@@ -120,7 +120,7 @@ type RedisCacheInitParameters struct {
 	// Whether or not public network access is allowed for this Redis Cache. true means this resource could be accessed by both public and private endpoint. false means only private endpoint access is allowed. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
+	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	RedisConfiguration []RedisConfigurationInitParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
 	// Redis version. Only major version needed. Valid values: 4, 6.
@@ -186,7 +186,7 @@ type RedisCacheObservation struct {
 	// Whether or not public network access is allowed for this Redis Cache. true means this resource could be accessed by both public and private endpoint. false means only private endpoint access is allowed. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
+	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	RedisConfiguration []RedisConfigurationObservation `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
 	// Redis version. Only major version needed. Valid values: 4, 6.
@@ -261,7 +261,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
+	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	// +kubebuilder:validation:Optional
 	RedisConfiguration []RedisConfigurationParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
@@ -339,7 +339,7 @@ type RedisConfigurationInitParameters struct {
 	// The max-memory delta for this Redis instance. Defaults are shown below.
 	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
 
-	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
+	// How Redis will select what to remove when maxmemory is reached. Defaults to volatile-lru.
 	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
 
 	// Value in megabytes reserved for non-cache usage e.g. failover. Defaults are shown below.
@@ -375,7 +375,7 @@ type RedisConfigurationObservation struct {
 	// The max-memory delta for this Redis instance. Defaults are shown below.
 	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
 
-	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
+	// How Redis will select what to remove when maxmemory is reached. Defaults to volatile-lru.
 	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
 
 	// Value in megabytes reserved for non-cache usage e.g. failover. Defaults are shown below.
@@ -420,7 +420,7 @@ type RedisConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
 
-	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
+	// How Redis will select what to remove when maxmemory is reached. Defaults to volatile-lru.
 	// +kubebuilder:validation:Optional
 	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
 

@@ -132,7 +132,7 @@ type ResourceTypeInitParameters struct {
 	// Specifies the name of the route definition.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. Defaults to Proxy.
 	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }
 
@@ -144,7 +144,7 @@ type ResourceTypeObservation struct {
 	// Specifies the name of the route definition.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. Defaults to Proxy.
 	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }
 
@@ -158,7 +158,7 @@ type ResourceTypeParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. Defaults to Proxy.
 	// +kubebuilder:validation:Optional
 	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }

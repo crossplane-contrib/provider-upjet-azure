@@ -98,7 +98,7 @@ func (tr *MaintenanceAssignmentDedicatedHost) LateInitialize(attrs []byte) (bool
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MaintenanceAssignmentDedicatedHost) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this MaintenanceAssignmentVirtualMachine
@@ -182,7 +182,7 @@ func (tr *MaintenanceAssignmentVirtualMachine) LateInitialize(attrs []byte) (boo
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MaintenanceAssignmentVirtualMachine) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this MaintenanceConfiguration

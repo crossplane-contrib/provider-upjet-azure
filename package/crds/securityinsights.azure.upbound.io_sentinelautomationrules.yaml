@@ -128,23 +128,25 @@ spec:
                             NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
                           type: string
                         property:
-                          description: 'The property to use for evaluate the condition.
-                            Possible values include: AccountAadTenantId, AccountAadUserId,
+                          description: The property to use for evaluate the condition.
+                            Possible values are AccountAadTenantId, AccountAadUserId,
                             AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
-                            AccountSid, AccountUPNSuffix, AzureResourceResourceId,
-                            AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName,
-                            DNSDomainName, FileDirectory, FileHashValue, FileName,
-                            HostAzureID, HostNTDomain, HostName, HostNetBiosName,
-                            HostOSVersion, IPAddress, IncidentDescription, IncidentProviderName,
-                            IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus,
-                            IncidentTactics, IncidentTitle, IoTDeviceId, IoTDeviceModel,
+                            AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames,
+                            AzureResourceResourceId, AzureResourceSubscriptionId,
+                            CloudApplicationAppId, CloudApplicationAppName, DNSDomainName,
+                            FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain,
+                            HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey,
+                            IncidentCustomDetailsValue, IncidentDescription, IncidentLabel,
+                            IncidentProviderName, IncidentRelatedAnalyticRuleIds,
+                            IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle,
+                            IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel,
                             IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
                             IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
                             MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
                             MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
                             MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
-                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData,
-                            Url.'
+                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData
+                            and Url.
                           type: string
                         values:
                           description: Specifies a list of values to use for evaluate
@@ -341,23 +343,25 @@ spec:
                             NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
                           type: string
                         property:
-                          description: 'The property to use for evaluate the condition.
-                            Possible values include: AccountAadTenantId, AccountAadUserId,
+                          description: The property to use for evaluate the condition.
+                            Possible values are AccountAadTenantId, AccountAadUserId,
                             AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
-                            AccountSid, AccountUPNSuffix, AzureResourceResourceId,
-                            AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName,
-                            DNSDomainName, FileDirectory, FileHashValue, FileName,
-                            HostAzureID, HostNTDomain, HostName, HostNetBiosName,
-                            HostOSVersion, IPAddress, IncidentDescription, IncidentProviderName,
-                            IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus,
-                            IncidentTactics, IncidentTitle, IoTDeviceId, IoTDeviceModel,
+                            AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames,
+                            AzureResourceResourceId, AzureResourceSubscriptionId,
+                            CloudApplicationAppId, CloudApplicationAppName, DNSDomainName,
+                            FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain,
+                            HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey,
+                            IncidentCustomDetailsValue, IncidentDescription, IncidentLabel,
+                            IncidentProviderName, IncidentRelatedAnalyticRuleIds,
+                            IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle,
+                            IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel,
                             IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
                             IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
                             MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
                             MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
                             MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
-                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData,
-                            Url.'
+                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData
+                            and Url.
                           type: string
                         values:
                           description: Specifies a list of values to use for evaluate
@@ -641,23 +645,25 @@ spec:
                             NotContains, StartsWith, NotStartsWith, EndsWith, NotEndsWith.'
                           type: string
                         property:
-                          description: 'The property to use for evaluate the condition.
-                            Possible values include: AccountAadTenantId, AccountAadUserId,
+                          description: The property to use for evaluate the condition.
+                            Possible values are AccountAadTenantId, AccountAadUserId,
                             AccountNTDomain, AccountName, AccountObjectGuid, AccountPUID,
-                            AccountSid, AccountUPNSuffix, AzureResourceResourceId,
-                            AzureResourceSubscriptionId, CloudApplicationAppId, CloudApplicationAppName,
-                            DNSDomainName, FileDirectory, FileHashValue, FileName,
-                            HostAzureID, HostNTDomain, HostName, HostNetBiosName,
-                            HostOSVersion, IPAddress, IncidentDescription, IncidentProviderName,
-                            IncidentRelatedAnalyticRuleIds, IncidentSeverity, IncidentStatus,
-                            IncidentTactics, IncidentTitle, IoTDeviceId, IoTDeviceModel,
+                            AccountSid, AccountUPNSuffix, AlertAnalyticRuleIds, AlertProductNames,
+                            AzureResourceResourceId, AzureResourceSubscriptionId,
+                            CloudApplicationAppId, CloudApplicationAppName, DNSDomainName,
+                            FileDirectory, FileHashValue, FileName, HostAzureID, HostNTDomain,
+                            HostName, HostNetBiosName, HostOSVersion, IPAddress, IncidentCustomDetailsKey,
+                            IncidentCustomDetailsValue, IncidentDescription, IncidentLabel,
+                            IncidentProviderName, IncidentRelatedAnalyticRuleIds,
+                            IncidentSeverity, IncidentStatus, IncidentTactics, IncidentTitle,
+                            IncidentUpdatedBySource, IoTDeviceId, IoTDeviceModel,
                             IoTDeviceName, IoTDeviceOperatingSystem, IoTDeviceType,
                             IoTDeviceVendor, MailMessageDeliveryAction, MailMessageDeliveryLocation,
                             MailMessageP1Sender, MailMessageP2Sender, MailMessageRecipient,
                             MailMessageSenderIP, MailMessageSubject, MailboxDisplayName,
                             MailboxPrimaryAddress, MailboxUPN, MalwareCategory, MalwareName,
-                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData,
-                            Url.'
+                            ProcessCommandLine, ProcessId, RegistryKey, RegistryValueData
+                            and Url.
                           type: string
                         values:
                           description: Specifies a list of values to use for evaluate

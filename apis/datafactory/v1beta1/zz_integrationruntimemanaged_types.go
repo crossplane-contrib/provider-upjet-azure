@@ -22,7 +22,7 @@ type IntegrationRuntimeManagedCatalogInfoInitParameters struct {
 	// Administrator login name for the SQL Server.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS.
+	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS. Defaults to Basic.
 	PricingTier *string `json:"pricingTier,omitempty" tf:"pricing_tier,omitempty"`
 
 	// The endpoint of an Azure SQL Server that will be used to host the SSIS catalog.
@@ -34,7 +34,7 @@ type IntegrationRuntimeManagedCatalogInfoObservation struct {
 	// Administrator login name for the SQL Server.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
-	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS.
+	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS. Defaults to Basic.
 	PricingTier *string `json:"pricingTier,omitempty" tf:"pricing_tier,omitempty"`
 
 	// The endpoint of an Azure SQL Server that will be used to host the SSIS catalog.
@@ -51,7 +51,7 @@ type IntegrationRuntimeManagedCatalogInfoParameters struct {
 	// +kubebuilder:validation:Optional
 	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
 
-	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS.
+	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS. Defaults to Basic.
 	// +kubebuilder:validation:Optional
 	PricingTier *string `json:"pricingTier,omitempty" tf:"pricing_tier,omitempty"`
 
@@ -103,7 +103,7 @@ type IntegrationRuntimeManagedInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
 	// The size of the nodes on which the Managed Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
@@ -142,7 +142,7 @@ type IntegrationRuntimeManagedObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
 	// The size of the nodes on which the Managed Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
@@ -195,7 +195,7 @@ type IntegrationRuntimeManagedParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	// +kubebuilder:validation:Optional
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 

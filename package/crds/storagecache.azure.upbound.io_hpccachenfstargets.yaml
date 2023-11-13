@@ -149,7 +149,7 @@ spec:
                     type: object
                   namespaceJunction:
                     description: Can be specified multiple times to define multiple
-                      namespace_junction. Each namespace_juntion block supports fields
+                      namespace_junction. Each namespace_junction block supports fields
                       documented below.
                     items:
                       properties:
@@ -259,9 +259,9 @@ spec:
                     type: string
                   usageModel:
                     description: 'The type of usage of the HPC Cache NFS Target. Possible
-                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
-                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY,
+                      READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
               initProvider:
@@ -278,7 +278,7 @@ spec:
                 properties:
                   namespaceJunction:
                     description: Can be specified multiple times to define multiple
-                      namespace_junction. Each namespace_juntion block supports fields
+                      namespace_junction. Each namespace_junction block supports fields
                       documented below.
                     items:
                       properties:
@@ -308,9 +308,9 @@ spec:
                     type: string
                   usageModel:
                     description: 'The type of usage of the HPC Cache NFS Target. Possible
-                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
-                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY,
+                      READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
               managementPolicies:
@@ -501,7 +501,7 @@ spec:
                     type: string
                   namespaceJunction:
                     description: Can be specified multiple times to define multiple
-                      namespace_junction. Each namespace_juntion block supports fields
+                      namespace_junction. Each namespace_junction block supports fields
                       documented below.
                     items:
                       properties:
@@ -536,9 +536,9 @@ spec:
                     type: string
                   usageModel:
                     description: 'The type of usage of the HPC Cache NFS Target. Possible
-                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
-                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY,
+                      READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
               conditions:

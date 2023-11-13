@@ -137,7 +137,7 @@ spec:
                             type: object
                           type: array
                         monitorService:
-                          description: A monitor_service as block defined below.
+                          description: A monitor_service block as defined below.
                           items:
                             properties:
                               operator:
@@ -414,7 +414,7 @@ spec:
                             type: object
                           type: array
                         monitorService:
-                          description: A monitor_service as block defined below.
+                          description: A monitor_service block as defined below.
                           items:
                             properties:
                               operator:
@@ -770,7 +770,7 @@ spec:
                             type: object
                           type: array
                         monitorService:
-                          description: A monitor_service as block defined below.
+                          description: A monitor_service block as defined below.
                           items:
                             properties:
                               operator:

@@ -179,7 +179,7 @@ type VaultInitParameters struct {
 
 type VaultObservation struct {
 
-	// A list of up to 1024 objects describing access policies, as described below.
+	// A list of access_policy objects (up to 1024) describing access policies, as described below.
 	AccessPolicy []AccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// One or more contact block as defined below.

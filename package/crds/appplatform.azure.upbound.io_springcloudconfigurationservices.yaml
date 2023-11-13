@@ -68,10 +68,18 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  generation:
+                    description: The generation of the Spring Cloud Configuration
+                      Service. Possible values are Gen1 and Gen2.
+                    type: string
                   repository:
                     description: One or more repository blocks as defined below.
                     items:
                       properties:
+                        caCertificateId:
+                          description: Specifies the ID of the Certificate Authority
+                            used when retrieving the Git Repository via HTTPS.
+                          type: string
                         hostKey:
                           description: Specifies the SSH public key of git repository.
                           type: string
@@ -236,10 +244,18 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  generation:
+                    description: The generation of the Spring Cloud Configuration
+                      Service. Possible values are Gen1 and Gen2.
+                    type: string
                   repository:
                     description: One or more repository blocks as defined below.
                     items:
                       properties:
+                        caCertificateId:
+                          description: Specifies the ID of the Certificate Authority
+                            used when retrieving the Git Repository via HTTPS.
+                          type: string
                         hostKey:
                           description: Specifies the SSH public key of git repository.
                           type: string
@@ -444,6 +460,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  generation:
+                    description: The generation of the Spring Cloud Configuration
+                      Service. Possible values are Gen1 and Gen2.
+                    type: string
                   id:
                     description: The ID of the Spring Cloud Configuration Service.
                     type: string
@@ -451,6 +471,10 @@ spec:
                     description: One or more repository blocks as defined below.
                     items:
                       properties:
+                        caCertificateId:
+                          description: Specifies the ID of the Certificate Authority
+                            used when retrieving the Git Repository via HTTPS.
+                          type: string
                         hostKey:
                           description: Specifies the SSH public key of git repository.
                           type: string

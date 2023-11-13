@@ -146,8 +146,7 @@ spec:
                         type: object
                     type: object
                   soaRecord:
-                    description: An soa_record block as defined below. Changing this
-                      forces a new resource to be created.
+                    description: An soa_record block as defined below.
                     items:
                       properties:
                         email:
@@ -159,7 +158,8 @@ spec:
                           type: number
                         hostName:
                           description: The domain name of the authoritative name server
-                            for the SOA record.
+                            for the SOA record. If not set, computed value from Azure
+                            will be used.
                           type: string
                         minimumTtl:
                           description: The minimum Time To Live for the SOA record.
@@ -208,8 +208,7 @@ spec:
                   like an autoscaler.
                 properties:
                   soaRecord:
-                    description: An soa_record block as defined below. Changing this
-                      forces a new resource to be created.
+                    description: An soa_record block as defined below.
                     items:
                       properties:
                         email:
@@ -221,7 +220,8 @@ spec:
                           type: number
                         hostName:
                           description: The domain name of the authoritative name server
-                            for the SOA record.
+                            for the SOA record. If not set, computed value from Azure
+                            will be used.
                           type: string
                         minimumTtl:
                           description: The minimum Time To Live for the SOA record.
@@ -443,8 +443,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   soaRecord:
-                    description: An soa_record block as defined below. Changing this
-                      forces a new resource to be created.
+                    description: An soa_record block as defined below.
                     items:
                       properties:
                         email:
@@ -458,7 +457,8 @@ spec:
                           type: string
                         hostName:
                           description: The domain name of the authoritative name server
-                            for the SOA record.
+                            for the SOA record. If not set, computed value from Azure
+                            will be used.
                           type: string
                         minimumTtl:
                           description: The minimum Time To Live for the SOA record.

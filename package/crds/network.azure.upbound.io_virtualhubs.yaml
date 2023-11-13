@@ -185,6 +185,10 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Virtual Hub.
                     type: object
+                  virtualRouterAutoScaleMinCapacity:
+                    description: Minimum instance capacity for the scaling configuration
+                      of the Virtual Hub Router.
+                    type: number
                   virtualWanId:
                     description: The ID of a Virtual WAN within which the Virtual
                       Hub should be created. Changing this forces a new resource to
@@ -314,6 +318,10 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Virtual Hub.
                     type: object
+                  virtualRouterAutoScaleMinCapacity:
+                    description: Minimum instance capacity for the scaling configuration
+                      of the Virtual Hub Router.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -538,6 +546,10 @@ spec:
                   virtualRouterAsn:
                     description: The Autonomous System Number of the Virtual Hub BGP
                       router.
+                    type: number
+                  virtualRouterAutoScaleMinCapacity:
+                    description: Minimum instance capacity for the scaling configuration
+                      of the Virtual Hub Router.
                     type: number
                   virtualRouterIps:
                     description: The IP addresses of the Virtual Hub BGP router.

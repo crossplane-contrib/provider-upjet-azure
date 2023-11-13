@@ -19,13 +19,13 @@ import (
 
 type HPCCacheNFSTargetInitParameters struct {
 
-	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
+	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	NamespaceJunction []NamespaceJunctionInitParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 
 	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
 	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
 
-	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }
 
@@ -37,7 +37,7 @@ type HPCCacheNFSTargetObservation struct {
 	// The ID of the HPC Cache NFS Target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
+	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	NamespaceJunction []NamespaceJunctionObservation `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 
 	// The name of the Resource Group in which to create the HPC Cache NFS Target. Changing this forces a new resource to be created.
@@ -46,7 +46,7 @@ type HPCCacheNFSTargetObservation struct {
 	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
 	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
 
-	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }
 
@@ -65,7 +65,7 @@ type HPCCacheNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
-	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
+	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	// +kubebuilder:validation:Optional
 	NamespaceJunction []NamespaceJunctionParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 
@@ -86,7 +86,7 @@ type HPCCacheNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
 
-	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	// +kubebuilder:validation:Optional
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
 }

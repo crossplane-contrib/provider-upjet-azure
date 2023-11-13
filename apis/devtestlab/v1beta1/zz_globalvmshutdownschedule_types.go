@@ -28,7 +28,7 @@ type GlobalVMShutdownScheduleInitParameters struct {
 	// The location where the schedule is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	NotificationSettings []NotificationSettingsInitParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -52,7 +52,7 @@ type GlobalVMShutdownScheduleObservation struct {
 	// The location where the schedule is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	NotificationSettings []NotificationSettingsObservation `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -79,7 +79,7 @@ type GlobalVMShutdownScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	NotificationSettings []NotificationSettingsParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 

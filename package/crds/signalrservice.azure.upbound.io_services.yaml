@@ -287,6 +287,12 @@ spec:
                           description: The upstream URL Template. This can be a url
                             or a template such as http://host.com/{hub}/api/{category}/{event}.
                           type: string
+                        userAssignedIdentityId:
+                          description: Specifies the Managed Identity IDs to be assigned
+                            to this signalR upstream setting by using resource uuid
+                            as both system assigned and user assigned identity is
+                            supported.
+                          type: string
                       type: object
                     type: array
                 type: object
@@ -441,6 +447,12 @@ spec:
                         urlTemplate:
                           description: The upstream URL Template. This can be a url
                             or a template such as http://host.com/{hub}/api/{category}/{event}.
+                          type: string
+                        userAssignedIdentityId:
+                          description: Specifies the Managed Identity IDs to be assigned
+                            to this signalR upstream setting by using resource uuid
+                            as both system assigned and user assigned identity is
+                            supported.
                           type: string
                       type: object
                     type: array
@@ -786,6 +798,12 @@ spec:
                         urlTemplate:
                           description: The upstream URL Template. This can be a url
                             or a template such as http://host.com/{hub}/api/{category}/{event}.
+                          type: string
+                        userAssignedIdentityId:
+                          description: Specifies the Managed Identity IDs to be assigned
+                            to this signalR upstream setting by using resource uuid
+                            as both system assigned and user assigned identity is
+                            supported.
                           type: string
                       type: object
                     type: array

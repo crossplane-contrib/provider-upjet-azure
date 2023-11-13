@@ -99,7 +99,7 @@ type ShareInitParameters struct {
 	// A mapping of MetaData for this File Share.
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
+	// The maximum size of the share, in gigabytes.
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 }
 
@@ -120,7 +120,7 @@ type ShareObservation struct {
 	// A mapping of MetaData for this File Share.
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
+	// The maximum size of the share, in gigabytes.
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// The Resource Manager ID of this File Share.
@@ -151,7 +151,7 @@ type ShareParameters struct {
 	// +kubebuilder:validation:Optional
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
+	// The maximum size of the share, in gigabytes.
 	// +kubebuilder:validation:Optional
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 

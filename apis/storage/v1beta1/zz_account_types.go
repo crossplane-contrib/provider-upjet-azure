@@ -109,7 +109,7 @@ type AccountInitParameters struct {
 	// A share_properties block as defined below.
 	ShareProperties []SharePropertiesInitParameters `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
-	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). Defaults to true.
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
 	// A static_website block as defined below.
@@ -298,7 +298,7 @@ type AccountObservation struct {
 	// A share_properties block as defined below.
 	ShareProperties []SharePropertiesObservation `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
-	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). Defaults to true.
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
 	// A static_website block as defined below.
@@ -446,7 +446,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ShareProperties []SharePropertiesParameters `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
-	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). Defaults to true.
 	// +kubebuilder:validation:Optional
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
@@ -471,16 +471,16 @@ type ActiveDirectoryInitParameters struct {
 	// Specifies the primary domain that the AD DNS server is authoritative for.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Specifies the security identifier (SID).
+	// Specifies the security identifier (SID). This is required when directory_type is set to AD.
 	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
 
-	// Specifies the Active Directory forest.
+	// Specifies the Active Directory forest. This is required when directory_type is set to AD.
 	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
 
-	// Specifies the NetBIOS domain name.
+	// Specifies the NetBIOS domain name. This is required when directory_type is set to AD.
 	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
 
-	// Specifies the security identifier (SID) for Azure Storage.
+	// Specifies the security identifier (SID) for Azure Storage. This is required when directory_type is set to AD.
 	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
 }
 
@@ -492,16 +492,16 @@ type ActiveDirectoryObservation struct {
 	// Specifies the primary domain that the AD DNS server is authoritative for.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Specifies the security identifier (SID).
+	// Specifies the security identifier (SID). This is required when directory_type is set to AD.
 	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
 
-	// Specifies the Active Directory forest.
+	// Specifies the Active Directory forest. This is required when directory_type is set to AD.
 	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
 
-	// Specifies the NetBIOS domain name.
+	// Specifies the NetBIOS domain name. This is required when directory_type is set to AD.
 	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
 
-	// Specifies the security identifier (SID) for Azure Storage.
+	// Specifies the security identifier (SID) for Azure Storage. This is required when directory_type is set to AD.
 	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
 }
 
@@ -515,21 +515,21 @@ type ActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// Specifies the security identifier (SID).
+	// Specifies the security identifier (SID). This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	DomainSid *string `json:"domainSid" tf:"domain_sid,omitempty"`
+	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
 
-	// Specifies the Active Directory forest.
+	// Specifies the Active Directory forest. This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	ForestName *string `json:"forestName" tf:"forest_name,omitempty"`
+	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
 
-	// Specifies the NetBIOS domain name.
+	// Specifies the NetBIOS domain name. This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	NetbiosDomainName *string `json:"netbiosDomainName" tf:"netbios_domain_name,omitempty"`
+	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
 
-	// Specifies the security identifier (SID) for Azure Storage.
+	// Specifies the security identifier (SID) for Azure Storage. This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	StorageSid *string `json:"storageSid" tf:"storage_sid,omitempty"`
+	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
 }
 
 type AzureFilesAuthenticationInitParameters struct {
@@ -1057,10 +1057,10 @@ type NetworkRulesInitParameters struct {
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918), are not allowed.
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []PrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
@@ -1075,10 +1075,10 @@ type NetworkRulesObservation struct {
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918), are not allowed.
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []PrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
@@ -1095,11 +1095,11 @@ type NetworkRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918), are not allowed.
 	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateLinkAccess []PrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 

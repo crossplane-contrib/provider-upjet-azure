@@ -28,7 +28,7 @@ type AccountNetworkRulesInitParameters struct {
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of virtual network subnet ids to secure the storage account.
@@ -49,7 +49,7 @@ type AccountNetworkRulesObservation struct {
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
@@ -73,7 +73,7 @@ type AccountNetworkRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 

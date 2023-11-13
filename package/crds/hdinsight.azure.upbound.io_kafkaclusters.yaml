@@ -361,7 +361,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -489,8 +489,9 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -667,8 +668,9 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -851,8 +853,9 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -1033,8 +1036,9 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -1590,7 +1594,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -1619,8 +1623,9 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -1692,8 +1697,9 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -1771,8 +1777,9 @@ spec:
                                 type: number
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -1848,8 +1855,9 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -2385,7 +2393,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -2419,8 +2427,9 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -2498,8 +2507,9 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -2583,8 +2593,9 @@ spec:
                                 type: number
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:
@@ -2666,8 +2677,9 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  below. Changing this forces a new resource to be
+                                  created.
                                 items:
                                   properties:
                                     name:

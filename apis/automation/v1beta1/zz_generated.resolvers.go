@@ -216,6 +216,22 @@ func (mg *HybridRunBookWorkerGroup) ResolveReferences(ctx context.Context, c cli
 	var err error
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutomationAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.AutomationAccountNameRef,
+		Selector:     mg.Spec.ForProvider.AutomationAccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AutomationAccountName")
+	}
+	mg.Spec.ForProvider.AutomationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AutomationAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),
 		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,

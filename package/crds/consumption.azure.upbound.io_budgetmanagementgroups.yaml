@@ -87,7 +87,7 @@ spec:
                                 type: string
                               operator:
                                 description: The operator to use for comparison. The
-                                  allowed values are In.
+                                  allowed values are In. Defaults to In.
                                 type: string
                               values:
                                 description: Specifies a list of values for the tag.
@@ -113,7 +113,7 @@ spec:
                                       type: string
                                     operator:
                                       description: The operator to use for comparison.
-                                        The allowed values are In.
+                                        The allowed values are In. Defaults to In.
                                       type: string
                                     values:
                                       description: Specifies a list of values for
@@ -134,7 +134,7 @@ spec:
                                       type: string
                                     operator:
                                       description: The operator to use for comparison.
-                                        The allowed values are In.
+                                        The allowed values are In. Defaults to In.
                                       type: string
                                     values:
                                       description: Specifies a list of values for
@@ -156,7 +156,7 @@ spec:
                                 type: string
                               operator:
                                 description: The operator to use for comparison. The
-                                  allowed values are In.
+                                  allowed values are In. Defaults to In.
                                 type: string
                               values:
                                 description: Specifies a list of values for the tag.
@@ -342,7 +342,7 @@ spec:
                                 type: string
                               operator:
                                 description: The operator to use for comparison. The
-                                  allowed values are In.
+                                  allowed values are In. Defaults to In.
                                 type: string
                               values:
                                 description: Specifies a list of values for the tag.
@@ -368,7 +368,7 @@ spec:
                                       type: string
                                     operator:
                                       description: The operator to use for comparison.
-                                        The allowed values are In.
+                                        The allowed values are In. Defaults to In.
                                       type: string
                                     values:
                                       description: Specifies a list of values for
@@ -389,7 +389,7 @@ spec:
                                       type: string
                                     operator:
                                       description: The operator to use for comparison.
-                                        The allowed values are In.
+                                        The allowed values are In. Defaults to In.
                                       type: string
                                     values:
                                       description: Specifies a list of values for
@@ -411,7 +411,7 @@ spec:
                                 type: string
                               operator:
                                 description: The operator to use for comparison. The
-                                  allowed values are In.
+                                  allowed values are In. Defaults to In.
                                 type: string
                               values:
                                 description: Specifies a list of values for the tag.
@@ -689,7 +689,7 @@ spec:
                                 type: string
                               operator:
                                 description: The operator to use for comparison. The
-                                  allowed values are In.
+                                  allowed values are In. Defaults to In.
                                 type: string
                               values:
                                 description: Specifies a list of values for the tag.
@@ -715,7 +715,7 @@ spec:
                                       type: string
                                     operator:
                                       description: The operator to use for comparison.
-                                        The allowed values are In.
+                                        The allowed values are In. Defaults to In.
                                       type: string
                                     values:
                                       description: Specifies a list of values for
@@ -736,7 +736,7 @@ spec:
                                       type: string
                                     operator:
                                       description: The operator to use for comparison.
-                                        The allowed values are In.
+                                        The allowed values are In. Defaults to In.
                                       type: string
                                     values:
                                       description: Specifies a list of values for
@@ -758,7 +758,7 @@ spec:
                                 type: string
                               operator:
                                 description: The operator to use for comparison. The
-                                  allowed values are In.
+                                  allowed values are In. Defaults to In.
                                 type: string
                               values:
                                 description: Specifies a list of values for the tag.

@@ -158,12 +158,13 @@ spec:
                     type: object
                   logLevel:
                     description: The verbosity of the logs. Possible values are None,
-                      Debug, Information, Warning and Error.
+                      Debug, Information, Warning and Error. Defaults to None.
                     type: string
                   mode:
                     description: The mode of the Connected Registry. Possible values
                       are Mirror, ReadOnly, ReadWrite and Registry. Changing this
-                      forces a new Container Connected Registry to be created.
+                      forces a new Container Connected Registry to be created. Defaults
+                      to ReadWrite.
                     type: string
                   notification:
                     description: One or more notification blocks as defined below.
@@ -196,7 +197,7 @@ spec:
                   syncMessageTtl:
                     description: The period of time (in form of ISO8601) for which
                       a message is available to sync before it is expired. Allowed
-                      range is from P1D to P90D.
+                      range is from P1D to P90D. Defaults to P1D.
                     type: string
                   syncSchedule:
                     description: The cron expression indicating the schedule that
@@ -311,12 +312,13 @@ spec:
                     type: array
                   logLevel:
                     description: The verbosity of the logs. Possible values are None,
-                      Debug, Information, Warning and Error.
+                      Debug, Information, Warning and Error. Defaults to None.
                     type: string
                   mode:
                     description: The mode of the Connected Registry. Possible values
                       are Mirror, ReadOnly, ReadWrite and Registry. Changing this
-                      forces a new Container Connected Registry to be created.
+                      forces a new Container Connected Registry to be created. Defaults
+                      to ReadWrite.
                     type: string
                   notification:
                     description: One or more notification blocks as defined below.
@@ -349,7 +351,7 @@ spec:
                   syncMessageTtl:
                     description: The period of time (in form of ISO8601) for which
                       a message is available to sync before it is expired. Allowed
-                      range is from P1D to P90D.
+                      range is from P1D to P90D. Defaults to P1D.
                     type: string
                   syncSchedule:
                     description: The cron expression indicating the schedule that
@@ -548,12 +550,13 @@ spec:
                     type: string
                   logLevel:
                     description: The verbosity of the logs. Possible values are None,
-                      Debug, Information, Warning and Error.
+                      Debug, Information, Warning and Error. Defaults to None.
                     type: string
                   mode:
                     description: The mode of the Connected Registry. Possible values
                       are Mirror, ReadOnly, ReadWrite and Registry. Changing this
-                      forces a new Container Connected Registry to be created.
+                      forces a new Container Connected Registry to be created. Defaults
+                      to ReadWrite.
                     type: string
                   notification:
                     description: One or more notification blocks as defined below.
@@ -586,7 +589,7 @@ spec:
                   syncMessageTtl:
                     description: The period of time (in form of ISO8601) for which
                       a message is available to sync before it is expired. Allowed
-                      range is from P1D to P90D.
+                      range is from P1D to P90D. Defaults to P1D.
                     type: string
                   syncSchedule:
                     description: The cron expression indicating the schedule that

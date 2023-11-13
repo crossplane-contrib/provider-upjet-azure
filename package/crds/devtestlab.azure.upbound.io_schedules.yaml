@@ -172,7 +172,7 @@ spec:
                     type: string
                   notificationSettings:
                     description: The notification setting of a schedule. A notification_settings
-                      as defined below.
+                      block as defined below.
                     items:
                       properties:
                         status:
@@ -344,7 +344,7 @@ spec:
                     type: string
                   notificationSettings:
                     description: The notification setting of a schedule. A notification_settings
-                      as defined below.
+                      block as defined below.
                     items:
                       properties:
                         status:
@@ -613,7 +613,7 @@ spec:
                     type: string
                   notificationSettings:
                     description: The notification setting of a schedule. A notification_settings
-                      as defined below.
+                      block as defined below.
                     items:
                       properties:
                         status:

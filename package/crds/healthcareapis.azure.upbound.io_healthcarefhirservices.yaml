@@ -79,7 +79,7 @@ spec:
                       properties:
                         audience:
                           description: The intended audience to receive authentication
-                            tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+                            tokens for the service.
                           type: string
                         authority:
                           description: 'The Azure Active Directory (tenant) that serves
@@ -144,7 +144,7 @@ spec:
                           type: array
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are UserAssigned and SystemAssigned.
                           type: string
                       type: object
                     type: array
@@ -159,8 +159,8 @@ spec:
                       FHIR Service to be created.
                     type: string
                   ociArtifact:
-                    description: A list of objects describing OCI artifacts for export
-                      as defined below.
+                    description: A list of oci_artifact objects as defined below to
+                      describe OCI artifacts for export.
                     items:
                       properties:
                         digest:
@@ -368,7 +368,7 @@ spec:
                       properties:
                         audience:
                           description: The intended audience to receive authentication
-                            tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+                            tokens for the service.
                           type: string
                         authority:
                           description: 'The Azure Active Directory (tenant) that serves
@@ -433,7 +433,7 @@ spec:
                           type: array
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are UserAssigned and SystemAssigned.
                           type: string
                       type: object
                     type: array
@@ -448,8 +448,8 @@ spec:
                       FHIR Service to be created.
                     type: string
                   ociArtifact:
-                    description: A list of objects describing OCI artifacts for export
-                      as defined below.
+                    description: A list of oci_artifact objects as defined below to
+                      describe OCI artifacts for export.
                     items:
                       properties:
                         digest:
@@ -660,7 +660,7 @@ spec:
                       properties:
                         audience:
                           description: The intended audience to receive authentication
-                            tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+                            tokens for the service.
                           type: string
                         authority:
                           description: 'The Azure Active Directory (tenant) that serves
@@ -734,7 +734,7 @@ spec:
                           type: string
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are UserAssigned and SystemAssigned.
                           type: string
                       type: object
                     type: array
@@ -749,8 +749,8 @@ spec:
                       FHIR Service to be created.
                     type: string
                   ociArtifact:
-                    description: A list of objects describing OCI artifacts for export
-                      as defined below.
+                    description: A list of oci_artifact objects as defined below to
+                      describe OCI artifacts for export.
                     items:
                       properties:
                         digest:

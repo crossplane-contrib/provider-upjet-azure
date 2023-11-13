@@ -220,7 +220,7 @@ type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 	// Specifies the display name of the alert rule.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Specifies the flag which indicates whether this scheduled query rule is enabled. Value should be true or false. The default is true.
+	// Specifies the flag which indicates whether this scheduled query rule is enabled. Value should be true or false. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// How often the scheduled query rule is evaluated, represented in ISO 8601 duration format. Possible values are PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D.
@@ -274,7 +274,7 @@ type MonitorScheduledQueryRulesAlertV2Observation struct {
 	// Specifies the display name of the alert rule.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Specifies the flag which indicates whether this scheduled query rule is enabled. Value should be true or false. The default is true.
+	// Specifies the flag which indicates whether this scheduled query rule is enabled. Value should be true or false. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// How often the scheduled query rule is evaluated, represented in ISO 8601 duration format. Possible values are PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D.
@@ -345,7 +345,7 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
-	// Specifies the flag which indicates whether this scheduled query rule is enabled. Value should be true or false. The default is true.
+	// Specifies the flag which indicates whether this scheduled query rule is enabled. Value should be true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

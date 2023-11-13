@@ -12,6 +12,7 @@ import (
 	errors "github.com/pkg/errors"
 	v1beta11 "github.com/upbound/provider-azure/apis/azure/v1beta1"
 	v1beta1 "github.com/upbound/provider-azure/apis/network/v1beta1"
+	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -203,6 +204,26 @@ func (mg *ServiceBusNamespace) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkRuleSet); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta1.SubnetList{},
+					Managed: &v1beta1.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkRuleSet[i3].NetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 		Extract:      reference.ExternalName(),

@@ -79,7 +79,7 @@ type EndpointObservation struct {
 	// Name of the Service Bus Queue/Topic or Event Hub. This attribute can only be specified and is mandatory when authentication_type is identityBased for endpoint type AzureIotHub.ServiceBusQueue, AzureIotHub.ServiceBusTopic or AzureIotHub.EventHub.
 	EntityPath *string `json:"entityPath,omitempty" tf:"entity_path,omitempty"`
 
-	// File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered. This attribute is applicable for endpoint type AzureIotHub.StorageContainer.
+	// File name format for the blob. All parameters are mandatory but can be reordered. This attribute is applicable for endpoint type AzureIotHub.StorageContainer. Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
 	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
 
 	// The ID of the User Managed Identity used to authenticate against the endpoint.
@@ -133,7 +133,7 @@ type FallbackRouteObservation struct {
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
-	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents and DigitalTwinChangeEvents.
+	// The source that the routing rule is to be applied to, such as DeviceMessages. Possible values include: Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents, DeviceConnectionStateEvents, DeviceJobLifecycleEvents and DigitalTwinChangeEvents. Defaults to DeviceMessages.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
@@ -289,6 +289,9 @@ type IOTHubInitParameters struct {
 	// An identity block as defined below.
 	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// If false, SAS tokens with Iot hub scoped SAS keys cannot be used for authentication. Defaults to true.
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -355,6 +358,9 @@ type IOTHubObservation struct {
 	// An identity block as defined below.
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
+	// If false, SAS tokens with Iot hub scoped SAS keys cannot be used for authentication. Defaults to true.
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -407,6 +413,10 @@ type IOTHubParameters struct {
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// If false, SAS tokens with Iot hub scoped SAS keys cannot be used for authentication. Defaults to true.
+	// +kubebuilder:validation:Optional
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

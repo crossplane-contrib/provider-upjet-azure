@@ -86,8 +86,8 @@ spec:
                             The range is 100 - 65000.
                           type: number
                         rule:
-                          description: One or more application_rule (application rule)
-                            blocks as defined below.
+                          description: One or more application_rule blocks as defined
+                            below.
                           items:
                             properties:
                               description:
@@ -117,6 +117,21 @@ spec:
                                   for Firewall Policy. Conflicts with destination_fqdns.
                                 items:
                                   type: string
+                                type: array
+                              httpHeaders:
+                                description: Specifies a list of HTTP/HTTPS headers
+                                  to insert. One or more http_headers blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name which should be used for
+                                        this network rule collection.
+                                      type: string
+                                    value:
+                                      description: Specifies the value of the value.
+                                      type: string
+                                  type: object
                                 type: array
                               name:
                                 description: The name which should be used for this
@@ -262,9 +277,13 @@ spec:
                             range is 100 - 65000.
                           type: number
                         rule:
-                          description: A nat_rule (NAT rule) block as defined below.
+                          description: A nat_rule block as defined below.
                           items:
                             properties:
+                              description:
+                                description: The description which should be used
+                                  for this rule.
+                                type: string
                               destinationAddress:
                                 description: The destination IP address (including
                                   CIDR).
@@ -327,10 +346,14 @@ spec:
                             The range is 100 - 65000.
                           type: number
                         rule:
-                          description: One or more network_rule (network rule) blocks
-                            as defined below.
+                          description: One or more network_rule blocks as defined
+                            below.
                           items:
                             properties:
+                              description:
+                                description: The description which should be used
+                                  for this rule.
+                                type: string
                               destinationAddresses:
                                 description: Specifies a list of destination IP addresses
                                   (including CIDR, IP range and *) or Service Tags.
@@ -413,8 +436,8 @@ spec:
                             The range is 100 - 65000.
                           type: number
                         rule:
-                          description: One or more application_rule (application rule)
-                            blocks as defined below.
+                          description: One or more application_rule blocks as defined
+                            below.
                           items:
                             properties:
                               description:
@@ -444,6 +467,21 @@ spec:
                                   for Firewall Policy. Conflicts with destination_fqdns.
                                 items:
                                   type: string
+                                type: array
+                              httpHeaders:
+                                description: Specifies a list of HTTP/HTTPS headers
+                                  to insert. One or more http_headers blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name which should be used for
+                                        this network rule collection.
+                                      type: string
+                                    value:
+                                      description: Specifies the value of the value.
+                                      type: string
+                                  type: object
                                 type: array
                               name:
                                 description: The name which should be used for this
@@ -511,9 +549,13 @@ spec:
                             range is 100 - 65000.
                           type: number
                         rule:
-                          description: A nat_rule (NAT rule) block as defined below.
+                          description: A nat_rule block as defined below.
                           items:
                             properties:
+                              description:
+                                description: The description which should be used
+                                  for this rule.
+                                type: string
                               destinationAddress:
                                 description: The destination IP address (including
                                   CIDR).
@@ -576,10 +618,14 @@ spec:
                             The range is 100 - 65000.
                           type: number
                         rule:
-                          description: One or more network_rule (network rule) blocks
-                            as defined below.
+                          description: One or more network_rule blocks as defined
+                            below.
                           items:
                             properties:
+                              description:
+                                description: The description which should be used
+                                  for this rule.
+                                type: string
                               destinationAddresses:
                                 description: Specifies a list of destination IP addresses
                                   (including CIDR, IP range and *) or Service Tags.
@@ -821,8 +867,8 @@ spec:
                             The range is 100 - 65000.
                           type: number
                         rule:
-                          description: One or more application_rule (application rule)
-                            blocks as defined below.
+                          description: One or more application_rule blocks as defined
+                            below.
                           items:
                             properties:
                               description:
@@ -852,6 +898,21 @@ spec:
                                   for Firewall Policy. Conflicts with destination_fqdns.
                                 items:
                                   type: string
+                                type: array
+                              httpHeaders:
+                                description: Specifies a list of HTTP/HTTPS headers
+                                  to insert. One or more http_headers blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: The name which should be used for
+                                        this network rule collection.
+                                      type: string
+                                    value:
+                                      description: Specifies the value of the value.
+                                      type: string
+                                  type: object
                                 type: array
                               name:
                                 description: The name which should be used for this
@@ -927,9 +988,13 @@ spec:
                             range is 100 - 65000.
                           type: number
                         rule:
-                          description: A nat_rule (NAT rule) block as defined below.
+                          description: A nat_rule block as defined below.
                           items:
                             properties:
+                              description:
+                                description: The description which should be used
+                                  for this rule.
+                                type: string
                               destinationAddress:
                                 description: The destination IP address (including
                                   CIDR).
@@ -992,10 +1057,14 @@ spec:
                             The range is 100 - 65000.
                           type: number
                         rule:
-                          description: One or more network_rule (network rule) blocks
-                            as defined below.
+                          description: One or more network_rule blocks as defined
+                            below.
                           items:
                             properties:
+                              description:
+                                description: The description which should be used
+                                  for this rule.
+                                type: string
                               destinationAddresses:
                                 description: Specifies a list of destination IP addresses
                                   (including CIDR, IP range and *) or Service Tags.

@@ -5338,9 +5338,9 @@ func (in *AutoHealSettingTriggerStatusCodeInitParameters) DeepCopyInto(out *Auto
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5383,9 +5383,9 @@ func (in *AutoHealSettingTriggerStatusCodeObservation) DeepCopyInto(out *AutoHea
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5428,9 +5428,9 @@ func (in *AutoHealSettingTriggerStatusCodeParameters) DeepCopyInto(out *AutoHeal
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -12003,6 +12003,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SiteConfig != nil {
 		in, out := &in.SiteConfig, &out.SiteConfig
 		*out = make([]LinuxFunctionAppSiteConfigInitParameters, len(*in))
@@ -12265,6 +12270,11 @@ func (in *LinuxFunctionAppObservation) DeepCopyInto(out *LinuxFunctionAppObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -12461,6 +12471,11 @@ func (in *LinuxFunctionAppParameters) DeepCopyInto(out *LinuxFunctionAppParamete
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ResourceGroupName != nil {
@@ -15571,6 +15586,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -15821,6 +15841,11 @@ func (in *LinuxFunctionAppSlotObservation) DeepCopyInto(out *LinuxFunctionAppSlo
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -16005,6 +16030,11 @@ func (in *LinuxFunctionAppSlotParameters) DeepCopyInto(out *LinuxFunctionAppSlot
 	if in.KeyVaultReferenceIdentityID != nil {
 		in, out := &in.KeyVaultReferenceIdentityID, &out.KeyVaultReferenceIdentityID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -21192,6 +21222,11 @@ func (in *LinuxWebAppInitParameters) DeepCopyInto(out *LinuxWebAppInitParameters
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SiteConfig != nil {
 		in, out := &in.SiteConfig, &out.SiteConfig
 		*out = make([]LinuxWebAppSiteConfigInitParameters, len(*in))
@@ -21431,6 +21466,11 @@ func (in *LinuxWebAppObservation) DeepCopyInto(out *LinuxWebAppObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -21601,6 +21641,11 @@ func (in *LinuxWebAppParameters) DeepCopyInto(out *LinuxWebAppParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -21708,8 +21753,23 @@ func (in *LinuxWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -21778,8 +21838,23 @@ func (in *LinuxWebAppSiteConfigApplicationStackObservation) DeepCopyInto(out *Li
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -21848,8 +21923,28 @@ func (in *LinuxWebAppSiteConfigApplicationStackParameters) DeepCopyInto(out *Lin
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -26757,6 +26852,11 @@ func (in *LinuxWebAppSlotInitParameters) DeepCopyInto(out *LinuxWebAppSlotInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -27132,6 +27232,11 @@ func (in *LinuxWebAppSlotObservation) DeepCopyInto(out *LinuxWebAppSlotObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -27305,6 +27410,11 @@ func (in *LinuxWebAppSlotParameters) DeepCopyInto(out *LinuxWebAppSlotParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -27380,8 +27490,23 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInto(
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -27450,8 +27575,23 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackObservation) DeepCopyInto(out
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -27520,8 +27660,28 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackParameters) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -32001,9 +32161,9 @@ func (in *SiteConfigAutoHealSettingTriggerStatusCodeInitParameters) DeepCopyInto
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -32046,9 +32206,9 @@ func (in *SiteConfigAutoHealSettingTriggerStatusCodeObservation) DeepCopyInto(ou
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -32091,9 +32251,9 @@ func (in *SiteConfigAutoHealSettingTriggerStatusCodeParameters) DeepCopyInto(out
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -34034,6 +34194,22 @@ func (in *StaticSiteIdentityParameters) DeepCopy() *StaticSiteIdentityParameters
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *StaticSiteInitParameters) DeepCopyInto(out *StaticSiteInitParameters) {
 	*out = *in
+	if in.AppSettings != nil {
+		in, out := &in.AppSettings, &out.AppSettings
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]StaticSiteIdentityInitParameters, len(*in))
@@ -34119,6 +34295,22 @@ func (in *StaticSiteList) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *StaticSiteObservation) DeepCopyInto(out *StaticSiteObservation) {
 	*out = *in
+	if in.AppSettings != nil {
+		in, out := &in.AppSettings, &out.AppSettings
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.DefaultHostName != nil {
 		in, out := &in.DefaultHostName, &out.DefaultHostName
 		*out = new(string)
@@ -34187,6 +34379,22 @@ func (in *StaticSiteObservation) DeepCopy() *StaticSiteObservation {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *StaticSiteParameters) DeepCopyInto(out *StaticSiteParameters) {
 	*out = *in
+	if in.AppSettings != nil {
+		in, out := &in.AppSettings, &out.AppSettings
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]StaticSiteIdentityParameters, len(*in))
@@ -34315,9 +34523,9 @@ func (in *StatusCodeInitParameters) DeepCopyInto(out *StatusCodeInitParameters) 
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -34360,9 +34568,9 @@ func (in *StatusCodeObservation) DeepCopyInto(out *StatusCodeObservation) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -34405,9 +34613,9 @@ func (in *StatusCodeParameters) DeepCopyInto(out *StatusCodeParameters) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -34970,9 +35178,9 @@ func (in *TriggerStatusCodeInitParameters) DeepCopyInto(out *TriggerStatusCodeIn
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -35015,9 +35223,9 @@ func (in *TriggerStatusCodeObservation) DeepCopyInto(out *TriggerStatusCodeObser
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -35060,9 +35268,9 @@ func (in *TriggerStatusCodeParameters) DeepCopyInto(out *TriggerStatusCodeParame
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -38962,6 +39170,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SiteConfig != nil {
 		in, out := &in.SiteConfig, &out.SiteConfig
 		*out = make([]WindowsFunctionAppSiteConfigInitParameters, len(*in))
@@ -39219,6 +39432,11 @@ func (in *WindowsFunctionAppObservation) DeepCopyInto(out *WindowsFunctionAppObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -39410,6 +39628,11 @@ func (in *WindowsFunctionAppParameters) DeepCopyInto(out *WindowsFunctionAppPara
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ResourceGroupName != nil {
@@ -44611,6 +44834,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -44861,6 +45089,11 @@ func (in *WindowsFunctionAppSlotObservation) DeepCopyInto(out *WindowsFunctionAp
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -45045,6 +45278,11 @@ func (in *WindowsFunctionAppSlotParameters) DeepCopyInto(out *WindowsFunctionApp
 	if in.KeyVaultReferenceIdentityID != nil {
 		in, out := &in.KeyVaultReferenceIdentityID, &out.KeyVaultReferenceIdentityID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -50644,6 +50882,11 @@ func (in *WindowsWebAppInitParameters) DeepCopyInto(out *WindowsWebAppInitParame
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SiteConfig != nil {
 		in, out := &in.SiteConfig, &out.SiteConfig
 		*out = make([]WindowsWebAppSiteConfigInitParameters, len(*in))
@@ -51229,6 +51472,11 @@ func (in *WindowsWebAppObservation) DeepCopyInto(out *WindowsWebAppObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -51399,6 +51647,11 @@ func (in *WindowsWebAppParameters) DeepCopyInto(out *WindowsWebAppParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -51521,6 +51774,21 @@ func (in *WindowsWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
+		*out = new(string)
+		**out = **in
+	}
 	if in.DotnetCoreVersion != nil {
 		in, out := &in.DotnetCoreVersion, &out.DotnetCoreVersion
 		*out = new(string)
@@ -51611,6 +51879,21 @@ func (in *WindowsWebAppSiteConfigApplicationStackObservation) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
+		*out = new(string)
+		**out = **in
+	}
 	if in.DotnetCoreVersion != nil {
 		in, out := &in.DotnetCoreVersion, &out.DotnetCoreVersion
 		*out = new(string)
@@ -51698,6 +51981,26 @@ func (in *WindowsWebAppSiteConfigApplicationStackParameters) DeepCopyInto(out *W
 	}
 	if in.DockerContainerTag != nil {
 		in, out := &in.DockerContainerTag, &out.DockerContainerTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -56723,6 +57026,11 @@ func (in *WindowsWebAppSlotInitParameters) DeepCopyInto(out *WindowsWebAppSlotIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -57471,6 +57779,11 @@ func (in *WindowsWebAppSlotObservation) DeepCopyInto(out *WindowsWebAppSlotObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -57639,6 +57952,11 @@ func (in *WindowsWebAppSlotParameters) DeepCopyInto(out *WindowsWebAppSlotParame
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -57726,6 +58044,21 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInt
 	}
 	if in.DockerContainerTag != nil {
 		in, out := &in.DockerContainerTag, &out.DockerContainerTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -57819,6 +58152,21 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackObservation) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
+		*out = new(string)
+		**out = **in
+	}
 	if in.DotnetCoreVersion != nil {
 		in, out := &in.DotnetCoreVersion, &out.DotnetCoreVersion
 		*out = new(string)
@@ -57906,6 +58254,26 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackParameters) DeepCopyInto(ou
 	}
 	if in.DockerContainerTag != nil {
 		in, out := &in.DockerContainerTag, &out.DockerContainerTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}

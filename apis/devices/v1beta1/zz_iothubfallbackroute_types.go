@@ -19,19 +19,19 @@ import (
 
 type IOTHubFallbackRouteInitParameters struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Used to specify whether the fallback route is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
+	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents. Defaults to DeviceMessages.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type IOTHubFallbackRouteObservation struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Used to specify whether the fallback route is enabled.
@@ -49,13 +49,13 @@ type IOTHubFallbackRouteObservation struct {
 	// The name of the resource group under which the IotHub Storage Container Endpoint resource has to be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
+	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents. Defaults to DeviceMessages.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }
 
 type IOTHubFallbackRouteParameters struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
@@ -102,7 +102,7 @@ type IOTHubFallbackRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
+	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents. Defaults to DeviceMessages.
 	// +kubebuilder:validation:Optional
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }

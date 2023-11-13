@@ -120,6 +120,10 @@ spec:
                       stored in the Secret referenced by the administratorPasswordSecretRef
                       field.
                     type: boolean
+                  autoGrowEnabled:
+                    description: Is the storage auto grow for PostgreSQL Flexible
+                      Server enabled? Defaults to false.
+                    type: boolean
                   backupRetentionDays:
                     description: The backup retention days for the PostgreSQL Flexible
                       Server. Possible values are between 7 and 35 days.
@@ -127,14 +131,24 @@ spec:
                   createMode:
                     description: The creation mode which can be used to restore or
                       replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update. Changing this forces a new PostgreSQL Flexible
-                      Server to be created.
+                      Replica and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
                       this forces a new resource to be created.
                     items:
                       properties:
+                        geoBackupKeyVaultKeyId:
+                          description: The ID of the geo backup Key Vault Key. It
+                            can't cross region and need Customer Managed Key in same
+                            region as geo backup.
+                          type: string
+                        geoBackupUserAssignedIdentityId:
+                          description: The geo backup user managed identity id for
+                            a Customer Managed Key. Should be added with identity_ids.
+                            It can't cross region and need identity in same region
+                            as geo backup.
+                          type: string
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
                           type: string
@@ -258,8 +272,7 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this PostgreSQL Flexible
-                            Server. Should be set to UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
+                            Server. The only possible value is UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -294,8 +307,7 @@ spec:
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
-                      Flexible Server. Changing this forces a new PostgreSQL Flexible
-                      Server to be created.
+                      Flexible Server.
                     type: string
                   privateDnsZoneIdRef:
                     description: Reference to a PrivateDNSZone in network to populate
@@ -470,7 +482,7 @@ spec:
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
                       Server. Possible values are 32768, 65536, 131072, 262144, 524288,
-                      1048576, 2097152, 4194304, 8388608, and 16777216.
+                      1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
                     type: number
                   tags:
                     additionalProperties:
@@ -480,9 +492,8 @@ spec:
                     type: object
                   version:
                     description: The version of PostgreSQL Flexible Server to use.
-                      Possible values are 11,12, 13 and 14. Required when create_mode
-                      is Default. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Possible values are 11,12, 13, 14 and 15. Required when create_mode
+                      is Default.
                     type: string
                   zone:
                     description: Specifies the Availability Zone in which the PostgreSQL
@@ -527,6 +538,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  autoGrowEnabled:
+                    description: Is the storage auto grow for PostgreSQL Flexible
+                      Server enabled? Defaults to false.
+                    type: boolean
                   backupRetentionDays:
                     description: The backup retention days for the PostgreSQL Flexible
                       Server. Possible values are between 7 and 35 days.
@@ -534,14 +549,24 @@ spec:
                   createMode:
                     description: The creation mode which can be used to restore or
                       replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update. Changing this forces a new PostgreSQL Flexible
-                      Server to be created.
+                      Replica and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
                       this forces a new resource to be created.
                     items:
                       properties:
+                        geoBackupKeyVaultKeyId:
+                          description: The ID of the geo backup Key Vault Key. It
+                            can't cross region and need Customer Managed Key in same
+                            region as geo backup.
+                          type: string
+                        geoBackupUserAssignedIdentityId:
+                          description: The geo backup user managed identity id for
+                            a Customer Managed Key. Should be added with identity_ids.
+                            It can't cross region and need identity in same region
+                            as geo backup.
+                          type: string
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
                           type: string
@@ -584,8 +609,7 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this PostgreSQL Flexible
-                            Server. Should be set to UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
+                            Server. The only possible value is UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -636,7 +660,7 @@ spec:
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
                       Server. Possible values are 32768, 65536, 131072, 262144, 524288,
-                      1048576, 2097152, 4194304, 8388608, and 16777216.
+                      1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
                     type: number
                   tags:
                     additionalProperties:
@@ -646,9 +670,8 @@ spec:
                     type: object
                   version:
                     description: The version of PostgreSQL Flexible Server to use.
-                      Possible values are 11,12, 13 and 14. Required when create_mode
-                      is Default. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Possible values are 11,12, 13, 14 and 15. Required when create_mode
+                      is Default.
                     type: string
                   zone:
                     description: Specifies the Availability Zone in which the PostgreSQL
@@ -851,6 +874,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  autoGrowEnabled:
+                    description: Is the storage auto grow for PostgreSQL Flexible
+                      Server enabled? Defaults to false.
+                    type: boolean
                   backupRetentionDays:
                     description: The backup retention days for the PostgreSQL Flexible
                       Server. Possible values are between 7 and 35 days.
@@ -858,14 +885,24 @@ spec:
                   createMode:
                     description: The creation mode which can be used to restore or
                       replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update. Changing this forces a new PostgreSQL Flexible
-                      Server to be created.
+                      Replica and Update.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
                       this forces a new resource to be created.
                     items:
                       properties:
+                        geoBackupKeyVaultKeyId:
+                          description: The ID of the geo backup Key Vault Key. It
+                            can't cross region and need Customer Managed Key in same
+                            region as geo backup.
+                          type: string
+                        geoBackupUserAssignedIdentityId:
+                          description: The geo backup user managed identity id for
+                            a Customer Managed Key. Should be added with identity_ids.
+                            It can't cross region and need identity in same region
+                            as geo backup.
+                          type: string
                         keyVaultKeyId:
                           description: The ID of the Key Vault Key.
                           type: string
@@ -919,19 +956,10 @@ spec:
                           items:
                             type: string
                           type: array
-                        principalId:
-                          description: The ID of the PostgreSQL Flexible Server.
-                          type: string
-                        tenantId:
-                          description: The Tenant ID of the Azure Active Directory
-                            which is used by the Active Directory authentication.
-                            active_directory_auth_enabled must be set to true.
-                          type: string
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this PostgreSQL Flexible
-                            Server. Should be set to UserAssigned, SystemAssigned,
-                            UserAssigned (to enable both).
+                            Server. The only possible value is UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -966,8 +994,7 @@ spec:
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
-                      Flexible Server. Changing this forces a new PostgreSQL Flexible
-                      Server to be created.
+                      Flexible Server.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Is public network access enabled?
@@ -995,7 +1022,7 @@ spec:
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
                       Server. Possible values are 32768, 65536, 131072, 262144, 524288,
-                      1048576, 2097152, 4194304, 8388608, and 16777216.
+                      1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
                     type: number
                   tags:
                     additionalProperties:
@@ -1005,9 +1032,8 @@ spec:
                     type: object
                   version:
                     description: The version of PostgreSQL Flexible Server to use.
-                      Possible values are 11,12, 13 and 14. Required when create_mode
-                      is Default. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Possible values are 11,12, 13, 14 and 15. Required when create_mode
+                      is Default.
                     type: string
                   zone:
                     description: Specifies the Availability Zone in which the PostgreSQL

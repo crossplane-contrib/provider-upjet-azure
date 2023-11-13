@@ -142,7 +142,7 @@ spec:
                         probeMethod:
                           description: 'Specifies HTTP method the health probe uses
                             when querying the backend pool instances. Possible values
-                            include: Get and Head. Defaults to GET.'
+                            include: GET and HEAD. Defaults to GET.'
                           type: string
                         protocol:
                           description: Protocol scheme to use for the Health Probe.
@@ -508,7 +508,7 @@ spec:
                         probeMethod:
                           description: 'Specifies HTTP method the health probe uses
                             when querying the backend pool instances. Possible values
-                            include: Get and Head. Defaults to GET.'
+                            include: GET and HEAD. Defaults to GET.'
                           type: string
                         protocol:
                           description: Protocol scheme to use for the Health Probe.
@@ -974,7 +974,7 @@ spec:
                         probeMethod:
                           description: 'Specifies HTTP method the health probe uses
                             when querying the backend pool instances. Possible values
-                            include: Get and Head. Defaults to GET.'
+                            include: GET and HEAD. Defaults to GET.'
                           type: string
                         protocol:
                           description: Protocol scheme to use for the Health Probe.

@@ -136,8 +136,8 @@ spec:
                       endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
-                    description: A redis_configuration as defined below - with some
-                      limitations by SKU - defaults/details are shown below.
+                    description: A redis_configuration block as defined below - with
+                      some limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
                         aofBackupEnabled:
@@ -194,7 +194,7 @@ spec:
                           type: number
                         maxmemoryPolicy:
                           description: How Redis will select what to remove when maxmemory
-                            is reached. Defaults are shown below. Defaults to volatile-lru.
+                            is reached. Defaults to volatile-lru.
                           type: string
                         maxmemoryReserved:
                           description: Value in megabytes reserved for non-cache usage
@@ -518,8 +518,8 @@ spec:
                       endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
-                    description: A redis_configuration as defined below - with some
-                      limitations by SKU - defaults/details are shown below.
+                    description: A redis_configuration block as defined below - with
+                      some limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
                         aofBackupEnabled:
@@ -540,7 +540,7 @@ spec:
                           type: number
                         maxmemoryPolicy:
                           description: How Redis will select what to remove when maxmemory
-                            is reached. Defaults are shown below. Defaults to volatile-lru.
+                            is reached. Defaults to volatile-lru.
                           type: string
                         maxmemoryReserved:
                           description: Value in megabytes reserved for non-cache usage
@@ -875,8 +875,8 @@ spec:
                       endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
-                    description: A redis_configuration as defined below - with some
-                      limitations by SKU - defaults/details are shown below.
+                    description: A redis_configuration block as defined below - with
+                      some limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
                         aofBackupEnabled:
@@ -901,7 +901,7 @@ spec:
                           type: number
                         maxmemoryPolicy:
                           description: How Redis will select what to remove when maxmemory
-                            is reached. Defaults are shown below. Defaults to volatile-lru.
+                            is reached. Defaults to volatile-lru.
                           type: string
                         maxmemoryReserved:
                           description: Value in megabytes reserved for non-cache usage

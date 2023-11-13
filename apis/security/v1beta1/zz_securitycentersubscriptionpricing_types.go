@@ -17,9 +17,41 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ExtensionInitParameters struct {
+
+	// Key/Value pairs that are required for some extensions.
+	AdditionalExtensionProperties map[string]*string `json:"additionalExtensionProperties,omitempty" tf:"additional_extension_properties,omitempty"`
+
+	// The name of extension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type ExtensionObservation struct {
+
+	// Key/Value pairs that are required for some extensions.
+	AdditionalExtensionProperties map[string]*string `json:"additionalExtensionProperties,omitempty" tf:"additional_extension_properties,omitempty"`
+
+	// The name of extension.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type ExtensionParameters struct {
+
+	// Key/Value pairs that are required for some extensions.
+	// +kubebuilder:validation:Optional
+	AdditionalExtensionProperties map[string]*string `json:"additionalExtensionProperties,omitempty" tf:"additional_extension_properties,omitempty"`
+
+	// The name of extension.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type SecurityCenterSubscriptionPricingInitParameters struct {
 
-	// The resource type this setting affects. Possible values are AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
+	// One or more extension blocks as defined below.
+	Extension []ExtensionInitParameters `json:"extension,omitempty" tf:"extension,omitempty"`
+
+	// The resource type this setting affects. Possible values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Resource type pricing subplan. Contact your MSFT representative for possible values.
@@ -31,10 +63,13 @@ type SecurityCenterSubscriptionPricingInitParameters struct {
 
 type SecurityCenterSubscriptionPricingObservation struct {
 
+	// One or more extension blocks as defined below.
+	Extension []ExtensionObservation `json:"extension,omitempty" tf:"extension,omitempty"`
+
 	// The subscription pricing ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The resource type this setting affects. Possible values are AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
+	// The resource type this setting affects. Possible values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// Resource type pricing subplan. Contact your MSFT representative for possible values.
@@ -46,7 +81,11 @@ type SecurityCenterSubscriptionPricingObservation struct {
 
 type SecurityCenterSubscriptionPricingParameters struct {
 
-	// The resource type this setting affects. Possible values are AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
+	// One or more extension blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Extension []ExtensionParameters `json:"extension,omitempty" tf:"extension,omitempty"`
+
+	// The resource type this setting affects. Possible values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService, SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines, Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs and CloudPosture. Defaults to VirtualMachines
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 

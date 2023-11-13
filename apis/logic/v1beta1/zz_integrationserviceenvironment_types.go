@@ -25,7 +25,7 @@ type IntegrationServiceEnvironmentInitParameters struct {
 	// The Azure Region where the Integration Service Environment should exist. Changing this forces a new Integration Service Environment to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The SKU name and capacity of the Integration Service Environment. Possible values are Developer_0, Premium_0, Premium_1, Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7, Premium_8, Premium_9 and Premium_10.
+	// The SKU name and capacity of the Integration Service Environment. Possible values are Developer_0, Premium_0, Premium_1, Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7, Premium_8, Premium_9 and Premium_10. Defaults to Developer_0.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Integration Service Environment.
@@ -52,7 +52,7 @@ type IntegrationServiceEnvironmentObservation struct {
 	// The name of the Resource Group where the Integration Service Environment should exist. Changing this forces a new Integration Service Environment to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The SKU name and capacity of the Integration Service Environment. Possible values are Developer_0, Premium_0, Premium_1, Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7, Premium_8, Premium_9 and Premium_10.
+	// The SKU name and capacity of the Integration Service Environment. Possible values are Developer_0, Premium_0, Premium_1, Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7, Premium_8, Premium_9 and Premium_10. Defaults to Developer_0.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Integration Service Environment.
@@ -91,7 +91,7 @@ type IntegrationServiceEnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The SKU name and capacity of the Integration Service Environment. Possible values are Developer_0, Premium_0, Premium_1, Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7, Premium_8, Premium_9 and Premium_10.
+	// The SKU name and capacity of the Integration Service Environment. Possible values are Developer_0, Premium_0, Premium_1, Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7, Premium_8, Premium_9 and Premium_10. Defaults to Developer_0.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 

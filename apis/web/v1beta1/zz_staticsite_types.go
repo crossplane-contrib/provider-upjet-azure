@@ -54,6 +54,9 @@ type StaticSiteIdentityParameters struct {
 
 type StaticSiteInitParameters struct {
 
+	// A key-value pair of App Settings.
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
+
 	// An identity block as defined below.
 	Identity []StaticSiteIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -71,6 +74,9 @@ type StaticSiteInitParameters struct {
 }
 
 type StaticSiteObservation struct {
+
+	// A key-value pair of App Settings.
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// The default host name of the Static Web App.
 	DefaultHostName *string `json:"defaultHostName,omitempty" tf:"default_host_name,omitempty"`
@@ -98,6 +104,10 @@ type StaticSiteObservation struct {
 }
 
 type StaticSiteParameters struct {
+
+	// A key-value pair of App Settings.
+	// +kubebuilder:validation:Optional
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional

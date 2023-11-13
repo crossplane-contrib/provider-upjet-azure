@@ -413,6 +413,9 @@ type StorageInitParameters struct {
 	// Should Storage Auto Grow be enabled? Defaults to true.
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
 
+	// Should IOPS be scaled automatically? If true, iops can not be set. Defaults to false.
+	IoScalingEnabled *bool `json:"ioScalingEnabled,omitempty" tf:"io_scaling_enabled,omitempty"`
+
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
@@ -424,6 +427,9 @@ type StorageObservation struct {
 
 	// Should Storage Auto Grow be enabled? Defaults to true.
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
+
+	// Should IOPS be scaled automatically? If true, iops can not be set. Defaults to false.
+	IoScalingEnabled *bool `json:"ioScalingEnabled,omitempty" tf:"io_scaling_enabled,omitempty"`
 
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
@@ -437,6 +443,10 @@ type StorageParameters struct {
 	// Should Storage Auto Grow be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
+
+	// Should IOPS be scaled automatically? If true, iops can not be set. Defaults to false.
+	// +kubebuilder:validation:Optional
+	IoScalingEnabled *bool `json:"ioScalingEnabled,omitempty" tf:"io_scaling_enabled,omitempty"`
 
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	// +kubebuilder:validation:Optional

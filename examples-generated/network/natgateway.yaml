@@ -19,47 +19,6 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
-kind: PublicIP
-metadata:
-  annotations:
-    meta.upbound.io/example-id: network/v1beta1/natgateway
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    allocationMethod: Static
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    sku: Standard
-    zones:
-    - "1"
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: PublicIPPrefix
-metadata:
-  annotations:
-    meta.upbound.io/example-id: network/v1beta1/natgateway
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: West Europe
-    prefixLength: 30
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    zones:
-    - "1"
-
----
-
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

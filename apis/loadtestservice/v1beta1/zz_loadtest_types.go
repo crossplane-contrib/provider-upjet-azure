@@ -18,22 +18,36 @@ import (
 )
 
 type IdentityInitParameters struct {
+
+	// A list of the User Assigned Identity IDs that should be assigned to this Load Test.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Identity that should be assigned to this Load Test. Possible values are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
 
-	// The ID of the Load Test.
+	// A list of the User Assigned Identity IDs that should be assigned to this Load Test.
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID for the System-Assigned Managed Identity assigned to this Load Test.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The ID of the Load Test.
+	// The Tenant ID for the System-Assigned Managed Identity assigned to this Load Test.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
+	// Specifies the type of Managed Identity that should be assigned to this Load Test. Possible values are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
 
+	// A list of the User Assigned Identity IDs that should be assigned to this Load Test.
+	// +kubebuilder:validation:Optional
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Identity that should be assigned to this Load Test. Possible values are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -43,7 +57,7 @@ type LoadTestInitParameters struct {
 	// Description of the resource. Changing this forces a new Load Test to be created.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the Managed Identity which should be assigned to this Load Test.
+	// An identity block as defined below. Specifies the Managed Identity which should be assigned to this Load Test.
 	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Load Test should exist. Changing this forces a new Load Test to be created.
@@ -64,7 +78,7 @@ type LoadTestObservation struct {
 	// The ID of the Load Test.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the Managed Identity which should be assigned to this Load Test.
+	// An identity block as defined below. Specifies the Managed Identity which should be assigned to this Load Test.
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Load Test should exist. Changing this forces a new Load Test to be created.
@@ -83,7 +97,7 @@ type LoadTestParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// Specifies the Managed Identity which should be assigned to this Load Test.
+	// An identity block as defined below. Specifies the Managed Identity which should be assigned to this Load Test.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 

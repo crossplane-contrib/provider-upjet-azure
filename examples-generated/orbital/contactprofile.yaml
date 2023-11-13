@@ -29,7 +29,7 @@ spec:
         testing.upbound.io/example-name: example
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -89,7 +89,7 @@ spec:
   forProvider:
     addressSpace:
     - 10.0.0.0/16
-    location: ${azurerm_resource_group.test.location}
+    location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example

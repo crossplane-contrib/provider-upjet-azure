@@ -17,6 +17,58 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type CommunityGalleryInitParameters struct {
+
+	// The End User Licence Agreement for the Shared Image Gallery. Changing this forces a new resource to be created.
+	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
+
+	// Prefix of the community public name for the Shared Image Gallery. Changing this forces a new resource to be created.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Email of the publisher for the Shared Image Gallery. Changing this forces a new resource to be created.
+	PublisherEmail *string `json:"publisherEmail,omitempty" tf:"publisher_email,omitempty"`
+
+	// URI of the publisher for the Shared Image Gallery. Changing this forces a new resource to be created.
+	PublisherURI *string `json:"publisherUri,omitempty" tf:"publisher_uri,omitempty"`
+}
+
+type CommunityGalleryObservation struct {
+
+	// The End User Licence Agreement for the Shared Image Gallery. Changing this forces a new resource to be created.
+	Eula *string `json:"eula,omitempty" tf:"eula,omitempty"`
+
+	// Specifies the name of the Shared Image Gallery. Changing this forces a new resource to be created.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Prefix of the community public name for the Shared Image Gallery. Changing this forces a new resource to be created.
+	Prefix *string `json:"prefix,omitempty" tf:"prefix,omitempty"`
+
+	// Email of the publisher for the Shared Image Gallery. Changing this forces a new resource to be created.
+	PublisherEmail *string `json:"publisherEmail,omitempty" tf:"publisher_email,omitempty"`
+
+	// URI of the publisher for the Shared Image Gallery. Changing this forces a new resource to be created.
+	PublisherURI *string `json:"publisherUri,omitempty" tf:"publisher_uri,omitempty"`
+}
+
+type CommunityGalleryParameters struct {
+
+	// The End User Licence Agreement for the Shared Image Gallery. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Eula *string `json:"eula" tf:"eula,omitempty"`
+
+	// Prefix of the community public name for the Shared Image Gallery. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Prefix *string `json:"prefix" tf:"prefix,omitempty"`
+
+	// Email of the publisher for the Shared Image Gallery. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PublisherEmail *string `json:"publisherEmail" tf:"publisher_email,omitempty"`
+
+	// URI of the publisher for the Shared Image Gallery. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PublisherURI *string `json:"publisherUri" tf:"publisher_uri,omitempty"`
+}
+
 type SharedImageGalleryInitParameters struct {
 
 	// A description for this Shared Image Gallery.
@@ -24,6 +76,9 @@ type SharedImageGalleryInitParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A sharing block as defined below. Changing this forces a new resource to be created.
+	Sharing []SharingInitParameters `json:"sharing,omitempty" tf:"sharing,omitempty"`
 
 	// A mapping of tags to assign to the Shared Image Gallery.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -42,6 +97,9 @@ type SharedImageGalleryObservation struct {
 
 	// The name of the resource group in which to create the Shared Image Gallery. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A sharing block as defined below. Changing this forces a new resource to be created.
+	Sharing []SharingObservation `json:"sharing,omitempty" tf:"sharing,omitempty"`
 
 	// A mapping of tags to assign to the Shared Image Gallery.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -73,9 +131,42 @@ type SharedImageGalleryParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A sharing block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Sharing []SharingParameters `json:"sharing,omitempty" tf:"sharing,omitempty"`
+
 	// A mapping of tags to assign to the Shared Image Gallery.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type SharingInitParameters struct {
+
+	// A community_gallery block as defined below. Changing this forces a new resource to be created.
+	CommunityGallery []CommunityGalleryInitParameters `json:"communityGallery,omitempty" tf:"community_gallery,omitempty"`
+
+	// The permission of the Shared Image Gallery when sharing. Possible values are Community, Groups and Private. Changing this forces a new resource to be created.
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+}
+
+type SharingObservation struct {
+
+	// A community_gallery block as defined below. Changing this forces a new resource to be created.
+	CommunityGallery []CommunityGalleryObservation `json:"communityGallery,omitempty" tf:"community_gallery,omitempty"`
+
+	// The permission of the Shared Image Gallery when sharing. Possible values are Community, Groups and Private. Changing this forces a new resource to be created.
+	Permission *string `json:"permission,omitempty" tf:"permission,omitempty"`
+}
+
+type SharingParameters struct {
+
+	// A community_gallery block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	CommunityGallery []CommunityGalleryParameters `json:"communityGallery,omitempty" tf:"community_gallery,omitempty"`
+
+	// The permission of the Shared Image Gallery when sharing. Possible values are Community, Groups and Private. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Permission *string `json:"permission" tf:"permission,omitempty"`
 }
 
 // SharedImageGallerySpec defines the desired state of SharedImageGallery

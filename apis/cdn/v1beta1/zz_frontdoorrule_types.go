@@ -78,16 +78,16 @@ type ActionsParameters struct {
 
 type ActionsURLRedirectActionInitParameters struct {
 
-	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to an empty string. Defaults to "".
+	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to "".
 	DestinationFragment *string `json:"destinationFragment,omitempty" tf:"destination_fragment,omitempty"`
 
 	// The host name you want the request to be redirected to. The value must be a string between 0 and 2048 characters in length, leave blank to preserve the incoming host.
 	DestinationHostName *string `json:"destinationHostname,omitempty" tf:"destination_hostname,omitempty"`
 
-	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to an empty string. Defaults to "".
+	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to "".
 	DestinationPath *string `json:"destinationPath,omitempty" tf:"destination_path,omitempty"`
 
-	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to an empty string. Defaults to "".
+	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to "".
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
 	// The protocol the request will be redirected as. Possible values include MatchRequest, Http or Https. Defaults to MatchRequest.
@@ -99,16 +99,16 @@ type ActionsURLRedirectActionInitParameters struct {
 
 type ActionsURLRedirectActionObservation struct {
 
-	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to an empty string. Defaults to "".
+	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to "".
 	DestinationFragment *string `json:"destinationFragment,omitempty" tf:"destination_fragment,omitempty"`
 
 	// The host name you want the request to be redirected to. The value must be a string between 0 and 2048 characters in length, leave blank to preserve the incoming host.
 	DestinationHostName *string `json:"destinationHostname,omitempty" tf:"destination_hostname,omitempty"`
 
-	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to an empty string. Defaults to "".
+	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to "".
 	DestinationPath *string `json:"destinationPath,omitempty" tf:"destination_path,omitempty"`
 
-	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to an empty string. Defaults to "".
+	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to "".
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
 	// The protocol the request will be redirected as. Possible values include MatchRequest, Http or Https. Defaults to MatchRequest.
@@ -120,7 +120,7 @@ type ActionsURLRedirectActionObservation struct {
 
 type ActionsURLRedirectActionParameters struct {
 
-	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to an empty string. Defaults to "".
+	// The fragment to use in the redirect. The value must be a string between 0 and 1024 characters in length, leave blank to preserve the incoming fragment. Defaults to "".
 	// +kubebuilder:validation:Optional
 	DestinationFragment *string `json:"destinationFragment,omitempty" tf:"destination_fragment,omitempty"`
 
@@ -128,11 +128,11 @@ type ActionsURLRedirectActionParameters struct {
 	// +kubebuilder:validation:Optional
 	DestinationHostName *string `json:"destinationHostname" tf:"destination_hostname,omitempty"`
 
-	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to an empty string. Defaults to "".
+	// The path to use in the redirect. The value must be a string and include the leading /, leave blank to preserve the incoming path. Defaults to "".
 	// +kubebuilder:validation:Optional
 	DestinationPath *string `json:"destinationPath,omitempty" tf:"destination_path,omitempty"`
 
-	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to an empty string. Defaults to "".
+	// The query string used in the redirect URL. The value must be in the <key>=<value> or <key>={action_server_variable} format and must not include the leading ?, leave blank to preserve the incoming query string. Maximum allowed length for this field is 2048 characters. Defaults to "".
 	// +kubebuilder:validation:Optional
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
@@ -1475,7 +1475,7 @@ type URLFilenameConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
 	// +kubebuilder:validation:Optional
-	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
+	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
 	// +kubebuilder:validation:Optional

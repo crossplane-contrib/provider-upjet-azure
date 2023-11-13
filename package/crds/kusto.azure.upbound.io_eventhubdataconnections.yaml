@@ -318,7 +318,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventSystemProperties:
                     description: Specifies a list of system properties for the Event
@@ -527,7 +527,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventSystemProperties:
                     description: Specifies a list of system properties for the Event
@@ -753,7 +753,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventSystemProperties:
                     description: Specifies a list of system properties for the Event

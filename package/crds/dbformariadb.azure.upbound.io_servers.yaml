@@ -93,7 +93,7 @@ spec:
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
                       automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      value if not explicitly specified is true. Defaults to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values
@@ -341,7 +341,7 @@ spec:
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
                       automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      value if not explicitly specified is true. Defaults to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values
@@ -602,7 +602,7 @@ spec:
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
                       automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      value if not explicitly specified is true. Defaults to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values

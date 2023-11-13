@@ -364,12 +364,12 @@ spec:
                       type: string
                     type: array
                   firewallIds:
-                    description: A firewall_ids block as defined below.
+                    description: A list of ID of Firewall.
                     items:
                       type: string
                     type: array
                   firewallPolicyIds:
-                    description: A firewall_policy_ids block as defined below.
+                    description: A list of ID of Firewall Policy`.
                     items:
                       type: string
                     type: array

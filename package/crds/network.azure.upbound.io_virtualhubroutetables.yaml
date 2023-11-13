@@ -73,7 +73,7 @@ spec:
                       type: string
                     type: array
                   route:
-                    description: A route block as defined below.
+                    description: One or more route blocks as defined below.
                     items:
                       properties:
                         destinations:
@@ -274,7 +274,7 @@ spec:
                       type: string
                     type: array
                   route:
-                    description: A route block as defined below.
+                    description: One or more route blocks as defined below.
                     items:
                       properties:
                         destinations:
@@ -471,7 +471,7 @@ spec:
                       type: string
                     type: array
                   route:
-                    description: A route block as defined below.
+                    description: One or more route blocks as defined below.
                     items:
                       properties:
                         destinations:

@@ -82,6 +82,15 @@ type BaseBlobInitParameters struct {
 	// The age in days after last modification to tier blobs to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and 99999. Defaults to -1.
 	TierToArchiveAfterDaysSinceModificationGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_modification_greater_than,omitempty"`
 
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
+
+	// The age in days after last access time to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceLastAccessTimeGreaterThan *float64 `json:"tierToColdAfterDaysSinceLastAccessTimeGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_last_access_time_greater_than,omitempty"`
+
+	// The age in days after last modification to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceModificationGreaterThan *float64 `json:"tierToColdAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_modification_greater_than,omitempty"`
+
 	// The age in days after creation to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
 	TierToCoolAfterDaysSinceCreationGreaterThan *float64 `json:"tierToCoolAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cool_after_days_since_creation_greater_than,omitempty"`
 
@@ -117,6 +126,15 @@ type BaseBlobObservation struct {
 
 	// The age in days after last modification to tier blobs to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and 99999. Defaults to -1.
 	TierToArchiveAfterDaysSinceModificationGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_modification_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
+
+	// The age in days after last access time to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceLastAccessTimeGreaterThan *float64 `json:"tierToColdAfterDaysSinceLastAccessTimeGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_last_access_time_greater_than,omitempty"`
+
+	// The age in days after last modification to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceModificationGreaterThan *float64 `json:"tierToColdAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_modification_greater_than,omitempty"`
 
 	// The age in days after creation to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
 	TierToCoolAfterDaysSinceCreationGreaterThan *float64 `json:"tierToCoolAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cool_after_days_since_creation_greater_than,omitempty"`
@@ -161,6 +179,18 @@ type BaseBlobParameters struct {
 	// The age in days after last modification to tier blobs to archive storage. Supports blob currently at Hot or Cool tier. Must be between 0 and 99999. Defaults to -1.
 	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceModificationGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_modification_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
+
+	// The age in days after last access time to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
+	TierToColdAfterDaysSinceLastAccessTimeGreaterThan *float64 `json:"tierToColdAfterDaysSinceLastAccessTimeGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_last_access_time_greater_than,omitempty"`
+
+	// The age in days after last modification to tier blobs to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
+	TierToColdAfterDaysSinceModificationGreaterThan *float64 `json:"tierToColdAfterDaysSinceModificationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_modification_greater_than,omitempty"`
 
 	// The age in days after creation to cool storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
 	// +kubebuilder:validation:Optional
@@ -354,6 +384,9 @@ type SnapshotInitParameters struct {
 
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
 }
 
 type SnapshotObservation struct {
@@ -369,6 +402,9 @@ type SnapshotObservation struct {
 
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
 }
 
 type SnapshotParameters struct {
@@ -388,6 +424,10 @@ type SnapshotParameters struct {
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
 	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
 }
 
 type VersionInitParameters struct {
@@ -403,6 +443,9 @@ type VersionInitParameters struct {
 
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
 }
 
 type VersionObservation struct {
@@ -418,6 +461,9 @@ type VersionObservation struct {
 
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
 }
 
 type VersionParameters struct {
@@ -437,6 +483,10 @@ type VersionParameters struct {
 	// The age in days after last tier change to the blobs to skip to be archved. Must be between 0 and 99999. Defaults to -1.
 	// +kubebuilder:validation:Optional
 	TierToArchiveAfterDaysSinceLastTierChangeGreaterThan *float64 `json:"tierToArchiveAfterDaysSinceLastTierChangeGreaterThan,omitempty" tf:"tier_to_archive_after_days_since_last_tier_change_greater_than,omitempty"`
+
+	// The age in days after creation to cold storage. Supports blob currently at Hot tier. Must be between 0 and 99999. Defaults to -1.
+	// +kubebuilder:validation:Optional
+	TierToColdAfterDaysSinceCreationGreaterThan *float64 `json:"tierToColdAfterDaysSinceCreationGreaterThan,omitempty" tf:"tier_to_cold_after_days_since_creation_greater_than,omitempty"`
 }
 
 // ManagementPolicySpec defines the desired state of ManagementPolicy

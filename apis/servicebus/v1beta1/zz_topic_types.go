@@ -34,9 +34,7 @@ type TopicInitParameters struct {
 	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
 	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 
-	// Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-	// the topic to be partitioned across multiple message brokers. Defaults to false.
-	// Changing this forces a new resource to be created.
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
 	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
@@ -74,9 +72,7 @@ type TopicObservation struct {
 	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
 	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 
-	// Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-	// the topic to be partitioned across multiple message brokers. Defaults to false.
-	// Changing this forces a new resource to be created.
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
 	// The ServiceBus Topic ID.
@@ -126,9 +122,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 
-	// Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-	// the topic to be partitioned across multiple message brokers. Defaults to false.
-	// Changing this forces a new resource to be created.
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 

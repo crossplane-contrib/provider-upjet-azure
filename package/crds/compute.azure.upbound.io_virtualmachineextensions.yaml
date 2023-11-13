@@ -113,6 +113,12 @@ spec:
                     - name
                     - namespace
                     type: object
+                  provisionAfterExtensions:
+                    description: Specifies the collection of extension names after
+                      which this extension needs to be provisioned.
+                    items:
+                      type: string
+                    type: array
                   publisher:
                     description: The publisher of the extension, available publishers
                       can be found by using the Azure CLI. Changing this forces a
@@ -252,6 +258,12 @@ spec:
                           description: The ID of the source Key Vault.
                           type: string
                       type: object
+                    type: array
+                  provisionAfterExtensions:
+                    description: Specifies the collection of extension names after
+                      which this extension needs to be provisioned.
+                    items:
+                      type: string
                     type: array
                   publisher:
                     description: The publisher of the extension, available publishers
@@ -483,6 +495,12 @@ spec:
                           description: The ID of the source Key Vault.
                           type: string
                       type: object
+                    type: array
+                  provisionAfterExtensions:
+                    description: Specifies the collection of extension names after
+                      which this extension needs to be provisioned.
+                    items:
+                      type: string
                     type: array
                   publisher:
                     description: The publisher of the extension, available publishers

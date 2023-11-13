@@ -68,7 +68,8 @@ spec:
               forProvider:
                 properties:
                   backupPolicyId:
-                    description: Specifies the id of the backup policy to use.
+                    description: Specifies the id of the backup policy to use. Required
+                      in creation or when protection_stopped is not specified.
                     type: string
                   backupPolicyIdRef:
                     description: Reference to a BackupPolicyVM in recoveryservices
@@ -157,6 +158,11 @@ spec:
                     items:
                       type: number
                     type: array
+                  protectionState:
+                    description: Specifies Protection state of the backup. Possible
+                      values are Invalid, IRPending, Protected, ProtectionStopped,
+                      ProtectionError and ProtectionPaused.
+                    type: string
                   recoveryVaultName:
                     description: Specifies the name of the Recovery Services Vault
                       to use. Changing this forces a new resource to be created.
@@ -345,6 +351,11 @@ spec:
                     items:
                       type: number
                     type: array
+                  protectionState:
+                    description: Specifies Protection state of the backup. Possible
+                      values are Invalid, IRPending, Protected, ProtectionStopped,
+                      ProtectionError and ProtectionPaused.
+                    type: string
                   sourceVmId:
                     description: Specifies the ID of the VM to backup. Changing this
                       forces a new resource to be created.
@@ -516,7 +527,8 @@ spec:
               atProvider:
                 properties:
                   backupPolicyId:
-                    description: Specifies the id of the backup policy to use.
+                    description: Specifies the id of the backup policy to use. Required
+                      in creation or when protection_stopped is not specified.
                     type: string
                   excludeDiskLuns:
                     description: A list of Disks' Logical Unit Numbers(LUN) to be
@@ -533,6 +545,11 @@ spec:
                     items:
                       type: number
                     type: array
+                  protectionState:
+                    description: Specifies Protection state of the backup. Possible
+                      values are Invalid, IRPending, Protected, ProtectionStopped,
+                      ProtectionError and ProtectionPaused.
+                    type: string
                   recoveryVaultName:
                     description: Specifies the name of the Recovery Services Vault
                       to use. Changing this forces a new resource to be created.

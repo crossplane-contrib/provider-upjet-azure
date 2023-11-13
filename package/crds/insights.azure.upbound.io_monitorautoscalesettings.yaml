@@ -123,6 +123,21 @@ spec:
                           type: array
                       type: object
                     type: array
+                  predictive:
+                    description: A predictive block as defined below.
+                    items:
+                      properties:
+                        lookAheadTime:
+                          description: Specifies the amount of time by which instances
+                            are launched in advance. It must be between PT1M and PT1H
+                            in ISO 8601 format.
+                          type: string
+                        scaleMode:
+                          description: Specifies the predictive scale mode. Possible
+                            values are Enabled or ForecastOnly.
+                          type: string
+                      type: object
+                    type: array
                   profile:
                     description: Specifies one or more (up to 20) profile blocks as
                       defined below.
@@ -641,6 +656,21 @@ spec:
                           type: array
                       type: object
                     type: array
+                  predictive:
+                    description: A predictive block as defined below.
+                    items:
+                      properties:
+                        lookAheadTime:
+                          description: Specifies the amount of time by which instances
+                            are launched in advance. It must be between PT1M and PT1H
+                            in ISO 8601 format.
+                          type: string
+                        scaleMode:
+                          description: Specifies the predictive scale mode. Possible
+                            values are Enabled or ForecastOnly.
+                          type: string
+                      type: object
+                    type: array
                   profile:
                     description: Specifies one or more (up to 20) profile blocks as
                       defined below.
@@ -1079,6 +1109,21 @@ spec:
                                 type: string
                             type: object
                           type: array
+                      type: object
+                    type: array
+                  predictive:
+                    description: A predictive block as defined below.
+                    items:
+                      properties:
+                        lookAheadTime:
+                          description: Specifies the amount of time by which instances
+                            are launched in advance. It must be between PT1M and PT1H
+                            in ISO 8601 format.
+                          type: string
+                        scaleMode:
+                          description: Specifies the predictive scale mode. Possible
+                            values are Enabled or ForecastOnly.
+                          type: string
                       type: object
                     type: array
                   profile:

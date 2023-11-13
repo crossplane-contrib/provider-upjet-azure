@@ -95,7 +95,7 @@ spec:
                         pricingTier:
                           description: 'Pricing tier for the database that will be
                             created for the SSIS catalog. Valid values are: Basic,
-                            Standard, Premium and PremiumRS.'
+                            Standard, Premium and PremiumRS. Defaults to Basic.'
                           type: string
                         serverEndpoint:
                           description: The endpoint of an Azure SQL Server that will
@@ -232,7 +232,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Managed Integration
@@ -361,7 +361,7 @@ spec:
                         pricingTier:
                           description: 'Pricing tier for the database that will be
                             created for the SSIS catalog. Valid values are: Basic,
-                            Standard, Premium and PremiumRS.'
+                            Standard, Premium and PremiumRS. Defaults to Basic.'
                           type: string
                         serverEndpoint:
                           description: The endpoint of an Azure SQL Server that will
@@ -398,7 +398,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Managed Integration
@@ -608,7 +608,7 @@ spec:
                         pricingTier:
                           description: 'Pricing tier for the database that will be
                             created for the SSIS catalog. Valid values are: Basic,
-                            Standard, Premium and PremiumRS.'
+                            Standard, Premium and PremiumRS. Defaults to Basic.'
                           type: string
                         serverEndpoint:
                           description: The endpoint of an Azure SQL Server that will
@@ -652,7 +652,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Managed Integration

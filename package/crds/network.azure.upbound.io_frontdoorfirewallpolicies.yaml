@@ -279,7 +279,7 @@ spec:
                     type: array
                   mode:
                     description: The firewall policy mode. Possible values are Detection,
-                      Prevention and defaults to Prevention.
+                      Prevention. Defaults to Prevention.
                     type: string
                   redirectUrl:
                     description: If action type is redirect, this field represents
@@ -593,7 +593,7 @@ spec:
                     type: array
                   mode:
                     description: The firewall policy mode. Possible values are Detection,
-                      Prevention and defaults to Prevention.
+                      Prevention. Defaults to Prevention.
                     type: string
                   redirectUrl:
                     description: If action type is redirect, this field represents
@@ -995,7 +995,7 @@ spec:
                     type: array
                   mode:
                     description: The firewall policy mode. Possible values are Detection,
-                      Prevention and defaults to Prevention.
+                      Prevention. Defaults to Prevention.
                     type: string
                   redirectUrl:
                     description: If action type is redirect, this field represents

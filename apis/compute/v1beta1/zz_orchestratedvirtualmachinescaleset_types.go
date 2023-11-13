@@ -415,7 +415,7 @@ type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairInitParameters str
 	// Should the automatic instance repair be enabled on this Orchestrated Virtual Machine Scale Set? Possible values are true and false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. Defaults to 30 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M).
+	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M). Defaults to PT30M.
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
 
@@ -424,7 +424,7 @@ type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairObservation struct
 	// Should the automatic instance repair be enabled on this Orchestrated Virtual Machine Scale Set? Possible values are true and false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. Defaults to 30 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M).
+	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M). Defaults to PT30M.
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
 
@@ -434,7 +434,7 @@ type OrchestratedVirtualMachineScaleSetAutomaticInstanceRepairParameters struct 
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. Defaults to 30 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M).
+	// Amount of time for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. Possible values are between 30 and 90 minutes. The time duration should be specified in ISO 8601 format (e.g. PT30M to PT90M). Defaults to PT30M.
 	// +kubebuilder:validation:Optional
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
@@ -478,8 +478,10 @@ type OrchestratedVirtualMachineScaleSetDataDiskInitParameters struct {
 	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS and UltraSSD_LRS.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
+	// Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.
 	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
 
+	// Specifies the bandwidth in MB per second for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.
 	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
 
 	// Specifies if Write Accelerator is enabled on the Data Disk. Defaults to false.
@@ -506,8 +508,10 @@ type OrchestratedVirtualMachineScaleSetDataDiskObservation struct {
 	// The Type of Storage Account which should back this Data Disk. Possible values include Standard_LRS, StandardSSD_LRS, StandardSSD_ZRS, Premium_LRS, PremiumV2_LRS, Premium_ZRS and UltraSSD_LRS.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
+	// Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.
 	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
 
+	// Specifies the bandwidth in MB per second for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.
 	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
 
 	// Specifies if Write Accelerator is enabled on the Data Disk. Defaults to false.
@@ -540,9 +544,11 @@ type OrchestratedVirtualMachineScaleSetDataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType" tf:"storage_account_type,omitempty"`
 
+	// Specifies the Read-Write IOPS for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.
 	// +kubebuilder:validation:Optional
 	UltraSsdDiskIopsReadWrite *float64 `json:"ultraSsdDiskIopsReadWrite,omitempty" tf:"ultra_ssd_disk_iops_read_write,omitempty"`
 
+	// Specifies the bandwidth in MB per second for this Data Disk. Only settable when storage_account_type is PremiumV2_LRS or UltraSSD_LRS.
 	// +kubebuilder:validation:Optional
 	UltraSsdDiskMbpsReadWrite *float64 `json:"ultraSsdDiskMbpsReadWrite,omitempty" tf:"ultra_ssd_disk_mbps_read_write,omitempty"`
 
@@ -722,7 +728,7 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 	// Should extension operations be allowed on the Virtual Machine Scale Set? Possible values are true or false. Defaults to true. Changing this forces a new Orchestrated Virtual Machine Scale Set to be created.
 	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
 
-	// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
+	// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// An identity block as defined below.
@@ -897,7 +903,7 @@ type OrchestratedVirtualMachineScaleSetObservation struct {
 	// Should extension operations be allowed on the Virtual Machine Scale Set? Possible values are true or false. Defaults to true. Changing this forces a new Orchestrated Virtual Machine Scale Set to be created.
 	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
 
-	// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
+	// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// The ID of the Orchestrated Virtual Machine Scale Set.
@@ -1109,7 +1115,7 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
 
-	// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. The default value is 90 minutes (PT1H30M).
+	// Specifies the time alloted for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 

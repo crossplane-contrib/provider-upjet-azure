@@ -101,6 +101,22 @@ spec:
                     items:
                       type: string
                     type: array
+                  clientAuthorization:
+                    description: A client_authorization block as defined below.
+                    items:
+                      properties:
+                        certificateIds:
+                          description: Specifies the Spring Cloud Certificate IDs
+                            of the Spring Cloud Gateway.
+                          items:
+                            type: string
+                          type: array
+                        verificationEnabled:
+                          description: Specifies whether the client certificate verification
+                            is enabled.
+                          type: boolean
+                      type: object
+                    type: array
                   cors:
                     description: A cors block as defined below.
                     items:
@@ -116,6 +132,12 @@ spec:
                             The special value * allows all methods. If not set, GET
                             and HEAD are allowed by default. Possible values are DELETE,
                             GET, HEAD, MERGE, POST, OPTIONS and PUT.
+                          items:
+                            type: string
+                          type: array
+                        allowedOriginPatterns:
+                          description: Allowed origin patterns to make cross-site
+                            requests.
                           items:
                             type: string
                           type: array
@@ -172,7 +194,7 @@ spec:
                         memory:
                           description: Specifies the required memory size of the Spring
                             Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi,
-                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not
+                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 2Gi if not
                             specified.
                           type: string
                       type: object
@@ -340,6 +362,22 @@ spec:
                     items:
                       type: string
                     type: array
+                  clientAuthorization:
+                    description: A client_authorization block as defined below.
+                    items:
+                      properties:
+                        certificateIds:
+                          description: Specifies the Spring Cloud Certificate IDs
+                            of the Spring Cloud Gateway.
+                          items:
+                            type: string
+                          type: array
+                        verificationEnabled:
+                          description: Specifies whether the client certificate verification
+                            is enabled.
+                          type: boolean
+                      type: object
+                    type: array
                   cors:
                     description: A cors block as defined below.
                     items:
@@ -355,6 +393,12 @@ spec:
                             The special value * allows all methods. If not set, GET
                             and HEAD are allowed by default. Possible values are DELETE,
                             GET, HEAD, MERGE, POST, OPTIONS and PUT.
+                          items:
+                            type: string
+                          type: array
+                        allowedOriginPatterns:
+                          description: Allowed origin patterns to make cross-site
+                            requests.
                           items:
                             type: string
                           type: array
@@ -411,7 +455,7 @@ spec:
                         memory:
                           description: Specifies the required memory size of the Spring
                             Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi,
-                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not
+                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 2Gi if not
                             specified.
                           type: string
                       type: object
@@ -638,6 +682,22 @@ spec:
                     items:
                       type: string
                     type: array
+                  clientAuthorization:
+                    description: A client_authorization block as defined below.
+                    items:
+                      properties:
+                        certificateIds:
+                          description: Specifies the Spring Cloud Certificate IDs
+                            of the Spring Cloud Gateway.
+                          items:
+                            type: string
+                          type: array
+                        verificationEnabled:
+                          description: Specifies whether the client certificate verification
+                            is enabled.
+                          type: boolean
+                      type: object
+                    type: array
                   cors:
                     description: A cors block as defined below.
                     items:
@@ -653,6 +713,12 @@ spec:
                             The special value * allows all methods. If not set, GET
                             and HEAD are allowed by default. Possible values are DELETE,
                             GET, HEAD, MERGE, POST, OPTIONS and PUT.
+                          items:
+                            type: string
+                          type: array
+                        allowedOriginPatterns:
+                          description: Allowed origin patterns to make cross-site
+                            requests.
                           items:
                             type: string
                           type: array
@@ -712,7 +778,7 @@ spec:
                         memory:
                           description: Specifies the required memory size of the Spring
                             Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi,
-                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not
+                            3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 2Gi if not
                             specified.
                           type: string
                       type: object

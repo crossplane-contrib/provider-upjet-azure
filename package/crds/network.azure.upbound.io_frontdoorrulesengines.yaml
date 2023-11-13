@@ -277,7 +277,7 @@ spec:
                             properties:
                               negateCondition:
                                 description: can be set to true or false to negate
-                                  the given condition. Defaults to true.
+                                  the given condition. Defaults to false.
                                 type: boolean
                               operator:
                                 description: can be set to Any, IPMatch, GeoMatch,
@@ -384,7 +384,7 @@ spec:
                             properties:
                               negateCondition:
                                 description: can be set to true or false to negate
-                                  the given condition. Defaults to true.
+                                  the given condition. Defaults to false.
                                 type: boolean
                               operator:
                                 description: can be set to Any, IPMatch, GeoMatch,
@@ -657,7 +657,7 @@ spec:
                             properties:
                               negateCondition:
                                 description: can be set to true or false to negate
-                                  the given condition. Defaults to true.
+                                  the given condition. Defaults to false.
                                 type: boolean
                               operator:
                                 description: can be set to Any, IPMatch, GeoMatch,

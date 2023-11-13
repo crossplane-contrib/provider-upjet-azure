@@ -746,7 +746,7 @@ type VoiceReceiverParameters struct {
 
 type WebhookReceiverInitParameters struct {
 
-	// The aad_auth block as defined below
+	// The aad_auth block as defined below.
 	AADAuth []AADAuthInitParameters `json:"aadAuth,omitempty" tf:"aad_auth,omitempty"`
 
 	// The name of the webhook receiver. Names must be unique (case-insensitive) across all receivers within an action group.
@@ -761,7 +761,7 @@ type WebhookReceiverInitParameters struct {
 
 type WebhookReceiverObservation struct {
 
-	// The aad_auth block as defined below
+	// The aad_auth block as defined below.
 	AADAuth []AADAuthObservation `json:"aadAuth,omitempty" tf:"aad_auth,omitempty"`
 
 	// The name of the webhook receiver. Names must be unique (case-insensitive) across all receivers within an action group.
@@ -776,7 +776,7 @@ type WebhookReceiverObservation struct {
 
 type WebhookReceiverParameters struct {
 
-	// The aad_auth block as defined below
+	// The aad_auth block as defined below.
 	// +kubebuilder:validation:Optional
 	AADAuth []AADAuthParameters `json:"aadAuth,omitempty" tf:"aad_auth,omitempty"`
 

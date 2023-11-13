@@ -303,6 +303,16 @@ spec:
                           description: The number of monthly backups to keep. Must
                             be between 1 and 9999
                           type: number
+                        days:
+                          description: The days of the month to retain backups of.
+                            Must be between 1 and 31.
+                          items:
+                            type: number
+                          type: array
+                        includeLastDays:
+                          description: Including the last day of the month, default
+                            to false.
+                          type: boolean
                         weekdays:
                           description: The weekday backups to retain . Must be one
                             of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
@@ -346,6 +356,16 @@ spec:
                           description: The number of yearly backups to keep. Must
                             be between 1 and 9999
                           type: number
+                        days:
+                          description: The days of the month to retain backups of.
+                            Must be between 1 and 31.
+                          items:
+                            type: number
+                          type: array
+                        includeLastDays:
+                          description: Including the last day of the month, default
+                            to false.
+                          type: boolean
                         months:
                           description: The months of the year to retain backups of.
                             Must be one of January, February, March, April, May, June,
@@ -463,6 +483,16 @@ spec:
                           description: The number of monthly backups to keep. Must
                             be between 1 and 9999
                           type: number
+                        days:
+                          description: The days of the month to retain backups of.
+                            Must be between 1 and 31.
+                          items:
+                            type: number
+                          type: array
+                        includeLastDays:
+                          description: Including the last day of the month, default
+                            to false.
+                          type: boolean
                         weekdays:
                           description: The weekday backups to retain . Must be one
                             of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
@@ -506,6 +536,16 @@ spec:
                           description: The number of yearly backups to keep. Must
                             be between 1 and 9999
                           type: number
+                        days:
+                          description: The days of the month to retain backups of.
+                            Must be between 1 and 31.
+                          items:
+                            type: number
+                          type: array
+                        includeLastDays:
+                          description: Including the last day of the month, default
+                            to false.
+                          type: boolean
                         months:
                           description: The months of the year to retain backups of.
                             Must be one of January, February, March, April, May, June,
@@ -792,6 +832,16 @@ spec:
                           description: The number of monthly backups to keep. Must
                             be between 1 and 9999
                           type: number
+                        days:
+                          description: The days of the month to retain backups of.
+                            Must be between 1 and 31.
+                          items:
+                            type: number
+                          type: array
+                        includeLastDays:
+                          description: Including the last day of the month, default
+                            to false.
+                          type: boolean
                         weekdays:
                           description: The weekday backups to retain . Must be one
                             of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
@@ -835,6 +885,16 @@ spec:
                           description: The number of yearly backups to keep. Must
                             be between 1 and 9999
                           type: number
+                        days:
+                          description: The days of the month to retain backups of.
+                            Must be between 1 and 31.
+                          items:
+                            type: number
+                          type: array
+                        includeLastDays:
+                          description: Including the last day of the month, default
+                            to false.
+                          type: boolean
                         months:
                           description: The months of the year to retain backups of.
                             Must be one of January, February, March, April, May, June,

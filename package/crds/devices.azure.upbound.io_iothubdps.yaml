@@ -93,7 +93,7 @@ spec:
                           type: string
                         target:
                           description: Target for requests captured by this rule.
-                            Possible values are All, DeviceApi and ServiceApi.
+                            Possible values are all, deviceApi and serviceApi.
                           type: string
                       type: object
                     type: array
@@ -281,7 +281,7 @@ spec:
                           type: string
                         target:
                           description: Target for requests captured by this rule.
-                            Possible values are All, DeviceApi and ServiceApi.
+                            Possible values are all, deviceApi and serviceApi.
                           type: string
                       type: object
                     type: array
@@ -542,7 +542,7 @@ spec:
                           type: string
                         target:
                           description: Target for requests captured by this rule.
-                            Possible values are All, DeviceApi and ServiceApi.
+                            Possible values are all, deviceApi and serviceApi.
                           type: string
                       type: object
                     type: array

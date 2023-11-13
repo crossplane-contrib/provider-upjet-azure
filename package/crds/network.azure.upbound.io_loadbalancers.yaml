@@ -73,8 +73,8 @@ spec:
                       Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
-                    description: One or multiple frontend_ip_configuration blocks
-                      as documented below.
+                    description: One or more frontend_ip_configuration blocks as documented
+                      below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:
@@ -390,8 +390,8 @@ spec:
                       Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
-                    description: One or multiple frontend_ip_configuration blocks
-                      as documented below.
+                    description: One or more frontend_ip_configuration blocks as documented
+                      below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:
@@ -625,8 +625,8 @@ spec:
                       Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
-                    description: One or multiple frontend_ip_configuration blocks
-                      as documented below.
+                    description: One or more frontend_ip_configuration blocks as documented
+                      below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:

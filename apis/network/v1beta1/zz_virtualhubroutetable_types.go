@@ -22,7 +22,7 @@ type VirtualHubRouteTableInitParameters struct {
 	// List of labels associated with this route table.
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A route block as defined below.
+	// One or more route blocks as defined below.
 	Route []VirtualHubRouteTableRouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
 }
 
@@ -34,7 +34,7 @@ type VirtualHubRouteTableObservation struct {
 	// List of labels associated with this route table.
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A route block as defined below.
+	// One or more route blocks as defined below.
 	Route []VirtualHubRouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The ID of the Virtual Hub within which this route table should be created. Changing this forces a new resource to be created.
@@ -47,7 +47,7 @@ type VirtualHubRouteTableParameters struct {
 	// +kubebuilder:validation:Optional
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A route block as defined below.
+	// One or more route blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Route []VirtualHubRouteTableRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 

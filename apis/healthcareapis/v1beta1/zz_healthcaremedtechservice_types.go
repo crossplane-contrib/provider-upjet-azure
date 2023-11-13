@@ -18,6 +18,8 @@ import (
 )
 
 type HealthcareMedtechServiceIdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Healthcare Med Tech Service.
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
@@ -25,6 +27,8 @@ type HealthcareMedtechServiceIdentityInitParameters struct {
 }
 
 type HealthcareMedtechServiceIdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Healthcare Med Tech Service.
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this System Assigned Managed Service Identity.
@@ -39,6 +43,7 @@ type HealthcareMedtechServiceIdentityObservation struct {
 
 type HealthcareMedtechServiceIdentityParameters struct {
 
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Healthcare Med Tech Service.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 

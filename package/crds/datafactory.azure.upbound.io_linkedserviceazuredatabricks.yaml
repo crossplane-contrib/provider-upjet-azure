@@ -189,7 +189,7 @@ spec:
                     type: string
                   instancePool:
                     description: Leverages an instance pool within the linked ADB
-                      instance as defined by instance_pool block below.
+                      instance as one instance_pool block defined below.
                     items:
                       properties:
                         clusterVersion:
@@ -402,7 +402,7 @@ spec:
                     type: string
                   instancePool:
                     description: Leverages an instance pool within the linked ADB
-                      instance as defined by instance_pool block below.
+                      instance as one instance_pool block defined below.
                     items:
                       properties:
                         clusterVersion:
@@ -703,7 +703,7 @@ spec:
                     type: string
                   instancePool:
                     description: Leverages an instance pool within the linked ADB
-                      instance as defined by instance_pool block below.
+                      instance as one instance_pool block defined below.
                     items:
                       properties:
                         clusterVersion:

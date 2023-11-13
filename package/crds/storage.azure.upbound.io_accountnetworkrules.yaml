@@ -86,7 +86,7 @@ spec:
                       type: string
                     type: array
                   privateLinkAccess:
-                    description: One or More private_link_access block as defined
+                    description: One or more private_link_access block as defined
                       below.
                     items:
                       properties:
@@ -216,7 +216,7 @@ spec:
                       type: string
                     type: array
                   privateLinkAccess:
-                    description: One or More private_link_access block as defined
+                    description: One or more private_link_access block as defined
                       below.
                     items:
                       properties:
@@ -430,7 +430,7 @@ spec:
                       type: string
                     type: array
                   privateLinkAccess:
-                    description: One or More private_link_access block as defined
+                    description: One or more private_link_access block as defined
                       below.
                     items:
                       properties:

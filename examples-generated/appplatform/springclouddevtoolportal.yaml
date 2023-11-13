@@ -18,7 +18,7 @@ spec:
     sso:
     - clientId: example id
       clientSecret: example secret
-      metadataUrl: https://www.example.com/metadata
+      metadataUrl: https://login.microsoftonline.com/${data.azurerm_client_config.current.tenant_id}/v2.0/.well-known/openid-configuration
       scope:
       - openid
       - profile

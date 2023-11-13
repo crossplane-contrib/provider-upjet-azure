@@ -46,6 +46,25 @@ type DDOSProtectionPlanParameters struct {
 	ID *string `json:"id" tf:"id,omitempty"`
 }
 
+type EncryptionInitParameters struct {
+
+	// Specifies if the encrypted Virtual Network allows VM that does not support encryption. Possible values are DropUnencrypted and AllowUnencrypted.
+	Enforcement *string `json:"enforcement,omitempty" tf:"enforcement,omitempty"`
+}
+
+type EncryptionObservation struct {
+
+	// Specifies if the encrypted Virtual Network allows VM that does not support encryption. Possible values are DropUnencrypted and AllowUnencrypted.
+	Enforcement *string `json:"enforcement,omitempty" tf:"enforcement,omitempty"`
+}
+
+type EncryptionParameters struct {
+
+	// Specifies if the encrypted Virtual Network allows VM that does not support encryption. Possible values are DropUnencrypted and AllowUnencrypted.
+	// +kubebuilder:validation:Optional
+	Enforcement *string `json:"enforcement" tf:"enforcement,omitempty"`
+}
+
 type VirtualNetworkInitParameters struct {
 
 	// The address space that is used the virtual network. You can supply more than one address space.
@@ -62,6 +81,9 @@ type VirtualNetworkInitParameters struct {
 
 	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
+	// A encryption block as defined below.
+	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
@@ -89,6 +111,9 @@ type VirtualNetworkObservation struct {
 
 	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
+	// A encryption block as defined below.
+	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
 	FlowTimeoutInMinutes *float64 `json:"flowTimeoutInMinutes,omitempty" tf:"flow_timeout_in_minutes,omitempty"`
@@ -133,6 +158,10 @@ type VirtualNetworkParameters struct {
 	// Specifies the Edge Zone within the Azure Region where this Virtual Network should exist. Changing this forces a new Virtual Network to be created.
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
+
+	// A encryption block as defined below.
+	// +kubebuilder:validation:Optional
+	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// The flow timeout in minutes for the Virtual Network, which is used to enable connection tracking for intra-VM flows. Possible values are between 4 and 30 minutes.
 	// +kubebuilder:validation:Optional

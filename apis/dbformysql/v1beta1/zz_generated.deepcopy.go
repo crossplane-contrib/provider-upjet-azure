@@ -2983,6 +2983,11 @@ func (in *StorageInitParameters) DeepCopyInto(out *StorageInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.IoScalingEnabled != nil {
+		in, out := &in.IoScalingEnabled, &out.IoScalingEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
 		*out = new(float64)
@@ -3013,6 +3018,11 @@ func (in *StorageObservation) DeepCopyInto(out *StorageObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.IoScalingEnabled != nil {
+		in, out := &in.IoScalingEnabled, &out.IoScalingEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Iops != nil {
 		in, out := &in.Iops, &out.Iops
 		*out = new(float64)
@@ -3040,6 +3050,11 @@ func (in *StorageParameters) DeepCopyInto(out *StorageParameters) {
 	*out = *in
 	if in.AutoGrowEnabled != nil {
 		in, out := &in.AutoGrowEnabled, &out.AutoGrowEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.IoScalingEnabled != nil {
+		in, out := &in.IoScalingEnabled, &out.IoScalingEnabled
 		*out = new(bool)
 		**out = **in
 	}

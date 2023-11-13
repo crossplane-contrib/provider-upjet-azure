@@ -69,7 +69,7 @@ spec:
                 properties:
                   dnsConfig:
                     description: This block specifies the DNS configuration of the
-                      Profile, it supports the fields documented below.
+                      Profile. One dns_config block as defined below.
                     items:
                       properties:
                         relativeName:
@@ -90,7 +90,7 @@ spec:
                     type: number
                   monitorConfig:
                     description: This block specifies the Endpoint monitoring configuration
-                      for the Profile, it supports the fields documented below.
+                      for the Profile. One monitor_config block as defined below.
                     items:
                       properties:
                         customHeader:
@@ -262,7 +262,7 @@ spec:
                 properties:
                   dnsConfig:
                     description: This block specifies the DNS configuration of the
-                      Profile, it supports the fields documented below.
+                      Profile. One dns_config block as defined below.
                     items:
                       properties:
                         relativeName:
@@ -283,7 +283,7 @@ spec:
                     type: number
                   monitorConfig:
                     description: This block specifies the Endpoint monitoring configuration
-                      for the Profile, it supports the fields documented below.
+                      for the Profile. One monitor_config block as defined below.
                     items:
                       properties:
                         customHeader:
@@ -542,7 +542,7 @@ spec:
                 properties:
                   dnsConfig:
                     description: This block specifies the DNS configuration of the
-                      Profile, it supports the fields documented below.
+                      Profile. One dns_config block as defined below.
                     items:
                       properties:
                         relativeName:
@@ -569,7 +569,7 @@ spec:
                     type: number
                   monitorConfig:
                     description: This block specifies the Endpoint monitoring configuration
-                      for the Profile, it supports the fields documented below.
+                      for the Profile. One monitor_config block as defined below.
                     items:
                       properties:
                         customHeader:

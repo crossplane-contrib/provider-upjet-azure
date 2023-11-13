@@ -239,7 +239,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventgridResourceId:
                     description: The resource ID of the event grid that is subscribed
@@ -609,7 +609,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventgridResourceId:
                     description: The resource ID of the event grid that is subscribed
@@ -833,7 +833,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventgridResourceId:
                     description: The resource ID of the event grid that is subscribed

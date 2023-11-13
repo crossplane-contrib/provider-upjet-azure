@@ -280,7 +280,7 @@ type IntegrationRuntimeAzureSSISInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
 	// The size of the nodes on which the Azure-SSIS Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
@@ -331,7 +331,7 @@ type IntegrationRuntimeAzureSSISObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
 	// The size of the nodes on which the Azure-SSIS Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
@@ -398,7 +398,7 @@ type IntegrationRuntimeAzureSSISParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	// +kubebuilder:validation:Optional
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 

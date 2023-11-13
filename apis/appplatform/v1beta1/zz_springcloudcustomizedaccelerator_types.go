@@ -48,6 +48,9 @@ type GitRepositoryInitParameters struct {
 	// Specifies the Git repository branch to be used.
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
 
+	// Specifies the ID of the CA Spring Cloud Certificate for https URL of Git repository.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
+
 	// Specifies the Git repository commit to be used.
 	Commit *string `json:"commit,omitempty" tf:"commit,omitempty"`
 
@@ -71,6 +74,9 @@ type GitRepositoryObservation struct {
 
 	// Specifies the Git repository branch to be used.
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// Specifies the ID of the CA Spring Cloud Certificate for https URL of Git repository.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
 
 	// Specifies the Git repository commit to be used.
 	Commit *string `json:"commit,omitempty" tf:"commit,omitempty"`
@@ -97,6 +103,10 @@ type GitRepositoryParameters struct {
 	// Specifies the Git repository branch to be used.
 	// +kubebuilder:validation:Optional
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// Specifies the ID of the CA Spring Cloud Certificate for https URL of Git repository.
+	// +kubebuilder:validation:Optional
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
 
 	// Specifies the Git repository commit to be used.
 	// +kubebuilder:validation:Optional

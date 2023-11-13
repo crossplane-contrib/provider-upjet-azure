@@ -71,19 +71,20 @@ spec:
                     description: The name of the collation to use with this pool,
                       only applicable when create_mode is set to Default. Azure default
                       is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new
-                      resource to be created.
+                      Synapse SQL Pool to be created.
                     type: string
                   createMode:
                     description: 'Specifies how to create the SQL Pool. Valid values
                       are: Default, Recovery or PointInTimeRestore. Must be Default
                       to create a new database. Defaults to Default. Changing this
-                      forces a new resource to be created.'
+                      forces a new Synapse SQL Pool to be created.'
                     type: string
                   dataEncrypted:
                     description: Is transparent data encryption enabled?
                     type: boolean
                   geoBackupPolicyEnabled:
-                    description: Is geo-backup policy enabled? Defaults to true.
+                    description: Is geo-backup policy enabled? Possible values include
+                      true or false. Defaults to true.
                     type: boolean
                   recoveryDatabaseId:
                     description: The ID of the Synapse SQL Pool or SQL Database which
@@ -91,9 +92,9 @@ spec:
                       Changing this forces a new Synapse SQL Pool to be created.
                     type: string
                   restore:
-                    description: A restore block as defined below. only applicable
+                    description: A restore block as defined below. Only applicable
                       when create_mode is set to PointInTimeRestore. Changing this
-                      forces a new resource to be created.
+                      forces a new Synapse SQL Pool to be created.
                     items:
                       properties:
                         pointInTime:
@@ -113,6 +114,12 @@ spec:
                       Possible values are DW100c, DW200c, DW300c, DW400c, DW500c,
                       DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c,
                       DW7500c, DW10000c, DW15000c or DW30000c.
+                    type: string
+                  storageAccountType:
+                    description: The storage account type that will be used to store
+                      backups for this Synapse SQL Pool. Possible values are LRS or
+                      GRS. Changing this forces a new Synapse SQL Pool to be created.
+                      Defaults to GRS.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of Synapse Workspace within which this SQL
@@ -215,19 +222,20 @@ spec:
                     description: The name of the collation to use with this pool,
                       only applicable when create_mode is set to Default. Azure default
                       is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new
-                      resource to be created.
+                      Synapse SQL Pool to be created.
                     type: string
                   createMode:
                     description: 'Specifies how to create the SQL Pool. Valid values
                       are: Default, Recovery or PointInTimeRestore. Must be Default
                       to create a new database. Defaults to Default. Changing this
-                      forces a new resource to be created.'
+                      forces a new Synapse SQL Pool to be created.'
                     type: string
                   dataEncrypted:
                     description: Is transparent data encryption enabled?
                     type: boolean
                   geoBackupPolicyEnabled:
-                    description: Is geo-backup policy enabled? Defaults to true.
+                    description: Is geo-backup policy enabled? Possible values include
+                      true or false. Defaults to true.
                     type: boolean
                   recoveryDatabaseId:
                     description: The ID of the Synapse SQL Pool or SQL Database which
@@ -235,9 +243,9 @@ spec:
                       Changing this forces a new Synapse SQL Pool to be created.
                     type: string
                   restore:
-                    description: A restore block as defined below. only applicable
+                    description: A restore block as defined below. Only applicable
                       when create_mode is set to PointInTimeRestore. Changing this
-                      forces a new resource to be created.
+                      forces a new Synapse SQL Pool to be created.
                     items:
                       properties:
                         pointInTime:
@@ -257,6 +265,12 @@ spec:
                       Possible values are DW100c, DW200c, DW300c, DW400c, DW500c,
                       DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c,
                       DW7500c, DW10000c, DW15000c or DW30000c.
+                    type: string
+                  storageAccountType:
+                    description: The storage account type that will be used to store
+                      backups for this Synapse SQL Pool. Possible values are LRS or
+                      GRS. Changing this forces a new Synapse SQL Pool to be created.
+                      Defaults to GRS.
                     type: string
                   tags:
                     additionalProperties:
@@ -439,19 +453,20 @@ spec:
                     description: The name of the collation to use with this pool,
                       only applicable when create_mode is set to Default. Azure default
                       is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new
-                      resource to be created.
+                      Synapse SQL Pool to be created.
                     type: string
                   createMode:
                     description: 'Specifies how to create the SQL Pool. Valid values
                       are: Default, Recovery or PointInTimeRestore. Must be Default
                       to create a new database. Defaults to Default. Changing this
-                      forces a new resource to be created.'
+                      forces a new Synapse SQL Pool to be created.'
                     type: string
                   dataEncrypted:
                     description: Is transparent data encryption enabled?
                     type: boolean
                   geoBackupPolicyEnabled:
-                    description: Is geo-backup policy enabled? Defaults to true.
+                    description: Is geo-backup policy enabled? Possible values include
+                      true or false. Defaults to true.
                     type: boolean
                   id:
                     description: The ID of the Synapse SQL Pool.
@@ -462,9 +477,9 @@ spec:
                       Changing this forces a new Synapse SQL Pool to be created.
                     type: string
                   restore:
-                    description: A restore block as defined below. only applicable
+                    description: A restore block as defined below. Only applicable
                       when create_mode is set to PointInTimeRestore. Changing this
-                      forces a new resource to be created.
+                      forces a new Synapse SQL Pool to be created.
                     items:
                       properties:
                         pointInTime:
@@ -484,6 +499,12 @@ spec:
                       Possible values are DW100c, DW200c, DW300c, DW400c, DW500c,
                       DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c,
                       DW7500c, DW10000c, DW15000c or DW30000c.
+                    type: string
+                  storageAccountType:
+                    description: The storage account type that will be used to store
+                      backups for this Synapse SQL Pool. Possible values are LRS or
+                      GRS. Changing this forces a new Synapse SQL Pool to be created.
+                      Defaults to GRS.
                     type: string
                   synapseWorkspaceId:
                     description: The ID of Synapse Workspace within which this SQL

@@ -115,6 +115,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  azureadAuthenticationOnly:
+                    description: Is Azure Active Directory Authentication the only
+                      way to authenticate with resources inside this synapse Workspace.
+                      Defaults to false.
+                    type: boolean
                   computeSubnetId:
                     description: Subnet ID used for computes in workspace Changing
                       this forces a new resource to be created.
@@ -708,6 +713,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  azureadAuthenticationOnly:
+                    description: Is Azure Active Directory Authentication the only
+                      way to authenticate with resources inside this synapse Workspace.
+                      Defaults to false.
+                    type: boolean
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Conflicts
                       with aad_admin.
@@ -1042,6 +1052,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  azureadAuthenticationOnly:
+                    description: Is Azure Active Directory Authentication the only
+                      way to authenticate with resources inside this synapse Workspace.
+                      Defaults to false.
+                    type: boolean
                   computeSubnetId:
                     description: Subnet ID used for computes in workspace Changing
                       this forces a new resource to be created.

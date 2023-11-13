@@ -2166,6 +2166,11 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.DataCollectionRuleID != nil {
+		in, out := &in.DataCollectionRuleID, &out.DataCollectionRuleID
+		*out = new(string)
+		**out = **in
+	}
 	if in.InternetIngestionEnabled != nil {
 		in, out := &in.InternetIngestionEnabled, &out.InternetIngestionEnabled
 		*out = new(bool)
@@ -2279,6 +2284,11 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.DataCollectionRuleID != nil {
+		in, out := &in.DataCollectionRuleID, &out.DataCollectionRuleID
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -2373,6 +2383,11 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	if in.DailyQuotaGb != nil {
 		in, out := &in.DailyQuotaGb, &out.DailyQuotaGb
 		*out = new(float64)
+		**out = **in
+	}
+	if in.DataCollectionRuleID != nil {
+		in, out := &in.DataCollectionRuleID, &out.DataCollectionRuleID
+		*out = new(string)
 		**out = **in
 	}
 	if in.InternetIngestionEnabled != nil {

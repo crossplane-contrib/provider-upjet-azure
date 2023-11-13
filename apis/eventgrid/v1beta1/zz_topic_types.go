@@ -54,7 +54,7 @@ type TopicIdentityParameters struct {
 
 type TopicInboundIPRuleInitParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action"`
 
 	// The IP mask (CIDR) to match on.
@@ -63,7 +63,7 @@ type TopicInboundIPRuleInitParameters struct {
 
 type TopicInboundIPRuleObservation struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The IP mask (CIDR) to match on.
@@ -72,7 +72,7 @@ type TopicInboundIPRuleObservation struct {
 
 type TopicInboundIPRuleParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 

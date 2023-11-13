@@ -173,8 +173,8 @@ spec:
                     type: string
                   enabled:
                     description: Specifies the flag which indicates whether this scheduled
-                      query rule is enabled. Value should be true or false. The default
-                      is true.
+                      query rule is enabled. Value should be true or false. Defaults
+                      to true.
                     type: boolean
                   evaluationFrequency:
                     description: How often the scheduled query rule is evaluated,
@@ -518,8 +518,8 @@ spec:
                     type: string
                   enabled:
                     description: Specifies the flag which indicates whether this scheduled
-                      query rule is enabled. Value should be true or false. The default
-                      is true.
+                      query rule is enabled. Value should be true or false. Defaults
+                      to true.
                     type: boolean
                   evaluationFrequency:
                     description: How often the scheduled query rule is evaluated,
@@ -872,8 +872,8 @@ spec:
                     type: string
                   enabled:
                     description: Specifies the flag which indicates whether this scheduled
-                      query rule is enabled. Value should be true or false. The default
-                      is true.
+                      query rule is enabled. Value should be true or false. Defaults
+                      to true.
                     type: boolean
                   evaluationFrequency:
                     description: How often the scheduled query rule is evaluated,

@@ -140,6 +140,11 @@ func (in *ProviderInitParameters) DeepCopyInto(out *ProviderInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SevSnpPolicyBase64 != nil {
+		in, out := &in.SevSnpPolicyBase64, &out.SevSnpPolicyBase64
+		*out = new(string)
+		**out = **in
+	}
 	if in.SgxEnclavePolicyBase64 != nil {
 		in, out := &in.SgxEnclavePolicyBase64, &out.SgxEnclavePolicyBase64
 		*out = new(string)
@@ -250,6 +255,11 @@ func (in *ProviderObservation) DeepCopyInto(out *ProviderObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SevSnpPolicyBase64 != nil {
+		in, out := &in.SevSnpPolicyBase64, &out.SevSnpPolicyBase64
+		*out = new(string)
+		**out = **in
+	}
 	if in.SgxEnclavePolicyBase64 != nil {
 		in, out := &in.SgxEnclavePolicyBase64, &out.SgxEnclavePolicyBase64
 		*out = new(string)
@@ -332,6 +342,11 @@ func (in *ProviderParameters) DeepCopyInto(out *ProviderParameters) {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SevSnpPolicyBase64 != nil {
+		in, out := &in.SevSnpPolicyBase64, &out.SevSnpPolicyBase64
+		*out = new(string)
+		**out = **in
 	}
 	if in.SgxEnclavePolicyBase64 != nil {
 		in, out := &in.SgxEnclavePolicyBase64, &out.SgxEnclavePolicyBase64

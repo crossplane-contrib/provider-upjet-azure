@@ -182,6 +182,9 @@ type WindowsVirtualMachineInitParameters struct {
 	// A boot_diagnostics block as defined below.
 	BootDiagnostics []WindowsVirtualMachineBootDiagnosticsInitParameters `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
 
+	// Specifies whether to skip platform scheduled patching when a user schedule is associated with the VM. Defaults to false.
+	BypassPlatformSafetyChecksOnUserScheduleEnabled *bool `json:"bypassPlatformSafetyChecksOnUserScheduleEnabled,omitempty" tf:"bypass_platform_safety_checks_on_user_schedule_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
@@ -206,7 +209,7 @@ type WindowsVirtualMachineInitParameters struct {
 	// Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// One or more gallery_application blocks as defined below.
@@ -250,6 +253,9 @@ type WindowsVirtualMachineInitParameters struct {
 
 	// The ID of the Proximity Placement Group which the Virtual Machine should be assigned to.
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
+
+	// Specifies the reboot setting for platform scheduled patching. Possible values are Always, IfRequired and Never.
+	RebootSetting *string `json:"rebootSetting,omitempty" tf:"reboot_setting,omitempty"`
 
 	// One or more secret blocks as defined below.
 	Secret []WindowsVirtualMachineSecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
@@ -311,6 +317,9 @@ type WindowsVirtualMachineObservation struct {
 	// A boot_diagnostics block as defined below.
 	BootDiagnostics []WindowsVirtualMachineBootDiagnosticsObservation `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
 
+	// Specifies whether to skip platform scheduled patching when a user schedule is associated with the VM. Defaults to false.
+	BypassPlatformSafetyChecksOnUserScheduleEnabled *bool `json:"bypassPlatformSafetyChecksOnUserScheduleEnabled,omitempty" tf:"bypass_platform_safety_checks_on_user_schedule_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
@@ -335,7 +344,7 @@ type WindowsVirtualMachineObservation struct {
 	// Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// One or more gallery_application blocks as defined below.
@@ -397,6 +406,9 @@ type WindowsVirtualMachineObservation struct {
 
 	// A list of the Public IP Addresses assigned to this Virtual Machine.
 	PublicIPAddresses []*string `json:"publicIpAddresses,omitempty" tf:"public_ip_addresses,omitempty"`
+
+	// Specifies the reboot setting for platform scheduled patching. Possible values are Always, IfRequired and Never.
+	RebootSetting *string `json:"rebootSetting,omitempty" tf:"reboot_setting,omitempty"`
 
 	// The name of the Resource Group in which the Windows Virtual Machine should be exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -602,6 +614,10 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	BootDiagnostics []WindowsVirtualMachineBootDiagnosticsParameters `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
 
+	// Specifies whether to skip platform scheduled patching when a user schedule is associated with the VM. Defaults to false.
+	// +kubebuilder:validation:Optional
+	BypassPlatformSafetyChecksOnUserScheduleEnabled *bool `json:"bypassPlatformSafetyChecksOnUserScheduleEnabled,omitempty" tf:"bypass_platform_safety_checks_on_user_schedule_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
 	// +kubebuilder:validation:Optional
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
@@ -638,7 +654,7 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
@@ -711,6 +727,10 @@ type WindowsVirtualMachineParameters struct {
 	// The ID of the Proximity Placement Group which the Virtual Machine should be assigned to.
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
+
+	// Specifies the reboot setting for platform scheduled patching. Possible values are Always, IfRequired and Never.
+	// +kubebuilder:validation:Optional
+	RebootSetting *string `json:"rebootSetting,omitempty" tf:"reboot_setting,omitempty"`
 
 	// The name of the Resource Group in which the Windows Virtual Machine should be exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

@@ -34,6 +34,12 @@ type ManagedHardwareSecurityModuleInitParameters struct {
 	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module? Changing this forces a new resource to be created.
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
+	// A list of KeyVault certificates resource IDs (minimum of three and up to a maximum of 10) to activate this Managed HSM. More information see activate-your-managed-hsm
+	SecurityDomainKeyVaultCertificateIds []*string `json:"securityDomainKeyVaultCertificateIds,omitempty" tf:"security_domain_key_vault_certificate_ids,omitempty"`
+
+	// Specifies the minimum number of shares required to decrypt the security domain for recovery. This is required when security_domain_key_vault_certificate_ids is specified. Valid values are between 2 and 10.
+	SecurityDomainQuorum *float64 `json:"securityDomainQuorum,omitempty" tf:"security_domain_quorum,omitempty"`
+
 	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -102,6 +108,12 @@ type ManagedHardwareSecurityModuleObservation struct {
 	// The name of the resource group in which to create the Key Vault Managed Hardware Security Module. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// A list of KeyVault certificates resource IDs (minimum of three and up to a maximum of 10) to activate this Managed HSM. More information see activate-your-managed-hsm
+	SecurityDomainKeyVaultCertificateIds []*string `json:"securityDomainKeyVaultCertificateIds,omitempty" tf:"security_domain_key_vault_certificate_ids,omitempty"`
+
+	// Specifies the minimum number of shares required to decrypt the security domain for recovery. This is required when security_domain_key_vault_certificate_ids is specified. Valid values are between 2 and 10.
+	SecurityDomainQuorum *float64 `json:"securityDomainQuorum,omitempty" tf:"security_domain_quorum,omitempty"`
+
 	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -149,6 +161,14 @@ type ManagedHardwareSecurityModuleParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// A list of KeyVault certificates resource IDs (minimum of three and up to a maximum of 10) to activate this Managed HSM. More information see activate-your-managed-hsm
+	// +kubebuilder:validation:Optional
+	SecurityDomainKeyVaultCertificateIds []*string `json:"securityDomainKeyVaultCertificateIds,omitempty" tf:"security_domain_key_vault_certificate_ids,omitempty"`
+
+	// Specifies the minimum number of shares required to decrypt the security domain for recovery. This is required when security_domain_key_vault_certificate_ids is specified. Valid values are between 2 and 10.
+	// +kubebuilder:validation:Optional
+	SecurityDomainQuorum *float64 `json:"securityDomainQuorum,omitempty" tf:"security_domain_quorum,omitempty"`
 
 	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

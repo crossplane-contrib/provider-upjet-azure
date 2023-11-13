@@ -243,8 +243,8 @@ spec:
                   usageModel:
                     description: 'The type of usage of the HPC Cache Blob NFS Target.
                       Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180,
-                      WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
               initProvider:
@@ -275,8 +275,8 @@ spec:
                   usageModel:
                     description: 'The type of usage of the HPC Cache Blob NFS Target.
                       Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180,
-                      WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
               managementPolicies:
@@ -487,8 +487,8 @@ spec:
                   usageModel:
                     description: 'The type of usage of the HPC Cache Blob NFS Target.
                       Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180,
-                      WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
                 type: object
               conditions:

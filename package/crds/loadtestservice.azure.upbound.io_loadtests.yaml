@@ -72,11 +72,20 @@ spec:
                       a new Load Test to be created.
                     type: string
                   identity:
-                    description: Specifies the Managed Identity which should be assigned
-                      to this Load Test.
+                    description: An identity block as defined below. Specifies the
+                      Managed Identity which should be assigned to this Load Test.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of the User Assigned Identity IDs that
+                            should be assigned to this Load Test.
+                          items:
+                            type: string
+                          type: array
                         type:
+                          description: Specifies the type of Managed Identity that
+                            should be assigned to this Load Test. Possible values
+                            are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -188,11 +197,20 @@ spec:
                       a new Load Test to be created.
                     type: string
                   identity:
-                    description: Specifies the Managed Identity which should be assigned
-                      to this Load Test.
+                    description: An identity block as defined below. Specifies the
+                      Managed Identity which should be assigned to this Load Test.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of the User Assigned Identity IDs that
+                            should be assigned to this Load Test.
+                          items:
+                            type: string
+                          type: array
                         type:
+                          description: Specifies the type of Managed Identity that
+                            should be assigned to this Load Test. Possible values
+                            are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -388,17 +406,28 @@ spec:
                     description: The ID of the Load Test.
                     type: string
                   identity:
-                    description: Specifies the Managed Identity which should be assigned
-                      to this Load Test.
+                    description: An identity block as defined below. Specifies the
+                      Managed Identity which should be assigned to this Load Test.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of the User Assigned Identity IDs that
+                            should be assigned to this Load Test.
+                          items:
+                            type: string
+                          type: array
                         principalId:
-                          description: The ID of the Load Test.
+                          description: The Principal ID for the System-Assigned Managed
+                            Identity assigned to this Load Test.
                           type: string
                         tenantId:
-                          description: The ID of the Load Test.
+                          description: The Tenant ID for the System-Assigned Managed
+                            Identity assigned to this Load Test.
                           type: string
                         type:
+                          description: Specifies the type of Managed Identity that
+                            should be assigned to this Load Test. Possible values
+                            are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
                           type: string
                       type: object
                     type: array

@@ -144,6 +144,12 @@ spec:
                             type: string
                         type: object
                     type: object
+                  analyticalStorageTtl:
+                    description: The time to live of Analytical Storage for this Cosmos
+                      DB Gremlin Graph. Possible values are between -1 to 2147483647
+                      not including 0. If present and the value is set to -1, it means
+                      never expire.
+                    type: number
                   autoscaleSettings:
                     description: An autoscale_settings block as defined below. Requires
                       partition_key_path to be set.
@@ -440,6 +446,12 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  analyticalStorageTtl:
+                    description: The time to live of Analytical Storage for this Cosmos
+                      DB Gremlin Graph. Possible values are between -1 to 2147483647
+                      not including 0. If present and the value is set to -1, it means
+                      never expire.
+                    type: number
                   autoscaleSettings:
                     description: An autoscale_settings block as defined below. Requires
                       partition_key_path to be set.
@@ -740,6 +752,12 @@ spec:
                     description: The name of the CosmosDB Account to create the Gremlin
                       Graph within. Changing this forces a new resource to be created.
                     type: string
+                  analyticalStorageTtl:
+                    description: The time to live of Analytical Storage for this Cosmos
+                      DB Gremlin Graph. Possible values are between -1 to 2147483647
+                      not including 0. If present and the value is set to -1, it means
+                      never expire.
+                    type: number
                   autoscaleSettings:
                     description: An autoscale_settings block as defined below. Requires
                       partition_key_path to be set.

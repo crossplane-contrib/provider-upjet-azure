@@ -283,7 +283,7 @@ spec:
                     type: string
                   queryType:
                     description: The type of query results. Possible values are ResultCount
-                      and Number. Default is ResultCount. If set to Number, query
+                      and Number. Default is ResultCount. If set to ResultCount, query
                       must include an AggregatedValue column of a numeric type, for
                       example, Heartbeat | summarize AggregatedValue = count() by
                       bin(TimeGenerated, 5m).
@@ -486,7 +486,7 @@ spec:
                     type: string
                   queryType:
                     description: The type of query results. Possible values are ResultCount
-                      and Number. Default is ResultCount. If set to Number, query
+                      and Number. Default is ResultCount. If set to ResultCount, query
                       must include an AggregatedValue column of a numeric type, for
                       example, Heartbeat | summarize AggregatedValue = count() by
                       bin(TimeGenerated, 5m).
@@ -804,7 +804,7 @@ spec:
                     type: string
                   queryType:
                     description: The type of query results. Possible values are ResultCount
-                      and Number. Default is ResultCount. If set to Number, query
+                      and Number. Default is ResultCount. If set to ResultCount, query
                       must include an AggregatedValue column of a numeric type, for
                       example, Heartbeat | summarize AggregatedValue = count() by
                       bin(TimeGenerated, 5m).

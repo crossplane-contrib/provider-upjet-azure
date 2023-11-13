@@ -310,7 +310,7 @@ type ManagementInitParameters struct {
 	// One or more additional_location blocks as defined below.
 	AdditionalLocation []AdditionalLocationInitParameters `json:"additionalLocation,omitempty" tf:"additional_location,omitempty"`
 
-	// One or more (up to 10) certificate blocks as defined below.
+	// One or more certificate blocks (up to 10) as defined below.
 	Certificate []CertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Enforce a client certificate to be presented on each request to the gateway? This is only supported when SKU type is Consumption.
@@ -343,7 +343,7 @@ type ManagementInitParameters struct {
 	// ID of a standard SKU IPv4 Public IP.
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
-	// Is public access to the service allowed?. Defaults to true
+	// Is public access to the service allowed? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The email of publisher/company.
@@ -373,7 +373,7 @@ type ManagementInitParameters struct {
 	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
 	VirtualNetworkConfiguration []ManagementVirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
-	// The type of virtual network you want to use, valid values include: None, External, Internal.
+	// The type of virtual network you want to use, valid values include: None, External, Internal. Defaults to None.
 	VirtualNetworkType *string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
 
 	// Specifies a list of Availability Zones in which this API Management service should be located. Changing this forces a new API Management service to be created.
@@ -385,7 +385,7 @@ type ManagementObservation struct {
 	// One or more additional_location blocks as defined below.
 	AdditionalLocation []AdditionalLocationObservation `json:"additionalLocation,omitempty" tf:"additional_location,omitempty"`
 
-	// One or more (up to 10) certificate blocks as defined below.
+	// One or more certificate blocks (up to 10) as defined below.
 	Certificate []CertificateObservation `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// Enforce a client certificate to be presented on each request to the gateway? This is only supported when SKU type is Consumption.
@@ -445,7 +445,7 @@ type ManagementObservation struct {
 	// The Public IP addresses of the API Management Service.
 	PublicIPAddresses []*string `json:"publicIpAddresses,omitempty" tf:"public_ip_addresses,omitempty"`
 
-	// Is public access to the service allowed?. Defaults to true
+	// Is public access to the service allowed? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The email of publisher/company.
@@ -481,7 +481,7 @@ type ManagementObservation struct {
 	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
 	VirtualNetworkConfiguration []ManagementVirtualNetworkConfigurationObservation `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
-	// The type of virtual network you want to use, valid values include: None, External, Internal.
+	// The type of virtual network you want to use, valid values include: None, External, Internal. Defaults to None.
 	VirtualNetworkType *string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
 
 	// Specifies a list of Availability Zones in which this API Management service should be located. Changing this forces a new API Management service to be created.
@@ -494,7 +494,7 @@ type ManagementParameters struct {
 	// +kubebuilder:validation:Optional
 	AdditionalLocation []AdditionalLocationParameters `json:"additionalLocation,omitempty" tf:"additional_location,omitempty"`
 
-	// One or more (up to 10) certificate blocks as defined below.
+	// One or more certificate blocks (up to 10) as defined below.
 	// +kubebuilder:validation:Optional
 	Certificate []CertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
@@ -538,7 +538,7 @@ type ManagementParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
-	// Is public access to the service allowed?. Defaults to true
+	// Is public access to the service allowed? Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -591,7 +591,7 @@ type ManagementParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration []ManagementVirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
-	// The type of virtual network you want to use, valid values include: None, External, Internal.
+	// The type of virtual network you want to use, valid values include: None, External, Internal. Defaults to None.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkType *string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
 

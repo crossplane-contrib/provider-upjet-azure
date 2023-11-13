@@ -517,7 +517,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -598,11 +598,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -643,12 +647,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -971,7 +974,8 @@ spec:
                   clientCertificateMode:
                     description: The Client Certificate mode. Possible values are
                       Required, Optional, and OptionalInteractiveUser. This property
-                      has no effect when client_certificate_enabled is false
+                      has no effect when client_certificate_enabled is false. Defaults
+                      to Required.
                     type: string
                   connectionString:
                     description: One or more connection_string blocks as defined below.
@@ -1140,6 +1144,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Web
+                      App. Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group where the Linux Web
                       App should exist. Changing this forces a new Linux Web App to
@@ -1321,11 +1329,40 @@ spec:
                           items:
                             properties:
                               dockerImage:
-                                description: The Docker image reference, including
-                                  repository host as needed.
+                                type: string
+                              dockerImageName:
+                                description: The docker image, including tag, to be
+                                  used. e.g. appsvc/staticsite:latest.
                                 type: string
                               dockerImageTag:
-                                description: The image Tag to use. e.g. latest.
+                                type: string
+                              dockerRegistryPasswordSecretRef:
+                                description: The User Name to use for authentication
+                                  against the registry to pull the image.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                              dockerRegistryUrl:
+                                description: The URL of the container registry where
+                                  the docker_image_name is located. e.g. https://index.docker.io
+                                  or https://mcr.microsoft.com. This value is required
+                                  with docker_image_name.
+                                type: string
+                              dockerRegistryUsername:
+                                description: The User Name to use for authentication
+                                  against the registry to pull the image.
                                 type: string
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
@@ -1353,7 +1390,7 @@ spec:
                                 type: string
                               phpVersion:
                                 description: The version of PHP to run. Possible values
-                                  are 8.0, 8.1 and 8.2.
+                                  are 7.4, 8.0, 8.1 and 8.2.
                                 type: string
                               pythonVersion:
                                 description: The version of Python to run. Possible
@@ -1376,7 +1413,7 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny.
+                                  Allow or Deny. Defaults to Allow.
                                 items:
                                   properties:
                                     actionType:
@@ -1464,10 +1501,10 @@ spec:
                                             description: The Request Sub Status of
                                               the Status Code.
                                             type: number
-                                          win32Status:
+                                          win32StatusCode:
                                             description: The Win32 Status Code of
                                               the Request.
-                                            type: string
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -1509,7 +1546,8 @@ spec:
                           type: array
                         ftpsState:
                           description: The State of FTP / FTPS service. Possible values
-                            include AllAllowed, FtpsOnly, and Disabled.
+                            include AllAllowed, FtpsOnly, and Disabled. Defaults to
+                            Disabled.
                           type: string
                         healthCheckEvictionTimeInMin:
                           description: The amount of time in minutes that a node can
@@ -1533,8 +1571,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -1686,7 +1724,7 @@ spec:
                           type: boolean
                         managedPipelineMode:
                           description: Managed pipeline mode. Possible values include
-                            Integrated, and Classic.
+                            Integrated, and Classic. Defaults to Integrated.
                           type: string
                         minimumTlsVersion:
                           description: 'The configures the minimum version of TLS
@@ -1708,8 +1746,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -2370,7 +2408,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -2451,11 +2489,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -2496,12 +2538,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -2804,7 +2845,8 @@ spec:
                   clientCertificateMode:
                     description: The Client Certificate mode. Possible values are
                       Required, Optional, and OptionalInteractiveUser. This property
-                      has no effect when client_certificate_enabled is false
+                      has no effect when client_certificate_enabled is false. Defaults
+                      to Required.
                     type: string
                   connectionString:
                     description: One or more connection_string blocks as defined below.
@@ -2933,6 +2975,10 @@ spec:
                           type: array
                       type: object
                     type: array
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Web
+                      App. Defaults to true.
+                    type: boolean
                   siteConfig:
                     description: A site_config block as defined below.
                     items:
@@ -2957,11 +3003,22 @@ spec:
                           items:
                             properties:
                               dockerImage:
-                                description: The Docker image reference, including
-                                  repository host as needed.
+                                type: string
+                              dockerImageName:
+                                description: The docker image, including tag, to be
+                                  used. e.g. appsvc/staticsite:latest.
                                 type: string
                               dockerImageTag:
-                                description: The image Tag to use. e.g. latest.
+                                type: string
+                              dockerRegistryUrl:
+                                description: The URL of the container registry where
+                                  the docker_image_name is located. e.g. https://index.docker.io
+                                  or https://mcr.microsoft.com. This value is required
+                                  with docker_image_name.
+                                type: string
+                              dockerRegistryUsername:
+                                description: The User Name to use for authentication
+                                  against the registry to pull the image.
                                 type: string
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
@@ -2989,7 +3046,7 @@ spec:
                                 type: string
                               phpVersion:
                                 description: The version of PHP to run. Possible values
-                                  are 8.0, 8.1 and 8.2.
+                                  are 7.4, 8.0, 8.1 and 8.2.
                                 type: string
                               pythonVersion:
                                 description: The version of Python to run. Possible
@@ -3012,7 +3069,7 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny.
+                                  Allow or Deny. Defaults to Allow.
                                 items:
                                   properties:
                                     actionType:
@@ -3100,10 +3157,10 @@ spec:
                                             description: The Request Sub Status of
                                               the Status Code.
                                             type: number
-                                          win32Status:
+                                          win32StatusCode:
                                             description: The Win32 Status Code of
                                               the Request.
-                                            type: string
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -3145,7 +3202,8 @@ spec:
                           type: array
                         ftpsState:
                           description: The State of FTP / FTPS service. Possible values
-                            include AllAllowed, FtpsOnly, and Disabled.
+                            include AllAllowed, FtpsOnly, and Disabled. Defaults to
+                            Disabled.
                           type: string
                         healthCheckEvictionTimeInMin:
                           description: The amount of time in minutes that a node can
@@ -3169,8 +3227,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -3237,7 +3295,7 @@ spec:
                           type: boolean
                         managedPipelineMode:
                           description: Managed pipeline mode. Possible values include
-                            Integrated, and Classic.
+                            Integrated, and Classic. Defaults to Integrated.
                           type: string
                         minimumTlsVersion:
                           description: 'The configures the minimum version of TLS
@@ -3259,8 +3317,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -3902,7 +3960,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -4022,11 +4080,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -4067,12 +4129,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -4378,7 +4439,8 @@ spec:
                   clientCertificateMode:
                     description: The Client Certificate mode. Possible values are
                       Required, Optional, and OptionalInteractiveUser. This property
-                      has no effect when client_certificate_enabled is false
+                      has no effect when client_certificate_enabled is false. Defaults
+                      to Required.
                     type: string
                   connectionString:
                     description: One or more connection_string blocks as defined below.
@@ -4539,8 +4601,7 @@ spec:
                       such as 52.23.25.3,52.143.43.12.
                     type: string
                   possibleOutboundIpAddressList:
-                    description: A possible_outbound_ip_address_list block as defined
-                      below.
+                    description: A list of possible outbound ip address.
                     items:
                       type: string
                     type: array
@@ -4549,6 +4610,10 @@ spec:
                       such as 52.23.25.3,52.143.43.12,52.143.43.17 - not all of which
                       are necessarily in use. Superset of outbound_ip_addresses.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Web
+                      App. Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group where the Linux Web
                       App should exist. Changing this forces a new Linux Web App to
@@ -4582,11 +4647,22 @@ spec:
                           items:
                             properties:
                               dockerImage:
-                                description: The Docker image reference, including
-                                  repository host as needed.
+                                type: string
+                              dockerImageName:
+                                description: The docker image, including tag, to be
+                                  used. e.g. appsvc/staticsite:latest.
                                 type: string
                               dockerImageTag:
-                                description: The image Tag to use. e.g. latest.
+                                type: string
+                              dockerRegistryUrl:
+                                description: The URL of the container registry where
+                                  the docker_image_name is located. e.g. https://index.docker.io
+                                  or https://mcr.microsoft.com. This value is required
+                                  with docker_image_name.
+                                type: string
+                              dockerRegistryUsername:
+                                description: The User Name to use for authentication
+                                  against the registry to pull the image.
                                 type: string
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
@@ -4614,7 +4690,7 @@ spec:
                                 type: string
                               phpVersion:
                                 description: The version of PHP to run. Possible values
-                                  are 8.0, 8.1 and 8.2.
+                                  are 7.4, 8.0, 8.1 and 8.2.
                                 type: string
                               pythonVersion:
                                 description: The version of Python to run. Possible
@@ -4637,7 +4713,7 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny.
+                                  Allow or Deny. Defaults to Allow.
                                 items:
                                   properties:
                                     actionType:
@@ -4725,10 +4801,10 @@ spec:
                                             description: The Request Sub Status of
                                               the Status Code.
                                             type: number
-                                          win32Status:
+                                          win32StatusCode:
                                             description: The Win32 Status Code of
                                               the Request.
-                                            type: string
+                                            type: number
                                         type: object
                                       type: array
                                   type: object
@@ -4774,7 +4850,8 @@ spec:
                           type: boolean
                         ftpsState:
                           description: The State of FTP / FTPS service. Possible values
-                            include AllAllowed, FtpsOnly, and Disabled.
+                            include AllAllowed, FtpsOnly, and Disabled. Defaults to
+                            Disabled.
                           type: string
                         healthCheckEvictionTimeInMin:
                           description: The amount of time in minutes that a node can
@@ -4798,8 +4875,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -4873,7 +4950,7 @@ spec:
                           type: boolean
                         managedPipelineMode:
                           description: Managed pipeline mode. Possible values include
-                            Integrated, and Classic.
+                            Integrated, and Classic. Defaults to Integrated.
                           type: string
                         minimumTlsVersion:
                           description: 'The configures the minimum version of TLS
@@ -4895,8 +4972,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.

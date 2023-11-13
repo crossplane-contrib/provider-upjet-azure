@@ -83,7 +83,7 @@ type NonComplianceMessageParameters struct {
 
 type OverridesInitParameters struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	Selectors []SelectorsInitParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
@@ -92,7 +92,7 @@ type OverridesInitParameters struct {
 
 type OverridesObservation struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	Selectors []SelectorsObservation `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
@@ -101,7 +101,7 @@ type OverridesObservation struct {
 
 type OverridesParameters struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	// +kubebuilder:validation:Optional
 	Selectors []SelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
@@ -300,7 +300,7 @@ type ResourceSelectorsSelectorsInitParameters struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -312,7 +312,7 @@ type ResourceSelectorsSelectorsObservation struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -325,7 +325,7 @@ type ResourceSelectorsSelectorsParameters struct {
 	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind" tf:"kind,omitempty"`
 
@@ -348,7 +348,7 @@ type SelectorsObservation struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.

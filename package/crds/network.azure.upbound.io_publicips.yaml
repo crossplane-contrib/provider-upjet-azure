@@ -102,7 +102,7 @@ spec:
                     type: object
                   ipVersion:
                     description: The IP Version to use, IPv6 or IPv4. Changing this
-                      forces a new resource to be created.
+                      forces a new resource to be created. Defaults to IPv4.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the
@@ -270,7 +270,7 @@ spec:
                     type: object
                   ipVersion:
                     description: The IP Version to use, IPv6 or IPv4. Changing this
-                      forces a new resource to be created.
+                      forces a new resource to be created. Defaults to IPv4.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the
@@ -532,7 +532,7 @@ spec:
                     type: object
                   ipVersion:
                     description: The IP Version to use, IPv6 or IPv4. Changing this
-                      forces a new resource to be created.
+                      forces a new resource to be created. Defaults to IPv4.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the

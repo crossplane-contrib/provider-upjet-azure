@@ -313,7 +313,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventSystemProperties:
                     description: Specifies the System Properties that each IoT Hub
@@ -603,7 +603,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventSystemProperties:
                     description: Specifies the System Properties that each IoT Hub
@@ -834,7 +834,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventSystemProperties:
                     description: Specifies the System Properties that each IoT Hub

@@ -90,7 +90,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.
@@ -294,7 +294,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.
@@ -591,7 +591,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.

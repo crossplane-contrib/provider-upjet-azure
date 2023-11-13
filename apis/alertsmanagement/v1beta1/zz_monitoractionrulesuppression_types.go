@@ -234,7 +234,7 @@ type MonitorActionRuleSuppressionConditionInitParameters struct {
 	// A monitor block as defined below.
 	Monitor []ConditionMonitorInitParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []ConditionMonitorServiceInitParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -258,7 +258,7 @@ type MonitorActionRuleSuppressionConditionObservation struct {
 	// A monitor block as defined below.
 	Monitor []ConditionMonitorObservation `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []ConditionMonitorServiceObservation `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -286,7 +286,7 @@ type MonitorActionRuleSuppressionConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	Monitor []ConditionMonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	// +kubebuilder:validation:Optional
 	MonitorService []ConditionMonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 

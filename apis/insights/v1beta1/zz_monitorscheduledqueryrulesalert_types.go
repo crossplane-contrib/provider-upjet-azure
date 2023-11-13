@@ -93,7 +93,7 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 	// Log search query.
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
+	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to ResultCount, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
 
 	// Severity of the alert. Possible values include: 0, 1, 2, 3, or 4.
@@ -148,7 +148,7 @@ type MonitorScheduledQueryRulesAlertObservation struct {
 	// Log search query.
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
+	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to ResultCount, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
 
 	// The name of the resource group in which to create the scheduled query rule instance. Changing this forces a new resource to be created.
@@ -223,7 +223,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
+	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to ResultCount, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	// +kubebuilder:validation:Optional
 	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
 

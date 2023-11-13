@@ -19,14 +19,14 @@ import (
 
 type NamespaceNetworkRuleSetInitParameters struct {
 
-	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
+	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or more network_rules blocks as defined below.
-	NetworkRules []NetworkRulesInitParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+	NetworkRules []NamespaceNetworkRuleSetNetworkRulesInitParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
 
 	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -35,9 +35,45 @@ type NamespaceNetworkRuleSetInitParameters struct {
 	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
 }
 
+type NamespaceNetworkRuleSetNetworkRulesInitParameters struct {
+
+	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+}
+
+type NamespaceNetworkRuleSetNetworkRulesObservation struct {
+
+	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The Subnet ID which should be able to access this ServiceBus Namespace.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type NamespaceNetworkRuleSetNetworkRulesParameters struct {
+
+	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	// +kubebuilder:validation:Optional
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The Subnet ID which should be able to access this ServiceBus Namespace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
 type NamespaceNetworkRuleSetObservation struct {
 
-	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
+	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// The ID of the ServiceBus Namespace Network Rule Set.
@@ -50,7 +86,7 @@ type NamespaceNetworkRuleSetObservation struct {
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
 	// One or more network_rules blocks as defined below.
-	NetworkRules []NetworkRulesObservation `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+	NetworkRules []NamespaceNetworkRuleSetNetworkRulesObservation `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
 
 	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -61,7 +97,7 @@ type NamespaceNetworkRuleSetObservation struct {
 
 type NamespaceNetworkRuleSetParameters struct {
 
-	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Deny.
+	// Specifies the default action for the ServiceBus Namespace Network Rule Set. Possible values are Allow and Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
@@ -85,7 +121,7 @@ type NamespaceNetworkRuleSetParameters struct {
 
 	// One or more network_rules blocks as defined below.
 	// +kubebuilder:validation:Optional
-	NetworkRules []NetworkRulesParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+	NetworkRules []NamespaceNetworkRuleSetNetworkRulesParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
 
 	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -94,42 +130,6 @@ type NamespaceNetworkRuleSetParameters struct {
 	// If True, then Azure Services that are known and trusted for this resource type are allowed to bypass firewall configuration. See Trusted Microsoft Services
 	// +kubebuilder:validation:Optional
 	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
-}
-
-type NetworkRulesInitParameters struct {
-
-	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
-}
-
-type NetworkRulesObservation struct {
-
-	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
-
-	// The Subnet ID which should be able to access this ServiceBus Namespace.
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-}
-
-type NetworkRulesParameters struct {
-
-	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
-	// +kubebuilder:validation:Optional
-	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
-
-	// The Subnet ID which should be able to access this ServiceBus Namespace.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
-
-	// Reference to a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
-
-	// Selector for a Subnet in network to populate subnetId.
-	// +kubebuilder:validation:Optional
-	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 // NamespaceNetworkRuleSetSpec defines the desired state of NamespaceNetworkRuleSet

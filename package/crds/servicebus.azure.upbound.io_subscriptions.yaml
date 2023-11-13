@@ -90,7 +90,7 @@ spec:
                     type: array
                   clientScopedSubscriptionEnabled:
                     description: whether the subscription is scoped to a client id.
-                      Defaults to False.
+                      Defaults to false.
                     type: boolean
                   deadLetteringOnFilterEvaluationError:
                     description: Boolean flag which controls whether the Subscription
@@ -250,7 +250,7 @@ spec:
                     type: array
                   clientScopedSubscriptionEnabled:
                     description: whether the subscription is scoped to a client id.
-                      Defaults to False.
+                      Defaults to false.
                     type: boolean
                   deadLetteringOnFilterEvaluationError:
                     description: Boolean flag which controls whether the Subscription
@@ -496,7 +496,7 @@ spec:
                     type: array
                   clientScopedSubscriptionEnabled:
                     description: whether the subscription is scoped to a client id.
-                      Defaults to False.
+                      Defaults to false.
                     type: boolean
                   deadLetteringOnFilterEvaluationError:
                     description: Boolean flag which controls whether the Subscription

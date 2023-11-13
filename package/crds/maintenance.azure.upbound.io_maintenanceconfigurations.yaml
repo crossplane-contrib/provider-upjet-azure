@@ -241,7 +241,7 @@ spec:
                     type: object
                   visibility:
                     description: The visibility of the Maintenance Configuration.
-                      The only allowable value is Custom.
+                      The only allowable value is Custom. Defaults to Custom.
                     type: string
                   window:
                     description: A window block as defined below.
@@ -377,7 +377,7 @@ spec:
                     type: object
                   visibility:
                     description: The visibility of the Maintenance Configuration.
-                      The only allowable value is Custom.
+                      The only allowable value is Custom. Defaults to Custom.
                     type: string
                   window:
                     description: A window block as defined below.
@@ -684,7 +684,7 @@ spec:
                     type: object
                   visibility:
                     description: The visibility of the Maintenance Configuration.
-                      The only allowable value is Custom.
+                      The only allowable value is Custom. Defaults to Custom.
                     type: string
                   window:
                     description: A window block as defined below.

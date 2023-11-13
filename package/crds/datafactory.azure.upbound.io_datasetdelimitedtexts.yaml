@@ -83,6 +83,18 @@ spec:
                     description: An azure_blob_fs_location block as defined below.
                     items:
                       properties:
+                        dynamicFileSystemEnabled:
+                          description: Is the file_system using dynamic expression,
+                            function or system variables? Defaults to false.
+                          type: boolean
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
                         fileSystem:
                           description: The storage data lake gen2 file system on the
                             Azure Blob Storage Account hosting the file.
@@ -338,8 +350,7 @@ spec:
                         type: object
                     type: object
                   nullValue:
-                    description: The null value string. Defaults to an empty string.
-                      Defaults to "".
+                    description: The null value string. Defaults to "".
                     type: string
                   parameters:
                     additionalProperties:
@@ -402,6 +413,18 @@ spec:
                     description: An azure_blob_fs_location block as defined below.
                     items:
                       properties:
+                        dynamicFileSystemEnabled:
+                          description: Is the file_system using dynamic expression,
+                            function or system variables? Defaults to false.
+                          type: boolean
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
                         fileSystem:
                           description: The storage data lake gen2 file system on the
                             Azure Blob Storage Account hosting the file.
@@ -499,8 +522,7 @@ spec:
                       type: object
                     type: array
                   nullValue:
-                    description: The null value string. Defaults to an empty string.
-                      Defaults to "".
+                    description: The null value string. Defaults to "".
                     type: string
                   parameters:
                     additionalProperties:
@@ -717,6 +739,18 @@ spec:
                     description: An azure_blob_fs_location block as defined below.
                     items:
                       properties:
+                        dynamicFileSystemEnabled:
+                          description: Is the file_system using dynamic expression,
+                            function or system variables? Defaults to false.
+                          type: boolean
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
                         fileSystem:
                           description: The storage data lake gen2 file system on the
                             Azure Blob Storage Account hosting the file.
@@ -825,8 +859,7 @@ spec:
                       associate the Dataset with.
                     type: string
                   nullValue:
-                    description: The null value string. Defaults to an empty string.
-                      Defaults to "".
+                    description: The null value string. Defaults to "".
                     type: string
                   parameters:
                     additionalProperties:

@@ -28,6 +28,9 @@ type EnvironmentInitParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 type EnvironmentObservation struct {
@@ -75,9 +78,17 @@ type EnvironmentObservation struct {
 
 	// A mapping of tags to assign to the resource.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 type EnvironmentParameters struct {
+
+	// Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
+	// Application Insights connection string used by Dapr to export Service to Service communication telemetry.
+	// +kubebuilder:validation:Optional
+	DaprApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
@@ -134,6 +145,10 @@ type EnvironmentParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 // EnvironmentSpec defines the desired state of Environment

@@ -19,19 +19,19 @@ import (
 
 type CustomRouteInitParameters struct {
 
-	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// A list of address blocks reserved for this virtual network in CIDR notation.
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 type CustomRouteObservation struct {
 
-	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// A list of address blocks reserved for this virtual network in CIDR notation.
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 type CustomRouteParameters struct {
 
-	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// A list of address blocks reserved for this virtual network in CIDR notation.
 	// +kubebuilder:validation:Optional
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
@@ -261,7 +261,7 @@ type VirtualNetworkGatewayBGPSettingsInitParameters struct {
 	// The weight added to routes which have been learned through BGP peering. Valid values can be between 0 and 100.
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
-	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
+	// A list of peering_addresses blocks as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	PeeringAddresses []PeeringAddressesInitParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
 }
 
@@ -273,7 +273,7 @@ type VirtualNetworkGatewayBGPSettingsObservation struct {
 	// The weight added to routes which have been learned through BGP peering. Valid values can be between 0 and 100.
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
-	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
+	// A list of peering_addresses blocks as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	PeeringAddresses []PeeringAddressesObservation `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
 }
 
@@ -287,7 +287,7 @@ type VirtualNetworkGatewayBGPSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
-	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
+	// A list of peering_addresses blocks as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	// +kubebuilder:validation:Optional
 	PeeringAddresses []PeeringAddressesParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
 }
@@ -378,7 +378,7 @@ type VirtualNetworkGatewayInitParameters struct {
 	// The Generation of the Virtual Network gateway. Possible values include Generation1, Generation2 or None. Changing this forces a new resource to be created.
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One, two or three ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
@@ -432,7 +432,7 @@ type VirtualNetworkGatewayObservation struct {
 	// The ID of the Virtual Network Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// One, two or three ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
@@ -493,7 +493,7 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One, two or three ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.

@@ -19,6 +19,9 @@ import (
 
 type AccountInitParameters struct {
 
+	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
 	// The SKU of the Azure Maps Account. Possible values are S0, S1 and G2. Changing this forces a new resource to be created.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -30,6 +33,9 @@ type AccountObservation struct {
 
 	// The ID of the Azure Maps Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// The name of the Resource Group in which the Azure Maps Account should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -45,6 +51,10 @@ type AccountObservation struct {
 }
 
 type AccountParameters struct {
+
+	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
+	// +kubebuilder:validation:Optional
+	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// The name of the Resource Group in which the Azure Maps Account should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

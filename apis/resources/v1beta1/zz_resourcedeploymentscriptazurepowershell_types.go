@@ -152,7 +152,7 @@ type ResourceDeploymentScriptAzurePowerShellInitParameters struct {
 	// Maximum allowed script execution time specified in ISO 8601 format. Needs to be greater than 0 and smaller than 1 day. Defaults to P1D. Changing this forces a new Resource Deployment Script to be created.
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// Azure PowerShell module version to be used. The supported versions are 2.7, 2.8, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 8.0, 8.1, 8.2, 8.3, 9.0. Changing this forces a new Resource Deployment Script to be created.
+	// Specifies the version of the Azure PowerShell that should be used in the format X.Y (e.g. 9.7). A canonical list of versions is available from the Microsoft Container Registry API. Changing this forces a new Resource Deployment Script to be created.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -212,7 +212,7 @@ type ResourceDeploymentScriptAzurePowerShellObservation struct {
 	// Maximum allowed script execution time specified in ISO 8601 format. Needs to be greater than 0 and smaller than 1 day. Defaults to P1D. Changing this forces a new Resource Deployment Script to be created.
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// Azure PowerShell module version to be used. The supported versions are 2.7, 2.8, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 8.0, 8.1, 8.2, 8.3, 9.0. Changing this forces a new Resource Deployment Script to be created.
+	// Specifies the version of the Azure PowerShell that should be used in the format X.Y (e.g. 9.7). A canonical list of versions is available from the Microsoft Container Registry API. Changing this forces a new Resource Deployment Script to be created.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
@@ -291,7 +291,7 @@ type ResourceDeploymentScriptAzurePowerShellParameters struct {
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 
-	// Azure PowerShell module version to be used. The supported versions are 2.7, 2.8, 3.0, 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7, 3.8, 4.1, 4.2, 4.3, 4.4, 4.5, 4.6, 4.7, 4.8, 5.0, 5.1, 5.2, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6.0, 6.1, 6.2, 6.3, 6.4, 6.5, 6.6, 7.0, 7.1, 7.2, 7.3, 7.4, 7.5, 8.0, 8.1, 8.2, 8.3, 9.0. Changing this forces a new Resource Deployment Script to be created.
+	// Specifies the version of the Azure PowerShell that should be used in the format X.Y (e.g. 9.7). A canonical list of versions is available from the Microsoft Container Registry API. Changing this forces a new Resource Deployment Script to be created.
 	// +kubebuilder:validation:Optional
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }

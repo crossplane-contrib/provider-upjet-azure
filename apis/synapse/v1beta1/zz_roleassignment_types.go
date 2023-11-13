@@ -22,7 +22,7 @@ type RoleAssignmentInitParameters struct {
 	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	// The Role Name of the Synapse Built-In Role. Possible values are Apache Spark Administrator, Synapse Administrator, Synapse Artifact Publisher, Synapse Artifact User, Synapse Compute Operator, Synapse Contributor, Synapse Credential User, Synapse Linked Data Manager, Synapse Monitoring Operator, Synapse SQL Administrator and Synapse User. Changing this forces a new resource to be created.
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
@@ -37,7 +37,7 @@ type RoleAssignmentObservation struct {
 	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	// The Role Name of the Synapse Built-In Role. Possible values are Apache Spark Administrator, Synapse Administrator, Synapse Artifact Publisher, Synapse Artifact User, Synapse Compute Operator, Synapse Contributor, Synapse Credential User, Synapse Linked Data Manager, Synapse Monitoring Operator, Synapse SQL Administrator and Synapse User. Changing this forces a new resource to be created.
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
@@ -53,7 +53,7 @@ type RoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	// The Role Name of the Synapse Built-In Role. Possible values are Apache Spark Administrator, Synapse Administrator, Synapse Artifact Publisher, Synapse Artifact User, Synapse Compute Operator, Synapse Contributor, Synapse Credential User, Synapse Linked Data Manager, Synapse Monitoring Operator, Synapse SQL Administrator and Synapse User. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 

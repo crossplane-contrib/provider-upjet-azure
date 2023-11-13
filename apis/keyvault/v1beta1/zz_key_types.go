@@ -203,7 +203,7 @@ type RotationPolicyInitParameters struct {
 	// Expire a Key Vault Key after given duration as an ISO 8601 duration.
 	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
 
-	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// Notify at a given duration before expiry as an ISO 8601 duration.
 	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }
 
@@ -215,7 +215,7 @@ type RotationPolicyObservation struct {
 	// Expire a Key Vault Key after given duration as an ISO 8601 duration.
 	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
 
-	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// Notify at a given duration before expiry as an ISO 8601 duration.
 	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }
 
@@ -229,7 +229,7 @@ type RotationPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
 
-	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// Notify at a given duration before expiry as an ISO 8601 duration.
 	// +kubebuilder:validation:Optional
 	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }

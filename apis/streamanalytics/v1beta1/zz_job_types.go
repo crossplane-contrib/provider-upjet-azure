@@ -47,16 +47,16 @@ type JobInitParameters struct {
 	// Specifies the compatibility level for this job - which controls certain runtime behaviours of the streaming job. Possible values are 1.0, 1.1 and 1.2.
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
-	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
 	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
+	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 0.
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
 	// Specifies the policy which should be applied to events which arrive out of order in the input event stream. Possible values are Adjust and Drop. Default is Adjust.
@@ -95,16 +95,16 @@ type JobObservation struct {
 	// Specifies the compatibility level for this job - which controls certain runtime behaviours of the streaming job. Possible values are 1.0, 1.1 and 1.2.
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
-	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
 	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
+	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 0.
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
 	// Specifies the policy which should be applied to events which arrive out of order in the input event stream. Possible values are Adjust and Drop. Default is Adjust.
@@ -153,7 +153,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
-	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	// +kubebuilder:validation:Optional
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
@@ -161,11 +161,11 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
 	// +kubebuilder:validation:Optional
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
+	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 0.
 	// +kubebuilder:validation:Optional
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 

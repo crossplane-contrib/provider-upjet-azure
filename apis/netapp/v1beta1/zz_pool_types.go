@@ -28,7 +28,7 @@ type PoolInitParameters struct {
 	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	// Provisioned size of the pool in TB. Value must be between 2 and 500.
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -55,7 +55,7 @@ type PoolObservation struct {
 	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	// Provisioned size of the pool in TB. Value must be between 2 and 500.
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -102,7 +102,7 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	// Provisioned size of the pool in TB. Value must be between 2 and 500.
 	// +kubebuilder:validation:Optional
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 

@@ -79,6 +79,10 @@ spec:
                     description: The workspace daily quota for ingestion in GB. Defaults
                       to -1 (unlimited) if omitted.
                     type: number
+                  dataCollectionRuleId:
+                    description: The ID of the Data Collection Rule to use for this
+                      workspace.
+                    type: string
                   internetIngestionEnabled:
                     description: Should the Log Analytics Workspace support ingestion
                       over the Public Internet? Defaults to true.
@@ -97,7 +101,8 @@ spec:
                     type: string
                   reservationCapacityInGbPerDay:
                     description: The capacity reservation level in GB for this workspace.
-                      Must be in increments of 100 between 100 and 5000.
+                      Possible values are 100, 200, 300, 400, 500, 1000, 2000 and
+                      5000.
                     type: number
                   resourceGroupName:
                     description: The name of the resource group in which the Log Analytics
@@ -219,6 +224,10 @@ spec:
                     description: The workspace daily quota for ingestion in GB. Defaults
                       to -1 (unlimited) if omitted.
                     type: number
+                  dataCollectionRuleId:
+                    description: The ID of the Data Collection Rule to use for this
+                      workspace.
+                    type: string
                   internetIngestionEnabled:
                     description: Should the Log Analytics Workspace support ingestion
                       over the Public Internet? Defaults to true.
@@ -237,7 +246,8 @@ spec:
                     type: string
                   reservationCapacityInGbPerDay:
                     description: The capacity reservation level in GB for this workspace.
-                      Must be in increments of 100 between 100 and 5000.
+                      Possible values are 100, 200, 300, 400, 500, 1000, 2000 and
+                      5000.
                     type: number
                   retentionInDays:
                     description: The workspace data retention in days. Possible values
@@ -437,6 +447,10 @@ spec:
                     description: The workspace daily quota for ingestion in GB. Defaults
                       to -1 (unlimited) if omitted.
                     type: number
+                  dataCollectionRuleId:
+                    description: The ID of the Data Collection Rule to use for this
+                      workspace.
+                    type: string
                   id:
                     description: The Log Analytics Workspace ID.
                     type: string
@@ -458,7 +472,8 @@ spec:
                     type: string
                   reservationCapacityInGbPerDay:
                     description: The capacity reservation level in GB for this workspace.
-                      Must be in increments of 100 between 100 and 5000.
+                      Possible values are 100, 200, 300, 400, 500, 1000, 2000 and
+                      5000.
                     type: number
                   resourceGroupName:
                     description: The name of the resource group in which the Log Analytics

@@ -155,6 +155,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  bypassPlatformSafetyChecksOnUserScheduleEnabled:
+                    description: Specifies whether to skip platform scheduled patching
+                      when a user schedule is associated with the VM. Defaults to
+                      false.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       which the Virtual Machine should be allocated to.
@@ -218,7 +223,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -487,6 +492,10 @@ spec:
                   proximityPlacementGroupId:
                     description: The ID of the Proximity Placement Group which the
                       Virtual Machine should be assigned to.
+                    type: string
+                  rebootSetting:
+                    description: Specifies the reboot setting for platform scheduled
+                      patching. Possible values are Always, IfRequired and Never.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Windows
@@ -759,6 +768,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  bypassPlatformSafetyChecksOnUserScheduleEnabled:
+                    description: Specifies whether to skip platform scheduled patching
+                      when a user schedule is associated with the VM. Defaults to
+                      false.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       which the Virtual Machine should be allocated to.
@@ -803,7 +817,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -986,6 +1000,10 @@ spec:
                   proximityPlacementGroupId:
                     description: The ID of the Proximity Placement Group which the
                       Virtual Machine should be assigned to.
+                    type: string
+                  rebootSetting:
+                    description: Specifies the reboot setting for platform scheduled
+                      patching. Possible values are Always, IfRequired and Never.
                     type: string
                   secret:
                     description: One or more secret blocks as defined below.
@@ -1352,6 +1370,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  bypassPlatformSafetyChecksOnUserScheduleEnabled:
+                    description: Specifies whether to skip platform scheduled patching
+                      when a user schedule is associated with the VM. Defaults to
+                      false.
+                    type: boolean
                   capacityReservationGroupId:
                     description: Specifies the ID of the Capacity Reservation Group
                       which the Virtual Machine should be allocated to.
@@ -1396,7 +1419,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -1619,6 +1642,10 @@ spec:
                     items:
                       type: string
                     type: array
+                  rebootSetting:
+                    description: Specifies the reboot setting for platform scheduled
+                      patching. Possible values are Always, IfRequired and Never.
+                    type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Windows
                       Virtual Machine should be exist. Changing this forces a new

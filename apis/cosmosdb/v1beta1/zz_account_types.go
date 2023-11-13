@@ -37,7 +37,7 @@ type AccountInitParameters struct {
 	// A capacity block as defined below.
 	Capacity []CapacityInitParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// Specifies a consistency_policy resource, used to define the consistency policy for this CosmosDB account.
+	// Specifies one consistency_policy block as defined below, used to define the consistency policy for this CosmosDB account.
 	ConsistencyPolicy []ConsistencyPolicyInitParameters `json:"consistencyPolicy,omitempty" tf:"consistency_policy,omitempty"`
 
 	// A cors_rule block as defined below.
@@ -46,7 +46,7 @@ type AccountInitParameters struct {
 	// The creation mode for the CosmosDB Account. Possible values are Default and Restore. Changing this forces a new resource to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity. Defaults to FirstPartyIdentity.
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
 	// Enable automatic failover for this Cosmos DB account.
@@ -103,7 +103,7 @@ type AccountInitParameters struct {
 	// A mapping of tags to assign to the resource.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a virtual_network_rules resource, used to define which subnets are allowed to access this CosmosDB account.
+	// Specifies a virtual_network_rule block as defined below, used to define which subnets are allowed to access this CosmosDB account.
 	VirtualNetworkRule []VirtualNetworkRuleInitParameters `json:"virtualNetworkRule,omitempty" tf:"virtual_network_rule,omitempty"`
 }
 
@@ -127,7 +127,7 @@ type AccountObservation struct {
 	// A capacity block as defined below.
 	Capacity []CapacityObservation `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// Specifies a consistency_policy resource, used to define the consistency policy for this CosmosDB account.
+	// Specifies one consistency_policy block as defined below, used to define the consistency policy for this CosmosDB account.
 	ConsistencyPolicy []ConsistencyPolicyObservation `json:"consistencyPolicy,omitempty" tf:"consistency_policy,omitempty"`
 
 	// A cors_rule block as defined below.
@@ -136,7 +136,7 @@ type AccountObservation struct {
 	// The creation mode for the CosmosDB Account. Possible values are Default and Restore. Changing this forces a new resource to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity. Defaults to FirstPartyIdentity.
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
 	// Enable automatic failover for this Cosmos DB account.
@@ -205,7 +205,7 @@ type AccountObservation struct {
 	// A mapping of tags to assign to the resource.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a virtual_network_rules resource, used to define which subnets are allowed to access this CosmosDB account.
+	// Specifies a virtual_network_rule block as defined below, used to define which subnets are allowed to access this CosmosDB account.
 	VirtualNetworkRule []VirtualNetworkRuleObservation `json:"virtualNetworkRule,omitempty" tf:"virtual_network_rule,omitempty"`
 
 	// A list of write endpoints available for this CosmosDB account.
@@ -238,7 +238,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Capacity []CapacityParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
-	// Specifies a consistency_policy resource, used to define the consistency policy for this CosmosDB account.
+	// Specifies one consistency_policy block as defined below, used to define the consistency policy for this CosmosDB account.
 	// +kubebuilder:validation:Optional
 	ConsistencyPolicy []ConsistencyPolicyParameters `json:"consistencyPolicy,omitempty" tf:"consistency_policy,omitempty"`
 
@@ -250,7 +250,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
-	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity. Defaults to FirstPartyIdentity.
 	// +kubebuilder:validation:Optional
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
@@ -339,7 +339,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies a virtual_network_rules resource, used to define which subnets are allowed to access this CosmosDB account.
+	// Specifies a virtual_network_rule block as defined below, used to define which subnets are allowed to access this CosmosDB account.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkRule []VirtualNetworkRuleParameters `json:"virtualNetworkRule,omitempty" tf:"virtual_network_rule,omitempty"`
 }
@@ -414,19 +414,19 @@ type BackupParameters struct {
 
 type CapabilitiesInitParameters struct {
 
-	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex, EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CapabilitiesObservation struct {
 
-	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex, EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type CapabilitiesParameters struct {
 
-	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+	// The capability to enable - Possible values are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses, EnableAggregationPipeline, EnableCassandra, EnableGremlin, EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites, EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex, EnableServerless, EnableTable, EnableTtlOnCustomPath, EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -503,7 +503,7 @@ type CorsRuleInitParameters struct {
 	// A list of response headers that are exposed to CORS clients.
 	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
 
-	// The number of seconds the client should cache a preflight response.
+	// The number of seconds the client should cache a preflight response. Possible values are between 1 and 2147483647.
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
@@ -521,7 +521,7 @@ type CorsRuleObservation struct {
 	// A list of response headers that are exposed to CORS clients.
 	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
 
-	// The number of seconds the client should cache a preflight response.
+	// The number of seconds the client should cache a preflight response. Possible values are between 1 and 2147483647.
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
@@ -543,9 +543,9 @@ type CorsRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ExposedHeaders []*string `json:"exposedHeaders" tf:"exposed_headers,omitempty"`
 
-	// The number of seconds the client should cache a preflight response.
+	// The number of seconds the client should cache a preflight response. Possible values are between 1 and 2147483647.
 	// +kubebuilder:validation:Optional
-	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds" tf:"max_age_in_seconds,omitempty"`
+	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
 type DatabaseInitParameters struct {

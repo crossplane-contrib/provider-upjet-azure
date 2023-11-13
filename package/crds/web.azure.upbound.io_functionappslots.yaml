@@ -670,8 +670,8 @@ spec:
                             should be enabled. Defaults to false.
                           type: boolean
                         ipRestriction:
-                          description: A List of objects representing IP restrictions
-                            as defined below.
+                          description: A list of ip_restriction objects representing
+                            IP restrictions as defined below.
                           items:
                             properties:
                               action:
@@ -679,7 +679,7 @@ spec:
                                   Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific scm_ip_restriction
+                                description: The headers block for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:
@@ -834,8 +834,8 @@ spec:
                             to false.
                           type: boolean
                         scmIpRestriction:
-                          description: A List of objects representing IP restrictions
-                            as defined below.
+                          description: A list of scm_ip_restriction objects representing
+                            IP restrictions as defined below.
                           items:
                             properties:
                               action:
@@ -843,7 +843,7 @@ spec:
                                   Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific scm_ip_restriction
+                                description: The headers block for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:
@@ -1364,8 +1364,8 @@ spec:
                             should be enabled. Defaults to false.
                           type: boolean
                         ipRestriction:
-                          description: A List of objects representing IP restrictions
-                            as defined below.
+                          description: A list of ip_restriction objects representing
+                            IP restrictions as defined below.
                           items:
                             properties:
                               action:
@@ -1373,7 +1373,7 @@ spec:
                                   Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific scm_ip_restriction
+                                description: The headers block for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:
@@ -1444,8 +1444,8 @@ spec:
                             to false.
                           type: boolean
                         scmIpRestriction:
-                          description: A List of objects representing IP restrictions
-                            as defined below.
+                          description: A list of scm_ip_restriction objects representing
+                            IP restrictions as defined below.
                           items:
                             properties:
                               action:
@@ -1453,7 +1453,7 @@ spec:
                                   Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific scm_ip_restriction
+                                description: The headers block for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:
@@ -1999,8 +1999,8 @@ spec:
                             should be enabled. Defaults to false.
                           type: boolean
                         ipRestriction:
-                          description: A List of objects representing IP restrictions
-                            as defined below.
+                          description: A list of ip_restriction objects representing
+                            IP restrictions as defined below.
                           items:
                             properties:
                               action:
@@ -2008,7 +2008,7 @@ spec:
                                   Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific scm_ip_restriction
+                                description: The headers block for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:
@@ -2083,8 +2083,8 @@ spec:
                             to false.
                           type: boolean
                         scmIpRestriction:
-                          description: A List of objects representing IP restrictions
-                            as defined below.
+                          description: A list of scm_ip_restriction objects representing
+                            IP restrictions as defined below.
                           items:
                             properties:
                               action:
@@ -2092,7 +2092,7 @@ spec:
                                   Defaults to Allow.
                                 type: string
                               headers:
-                                description: The headers for this specific scm_ip_restriction
+                                description: The headers block for this specific scm_ip_restriction
                                   as defined below.
                                 items:
                                   properties:

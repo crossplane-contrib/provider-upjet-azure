@@ -89,6 +89,7 @@ spec:
                     type: string
                   productType:
                     description: Certificate product type, such as Standard or WildCard.
+                      Defaults to Standard.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -212,6 +213,7 @@ spec:
                     type: string
                   productType:
                     description: Certificate product type, such as Standard or WildCard.
+                      Defaults to Standard.
                     type: string
                   tags:
                     additionalProperties:
@@ -455,6 +457,7 @@ spec:
                     type: string
                   productType:
                     description: Certificate product type, such as Standard or WildCard.
+                      Defaults to Standard.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create

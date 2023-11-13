@@ -126,6 +126,22 @@ spec:
 ---
 
 apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorroute
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
 kind: FrontdoorOrigin
 metadata:
   annotations:
@@ -166,6 +182,10 @@ spec:
     cdnFrontdoorProfileIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    loadBalancing:
+    - additionalLatencyInMilliseconds: 0
+      sampleSize: 16
+      successfulSamplesRequired: 3
 
 ---
 
@@ -180,6 +200,23 @@ metadata:
 spec:
   forProvider:
     resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_AzureFrontDoor
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorRuleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorroute
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 

@@ -166,13 +166,13 @@ type MonitorConfigParameters struct {
 
 type TrafficManagerProfileInitParameters struct {
 
-	// This block specifies the DNS configuration of the Profile, it supports the fields documented below.
+	// This block specifies the DNS configuration of the Profile. One dns_config block as defined below.
 	DNSConfig []DNSConfigInitParameters `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
 
 	// The amount of endpoints to return for DNS queries to this Profile. Possible values range from 1 to 8.
 	MaxReturn *float64 `json:"maxReturn,omitempty" tf:"max_return,omitempty"`
 
-	// This block specifies the Endpoint monitoring configuration for the Profile, it supports the fields documented below.
+	// This block specifies the Endpoint monitoring configuration for the Profile. One monitor_config block as defined below.
 	MonitorConfig []MonitorConfigInitParameters `json:"monitorConfig,omitempty" tf:"monitor_config,omitempty"`
 
 	// The status of the profile, can be set to either Enabled or Disabled. Defaults to Enabled.
@@ -190,7 +190,7 @@ type TrafficManagerProfileInitParameters struct {
 
 type TrafficManagerProfileObservation struct {
 
-	// This block specifies the DNS configuration of the Profile, it supports the fields documented below.
+	// This block specifies the DNS configuration of the Profile. One dns_config block as defined below.
 	DNSConfig []DNSConfigObservation `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
 
 	// The FQDN of the created Profile.
@@ -202,7 +202,7 @@ type TrafficManagerProfileObservation struct {
 	// The amount of endpoints to return for DNS queries to this Profile. Possible values range from 1 to 8.
 	MaxReturn *float64 `json:"maxReturn,omitempty" tf:"max_return,omitempty"`
 
-	// This block specifies the Endpoint monitoring configuration for the Profile, it supports the fields documented below.
+	// This block specifies the Endpoint monitoring configuration for the Profile. One monitor_config block as defined below.
 	MonitorConfig []MonitorConfigObservation `json:"monitorConfig,omitempty" tf:"monitor_config,omitempty"`
 
 	// The status of the profile, can be set to either Enabled or Disabled. Defaults to Enabled.
@@ -223,7 +223,7 @@ type TrafficManagerProfileObservation struct {
 
 type TrafficManagerProfileParameters struct {
 
-	// This block specifies the DNS configuration of the Profile, it supports the fields documented below.
+	// This block specifies the DNS configuration of the Profile. One dns_config block as defined below.
 	// +kubebuilder:validation:Optional
 	DNSConfig []DNSConfigParameters `json:"dnsConfig,omitempty" tf:"dns_config,omitempty"`
 
@@ -231,7 +231,7 @@ type TrafficManagerProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxReturn *float64 `json:"maxReturn,omitempty" tf:"max_return,omitempty"`
 
-	// This block specifies the Endpoint monitoring configuration for the Profile, it supports the fields documented below.
+	// This block specifies the Endpoint monitoring configuration for the Profile. One monitor_config block as defined below.
 	// +kubebuilder:validation:Optional
 	MonitorConfig []MonitorConfigParameters `json:"monitorConfig,omitempty" tf:"monitor_config,omitempty"`
 

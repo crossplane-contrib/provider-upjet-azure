@@ -177,7 +177,7 @@ type EventHubNamespaceParameters struct {
 
 type IPRuleInitParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action"`
 
 	// The IP mask to match on.
@@ -186,7 +186,7 @@ type IPRuleInitParameters struct {
 
 type IPRuleObservation struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The IP mask to match on.
@@ -195,7 +195,7 @@ type IPRuleObservation struct {
 
 type IPRuleParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 

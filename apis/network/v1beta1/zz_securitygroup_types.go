@@ -22,7 +22,7 @@ type SecurityGroupInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// List of objects representing security rules, as defined below.
+	// List of security_rule objects representing security rules, as defined below.
 	SecurityRule []SecurityRuleInitParameters `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -40,7 +40,7 @@ type SecurityGroupObservation struct {
 	// The name of the resource group in which to create the network security group. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// List of objects representing security rules, as defined below.
+	// List of security_rule objects representing security rules, as defined below.
 	SecurityRule []SecurityRuleObservation `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -66,7 +66,7 @@ type SecurityGroupParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// List of objects representing security rules, as defined below.
+	// List of security_rule objects representing security rules, as defined below.
 	// +kubebuilder:validation:Optional
 	SecurityRule []SecurityRuleParameters `json:"securityRule,omitempty" tf:"security_rule,omitempty"`
 

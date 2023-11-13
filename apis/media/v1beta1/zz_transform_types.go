@@ -186,7 +186,7 @@ type AudioParameters struct {
 
 type BuiltinPresetInitParameters struct {
 
-	// A present_configuration block as defined below.
+	// A preset_configuration block as defined below.
 	PresetConfiguration []PresetConfigurationInitParameters `json:"presetConfiguration,omitempty" tf:"preset_configuration,omitempty"`
 
 	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, DDGoodQualityAudio, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
@@ -195,7 +195,7 @@ type BuiltinPresetInitParameters struct {
 
 type BuiltinPresetObservation struct {
 
-	// A present_configuration block as defined below.
+	// A preset_configuration block as defined below.
 	PresetConfiguration []PresetConfigurationObservation `json:"presetConfiguration,omitempty" tf:"preset_configuration,omitempty"`
 
 	// The built-in preset to be used for encoding videos. The Possible values are AACGoodQualityAudio, AdaptiveStreaming, ContentAwareEncoding, ContentAwareEncodingExperimental, CopyAllBitrateNonInterleaved, DDGoodQualityAudio, H265AdaptiveStreaming, H265ContentAwareEncoding, H265SingleBitrate4K, H265SingleBitrate1080p, H265SingleBitrate720p, H264MultipleBitrate1080p, H264MultipleBitrateSD, H264MultipleBitrate720p, H264SingleBitrate1080p, H264SingleBitrateSD and H264SingleBitrate720p.
@@ -204,7 +204,7 @@ type BuiltinPresetObservation struct {
 
 type BuiltinPresetParameters struct {
 
-	// A present_configuration block as defined below.
+	// A preset_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	PresetConfiguration []PresetConfigurationParameters `json:"presetConfiguration,omitempty" tf:"preset_configuration,omitempty"`
 
@@ -394,6 +394,9 @@ type CustomPresetInitParameters struct {
 	// One or more codec blocks as defined above.
 	Codec []CodecInitParameters `json:"codec,omitempty" tf:"codec,omitempty"`
 
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
+
 	// A filter block as defined below.
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
@@ -405,6 +408,9 @@ type CustomPresetObservation struct {
 
 	// One or more codec blocks as defined above.
 	Codec []CodecObservation `json:"codec,omitempty" tf:"codec,omitempty"`
+
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// A filter block as defined below.
 	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
@@ -418,6 +424,10 @@ type CustomPresetParameters struct {
 	// One or more codec blocks as defined above.
 	// +kubebuilder:validation:Optional
 	Codec []CodecParameters `json:"codec" tf:"codec,omitempty"`
+
+	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +kubebuilder:validation:Optional
+	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// A filter block as defined below.
 	// +kubebuilder:validation:Optional
@@ -756,7 +766,7 @@ type H264VideoInitParameters struct {
 	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -783,7 +793,7 @@ type H264VideoObservation struct {
 	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -811,7 +821,7 @@ type H264VideoParameters struct {
 	// +kubebuilder:validation:Optional
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
@@ -845,7 +855,7 @@ type H265VideoInitParameters struct {
 	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -875,7 +885,7 @@ type H265VideoLayerInitParameters struct {
 	// The average bitrate in bits per second at which to encode the input video when generating this layer.
 	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
-	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. Defaults to PT5S.
 	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
 
 	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
@@ -920,7 +930,7 @@ type H265VideoLayerObservation struct {
 	// The average bitrate in bits per second at which to encode the input video when generating this layer.
 	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
-	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. Defaults to PT5S.
 	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
 
 	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
@@ -968,7 +978,7 @@ type H265VideoLayerParameters struct {
 	// +kubebuilder:validation:Optional
 	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
 
-	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. Defaults to PT5S.
 	// +kubebuilder:validation:Optional
 	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
 
@@ -1018,7 +1028,7 @@ type H265VideoObservation struct {
 	// The complexity of the encoding. Possible values are Balanced, Speed or Quality.
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -1043,7 +1053,7 @@ type H265VideoParameters struct {
 	// +kubebuilder:validation:Optional
 	Complexity *string `json:"complexity,omitempty" tf:"complexity,omitempty"`
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
@@ -1070,7 +1080,7 @@ type H265VideoParameters struct {
 
 type JpgImageInitParameters struct {
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -1149,7 +1159,7 @@ type JpgImageLayerParameters struct {
 
 type JpgImageObservation struct {
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -1179,7 +1189,7 @@ type JpgImageObservation struct {
 
 type JpgImageParameters struct {
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
@@ -1246,7 +1256,7 @@ type LayerInitParameters struct {
 	// The average bitrate in bits per second at which to encode the input video when generating this layer.
 	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
-	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. Defaults to PT5S.
 	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
 
 	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
@@ -1294,7 +1304,7 @@ type LayerObservation struct {
 	// The average bitrate in bits per second at which to encode the input video when generating this layer.
 	Bitrate *float64 `json:"bitrate,omitempty" tf:"bitrate,omitempty"`
 
-	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. Defaults to PT5S.
 	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
 
 	// The value of CRF to be used when encoding this layer. This setting takes effect when rate_control_mode is set CRF. The range of CRF value is between 0 and 51, where lower values would result in better quality, at the expense of higher file sizes. Higher values mean more compression, but at some point quality degradation will be noticed. Default to 23.
@@ -1345,7 +1355,7 @@ type LayerParameters struct {
 	// +kubebuilder:validation:Optional
 	Bitrate *float64 `json:"bitrate" tf:"bitrate,omitempty"`
 
-	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. The default is 5 seconds (PT5S).
+	// Specifies the maximum amount of time that the encoder should buffer frames before encoding. The value should be in ISO 8601 format. The value should be in the range 0.1 to 100 seconds. Defaults to PT5S.
 	// +kubebuilder:validation:Optional
 	BufferWindow *string `json:"bufferWindow,omitempty" tf:"buffer_window,omitempty"`
 
@@ -1456,7 +1466,7 @@ type OutputInitParameters struct {
 	// A face_detector_preset block as defined above.
 	FaceDetectorPreset []FaceDetectorPresetInitParameters `json:"faceDetectorPreset,omitempty" tf:"face_detector_preset,omitempty"`
 
-	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. The default is StopProcessingJob.
+	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. Defaults to StopProcessingJob.
 	OnErrorAction *string `json:"onErrorAction,omitempty" tf:"on_error_action,omitempty"`
 
 	// Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing Transform Outputs. Possible values are High, Normal or Low. Defaults to Normal.
@@ -1480,7 +1490,7 @@ type OutputObservation struct {
 	// A face_detector_preset block as defined above.
 	FaceDetectorPreset []FaceDetectorPresetObservation `json:"faceDetectorPreset,omitempty" tf:"face_detector_preset,omitempty"`
 
-	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. The default is StopProcessingJob.
+	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. Defaults to StopProcessingJob.
 	OnErrorAction *string `json:"onErrorAction,omitempty" tf:"on_error_action,omitempty"`
 
 	// Sets the relative priority of the TransformOutputs within a Transform. This sets the priority that the service uses for processing Transform Outputs. Possible values are High, Normal or Low. Defaults to Normal.
@@ -1508,7 +1518,7 @@ type OutputParameters struct {
 	// +kubebuilder:validation:Optional
 	FaceDetectorPreset []FaceDetectorPresetParameters `json:"faceDetectorPreset,omitempty" tf:"face_detector_preset,omitempty"`
 
-	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. The default is StopProcessingJob.
+	// A Transform can define more than one outputs. This property defines what the service should do when one output fails - either continue to produce other outputs, or, stop the other outputs. The overall Job state will not reflect failures of outputs that are specified with ContinueJob. Possible values are StopProcessingJob or ContinueJob. Defaults to StopProcessingJob.
 	// +kubebuilder:validation:Optional
 	OnErrorAction *string `json:"onErrorAction,omitempty" tf:"on_error_action,omitempty"`
 
@@ -1552,7 +1562,7 @@ type OverlayParameters struct {
 
 type PngImageInitParameters struct {
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -1618,7 +1628,7 @@ type PngImageLayerParameters struct {
 
 type PngImageObservation struct {
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
 	// Specifies the label for the codec. The label can be used to control muxing behavior.
@@ -1645,7 +1655,7 @@ type PngImageObservation struct {
 
 type PngImageParameters struct {
 
-	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. The default is 2 seconds (PT2S). Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting.
+	// The distance between two key frames. The value should be non-zero in the range 0.5 to 20 seconds, specified in ISO 8601 format. Note that this setting is ignored if sync_mode is set to Passthrough, where the KeyFrameInterval value will follow the input source setting. Defaults to PT2S.
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 

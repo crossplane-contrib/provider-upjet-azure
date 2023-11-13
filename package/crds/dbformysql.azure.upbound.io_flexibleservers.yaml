@@ -449,6 +449,10 @@ spec:
                           description: Should Storage Auto Grow be enabled? Defaults
                             to true.
                           type: boolean
+                        ioScalingEnabled:
+                          description: Should IOPS be scaled automatically? If true,
+                            iops can not be set. Defaults to false.
+                          type: boolean
                         iops:
                           description: The storage IOPS for the MySQL Flexible Server.
                             Possible values are between 360 and 20000.
@@ -612,6 +616,10 @@ spec:
                         autoGrowEnabled:
                           description: Should Storage Auto Grow be enabled? Defaults
                             to true.
+                          type: boolean
+                        ioScalingEnabled:
+                          description: Should IOPS be scaled automatically? If true,
+                            iops can not be set. Defaults to false.
                           type: boolean
                         iops:
                           description: The storage IOPS for the MySQL Flexible Server.
@@ -963,6 +971,10 @@ spec:
                         autoGrowEnabled:
                           description: Should Storage Auto Grow be enabled? Defaults
                             to true.
+                          type: boolean
+                        ioScalingEnabled:
+                          description: Should IOPS be scaled automatically? If true,
+                            iops can not be set. Defaults to false.
                           type: boolean
                         iops:
                           description: The storage IOPS for the MySQL Flexible Server.

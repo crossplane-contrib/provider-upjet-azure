@@ -160,6 +160,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    skuName: Premium_AzureFrontDoor
 
 ---
 

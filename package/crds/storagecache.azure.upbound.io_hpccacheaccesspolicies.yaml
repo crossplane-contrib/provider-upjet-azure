@@ -68,7 +68,8 @@ spec:
               forProvider:
                 properties:
                   accessRule:
-                    description: Up to three access_rule blocks as defined below.
+                    description: One or more access_rule blocks (up to three) as defined
+                      below.
                     items:
                       properties:
                         access:
@@ -202,7 +203,8 @@ spec:
                   like an autoscaler.
                 properties:
                   accessRule:
-                    description: Up to three access_rule blocks as defined below.
+                    description: One or more access_rule blocks (up to three) as defined
+                      below.
                     items:
                       properties:
                         access:
@@ -415,7 +417,8 @@ spec:
               atProvider:
                 properties:
                   accessRule:
-                    description: Up to three access_rule blocks as defined below.
+                    description: One or more access_rule blocks (up to three) as defined
+                      below.
                     items:
                       properties:
                         access:

@@ -122,6 +122,11 @@ func (in *ResourceGroupInitParameters) DeepCopyInto(out *ResourceGroupInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagedBy != nil {
+		in, out := &in.ManagedBy, &out.ManagedBy
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -195,6 +200,11 @@ func (in *ResourceGroupObservation) DeepCopyInto(out *ResourceGroupObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagedBy != nil {
+		in, out := &in.ManagedBy, &out.ManagedBy
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -228,6 +238,11 @@ func (in *ResourceGroupParameters) DeepCopyInto(out *ResourceGroupParameters) {
 	*out = *in
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedBy != nil {
+		in, out := &in.ManagedBy, &out.ManagedBy
 		*out = new(string)
 		**out = **in
 	}

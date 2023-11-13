@@ -68,7 +68,7 @@ spec:
               forProvider:
                 properties:
                   dataDisk:
-                    description: One or more data_disk elements as defined below.
+                    description: One or more data_disk blocks as defined below.
                     items:
                       properties:
                         blobUri:
@@ -77,7 +77,7 @@ spec:
                           type: string
                         caching:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
-                            or None. The default is None.
+                            or None. Defaults to None.
                           type: string
                         lun:
                           description: Specifies the logical unit number of the data
@@ -96,7 +96,7 @@ spec:
                     type: array
                   hyperVGeneration:
                     description: The HyperVGenerationType of the VirtualMachine created
-                      from the image as V1, V2. The default is V1. Changing this forces
+                      from the image as V1, V2. Defaults to V1. Changing this forces
                       a new resource to be created.
                     type: string
                   location:
@@ -105,7 +105,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   osDisk:
-                    description: One or more os_disk elements as defined below. Changing
+                    description: One or more os_disk blocks as defined below. Changing
                       this forces a new resource to be created.
                     items:
                       properties:
@@ -117,6 +117,11 @@ spec:
                         caching:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
                             or None. The default is None.
+                          type: string
+                        diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this image. Changing this forces a
+                            new resource to be created.
                           type: string
                         managedDiskId:
                           description: Specifies the ID of the managed disk resource
@@ -134,7 +139,7 @@ spec:
                           type: string
                         sizeGb:
                           description: Specifies the size of the image to be created.
-                            The target size can't be smaller than the source size.
+                            Changing this forces a new resource to be created.
                           type: number
                       type: object
                     type: array
@@ -244,7 +249,7 @@ spec:
                   like an autoscaler.
                 properties:
                   dataDisk:
-                    description: One or more data_disk elements as defined below.
+                    description: One or more data_disk blocks as defined below.
                     items:
                       properties:
                         blobUri:
@@ -253,7 +258,7 @@ spec:
                           type: string
                         caching:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
-                            or None. The default is None.
+                            or None. Defaults to None.
                           type: string
                         lun:
                           description: Specifies the logical unit number of the data
@@ -272,7 +277,7 @@ spec:
                     type: array
                   hyperVGeneration:
                     description: The HyperVGenerationType of the VirtualMachine created
-                      from the image as V1, V2. The default is V1. Changing this forces
+                      from the image as V1, V2. Defaults to V1. Changing this forces
                       a new resource to be created.
                     type: string
                   location:
@@ -281,7 +286,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   osDisk:
-                    description: One or more os_disk elements as defined below. Changing
+                    description: One or more os_disk blocks as defined below. Changing
                       this forces a new resource to be created.
                     items:
                       properties:
@@ -293,6 +298,11 @@ spec:
                         caching:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
                             or None. The default is None.
+                          type: string
+                        diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this image. Changing this forces a
+                            new resource to be created.
                           type: string
                         managedDiskId:
                           description: Specifies the ID of the managed disk resource
@@ -310,7 +320,7 @@ spec:
                           type: string
                         sizeGb:
                           description: Specifies the size of the image to be created.
-                            The target size can't be smaller than the source size.
+                            Changing this forces a new resource to be created.
                           type: number
                       type: object
                     type: array
@@ -498,7 +508,7 @@ spec:
               atProvider:
                 properties:
                   dataDisk:
-                    description: One or more data_disk elements as defined below.
+                    description: One or more data_disk blocks as defined below.
                     items:
                       properties:
                         blobUri:
@@ -507,7 +517,7 @@ spec:
                           type: string
                         caching:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
-                            or None. The default is None.
+                            or None. Defaults to None.
                           type: string
                         lun:
                           description: Specifies the logical unit number of the data
@@ -526,7 +536,7 @@ spec:
                     type: array
                   hyperVGeneration:
                     description: The HyperVGenerationType of the VirtualMachine created
-                      from the image as V1, V2. The default is V1. Changing this forces
+                      from the image as V1, V2. Defaults to V1. Changing this forces
                       a new resource to be created.
                     type: string
                   id:
@@ -538,7 +548,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   osDisk:
-                    description: One or more os_disk elements as defined below. Changing
+                    description: One or more os_disk blocks as defined below. Changing
                       this forces a new resource to be created.
                     items:
                       properties:
@@ -550,6 +560,11 @@ spec:
                         caching:
                           description: Specifies the caching mode as ReadWrite, ReadOnly,
                             or None. The default is None.
+                          type: string
+                        diskEncryptionSetId:
+                          description: The ID of the Disk Encryption Set which should
+                            be used to encrypt this image. Changing this forces a
+                            new resource to be created.
                           type: string
                         managedDiskId:
                           description: Specifies the ID of the managed disk resource
@@ -567,7 +582,7 @@ spec:
                           type: string
                         sizeGb:
                           description: Specifies the size of the image to be created.
-                            The target size can't be smaller than the source size.
+                            Changing this forces a new resource to be created.
                           type: number
                       type: object
                     type: array

@@ -69,7 +69,8 @@ spec:
                 properties:
                   autoKeyRotationEnabled:
                     description: Boolean flag to specify whether Azure Disk Encryption
-                      Set automatically rotates encryption Key to latest version.
+                      Set automatically rotates the encryption Key to latest version
+                      or not. Possible values are true or false. Defaults to false.
                     type: boolean
                   encryptionType:
                     description: The type of key used to encrypt the data of the disk.
@@ -281,7 +282,8 @@ spec:
                 properties:
                   autoKeyRotationEnabled:
                     description: Boolean flag to specify whether Azure Disk Encryption
-                      Set automatically rotates encryption Key to latest version.
+                      Set automatically rotates the encryption Key to latest version
+                      or not. Possible values are true or false. Defaults to false.
                     type: boolean
                   encryptionType:
                     description: The type of key used to encrypt the data of the disk.
@@ -498,7 +500,8 @@ spec:
                 properties:
                   autoKeyRotationEnabled:
                     description: Boolean flag to specify whether Azure Disk Encryption
-                      Set automatically rotates encryption Key to latest version.
+                      Set automatically rotates the encryption Key to latest version
+                      or not. Possible values are true or false. Defaults to false.
                     type: boolean
                   encryptionType:
                     description: The type of key used to encrypt the data of the disk.
@@ -541,6 +544,10 @@ spec:
                   keyVaultKeyId:
                     description: Specifies the URL to a Key Vault Key (either from
                       a Key Vault Key, or the Key URL for the Key Vault Secret).
+                    type: string
+                  keyVaultKeyUrl:
+                    description: The URL for the Key Vault Key or Key Vault Secret
+                      that is currently being used by the service.
                     type: string
                   location:
                     description: Specifies the Azure Region where the Disk Encryption

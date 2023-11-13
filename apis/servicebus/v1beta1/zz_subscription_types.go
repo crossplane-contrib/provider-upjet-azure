@@ -57,7 +57,7 @@ type SubscriptionInitParameters struct {
 	// A client_scoped_subscription block as defined below.
 	ClientScopedSubscription []ClientScopedSubscriptionInitParameters `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
-	// whether the subscription is scoped to a client id. Defaults to False.
+	// whether the subscription is scoped to a client id. Defaults to false.
 	ClientScopedSubscriptionEnabled *bool `json:"clientScopedSubscriptionEnabled,omitempty" tf:"client_scoped_subscription_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Subscription has dead letter support on filter evaluation exceptions. Defaults to true.
@@ -99,7 +99,7 @@ type SubscriptionObservation struct {
 	// A client_scoped_subscription block as defined below.
 	ClientScopedSubscription []ClientScopedSubscriptionObservation `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
-	// whether the subscription is scoped to a client id. Defaults to False.
+	// whether the subscription is scoped to a client id. Defaults to false.
 	ClientScopedSubscriptionEnabled *bool `json:"clientScopedSubscriptionEnabled,omitempty" tf:"client_scoped_subscription_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Subscription has dead letter support on filter evaluation exceptions. Defaults to true.
@@ -149,7 +149,7 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientScopedSubscription []ClientScopedSubscriptionParameters `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
-	// whether the subscription is scoped to a client id. Defaults to False.
+	// whether the subscription is scoped to a client id. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ClientScopedSubscriptionEnabled *bool `json:"clientScopedSubscriptionEnabled,omitempty" tf:"client_scoped_subscription_enabled,omitempty"`
 

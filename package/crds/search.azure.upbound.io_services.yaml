@@ -104,7 +104,7 @@ spec:
                     type: array
                   localAuthenticationEnabled:
                     description: Specifies whether the Search Service allows authenticating
-                      using API Keys? Defaults to false.
+                      using API Keys? Defaults to true.
                     type: boolean
                   location:
                     description: The Azure Region where the Search Service should
@@ -205,6 +205,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  semanticSearchSku:
+                    description: Specifies the Semantic Search SKU which should be
+                      used for this Search Service. Possible values include free and
+                      standard.
+                    type: string
                   sku:
                     description: The SKU which should be used for this Search Service.
                       Possible values include basic, free, standard, standard2, standard3,
@@ -267,7 +272,7 @@ spec:
                     type: array
                   localAuthenticationEnabled:
                     description: Specifies whether the Search Service allows authenticating
-                      using API Keys? Defaults to false.
+                      using API Keys? Defaults to true.
                     type: boolean
                   location:
                     description: The Azure Region where the Search Service should
@@ -288,6 +293,11 @@ spec:
                       created for this Search Service. This field cannot be set when
                       using a free sku (see the Microsoft documentation).
                     type: number
+                  semanticSearchSku:
+                    description: Specifies the Semantic Search SKU which should be
+                      used for this Search Service. Possible values include free and
+                      standard.
+                    type: string
                   sku:
                     description: The SKU which should be used for this Search Service.
                       Possible values include basic, free, standard, standard2, standard3,
@@ -523,7 +533,7 @@ spec:
                     type: array
                   localAuthenticationEnabled:
                     description: Specifies whether the Search Service allows authenticating
-                      using API Keys? Defaults to false.
+                      using API Keys? Defaults to true.
                     type: boolean
                   location:
                     description: The Azure Region where the Search Service should
@@ -560,6 +570,11 @@ spec:
                     description: The name of the Resource Group where the Search Service
                       should exist. Changing this forces a new Search Service to be
                       created.
+                    type: string
+                  semanticSearchSku:
+                    description: Specifies the Semantic Search SKU which should be
+                      used for this Search Service. Possible values include free and
+                      standard.
                     type: string
                   sku:
                     description: The SKU which should be used for this Search Service.

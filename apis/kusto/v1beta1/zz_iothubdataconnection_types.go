@@ -22,7 +22,7 @@ type IOTHubDataConnectionInitParameters struct {
 	// Specifies the data format of the IoTHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSV, TSVE, TXT and W3CLOGFILE. Changing this forces a new resource to be created.
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
-	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created. Defaults to Single.
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 
 	// Specifies the System Properties that each IoT Hub message should contain. Changing this forces a new resource to be created. Possible values are message-id, sequence-number, to, absolute-expiry-time, iothub-enqueuedtime, correlation-id, user-id, iothub-ack, iothub-connection-device-id, iothub-connection-auth-generation-id and iothub-connection-auth-method.
@@ -55,7 +55,7 @@ type IOTHubDataConnectionObservation struct {
 	// Specifies the name of the Kusto Database this data connection will be added to. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created. Defaults to Single.
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 
 	// Specifies the System Properties that each IoT Hub message should contain. Changing this forces a new resource to be created. Possible values are message-id, sequence-number, to, absolute-expiry-time, iothub-enqueuedtime, correlation-id, user-id, iothub-ack, iothub-connection-device-id, iothub-connection-auth-generation-id and iothub-connection-auth-method.
@@ -131,7 +131,7 @@ type IOTHubDataConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
+	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created. Defaults to Single.
 	// +kubebuilder:validation:Optional
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
 

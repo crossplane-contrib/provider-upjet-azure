@@ -295,12 +295,12 @@ spec:
                             family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based
                             BasicPool, StandardPool, or PremiumPool pattern. Possible
                             values are BasicPool, StandardPool, PremiumPool, GP_Gen4,
-                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
                           type: string
                         tier:
                           description: 'The tier of the particular SKU. Possible values
                             are GeneralPurpose, BusinessCritical, Basic, Standard,
-                            or Premium. For more information see the documentation
+                            Premium, or HyperScale. For more information see the documentation
                             for your Elasticpool configuration: vCore-based or DTU-based.'
                           type: string
                       type: object
@@ -398,12 +398,12 @@ spec:
                             family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based
                             BasicPool, StandardPool, or PremiumPool pattern. Possible
                             values are BasicPool, StandardPool, PremiumPool, GP_Gen4,
-                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
                           type: string
                         tier:
                           description: 'The tier of the particular SKU. Possible values
                             are GeneralPurpose, BusinessCritical, Basic, Standard,
-                            or Premium. For more information see the documentation
+                            Premium, or HyperScale. For more information see the documentation
                             for your Elasticpool configuration: vCore-based or DTU-based.'
                           type: string
                       type: object
@@ -680,12 +680,12 @@ spec:
                             family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based
                             BasicPool, StandardPool, or PremiumPool pattern. Possible
                             values are BasicPool, StandardPool, PremiumPool, GP_Gen4,
-                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
                           type: string
                         tier:
                           description: 'The tier of the particular SKU. Possible values
                             are GeneralPurpose, BusinessCritical, Basic, Standard,
-                            or Premium. For more information see the documentation
+                            Premium, or HyperScale. For more information see the documentation
                             for your Elasticpool configuration: vCore-based or DTU-based.'
                           type: string
                       type: object

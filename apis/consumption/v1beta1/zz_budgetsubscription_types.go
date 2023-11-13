@@ -22,7 +22,7 @@ type BudgetSubscriptionFilterDimensionInitParameters struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -34,7 +34,7 @@ type BudgetSubscriptionFilterDimensionObservation struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -47,7 +47,7 @@ type BudgetSubscriptionFilterDimensionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
@@ -73,7 +73,7 @@ type BudgetSubscriptionFilterNotDimensionInitParameters struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -85,7 +85,7 @@ type BudgetSubscriptionFilterNotDimensionObservation struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -98,7 +98,7 @@ type BudgetSubscriptionFilterNotDimensionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
@@ -168,7 +168,7 @@ type BudgetSubscriptionFilterTagInitParameters struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -180,7 +180,7 @@ type BudgetSubscriptionFilterTagObservation struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -193,7 +193,7 @@ type BudgetSubscriptionFilterTagParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
@@ -404,7 +404,7 @@ type FilterNotTagInitParameters struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -416,7 +416,7 @@ type FilterNotTagObservation struct {
 	// The name of the tag to use for the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
@@ -429,7 +429,7 @@ type FilterNotTagParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The operator to use for comparison. The allowed values are In.
+	// The operator to use for comparison. The allowed values are In. Defaults to In.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 

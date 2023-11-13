@@ -186,6 +186,9 @@ type Link1InitParameters struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 type Link1Observation struct {
@@ -210,6 +213,9 @@ type Link1Observation struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
 	PatchPanelID *string `json:"patchPanelId,omitempty" tf:"patch_panel_id,omitempty"`
@@ -238,6 +244,10 @@ type Link1Parameters struct {
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 type Link2InitParameters struct {
@@ -253,6 +263,9 @@ type Link2InitParameters struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 type Link2Observation struct {
@@ -277,6 +290,9 @@ type Link2Observation struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
 	PatchPanelID *string `json:"patchPanelId,omitempty" tf:"patch_panel_id,omitempty"`
@@ -305,6 +321,10 @@ type Link2Parameters struct {
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 // ExpressRoutePortSpec defines the desired state of ExpressRoutePort

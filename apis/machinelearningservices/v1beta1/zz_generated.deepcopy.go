@@ -145,6 +145,11 @@ func (in *ComputeClusterInitParameters) DeepCopyInto(out *ComputeClusterInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.NodePublicIPEnabled != nil {
+		in, out := &in.NodePublicIPEnabled, &out.NodePublicIPEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SSH != nil {
 		in, out := &in.SSH, &out.SSH
 		*out = make([]SSHInitParameters, len(*in))
@@ -274,6 +279,11 @@ func (in *ComputeClusterObservation) DeepCopyInto(out *ComputeClusterObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.NodePublicIPEnabled != nil {
+		in, out := &in.NodePublicIPEnabled, &out.NodePublicIPEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SSH != nil {
 		in, out := &in.SSH, &out.SSH
 		*out = make([]SSHObservation, len(*in))
@@ -379,6 +389,11 @@ func (in *ComputeClusterParameters) DeepCopyInto(out *ComputeClusterParameters) 
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.NodePublicIPEnabled != nil {
+		in, out := &in.NodePublicIPEnabled, &out.NodePublicIPEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.SSH != nil {
@@ -655,6 +670,11 @@ func (in *ComputeInstanceInitParameters) DeepCopyInto(out *ComputeInstanceInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.NodePublicIPEnabled != nil {
+		in, out := &in.NodePublicIPEnabled, &out.NodePublicIPEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SSH != nil {
 		in, out := &in.SSH, &out.SSH
 		*out = make([]ComputeInstanceSSHInitParameters, len(*in))
@@ -774,6 +794,11 @@ func (in *ComputeInstanceObservation) DeepCopyInto(out *ComputeInstanceObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.NodePublicIPEnabled != nil {
+		in, out := &in.NodePublicIPEnabled, &out.NodePublicIPEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SSH != nil {
 		in, out := &in.SSH, &out.SSH
 		*out = make([]ComputeInstanceSSHObservation, len(*in))
@@ -870,6 +895,11 @@ func (in *ComputeInstanceParameters) DeepCopyInto(out *ComputeInstanceParameters
 		in, out := &in.MachineLearningWorkspaceIDSelector, &out.MachineLearningWorkspaceIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.NodePublicIPEnabled != nil {
+		in, out := &in.NodePublicIPEnabled, &out.NodePublicIPEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.SSH != nil {
 		in, out := &in.SSH, &out.SSH

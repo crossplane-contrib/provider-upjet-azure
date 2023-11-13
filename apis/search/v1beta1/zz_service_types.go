@@ -74,7 +74,7 @@ type ServiceInitParameters struct {
 	// An identity block as defined below.
 	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies whether the Search Service allows authenticating using API Keys? Defaults to false.
+	// Specifies whether the Search Service allows authenticating using API Keys? Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
@@ -88,6 +88,9 @@ type ServiceInitParameters struct {
 
 	// Specifies the number of Replica's which should be created for this Search Service. This field cannot be set when using a free sku (see the Microsoft documentation).
 	ReplicaCount *float64 `json:"replicaCount,omitempty" tf:"replica_count,omitempty"`
+
+	// Specifies the Semantic Search SKU which should be used for this Search Service. Possible values include free and standard.
+	SemanticSearchSku *string `json:"semanticSearchSku,omitempty" tf:"semantic_search_sku,omitempty"`
 
 	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -116,7 +119,7 @@ type ServiceObservation struct {
 	// An identity block as defined below.
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies whether the Search Service allows authenticating using API Keys? Defaults to false.
+	// Specifies whether the Search Service allows authenticating using API Keys? Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
 	// The Azure Region where the Search Service should exist. Changing this forces a new Search Service to be created.
@@ -136,6 +139,9 @@ type ServiceObservation struct {
 
 	// The name of the Resource Group where the Search Service should exist. Changing this forces a new Search Service to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Specifies the Semantic Search SKU which should be used for this Search Service. Possible values include free and standard.
+	SemanticSearchSku *string `json:"semanticSearchSku,omitempty" tf:"semantic_search_sku,omitempty"`
 
 	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -166,7 +172,7 @@ type ServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies whether the Search Service allows authenticating using API Keys? Defaults to false.
+	// Specifies whether the Search Service allows authenticating using API Keys? Defaults to true.
 	// +kubebuilder:validation:Optional
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
 
@@ -198,6 +204,10 @@ type ServiceParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// Specifies the Semantic Search SKU which should be used for this Search Service. Possible values include free and standard.
+	// +kubebuilder:validation:Optional
+	SemanticSearchSku *string `json:"semanticSearchSku,omitempty" tf:"semantic_search_sku,omitempty"`
 
 	// The SKU which should be used for this Search Service. Possible values include basic, free, standard, standard2, standard3, storage_optimized_l1 and storage_optimized_l2. Changing this forces a new Search Service to be created.
 	// +kubebuilder:validation:Optional

@@ -83,7 +83,7 @@ type LinkedServiceAzureDatabricksInitParameters struct {
 	// The cluster_id of an existing cluster within the linked ADB instance.
 	ExistingClusterID *string `json:"existingClusterId,omitempty" tf:"existing_cluster_id,omitempty"`
 
-	// Leverages an instance pool within the linked ADB instance as defined by instance_pool block below.
+	// Leverages an instance pool within the linked ADB instance as one instance_pool block defined below.
 	InstancePool []InstancePoolInitParameters `json:"instancePool,omitempty" tf:"instance_pool,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
@@ -151,7 +151,7 @@ type LinkedServiceAzureDatabricksObservation struct {
 	// The ID of the Data Factory Linked Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Leverages an instance pool within the linked ADB instance as defined by instance_pool block below.
+	// Leverages an instance pool within the linked ADB instance as one instance_pool block defined below.
 	InstancePool []InstancePoolObservation `json:"instancePool,omitempty" tf:"instance_pool,omitempty"`
 
 	// The integration runtime reference to associate with the Data Factory Linked Service.
@@ -210,7 +210,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 	// +kubebuilder:validation:Optional
 	ExistingClusterID *string `json:"existingClusterId,omitempty" tf:"existing_cluster_id,omitempty"`
 
-	// Leverages an instance pool within the linked ADB instance as defined by instance_pool block below.
+	// Leverages an instance pool within the linked ADB instance as one instance_pool block defined below.
 	// +kubebuilder:validation:Optional
 	InstancePool []InstancePoolParameters `json:"instancePool,omitempty" tf:"instance_pool,omitempty"`
 

@@ -110,7 +110,7 @@ spec:
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
-                      container registry. Defaults to true.
+                      automation account. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which the Automation
@@ -257,7 +257,7 @@ spec:
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
-                      container registry. Defaults to true.
+                      automation account. Defaults to true.
                     type: boolean
                   skuName:
                     description: The SKU of the account. Possible values are Basic
@@ -517,7 +517,7 @@ spec:
                     type: array
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for the
-                      container registry. Defaults to true.
+                      automation account. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which the Automation

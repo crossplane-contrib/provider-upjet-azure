@@ -22,7 +22,7 @@ type LoadBalancerProbeInitParameters struct {
 	// The interval, in seconds between probes to the backend endpoint for health status. The default value is 15, the minimum value is 5.
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// The number of failed probe attempts after which the backend endpoint is removed from rotation. The default value is 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
+	// The number of failed probe attempts after which the backend endpoint is removed from rotation. Default to 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
 	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
 
 	// Port on which the Probe queries the backend endpoint. Possible values range from 1 to 65535, inclusive.
@@ -51,7 +51,7 @@ type LoadBalancerProbeObservation struct {
 	// The ID of the LoadBalancer in which to create the NAT Rule. Changing this forces a new resource to be created.
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 
-	// The number of failed probe attempts after which the backend endpoint is removed from rotation. The default value is 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
+	// The number of failed probe attempts after which the backend endpoint is removed from rotation. Default to 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
 	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
 
 	// Port on which the Probe queries the backend endpoint. Possible values range from 1 to 65535, inclusive.
@@ -87,7 +87,7 @@ type LoadBalancerProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
-	// The number of failed probe attempts after which the backend endpoint is removed from rotation. The default value is 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
+	// The number of failed probe attempts after which the backend endpoint is removed from rotation. Default to 2. NumberOfProbes multiplied by intervalInSeconds value must be greater or equal to 10.Endpoints are returned to rotation when at least one probe is successful.
 	// +kubebuilder:validation:Optional
 	NumberOfProbes *float64 `json:"numberOfProbes,omitempty" tf:"number_of_probes,omitempty"`
 

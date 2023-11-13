@@ -120,6 +120,10 @@ spec:
                         branch:
                           description: Specifies the Git repository branch to be used.
                           type: string
+                        caCertificateId:
+                          description: Specifies the ID of the CA Spring Cloud Certificate
+                            for https URL of Git repository.
+                          type: string
                         commit:
                           description: Specifies the Git repository commit to be used.
                           type: string
@@ -314,6 +318,10 @@ spec:
                           type: array
                         branch:
                           description: Specifies the Git repository branch to be used.
+                          type: string
+                        caCertificateId:
+                          description: Specifies the ID of the CA Spring Cloud Certificate
+                            for https URL of Git repository.
                           type: string
                         commit:
                           description: Specifies the Git repository commit to be used.
@@ -550,6 +558,10 @@ spec:
                           type: array
                         branch:
                           description: Specifies the Git repository branch to be used.
+                          type: string
+                        caCertificateId:
+                          description: Specifies the ID of the CA Spring Cloud Certificate
+                            for https URL of Git repository.
                           type: string
                         commit:
                           description: Specifies the Git repository commit to be used.

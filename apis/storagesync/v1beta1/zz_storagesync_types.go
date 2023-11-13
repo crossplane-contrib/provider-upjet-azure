@@ -19,7 +19,7 @@ import (
 
 type StorageSyncInitParameters struct {
 
-	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly.
+	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly. Defaults to AllowAllTraffic.
 	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
 
 	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
@@ -34,7 +34,7 @@ type StorageSyncObservation struct {
 	// The ID of the Storage Sync.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly.
+	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly. Defaults to AllowAllTraffic.
 	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
 
 	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
@@ -49,7 +49,7 @@ type StorageSyncObservation struct {
 
 type StorageSyncParameters struct {
 
-	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly.
+	// Incoming traffic policy. Possible values are AllowAllTraffic and AllowVirtualNetworksOnly. Defaults to AllowAllTraffic.
 	// +kubebuilder:validation:Optional
 	IncomingTrafficPolicy *string `json:"incomingTrafficPolicy,omitempty" tf:"incoming_traffic_policy,omitempty"`
 

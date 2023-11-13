@@ -19,19 +19,19 @@ import (
 
 type ActionInitParameters struct {
 
-	// The Type of action to be performed when the lifetime trigger is triggerec. Possible values include AutoRenew and EmailContacts. Changing this forces a new resource to be created.
+	// The Type of action to be performed when the lifetime trigger is triggerec. Possible values include AutoRenew and EmailContacts.
 	ActionType *string `json:"actionType,omitempty" tf:"action_type,omitempty"`
 }
 
 type ActionObservation struct {
 
-	// The Type of action to be performed when the lifetime trigger is triggerec. Possible values include AutoRenew and EmailContacts. Changing this forces a new resource to be created.
+	// The Type of action to be performed when the lifetime trigger is triggerec. Possible values include AutoRenew and EmailContacts.
 	ActionType *string `json:"actionType,omitempty" tf:"action_type,omitempty"`
 }
 
 type ActionParameters struct {
 
-	// The Type of action to be performed when the lifetime trigger is triggerec. Possible values include AutoRenew and EmailContacts. Changing this forces a new resource to be created.
+	// The Type of action to be performed when the lifetime trigger is triggerec. Possible values include AutoRenew and EmailContacts.
 	// +kubebuilder:validation:Optional
 	ActionType *string `json:"actionType" tf:"action_type,omitempty"`
 }
@@ -82,10 +82,10 @@ type CertificateCertificateParameters struct {
 
 type CertificateInitParameters struct {
 
-	// A certificate block as defined below, used to Import an existing certificate.
+	// A certificate block as defined below, used to Import an existing certificate. Changing this will create a new version of the Key Vault Certificate.
 	Certificate []CertificateCertificateInitParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// A certificate_policy block as defined below. Changing this forces a new resource to be created.
+	// A certificate_policy block as defined below. Changing this will create a new version of the Key Vault Certificate.
 	CertificatePolicy []CertificatePolicyInitParameters `json:"certificatePolicy,omitempty" tf:"certificate_policy,omitempty"`
 
 	// Specifies the name of the Key Vault Certificate. Changing this forces a new resource to be created.
@@ -97,7 +97,7 @@ type CertificateInitParameters struct {
 
 type CertificateObservation struct {
 
-	// A certificate block as defined below, used to Import an existing certificate.
+	// A certificate block as defined below, used to Import an existing certificate. Changing this will create a new version of the Key Vault Certificate.
 	Certificate []CertificateCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// A certificate_attribute block as defined below.
@@ -109,7 +109,7 @@ type CertificateObservation struct {
 	// The Base64 encoded Key Vault Certificate data.
 	CertificateDataBase64 *string `json:"certificateDataBase64,omitempty" tf:"certificate_data_base64,omitempty"`
 
-	// A certificate_policy block as defined below. Changing this forces a new resource to be created.
+	// A certificate_policy block as defined below. Changing this will create a new version of the Key Vault Certificate.
 	CertificatePolicy []CertificatePolicyObservation `json:"certificatePolicy,omitempty" tf:"certificate_policy,omitempty"`
 
 	// The Key Vault Certificate ID.
@@ -148,11 +148,11 @@ type CertificateObservation struct {
 
 type CertificateParameters struct {
 
-	// A certificate block as defined below, used to Import an existing certificate.
+	// A certificate block as defined below, used to Import an existing certificate. Changing this will create a new version of the Key Vault Certificate.
 	// +kubebuilder:validation:Optional
 	Certificate []CertificateCertificateParameters `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
-	// A certificate_policy block as defined below. Changing this forces a new resource to be created.
+	// A certificate_policy block as defined below. Changing this will create a new version of the Key Vault Certificate.
 	// +kubebuilder:validation:Optional
 	CertificatePolicy []CertificatePolicyParameters `json:"certificatePolicy,omitempty" tf:"certificate_policy,omitempty"`
 
@@ -240,78 +240,78 @@ type CertificatePolicyParameters struct {
 
 type IssuerParametersInitParameters struct {
 
-	// The name of the Certificate Issuer. Possible values include Self (for self-signed certificate), or Unknown (for a certificate issuing authority like Let's Encrypt and Azure direct supported ones). Changing this forces a new resource to be created.
+	// The name of the Certificate Issuer. Possible values include Self (for self-signed certificate), or Unknown (for a certificate issuing authority like Let's Encrypt and Azure direct supported ones).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type IssuerParametersObservation struct {
 
-	// The name of the Certificate Issuer. Possible values include Self (for self-signed certificate), or Unknown (for a certificate issuing authority like Let's Encrypt and Azure direct supported ones). Changing this forces a new resource to be created.
+	// The name of the Certificate Issuer. Possible values include Self (for self-signed certificate), or Unknown (for a certificate issuing authority like Let's Encrypt and Azure direct supported ones).
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type IssuerParametersParameters struct {
 
-	// The name of the Certificate Issuer. Possible values include Self (for self-signed certificate), or Unknown (for a certificate issuing authority like Let's Encrypt and Azure direct supported ones). Changing this forces a new resource to be created.
+	// The name of the Certificate Issuer. Possible values include Self (for self-signed certificate), or Unknown (for a certificate issuing authority like Let's Encrypt and Azure direct supported ones).
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type KeyPropertiesInitParameters struct {
 
-	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM. Changing this forces a new resource to be created.
+	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM.
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Is this certificate exportable? Changing this forces a new resource to be created.
+	// Is this certificate exportable?
 	Exportable *bool `json:"exportable,omitempty" tf:"exportable,omitempty"`
 
-	// The size of the key used in the certificate. Possible values include 2048, 3072, and 4096 for RSA keys, or 256, 384, and 521 for EC keys. This property is required when using RSA keys. Changing this forces a new resource to be created.
+	// The size of the key used in the certificate. Possible values include 2048, 3072, and 4096 for RSA keys, or 256, 384, and 521 for EC keys. This property is required when using RSA keys.
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
-	// Specifies the type of key. Possible values are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this forces a new resource to be created.
+	// Specifies the type of key. Possible values are EC, EC-HSM, RSA, RSA-HSM and oct.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
-	// Is the key reusable? Changing this forces a new resource to be created.
+	// Is the key reusable?
 	ReuseKey *bool `json:"reuseKey,omitempty" tf:"reuse_key,omitempty"`
 }
 
 type KeyPropertiesObservation struct {
 
-	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM. Changing this forces a new resource to be created.
+	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM.
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Is this certificate exportable? Changing this forces a new resource to be created.
+	// Is this certificate exportable?
 	Exportable *bool `json:"exportable,omitempty" tf:"exportable,omitempty"`
 
-	// The size of the key used in the certificate. Possible values include 2048, 3072, and 4096 for RSA keys, or 256, 384, and 521 for EC keys. This property is required when using RSA keys. Changing this forces a new resource to be created.
+	// The size of the key used in the certificate. Possible values include 2048, 3072, and 4096 for RSA keys, or 256, 384, and 521 for EC keys. This property is required when using RSA keys.
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
-	// Specifies the type of key. Possible values are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this forces a new resource to be created.
+	// Specifies the type of key. Possible values are EC, EC-HSM, RSA, RSA-HSM and oct.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
-	// Is the key reusable? Changing this forces a new resource to be created.
+	// Is the key reusable?
 	ReuseKey *bool `json:"reuseKey,omitempty" tf:"reuse_key,omitempty"`
 }
 
 type KeyPropertiesParameters struct {
 
-	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM. Changing this forces a new resource to be created.
+	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM.
 	// +kubebuilder:validation:Optional
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Is this certificate exportable? Changing this forces a new resource to be created.
+	// Is this certificate exportable?
 	// +kubebuilder:validation:Optional
 	Exportable *bool `json:"exportable" tf:"exportable,omitempty"`
 
-	// The size of the key used in the certificate. Possible values include 2048, 3072, and 4096 for RSA keys, or 256, 384, and 521 for EC keys. This property is required when using RSA keys. Changing this forces a new resource to be created.
+	// The size of the key used in the certificate. Possible values include 2048, 3072, and 4096 for RSA keys, or 256, 384, and 521 for EC keys. This property is required when using RSA keys.
 	// +kubebuilder:validation:Optional
 	KeySize *float64 `json:"keySize,omitempty" tf:"key_size,omitempty"`
 
-	// Specifies the type of key. Possible values are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this forces a new resource to be created.
+	// Specifies the type of key. Possible values are EC, EC-HSM, RSA, RSA-HSM and oct.
 	// +kubebuilder:validation:Optional
 	KeyType *string `json:"keyType" tf:"key_type,omitempty"`
 
-	// Is the key reusable? Changing this forces a new resource to be created.
+	// Is the key reusable?
 	// +kubebuilder:validation:Optional
 	ReuseKey *bool `json:"reuseKey" tf:"reuse_key,omitempty"`
 }
@@ -347,146 +347,146 @@ type LifetimeActionParameters struct {
 
 type SecretPropertiesInitParameters struct {
 
-	// The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM. Changing this forces a new resource to be created.
+	// The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 }
 
 type SecretPropertiesObservation struct {
 
-	// The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM. Changing this forces a new resource to be created.
+	// The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 }
 
 type SecretPropertiesParameters struct {
 
-	// The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM. Changing this forces a new resource to be created.
+	// The Content-Type of the Certificate, such as application/x-pkcs12 for a PFX or application/x-pem-file for a PEM.
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType" tf:"content_type,omitempty"`
 }
 
 type SubjectAlternativeNamesInitParameters struct {
 
-	// A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created.
+	// A list of alternative DNS names (FQDNs) identified by the Certificate.
 	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
 
-	// A list of email addresses identified by this Certificate. Changing this forces a new resource to be created.
+	// A list of email addresses identified by this Certificate.
 	Emails []*string `json:"emails,omitempty" tf:"emails,omitempty"`
 
-	// A list of User Principal Names identified by the Certificate. Changing this forces a new resource to be created.
+	// A list of User Principal Names identified by the Certificate.
 	Upns []*string `json:"upns,omitempty" tf:"upns,omitempty"`
 }
 
 type SubjectAlternativeNamesObservation struct {
 
-	// A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created.
+	// A list of alternative DNS names (FQDNs) identified by the Certificate.
 	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
 
-	// A list of email addresses identified by this Certificate. Changing this forces a new resource to be created.
+	// A list of email addresses identified by this Certificate.
 	Emails []*string `json:"emails,omitempty" tf:"emails,omitempty"`
 
-	// A list of User Principal Names identified by the Certificate. Changing this forces a new resource to be created.
+	// A list of User Principal Names identified by the Certificate.
 	Upns []*string `json:"upns,omitempty" tf:"upns,omitempty"`
 }
 
 type SubjectAlternativeNamesParameters struct {
 
-	// A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created.
+	// A list of alternative DNS names (FQDNs) identified by the Certificate.
 	// +kubebuilder:validation:Optional
 	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
 
-	// A list of email addresses identified by this Certificate. Changing this forces a new resource to be created.
+	// A list of email addresses identified by this Certificate.
 	// +kubebuilder:validation:Optional
 	Emails []*string `json:"emails,omitempty" tf:"emails,omitempty"`
 
-	// A list of User Principal Names identified by the Certificate. Changing this forces a new resource to be created.
+	// A list of User Principal Names identified by the Certificate.
 	// +kubebuilder:validation:Optional
 	Upns []*string `json:"upns,omitempty" tf:"upns,omitempty"`
 }
 
 type TriggerInitParameters struct {
 
-	// The number of days before the Certificate expires that the action associated with this Trigger should run. Changing this forces a new resource to be created. Conflicts with lifetime_percentage.
+	// The number of days before the Certificate expires that the action associated with this Trigger should run. Conflicts with lifetime_percentage.
 	DaysBeforeExpiry *float64 `json:"daysBeforeExpiry,omitempty" tf:"days_before_expiry,omitempty"`
 
-	// The percentage at which during the Certificates Lifetime the action associated with this Trigger should run. Changing this forces a new resource to be created. Conflicts with days_before_expiry.
+	// The percentage at which during the Certificates Lifetime the action associated with this Trigger should run. Conflicts with days_before_expiry.
 	LifetimePercentage *float64 `json:"lifetimePercentage,omitempty" tf:"lifetime_percentage,omitempty"`
 }
 
 type TriggerObservation struct {
 
-	// The number of days before the Certificate expires that the action associated with this Trigger should run. Changing this forces a new resource to be created. Conflicts with lifetime_percentage.
+	// The number of days before the Certificate expires that the action associated with this Trigger should run. Conflicts with lifetime_percentage.
 	DaysBeforeExpiry *float64 `json:"daysBeforeExpiry,omitempty" tf:"days_before_expiry,omitempty"`
 
-	// The percentage at which during the Certificates Lifetime the action associated with this Trigger should run. Changing this forces a new resource to be created. Conflicts with days_before_expiry.
+	// The percentage at which during the Certificates Lifetime the action associated with this Trigger should run. Conflicts with days_before_expiry.
 	LifetimePercentage *float64 `json:"lifetimePercentage,omitempty" tf:"lifetime_percentage,omitempty"`
 }
 
 type TriggerParameters struct {
 
-	// The number of days before the Certificate expires that the action associated with this Trigger should run. Changing this forces a new resource to be created. Conflicts with lifetime_percentage.
+	// The number of days before the Certificate expires that the action associated with this Trigger should run. Conflicts with lifetime_percentage.
 	// +kubebuilder:validation:Optional
 	DaysBeforeExpiry *float64 `json:"daysBeforeExpiry,omitempty" tf:"days_before_expiry,omitempty"`
 
-	// The percentage at which during the Certificates Lifetime the action associated with this Trigger should run. Changing this forces a new resource to be created. Conflicts with days_before_expiry.
+	// The percentage at which during the Certificates Lifetime the action associated with this Trigger should run. Conflicts with days_before_expiry.
 	// +kubebuilder:validation:Optional
 	LifetimePercentage *float64 `json:"lifetimePercentage,omitempty" tf:"lifetime_percentage,omitempty"`
 }
 
 type X509CertificatePropertiesInitParameters struct {
 
-	// A list of Extended/Enhanced Key Usages. Changing this forces a new resource to be created.
+	// A list of Extended/Enhanced Key Usages.
 	ExtendedKeyUsage []*string `json:"extendedKeyUsage,omitempty" tf:"extended_key_usage,omitempty"`
 
-	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created.
+	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive.
 	KeyUsage []*string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
-	// The Certificate's Subject. Changing this forces a new resource to be created.
+	// The Certificate's Subject.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
-	// A subject_alternative_names block as defined below. Changing this forces a new resource to be created.
+	// A subject_alternative_names block as defined below.
 	SubjectAlternativeNames []SubjectAlternativeNamesInitParameters `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
-	// The Certificates Validity Period in Months. Changing this forces a new resource to be created.
+	// The Certificates Validity Period in Months.
 	ValidityInMonths *float64 `json:"validityInMonths,omitempty" tf:"validity_in_months,omitempty"`
 }
 
 type X509CertificatePropertiesObservation struct {
 
-	// A list of Extended/Enhanced Key Usages. Changing this forces a new resource to be created.
+	// A list of Extended/Enhanced Key Usages.
 	ExtendedKeyUsage []*string `json:"extendedKeyUsage,omitempty" tf:"extended_key_usage,omitempty"`
 
-	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created.
+	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive.
 	KeyUsage []*string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
-	// The Certificate's Subject. Changing this forces a new resource to be created.
+	// The Certificate's Subject.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 
-	// A subject_alternative_names block as defined below. Changing this forces a new resource to be created.
+	// A subject_alternative_names block as defined below.
 	SubjectAlternativeNames []SubjectAlternativeNamesObservation `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
-	// The Certificates Validity Period in Months. Changing this forces a new resource to be created.
+	// The Certificates Validity Period in Months.
 	ValidityInMonths *float64 `json:"validityInMonths,omitempty" tf:"validity_in_months,omitempty"`
 }
 
 type X509CertificatePropertiesParameters struct {
 
-	// A list of Extended/Enhanced Key Usages. Changing this forces a new resource to be created.
+	// A list of Extended/Enhanced Key Usages.
 	// +kubebuilder:validation:Optional
 	ExtendedKeyUsage []*string `json:"extendedKeyUsage,omitempty" tf:"extended_key_usage,omitempty"`
 
-	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created.
+	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive.
 	// +kubebuilder:validation:Optional
 	KeyUsage []*string `json:"keyUsage" tf:"key_usage,omitempty"`
 
-	// The Certificate's Subject. Changing this forces a new resource to be created.
+	// The Certificate's Subject.
 	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject" tf:"subject,omitempty"`
 
-	// A subject_alternative_names block as defined below. Changing this forces a new resource to be created.
+	// A subject_alternative_names block as defined below.
 	// +kubebuilder:validation:Optional
 	SubjectAlternativeNames []SubjectAlternativeNamesParameters `json:"subjectAlternativeNames,omitempty" tf:"subject_alternative_names,omitempty"`
 
-	// The Certificates Validity Period in Months. Changing this forces a new resource to be created.
+	// The Certificates Validity Period in Months.
 	// +kubebuilder:validation:Optional
 	ValidityInMonths *float64 `json:"validityInMonths" tf:"validity_in_months,omitempty"`
 }

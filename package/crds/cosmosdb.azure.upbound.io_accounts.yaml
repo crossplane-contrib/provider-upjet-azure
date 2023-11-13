@@ -127,7 +127,8 @@ spec:
                             are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,
                             EnableAggregationPipeline, EnableCassandra, EnableGremlin,
                             EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites,
-                            EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable,
+                            EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
                             EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
                           type: string
                       type: object
@@ -144,8 +145,9 @@ spec:
                       type: object
                     type: array
                   consistencyPolicy:
-                    description: Specifies a consistency_policy resource, used to
-                      define the consistency policy for this CosmosDB account.
+                    description: Specifies one consistency_policy block as defined
+                      below, used to define the consistency policy for this CosmosDB
+                      account.
                     items:
                       properties:
                         consistencyLevel:
@@ -200,7 +202,8 @@ spec:
                           type: array
                         maxAgeInSeconds:
                           description: The number of seconds the client should cache
-                            a preflight response.
+                            a preflight response. Possible values are between 1 and
+                            2147483647.
                           type: number
                       type: object
                     type: array
@@ -212,6 +215,7 @@ spec:
                   defaultIdentityType:
                     description: The default identity for accessing Key Vault. Possible
                       values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+                      Defaults to FirstPartyIdentity.
                     type: string
                   enableAutomaticFailover:
                     description: Enable automatic failover for this Cosmos DB account.
@@ -516,9 +520,9 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   virtualNetworkRule:
-                    description: Specifies a virtual_network_rules resource, used
-                      to define which subnets are allowed to access this CosmosDB
-                      account.
+                    description: Specifies a virtual_network_rule block as defined
+                      below, used to define which subnets are allowed to access this
+                      CosmosDB account.
                     items:
                       properties:
                         id:
@@ -604,7 +608,8 @@ spec:
                             are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,
                             EnableAggregationPipeline, EnableCassandra, EnableGremlin,
                             EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites,
-                            EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable,
+                            EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
                             EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
                           type: string
                       type: object
@@ -621,8 +626,9 @@ spec:
                       type: object
                     type: array
                   consistencyPolicy:
-                    description: Specifies a consistency_policy resource, used to
-                      define the consistency policy for this CosmosDB account.
+                    description: Specifies one consistency_policy block as defined
+                      below, used to define the consistency policy for this CosmosDB
+                      account.
                     items:
                       properties:
                         consistencyLevel:
@@ -677,7 +683,8 @@ spec:
                           type: array
                         maxAgeInSeconds:
                           description: The number of seconds the client should cache
-                            a preflight response.
+                            a preflight response. Possible values are between 1 and
+                            2147483647.
                           type: number
                       type: object
                     type: array
@@ -689,6 +696,7 @@ spec:
                   defaultIdentityType:
                     description: The default identity for accessing Key Vault. Possible
                       values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+                      Defaults to FirstPartyIdentity.
                     type: string
                   enableAutomaticFailover:
                     description: Enable automatic failover for this Cosmos DB account.
@@ -831,9 +839,9 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   virtualNetworkRule:
-                    description: Specifies a virtual_network_rules resource, used
-                      to define which subnets are allowed to access this CosmosDB
-                      account.
+                    description: Specifies a virtual_network_rule block as defined
+                      below, used to define which subnets are allowed to access this
+                      CosmosDB account.
                     items:
                       properties:
                         id:
@@ -1089,7 +1097,8 @@ spec:
                             are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,
                             EnableAggregationPipeline, EnableCassandra, EnableGremlin,
                             EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites,
-                            EnableMongoRoleBasedAccessControl, EnableServerless, EnableTable,
+                            EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
                             EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
                           type: string
                       type: object
@@ -1106,8 +1115,9 @@ spec:
                       type: object
                     type: array
                   consistencyPolicy:
-                    description: Specifies a consistency_policy resource, used to
-                      define the consistency policy for this CosmosDB account.
+                    description: Specifies one consistency_policy block as defined
+                      below, used to define the consistency policy for this CosmosDB
+                      account.
                     items:
                       properties:
                         consistencyLevel:
@@ -1162,7 +1172,8 @@ spec:
                           type: array
                         maxAgeInSeconds:
                           description: The number of seconds the client should cache
-                            a preflight response.
+                            a preflight response. Possible values are between 1 and
+                            2147483647.
                           type: number
                       type: object
                     type: array
@@ -1174,6 +1185,7 @@ spec:
                   defaultIdentityType:
                     description: The default identity for accessing Key Vault. Possible
                       values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+                      Defaults to FirstPartyIdentity.
                     type: string
                   enableAutomaticFailover:
                     description: Enable automatic failover for this Cosmos DB account.
@@ -1350,9 +1362,9 @@ spec:
                     description: A mapping of tags to assign to the resource.
                     type: object
                   virtualNetworkRule:
-                    description: Specifies a virtual_network_rules resource, used
-                      to define which subnets are allowed to access this CosmosDB
-                      account.
+                    description: Specifies a virtual_network_rule block as defined
+                      below, used to define which subnets are allowed to access this
+                      CosmosDB account.
                     items:
                       properties:
                         id:

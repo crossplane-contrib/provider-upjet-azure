@@ -78,7 +78,7 @@ type CorsParameters struct {
 
 type HealthcareFHIRServiceAuthenticationInitParameters struct {
 
-	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+	// The intended audience to receive authentication tokens for the service.
 	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
@@ -91,7 +91,7 @@ type HealthcareFHIRServiceAuthenticationInitParameters struct {
 
 type HealthcareFHIRServiceAuthenticationObservation struct {
 
-	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+	// The intended audience to receive authentication tokens for the service.
 	Audience *string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// The Azure Active Directory (tenant) that serves as the authentication authority to access the service.
@@ -104,7 +104,7 @@ type HealthcareFHIRServiceAuthenticationObservation struct {
 
 type HealthcareFHIRServiceAuthenticationParameters struct {
 
-	// The intended audience to receive authentication tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+	// The intended audience to receive authentication tokens for the service.
 	// +kubebuilder:validation:Optional
 	Audience *string `json:"audience" tf:"audience,omitempty"`
 
@@ -123,7 +123,7 @@ type HealthcareFHIRServiceIdentityInitParameters struct {
 	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
+	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -138,7 +138,7 @@ type HealthcareFHIRServiceIdentityObservation struct {
 	// The ID of the Healthcare FHIR Service.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
+	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -148,7 +148,7 @@ type HealthcareFHIRServiceIdentityParameters struct {
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
+	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -179,7 +179,7 @@ type HealthcareFHIRServiceInitParameters struct {
 	// Specifies the Azure Region where the Healthcare FHIR Service should be created. Changing this forces a new Healthcare FHIR Service to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A list of objects describing OCI artifacts for export as defined below.
+	// A list of oci_artifact objects as defined below to describe OCI artifacts for export.
 	OciArtifact []OciArtifactInitParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare FHIR Service.
@@ -215,7 +215,7 @@ type HealthcareFHIRServiceObservation struct {
 	// Specifies the Azure Region where the Healthcare FHIR Service should be created. Changing this forces a new Healthcare FHIR Service to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A list of objects describing OCI artifacts for export as defined below.
+	// A list of oci_artifact objects as defined below to describe OCI artifacts for export.
 	OciArtifact []OciArtifactObservation `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
 	// Whether public networks access is enabled.
@@ -265,7 +265,7 @@ type HealthcareFHIRServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// A list of objects describing OCI artifacts for export as defined below.
+	// A list of oci_artifact objects as defined below to describe OCI artifacts for export.
 	// +kubebuilder:validation:Optional
 	OciArtifact []OciArtifactParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 

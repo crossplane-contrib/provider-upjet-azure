@@ -151,10 +151,10 @@ spec:
                           type: boolean
                         gracePeriod:
                           description: Amount of time (in minutes, between 30 and
-                            90, defaults to 30 minutes) for which automatic repairs
-                            will be delayed. The grace period starts right after the
-                            VM is found unhealthy. The time duration should be specified
-                            in ISO 8601 format. Defaults to PT30M.
+                            90) for which automatic repairs will be delayed. The grace
+                            period starts right after the VM is found unhealthy. The
+                            time duration should be specified in ISO 8601 format.
+                            Defaults to PT30M.
                           type: string
                       type: object
                     type: array
@@ -378,7 +378,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -1043,8 +1043,7 @@ spec:
                             which have been evicted. The time duration should be between
                             15 minutes and 120 minutes (inclusive). The time duration
                             should be specified in the ISO 8601 format. Defaults to
-                            90 minutes (e.g. PT1H30M). Changing this forces a new
-                            resource to be created.
+                            PT1H. Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array
@@ -1190,10 +1189,10 @@ spec:
                           type: boolean
                         gracePeriod:
                           description: Amount of time (in minutes, between 30 and
-                            90, defaults to 30 minutes) for which automatic repairs
-                            will be delayed. The grace period starts right after the
-                            VM is found unhealthy. The time duration should be specified
-                            in ISO 8601 format. Defaults to PT30M.
+                            90) for which automatic repairs will be delayed. The grace
+                            period starts right after the VM is found unhealthy. The
+                            time duration should be specified in ISO 8601 format.
+                            Defaults to PT30M.
                           type: string
                       type: object
                     type: array
@@ -1381,7 +1380,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -1882,8 +1881,7 @@ spec:
                             which have been evicted. The time duration should be between
                             15 minutes and 120 minutes (inclusive). The time duration
                             should be specified in the ISO 8601 format. Defaults to
-                            90 minutes (e.g. PT1H30M). Changing this forces a new
-                            resource to be created.
+                            PT1H. Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array
@@ -2211,10 +2209,10 @@ spec:
                           type: boolean
                         gracePeriod:
                           description: Amount of time (in minutes, between 30 and
-                            90, defaults to 30 minutes) for which automatic repairs
-                            will be delayed. The grace period starts right after the
-                            VM is found unhealthy. The time duration should be specified
-                            in ISO 8601 format. Defaults to PT30M.
+                            90) for which automatic repairs will be delayed. The grace
+                            period starts right after the VM is found unhealthy. The
+                            time duration should be specified in ISO 8601 format.
+                            Defaults to PT30M.
                           type: string
                       type: object
                     type: array
@@ -2402,7 +2400,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -2923,8 +2921,7 @@ spec:
                             which have been evicted. The time duration should be between
                             15 minutes and 120 minutes (inclusive). The time duration
                             should be specified in the ISO 8601 format. Defaults to
-                            90 minutes (e.g. PT1H30M). Changing this forces a new
-                            resource to be created.
+                            PT1H. Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array

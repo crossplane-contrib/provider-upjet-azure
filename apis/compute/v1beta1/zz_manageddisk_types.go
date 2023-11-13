@@ -113,7 +113,7 @@ type KeyEncryptionKeyParameters struct {
 
 type ManagedDiskInitParameters struct {
 
-	// The method to use when creating the managed disk. Changing this forces a new resource to be created. Possible values include:
+	// The method to use when creating the managed disk. Changing this forces a new resource to be created. Possible values include: * Import - Import a VHD file in to the managed disk (VHD specified with source_uri). * ImportSecure - Securely import a VHD file in to the managed disk (VHD specified with source_uri). * Empty - Create an empty managed disk. * Copy - Copy an existing managed disk or snapshot (specified with source_resource_id). * FromImage - Copy a Platform Image (specified with image_reference_id) * Restore - Set by Azure Backup or Site Recovery on a restored disk (specified with source_resource_id). * Upload - Upload a VHD disk with the help of SAS URL (to be used with upload_size_bytes).
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
 	// The ID of the disk access resource for using private endpoints on disks.
@@ -167,8 +167,14 @@ type ManagedDiskInitParameters struct {
 	// Specifies if On-Demand Bursting is enabled for the Managed Disk.
 	OnDemandBurstingEnabled *bool `json:"onDemandBurstingEnabled,omitempty" tf:"on_demand_bursting_enabled,omitempty"`
 
+	// Specifies whether this Managed Disk should be optimized for frequent disk attachments (where a disk is attached/detached more than 5 times in a day). Defaults to false.
+	OptimizedFrequentAttachEnabled *bool `json:"optimizedFrequentAttachEnabled,omitempty" tf:"optimized_frequent_attach_enabled,omitempty"`
+
 	// Specify a value when the source of an Import, ImportSecure or Copy operation targets a source that contains an operating system. Valid values are Linux or Windows.
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
+
+	// Specifies whether Performance Plus is enabled for this Managed Disk. Defaults to false. Changing this forces a new resource to be created.
+	PerformancePlusEnabled *bool `json:"performancePlusEnabled,omitempty" tf:"performance_plus_enabled,omitempty"`
 
 	// Whether it is allowed to access the disk via public network. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -206,7 +212,7 @@ type ManagedDiskInitParameters struct {
 
 type ManagedDiskObservation struct {
 
-	// The method to use when creating the managed disk. Changing this forces a new resource to be created. Possible values include:
+	// The method to use when creating the managed disk. Changing this forces a new resource to be created. Possible values include: * Import - Import a VHD file in to the managed disk (VHD specified with source_uri). * ImportSecure - Securely import a VHD file in to the managed disk (VHD specified with source_uri). * Empty - Create an empty managed disk. * Copy - Copy an existing managed disk or snapshot (specified with source_resource_id). * FromImage - Copy a Platform Image (specified with image_reference_id) * Restore - Set by Azure Backup or Site Recovery on a restored disk (specified with source_resource_id). * Upload - Upload a VHD disk with the help of SAS URL (to be used with upload_size_bytes).
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
 	// The ID of the disk access resource for using private endpoints on disks.
@@ -263,8 +269,14 @@ type ManagedDiskObservation struct {
 	// Specifies if On-Demand Bursting is enabled for the Managed Disk.
 	OnDemandBurstingEnabled *bool `json:"onDemandBurstingEnabled,omitempty" tf:"on_demand_bursting_enabled,omitempty"`
 
+	// Specifies whether this Managed Disk should be optimized for frequent disk attachments (where a disk is attached/detached more than 5 times in a day). Defaults to false.
+	OptimizedFrequentAttachEnabled *bool `json:"optimizedFrequentAttachEnabled,omitempty" tf:"optimized_frequent_attach_enabled,omitempty"`
+
 	// Specify a value when the source of an Import, ImportSecure or Copy operation targets a source that contains an operating system. Valid values are Linux or Windows.
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
+
+	// Specifies whether Performance Plus is enabled for this Managed Disk. Defaults to false. Changing this forces a new resource to be created.
+	PerformancePlusEnabled *bool `json:"performancePlusEnabled,omitempty" tf:"performance_plus_enabled,omitempty"`
 
 	// Whether it is allowed to access the disk via public network. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -308,7 +320,7 @@ type ManagedDiskObservation struct {
 
 type ManagedDiskParameters struct {
 
-	// The method to use when creating the managed disk. Changing this forces a new resource to be created. Possible values include:
+	// The method to use when creating the managed disk. Changing this forces a new resource to be created. Possible values include: * Import - Import a VHD file in to the managed disk (VHD specified with source_uri). * ImportSecure - Securely import a VHD file in to the managed disk (VHD specified with source_uri). * Empty - Create an empty managed disk. * Copy - Copy an existing managed disk or snapshot (specified with source_resource_id). * FromImage - Copy a Platform Image (specified with image_reference_id) * Restore - Set by Azure Backup or Site Recovery on a restored disk (specified with source_resource_id). * Upload - Upload a VHD disk with the help of SAS URL (to be used with upload_size_bytes).
 	// +kubebuilder:validation:Optional
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
@@ -380,9 +392,17 @@ type ManagedDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	OnDemandBurstingEnabled *bool `json:"onDemandBurstingEnabled,omitempty" tf:"on_demand_bursting_enabled,omitempty"`
 
+	// Specifies whether this Managed Disk should be optimized for frequent disk attachments (where a disk is attached/detached more than 5 times in a day). Defaults to false.
+	// +kubebuilder:validation:Optional
+	OptimizedFrequentAttachEnabled *bool `json:"optimizedFrequentAttachEnabled,omitempty" tf:"optimized_frequent_attach_enabled,omitempty"`
+
 	// Specify a value when the source of an Import, ImportSecure or Copy operation targets a source that contains an operating system. Valid values are Linux or Windows.
 	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
+
+	// Specifies whether Performance Plus is enabled for this Managed Disk. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PerformancePlusEnabled *bool `json:"performancePlusEnabled,omitempty" tf:"performance_plus_enabled,omitempty"`
 
 	// Whether it is allowed to access the disk via public network. Defaults to true.
 	// +kubebuilder:validation:Optional

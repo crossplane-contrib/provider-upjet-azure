@@ -31,7 +31,7 @@ type OverridesSelectorsObservation struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -104,7 +104,7 @@ type ResourcePolicyAssignmentInitParameters struct {
 	// A JSON mapping of any Metadata for this Policy.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created.
+	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created. Cannot exceed 64 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more non_compliance_message blocks as defined below.
@@ -178,7 +178,7 @@ type ResourcePolicyAssignmentObservation struct {
 	// A JSON mapping of any Metadata for this Policy.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created.
+	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created. Cannot exceed 64 characters in length.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// One or more non_compliance_message blocks as defined below.
@@ -205,7 +205,7 @@ type ResourcePolicyAssignmentObservation struct {
 
 type ResourcePolicyAssignmentOverridesInitParameters struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	Selectors []OverridesSelectorsInitParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
@@ -214,7 +214,7 @@ type ResourcePolicyAssignmentOverridesInitParameters struct {
 
 type ResourcePolicyAssignmentOverridesObservation struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	Selectors []OverridesSelectorsObservation `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
@@ -223,7 +223,7 @@ type ResourcePolicyAssignmentOverridesObservation struct {
 
 type ResourcePolicyAssignmentOverridesParameters struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	// +kubebuilder:validation:Optional
 	Selectors []OverridesSelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
@@ -258,7 +258,7 @@ type ResourcePolicyAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created.
+	// The name which should be used for this Policy Assignment. Changing this forces a new Resource Policy Assignment to be created. Cannot exceed 64 characters in length.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -335,7 +335,7 @@ type ResourcePolicyAssignmentResourceSelectorsSelectorsInitParameters struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -347,7 +347,7 @@ type ResourcePolicyAssignmentResourceSelectorsSelectorsObservation struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -360,7 +360,7 @@ type ResourcePolicyAssignmentResourceSelectorsSelectorsParameters struct {
 	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind" tf:"kind,omitempty"`
 

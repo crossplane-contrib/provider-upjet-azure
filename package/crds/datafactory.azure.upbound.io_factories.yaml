@@ -93,6 +93,10 @@ spec:
                             For example: https://github.mydomain.com. Use https://github.com
                             for open source repositories.'
                           type: string
+                        publishingEnabled:
+                          description: Is automated publishing enabled? Defaults to
+                            true.
+                          type: boolean
                         repositoryName:
                           description: Specifies the name of the git repository.
                           type: string
@@ -250,6 +254,10 @@ spec:
                         projectName:
                           description: Specifies the name of the VSTS project.
                           type: string
+                        publishingEnabled:
+                          description: Is automated publishing enabled? Defaults to
+                            true.
+                          type: boolean
                         repositoryName:
                           description: Specifies the name of the git repository.
                           type: string
@@ -302,6 +310,10 @@ spec:
                             For example: https://github.mydomain.com. Use https://github.com
                             for open source repositories.'
                           type: string
+                        publishingEnabled:
+                          description: Is automated publishing enabled? Defaults to
+                            true.
+                          type: boolean
                         repositoryName:
                           description: Specifies the name of the git repository.
                           type: string
@@ -379,6 +391,10 @@ spec:
                         projectName:
                           description: Specifies the name of the VSTS project.
                           type: string
+                        publishingEnabled:
+                          description: Is automated publishing enabled? Defaults to
+                            true.
+                          type: boolean
                         repositoryName:
                           description: Specifies the name of the git repository.
                           type: string
@@ -589,6 +605,10 @@ spec:
                             For example: https://github.mydomain.com. Use https://github.com
                             for open source repositories.'
                           type: string
+                        publishingEnabled:
+                          description: Is automated publishing enabled? Defaults to
+                            true.
+                          type: boolean
                         repositoryName:
                           description: Specifies the name of the git repository.
                           type: string
@@ -682,6 +702,10 @@ spec:
                         projectName:
                           description: Specifies the name of the VSTS project.
                           type: string
+                        publishingEnabled:
+                          description: Is automated publishing enabled? Defaults to
+                            true.
+                          type: boolean
                         repositoryName:
                           description: Specifies the name of the git repository.
                           type: string

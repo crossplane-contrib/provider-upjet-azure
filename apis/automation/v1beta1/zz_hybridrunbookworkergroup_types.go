@@ -19,9 +19,6 @@ import (
 
 type HybridRunBookWorkerGroupInitParameters struct {
 
-	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
-	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
-
 	// The name of resource type azurerm_automation_credential to use for hybrid worker.
 	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
@@ -50,8 +47,17 @@ type HybridRunBookWorkerGroupObservation struct {
 type HybridRunBookWorkerGroupParameters struct {
 
 	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// Reference to a Account in automation to populate automationAccountName.
+	// +kubebuilder:validation:Optional
+	AutomationAccountNameRef *v1.Reference `json:"automationAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in automation to populate automationAccountName.
+	// +kubebuilder:validation:Optional
+	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of resource type azurerm_automation_credential to use for hybrid worker.
 	// +kubebuilder:validation:Optional
@@ -110,7 +116,6 @@ type HybridRunBookWorkerGroupStatus struct {
 type HybridRunBookWorkerGroup struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.automationAccountName) || (has(self.initProvider) && has(self.initProvider.automationAccountName))",message="spec.forProvider.automationAccountName is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	Spec   HybridRunBookWorkerGroupSpec   `json:"spec"`
 	Status HybridRunBookWorkerGroupStatus `json:"status,omitempty"`

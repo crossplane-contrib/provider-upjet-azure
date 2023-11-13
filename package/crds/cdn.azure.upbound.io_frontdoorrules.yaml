@@ -262,8 +262,7 @@ spec:
                                 description: The fragment to use in the redirect.
                                   The value must be a string between 0 and 1024 characters
                                   in length, leave blank to preserve the incoming
-                                  fragment. Defaults to an empty string. Defaults
-                                  to "".
+                                  fragment. Defaults to "".
                                 type: string
                               destinationHostname:
                                 description: The host name you want the request to
@@ -275,7 +274,7 @@ spec:
                                 description: The path to use in the redirect. The
                                   value must be a string and include the leading /,
                                   leave blank to preserve the incoming path. Defaults
-                                  to an empty string. Defaults to "".
+                                  to "".
                                 type: string
                               queryString:
                                 description: The query string used in the redirect
@@ -283,7 +282,7 @@ spec:
                                   format and must not include the leading ?, leave
                                   blank to preserve the incoming query string. Maximum
                                   allowed length for this field is 2048 characters.
-                                  Defaults to an empty string. Defaults to "".
+                                  Defaults to "".
                                 type: string
                               redirectProtocol:
                                 description: The protocol the request will be redirected
@@ -1171,8 +1170,7 @@ spec:
                                 description: The fragment to use in the redirect.
                                   The value must be a string between 0 and 1024 characters
                                   in length, leave blank to preserve the incoming
-                                  fragment. Defaults to an empty string. Defaults
-                                  to "".
+                                  fragment. Defaults to "".
                                 type: string
                               destinationHostname:
                                 description: The host name you want the request to
@@ -1184,7 +1182,7 @@ spec:
                                 description: The path to use in the redirect. The
                                   value must be a string and include the leading /,
                                   leave blank to preserve the incoming path. Defaults
-                                  to an empty string. Defaults to "".
+                                  to "".
                                 type: string
                               queryString:
                                 description: The query string used in the redirect
@@ -1192,7 +1190,7 @@ spec:
                                   format and must not include the leading ?, leave
                                   blank to preserve the incoming query string. Maximum
                                   allowed length for this field is 2048 characters.
-                                  Defaults to an empty string. Defaults to "".
+                                  Defaults to "".
                                 type: string
                               redirectProtocol:
                                 description: The protocol the request will be redirected
@@ -2168,8 +2166,7 @@ spec:
                                 description: The fragment to use in the redirect.
                                   The value must be a string between 0 and 1024 characters
                                   in length, leave blank to preserve the incoming
-                                  fragment. Defaults to an empty string. Defaults
-                                  to "".
+                                  fragment. Defaults to "".
                                 type: string
                               destinationHostname:
                                 description: The host name you want the request to
@@ -2181,7 +2178,7 @@ spec:
                                 description: The path to use in the redirect. The
                                   value must be a string and include the leading /,
                                   leave blank to preserve the incoming path. Defaults
-                                  to an empty string. Defaults to "".
+                                  to "".
                                 type: string
                               queryString:
                                 description: The query string used in the redirect
@@ -2189,7 +2186,7 @@ spec:
                                   format and must not include the leading ?, leave
                                   blank to preserve the incoming query string. Maximum
                                   allowed length for this field is 2048 characters.
-                                  Defaults to an empty string. Defaults to "".
+                                  Defaults to "".
                                 type: string
                               redirectProtocol:
                                 description: The protocol the request will be redirected

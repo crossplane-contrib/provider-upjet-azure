@@ -133,7 +133,8 @@ spec:
                     type: string
                   nodeSizeFamily:
                     description: The kind of nodes that the Spark Pool provides. Possible
-                      values are MemoryOptimized and None.
+                      values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU,
+                      MemoryOptimized, and None.
                     type: string
                   sessionLevelPackagesEnabled:
                     description: Indicates whether session level packages are enabled
@@ -326,7 +327,8 @@ spec:
                     type: string
                   nodeSizeFamily:
                     description: The kind of nodes that the Spark Pool provides. Possible
-                      values are MemoryOptimized and None.
+                      values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU,
+                      MemoryOptimized, and None.
                     type: string
                   sessionLevelPackagesEnabled:
                     description: Indicates whether session level packages are enabled
@@ -606,7 +608,8 @@ spec:
                     type: string
                   nodeSizeFamily:
                     description: The kind of nodes that the Spark Pool provides. Possible
-                      values are MemoryOptimized and None.
+                      values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU,
+                      MemoryOptimized, and None.
                     type: string
                   sessionLevelPackagesEnabled:
                     description: Indicates whether session level packages are enabled

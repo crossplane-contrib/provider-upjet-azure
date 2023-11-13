@@ -115,7 +115,7 @@ type MaintenanceConfigurationInitParameters struct {
 	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
+	// The visibility of the Maintenance Configuration. The only allowable value is Custom. Defaults to Custom.
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// A window block as defined below.
@@ -148,7 +148,7 @@ type MaintenanceConfigurationObservation struct {
 	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
+	// The visibility of the Maintenance Configuration. The only allowable value is Custom. Defaults to Custom.
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// A window block as defined below.
@@ -194,7 +194,7 @@ type MaintenanceConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
+	// The visibility of the Maintenance Configuration. The only allowable value is Custom. Defaults to Custom.
 	// +kubebuilder:validation:Optional
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 

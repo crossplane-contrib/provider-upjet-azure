@@ -96,6 +96,9 @@ type GremlinGraphAutoscaleSettingsParameters struct {
 
 type GremlinGraphInitParameters struct {
 
+	// The time to live of Analytical Storage for this Cosmos DB Gremlin Graph. Possible values are between -1 to 2147483647 not including 0. If present and the value is set to -1, it means never expire.
+	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
+
 	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
 	AutoscaleSettings []GremlinGraphAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
@@ -125,6 +128,9 @@ type GremlinGraphObservation struct {
 
 	// The name of the CosmosDB Account to create the Gremlin Graph within. Changing this forces a new resource to be created.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// The time to live of Analytical Storage for this Cosmos DB Gremlin Graph. Possible values are between -1 to 2147483647 not including 0. If present and the value is set to -1, it means never expire.
+	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
 	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
 	AutoscaleSettings []GremlinGraphAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
@@ -174,6 +180,10 @@ type GremlinGraphParameters struct {
 	// Selector for a Account to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
+
+	// The time to live of Analytical Storage for this Cosmos DB Gremlin Graph. Possible values are between -1 to 2147483647 not including 0. If present and the value is set to -1, it means never expire.
+	// +kubebuilder:validation:Optional
+	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
 	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
 	// +kubebuilder:validation:Optional

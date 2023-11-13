@@ -240,7 +240,7 @@ type ResponseHeaderParameters struct {
 
 type RuleMatchConditionInitParameters struct {
 
-	// can be set to true or false to negate the given condition. Defaults to true.
+	// can be set to true or false to negate the given condition. Defaults to false.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
@@ -261,7 +261,7 @@ type RuleMatchConditionInitParameters struct {
 
 type RuleMatchConditionObservation struct {
 
-	// can be set to true or false to negate the given condition. Defaults to true.
+	// can be set to true or false to negate the given condition. Defaults to false.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
@@ -282,7 +282,7 @@ type RuleMatchConditionObservation struct {
 
 type RuleMatchConditionParameters struct {
 
-	// can be set to true or false to negate the given condition. Defaults to true.
+	// can be set to true or false to negate the given condition. Defaults to false.
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 

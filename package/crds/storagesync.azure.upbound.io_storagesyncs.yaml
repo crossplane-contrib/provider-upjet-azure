@@ -69,7 +69,7 @@ spec:
                 properties:
                   incomingTrafficPolicy:
                     description: Incoming traffic policy. Possible values are AllowAllTraffic
-                      and AllowVirtualNetworksOnly.
+                      and AllowVirtualNetworksOnly. Defaults to AllowAllTraffic.
                     type: string
                   location:
                     description: The Azure Region where the Storage Sync should exist.
@@ -176,7 +176,7 @@ spec:
                 properties:
                   incomingTrafficPolicy:
                     description: Incoming traffic policy. Possible values are AllowAllTraffic
-                      and AllowVirtualNetworksOnly.
+                      and AllowVirtualNetworksOnly. Defaults to AllowAllTraffic.
                     type: string
                   location:
                     description: The Azure Region where the Storage Sync should exist.
@@ -364,7 +364,7 @@ spec:
                     type: string
                   incomingTrafficPolicy:
                     description: Incoming traffic policy. Possible values are AllowAllTraffic
-                      and AllowVirtualNetworksOnly.
+                      and AllowVirtualNetworksOnly. Defaults to AllowAllTraffic.
                     type: string
                   location:
                     description: The Azure Region where the Storage Sync should exist.

@@ -25,7 +25,7 @@ type OutputBlobInitParameters struct {
 	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
-	// The minimum number of rows per batch (must be between 0 and 10000).
+	// The minimum number of rows per batch (must be between 0 and 1000000).
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
@@ -49,7 +49,7 @@ type OutputBlobObservation struct {
 	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
-	// The minimum number of rows per batch (must be between 0 and 10000).
+	// The minimum number of rows per batch (must be between 0 and 1000000).
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
@@ -90,7 +90,7 @@ type OutputBlobParameters struct {
 	// +kubebuilder:validation:Optional
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
-	// The minimum number of rows per batch (must be between 0 and 10000).
+	// The minimum number of rows per batch (must be between 0 and 1000000).
 	// +kubebuilder:validation:Optional
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
 

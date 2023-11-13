@@ -189,7 +189,7 @@ spec:
                       type: object
                     type: array
                   certificate:
-                    description: One or more (up to 10) certificate blocks as defined
+                    description: One or more certificate blocks (up to 10) as defined
                       below.
                     items:
                       properties:
@@ -339,8 +339,8 @@ spec:
                     description: ID of a standard SKU IPv4 Public IP.
                     type: string
                   publicNetworkAccessEnabled:
-                    description: Is public access to the service allowed?. Defaults
-                      to true
+                    description: Is public access to the service allowed? Defaults
+                      to true.
                     type: boolean
                   publisherEmail:
                     description: The email of publisher/company.
@@ -652,7 +652,7 @@ spec:
                     type: array
                   virtualNetworkType:
                     description: 'The type of virtual network you want to use, valid
-                      values include: None, External, Internal.'
+                      values include: None, External, Internal. Defaults to None.'
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
@@ -711,7 +711,7 @@ spec:
                       type: object
                     type: array
                   certificate:
-                    description: One or more (up to 10) certificate blocks as defined
+                    description: One or more certificate blocks (up to 10) as defined
                       below.
                     items:
                       properties:
@@ -806,8 +806,8 @@ spec:
                     description: ID of a standard SKU IPv4 Public IP.
                     type: string
                   publicNetworkAccessEnabled:
-                    description: Is public access to the service allowed?. Defaults
-                      to true
+                    description: Is public access to the service allowed? Defaults
+                      to true.
                     type: boolean
                   publisherEmail:
                     description: The email of publisher/company.
@@ -956,7 +956,7 @@ spec:
                     type: array
                   virtualNetworkType:
                     description: 'The type of virtual network you want to use, valid
-                      values include: None, External, Internal.'
+                      values include: None, External, Internal. Defaults to None.'
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
@@ -1208,7 +1208,7 @@ spec:
                       type: object
                     type: array
                   certificate:
-                    description: One or more (up to 10) certificate blocks as defined
+                    description: One or more certificate blocks (up to 10) as defined
                       below.
                     items:
                       properties:
@@ -1567,8 +1567,8 @@ spec:
                       type: string
                     type: array
                   publicNetworkAccessEnabled:
-                    description: Is public access to the service allowed?. Defaults
-                      to true
+                    description: Is public access to the service allowed? Defaults
+                      to true.
                     type: boolean
                   publisherEmail:
                     description: The email of publisher/company.
@@ -1735,7 +1735,7 @@ spec:
                     type: array
                   virtualNetworkType:
                     description: 'The type of virtual network you want to use, valid
-                      values include: None, External, Internal.'
+                      values include: None, External, Internal. Defaults to None.'
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this

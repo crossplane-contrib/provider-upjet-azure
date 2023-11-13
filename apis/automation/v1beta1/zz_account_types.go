@@ -31,7 +31,7 @@ type AccountInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether public network access is allowed for the container registry. Defaults to true.
+	// Whether public network access is allowed for the automation account. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The SKU of the account. Possible values are Basic and Free.
@@ -66,7 +66,7 @@ type AccountObservation struct {
 
 	PrivateEndpointConnection []PrivateEndpointConnectionObservation `json:"privateEndpointConnection,omitempty" tf:"private_endpoint_connection,omitempty"`
 
-	// Whether public network access is allowed for the container registry. Defaults to true.
+	// Whether public network access is allowed for the automation account. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which the Automation Account is created. Changing this forces a new resource to be created.
@@ -97,7 +97,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Whether public network access is allowed for the container registry. Defaults to true.
+	// Whether public network access is allowed for the automation account. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 

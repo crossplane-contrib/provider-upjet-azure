@@ -202,11 +202,20 @@ spec:
                           - name
                           - namespace
                           type: object
+                        endpointUri:
+                          description: The endpoint address of an EventHub Namespace.
+                            Required when client_id is set.
+                          type: string
                         name:
                           description: The name of an EventHub.
                           type: string
-                      required:
-                      - connectionStringSecretRef
+                        userAssignedIdentityClientId:
+                          description: The Client Id of the User Assigned Identity  with
+                            the "Azure Event Hubs Data Sender" role to the target
+                            EventHub Namespace. Required when endpoint_uri is set.
+                            If not specified the System Assigned Identity will be
+                            used.
+                          type: string
                       type: object
                     type: array
                   resourceGroupName:
@@ -399,8 +408,19 @@ spec:
                       forces a new resource to be created.
                     items:
                       properties:
+                        endpointUri:
+                          description: The endpoint address of an EventHub Namespace.
+                            Required when client_id is set.
+                          type: string
                         name:
                           description: The name of an EventHub.
+                          type: string
+                        userAssignedIdentityClientId:
+                          description: The Client Id of the User Assigned Identity  with
+                            the "Azure Event Hubs Data Sender" role to the target
+                            EventHub Namespace. Required when endpoint_uri is set.
+                            If not specified the System Assigned Identity will be
+                            used.
                           type: string
                       type: object
                     type: array
@@ -613,8 +633,19 @@ spec:
                       forces a new resource to be created.
                     items:
                       properties:
+                        endpointUri:
+                          description: The endpoint address of an EventHub Namespace.
+                            Required when client_id is set.
+                          type: string
                         name:
                           description: The name of an EventHub.
+                          type: string
+                        userAssignedIdentityClientId:
+                          description: The Client Id of the User Assigned Identity  with
+                            the "Azure Event Hubs Data Sender" role to the target
+                            EventHub Namespace. Required when endpoint_uri is set.
+                            If not specified the System Assigned Identity will be
+                            used.
                           type: string
                       type: object
                     type: array

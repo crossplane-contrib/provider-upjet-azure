@@ -627,11 +627,11 @@ spec:
                         type: object
                     type: object
                   securityStyle:
-                    description: Volume security style, accepted values are Unix or
-                      Ntfs. If not provided, single-protocol volume is created defaulting
-                      to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
-                      to Ntfs. In a dual-protocol volume, if not provided, its value
-                      will be Ntfs. Changing this forces a new resource to be created.
+                    description: Volume security style, accepted values are unix or
+                      ntfs. If not provided, single-protocol volume is created defaulting
+                      to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
+                      to ntfs. In a dual-protocol volume, if not provided, its value
+                      will be ntfs. Changing this forces a new resource to be created.
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
@@ -843,11 +843,11 @@ spec:
                       type: string
                     type: array
                   securityStyle:
-                    description: Volume security style, accepted values are Unix or
-                      Ntfs. If not provided, single-protocol volume is created defaulting
-                      to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
-                      to Ntfs. In a dual-protocol volume, if not provided, its value
-                      will be Ntfs. Changing this forces a new resource to be created.
+                    description: Volume security style, accepted values are unix or
+                      ntfs. If not provided, single-protocol volume is created defaulting
+                      to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
+                      to ntfs. In a dual-protocol volume, if not provided, its value
+                      will be ntfs. Changing this forces a new resource to be created.
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid
@@ -1190,11 +1190,11 @@ spec:
                       created.
                     type: string
                   securityStyle:
-                    description: Volume security style, accepted values are Unix or
-                      Ntfs. If not provided, single-protocol volume is created defaulting
-                      to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
-                      to Ntfs. In a dual-protocol volume, if not provided, its value
-                      will be Ntfs. Changing this forces a new resource to be created.
+                    description: Volume security style, accepted values are unix or
+                      ntfs. If not provided, single-protocol volume is created defaulting
+                      to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
+                      to ntfs. In a dual-protocol volume, if not provided, its value
+                      will be ntfs. Changing this forces a new resource to be created.
                     type: string
                   serviceLevel:
                     description: The target performance of the file system. Valid

@@ -322,6 +322,9 @@ type WorkspaceInitParameters struct {
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo []AzureDevopsRepoInitParameters `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
 
+	// Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace. Defaults to false.
+	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
+
 	// A customer_managed_key block as defined below. Conflicts with aad_admin.
 	CustomerManagedKey []CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
@@ -369,6 +372,9 @@ type WorkspaceObservation struct {
 
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo []AzureDevopsRepoObservation `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
+
+	// Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace. Defaults to false.
+	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
 	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`
@@ -437,6 +443,10 @@ type WorkspaceParameters struct {
 	// An azure_devops_repo block as defined below.
 	// +kubebuilder:validation:Optional
 	AzureDevopsRepo []AzureDevopsRepoParameters `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
+
+	// Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet

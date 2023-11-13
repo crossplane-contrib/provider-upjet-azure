@@ -19,10 +19,10 @@ import (
 
 type SubnetInitParameters struct {
 
-	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny.
+	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny. Defaults to Allow.
 	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
 
-	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny.
+	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny. Defaults to Allow.
 	UsePublicIPAddress *string `json:"usePublicIpAddress,omitempty" tf:"use_public_ip_address,omitempty"`
 }
 
@@ -31,20 +31,20 @@ type SubnetObservation struct {
 	// The name of the Subnet for this Virtual Network.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny.
+	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny. Defaults to Allow.
 	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
 
-	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny.
+	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny. Defaults to Allow.
 	UsePublicIPAddress *string `json:"usePublicIpAddress,omitempty" tf:"use_public_ip_address,omitempty"`
 }
 
 type SubnetParameters struct {
 
-	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny.
+	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
 
-	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny.
+	// Can Virtual Machines in this Subnet use Public IP Addresses? Possible values are Allow, Default and Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	UsePublicIPAddress *string `json:"usePublicIpAddress,omitempty" tf:"use_public_ip_address,omitempty"`
 }

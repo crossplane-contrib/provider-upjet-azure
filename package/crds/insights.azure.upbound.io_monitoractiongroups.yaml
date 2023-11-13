@@ -380,7 +380,7 @@ spec:
                     items:
                       properties:
                         aadAuth:
-                          description: The aad_auth block as defined below
+                          description: The aad_auth block as defined below.
                           items:
                             properties:
                               identifierUri:
@@ -654,7 +654,7 @@ spec:
                     items:
                       properties:
                         aadAuth:
-                          description: The aad_auth block as defined below
+                          description: The aad_auth block as defined below.
                           items:
                             properties:
                               identifierUri:
@@ -1094,7 +1094,7 @@ spec:
                     items:
                       properties:
                         aadAuth:
-                          description: The aad_auth block as defined below
+                          description: The aad_auth block as defined below.
                           items:
                             properties:
                               identifierUri:

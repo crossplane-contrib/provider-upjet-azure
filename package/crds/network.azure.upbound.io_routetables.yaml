@@ -155,8 +155,8 @@ spec:
                         type: object
                     type: object
                   route:
-                    description: List of objects representing routes. Each object
-                      accepts the arguments documented below.
+                    description: List of route objects representing routes as defined
+                      below. Each object accepts the arguments documented below.
                     items:
                       properties:
                         addressPrefix:
@@ -206,8 +206,8 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   route:
-                    description: List of objects representing routes. Each object
-                      accepts the arguments documented below.
+                    description: List of route objects representing routes as defined
+                      below. Each object accepts the arguments documented below.
                     items:
                       properties:
                         addressPrefix:
@@ -422,8 +422,8 @@ spec:
                       the route table. Changing this forces a new resource to be created.
                     type: string
                   route:
-                    description: List of objects representing routes. Each object
-                      accepts the arguments documented below.
+                    description: List of route objects representing routes as defined
+                      below. Each object accepts the arguments documented below.
                     items:
                       properties:
                         addressPrefix:

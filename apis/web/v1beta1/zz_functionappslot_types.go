@@ -645,7 +645,7 @@ type FunctionAppSlotSiteConfigInitParameters struct {
 	// Specifies whether or not the HTTP2 protocol should be enabled. Defaults to false.
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
-	// A List of objects representing IP restrictions as defined below.
+	// A list of ip_restriction objects representing IP restrictions as defined below.
 	IPRestriction []SiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// Java version hosted by the function app in Azure. Possible values are 1.8, 11 & 17 (In-Preview).
@@ -663,7 +663,7 @@ type FunctionAppSlotSiteConfigInitParameters struct {
 	// Should Runtime Scale Monitoring be enabled?. Only applicable to apps on the Premium plan. Defaults to false.
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
-	// A List of objects representing IP restrictions as defined below.
+	// A list of scm_ip_restriction objects representing IP restrictions as defined below.
 	ScmIPRestriction []SiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The type of Source Control used by this function App. Valid values include: BitBucketGit, BitBucketHg, CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg, GitHub, LocalGit, None (default), OneDrive, Tfs, VSO, and VSTSRM.
@@ -711,7 +711,7 @@ type FunctionAppSlotSiteConfigObservation struct {
 	// Specifies whether or not the HTTP2 protocol should be enabled. Defaults to false.
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
-	// A List of objects representing IP restrictions as defined below.
+	// A list of ip_restriction objects representing IP restrictions as defined below.
 	IPRestriction []SiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
 	// Java version hosted by the function app in Azure. Possible values are 1.8, 11 & 17 (In-Preview).
@@ -729,7 +729,7 @@ type FunctionAppSlotSiteConfigObservation struct {
 	// Should Runtime Scale Monitoring be enabled?. Only applicable to apps on the Premium plan. Defaults to false.
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
-	// A List of objects representing IP restrictions as defined below.
+	// A list of scm_ip_restriction objects representing IP restrictions as defined below.
 	ScmIPRestriction []SiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
 	// The type of Source Control used by this function App. Valid values include: BitBucketGit, BitBucketHg, CodePlexGit, CodePlexHg, Dropbox, ExternalGit, ExternalHg, GitHub, LocalGit, None (default), OneDrive, Tfs, VSO, and VSTSRM.
@@ -786,7 +786,7 @@ type FunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Http2Enabled *bool `json:"http2Enabled,omitempty" tf:"http2_enabled,omitempty"`
 
-	// A List of objects representing IP restrictions as defined below.
+	// A list of ip_restriction objects representing IP restrictions as defined below.
 	// +kubebuilder:validation:Optional
 	IPRestriction []SiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
@@ -810,7 +810,7 @@ type FunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RuntimeScaleMonitoringEnabled *bool `json:"runtimeScaleMonitoringEnabled,omitempty" tf:"runtime_scale_monitoring_enabled,omitempty"`
 
-	// A List of objects representing IP restrictions as defined below.
+	// A list of scm_ip_restriction objects representing IP restrictions as defined below.
 	// +kubebuilder:validation:Optional
 	ScmIPRestriction []SiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
 
@@ -933,7 +933,7 @@ type SiteConfigIPRestrictionInitParameters struct {
 	// Allow or Deny access for this IP range. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The headers for this specific scm_ip_restriction as defined below.
+	// The headers block for this specific scm_ip_restriction as defined below.
 	Headers []IPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
@@ -954,7 +954,7 @@ type SiteConfigIPRestrictionObservation struct {
 	// Allow or Deny access for this IP range. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The headers for this specific scm_ip_restriction as defined below.
+	// The headers block for this specific scm_ip_restriction as defined below.
 	Headers []IPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
@@ -979,7 +979,7 @@ type SiteConfigIPRestrictionParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The headers for this specific scm_ip_restriction as defined below.
+	// The headers block for this specific scm_ip_restriction as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []IPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
 
@@ -1068,7 +1068,7 @@ type SiteConfigScmIPRestrictionInitParameters struct {
 	// Allow or Deny access for this IP range. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The headers for this specific scm_ip_restriction as defined below.
+	// The headers block for this specific scm_ip_restriction as defined below.
 	Headers []SiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
@@ -1089,7 +1089,7 @@ type SiteConfigScmIPRestrictionObservation struct {
 	// Allow or Deny access for this IP range. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The headers for this specific scm_ip_restriction as defined below.
+	// The headers block for this specific scm_ip_restriction as defined below.
 	Headers []SiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
@@ -1114,7 +1114,7 @@ type SiteConfigScmIPRestrictionParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The headers for this specific scm_ip_restriction as defined below.
+	// The headers block for this specific scm_ip_restriction as defined below.
 	// +kubebuilder:validation:Optional
 	Headers []SiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
 

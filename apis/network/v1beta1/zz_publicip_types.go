@@ -37,7 +37,7 @@ type PublicIPInitParameters struct {
 	// A mapping of IP tags to assign to the public IP. Changing this forces a new resource to be created.
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
-	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Defaults to IPv4.
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
 	// Specifies the timeout for the TCP idle connection. The value can be set between 4 and 30 minutes.
@@ -94,7 +94,7 @@ type PublicIPObservation struct {
 	// A mapping of IP tags to assign to the public IP. Changing this forces a new resource to be created.
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
-	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Defaults to IPv4.
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
 	// Specifies the timeout for the TCP idle connection. The value can be set between 4 and 30 minutes.
@@ -151,7 +151,7 @@ type PublicIPParameters struct {
 	// +kubebuilder:validation:Optional
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
-	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Defaults to IPv4.
 	// +kubebuilder:validation:Optional
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 

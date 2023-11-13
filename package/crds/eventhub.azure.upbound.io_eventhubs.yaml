@@ -203,7 +203,7 @@ spec:
                     type: object
                   partitionCount:
                     description: Specifies the current number of shards on the Event
-                      Hub. Changing this will force-recreate the resource.
+                      Hub.
                     type: number
                   resourceGroupName:
                     description: The name of the resource group in which the EventHub's
@@ -361,7 +361,7 @@ spec:
                     type: number
                   partitionCount:
                     description: Specifies the current number of shards on the Event
-                      Hub. Changing this will force-recreate the resource.
+                      Hub.
                     type: number
                   status:
                     description: Specifies the status of the Event Hub resource. Possible
@@ -608,7 +608,7 @@ spec:
                     type: string
                   partitionCount:
                     description: Specifies the current number of shards on the Event
-                      Hub. Changing this will force-recreate the resource.
+                      Hub.
                     type: number
                   partitionIds:
                     description: The identifiers for partitions created for Event

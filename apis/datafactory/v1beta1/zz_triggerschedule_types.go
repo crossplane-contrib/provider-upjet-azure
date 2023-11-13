@@ -125,7 +125,7 @@ type TriggerScheduleInitParameters struct {
 	// The interval for how often the trigger occurs. This defaults to 1.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// block as defined below.
+	// A pipeline block as defined below.
 	Pipeline []TriggerSchedulePipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The pipeline parameters that the trigger will act upon.
@@ -167,7 +167,7 @@ type TriggerScheduleObservation struct {
 	// The interval for how often the trigger occurs. This defaults to 1.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// block as defined below.
+	// A pipeline block as defined below.
 	Pipeline []TriggerSchedulePipelineObservation `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The Data Factory Pipeline name that the trigger will act on.
@@ -226,7 +226,7 @@ type TriggerScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// block as defined below.
+	// A pipeline block as defined below.
 	// +kubebuilder:validation:Optional
 	Pipeline []TriggerSchedulePipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 

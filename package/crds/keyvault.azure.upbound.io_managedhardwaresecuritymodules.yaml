@@ -183,6 +183,19 @@ spec:
                             type: string
                         type: object
                     type: object
+                  securityDomainKeyVaultCertificateIds:
+                    description: A list of KeyVault certificates resource IDs (minimum
+                      of three and up to a maximum of 10) to activate this Managed
+                      HSM. More information see activate-your-managed-hsm
+                    items:
+                      type: string
+                    type: array
+                  securityDomainQuorum:
+                    description: Specifies the minimum number of shares required to
+                      decrypt the security domain for recovery. This is required when
+                      security_domain_key_vault_certificate_ids is specified. Valid
+                      values are between 2 and 10.
+                    type: number
                   skuName:
                     description: The Name of the SKU used for this Key Vault Managed
                       Hardware Security Module. Possible value is Standard_B1. Changing
@@ -253,6 +266,19 @@ spec:
                       Hardware Security Module? Changing this forces a new resource
                       to be created.
                     type: boolean
+                  securityDomainKeyVaultCertificateIds:
+                    description: A list of KeyVault certificates resource IDs (minimum
+                      of three and up to a maximum of 10) to activate this Managed
+                      HSM. More information see activate-your-managed-hsm
+                    items:
+                      type: string
+                    type: array
+                  securityDomainQuorum:
+                    description: Specifies the minimum number of shares required to
+                      decrypt the security domain for recovery. This is required when
+                      security_domain_key_vault_certificate_ids is specified. Valid
+                      values are between 2 and 10.
+                    type: number
                   skuName:
                     description: The Name of the SKU used for this Key Vault Managed
                       Hardware Security Module. Possible value is Standard_B1. Changing
@@ -507,6 +533,19 @@ spec:
                       the Key Vault Managed Hardware Security Module. Changing this
                       forces a new resource to be created.
                     type: string
+                  securityDomainKeyVaultCertificateIds:
+                    description: A list of KeyVault certificates resource IDs (minimum
+                      of three and up to a maximum of 10) to activate this Managed
+                      HSM. More information see activate-your-managed-hsm
+                    items:
+                      type: string
+                    type: array
+                  securityDomainQuorum:
+                    description: Specifies the minimum number of shares required to
+                      decrypt the security domain for recovery. This is required when
+                      security_domain_key_vault_certificate_ids is specified. Valid
+                      values are between 2 and 10.
+                    type: number
                   skuName:
                     description: The Name of the SKU used for this Key Vault Managed
                       Hardware Security Module. Possible value is Standard_B1. Changing

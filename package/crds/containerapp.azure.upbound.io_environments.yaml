@@ -67,6 +67,27 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  daprApplicationInsightsConnectionStringSecretRef:
+                    description: Application Insights connection string used by Dapr
+                      to export Service to Service communication telemetry. Changing
+                      this forces a new resource to be created. Application Insights
+                      connection string used by Dapr to export Service to Service
+                      communication telemetry.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   infrastructureSubnetId:
                     description: The existing Subnet to use for the Container Apps
                       Control Plane. Changing this forces a new resource to be created.
@@ -325,6 +346,11 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                  zoneRedundancyEnabled:
+                    description: Should the Container App Environment be created with
+                      Zone Redundancy enabled? Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -356,6 +382,11 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                  zoneRedundancyEnabled:
+                    description: Should the Container App Environment be created with
+                      Zone Redundancy enabled? Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -592,6 +623,11 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                  zoneRedundancyEnabled:
+                    description: Should the Container App Environment be created with
+                      Zone Redundancy enabled? Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

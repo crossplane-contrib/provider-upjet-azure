@@ -123,7 +123,7 @@ type FrontdoorFirewallPolicyInitParameters struct {
 	// One or more managed_rule blocks as defined below.
 	ManagedRule []ManagedRuleInitParameters `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
 
-	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	// The firewall policy mode. Possible values are Detection, Prevention. Defaults to Prevention.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// If action type is redirect, this field represents redirect URL for the client.
@@ -159,7 +159,7 @@ type FrontdoorFirewallPolicyObservation struct {
 	// One or more managed_rule blocks as defined below.
 	ManagedRule []ManagedRuleObservation `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
 
-	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	// The firewall policy mode. Possible values are Detection, Prevention. Defaults to Prevention.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// If action type is redirect, this field represents redirect URL for the client.
@@ -194,7 +194,7 @@ type FrontdoorFirewallPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedRule []ManagedRuleParameters `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
 
-	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	// The firewall policy mode. Possible values are Detection, Prevention. Defaults to Prevention.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 

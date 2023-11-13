@@ -100,6 +100,17 @@ spec:
                       this Virtual Network should exist. Changing this forces a new
                       Virtual Network to be created.
                     type: string
+                  encryption:
+                    description: A encryption block as defined below.
+                    items:
+                      properties:
+                        enforcement:
+                          description: Specifies if the encrypted Virtual Network
+                            allows VM that does not support encryption. Possible values
+                            are DropUnencrypted and AllowUnencrypted.
+                          type: string
+                      type: object
+                    type: array
                   flowTimeoutInMinutes:
                     description: The flow timeout in minutes for the Virtual Network,
                       which is used to enable connection tracking for intra-VM flows.
@@ -239,6 +250,17 @@ spec:
                       this Virtual Network should exist. Changing this forces a new
                       Virtual Network to be created.
                     type: string
+                  encryption:
+                    description: A encryption block as defined below.
+                    items:
+                      properties:
+                        enforcement:
+                          description: Specifies if the encrypted Virtual Network
+                            allows VM that does not support encryption. Possible values
+                            are DropUnencrypted and AllowUnencrypted.
+                          type: string
+                      type: object
+                    type: array
                   flowTimeoutInMinutes:
                     description: The flow timeout in minutes for the Virtual Network,
                       which is used to enable connection tracking for intra-VM flows.
@@ -460,6 +482,17 @@ spec:
                       this Virtual Network should exist. Changing this forces a new
                       Virtual Network to be created.
                     type: string
+                  encryption:
+                    description: A encryption block as defined below.
+                    items:
+                      properties:
+                        enforcement:
+                          description: Specifies if the encrypted Virtual Network
+                            allows VM that does not support encryption. Possible values
+                            are DropUnencrypted and AllowUnencrypted.
+                          type: string
+                      type: object
+                    type: array
                   flowTimeoutInMinutes:
                     description: The flow timeout in minutes for the Virtual Network,
                       which is used to enable connection tracking for intra-VM flows.

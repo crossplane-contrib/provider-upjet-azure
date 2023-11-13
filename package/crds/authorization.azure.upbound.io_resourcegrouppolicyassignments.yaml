@@ -135,7 +135,8 @@ spec:
                     items:
                       properties:
                         selectors:
-                          description: One or more override_selector as defined below.
+                          description: One or more override_selector block as defined
+                            below.
                           items:
                             properties:
                               in:
@@ -346,7 +347,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the
@@ -439,7 +440,8 @@ spec:
                     items:
                       properties:
                         selectors:
-                          description: One or more override_selector as defined below.
+                          description: One or more override_selector block as defined
+                            below.
                           items:
                             properties:
                               in:
@@ -491,7 +493,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the
@@ -749,7 +751,8 @@ spec:
                     items:
                       properties:
                         selectors:
-                          description: One or more override_selector as defined below.
+                          description: One or more override_selector block as defined
+                            below.
                           items:
                             properties:
                               in:
@@ -762,7 +765,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the
@@ -815,7 +818,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the

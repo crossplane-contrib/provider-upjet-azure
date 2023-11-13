@@ -172,7 +172,7 @@ spec:
                       defaults to 1.
                     type: number
                   pipeline:
-                    description: block as defined below.
+                    description: A pipeline block as defined below.
                     items:
                       properties:
                         name:
@@ -370,7 +370,7 @@ spec:
                       defaults to 1.
                     type: number
                   pipeline:
-                    description: block as defined below.
+                    description: A pipeline block as defined below.
                     items:
                       properties:
                         name:
@@ -649,7 +649,7 @@ spec:
                       defaults to 1.
                     type: number
                   pipeline:
-                    description: block as defined below.
+                    description: A pipeline block as defined below.
                     items:
                       properties:
                         name:

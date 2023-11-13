@@ -89,7 +89,7 @@ type ConditionInitParameters struct {
 	// A monitor block as defined below.
 	Monitor []MonitorInitParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []MonitorServiceInitParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -113,7 +113,7 @@ type ConditionObservation struct {
 	// A monitor block as defined below.
 	Monitor []MonitorObservation `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []MonitorServiceObservation `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -141,7 +141,7 @@ type ConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	Monitor []MonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	// +kubebuilder:validation:Optional
 	MonitorService []MonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 

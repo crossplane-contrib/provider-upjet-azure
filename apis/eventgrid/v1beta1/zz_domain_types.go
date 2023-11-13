@@ -37,7 +37,7 @@ type DomainInitParameters struct {
 	// A input_mapping_fields block as defined below. Changing this forces a new resource to be created.
 	InputMappingFields []InputMappingFieldsInitParameters `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
 
-	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to eventgridschema. Changing this forces a new resource to be created.
+	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
 	InputSchema *string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
 	// Whether local authentication methods is enabled for the EventGrid Domain. Defaults to true.
@@ -79,7 +79,7 @@ type DomainObservation struct {
 	// A input_mapping_fields block as defined below. Changing this forces a new resource to be created.
 	InputMappingFields []InputMappingFieldsObservation `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
 
-	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to eventgridschema. Changing this forces a new resource to be created.
+	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
 	InputSchema *string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
 	// Whether local authentication methods is enabled for the EventGrid Domain. Defaults to true.
@@ -124,7 +124,7 @@ type DomainParameters struct {
 	// +kubebuilder:validation:Optional
 	InputMappingFields []InputMappingFieldsParameters `json:"inputMappingFields,omitempty" tf:"input_mapping_fields,omitempty"`
 
-	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to eventgridschema. Changing this forces a new resource to be created.
+	// Specifies the schema in which incoming events will be published to this domain. Allowed values are CloudEventSchemaV1_0, CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	InputSchema *string `json:"inputSchema,omitempty" tf:"input_schema,omitempty"`
 
@@ -195,7 +195,7 @@ type IdentityParameters struct {
 
 type InboundIPRuleInitParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action"`
 
 	// The IP mask (CIDR) to match on.
@@ -204,7 +204,7 @@ type InboundIPRuleInitParameters struct {
 
 type InboundIPRuleObservation struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The IP mask (CIDR) to match on.
@@ -213,7 +213,7 @@ type InboundIPRuleObservation struct {
 
 type InboundIPRuleParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 

@@ -174,7 +174,7 @@ type IPFilterRuleInitParameters struct {
 	// The name of the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
+	// Target for requests captured by this rule. Possible values are all, deviceApi and serviceApi.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
@@ -189,7 +189,7 @@ type IPFilterRuleObservation struct {
 	// The name of the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
+	// Target for requests captured by this rule. Possible values are all, deviceApi and serviceApi.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
@@ -207,7 +207,7 @@ type IPFilterRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
+	// Target for requests captured by this rule. Possible values are all, deviceApi and serviceApi.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }

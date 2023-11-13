@@ -19,7 +19,7 @@ import (
 
 type DNSZoneInitParameters struct {
 
-	// An soa_record block as defined below. Changing this forces a new resource to be created.
+	// An soa_record block as defined below.
 	SoaRecord []SoaRecordInitParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -43,7 +43,7 @@ type DNSZoneObservation struct {
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// An soa_record block as defined below. Changing this forces a new resource to be created.
+	// An soa_record block as defined below.
 	SoaRecord []SoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -65,7 +65,7 @@ type DNSZoneParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// An soa_record block as defined below. Changing this forces a new resource to be created.
+	// An soa_record block as defined below.
 	// +kubebuilder:validation:Optional
 	SoaRecord []SoaRecordParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
@@ -82,7 +82,7 @@ type SoaRecordInitParameters struct {
 	// The expire time for the SOA record. Defaults to 2419200.
 	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
 
-	// The domain name of the authoritative name server for the SOA record.
+	// The domain name of the authoritative name server for the SOA record. If not set, computed value from Azure will be used.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
@@ -114,7 +114,7 @@ type SoaRecordObservation struct {
 
 	Fqdn *string `json:"fqdn,omitempty" tf:"fqdn,omitempty"`
 
-	// The domain name of the authoritative name server for the SOA record.
+	// The domain name of the authoritative name server for the SOA record. If not set, computed value from Azure will be used.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
@@ -146,9 +146,9 @@ type SoaRecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpireTime *float64 `json:"expireTime,omitempty" tf:"expire_time,omitempty"`
 
-	// The domain name of the authoritative name server for the SOA record.
+	// The domain name of the authoritative name server for the SOA record. If not set, computed value from Azure will be used.
 	// +kubebuilder:validation:Optional
-	HostName *string `json:"hostName" tf:"host_name,omitempty"`
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// The minimum Time To Live for the SOA record. By convention, it is used to determine the negative caching duration. Defaults to 300.
 	// +kubebuilder:validation:Optional

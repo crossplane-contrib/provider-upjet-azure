@@ -217,7 +217,7 @@ type DiskEncryptionParameters struct {
 
 type EdgeNodeInitParameters struct {
 
-	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster. One or more https_endpoints blocks as defined below.
 	HTTPSEndpoints []HTTPSEndpointsInitParameters `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
 
 	// A install_script_action block as defined below.
@@ -235,7 +235,7 @@ type EdgeNodeInitParameters struct {
 
 type EdgeNodeObservation struct {
 
-	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster. One or more https_endpoints blocks as defined below.
 	HTTPSEndpoints []HTTPSEndpointsObservation `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
 
 	// A install_script_action block as defined below.
@@ -253,7 +253,7 @@ type EdgeNodeObservation struct {
 
 type EdgeNodeParameters struct {
 
-	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster. One or more https_endpoints blocks as defined below.
 	// +kubebuilder:validation:Optional
 	HTTPSEndpoints []HTTPSEndpointsParameters `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
 
@@ -588,7 +588,7 @@ type HeadNodeInitParameters struct {
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	ScriptActions []ScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -606,7 +606,7 @@ type HeadNodeObservation struct {
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	ScriptActions []ScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -632,7 +632,7 @@ type HeadNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScriptActions []ScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -812,7 +812,7 @@ type NetworkInitParameters struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -821,7 +821,7 @@ type NetworkObservation struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -831,7 +831,7 @@ type NetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
@@ -1254,7 +1254,7 @@ type WorkerNodeInitParameters struct {
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	ScriptActions []WorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The number of instances which should be run for the Worker Nodes.
@@ -1278,7 +1278,7 @@ type WorkerNodeObservation struct {
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	ScriptActions []WorkerNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1311,7 +1311,7 @@ type WorkerNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScriptActions []WorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1390,7 +1390,7 @@ type ZookeeperNodeInitParameters struct {
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	ScriptActions []ZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
@@ -1408,7 +1408,7 @@ type ZookeeperNodeObservation struct {
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	ScriptActions []ZookeeperNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1434,7 +1434,7 @@ type ZookeeperNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ScriptActions []ZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 

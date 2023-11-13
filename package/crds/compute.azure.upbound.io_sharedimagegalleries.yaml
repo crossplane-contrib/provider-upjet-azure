@@ -154,6 +154,45 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sharing:
+                    description: A sharing block as defined below. Changing this forces
+                      a new resource to be created.
+                    items:
+                      properties:
+                        communityGallery:
+                          description: A community_gallery block as defined below.
+                            Changing this forces a new resource to be created.
+                          items:
+                            properties:
+                              eula:
+                                description: The End User Licence Agreement for the
+                                  Shared Image Gallery. Changing this forces a new
+                                  resource to be created.
+                                type: string
+                              prefix:
+                                description: Prefix of the community public name for
+                                  the Shared Image Gallery. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                              publisherEmail:
+                                description: Email of the publisher for the Shared
+                                  Image Gallery. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              publisherUri:
+                                description: URI of the publisher for the Shared Image
+                                  Gallery. Changing this forces a new resource to
+                                  be created.
+                                type: string
+                            type: object
+                          type: array
+                        permission:
+                          description: The permission of the Shared Image Gallery
+                            when sharing. Possible values are Community, Groups and
+                            Private. Changing this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -179,6 +218,45 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  sharing:
+                    description: A sharing block as defined below. Changing this forces
+                      a new resource to be created.
+                    items:
+                      properties:
+                        communityGallery:
+                          description: A community_gallery block as defined below.
+                            Changing this forces a new resource to be created.
+                          items:
+                            properties:
+                              eula:
+                                description: The End User Licence Agreement for the
+                                  Shared Image Gallery. Changing this forces a new
+                                  resource to be created.
+                                type: string
+                              prefix:
+                                description: Prefix of the community public name for
+                                  the Shared Image Gallery. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                              publisherEmail:
+                                description: Email of the publisher for the Shared
+                                  Image Gallery. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              publisherUri:
+                                description: URI of the publisher for the Shared Image
+                                  Gallery. Changing this forces a new resource to
+                                  be created.
+                                type: string
+                            type: object
+                          type: array
+                        permission:
+                          description: The permission of the Shared Image Gallery
+                            when sharing. Possible values are Community, Groups and
+                            Private. Changing this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string
@@ -370,6 +448,50 @@ spec:
                       the Shared Image Gallery. Changing this forces a new resource
                       to be created.
                     type: string
+                  sharing:
+                    description: A sharing block as defined below. Changing this forces
+                      a new resource to be created.
+                    items:
+                      properties:
+                        communityGallery:
+                          description: A community_gallery block as defined below.
+                            Changing this forces a new resource to be created.
+                          items:
+                            properties:
+                              eula:
+                                description: The End User Licence Agreement for the
+                                  Shared Image Gallery. Changing this forces a new
+                                  resource to be created.
+                                type: string
+                              name:
+                                description: Specifies the name of the Shared Image
+                                  Gallery. Changing this forces a new resource to
+                                  be created.
+                                type: string
+                              prefix:
+                                description: Prefix of the community public name for
+                                  the Shared Image Gallery. Changing this forces a
+                                  new resource to be created.
+                                type: string
+                              publisherEmail:
+                                description: Email of the publisher for the Shared
+                                  Image Gallery. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              publisherUri:
+                                description: URI of the publisher for the Shared Image
+                                  Gallery. Changing this forces a new resource to
+                                  be created.
+                                type: string
+                            type: object
+                          type: array
+                        permission:
+                          description: The permission of the Shared Image Gallery
+                            when sharing. Possible values are Community, Groups and
+                            Private. Changing this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
                   tags:
                     additionalProperties:
                       type: string

@@ -145,7 +145,7 @@ type RadiusClientRootCertificateParameters struct {
 
 type RadiusInitParameters struct {
 
-	// One or more client_root_certificate blocks as defined above.
+	// One or more client_root_certificate blocks as defined below.
 	ClientRootCertificate []RadiusClientRootCertificateInitParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 
 	// One or more server blocks as defined below.
@@ -157,7 +157,7 @@ type RadiusInitParameters struct {
 
 type RadiusObservation struct {
 
-	// One or more client_root_certificate blocks as defined above.
+	// One or more client_root_certificate blocks as defined below.
 	ClientRootCertificate []RadiusClientRootCertificateObservation `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 
 	// One or more server blocks as defined below.
@@ -169,7 +169,7 @@ type RadiusObservation struct {
 
 type RadiusParameters struct {
 
-	// One or more client_root_certificate blocks as defined above.
+	// One or more client_root_certificate blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ClientRootCertificate []RadiusClientRootCertificateParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 

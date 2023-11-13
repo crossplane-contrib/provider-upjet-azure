@@ -372,6 +372,9 @@ type UpstreamEndpointInitParameters struct {
 
 	// The upstream URL Template. This can be a url or a template such as http://host.com/{hub}/api/{category}/{event}.
 	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
+
+	// Specifies the Managed Identity IDs to be assigned to this signalR upstream setting by using resource uuid as both system assigned and user assigned identity is supported.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type UpstreamEndpointObservation struct {
@@ -387,6 +390,9 @@ type UpstreamEndpointObservation struct {
 
 	// The upstream URL Template. This can be a url or a template such as http://host.com/{hub}/api/{category}/{event}.
 	URLTemplate *string `json:"urlTemplate,omitempty" tf:"url_template,omitempty"`
+
+	// Specifies the Managed Identity IDs to be assigned to this signalR upstream setting by using resource uuid as both system assigned and user assigned identity is supported.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type UpstreamEndpointParameters struct {
@@ -406,6 +412,10 @@ type UpstreamEndpointParameters struct {
 	// The upstream URL Template. This can be a url or a template such as http://host.com/{hub}/api/{category}/{event}.
 	// +kubebuilder:validation:Optional
 	URLTemplate *string `json:"urlTemplate" tf:"url_template,omitempty"`
+
+	// Specifies the Managed Identity IDs to be assigned to this signalR upstream setting by using resource uuid as both system assigned and user assigned identity is supported.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 // ServiceSpec defines the desired state of Service

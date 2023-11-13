@@ -720,7 +720,7 @@ spec:
                     type: array
                   templateParameter:
                     description: One or more template_parameter blocks as defined
-                      below.
+                      below. Required if url_template contains one or more parameters.
                     items:
                       properties:
                         defaultValue:
@@ -1210,7 +1210,7 @@ spec:
                     type: array
                   templateParameter:
                     description: One or more template_parameter blocks as defined
-                      below.
+                      below. Required if url_template contains one or more parameters.
                     items:
                       properties:
                         defaultValue:
@@ -1882,7 +1882,7 @@ spec:
                     type: array
                   templateParameter:
                     description: One or more template_parameter blocks as defined
-                      below.
+                      below. Required if url_template contains one or more parameters.
                     items:
                       properties:
                         defaultValue:

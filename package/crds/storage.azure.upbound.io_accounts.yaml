@@ -114,16 +114,20 @@ spec:
                                 type: string
                               domainSid:
                                 description: Specifies the security identifier (SID).
+                                  This is required when directory_type is set to AD.
                                 type: string
                               forestName:
                                 description: Specifies the Active Directory forest.
+                                  This is required when directory_type is set to AD.
                                 type: string
                               netbiosDomainName:
-                                description: Specifies the NetBIOS domain name.
+                                description: Specifies the NetBIOS domain name. This
+                                  is required when directory_type is set to AD.
                                 type: string
                               storageSid:
                                 description: Specifies the security identifier (SID)
-                                  for Azure Storage.
+                                  for Azure Storage. This is required when directory_type
+                                  is set to AD.
                                 type: string
                             type: object
                           type: array
@@ -365,13 +369,13 @@ spec:
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
                             Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
-                            and Private IP address ranges (as defined in RFC 1918),  are
-                            not allowed.
+                            and Private IP address ranges (as defined in RFC 1918),
+                            are not allowed.
                           items:
                             type: string
                           type: array
                         privateLinkAccess:
-                          description: One or More private_link_access block as defined
+                          description: One or more private_link_access block as defined
                             below.
                           items:
                             properties:
@@ -722,8 +726,8 @@ spec:
                     description: Indicates whether the storage account permits requests
                       to be authorized with the account access key via Shared Key.
                       If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory (Azure AD). The
-                      default value is true.
+                      must be authorized with Azure Active Directory (Azure AD). Defaults
+                      to true.
                     type: boolean
                   staticWebsite:
                     description: A static_website block as defined below.
@@ -811,16 +815,20 @@ spec:
                                 type: string
                               domainSid:
                                 description: Specifies the security identifier (SID).
+                                  This is required when directory_type is set to AD.
                                 type: string
                               forestName:
                                 description: Specifies the Active Directory forest.
+                                  This is required when directory_type is set to AD.
                                 type: string
                               netbiosDomainName:
-                                description: Specifies the NetBIOS domain name.
+                                description: Specifies the NetBIOS domain name. This
+                                  is required when directory_type is set to AD.
                                 type: string
                               storageSid:
                                 description: Specifies the security identifier (SID)
-                                  for Azure Storage.
+                                  for Azure Storage. This is required when directory_type
+                                  is set to AD.
                                 type: string
                             type: object
                           type: array
@@ -1062,13 +1070,13 @@ spec:
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
                             Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
-                            and Private IP address ranges (as defined in RFC 1918),  are
-                            not allowed.
+                            and Private IP address ranges (as defined in RFC 1918),
+                            are not allowed.
                           items:
                             type: string
                           type: array
                         privateLinkAccess:
-                          description: One or More private_link_access block as defined
+                          description: One or more private_link_access block as defined
                             below.
                           items:
                             properties:
@@ -1339,8 +1347,8 @@ spec:
                     description: Indicates whether the storage account permits requests
                       to be authorized with the account access key via Shared Key.
                       If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory (Azure AD). The
-                      default value is true.
+                      must be authorized with Azure Active Directory (Azure AD). Defaults
+                      to true.
                     type: boolean
                   staticWebsite:
                     description: A static_website block as defined below.
@@ -1594,16 +1602,20 @@ spec:
                                 type: string
                               domainSid:
                                 description: Specifies the security identifier (SID).
+                                  This is required when directory_type is set to AD.
                                 type: string
                               forestName:
                                 description: Specifies the Active Directory forest.
+                                  This is required when directory_type is set to AD.
                                 type: string
                               netbiosDomainName:
-                                description: Specifies the NetBIOS domain name.
+                                description: Specifies the NetBIOS domain name. This
+                                  is required when directory_type is set to AD.
                                 type: string
                               storageSid:
                                 description: Specifies the security identifier (SID)
-                                  for Azure Storage.
+                                  for Azure Storage. This is required when directory_type
+                                  is set to AD.
                                 type: string
                             type: object
                           type: array
@@ -1856,13 +1868,13 @@ spec:
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
                             Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
-                            and Private IP address ranges (as defined in RFC 1918),  are
-                            not allowed.
+                            and Private IP address ranges (as defined in RFC 1918),
+                            are not allowed.
                           items:
                             type: string
                           type: array
                         privateLinkAccess:
-                          description: One or More private_link_access block as defined
+                          description: One or more private_link_access block as defined
                             below.
                           items:
                             properties:
@@ -2238,8 +2250,8 @@ spec:
                     description: Indicates whether the storage account permits requests
                       to be authorized with the account access key via Shared Key.
                       If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory (Azure AD). The
-                      default value is true.
+                      must be authorized with Azure Active Directory (Azure AD). Defaults
+                      to true.
                     type: boolean
                   staticWebsite:
                     description: A static_website block as defined below.

@@ -153,8 +153,8 @@ spec:
                     type: object
                   requiresClientAuthorization:
                     description: Specify if client authorization is needed for this
-                      hybrid connection. True by default. Changing this forces a new
-                      resource to be created. Defaults to true.
+                      hybrid connection. Changing this forces a new resource to be
+                      created. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -262,8 +262,8 @@ spec:
                     type: string
                   requiresClientAuthorization:
                     description: Specify if client authorization is needed for this
-                      hybrid connection. True by default. Changing this forces a new
-                      resource to be created. Defaults to true.
+                      hybrid connection. Changing this forces a new resource to be
+                      created. Defaults to true.
                     type: boolean
                   userMetadata:
                     description: The usermetadata is a placeholder to store user-defined
@@ -457,8 +457,8 @@ spec:
                     type: string
                   requiresClientAuthorization:
                     description: Specify if client authorization is needed for this
-                      hybrid connection. True by default. Changing this forces a new
-                      resource to be created. Defaults to true.
+                      hybrid connection. Changing this forces a new resource to be
+                      created. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create

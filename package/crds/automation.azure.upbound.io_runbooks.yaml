@@ -253,7 +253,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   publishContentLink:
-                    description: The published runbook content link.
+                    description: One publish_content_link block as defined below.
                     items:
                       properties:
                         hash:
@@ -488,7 +488,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   publishContentLink:
-                    description: The published runbook content link.
+                    description: One publish_content_link block as defined below.
                     items:
                       properties:
                         hash:
@@ -829,7 +829,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   publishContentLink:
-                    description: The published runbook content link.
+                    description: One publish_content_link block as defined below.
                     items:
                       properties:
                         hash:

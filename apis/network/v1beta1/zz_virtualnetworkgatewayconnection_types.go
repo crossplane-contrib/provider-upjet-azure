@@ -43,7 +43,7 @@ type CustomBGPAddressesParameters struct {
 
 	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (second one)
 	// +kubebuilder:validation:Optional
-	Secondary *string `json:"secondary" tf:"secondary,omitempty"`
+	Secondary *string `json:"secondary,omitempty" tf:"secondary,omitempty"`
 }
 
 type IpsecPolicyInitParameters struct {
@@ -179,7 +179,7 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	// -> Note: Only valid for IPSec connections on virtual network gateways with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
 
-	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// A custom_bgp_addresses block which is documented below.
 	// The block can only be used on IPSec / activeactive connections,
 	// For details about see the relevant section in the Azure documentation.
 	CustomBGPAddresses []CustomBGPAddressesInitParameters `json:"customBgpAddresses,omitempty" tf:"custom_bgp_addresses,omitempty"`
@@ -240,7 +240,7 @@ type VirtualNetworkGatewayConnectionObservation struct {
 	// -> Note: Only valid for IPSec connections on virtual network gateways with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
 
-	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// A custom_bgp_addresses block which is documented below.
 	// The block can only be used on IPSec / activeactive connections,
 	// For details about see the relevant section in the Azure documentation.
 	CustomBGPAddresses []CustomBGPAddressesObservation `json:"customBgpAddresses,omitempty" tf:"custom_bgp_addresses,omitempty"`
@@ -322,7 +322,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
 
-	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// A custom_bgp_addresses block which is documented below.
 	// The block can only be used on IPSec / activeactive connections,
 	// For details about see the relevant section in the Azure documentation.
 	// +kubebuilder:validation:Optional

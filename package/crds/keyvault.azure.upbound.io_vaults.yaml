@@ -514,8 +514,8 @@ spec:
               atProvider:
                 properties:
                   accessPolicy:
-                    description: A list of up to 1024 objects describing access policies,
-                      as described below.
+                    description: A list of access_policy objects (up to 1024) describing
+                      access policies, as described below.
                     items:
                       properties:
                         applicationId:

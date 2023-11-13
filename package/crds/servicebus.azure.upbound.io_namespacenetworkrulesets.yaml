@@ -71,7 +71,7 @@ spec:
                   defaultAction:
                     description: Specifies the default action for the ServiceBus Namespace
                       Network Rule Set. Possible values are Allow and Deny. Defaults
-                      to Deny.
+                      to Allow.
                     type: string
                   ipRules:
                     description: One or more IP Addresses, or CIDR Blocks which should
@@ -277,7 +277,7 @@ spec:
                   defaultAction:
                     description: Specifies the default action for the ServiceBus Namespace
                       Network Rule Set. Possible values are Allow and Deny. Defaults
-                      to Deny.
+                      to Allow.
                     type: string
                   ipRules:
                     description: One or more IP Addresses, or CIDR Blocks which should
@@ -475,7 +475,7 @@ spec:
                   defaultAction:
                     description: Specifies the default action for the ServiceBus Namespace
                       Network Rule Set. Possible values are Allow and Deny. Defaults
-                      to Deny.
+                      to Allow.
                     type: string
                   id:
                     description: The ID of the ServiceBus Namespace Network Rule Set.

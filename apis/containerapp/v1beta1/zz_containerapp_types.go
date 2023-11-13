@@ -17,6 +17,84 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AuthenticationInitParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type AuthenticationObservation struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type AuthenticationParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	// +kubebuilder:validation:Optional
+	TriggerParameter *string `json:"triggerParameter" tf:"trigger_parameter,omitempty"`
+}
+
+type AzureQueueScaleRuleInitParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the length of the queue to trigger scaling actions.
+	QueueLength *float64 `json:"queueLength,omitempty" tf:"queue_length,omitempty"`
+
+	// The name of the Azure Queue
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+}
+
+type AzureQueueScaleRuleObservation struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The value of the length of the queue to trigger scaling actions.
+	QueueLength *float64 `json:"queueLength,omitempty" tf:"queue_length,omitempty"`
+
+	// The name of the Azure Queue
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+}
+
+type AzureQueueScaleRuleParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Authentication []AuthenticationParameters `json:"authentication" tf:"authentication,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The value of the length of the queue to trigger scaling actions.
+	// +kubebuilder:validation:Optional
+	QueueLength *float64 `json:"queueLength" tf:"queue_length,omitempty"`
+
+	// The name of the Azure Queue
+	// +kubebuilder:validation:Optional
+	QueueName *string `json:"queueName" tf:"queue_name,omitempty"`
+}
+
 type ContainerAppInitParameters struct {
 
 	// A dapr block as detailed below.
@@ -182,7 +260,7 @@ type ContainerInitParameters struct {
 	// A liveness_probe block as detailed below.
 	LivenessProbe []LivenessProbeInitParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values include 0.5Gi, 1.0Gi, 1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi.
+	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
 	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
@@ -228,7 +306,7 @@ type ContainerObservation struct {
 	// A liveness_probe block as detailed below.
 	LivenessProbe []LivenessProbeObservation `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values include 0.5Gi, 1.0Gi, 1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi.
+	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
 	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 
@@ -276,7 +354,7 @@ type ContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	LivenessProbe []LivenessProbeParameters `json:"livenessProbe,omitempty" tf:"liveness_probe,omitempty"`
 
-	// The amount of memory to allocate to the container. Possible values include 0.5Gi, 1.0Gi, 1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi.
+	// The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi.
 	// The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory" tf:"memory,omitempty"`
@@ -340,6 +418,84 @@ type CustomDomainParameters struct {
 
 	// The name of the Volume to be mounted in the container.
 	// The hostname of the Certificate. Must be the CN or a named SAN in the certificate.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
+type CustomScaleRuleAuthenticationInitParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type CustomScaleRuleAuthenticationObservation struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type CustomScaleRuleAuthenticationParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	// +kubebuilder:validation:Optional
+	TriggerParameter *string `json:"triggerParameter" tf:"trigger_parameter,omitempty"`
+}
+
+type CustomScaleRuleInitParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []CustomScaleRuleAuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// The Custom rule type. Possible values include: activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid,solace-event-queue, and github-runner.
+	CustomRuleType *string `json:"customRuleType,omitempty" tf:"custom_rule_type,omitempty"`
+
+	// - A map of string key-value pairs to configure the Custom Scale Rule.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type CustomScaleRuleObservation struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []CustomScaleRuleAuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// The Custom rule type. Possible values include: activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid,solace-event-queue, and github-runner.
+	CustomRuleType *string `json:"customRuleType,omitempty" tf:"custom_rule_type,omitempty"`
+
+	// - A map of string key-value pairs to configure the Custom Scale Rule.
+	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type CustomScaleRuleParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Authentication []CustomScaleRuleAuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// The Custom rule type. Possible values include: activemq, artemis-queue, kafka, pulsar, aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream, aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer, azure-eventhub, azure-log-analytics, azure-monitor, azure-pipelines, azure-servicebus, azure-queue, cassandra, cpu, cron, datadog, elasticsearch, external, external-push, gcp-stackdriver, gcp-storage, gcp-pubsub, graphite, http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload, liiklus, memory, metrics-api, mongodb, mssql, mysql, nats-jetstream, stan, tcp, new-relic, openstack-metric, openstack-swift, postgresql, predictkube, prometheus, rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams, redis-cluster-streams, redis-sentinel-streams, selenium-grid,solace-event-queue, and github-runner.
+	// +kubebuilder:validation:Optional
+	CustomRuleType *string `json:"customRuleType" tf:"custom_rule_type,omitempty"`
+
+	// - A map of string key-value pairs to configure the Custom Scale Rule.
+	// +kubebuilder:validation:Optional
+	Metadata map[string]*string `json:"metadata" tf:"metadata,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 }
@@ -440,6 +596,74 @@ type EnvParameters struct {
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
+type HTTPScaleRuleAuthenticationInitParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type HTTPScaleRuleAuthenticationObservation struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type HTTPScaleRuleAuthenticationParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	// +kubebuilder:validation:Optional
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type HTTPScaleRuleInitParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []HTTPScaleRuleAuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// - The number of concurrent requests to trigger scaling.
+	ConcurrentRequests *string `json:"concurrentRequests,omitempty" tf:"concurrent_requests,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type HTTPScaleRuleObservation struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []HTTPScaleRuleAuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// - The number of concurrent requests to trigger scaling.
+	ConcurrentRequests *string `json:"concurrentRequests,omitempty" tf:"concurrent_requests,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type HTTPScaleRuleParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Authentication []HTTPScaleRuleAuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// - The number of concurrent requests to trigger scaling.
+	// +kubebuilder:validation:Optional
+	ConcurrentRequests *string `json:"concurrentRequests" tf:"concurrent_requests,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type HeaderInitParameters struct {
 
 	// The name of the Volume to be mounted in the container.
@@ -477,16 +701,16 @@ type HeaderParameters struct {
 
 type IdentityInitParameters struct {
 
-	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
 
-	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The ID of the Container App.
@@ -495,17 +719,17 @@ type IdentityObservation struct {
 	// The ID of the Container App.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
 
-	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned or SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
-	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
+	// The type of managed identity to assign. Possible values are SystemAssigned, UserAssigned, and SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -519,7 +743,11 @@ type IngressInitParameters struct {
 	// One or more custom_domain block as detailed below.
 	CustomDomain []CustomDomainInitParameters `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
 
-	// Is this an external Ingress.
+	// The exposed port on the container for the Ingress traffic.
+	// The exposed port on the container for the Ingress traffic.
+	ExposedPort *float64 `json:"exposedPort,omitempty" tf:"exposed_port,omitempty"`
+
+	// Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
 	// Is this an external Ingress.
 	ExternalEnabled *bool `json:"externalEnabled,omitempty" tf:"external_enabled,omitempty"`
 
@@ -530,8 +758,8 @@ type IngressInitParameters struct {
 	// A traffic_weight block as detailed below.
 	TrafficWeight []TrafficWeightInitParameters `json:"trafficWeight,omitempty" tf:"traffic_weight,omitempty"`
 
-	// The transport method for the Ingress. Possible values include auto, http, and http2. Defaults to auto
-	// The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`. Defaults to `auto`
+	// The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+	// The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
 	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
 }
 
@@ -544,7 +772,11 @@ type IngressObservation struct {
 	// One or more custom_domain block as detailed below.
 	CustomDomain []CustomDomainObservation `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
 
-	// Is this an external Ingress.
+	// The exposed port on the container for the Ingress traffic.
+	// The exposed port on the container for the Ingress traffic.
+	ExposedPort *float64 `json:"exposedPort,omitempty" tf:"exposed_port,omitempty"`
+
+	// Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
 	// Is this an external Ingress.
 	ExternalEnabled *bool `json:"externalEnabled,omitempty" tf:"external_enabled,omitempty"`
 
@@ -559,8 +791,8 @@ type IngressObservation struct {
 	// A traffic_weight block as detailed below.
 	TrafficWeight []TrafficWeightObservation `json:"trafficWeight,omitempty" tf:"traffic_weight,omitempty"`
 
-	// The transport method for the Ingress. Possible values include auto, http, and http2. Defaults to auto
-	// The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`. Defaults to `auto`
+	// The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+	// The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
 	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
 }
 
@@ -575,7 +807,12 @@ type IngressParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomDomain []CustomDomainParameters `json:"customDomain,omitempty" tf:"custom_domain,omitempty"`
 
-	// Is this an external Ingress.
+	// The exposed port on the container for the Ingress traffic.
+	// The exposed port on the container for the Ingress traffic.
+	// +kubebuilder:validation:Optional
+	ExposedPort *float64 `json:"exposedPort,omitempty" tf:"exposed_port,omitempty"`
+
+	// Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
 	// Is this an external Ingress.
 	// +kubebuilder:validation:Optional
 	ExternalEnabled *bool `json:"externalEnabled,omitempty" tf:"external_enabled,omitempty"`
@@ -589,8 +826,8 @@ type IngressParameters struct {
 	// +kubebuilder:validation:Optional
 	TrafficWeight []TrafficWeightParameters `json:"trafficWeight" tf:"traffic_weight,omitempty"`
 
-	// The transport method for the Ingress. Possible values include auto, http, and http2. Defaults to auto
-	// The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`. Defaults to `auto`
+	// The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+	// The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
 	// +kubebuilder:validation:Optional
 	Transport *string `json:"transport,omitempty" tf:"transport,omitempty"`
 }
@@ -1109,10 +1346,87 @@ type StartupProbeParameters struct {
 	Transport *string `json:"transport" tf:"transport,omitempty"`
 }
 
+type TCPScaleRuleAuthenticationInitParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type TCPScaleRuleAuthenticationObservation struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type TCPScaleRuleAuthenticationParameters struct {
+
+	// The name of the secret that contains the value for this environment variable.
+	// +kubebuilder:validation:Optional
+	SecretName *string `json:"secretName" tf:"secret_name,omitempty"`
+
+	// The Trigger Parameter name to use the supply the value retrieved from the secret_name.
+	// +kubebuilder:validation:Optional
+	TriggerParameter *string `json:"triggerParameter,omitempty" tf:"trigger_parameter,omitempty"`
+}
+
+type TCPScaleRuleInitParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []TCPScaleRuleAuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// - The number of concurrent requests to trigger scaling.
+	ConcurrentRequests *string `json:"concurrentRequests,omitempty" tf:"concurrent_requests,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type TCPScaleRuleObservation struct {
+
+	// Zero or more authentication blocks as defined below.
+	Authentication []TCPScaleRuleAuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// - The number of concurrent requests to trigger scaling.
+	ConcurrentRequests *string `json:"concurrentRequests,omitempty" tf:"concurrent_requests,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type TCPScaleRuleParameters struct {
+
+	// Zero or more authentication blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Authentication []TCPScaleRuleAuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
+
+	// - The number of concurrent requests to trigger scaling.
+	// +kubebuilder:validation:Optional
+	ConcurrentRequests *string `json:"concurrentRequests" tf:"concurrent_requests,omitempty"`
+
+	// The name of the Volume to be mounted in the container.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type TemplateInitParameters struct {
+
+	// One or more azure_queue_scale_rule blocks as defined below.
+	AzureQueueScaleRule []AzureQueueScaleRuleInitParameters `json:"azureQueueScaleRule,omitempty" tf:"azure_queue_scale_rule,omitempty"`
 
 	// One or more container blocks as detailed below.
 	Container []ContainerInitParameters `json:"container,omitempty" tf:"container,omitempty"`
+
+	// One or more custom_scale_rule blocks as defined below.
+	CustomScaleRule []CustomScaleRuleInitParameters `json:"customScaleRule,omitempty" tf:"custom_scale_rule,omitempty"`
+
+	// One or more http_scale_rule blocks as defined below.
+	HTTPScaleRule []HTTPScaleRuleInitParameters `json:"httpScaleRule,omitempty" tf:"http_scale_rule,omitempty"`
 
 	// The maximum number of replicas for this container.
 	// The maximum number of replicas for this container.
@@ -1125,6 +1439,9 @@ type TemplateInitParameters struct {
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	RevisionSuffix *string `json:"revisionSuffix,omitempty" tf:"revision_suffix,omitempty"`
+
+	// One or more tcp_scale_rule blocks as defined below.
+	TCPScaleRule []TCPScaleRuleInitParameters `json:"tcpScaleRule,omitempty" tf:"tcp_scale_rule,omitempty"`
 
 	// A volume block as detailed below.
 	Volume []VolumeInitParameters `json:"volume,omitempty" tf:"volume,omitempty"`
@@ -1132,8 +1449,17 @@ type TemplateInitParameters struct {
 
 type TemplateObservation struct {
 
+	// One or more azure_queue_scale_rule blocks as defined below.
+	AzureQueueScaleRule []AzureQueueScaleRuleObservation `json:"azureQueueScaleRule,omitempty" tf:"azure_queue_scale_rule,omitempty"`
+
 	// One or more container blocks as detailed below.
 	Container []ContainerObservation `json:"container,omitempty" tf:"container,omitempty"`
+
+	// One or more custom_scale_rule blocks as defined below.
+	CustomScaleRule []CustomScaleRuleObservation `json:"customScaleRule,omitempty" tf:"custom_scale_rule,omitempty"`
+
+	// One or more http_scale_rule blocks as defined below.
+	HTTPScaleRule []HTTPScaleRuleObservation `json:"httpScaleRule,omitempty" tf:"http_scale_rule,omitempty"`
 
 	// The maximum number of replicas for this container.
 	// The maximum number of replicas for this container.
@@ -1146,6 +1472,9 @@ type TemplateObservation struct {
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	RevisionSuffix *string `json:"revisionSuffix,omitempty" tf:"revision_suffix,omitempty"`
+
+	// One or more tcp_scale_rule blocks as defined below.
+	TCPScaleRule []TCPScaleRuleObservation `json:"tcpScaleRule,omitempty" tf:"tcp_scale_rule,omitempty"`
 
 	// A volume block as detailed below.
 	Volume []VolumeObservation `json:"volume,omitempty" tf:"volume,omitempty"`
@@ -1153,9 +1482,21 @@ type TemplateObservation struct {
 
 type TemplateParameters struct {
 
+	// One or more azure_queue_scale_rule blocks as defined below.
+	// +kubebuilder:validation:Optional
+	AzureQueueScaleRule []AzureQueueScaleRuleParameters `json:"azureQueueScaleRule,omitempty" tf:"azure_queue_scale_rule,omitempty"`
+
 	// One or more container blocks as detailed below.
 	// +kubebuilder:validation:Optional
 	Container []ContainerParameters `json:"container" tf:"container,omitempty"`
+
+	// One or more custom_scale_rule blocks as defined below.
+	// +kubebuilder:validation:Optional
+	CustomScaleRule []CustomScaleRuleParameters `json:"customScaleRule,omitempty" tf:"custom_scale_rule,omitempty"`
+
+	// One or more http_scale_rule blocks as defined below.
+	// +kubebuilder:validation:Optional
+	HTTPScaleRule []HTTPScaleRuleParameters `json:"httpScaleRule,omitempty" tf:"http_scale_rule,omitempty"`
 
 	// The maximum number of replicas for this container.
 	// The maximum number of replicas for this container.
@@ -1171,6 +1512,10 @@ type TemplateParameters struct {
 	// The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
 	// +kubebuilder:validation:Optional
 	RevisionSuffix *string `json:"revisionSuffix,omitempty" tf:"revision_suffix,omitempty"`
+
+	// One or more tcp_scale_rule blocks as defined below.
+	// +kubebuilder:validation:Optional
+	TCPScaleRule []TCPScaleRuleParameters `json:"tcpScaleRule,omitempty" tf:"tcp_scale_rule,omitempty"`
 
 	// A volume block as detailed below.
 	// +kubebuilder:validation:Optional
@@ -1248,7 +1593,7 @@ type VolumeInitParameters struct {
 	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage volume. Possible values include AzureFile and EmptyDir. Defaults to EmptyDir.
+	// The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
@@ -1298,7 +1643,7 @@ type VolumeObservation struct {
 	// The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage volume. Possible values include AzureFile and EmptyDir. Defaults to EmptyDir.
+	// The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 }
@@ -1315,7 +1660,7 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageName *string `json:"storageName,omitempty" tf:"storage_name,omitempty"`
 
-	// The type of storage volume. Possible values include AzureFile and EmptyDir. Defaults to EmptyDir.
+	// The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
 	// The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`

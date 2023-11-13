@@ -202,7 +202,7 @@ spec:
                           type: string
                         notifyBeforeExpiry:
                           description: Notify at a given duration before expiry as
-                            an ISO 8601 duration. Default is P30D.
+                            an ISO 8601 duration.
                           type: string
                       type: object
                     type: array
@@ -283,7 +283,7 @@ spec:
                           type: string
                         notifyBeforeExpiry:
                           description: Notify at a given duration before expiry as
-                            an ISO 8601 duration. Default is P30D.
+                            an ISO 8601 duration.
                           type: string
                       type: object
                     type: array
@@ -560,7 +560,7 @@ spec:
                           type: string
                         notifyBeforeExpiry:
                           description: Notify at a given duration before expiry as
-                            an ISO 8601 duration. Default is P30D.
+                            an ISO 8601 duration.
                           type: string
                       type: object
                     type: array

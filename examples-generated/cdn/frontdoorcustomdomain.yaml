@@ -50,7 +50,7 @@ spec:
   forProvider:
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
 
 ---
 

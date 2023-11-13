@@ -67,6 +67,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  appSettings:
+                    additionalProperties:
+                      type: string
+                    description: A key-value pair of App Settings.
+                    type: object
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -194,6 +199,11 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  appSettings:
+                    additionalProperties:
+                      type: string
+                    description: A key-value pair of App Settings.
+                    type: object
                   identity:
                     description: An identity block as defined below.
                     items:
@@ -399,6 +409,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  appSettings:
+                    additionalProperties:
+                      type: string
+                    description: A key-value pair of App Settings.
+                    type: object
                   defaultHostName:
                     description: The default host name of the Static Web App.
                     type: string

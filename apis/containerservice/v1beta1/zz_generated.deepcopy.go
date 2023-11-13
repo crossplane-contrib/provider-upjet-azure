@@ -1030,6 +1030,11 @@ func (in *DefaultNodePoolInitParameters) DeepCopyInto(out *DefaultNodePoolInitPa
 		*out = new(string)
 		**out = **in
 	}
+	if in.SnapshotID != nil {
+		in, out := &in.SnapshotID, &out.SnapshotID
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1264,6 +1269,11 @@ func (in *DefaultNodePoolObservation) DeepCopyInto(out *DefaultNodePoolObservati
 	}
 	if in.ScaleDownMode != nil {
 		in, out := &in.ScaleDownMode, &out.ScaleDownMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.SnapshotID != nil {
+		in, out := &in.SnapshotID, &out.SnapshotID
 		*out = new(string)
 		**out = **in
 	}
@@ -1516,6 +1526,11 @@ func (in *DefaultNodePoolParameters) DeepCopyInto(out *DefaultNodePoolParameters
 	}
 	if in.ScaleDownMode != nil {
 		in, out := &in.ScaleDownMode, &out.ScaleDownMode
+		*out = new(string)
+		**out = **in
+	}
+	if in.SnapshotID != nil {
+		in, out := &in.SnapshotID, &out.SnapshotID
 		*out = new(string)
 		**out = **in
 	}
@@ -2802,6 +2817,17 @@ func (in *KubernetesClusterInitParameters) DeepCopyInto(out *KubernetesClusterIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CustomCATrustCertificatesBase64 != nil {
+		in, out := &in.CustomCATrustCertificatesBase64, &out.CustomCATrustCertificatesBase64
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.DNSPrefix != nil {
 		in, out := &in.DNSPrefix, &out.DNSPrefix
 		*out = new(string)
@@ -2920,6 +2946,20 @@ func (in *KubernetesClusterInitParameters) DeepCopyInto(out *KubernetesClusterIn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.MaintenanceWindowAutoUpgrade != nil {
+		in, out := &in.MaintenanceWindowAutoUpgrade, &out.MaintenanceWindowAutoUpgrade
+		*out = make([]MaintenanceWindowAutoUpgradeInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.MaintenanceWindowNodeOs != nil {
+		in, out := &in.MaintenanceWindowNodeOs, &out.MaintenanceWindowNodeOs
+		*out = make([]MaintenanceWindowNodeOsInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.MicrosoftDefender != nil {
 		in, out := &in.MicrosoftDefender, &out.MicrosoftDefender
 		*out = make([]MicrosoftDefenderInitParameters, len(*in))
@@ -2940,6 +2980,11 @@ func (in *KubernetesClusterInitParameters) DeepCopyInto(out *KubernetesClusterIn
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.NodeOsChannelUpgrade != nil {
+		in, out := &in.NodeOsChannelUpgrade, &out.NodeOsChannelUpgrade
+		*out = new(string)
+		**out = **in
 	}
 	if in.NodeResourceGroup != nil {
 		in, out := &in.NodeResourceGroup, &out.NodeResourceGroup
@@ -4602,6 +4647,17 @@ func (in *KubernetesClusterObservation) DeepCopyInto(out *KubernetesClusterObser
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CustomCATrustCertificatesBase64 != nil {
+		in, out := &in.CustomCATrustCertificatesBase64, &out.CustomCATrustCertificatesBase64
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.DNSPrefix != nil {
 		in, out := &in.DNSPrefix, &out.DNSPrefix
 		*out = new(string)
@@ -4735,6 +4791,20 @@ func (in *KubernetesClusterObservation) DeepCopyInto(out *KubernetesClusterObser
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.MaintenanceWindowAutoUpgrade != nil {
+		in, out := &in.MaintenanceWindowAutoUpgrade, &out.MaintenanceWindowAutoUpgrade
+		*out = make([]MaintenanceWindowAutoUpgradeObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.MaintenanceWindowNodeOs != nil {
+		in, out := &in.MaintenanceWindowNodeOs, &out.MaintenanceWindowNodeOs
+		*out = make([]MaintenanceWindowNodeOsObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.MicrosoftDefender != nil {
 		in, out := &in.MicrosoftDefender, &out.MicrosoftDefender
 		*out = make([]MicrosoftDefenderObservation, len(*in))
@@ -4755,6 +4825,11 @@ func (in *KubernetesClusterObservation) DeepCopyInto(out *KubernetesClusterObser
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.NodeOsChannelUpgrade != nil {
+		in, out := &in.NodeOsChannelUpgrade, &out.NodeOsChannelUpgrade
+		*out = new(string)
+		**out = **in
 	}
 	if in.NodeResourceGroup != nil {
 		in, out := &in.NodeResourceGroup, &out.NodeResourceGroup
@@ -4972,6 +5047,17 @@ func (in *KubernetesClusterParameters) DeepCopyInto(out *KubernetesClusterParame
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.CustomCATrustCertificatesBase64 != nil {
+		in, out := &in.CustomCATrustCertificatesBase64, &out.CustomCATrustCertificatesBase64
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.DNSPrefix != nil {
 		in, out := &in.DNSPrefix, &out.DNSPrefix
 		*out = new(string)
@@ -5090,6 +5176,20 @@ func (in *KubernetesClusterParameters) DeepCopyInto(out *KubernetesClusterParame
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.MaintenanceWindowAutoUpgrade != nil {
+		in, out := &in.MaintenanceWindowAutoUpgrade, &out.MaintenanceWindowAutoUpgrade
+		*out = make([]MaintenanceWindowAutoUpgradeParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.MaintenanceWindowNodeOs != nil {
+		in, out := &in.MaintenanceWindowNodeOs, &out.MaintenanceWindowNodeOs
+		*out = make([]MaintenanceWindowNodeOsParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.MicrosoftDefender != nil {
 		in, out := &in.MicrosoftDefender, &out.MicrosoftDefender
 		*out = make([]MicrosoftDefenderParameters, len(*in))
@@ -5110,6 +5210,11 @@ func (in *KubernetesClusterParameters) DeepCopyInto(out *KubernetesClusterParame
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.NodeOsChannelUpgrade != nil {
+		in, out := &in.NodeOsChannelUpgrade, &out.NodeOsChannelUpgrade
+		*out = new(string)
+		**out = **in
 	}
 	if in.NodeResourceGroup != nil {
 		in, out := &in.NodeResourceGroup, &out.NodeResourceGroup
@@ -6406,6 +6511,282 @@ func (in *LoadBalancerProfileParameters) DeepCopy() *LoadBalancerProfileParamete
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowAutoUpgradeInitParameters) DeepCopyInto(out *MaintenanceWindowAutoUpgradeInitParameters) {
+	*out = *in
+	if in.DayOfMonth != nil {
+		in, out := &in.DayOfMonth, &out.DayOfMonth
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DayOfWeek != nil {
+		in, out := &in.DayOfWeek, &out.DayOfWeek
+		*out = new(string)
+		**out = **in
+	}
+	if in.Duration != nil {
+		in, out := &in.Duration, &out.Duration
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Frequency != nil {
+		in, out := &in.Frequency, &out.Frequency
+		*out = new(string)
+		**out = **in
+	}
+	if in.Interval != nil {
+		in, out := &in.Interval, &out.Interval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NotAllowed != nil {
+		in, out := &in.NotAllowed, &out.NotAllowed
+		*out = make([]MaintenanceWindowAutoUpgradeNotAllowedInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StartDate != nil {
+		in, out := &in.StartDate, &out.StartDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.StartTime != nil {
+		in, out := &in.StartTime, &out.StartTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.UtcOffset != nil {
+		in, out := &in.UtcOffset, &out.UtcOffset
+		*out = new(string)
+		**out = **in
+	}
+	if in.WeekIndex != nil {
+		in, out := &in.WeekIndex, &out.WeekIndex
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowAutoUpgradeInitParameters.
+func (in *MaintenanceWindowAutoUpgradeInitParameters) DeepCopy() *MaintenanceWindowAutoUpgradeInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowAutoUpgradeInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowAutoUpgradeNotAllowedInitParameters) DeepCopyInto(out *MaintenanceWindowAutoUpgradeNotAllowedInitParameters) {
+	*out = *in
+	if in.End != nil {
+		in, out := &in.End, &out.End
+		*out = new(string)
+		**out = **in
+	}
+	if in.Start != nil {
+		in, out := &in.Start, &out.Start
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowAutoUpgradeNotAllowedInitParameters.
+func (in *MaintenanceWindowAutoUpgradeNotAllowedInitParameters) DeepCopy() *MaintenanceWindowAutoUpgradeNotAllowedInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowAutoUpgradeNotAllowedInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowAutoUpgradeNotAllowedObservation) DeepCopyInto(out *MaintenanceWindowAutoUpgradeNotAllowedObservation) {
+	*out = *in
+	if in.End != nil {
+		in, out := &in.End, &out.End
+		*out = new(string)
+		**out = **in
+	}
+	if in.Start != nil {
+		in, out := &in.Start, &out.Start
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowAutoUpgradeNotAllowedObservation.
+func (in *MaintenanceWindowAutoUpgradeNotAllowedObservation) DeepCopy() *MaintenanceWindowAutoUpgradeNotAllowedObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowAutoUpgradeNotAllowedObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowAutoUpgradeNotAllowedParameters) DeepCopyInto(out *MaintenanceWindowAutoUpgradeNotAllowedParameters) {
+	*out = *in
+	if in.End != nil {
+		in, out := &in.End, &out.End
+		*out = new(string)
+		**out = **in
+	}
+	if in.Start != nil {
+		in, out := &in.Start, &out.Start
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowAutoUpgradeNotAllowedParameters.
+func (in *MaintenanceWindowAutoUpgradeNotAllowedParameters) DeepCopy() *MaintenanceWindowAutoUpgradeNotAllowedParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowAutoUpgradeNotAllowedParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowAutoUpgradeObservation) DeepCopyInto(out *MaintenanceWindowAutoUpgradeObservation) {
+	*out = *in
+	if in.DayOfMonth != nil {
+		in, out := &in.DayOfMonth, &out.DayOfMonth
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DayOfWeek != nil {
+		in, out := &in.DayOfWeek, &out.DayOfWeek
+		*out = new(string)
+		**out = **in
+	}
+	if in.Duration != nil {
+		in, out := &in.Duration, &out.Duration
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Frequency != nil {
+		in, out := &in.Frequency, &out.Frequency
+		*out = new(string)
+		**out = **in
+	}
+	if in.Interval != nil {
+		in, out := &in.Interval, &out.Interval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NotAllowed != nil {
+		in, out := &in.NotAllowed, &out.NotAllowed
+		*out = make([]MaintenanceWindowAutoUpgradeNotAllowedObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StartDate != nil {
+		in, out := &in.StartDate, &out.StartDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.StartTime != nil {
+		in, out := &in.StartTime, &out.StartTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.UtcOffset != nil {
+		in, out := &in.UtcOffset, &out.UtcOffset
+		*out = new(string)
+		**out = **in
+	}
+	if in.WeekIndex != nil {
+		in, out := &in.WeekIndex, &out.WeekIndex
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowAutoUpgradeObservation.
+func (in *MaintenanceWindowAutoUpgradeObservation) DeepCopy() *MaintenanceWindowAutoUpgradeObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowAutoUpgradeObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowAutoUpgradeParameters) DeepCopyInto(out *MaintenanceWindowAutoUpgradeParameters) {
+	*out = *in
+	if in.DayOfMonth != nil {
+		in, out := &in.DayOfMonth, &out.DayOfMonth
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DayOfWeek != nil {
+		in, out := &in.DayOfWeek, &out.DayOfWeek
+		*out = new(string)
+		**out = **in
+	}
+	if in.Duration != nil {
+		in, out := &in.Duration, &out.Duration
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Frequency != nil {
+		in, out := &in.Frequency, &out.Frequency
+		*out = new(string)
+		**out = **in
+	}
+	if in.Interval != nil {
+		in, out := &in.Interval, &out.Interval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NotAllowed != nil {
+		in, out := &in.NotAllowed, &out.NotAllowed
+		*out = make([]MaintenanceWindowAutoUpgradeNotAllowedParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StartDate != nil {
+		in, out := &in.StartDate, &out.StartDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.StartTime != nil {
+		in, out := &in.StartTime, &out.StartTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.UtcOffset != nil {
+		in, out := &in.UtcOffset, &out.UtcOffset
+		*out = new(string)
+		**out = **in
+	}
+	if in.WeekIndex != nil {
+		in, out := &in.WeekIndex, &out.WeekIndex
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowAutoUpgradeParameters.
+func (in *MaintenanceWindowAutoUpgradeParameters) DeepCopy() *MaintenanceWindowAutoUpgradeParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowAutoUpgradeParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *MaintenanceWindowInitParameters) DeepCopyInto(out *MaintenanceWindowInitParameters) {
 	*out = *in
 	if in.Allowed != nil {
@@ -6430,6 +6811,282 @@ func (in *MaintenanceWindowInitParameters) DeepCopy() *MaintenanceWindowInitPara
 		return nil
 	}
 	out := new(MaintenanceWindowInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowNodeOsInitParameters) DeepCopyInto(out *MaintenanceWindowNodeOsInitParameters) {
+	*out = *in
+	if in.DayOfMonth != nil {
+		in, out := &in.DayOfMonth, &out.DayOfMonth
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DayOfWeek != nil {
+		in, out := &in.DayOfWeek, &out.DayOfWeek
+		*out = new(string)
+		**out = **in
+	}
+	if in.Duration != nil {
+		in, out := &in.Duration, &out.Duration
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Frequency != nil {
+		in, out := &in.Frequency, &out.Frequency
+		*out = new(string)
+		**out = **in
+	}
+	if in.Interval != nil {
+		in, out := &in.Interval, &out.Interval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NotAllowed != nil {
+		in, out := &in.NotAllowed, &out.NotAllowed
+		*out = make([]MaintenanceWindowNodeOsNotAllowedInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StartDate != nil {
+		in, out := &in.StartDate, &out.StartDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.StartTime != nil {
+		in, out := &in.StartTime, &out.StartTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.UtcOffset != nil {
+		in, out := &in.UtcOffset, &out.UtcOffset
+		*out = new(string)
+		**out = **in
+	}
+	if in.WeekIndex != nil {
+		in, out := &in.WeekIndex, &out.WeekIndex
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowNodeOsInitParameters.
+func (in *MaintenanceWindowNodeOsInitParameters) DeepCopy() *MaintenanceWindowNodeOsInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowNodeOsInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowNodeOsNotAllowedInitParameters) DeepCopyInto(out *MaintenanceWindowNodeOsNotAllowedInitParameters) {
+	*out = *in
+	if in.End != nil {
+		in, out := &in.End, &out.End
+		*out = new(string)
+		**out = **in
+	}
+	if in.Start != nil {
+		in, out := &in.Start, &out.Start
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowNodeOsNotAllowedInitParameters.
+func (in *MaintenanceWindowNodeOsNotAllowedInitParameters) DeepCopy() *MaintenanceWindowNodeOsNotAllowedInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowNodeOsNotAllowedInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowNodeOsNotAllowedObservation) DeepCopyInto(out *MaintenanceWindowNodeOsNotAllowedObservation) {
+	*out = *in
+	if in.End != nil {
+		in, out := &in.End, &out.End
+		*out = new(string)
+		**out = **in
+	}
+	if in.Start != nil {
+		in, out := &in.Start, &out.Start
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowNodeOsNotAllowedObservation.
+func (in *MaintenanceWindowNodeOsNotAllowedObservation) DeepCopy() *MaintenanceWindowNodeOsNotAllowedObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowNodeOsNotAllowedObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowNodeOsNotAllowedParameters) DeepCopyInto(out *MaintenanceWindowNodeOsNotAllowedParameters) {
+	*out = *in
+	if in.End != nil {
+		in, out := &in.End, &out.End
+		*out = new(string)
+		**out = **in
+	}
+	if in.Start != nil {
+		in, out := &in.Start, &out.Start
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowNodeOsNotAllowedParameters.
+func (in *MaintenanceWindowNodeOsNotAllowedParameters) DeepCopy() *MaintenanceWindowNodeOsNotAllowedParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowNodeOsNotAllowedParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowNodeOsObservation) DeepCopyInto(out *MaintenanceWindowNodeOsObservation) {
+	*out = *in
+	if in.DayOfMonth != nil {
+		in, out := &in.DayOfMonth, &out.DayOfMonth
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DayOfWeek != nil {
+		in, out := &in.DayOfWeek, &out.DayOfWeek
+		*out = new(string)
+		**out = **in
+	}
+	if in.Duration != nil {
+		in, out := &in.Duration, &out.Duration
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Frequency != nil {
+		in, out := &in.Frequency, &out.Frequency
+		*out = new(string)
+		**out = **in
+	}
+	if in.Interval != nil {
+		in, out := &in.Interval, &out.Interval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NotAllowed != nil {
+		in, out := &in.NotAllowed, &out.NotAllowed
+		*out = make([]MaintenanceWindowNodeOsNotAllowedObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StartDate != nil {
+		in, out := &in.StartDate, &out.StartDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.StartTime != nil {
+		in, out := &in.StartTime, &out.StartTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.UtcOffset != nil {
+		in, out := &in.UtcOffset, &out.UtcOffset
+		*out = new(string)
+		**out = **in
+	}
+	if in.WeekIndex != nil {
+		in, out := &in.WeekIndex, &out.WeekIndex
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowNodeOsObservation.
+func (in *MaintenanceWindowNodeOsObservation) DeepCopy() *MaintenanceWindowNodeOsObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowNodeOsObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *MaintenanceWindowNodeOsParameters) DeepCopyInto(out *MaintenanceWindowNodeOsParameters) {
+	*out = *in
+	if in.DayOfMonth != nil {
+		in, out := &in.DayOfMonth, &out.DayOfMonth
+		*out = new(float64)
+		**out = **in
+	}
+	if in.DayOfWeek != nil {
+		in, out := &in.DayOfWeek, &out.DayOfWeek
+		*out = new(string)
+		**out = **in
+	}
+	if in.Duration != nil {
+		in, out := &in.Duration, &out.Duration
+		*out = new(float64)
+		**out = **in
+	}
+	if in.Frequency != nil {
+		in, out := &in.Frequency, &out.Frequency
+		*out = new(string)
+		**out = **in
+	}
+	if in.Interval != nil {
+		in, out := &in.Interval, &out.Interval
+		*out = new(float64)
+		**out = **in
+	}
+	if in.NotAllowed != nil {
+		in, out := &in.NotAllowed, &out.NotAllowed
+		*out = make([]MaintenanceWindowNodeOsNotAllowedParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.StartDate != nil {
+		in, out := &in.StartDate, &out.StartDate
+		*out = new(string)
+		**out = **in
+	}
+	if in.StartTime != nil {
+		in, out := &in.StartTime, &out.StartTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.UtcOffset != nil {
+		in, out := &in.UtcOffset, &out.UtcOffset
+		*out = new(string)
+		**out = **in
+	}
+	if in.WeekIndex != nil {
+		in, out := &in.WeekIndex, &out.WeekIndex
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new MaintenanceWindowNodeOsParameters.
+func (in *MaintenanceWindowNodeOsParameters) DeepCopy() *MaintenanceWindowNodeOsParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(MaintenanceWindowNodeOsParameters)
 	in.DeepCopyInto(out)
 	return out
 }
@@ -7497,6 +8154,16 @@ func (in *SecretIdentityParameters) DeepCopy() *SecretIdentityParameters {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ServiceMeshProfileInitParameters) DeepCopyInto(out *ServiceMeshProfileInitParameters) {
 	*out = *in
+	if in.ExternalIngressGatewayEnabled != nil {
+		in, out := &in.ExternalIngressGatewayEnabled, &out.ExternalIngressGatewayEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.InternalIngressGatewayEnabled != nil {
+		in, out := &in.InternalIngressGatewayEnabled, &out.InternalIngressGatewayEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Mode != nil {
 		in, out := &in.Mode, &out.Mode
 		*out = new(string)
@@ -7517,6 +8184,16 @@ func (in *ServiceMeshProfileInitParameters) DeepCopy() *ServiceMeshProfileInitPa
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ServiceMeshProfileObservation) DeepCopyInto(out *ServiceMeshProfileObservation) {
 	*out = *in
+	if in.ExternalIngressGatewayEnabled != nil {
+		in, out := &in.ExternalIngressGatewayEnabled, &out.ExternalIngressGatewayEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.InternalIngressGatewayEnabled != nil {
+		in, out := &in.InternalIngressGatewayEnabled, &out.InternalIngressGatewayEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Mode != nil {
 		in, out := &in.Mode, &out.Mode
 		*out = new(string)
@@ -7537,6 +8214,16 @@ func (in *ServiceMeshProfileObservation) DeepCopy() *ServiceMeshProfileObservati
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *ServiceMeshProfileParameters) DeepCopyInto(out *ServiceMeshProfileParameters) {
 	*out = *in
+	if in.ExternalIngressGatewayEnabled != nil {
+		in, out := &in.ExternalIngressGatewayEnabled, &out.ExternalIngressGatewayEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.InternalIngressGatewayEnabled != nil {
+		in, out := &in.InternalIngressGatewayEnabled, &out.InternalIngressGatewayEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Mode != nil {
 		in, out := &in.Mode, &out.Mode
 		*out = new(string)
@@ -8276,6 +8963,66 @@ func (in *UpgradeSettingsParameters) DeepCopy() *UpgradeSettingsParameters {
 }
 
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *WebAppRoutingIdentityInitParameters) DeepCopyInto(out *WebAppRoutingIdentityInitParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new WebAppRoutingIdentityInitParameters.
+func (in *WebAppRoutingIdentityInitParameters) DeepCopy() *WebAppRoutingIdentityInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(WebAppRoutingIdentityInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *WebAppRoutingIdentityObservation) DeepCopyInto(out *WebAppRoutingIdentityObservation) {
+	*out = *in
+	if in.ClientID != nil {
+		in, out := &in.ClientID, &out.ClientID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ObjectID != nil {
+		in, out := &in.ObjectID, &out.ObjectID
+		*out = new(string)
+		**out = **in
+	}
+	if in.UserAssignedIdentityID != nil {
+		in, out := &in.UserAssignedIdentityID, &out.UserAssignedIdentityID
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new WebAppRoutingIdentityObservation.
+func (in *WebAppRoutingIdentityObservation) DeepCopy() *WebAppRoutingIdentityObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(WebAppRoutingIdentityObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *WebAppRoutingIdentityParameters) DeepCopyInto(out *WebAppRoutingIdentityParameters) {
+	*out = *in
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new WebAppRoutingIdentityParameters.
+func (in *WebAppRoutingIdentityParameters) DeepCopy() *WebAppRoutingIdentityParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(WebAppRoutingIdentityParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *WebAppRoutingInitParameters) DeepCopyInto(out *WebAppRoutingInitParameters) {
 	*out = *in
 	if in.DNSZoneID != nil {
@@ -8302,6 +9049,13 @@ func (in *WebAppRoutingObservation) DeepCopyInto(out *WebAppRoutingObservation) 
 		in, out := &in.DNSZoneID, &out.DNSZoneID
 		*out = new(string)
 		**out = **in
+	}
+	if in.WebAppRoutingIdentity != nil {
+		in, out := &in.WebAppRoutingIdentity, &out.WebAppRoutingIdentity
+		*out = make([]WebAppRoutingIdentityObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
 	}
 }
 

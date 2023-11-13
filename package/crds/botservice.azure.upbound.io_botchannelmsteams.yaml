@@ -150,6 +150,11 @@ spec:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
                     type: string
+                  deploymentEnvironment:
+                    description: The deployment environment for Microsoft Teams channel
+                      calls. Possible values are CommercialDeployment and GCCModerateDeployment.
+                      Defaults to CommercialDeployment.
+                    type: string
                   enableCalling:
                     description: Specifies whether to enable Microsoft Teams channel
                       calls. This defaults to false.
@@ -253,6 +258,11 @@ spec:
                   callingWebHook:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
+                    type: string
+                  deploymentEnvironment:
+                    description: The deployment environment for Microsoft Teams channel
+                      calls. Possible values are CommercialDeployment and GCCModerateDeployment.
+                      Defaults to CommercialDeployment.
                     type: string
                   enableCalling:
                     description: Specifies whether to enable Microsoft Teams channel
@@ -440,6 +450,11 @@ spec:
                   callingWebHook:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
+                    type: string
+                  deploymentEnvironment:
+                    description: The deployment environment for Microsoft Teams channel
+                      calls. Possible values are CommercialDeployment and GCCModerateDeployment.
+                      Defaults to CommercialDeployment.
                     type: string
                   enableCalling:
                     description: Specifies whether to enable Microsoft Teams channel

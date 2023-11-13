@@ -239,10 +239,12 @@ spec:
                         useInVirtualMachineCreation:
                           description: Can this subnet be used for creating Virtual
                             Machines? Possible values are Allow, Default and Deny.
+                            Defaults to Allow.
                           type: string
                         usePublicIpAddress:
                           description: Can Virtual Machines in this Subnet use Public
                             IP Addresses? Possible values are Allow, Default and Deny.
+                            Defaults to Allow.
                           type: string
                       type: object
                     type: array
@@ -278,10 +280,12 @@ spec:
                         useInVirtualMachineCreation:
                           description: Can this subnet be used for creating Virtual
                             Machines? Possible values are Allow, Default and Deny.
+                            Defaults to Allow.
                           type: string
                         usePublicIpAddress:
                           description: Can Virtual Machines in this Subnet use Public
                             IP Addresses? Possible values are Allow, Default and Deny.
+                            Defaults to Allow.
                           type: string
                       type: object
                     type: array
@@ -491,10 +495,12 @@ spec:
                         useInVirtualMachineCreation:
                           description: Can this subnet be used for creating Virtual
                             Machines? Possible values are Allow, Default and Deny.
+                            Defaults to Allow.
                           type: string
                         usePublicIpAddress:
                           description: Can Virtual Machines in this Subnet use Public
                             IP Addresses? Possible values are Allow, Default and Deny.
+                            Defaults to Allow.
                           type: string
                       type: object
                     type: array

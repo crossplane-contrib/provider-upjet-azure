@@ -63,7 +63,7 @@ type JobInitParameters struct {
 	// One or more output_asset blocks as defined below. Changing this forces a new Media Job to be created.
 	OutputAsset []OutputAssetInitParameters `json:"outputAsset,omitempty" tf:"output_asset,omitempty"`
 
-	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. If not set, the default is normal. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low.
+	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low. Defaults to Normal.
 	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
@@ -84,7 +84,7 @@ type JobObservation struct {
 	// One or more output_asset blocks as defined below. Changing this forces a new Media Job to be created.
 	OutputAsset []OutputAssetObservation `json:"outputAsset,omitempty" tf:"output_asset,omitempty"`
 
-	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. If not set, the default is normal. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low.
+	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low. Defaults to Normal.
 	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The name of the Resource Group where the Media Job should exist. Changing this forces a new Media Job to be created.
@@ -121,7 +121,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputAsset []OutputAssetParameters `json:"outputAsset,omitempty" tf:"output_asset,omitempty"`
 
-	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. If not set, the default is normal. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low.
+	// Priority with which the job should be processed. Higher priority jobs are processed before lower priority jobs. Changing this forces a new Media Job to be created. Possible values are High, Normal and Low. Defaults to Normal.
 	// +kubebuilder:validation:Optional
 	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 

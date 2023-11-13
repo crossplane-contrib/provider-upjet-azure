@@ -25,10 +25,10 @@ type ContainerConnectedRegistryInitParameters struct {
 	// Specifies a list of IDs of Container Registry Tokens, which are meant to be used by the clients to connect to the Connected Registry.
 	ClientTokenIds []*string `json:"clientTokenIds,omitempty" tf:"client_token_ids,omitempty"`
 
-	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error.
+	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error. Defaults to None.
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
-	// The mode of the Connected Registry. Possible values are Mirror, ReadOnly, ReadWrite and Registry. Changing this forces a new Container Connected Registry to be created.
+	// The mode of the Connected Registry. Possible values are Mirror, ReadOnly, ReadWrite and Registry. Changing this forces a new Container Connected Registry to be created. Defaults to ReadWrite.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// One or more notification blocks as defined below.
@@ -37,7 +37,7 @@ type ContainerConnectedRegistryInitParameters struct {
 	// The ID of the parent registry. This can be either a Container Registry ID or a Connected Registry ID. Changing this forces a new Container Connected Registry to be created.
 	ParentRegistryID *string `json:"parentRegistryId,omitempty" tf:"parent_registry_id,omitempty"`
 
-	// The period of time (in form of ISO8601) for which a message is available to sync before it is expired. Allowed range is from P1D to P90D.
+	// The period of time (in form of ISO8601) for which a message is available to sync before it is expired. Allowed range is from P1D to P90D. Defaults to P1D.
 	SyncMessageTTL *string `json:"syncMessageTtl,omitempty" tf:"sync_message_ttl,omitempty"`
 
 	// The cron expression indicating the schedule that the Connected Registry will sync with its parent. Defaults to * * * * *.
@@ -61,10 +61,10 @@ type ContainerConnectedRegistryObservation struct {
 	// The ID of the Container Connected Registry.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error.
+	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error. Defaults to None.
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
-	// The mode of the Connected Registry. Possible values are Mirror, ReadOnly, ReadWrite and Registry. Changing this forces a new Container Connected Registry to be created.
+	// The mode of the Connected Registry. Possible values are Mirror, ReadOnly, ReadWrite and Registry. Changing this forces a new Container Connected Registry to be created. Defaults to ReadWrite.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// One or more notification blocks as defined below.
@@ -73,7 +73,7 @@ type ContainerConnectedRegistryObservation struct {
 	// The ID of the parent registry. This can be either a Container Registry ID or a Connected Registry ID. Changing this forces a new Container Connected Registry to be created.
 	ParentRegistryID *string `json:"parentRegistryId,omitempty" tf:"parent_registry_id,omitempty"`
 
-	// The period of time (in form of ISO8601) for which a message is available to sync before it is expired. Allowed range is from P1D to P90D.
+	// The period of time (in form of ISO8601) for which a message is available to sync before it is expired. Allowed range is from P1D to P90D. Defaults to P1D.
 	SyncMessageTTL *string `json:"syncMessageTtl,omitempty" tf:"sync_message_ttl,omitempty"`
 
 	// The cron expression indicating the schedule that the Connected Registry will sync with its parent. Defaults to * * * * *.
@@ -110,11 +110,11 @@ type ContainerConnectedRegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
 
-	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error.
+	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error. Defaults to None.
 	// +kubebuilder:validation:Optional
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 
-	// The mode of the Connected Registry. Possible values are Mirror, ReadOnly, ReadWrite and Registry. Changing this forces a new Container Connected Registry to be created.
+	// The mode of the Connected Registry. Possible values are Mirror, ReadOnly, ReadWrite and Registry. Changing this forces a new Container Connected Registry to be created. Defaults to ReadWrite.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -126,7 +126,7 @@ type ContainerConnectedRegistryParameters struct {
 	// +kubebuilder:validation:Optional
 	ParentRegistryID *string `json:"parentRegistryId,omitempty" tf:"parent_registry_id,omitempty"`
 
-	// The period of time (in form of ISO8601) for which a message is available to sync before it is expired. Allowed range is from P1D to P90D.
+	// The period of time (in form of ISO8601) for which a message is available to sync before it is expired. Allowed range is from P1D to P90D. Defaults to P1D.
 	// +kubebuilder:validation:Optional
 	SyncMessageTTL *string `json:"syncMessageTtl,omitempty" tf:"sync_message_ttl,omitempty"`
 

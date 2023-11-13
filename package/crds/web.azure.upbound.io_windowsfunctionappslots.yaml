@@ -137,9 +137,10 @@ spec:
                             logs in.
                           type: object
                         allowedExternalRedirectUrls:
-                          description: an allowed_external_redirect_urls block as
-                            detailed below. Specifies a list of External URLs that
-                            can be redirected to as part of logging in or logging
+                          description: Specifies a list of External URLs that can
+                            be redirected to as part of logging in or logging out
+                            of the Windows Web App. Specifies a list of External URLs
+                            that can be redirected to as part of logging in or logging
                             out of the Windows Web App.
                           items:
                             type: string
@@ -515,7 +516,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -596,11 +597,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -641,12 +646,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -974,9 +978,10 @@ spec:
                   clientCertificateMode:
                     description: The mode of the Function App Slot's client certificates
                       requirement for incoming requests. Possible values are Required,
-                      Optional, and OptionalInteractiveUser. The mode of the Function
-                      App Slot's client certificates requirement for incoming requests.
-                      Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`.
+                      Optional, and OptionalInteractiveUser. Defaults to Optional.
+                      The mode of the Function App Slot's client certificates requirement
+                      for incoming requests. Possible values are `Required`, `Optional`,
+                      and `OptionalInteractiveUser`.
                     type: string
                   connectionString:
                     description: a connection_string block as detailed below.
@@ -1146,6 +1151,10 @@ spec:
                       with a user-assigned identity The User Assigned Identity to
                       use for Key Vault access.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Function
+                      App. Defaults to true.
+                    type: boolean
                   servicePlanId:
                     description: The ID of the Service Plan in which to run this slot.
                       If not specified the same Service Plan as the Windows Function
@@ -1288,9 +1297,10 @@ spec:
                           items:
                             properties:
                               allowedOrigins:
-                                description: an allowed_origins block as detailed
-                                  below. Specifies a list of origins that should be
-                                  allowed to make cross-origin calls.
+                                description: Specifies a list of origins that should
+                                  be allowed to make cross-origin calls. Specifies
+                                  a list of origins that should be allowed to make
+                                  cross-origin calls.
                                 items:
                                   type: string
                                 type: array
@@ -1302,9 +1312,9 @@ spec:
                             type: object
                           type: array
                         defaultDocuments:
-                          description: a default_documents block as detailed below.
-                            Specifies a list of Default Documents for the Windows
-                            Web App.
+                          description: Specifies a list of Default Documents for the
+                            Windows Web App. Specifies a list of Default Documents
+                            for the Windows Web App.
                           items:
                             type: string
                           type: array
@@ -1324,8 +1334,8 @@ spec:
                         healthCheckEvictionTimeInMin:
                           description: The amount of time in minutes that a node is
                             unhealthy before being removed from the load balancer.
-                            Possible values are between 2 and 10. Defaults to 10.
-                            Only valid in conjunction with health_check_path The amount
+                            Possible values are between 2 and 10. Defaults to 0. Only
+                            valid in conjunction with health_check_path. The amount
                             of time in minutes that a node is unhealthy before being
                             removed from the load balancer. Possible values are between
                             `2` and `10`. Defaults to `10`. Only valid in conjunction
@@ -1346,8 +1356,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: a headers block as detailed below.
@@ -1538,8 +1548,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: a headers block as detailed below.
@@ -2013,9 +2023,10 @@ spec:
                             logs in.
                           type: object
                         allowedExternalRedirectUrls:
-                          description: an allowed_external_redirect_urls block as
-                            detailed below. Specifies a list of External URLs that
-                            can be redirected to as part of logging in or logging
+                          description: Specifies a list of External URLs that can
+                            be redirected to as part of logging in or logging out
+                            of the Windows Web App. Specifies a list of External URLs
+                            that can be redirected to as part of logging in or logging
                             out of the Windows Web App.
                           items:
                             type: string
@@ -2286,7 +2297,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -2367,11 +2378,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -2412,12 +2427,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -2725,9 +2739,10 @@ spec:
                   clientCertificateMode:
                     description: The mode of the Function App Slot's client certificates
                       requirement for incoming requests. Possible values are Required,
-                      Optional, and OptionalInteractiveUser. The mode of the Function
-                      App Slot's client certificates requirement for incoming requests.
-                      Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`.
+                      Optional, and OptionalInteractiveUser. Defaults to Optional.
+                      The mode of the Function App Slot's client certificates requirement
+                      for incoming requests. Possible values are `Required`, `Optional`,
+                      and `OptionalInteractiveUser`.
                     type: string
                   connectionString:
                     description: a connection_string block as detailed below.
@@ -2797,6 +2812,10 @@ spec:
                       with a user-assigned identity The User Assigned Identity to
                       use for Key Vault access.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Function
+                      App. Defaults to true.
+                    type: boolean
                   servicePlanId:
                     description: The ID of the Service Plan in which to run this slot.
                       If not specified the same Service Plan as the Windows Function
@@ -2900,9 +2919,10 @@ spec:
                           items:
                             properties:
                               allowedOrigins:
-                                description: an allowed_origins block as detailed
-                                  below. Specifies a list of origins that should be
-                                  allowed to make cross-origin calls.
+                                description: Specifies a list of origins that should
+                                  be allowed to make cross-origin calls. Specifies
+                                  a list of origins that should be allowed to make
+                                  cross-origin calls.
                                 items:
                                   type: string
                                 type: array
@@ -2914,9 +2934,9 @@ spec:
                             type: object
                           type: array
                         defaultDocuments:
-                          description: a default_documents block as detailed below.
-                            Specifies a list of Default Documents for the Windows
-                            Web App.
+                          description: Specifies a list of Default Documents for the
+                            Windows Web App. Specifies a list of Default Documents
+                            for the Windows Web App.
                           items:
                             type: string
                           type: array
@@ -2936,8 +2956,8 @@ spec:
                         healthCheckEvictionTimeInMin:
                           description: The amount of time in minutes that a node is
                             unhealthy before being removed from the load balancer.
-                            Possible values are between 2 and 10. Defaults to 10.
-                            Only valid in conjunction with health_check_path The amount
+                            Possible values are between 2 and 10. Defaults to 0. Only
+                            valid in conjunction with health_check_path. The amount
                             of time in minutes that a node is unhealthy before being
                             removed from the load balancer. Possible values are between
                             `2` and `10`. Defaults to `10`. Only valid in conjunction
@@ -2958,8 +2978,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: a headers block as detailed below.
@@ -3065,8 +3085,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: a headers block as detailed below.
@@ -3421,9 +3441,10 @@ spec:
                             logs in.
                           type: object
                         allowedExternalRedirectUrls:
-                          description: an allowed_external_redirect_urls block as
-                            detailed below. Specifies a list of External URLs that
-                            can be redirected to as part of logging in or logging
+                          description: Specifies a list of External URLs that can
+                            be redirected to as part of logging in or logging out
+                            of the Windows Web App. Specifies a list of External URLs
+                            that can be redirected to as part of logging in or logging
                             out of the Windows Web App.
                           items:
                             type: string
@@ -3694,7 +3715,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -3814,11 +3835,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -3859,12 +3884,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -4176,9 +4200,10 @@ spec:
                   clientCertificateMode:
                     description: The mode of the Function App Slot's client certificates
                       requirement for incoming requests. Possible values are Required,
-                      Optional, and OptionalInteractiveUser. The mode of the Function
-                      App Slot's client certificates requirement for incoming requests.
-                      Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`.
+                      Optional, and OptionalInteractiveUser. Defaults to Optional.
+                      The mode of the Function App Slot's client certificates requirement
+                      for incoming requests. Possible values are `Required`, `Optional`,
+                      and `OptionalInteractiveUser`.
                     type: string
                   connectionString:
                     description: a connection_string block as detailed below.
@@ -4307,6 +4332,10 @@ spec:
                       This is a superset of `outbound_ip_addresses`. For example `["52.23.25.3",
                       "52.143.43.12","52.143.43.17"]`.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Function
+                      App. Defaults to true.
+                    type: boolean
                   servicePlanId:
                     description: The ID of the Service Plan in which to run this slot.
                       If not specified the same Service Plan as the Windows Function
@@ -4410,9 +4439,10 @@ spec:
                           items:
                             properties:
                               allowedOrigins:
-                                description: an allowed_origins block as detailed
-                                  below. Specifies a list of origins that should be
-                                  allowed to make cross-origin calls.
+                                description: Specifies a list of origins that should
+                                  be allowed to make cross-origin calls. Specifies
+                                  a list of origins that should be allowed to make
+                                  cross-origin calls.
                                 items:
                                   type: string
                                 type: array
@@ -4424,9 +4454,9 @@ spec:
                             type: object
                           type: array
                         defaultDocuments:
-                          description: a default_documents block as detailed below.
-                            Specifies a list of Default Documents for the Windows
-                            Web App.
+                          description: Specifies a list of Default Documents for the
+                            Windows Web App. Specifies a list of Default Documents
+                            for the Windows Web App.
                           items:
                             type: string
                           type: array
@@ -4450,8 +4480,8 @@ spec:
                         healthCheckEvictionTimeInMin:
                           description: The amount of time in minutes that a node is
                             unhealthy before being removed from the load balancer.
-                            Possible values are between 2 and 10. Defaults to 10.
-                            Only valid in conjunction with health_check_path The amount
+                            Possible values are between 2 and 10. Defaults to 0. Only
+                            valid in conjunction with health_check_path. The amount
                             of time in minutes that a node is unhealthy before being
                             removed from the load balancer. Possible values are between
                             `2` and `10`. Defaults to `10`. Only valid in conjunction
@@ -4472,8 +4502,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: a headers block as detailed below.
@@ -4584,8 +4614,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: a headers block as detailed below.

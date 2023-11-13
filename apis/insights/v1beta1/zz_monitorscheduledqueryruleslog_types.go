@@ -22,7 +22,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionInitParameters struct {
 	// Name of the dimension.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Operator for dimension values, - 'Include'.
+	// Operator for dimension values, - 'Include'. Defaults to Include.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// List of dimension values.
@@ -34,7 +34,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionObservation struct {
 	// Name of the dimension.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Operator for dimension values, - 'Include'.
+	// Operator for dimension values, - 'Include'. Defaults to Include.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// List of dimension values.
@@ -47,7 +47,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Operator for dimension values, - 'Include'.
+	// Operator for dimension values, - 'Include'. Defaults to Include.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 

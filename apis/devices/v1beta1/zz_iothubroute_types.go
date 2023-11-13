@@ -19,7 +19,7 @@ import (
 
 type IOTHubRouteInitParameters struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Specifies whether a route is enabled.
@@ -34,7 +34,7 @@ type IOTHubRouteInitParameters struct {
 
 type IOTHubRouteObservation struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Specifies whether a route is enabled.
@@ -58,7 +58,7 @@ type IOTHubRouteObservation struct {
 
 type IOTHubRouteParameters struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 

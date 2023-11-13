@@ -98,7 +98,7 @@ func (tr *SpringCloudAccelerator) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudAccelerator) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudActiveDeployment
@@ -1358,7 +1358,7 @@ func (tr *SpringCloudCustomizedAccelerator) LateInitialize(attrs []byte) (bool, 
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudCustomizedAccelerator) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }
 
 // GetTerraformResourceType returns Terraform resource type for this SpringCloudDevToolPortal
@@ -1704,7 +1704,7 @@ func (mg *SpringCloudService) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudService
 func (tr *SpringCloudService) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"config_server_git_setting[*].http_basic_auth[*].password": "spec.forProvider.configServerGitSetting[*].httpBasicAuth[*].passwordSecretRef", "config_server_git_setting[*].repository[*].http_basic_auth[*].password": "spec.forProvider.configServerGitSetting[*].repository[*].httpBasicAuth[*].passwordSecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].host_key": "spec.forProvider.configServerGitSetting[*].repository[*].sshAuth[*].hostKeySecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].private_key": "spec.forProvider.configServerGitSetting[*].repository[*].sshAuth[*].privateKeySecretRef", "config_server_git_setting[*].ssh_auth[*].host_key": "spec.forProvider.configServerGitSetting[*].sshAuth[*].hostKeySecretRef", "config_server_git_setting[*].ssh_auth[*].private_key": "spec.forProvider.configServerGitSetting[*].sshAuth[*].privateKeySecretRef"}
+	return map[string]string{"config_server_git_setting[*].http_basic_auth[*].password": "spec.forProvider.configServerGitSetting[*].httpBasicAuth[*].passwordSecretRef", "config_server_git_setting[*].repository[*].http_basic_auth[*].password": "spec.forProvider.configServerGitSetting[*].repository[*].httpBasicAuth[*].passwordSecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].host_key": "spec.forProvider.configServerGitSetting[*].repository[*].sshAuth[*].hostKeySecretRef", "config_server_git_setting[*].repository[*].ssh_auth[*].private_key": "spec.forProvider.configServerGitSetting[*].repository[*].sshAuth[*].privateKeySecretRef", "config_server_git_setting[*].ssh_auth[*].host_key": "spec.forProvider.configServerGitSetting[*].sshAuth[*].hostKeySecretRef", "config_server_git_setting[*].ssh_auth[*].private_key": "spec.forProvider.configServerGitSetting[*].sshAuth[*].privateKeySecretRef", "container_registry[*].password": "spec.forProvider.containerRegistry[*].passwordSecretRef"}
 }
 
 // GetObservation of this SpringCloudService

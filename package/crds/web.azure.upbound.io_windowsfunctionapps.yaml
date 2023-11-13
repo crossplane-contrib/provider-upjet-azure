@@ -517,7 +517,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -598,11 +598,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -643,12 +647,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -976,9 +979,10 @@ spec:
                   clientCertificateMode:
                     description: The mode of the Function App's client certificates
                       requirement for incoming requests. Possible values are Required,
-                      Optional, and OptionalInteractiveUser. The mode of the Function
-                      App's client certificates requirement for incoming requests.
-                      Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
+                      Optional, and OptionalInteractiveUser. Defaults to Optional.
+                      The mode of the Function App's client certificates requirement
+                      for incoming requests. Possible values are `Required`, `Optional`,
+                      and `OptionalInteractiveUser`
                     type: string
                   connectionString:
                     description: One or more connection_string blocks as defined below.
@@ -1074,6 +1078,10 @@ spec:
                       exist. Changing this forces a new Windows Function App to be
                       created.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Function
+                      App. Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group where the Windows
                       Function App should exist. Changing this forces a new Windows
@@ -1326,9 +1334,9 @@ spec:
                             properties:
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
-                                  values include v3.0, v4.0 v6.0 and v7.0. The version
-                                  of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`
-                                  and `v7.0`
+                                  values include v3.0, v4.0 v6.0 and v7.0. Defaults
+                                  to v4.0. The version of .Net. Possible values are
+                                  `v3.0`, `v4.0`, `v6.0` and `v7.0`
                                 type: string
                               javaVersion:
                                 description: The Version of Java to use. Supported
@@ -1424,8 +1432,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -1618,8 +1626,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -2396,7 +2404,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -2477,11 +2485,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -2522,12 +2534,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -2835,9 +2846,10 @@ spec:
                   clientCertificateMode:
                     description: The mode of the Function App's client certificates
                       requirement for incoming requests. Possible values are Required,
-                      Optional, and OptionalInteractiveUser. The mode of the Function
-                      App's client certificates requirement for incoming requests.
-                      Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
+                      Optional, and OptionalInteractiveUser. Defaults to Optional.
+                      The mode of the Function App's client certificates requirement
+                      for incoming requests. Possible values are `Required`, `Optional`,
+                      and `OptionalInteractiveUser`
                     type: string
                   connectionString:
                     description: One or more connection_string blocks as defined below.
@@ -2913,6 +2925,10 @@ spec:
                       exist. Changing this forces a new Windows Function App to be
                       created.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Function
+                      App. Defaults to true.
+                    type: boolean
                   siteConfig:
                     description: A site_config block as defined below.
                     items:
@@ -2968,9 +2984,9 @@ spec:
                             properties:
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
-                                  values include v3.0, v4.0 v6.0 and v7.0. The version
-                                  of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`
-                                  and `v7.0`
+                                  values include v3.0, v4.0 v6.0 and v7.0. Defaults
+                                  to v4.0. The version of .Net. Possible values are
+                                  `v3.0`, `v4.0`, `v6.0` and `v7.0`
                                 type: string
                               javaVersion:
                                 description: The Version of Java to use. Supported
@@ -3066,8 +3082,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -3175,8 +3191,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -3836,7 +3852,7 @@ spec:
                               wwwAuthenticationDisabled:
                                 description: Should the www-authenticate provider
                                   should be omitted from the request? Defaults to
-                                  false Should the www-authenticate provider should
+                                  false. Should the www-authenticate provider should
                                   be omitted from the request? Defaults to `false`
                                 type: boolean
                             type: object
@@ -3956,11 +3972,15 @@ spec:
                             type: object
                           type: array
                         defaultProvider:
-                          description: The Default Authentication Provider to use
-                            when more than one Authentication Provider is configured
-                            and the unauthenticated_action is set to RedirectToLoginPage.
-                            The Default Authentication Provider to use when the `unauthenticated_action`
-                            is set to `RedirectToLoginPage`.
+                          description: 'The Default Authentication Provider to use
+                            when the unauthenticated_action is set to RedirectToLoginPage.
+                            Possible values include: apple, azureactivedirectory,
+                            facebook, github, google, twitter and the name of your
+                            custom_oidc_v2 provider. The Default Authentication Provider
+                            to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+                            Possible values include: `apple`, `azureactivedirectory`,
+                            `facebook`, `github`, `google`, `twitter` and the `name`
+                            of your `custom_oidc_v2` provider.'
                           type: string
                         excludedPaths:
                           description: The paths which should be excluded from the
@@ -4001,12 +4021,11 @@ spec:
                           type: array
                         forwardProxyConvention:
                           description: The convention used to determine the url of
-                            the request made. Possible values include ForwardProxyConventionNoProxy,
-                            ForwardProxyConventionStandard, ForwardProxyConventionCustom.
-                            Defaults to ForwardProxyConventionNoProxy. The convention
-                            used to determine the url of the request made. Possible
-                            values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`,
-                            `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
+                            the request made. Possible values include NoProxy, Standard,
+                            Custom. Defaults to NoProxy. The convention used to determine
+                            the url of the request made. Possible values include `ForwardProxyConventionNoProxy`,
+                            `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`.
+                            Defaults to `ForwardProxyConventionNoProxy`
                           type: string
                         forwardProxyCustomHostHeaderName:
                           description: The name of the custom header containing the
@@ -4317,9 +4336,10 @@ spec:
                   clientCertificateMode:
                     description: The mode of the Function App's client certificates
                       requirement for incoming requests. Possible values are Required,
-                      Optional, and OptionalInteractiveUser. The mode of the Function
-                      App's client certificates requirement for incoming requests.
-                      Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
+                      Optional, and OptionalInteractiveUser. Defaults to Optional.
+                      The mode of the Function App's client certificates requirement
+                      for incoming requests. Possible values are `Required`, `Optional`,
+                      and `OptionalInteractiveUser`
                     type: string
                   connectionString:
                     description: One or more connection_string blocks as defined below.
@@ -4438,6 +4458,10 @@ spec:
                       as a string. For example 52.23.25.3,52.143.43.12,52.143.43.17.
                       This is a superset of outbound_ip_addresses.
                     type: string
+                  publicNetworkAccessEnabled:
+                    description: Should public network access be enabled for the Function
+                      App. Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group where the Windows
                       Function App should exist. Changing this forces a new Windows
@@ -4503,9 +4527,9 @@ spec:
                             properties:
                               dotnetVersion:
                                 description: The version of .NET to use. Possible
-                                  values include v3.0, v4.0 v6.0 and v7.0. The version
-                                  of .Net. Possible values are `v3.0`, `v4.0`, `v6.0`
-                                  and `v7.0`
+                                  values include v3.0, v4.0 v6.0 and v7.0. Defaults
+                                  to v4.0. The version of .Net. Possible values are
+                                  `v3.0`, `v4.0`, `v6.0` and `v7.0`
                                 type: string
                               javaVersion:
                                 description: The Version of Java to use. Supported
@@ -4605,8 +4629,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.
@@ -4719,8 +4743,8 @@ spec:
                             properties:
                               action:
                                 description: The action to take. Possible values are
-                                  Allow or Deny. The action to take. Possible values
-                                  are `Allow` or `Deny`.
+                                  Allow or Deny. Defaults to Allow. The action to
+                                  take. Possible values are `Allow` or `Deny`.
                                 type: string
                               headers:
                                 description: A headers block as defined above.

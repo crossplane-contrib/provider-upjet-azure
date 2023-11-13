@@ -100,10 +100,9 @@ spec:
                       with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.'
                     type: string
                   customBgpAddresses:
-                    description: A custom_bgp_addresses (Border Gateway Protocol custom
-                      IP Addresses) block which is documented below. The block can
-                      only be used on IPSec / activeactive connections, For details
-                      about see the relevant section in the Azure documentation.
+                    description: A custom_bgp_addresses block which is documented
+                      below. The block can only be used on IPSec / activeactive connections,
+                      For details about see the relevant section in the Azure documentation.
                     items:
                       properties:
                         primary:
@@ -599,10 +598,9 @@ spec:
                       with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.'
                     type: string
                   customBgpAddresses:
-                    description: A custom_bgp_addresses (Border Gateway Protocol custom
-                      IP Addresses) block which is documented below. The block can
-                      only be used on IPSec / activeactive connections, For details
-                      about see the relevant section in the Azure documentation.
+                    description: A custom_bgp_addresses block which is documented
+                      below. The block can only be used on IPSec / activeactive connections,
+                      For details about see the relevant section in the Azure documentation.
                     items:
                       properties:
                         primary:
@@ -924,10 +922,9 @@ spec:
                       with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.'
                     type: string
                   customBgpAddresses:
-                    description: A custom_bgp_addresses (Border Gateway Protocol custom
-                      IP Addresses) block which is documented below. The block can
-                      only be used on IPSec / activeactive connections, For details
-                      about see the relevant section in the Azure documentation.
+                    description: A custom_bgp_addresses block which is documented
+                      below. The block can only be used on IPSec / activeactive connections,
+                      For details about see the relevant section in the Azure documentation.
                     items:
                       properties:
                         primary:

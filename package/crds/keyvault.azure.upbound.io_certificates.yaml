@@ -69,7 +69,8 @@ spec:
                 properties:
                   certificate:
                     description: A certificate block as defined below, used to Import
-                      an existing certificate.
+                      an existing certificate. Changing this will create a new version
+                      of the Key Vault Certificate.
                     items:
                       properties:
                         contentsSecretRef:
@@ -112,7 +113,7 @@ spec:
                     type: array
                   certificatePolicy:
                     description: A certificate_policy block as defined below. Changing
-                      this forces a new resource to be created.
+                      this will create a new version of the Key Vault Certificate.
                     items:
                       properties:
                         issuerParameters:
@@ -124,7 +125,6 @@ spec:
                                   values include Self (for self-signed certificate),
                                   or Unknown (for a certificate issuing authority
                                   like Let's Encrypt and Azure direct supported ones).
-                                  Changing this forces a new resource to be created.
                                 type: string
                             type: object
                           type: array
@@ -136,28 +136,23 @@ spec:
                                 description: Specifies the curve to use when creating
                                   an EC key. Possible values are P-256, P-256K, P-384,
                                   and P-521. This field will be required in a future
-                                  release if key_type is EC or EC-HSM. Changing this
-                                  forces a new resource to be created.
+                                  release if key_type is EC or EC-HSM.
                                 type: string
                               exportable:
-                                description: Is this certificate exportable? Changing
-                                  this forces a new resource to be created.
+                                description: Is this certificate exportable?
                                 type: boolean
                               keySize:
                                 description: The size of the key used in the certificate.
                                   Possible values include 2048, 3072, and 4096 for
                                   RSA keys, or 256, 384, and 521 for EC keys. This
-                                  property is required when using RSA keys. Changing
-                                  this forces a new resource to be created.
+                                  property is required when using RSA keys.
                                 type: number
                               keyType:
                                 description: Specifies the type of key. Possible values
-                                  are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this
-                                  forces a new resource to be created.
+                                  are EC, EC-HSM, RSA, RSA-HSM and oct.
                                 type: string
                               reuseKey:
-                                description: Is the key reusable? Changing this forces
-                                  a new resource to be created.
+                                description: Is the key reusable?
                                 type: boolean
                             type: object
                           type: array
@@ -173,8 +168,6 @@ spec:
                                       description: The Type of action to be performed
                                         when the lifetime trigger is triggerec. Possible
                                         values include AutoRenew and EmailContacts.
-                                        Changing this forces a new resource to be
-                                        created.
                                       type: string
                                   type: object
                                 type: array
@@ -185,16 +178,13 @@ spec:
                                     daysBeforeExpiry:
                                       description: The number of days before the Certificate
                                         expires that the action associated with this
-                                        Trigger should run. Changing this forces a
-                                        new resource to be created. Conflicts with
-                                        lifetime_percentage.
+                                        Trigger should run. Conflicts with lifetime_percentage.
                                       type: number
                                     lifetimePercentage:
                                       description: The percentage at which during
                                         the Certificates Lifetime the action associated
-                                        with this Trigger should run. Changing this
-                                        forces a new resource to be created. Conflicts
-                                        with days_before_expiry.
+                                        with this Trigger should run. Conflicts with
+                                        days_before_expiry.
                                       type: number
                                   type: object
                                 type: array
@@ -207,8 +197,7 @@ spec:
                               contentType:
                                 description: The Content-Type of the Certificate,
                                   such as application/x-pkcs12 for a PFX or application/x-pem-file
-                                  for a PEM. Changing this forces a new resource to
-                                  be created.
+                                  for a PEM.
                                 type: string
                             type: object
                           type: array
@@ -219,7 +208,6 @@ spec:
                             properties:
                               extendedKeyUsage:
                                 description: A list of Extended/Enhanced Key Usages.
-                                  Changing this forces a new resource to be created.
                                 items:
                                   type: string
                                 type: array
@@ -228,39 +216,33 @@ spec:
                                   Possible values include cRLSign, dataEncipherment,
                                   decipherOnly, digitalSignature, encipherOnly, keyAgreement,
                                   keyCertSign, keyEncipherment and nonRepudiation
-                                  and are case-sensitive. Changing this forces a new
-                                  resource to be created.
+                                  and are case-sensitive.
                                 items:
                                   type: string
                                 type: array
                               subject:
-                                description: The Certificate's Subject. Changing this
-                                  forces a new resource to be created.
+                                description: The Certificate's Subject.
                                 type: string
                               subjectAlternativeNames:
                                 description: A subject_alternative_names block as
-                                  defined below. Changing this forces a new resource
-                                  to be created.
+                                  defined below.
                                 items:
                                   properties:
                                     dnsNames:
                                       description: A list of alternative DNS names
-                                        (FQDNs) identified by the Certificate. Changing
-                                        this forces a new resource to be created.
+                                        (FQDNs) identified by the Certificate.
                                       items:
                                         type: string
                                       type: array
                                     emails:
                                       description: A list of email addresses identified
-                                        by this Certificate. Changing this forces
-                                        a new resource to be created.
+                                        by this Certificate.
                                       items:
                                         type: string
                                       type: array
                                     upns:
                                       description: A list of User Principal Names
-                                        identified by the Certificate. Changing this
-                                        forces a new resource to be created.
+                                        identified by the Certificate.
                                       items:
                                         type: string
                                       type: array
@@ -268,7 +250,6 @@ spec:
                                 type: array
                               validityInMonths:
                                 description: The Certificates Validity Period in Months.
-                                  Changing this forces a new resource to be created.
                                 type: number
                             type: object
                           type: array
@@ -375,13 +356,14 @@ spec:
                 properties:
                   certificate:
                     description: A certificate block as defined below, used to Import
-                      an existing certificate.
+                      an existing certificate. Changing this will create a new version
+                      of the Key Vault Certificate.
                     items:
                       type: object
                     type: array
                   certificatePolicy:
                     description: A certificate_policy block as defined below. Changing
-                      this forces a new resource to be created.
+                      this will create a new version of the Key Vault Certificate.
                     items:
                       properties:
                         issuerParameters:
@@ -393,7 +375,6 @@ spec:
                                   values include Self (for self-signed certificate),
                                   or Unknown (for a certificate issuing authority
                                   like Let's Encrypt and Azure direct supported ones).
-                                  Changing this forces a new resource to be created.
                                 type: string
                             type: object
                           type: array
@@ -405,28 +386,23 @@ spec:
                                 description: Specifies the curve to use when creating
                                   an EC key. Possible values are P-256, P-256K, P-384,
                                   and P-521. This field will be required in a future
-                                  release if key_type is EC or EC-HSM. Changing this
-                                  forces a new resource to be created.
+                                  release if key_type is EC or EC-HSM.
                                 type: string
                               exportable:
-                                description: Is this certificate exportable? Changing
-                                  this forces a new resource to be created.
+                                description: Is this certificate exportable?
                                 type: boolean
                               keySize:
                                 description: The size of the key used in the certificate.
                                   Possible values include 2048, 3072, and 4096 for
                                   RSA keys, or 256, 384, and 521 for EC keys. This
-                                  property is required when using RSA keys. Changing
-                                  this forces a new resource to be created.
+                                  property is required when using RSA keys.
                                 type: number
                               keyType:
                                 description: Specifies the type of key. Possible values
-                                  are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this
-                                  forces a new resource to be created.
+                                  are EC, EC-HSM, RSA, RSA-HSM and oct.
                                 type: string
                               reuseKey:
-                                description: Is the key reusable? Changing this forces
-                                  a new resource to be created.
+                                description: Is the key reusable?
                                 type: boolean
                             type: object
                           type: array
@@ -442,8 +418,6 @@ spec:
                                       description: The Type of action to be performed
                                         when the lifetime trigger is triggerec. Possible
                                         values include AutoRenew and EmailContacts.
-                                        Changing this forces a new resource to be
-                                        created.
                                       type: string
                                   type: object
                                 type: array
@@ -454,16 +428,13 @@ spec:
                                     daysBeforeExpiry:
                                       description: The number of days before the Certificate
                                         expires that the action associated with this
-                                        Trigger should run. Changing this forces a
-                                        new resource to be created. Conflicts with
-                                        lifetime_percentage.
+                                        Trigger should run. Conflicts with lifetime_percentage.
                                       type: number
                                     lifetimePercentage:
                                       description: The percentage at which during
                                         the Certificates Lifetime the action associated
-                                        with this Trigger should run. Changing this
-                                        forces a new resource to be created. Conflicts
-                                        with days_before_expiry.
+                                        with this Trigger should run. Conflicts with
+                                        days_before_expiry.
                                       type: number
                                   type: object
                                 type: array
@@ -476,8 +447,7 @@ spec:
                               contentType:
                                 description: The Content-Type of the Certificate,
                                   such as application/x-pkcs12 for a PFX or application/x-pem-file
-                                  for a PEM. Changing this forces a new resource to
-                                  be created.
+                                  for a PEM.
                                 type: string
                             type: object
                           type: array
@@ -488,7 +458,6 @@ spec:
                             properties:
                               extendedKeyUsage:
                                 description: A list of Extended/Enhanced Key Usages.
-                                  Changing this forces a new resource to be created.
                                 items:
                                   type: string
                                 type: array
@@ -497,39 +466,33 @@ spec:
                                   Possible values include cRLSign, dataEncipherment,
                                   decipherOnly, digitalSignature, encipherOnly, keyAgreement,
                                   keyCertSign, keyEncipherment and nonRepudiation
-                                  and are case-sensitive. Changing this forces a new
-                                  resource to be created.
+                                  and are case-sensitive.
                                 items:
                                   type: string
                                 type: array
                               subject:
-                                description: The Certificate's Subject. Changing this
-                                  forces a new resource to be created.
+                                description: The Certificate's Subject.
                                 type: string
                               subjectAlternativeNames:
                                 description: A subject_alternative_names block as
-                                  defined below. Changing this forces a new resource
-                                  to be created.
+                                  defined below.
                                 items:
                                   properties:
                                     dnsNames:
                                       description: A list of alternative DNS names
-                                        (FQDNs) identified by the Certificate. Changing
-                                        this forces a new resource to be created.
+                                        (FQDNs) identified by the Certificate.
                                       items:
                                         type: string
                                       type: array
                                     emails:
                                       description: A list of email addresses identified
-                                        by this Certificate. Changing this forces
-                                        a new resource to be created.
+                                        by this Certificate.
                                       items:
                                         type: string
                                       type: array
                                     upns:
                                       description: A list of User Principal Names
-                                        identified by the Certificate. Changing this
-                                        forces a new resource to be created.
+                                        identified by the Certificate.
                                       items:
                                         type: string
                                       type: array
@@ -537,7 +500,6 @@ spec:
                                 type: array
                               validityInMonths:
                                 description: The Certificates Validity Period in Months.
-                                  Changing this forces a new resource to be created.
                                 type: number
                             type: object
                           type: array
@@ -725,7 +687,8 @@ spec:
                 properties:
                   certificate:
                     description: A certificate block as defined below, used to Import
-                      an existing certificate.
+                      an existing certificate. Changing this will create a new version
+                      of the Key Vault Certificate.
                     items:
                       properties:
                         contentsSecretRef:
@@ -801,7 +764,7 @@ spec:
                     type: string
                   certificatePolicy:
                     description: A certificate_policy block as defined below. Changing
-                      this forces a new resource to be created.
+                      this will create a new version of the Key Vault Certificate.
                     items:
                       properties:
                         issuerParameters:
@@ -813,7 +776,6 @@ spec:
                                   values include Self (for self-signed certificate),
                                   or Unknown (for a certificate issuing authority
                                   like Let's Encrypt and Azure direct supported ones).
-                                  Changing this forces a new resource to be created.
                                 type: string
                             type: object
                           type: array
@@ -825,28 +787,23 @@ spec:
                                 description: Specifies the curve to use when creating
                                   an EC key. Possible values are P-256, P-256K, P-384,
                                   and P-521. This field will be required in a future
-                                  release if key_type is EC or EC-HSM. Changing this
-                                  forces a new resource to be created.
+                                  release if key_type is EC or EC-HSM.
                                 type: string
                               exportable:
-                                description: Is this certificate exportable? Changing
-                                  this forces a new resource to be created.
+                                description: Is this certificate exportable?
                                 type: boolean
                               keySize:
                                 description: The size of the key used in the certificate.
                                   Possible values include 2048, 3072, and 4096 for
                                   RSA keys, or 256, 384, and 521 for EC keys. This
-                                  property is required when using RSA keys. Changing
-                                  this forces a new resource to be created.
+                                  property is required when using RSA keys.
                                 type: number
                               keyType:
                                 description: Specifies the type of key. Possible values
-                                  are EC, EC-HSM, RSA, RSA-HSM and oct. Changing this
-                                  forces a new resource to be created.
+                                  are EC, EC-HSM, RSA, RSA-HSM and oct.
                                 type: string
                               reuseKey:
-                                description: Is the key reusable? Changing this forces
-                                  a new resource to be created.
+                                description: Is the key reusable?
                                 type: boolean
                             type: object
                           type: array
@@ -862,8 +819,6 @@ spec:
                                       description: The Type of action to be performed
                                         when the lifetime trigger is triggerec. Possible
                                         values include AutoRenew and EmailContacts.
-                                        Changing this forces a new resource to be
-                                        created.
                                       type: string
                                   type: object
                                 type: array
@@ -874,16 +829,13 @@ spec:
                                     daysBeforeExpiry:
                                       description: The number of days before the Certificate
                                         expires that the action associated with this
-                                        Trigger should run. Changing this forces a
-                                        new resource to be created. Conflicts with
-                                        lifetime_percentage.
+                                        Trigger should run. Conflicts with lifetime_percentage.
                                       type: number
                                     lifetimePercentage:
                                       description: The percentage at which during
                                         the Certificates Lifetime the action associated
-                                        with this Trigger should run. Changing this
-                                        forces a new resource to be created. Conflicts
-                                        with days_before_expiry.
+                                        with this Trigger should run. Conflicts with
+                                        days_before_expiry.
                                       type: number
                                   type: object
                                 type: array
@@ -896,8 +848,7 @@ spec:
                               contentType:
                                 description: The Content-Type of the Certificate,
                                   such as application/x-pkcs12 for a PFX or application/x-pem-file
-                                  for a PEM. Changing this forces a new resource to
-                                  be created.
+                                  for a PEM.
                                 type: string
                             type: object
                           type: array
@@ -908,7 +859,6 @@ spec:
                             properties:
                               extendedKeyUsage:
                                 description: A list of Extended/Enhanced Key Usages.
-                                  Changing this forces a new resource to be created.
                                 items:
                                   type: string
                                 type: array
@@ -917,39 +867,33 @@ spec:
                                   Possible values include cRLSign, dataEncipherment,
                                   decipherOnly, digitalSignature, encipherOnly, keyAgreement,
                                   keyCertSign, keyEncipherment and nonRepudiation
-                                  and are case-sensitive. Changing this forces a new
-                                  resource to be created.
+                                  and are case-sensitive.
                                 items:
                                   type: string
                                 type: array
                               subject:
-                                description: The Certificate's Subject. Changing this
-                                  forces a new resource to be created.
+                                description: The Certificate's Subject.
                                 type: string
                               subjectAlternativeNames:
                                 description: A subject_alternative_names block as
-                                  defined below. Changing this forces a new resource
-                                  to be created.
+                                  defined below.
                                 items:
                                   properties:
                                     dnsNames:
                                       description: A list of alternative DNS names
-                                        (FQDNs) identified by the Certificate. Changing
-                                        this forces a new resource to be created.
+                                        (FQDNs) identified by the Certificate.
                                       items:
                                         type: string
                                       type: array
                                     emails:
                                       description: A list of email addresses identified
-                                        by this Certificate. Changing this forces
-                                        a new resource to be created.
+                                        by this Certificate.
                                       items:
                                         type: string
                                       type: array
                                     upns:
                                       description: A list of User Principal Names
-                                        identified by the Certificate. Changing this
-                                        forces a new resource to be created.
+                                        identified by the Certificate.
                                       items:
                                         type: string
                                       type: array
@@ -957,7 +901,6 @@ spec:
                                 type: array
                               validityInMonths:
                                 description: The Certificates Validity Period in Months.
-                                  Changing this forces a new resource to be created.
                                 type: number
                             type: object
                           type: array

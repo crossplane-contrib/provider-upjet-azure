@@ -93,8 +93,8 @@ spec:
                     description: Enable/Disable auto-growing of the storage. Storage
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
-                      automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      automatically grows without impacting the workload. Defaults
+                      to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values
@@ -338,8 +338,8 @@ spec:
                     description: Enable/Disable auto-growing of the storage. Storage
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
-                      automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      automatically grows without impacting the workload. Defaults
+                      to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values
@@ -655,8 +655,8 @@ spec:
                     description: Enable/Disable auto-growing of the storage. Storage
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
-                      automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      automatically grows without impacting the workload. Defaults
+                      to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values

@@ -147,7 +147,7 @@ type LoadBalancerInitParameters struct {
 	// Specifies the Edge Zone within the Azure Region where this Load Balancer should exist. Changing this forces a new Load Balancer to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// One or multiple frontend_ip_configuration blocks as documented below.
+	// One or more frontend_ip_configuration blocks as documented below.
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationInitParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// Specifies the supported Azure Region where the Load Balancer should be created. Changing this forces a new resource to be created.
@@ -168,7 +168,7 @@ type LoadBalancerObservation struct {
 	// Specifies the Edge Zone within the Azure Region where this Load Balancer should exist. Changing this forces a new Load Balancer to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// One or multiple frontend_ip_configuration blocks as documented below.
+	// One or more frontend_ip_configuration blocks as documented below.
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// The Load Balancer ID.
@@ -202,7 +202,7 @@ type LoadBalancerParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// One or multiple frontend_ip_configuration blocks as documented below.
+	// One or more frontend_ip_configuration blocks as documented below.
 	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 

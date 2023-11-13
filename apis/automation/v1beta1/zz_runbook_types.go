@@ -339,7 +339,7 @@ type RunBookInitParameters struct {
 	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The published runbook content link.
+	// One publish_content_link block as defined below.
 	PublishContentLink []PublishContentLinkInitParameters `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
 	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3, Python2 or Script. Changing this forces a new resource to be created.
@@ -383,7 +383,7 @@ type RunBookObservation struct {
 	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The published runbook content link.
+	// One publish_content_link block as defined below.
 	PublishContentLink []PublishContentLinkObservation `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
 	// The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created.
@@ -446,7 +446,7 @@ type RunBookParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The published runbook content link.
+	// One publish_content_link block as defined below.
 	// +kubebuilder:validation:Optional
 	PublishContentLink []PublishContentLinkParameters `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 

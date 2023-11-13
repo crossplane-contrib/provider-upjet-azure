@@ -22,6 +22,9 @@ type BotChannelMSTeamsInitParameters struct {
 	// Specifies the webhook for Microsoft Teams channel calls.
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
 
+	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
+	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
+
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 
@@ -36,6 +39,9 @@ type BotChannelMSTeamsObservation struct {
 
 	// Specifies the webhook for Microsoft Teams channel calls.
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
+
+	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
+	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
 
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
@@ -69,6 +75,10 @@ type BotChannelMSTeamsParameters struct {
 	// Specifies the webhook for Microsoft Teams channel calls.
 	// +kubebuilder:validation:Optional
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
+
+	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
+	// +kubebuilder:validation:Optional
+	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
 
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	// +kubebuilder:validation:Optional

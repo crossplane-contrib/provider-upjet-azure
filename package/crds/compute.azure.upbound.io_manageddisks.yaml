@@ -70,7 +70,16 @@ spec:
                   createOption:
                     description: 'The method to use when creating the managed disk.
                       Changing this forces a new resource to be created. Possible
-                      values include:'
+                      values include: * Import - Import a VHD file in to the managed
+                      disk (VHD specified with source_uri). * ImportSecure - Securely
+                      import a VHD file in to the managed disk (VHD specified with
+                      source_uri). * Empty - Create an empty managed disk. * Copy
+                      - Copy an existing managed disk or snapshot (specified with
+                      source_resource_id). * FromImage - Copy a Platform Image (specified
+                      with image_reference_id) * Restore - Set by Azure Backup or
+                      Site Recovery on a restored disk (specified with source_resource_id).
+                      * Upload - Upload a VHD disk with the help of SAS URL (to be
+                      used with upload_size_bytes).'
                     type: string
                   diskAccessId:
                     description: The ID of the disk access resource for using private
@@ -191,11 +200,21 @@ spec:
                     description: Specifies if On-Demand Bursting is enabled for the
                       Managed Disk.
                     type: boolean
+                  optimizedFrequentAttachEnabled:
+                    description: Specifies whether this Managed Disk should be optimized
+                      for frequent disk attachments (where a disk is attached/detached
+                      more than 5 times in a day). Defaults to false.
+                    type: boolean
                   osType:
                     description: Specify a value when the source of an Import, ImportSecure
                       or Copy operation targets a source that contains an operating
                       system. Valid values are Linux or Windows.
                     type: string
+                  performancePlusEnabled:
+                    description: Specifies whether Performance Plus is enabled for
+                      this Managed Disk. Defaults to false. Changing this forces a
+                      new resource to be created.
+                    type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether it is allowed to access the disk via public
                       network. Defaults to true.
@@ -431,7 +450,16 @@ spec:
                   createOption:
                     description: 'The method to use when creating the managed disk.
                       Changing this forces a new resource to be created. Possible
-                      values include:'
+                      values include: * Import - Import a VHD file in to the managed
+                      disk (VHD specified with source_uri). * ImportSecure - Securely
+                      import a VHD file in to the managed disk (VHD specified with
+                      source_uri). * Empty - Create an empty managed disk. * Copy
+                      - Copy an existing managed disk or snapshot (specified with
+                      source_resource_id). * FromImage - Copy a Platform Image (specified
+                      with image_reference_id) * Restore - Set by Azure Backup or
+                      Site Recovery on a restored disk (specified with source_resource_id).
+                      * Upload - Upload a VHD disk with the help of SAS URL (to be
+                      used with upload_size_bytes).'
                     type: string
                   diskAccessId:
                     description: The ID of the disk access resource for using private
@@ -552,11 +580,21 @@ spec:
                     description: Specifies if On-Demand Bursting is enabled for the
                       Managed Disk.
                     type: boolean
+                  optimizedFrequentAttachEnabled:
+                    description: Specifies whether this Managed Disk should be optimized
+                      for frequent disk attachments (where a disk is attached/detached
+                      more than 5 times in a day). Defaults to false.
+                    type: boolean
                   osType:
                     description: Specify a value when the source of an Import, ImportSecure
                       or Copy operation targets a source that contains an operating
                       system. Valid values are Linux or Windows.
                     type: string
+                  performancePlusEnabled:
+                    description: Specifies whether Performance Plus is enabled for
+                      this Managed Disk. Defaults to false. Changing this forces a
+                      new resource to be created.
+                    type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether it is allowed to access the disk via public
                       network. Defaults to true.
@@ -797,7 +835,16 @@ spec:
                   createOption:
                     description: 'The method to use when creating the managed disk.
                       Changing this forces a new resource to be created. Possible
-                      values include:'
+                      values include: * Import - Import a VHD file in to the managed
+                      disk (VHD specified with source_uri). * ImportSecure - Securely
+                      import a VHD file in to the managed disk (VHD specified with
+                      source_uri). * Empty - Create an empty managed disk. * Copy
+                      - Copy an existing managed disk or snapshot (specified with
+                      source_resource_id). * FromImage - Copy a Platform Image (specified
+                      with image_reference_id) * Restore - Set by Azure Backup or
+                      Site Recovery on a restored disk (specified with source_resource_id).
+                      * Upload - Upload a VHD disk with the help of SAS URL (to be
+                      used with upload_size_bytes).'
                     type: string
                   diskAccessId:
                     description: The ID of the disk access resource for using private
@@ -921,11 +968,21 @@ spec:
                     description: Specifies if On-Demand Bursting is enabled for the
                       Managed Disk.
                     type: boolean
+                  optimizedFrequentAttachEnabled:
+                    description: Specifies whether this Managed Disk should be optimized
+                      for frequent disk attachments (where a disk is attached/detached
+                      more than 5 times in a day). Defaults to false.
+                    type: boolean
                   osType:
                     description: Specify a value when the source of an Import, ImportSecure
                       or Copy operation targets a source that contains an operating
                       system. Valid values are Linux or Windows.
                     type: string
+                  performancePlusEnabled:
+                    description: Specifies whether Performance Plus is enabled for
+                      this Managed Disk. Defaults to false. Changing this forces a
+                      new resource to be created.
+                    type: boolean
                   publicNetworkAccessEnabled:
                     description: Whether it is allowed to access the disk via public
                       network. Defaults to true.

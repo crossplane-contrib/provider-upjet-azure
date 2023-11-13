@@ -304,7 +304,7 @@ spec:
                     type: object
                   defaultPrincipalModificationKind:
                     description: 'The default principals modification kind. Valid
-                      values are: None (default), Replace and Union.'
+                      values are: None (default), Replace and Union. Defaults to None.'
                     type: string
                   location:
                     description: Specifies the location of the Kusto Cluster for which
@@ -451,7 +451,7 @@ spec:
                 properties:
                   defaultPrincipalModificationKind:
                     description: 'The default principals modification kind. Valid
-                      values are: None (default), Replace and Union.'
+                      values are: None (default), Replace and Union. Defaults to None.'
                     type: string
                   location:
                     description: Specifies the location of the Kusto Cluster for which
@@ -702,7 +702,7 @@ spec:
                     type: string
                   defaultPrincipalModificationKind:
                     description: 'The default principals modification kind. Valid
-                      values are: None (default), Replace and Union.'
+                      values are: None (default), Replace and Union. Defaults to None.'
                     type: string
                   id:
                     description: The Kusto Attached Database Configuration ID.

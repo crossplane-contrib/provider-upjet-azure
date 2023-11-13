@@ -463,7 +463,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Azure-SSIS Integration
@@ -864,7 +864,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Azure-SSIS Integration
@@ -1277,7 +1277,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Azure-SSIS Integration

@@ -110,7 +110,7 @@ type BackendPoolHealthProbeInitParameters struct {
 	// The path to use for the Health Probe. Default is /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: GET and HEAD. Defaults to GET.
 	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 
 	// Protocol scheme to use for the Health Probe. Possible values are Http and Https. Defaults to Http.
@@ -134,7 +134,7 @@ type BackendPoolHealthProbeObservation struct {
 	// The path to use for the Health Probe. Default is /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: GET and HEAD. Defaults to GET.
 	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 
 	// Protocol scheme to use for the Health Probe. Possible values are Http and Https. Defaults to Http.
@@ -159,7 +159,7 @@ type BackendPoolHealthProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: GET and HEAD. Defaults to GET.
 	// +kubebuilder:validation:Optional
 	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 

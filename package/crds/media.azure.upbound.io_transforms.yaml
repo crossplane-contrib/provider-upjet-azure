@@ -192,7 +192,7 @@ spec:
                           items:
                             properties:
                               presetConfiguration:
-                                description: A present_configuration block as defined
+                                description: A preset_configuration block as defined
                                   below.
                                 items:
                                   properties:
@@ -353,11 +353,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -398,7 +398,7 @@ spec:
                                                     The value should be in ISO 8601
                                                     format. The value should be in
                                                     the range 0.1 to 100 seconds.
-                                                    The default is 5 seconds (PT5S).
+                                                    Defaults to PT5S.
                                                   type: string
                                                 crf:
                                                   description: The value of CRF to
@@ -537,11 +537,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -582,7 +582,7 @@ spec:
                                                     The value should be in ISO 8601
                                                     format. The value should be in
                                                     the range 0.1 to 100 seconds.
-                                                    The default is 5 seconds (PT5S).
+                                                    Defaults to PT5S.
                                                   type: string
                                                 crf:
                                                   description: The value of CRF to
@@ -703,11 +703,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -833,11 +833,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -940,6 +940,12 @@ spec:
                                       type: array
                                   type: object
                                 type: array
+                              experimentalOptions:
+                                additionalProperties:
+                                  type: string
+                                description: Dictionary containing key value pairs
+                                  for parameters not exposed in the preset itself.
+                                type: object
                               filter:
                                 description: A filter block as defined below.
                                 items:
@@ -1550,7 +1556,7 @@ spec:
                             or, stop the other outputs. The overall Job state will
                             not reflect failures of outputs that are specified with
                             ContinueJob. Possible values are StopProcessingJob or
-                            ContinueJob. The default is StopProcessingJob.
+                            ContinueJob. Defaults to StopProcessingJob.
                           type: string
                         relativePriority:
                           description: Sets the relative priority of the TransformOutputs
@@ -1751,7 +1757,7 @@ spec:
                           items:
                             properties:
                               presetConfiguration:
-                                description: A present_configuration block as defined
+                                description: A preset_configuration block as defined
                                   below.
                                 items:
                                   properties:
@@ -1912,11 +1918,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -1957,7 +1963,7 @@ spec:
                                                     The value should be in ISO 8601
                                                     format. The value should be in
                                                     the range 0.1 to 100 seconds.
-                                                    The default is 5 seconds (PT5S).
+                                                    Defaults to PT5S.
                                                   type: string
                                                 crf:
                                                   description: The value of CRF to
@@ -2096,11 +2102,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -2141,7 +2147,7 @@ spec:
                                                     The value should be in ISO 8601
                                                     format. The value should be in
                                                     the range 0.1 to 100 seconds.
-                                                    The default is 5 seconds (PT5S).
+                                                    Defaults to PT5S.
                                                   type: string
                                                 crf:
                                                   description: The value of CRF to
@@ -2262,11 +2268,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -2392,11 +2398,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -2499,6 +2505,12 @@ spec:
                                       type: array
                                   type: object
                                 type: array
+                              experimentalOptions:
+                                additionalProperties:
+                                  type: string
+                                description: Dictionary containing key value pairs
+                                  for parameters not exposed in the preset itself.
+                                type: object
                               filter:
                                 description: A filter block as defined below.
                                 items:
@@ -3109,7 +3121,7 @@ spec:
                             or, stop the other outputs. The overall Job state will
                             not reflect failures of outputs that are specified with
                             ContinueJob. Possible values are StopProcessingJob or
-                            ContinueJob. The default is StopProcessingJob.
+                            ContinueJob. Defaults to StopProcessingJob.
                           type: string
                         relativePriority:
                           description: Sets the relative priority of the TransformOutputs
@@ -3391,7 +3403,7 @@ spec:
                           items:
                             properties:
                               presetConfiguration:
-                                description: A present_configuration block as defined
+                                description: A preset_configuration block as defined
                                   below.
                                 items:
                                   properties:
@@ -3552,11 +3564,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -3597,7 +3609,7 @@ spec:
                                                     The value should be in ISO 8601
                                                     format. The value should be in
                                                     the range 0.1 to 100 seconds.
-                                                    The default is 5 seconds (PT5S).
+                                                    Defaults to PT5S.
                                                   type: string
                                                 crf:
                                                   description: The value of CRF to
@@ -3736,11 +3748,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -3781,7 +3793,7 @@ spec:
                                                     The value should be in ISO 8601
                                                     format. The value should be in
                                                     the range 0.1 to 100 seconds.
-                                                    The default is 5 seconds (PT5S).
+                                                    Defaults to PT5S.
                                                   type: string
                                                 crf:
                                                   description: The value of CRF to
@@ -3902,11 +3914,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -4032,11 +4044,11 @@ spec:
                                             description: The distance between two
                                               key frames. The value should be non-zero
                                               in the range 0.5 to 20 seconds, specified
-                                              in ISO 8601 format. The default is 2
-                                              seconds (PT2S). Note that this setting
+                                              in ISO 8601 format. Note that this setting
                                               is ignored if sync_mode is set to Passthrough,
                                               where the KeyFrameInterval value will
-                                              follow the input source setting.
+                                              follow the input source setting. Defaults
+                                              to PT2S.
                                             type: string
                                           label:
                                             description: Specifies the label for the
@@ -4139,6 +4151,12 @@ spec:
                                       type: array
                                   type: object
                                 type: array
+                              experimentalOptions:
+                                additionalProperties:
+                                  type: string
+                                description: Dictionary containing key value pairs
+                                  for parameters not exposed in the preset itself.
+                                type: object
                               filter:
                                 description: A filter block as defined below.
                                 items:
@@ -4749,7 +4767,7 @@ spec:
                             or, stop the other outputs. The overall Job state will
                             not reflect failures of outputs that are specified with
                             ContinueJob. Possible values are StopProcessingJob or
-                            ContinueJob. The default is StopProcessingJob.
+                            ContinueJob. Defaults to StopProcessingJob.
                           type: string
                         relativePriority:
                           description: Sets the relative priority of the TransformOutputs

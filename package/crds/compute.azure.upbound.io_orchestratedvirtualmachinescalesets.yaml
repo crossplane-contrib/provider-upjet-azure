@@ -93,9 +93,9 @@ spec:
                           description: Amount of time for which automatic repairs
                             will be delayed. The grace period starts right after the
                             VM is found unhealthy. Possible values are between 30
-                            and 90 minutes. Defaults to 30 minutes. The time duration
-                            should be specified in ISO 8601 format (e.g. PT30M to
-                            PT90M).
+                            and 90 minutes. The time duration should be specified
+                            in ISO 8601 format (e.g. PT30M to PT90M). Defaults to
+                            PT30M.
                           type: string
                       type: object
                     type: array
@@ -153,8 +153,14 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
+                          description: Specifies the Read-Write IOPS for this Data
+                            Disk. Only settable when storage_account_type is PremiumV2_LRS
+                            or UltraSSD_LRS.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
+                          description: Specifies the bandwidth in MB per second for
+                            this Data Disk. Only settable when storage_account_type
+                            is PremiumV2_LRS or UltraSSD_LRS.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on
@@ -258,7 +264,7 @@ spec:
                     description: Specifies the time alloted for all extensions to
                       start. The time duration should be between 15 minutes and 120
                       minutes (inclusive) and should be specified in ISO 8601 format.
-                      The default value is 90 minutes (PT1H30M).
+                      Defaults to PT1H30M.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -1088,9 +1094,9 @@ spec:
                           description: Amount of time for which automatic repairs
                             will be delayed. The grace period starts right after the
                             VM is found unhealthy. Possible values are between 30
-                            and 90 minutes. Defaults to 30 minutes. The time duration
-                            should be specified in ISO 8601 format (e.g. PT30M to
-                            PT90M).
+                            and 90 minutes. The time duration should be specified
+                            in ISO 8601 format (e.g. PT30M to PT90M). Defaults to
+                            PT30M.
                           type: string
                       type: object
                     type: array
@@ -1148,8 +1154,14 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
+                          description: Specifies the Read-Write IOPS for this Data
+                            Disk. Only settable when storage_account_type is PremiumV2_LRS
+                            or UltraSSD_LRS.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
+                          description: Specifies the bandwidth in MB per second for
+                            this Data Disk. Only settable when storage_account_type
+                            is PremiumV2_LRS or UltraSSD_LRS.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on
@@ -1235,7 +1247,7 @@ spec:
                     description: Specifies the time alloted for all extensions to
                       start. The time duration should be between 15 minutes and 120
                       minutes (inclusive) and should be specified in ISO 8601 format.
-                      The default value is 90 minutes (PT1H30M).
+                      Defaults to PT1H30M.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -1988,9 +2000,9 @@ spec:
                           description: Amount of time for which automatic repairs
                             will be delayed. The grace period starts right after the
                             VM is found unhealthy. Possible values are between 30
-                            and 90 minutes. Defaults to 30 minutes. The time duration
-                            should be specified in ISO 8601 format (e.g. PT30M to
-                            PT90M).
+                            and 90 minutes. The time duration should be specified
+                            in ISO 8601 format (e.g. PT30M to PT90M). Defaults to
+                            PT30M.
                           type: string
                       type: object
                     type: array
@@ -2048,8 +2060,14 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
+                          description: Specifies the Read-Write IOPS for this Data
+                            Disk. Only settable when storage_account_type is PremiumV2_LRS
+                            or UltraSSD_LRS.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
+                          description: Specifies the bandwidth in MB per second for
+                            this Data Disk. Only settable when storage_account_type
+                            is PremiumV2_LRS or UltraSSD_LRS.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on
@@ -2135,7 +2153,7 @@ spec:
                     description: Specifies the time alloted for all extensions to
                       start. The time duration should be between 15 minutes and 120
                       minutes (inclusive) and should be specified in ISO 8601 format.
-                      The default value is 90 minutes (PT1H30M).
+                      Defaults to PT1H30M.
                     type: string
                   id:
                     description: The ID of the Orchestrated Virtual Machine Scale

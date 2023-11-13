@@ -177,13 +177,14 @@ spec:
                         identityIds:
                           description: '- A list of one or more Resource IDs for User
                             Assigned Managed identities to assign. Required when type
-                            is set to UserAssigned.'
+                            is set to UserAssigned or SystemAssigned, UserAssigned.'
                           items:
                             type: string
                           type: array
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are SystemAssigned, UserAssigned, and SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -217,9 +218,15 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exposedPort:
+                          description: The exposed port on the container for the Ingress
+                            traffic. The exposed port on the container for the Ingress
+                            traffic.
+                          type: number
                         externalEnabled:
-                          description: Is this an external Ingress. Is this an external
-                            Ingress.
+                          description: Are connections to this Ingress from outside
+                            the Container App Environment enabled? Defaults to false.
+                            Is this an external Ingress.
                           type: boolean
                         targetPort:
                           description: The target port on the container for the Ingress
@@ -259,9 +266,10 @@ spec:
                           type: array
                         transport:
                           description: The transport method for the Ingress. Possible
-                            values include auto, http, and http2. Defaults to auto
+                            values are auto, http, http2 and tcp. Defaults to auto.
                             The transport method for the Ingress. Possible values
-                            include `auto`, `http`, and `http2`. Defaults to `auto`
+                            include `auto`, `http`, and `http2`, `tcp`. Defaults to
+                            `auto`
                           type: string
                       type: object
                     type: array
@@ -434,6 +442,39 @@ spec:
                     description: A template block as detailed below.
                     items:
                       properties:
+                        azureQueueScaleRule:
+                          description: One or more azure_queue_scale_rule blocks as
+                            defined below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                              queueLength:
+                                description: The value of the length of the queue
+                                  to trigger scaling actions.
+                                type: number
+                              queueName:
+                                description: The name of the Azure Queue
+                                type: string
+                            type: object
+                          type: array
                         container:
                           description: One or more container blocks as detailed below.
                           items:
@@ -573,14 +614,13 @@ spec:
                                 type: array
                               memory:
                                 description: The amount of memory to allocate to the
-                                  container. Possible values include 0.5Gi, 1.0Gi,
-                                  1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi. The
-                                  amount of memory to allocate to the container. Possible
-                                  values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`,
-                                  `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:**
-                                  `cpu` and `memory` must be specified in `0.25'/'0.5Gi`
-                                  combination increments. e.g. `1.25` / `2.5Gi` or
-                                  `0.75` / `1.5Gi`
+                                  container. Possible values are 0.5Gi, 1Gi, 1.5Gi,
+                                  2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. The amount of memory
+                                  to allocate to the container. Possible values include
+                                  `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`,
+                                  `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory`
+                                  must be specified in `0.25'/'0.5Gi` combination
+                                  increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
                                 type: string
                               name:
                                 description: The name of the Volume to be mounted
@@ -759,6 +799,86 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        customScaleRule:
+                          description: One or more custom_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              customRuleType:
+                                description: 'The Custom rule type. Possible values
+                                  include: activemq, artemis-queue, kafka, pulsar,
+                                  aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams,
+                                  aws-kinesis-stream, aws-sqs-queue, azure-app-insights,
+                                  azure-blob, azure-data-explorer, azure-eventhub,
+                                  azure-log-analytics, azure-monitor, azure-pipelines,
+                                  azure-servicebus, azure-queue, cassandra, cpu, cron,
+                                  datadog, elasticsearch, external, external-push,
+                                  gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                  http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                  liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                  nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                  openstack-swift, postgresql, predictkube, prometheus,
+                                  rabbitmq, redis, redis-cluster, redis-sentinel,
+                                  redis-streams, redis-cluster-streams, redis-sentinel-streams,
+                                  selenium-grid,solace-event-queue, and github-runner.'
+                                type: string
+                              metadata:
+                                additionalProperties:
+                                  type: string
+                                description: '- A map of string key-value pairs to
+                                  configure the Custom Scale Rule.'
+                                type: object
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        httpScaleRule:
+                          description: One or more http_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         maxReplicas:
                           description: The maximum number of replicas for this container.
                             The maximum number of replicas for this container.
@@ -775,6 +895,36 @@ spec:
                             the lifetime of the Resource. If omitted the service will
                             use a hash function to create one.
                           type: string
+                        tcpScaleRule:
+                          description: One or more tcp_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         volume:
                           description: A volume block as detailed below.
                           items:
@@ -790,7 +940,7 @@ spec:
                                 type: string
                               storageType:
                                 description: The type of storage volume. Possible
-                                  values include AzureFile and EmptyDir. Defaults
+                                  values are AzureFile, EmptyDir and Secret. Defaults
                                   to EmptyDir. The type of storage volume. Possible
                                   values include `AzureFile` and `EmptyDir`. Defaults
                                   to `EmptyDir`.
@@ -841,13 +991,14 @@ spec:
                         identityIds:
                           description: '- A list of one or more Resource IDs for User
                             Assigned Managed identities to assign. Required when type
-                            is set to UserAssigned.'
+                            is set to UserAssigned or SystemAssigned, UserAssigned.'
                           items:
                             type: string
                           type: array
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are SystemAssigned, UserAssigned, and SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -881,9 +1032,15 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exposedPort:
+                          description: The exposed port on the container for the Ingress
+                            traffic. The exposed port on the container for the Ingress
+                            traffic.
+                          type: number
                         externalEnabled:
-                          description: Is this an external Ingress. Is this an external
-                            Ingress.
+                          description: Are connections to this Ingress from outside
+                            the Container App Environment enabled? Defaults to false.
+                            Is this an external Ingress.
                           type: boolean
                         targetPort:
                           description: The target port on the container for the Ingress
@@ -923,9 +1080,10 @@ spec:
                           type: array
                         transport:
                           description: The transport method for the Ingress. Possible
-                            values include auto, http, and http2. Defaults to auto
+                            values are auto, http, http2 and tcp. Defaults to auto.
                             The transport method for the Ingress. Possible values
-                            include `auto`, `http`, and `http2`. Defaults to `auto`
+                            include `auto`, `http`, and `http2`, `tcp`. Defaults to
+                            `auto`
                           type: string
                       type: object
                     type: array
@@ -979,6 +1137,39 @@ spec:
                     description: A template block as detailed below.
                     items:
                       properties:
+                        azureQueueScaleRule:
+                          description: One or more azure_queue_scale_rule blocks as
+                            defined below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                              queueLength:
+                                description: The value of the length of the queue
+                                  to trigger scaling actions.
+                                type: number
+                              queueName:
+                                description: The name of the Azure Queue
+                                type: string
+                            type: object
+                          type: array
                         container:
                           description: One or more container blocks as detailed below.
                           items:
@@ -1118,14 +1309,13 @@ spec:
                                 type: array
                               memory:
                                 description: The amount of memory to allocate to the
-                                  container. Possible values include 0.5Gi, 1.0Gi,
-                                  1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi. The
-                                  amount of memory to allocate to the container. Possible
-                                  values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`,
-                                  `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:**
-                                  `cpu` and `memory` must be specified in `0.25'/'0.5Gi`
-                                  combination increments. e.g. `1.25` / `2.5Gi` or
-                                  `0.75` / `1.5Gi`
+                                  container. Possible values are 0.5Gi, 1Gi, 1.5Gi,
+                                  2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. The amount of memory
+                                  to allocate to the container. Possible values include
+                                  `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`,
+                                  `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory`
+                                  must be specified in `0.25'/'0.5Gi` combination
+                                  increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
                                 type: string
                               name:
                                 description: The name of the Volume to be mounted
@@ -1304,6 +1494,86 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        customScaleRule:
+                          description: One or more custom_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              customRuleType:
+                                description: 'The Custom rule type. Possible values
+                                  include: activemq, artemis-queue, kafka, pulsar,
+                                  aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams,
+                                  aws-kinesis-stream, aws-sqs-queue, azure-app-insights,
+                                  azure-blob, azure-data-explorer, azure-eventhub,
+                                  azure-log-analytics, azure-monitor, azure-pipelines,
+                                  azure-servicebus, azure-queue, cassandra, cpu, cron,
+                                  datadog, elasticsearch, external, external-push,
+                                  gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                  http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                  liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                  nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                  openstack-swift, postgresql, predictkube, prometheus,
+                                  rabbitmq, redis, redis-cluster, redis-sentinel,
+                                  redis-streams, redis-cluster-streams, redis-sentinel-streams,
+                                  selenium-grid,solace-event-queue, and github-runner.'
+                                type: string
+                              metadata:
+                                additionalProperties:
+                                  type: string
+                                description: '- A map of string key-value pairs to
+                                  configure the Custom Scale Rule.'
+                                type: object
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        httpScaleRule:
+                          description: One or more http_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         maxReplicas:
                           description: The maximum number of replicas for this container.
                             The maximum number of replicas for this container.
@@ -1320,6 +1590,36 @@ spec:
                             the lifetime of the Resource. If omitted the service will
                             use a hash function to create one.
                           type: string
+                        tcpScaleRule:
+                          description: One or more tcp_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         volume:
                           description: A volume block as detailed below.
                           items:
@@ -1335,7 +1635,7 @@ spec:
                                 type: string
                               storageType:
                                 description: The type of storage volume. Possible
-                                  values include AzureFile and EmptyDir. Defaults
+                                  values are AzureFile, EmptyDir and Secret. Defaults
                                   to EmptyDir. The type of storage volume. Possible
                                   values include `AzureFile` and `EmptyDir`. Defaults
                                   to `EmptyDir`.
@@ -1557,7 +1857,7 @@ spec:
                         identityIds:
                           description: '- A list of one or more Resource IDs for User
                             Assigned Managed identities to assign. Required when type
-                            is set to UserAssigned.'
+                            is set to UserAssigned or SystemAssigned, UserAssigned.'
                           items:
                             type: string
                           type: array
@@ -1569,7 +1869,8 @@ spec:
                           type: string
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are SystemAssigned, UserAssigned, and SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -1603,9 +1904,15 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exposedPort:
+                          description: The exposed port on the container for the Ingress
+                            traffic. The exposed port on the container for the Ingress
+                            traffic.
+                          type: number
                         externalEnabled:
-                          description: Is this an external Ingress. Is this an external
-                            Ingress.
+                          description: Are connections to this Ingress from outside
+                            the Container App Environment enabled? Defaults to false.
+                            Is this an external Ingress.
                           type: boolean
                         fqdn:
                           description: The FQDN of the ingress. The FQDN of the ingress.
@@ -1648,9 +1955,10 @@ spec:
                           type: array
                         transport:
                           description: The transport method for the Ingress. Possible
-                            values include auto, http, and http2. Defaults to auto
+                            values are auto, http, http2 and tcp. Defaults to auto.
                             The transport method for the Ingress. Possible values
-                            include `auto`, `http`, and `http2`. Defaults to `auto`
+                            include `auto`, `http`, and `http2`, `tcp`. Defaults to
+                            `auto`
                           type: string
                       type: object
                     type: array
@@ -1766,6 +2074,39 @@ spec:
                     description: A template block as detailed below.
                     items:
                       properties:
+                        azureQueueScaleRule:
+                          description: One or more azure_queue_scale_rule blocks as
+                            defined below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                              queueLength:
+                                description: The value of the length of the queue
+                                  to trigger scaling actions.
+                                type: number
+                              queueName:
+                                description: The name of the Azure Queue
+                                type: string
+                            type: object
+                          type: array
                         container:
                           description: One or more container blocks as detailed below.
                           items:
@@ -1917,14 +2258,13 @@ spec:
                                 type: array
                               memory:
                                 description: The amount of memory to allocate to the
-                                  container. Possible values include 0.5Gi, 1.0Gi,
-                                  1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi. The
-                                  amount of memory to allocate to the container. Possible
-                                  values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`,
-                                  `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:**
-                                  `cpu` and `memory` must be specified in `0.25'/'0.5Gi`
-                                  combination increments. e.g. `1.25` / `2.5Gi` or
-                                  `0.75` / `1.5Gi`
+                                  container. Possible values are 0.5Gi, 1Gi, 1.5Gi,
+                                  2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. The amount of memory
+                                  to allocate to the container. Possible values include
+                                  `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`,
+                                  `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory`
+                                  must be specified in `0.25'/'0.5Gi` combination
+                                  increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
                                 type: string
                               name:
                                 description: The name of the Volume to be mounted
@@ -2110,6 +2450,86 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        customScaleRule:
+                          description: One or more custom_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              customRuleType:
+                                description: 'The Custom rule type. Possible values
+                                  include: activemq, artemis-queue, kafka, pulsar,
+                                  aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams,
+                                  aws-kinesis-stream, aws-sqs-queue, azure-app-insights,
+                                  azure-blob, azure-data-explorer, azure-eventhub,
+                                  azure-log-analytics, azure-monitor, azure-pipelines,
+                                  azure-servicebus, azure-queue, cassandra, cpu, cron,
+                                  datadog, elasticsearch, external, external-push,
+                                  gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                  http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                  liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                  nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                  openstack-swift, postgresql, predictkube, prometheus,
+                                  rabbitmq, redis, redis-cluster, redis-sentinel,
+                                  redis-streams, redis-cluster-streams, redis-sentinel-streams,
+                                  selenium-grid,solace-event-queue, and github-runner.'
+                                type: string
+                              metadata:
+                                additionalProperties:
+                                  type: string
+                                description: '- A map of string key-value pairs to
+                                  configure the Custom Scale Rule.'
+                                type: object
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        httpScaleRule:
+                          description: One or more http_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         maxReplicas:
                           description: The maximum number of replicas for this container.
                             The maximum number of replicas for this container.
@@ -2126,6 +2546,36 @@ spec:
                             the lifetime of the Resource. If omitted the service will
                             use a hash function to create one.
                           type: string
+                        tcpScaleRule:
+                          description: One or more tcp_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         volume:
                           description: A volume block as detailed below.
                           items:
@@ -2141,7 +2591,7 @@ spec:
                                 type: string
                               storageType:
                                 description: The type of storage volume. Possible
-                                  values include AzureFile and EmptyDir. Defaults
+                                  values are AzureFile, EmptyDir and Secret. Defaults
                                   to EmptyDir. The type of storage volume. Possible
                                   values include `AzureFile` and `EmptyDir`. Defaults
                                   to `EmptyDir`.

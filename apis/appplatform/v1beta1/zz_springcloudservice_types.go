@@ -202,6 +202,68 @@ type ConfigServerGitSettingSSHAuthParameters struct {
 	StrictHostKeyCheckingEnabled *bool `json:"strictHostKeyCheckingEnabled,omitempty" tf:"strict_host_key_checking_enabled,omitempty"`
 }
 
+type ContainerRegistryInitParameters struct {
+
+	// Specifies the name of the container registry.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the login server of the container registry.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// Specifies the username of the container registry.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type ContainerRegistryObservation struct {
+
+	// Specifies the name of the container registry.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the login server of the container registry.
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// Specifies the username of the container registry.
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+}
+
+type ContainerRegistryParameters struct {
+
+	// Specifies the name of the container registry.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Specifies the password of the container registry.
+	// +kubebuilder:validation:Required
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
+	// Specifies the login server of the container registry.
+	// +kubebuilder:validation:Optional
+	Server *string `json:"server" tf:"server,omitempty"`
+
+	// Specifies the username of the container registry.
+	// +kubebuilder:validation:Optional
+	Username *string `json:"username" tf:"username,omitempty"`
+}
+
+type DefaultBuildServiceInitParameters struct {
+
+	// Specifies the name of the container registry used in the default build service.
+	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
+}
+
+type DefaultBuildServiceObservation struct {
+
+	// Specifies the name of the container registry used in the default build service.
+	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
+}
+
+type DefaultBuildServiceParameters struct {
+
+	// Specifies the name of the container registry used in the default build service.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
+}
+
 type HTTPBasicAuthInitParameters struct {
 
 	// The username that's used to access the Git repository server, required when the Git repository server supports HTTP Basic Authentication.
@@ -225,6 +287,45 @@ type HTTPBasicAuthParameters struct {
 	Username *string `json:"username" tf:"username,omitempty"`
 }
 
+type MarketplaceInitParameters struct {
+
+	// Specifies the plan ID of the 3rd Party Artifact that is being procured.
+	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
+
+	// Specifies the 3rd Party artifact that is being procured.
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	// Specifies the publisher ID of the 3rd Party Artifact that is being procured.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+}
+
+type MarketplaceObservation struct {
+
+	// Specifies the plan ID of the 3rd Party Artifact that is being procured.
+	Plan *string `json:"plan,omitempty" tf:"plan,omitempty"`
+
+	// Specifies the 3rd Party artifact that is being procured.
+	Product *string `json:"product,omitempty" tf:"product,omitempty"`
+
+	// Specifies the publisher ID of the 3rd Party Artifact that is being procured.
+	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
+}
+
+type MarketplaceParameters struct {
+
+	// Specifies the plan ID of the 3rd Party Artifact that is being procured.
+	// +kubebuilder:validation:Optional
+	Plan *string `json:"plan" tf:"plan,omitempty"`
+
+	// Specifies the 3rd Party artifact that is being procured.
+	// +kubebuilder:validation:Optional
+	Product *string `json:"product" tf:"product,omitempty"`
+
+	// Specifies the publisher ID of the 3rd Party Artifact that is being procured.
+	// +kubebuilder:validation:Optional
+	Publisher *string `json:"publisher" tf:"publisher,omitempty"`
+}
+
 type NetworkInitParameters struct {
 
 	// Specifies the Name of the resource group containing network resources of Azure Spring Cloud Apps. Changing this forces a new resource to be created.
@@ -232,6 +333,9 @@ type NetworkInitParameters struct {
 
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
+
+	// Specifies the egress traffic type of the Spring Cloud Service. Possible values are loadBalancer and userDefinedRouting. Defaults to loadBalancer. Changing this forces a new resource to be created.
+	OutboundType *string `json:"outboundType,omitempty" tf:"outbound_type,omitempty"`
 
 	// Ingress read time out in seconds.
 	ReadTimeoutSeconds *float64 `json:"readTimeoutSeconds,omitempty" tf:"read_timeout_seconds,omitempty"`
@@ -250,6 +354,9 @@ type NetworkObservation struct {
 
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
+
+	// Specifies the egress traffic type of the Spring Cloud Service. Possible values are loadBalancer and userDefinedRouting. Defaults to loadBalancer. Changing this forces a new resource to be created.
+	OutboundType *string `json:"outboundType,omitempty" tf:"outbound_type,omitempty"`
 
 	// Ingress read time out in seconds.
 	ReadTimeoutSeconds *float64 `json:"readTimeoutSeconds,omitempty" tf:"read_timeout_seconds,omitempty"`
@@ -284,6 +391,10 @@ type NetworkParameters struct {
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CidrRanges []*string `json:"cidrRanges" tf:"cidr_ranges,omitempty"`
+
+	// Specifies the egress traffic type of the Spring Cloud Service. Possible values are loadBalancer and userDefinedRouting. Defaults to loadBalancer. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	OutboundType *string `json:"outboundType,omitempty" tf:"outbound_type,omitempty"`
 
 	// Ingress read time out in seconds.
 	// +kubebuilder:validation:Optional
@@ -400,11 +511,20 @@ type SpringCloudServiceInitParameters struct {
 	// A config_server_git_setting block as defined below. This field is applicable only for Spring Cloud Service with basic and standard tier.
 	ConfigServerGitSetting []ConfigServerGitSettingInitParameters `json:"configServerGitSetting,omitempty" tf:"config_server_git_setting,omitempty"`
 
+	// One or more container_registry block as defined below. This field is applicable only for Spring Cloud Service with enterprise tier.
+	ContainerRegistry []ContainerRegistryInitParameters `json:"containerRegistry,omitempty" tf:"container_registry,omitempty"`
+
+	// A default_build_service block as defined below. This field is applicable only for Spring Cloud Service with enterprise tier.
+	DefaultBuildService []DefaultBuildServiceInitParameters `json:"defaultBuildService,omitempty" tf:"default_build_service,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Should the log stream in vnet injection instance could be accessed from Internet?
 	LogStreamPublicEndpointEnabled *bool `json:"logStreamPublicEndpointEnabled,omitempty" tf:"log_stream_public_endpoint_enabled,omitempty"`
+
+	// A marketplace block as defined below. Can only be specified when sku is set to E0.
+	Marketplace []MarketplaceInitParameters `json:"marketplace,omitempty" tf:"marketplace,omitempty"`
 
 	// A network block as defined below. Changing this forces a new resource to be created.
 	Network []NetworkInitParameters `json:"network,omitempty" tf:"network,omitempty"`
@@ -433,6 +553,12 @@ type SpringCloudServiceObservation struct {
 	// A config_server_git_setting block as defined below. This field is applicable only for Spring Cloud Service with basic and standard tier.
 	ConfigServerGitSetting []ConfigServerGitSettingObservation `json:"configServerGitSetting,omitempty" tf:"config_server_git_setting,omitempty"`
 
+	// One or more container_registry block as defined below. This field is applicable only for Spring Cloud Service with enterprise tier.
+	ContainerRegistry []ContainerRegistryObservation `json:"containerRegistry,omitempty" tf:"container_registry,omitempty"`
+
+	// A default_build_service block as defined below. This field is applicable only for Spring Cloud Service with enterprise tier.
+	DefaultBuildService []DefaultBuildServiceObservation `json:"defaultBuildService,omitempty" tf:"default_build_service,omitempty"`
+
 	// The ID of the Spring Cloud Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -441,6 +567,9 @@ type SpringCloudServiceObservation struct {
 
 	// Should the log stream in vnet injection instance could be accessed from Internet?
 	LogStreamPublicEndpointEnabled *bool `json:"logStreamPublicEndpointEnabled,omitempty" tf:"log_stream_public_endpoint_enabled,omitempty"`
+
+	// A marketplace block as defined below. Can only be specified when sku is set to E0.
+	Marketplace []MarketplaceObservation `json:"marketplace,omitempty" tf:"marketplace,omitempty"`
 
 	// A network block as defined below. Changing this forces a new resource to be created.
 	Network []NetworkObservation `json:"network,omitempty" tf:"network,omitempty"`
@@ -483,6 +612,14 @@ type SpringCloudServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigServerGitSetting []ConfigServerGitSettingParameters `json:"configServerGitSetting,omitempty" tf:"config_server_git_setting,omitempty"`
 
+	// One or more container_registry block as defined below. This field is applicable only for Spring Cloud Service with enterprise tier.
+	// +kubebuilder:validation:Optional
+	ContainerRegistry []ContainerRegistryParameters `json:"containerRegistry,omitempty" tf:"container_registry,omitempty"`
+
+	// A default_build_service block as defined below. This field is applicable only for Spring Cloud Service with enterprise tier.
+	// +kubebuilder:validation:Optional
+	DefaultBuildService []DefaultBuildServiceParameters `json:"defaultBuildService,omitempty" tf:"default_build_service,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -490,6 +627,10 @@ type SpringCloudServiceParameters struct {
 	// Should the log stream in vnet injection instance could be accessed from Internet?
 	// +kubebuilder:validation:Optional
 	LogStreamPublicEndpointEnabled *bool `json:"logStreamPublicEndpointEnabled,omitempty" tf:"log_stream_public_endpoint_enabled,omitempty"`
+
+	// A marketplace block as defined below. Can only be specified when sku is set to E0.
+	// +kubebuilder:validation:Optional
+	Marketplace []MarketplaceParameters `json:"marketplace,omitempty" tf:"marketplace,omitempty"`
 
 	// A network block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

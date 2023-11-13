@@ -310,6 +310,8 @@ spec:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Healthcare Med Tech Service.
                           items:
                             type: string
                           type: array
@@ -430,6 +432,8 @@ spec:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Healthcare Med Tech Service.
                           items:
                             type: string
                           type: array
@@ -649,6 +653,8 @@ spec:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Healthcare Med Tech Service.
                           items:
                             type: string
                           type: array

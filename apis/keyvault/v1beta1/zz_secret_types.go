@@ -107,7 +107,7 @@ type SecretParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Specifies the value of the Key Vault Secret.
+	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
 	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }

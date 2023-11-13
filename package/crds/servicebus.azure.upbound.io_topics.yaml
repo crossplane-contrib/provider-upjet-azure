@@ -90,9 +90,8 @@ spec:
                       before writing it to persistent storage.
                     type: boolean
                   enablePartitioning:
-                    description: Boolean flag which controls whether to enable Changing
-                      this forces a new resource to be created. the topic to be partitioned
-                      across multiple message brokers. Defaults to false. Changing
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created.
                     type: boolean
                   maxMessageSizeInKilobytes:
@@ -235,9 +234,8 @@ spec:
                       before writing it to persistent storage.
                     type: boolean
                   enablePartitioning:
-                    description: Boolean flag which controls whether to enable Changing
-                      this forces a new resource to be created. the topic to be partitioned
-                      across multiple message brokers. Defaults to false. Changing
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created.
                     type: boolean
                   maxMessageSizeInKilobytes:
@@ -453,9 +451,8 @@ spec:
                       before writing it to persistent storage.
                     type: boolean
                   enablePartitioning:
-                    description: Boolean flag which controls whether to enable Changing
-                      this forces a new resource to be created. the topic to be partitioned
-                      across multiple message brokers. Defaults to false. Changing
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created.
                     type: boolean
                   id:

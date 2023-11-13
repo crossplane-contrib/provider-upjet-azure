@@ -28,6 +28,9 @@ type WorkspaceInitParameters struct {
 	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
+	// The ID of the Data Collection Rule to use for this workspace.
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
 	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
 
@@ -40,7 +43,7 @@ type WorkspaceInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	// The capacity reservation level in GB for this workspace. Possible values are 100, 200, 300, 400, 500, 1000, 2000 and 5000.
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 
 	// The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730.
@@ -64,6 +67,9 @@ type WorkspaceObservation struct {
 	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
+	// The ID of the Data Collection Rule to use for this workspace.
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
 	// The Log Analytics Workspace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -79,7 +85,7 @@ type WorkspaceObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	// The capacity reservation level in GB for this workspace. Possible values are 100, 200, 300, 400, 500, 1000, 2000 and 5000.
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 
 	// The name of the resource group in which the Log Analytics workspace is created. Changing this forces a new resource to be created.
@@ -112,6 +118,10 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
+	// The ID of the Data Collection Rule to use for this workspace.
+	// +kubebuilder:validation:Optional
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
 	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
 	// +kubebuilder:validation:Optional
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
@@ -128,7 +138,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	// The capacity reservation level in GB for this workspace. Possible values are 100, 200, 300, 400, 500, 1000, 2000 and 5000.
 	// +kubebuilder:validation:Optional
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 

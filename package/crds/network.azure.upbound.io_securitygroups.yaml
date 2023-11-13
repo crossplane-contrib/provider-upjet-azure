@@ -154,8 +154,8 @@ spec:
                         type: object
                     type: object
                   securityRule:
-                    description: List of objects representing security rules, as defined
-                      below.
+                    description: List of security_rule objects representing security
+                      rules, as defined below.
                     items:
                       properties:
                         access:
@@ -270,8 +270,8 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   securityRule:
-                    description: List of objects representing security rules, as defined
-                      below.
+                    description: List of security_rule objects representing security
+                      rules, as defined below.
                     items:
                       properties:
                         access:
@@ -552,8 +552,8 @@ spec:
                       to be created.
                     type: string
                   securityRule:
-                    description: List of objects representing security rules, as defined
-                      below.
+                    description: List of security_rule objects representing security
+                      rules, as defined below.
                     items:
                       properties:
                         access:

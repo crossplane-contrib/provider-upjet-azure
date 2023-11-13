@@ -19,6 +19,15 @@ import (
 
 type AzureBlobFsLocationInitParameters struct {
 
+	// Is the file_system using dynamic expression, function or system variables? Defaults to false.
+	DynamicFileSystemEnabled *bool `json:"dynamicFileSystemEnabled,omitempty" tf:"dynamic_file_system_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
 	// The storage data lake gen2 file system on the Azure Blob Storage Account hosting the file.
 	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
 
@@ -30,6 +39,15 @@ type AzureBlobFsLocationInitParameters struct {
 }
 
 type AzureBlobFsLocationObservation struct {
+
+	// Is the file_system using dynamic expression, function or system variables? Defaults to false.
+	DynamicFileSystemEnabled *bool `json:"dynamicFileSystemEnabled,omitempty" tf:"dynamic_file_system_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
 	// The storage data lake gen2 file system on the Azure Blob Storage Account hosting the file.
 	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
@@ -43,9 +61,21 @@ type AzureBlobFsLocationObservation struct {
 
 type AzureBlobFsLocationParameters struct {
 
+	// Is the file_system using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
+	DynamicFileSystemEnabled *bool `json:"dynamicFileSystemEnabled,omitempty" tf:"dynamic_file_system_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
 	// The storage data lake gen2 file system on the Azure Blob Storage Account hosting the file.
 	// +kubebuilder:validation:Optional
-	FileSystem *string `json:"fileSystem" tf:"file_system,omitempty"`
+	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
 
 	// The filename of the file.
 	// +kubebuilder:validation:Optional
@@ -225,7 +255,7 @@ type DataSetDelimitedTextInitParameters struct {
 	// A http_server_location block as defined below.
 	HTTPServerLocation []DataSetDelimitedTextHTTPServerLocationInitParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
 
-	// The null value string. Defaults to an empty string. Defaults to "".
+	// The null value string. Defaults to "".
 	NullValue *string `json:"nullValue,omitempty" tf:"null_value,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
@@ -291,7 +321,7 @@ type DataSetDelimitedTextObservation struct {
 	// The Data Factory Linked Service name in which to associate the Dataset with.
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
-	// The null value string. Defaults to an empty string. Defaults to "".
+	// The null value string. Defaults to "".
 	NullValue *string `json:"nullValue,omitempty" tf:"null_value,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
@@ -388,7 +418,7 @@ type DataSetDelimitedTextParameters struct {
 	// +kubebuilder:validation:Optional
 	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
-	// The null value string. Defaults to an empty string. Defaults to "".
+	// The null value string. Defaults to "".
 	// +kubebuilder:validation:Optional
 	NullValue *string `json:"nullValue,omitempty" tf:"null_value,omitempty"`
 

@@ -87,6 +87,7 @@ spec:
                                 type: string
                               operator:
                                 description: Operator for dimension values, - 'Include'.
+                                  Defaults to Include.
                                 type: string
                               values:
                                 description: List of dimension values.
@@ -312,6 +313,7 @@ spec:
                                 type: string
                               operator:
                                 description: Operator for dimension values, - 'Include'.
+                                  Defaults to Include.
                                 type: string
                               values:
                                 description: List of dimension values.
@@ -545,6 +547,7 @@ spec:
                                 type: string
                               operator:
                                 description: Operator for dimension values, - 'Include'.
+                                  Defaults to Include.
                                 type: string
                               values:
                                 description: List of dimension values.

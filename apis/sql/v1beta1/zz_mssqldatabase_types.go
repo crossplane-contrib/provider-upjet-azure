@@ -141,7 +141,7 @@ type MSSQLDatabaseInitParameters struct {
 	// Specifies the collation of the database. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created.
+	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created. Defaults to Default.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// The ID of the source database from which to create the new database. This should only be used for databases with create_mode values that use another database as reference. Changing this forces a new resource to be created.
@@ -153,7 +153,7 @@ type MSSQLDatabaseInitParameters struct {
 	// A boolean that specifies if the Geo Backup Policy is enabled. Defaults to true.
 	GeoBackupEnabled *bool `json:"geoBackupEnabled,omitempty" tf:"geo_backup_enabled,omitempty"`
 
-	// A Database Import block as documented below. Mutually exclusive with create_mode.
+	// A import block as documented below. Mutually exclusive with create_mode.
 	Import []ImportInitParameters `json:"import,omitempty" tf:"import,omitempty"`
 
 	// A boolean that specifies if this is a ledger database. Defaults to false. Changing this forces a new resource to be created.
@@ -198,7 +198,7 @@ type MSSQLDatabaseInitParameters struct {
 	// Specifies the name of the SKU used by the database. For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100. Changing this from the HyperScale service tier to another service tier will create a new resource.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. The default value is Geo.
+	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. Defaults to Geo.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -222,7 +222,7 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the collation of the database. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created.
+	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created. Defaults to Default.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// The ID of the source database from which to create the new database. This should only be used for databases with create_mode values that use another database as reference. Changing this forces a new resource to be created.
@@ -237,7 +237,7 @@ type MSSQLDatabaseObservation struct {
 	// The ID of the MS SQL Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A Database Import block as documented below. Mutually exclusive with create_mode.
+	// A import block as documented below. Mutually exclusive with create_mode.
 	Import []ImportObservation `json:"import,omitempty" tf:"import,omitempty"`
 
 	// A boolean that specifies if this is a ledger database. Defaults to false. Changing this forces a new resource to be created.
@@ -285,7 +285,7 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the name of the SKU used by the database. For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100. Changing this from the HyperScale service tier to another service tier will create a new resource.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. The default value is Geo.
+	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. Defaults to Geo.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -311,7 +311,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created.
+	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created. Defaults to Default.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -327,7 +327,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	GeoBackupEnabled *bool `json:"geoBackupEnabled,omitempty" tf:"geo_backup_enabled,omitempty"`
 
-	// A Database Import block as documented below. Mutually exclusive with create_mode.
+	// A import block as documented below. Mutually exclusive with create_mode.
 	// +kubebuilder:validation:Optional
 	Import []ImportParameters `json:"import,omitempty" tf:"import,omitempty"`
 
@@ -401,7 +401,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. The default value is Geo.
+	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. Defaults to Geo.
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
@@ -427,7 +427,7 @@ type ShortTermRetentionPolicyInitParameters struct {
 	// The hours between each differential backup. This is only applicable to live databases but not dropped databases. Value has to be 12 or 24. Defaults to 12 hours.
 	BackupIntervalInHours *float64 `json:"backupIntervalInHours,omitempty" tf:"backup_interval_in_hours,omitempty"`
 
-	// Point In Time Restore configuration. Value has to be between 7 and 35.
+	// Point In Time Restore configuration. Value has to be between 1 and 35.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
@@ -436,7 +436,7 @@ type ShortTermRetentionPolicyObservation struct {
 	// The hours between each differential backup. This is only applicable to live databases but not dropped databases. Value has to be 12 or 24. Defaults to 12 hours.
 	BackupIntervalInHours *float64 `json:"backupIntervalInHours,omitempty" tf:"backup_interval_in_hours,omitempty"`
 
-	// Point In Time Restore configuration. Value has to be between 7 and 35.
+	// Point In Time Restore configuration. Value has to be between 1 and 35.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
@@ -446,7 +446,7 @@ type ShortTermRetentionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupIntervalInHours *float64 `json:"backupIntervalInHours,omitempty" tf:"backup_interval_in_hours,omitempty"`
 
-	// Point In Time Restore configuration. Value has to be between 7 and 35.
+	// Point In Time Restore configuration. Value has to be between 1 and 35.
 	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays" tf:"retention_days,omitempty"`
 }
@@ -456,7 +456,7 @@ type ThreatDetectionPolicyInitParameters struct {
 	// Specifies a list of alerts which should be disabled. Possible values include Access_Anomaly, Sql_Injection and Sql_Injection_Vulnerability.
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
+	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled. Defaults to Disabled.
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// A list of email addresses which alerts should be sent to.
@@ -465,7 +465,7 @@ type ThreatDetectionPolicyInitParameters struct {
 	// Specifies the number of days to keep in the Threat Detection audit logs.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// The State of the Policy. Possible values are Enabled, Disabled or New.
+	// The State of the Policy. Possible values are Enabled, Disabled or New. Defaults to Disabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
@@ -477,7 +477,7 @@ type ThreatDetectionPolicyObservation struct {
 	// Specifies a list of alerts which should be disabled. Possible values include Access_Anomaly, Sql_Injection and Sql_Injection_Vulnerability.
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
+	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled. Defaults to Disabled.
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// A list of email addresses which alerts should be sent to.
@@ -486,7 +486,7 @@ type ThreatDetectionPolicyObservation struct {
 	// Specifies the number of days to keep in the Threat Detection audit logs.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// The State of the Policy. Possible values are Enabled, Disabled or New.
+	// The State of the Policy. Possible values are Enabled, Disabled or New. Defaults to Disabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
@@ -499,7 +499,7 @@ type ThreatDetectionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
+	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
@@ -511,7 +511,7 @@ type ThreatDetectionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// The State of the Policy. Possible values are Enabled, Disabled or New.
+	// The State of the Policy. Possible values are Enabled, Disabled or New. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 

@@ -3099,6 +3099,11 @@ func (in *SQLPoolInitParameters) DeepCopyInto(out *SQLPoolInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.StorageAccountType != nil {
+		in, out := &in.StorageAccountType, &out.StorageAccountType
+		*out = new(string)
+		**out = **in
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -3204,6 +3209,11 @@ func (in *SQLPoolObservation) DeepCopyInto(out *SQLPoolObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.StorageAccountType != nil {
+		in, out := &in.StorageAccountType, &out.StorageAccountType
+		*out = new(string)
+		**out = **in
+	}
 	if in.SynapseWorkspaceID != nil {
 		in, out := &in.SynapseWorkspaceID, &out.SynapseWorkspaceID
 		*out = new(string)
@@ -3274,6 +3284,11 @@ func (in *SQLPoolParameters) DeepCopyInto(out *SQLPoolParameters) {
 	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageAccountType != nil {
+		in, out := &in.StorageAccountType, &out.StorageAccountType
 		*out = new(string)
 		**out = **in
 	}
@@ -5201,6 +5216,11 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.AzureadAuthenticationOnly != nil {
+		in, out := &in.AzureadAuthenticationOnly, &out.AzureadAuthenticationOnly
+		*out = new(bool)
+		**out = **in
+	}
 	if in.CustomerManagedKey != nil {
 		in, out := &in.CustomerManagedKey, &out.CustomerManagedKey
 		*out = make([]CustomerManagedKeyInitParameters, len(*in))
@@ -5351,6 +5371,11 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.AzureadAuthenticationOnly != nil {
+		in, out := &in.AzureadAuthenticationOnly, &out.AzureadAuthenticationOnly
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ComputeSubnetID != nil {
 		in, out := &in.ComputeSubnetID, &out.ComputeSubnetID
@@ -5511,6 +5536,11 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.AzureadAuthenticationOnly != nil {
+		in, out := &in.AzureadAuthenticationOnly, &out.AzureadAuthenticationOnly
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ComputeSubnetID != nil {
 		in, out := &in.ComputeSubnetID, &out.ComputeSubnetID

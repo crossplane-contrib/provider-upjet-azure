@@ -241,7 +241,7 @@ type RequestInitParameters struct {
 	// Should the following of redirects be enabled? Defaults to true.
 	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
 
-	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'. Defaults to GET.
 	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
 
 	// One or more header blocks as defined above.
@@ -262,7 +262,7 @@ type RequestObservation struct {
 	// Should the following of redirects be enabled? Defaults to true.
 	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
 
-	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'. Defaults to GET.
 	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
 
 	// One or more header blocks as defined above.
@@ -285,7 +285,7 @@ type RequestParameters struct {
 	// +kubebuilder:validation:Optional
 	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
 
-	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'. Defaults to GET.
 	// +kubebuilder:validation:Optional
 	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
 

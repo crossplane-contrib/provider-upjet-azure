@@ -8,46 +8,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    location: West Europe
-    osDisk:
-    - blobUri: ${azurerm_virtual_machine.example.storage_os_disk[0].vhd_uri}
-      osState: Generalized
-      osType: Linux
-      sizeGb: 30
+    location: ${data.azurerm_virtual_machine.example.location}
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: NetworkInterface
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1beta1/image
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    ipConfiguration:
-    - name: testconfiguration1
-      privateIpAddressAllocation: Static
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: azure.upbound.io/v1beta1
-kind: ResourceGroup
-metadata:
-  annotations:
-    meta.upbound.io/example-id: compute/v1beta1/image
-  labels:
-    testing.upbound.io/example-name: example
-  name: example
-spec:
-  forProvider:
-    location: West Europe
+        testing.upbound.io/example-name: azurerm_virtual_machine
+    sourceVirtualMachineId: ${data.azurerm_virtual_machine.example.id}

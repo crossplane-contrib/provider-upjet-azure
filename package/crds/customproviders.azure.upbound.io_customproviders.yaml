@@ -178,7 +178,7 @@ spec:
                         routingType:
                           description: The routing type that is supported for the
                             resource request. Valid values are Proxy and Proxy,Cache.
-                            This value defaults to ResourceTypeRoutingProxy.
+                            Defaults to Proxy.
                           type: string
                       type: object
                     type: array
@@ -242,7 +242,7 @@ spec:
                         routingType:
                           description: The routing type that is supported for the
                             resource request. Valid values are Proxy and Proxy,Cache.
-                            This value defaults to ResourceTypeRoutingProxy.
+                            Defaults to Proxy.
                           type: string
                       type: object
                     type: array
@@ -472,7 +472,7 @@ spec:
                         routingType:
                           description: The routing type that is supported for the
                             resource request. Valid values are Proxy and Proxy,Cache.
-                            This value defaults to ResourceTypeRoutingProxy.
+                            Defaults to Proxy.
                           type: string
                       type: object
                     type: array

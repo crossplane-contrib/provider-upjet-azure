@@ -73,6 +73,10 @@ spec:
                     description: a automatic_update block defined as below.
                     items:
                       properties:
+                        authenticationType:
+                          description: The authentication type used for automation
+                            account. Possible values are RunAsAccount and SystemAssignedIdentity.
+                          type: string
                         automationAccountId:
                           description: The automation account ID which holds the automatic
                             update runbook and authenticates to Azure resources.
@@ -577,6 +581,10 @@ spec:
                     description: a automatic_update block defined as below.
                     items:
                       properties:
+                        authenticationType:
+                          description: The authentication type used for automation
+                            account. Possible values are RunAsAccount and SystemAssignedIdentity.
+                          type: string
                         automationAccountId:
                           description: The automation account ID which holds the automatic
                             update runbook and authenticates to Azure resources.
@@ -759,6 +767,10 @@ spec:
                     description: a automatic_update block defined as below.
                     items:
                       properties:
+                        authenticationType:
+                          description: The authentication type used for automation
+                            account. Possible values are RunAsAccount and SystemAssignedIdentity.
+                          type: string
                         automationAccountId:
                           description: The automation account ID which holds the automatic
                             update runbook and authenticates to Azure resources.

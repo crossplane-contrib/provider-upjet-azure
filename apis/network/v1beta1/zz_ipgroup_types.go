@@ -34,10 +34,10 @@ type IPGroupObservation struct {
 	// A list of CIDRs or IP addresses.
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
-	// A firewall_ids block as defined below.
+	// A list of ID of Firewall.
 	FirewallIds []*string `json:"firewallIds,omitempty" tf:"firewall_ids,omitempty"`
 
-	// A firewall_policy_ids block as defined below.
+	// A list of ID of Firewall Policy`.
 	FirewallPolicyIds []*string `json:"firewallPolicyIds,omitempty" tf:"firewall_policy_ids,omitempty"`
 
 	// The ID of the IP group.

@@ -155,7 +155,7 @@ type SparkPoolInitParameters struct {
 	// The level of node in the Spark Pool. Possible values are Small, Medium, Large, None, XLarge, XXLarge and XXXLarge.
 	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
-	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
+	// The kind of nodes that the Spark Pool provides. Possible values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU, MemoryOptimized, and None.
 	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
 
 	// Indicates whether session level packages are enabled or not. Defaults to false.
@@ -212,7 +212,7 @@ type SparkPoolObservation struct {
 	// The level of node in the Spark Pool. Possible values are Small, Medium, Large, None, XLarge, XXLarge and XXXLarge.
 	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
-	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
+	// The kind of nodes that the Spark Pool provides. Possible values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU, MemoryOptimized, and None.
 	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
 
 	// Indicates whether session level packages are enabled or not. Defaults to false.
@@ -279,7 +279,7 @@ type SparkPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
-	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
+	// The kind of nodes that the Spark Pool provides. Possible values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU, MemoryOptimized, and None.
 	// +kubebuilder:validation:Optional
 	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
 

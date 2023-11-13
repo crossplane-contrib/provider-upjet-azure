@@ -186,6 +186,7 @@ spec:
                         dataDiskType:
                           description: The type of the disk to use for storing data.
                             It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+                            Defaults to Standard_LRS.
                           type: string
                         ephemeralPortRange:
                           description: Sets the port range available for the OS. Format
@@ -517,6 +518,7 @@ spec:
                         dataDiskType:
                           description: The type of the disk to use for storing data.
                             It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+                            Defaults to Standard_LRS.
                           type: string
                         ephemeralPortRange:
                           description: Sets the port range available for the OS. Format
@@ -923,6 +925,7 @@ spec:
                         dataDiskType:
                           description: The type of the disk to use for storing data.
                             It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+                            Defaults to Standard_LRS.
                           type: string
                         ephemeralPortRange:
                           description: Sets the port range available for the OS. Format
