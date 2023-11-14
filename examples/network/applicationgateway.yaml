@@ -7,6 +7,7 @@ kind: ApplicationGateway
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/applicationgateway
+    uptest.upbound.io/timeout: "7200"
   labels:
     testing.upbound.io/example-name: network
   name: example
@@ -46,6 +47,7 @@ spec:
       httpListenerName: example
       name: example
       ruleType: Basic
+      priority: 9
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -66,7 +68,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    allocationMethod: Dynamic
+    sku: Standard
+    allocationMethod: Static
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
