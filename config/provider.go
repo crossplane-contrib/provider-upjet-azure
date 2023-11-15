@@ -71,6 +71,7 @@ import (
 	"github.com/upbound/provider-azure/config/storagecache"
 	"github.com/upbound/provider-azure/config/storagesync"
 	"github.com/upbound/provider-azure/config/streamanalytics"
+	"github.com/upbound/provider-azure/config/virtualdesktop"
 	"github.com/upbound/provider-azure/config/web"
 	"github.com/upbound/provider-azure/hack"
 )
@@ -225,6 +226,7 @@ func GetProvider() *tjconfig.Provider {
 		certificateregistration.Configure,
 		orbital.Configure,
 		appplatform.Configure,
+		virtualdesktop.Configure,
 	} {
 		configure(pc)
 	}

@@ -1,0 +1,87 @@
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: WorkspaceApplicationGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/workspaceapplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: workspaceremoteapp
+  name: workspaceremoteapp
+spec:
+  forProvider:
+    applicationGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: remoteapp
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: workspace
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/workspaceapplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: ApplicationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/workspaceapplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: remoteapp
+  name: remoteapp
+spec:
+  forProvider:
+    hostPoolIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: pooledbreadthfirst
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: RemoteApp
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: HostPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/workspaceapplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: pooledbreadthfirst
+  name: pooledbreadthfirst
+spec:
+  forProvider:
+    loadBalancerType: BreadthFirst
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Pooled
+
+---
+
+apiVersion: virtualdesktop.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: virtualdesktop/v1beta1/workspaceapplicationgroupassociation
+  labels:
+    testing.upbound.io/example-name: workspace
+  name: workspace
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
