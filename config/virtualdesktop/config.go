@@ -46,7 +46,7 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_desktop_workspace_application_group_association", func(r *config.Resource) {
-		r.Kind = "WorkspaceApplicationAssociation"
+		r.Kind = "WorkspaceApplicationGroupAssociation"
 		r.ShortGroup = group
 	})
 
