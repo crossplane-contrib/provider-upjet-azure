@@ -124,7 +124,11 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, sche
 func configureNoForkAzureClient(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	cb := xpprovider.AzureClientBuilder{}
 	switch pc.Spec.Credentials.Source { //nolint:exhaustive
-	case xpv1.CredentialsSourceSecret:
+	// TODO: we need to add support for the other schemes
+	case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
+	case credentialsSourceOIDCTokenFile:
+	case credentialsSourceUpbound:
+	default:
 		cb.SubscriptionID = ps.Configuration[keySubscriptionID].(string)
 		cb.AuthConfig = &auth.Credentials{
 			ClientID:                              ps.Configuration[keyClientID].(string),
