@@ -113,6 +113,9 @@ func main() {
 			terraform.WithSharedProviderOptions(terraform.WithNativeProviderPath(*nativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*providerSource)))
 	}
 
+	ctx := context.Background()
+	provider, err := config.GetProvider(ctx, false)
+	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
 	o := tjcontroller.Options{
 		Options: xpcontroller.Options{
 			Logger:                  log,
@@ -121,9 +124,10 @@ func main() {
 			MaxConcurrentReconciles: *maxReconcileRate,
 			Features:                &feature.Flags{},
 		},
-		Provider:   config.GetProvider(),
-		SetupFn:    clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, scheduler),
-		PollJitter: pollJitter,
+		Provider:              provider,
+		SetupFn:               clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, scheduler),
+		PollJitter:            pollJitter,
+		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 	}
 
 	if *enableManagementPolicies {
@@ -147,7 +151,7 @@ func main() {
 		}
 
 		// Ensure default store config exists.
-		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(context.Background(), &v1alpha1.StoreConfig{
+		kingpin.FatalIfError(resource.Ignore(kerrors.IsAlreadyExists, mgr.GetClient().Create(ctx, &v1alpha1.StoreConfig{
 			ObjectMeta: metav1.ObjectMeta{
 				Name: "default",
 			},

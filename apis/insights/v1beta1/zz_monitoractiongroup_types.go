@@ -388,9 +388,6 @@ type ItsmReceiverInitParameters struct {
 	// The name of the ITSM receiver.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The region of the workspace.
-	Region *string `json:"region,omitempty" tf:"region,omitempty"`
-
 	// A JSON blob for the configurations of the ITSM action. CreateMultipleWorkItems option will be part of this blob as well.
 	TicketConfiguration *string `json:"ticketConfiguration,omitempty" tf:"ticket_configuration,omitempty"`
 
@@ -427,7 +424,7 @@ type ItsmReceiverParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The region of the workspace.
-	// +kubebuilder:validation:Optional
+	// +kubebuilder:validation:Required
 	Region *string `json:"region" tf:"region,omitempty"`
 
 	// A JSON blob for the configurations of the ITSM action. CreateMultipleWorkItems option will be part of this blob as well.

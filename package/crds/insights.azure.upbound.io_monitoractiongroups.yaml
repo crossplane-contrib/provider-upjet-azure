@@ -228,6 +228,8 @@ spec:
                             this connection is defined. Format is <subscription id>|<workspace
                             id>, for example 00000000-0000-0000-0000-000000000000|00000000-0000-0000-0000-000000000000.
                           type: string
+                      required:
+                      - region
                       type: object
                     type: array
                   location:
@@ -569,9 +571,6 @@ spec:
                           type: string
                         name:
                           description: The name of the ITSM receiver.
-                          type: string
-                        region:
-                          description: The region of the workspace.
                           type: string
                         ticketConfiguration:
                           description: A JSON blob for the configurations of the ITSM

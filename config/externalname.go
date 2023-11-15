@@ -5,14 +5,17 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/upbound/provider-azure/config/common"
+
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/config"
 )
 
-// ExternalNameConfigs is a map of external name configurations for the whole
-// provider.
-var ExternalNameConfigs = map[string]config.ExternalName{
+// NoForkExternalNameConfigs contains all external name configurations
+// belonging to Terraform resources to be reconciled under the no-fork
+// architecture for this provider.
+var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// apimanagement
 	// API Management Services can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1
@@ -1875,6 +1878,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_load_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LoadTestService/loadTests/{{ .external_name }}"),
 }
 
+var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}
+
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -2017,25 +2022,29 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 	return e
 }
 
-// ExternalNameConfigurations adds all external name configurations from
-// the main table ExternalNameConfigs.
-func ExternalNameConfigurations() config.ResourceOption {
+// ResourceConfigurator applies all external name configs
+// listed in the table NoForkExternalNameConfigs and
+// CLIReconciledExternalNameConfigs and sets the version
+// of those resources to v1beta1. For those resource in
+// NoForkExternalNameConfigs, it also sets
+// config.Resource.UseNoForkClient to `true`.
+func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
-		if e, ok := ExternalNameConfigs[r.Name]; ok {
-			r.ExternalName = e
-			r.Version = "v1beta1"
+		// if configured both for the no-fork and CLI based architectures,
+		// no-fork configuration prevails
+		e, configured := NoForkExternalNameConfigs[r.Name]
+		if !configured {
+			e, configured = CLIReconciledExternalNameConfigs[r.Name]
 		}
+		if !configured {
+			return
+		}
+		r.Version = common.VersionV1Beta1
+		r.ExternalName = e
+		// Note(turkenh): This is special to provider-aws. We had injected
+		// region as a parameter for all resources to be consistent with
+		// the native aws provider, and now, we need to add manually it to
+		// the identifier fields for all resources.
+		r.ExternalName.IdentifierFields = append(r.ExternalName.IdentifierFields, "region")
 	}
-}
-
-// ResourcesWithExternalNameConfig returns a list of resources that have external
-// name config defined in the external name table.
-func ResourcesWithExternalNameConfig() []string {
-	l := make([]string, len(ExternalNameConfigs))
-	i := 0
-	for r := range ExternalNameConfigs {
-		l[i] = r + "$"
-		i++
-	}
-	return l
 }

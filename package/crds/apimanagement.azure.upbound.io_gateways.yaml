@@ -284,10 +284,6 @@ spec:
                           description: A canonical name for the geographic or physical
                             location.
                           type: string
-                        region:
-                          description: The country or region where the resource is
-                            located.
-                          type: string
                       type: object
                     type: array
                 type: object

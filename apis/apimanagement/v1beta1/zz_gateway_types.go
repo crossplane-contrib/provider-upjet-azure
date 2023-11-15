@@ -89,9 +89,6 @@ type LocationDataInitParameters struct {
 
 	// A canonical name for the geographic or physical location.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
-	// The country or region where the resource is located.
-	Region *string `json:"region,omitempty" tf:"region,omitempty"`
 }
 
 type LocationDataObservation struct {

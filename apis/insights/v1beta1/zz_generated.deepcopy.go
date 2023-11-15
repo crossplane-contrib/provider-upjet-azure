@@ -6919,11 +6919,6 @@ func (in *ItsmReceiverInitParameters) DeepCopyInto(out *ItsmReceiverInitParamete
 		*out = new(string)
 		**out = **in
 	}
-	if in.Region != nil {
-		in, out := &in.Region, &out.Region
-		*out = new(string)
-		**out = **in
-	}
 	if in.TicketConfiguration != nil {
 		in, out := &in.TicketConfiguration, &out.TicketConfiguration
 		*out = new(string)

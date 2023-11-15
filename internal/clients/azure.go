@@ -5,13 +5,16 @@ import (
 	"encoding/json"
 	"strings"
 
+	"github.com/hashicorp/go-azure-sdk/sdk/environments"
+
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	"github.com/crossplane/upjet/pkg/terraform"
+	"github.com/hashicorp/go-azure-sdk/sdk/auth"
+	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
-
-	"github.com/crossplane/upjet/pkg/terraform"
 
 	"github.com/upbound/provider-azure/apis/v1beta1"
 )
@@ -110,8 +113,36 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, sche
 		default:
 			err = spAuth(ctx, pc, &ps, client)
 		}
-		return ps, err
+		if err != nil {
+			return terraform.Setup{}, errors.Wrap(err, "failed to prepare terraform.Setup")
+		}
+
+		return ps, errors.Wrap(configureNoForkAzureClient(ctx, pc, &ps), "failed to configure the no-fork Azure client")
 	}
+}
+
+func configureNoForkAzureClient(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
+	cb := xpprovider.AzureClientBuilder{}
+	switch pc.Spec.Credentials.Source { //nolint:exhaustive
+	case xpv1.CredentialsSourceSecret:
+		cb.SubscriptionID = ps.Configuration[keySubscriptionID].(string)
+		cb.AuthConfig = &auth.Credentials{
+			ClientID:                              ps.Configuration[keyClientID].(string),
+			TenantID:                              ps.Configuration[keyTenantID].(string),
+			ClientSecret:                          ps.Configuration[keyClientSecret].(string),
+			EnableAuthenticatingUsingClientSecret: true,
+		}
+	}
+	// TODO: we need to check how to prepare environment's
+	// authorization context, this may differ especially if
+	// we are preparing an environment inside an EKS cluster, etc.
+	cb.AuthConfig.Environment = *environments.AzurePublic()
+	c, err := cb.GetClient(context.WithoutCancel(ctx))
+	if err != nil {
+		return errors.Wrap(err, "failed to build the Terraform Azure provider client")
+	}
+	ps.Meta = c
+	return nil
 }
 
 func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup, client client.Client) error {
