@@ -4,54 +4,13 @@ metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/appactiveslot
   labels:
-    testing.upbound.io/example-name: exampleappactiveslot
-  name: exampleappactiveslot
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     slotIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: appactiveslot-lsl
-
----
-
-apiVersion: web.azure.upbound.io/v1beta1
-kind: LinuxWebAppSlot
-metadata:
-  annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
-  labels:
-    testing.upbound.io/example-name: appactiveslot-lsl
-  name: appactiveslot-lsl
-spec:
-  forProvider:
-    name: appactiveslot
-    appServiceIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: appactiveslot-lwa
-    siteConfig:
-    - {}
-
----
-
-apiVersion: web.azure.upbound.io/v1beta1
-kind: LinuxWebApp
-metadata:
-  annotations:
-    meta.upbound.io/example-id: web/v1beta1/appactiveslot
-  labels:
-    testing.upbound.io/example-name: appactiveslot-lwa
-  name: appactiveslot-lwa
-spec:
-  forProvider:
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: appactiveslot-rg
-    servicePlanIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: appactiveslot-sp
-    siteConfig:
-    - {}
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -61,7 +20,7 @@ metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/appactiveslot
   labels:
-    testing.upbound.io/example-name: appactiveslot-rg
+    testing.upbound.io/example-name: example
   name: appactiveslot-rg
 spec:
   forProvider:
@@ -75,14 +34,53 @@ metadata:
   annotations:
     meta.upbound.io/example-id: web/v1beta1/appactiveslot
   labels:
-    testing.upbound.io/example-name: appactiveslot-sp
-  name: appactiveslot-sp
+    testing.upbound.io/example-name: example
+  name: example-appactive
 spec:
   forProvider:
     location: West Europe
     osType: Windows
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: appactiveslot-rg
+        testing.upbound.io/example-name: example
     skuName: P1v2
 
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: WindowsWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-appactive
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+      - {}
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: WindowsWebAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/appactiveslot
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-appactive
+spec:
+  forProvider:
+    appServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    siteConfig:
+      - {}
