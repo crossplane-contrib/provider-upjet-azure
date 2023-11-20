@@ -14,8 +14,7 @@ spec:
     - name: delegation
       serviceDelegation:
       - actions:
-        - Microsoft.Network/virtualNetworks/subnets/join/action
-        - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
+        - Microsoft.Network/virtualNetworks/subnets/action
         name: Microsoft.ContainerInstance/containerGroups
     resourceGroupNameSelector:
       matchLabels:
