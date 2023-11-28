@@ -125,7 +125,7 @@ func main() {
 			Features:                &feature.Flags{},
 		},
 		Provider:              provider,
-		SetupFn:               clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, scheduler),
+		SetupFn:               clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, provider.TerraformProvider, scheduler),
 		PollJitter:            pollJitter,
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 	}

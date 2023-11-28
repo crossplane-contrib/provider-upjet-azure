@@ -3,15 +3,13 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
+	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"strings"
-
-	"github.com/hashicorp/go-azure-sdk/sdk/environments"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/upjet/pkg/terraform"
-	"github.com/hashicorp/go-azure-sdk/sdk/auth"
-	"github.com/hashicorp/terraform-provider-azurerm/xpprovider"
 	"github.com/pkg/errors"
 	"k8s.io/apimachinery/pkg/types"
 	"sigs.k8s.io/controller-runtime/pkg/client"
@@ -66,7 +64,7 @@ var (
 // TerraformSetupBuilder returns Terraform setup with provider specific
 // configuration like provider credentials used to connect to cloud APIs in the
 // expected form of a Terraform provider.
-func TerraformSetupBuilder(version, providerSource, providerVersion string, scheduler terraform.ProviderScheduler) terraform.SetupFn { //nolint:gocyclo
+func TerraformSetupBuilder(version, providerSource, providerVersion string, tfProvider *schema.Provider, scheduler terraform.ProviderScheduler) terraform.SetupFn { //nolint:gocyclo
 	return func(ctx context.Context, client client.Client, mg xpresource.Managed) (terraform.Setup, error) {
 		ps := terraform.Setup{
 			Version: version,
@@ -92,7 +90,7 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, sche
 		}
 
 		ps.Configuration = map[string]interface{}{
-			keyTerraformFeatures: struct{}{},
+			keyTerraformFeatures: map[string]interface{}{},
 			// Terraform AzureRM provider tries to register all resource providers
 			// in Azure just in case if the provider of the resource you're
 			// trying to create is not registered and the returned error is
@@ -117,35 +115,18 @@ func TerraformSetupBuilder(version, providerSource, providerVersion string, sche
 			return terraform.Setup{}, errors.Wrap(err, "failed to prepare terraform.Setup")
 		}
 
-		return ps, errors.Wrap(configureNoForkAzureClient(ctx, pc, &ps), "failed to configure the no-fork Azure client")
+		return ps, errors.Wrap(configureNoForkAzureClient(ctx, &ps, *tfProvider), "failed to configure the no-fork Azure client")
 	}
 }
 
-func configureNoForkAzureClient(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
-	cb := xpprovider.AzureClientBuilder{}
-	switch pc.Spec.Credentials.Source { //nolint:exhaustive
-	// TODO: we need to add support for the other schemes
-	case credentialsSourceSystemAssignedManagedIdentity, credentialsSourceUserAssignedManagedIdentity:
-	case credentialsSourceOIDCTokenFile:
-	case credentialsSourceUpbound:
-	default:
-		cb.SubscriptionID = ps.Configuration[keySubscriptionID].(string)
-		cb.AuthConfig = &auth.Credentials{
-			ClientID:                              ps.Configuration[keyClientID].(string),
-			TenantID:                              ps.Configuration[keyTenantID].(string),
-			ClientSecret:                          ps.Configuration[keyClientSecret].(string),
-			EnableAuthenticatingUsingClientSecret: true,
-		}
+func configureNoForkAzureClient(ctx context.Context, ps *terraform.Setup, p schema.Provider) error {
+	diag := p.Configure(context.WithoutCancel(ctx), &tfsdk.ResourceConfig{
+		Config: ps.Configuration,
+	})
+	if diag != nil && diag.HasError() {
+		return errors.Errorf("failed to configure the provider: %v", diag)
 	}
-	// TODO: we need to check how to prepare environment's
-	// authorization context, this may differ especially if
-	// we are preparing an environment inside an EKS cluster, etc.
-	cb.AuthConfig.Environment = *environments.AzurePublic()
-	c, err := cb.GetClient(context.WithoutCancel(ctx))
-	if err != nil {
-		return errors.Wrap(err, "failed to build the Terraform Azure provider client")
-	}
-	ps.Meta = c
+	ps.Meta = p.Meta()
 	return nil
 }
 

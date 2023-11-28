@@ -8,7 +8,6 @@ require (
 	github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79
 	github.com/crossplane/upjet v1.1.0-rc.0.0.20231227120826-4cb45f9104ac
 	github.com/google/go-cmp v0.6.0
-	github.com/hashicorp/go-azure-sdk v0.20230511.1094507
 	github.com/hashicorp/terraform-json v0.16.0
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.26.1
 	github.com/hashicorp/terraform-provider-azurerm v1.44.1-0.20230519070112-155958d2cb08
@@ -64,6 +63,7 @@ require (
 	github.com/google/uuid v1.3.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-azure-helpers v0.56.0 // indirect
+	github.com/hashicorp/go-azure-sdk v0.20230511.1094507 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-cty v1.4.1-0.20200414143053-d3edf31b6320 // indirect
