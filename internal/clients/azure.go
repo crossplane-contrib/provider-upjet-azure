@@ -3,9 +3,10 @@ package clients
 import (
 	"context"
 	"encoding/json"
+	"strings"
+
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
 	tfsdk "github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"strings"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
