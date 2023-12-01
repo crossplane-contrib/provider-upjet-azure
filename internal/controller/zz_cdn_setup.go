@@ -13,12 +13,14 @@ import (
 	frontdoorcustomdomain "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorcustomdomain"
 	frontdoorcustomdomainassociation "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorcustomdomainassociation"
 	frontdoorendpoint "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorendpoint"
+	frontdoorfirewallpolicy "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorfirewallpolicy"
 	frontdoororigin "github.com/upbound/provider-azure/internal/controller/cdn/frontdoororigin"
 	frontdoororigingroup "github.com/upbound/provider-azure/internal/controller/cdn/frontdoororigingroup"
 	frontdoorprofile "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorprofile"
 	frontdoorroute "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorroute"
 	frontdoorrule "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorrule"
 	frontdoorruleset "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorruleset"
+	frontdoorsecuritypolicy "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorsecuritypolicy"
 	profile "github.com/upbound/provider-azure/internal/controller/cdn/profile"
 )
 
@@ -30,12 +32,14 @@ func Setup_cdn(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorcustomdomain.Setup,
 		frontdoorcustomdomainassociation.Setup,
 		frontdoorendpoint.Setup,
+		frontdoorfirewallpolicy.Setup,
 		frontdoororigin.Setup,
 		frontdoororigingroup.Setup,
 		frontdoorprofile.Setup,
 		frontdoorroute.Setup,
 		frontdoorrule.Setup,
 		frontdoorruleset.Setup,
+		frontdoorsecuritypolicy.Setup,
 		profile.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {

@@ -123,12 +123,14 @@ import (
 	frontdoorcustomdomain "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorcustomdomain"
 	frontdoorcustomdomainassociation "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorcustomdomainassociation"
 	frontdoorendpoint "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorendpoint"
+	frontdoorfirewallpolicy "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorfirewallpolicy"
 	frontdoororigin "github.com/upbound/provider-azure/internal/controller/cdn/frontdoororigin"
 	frontdoororigingroup "github.com/upbound/provider-azure/internal/controller/cdn/frontdoororigingroup"
 	frontdoorprofile "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorprofile"
 	frontdoorroute "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorroute"
 	frontdoorrule "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorrule"
 	frontdoorruleset "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorruleset"
+	frontdoorsecuritypolicy "github.com/upbound/provider-azure/internal/controller/cdn/frontdoorsecuritypolicy"
 	profile "github.com/upbound/provider-azure/internal/controller/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cognitiveservices/account"
@@ -459,7 +461,7 @@ import (
 	firewallpolicyrulecollectiongroup "github.com/upbound/provider-azure/internal/controller/network/firewallpolicyrulecollectiongroup"
 	frontdoor "github.com/upbound/provider-azure/internal/controller/network/frontdoor"
 	frontdoorcustomhttpsconfiguration "github.com/upbound/provider-azure/internal/controller/network/frontdoorcustomhttpsconfiguration"
-	frontdoorfirewallpolicy "github.com/upbound/provider-azure/internal/controller/network/frontdoorfirewallpolicy"
+	frontdoorfirewallpolicynetwork "github.com/upbound/provider-azure/internal/controller/network/frontdoorfirewallpolicy"
 	frontdoorrulesengine "github.com/upbound/provider-azure/internal/controller/network/frontdoorrulesengine"
 	ipgroup "github.com/upbound/provider-azure/internal/controller/network/ipgroup"
 	loadbalancer "github.com/upbound/provider-azure/internal/controller/network/loadbalancer"
@@ -849,12 +851,14 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		frontdoorcustomdomain.Setup,
 		frontdoorcustomdomainassociation.Setup,
 		frontdoorendpoint.Setup,
+		frontdoorfirewallpolicy.Setup,
 		frontdoororigin.Setup,
 		frontdoororigingroup.Setup,
 		frontdoorprofile.Setup,
 		frontdoorroute.Setup,
 		frontdoorrule.Setup,
 		frontdoorruleset.Setup,
+		frontdoorsecuritypolicy.Setup,
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
@@ -1185,7 +1189,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		firewallpolicyrulecollectiongroup.Setup,
 		frontdoor.Setup,
 		frontdoorcustomhttpsconfiguration.Setup,
-		frontdoorfirewallpolicy.Setup,
+		frontdoorfirewallpolicynetwork.Setup,
 		frontdoorrulesengine.Setup,
 		ipgroup.Setup,
 		loadbalancer.Setup,

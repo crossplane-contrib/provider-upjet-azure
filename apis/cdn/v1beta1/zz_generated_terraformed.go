@@ -353,6 +353,90 @@ func (tr *FrontdoorEndpoint) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this FrontdoorFirewallPolicy
+func (mg *FrontdoorFirewallPolicy) GetTerraformResourceType() string {
+	return "azurerm_cdn_frontdoor_firewall_policy"
+}
+
+// GetConnectionDetailsMapping for this FrontdoorFirewallPolicy
+func (tr *FrontdoorFirewallPolicy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FrontdoorFirewallPolicy
+func (tr *FrontdoorFirewallPolicy) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FrontdoorFirewallPolicy
+func (tr *FrontdoorFirewallPolicy) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FrontdoorFirewallPolicy
+func (tr *FrontdoorFirewallPolicy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FrontdoorFirewallPolicy
+func (tr *FrontdoorFirewallPolicy) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FrontdoorFirewallPolicy
+func (tr *FrontdoorFirewallPolicy) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this FrontdoorFirewallPolicy
+func (tr *FrontdoorFirewallPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// LateInitialize this FrontdoorFirewallPolicy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FrontdoorFirewallPolicy) LateInitialize(attrs []byte) (bool, error) {
+	params := &FrontdoorFirewallPolicyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FrontdoorFirewallPolicy) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this FrontdoorOrigin
 func (mg *FrontdoorOrigin) GetTerraformResourceType() string {
 	return "azurerm_cdn_frontdoor_origin"
@@ -855,6 +939,90 @@ func (tr *FrontdoorRuleSet) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *FrontdoorRuleSet) GetTerraformSchemaVersion() int {
+	return 0
+}
+
+// GetTerraformResourceType returns Terraform resource type for this FrontdoorSecurityPolicy
+func (mg *FrontdoorSecurityPolicy) GetTerraformResourceType() string {
+	return "azurerm_cdn_frontdoor_security_policy"
+}
+
+// GetConnectionDetailsMapping for this FrontdoorSecurityPolicy
+func (tr *FrontdoorSecurityPolicy) GetConnectionDetailsMapping() map[string]string {
+	return nil
+}
+
+// GetObservation of this FrontdoorSecurityPolicy
+func (tr *FrontdoorSecurityPolicy) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this FrontdoorSecurityPolicy
+func (tr *FrontdoorSecurityPolicy) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this FrontdoorSecurityPolicy
+func (tr *FrontdoorSecurityPolicy) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this FrontdoorSecurityPolicy
+func (tr *FrontdoorSecurityPolicy) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this FrontdoorSecurityPolicy
+func (tr *FrontdoorSecurityPolicy) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this FrontdoorSecurityPolicy
+func (tr *FrontdoorSecurityPolicy) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// LateInitialize this FrontdoorSecurityPolicy using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *FrontdoorSecurityPolicy) LateInitialize(attrs []byte) (bool, error) {
+	params := &FrontdoorSecurityPolicyParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *FrontdoorSecurityPolicy) GetTerraformSchemaVersion() int {
 	return 0
 }
 

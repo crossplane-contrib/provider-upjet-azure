@@ -43,6 +43,15 @@ func (l *FrontdoorEndpointList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this FrontdoorFirewallPolicyList.
+func (l *FrontdoorFirewallPolicyList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this FrontdoorOriginGroupList.
 func (l *FrontdoorOriginGroupList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
@@ -90,6 +99,15 @@ func (l *FrontdoorRuleList) GetItems() []resource.Managed {
 
 // GetItems of this FrontdoorRuleSetList.
 func (l *FrontdoorRuleSetList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this FrontdoorSecurityPolicyList.
+func (l *FrontdoorSecurityPolicyList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
 	for i := range l.Items {
 		items[i] = &l.Items[i]
