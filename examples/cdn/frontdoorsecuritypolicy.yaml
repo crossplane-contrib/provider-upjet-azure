@@ -17,13 +17,50 @@ spec:
         - domain:
           - cdnFrontdoorDomainIdSelector:
               matchLabels:
-                testing.upbound.io/example-name: domain1
+                testing.upbound.io/example-name: frontdoorsecuritypolicy
           patternsToMatch:
           - /*
         cdnFrontdoorFirewallPolicyIdSelector:
           matchLabels:
             testing.upbound.io/example-name: frontdoorsecuritypolicy
 
+---
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorCustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: frontdoorsecuritypolicy
+  name: frontdoorsecuritypolicy
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: frontdoorsecuritypolicy
+    dnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: frontdoorsecuritypolicy
+    hostName: contoso.fabrikam.com
+    tls:
+    - certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
+
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSZone
+metadata:
+  annotations:
+    crossplane.io/external-name: upbound-example.com
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: frontdoorsecuritypolicy
+  name: frontdoorsecuritypolicy
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: frontdoorsecuritypolicy
 ---
 
 apiVersion: cdn.azure.upbound.io/v1beta1
