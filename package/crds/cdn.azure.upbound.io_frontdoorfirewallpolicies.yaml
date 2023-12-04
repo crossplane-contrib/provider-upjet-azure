@@ -1,0 +1,1191 @@
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.13.0
+  name: frontdoorfirewallpolicies.cdn.azure.upbound.io
+spec:
+  group: cdn.azure.upbound.io
+  names:
+    categories:
+    - crossplane
+    - managed
+    - azure
+    kind: FrontdoorFirewallPolicy
+    listKind: FrontdoorFirewallPolicyList
+    plural: frontdoorfirewallpolicies
+    singular: frontdoorfirewallpolicy
+  scope: Cluster
+  versions:
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta1
+    schema:
+      openAPIV3Schema:
+        description: FrontdoorFirewallPolicy is the Schema for the FrontdoorFirewallPolicys
+          API. Manages a Front Door (standard/premium) Firewall Policy instance.
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FrontdoorFirewallPolicySpec defines the desired state of
+              FrontdoorFirewallPolicy
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: 'DeletionPolicy specifies what will happen to the underlying
+                  external when this managed resource is deleted - either "Delete"
+                  or "Orphan" the external resource. This field is planned to be deprecated
+                  in favor of the ManagementPolicies field in a future release. Currently,
+                  both could be set independently and non-default values would be
+                  honored if the feature flag is enabled. See the design doc for more
+                  information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223'
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  customBlockResponseBody:
+                    description: If a custom_rule block's action type is block, this
+                      is the response body. The body must be specified in base64 encoding.
+                    type: string
+                  customBlockResponseStatusCode:
+                    description: If a custom_rule block's action type is block, this
+                      is the response status code. Possible values are 200, 403, 405,
+                      406, or 429.
+                    type: number
+                  customRule:
+                    description: One or more custom_rule blocks as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to perform when the rule is matched.
+                            Possible values are Allow, Block, Log, or Redirect.
+                          type: string
+                        enabled:
+                          description: Is the rule is enabled or disabled? Defaults
+                            to true.
+                          type: boolean
+                        matchCondition:
+                          description: One or more match_condition block defined below.
+                            Can support up to 10 match_condition blocks.
+                          items:
+                            properties:
+                              matchValues:
+                                description: Up to 600 possible values to match. Limit
+                                  is in total across all match_condition blocks and
+                                  match_values arguments. String value itself can
+                                  be up to 256 characters in length.
+                                items:
+                                  type: string
+                                type: array
+                              matchVariable:
+                                description: The request variable to compare with.
+                                  Possible values are Cookies, PostArgs, QueryString,
+                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
+                                  RequestUri, or SocketAddr.
+                                type: string
+                              negationCondition:
+                                description: Should the result of the condition be
+                                  negated.
+                                type: boolean
+                              operator:
+                                description: Comparison type to use for matching with
+                                  the variable value. Possible values are Any, BeginsWith,
+                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
+                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
+                                  or RegEx.
+                                type: string
+                              selector:
+                                description: Match against a specific key if the match_variable
+                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                type: string
+                              transforms:
+                                description: Up to 5 transforms to apply. Possible
+                                  values are Lowercase, RemoveNulls, Trim, Uppercase,
+                                  URLDecode or URLEncode.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: Gets name of the resource that is unique within
+                            a policy. This name can be used to access the resource.
+                          type: string
+                        priority:
+                          description: The priority of the rule. Rules with a lower
+                            value will be evaluated before rules with a higher value.
+                            Defaults to 1.
+                          type: number
+                        rateLimitDurationInMinutes:
+                          description: The rate limit duration in minutes. Defaults
+                            to 1.
+                          type: number
+                        rateLimitThreshold:
+                          description: The rate limit threshold. Defaults to 10.
+                          type: number
+                        type:
+                          description: The type of rule. Possible values are MatchRule
+                            or RateLimitRule.
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: Is the Front Door Firewall Policy enabled? Defaults
+                      to true.
+                    type: boolean
+                  managedRule:
+                    description: One or more managed_rule blocks as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to perform for all DRS rules when
+                            the managed rule is matched or when the anomaly score
+                            is 5 or greater depending on which version of the DRS
+                            you are using. Possible values include Allow, Log, Block,
+                            and Redirect.
+                          type: string
+                        exclusion:
+                          description: One or more exclusion blocks as defined below.
+                          items:
+                            properties:
+                              matchVariable:
+                                description: The request variable to compare with.
+                                  Possible values are Cookies, PostArgs, QueryString,
+                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
+                                  RequestUri, or SocketAddr.
+                                type: string
+                              operator:
+                                description: Comparison type to use for matching with
+                                  the variable value. Possible values are Any, BeginsWith,
+                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
+                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
+                                  or RegEx.
+                                type: string
+                              selector:
+                                description: Match against a specific key if the match_variable
+                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                type: string
+                            type: object
+                          type: array
+                        override:
+                          description: One or more override blocks as defined below.
+                          items:
+                            properties:
+                              exclusion:
+                                description: One or more exclusion blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    matchVariable:
+                                      description: The request variable to compare
+                                        with. Possible values are Cookies, PostArgs,
+                                        QueryString, RemoteAddr, RequestBody, RequestHeader,
+                                        RequestMethod, RequestUri, or SocketAddr.
+                                      type: string
+                                    operator:
+                                      description: Comparison type to use for matching
+                                        with the variable value. Possible values are
+                                        Any, BeginsWith, Contains, EndsWith, Equal,
+                                        GeoMatch, GreaterThan, GreaterThanOrEqual,
+                                        IPMatch, LessThan, LessThanOrEqual or RegEx.
+                                      type: string
+                                    selector:
+                                      description: Match against a specific key if
+                                        the match_variable is QueryString, PostArgs,
+                                        RequestHeader or Cookies.
+                                      type: string
+                                  type: object
+                                type: array
+                              rule:
+                                description: One or more rule blocks as defined below.
+                                  If none are specified, all of the rules in the group
+                                  will be disabled.
+                                items:
+                                  properties:
+                                    action:
+                                      description: The action to be applied when the
+                                        managed rule matches or when the anomaly score
+                                        is 5 or greater. Possible values for DRS 1.1
+                                        and below are Allow, Log, Block, and Redirect.
+                                        For DRS 2.0 and above the possible values
+                                        are Log or AnomalyScoring.
+                                      type: string
+                                    enabled:
+                                      description: Is the managed rule override enabled
+                                        or disabled. Defaults to false
+                                      type: boolean
+                                    exclusion:
+                                      description: One or more exclusion blocks as
+                                        defined below.
+                                      items:
+                                        properties:
+                                          matchVariable:
+                                            description: The request variable to compare
+                                              with. Possible values are Cookies, PostArgs,
+                                              QueryString, RemoteAddr, RequestBody,
+                                              RequestHeader, RequestMethod, RequestUri,
+                                              or SocketAddr.
+                                            type: string
+                                          operator:
+                                            description: Comparison type to use for
+                                              matching with the variable value. Possible
+                                              values are Any, BeginsWith, Contains,
+                                              EndsWith, Equal, GeoMatch, GreaterThan,
+                                              GreaterThanOrEqual, IPMatch, LessThan,
+                                              LessThanOrEqual or RegEx.
+                                            type: string
+                                          selector:
+                                            description: Match against a specific
+                                              key if the match_variable is QueryString,
+                                              PostArgs, RequestHeader or Cookies.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    ruleId:
+                                      description: Identifier for the managed rule.
+                                      type: string
+                                  type: object
+                                type: array
+                              ruleGroupName:
+                                description: The managed rule group to override.
+                                type: string
+                            type: object
+                          type: array
+                        type:
+                          description: The name of the managed rule to use with this
+                            resource. Possible values include DefaultRuleSet, Microsoft_DefaultRuleSet,
+                            BotProtection or Microsoft_BotManagerRuleSet.
+                          type: string
+                        version:
+                          description: The version of the managed rule to use with
+                            this resource. Possible values depends on which DRS type
+                            you are using, for the DefaultRuleSet type the possible
+                            values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
+                            the possible values include 1.1, 2.0 or 2.1. For BotProtection
+                            the value must be preview-0.1 and for Microsoft_BotManagerRuleSet
+                            the value must be 1.0.
+                          type: string
+                      type: object
+                    type: array
+                  mode:
+                    description: The Front Door Firewall Policy mode. Possible values
+                      are Detection, Prevention.
+                    type: string
+                  redirectUrl:
+                    description: If action type is redirect, this field represents
+                      redirect URL for the client.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  skuName:
+                    description: The sku's pricing tier for this Front Door Firewall
+                      Policy. Possible values include Standard_AzureFrontDoor or Premium_AzureFrontDoor.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  skuNameRef:
+                    description: Reference to a FrontdoorProfile in cdn to populate
+                      skuName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  skuNameSelector:
+                    description: Selector for a FrontdoorProfile in cdn to populate
+                      skuName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Front Door Firewall
+                      Policy.
+                    type: object
+                type: object
+              initProvider:
+                description: THIS IS A BETA FIELD. It will be honored unless the Management
+                  Policies feature flag is disabled. InitProvider holds the same fields
+                  as ForProvider, with the exception of Identifier and other resource
+                  reference fields. The fields that are in InitProvider are merged
+                  into ForProvider when the resource is created. The same fields are
+                  also added to the terraform ignore_changes hook, to avoid updating
+                  them after creation. This is useful for fields that are required
+                  on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them,
+                  like an autoscaler.
+                properties:
+                  customBlockResponseBody:
+                    description: If a custom_rule block's action type is block, this
+                      is the response body. The body must be specified in base64 encoding.
+                    type: string
+                  customBlockResponseStatusCode:
+                    description: If a custom_rule block's action type is block, this
+                      is the response status code. Possible values are 200, 403, 405,
+                      406, or 429.
+                    type: number
+                  customRule:
+                    description: One or more custom_rule blocks as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to perform when the rule is matched.
+                            Possible values are Allow, Block, Log, or Redirect.
+                          type: string
+                        enabled:
+                          description: Is the rule is enabled or disabled? Defaults
+                            to true.
+                          type: boolean
+                        matchCondition:
+                          description: One or more match_condition block defined below.
+                            Can support up to 10 match_condition blocks.
+                          items:
+                            properties:
+                              matchValues:
+                                description: Up to 600 possible values to match. Limit
+                                  is in total across all match_condition blocks and
+                                  match_values arguments. String value itself can
+                                  be up to 256 characters in length.
+                                items:
+                                  type: string
+                                type: array
+                              matchVariable:
+                                description: The request variable to compare with.
+                                  Possible values are Cookies, PostArgs, QueryString,
+                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
+                                  RequestUri, or SocketAddr.
+                                type: string
+                              negationCondition:
+                                description: Should the result of the condition be
+                                  negated.
+                                type: boolean
+                              operator:
+                                description: Comparison type to use for matching with
+                                  the variable value. Possible values are Any, BeginsWith,
+                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
+                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
+                                  or RegEx.
+                                type: string
+                              selector:
+                                description: Match against a specific key if the match_variable
+                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                type: string
+                              transforms:
+                                description: Up to 5 transforms to apply. Possible
+                                  values are Lowercase, RemoveNulls, Trim, Uppercase,
+                                  URLDecode or URLEncode.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: Gets name of the resource that is unique within
+                            a policy. This name can be used to access the resource.
+                          type: string
+                        priority:
+                          description: The priority of the rule. Rules with a lower
+                            value will be evaluated before rules with a higher value.
+                            Defaults to 1.
+                          type: number
+                        rateLimitDurationInMinutes:
+                          description: The rate limit duration in minutes. Defaults
+                            to 1.
+                          type: number
+                        rateLimitThreshold:
+                          description: The rate limit threshold. Defaults to 10.
+                          type: number
+                        type:
+                          description: The type of rule. Possible values are MatchRule
+                            or RateLimitRule.
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: Is the Front Door Firewall Policy enabled? Defaults
+                      to true.
+                    type: boolean
+                  managedRule:
+                    description: One or more managed_rule blocks as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to perform for all DRS rules when
+                            the managed rule is matched or when the anomaly score
+                            is 5 or greater depending on which version of the DRS
+                            you are using. Possible values include Allow, Log, Block,
+                            and Redirect.
+                          type: string
+                        exclusion:
+                          description: One or more exclusion blocks as defined below.
+                          items:
+                            properties:
+                              matchVariable:
+                                description: The request variable to compare with.
+                                  Possible values are Cookies, PostArgs, QueryString,
+                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
+                                  RequestUri, or SocketAddr.
+                                type: string
+                              operator:
+                                description: Comparison type to use for matching with
+                                  the variable value. Possible values are Any, BeginsWith,
+                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
+                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
+                                  or RegEx.
+                                type: string
+                              selector:
+                                description: Match against a specific key if the match_variable
+                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                type: string
+                            type: object
+                          type: array
+                        override:
+                          description: One or more override blocks as defined below.
+                          items:
+                            properties:
+                              exclusion:
+                                description: One or more exclusion blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    matchVariable:
+                                      description: The request variable to compare
+                                        with. Possible values are Cookies, PostArgs,
+                                        QueryString, RemoteAddr, RequestBody, RequestHeader,
+                                        RequestMethod, RequestUri, or SocketAddr.
+                                      type: string
+                                    operator:
+                                      description: Comparison type to use for matching
+                                        with the variable value. Possible values are
+                                        Any, BeginsWith, Contains, EndsWith, Equal,
+                                        GeoMatch, GreaterThan, GreaterThanOrEqual,
+                                        IPMatch, LessThan, LessThanOrEqual or RegEx.
+                                      type: string
+                                    selector:
+                                      description: Match against a specific key if
+                                        the match_variable is QueryString, PostArgs,
+                                        RequestHeader or Cookies.
+                                      type: string
+                                  type: object
+                                type: array
+                              rule:
+                                description: One or more rule blocks as defined below.
+                                  If none are specified, all of the rules in the group
+                                  will be disabled.
+                                items:
+                                  properties:
+                                    action:
+                                      description: The action to be applied when the
+                                        managed rule matches or when the anomaly score
+                                        is 5 or greater. Possible values for DRS 1.1
+                                        and below are Allow, Log, Block, and Redirect.
+                                        For DRS 2.0 and above the possible values
+                                        are Log or AnomalyScoring.
+                                      type: string
+                                    enabled:
+                                      description: Is the managed rule override enabled
+                                        or disabled. Defaults to false
+                                      type: boolean
+                                    exclusion:
+                                      description: One or more exclusion blocks as
+                                        defined below.
+                                      items:
+                                        properties:
+                                          matchVariable:
+                                            description: The request variable to compare
+                                              with. Possible values are Cookies, PostArgs,
+                                              QueryString, RemoteAddr, RequestBody,
+                                              RequestHeader, RequestMethod, RequestUri,
+                                              or SocketAddr.
+                                            type: string
+                                          operator:
+                                            description: Comparison type to use for
+                                              matching with the variable value. Possible
+                                              values are Any, BeginsWith, Contains,
+                                              EndsWith, Equal, GeoMatch, GreaterThan,
+                                              GreaterThanOrEqual, IPMatch, LessThan,
+                                              LessThanOrEqual or RegEx.
+                                            type: string
+                                          selector:
+                                            description: Match against a specific
+                                              key if the match_variable is QueryString,
+                                              PostArgs, RequestHeader or Cookies.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    ruleId:
+                                      description: Identifier for the managed rule.
+                                      type: string
+                                  type: object
+                                type: array
+                              ruleGroupName:
+                                description: The managed rule group to override.
+                                type: string
+                            type: object
+                          type: array
+                        type:
+                          description: The name of the managed rule to use with this
+                            resource. Possible values include DefaultRuleSet, Microsoft_DefaultRuleSet,
+                            BotProtection or Microsoft_BotManagerRuleSet.
+                          type: string
+                        version:
+                          description: The version of the managed rule to use with
+                            this resource. Possible values depends on which DRS type
+                            you are using, for the DefaultRuleSet type the possible
+                            values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
+                            the possible values include 1.1, 2.0 or 2.1. For BotProtection
+                            the value must be preview-0.1 and for Microsoft_BotManagerRuleSet
+                            the value must be 1.0.
+                          type: string
+                      type: object
+                    type: array
+                  mode:
+                    description: The Front Door Firewall Policy mode. Possible values
+                      are Detection, Prevention.
+                    type: string
+                  redirectUrl:
+                    description: If action type is redirect, this field represents
+                      redirect URL for the client.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Front Door Firewall
+                      Policy.
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: 'THIS IS A BETA FIELD. It is on by default but can be
+                  opted out through a Crossplane feature flag. ManagementPolicies
+                  specify the array of actions Crossplane is allowed to take on the
+                  managed and external resources. This field is planned to replace
+                  the DeletionPolicy field in a future release. Currently, both could
+                  be set independently and non-default values would be honored if
+                  the feature flag is enabled. If both are custom, the DeletionPolicy
+                  field will be ignored. See the design doc for more information:
+                  https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md'
+                items:
+                  description: A ManagementAction represents an action that the Crossplane
+                    controllers can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: ProviderConfigReference specifies how the provider that
+                  will be used to create, observe, update, and delete this managed
+                  resource should be configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: Resolution specifies whether resolution of this
+                          reference is required. The default is 'Required', which
+                          means the reconcile will fail if the reference cannot be
+                          resolved. 'Optional' means this reference will be a no-op
+                          if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: Resolve specifies when this reference should
+                          be resolved. The default is 'IfNotPresent', which will attempt
+                          to resolve the reference only when the corresponding field
+                          is not present. Use 'Always' to resolve the reference on
+                          every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: PublishConnectionDetailsTo specifies the connection secret
+                  config which contains a name, metadata and a reference to secret
+                  store config to which any connection details for this managed resource
+                  should be written. Connection details frequently include the endpoint,
+                  username, and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: SecretStoreConfigRef specifies which secret store
+                      config should be used for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: Annotations are the annotations to be added to
+                          connection secret. - For Kubernetes secrets, this will be
+                          used as "metadata.annotations". - It is up to Secret Store
+                          implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: Labels are the labels/tags to be added to connection
+                          secret. - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store
+                          types.
+                        type: object
+                      type:
+                        description: Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: WriteConnectionSecretToReference specifies the namespace
+                  and name of a Secret to which any connection details for this managed
+                  resource should be written. Connection details frequently include
+                  the endpoint, username, and password required to connect to the
+                  managed resource. This field is planned to be replaced in a future
+                  release in favor of PublishConnectionDetailsTo. Currently, both
+                  could be set independently and connection details would be published
+                  to both without affecting each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.mode is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.mode)
+                || (has(self.initProvider) && has(self.initProvider.mode))'
+          status:
+            description: FrontdoorFirewallPolicyStatus defines the observed state
+              of FrontdoorFirewallPolicy.
+            properties:
+              atProvider:
+                properties:
+                  customBlockResponseBody:
+                    description: If a custom_rule block's action type is block, this
+                      is the response body. The body must be specified in base64 encoding.
+                    type: string
+                  customBlockResponseStatusCode:
+                    description: If a custom_rule block's action type is block, this
+                      is the response status code. Possible values are 200, 403, 405,
+                      406, or 429.
+                    type: number
+                  customRule:
+                    description: One or more custom_rule blocks as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to perform when the rule is matched.
+                            Possible values are Allow, Block, Log, or Redirect.
+                          type: string
+                        enabled:
+                          description: Is the rule is enabled or disabled? Defaults
+                            to true.
+                          type: boolean
+                        matchCondition:
+                          description: One or more match_condition block defined below.
+                            Can support up to 10 match_condition blocks.
+                          items:
+                            properties:
+                              matchValues:
+                                description: Up to 600 possible values to match. Limit
+                                  is in total across all match_condition blocks and
+                                  match_values arguments. String value itself can
+                                  be up to 256 characters in length.
+                                items:
+                                  type: string
+                                type: array
+                              matchVariable:
+                                description: The request variable to compare with.
+                                  Possible values are Cookies, PostArgs, QueryString,
+                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
+                                  RequestUri, or SocketAddr.
+                                type: string
+                              negationCondition:
+                                description: Should the result of the condition be
+                                  negated.
+                                type: boolean
+                              operator:
+                                description: Comparison type to use for matching with
+                                  the variable value. Possible values are Any, BeginsWith,
+                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
+                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
+                                  or RegEx.
+                                type: string
+                              selector:
+                                description: Match against a specific key if the match_variable
+                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                type: string
+                              transforms:
+                                description: Up to 5 transforms to apply. Possible
+                                  values are Lowercase, RemoveNulls, Trim, Uppercase,
+                                  URLDecode or URLEncode.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        name:
+                          description: Gets name of the resource that is unique within
+                            a policy. This name can be used to access the resource.
+                          type: string
+                        priority:
+                          description: The priority of the rule. Rules with a lower
+                            value will be evaluated before rules with a higher value.
+                            Defaults to 1.
+                          type: number
+                        rateLimitDurationInMinutes:
+                          description: The rate limit duration in minutes. Defaults
+                            to 1.
+                          type: number
+                        rateLimitThreshold:
+                          description: The rate limit threshold. Defaults to 10.
+                          type: number
+                        type:
+                          description: The type of rule. Possible values are MatchRule
+                            or RateLimitRule.
+                          type: string
+                      type: object
+                    type: array
+                  enabled:
+                    description: Is the Front Door Firewall Policy enabled? Defaults
+                      to true.
+                    type: boolean
+                  frontendEndpointIds:
+                    description: The Front Door Profiles frontend endpoints associated
+                      with this Front Door Firewall Policy.
+                    items:
+                      type: string
+                    type: array
+                  id:
+                    description: The ID of the Front Door Firewall Policy.
+                    type: string
+                  managedRule:
+                    description: One or more managed_rule blocks as defined below.
+                    items:
+                      properties:
+                        action:
+                          description: The action to perform for all DRS rules when
+                            the managed rule is matched or when the anomaly score
+                            is 5 or greater depending on which version of the DRS
+                            you are using. Possible values include Allow, Log, Block,
+                            and Redirect.
+                          type: string
+                        exclusion:
+                          description: One or more exclusion blocks as defined below.
+                          items:
+                            properties:
+                              matchVariable:
+                                description: The request variable to compare with.
+                                  Possible values are Cookies, PostArgs, QueryString,
+                                  RemoteAddr, RequestBody, RequestHeader, RequestMethod,
+                                  RequestUri, or SocketAddr.
+                                type: string
+                              operator:
+                                description: Comparison type to use for matching with
+                                  the variable value. Possible values are Any, BeginsWith,
+                                  Contains, EndsWith, Equal, GeoMatch, GreaterThan,
+                                  GreaterThanOrEqual, IPMatch, LessThan, LessThanOrEqual
+                                  or RegEx.
+                                type: string
+                              selector:
+                                description: Match against a specific key if the match_variable
+                                  is QueryString, PostArgs, RequestHeader or Cookies.
+                                type: string
+                            type: object
+                          type: array
+                        override:
+                          description: One or more override blocks as defined below.
+                          items:
+                            properties:
+                              exclusion:
+                                description: One or more exclusion blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    matchVariable:
+                                      description: The request variable to compare
+                                        with. Possible values are Cookies, PostArgs,
+                                        QueryString, RemoteAddr, RequestBody, RequestHeader,
+                                        RequestMethod, RequestUri, or SocketAddr.
+                                      type: string
+                                    operator:
+                                      description: Comparison type to use for matching
+                                        with the variable value. Possible values are
+                                        Any, BeginsWith, Contains, EndsWith, Equal,
+                                        GeoMatch, GreaterThan, GreaterThanOrEqual,
+                                        IPMatch, LessThan, LessThanOrEqual or RegEx.
+                                      type: string
+                                    selector:
+                                      description: Match against a specific key if
+                                        the match_variable is QueryString, PostArgs,
+                                        RequestHeader or Cookies.
+                                      type: string
+                                  type: object
+                                type: array
+                              rule:
+                                description: One or more rule blocks as defined below.
+                                  If none are specified, all of the rules in the group
+                                  will be disabled.
+                                items:
+                                  properties:
+                                    action:
+                                      description: The action to be applied when the
+                                        managed rule matches or when the anomaly score
+                                        is 5 or greater. Possible values for DRS 1.1
+                                        and below are Allow, Log, Block, and Redirect.
+                                        For DRS 2.0 and above the possible values
+                                        are Log or AnomalyScoring.
+                                      type: string
+                                    enabled:
+                                      description: Is the managed rule override enabled
+                                        or disabled. Defaults to false
+                                      type: boolean
+                                    exclusion:
+                                      description: One or more exclusion blocks as
+                                        defined below.
+                                      items:
+                                        properties:
+                                          matchVariable:
+                                            description: The request variable to compare
+                                              with. Possible values are Cookies, PostArgs,
+                                              QueryString, RemoteAddr, RequestBody,
+                                              RequestHeader, RequestMethod, RequestUri,
+                                              or SocketAddr.
+                                            type: string
+                                          operator:
+                                            description: Comparison type to use for
+                                              matching with the variable value. Possible
+                                              values are Any, BeginsWith, Contains,
+                                              EndsWith, Equal, GeoMatch, GreaterThan,
+                                              GreaterThanOrEqual, IPMatch, LessThan,
+                                              LessThanOrEqual or RegEx.
+                                            type: string
+                                          selector:
+                                            description: Match against a specific
+                                              key if the match_variable is QueryString,
+                                              PostArgs, RequestHeader or Cookies.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    ruleId:
+                                      description: Identifier for the managed rule.
+                                      type: string
+                                  type: object
+                                type: array
+                              ruleGroupName:
+                                description: The managed rule group to override.
+                                type: string
+                            type: object
+                          type: array
+                        type:
+                          description: The name of the managed rule to use with this
+                            resource. Possible values include DefaultRuleSet, Microsoft_DefaultRuleSet,
+                            BotProtection or Microsoft_BotManagerRuleSet.
+                          type: string
+                        version:
+                          description: The version of the managed rule to use with
+                            this resource. Possible values depends on which DRS type
+                            you are using, for the DefaultRuleSet type the possible
+                            values include 1.0 or preview-0.1. For Microsoft_DefaultRuleSet
+                            the possible values include 1.1, 2.0 or 2.1. For BotProtection
+                            the value must be preview-0.1 and for Microsoft_BotManagerRuleSet
+                            the value must be 1.0.
+                          type: string
+                      type: object
+                    type: array
+                  mode:
+                    description: The Front Door Firewall Policy mode. Possible values
+                      are Detection, Prevention.
+                    type: string
+                  redirectUrl:
+                    description: If action type is redirect, this field represents
+                      redirect URL for the client.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  skuName:
+                    description: The sku's pricing tier for this Front Door Firewall
+                      Policy. Possible values include Standard_AzureFrontDoor or Premium_AzureFrontDoor.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Front Door Firewall
+                      Policy.
+                    type: object
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: LastTransitionTime is the last time this condition
+                        transitioned from one status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: A Message containing details about this condition's
+                        last transition from one status to another, if any.
+                      type: string
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: Type of this condition. At most one of each condition
+                        type may apply to a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}

@@ -169,6 +169,48 @@ func (mg *FrontdoorEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 	return nil
 }
 
+// ResolveReferences of this FrontdoorFirewallPolicy.
+func (mg *FrontdoorFirewallPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SkuName),
+		Extract:      resource.ExtractParamPath("sku_name", false),
+		Reference:    mg.Spec.ForProvider.SkuNameRef,
+		Selector:     mg.Spec.ForProvider.SkuNameSelector,
+		To: reference.To{
+			List:    &FrontdoorProfileList{},
+			Managed: &FrontdoorProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.SkuName")
+	}
+	mg.Spec.ForProvider.SkuName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SkuNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this FrontdoorOrigin.
 func (mg *FrontdoorOrigin) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
@@ -475,6 +517,77 @@ func (mg *FrontdoorRuleSet) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.CdnFrontdoorProfileID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CdnFrontdoorProfileIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this FrontdoorSecurityPolicy.
+func (mg *FrontdoorSecurityPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CdnFrontdoorProfileID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.CdnFrontdoorProfileIDRef,
+		Selector:     mg.Spec.ForProvider.CdnFrontdoorProfileIDSelector,
+		To: reference.To{
+			List:    &FrontdoorProfileList{},
+			Managed: &FrontdoorProfile{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CdnFrontdoorProfileID")
+	}
+	mg.Spec.ForProvider.CdnFrontdoorProfileID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CdnFrontdoorProfileIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SecurityPolicies); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SecurityPolicies[i3].Firewall); i4++ {
+			for i5 := 0; i5 < len(mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association); i5++ {
+				for i6 := 0; i6 < len(mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association[i5].Domain); i6++ {
+					rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+						CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association[i5].Domain[i6].CdnFrontdoorDomainID),
+						Extract:      resource.ExtractResourceID(),
+						Reference:    mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association[i5].Domain[i6].CdnFrontdoorDomainIDRef,
+						Selector:     mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association[i5].Domain[i6].CdnFrontdoorDomainIDSelector,
+						To: reference.To{
+							List:    &FrontdoorCustomDomainList{},
+							Managed: &FrontdoorCustomDomain{},
+						},
+					})
+					if err != nil {
+						return errors.Wrap(err, "mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association[i5].Domain[i6].CdnFrontdoorDomainID")
+					}
+					mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association[i5].Domain[i6].CdnFrontdoorDomainID = reference.ToPtrValue(rsp.ResolvedValue)
+					mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].Association[i5].Domain[i6].CdnFrontdoorDomainIDRef = rsp.ResolvedReference
+
+				}
+			}
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.SecurityPolicies); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.SecurityPolicies[i3].Firewall); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].CdnFrontdoorFirewallPolicyID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].CdnFrontdoorFirewallPolicyIDRef,
+				Selector:     mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].CdnFrontdoorFirewallPolicyIDSelector,
+				To: reference.To{
+					List:    &FrontdoorFirewallPolicyList{},
+					Managed: &FrontdoorFirewallPolicy{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].CdnFrontdoorFirewallPolicyID")
+			}
+			mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].CdnFrontdoorFirewallPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.SecurityPolicies[i3].Firewall[i4].CdnFrontdoorFirewallPolicyIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
