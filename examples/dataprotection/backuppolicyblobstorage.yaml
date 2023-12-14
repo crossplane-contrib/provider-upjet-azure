@@ -6,4 +6,30 @@ spec:
   forProvider:
     retentionDuration: P30D
     vaultIdRef:
-      name: example
+      name: example-backuppolicyblobstorage-vault
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupVault
+metadata:
+  name: example-backuppolicyblobstorage-vault
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameRef:
+      name: example-rg-backuppolicyblobstorage
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-rg-backuppolicyblobstorage
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
