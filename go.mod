@@ -20,6 +20,8 @@ require (
 	sigs.k8s.io/controller-tools v0.13.0
 )
 
+replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231214122143-b674f3dd0c9f
+
 require (
 	github.com/Azure/azure-sdk-for-go v66.0.0+incompatible // indirect
 	github.com/Azure/go-autorest v14.2.0+incompatible // indirect
