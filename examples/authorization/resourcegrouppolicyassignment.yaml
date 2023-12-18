@@ -8,7 +8,7 @@ spec:
   forProvider:
     policyDefinitionIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-auth
     resourceGroupIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example-auth
