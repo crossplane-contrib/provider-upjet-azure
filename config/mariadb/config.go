@@ -44,7 +44,4 @@ func Configure(p *config.Provider) {
 			}, nil
 		}
 	})
-	p.AddResourceConfigurator("azurerm_mariadb_configuration", func(r *config.Resource) {
-		r.UseAsync = false
-	})
 }
