@@ -54,7 +54,7 @@ metadata:
 spec:
   forProvider:
     customHttpsProvisioningEnabled: false
-    frontendEndpointId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/example-frontdoor-rg/providers/Microsoft.Network/frontDoors/example/frontendEndpoints/example
+    frontendEndpointId: /subscriptions/2895a7df-ae9f-41b8-9e78-3ce4926df838/resourceGroups/example-frontdoor-rg/providers/Microsoft.Network/frontDoors/example/frontendEndpoints/example
 
 ---
 apiVersion: network.azure.upbound.io/v1beta1

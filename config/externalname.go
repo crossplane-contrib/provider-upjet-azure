@@ -798,8 +798,8 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_storage_blob_inventory_policy":     config.IdentifierFromProvider,
 	"azurerm_storage_container":                 config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
 	"azurerm_storage_data_lake_gen2_filesystem": storageDataLakeGen2Filesystem(),
-	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/encryptionScopes/{{ .external_name }}"),
-	"azurerm_storage_management_policy":         config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/managementPolicies/default"),
+	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/encryptionScopes/{{ .external_name }}"),
+	"azurerm_storage_management_policy":         config.TemplatedStringAsIdentifier("", "{{ .parameters.storage_account_id }}/managementPolicies/default"),
 	// The id of this resource is a concatenation of 2 resource names, but in the terraform documentation
 	// this reasource does not have a name so instead it concatenates destination and target storage account IDs
 	"azurerm_storage_object_replication": config.IdentifierFromProvider,
