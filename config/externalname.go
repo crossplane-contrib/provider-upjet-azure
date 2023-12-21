@@ -795,7 +795,7 @@ var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// Following _Case 6_ from the **Adding a New Resource** guide
 	"azurerm_storage_account_network_rules":     config.IdentifierFromProvider,
 	"azurerm_storage_blob":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .external_name }}"),
-	"azurerm_storage_blob_inventory_policy":     config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/inventoryPolicies/Default"),
+	"azurerm_storage_blob_inventory_policy":     config.IdentifierFromProvider,
 	"azurerm_storage_container":                 config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
 	"azurerm_storage_data_lake_gen2_filesystem": storageDataLakeGen2Filesystem(),
 	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/encryptionScopes/{{ .external_name }}"),
