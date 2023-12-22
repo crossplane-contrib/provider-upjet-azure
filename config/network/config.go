@@ -18,6 +18,7 @@ package network
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
 )
@@ -603,6 +604,15 @@ func Configure(p *config.Provider) {
 		r.References["target_virtual_network_id"] = config.Reference{
 			Type:      "VirtualNetwork",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_network_manager_management_group_connection", func(r *config.Resource) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "network_manager_id")
+			}
+			return diff, nil
 		}
 	})
 }
