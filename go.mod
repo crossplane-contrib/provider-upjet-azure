@@ -154,3 +154,5 @@ require (
 )
 
 replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20231115141655-4efad3ac0449
+
+replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20231222204719-343f24ceaee4

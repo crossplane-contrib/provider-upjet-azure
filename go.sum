@@ -81,8 +81,6 @@ github.com/crossplane/crossplane-runtime v1.15.0-rc.0.0.20231213071410-0b379538a
 github.com/crossplane/crossplane-runtime v1.15.0-rc.0.0.20231213071410-0b379538ab14/go.mod h1:pgt7PaTvvOQz3jILyxbCaeleU9MrAqKaNoPJavhGBgM=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79 h1:HigXs5tEQxWz0fcj8hzbU2UAZgEM7wPe0XRFOsrtF8Y=
 github.com/crossplane/crossplane-tools v0.0.0-20230925130601-628280f8bf79/go.mod h1:+e4OaFlOcmr0JvINHl/yvEYBrZawzTgj6pQumOH1SS0=
-github.com/crossplane/upjet v1.1.0-rc.0.0.20231227120826-4cb45f9104ac h1:T1MTxsPAE/Cs0/EAGjeC29H9O/rO81yol2/5qGsf888=
-github.com/crossplane/upjet v1.1.0-rc.0.0.20231227120826-4cb45f9104ac/go.mod h1:t9etxIdYaxgyvFPBToikm5zBHi8RIpX8N4mTH77lQFM=
 github.com/dave/jennifer v1.6.0 h1:MQ/6emI2xM7wt0tJzJzyUik2Q3Tcn2eE0vtYgh4GPVI=
 github.com/dave/jennifer v1.6.0/go.mod h1:AxTG893FiZKqxy3FP1kL80VMshSMuz2G+EgvszgGRnk=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -381,6 +379,8 @@ github.com/tombuildsstuff/giovanni v0.20.0 h1:IM/I/iNWMXnPYwcSq8uxV7TKDlv7Nejq0b
 github.com/tombuildsstuff/giovanni v0.20.0/go.mod h1:66KVLYma2whJhEdxPSPL3GQHkulhK+C5CluKfHGfPF4=
 github.com/tombuildsstuff/kermit v0.20230424.1090808 h1:p4vmVTBAeZyERLf6J5C9BIwHJ2ty1y+4Dvdoxzo3rB0=
 github.com/tombuildsstuff/kermit v0.20230424.1090808/go.mod h1:YleYDYRKTGy5ihWHG9u3CwyVTr0l8dOLkYtVEPjnzGI=
+github.com/ulucinar/upbound-upjet v0.0.0-20231222204719-343f24ceaee4 h1:6LOhBjExDyGMm0LrNiLjr+pDz5+YBI8k/ddKQ49yhGw=
+github.com/ulucinar/upbound-upjet v0.0.0-20231222204719-343f24ceaee4/go.mod h1:t9etxIdYaxgyvFPBToikm5zBHi8RIpX8N4mTH77lQFM=
 github.com/upbound/terraform-provider-azurerm v0.0.0-20231115141655-4efad3ac0449 h1:svJL/V82oNz6001pOLGDPAwI0HrDgcQb9UY/ho4A3y4=
 github.com/upbound/terraform-provider-azurerm v0.0.0-20231115141655-4efad3ac0449/go.mod h1:Cwkegu9hzL9Ft5GHi8fblT7YadhzahI6XPR7Hbyam5U=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
