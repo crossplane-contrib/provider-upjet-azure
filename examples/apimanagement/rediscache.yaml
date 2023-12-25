@@ -14,9 +14,6 @@ spec:
     redisCacheIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    redisCacheIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
     cacheLocation: East Us
     connectionStringSecretRef:
       key: attribute.primary_connection_string
@@ -31,7 +28,7 @@ metadata:
     meta.upbound.io/example-id: apimanagement/v1beta1/rediscache
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-redis-cache-${Rand.RFC1123Subdomain}
 spec:
   writeConnectionSecretToRef:
     namespace: upbound-system
