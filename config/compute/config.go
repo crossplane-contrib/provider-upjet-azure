@@ -5,6 +5,7 @@ Copyright 2022 Upbound Inc.
 package compute
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 	"github.com/upbound/provider-azure/apis/rconfig"
 
 	"github.com/crossplane/upjet/pkg/config"
@@ -21,10 +22,26 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"platform_fault_domain",
 				"virtual_machine_scale_set_id"},
 		}
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "termination_notification.#")
+			}
+			return diff, nil
+		}
 	})
 	p.AddResourceConfigurator("azurerm_linux_virtual_machine_scale_set", func(r *config.Resource) {
 		// In version 3.38.0 the `scale_in_policy` parameter was removed, and replaced by `scale_in`
 		config.MoveToStatus(r.TerraformResource, "scale_in_policy")
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "termination_notification.#")
+				delete(diff.Attributes, "terminate_notification.#")
+				delete(diff.Attributes, "gallery_application.#")
+				delete(diff.Attributes, "gallery_applications.#")
+				delete(diff.Attributes, "spot_restore.#")
+			}
+			return diff, nil
+		}
 	})
 	p.AddResourceConfigurator("azurerm_windows_virtual_machine", func(r *config.Resource) {
 		r.References["network_interface_ids"] = config.Reference{
@@ -51,6 +68,14 @@ func Configure(p *config.Provider) {
 		r.References["virtual_machine_id"] = config.Reference{
 			TerraformName: "azurerm_linux_virtual_machine",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
+	p.AddResourceConfigurator("azurerm_orchestrated_virtual_machine_scale_set", func(r *config.Resource) {
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "termination_notification.#")
+			}
+			return diff, nil
 		}
 	})
 	/* Note on testing:
