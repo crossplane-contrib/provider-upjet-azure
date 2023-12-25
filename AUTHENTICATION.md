@@ -79,6 +79,29 @@ and looks like the following:
 }
 ```
 
+Alternatively, service principals credentials can also use a client certificate instead of
+a client secret. Note that the client certificate must be converted to PKCS12 format
+containing both the certificate and private key, then must be base64-encoded. Also,
+if the PKCS12 certificate is protected with a password, `clientCertificatePassword` must be
+set, it can be omitted if the certificate has no password.
+The credentials document should look like the following:
+
+```
+{
+  "clientId": "<client ID of the service principal>",
+  "clientCertificate": "<base64-encoded pkcs12 client certificate of the service principal>",
+  "clientCertificatePassword": "<password for the client certificate, can be omitted>",
+  "subscriptionId": "<subscription ID containing the service principal>",
+  "tenantId": "<tenant ID of the service principal>",
+  "activeDirectoryEndpointUrl": "https://login.microsoftonline.com",
+  "resourceManagerEndpointUrl": "https://management.azure.com/",
+  "activeDirectoryGraphResourceId": "https://graph.windows.net/",
+  "sqlManagementEndpointUrl": "https://management.core.windows.net:8443/",
+  "galleryEndpointUrl": "https://gallery.azure.com/",
+  "managementEndpointUrl": "https://management.core.windows.net/"
+}
+```
+
 As mentioned above, this authentication method involves a service principal's
 long-term credentials and is considered as less secure when compared to other
 configurations.
