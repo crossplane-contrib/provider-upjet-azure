@@ -131,7 +131,7 @@ func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup
 	ps.Configuration[keyClientSecret] = azureCreds[keyAzureClientSecret]
 	if clientCert, ok := azureCreds[keyAzureClientCert]; ok {
 		ps.Configuration[keyClientCert] = clientCert
-		if clientCertPass, ok2 := azureCreds[keyAzureClientCertPass]; ok2 {
+		if clientCertPass, passwordOk := azureCreds[keyAzureClientCertPass]; passwordOk {
 			ps.Configuration[keyClientCertPassword] = clientCertPass
 		}
 	}
