@@ -5,10 +5,10 @@ Copyright 2022 Upbound Inc.
 package compute
 
 import (
-	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
-	"github.com/upbound/provider-azure/apis/rconfig"
-
 	"github.com/crossplane/upjet/pkg/config"
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
+	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures cosmodb group
@@ -59,6 +59,16 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"scale_in_policy"},
 		}
 		r.MetaResource.ArgumentDocs["scale_in_policy"] = "Deprecated: scaleInPolicy will be removed in favour of the scaleIn code block."
+		r.TerraformCustomDiff = func(diff *terraform.InstanceDiff, _ *terraform.InstanceState, _ *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+			if diff != nil && diff.Attributes != nil {
+				delete(diff.Attributes, "termination_notification.#")
+				delete(diff.Attributes, "terminate_notification.#")
+				delete(diff.Attributes, "gallery_application.#")
+				delete(diff.Attributes, "gallery_applications.#")
+				delete(diff.Attributes, "spot_restore.#")
+			}
+			return diff, nil
+		}
 	})
 	p.AddResourceConfigurator("azurerm_virtual_machine_extension", func(r *config.Resource) {
 		r.Kind = "VirtualMachineExtension"
