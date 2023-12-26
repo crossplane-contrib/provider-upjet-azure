@@ -19,7 +19,7 @@ package rconfig
 import (
 	"fmt"
 
-	"github.com/upbound/upjet/pkg/resource"
+	"github.com/crossplane/upjet/pkg/resource"
 
 	xpref "github.com/crossplane/crossplane-runtime/pkg/reference"
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
