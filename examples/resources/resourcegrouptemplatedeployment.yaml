@@ -10,11 +10,11 @@ spec:
   forProvider:
     deploymentMode: Incremental
     parametersContent: |-
-      ${jsonencode({
-          "vnetName" = {
-            value = "example-vnet"
-          }
-        })}
+      {
+        "vnetName": {
+          "value": "example-vnet"
+        }
+      }
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -35,8 +35,8 @@ spec:
               {
                   "type": "Microsoft.Network/virtualNetworks",
                   "apiVersion": "2020-05-01",
-                  "name": "[parameters('vnetName')]",
-                  "location": "[resourceGroup().location]",
+                  "name": "example-vnet",
+                  "location": "westeurope",
                   "properties": {
                       "addressSpace": {
                           "addressPrefixes": [
