@@ -26,6 +26,7 @@ type LabInitParameters struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,6 +60,7 @@ type LabObservation struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The unique immutable identifier of the Dev Test Lab.
@@ -90,6 +92,7 @@ type LabParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

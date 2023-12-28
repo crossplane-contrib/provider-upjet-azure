@@ -18,6 +18,19 @@ import (
 )
 
 type NamespaceDisasterRecoveryConfigInitParameters struct {
+
+	// The ID of the EventHub Namespace to replicate to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
+
+	// Reference to a EventHubNamespace in eventhub to populate partnerNamespaceId.
+	// +kubebuilder:validation:Optional
+	PartnerNamespaceIDRef *v1.Reference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a EventHubNamespace in eventhub to populate partnerNamespaceId.
+	// +kubebuilder:validation:Optional
+	PartnerNamespaceIDSelector *v1.Selector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
 }
 
 type NamespaceDisasterRecoveryConfigObservation struct {

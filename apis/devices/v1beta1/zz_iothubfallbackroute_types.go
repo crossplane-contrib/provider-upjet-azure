@@ -25,6 +25,18 @@ type IOTHubFallbackRouteInitParameters struct {
 	// Used to specify whether the fallback route is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
+	// +crossplane:generate:reference:type=IOTHubEndpointStorageContainer
+	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	// References to IOTHubEndpointStorageContainer to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IOTHubEndpointStorageContainer to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
+
 	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
 }

@@ -81,6 +81,22 @@ func (mg *HealthcareFHIRService) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -155,6 +171,54 @@ func (mg *HealthcareMedtechService) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubConsumerGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventHubConsumerGroupNameRef,
+		Selector:     mg.Spec.InitProvider.EventHubConsumerGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ConsumerGroupList{},
+			Managed: &v1beta11.ConsumerGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubConsumerGroupName")
+	}
+	mg.Spec.InitProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventHubNameRef,
+		Selector:     mg.Spec.InitProvider.EventHubNameSelector,
+		To: reference.To{
+			List:    &v1beta11.EventHubList{},
+			Managed: &v1beta11.EventHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubName")
+	}
+	mg.Spec.InitProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubNamespaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventHubNamespaceNameRef,
+		Selector:     mg.Spec.InitProvider.EventHubNamespaceNameSelector,
+		To: reference.To{
+			List:    &v1beta11.EventHubNamespaceList{},
+			Managed: &v1beta11.EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubNamespaceName")
+	}
+	mg.Spec.InitProvider.EventHubNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubNamespaceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -196,6 +260,22 @@ func (mg *HealthcareMedtechServiceFHIRDestination) ResolveReferences(ctx context
 	}
 	mg.Spec.ForProvider.MedtechServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MedtechServiceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationFHIRServiceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DestinationFHIRServiceIDRef,
+		Selector:     mg.Spec.InitProvider.DestinationFHIRServiceIDSelector,
+		To: reference.To{
+			List:    &HealthcareFHIRServiceList{},
+			Managed: &HealthcareFHIRService{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DestinationFHIRServiceID")
+	}
+	mg.Spec.InitProvider.DestinationFHIRServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DestinationFHIRServiceIDRef = rsp.ResolvedReference
 
 	return nil
 }

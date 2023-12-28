@@ -22,6 +22,19 @@ type HealthcareMedtechServiceFHIRDestinationInitParameters struct {
 	// Specifies the destination Fhir mappings of the Med Tech Service Fhir Destination.
 	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson,omitempty" tf:"destination_fhir_mapping_json,omitempty"`
 
+	// Specifies the destination fhir service id of the Med Tech Service Fhir Destination.
+	// +crossplane:generate:reference:type=HealthcareFHIRService
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	DestinationFHIRServiceID *string `json:"destinationFhirServiceId,omitempty" tf:"destination_fhir_service_id,omitempty"`
+
+	// Reference to a HealthcareFHIRService to populate destinationFhirServiceId.
+	// +kubebuilder:validation:Optional
+	DestinationFHIRServiceIDRef *v1.Reference `json:"destinationFhirServiceIdRef,omitempty" tf:"-"`
+
+	// Selector for a HealthcareFHIRService to populate destinationFhirServiceId.
+	// +kubebuilder:validation:Optional
+	DestinationFHIRServiceIDSelector *v1.Selector `json:"destinationFhirServiceIdSelector,omitempty" tf:"-"`
+
 	// Specifies the destination identity resolution type where the Healthcare Med Tech Service Fhir Destination should be created. Possible values are Create, Lookup.
 	DestinationIdentityResolutionType *string `json:"destinationIdentityResolutionType,omitempty" tf:"destination_identity_resolution_type,omitempty"`
 

@@ -221,6 +221,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   serviceEndpoints:
                     description: 'The list of Service endpoints to associate with
                       the subnet. Possible values include: Microsoft.AzureActiveDirectory,
@@ -230,6 +231,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   virtualNetworkName:
                     description: The name of the virtual network to which to attach
                       the subnet. Changing this forces a new resource to be created.
@@ -395,6 +397,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   serviceEndpoints:
                     description: 'The list of Service endpoints to associate with
                       the subnet. Possible values include: Microsoft.AzureActiveDirectory,
@@ -404,6 +407,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -657,6 +661,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   serviceEndpoints:
                     description: 'The list of Service endpoints to associate with
                       the subnet. Possible values include: Microsoft.AzureActiveDirectory,
@@ -666,6 +671,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   virtualNetworkName:
                     description: The name of the virtual network to which to attach
                       the subnet. Changing this forces a new resource to be created.

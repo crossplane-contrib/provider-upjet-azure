@@ -75,6 +75,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service Azure SQL Database.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service Azure SQL Database.
@@ -213,6 +214,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service Azure SQL Database.
                     type: object
+                    x-kubernetes-map-type: granular
                   servicePrincipalId:
                     description: The service principal id in which to authenticate
                       against the Azure SQL Database. Required if service_principal_key
@@ -251,6 +253,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service Azure SQL Database.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service Azure SQL Database.
@@ -310,6 +313,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service Azure SQL Database.
                     type: object
+                    x-kubernetes-map-type: granular
                   servicePrincipalId:
                     description: The service principal id in which to authenticate
                       against the Azure SQL Database. Required if service_principal_key
@@ -502,6 +506,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service Azure SQL Database.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service Azure SQL Database.
@@ -569,6 +574,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service Azure SQL Database.
                     type: object
+                    x-kubernetes-map-type: granular
                   servicePrincipalId:
                     description: The service principal id in which to authenticate
                       against the Azure SQL Database. Required if service_principal_key

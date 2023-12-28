@@ -165,6 +165,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zones:
                     description: A list of Availability Zones in which this NAT Gateway
                       should be located. Changing this forces a new NAT Gateway to
@@ -172,6 +173,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -203,6 +205,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zones:
                     description: A list of Availability Zones in which this NAT Gateway
                       should be located. Changing this forces a new NAT Gateway to
@@ -210,6 +213,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -410,6 +414,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zones:
                     description: A list of Availability Zones in which this NAT Gateway
                       should be located. Changing this forces a new NAT Gateway to
@@ -417,6 +422,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

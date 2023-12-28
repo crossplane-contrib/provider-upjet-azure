@@ -245,7 +245,21 @@ type DynamicCriteriaParameters struct {
 
 type MonitorMetricAlertActionInitParameters struct {
 
+	// The ID of the Action Group can be sourced from the
+	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
+
+	// Reference to a MonitorActionGroup to populate actionGroupId.
+	// +kubebuilder:validation:Optional
+	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a MonitorActionGroup to populate actionGroupId.
+	// +kubebuilder:validation:Optional
+	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
+	// +mapType=granular
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
 
@@ -255,6 +269,7 @@ type MonitorMetricAlertActionObservation struct {
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
+	// +mapType=granular
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
 
@@ -276,6 +291,7 @@ type MonitorMetricAlertActionParameters struct {
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
 
@@ -384,10 +400,25 @@ type MonitorMetricAlertInitParameters struct {
 	// The evaluation frequency of this Metric Alert, represented in ISO 8601 duration format. Possible values are PT1M, PT5M, PT15M, PT30M and PT1H. Defaults to PT1M.
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
+	// A set of strings of resource IDs at which the metric criteria should be applied.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +listType=set
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// References to Account in storage to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Account in storage to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+
 	// The severity of this Metric Alert. Possible values are 0, 1, 2, 3 and 4. Defaults to 3.
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The location of the target resource.
@@ -435,12 +466,14 @@ type MonitorMetricAlertObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A set of strings of resource IDs at which the metric criteria should be applied.
+	// +listType=set
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// The severity of this Metric Alert. Possible values are 0, 1, 2, 3 and 4. Defaults to 3.
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The location of the target resource.
@@ -506,6 +539,7 @@ type MonitorMetricAlertParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// References to Account in storage to populate scopes.
@@ -522,6 +556,7 @@ type MonitorMetricAlertParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The location of the target resource.

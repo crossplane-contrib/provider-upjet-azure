@@ -35,6 +35,7 @@ type PublicIPInitParameters struct {
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
 	// A mapping of IP tags to assign to the public IP. Changing this forces a new resource to be created.
+	// +mapType=granular
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
 	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
@@ -59,9 +60,11 @@ type PublicIPInitParameters struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A collection containing the availability zone to allocate the Public IP in. Changing this forces a new resource to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -92,6 +95,7 @@ type PublicIPObservation struct {
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// A mapping of IP tags to assign to the public IP. Changing this forces a new resource to be created.
+	// +mapType=granular
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
 	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
@@ -119,9 +123,11 @@ type PublicIPObservation struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A collection containing the availability zone to allocate the Public IP in. Changing this forces a new resource to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -149,6 +155,7 @@ type PublicIPParameters struct {
 
 	// A mapping of IP tags to assign to the public IP. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
 	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
@@ -194,10 +201,12 @@ type PublicIPParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A collection containing the availability zone to allocate the Public IP in. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 

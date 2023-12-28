@@ -101,6 +101,7 @@ type AccountInitParameters struct {
 	Restore []RestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a virtual_network_rules resource, used to define which subnets are allowed to access this CosmosDB account.
@@ -203,6 +204,7 @@ type AccountObservation struct {
 	Restore []RestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a virtual_network_rules resource, used to define which subnets are allowed to access this CosmosDB account.
@@ -337,6 +339,7 @@ type AccountParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a virtual_network_rules resource, used to define which subnets are allowed to access this CosmosDB account.
@@ -551,6 +554,7 @@ type CorsRuleParameters struct {
 type DatabaseInitParameters struct {
 
 	// A list of the collection names for the restore request. Changing this forces a new resource to be created.
+	// +listType=set
 	CollectionNames []*string `json:"collectionNames,omitempty" tf:"collection_names,omitempty"`
 
 	// Specifies the name of the CosmosDB Account. Changing this forces a new resource to be created.
@@ -560,6 +564,7 @@ type DatabaseInitParameters struct {
 type DatabaseObservation struct {
 
 	// A list of the collection names for the restore request. Changing this forces a new resource to be created.
+	// +listType=set
 	CollectionNames []*string `json:"collectionNames,omitempty" tf:"collection_names,omitempty"`
 
 	// Specifies the name of the CosmosDB Account. Changing this forces a new resource to be created.
@@ -570,6 +575,7 @@ type DatabaseParameters struct {
 
 	// A list of the collection names for the restore request. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CollectionNames []*string `json:"collectionNames,omitempty" tf:"collection_names,omitempty"`
 
 	// Specifies the name of the CosmosDB Account. Changing this forces a new resource to be created.
@@ -622,6 +628,7 @@ type GeoLocationParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cosmos Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity assigned to this Cosmos account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
@@ -631,6 +638,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cosmos Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -647,6 +655,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cosmos Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity assigned to this Cosmos account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
@@ -661,6 +670,19 @@ type RestoreInitParameters struct {
 
 	// The creation time of the database or the collection (Datetime Format RFC 3339). Changing this forces a new resource to be created.
 	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc,omitempty" tf:"restore_timestamp_in_utc,omitempty"`
+
+	// The resource ID of the restorable database account from which the restore has to be initiated. The example is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SourceCosmosDBAccountID *string `json:"sourceCosmosdbAccountId,omitempty" tf:"source_cosmosdb_account_id,omitempty"`
+
+	// Reference to a Account to populate sourceCosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	SourceCosmosDBAccountIDRef *v1.Reference `json:"sourceCosmosdbAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account to populate sourceCosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	SourceCosmosDBAccountIDSelector *v1.Selector `json:"sourceCosmosdbAccountIdSelector,omitempty" tf:"-"`
 }
 
 type RestoreObservation struct {

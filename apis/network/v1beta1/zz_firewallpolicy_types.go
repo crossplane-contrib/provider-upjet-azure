@@ -118,6 +118,7 @@ type ExplicitProxyParameters struct {
 type FirewallPolicyIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
@@ -127,6 +128,7 @@ type FirewallPolicyIdentityInitParameters struct {
 type FirewallPolicyIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
@@ -137,6 +139,7 @@ type FirewallPolicyIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
@@ -183,6 +186,7 @@ type FirewallPolicyInitParameters struct {
 	TLSCertificate []TLSCertificateInitParameters `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
 
 	// A mapping of tags which should be assigned to the Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A threat_intelligence_allowlist block as defined below.
@@ -246,6 +250,7 @@ type FirewallPolicyObservation struct {
 	TLSCertificate []TLSCertificateObservation `json:"tlsCertificate,omitempty" tf:"tls_certificate,omitempty"`
 
 	// A mapping of tags which should be assigned to the Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A threat_intelligence_allowlist block as defined below.
@@ -320,6 +325,7 @@ type FirewallPolicyParameters struct {
 
 	// A mapping of tags which should be assigned to the Firewall Policy.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A threat_intelligence_allowlist block as defined below.
@@ -519,18 +525,22 @@ type TLSCertificateParameters struct {
 type ThreatIntelligenceAllowlistInitParameters struct {
 
 	// A list of FQDNs that will be skipped for threat detection.
+	// +listType=set
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// A list of IP addresses or CIDR ranges that will be skipped for threat detection.
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
 type ThreatIntelligenceAllowlistObservation struct {
 
 	// A list of FQDNs that will be skipped for threat detection.
+	// +listType=set
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// A list of IP addresses or CIDR ranges that will be skipped for threat detection.
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -538,10 +548,12 @@ type ThreatIntelligenceAllowlistParameters struct {
 
 	// A list of FQDNs that will be skipped for threat detection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// A list of IP addresses or CIDR ranges that will be skipped for threat detection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 }
 
@@ -551,12 +563,15 @@ type TrafficBypassInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies a list of destination IP addresses that shall be bypassed by intrusion detection.
+	// +listType=set
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
 	// Specifies a list of destination IP groups that shall be bypassed by intrusion detection.
+	// +listType=set
 	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
 
 	// Specifies a list of destination IP ports that shall be bypassed by intrusion detection.
+	// +listType=set
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
 	// The name which should be used for this bypass traffic setting.
@@ -566,9 +581,11 @@ type TrafficBypassInitParameters struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Specifies a list of source addresses that shall be bypassed by intrusion detection.
+	// +listType=set
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// Specifies a list of source IP groups that shall be bypassed by intrusion detection.
+	// +listType=set
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }
 
@@ -578,12 +595,15 @@ type TrafficBypassObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies a list of destination IP addresses that shall be bypassed by intrusion detection.
+	// +listType=set
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
 	// Specifies a list of destination IP groups that shall be bypassed by intrusion detection.
+	// +listType=set
 	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
 
 	// Specifies a list of destination IP ports that shall be bypassed by intrusion detection.
+	// +listType=set
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
 	// The name which should be used for this bypass traffic setting.
@@ -593,9 +613,11 @@ type TrafficBypassObservation struct {
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Specifies a list of source addresses that shall be bypassed by intrusion detection.
+	// +listType=set
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// Specifies a list of source IP groups that shall be bypassed by intrusion detection.
+	// +listType=set
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }
 
@@ -607,14 +629,17 @@ type TrafficBypassParameters struct {
 
 	// Specifies a list of destination IP addresses that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
 	// Specifies a list of destination IP groups that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DestinationIPGroups []*string `json:"destinationIpGroups,omitempty" tf:"destination_ip_groups,omitempty"`
 
 	// Specifies a list of destination IP ports that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
 
 	// The name which should be used for this bypass traffic setting.
@@ -627,10 +652,12 @@ type TrafficBypassParameters struct {
 
 	// Specifies a list of source addresses that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourceAddresses []*string `json:"sourceAddresses,omitempty" tf:"source_addresses,omitempty"`
 
 	// Specifies a list of source IP groups that shall be bypassed by intrusion detection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourceIPGroups []*string `json:"sourceIpGroups,omitempty" tf:"source_ip_groups,omitempty"`
 }
 

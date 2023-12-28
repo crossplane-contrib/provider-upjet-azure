@@ -290,6 +290,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Storage Account. Possible
@@ -358,6 +359,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         defaultAction:
                           description: Specifies the default action of allow or deny
                             when no other rules match. Valid options are Deny or Allow.
@@ -370,6 +372,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         privateLinkAccess:
                           description: One or More private_link_access block as defined
                             below.
@@ -391,6 +394,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   nfsv3Enabled:
@@ -691,18 +695,21 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               channelEncryptionType:
                                 description: A set of SMB channel encryption. Possible
                                   values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               kerberosTicketEncryptionType:
                                 description: A set of Kerberos ticket encryption.
                                   Possible values are RC4-HMAC, and AES-256.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               multichannelEnabled:
                                 description: Indicates whether multichannel is enabled.
                                   Defaults to false. This is only supported on Premium
@@ -714,6 +721,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -751,6 +759,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -987,6 +996,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Storage Account. Possible
@@ -1055,6 +1065,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         defaultAction:
                           description: Specifies the default action of allow or deny
                             when no other rules match. Valid options are Deny or Allow.
@@ -1067,6 +1078,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         privateLinkAccess:
                           description: One or More private_link_access block as defined
                             below.
@@ -1088,6 +1100,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   nfsv3Enabled:
@@ -1308,18 +1321,21 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               channelEncryptionType:
                                 description: A set of SMB channel encryption. Possible
                                   values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               kerberosTicketEncryptionType:
                                 description: A set of Kerberos ticket encryption.
                                   Possible values are RC4-HMAC, and AES-256.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               multichannelEnabled:
                                 description: Indicates whether multichannel is enabled.
                                   Defaults to false. This is only supported on Premium
@@ -1331,6 +1347,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -1368,6 +1385,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -1773,6 +1791,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Identity of this Storage Account.
@@ -1849,6 +1868,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         defaultAction:
                           description: Specifies the default action of allow or deny
                             when no other rules match. Valid options are Deny or Allow.
@@ -1861,6 +1881,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         privateLinkAccess:
                           description: One or More private_link_access block as defined
                             below.
@@ -1882,6 +1903,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   nfsv3Enabled:
@@ -2207,18 +2229,21 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               channelEncryptionType:
                                 description: A set of SMB channel encryption. Possible
                                   values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               kerberosTicketEncryptionType:
                                 description: A set of Kerberos ticket encryption.
                                   Possible values are RC4-HMAC, and AES-256.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               multichannelEnabled:
                                 description: Indicates whether multichannel is enabled.
                                   Defaults to false. This is only supported on Premium
@@ -2230,6 +2255,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -2267,6 +2293,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

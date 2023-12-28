@@ -272,9 +272,11 @@ type IndexPolicyInitParameters struct {
 	CompositeIndex []CompositeIndexInitParameters `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
 
 	// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
+	// +listType=set
 	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
 	// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
+	// +listType=set
 	IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
 
 	// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
@@ -293,9 +295,11 @@ type IndexPolicyObservation struct {
 	CompositeIndex []CompositeIndexObservation `json:"compositeIndex,omitempty" tf:"composite_index,omitempty"`
 
 	// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
+	// +listType=set
 	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
 	// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
+	// +listType=set
 	IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
 
 	// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
@@ -317,10 +321,12 @@ type IndexPolicyParameters struct {
 
 	// List of paths to exclude from indexing. Required if indexing_mode is Consistent or Lazy.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludedPaths []*string `json:"excludedPaths,omitempty" tf:"excluded_paths,omitempty"`
 
 	// List of paths to include in the indexing. Required if indexing_mode is Consistent or Lazy.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IncludedPaths []*string `json:"includedPaths,omitempty" tf:"included_paths,omitempty"`
 
 	// Indicates the indexing mode. Possible values include: Consistent, Lazy, None.
@@ -343,6 +349,7 @@ type SpatialIndexObservation struct {
 	// Path for which the indexing behaviour applies to. According to the service design, all spatial types including LineString, MultiPolygon, Point, and Polygon will be applied to the path.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
+	// +listType=set
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 }
 
@@ -356,12 +363,14 @@ type SpatialIndexParameters struct {
 type UniqueKeyInitParameters struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+	// +listType=set
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
 }
 
 type UniqueKeyObservation struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+	// +listType=set
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
 }
 
@@ -369,6 +378,7 @@ type UniqueKeyParameters struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Paths []*string `json:"paths" tf:"paths,omitempty"`
 }
 

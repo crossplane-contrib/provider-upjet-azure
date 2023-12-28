@@ -177,12 +177,14 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Pipeline.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: A map of variables to associate with the Data Factory
                       Pipeline.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -227,12 +229,14 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Pipeline.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: A map of variables to associate with the Data Factory
                       Pipeline.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -437,12 +441,14 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Pipeline.
                     type: object
+                    x-kubernetes-map-type: granular
                   variables:
                     additionalProperties:
                       type: string
                     description: A map of variables to associate with the Data Factory
                       Pipeline.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

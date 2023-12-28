@@ -29,6 +29,7 @@ type ResourceGroupTemplateDeploymentInitParameters struct {
 	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group Template Deployment.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Resource Group. Cannot be specified with template_spec_version_id.
@@ -59,6 +60,7 @@ type ResourceGroupTemplateDeploymentObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group Template Deployment.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Resource Group. Cannot be specified with template_spec_version_id.
@@ -97,6 +99,7 @@ type ResourceGroupTemplateDeploymentParameters struct {
 
 	// A mapping of tags which should be assigned to the Resource Group Template Deployment.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Resource Group. Cannot be specified with template_spec_version_id.

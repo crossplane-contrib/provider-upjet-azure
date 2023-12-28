@@ -20,6 +20,7 @@ import (
 type SecurityCenterAssessmentPolicyInitParameters struct {
 
 	// A list of the categories of resource that is at risk when the Security Center Assessment is unhealthy. Possible values are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
+	// +listType=set
 	Categories []*string `json:"categories,omitempty" tf:"categories,omitempty"`
 
 	// The description of the Security Center Assessment.
@@ -38,6 +39,7 @@ type SecurityCenterAssessmentPolicyInitParameters struct {
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A list of the threat impacts for the Security Center Assessment. Possible values are AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage and ThreatResistance.
+	// +listType=set
 	Threats []*string `json:"threats,omitempty" tf:"threats,omitempty"`
 
 	// The user impact of the Security Center Assessment. Possible values are Low, Moderate and High.
@@ -47,6 +49,7 @@ type SecurityCenterAssessmentPolicyInitParameters struct {
 type SecurityCenterAssessmentPolicyObservation struct {
 
 	// A list of the categories of resource that is at risk when the Security Center Assessment is unhealthy. Possible values are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
+	// +listType=set
 	Categories []*string `json:"categories,omitempty" tf:"categories,omitempty"`
 
 	// The description of the Security Center Assessment.
@@ -71,6 +74,7 @@ type SecurityCenterAssessmentPolicyObservation struct {
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A list of the threat impacts for the Security Center Assessment. Possible values are AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage and ThreatResistance.
+	// +listType=set
 	Threats []*string `json:"threats,omitempty" tf:"threats,omitempty"`
 
 	// The user impact of the Security Center Assessment. Possible values are Low, Moderate and High.
@@ -81,6 +85,7 @@ type SecurityCenterAssessmentPolicyParameters struct {
 
 	// A list of the categories of resource that is at risk when the Security Center Assessment is unhealthy. Possible values are Unknown, Compute, Data, IdentityAndAccess, IoT and Networking.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Categories []*string `json:"categories,omitempty" tf:"categories,omitempty"`
 
 	// The description of the Security Center Assessment.
@@ -105,6 +110,7 @@ type SecurityCenterAssessmentPolicyParameters struct {
 
 	// A list of the threat impacts for the Security Center Assessment. Possible values are AccountBreach, DataExfiltration, DataSpillage, DenialOfService, ElevationOfPrivilege, MaliciousInsider, MissingCoverage and ThreatResistance.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Threats []*string `json:"threats,omitempty" tf:"threats,omitempty"`
 
 	// The user impact of the Security Center Assessment. Possible values are Low, Moderate and High.

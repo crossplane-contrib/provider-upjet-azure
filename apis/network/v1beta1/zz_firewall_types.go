@@ -21,6 +21,32 @@ type FirewallIPConfigurationInitParameters struct {
 
 	// Specifies the name of the IP Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Public IP Address associated with the firewall.
+	// +crossplane:generate:reference:type=PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+
+	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type FirewallIPConfigurationObservation struct {
@@ -91,6 +117,7 @@ type FirewallInitParameters struct {
 	ManagementIPConfiguration []ManagementIPConfigurationInitParameters `json:"managementIpConfiguration,omitempty" tf:"management_ip_configuration,omitempty"`
 
 	// A list of SNAT private CIDR IP ranges, or the special string IANAPrivateRanges, which indicates Azure Firewall does not SNAT when the destination IP address is a private range per IANA RFC 1918.
+	// +listType=set
 	PrivateIPRanges []*string `json:"privateIpRanges,omitempty" tf:"private_ip_ranges,omitempty"`
 
 	// SKU name of the Firewall. Possible values are AZFW_Hub and AZFW_VNet. Changing this forces a new resource to be created.
@@ -100,6 +127,7 @@ type FirewallInitParameters struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert and Deny. Defaults to Alert.
@@ -109,6 +137,7 @@ type FirewallInitParameters struct {
 	VirtualHub []VirtualHubInitParameters `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Azure Firewall should be located. Changing this forces a new Azure Firewall to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -133,6 +162,7 @@ type FirewallObservation struct {
 	ManagementIPConfiguration []ManagementIPConfigurationObservation `json:"managementIpConfiguration,omitempty" tf:"management_ip_configuration,omitempty"`
 
 	// A list of SNAT private CIDR IP ranges, or the special string IANAPrivateRanges, which indicates Azure Firewall does not SNAT when the destination IP address is a private range per IANA RFC 1918.
+	// +listType=set
 	PrivateIPRanges []*string `json:"privateIpRanges,omitempty" tf:"private_ip_ranges,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
@@ -145,6 +175,7 @@ type FirewallObservation struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert and Deny. Defaults to Alert.
@@ -154,6 +185,7 @@ type FirewallObservation struct {
 	VirtualHub []VirtualHubObservation `json:"virtualHub,omitempty" tf:"virtual_hub,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Azure Firewall should be located. Changing this forces a new Azure Firewall to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -181,6 +213,7 @@ type FirewallParameters struct {
 
 	// A list of SNAT private CIDR IP ranges, or the special string IANAPrivateRanges, which indicates Azure Firewall does not SNAT when the destination IP address is a private range per IANA RFC 1918.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PrivateIPRanges []*string `json:"privateIpRanges,omitempty" tf:"private_ip_ranges,omitempty"`
 
 	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
@@ -206,6 +239,7 @@ type FirewallParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The operation mode for threat intelligence-based filtering. Possible values are: Off, Alert and Deny. Defaults to Alert.
@@ -218,6 +252,7 @@ type FirewallParameters struct {
 
 	// Specifies a list of Availability Zones in which this Azure Firewall should be located. Changing this forces a new Azure Firewall to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -228,6 +263,19 @@ type ManagementIPConfigurationInitParameters struct {
 
 	// The ID of the Public IP Address associated with the firewall.
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to the subnet associated with the IP Configuration. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type ManagementIPConfigurationObservation struct {

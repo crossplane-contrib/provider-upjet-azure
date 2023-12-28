@@ -28,6 +28,19 @@ type CassandraDatacenterInitParameters struct {
 	// The fragment of the cassandra.yaml configuration file to be included in the cassandra.yaml for all nodes in this Cassandra Datacenter. The fragment should be Base64 encoded and only a subset of keys is allowed.
 	Base64EncodedYamlFragment *string `json:"base64EncodedYamlFragment,omitempty" tf:"base64_encoded_yaml_fragment,omitempty"`
 
+	// The ID of the delegated management subnet for this Cassandra Datacenter. Changing this forces a new Cassandra Datacenter to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDRef *v1.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
+
 	// Determines the number of p30 disks that are attached to each node.
 	DiskCount *float64 `json:"diskCount,omitempty" tf:"disk_count,omitempty"`
 

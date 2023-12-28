@@ -87,6 +87,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filter:
                           description: A filter block as defined below.
                           items:
@@ -118,6 +119,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         name:
                           description: The name of the endpoint for the Network Connection
                             Monitor .
@@ -223,12 +225,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
                       Network Connection Monitor.
                     type: object
+                    x-kubernetes-map-type: granular
                   testConfiguration:
                     description: A test_configuration block as defined below.
                     items:
@@ -272,6 +276,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         icmpConfiguration:
@@ -342,6 +347,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Should the test group be enabled? Defaults
                             to true.
@@ -355,11 +361,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         testConfigurationNames:
                           description: A list of test configuration names.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -395,6 +403,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filter:
                           description: A filter block as defined below.
                           items:
@@ -426,6 +435,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         name:
                           description: The name of the endpoint for the Network Connection
                             Monitor .
@@ -454,12 +464,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
                       Network Connection Monitor.
                     type: object
+                    x-kubernetes-map-type: granular
                   testConfiguration:
                     description: A test_configuration block as defined below.
                     items:
@@ -503,6 +515,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         icmpConfiguration:
@@ -573,6 +586,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Should the test group be enabled? Defaults
                             to true.
@@ -586,11 +600,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         testConfigurationNames:
                           description: A list of test configuration names.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -796,6 +812,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         filter:
                           description: A filter block as defined below.
                           items:
@@ -827,6 +844,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         name:
                           description: The name of the endpoint for the Network Connection
                             Monitor .
@@ -862,12 +880,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   tags:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
                       Network Connection Monitor.
                     type: object
+                    x-kubernetes-map-type: granular
                   testConfiguration:
                     description: A test_configuration block as defined below.
                     items:
@@ -911,6 +931,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                         icmpConfiguration:
@@ -981,6 +1002,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Should the test group be enabled? Defaults
                             to true.
@@ -994,11 +1016,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         testConfigurationNames:
                           description: A list of test configuration names.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object

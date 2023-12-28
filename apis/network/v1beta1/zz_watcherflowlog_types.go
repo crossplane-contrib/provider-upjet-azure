@@ -54,8 +54,34 @@ type TrafficAnalyticsInitParameters struct {
 	// How frequently service should do flow analytics in minutes. Defaults to 60.
 	IntervalInMinutes *float64 `json:"intervalInMinutes,omitempty" tf:"interval_in_minutes,omitempty"`
 
+	// The resource GUID of the attached workspace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("workspace_id",true)
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+
 	// The location of the attached workspace.
 	WorkspaceRegion *string `json:"workspaceRegion,omitempty" tf:"workspace_region,omitempty"`
+
+	// The resource ID of the attached workspace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type TrafficAnalyticsObservation struct {
@@ -127,10 +153,37 @@ type WatcherFlowLogInitParameters struct {
 	// The location where the Network Watcher Flow Log resides. Changing this forces a new resource to be created. Defaults to the location of the Network Watcher.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup to populate networkSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup to populate networkSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
+
 	// A retention_policy block as documented below.
 	RetentionPolicy []RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
+	// The ID of the Storage Account where flow logs are stored.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A traffic_analytics block as documented below.
@@ -167,6 +220,7 @@ type WatcherFlowLogObservation struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A traffic_analytics block as documented below.
@@ -246,6 +300,7 @@ type WatcherFlowLogParameters struct {
 
 	// A mapping of tags which should be assigned to the Network Watcher Flow Log.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A traffic_analytics block as documented below.

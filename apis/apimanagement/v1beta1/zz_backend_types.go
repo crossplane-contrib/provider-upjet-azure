@@ -222,9 +222,11 @@ type CredentialsInitParameters struct {
 	Certificate []*string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// A mapping of header parameters to pass to the backend host. The keys are the header names and the values are a comma separated string of header values. This is converted to a list before being passed to the API.
+	// +mapType=granular
 	Header map[string]*string `json:"header,omitempty" tf:"header,omitempty"`
 
 	// A mapping of query parameters to pass to the backend host. The keys are the query names and the values are a comma separated string of query values. This is converted to a list before being passed to the API.
+	// +mapType=granular
 	Query map[string]*string `json:"query,omitempty" tf:"query,omitempty"`
 }
 
@@ -237,9 +239,11 @@ type CredentialsObservation struct {
 	Certificate []*string `json:"certificate,omitempty" tf:"certificate,omitempty"`
 
 	// A mapping of header parameters to pass to the backend host. The keys are the header names and the values are a comma separated string of header values. This is converted to a list before being passed to the API.
+	// +mapType=granular
 	Header map[string]*string `json:"header,omitempty" tf:"header,omitempty"`
 
 	// A mapping of query parameters to pass to the backend host. The keys are the query names and the values are a comma separated string of query values. This is converted to a list before being passed to the API.
+	// +mapType=granular
 	Query map[string]*string `json:"query,omitempty" tf:"query,omitempty"`
 }
 
@@ -255,10 +259,12 @@ type CredentialsParameters struct {
 
 	// A mapping of header parameters to pass to the backend host. The keys are the header names and the values are a comma separated string of header values. This is converted to a list before being passed to the API.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Header map[string]*string `json:"header,omitempty" tf:"header,omitempty"`
 
 	// A mapping of query parameters to pass to the backend host. The keys are the query names and the values are a comma separated string of query values. This is converted to a list before being passed to the API.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Query map[string]*string `json:"query,omitempty" tf:"query,omitempty"`
 }
 
@@ -300,12 +306,14 @@ type ServiceFabricClusterInitParameters struct {
 	ClientCertificateThumbprint *string `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
 
 	// A list of cluster management endpoints.
+	// +listType=set
 	ManagementEndpoints []*string `json:"managementEndpoints,omitempty" tf:"management_endpoints,omitempty"`
 
 	// The maximum number of retries when attempting resolve the partition.
 	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries,omitempty" tf:"max_partition_resolution_retries,omitempty"`
 
 	// A list of thumbprints of the server certificates of the Service Fabric cluster.
+	// +listType=set
 	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
 
 	// One or more server_x509_name blocks as documented below.
@@ -321,12 +329,14 @@ type ServiceFabricClusterObservation struct {
 	ClientCertificateThumbprint *string `json:"clientCertificateThumbprint,omitempty" tf:"client_certificate_thumbprint,omitempty"`
 
 	// A list of cluster management endpoints.
+	// +listType=set
 	ManagementEndpoints []*string `json:"managementEndpoints,omitempty" tf:"management_endpoints,omitempty"`
 
 	// The maximum number of retries when attempting resolve the partition.
 	MaxPartitionResolutionRetries *float64 `json:"maxPartitionResolutionRetries,omitempty" tf:"max_partition_resolution_retries,omitempty"`
 
 	// A list of thumbprints of the server certificates of the Service Fabric cluster.
+	// +listType=set
 	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
 
 	// One or more server_x509_name blocks as documented below.
@@ -345,6 +355,7 @@ type ServiceFabricClusterParameters struct {
 
 	// A list of cluster management endpoints.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ManagementEndpoints []*string `json:"managementEndpoints" tf:"management_endpoints,omitempty"`
 
 	// The maximum number of retries when attempting resolve the partition.
@@ -353,6 +364,7 @@ type ServiceFabricClusterParameters struct {
 
 	// A list of thumbprints of the server certificates of the Service Fabric cluster.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ServerCertificateThumbprints []*string `json:"serverCertificateThumbprints,omitempty" tf:"server_certificate_thumbprints,omitempty"`
 
 	// One or more server_x509_name blocks as documented below.

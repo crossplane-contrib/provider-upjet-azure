@@ -90,6 +90,22 @@ func (mg *AppIntegrationAccount) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -131,6 +147,38 @@ func (mg *AppIntegrationAccountBatchConfiguration) ResolveReferences(ctx context
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IntegrationAccountName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.IntegrationAccountNameRef,
+		Selector:     mg.Spec.InitProvider.IntegrationAccountNameSelector,
+		To: reference.To{
+			List:    &AppIntegrationAccountList{},
+			Managed: &AppIntegrationAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IntegrationAccountName")
+	}
+	mg.Spec.InitProvider.IntegrationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IntegrationAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -404,6 +452,22 @@ func (mg *IntegrationServiceEnvironment) ResolveReferences(ctx context.Context, 
 	}
 	mg.Spec.ForProvider.VirtualNetworkSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIdsRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.VirtualNetworkSubnetIds),
+		Extract:       resource.ExtractParamPath("id", true),
+		References:    mg.Spec.InitProvider.VirtualNetworkSubnetIdsRefs,
+		Selector:      mg.Spec.InitProvider.VirtualNetworkSubnetIdsSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetIds")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }

@@ -19,7 +19,21 @@ import (
 
 type ActionInitParameters struct {
 
+	// The ID of the Action Group can be sourced from the .
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
+
+	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
+	// +kubebuilder:validation:Optional
+	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
+	// +kubebuilder:validation:Optional
+	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
+
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
+	// +mapType=granular
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
 
@@ -29,6 +43,7 @@ type ActionObservation struct {
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
+	// +mapType=granular
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
 
@@ -50,6 +65,7 @@ type ActionParameters struct {
 
 	// The map of custom string properties to include with the post operation. These data are appended to the webhook payload.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	WebhookProperties map[string]*string `json:"webhookProperties,omitempty" tf:"webhook_properties,omitempty"`
 }
 
@@ -81,6 +97,19 @@ type CriteriaInitParameters struct {
 
 	// A block to define fine grain resource health settings.
 	ResourceHealth []ResourceHealthInitParameters `json:"resourceHealth,omitempty" tf:"resource_health,omitempty"`
+
+	// The specific resource monitored by the activity log alert. It should be within one of the scopes.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
 	// The name of the resource provider monitored by the activity log alert.
 	ResourceProvider *string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty"`
@@ -236,7 +265,34 @@ type MonitorActivityLogAlertInitParameters struct {
 	// The name of the activity log alert. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the resource group in which to create the activity log alert instance. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The Scope at which the Activity Log should be applied. A list of strings which could be a resource group , or a subscription, or a resource ID (such as a Storage Account).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +listType=set
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// References to ResourceGroup in azure to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -264,9 +320,11 @@ type MonitorActivityLogAlertObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// The Scope at which the Activity Log should be applied. A list of strings which could be a resource group , or a subscription, or a resource ID (such as a Storage Account).
+	// +listType=set
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -309,6 +367,7 @@ type MonitorActivityLogAlertParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// References to ResourceGroup in azure to populate scopes.
@@ -321,30 +380,37 @@ type MonitorActivityLogAlertParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ResourceHealthInitParameters struct {
 
 	// The current resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	// +listType=set
 	Current []*string `json:"current,omitempty" tf:"current,omitempty"`
 
 	// The previous resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	// +listType=set
 	Previous []*string `json:"previous,omitempty" tf:"previous,omitempty"`
 
 	// The reason that will log an alert. Possible values are PlatformInitiated (such as a problem with the resource in an affected region of an Azure incident), UserInitiated (such as a shutdown request of a VM) and Unknown.
+	// +listType=set
 	Reason []*string `json:"reason,omitempty" tf:"reason,omitempty"`
 }
 
 type ResourceHealthObservation struct {
 
 	// The current resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	// +listType=set
 	Current []*string `json:"current,omitempty" tf:"current,omitempty"`
 
 	// The previous resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
+	// +listType=set
 	Previous []*string `json:"previous,omitempty" tf:"previous,omitempty"`
 
 	// The reason that will log an alert. Possible values are PlatformInitiated (such as a problem with the resource in an affected region of an Azure incident), UserInitiated (such as a shutdown request of a VM) and Unknown.
+	// +listType=set
 	Reason []*string `json:"reason,omitempty" tf:"reason,omitempty"`
 }
 
@@ -352,38 +418,47 @@ type ResourceHealthParameters struct {
 
 	// The current resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Current []*string `json:"current,omitempty" tf:"current,omitempty"`
 
 	// The previous resource health statuses that will log an alert. Possible values are Available, Degraded, Unavailable and Unknown.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Previous []*string `json:"previous,omitempty" tf:"previous,omitempty"`
 
 	// The reason that will log an alert. Possible values are PlatformInitiated (such as a problem with the resource in an affected region of an Azure incident), UserInitiated (such as a shutdown request of a VM) and Unknown.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Reason []*string `json:"reason,omitempty" tf:"reason,omitempty"`
 }
 
 type ServiceHealthInitParameters struct {
 
 	// Events this alert will monitor Possible values are Incident, Maintenance, Informational, ActionRequired and Security.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Locations this alert will monitor. For example, West Europe.
+	// +listType=set
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
 	// Services this alert will monitor. For example, Activity Logs & Alerts, Action Groups. Defaults to all Services.
+	// +listType=set
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 
 type ServiceHealthObservation struct {
 
 	// Events this alert will monitor Possible values are Incident, Maintenance, Informational, ActionRequired and Security.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Locations this alert will monitor. For example, West Europe.
+	// +listType=set
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
 	// Services this alert will monitor. For example, Activity Logs & Alerts, Action Groups. Defaults to all Services.
+	// +listType=set
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 
@@ -391,14 +466,17 @@ type ServiceHealthParameters struct {
 
 	// Events this alert will monitor Possible values are Incident, Maintenance, Informational, ActionRequired and Security.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// Locations this alert will monitor. For example, West Europe.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Locations []*string `json:"locations,omitempty" tf:"locations,omitempty"`
 
 	// Services this alert will monitor. For example, Activity Logs & Alerts, Action Groups. Defaults to all Services.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Services []*string `json:"services,omitempty" tf:"services,omitempty"`
 }
 

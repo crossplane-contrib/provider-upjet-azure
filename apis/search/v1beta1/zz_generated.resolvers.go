@@ -80,5 +80,21 @@ func (mg *SharedPrivateLinkService) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
+	}
+	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }

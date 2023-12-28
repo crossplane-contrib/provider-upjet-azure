@@ -21,6 +21,19 @@ type TokenInitParameters struct {
 
 	// Should the Container Registry token be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The ID of the Container Registry Scope Map associated with the token.
+	// +crossplane:generate:reference:type=ScopeMap
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ScopeMapID *string `json:"scopeMapId,omitempty" tf:"scope_map_id,omitempty"`
+
+	// Reference to a ScopeMap to populate scopeMapId.
+	// +kubebuilder:validation:Optional
+	ScopeMapIDRef *v1.Reference `json:"scopeMapIdRef,omitempty" tf:"-"`
+
+	// Selector for a ScopeMap to populate scopeMapId.
+	// +kubebuilder:validation:Optional
+	ScopeMapIDSelector *v1.Selector `json:"scopeMapIdSelector,omitempty" tf:"-"`
 }
 
 type TokenObservation struct {

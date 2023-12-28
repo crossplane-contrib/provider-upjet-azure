@@ -26,6 +26,7 @@ type HealthBotInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -47,6 +48,7 @@ type HealthBotObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -75,6 +77,7 @@ type HealthBotParameters struct {
 
 	// A mapping of tags which should be assigned to the service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

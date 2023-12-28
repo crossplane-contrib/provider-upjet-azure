@@ -34,6 +34,54 @@ type OutputMSSQLInitParameters struct {
 	// The name of the Stream Output. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The SQL server url. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLServer
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// Reference to a MSSQLServer in sql to populate server.
+	// +kubebuilder:validation:Optional
+	ServerRef *v1.Reference `json:"serverRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLServer in sql to populate server.
+	// +kubebuilder:validation:Optional
+	ServerSelector *v1.Selector `json:"serverSelector,omitempty" tf:"-"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Job
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Reference to a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+
+	// Table in the database that the output points to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Table
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+
+	// Reference to a Table in storage to populate table.
+	// +kubebuilder:validation:Optional
+	TableRef *v1.Reference `json:"tableRef,omitempty" tf:"-"`
+
+	// Selector for a Table in storage to populate table.
+	// +kubebuilder:validation:Optional
+	TableSelector *v1.Selector `json:"tableSelector,omitempty" tf:"-"`
+
 	// Username used to login to the Microsoft SQL Server. Changing this forces a new resource to be created. Required if authentication_mode is ConnectionString.
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 }

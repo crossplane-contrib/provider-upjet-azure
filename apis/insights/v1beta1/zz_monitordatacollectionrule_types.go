@@ -411,6 +411,19 @@ type EventHubDirectParameters struct {
 
 type EventHubInitParameters struct {
 
+	// The resource ID of the Event Hub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	EventHubID *string `json:"eventHubId,omitempty" tf:"event_hub_id,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventHubId.
+	// +kubebuilder:validation:Optional
+	EventHubIDRef *v1.Reference `json:"eventHubIdRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventHubId.
+	// +kubebuilder:validation:Optional
+	EventHubIDSelector *v1.Selector `json:"eventHubIdSelector,omitempty" tf:"-"`
+
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -576,6 +589,19 @@ type LogAnalyticsInitParameters struct {
 
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of a Log Analytic Workspace resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type LogAnalyticsObservation struct {
@@ -699,6 +725,7 @@ type MonitorAccountParameters struct {
 type MonitorDataCollectionRuleIdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Data Collection Rule. Currently, up to 1 identity is supported.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Collection Rule. Possible values are SystemAssigned and UserAssigned.
@@ -708,6 +735,7 @@ type MonitorDataCollectionRuleIdentityInitParameters struct {
 type MonitorDataCollectionRuleIdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Data Collection Rule. Currently, up to 1 identity is supported.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -724,6 +752,7 @@ type MonitorDataCollectionRuleIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Data Collection Rule. Currently, up to 1 identity is supported.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Data Collection Rule. Possible values are SystemAssigned and UserAssigned.
@@ -732,6 +761,19 @@ type MonitorDataCollectionRuleIdentityParameters struct {
 }
 
 type MonitorDataCollectionRuleInitParameters struct {
+
+	// The resource ID of the Data Collection Endpoint that this rule can be used with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorDataCollectionEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
+
+	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
+	// +kubebuilder:validation:Optional
+	DataCollectionEndpointIDRef *v1.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
+
+	// Selector for a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
+	// +kubebuilder:validation:Optional
+	DataCollectionEndpointIDSelector *v1.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
 
 	// One or more data_flow blocks as defined below.
 	DataFlow []DataFlowInitParameters `json:"dataFlow,omitempty" tf:"data_flow,omitempty"`
@@ -758,6 +800,7 @@ type MonitorDataCollectionRuleInitParameters struct {
 	StreamDeclaration []StreamDeclarationInitParameters `json:"streamDeclaration,omitempty" tf:"stream_declaration,omitempty"`
 
 	// A mapping of tags which should be assigned to the Data Collection Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -800,6 +843,7 @@ type MonitorDataCollectionRuleObservation struct {
 	StreamDeclaration []StreamDeclarationObservation `json:"streamDeclaration,omitempty" tf:"stream_declaration,omitempty"`
 
 	// A mapping of tags which should be assigned to the Data Collection Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -866,6 +910,7 @@ type MonitorDataCollectionRuleParameters struct {
 
 	// A mapping of tags which should be assigned to the Data Collection Rule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -1046,8 +1091,33 @@ type StorageBlobDirectParameters struct {
 
 type StorageBlobInitParameters struct {
 
+	// The Storage Container name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
+	// Reference to a Container in storage to populate containerName.
+	// +kubebuilder:validation:Optional
+	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate containerName.
+	// +kubebuilder:validation:Optional
+	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
+
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The resource ID of the Storage Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageBlobObservation struct {

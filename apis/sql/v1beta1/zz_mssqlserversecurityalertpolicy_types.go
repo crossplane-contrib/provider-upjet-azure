@@ -20,12 +20,14 @@ import (
 type MSSQLServerSecurityAlertPolicyInitParameters struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
 	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// Specifies an array of email addresses to which the alert is sent.
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
@@ -33,17 +35,32 @@ type MSSQLServerSecurityAlertPolicyInitParameters struct {
 
 	// Specifies the state of the policy, whether it is enabled or disabled or a policy has not been applied yet on the specific database server. Possible values are Disabled, Enabled and New.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
+
+	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
+	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
+
+	// Reference to a Account in storage to populate storageEndpoint.
+	// +kubebuilder:validation:Optional
+	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageEndpoint.
+	// +kubebuilder:validation:Optional
+	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 type MSSQLServerSecurityAlertPolicyObservation struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
+	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
 	EmailAccountAdmins *bool `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// Specifies an array of email addresses to which the alert is sent.
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The ID of the MS SQL Server Security Alert Policy.
@@ -69,6 +86,7 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Specifies an array of alerts that are disabled. Allowed values are: Sql_Injection, Sql_Injection_Vulnerability, Access_Anomaly, Data_Exfiltration, Unsafe_Action.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Boolean flag which specifies if the alert is sent to the account administrators or not. Defaults to false.
@@ -77,6 +95,7 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 
 	// Specifies an array of email addresses to which the alert is sent.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The name of the resource group that contains the MS SQL Server. Changing this forces a new resource to be created.

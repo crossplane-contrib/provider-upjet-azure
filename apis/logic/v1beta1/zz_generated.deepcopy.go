@@ -787,6 +787,21 @@ func (in *AppIntegrationAccountBatchConfigurationInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	if in.IntegrationAccountName != nil {
+		in, out := &in.IntegrationAccountName, &out.IntegrationAccountName
+		*out = new(string)
+		**out = **in
+	}
+	if in.IntegrationAccountNameRef != nil {
+		in, out := &in.IntegrationAccountNameRef, &out.IntegrationAccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IntegrationAccountNameSelector != nil {
+		in, out := &in.IntegrationAccountNameSelector, &out.IntegrationAccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
 		*out = make(map[string]*string, len(*in))
@@ -814,6 +829,21 @@ func (in *AppIntegrationAccountBatchConfigurationInitParameters) DeepCopyInto(ou
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -1052,6 +1082,21 @@ func (in *AppIntegrationAccountInitParameters) DeepCopyInto(out *AppIntegrationA
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
@@ -3590,6 +3635,29 @@ func (in *IntegrationServiceEnvironmentInitParameters) DeepCopyInto(out *Integra
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.VirtualNetworkSubnetIds != nil {
+		in, out := &in.VirtualNetworkSubnetIds, &out.VirtualNetworkSubnetIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.VirtualNetworkSubnetIdsRefs != nil {
+		in, out := &in.VirtualNetworkSubnetIdsRefs, &out.VirtualNetworkSubnetIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.VirtualNetworkSubnetIdsSelector != nil {
+		in, out := &in.VirtualNetworkSubnetIdsSelector, &out.VirtualNetworkSubnetIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

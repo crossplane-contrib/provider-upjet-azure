@@ -18,6 +18,68 @@ import (
 )
 
 type BackupProtectedFileShareInitParameters struct {
+
+	// Specifies the ID of the backup policy to use. The policy must be an Azure File Share backup policy. Other types are not supported.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.BackupPolicyFileShare
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// Reference to a BackupPolicyFileShare in recoveryservices to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackupPolicyFileShare in recoveryservices to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+
+	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameRef *v1.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+
+	// The name of the resource group in which to create the Azure Backup Protected File Share. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// Specifies the name of the file share to backup. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Share
+	SourceFileShareName *string `json:"sourceFileShareName,omitempty" tf:"source_file_share_name,omitempty"`
+
+	// Reference to a Share in storage to populate sourceFileShareName.
+	// +kubebuilder:validation:Optional
+	SourceFileShareNameRef *v1.Reference `json:"sourceFileShareNameRef,omitempty" tf:"-"`
+
+	// Selector for a Share in storage to populate sourceFileShareName.
+	// +kubebuilder:validation:Optional
+	SourceFileShareNameSelector *v1.Selector `json:"sourceFileShareNameSelector,omitempty" tf:"-"`
+
+	// Specifies the ID of the storage account of the file share to backup. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.BackupContainerStorageAccount
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("storage_account_id",false)
+	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
+
+	// Reference to a BackupContainerStorageAccount in recoveryservices to populate sourceStorageAccountId.
+	// +kubebuilder:validation:Optional
+	SourceStorageAccountIDRef *v1.Reference `json:"sourceStorageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackupContainerStorageAccount in recoveryservices to populate sourceStorageAccountId.
+	// +kubebuilder:validation:Optional
+	SourceStorageAccountIDSelector *v1.Selector `json:"sourceStorageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BackupProtectedFileShareObservation struct {

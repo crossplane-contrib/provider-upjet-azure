@@ -26,6 +26,7 @@ type CreatorInitParameters struct {
 	StorageUnits *float64 `json:"storageUnits,omitempty" tf:"storage_units,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Maps Creator.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,6 +45,7 @@ type CreatorObservation struct {
 	StorageUnits *float64 `json:"storageUnits,omitempty" tf:"storage_units,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Maps Creator.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -73,6 +75,7 @@ type CreatorParameters struct {
 
 	// A mapping of tags which should be assigned to the Azure Maps Creator.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -69,6 +69,21 @@ func (in *ResourcePolicyRemediationInitParameters) DeepCopyInto(out *ResourcePol
 		*out = new(float64)
 		**out = **in
 	}
+	if in.PolicyAssignmentID != nil {
+		in, out := &in.PolicyAssignmentID, &out.PolicyAssignmentID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PolicyAssignmentIDRef != nil {
+		in, out := &in.PolicyAssignmentIDRef, &out.PolicyAssignmentIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PolicyAssignmentIDSelector != nil {
+		in, out := &in.PolicyAssignmentIDSelector, &out.PolicyAssignmentIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PolicyDefinitionID != nil {
 		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID
 		*out = new(string)
@@ -88,6 +103,21 @@ func (in *ResourcePolicyRemediationInitParameters) DeepCopyInto(out *ResourcePol
 		in, out := &in.ResourceDiscoveryMode, &out.ResourceDiscoveryMode
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceID != nil {
+		in, out := &in.ResourceID, &out.ResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceIDRef != nil {
+		in, out := &in.ResourceIDRef, &out.ResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceIDSelector != nil {
+		in, out := &in.ResourceIDSelector, &out.ResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 
@@ -385,6 +415,21 @@ func (in *SubscriptionPolicyRemediationInitParameters) DeepCopyInto(out *Subscri
 		in, out := &in.ParallelDeployments, &out.ParallelDeployments
 		*out = new(float64)
 		**out = **in
+	}
+	if in.PolicyAssignmentID != nil {
+		in, out := &in.PolicyAssignmentID, &out.PolicyAssignmentID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PolicyAssignmentIDRef != nil {
+		in, out := &in.PolicyAssignmentIDRef, &out.PolicyAssignmentIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PolicyAssignmentIDSelector != nil {
+		in, out := &in.PolicyAssignmentIDSelector, &out.PolicyAssignmentIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PolicyDefinitionID != nil {
 		in, out := &in.PolicyDefinitionID, &out.PolicyDefinitionID

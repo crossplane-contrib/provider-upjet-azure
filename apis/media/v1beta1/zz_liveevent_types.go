@@ -227,6 +227,7 @@ type LiveEventInitParameters struct {
 	StreamOptions []*string `json:"streamOptions,omitempty" tf:"stream_options,omitempty"`
 
 	// A mapping of tags which should be assigned to the Live Event.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of languages (locale) to be used for speech-to-text transcription – it should match the spoken language in the audio track. The value should be in BCP-47 format (e.g: en-US). See the Microsoft Documentation for more information about the live transcription feature and the list of supported languages.
@@ -275,6 +276,7 @@ type LiveEventObservation struct {
 	StreamOptions []*string `json:"streamOptions,omitempty" tf:"stream_options,omitempty"`
 
 	// A mapping of tags which should be assigned to the Live Event.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of languages (locale) to be used for speech-to-text transcription – it should match the spoken language in the audio track. The value should be in BCP-47 format (e.g: en-US). See the Microsoft Documentation for more information about the live transcription feature and the list of supported languages.
@@ -350,6 +352,7 @@ type LiveEventParameters struct {
 
 	// A mapping of tags which should be assigned to the Live Event.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of languages (locale) to be used for speech-to-text transcription – it should match the spoken language in the audio track. The value should be in BCP-47 format (e.g: en-US). See the Microsoft Documentation for more information about the live transcription feature and the list of supported languages.

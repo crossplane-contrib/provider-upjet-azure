@@ -20,6 +20,7 @@ import (
 type SynapseSparkIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Synapse Spark. Changing this forces a new resource to be created.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Synapse Spark. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
@@ -29,6 +30,7 @@ type SynapseSparkIdentityInitParameters struct {
 type SynapseSparkIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Synapse Spark. Changing this forces a new resource to be created.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Synapse Spark.
@@ -45,6 +47,7 @@ type SynapseSparkIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Synapse Spark. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Synapse Spark. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
@@ -66,7 +69,21 @@ type SynapseSparkInitParameters struct {
 	// The Azure Region where the Machine Learning Synapse Spark should exist. Changing this forces a new Machine Learning Synapse Spark to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID of the linked Synapse Spark Pool. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.SparkPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
+
+	// Reference to a SparkPool in synapse to populate synapseSparkPoolId.
+	// +kubebuilder:validation:Optional
+	SynapseSparkPoolIDRef *v1.Reference `json:"synapseSparkPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a SparkPool in synapse to populate synapseSparkPoolId.
+	// +kubebuilder:validation:Optional
+	SynapseSparkPoolIDSelector *v1.Selector `json:"synapseSparkPoolIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -94,6 +111,7 @@ type SynapseSparkObservation struct {
 	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -145,6 +163,7 @@ type SynapseSparkParameters struct {
 
 	// A mapping of tags which should be assigned to the Machine Learning Synapse Spark. Changing this forces a new Machine Learning Synapse Spark to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

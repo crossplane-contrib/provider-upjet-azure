@@ -93,6 +93,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of identity used for this Automation
                             Account. Possible values are SystemAssigned, UserAssigned
@@ -201,6 +202,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -240,6 +242,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of identity used for this Automation
                             Account. Possible values are SystemAssigned, UserAssigned
@@ -268,6 +271,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -480,6 +484,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The Principal ID associated with this Managed
                             Service Identity.
@@ -533,6 +538,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

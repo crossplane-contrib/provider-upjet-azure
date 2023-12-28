@@ -22,8 +22,32 @@ type HybridConnectionInitParameters struct {
 	// Specifies the name of the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the Azure Relay in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/relay/v1beta1.EventRelayNamespace
+	RelayNamespaceName *string `json:"relayNamespaceName,omitempty" tf:"relay_namespace_name,omitempty"`
+
+	// Reference to a EventRelayNamespace in relay to populate relayNamespaceName.
+	// +kubebuilder:validation:Optional
+	RelayNamespaceNameRef *v1.Reference `json:"relayNamespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventRelayNamespace in relay to populate relayNamespaceName.
+	// +kubebuilder:validation:Optional
+	RelayNamespaceNameSelector *v1.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
+
 	// Specify if client authorization is needed for this hybrid connection. True by default. Changing this forces a new resource to be created. Defaults to true.
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
+
+	// The name of the resource group in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The usermetadata is a placeholder to store user-defined string data for the hybrid connection endpoint. For example, it can be used to store descriptive data, such as a list of teams and their contact information. Also, user-defined configuration settings can be stored.
 	UserMetadata *string `json:"userMetadata,omitempty" tf:"user_metadata,omitempty"`

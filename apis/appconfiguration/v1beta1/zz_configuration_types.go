@@ -44,6 +44,7 @@ type ConfigurationInitParameters struct {
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -95,6 +96,7 @@ type ConfigurationObservation struct {
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -147,10 +149,37 @@ type ConfigurationParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type EncryptionInitParameters struct {
+
+	// Specifies the client id of the identity which will be used to access key vault.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("client_id",true)
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDRef *v1.Reference `json:"identityClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
+
+	// Specifies the URI of the key vault key used to encrypt data.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyVaultKeyIdentifier *string `json:"keyVaultKeyIdentifier,omitempty" tf:"key_vault_key_identifier,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyVaultKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIdentifierRef *v1.Reference `json:"keyVaultKeyIdentifierRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyVaultKeyIdentifier.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIdentifierSelector *v1.Selector `json:"keyVaultKeyIdentifierSelector,omitempty" tf:"-"`
 }
 
 type EncryptionObservation struct {
@@ -196,6 +225,7 @@ type EncryptionParameters struct {
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -205,6 +235,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -221,6 +252,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this App Configuration.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this App Configuration. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).

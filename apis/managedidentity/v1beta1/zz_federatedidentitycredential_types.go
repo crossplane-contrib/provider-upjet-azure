@@ -25,6 +25,18 @@ type FederatedIdentityCredentialInitParameters struct {
 	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
+	// Specifies the name of the Resource Group within which this Federated Identity Credential should exist. Changing this forces a new Federated Identity Credential to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }

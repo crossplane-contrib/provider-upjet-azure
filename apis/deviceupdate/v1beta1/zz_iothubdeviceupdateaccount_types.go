@@ -32,6 +32,7 @@ type IOTHubDeviceUpdateAccountInitParameters struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Account.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,6 +60,7 @@ type IOTHubDeviceUpdateAccountObservation struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Account.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -95,12 +97,14 @@ type IOTHubDeviceUpdateAccountParameters struct {
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Account.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this IoT Hub Device Update Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this IoT Hub Device Update Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
@@ -110,6 +114,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this IoT Hub Device Update Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this IoT Hub Device Update Account.
@@ -126,6 +131,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this IoT Hub Device Update Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this IoT Hub Device Update Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).

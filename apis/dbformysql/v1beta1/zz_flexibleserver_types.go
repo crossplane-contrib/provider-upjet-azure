@@ -80,6 +80,19 @@ type FlexibleServerInitParameters struct {
 	// A customer_managed_key block as defined below.
 	CustomerManagedKey []CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
+	// The ID of the virtual network subnet to create the MySQL Flexible Server. Changing this forces a new MySQL Flexible Server to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DelegatedSubnetID *string `json:"delegatedSubnetId,omitempty" tf:"delegated_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate delegatedSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedSubnetIDRef *v1.Reference `json:"delegatedSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate delegatedSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedSubnetIDSelector *v1.Selector `json:"delegatedSubnetIdSelector,omitempty" tf:"-"`
+
 	// Should geo redundant backup enabled? Defaults to false. Changing this forces a new MySQL Flexible Server to be created.
 	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
 
@@ -98,6 +111,19 @@ type FlexibleServerInitParameters struct {
 	// The point in time to restore from creation_source_server_id when create_mode is PointInTimeRestore. Changing this forces a new MySQL Flexible Server to be created.
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
+	// The ID of the private DNS zone to create the MySQL Flexible Server. Changing this forces a new MySQL Flexible Server to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PrivateDNSZone
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
+
+	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+
 	// The replication role. Possible value is None.
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
@@ -111,6 +137,7 @@ type FlexibleServerInitParameters struct {
 	Storage []StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags which should be assigned to the MySQL Flexible Server.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21. Changing this forces a new MySQL Flexible Server to be created.
@@ -186,6 +213,7 @@ type FlexibleServerObservation struct {
 	Storage []StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags which should be assigned to the MySQL Flexible Server.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21. Changing this forces a new MySQL Flexible Server to be created.
@@ -300,6 +328,7 @@ type FlexibleServerParameters struct {
 
 	// A mapping of tags which should be assigned to the MySQL Flexible Server.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version of the MySQL Flexible Server to use. Possible values are 5.7, and 8.0.21. Changing this forces a new MySQL Flexible Server to be created.
@@ -343,6 +372,7 @@ type HighAvailabilityParameters struct {
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this MySQL Flexible Server. The only possible value is UserAssigned.
@@ -352,6 +382,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this MySQL Flexible Server. The only possible value is UserAssigned.
@@ -362,6 +393,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this MySQL Flexible Server.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this MySQL Flexible Server. The only possible value is UserAssigned.

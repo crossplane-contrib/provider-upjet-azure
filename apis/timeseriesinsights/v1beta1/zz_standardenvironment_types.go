@@ -35,6 +35,7 @@ type StandardEnvironmentInitParameters struct {
 	StorageLimitExceededBehavior *string `json:"storageLimitExceededBehavior,omitempty" tf:"storage_limit_exceeded_behavior,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -62,6 +63,7 @@ type StandardEnvironmentObservation struct {
 	StorageLimitExceededBehavior *string `json:"storageLimitExceededBehavior,omitempty" tf:"storage_limit_exceeded_behavior,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -102,6 +104,7 @@ type StandardEnvironmentParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

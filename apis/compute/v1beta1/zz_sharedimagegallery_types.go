@@ -26,6 +26,7 @@ type SharedImageGalleryInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the Shared Image Gallery.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,6 +45,7 @@ type SharedImageGalleryObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the Shared Image Gallery.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Unique Name for this Shared Image Gallery.
@@ -75,6 +77,7 @@ type SharedImageGalleryParameters struct {
 
 	// A mapping of tags to assign to the Shared Image Gallery.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

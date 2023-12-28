@@ -81,6 +81,18 @@ type StreamingLocatorInitParameters struct {
 	// Alternative Media ID of this Streaming Locator. Changing this forces a new Streaming Locator to be created.
 	AlternativeMediaID *string `json:"alternativeMediaId,omitempty" tf:"alternative_media_id,omitempty"`
 
+	// Asset Name. Changing this forces a new Streaming Locator to be created.
+	// +crossplane:generate:reference:type=Asset
+	AssetName *string `json:"assetName,omitempty" tf:"asset_name,omitempty"`
+
+	// Reference to a Asset to populate assetName.
+	// +kubebuilder:validation:Optional
+	AssetNameRef *v1.Reference `json:"assetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Asset to populate assetName.
+	// +kubebuilder:validation:Optional
+	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
+
 	// One or more content_key blocks as defined below. Changing this forces a new Streaming Locator to be created.
 	ContentKey []ContentKeyInitParameters `json:"contentKey,omitempty" tf:"content_key,omitempty"`
 

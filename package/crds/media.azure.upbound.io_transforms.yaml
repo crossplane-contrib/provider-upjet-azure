@@ -185,6 +185,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         builtinPreset:
@@ -1526,6 +1527,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                               faceRedactorMode:
                                 description: 'This mode provides the ability to choose
                                   between the following settings: 1) Analyze - For
@@ -1592,6 +1594,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                               insightsType:
                                 description: Defines the type of insights that you
                                   want the service to generate. The allowed values
@@ -1744,6 +1747,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         builtinPreset:
@@ -3085,6 +3089,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                               faceRedactorMode:
                                 description: 'This mode provides the ability to choose
                                   between the following settings: 1) Analyze - For
@@ -3151,6 +3156,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                               insightsType:
                                 description: Defines the type of insights that you
                                   want the service to generate. The allowed values
@@ -3384,6 +3390,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                             type: object
                           type: array
                         builtinPreset:
@@ -4725,6 +4732,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                               faceRedactorMode:
                                 description: 'This mode provides the ability to choose
                                   between the following settings: 1) Analyze - For
@@ -4791,6 +4799,7 @@ spec:
                                 description: Dictionary containing key value pairs
                                   for parameters not exposed in the preset itself.
                                 type: object
+                                x-kubernetes-map-type: granular
                               insightsType:
                                 description: Defines the type of insights that you
                                   want the service to generate. The allowed values

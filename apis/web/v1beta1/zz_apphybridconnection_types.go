@@ -27,9 +27,37 @@ type AppHybridConnectionInitParameters struct {
 	// The port to use for the endpoint
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
+	// The ID of the Relay Hybrid Connection to use. Changing this forces a new resource to be created.
+	// The ID of the Relay Hybrid Connection to use.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/relay/v1beta1.HybridConnection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RelayID *string `json:"relayId,omitempty" tf:"relay_id,omitempty"`
+
+	// Reference to a HybridConnection in relay to populate relayId.
+	// +kubebuilder:validation:Optional
+	RelayIDRef *v1.Reference `json:"relayIdRef,omitempty" tf:"-"`
+
+	// Selector for a HybridConnection in relay to populate relayId.
+	// +kubebuilder:validation:Optional
+	RelayIDSelector *v1.Selector `json:"relayIdSelector,omitempty" tf:"-"`
+
 	// The name of the Relay key with Send permission to use. Defaults to RootManageSharedAccessKey
 	// The name of the Relay key with `Send` permission to use. Defaults to `RootManageSharedAccessKey`
 	SendKeyName *string `json:"sendKeyName,omitempty" tf:"send_key_name,omitempty"`
+
+	// The ID of the Web App for this Hybrid Connection. Changing this forces a new resource to be created.
+	// The ID of the Web App for this Hybrid Connection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsWebApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WebAppID *string `json:"webAppId,omitempty" tf:"web_app_id,omitempty"`
+
+	// Reference to a WindowsWebApp in web to populate webAppId.
+	// +kubebuilder:validation:Optional
+	WebAppIDRef *v1.Reference `json:"webAppIdRef,omitempty" tf:"-"`
+
+	// Selector for a WindowsWebApp in web to populate webAppId.
+	// +kubebuilder:validation:Optional
+	WebAppIDSelector *v1.Selector `json:"webAppIdSelector,omitempty" tf:"-"`
 }
 
 type AppHybridConnectionObservation struct {

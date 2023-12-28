@@ -20,6 +20,7 @@ import (
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned.
@@ -29,6 +30,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Identity of this SQL Managed Instance.
@@ -45,6 +47,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this SQL Managed Instance. Possible values are SystemAssigned, UserAssigned.
@@ -59,6 +62,19 @@ type MSSQLManagedInstanceInitParameters struct {
 
 	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+
+	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
+	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
+
+	// Reference to a MSSQLManagedInstance to populate dnsZonePartnerId.
+	// +kubebuilder:validation:Optional
+	DNSZonePartnerIDRef *v1.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLManagedInstance to populate dnsZonePartnerId.
+	// +kubebuilder:validation:Optional
+	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
 	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -90,7 +106,21 @@ type MSSQLManagedInstanceInitParameters struct {
 	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 (GB).
 	StorageSizeInGb *float64 `json:"storageSizeInGb,omitempty" tf:"storage_size_in_gb,omitempty"`
 
+	// The subnet resource id that the SQL Managed Instance will be associated with. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
@@ -154,6 +184,7 @@ type MSSQLManagedInstanceObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
@@ -260,6 +291,7 @@ type MSSQLManagedInstanceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.

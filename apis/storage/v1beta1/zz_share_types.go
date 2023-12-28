@@ -97,6 +97,7 @@ type ShareInitParameters struct {
 	EnabledProtocol *string `json:"enabledProtocol,omitempty" tf:"enabled_protocol,omitempty"`
 
 	// A mapping of MetaData for this File Share.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
@@ -118,6 +119,7 @@ type ShareObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A mapping of MetaData for this File Share.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
@@ -149,6 +151,7 @@ type ShareParameters struct {
 
 	// A mapping of MetaData for this File Share.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).

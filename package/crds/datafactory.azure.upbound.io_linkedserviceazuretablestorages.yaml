@@ -75,6 +75,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -190,6 +191,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -209,6 +211,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -228,6 +231,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -405,6 +409,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -431,6 +436,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

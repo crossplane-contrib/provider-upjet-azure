@@ -91,6 +91,7 @@ spec:
                     description: Specifies the environment variables of the Spring
                       Cloud Deployment as a map of key-value pairs.
                     type: object
+                    x-kubernetes-map-type: granular
                   image:
                     description: Container image of the custom container. This should
                       be in the form of <repository>:<tag> without the server name
@@ -241,6 +242,7 @@ spec:
                     description: Specifies the environment variables of the Spring
                       Cloud Deployment as a map of key-value pairs.
                     type: object
+                    x-kubernetes-map-type: granular
                   image:
                     description: Container image of the custom container. This should
                       be in the form of <repository>:<tag> without the server name
@@ -475,6 +477,7 @@ spec:
                     description: Specifies the environment variables of the Spring
                       Cloud Deployment as a map of key-value pairs.
                     type: object
+                    x-kubernetes-map-type: granular
                   id:
                     description: The ID of the Spring Cloud Container Deployment.
                     type: string

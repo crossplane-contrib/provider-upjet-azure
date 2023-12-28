@@ -27,6 +27,19 @@ type SQLPoolExtendedAuditingPolicyInitParameters struct {
 
 	// Is storage_account_access_key value the storage's secondary key?
 	StorageAccountAccessKeyIsSecondary *bool `json:"storageAccountAccessKeyIsSecondary,omitempty" tf:"storage_account_access_key_is_secondary,omitempty"`
+
+	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all extended auditing logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
+	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
+
+	// Reference to a Account in storage to populate storageEndpoint.
+	// +kubebuilder:validation:Optional
+	StorageEndpointRef *v1.Reference `json:"storageEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageEndpoint.
+	// +kubebuilder:validation:Optional
+	StorageEndpointSelector *v1.Selector `json:"storageEndpointSelector,omitempty" tf:"-"`
 }
 
 type SQLPoolExtendedAuditingPolicyObservation struct {

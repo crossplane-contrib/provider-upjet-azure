@@ -57,6 +57,7 @@ type ActiveDirectoryV2InitParameters struct {
 
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
+	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
@@ -108,6 +109,7 @@ type ActiveDirectoryV2Observation struct {
 
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
+	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
@@ -169,6 +171,7 @@ type ActiveDirectoryV2Parameters struct {
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
@@ -1247,6 +1250,7 @@ type LinuxFunctionAppAuthSettingsInitParameters struct {
 
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
@@ -1357,6 +1361,7 @@ type LinuxFunctionAppAuthSettingsObservation struct {
 
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
@@ -1416,6 +1421,7 @@ type LinuxFunctionAppAuthSettingsParameters struct {
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Linux Web App.
@@ -1562,6 +1568,7 @@ type LinuxFunctionAppConnectionStringParameters struct {
 type LinuxFunctionAppIdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -1571,6 +1578,7 @@ type LinuxFunctionAppIdentityInitParameters struct {
 type LinuxFunctionAppIdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -1587,6 +1595,7 @@ type LinuxFunctionAppIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Linux Function App.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Linux Function App. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -1598,6 +1607,7 @@ type LinuxFunctionAppInitParameters struct {
 
 	// A map of key-value pairs for App Settings and custom values.
 	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
@@ -1662,6 +1672,32 @@ type LinuxFunctionAppInitParameters struct {
 	// Specifies the name of the Function App.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the Resource Group where the Linux Function App should exist. Changing this forces a new Linux Function App to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The ID of the App Service Plan within which to create this Function App.
+	// The ID of the App Service Plan within which to create this Function App
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.ServicePlan
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
+
+	// Reference to a ServicePlan in web to populate servicePlanId.
+	// +kubebuilder:validation:Optional
+	ServicePlanIDRef *v1.Reference `json:"servicePlanIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServicePlan in web to populate servicePlanId.
+	// +kubebuilder:validation:Optional
+	ServicePlanIDSelector *v1.Selector `json:"servicePlanIdSelector,omitempty" tf:"-"`
+
 	// A site_config block as defined below.
 	SiteConfig []LinuxFunctionAppSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
@@ -1670,6 +1706,19 @@ type LinuxFunctionAppInitParameters struct {
 
 	// One or more storage_account blocks as defined below.
 	StorageAccount []StorageAccountInitParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+
+	// The backend storage account name which will be used by this Function App.
+	// The backend storage account name which will be used by this Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The Key Vault Secret ID, optionally including version, that contains the Connection String to connect to the storage account for this Function App.
 	// The Key Vault Secret ID, including version, that contains the Connection String to connect to the storage account for this Function App.
@@ -1680,7 +1729,21 @@ type LinuxFunctionAppInitParameters struct {
 	StorageUsesManagedIdentity *bool `json:"storageUsesManagedIdentity,omitempty" tf:"storage_uses_managed_identity,omitempty"`
 
 	// A mapping of tags which should be assigned to the Linux Function App.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// The local path and filename of the Zip packaged application to deploy to this Linux Function App.
 	// The local path and filename of the Zip packaged application to deploy to this Linux Function App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
@@ -1691,6 +1754,7 @@ type LinuxFunctionAppObservation struct {
 
 	// A map of key-value pairs for App Settings and custom values.
 	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
@@ -1808,6 +1872,7 @@ type LinuxFunctionAppObservation struct {
 	StorageUsesManagedIdentity *bool `json:"storageUsesManagedIdentity,omitempty" tf:"storage_uses_managed_identity,omitempty"`
 
 	// A mapping of tags which should be assigned to the Linux Function App.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
@@ -1823,6 +1888,7 @@ type LinuxFunctionAppParameters struct {
 	// A map of key-value pairs for App Settings and custom values.
 	// A map of key-value pairs for [App Settings](https://docs.microsoft.com/en-us/azure/azure-functions/functions-app-settings) and custom values.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
@@ -1975,6 +2041,7 @@ type LinuxFunctionAppParameters struct {
 
 	// A mapping of tags which should be assigned to the Linux Function App.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
@@ -2001,6 +2068,7 @@ type LinuxFunctionAppSiteConfigCorsInitParameters struct {
 
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Are credentials allowed in CORS requests? Defaults to false.
@@ -2012,6 +2080,7 @@ type LinuxFunctionAppSiteConfigCorsObservation struct {
 
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Are credentials allowed in CORS requests? Defaults to false.
@@ -2024,6 +2093,7 @@ type LinuxFunctionAppSiteConfigCorsParameters struct {
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Are credentials allowed in CORS requests? Defaults to false.
@@ -2056,6 +2126,20 @@ type LinuxFunctionAppSiteConfigIPRestrictionInitParameters struct {
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type LinuxFunctionAppSiteConfigIPRestrictionObservation struct {
@@ -2625,6 +2709,20 @@ type LinuxFunctionAppSiteConfigScmIPRestrictionInitParameters struct {
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Function App for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type LinuxFunctionAppSiteConfigScmIPRestrictionObservation struct {

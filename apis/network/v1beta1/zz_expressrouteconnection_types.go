@@ -25,6 +25,19 @@ type ExpressRouteConnectionInitParameters struct {
 	// Is Internet security enabled for this Express Route Connection?
 	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty" tf:"enable_internet_security,omitempty"`
 
+	// The ID of the Express Route Circuit Peering that this Express Route Connection connects with. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ExpressRouteCircuitPeeringID *string `json:"expressRouteCircuitPeeringId,omitempty" tf:"express_route_circuit_peering_id,omitempty"`
+
+	// Reference to a ExpressRouteCircuitPeering to populate expressRouteCircuitPeeringId.
+	// +kubebuilder:validation:Optional
+	ExpressRouteCircuitPeeringIDRef *v1.Reference `json:"expressRouteCircuitPeeringIdRef,omitempty" tf:"-"`
+
+	// Selector for a ExpressRouteCircuitPeering to populate expressRouteCircuitPeeringId.
+	// +kubebuilder:validation:Optional
+	ExpressRouteCircuitPeeringIDSelector *v1.Selector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
+
 	// Specified whether Fast Path is enabled for Virtual Wan Firewall Hub. Defaults to false.
 	ExpressRouteGatewayBypassEnabled *bool `json:"expressRouteGatewayBypassEnabled,omitempty" tf:"express_route_gateway_bypass_enabled,omitempty"`
 
@@ -116,6 +129,7 @@ type ExpressRouteConnectionParameters struct {
 type PropagatedRouteTableInitParameters struct {
 
 	// The list of labels to logically group route tables.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.
@@ -125,6 +139,7 @@ type PropagatedRouteTableInitParameters struct {
 type PropagatedRouteTableObservation struct {
 
 	// The list of labels to logically group route tables.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.
@@ -135,6 +150,7 @@ type PropagatedRouteTableParameters struct {
 
 	// The list of labels to logically group route tables.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of IDs of the Virtual Hub Route Table to propagate routes from Express Route Connection to the route table.

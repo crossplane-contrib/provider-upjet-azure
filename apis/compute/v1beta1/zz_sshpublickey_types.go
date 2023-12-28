@@ -26,6 +26,7 @@ type SSHPublicKeyInitParameters struct {
 	PublicKey *string `json:"publicKey,omitempty" tf:"public_key,omitempty"`
 
 	// A mapping of tags which should be assigned to the SSH Public Key.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,6 +45,7 @@ type SSHPublicKeyObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the SSH Public Key.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -72,6 +74,7 @@ type SSHPublicKeyParameters struct {
 
 	// A mapping of tags which should be assigned to the SSH Public Key.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

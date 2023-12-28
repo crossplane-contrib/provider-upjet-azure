@@ -60,6 +60,19 @@ type CertificateContactsInitParameters struct {
 
 	// One or more contact blocks as defined below.
 	Contact []CertificateContactsContactInitParameters `json:"contact,omitempty" tf:"contact,omitempty"`
+
+	// The ID of the Key Vault. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 }
 
 type CertificateContactsObservation struct {

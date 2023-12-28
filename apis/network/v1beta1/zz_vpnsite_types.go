@@ -179,6 +179,7 @@ type TrafficCategoryParameters struct {
 type VPNSiteInitParameters struct {
 
 	// Specifies a list of IP address CIDRs that are located on your on-premises site. Traffic destined for these address spaces is routed to your local site.
+	// +listType=set
 	AddressCidrs []*string `json:"addressCidrs,omitempty" tf:"address_cidrs,omitempty"`
 
 	// The model of the VPN device.
@@ -197,12 +198,27 @@ type VPNSiteInitParameters struct {
 	O365Policy []O365PolicyInitParameters `json:"o365Policy,omitempty" tf:"o365_policy,omitempty"`
 
 	// A mapping of tags which should be assigned to the VPN Site.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Virtual Wan where this VPN site resides in. Changing this forces a new VPN Site to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualWAN
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
+
+	// Reference to a VirtualWAN in network to populate virtualWanId.
+	// +kubebuilder:validation:Optional
+	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualWAN in network to populate virtualWanId.
+	// +kubebuilder:validation:Optional
+	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
 type VPNSiteObservation struct {
 
 	// Specifies a list of IP address CIDRs that are located on your on-premises site. Traffic destined for these address spaces is routed to your local site.
+	// +listType=set
 	AddressCidrs []*string `json:"addressCidrs,omitempty" tf:"address_cidrs,omitempty"`
 
 	// The model of the VPN device.
@@ -227,6 +243,7 @@ type VPNSiteObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the VPN Site.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Wan where this VPN site resides in. Changing this forces a new VPN Site to be created.
@@ -237,6 +254,7 @@ type VPNSiteParameters struct {
 
 	// Specifies a list of IP address CIDRs that are located on your on-premises site. Traffic destined for these address spaces is routed to your local site.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressCidrs []*string `json:"addressCidrs,omitempty" tf:"address_cidrs,omitempty"`
 
 	// The model of the VPN device.
@@ -274,6 +292,7 @@ type VPNSiteParameters struct {
 
 	// A mapping of tags which should be assigned to the VPN Site.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Wan where this VPN site resides in. Changing this forces a new VPN Site to be created.

@@ -20,15 +20,43 @@ import (
 type SecurityCenterAssessmentInitParameters struct {
 
 	// A map of additional data to associate with the assessment.
+	// +mapType=granular
 	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
+
+	// The ID of the security Assessment policy to apply to this resource. Changing this forces a new security Assessment to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/security/v1beta1.SecurityCenterAssessmentPolicy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AssessmentPolicyID *string `json:"assessmentPolicyId,omitempty" tf:"assessment_policy_id,omitempty"`
+
+	// Reference to a SecurityCenterAssessmentPolicy in security to populate assessmentPolicyId.
+	// +kubebuilder:validation:Optional
+	AssessmentPolicyIDRef *v1.Reference `json:"assessmentPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityCenterAssessmentPolicy in security to populate assessmentPolicyId.
+	// +kubebuilder:validation:Optional
+	AssessmentPolicyIDSelector *v1.Selector `json:"assessmentPolicyIdSelector,omitempty" tf:"-"`
 
 	// A status block as defined below.
 	Status []StatusInitParameters `json:"status,omitempty" tf:"status,omitempty"`
+
+	// The ID of the target resource. Changing this forces a new security Assessment to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type SecurityCenterAssessmentObservation struct {
 
 	// A map of additional data to associate with the assessment.
+	// +mapType=granular
 	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
 
 	// The ID of the security Assessment policy to apply to this resource. Changing this forces a new security Assessment to be created.
@@ -48,6 +76,7 @@ type SecurityCenterAssessmentParameters struct {
 
 	// A map of additional data to associate with the assessment.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalData map[string]*string `json:"additionalData,omitempty" tf:"additional_data,omitempty"`
 
 	// The ID of the security Assessment policy to apply to this resource. Changing this forces a new security Assessment to be created.

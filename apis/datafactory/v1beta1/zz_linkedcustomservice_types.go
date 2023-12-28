@@ -23,6 +23,7 @@ type IntegrationRuntimeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map of parameters to associate with the integration runtime.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -32,6 +33,7 @@ type IntegrationRuntimeObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map of parameters to associate with the integration runtime.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -43,12 +45,14 @@ type IntegrationRuntimeParameters struct {
 
 	// A map of parameters to associate with the integration runtime.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedCustomServiceInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -61,6 +65,7 @@ type LinkedCustomServiceInitParameters struct {
 	IntegrationRuntime []IntegrationRuntimeInitParameters `json:"integrationRuntime,omitempty" tf:"integration_runtime,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of data stores that will be connected to Data Factory. For full list of supported data stores, please refer to Azure Data Factory connector. Changing this forces a new resource to be created.
@@ -73,6 +78,7 @@ type LinkedCustomServiceInitParameters struct {
 type LinkedCustomServiceObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -91,6 +97,7 @@ type LinkedCustomServiceObservation struct {
 	IntegrationRuntime []IntegrationRuntimeObservation `json:"integrationRuntime,omitempty" tf:"integration_runtime,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of data stores that will be connected to Data Factory. For full list of supported data stores, please refer to Azure Data Factory connector. Changing this forces a new resource to be created.
@@ -104,6 +111,7 @@ type LinkedCustomServiceParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -134,6 +142,7 @@ type LinkedCustomServiceParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of data stores that will be connected to Data Factory. For full list of supported data stores, please refer to Azure Data Factory connector. Changing this forces a new resource to be created.

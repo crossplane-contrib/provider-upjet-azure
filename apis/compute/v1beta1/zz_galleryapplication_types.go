@@ -41,6 +41,7 @@ type GalleryApplicationInitParameters struct {
 	SupportedOsType *string `json:"supportedOsType,omitempty" tf:"supported_os_type,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -74,6 +75,7 @@ type GalleryApplicationObservation struct {
 	SupportedOsType *string `json:"supportedOsType,omitempty" tf:"supported_os_type,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -123,6 +125,7 @@ type GalleryApplicationParameters struct {
 
 	// A mapping of tags to assign to the Gallery Application.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

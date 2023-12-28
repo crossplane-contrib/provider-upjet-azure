@@ -21,6 +21,19 @@ type ManagerManagementGroupConnectionInitParameters struct {
 
 	// A description of the Network Manager Management Group Connection.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
+	// Specifies the ID of the Network Manager which the Management Group is connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Manager
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
+
+	// Reference to a Manager in network to populate networkManagerId.
+	// +kubebuilder:validation:Optional
+	NetworkManagerIDRef *v1.Reference `json:"networkManagerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Manager in network to populate networkManagerId.
+	// +kubebuilder:validation:Optional
+	NetworkManagerIDSelector *v1.Selector `json:"networkManagerIdSelector,omitempty" tf:"-"`
 }
 
 type ManagerManagementGroupConnectionObservation struct {

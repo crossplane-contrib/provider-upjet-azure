@@ -19,6 +19,32 @@ import (
 
 type MSSQLManagedInstanceFailoverGroupInitParameters struct {
 
+	// The ID of the Azure SQL Managed Instance which will be replicated using a Managed Instance Failover Group. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
+
+	// Reference to a MSSQLManagedInstance to populate managedInstanceId.
+	// +kubebuilder:validation:Optional
+	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLManagedInstance to populate managedInstanceId.
+	// +kubebuilder:validation:Optional
+	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Azure SQL Managed Instance which will be replicated to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PartnerManagedInstanceID *string `json:"partnerManagedInstanceId,omitempty" tf:"partner_managed_instance_id,omitempty"`
+
+	// Reference to a MSSQLManagedInstance to populate partnerManagedInstanceId.
+	// +kubebuilder:validation:Optional
+	PartnerManagedInstanceIDRef *v1.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLManagedInstance to populate partnerManagedInstanceId.
+	// +kubebuilder:validation:Optional
+	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
+
 	// A read_write_endpoint_failover_policy block as defined below.
 	ReadWriteEndpointFailoverPolicy []MSSQLManagedInstanceFailoverGroupReadWriteEndpointFailoverPolicyInitParameters `json:"readWriteEndpointFailoverPolicy,omitempty" tf:"read_write_endpoint_failover_policy,omitempty"`
 

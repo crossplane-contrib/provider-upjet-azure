@@ -327,6 +327,21 @@ func (in *HybridConnectionAuthorizationRuleInitParameters) DeepCopyInto(out *Hyb
 		*out = new(bool)
 		**out = **in
 	}
+	if in.NamespaceName != nil {
+		in, out := &in.NamespaceName, &out.NamespaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.NamespaceNameRef != nil {
+		in, out := &in.NamespaceNameRef, &out.NamespaceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NamespaceNameSelector != nil {
+		in, out := &in.NamespaceNameSelector, &out.NamespaceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Send != nil {
 		in, out := &in.Send, &out.Send
 		*out = new(bool)
@@ -544,10 +559,40 @@ func (in *HybridConnectionInitParameters) DeepCopyInto(out *HybridConnectionInit
 		*out = new(string)
 		**out = **in
 	}
+	if in.RelayNamespaceName != nil {
+		in, out := &in.RelayNamespaceName, &out.RelayNamespaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RelayNamespaceNameRef != nil {
+		in, out := &in.RelayNamespaceNameRef, &out.RelayNamespaceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RelayNamespaceNameSelector != nil {
+		in, out := &in.RelayNamespaceNameSelector, &out.RelayNamespaceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.RequiresClientAuthorization != nil {
 		in, out := &in.RequiresClientAuthorization, &out.RequiresClientAuthorization
 		*out = new(bool)
 		**out = **in
+	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.UserMetadata != nil {
 		in, out := &in.UserMetadata, &out.UserMetadata

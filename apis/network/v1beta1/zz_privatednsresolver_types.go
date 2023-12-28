@@ -23,7 +23,21 @@ type PrivateDNSResolverInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Virtual Network that is linked to the Private DNS Resolver. Changing this forces a new Private DNS Resolver to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+
+	// Reference to a VirtualNetwork in network to populate virtualNetworkId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetwork in network to populate virtualNetworkId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSResolverObservation struct {
@@ -38,6 +52,7 @@ type PrivateDNSResolverObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Network that is linked to the Private DNS Resolver. Changing this forces a new Private DNS Resolver to be created.
@@ -65,6 +80,7 @@ type PrivateDNSResolverParameters struct {
 
 	// A mapping of tags which should be assigned to the Private DNS Resolver.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Network that is linked to the Private DNS Resolver. Changing this forces a new Private DNS Resolver to be created.

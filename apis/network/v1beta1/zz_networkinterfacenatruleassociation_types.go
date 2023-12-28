@@ -21,6 +21,32 @@ type NetworkInterfaceNatRuleAssociationInitParameters struct {
 
 	// The Name of the IP Configuration within the Network Interface which should be connected to the NAT Rule. Changing this forces a new resource to be created.
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
+
+	// The ID of the Load Balancer NAT Rule which this Network Interface which should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=LoadBalancerNatRule
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NATRuleID *string `json:"natRuleId,omitempty" tf:"nat_rule_id,omitempty"`
+
+	// Reference to a LoadBalancerNatRule to populate natRuleId.
+	// +kubebuilder:validation:Optional
+	NATRuleIDRef *v1.Reference `json:"natRuleIdRef,omitempty" tf:"-"`
+
+	// Selector for a LoadBalancerNatRule to populate natRuleId.
+	// +kubebuilder:validation:Optional
+	NATRuleIDSelector *v1.Selector `json:"natRuleIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceNatRuleAssociationObservation struct {

@@ -59,6 +59,7 @@ type CustomerManagedKeyParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this ServiceBus namespace.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this ServiceBus Namespace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -68,6 +69,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this ServiceBus namespace.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this ServiceBus Namespace.
@@ -84,6 +86,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this ServiceBus namespace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this ServiceBus Namespace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -118,6 +121,7 @@ type ServiceBusNamespaceInitParameters struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether or not this resource is zone redundant. sku needs to be Premium. Changing this forces a new resource to be created.
@@ -161,6 +165,7 @@ type ServiceBusNamespaceObservation struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether or not this resource is zone redundant. sku needs to be Premium. Changing this forces a new resource to be created.
@@ -217,6 +222,7 @@ type ServiceBusNamespaceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether or not this resource is zone redundant. sku needs to be Premium. Changing this forces a new resource to be created.

@@ -177,6 +177,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               routeTableIds:
                                 description: A list of Route Table IDs to associated
                                   with this VPN Gateway Connection.
@@ -198,12 +199,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         remoteAddressRanges:
                           description: A list of remote address spaces in CIDR format
                             for this VPN Gateway Connection.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   vpnGatewayId:
@@ -324,11 +327,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ingressNatRuleIds:
                           description: A list of the ingress NAT Rule Ids.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ipsecPolicy:
                           description: One or more ipsec_policy blocks as defined
                             above.
@@ -427,6 +432,84 @@ spec:
                     description: Whether Internet Security is enabled for this VPN
                       Connection. Defaults to false.
                     type: boolean
+                  remoteVpnSiteId:
+                    description: The ID of the remote VPN Site, which will connect
+                      to the VPN Gateway. Changing this forces a new VPN Gateway Connection
+                      to be created.
+                    type: string
+                  remoteVpnSiteIdRef:
+                    description: Reference to a VPNSite in network to populate remoteVpnSiteId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  remoteVpnSiteIdSelector:
+                    description: Selector for a VPNSite in network to populate remoteVpnSiteId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   routing:
                     description: A routing block as defined below. If this is not
                       specified, there will be a default route table created implicitly.
@@ -455,6 +538,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               routeTableIds:
                                 description: A list of Route Table IDs to associated
                                   with this VPN Gateway Connection.
@@ -476,12 +560,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         remoteAddressRanges:
                           description: A list of remote address spaces in CIDR format
                             for this VPN Gateway Connection.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   vpnLink:
@@ -522,11 +608,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ingressNatRuleIds:
                           description: A list of the ingress NAT Rule Ids.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ipsecPolicy:
                           description: One or more ipsec_policy blocks as defined
                             above.
@@ -820,6 +908,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               routeTableIds:
                                 description: A list of Route Table IDs to associated
                                   with this VPN Gateway Connection.
@@ -841,12 +930,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         remoteAddressRanges:
                           description: A list of remote address spaces in CIDR format
                             for this VPN Gateway Connection.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   vpnGatewayId:
@@ -892,11 +983,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ingressNatRuleIds:
                           description: A list of the ingress NAT Rule Ids.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ipsecPolicy:
                           description: One or more ipsec_policy blocks as defined
                             above.

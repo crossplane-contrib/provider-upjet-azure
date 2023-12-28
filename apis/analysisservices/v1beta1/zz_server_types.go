@@ -59,6 +59,7 @@ type IPv4FirewallRuleParameters struct {
 type ServerInitParameters struct {
 
 	// List of email addresses of admin users.
+	// +listType=set
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
 	// Indicates if the Power BI service is allowed to access or not.
@@ -76,16 +77,30 @@ type ServerInitParameters struct {
 	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
+	// The name of the Resource Group in which the Analysis Services Server should be exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// SKU for the Analysis Services Server. Possible values are: D1, B1, B2, S0, S1, S2, S4, S8, S9, S8v2 and S9v2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServerObservation struct {
 
 	// List of email addresses of admin users.
+	// +listType=set
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
 	// Indicates if the Power BI service is allowed to access or not.
@@ -116,6 +131,7 @@ type ServerObservation struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -123,6 +139,7 @@ type ServerParameters struct {
 
 	// List of email addresses of admin users.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
 	// URI and SAS token for a blob container to store backups.
@@ -168,6 +185,7 @@ type ServerParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

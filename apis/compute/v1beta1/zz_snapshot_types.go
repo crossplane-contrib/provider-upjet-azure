@@ -131,10 +131,24 @@ type SnapshotInitParameters struct {
 	// Specifies a reference to an existing snapshot, when create_option is Copy. Changing this forces a new resource to be created.
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
 
+	// Specifies the URI to a Managed or Unmanaged Disk. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
+
+	// Reference to a ManagedDisk in compute to populate sourceUri.
+	// +kubebuilder:validation:Optional
+	SourceURIRef *v1.Reference `json:"sourceUriRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedDisk in compute to populate sourceUri.
+	// +kubebuilder:validation:Optional
+	SourceURISelector *v1.Selector `json:"sourceUriSelector,omitempty" tf:"-"`
+
 	// Specifies the ID of an storage account. Used with source_uri to allow authorization during import of unmanaged blobs from a different subscription. Changing this forces a new resource to be created.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -171,6 +185,7 @@ type SnapshotObservation struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether Trusted Launch is enabled for the Snapshot.
@@ -236,6 +251,7 @@ type SnapshotParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

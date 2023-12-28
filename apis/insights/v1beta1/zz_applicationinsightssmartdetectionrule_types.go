@@ -20,7 +20,21 @@ import (
 type ApplicationInsightsSmartDetectionRuleInitParameters struct {
 
 	// Specifies a list of additional recipients that will be sent emails on this Application Insights Smart Detection Rule.
+	// +listType=set
 	AdditionalEmailRecipients []*string `json:"additionalEmailRecipients,omitempty" tf:"additional_email_recipients,omitempty"`
+
+	// The ID of the Application Insights component on which the Smart Detection Rule operates. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// Is the Application Insights Smart Detection Rule enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
@@ -35,6 +49,7 @@ type ApplicationInsightsSmartDetectionRuleInitParameters struct {
 type ApplicationInsightsSmartDetectionRuleObservation struct {
 
 	// Specifies a list of additional recipients that will be sent emails on this Application Insights Smart Detection Rule.
+	// +listType=set
 	AdditionalEmailRecipients []*string `json:"additionalEmailRecipients,omitempty" tf:"additional_email_recipients,omitempty"`
 
 	// The ID of the Application Insights component on which the Smart Detection Rule operates. Changing this forces a new resource to be created.
@@ -57,6 +72,7 @@ type ApplicationInsightsSmartDetectionRuleParameters struct {
 
 	// Specifies a list of additional recipients that will be sent emails on this Application Insights Smart Detection Rule.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AdditionalEmailRecipients []*string `json:"additionalEmailRecipients,omitempty" tf:"additional_email_recipients,omitempty"`
 
 	// The ID of the Application Insights component on which the Smart Detection Rule operates. Changing this forces a new resource to be created.

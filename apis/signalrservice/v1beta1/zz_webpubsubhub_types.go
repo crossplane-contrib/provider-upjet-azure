@@ -18,6 +18,19 @@ import (
 )
 
 type AuthInitParameters struct {
+
+	// Specify the identity ID of the target resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ManagedIdentityID *string `json:"managedIdentityId,omitempty" tf:"managed_identity_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate managedIdentityId.
+	// +kubebuilder:validation:Optional
+	ManagedIdentityIDRef *v1.Reference `json:"managedIdentityIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate managedIdentityId.
+	// +kubebuilder:validation:Optional
+	ManagedIdentityIDSelector *v1.Selector `json:"managedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type AuthObservation struct {
@@ -49,6 +62,7 @@ type EventHandlerInitParameters struct {
 	Auth []AuthInitParameters `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Specifies the list of system events. Supported values are connect, connected and disconnected.
+	// +listType=set
 	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
 
 	// The Event Handler URL Template. Two predefined parameters {hub} and {event} are available to use in the template. The value of the EventHandler URL is dynamically calculated when the client request comes in. Example: http://example.com/api/{hub}/{event}.
@@ -64,6 +78,7 @@ type EventHandlerObservation struct {
 	Auth []AuthObservation `json:"auth,omitempty" tf:"auth,omitempty"`
 
 	// Specifies the list of system events. Supported values are connect, connected and disconnected.
+	// +listType=set
 	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
 
 	// The Event Handler URL Template. Two predefined parameters {hub} and {event} are available to use in the template. The value of the EventHandler URL is dynamically calculated when the client request comes in. Example: http://example.com/api/{hub}/{event}.
@@ -81,6 +96,7 @@ type EventHandlerParameters struct {
 
 	// Specifies the list of system events. Supported values are connect, connected and disconnected.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SystemEvents []*string `json:"systemEvents,omitempty" tf:"system_events,omitempty"`
 
 	// The Event Handler URL Template. Two predefined parameters {hub} and {event} are available to use in the template. The value of the EventHandler URL is dynamically calculated when the client request comes in. Example: http://example.com/api/{hub}/{event}.
@@ -93,6 +109,30 @@ type EventHandlerParameters struct {
 }
 
 type EventListenerInitParameters struct {
+
+	// Specifies the event hub name to receive the events.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
+
+	// Specifies the event hub namespace name to receive the events.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
+
+	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
+	// +kubebuilder:validation:Optional
+	EventHubNamespaceNameRef *v1.Reference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHubNamespace in eventhub to populate eventhubNamespaceName.
+	// +kubebuilder:validation:Optional
+	EventHubNamespaceNameSelector *v1.Selector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the list of system events. Supported values are connected and disconnected.
 	SystemEventNameFilter []*string `json:"systemEventNameFilter,omitempty" tf:"system_event_name_filter,omitempty"`
@@ -167,6 +207,19 @@ type WebPubsubHubInitParameters struct {
 
 	// The name of the Web Pubsub hub service. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the id of the Web Pubsub. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.WebPubsub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WebPubsubID *string `json:"webPubsubId,omitempty" tf:"web_pubsub_id,omitempty"`
+
+	// Reference to a WebPubsub in signalrservice to populate webPubsubId.
+	// +kubebuilder:validation:Optional
+	WebPubsubIDRef *v1.Reference `json:"webPubsubIdRef,omitempty" tf:"-"`
+
+	// Selector for a WebPubsub in signalrservice to populate webPubsubId.
+	// +kubebuilder:validation:Optional
+	WebPubsubIDSelector *v1.Selector `json:"webPubsubIdSelector,omitempty" tf:"-"`
 }
 
 type WebPubsubHubObservation struct {

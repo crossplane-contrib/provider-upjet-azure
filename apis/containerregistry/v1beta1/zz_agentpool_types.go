@@ -26,10 +26,24 @@ type AgentPoolInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Container Registry Agent Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the VM your agent pool will run on. Valid values are: S1 (2 vCPUs, 3 GiB RAM), S2 (4 vCPUs, 8 GiB RAM), S3 (8 vCPUs, 16 GiB RAM) or I6 (64 vCPUs, 216 GiB RAM, Isolated). Defaults to S1. Changing this forces a new Azure Container Registry Agent Pool to be created.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+
+	// The ID of the Virtual Network Subnet Resource where the agent machines will be running. Changing this forces a new Azure Container Registry Agent Pool to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type AgentPoolObservation struct {
@@ -50,6 +64,7 @@ type AgentPoolObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Container Registry Agent Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the VM your agent pool will run on. Valid values are: S1 (2 vCPUs, 3 GiB RAM), S2 (4 vCPUs, 8 GiB RAM), S3 (8 vCPUs, 16 GiB RAM) or I6 (64 vCPUs, 216 GiB RAM, Isolated). Defaults to S1. Changing this forces a new Azure Container Registry Agent Pool to be created.
@@ -97,6 +112,7 @@ type AgentPoolParameters struct {
 
 	// A mapping of tags which should be assigned to the Azure Container Registry Agent Pool.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets the VM your agent pool will run on. Valid values are: S1 (2 vCPUs, 3 GiB RAM), S2 (4 vCPUs, 8 GiB RAM), S3 (8 vCPUs, 16 GiB RAM) or I6 (64 vCPUs, 216 GiB RAM, Isolated). Defaults to S1. Changing this forces a new Azure Container Registry Agent Pool to be created.

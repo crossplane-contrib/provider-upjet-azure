@@ -23,6 +23,7 @@ type ResourceGroupInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -35,6 +36,7 @@ type ResourceGroupObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -46,6 +48,7 @@ type ResourceGroupParameters struct {
 
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

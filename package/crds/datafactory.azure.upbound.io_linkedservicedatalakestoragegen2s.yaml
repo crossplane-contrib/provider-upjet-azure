@@ -75,6 +75,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -173,6 +174,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   servicePrincipalId:
                     description: The service principal id with which to authenticate
                       against the Azure Data Lake Storage Gen2 account. Incompatible
@@ -222,6 +224,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -241,6 +244,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   servicePrincipalId:
                     description: The service principal id with which to authenticate
                       against the Azure Data Lake Storage Gen2 account. Incompatible
@@ -449,6 +453,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -476,6 +481,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   servicePrincipalId:
                     description: The service principal id with which to authenticate
                       against the Azure Data Lake Storage Gen2 account. Incompatible

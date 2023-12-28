@@ -77,6 +77,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Blob Event Trigger.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Blob Event Trigger.
@@ -179,6 +180,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ignoreEmptyBlobs:
                     description: are blobs with zero bytes ignored?
                     type: boolean
@@ -274,6 +276,7 @@ spec:
                           description: The Data Factory Pipeline parameters that the
                             trigger will act on.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   storageAccountId:
@@ -376,6 +379,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Blob Event Trigger.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Blob Event Trigger.
@@ -399,6 +403,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   ignoreEmptyBlobs:
                     description: are blobs with zero bytes ignored?
                     type: boolean
@@ -406,14 +411,174 @@ spec:
                     description: One or more pipeline blocks as defined below.
                     items:
                       properties:
+                        name:
+                          description: The Data Factory Pipeline name that the trigger
+                            will act on.
+                          type: string
+                        nameRef:
+                          description: Reference to a Pipeline in datafactory to populate
+                            name.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        nameSelector:
+                          description: Selector for a Pipeline in datafactory to populate
+                            name.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         parameters:
                           additionalProperties:
                             type: string
                           description: The Data Factory Pipeline parameters that the
                             trigger will act on.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
+                  storageAccountId:
+                    description: The ID of Storage Account in which blob event will
+                      be listened. Changing this forces a new resource.
+                    type: string
+                  storageAccountIdRef:
+                    description: Reference to a Account in storage to populate storageAccountId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  storageAccountIdSelector:
+                    description: Selector for a Account in storage to populate storageAccountId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -599,6 +764,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Blob Event Trigger.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Blob Event Trigger.
@@ -626,6 +792,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The ID of the Data Factory Blob Event Trigger.
                     type: string
@@ -646,6 +813,7 @@ spec:
                           description: The Data Factory Pipeline parameters that the
                             trigger will act on.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   storageAccountId:

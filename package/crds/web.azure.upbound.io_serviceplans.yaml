@@ -179,6 +179,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       AppService.
                     type: object
+                    x-kubernetes-map-type: granular
                   workerCount:
                     description: The number of Workers (instances) to be allocated.
                     type: number
@@ -233,6 +234,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       AppService.
                     type: object
+                    x-kubernetes-map-type: granular
                   workerCount:
                     description: The number of Workers (instances) to be allocated.
                     type: number
@@ -467,6 +469,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       AppService.
                     type: object
+                    x-kubernetes-map-type: granular
                   workerCount:
                     description: The number of Workers (instances) to be allocated.
                     type: number

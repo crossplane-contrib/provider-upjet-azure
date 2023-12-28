@@ -23,6 +23,7 @@ type ServiceInitParameters struct {
 	DataLocation *string `json:"dataLocation,omitempty" tf:"data_location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Communication Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,6 +51,7 @@ type ServiceObservation struct {
 	SecondaryKey *string `json:"secondaryKey,omitempty" tf:"secondary_key,omitempty"`
 
 	// A mapping of tags which should be assigned to the Communication Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -74,6 +76,7 @@ type ServiceParameters struct {
 
 	// A mapping of tags which should be assigned to the Communication Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

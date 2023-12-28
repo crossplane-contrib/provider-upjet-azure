@@ -20,6 +20,7 @@ import (
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -29,6 +30,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Route ID.
@@ -45,6 +47,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Redis Cluster.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Redis Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -138,13 +141,29 @@ type RedisCacheInitParameters struct {
 	// The SKU of Redis to use. Possible values are Basic, Standard and Premium.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
+	// Only available when using the Premium SKU The ID of the Subnet within which the Redis Cache should be deployed. This Subnet must only contain Azure Cache for Redis instances without any other type of resources. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A mapping of tenant settings to assign to the resource.
+	// +mapType=granular
 	TenantSettings map[string]*string `json:"tenantSettings,omitempty" tf:"tenant_settings,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Redis Cache should be located. Changing this forces a new Redis Cache to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -214,12 +233,15 @@ type RedisCacheObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A mapping of tenant settings to assign to the resource.
+	// +mapType=granular
 	TenantSettings map[string]*string `json:"tenantSettings,omitempty" tf:"tenant_settings,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Redis Cache should be located. Changing this forces a new Redis Cache to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -314,14 +336,17 @@ type RedisCacheParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A mapping of tenant settings to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	TenantSettings map[string]*string `json:"tenantSettings,omitempty" tf:"tenant_settings,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Redis Cache should be located. Changing this forces a new Redis Cache to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 

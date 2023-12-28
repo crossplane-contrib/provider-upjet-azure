@@ -20,6 +20,7 @@ import (
 type LinkedServicePostgreSQLInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service PostgreSQL.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service PostgreSQL.
@@ -35,12 +36,14 @@ type LinkedServicePostgreSQLInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service PostgreSQL.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServicePostgreSQLObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service PostgreSQL.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service PostgreSQL.
@@ -62,6 +65,7 @@ type LinkedServicePostgreSQLObservation struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service PostgreSQL.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -69,6 +73,7 @@ type LinkedServicePostgreSQLParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service PostgreSQL.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service PostgreSQL.
@@ -103,6 +108,7 @@ type LinkedServicePostgreSQLParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service PostgreSQL.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

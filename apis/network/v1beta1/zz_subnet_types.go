@@ -94,9 +94,11 @@ type SubnetInitParameters struct {
 	PrivateLinkServiceNetworkPoliciesEnabled *bool `json:"privateLinkServiceNetworkPoliciesEnabled,omitempty" tf:"private_link_service_network_policies_enabled,omitempty"`
 
 	// The list of IDs of Service Endpoint Policies to associate with the subnet.
+	// +listType=set
 	ServiceEndpointPolicyIds []*string `json:"serviceEndpointPolicyIds,omitempty" tf:"service_endpoint_policy_ids,omitempty"`
 
 	// The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage, Microsoft.Storage.Global and Microsoft.Web.
+	// +listType=set
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 }
 
@@ -125,9 +127,11 @@ type SubnetObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// The list of IDs of Service Endpoint Policies to associate with the subnet.
+	// +listType=set
 	ServiceEndpointPolicyIds []*string `json:"serviceEndpointPolicyIds,omitempty" tf:"service_endpoint_policy_ids,omitempty"`
 
 	// The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage, Microsoft.Storage.Global and Microsoft.Web.
+	// +listType=set
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 
 	// The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
@@ -173,10 +177,12 @@ type SubnetParameters struct {
 
 	// The list of IDs of Service Endpoint Policies to associate with the subnet.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ServiceEndpointPolicyIds []*string `json:"serviceEndpointPolicyIds,omitempty" tf:"service_endpoint_policy_ids,omitempty"`
 
 	// The list of Service endpoints to associate with the subnet. Possible values include: Microsoft.AzureActiveDirectory, Microsoft.AzureCosmosDB, Microsoft.ContainerRegistry, Microsoft.EventHub, Microsoft.KeyVault, Microsoft.ServiceBus, Microsoft.Sql, Microsoft.Storage, Microsoft.Storage.Global and Microsoft.Web.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 
 	// The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.

@@ -23,6 +23,7 @@ type LogAnalyticsQueryPackInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -38,6 +39,7 @@ type LogAnalyticsQueryPackObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -62,6 +64,7 @@ type LogAnalyticsQueryPackParameters struct {
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

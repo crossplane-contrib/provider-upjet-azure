@@ -22,11 +22,36 @@ type EventHubDataConnectionInitParameters struct {
 	// Specifies compression type for the connection. Allowed values: GZip and None. Defaults to None. Changing this forces a new resource to be created.
 	Compression *string `json:"compression,omitempty" tf:"compression,omitempty"`
 
+	// Specifies the EventHub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
+	ConsumerGroup *string `json:"consumerGroup,omitempty" tf:"consumer_group,omitempty"`
+
+	// Reference to a ConsumerGroup in eventhub to populate consumerGroup.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupRef *v1.Reference `json:"consumerGroupRef,omitempty" tf:"-"`
+
+	// Selector for a ConsumerGroup in eventhub to populate consumerGroup.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupSelector *v1.Selector `json:"consumerGroupSelector,omitempty" tf:"-"`
+
 	// Specifies the data format of the EventHub messages. Allowed values: APACHEAVRO, AVRO, CSV, JSON, MULTIJSON, ORC, PARQUET, PSV, RAW, SCSV, SINGLEJSON, SOHSV, TSVE, TSV, TXT, and W3CLOGFILE.
 	DataFormat *string `json:"dataFormat,omitempty" tf:"data_format,omitempty"`
 
 	// Indication for database routing information from the data connection, by default only database routing information is allowed. Allowed values: Single, Multi. Changing this forces a new resource to be created.
 	DatabaseRoutingType *string `json:"databaseRoutingType,omitempty" tf:"database_routing_type,omitempty"`
+
+	// Specifies the resource id of the EventHub this data connection will use for ingestion. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubId.
+	// +kubebuilder:validation:Optional
+	EventHubIDRef *v1.Reference `json:"eventhubIdRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubId.
+	// +kubebuilder:validation:Optional
+	EventHubIDSelector *v1.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
 
 	// Specifies a list of system properties for the Event Hub.
 	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`

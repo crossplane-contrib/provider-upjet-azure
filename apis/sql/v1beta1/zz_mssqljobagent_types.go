@@ -19,6 +19,19 @@ import (
 
 type MSSQLJobAgentInitParameters struct {
 
+	// The ID of the database to store metadata for the Elastic Job Agent. Changing this forces a new Elastic Job Agent to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLDatabase
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DatabaseID *string `json:"databaseId,omitempty" tf:"database_id,omitempty"`
+
+	// Reference to a MSSQLDatabase in sql to populate databaseId.
+	// +kubebuilder:validation:Optional
+	DatabaseIDRef *v1.Reference `json:"databaseIdRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLDatabase in sql to populate databaseId.
+	// +kubebuilder:validation:Optional
+	DatabaseIDSelector *v1.Selector `json:"databaseIdSelector,omitempty" tf:"-"`
+
 	// The Azure Region where the Elastic Job Agent should exist. Changing this forces a new Elastic Job Agent to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -26,6 +39,7 @@ type MSSQLJobAgentInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Database.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,6 +58,7 @@ type MSSQLJobAgentObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Database.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -73,6 +88,7 @@ type MSSQLJobAgentParameters struct {
 
 	// A mapping of tags which should be assigned to the Database.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

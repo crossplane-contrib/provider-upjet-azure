@@ -19,6 +19,20 @@ import (
 
 type MonitorScheduledQueryRulesAlertActionInitParameters struct {
 
+	// List of action group reference resource IDs.
+	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +listType=set
+	ActionGroup []*string `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
+
+	// References to MonitorActionGroup to populate actionGroup.
+	// +kubebuilder:validation:Optional
+	ActionGroupRefs []v1.Reference `json:"actionGroupRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup to populate actionGroup.
+	// +kubebuilder:validation:Optional
+	ActionGroupSelector *v1.Selector `json:"actionGroupSelector,omitempty" tf:"-"`
+
 	// Custom payload to be sent for all webhook payloads in alerting action.
 	CustomWebhookPayload *string `json:"customWebhookPayload,omitempty" tf:"custom_webhook_payload,omitempty"`
 
@@ -29,6 +43,7 @@ type MonitorScheduledQueryRulesAlertActionInitParameters struct {
 type MonitorScheduledQueryRulesAlertActionObservation struct {
 
 	// List of action group reference resource IDs.
+	// +listType=set
 	ActionGroup []*string `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
 
 	// Custom payload to be sent for all webhook payloads in alerting action.
@@ -44,6 +59,7 @@ type MonitorScheduledQueryRulesAlertActionParameters struct {
 	// +crossplane:generate:reference:type=MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ActionGroup []*string `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
 
 	// References to MonitorActionGroup to populate actionGroup.
@@ -69,11 +85,25 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 	Action []MonitorScheduledQueryRulesAlertActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// List of Resource IDs referred into query.
+	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
 	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
 	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
+
+	// The resource URI over which log search query is to be run.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate dataSourceId.
+	// +kubebuilder:validation:Optional
+	DataSourceIDRef *v1.Reference `json:"dataSourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate dataSourceId.
+	// +kubebuilder:validation:Optional
+	DataSourceIDSelector *v1.Selector `json:"dataSourceIdSelector,omitempty" tf:"-"`
 
 	// The description of the scheduled query rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -96,10 +126,23 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
 
+	// The name of the resource group in which to create the scheduled query rule instance. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Severity of the alert. Possible values include: 0, 1, 2, 3, or 4.
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Time (in minutes) for which Alerts should be throttled or suppressed. Values must be between 0 and 10000 (inclusive).
@@ -118,6 +161,7 @@ type MonitorScheduledQueryRulesAlertObservation struct {
 	Action []MonitorScheduledQueryRulesAlertActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
 	// List of Resource IDs referred into query.
+	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
@@ -158,6 +202,7 @@ type MonitorScheduledQueryRulesAlertObservation struct {
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Time (in minutes) for which Alerts should be throttled or suppressed. Values must be between 0 and 10000 (inclusive).
@@ -178,6 +223,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// List of Resource IDs referred into query.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
@@ -246,6 +292,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Time (in minutes) for which Alerts should be throttled or suppressed. Values must be between 0 and 10000 (inclusive).

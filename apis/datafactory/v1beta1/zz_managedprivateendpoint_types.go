@@ -19,6 +19,19 @@ import (
 
 type ManagedPrivateEndpointInitParameters struct {
 
+	// The ID of the Data Factory on which to create the Managed Private Endpoint. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
+
+	// Reference to a Factory in datafactory to populate dataFactoryId.
+	// +kubebuilder:validation:Optional
+	DataFactoryIDRef *v1.Reference `json:"dataFactoryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Factory in datafactory to populate dataFactoryId.
+	// +kubebuilder:validation:Optional
+	DataFactoryIDSelector *v1.Selector `json:"dataFactoryIdSelector,omitempty" tf:"-"`
+
 	// Fully qualified domain names. Changing this forces a new resource to be created.
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
@@ -27,6 +40,19 @@ type ManagedPrivateEndpointInitParameters struct {
 
 	// Specifies the sub resource name which the Data Factory Private Endpoint is able to connect to. Changing this forces a new resource to be created.
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+
+	// The ID of the Private Link Enabled Remote Resource which this Data Factory Private Endpoint should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type ManagedPrivateEndpointObservation struct {

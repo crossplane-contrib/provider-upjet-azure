@@ -18,6 +18,43 @@ import (
 )
 
 type BackupContainerStorageAccountInitParameters struct {
+
+	// The name of the vault where the storage account will be registered. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameRef *v1.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+
+	// Name of the resource group where the vault is located. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The ID of the Storage Account to be registered Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BackupContainerStorageAccountObservation struct {

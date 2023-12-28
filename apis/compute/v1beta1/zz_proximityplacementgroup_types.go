@@ -20,12 +20,14 @@ import (
 type ProximityPlacementGroupInitParameters struct {
 
 	// Specifies the supported sizes of Virtual Machines that can be created in the Proximity Placement Group.
+	// +listType=set
 	AllowedVMSizes []*string `json:"allowedVmSizes,omitempty" tf:"allowed_vm_sizes,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the supported zone of the Proximity Placement Group. Changing this forces a new resource to be created.
@@ -35,6 +37,7 @@ type ProximityPlacementGroupInitParameters struct {
 type ProximityPlacementGroupObservation struct {
 
 	// Specifies the supported sizes of Virtual Machines that can be created in the Proximity Placement Group.
+	// +listType=set
 	AllowedVMSizes []*string `json:"allowedVmSizes,omitempty" tf:"allowed_vm_sizes,omitempty"`
 
 	// The ID of the Proximity Placement Group.
@@ -47,6 +50,7 @@ type ProximityPlacementGroupObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the supported zone of the Proximity Placement Group. Changing this forces a new resource to be created.
@@ -57,6 +61,7 @@ type ProximityPlacementGroupParameters struct {
 
 	// Specifies the supported sizes of Virtual Machines that can be created in the Proximity Placement Group.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedVMSizes []*string `json:"allowedVmSizes,omitempty" tf:"allowed_vm_sizes,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -78,6 +83,7 @@ type ProximityPlacementGroupParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the supported zone of the Proximity Placement Group. Changing this forces a new resource to be created.

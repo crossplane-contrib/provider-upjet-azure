@@ -22,17 +22,77 @@ type StreamInputEventHubInitParameters struct {
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
+	// The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub. If not set the input will use the Event Hub's default consumer group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
+	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameRef *v1.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+
+	// The name of the Event Hub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
+
 	// The name of the Stream Input EventHub. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The property the input Event Hub has been partitioned by.
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A serialization block as defined below.
 	Serialization []StreamInputEventHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
+	// The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	ServiceBusNamespace *string `json:"servicebusNamespace,omitempty" tf:"servicebus_namespace,omitempty"`
+
+	// Reference to a EventHubNamespace in eventhub to populate servicebusNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceBusNamespaceRef *v1.Reference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+
+	// Selector for a EventHubNamespace in eventhub to populate servicebusNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
+
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Job
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Reference to a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type StreamInputEventHubObservation struct {

@@ -56,6 +56,7 @@ type AuthSettingsInitParameters struct {
 	ActiveDirectory []ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// Login parameters to send to the OpenID Connect authorization endpoint when a user logs in. Each parameter must be in the form "key=value".
+	// +mapType=granular
 	AdditionalLoginParams map[string]*string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty"`
 
 	// External URLs that can be redirected to as part of logging in or logging out of the app.
@@ -101,6 +102,7 @@ type AuthSettingsObservation struct {
 	ActiveDirectory []ActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
 	// Login parameters to send to the OpenID Connect authorization endpoint when a user logs in. Each parameter must be in the form "key=value".
+	// +mapType=granular
 	AdditionalLoginParams map[string]*string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty"`
 
 	// External URLs that can be redirected to as part of logging in or logging out of the app.
@@ -148,6 +150,7 @@ type AuthSettingsParameters struct {
 
 	// Login parameters to send to the OpenID Connect authorization endpoint when a user logs in. Each parameter must be in the form "key=value".
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalLoginParams map[string]*string `json:"additionalLoginParams,omitempty" tf:"additional_login_params,omitempty"`
 
 	// External URLs that can be redirected to as part of logging in or logging out of the app.
@@ -235,6 +238,7 @@ type ConnectionStringParameters struct {
 type CorsInitParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Are credentials supported?
@@ -244,6 +248,7 @@ type CorsInitParameters struct {
 type CorsObservation struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Are credentials supported?
@@ -254,6 +259,7 @@ type CorsParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// Are credentials supported?
@@ -296,7 +302,21 @@ type FacebookParameters struct {
 
 type FunctionAppInitParameters struct {
 
+	// The ID of the App Service Plan within which to create this Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.AppServicePlan
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
+
+	// Reference to a AppServicePlan in web to populate appServicePlanId.
+	// +kubebuilder:validation:Optional
+	AppServicePlanIDRef *v1.Reference `json:"appServicePlanIdRef,omitempty" tf:"-"`
+
+	// Selector for a AppServicePlan in web to populate appServicePlanId.
+	// +kubebuilder:validation:Optional
+	AppServicePlanIDSelector *v1.Selector `json:"appServicePlanIdSelector,omitempty" tf:"-"`
+
 	// A map of key-value pairs for App Settings and custom values.
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
@@ -335,13 +355,38 @@ type FunctionAppInitParameters struct {
 	// A string indicating the Operating System type for this function app. Possible values are linux and “(empty string). Changing this forces a new resource to be created. Defaults to "".
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
+	// The name of the resource group in which to create the Function App. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A site_config object as defined below.
 	SiteConfig []SiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
 
 	// A source_control block, as defined below.
 	SourceControl []SourceControlInitParameters `json:"sourceControl,omitempty" tf:"source_control,omitempty"`
 
+	// The backend storage account name which will be used by this Function App (such as the dashboard, logs). Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The runtime version associated with the Function App. Defaults to ~1.
@@ -354,6 +399,7 @@ type FunctionAppObservation struct {
 	AppServicePlanID *string `json:"appServicePlanId,omitempty" tf:"app_service_plan_id,omitempty"`
 
 	// A map of key-value pairs for App Settings and custom values.
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
@@ -426,6 +472,7 @@ type FunctionAppObservation struct {
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The runtime version associated with the Function App. Defaults to ~1.
@@ -450,6 +497,7 @@ type FunctionAppParameters struct {
 
 	// A map of key-value pairs for App Settings and custom values.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// A auth_settings block as defined below.
@@ -540,6 +588,7 @@ type FunctionAppParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The runtime version associated with the Function App. Defaults to ~1.
@@ -583,30 +632,38 @@ type GoogleParameters struct {
 type HeadersInitParameters struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
+	// +listType=set
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
+	// +listType=set
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
+	// +listType=set
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
+	// +listType=set
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
 type HeadersObservation struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
+	// +listType=set
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
 
 	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
+	// +listType=set
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
 
 	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
+	// +listType=set
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
 
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
+	// +listType=set
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
@@ -614,18 +671,22 @@ type HeadersParameters struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
@@ -648,6 +709,19 @@ type IPRestrictionInitParameters struct {
 
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type IPRestrictionObservation struct {
@@ -718,6 +792,7 @@ type IPRestrictionParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the identity type of the Function App. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities.
@@ -727,6 +802,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this App Service.
@@ -743,6 +819,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the identity type of the Function App. Possible values are SystemAssigned (where Azure will generate a Service Principal for you), UserAssigned where you can specify the Service Principal IDs in the identity_ids field, and SystemAssigned, UserAssigned which assigns both a system managed identity as well as the specified user assigned identities.
@@ -786,30 +863,38 @@ type MicrosoftParameters struct {
 type ScmIPRestrictionHeadersInitParameters struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
+	// +listType=set
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
+	// +listType=set
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
+	// +listType=set
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
+	// +listType=set
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
 type ScmIPRestrictionHeadersObservation struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
+	// +listType=set
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid,omitempty"`
 
 	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
+	// +listType=set
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe,omitempty"`
 
 	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
+	// +listType=set
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for,omitempty"`
 
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
+	// +listType=set
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host,omitempty"`
 }
 
@@ -817,18 +902,22 @@ type ScmIPRestrictionHeadersParameters struct {
 
 	// A list of allowed Azure FrontDoor IDs in UUID notation with a maximum of 8.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XAzureFdid []*string `json:"xAzureFdid,omitempty" tf:"x_azure_fdid"`
 
 	// A list to allow the Azure FrontDoor health probe header. Only allowed value is "1".
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XFdHealthProbe []*string `json:"xFdHealthProbe,omitempty" tf:"x_fd_health_probe"`
 
 	// A list of allowed 'X-Forwarded-For' IPs in CIDR notation with a maximum of 8
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XForwardedFor []*string `json:"xForwardedFor,omitempty" tf:"x_forwarded_for"`
 
 	// A list of allowed 'X-Forwarded-Host' domains with a maximum of 8.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	XForwardedHost []*string `json:"xForwardedHost,omitempty" tf:"x_forwarded_host"`
 }
 
@@ -851,6 +940,19 @@ type ScmIPRestrictionInitParameters struct {
 
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag"`
+
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type ScmIPRestrictionObservation struct {

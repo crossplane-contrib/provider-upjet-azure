@@ -35,6 +35,7 @@ type AdditionalLocationInitParameters struct {
 	VirtualNetworkConfiguration []VirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// A list of availability zones. Changing this forces a new resource to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -65,6 +66,7 @@ type AdditionalLocationObservation struct {
 	VirtualNetworkConfiguration []VirtualNetworkConfigurationObservation `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// A list of availability zones. Changing this forces a new resource to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -92,6 +94,7 @@ type AdditionalLocationParameters struct {
 
 	// A list of availability zones. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -273,6 +276,7 @@ type HostNameConfigurationParameters struct {
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -282,6 +286,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -298,6 +303,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this API Management Service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this API Management Service. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -365,6 +371,7 @@ type ManagementInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A tenant_access block as defined below.
@@ -377,6 +384,7 @@ type ManagementInitParameters struct {
 	VirtualNetworkType *string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
 
 	// Specifies a list of Availability Zones in which this API Management service should be located. Changing this forces a new API Management service to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -473,6 +481,7 @@ type ManagementObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A tenant_access block as defined below.
@@ -485,6 +494,7 @@ type ManagementObservation struct {
 	VirtualNetworkType *string `json:"virtualNetworkType,omitempty" tf:"virtual_network_type,omitempty"`
 
 	// Specifies a list of Availability Zones in which this API Management service should be located. Changing this forces a new API Management service to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -581,6 +591,7 @@ type ManagementParameters struct {
 
 	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A tenant_access block as defined below.
@@ -597,10 +608,24 @@ type ManagementParameters struct {
 
 	// Specifies a list of Availability Zones in which this API Management service should be located. Changing this forces a new API Management service to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type ManagementVirtualNetworkConfigurationInitParameters struct {
+
+	// The id of the subnet that will be used for the API Management.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type ManagementVirtualNetworkConfigurationObservation struct {
@@ -1074,6 +1099,19 @@ type TermsOfServiceParameters struct {
 }
 
 type VirtualNetworkConfigurationInitParameters struct {
+
+	// The id of the subnet that will be used for the API Management.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkConfigurationObservation struct {

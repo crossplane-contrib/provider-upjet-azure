@@ -29,15 +29,18 @@ type SecurityRuleInitParameters_2 struct {
 	DestinationAddressPrefix *string `json:"destinationAddressPrefix,omitempty" tf:"destination_address_prefix,omitempty"`
 
 	// List of destination address prefixes. Tags may not be used. This is required if destination_address_prefix is not specified.
+	// +listType=set
 	DestinationAddressPrefixes []*string `json:"destinationAddressPrefixes,omitempty" tf:"destination_address_prefixes,omitempty"`
 
 	// A List of destination Application Security Group IDs
+	// +listType=set
 	DestinationApplicationSecurityGroupIds []*string `json:"destinationApplicationSecurityGroupIds,omitempty" tf:"destination_application_security_group_ids,omitempty"`
 
 	// Destination Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if destination_port_ranges is not specified.
 	DestinationPortRange *string `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// List of destination ports or port ranges. This is required if destination_port_range is not specified.
+	// +listType=set
 	DestinationPortRanges []*string `json:"destinationPortRanges,omitempty" tf:"destination_port_ranges,omitempty"`
 
 	// The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are Inbound and Outbound.
@@ -53,15 +56,18 @@ type SecurityRuleInitParameters_2 struct {
 	SourceAddressPrefix *string `json:"sourceAddressPrefix,omitempty" tf:"source_address_prefix,omitempty"`
 
 	// List of source address prefixes. Tags may not be used. This is required if source_address_prefix is not specified.
+	// +listType=set
 	SourceAddressPrefixes []*string `json:"sourceAddressPrefixes,omitempty" tf:"source_address_prefixes,omitempty"`
 
 	// A List of source Application Security Group IDs
+	// +listType=set
 	SourceApplicationSecurityGroupIds []*string `json:"sourceApplicationSecurityGroupIds,omitempty" tf:"source_application_security_group_ids,omitempty"`
 
 	// Source Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if source_port_ranges is not specified.
 	SourcePortRange *string `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 
 	// List of source ports or port ranges. This is required if source_port_range is not specified.
+	// +listType=set
 	SourcePortRanges []*string `json:"sourcePortRanges,omitempty" tf:"source_port_ranges,omitempty"`
 }
 
@@ -77,15 +83,18 @@ type SecurityRuleObservation_2 struct {
 	DestinationAddressPrefix *string `json:"destinationAddressPrefix,omitempty" tf:"destination_address_prefix,omitempty"`
 
 	// List of destination address prefixes. Tags may not be used. This is required if destination_address_prefix is not specified.
+	// +listType=set
 	DestinationAddressPrefixes []*string `json:"destinationAddressPrefixes,omitempty" tf:"destination_address_prefixes,omitempty"`
 
 	// A List of destination Application Security Group IDs
+	// +listType=set
 	DestinationApplicationSecurityGroupIds []*string `json:"destinationApplicationSecurityGroupIds,omitempty" tf:"destination_application_security_group_ids,omitempty"`
 
 	// Destination Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if destination_port_ranges is not specified.
 	DestinationPortRange *string `json:"destinationPortRange,omitempty" tf:"destination_port_range,omitempty"`
 
 	// List of destination ports or port ranges. This is required if destination_port_range is not specified.
+	// +listType=set
 	DestinationPortRanges []*string `json:"destinationPortRanges,omitempty" tf:"destination_port_ranges,omitempty"`
 
 	// The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are Inbound and Outbound.
@@ -110,15 +119,18 @@ type SecurityRuleObservation_2 struct {
 	SourceAddressPrefix *string `json:"sourceAddressPrefix,omitempty" tf:"source_address_prefix,omitempty"`
 
 	// List of source address prefixes. Tags may not be used. This is required if source_address_prefix is not specified.
+	// +listType=set
 	SourceAddressPrefixes []*string `json:"sourceAddressPrefixes,omitempty" tf:"source_address_prefixes,omitempty"`
 
 	// A List of source Application Security Group IDs
+	// +listType=set
 	SourceApplicationSecurityGroupIds []*string `json:"sourceApplicationSecurityGroupIds,omitempty" tf:"source_application_security_group_ids,omitempty"`
 
 	// Source Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if source_port_ranges is not specified.
 	SourcePortRange *string `json:"sourcePortRange,omitempty" tf:"source_port_range,omitempty"`
 
 	// List of source ports or port ranges. This is required if source_port_range is not specified.
+	// +listType=set
 	SourcePortRanges []*string `json:"sourcePortRanges,omitempty" tf:"source_port_ranges,omitempty"`
 }
 
@@ -138,10 +150,12 @@ type SecurityRuleParameters_2 struct {
 
 	// List of destination address prefixes. Tags may not be used. This is required if destination_address_prefix is not specified.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DestinationAddressPrefixes []*string `json:"destinationAddressPrefixes,omitempty" tf:"destination_address_prefixes,omitempty"`
 
 	// A List of destination Application Security Group IDs
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DestinationApplicationSecurityGroupIds []*string `json:"destinationApplicationSecurityGroupIds,omitempty" tf:"destination_application_security_group_ids,omitempty"`
 
 	// Destination Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if destination_port_ranges is not specified.
@@ -150,6 +164,7 @@ type SecurityRuleParameters_2 struct {
 
 	// List of destination ports or port ranges. This is required if destination_port_range is not specified.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DestinationPortRanges []*string `json:"destinationPortRanges,omitempty" tf:"destination_port_ranges,omitempty"`
 
 	// The direction specifies if rule will be evaluated on incoming or outgoing traffic. Possible values are Inbound and Outbound.
@@ -196,10 +211,12 @@ type SecurityRuleParameters_2 struct {
 
 	// List of source address prefixes. Tags may not be used. This is required if source_address_prefix is not specified.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourceAddressPrefixes []*string `json:"sourceAddressPrefixes,omitempty" tf:"source_address_prefixes,omitempty"`
 
 	// A List of source Application Security Group IDs
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourceApplicationSecurityGroupIds []*string `json:"sourceApplicationSecurityGroupIds,omitempty" tf:"source_application_security_group_ids,omitempty"`
 
 	// Source Port or Range. Integer or range between 0 and 65535 or * to match any. This is required if source_port_ranges is not specified.
@@ -208,6 +225,7 @@ type SecurityRuleParameters_2 struct {
 
 	// List of source ports or port ranges. This is required if source_port_range is not specified.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourcePortRanges []*string `json:"sourcePortRanges,omitempty" tf:"source_port_ranges,omitempty"`
 }
 

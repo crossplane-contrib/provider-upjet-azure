@@ -19,6 +19,19 @@ import (
 
 type SubAccountTagRuleInitParameters struct {
 
+	// The ID of the Logz Sub Account. Changing this forces a new Logz Sub Account Tag Rule to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logz/v1beta1.SubAccount
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LogzSubAccountID *string `json:"logzSubAccountId,omitempty" tf:"logz_sub_account_id,omitempty"`
+
+	// Reference to a SubAccount in logz to populate logzSubAccountId.
+	// +kubebuilder:validation:Optional
+	LogzSubAccountIDRef *v1.Reference `json:"logzSubAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a SubAccount in logz to populate logzSubAccountId.
+	// +kubebuilder:validation:Optional
+	LogzSubAccountIDSelector *v1.Selector `json:"logzSubAccountIdSelector,omitempty" tf:"-"`
+
 	// Whether AAD logs should be sent to the Monitor resource?
 	SendAADLogs *bool `json:"sendAadLogs,omitempty" tf:"send_aad_logs,omitempty"`
 

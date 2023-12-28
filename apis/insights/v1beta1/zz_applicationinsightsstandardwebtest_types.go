@@ -19,6 +19,19 @@ import (
 
 type ApplicationInsightsStandardWebTestInitParameters struct {
 
+	// The ID of the Application Insights instance on which the WebTest operates. Changing this forces a new Application Insights Standard WebTest to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+
 	// Purpose/user defined descriptive test for this WebTest.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -41,6 +54,7 @@ type ApplicationInsightsStandardWebTestInitParameters struct {
 	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
 
 	// A mapping of tags which should be assigned to the Application Insights Standard WebTest.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.
@@ -86,6 +100,7 @@ type ApplicationInsightsStandardWebTestObservation struct {
 	SyntheticMonitorID *string `json:"syntheticMonitorId,omitempty" tf:"synthetic_monitor_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Application Insights Standard WebTest.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.
@@ -154,6 +169,7 @@ type ApplicationInsightsStandardWebTestParameters struct {
 
 	// A mapping of tags which should be assigned to the Application Insights Standard WebTest.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.

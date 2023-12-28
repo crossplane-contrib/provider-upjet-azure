@@ -20,6 +20,7 @@ import (
 type LinkedServiceMySQLInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service MySQL.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service MySQL.
@@ -35,12 +36,14 @@ type LinkedServiceMySQLInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service MySQL.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceMySQLObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service MySQL.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service MySQL.
@@ -62,6 +65,7 @@ type LinkedServiceMySQLObservation struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service MySQL.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -69,6 +73,7 @@ type LinkedServiceMySQLParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service MySQL.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service MySQL.
@@ -103,6 +108,7 @@ type LinkedServiceMySQLParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service MySQL.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

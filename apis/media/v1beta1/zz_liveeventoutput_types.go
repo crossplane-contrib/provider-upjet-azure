@@ -22,6 +22,18 @@ type LiveEventOutputInitParameters struct {
 	// ISO 8601 time between 1 minute to 25 hours to indicate the maximum content length that can be archived in the asset for this live output. This also sets the maximum content length for the rewind window. For example, use PT1H30M to indicate 1 hour and 30 minutes of archive window. Changing this forces a new Live Output to be created.
 	ArchiveWindowDuration *string `json:"archiveWindowDuration,omitempty" tf:"archive_window_duration,omitempty"`
 
+	// The asset that the live output will write to. Changing this forces a new Live Output to be created.
+	// +crossplane:generate:reference:type=Asset
+	AssetName *string `json:"assetName,omitempty" tf:"asset_name,omitempty"`
+
+	// Reference to a Asset to populate assetName.
+	// +kubebuilder:validation:Optional
+	AssetNameRef *v1.Reference `json:"assetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Asset to populate assetName.
+	// +kubebuilder:validation:Optional
+	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
+
 	// The description of the live output. Changing this forces a new Live Output to be created.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

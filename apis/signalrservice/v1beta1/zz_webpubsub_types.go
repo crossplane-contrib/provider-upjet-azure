@@ -20,6 +20,7 @@ import (
 type WebPubsubIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Web PubSub. Possible values are SystemAssigned, UserAssigned.
@@ -29,6 +30,7 @@ type WebPubsubIdentityInitParameters struct {
 type WebPubsubIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -45,6 +47,7 @@ type WebPubsubIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Web PubSub.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Web PubSub. Possible values are SystemAssigned, UserAssigned.
@@ -78,6 +81,18 @@ type WebPubsubInitParameters struct {
 	// Whether to enable public network access? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// The name of the resource group in which to create the Web PubSub service. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -85,6 +100,7 @@ type WebPubsubInitParameters struct {
 	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -188,6 +204,7 @@ type WebPubsubObservation struct {
 	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
@@ -250,6 +267,7 @@ type WebPubsubParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

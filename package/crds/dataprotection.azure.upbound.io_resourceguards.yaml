@@ -157,6 +157,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Resource Guard.
                     type: object
+                    x-kubernetes-map-type: granular
                   vaultCriticalOperationExclusionList:
                     description: A list of the critical operations which are not protected
                       by this Resource Guard.
@@ -186,6 +187,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Resource Guard.
                     type: object
+                    x-kubernetes-map-type: granular
                   vaultCriticalOperationExclusionList:
                     description: A list of the critical operations which are not protected
                       by this Resource Guard.
@@ -381,6 +383,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Resource Guard.
                     type: object
+                    x-kubernetes-map-type: granular
                   vaultCriticalOperationExclusionList:
                     description: A list of the critical operations which are not protected
                       by this Resource Guard.

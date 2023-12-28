@@ -56,6 +56,25 @@ func (mg *LabServiceLab) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Network); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Network[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Network[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.Network[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Network[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.Network[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Network[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+
 	return nil
 }
 
@@ -97,6 +116,22 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DefaultNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.DefaultNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DefaultNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.DefaultNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DefaultNetworkSubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }

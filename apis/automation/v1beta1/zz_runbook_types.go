@@ -144,6 +144,7 @@ type JobScheduleInitParameters struct {
 	JobScheduleID *string `json:"jobScheduleId,omitempty" tf:"job_schedule_id"`
 
 	// A list of parameters block as defined below.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters"`
 
 	RunOn *string `json:"runOn,omitempty" tf:"run_on"`
@@ -158,6 +159,7 @@ type JobScheduleObservation struct {
 	JobScheduleID *string `json:"jobScheduleId,omitempty" tf:"job_schedule_id,omitempty"`
 
 	// A list of parameters block as defined below.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	RunOn *string `json:"runOn,omitempty" tf:"run_on,omitempty"`
@@ -174,6 +176,7 @@ type JobScheduleParameters struct {
 
 	// A list of parameters block as defined below.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters"`
 
 	// +kubebuilder:validation:Optional
@@ -313,6 +316,18 @@ type PublishContentLinkParameters struct {
 
 type RunBookInitParameters struct {
 
+	// The name of the automation account in which the Runbook is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta1.Account
+	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
+
+	// Reference to a Account in automation to populate automationAccountName.
+	// +kubebuilder:validation:Optional
+	AutomationAccountNameRef *v1.Reference `json:"automationAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in automation to populate automationAccountName.
+	// +kubebuilder:validation:Optional
+	AutomationAccountNameSelector *v1.Selector `json:"automationAccountNameSelector,omitempty" tf:"-"`
+
 	// The desired content of the runbook.
 	Content *string `json:"content,omitempty" tf:"content,omitempty"`
 
@@ -342,10 +357,23 @@ type RunBookInitParameters struct {
 	// The published runbook content link.
 	PublishContentLink []PublishContentLinkInitParameters `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
+	// The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3, Python2 or Script. Changing this forces a new resource to be created.
 	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -393,6 +421,7 @@ type RunBookObservation struct {
 	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -469,6 +498,7 @@ type RunBookParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

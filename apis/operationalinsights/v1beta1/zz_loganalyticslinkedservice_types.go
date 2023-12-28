@@ -19,6 +19,31 @@ import (
 
 type LogAnalyticsLinkedServiceInitParameters struct {
 
+	// The ID of the readable Resource that will be linked to the workspace. This should be used for linking to an Automation Account resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ReadAccessID *string `json:"readAccessId,omitempty" tf:"read_access_id,omitempty"`
+
+	// Reference to a Account in automation to populate readAccessId.
+	// +kubebuilder:validation:Optional
+	ReadAccessIDRef *v1.Reference `json:"readAccessIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in automation to populate readAccessId.
+	// +kubebuilder:validation:Optional
+	ReadAccessIDSelector *v1.Selector `json:"readAccessIdSelector,omitempty" tf:"-"`
+
+	// The name of the resource group in which the Log Analytics Linked Service is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// The ID of the writable Resource that will be linked to the workspace. This should be used for linking to a Log Analytics Cluster resource.
 	WriteAccessID *string `json:"writeAccessId,omitempty" tf:"write_access_id,omitempty"`
 }

@@ -60,6 +60,7 @@ type QueryKeysParameters struct {
 type ServiceInitParameters struct {
 
 	// Specifies a list of inbound IPv4 or CIDRs that are allowed to access the Search Service. If the incoming IP request is from an IP address which is not included in the allowed_ips it will be blocked by the Search Services firewall.
+	// +listType=set
 	AllowedIps []*string `json:"allowedIps,omitempty" tf:"allowed_ips,omitempty"`
 
 	// Specifies the response that the Search Service should return for requests that fail authentication. Possible values include http401WithBearerChallenge or http403.
@@ -93,12 +94,14 @@ type ServiceInitParameters struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to this Search Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type ServiceObservation struct {
 
 	// Specifies a list of inbound IPv4 or CIDRs that are allowed to access the Search Service. If the incoming IP request is from an IP address which is not included in the allowed_ips it will be blocked by the Search Services firewall.
+	// +listType=set
 	AllowedIps []*string `json:"allowedIps,omitempty" tf:"allowed_ips,omitempty"`
 
 	// Specifies the response that the Search Service should return for requests that fail authentication. Possible values include http401WithBearerChallenge or http403.
@@ -141,6 +144,7 @@ type ServiceObservation struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to this Search Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -148,6 +152,7 @@ type ServiceParameters struct {
 
 	// Specifies a list of inbound IPv4 or CIDRs that are allowed to access the Search Service. If the incoming IP request is from an IP address which is not included in the allowed_ips it will be blocked by the Search Services firewall.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedIps []*string `json:"allowedIps,omitempty" tf:"allowed_ips,omitempty"`
 
 	// Specifies the response that the Search Service should return for requests that fail authentication. Possible values include http401WithBearerChallenge or http403.
@@ -205,6 +210,7 @@ type ServiceParameters struct {
 
 	// Specifies a mapping of tags which should be assigned to this Search Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

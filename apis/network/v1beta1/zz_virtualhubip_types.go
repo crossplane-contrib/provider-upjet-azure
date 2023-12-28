@@ -24,6 +24,32 @@ type VirtualHubIPInitParameters struct {
 
 	// The private IP address allocation method. Possible values are Static and Dynamic is allowed. Defaults to Dynamic.
 	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Public IP Address. This option is required since September 1st 2021. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Subnet that the IP will reside. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubIPObservation struct {

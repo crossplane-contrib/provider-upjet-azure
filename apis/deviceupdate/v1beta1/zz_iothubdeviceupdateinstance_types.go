@@ -18,6 +18,19 @@ import (
 )
 
 type DiagnosticStorageAccountInitParameters struct {
+
+	// Resource ID of the Diagnostic Storage Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Reference to a Account in storage to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type DiagnosticStorageAccountObservation struct {
@@ -55,7 +68,21 @@ type IOTHubDeviceUpdateInstanceInitParameters struct {
 	// A diagnostic_storage_account block as defined below.
 	DiagnosticStorageAccount []DiagnosticStorageAccountInitParameters `json:"diagnosticStorageAccount,omitempty" tf:"diagnostic_storage_account,omitempty"`
 
+	// Specifies the ID of the IoT Hub associated with the IoT Hub Device Update Instance. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
+
+	// Reference to a IOTHub in devices to populate iothubId.
+	// +kubebuilder:validation:Optional
+	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+
+	// Selector for a IOTHub in devices to populate iothubId.
+	// +kubebuilder:validation:Optional
+	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -77,6 +104,7 @@ type IOTHubDeviceUpdateInstanceObservation struct {
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -120,6 +148,7 @@ type IOTHubDeviceUpdateInstanceParameters struct {
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Instance.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

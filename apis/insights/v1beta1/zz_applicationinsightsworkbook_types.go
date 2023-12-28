@@ -40,6 +40,18 @@ type ApplicationInsightsWorkbookInitParameters struct {
 	// Specifies the name of this Workbook as a UUID/GUID. It should not contain any uppercase letters. Changing this forces a new Workbook to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the name of the Resource Group where the Workbook should exist. Changing this forces a new Workbook to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Resource ID for a source resource. It should not contain any uppercase letters. Defaults to azure monitor.
 	SourceID *string `json:"sourceId,omitempty" tf:"source_id,omitempty"`
 
@@ -47,6 +59,7 @@ type ApplicationInsightsWorkbookInitParameters struct {
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Workbook.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -86,6 +99,7 @@ type ApplicationInsightsWorkbookObservation struct {
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Workbook.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -142,12 +156,14 @@ type ApplicationInsightsWorkbookParameters struct {
 
 	// A mapping of tags which should be assigned to the Workbook.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IdentityInitParameters struct {
 
 	// The list of User Assigned Managed Identity IDs assigned to this Workbook. Changing this forces a new resource to be created.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Service Identity that is configured on this Workbook. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. Changing this forces a new resource to be created.
@@ -157,6 +173,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// The list of User Assigned Managed Identity IDs assigned to this Workbook. Changing this forces a new resource to be created.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID of the System Assigned Managed Service Identity that is configured on this Workbook.
@@ -173,6 +190,7 @@ type IdentityParameters struct {
 
 	// The list of User Assigned Managed Identity IDs assigned to this Workbook. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Service Identity that is configured on this Workbook. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. Changing this forces a new resource to be created.

@@ -142,6 +142,58 @@ func (mg *EventSubscription) ResolveReferences(ctx context.Context, c client.Rea
 		mg.Spec.ForProvider.StorageQueueEndpoint[i3].StorageAccountIDRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ScopeRef,
+		Selector:     mg.Spec.InitProvider.ScopeSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scope")
+	}
+	mg.Spec.InitProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScopeRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageQueueEndpoint); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueNameRef,
+			Selector:     mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueNameSelector,
+			To: reference.To{
+				List:    &v1beta11.QueueList{},
+				Managed: &v1beta11.Queue{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName")
+		}
+		mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageQueueEndpoint[i3].QueueNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageQueueEndpoint); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountIDRef,
+			Selector:     mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountIDSelector,
+			To: reference.To{
+				List:    &v1beta11.AccountList{},
+				Managed: &v1beta11.Account{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID")
+		}
+		mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageQueueEndpoint[i3].StorageAccountIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -184,6 +236,22 @@ func (mg *SystemTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.SourceArmResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceArmResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceArmResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SourceArmResourceIDRef,
+		Selector:     mg.Spec.InitProvider.SourceArmResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceArmResourceID")
+	}
+	mg.Spec.InitProvider.SourceArmResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceArmResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }

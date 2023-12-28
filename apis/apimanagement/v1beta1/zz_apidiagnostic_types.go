@@ -19,6 +19,19 @@ import (
 
 type APIDiagnosticInitParameters struct {
 
+	// The ID (name) of the Diagnostics Logger.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Logger
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
+
+	// Reference to a Logger in apimanagement to populate apiManagementLoggerId.
+	// +kubebuilder:validation:Optional
+	APIManagementLoggerIDRef *v1.Reference `json:"apiManagementLoggerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Logger in apimanagement to populate apiManagementLoggerId.
+	// +kubebuilder:validation:Optional
+	APIManagementLoggerIDSelector *v1.Selector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
+
 	// Always log errors. Send telemetry if there is an erroneous condition, regardless of sampling settings.
 	AlwaysLogErrors *bool `json:"alwaysLogErrors,omitempty" tf:"always_log_errors,omitempty"`
 
@@ -203,6 +216,7 @@ type BackendRequestInitParameters struct {
 	DataMasking []DataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -215,6 +229,7 @@ type BackendRequestObservation struct {
 	DataMasking []DataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -230,6 +245,7 @@ type BackendRequestParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -271,6 +287,7 @@ type BackendResponseInitParameters struct {
 	DataMasking []BackendResponseDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -283,6 +300,7 @@ type BackendResponseObservation struct {
 	DataMasking []BackendResponseDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -298,6 +316,7 @@ type BackendResponseParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -484,6 +503,7 @@ type FrontendRequestInitParameters struct {
 	DataMasking []FrontendRequestDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -496,6 +516,7 @@ type FrontendRequestObservation struct {
 	DataMasking []FrontendRequestDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -511,6 +532,7 @@ type FrontendRequestParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -610,6 +632,7 @@ type FrontendResponseInitParameters struct {
 	DataMasking []FrontendResponseDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -622,6 +645,7 @@ type FrontendResponseObservation struct {
 	DataMasking []FrontendResponseDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -637,6 +661,7 @@ type FrontendResponseParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 

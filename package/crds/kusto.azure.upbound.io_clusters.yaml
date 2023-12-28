@@ -106,6 +106,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: 'Specifies the type of Managed Service Identity
                             that is configured on this Kusto Cluster. Possible values
@@ -120,6 +121,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   location:
                     description: The location where the Kusto Cluster should be created.
                       Changing this forces a new resource to be created.
@@ -274,6 +276,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   trustedExternalTenants:
                     description: Specifies a list of tenant IDs that are trusted by
                       the cluster. Default setting trusts all other tenants. Use trusted_external_tenants
@@ -386,6 +389,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -438,6 +442,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: 'Specifies the type of Managed Service Identity
                             that is configured on this Kusto Cluster. Possible values
@@ -452,6 +457,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   location:
                     description: The location where the Kusto Cluster should be created.
                       Changing this forces a new resource to be created.
@@ -527,6 +533,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   trustedExternalTenants:
                     description: Specifies a list of tenant IDs that are trusted by
                       the cluster. Default setting trusts all other tenants. Use trusted_external_tenants
@@ -549,6 +556,87 @@ spec:
                           description: Engine service's public IP address resource
                             id.
                           type: string
+                        subnetId:
+                          description: The subnet resource id.
+                          type: string
+                        subnetIdRef:
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        subnetIdSelector:
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                       type: object
                     type: array
                   zones:
@@ -558,6 +646,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -778,6 +867,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The Principal ID associated with this System
                             Assigned Managed Service Identity.
@@ -800,6 +890,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   location:
                     description: The location where the Kusto Cluster should be created.
                       Changing this forces a new resource to be created.
@@ -879,6 +970,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   trustedExternalTenants:
                     description: Specifies a list of tenant IDs that are trusted by
                       the cluster. Default setting trusts all other tenants. Use trusted_external_tenants
@@ -916,6 +1008,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

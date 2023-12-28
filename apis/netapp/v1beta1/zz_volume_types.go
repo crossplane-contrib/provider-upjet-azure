@@ -25,6 +25,19 @@ type DataProtectionReplicationInitParameters struct {
 	// Location of the primary volume. Changing this forces a new resource to be created.
 	RemoteVolumeLocation *string `json:"remoteVolumeLocation,omitempty" tf:"remote_volume_location,omitempty"`
 
+	// Resource ID of the primary volume.
+	// +crossplane:generate:reference:type=Volume
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	RemoteVolumeResourceID *string `json:"remoteVolumeResourceId,omitempty" tf:"remote_volume_resource_id,omitempty"`
+
+	// Reference to a Volume to populate remoteVolumeResourceId.
+	// +kubebuilder:validation:Optional
+	RemoteVolumeResourceIDRef *v1.Reference `json:"remoteVolumeResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Volume to populate remoteVolumeResourceId.
+	// +kubebuilder:validation:Optional
+	RemoteVolumeResourceIDSelector *v1.Selector `json:"remoteVolumeResourceIdSelector,omitempty" tf:"-"`
+
 	// Replication frequency, supported values are '10minutes', 'hourly', 'daily', values are case sensitive.
 	ReplicationFrequency *string `json:"replicationFrequency,omitempty" tf:"replication_frequency,omitempty"`
 }
@@ -74,6 +87,19 @@ type DataProtectionReplicationParameters struct {
 }
 
 type DataProtectionSnapshotPolicyInitParameters struct {
+
+	// Resource ID of the snapshot policy to apply to the volume.
+	// +crossplane:generate:reference:type=SnapshotPolicy
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SnapshotPolicyID *string `json:"snapshotPolicyId,omitempty" tf:"snapshot_policy_id,omitempty"`
+
+	// Reference to a SnapshotPolicy to populate snapshotPolicyId.
+	// +kubebuilder:validation:Optional
+	SnapshotPolicyIDRef *v1.Reference `json:"snapshotPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a SnapshotPolicy to populate snapshotPolicyId.
+	// +kubebuilder:validation:Optional
+	SnapshotPolicyIDSelector *v1.Selector `json:"snapshotPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type DataProtectionSnapshotPolicyObservation struct {
@@ -102,6 +128,7 @@ type DataProtectionSnapshotPolicyParameters struct {
 type ExportPolicyRuleInitParameters struct {
 
 	// A list of allowed clients IPv4 addresses.
+	// +listType=set
 	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
 
 	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
@@ -123,6 +150,7 @@ type ExportPolicyRuleInitParameters struct {
 type ExportPolicyRuleObservation struct {
 
 	// A list of allowed clients IPv4 addresses.
+	// +listType=set
 	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
 
 	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
@@ -145,6 +173,7 @@ type ExportPolicyRuleParameters struct {
 
 	// A list of allowed clients IPv4 addresses.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedClients []*string `json:"allowedClients" tf:"allowed_clients,omitempty"`
 
 	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
@@ -173,6 +202,19 @@ type VolumeInitParameters struct {
 	// Is the NetApp Volume enabled for Azure VMware Solution (AVS) datastore purpose. Defaults to false. Changing this forces a new resource to be created.
 	AzureVMwareDataStoreEnabled *bool `json:"azureVmwareDataStoreEnabled,omitempty" tf:"azure_vmware_data_store_enabled,omitempty"`
 
+	// Creates volume from snapshot. Following properties must be the same as the original volume where the snapshot was taken from: protocols, subnet_id, location, service_level, resource_group_name, account_name and pool_name. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Snapshot
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	CreateFromSnapshotResourceID *string `json:"createFromSnapshotResourceId,omitempty" tf:"create_from_snapshot_resource_id,omitempty"`
+
+	// Reference to a Snapshot to populate createFromSnapshotResourceId.
+	// +kubebuilder:validation:Optional
+	CreateFromSnapshotResourceIDRef *v1.Reference `json:"createFromSnapshotResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Snapshot to populate createFromSnapshotResourceId.
+	// +kubebuilder:validation:Optional
+	CreateFromSnapshotResourceIDSelector *v1.Selector `json:"createFromSnapshotResourceIdSelector,omitempty" tf:"-"`
+
 	// A data_protection_replication block as defined below. Changing this forces a new resource to be created.
 	DataProtectionReplication []DataProtectionReplicationInitParameters `json:"dataProtectionReplication,omitempty" tf:"data_protection_replication,omitempty"`
 
@@ -189,6 +231,7 @@ type VolumeInitParameters struct {
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
 	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// Volume security style, accepted values are Unix or Ntfs. If not provided, single-protocol volume is created defaulting to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to Ntfs. In a dual-protocol volume, if not provided, its value will be Ntfs. Changing this forces a new resource to be created.
@@ -203,7 +246,21 @@ type VolumeInitParameters struct {
 	// The maximum Storage Quota allowed for a file system in Gigabytes.
 	StorageQuotaInGb *float64 `json:"storageQuotaInGb,omitempty" tf:"storage_quota_in_gb,omitempty"`
 
+	// The ID of the Subnet the NetApp Volume resides in, which must have the Microsoft.NetApp/volumes delegation. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput of this volume in Mibps.
@@ -252,6 +309,7 @@ type VolumeObservation struct {
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
 	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// The name of the resource group where the NetApp Volume should be created. Changing this forces a new resource to be created.
@@ -273,6 +331,7 @@ type VolumeObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput of this volume in Mibps.
@@ -353,6 +412,7 @@ type VolumeParameters struct {
 
 	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// The name of the resource group where the NetApp Volume should be created. Changing this forces a new resource to be created.
@@ -400,6 +460,7 @@ type VolumeParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Throughput of this volume in Mibps.

@@ -38,6 +38,7 @@ type AccountInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -76,6 +77,7 @@ type AccountObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -120,6 +122,7 @@ type AccountParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -160,6 +163,7 @@ type EncryptionParameters struct {
 type IdentityInitParameters struct {
 
 	// The ID of the User Assigned Identity which should be assigned to this Automation Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of identity used for this Automation Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
@@ -169,6 +173,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// The ID of the User Assigned Identity which should be assigned to this Automation Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -185,6 +190,7 @@ type IdentityParameters struct {
 
 	// The ID of the User Assigned Identity which should be assigned to this Automation Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of identity used for this Automation Account. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.

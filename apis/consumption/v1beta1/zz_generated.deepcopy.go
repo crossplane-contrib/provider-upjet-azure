@@ -60,6 +60,21 @@ func (in *BudgetManagementGroupInitParameters) DeepCopyInto(out *BudgetManagemen
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ManagementGroupID != nil {
+		in, out := &in.ManagementGroupID, &out.ManagementGroupID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagementGroupIDRef != nil {
+		in, out := &in.ManagementGroupIDRef, &out.ManagementGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ManagementGroupIDSelector != nil {
+		in, out := &in.ManagementGroupIDSelector, &out.ManagementGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -574,6 +589,21 @@ func (in *BudgetResourceGroupInitParameters) DeepCopyInto(out *BudgetResourceGro
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ResourceGroupID != nil {
+		in, out := &in.ResourceGroupID, &out.ResourceGroupID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupIDRef != nil {
+		in, out := &in.ResourceGroupIDRef, &out.ResourceGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupIDSelector != nil {
+		in, out := &in.ResourceGroupIDSelector, &out.ResourceGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TimeGrain != nil {
 		in, out := &in.TimeGrain, &out.TimeGrain
@@ -1729,6 +1759,29 @@ func (in *BudgetSubscriptionNotificationInitParameters) DeepCopyInto(out *Budget
 				**out = **in
 			}
 		}
+	}
+	if in.ContactGroups != nil {
+		in, out := &in.ContactGroups, &out.ContactGroups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.ContactGroupsRefs != nil {
+		in, out := &in.ContactGroupsRefs, &out.ContactGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ContactGroupsSelector != nil {
+		in, out := &in.ContactGroupsSelector, &out.ContactGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ContactRoles != nil {
 		in, out := &in.ContactRoles, &out.ContactRoles

@@ -604,6 +604,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetId:
                                 description: The ID of the Subnet within the Virtual
                                   Network where the Zookeeper Nodes should be provisioned
@@ -843,6 +844,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetId:
                                 description: The ID of the Subnet within the Virtual
                                   Network where the Zookeeper Nodes should be provisioned
@@ -1028,6 +1030,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetId:
                                 description: The ID of the Subnet within the Virtual
                                   Network where the Zookeeper Nodes should be provisioned
@@ -1178,6 +1181,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         domainName:
                           description: The name of the Azure Active Directory Domain.
                             Changing this forces a new resource to be created.
@@ -1211,6 +1215,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         msiResourceId:
                           description: The User Assigned Identity for the HDInsight
                             Cluster. Changing this forces a new resource to be created.
@@ -1367,6 +1372,7 @@ spec:
                     description: A map of Tags which should be assigned to this HDInsight
                       Hadoop Cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tier:
                     description: Specifies the Tier which should be used for this
                       HDInsight Hadoop Cluster. Possible values are Standard or Premium.
@@ -1707,6 +1713,93 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
+                              subnetId:
+                                description: The ID of the Subnet within the Virtual
+                                  Network where the Zookeeper Nodes should be provisioned
+                                  within. Changing this forces a new resource to be
+                                  created.
+                                type: string
+                              subnetIdRef:
+                                description: Reference to a Subnet in network to populate
+                                  subnetId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              subnetIdSelector:
+                                description: Selector for a Subnet in network to populate
+                                  subnetId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               username:
                                 description: The Username of the local administrator
                                   for the Zookeeper Nodes. Changing this forces a
@@ -1841,6 +1934,93 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
+                              subnetId:
+                                description: The ID of the Subnet within the Virtual
+                                  Network where the Zookeeper Nodes should be provisioned
+                                  within. Changing this forces a new resource to be
+                                  created.
+                                type: string
+                              subnetIdRef:
+                                description: Reference to a Subnet in network to populate
+                                  subnetId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              subnetIdSelector:
+                                description: Selector for a Subnet in network to populate
+                                  subnetId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               targetInstanceCount:
                                 description: The number of instances which should
                                   be run for the Worker Nodes.
@@ -1921,6 +2101,93 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
+                              subnetId:
+                                description: The ID of the Subnet within the Virtual
+                                  Network where the Zookeeper Nodes should be provisioned
+                                  within. Changing this forces a new resource to be
+                                  created.
+                                type: string
+                              subnetIdRef:
+                                description: Reference to a Subnet in network to populate
+                                  subnetId.
+                                properties:
+                                  name:
+                                    description: Name of the referenced object.
+                                    type: string
+                                  policy:
+                                    description: Policies for referencing.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                required:
+                                - name
+                                type: object
+                              subnetIdSelector:
+                                description: Selector for a Subnet in network to populate
+                                  subnetId.
+                                properties:
+                                  matchControllerRef:
+                                    description: MatchControllerRef ensures an object
+                                      with the same controller reference as the selecting
+                                      object is selected.
+                                    type: boolean
+                                  matchLabels:
+                                    additionalProperties:
+                                      type: string
+                                    description: MatchLabels ensures an object with
+                                      matching labels is selected.
+                                    type: object
+                                  policy:
+                                    description: Policies for selection.
+                                    properties:
+                                      resolution:
+                                        default: Required
+                                        description: Resolution specifies whether
+                                          resolution of this reference is required.
+                                          The default is 'Required', which means the
+                                          reconcile will fail if the reference cannot
+                                          be resolved. 'Optional' means this reference
+                                          will be a no-op if it cannot be resolved.
+                                        enum:
+                                        - Required
+                                        - Optional
+                                        type: string
+                                      resolve:
+                                        description: Resolve specifies when this reference
+                                          should be resolved. The default is 'IfNotPresent',
+                                          which will attempt to resolve the reference
+                                          only when the corresponding field is not
+                                          present. Use 'Always' to resolve the reference
+                                          on every reconcile.
+                                        enum:
+                                        - Always
+                                        - IfNotPresent
+                                        type: string
+                                    type: object
+                                type: object
                               username:
                                 description: The Username of the local administrator
                                   for the Zookeeper Nodes. Changing this forces a
@@ -1985,6 +2252,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         domainName:
                           description: The name of the Azure Active Directory Domain.
                             Changing this forces a new resource to be created.
@@ -2000,6 +2268,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         msiResourceId:
                           description: The User Assigned Identity for the HDInsight
                             Cluster. Changing this forces a new resource to be created.
@@ -2015,6 +2284,88 @@ spec:
                             HDInsight Hadoop Cluster? Changing this forces a new resource
                             to be created.
                           type: boolean
+                        storageContainerId:
+                          description: The ID of the Storage Container. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        storageContainerIdRef:
+                          description: Reference to a Container in storage to populate
+                            storageContainerId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        storageContainerIdSelector:
+                          description: Selector for a Container in storage to populate
+                            storageContainerId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         storageResourceId:
                           description: The ID of the Storage Account. Changing this
                             forces a new resource to be created.
@@ -2051,6 +2402,7 @@ spec:
                     description: A map of Tags which should be assigned to this HDInsight
                       Hadoop Cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tier:
                     description: Specifies the Tier which should be used for this
                       HDInsight Hadoop Cluster. Possible values are Standard or Premium.
@@ -2581,6 +2933,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetId:
                                 description: The ID of the Subnet within the Virtual
                                   Network where the Zookeeper Nodes should be provisioned
@@ -2721,6 +3074,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetId:
                                 description: The ID of the Subnet within the Virtual
                                   Network where the Zookeeper Nodes should be provisioned
@@ -2807,6 +3161,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               subnetId:
                                 description: The ID of the Subnet within the Virtual
                                   Network where the Zookeeper Nodes should be provisioned
@@ -2877,6 +3232,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         domainName:
                           description: The name of the Azure Active Directory Domain.
                             Changing this forces a new resource to be created.
@@ -2892,6 +3248,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         msiResourceId:
                           description: The User Assigned Identity for the HDInsight
                             Cluster. Changing this forces a new resource to be created.
@@ -2951,6 +3308,7 @@ spec:
                     description: A map of Tags which should be assigned to this HDInsight
                       Hadoop Cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tier:
                     description: Specifies the Tier which should be used for this
                       HDInsight Hadoop Cluster. Possible values are Standard or Premium.

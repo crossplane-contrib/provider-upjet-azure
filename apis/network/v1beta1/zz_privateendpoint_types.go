@@ -57,6 +57,19 @@ type PrivateDNSZoneGroupInitParameters struct {
 
 	// Specifies the Name of the Private DNS Zone Group.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
+	// +crossplane:generate:reference:type=PrivateDNSZone
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PrivateDNSZoneIds []*string `json:"privateDnsZoneIds,omitempty" tf:"private_dns_zone_ids,omitempty"`
+
+	// References to PrivateDNSZone to populate privateDnsZoneIds.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIdsRefs []v1.Reference `json:"privateDnsZoneIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of PrivateDNSZone to populate privateDnsZoneIds.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIdsSelector *v1.Selector `json:"privateDnsZoneIdsSelector,omitempty" tf:"-"`
 }
 
 type PrivateDNSZoneGroupObservation struct {
@@ -158,7 +171,21 @@ type PrivateEndpointInitParameters struct {
 	// A private_service_connection block as defined below.
 	PrivateServiceConnection []PrivateServiceConnectionInitParameters `json:"privateServiceConnection,omitempty" tf:"private_service_connection,omitempty"`
 
+	// The ID of the Subnet from which Private IP Addresses will be allocated for this Private Endpoint. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -213,6 +240,7 @@ type PrivateEndpointObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -267,6 +295,7 @@ type PrivateEndpointParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

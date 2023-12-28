@@ -18,6 +18,32 @@ import (
 )
 
 type ServerKeyInitParameters struct {
+
+	// The URL to a Key Vault Key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+
+	// The ID of the PostgreSQL Server. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// Reference to a Server to populate serverId.
+	// +kubebuilder:validation:Optional
+	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+
+	// Selector for a Server to populate serverId.
+	// +kubebuilder:validation:Optional
+	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
 }
 
 type ServerKeyObservation struct {

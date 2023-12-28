@@ -26,6 +26,7 @@ type RouteFilterInitParameters struct {
 	Rule []RouteFilterRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// A mapping of tags which should be assigned to the Route Filter.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,6 +45,7 @@ type RouteFilterObservation struct {
 	Rule []RouteFilterRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 
 	// A mapping of tags which should be assigned to the Route Filter.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -72,6 +74,7 @@ type RouteFilterParameters struct {
 
 	// A mapping of tags which should be assigned to the Route Filter.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

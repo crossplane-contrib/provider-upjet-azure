@@ -19,6 +19,19 @@ import (
 
 type FrontdoorCustomDomainInitParameters struct {
 
+	// The ID of the Azure DNS Zone which should be used for this Front Door Custom Domain. If you are using Azure to host your DNS domains, you must delegate the domain provider's domain name system (DNS) to an Azure DNS Zone. For more information, see Delegate a domain to Azure DNS. Otherwise, if you're using your own domain provider to handle your DNS, you must validate the Front Door Custom Domain by creating the DNS TXT records manually.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.DNSZone
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// Reference to a DNSZone in network to populate dnsZoneId.
+	// +kubebuilder:validation:Optional
+	DNSZoneIDRef *v1.Reference `json:"dnsZoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a DNSZone in network to populate dnsZoneId.
+	// +kubebuilder:validation:Optional
+	DNSZoneIDSelector *v1.Selector `json:"dnsZoneIdSelector,omitempty" tf:"-"`
+
 	// The host name of the domain. The host_name field must be the FQDN of your domain(e.g. contoso.fabrikam.com). Changing this forces a new Front Door Custom Domain to be created.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 

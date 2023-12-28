@@ -20,6 +20,7 @@ import (
 type AdditionalWorkspaceInitParameters struct {
 
 	// A list of data types which sent to workspace. Possible values are Alerts and RawEvents.
+	// +listType=set
 	DataTypes []*string `json:"dataTypes,omitempty" tf:"data_types,omitempty"`
 
 	// The resource ID of the Log Analytics Workspace.
@@ -29,6 +30,7 @@ type AdditionalWorkspaceInitParameters struct {
 type AdditionalWorkspaceObservation struct {
 
 	// A list of data types which sent to workspace. Possible values are Alerts and RawEvents.
+	// +listType=set
 	DataTypes []*string `json:"dataTypes,omitempty" tf:"data_types,omitempty"`
 
 	// The resource ID of the Log Analytics Workspace.
@@ -39,6 +41,7 @@ type AdditionalWorkspaceParameters struct {
 
 	// A list of data types which sent to workspace. Possible values are Alerts and RawEvents.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DataTypes []*string `json:"dataTypes" tf:"data_types,omitempty"`
 
 	// The resource ID of the Log Analytics Workspace.
@@ -52,6 +55,7 @@ type IOTSecuritySolutionInitParameters struct {
 	AdditionalWorkspace []AdditionalWorkspaceInitParameters `json:"additionalWorkspace,omitempty" tf:"additional_workspace,omitempty"`
 
 	// A list of disabled data sources for the Iot Security Solution. Possible value is TwinData.
+	// +listType=set
 	DisabledDataSources []*string `json:"disabledDataSources,omitempty" tf:"disabled_data_sources,omitempty"`
 
 	// Specifies the Display Name for this Iot Security Solution.
@@ -61,7 +65,22 @@ type IOTSecuritySolutionInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A list of data which is to exported to analytic workspace. Valid values include RawEvents.
+	// +listType=set
 	EventsToExport []*string `json:"eventsToExport,omitempty" tf:"events_to_export,omitempty"`
+
+	// Specifies the IoT Hub resource IDs to which this Iot Security Solution is applied.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)
+	// +listType=set
+	IOTHubIds []*string `json:"iothubIds,omitempty" tf:"iothub_ids,omitempty"`
+
+	// References to IOTHub in devices to populate iothubIds.
+	// +kubebuilder:validation:Optional
+	IOTHubIdsRefs []v1.Reference `json:"iothubIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IOTHub in devices to populate iothubIds.
+	// +kubebuilder:validation:Optional
+	IOTHubIdsSelector *v1.Selector `json:"iothubIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -79,12 +98,14 @@ type IOTSecuritySolutionInitParameters struct {
 	QueryForResources *string `json:"queryForResources,omitempty" tf:"query_for_resources,omitempty"`
 
 	// A list of subscription Ids on which the user defined resources query should be executed.
+	// +listType=set
 	QuerySubscriptionIds []*string `json:"querySubscriptionIds,omitempty" tf:"query_subscription_ids,omitempty"`
 
 	// A recommendations_enabled block of options to enable or disable as defined below.
 	RecommendationsEnabled []RecommendationsEnabledInitParameters `json:"recommendationsEnabled,omitempty" tf:"recommendations_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -94,6 +115,7 @@ type IOTSecuritySolutionObservation struct {
 	AdditionalWorkspace []AdditionalWorkspaceObservation `json:"additionalWorkspace,omitempty" tf:"additional_workspace,omitempty"`
 
 	// A list of disabled data sources for the Iot Security Solution. Possible value is TwinData.
+	// +listType=set
 	DisabledDataSources []*string `json:"disabledDataSources,omitempty" tf:"disabled_data_sources,omitempty"`
 
 	// Specifies the Display Name for this Iot Security Solution.
@@ -103,12 +125,14 @@ type IOTSecuritySolutionObservation struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A list of data which is to exported to analytic workspace. Valid values include RawEvents.
+	// +listType=set
 	EventsToExport []*string `json:"eventsToExport,omitempty" tf:"events_to_export,omitempty"`
 
 	// The ID of the Iot Security Solution resource.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies the IoT Hub resource IDs to which this Iot Security Solution is applied.
+	// +listType=set
 	IOTHubIds []*string `json:"iothubIds,omitempty" tf:"iothub_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -127,6 +151,7 @@ type IOTSecuritySolutionObservation struct {
 	QueryForResources *string `json:"queryForResources,omitempty" tf:"query_for_resources,omitempty"`
 
 	// A list of subscription Ids on which the user defined resources query should be executed.
+	// +listType=set
 	QuerySubscriptionIds []*string `json:"querySubscriptionIds,omitempty" tf:"query_subscription_ids,omitempty"`
 
 	// A recommendations_enabled block of options to enable or disable as defined below.
@@ -136,6 +161,7 @@ type IOTSecuritySolutionObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -147,6 +173,7 @@ type IOTSecuritySolutionParameters struct {
 
 	// A list of disabled data sources for the Iot Security Solution. Possible value is TwinData.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DisabledDataSources []*string `json:"disabledDataSources,omitempty" tf:"disabled_data_sources,omitempty"`
 
 	// Specifies the Display Name for this Iot Security Solution.
@@ -159,12 +186,14 @@ type IOTSecuritySolutionParameters struct {
 
 	// A list of data which is to exported to analytic workspace. Valid values include RawEvents.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EventsToExport []*string `json:"eventsToExport,omitempty" tf:"events_to_export,omitempty"`
 
 	// Specifies the IoT Hub resource IDs to which this Iot Security Solution is applied.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IOTHubIds []*string `json:"iothubIds,omitempty" tf:"iothub_ids,omitempty"`
 
 	// References to IOTHub in devices to populate iothubIds.
@@ -197,6 +226,7 @@ type IOTSecuritySolutionParameters struct {
 
 	// A list of subscription Ids on which the user defined resources query should be executed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	QuerySubscriptionIds []*string `json:"querySubscriptionIds,omitempty" tf:"query_subscription_ids,omitempty"`
 
 	// A recommendations_enabled block of options to enable or disable as defined below.
@@ -218,6 +248,7 @@ type IOTSecuritySolutionParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -230,6 +230,19 @@ type NetworkInitParameters struct {
 	// Specifies the Name of the resource group containing network resources of Azure Spring Cloud Apps. Changing this forces a new resource to be created.
 	AppNetworkResourceGroup *string `json:"appNetworkResourceGroup,omitempty" tf:"app_network_resource_group,omitempty"`
 
+	// Specifies the ID of the Subnet which should host the Spring Boot Applications deployed in this Spring Cloud Service. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	AppSubnetID *string `json:"appSubnetId,omitempty" tf:"app_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate appSubnetId.
+	// +kubebuilder:validation:Optional
+	AppSubnetIDRef *v1.Reference `json:"appSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate appSubnetId.
+	// +kubebuilder:validation:Optional
+	AppSubnetIDSelector *v1.Selector `json:"appSubnetIdSelector,omitempty" tf:"-"`
+
 	// A list of (at least 3) CIDR ranges (at least /16) which are used to host the Spring Cloud infrastructure, which must not overlap with any existing CIDR ranges in the Subnet. Changing this forces a new resource to be created.
 	CidrRanges []*string `json:"cidrRanges,omitempty" tf:"cidr_ranges,omitempty"`
 
@@ -238,6 +251,19 @@ type NetworkInitParameters struct {
 
 	// Specifies the Name of the resource group containing network resources of Azure Spring Cloud Service Runtime. Changing this forces a new resource to be created.
 	ServiceRuntimeNetworkResourceGroup *string `json:"serviceRuntimeNetworkResourceGroup,omitempty" tf:"service_runtime_network_resource_group,omitempty"`
+
+	// Specifies the ID of the Subnet where the Service Runtime components of the Spring Cloud Service will exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ServiceRuntimeSubnetID *string `json:"serviceRuntimeSubnetId,omitempty" tf:"service_runtime_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate serviceRuntimeSubnetId.
+	// +kubebuilder:validation:Optional
+	ServiceRuntimeSubnetIDRef *v1.Reference `json:"serviceRuntimeSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate serviceRuntimeSubnetId.
+	// +kubebuilder:validation:Optional
+	ServiceRuntimeSubnetIDSelector *v1.Selector `json:"serviceRuntimeSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkObservation struct {
@@ -416,6 +442,7 @@ type SpringCloudServiceInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trace block as defined below.
@@ -464,6 +491,7 @@ type SpringCloudServiceObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trace block as defined below.
@@ -518,6 +546,7 @@ type SpringCloudServiceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trace block as defined below.
@@ -530,6 +559,19 @@ type SpringCloudServiceParameters struct {
 }
 
 type TraceInitParameters struct {
+
+	// The connection string used for Application Insights.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("connection_string",true)
+	ConnectionString *string `json:"connectionString,omitempty" tf:"connection_string,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate connectionString.
+	// +kubebuilder:validation:Optional
+	ConnectionStringRef *v1.Reference `json:"connectionStringRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate connectionString.
+	// +kubebuilder:validation:Optional
+	ConnectionStringSelector *v1.Selector `json:"connectionStringSelector,omitempty" tf:"-"`
 
 	// The sampling rate of Application Insights Agent. Must be between 0.0 and 100.0. Defaults to 10.0.
 	SampleRate *float64 `json:"sampleRate,omitempty" tf:"sample_rate,omitempty"`

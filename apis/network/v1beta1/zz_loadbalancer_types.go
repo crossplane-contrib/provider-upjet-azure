@@ -34,10 +34,37 @@ type LoadBalancerFrontendIPConfigurationInitParameters struct {
 	// The version of IP that the Private IP Address is. Possible values are IPv4 or IPv6.
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
+	// The ID of a Public IP Address which should be associated with the Load Balancer.
+	// +crossplane:generate:reference:type=PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+
 	// The ID of a Public IP Prefix which should be associated with the Load Balancer. Public IP Prefix can only be used with outbound rules.
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
+	// The ID of the Subnet which should be associated with the IP Configuration.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -50,15 +77,18 @@ type LoadBalancerFrontendIPConfigurationObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The list of IDs of inbound rules that use this frontend IP.
+	// +listType=set
 	InboundNATRules []*string `json:"inboundNatRules,omitempty" tf:"inbound_nat_rules,omitempty"`
 
 	// The list of IDs of load balancing rules that use this frontend IP.
+	// +listType=set
 	LoadBalancerRules []*string `json:"loadBalancerRules,omitempty" tf:"load_balancer_rules,omitempty"`
 
 	// Specifies the name of the frontend IP configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The list of IDs outbound rules that use this frontend IP.
+	// +listType=set
 	OutboundRules []*string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty"`
 
 	// Private IP Address to assign to the Load Balancer. The last one and first four IPs in any range are reserved and cannot be manually assigned.
@@ -80,6 +110,7 @@ type LoadBalancerFrontendIPConfigurationObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -139,6 +170,7 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 
 	// Specifies a list of Availability Zones in which the IP Address for this Load Balancer should be located.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -160,6 +192,7 @@ type LoadBalancerInitParameters struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -193,6 +226,7 @@ type LoadBalancerObservation struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -233,6 +267,7 @@ type LoadBalancerParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

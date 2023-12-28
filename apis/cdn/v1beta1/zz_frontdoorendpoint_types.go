@@ -23,6 +23,7 @@ type FrontdoorEndpointInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to the Front Door Endpoint.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -41,6 +42,7 @@ type FrontdoorEndpointObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specifies a mapping of tags which should be assigned to the Front Door Endpoint.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -66,6 +68,7 @@ type FrontdoorEndpointParameters struct {
 
 	// Specifies a mapping of tags which should be assigned to the Front Door Endpoint.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

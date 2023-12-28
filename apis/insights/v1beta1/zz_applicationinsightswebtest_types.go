@@ -19,6 +19,19 @@ import (
 
 type ApplicationInsightsWebTestInitParameters struct {
 
+	// The ID of the Application Insights component on which the WebTest operates. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+
 	// An XML configuration specification for a WebTest (see here for more information).
 	Configuration *string `json:"configuration,omitempty" tf:"configuration,omitempty"`
 
@@ -43,10 +56,23 @@ type ApplicationInsightsWebTestInitParameters struct {
 	// Specifies the name of the Application Insights WebTest. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the resource group in which to create the Application Insights WebTest. Changing this forces a new resource
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Allow for retries should this WebTest fail.
 	RetryEnabled *bool `json:"retryEnabled,omitempty" tf:"retry_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.
@@ -93,6 +119,7 @@ type ApplicationInsightsWebTestObservation struct {
 	SyntheticMonitorID *string `json:"syntheticMonitorId,omitempty" tf:"synthetic_monitor_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.
@@ -166,6 +193,7 @@ type ApplicationInsightsWebTestParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Seconds until this WebTest will timeout and fail. Default is 30.

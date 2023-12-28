@@ -34,6 +34,18 @@ type ApplicationInitParameters struct {
 	// Whether public network access is allowed for the IoT Central Application. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// The name of the resource group under which the IotHub resource has to be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A sku name. Possible values is ST0, ST1, ST2, Default value is ST1
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -41,6 +53,7 @@ type ApplicationInitParameters struct {
 	SubDomain *string `json:"subDomain,omitempty" tf:"sub_domain,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
@@ -77,6 +90,7 @@ type ApplicationObservation struct {
 	SubDomain *string `json:"subDomain,omitempty" tf:"sub_domain,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.
@@ -128,6 +142,7 @@ type ApplicationParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template name. IoT Central application template name. Default is a custom application. Changing this forces a new resource to be created.

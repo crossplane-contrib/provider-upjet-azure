@@ -21,6 +21,19 @@ type SecurityCenterWorkspaceInitParameters struct {
 
 	// The scope of VMs to send their security data to the desired workspace, unless overridden by a setting with more specific scope.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// The ID of the Log Analytics Workspace to save the data in.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 type SecurityCenterWorkspaceObservation struct {

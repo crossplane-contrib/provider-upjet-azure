@@ -71,6 +71,22 @@ func (mg *FunctionJavascriptUda) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobIDRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobIDSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobID")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -155,6 +171,22 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
+	}
+	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -229,6 +261,54 @@ func (mg *OutputBlob) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageContainerNameRef,
+		Selector:     mg.Spec.InitProvider.StorageContainerNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerName")
+	}
+	mg.Spec.InitProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -287,6 +367,38 @@ func (mg *OutputEventHub) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventHubNameRef,
+		Selector:     mg.Spec.InitProvider.EventHubNameSelector,
+		To: reference.To{
+			List:    &v1beta12.EventHubList{},
+			Managed: &v1beta12.EventHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubName")
+	}
+	mg.Spec.InitProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
+		Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta12.EventHubNamespaceList{},
+			Managed: &v1beta12.EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
+	}
+	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -344,6 +456,38 @@ func (mg *OutputFunction) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionApp),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.FunctionAppRef,
+		Selector:     mg.Spec.InitProvider.FunctionAppSelector,
+		To: reference.To{
+			List:    &v1beta13.FunctionAppList{},
+			Managed: &v1beta13.FunctionApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FunctionApp")
+	}
+	mg.Spec.InitProvider.FunctionApp = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionAppRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -419,6 +563,70 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.Table = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Server),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServerRef,
+		Selector:     mg.Spec.InitProvider.ServerSelector,
+		To: reference.To{
+			List:    &v1beta14.MSSQLServerList{},
+			Managed: &v1beta14.MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Server")
+	}
+	mg.Spec.InitProvider.Server = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Table),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TableRef,
+		Selector:     mg.Spec.InitProvider.TableSelector,
+		To: reference.To{
+			List:    &v1beta11.TableList{},
+			Managed: &v1beta11.Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Table")
+	}
+	mg.Spec.InitProvider.Table = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TableRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -444,6 +652,22 @@ func (mg *OutputPowerBI) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobIDRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobIDSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobID")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -519,6 +743,70 @@ func (mg *OutputServiceBusQueue) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.QueueName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.QueueNameRef,
+		Selector:     mg.Spec.InitProvider.QueueNameSelector,
+		To: reference.To{
+			List:    &v1beta15.QueueList{},
+			Managed: &v1beta15.Queue{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.QueueName")
+	}
+	mg.Spec.InitProvider.QueueName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.QueueNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
+		Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta15.ServiceBusNamespaceList{},
+			Managed: &v1beta15.ServiceBusNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
+	}
+	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -593,6 +881,70 @@ func (mg *OutputServiceBusTopic) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.TopicName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TopicNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
+		Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta15.ServiceBusNamespaceList{},
+			Managed: &v1beta15.ServiceBusNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
+	}
+	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TopicName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.TopicNameRef,
+		Selector:     mg.Spec.InitProvider.TopicNameSelector,
+		To: reference.To{
+			List:    &v1beta15.TopicList{},
+			Managed: &v1beta15.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TopicName")
+	}
+	mg.Spec.InitProvider.TopicName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TopicNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -651,6 +1003,22 @@ func (mg *OutputSynapse) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.UserRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.User),
+		Extract:      resource.ExtractParamPath("sql_administrator_login", false),
+		Reference:    mg.Spec.InitProvider.UserRef,
+		Selector:     mg.Spec.InitProvider.UserSelector,
+		To: reference.To{
+			List:    &v1beta16.WorkspaceList{},
+			Managed: &v1beta16.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.User")
+	}
+	mg.Spec.InitProvider.User = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.UserRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -708,6 +1076,38 @@ func (mg *OutputTable) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.Table = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Table),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.TableRef,
+		Selector:     mg.Spec.InitProvider.TableSelector,
+		To: reference.To{
+			List:    &v1beta11.TableList{},
+			Managed: &v1beta11.Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Table")
+	}
+	mg.Spec.InitProvider.Table = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TableRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -783,6 +1183,70 @@ func (mg *ReferenceInputBlob) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageContainerNameRef,
+		Selector:     mg.Spec.InitProvider.StorageContainerNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerName")
+	}
+	mg.Spec.InitProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -840,6 +1304,38 @@ func (mg *ReferenceInputMSSQL) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.Server = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Database),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.DatabaseRef,
+		Selector:     mg.Spec.InitProvider.DatabaseSelector,
+		To: reference.To{
+			List:    &v1beta14.MSSQLDatabaseList{},
+			Managed: &v1beta14.MSSQLDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Database")
+	}
+	mg.Spec.InitProvider.Database = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DatabaseRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Server),
+		Extract:      resource.ExtractParamPath("fully_qualified_domain_name", true),
+		Reference:    mg.Spec.InitProvider.ServerRef,
+		Selector:     mg.Spec.InitProvider.ServerSelector,
+		To: reference.To{
+			List:    &v1beta14.MSSQLServerList{},
+			Managed: &v1beta14.MSSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Server")
+	}
+	mg.Spec.InitProvider.Server = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -914,6 +1410,70 @@ func (mg *StreamInputBlob) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageContainerNameRef,
+		Selector:     mg.Spec.InitProvider.StorageContainerNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageContainerName")
+	}
+	mg.Spec.InitProvider.StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageContainerNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1005,6 +1565,86 @@ func (mg *StreamInputEventHub) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubConsumerGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventHubConsumerGroupNameRef,
+		Selector:     mg.Spec.InitProvider.EventHubConsumerGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta12.ConsumerGroupList{},
+			Managed: &v1beta12.ConsumerGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubConsumerGroupName")
+	}
+	mg.Spec.InitProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventHubNameRef,
+		Selector:     mg.Spec.InitProvider.EventHubNameSelector,
+		To: reference.To{
+			List:    &v1beta12.EventHubList{},
+			Managed: &v1beta12.EventHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubName")
+	}
+	mg.Spec.InitProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServiceBusNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServiceBusNamespaceRef,
+		Selector:     mg.Spec.InitProvider.ServiceBusNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta12.EventHubNamespaceList{},
+			Managed: &v1beta12.EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServiceBusNamespace")
+	}
+	mg.Spec.InitProvider.ServiceBusNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServiceBusNamespaceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -1078,6 +1718,70 @@ func (mg *StreamInputIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventHubConsumerGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.EventHubConsumerGroupNameRef,
+		Selector:     mg.Spec.InitProvider.EventHubConsumerGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta12.ConsumerGroupList{},
+			Managed: &v1beta12.ConsumerGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventHubConsumerGroupName")
+	}
+	mg.Spec.InitProvider.EventHubConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventHubConsumerGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubNamespace),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.IOTHubNamespaceRef,
+		Selector:     mg.Spec.InitProvider.IOTHubNamespaceSelector,
+		To: reference.To{
+			List:    &v1beta17.IOTHubList{},
+			Managed: &v1beta17.IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubNamespace")
+	}
+	mg.Spec.InitProvider.IOTHubNamespace = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IOTHubNamespaceRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StreamAnalyticsJobName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StreamAnalyticsJobNameRef,
+		Selector:     mg.Spec.InitProvider.StreamAnalyticsJobNameSelector,
+		To: reference.To{
+			List:    &JobList{},
+			Managed: &Job{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StreamAnalyticsJobName")
+	}
+	mg.Spec.InitProvider.StreamAnalyticsJobName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StreamAnalyticsJobNameRef = rsp.ResolvedReference
 
 	return nil
 }

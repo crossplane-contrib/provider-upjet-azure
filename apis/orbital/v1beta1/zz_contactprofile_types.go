@@ -106,7 +106,21 @@ type ContactProfileInitParameters struct {
 	// Minimum viable contact duration in ISO 8601 format. Used for listing the available contacts with a spacecraft at a given ground station.
 	MinimumVariableContactDuration *string `json:"minimumVariableContactDuration,omitempty" tf:"minimum_variable_contact_duration,omitempty"`
 
+	// ARM resource identifier of the subnet delegated to the Microsoft.Orbital/orbitalGateways. Needs to be at least a class C subnet, and should not have any IP created in it. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NetworkConfigurationSubnetID *string `json:"networkConfigurationSubnetId,omitempty" tf:"network_configuration_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate networkConfigurationSubnetId.
+	// +kubebuilder:validation:Optional
+	NetworkConfigurationSubnetIDRef *v1.Reference `json:"networkConfigurationSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate networkConfigurationSubnetId.
+	// +kubebuilder:validation:Optional
+	NetworkConfigurationSubnetIDSelector *v1.Selector `json:"networkConfigurationSubnetIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -140,6 +154,7 @@ type ContactProfileObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -198,6 +213,7 @@ type ContactProfileParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

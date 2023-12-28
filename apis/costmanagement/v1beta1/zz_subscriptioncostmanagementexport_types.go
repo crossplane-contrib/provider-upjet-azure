@@ -48,6 +48,19 @@ type SubscriptionCostManagementExportExportDataOptionsParameters struct {
 
 type SubscriptionCostManagementExportExportDataStorageLocationInitParameters struct {
 
+	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
+	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+
+	// Reference to a Container in storage to populate containerId.
+	// +kubebuilder:validation:Optional
+	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate containerId.
+	// +kubebuilder:validation:Optional
+	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
+
 	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
 	RootFolderPath *string `json:"rootFolderPath,omitempty" tf:"root_folder_path,omitempty"`
 }
@@ -104,6 +117,19 @@ type SubscriptionCostManagementExportInitParameters struct {
 
 	// How often the requested information will be exported. Valid values include Annually, Daily, Monthly, Weekly.
 	RecurrenceType *string `json:"recurrenceType,omitempty" tf:"recurrence_type,omitempty"`
+
+	// The id of the subscription on which to create an export. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.Subscription
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// Reference to a Subscription in azure to populate subscriptionId.
+	// +kubebuilder:validation:Optional
+	SubscriptionIDRef *v1.Reference `json:"subscriptionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subscription in azure to populate subscriptionId.
+	// +kubebuilder:validation:Optional
+	SubscriptionIDSelector *v1.Selector `json:"subscriptionIdSelector,omitempty" tf:"-"`
 }
 
 type SubscriptionCostManagementExportObservation struct {

@@ -19,16 +19,43 @@ import (
 
 type ManagedStorageAccountInitParameters struct {
 
+	// The ID of the Key Vault where the Managed Storage Account should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
 	// Should Storage Account access key be regenerated periodically?
 	RegenerateKeyAutomatically *bool `json:"regenerateKeyAutomatically,omitempty" tf:"regenerate_key_automatically,omitempty"`
 
 	// How often Storage Account access key should be regenerated. Value needs to be in ISO 8601 duration format.
 	RegenerationPeriod *string `json:"regenerationPeriod,omitempty" tf:"regeneration_period,omitempty"`
 
+	// The ID of the Storage Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+
 	// Which Storage Account access key that is managed by Key Vault. Possible values are key1 and key2.
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 
 	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,6 +80,7 @@ type ManagedStorageAccountObservation struct {
 	StorageAccountKey *string `json:"storageAccountKey,omitempty" tf:"storage_account_key,omitempty"`
 
 	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -100,6 +128,7 @@ type ManagedStorageAccountParameters struct {
 
 	// A mapping of tags which should be assigned to the Key Vault Managed Storage Account. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

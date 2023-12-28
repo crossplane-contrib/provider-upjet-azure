@@ -95,6 +95,7 @@ type ApplicationGatewayInitParameters struct {
 	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more trusted_client_certificate blocks as defined below.
@@ -110,6 +111,7 @@ type ApplicationGatewayInitParameters struct {
 	WafConfiguration []WafConfigurationInitParameters `json:"wafConfiguration,omitempty" tf:"waf_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Application Gateway should be located. Changing this forces a new Application Gateway to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -200,6 +202,7 @@ type ApplicationGatewayObservation struct {
 	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more trusted_client_certificate blocks as defined below.
@@ -215,6 +218,7 @@ type ApplicationGatewayObservation struct {
 	WafConfiguration []WafConfigurationObservation `json:"wafConfiguration,omitempty" tf:"waf_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Application Gateway should be located. Changing this forces a new Application Gateway to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -335,6 +339,7 @@ type ApplicationGatewayParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more trusted_client_certificate blocks as defined below.
@@ -355,6 +360,7 @@ type ApplicationGatewayParameters struct {
 
 	// Specifies a list of Availability Zones in which this Application Gateway should be located. Changing this forces a new Application Gateway to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -416,9 +422,11 @@ type AutoscaleConfigurationParameters struct {
 type BackendAddressPoolInitParameters struct {
 
 	// A list of FQDN's which should be part of the Backend Address Pool.
+	// +listType=set
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// A list of IP Addresses which should be part of the Backend Address Pool.
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The name of the Backend Address Pool.
@@ -428,12 +436,14 @@ type BackendAddressPoolInitParameters struct {
 type BackendAddressPoolObservation struct {
 
 	// A list of FQDN's which should be part of the Backend Address Pool.
+	// +listType=set
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// The ID of the Backend Address Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of IP Addresses which should be part of the Backend Address Pool.
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The name of the Backend Address Pool.
@@ -444,10 +454,12 @@ type BackendAddressPoolParameters struct {
 
 	// A list of FQDN's which should be part of the Backend Address Pool.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// A list of IP Addresses which should be part of the Backend Address Pool.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPAddresses []*string `json:"ipAddresses,omitempty" tf:"ip_addresses,omitempty"`
 
 	// The name of the Backend Address Pool.
@@ -813,6 +825,32 @@ type FrontendIPConfigurationInitParameters struct {
 
 	// The name of the private link configuration to use for this frontend IP configuration.
 	PrivateLinkConfigurationName *string `json:"privateLinkConfigurationName,omitempty" tf:"private_link_configuration_name,omitempty"`
+
+	// The ID of a Public IP Address which the Application Gateway should use. The allocation method for the Public IP Address depends on the sku of this Application Gateway. Please refer to the Azure documentation for public IP addresses for details.
+	// +crossplane:generate:reference:type=PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Subnet.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type FrontendIPConfigurationObservation struct {
@@ -925,6 +963,19 @@ type GatewayIPConfigurationInitParameters struct {
 
 	// The Name of this Gateway IP Configuration.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The ID of the Subnet which the Application Gateway should be connected to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type GatewayIPConfigurationObservation struct {
@@ -1039,6 +1090,7 @@ type HTTPListenerInitParameters struct {
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// A list of Hostname(s) should be used for this HTTP Listener. It allows special wildcard characters.
+	// +listType=set
 	HostNames []*string `json:"hostNames,omitempty" tf:"host_names,omitempty"`
 
 	// The Name of the HTTP Listener.
@@ -1081,6 +1133,7 @@ type HTTPListenerObservation struct {
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
 	// A list of Hostname(s) should be used for this HTTP Listener. It allows special wildcard characters.
+	// +listType=set
 	HostNames []*string `json:"hostNames,omitempty" tf:"host_names,omitempty"`
 
 	// The ID of the HTTP Listener.
@@ -1132,6 +1185,7 @@ type HTTPListenerParameters struct {
 
 	// A list of Hostname(s) should be used for this HTTP Listener. It allows special wildcard characters.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HostNames []*string `json:"hostNames,omitempty" tf:"host_names,omitempty"`
 
 	// The Name of the HTTP Listener.
@@ -1168,6 +1222,19 @@ type IPConfigurationInitParameters struct {
 
 	// The allocation method used for the Private IP Address. Possible values are Dynamic and Static.
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+
+	// The ID of the subnet the private link configuration should connect to.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IPConfigurationObservation struct {
@@ -1224,6 +1291,7 @@ type IPConfigurationParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Application Gateway.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
@@ -1233,6 +1301,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Application Gateway.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
@@ -1243,6 +1312,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Application Gateway.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.

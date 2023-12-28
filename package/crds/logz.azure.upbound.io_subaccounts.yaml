@@ -154,6 +154,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       logz Sub Account.
                     type: object
+                    x-kubernetes-map-type: granular
                   user:
                     description: A user block as defined below. Changing this forces
                       a new resource to be created.
@@ -208,6 +209,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       logz Sub Account.
                     type: object
+                    x-kubernetes-map-type: granular
                   user:
                     description: A user block as defined below. Changing this forces
                       a new resource to be created.
@@ -427,6 +429,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       logz Sub Account.
                     type: object
+                    x-kubernetes-map-type: granular
                   user:
                     description: A user block as defined below. Changing this forces
                       a new resource to be created.

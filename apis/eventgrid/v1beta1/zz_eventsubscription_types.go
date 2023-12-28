@@ -439,6 +439,19 @@ type EventSubscriptionInitParameters struct {
 	// A retry_policy block as defined below.
 	RetryPolicy []RetryPolicyInitParameters `json:"retryPolicy,omitempty" tf:"retry_policy,omitempty"`
 
+	// Specifies the scope at which the EventGrid Event Subscription should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate scope.
+	// +kubebuilder:validation:Optional
+	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate scope.
+	// +kubebuilder:validation:Optional
+	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
+
 	// Specifies the id where the Service Bus Queue is located.
 	ServiceBusQueueEndpointID *string `json:"serviceBusQueueEndpointId,omitempty" tf:"service_bus_queue_endpoint_id,omitempty"`
 
@@ -956,6 +969,31 @@ type StorageQueueEndpointInitParameters struct {
 
 	// Storage queue message time to live in seconds.
 	QueueMessageTimeToLiveInSeconds *float64 `json:"queueMessageTimeToLiveInSeconds,omitempty" tf:"queue_message_time_to_live_in_seconds,omitempty"`
+
+	// Specifies the name of the storage queue where the Event Subscription will receive events.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Queue
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+
+	// Reference to a Queue in storage to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameRef *v1.Reference `json:"queueNameRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in storage to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+
+	// Specifies the id of the storage account id where the storage queue is located.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageQueueEndpointObservation struct {

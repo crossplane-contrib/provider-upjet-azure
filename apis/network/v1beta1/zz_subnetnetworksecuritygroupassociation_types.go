@@ -18,6 +18,32 @@ import (
 )
 
 type SubnetNetworkSecurityGroupAssociationInitParameters struct {
+
+	// The ID of the Network Security Group which should be associated with the Subnet. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
+
+	// Reference to a SecurityGroup to populate networkSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a SecurityGroup to populate networkSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Subnet. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetNetworkSecurityGroupAssociationObservation struct {

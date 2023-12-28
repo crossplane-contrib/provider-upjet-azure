@@ -24,6 +24,19 @@ type ExpressRouteCircuitConnectionInitParameters struct {
 
 	// The IPv6 address space from which to allocate customer addresses for global reach.
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
+
+	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
+	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PeerPeeringID *string `json:"peerPeeringId,omitempty" tf:"peer_peering_id,omitempty"`
+
+	// Reference to a ExpressRouteCircuitPeering to populate peerPeeringId.
+	// +kubebuilder:validation:Optional
+	PeerPeeringIDRef *v1.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
+
+	// Selector for a ExpressRouteCircuitPeering to populate peerPeeringId.
+	// +kubebuilder:validation:Optional
+	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 }
 
 type ExpressRouteCircuitConnectionObservation struct {

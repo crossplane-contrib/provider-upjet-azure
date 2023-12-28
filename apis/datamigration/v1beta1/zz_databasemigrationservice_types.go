@@ -28,7 +28,21 @@ type DatabaseMigrationServiceInitParameters struct {
 	// The SKU name of the database migration service. Possible values are Premium_4vCores, Standard_1vCores, Standard_2vCores and Standard_4vCores. Changing this forces a new resource to be created.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
+	// The ID of the virtual subnet resource to which the database migration service should be joined. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,6 +67,7 @@ type DatabaseMigrationServiceObservation struct {
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
 	// A mapping of tags to assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -99,6 +114,7 @@ type DatabaseMigrationServiceParameters struct {
 
 	// A mapping of tags to assigned to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

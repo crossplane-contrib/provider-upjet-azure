@@ -81,6 +81,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         mountPath:
                           description: The mount path of the persistent disk.
                           type: string
@@ -109,6 +110,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Spring Cloud Application.
@@ -356,6 +358,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         mountPath:
                           description: The mount path of the persistent disk.
                           type: string
@@ -384,6 +387,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Spring Cloud Application.
@@ -625,6 +629,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         mountPath:
                           description: The mount path of the persistent disk.
                           type: string
@@ -660,6 +665,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Managed Service Identity of this Spring

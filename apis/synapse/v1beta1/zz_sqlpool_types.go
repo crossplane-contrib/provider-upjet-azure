@@ -70,6 +70,7 @@ type SQLPoolInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse SQL Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -103,6 +104,7 @@ type SQLPoolObservation struct {
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse SQL Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -152,6 +154,7 @@ type SQLPoolParameters struct {
 
 	// A mapping of tags which should be assigned to the Synapse SQL Pool.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

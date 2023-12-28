@@ -58,6 +58,21 @@ func (in *DashboardInitParameters) DeepCopyInto(out *DashboardInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

@@ -43,6 +43,7 @@ type LinkedServiceOdbcBasicAuthenticationParameters struct {
 type LinkedServiceOdbcInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service ODBC.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service ODBC.
@@ -61,12 +62,14 @@ type LinkedServiceOdbcInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service ODBC.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceOdbcObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service ODBC.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service ODBC.
@@ -91,6 +94,7 @@ type LinkedServiceOdbcObservation struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service ODBC.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -98,6 +102,7 @@ type LinkedServiceOdbcParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service ODBC.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service ODBC.
@@ -136,6 +141,7 @@ type LinkedServiceOdbcParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service ODBC.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

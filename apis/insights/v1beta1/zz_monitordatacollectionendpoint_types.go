@@ -32,6 +32,7 @@ type MonitorDataCollectionEndpointInitParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// A mapping of tags which should be assigned to the Data Collection Endpoint.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -62,6 +63,7 @@ type MonitorDataCollectionEndpointObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Data Collection Endpoint.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -98,6 +100,7 @@ type MonitorDataCollectionEndpointParameters struct {
 
 	// A mapping of tags which should be assigned to the Data Collection Endpoint.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

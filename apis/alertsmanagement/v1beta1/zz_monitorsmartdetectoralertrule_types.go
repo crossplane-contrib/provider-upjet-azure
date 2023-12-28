@@ -22,6 +22,20 @@ type ActionGroupInitParameters struct {
 	// Specifies a custom email subject if Email Receiver is specified in Monitor Action Group resource.
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
+	// Specifies the action group ids.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +listType=set
+	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate ids.
+	// +kubebuilder:validation:Optional
+	IdsRefs []v1.Reference `json:"idsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate ids.
+	// +kubebuilder:validation:Optional
+	IdsSelector *v1.Selector `json:"idsSelector,omitempty" tf:"-"`
+
 	// A JSON String which Specifies the custom webhook payload if Webhook Receiver is specified in Monitor Action Group resource.
 	WebhookPayload *string `json:"webhookPayload,omitempty" tf:"webhook_payload,omitempty"`
 }
@@ -32,6 +46,7 @@ type ActionGroupObservation struct {
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// Specifies the action group ids.
+	// +listType=set
 	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
 
 	// A JSON String which Specifies the custom webhook payload if Webhook Receiver is specified in Monitor Action Group resource.
@@ -48,6 +63,7 @@ type ActionGroupParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
 
 	// References to MonitorActionGroup in insights to populate ids.
@@ -83,10 +99,37 @@ type MonitorSmartDetectorAlertRuleInitParameters struct {
 	// Specifies the name of the Monitor Smart Detector Alert Rule. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the name of the resource group in which the Monitor Smart Detector Alert Rule should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// Specifies the scopes of this Smart Detector Alert Rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +listType=set
+	ScopeResourceIds []*string `json:"scopeResourceIds,omitempty" tf:"scope_resource_ids,omitempty"`
+
+	// References to ApplicationInsights in insights to populate scopeResourceIds.
+	// +kubebuilder:validation:Optional
+	ScopeResourceIdsRefs []v1.Reference `json:"scopeResourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ApplicationInsights in insights to populate scopeResourceIds.
+	// +kubebuilder:validation:Optional
+	ScopeResourceIdsSelector *v1.Selector `json:"scopeResourceIdsSelector,omitempty" tf:"-"`
+
 	// Specifies the severity of this Smart Detector Alert Rule. Possible values are Sev0, Sev1, Sev2, Sev3 or Sev4.
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the duration (in ISO8601 format) to wait before notifying on the alert rule again.
@@ -120,12 +163,14 @@ type MonitorSmartDetectorAlertRuleObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// Specifies the scopes of this Smart Detector Alert Rule.
+	// +listType=set
 	ScopeResourceIds []*string `json:"scopeResourceIds,omitempty" tf:"scope_resource_ids,omitempty"`
 
 	// Specifies the severity of this Smart Detector Alert Rule. Possible values are Sev0, Sev1, Sev2, Sev3 or Sev4.
 	Severity *string `json:"severity,omitempty" tf:"severity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the duration (in ISO8601 format) to wait before notifying on the alert rule again.
@@ -175,6 +220,7 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ScopeResourceIds []*string `json:"scopeResourceIds,omitempty" tf:"scope_resource_ids,omitempty"`
 
 	// References to ApplicationInsights in insights to populate scopeResourceIds.
@@ -191,6 +237,7 @@ type MonitorSmartDetectorAlertRuleParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the duration (in ISO8601 format) to wait before notifying on the alert rule again.

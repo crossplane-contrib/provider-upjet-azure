@@ -127,6 +127,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of extension, available types for a publisher
                       can be found using the Azure CLI.
@@ -267,6 +268,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of extension, available types for a publisher
                       can be found using the Azure CLI.
@@ -498,6 +500,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of extension, available types for a publisher
                       can be found using the Azure CLI.

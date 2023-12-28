@@ -18,6 +18,19 @@ import (
 )
 
 type DataSetKustoClusterInitParameters struct {
+
+	// The resource ID of the Kusto Cluster to be shared with the receiver. Changing this forces a new Data Share Kusto Cluster Dataset to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	KustoClusterID *string `json:"kustoClusterId,omitempty" tf:"kusto_cluster_id,omitempty"`
+
+	// Reference to a Cluster in kusto to populate kustoClusterId.
+	// +kubebuilder:validation:Optional
+	KustoClusterIDRef *v1.Reference `json:"kustoClusterIdRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in kusto to populate kustoClusterId.
+	// +kubebuilder:validation:Optional
+	KustoClusterIDSelector *v1.Selector `json:"kustoClusterIdSelector,omitempty" tf:"-"`
 }
 
 type DataSetKustoClusterObservation struct {

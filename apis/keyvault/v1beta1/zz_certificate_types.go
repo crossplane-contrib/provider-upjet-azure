@@ -88,10 +88,24 @@ type CertificateInitParameters struct {
 	// A certificate_policy block as defined below. Changing this forces a new resource to be created.
 	CertificatePolicy []CertificatePolicyInitParameters `json:"certificatePolicy,omitempty" tf:"certificate_policy,omitempty"`
 
+	// The ID of the Key Vault where the Certificate should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Key Vault Certificate. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -131,6 +145,7 @@ type CertificateObservation struct {
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The X509 Thumbprint of the Key Vault Certificate represented as a hexadecimal string.
@@ -176,6 +191,7 @@ type CertificateParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -367,24 +383,30 @@ type SecretPropertiesParameters struct {
 type SubjectAlternativeNamesInitParameters struct {
 
 	// A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created.
+	// +listType=set
 	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
 
 	// A list of email addresses identified by this Certificate. Changing this forces a new resource to be created.
+	// +listType=set
 	Emails []*string `json:"emails,omitempty" tf:"emails,omitempty"`
 
 	// A list of User Principal Names identified by the Certificate. Changing this forces a new resource to be created.
+	// +listType=set
 	Upns []*string `json:"upns,omitempty" tf:"upns,omitempty"`
 }
 
 type SubjectAlternativeNamesObservation struct {
 
 	// A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created.
+	// +listType=set
 	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
 
 	// A list of email addresses identified by this Certificate. Changing this forces a new resource to be created.
+	// +listType=set
 	Emails []*string `json:"emails,omitempty" tf:"emails,omitempty"`
 
 	// A list of User Principal Names identified by the Certificate. Changing this forces a new resource to be created.
+	// +listType=set
 	Upns []*string `json:"upns,omitempty" tf:"upns,omitempty"`
 }
 
@@ -392,14 +414,17 @@ type SubjectAlternativeNamesParameters struct {
 
 	// A list of alternative DNS names (FQDNs) identified by the Certificate. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DNSNames []*string `json:"dnsNames,omitempty" tf:"dns_names,omitempty"`
 
 	// A list of email addresses identified by this Certificate. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Emails []*string `json:"emails,omitempty" tf:"emails,omitempty"`
 
 	// A list of User Principal Names identified by the Certificate. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Upns []*string `json:"upns,omitempty" tf:"upns,omitempty"`
 }
 
@@ -438,6 +463,7 @@ type X509CertificatePropertiesInitParameters struct {
 	ExtendedKeyUsage []*string `json:"extendedKeyUsage,omitempty" tf:"extended_key_usage,omitempty"`
 
 	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created.
+	// +listType=set
 	KeyUsage []*string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
 	// The Certificate's Subject. Changing this forces a new resource to be created.
@@ -456,6 +482,7 @@ type X509CertificatePropertiesObservation struct {
 	ExtendedKeyUsage []*string `json:"extendedKeyUsage,omitempty" tf:"extended_key_usage,omitempty"`
 
 	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created.
+	// +listType=set
 	KeyUsage []*string `json:"keyUsage,omitempty" tf:"key_usage,omitempty"`
 
 	// The Certificate's Subject. Changing this forces a new resource to be created.
@@ -476,6 +503,7 @@ type X509CertificatePropertiesParameters struct {
 
 	// A list of uses associated with this Key. Possible values include cRLSign, dataEncipherment, decipherOnly, digitalSignature, encipherOnly, keyAgreement, keyCertSign, keyEncipherment and nonRepudiation and are case-sensitive. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	KeyUsage []*string `json:"keyUsage" tf:"key_usage,omitempty"`
 
 	// The Certificate's Subject. Changing this forces a new resource to be created.

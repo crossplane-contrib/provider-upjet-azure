@@ -20,6 +20,7 @@ import (
 type SystemTopicIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid System Topic.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Event Grid System Topic. Possible values are SystemAssigned, UserAssigned.
@@ -29,6 +30,7 @@ type SystemTopicIdentityInitParameters struct {
 type SystemTopicIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid System Topic.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -45,6 +47,7 @@ type SystemTopicIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Event Grid System Topic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Event Grid System Topic. Possible values are SystemAssigned, UserAssigned.
@@ -60,7 +63,21 @@ type SystemTopicInitParameters struct {
 	// The Azure Region where the Event Grid System Topic should exist. Changing this forces a new Event Grid System Topic to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID of the Event Grid System Topic ARM Source. Changing this forces a new Event Grid System Topic to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty" tf:"source_arm_resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate sourceArmResourceId.
+	// +kubebuilder:validation:Optional
+	SourceArmResourceIDRef *v1.Reference `json:"sourceArmResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate sourceArmResourceId.
+	// +kubebuilder:validation:Optional
+	SourceArmResourceIDSelector *v1.Selector `json:"sourceArmResourceIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Event Grid System Topic.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Topic Type of the Event Grid System Topic. The topic type is validated by Azure and there may be additional topic types beyond the following: Microsoft.AppConfiguration.ConfigurationStores, Microsoft.Communication.CommunicationServices, Microsoft.ContainerRegistry.Registries, Microsoft.Devices.IoTHubs, Microsoft.EventGrid.Domains, Microsoft.EventGrid.Topics, Microsoft.Eventhub.Namespaces, Microsoft.KeyVault.vaults, Microsoft.MachineLearningServices.Workspaces, Microsoft.Maps.Accounts, Microsoft.Media.MediaServices, Microsoft.Resources.ResourceGroups, Microsoft.Resources.Subscriptions, Microsoft.ServiceBus.Namespaces, Microsoft.SignalRService.SignalR, Microsoft.Storage.StorageAccounts, Microsoft.Web.ServerFarms and Microsoft.Web.Sites. Changing this forces a new Event Grid System Topic to be created.
@@ -88,6 +105,7 @@ type SystemTopicObservation struct {
 	SourceArmResourceID *string `json:"sourceArmResourceId,omitempty" tf:"source_arm_resource_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Event Grid System Topic.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Topic Type of the Event Grid System Topic. The topic type is validated by Azure and there may be additional topic types beyond the following: Microsoft.AppConfiguration.ConfigurationStores, Microsoft.Communication.CommunicationServices, Microsoft.ContainerRegistry.Registries, Microsoft.Devices.IoTHubs, Microsoft.EventGrid.Domains, Microsoft.EventGrid.Topics, Microsoft.Eventhub.Namespaces, Microsoft.KeyVault.vaults, Microsoft.MachineLearningServices.Workspaces, Microsoft.Maps.Accounts, Microsoft.Media.MediaServices, Microsoft.Resources.ResourceGroups, Microsoft.Resources.Subscriptions, Microsoft.ServiceBus.Namespaces, Microsoft.SignalRService.SignalR, Microsoft.Storage.StorageAccounts, Microsoft.Web.ServerFarms and Microsoft.Web.Sites. Changing this forces a new Event Grid System Topic to be created.
@@ -133,6 +151,7 @@ type SystemTopicParameters struct {
 
 	// A mapping of tags which should be assigned to the Event Grid System Topic.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Topic Type of the Event Grid System Topic. The topic type is validated by Azure and there may be additional topic types beyond the following: Microsoft.AppConfiguration.ConfigurationStores, Microsoft.Communication.CommunicationServices, Microsoft.ContainerRegistry.Registries, Microsoft.Devices.IoTHubs, Microsoft.EventGrid.Domains, Microsoft.EventGrid.Topics, Microsoft.Eventhub.Namespaces, Microsoft.KeyVault.vaults, Microsoft.MachineLearningServices.Workspaces, Microsoft.Maps.Accounts, Microsoft.Media.MediaServices, Microsoft.Resources.ResourceGroups, Microsoft.Resources.Subscriptions, Microsoft.ServiceBus.Namespaces, Microsoft.SignalRService.SignalR, Microsoft.Storage.StorageAccounts, Microsoft.Web.ServerFarms and Microsoft.Web.Sites. Changing this forces a new Event Grid System Topic to be created.

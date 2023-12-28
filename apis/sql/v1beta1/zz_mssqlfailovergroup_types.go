@@ -19,6 +19,20 @@ import (
 
 type MSSQLFailoverGroupInitParameters struct {
 
+	// A set of database names to include in the failover group.
+	// +crossplane:generate:reference:type=MSSQLDatabase
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +listType=set
+	Databases []*string `json:"databases,omitempty" tf:"databases,omitempty"`
+
+	// References to MSSQLDatabase to populate databases.
+	// +kubebuilder:validation:Optional
+	DatabasesRefs []v1.Reference `json:"databasesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MSSQLDatabase to populate databases.
+	// +kubebuilder:validation:Optional
+	DatabasesSelector *v1.Selector `json:"databasesSelector,omitempty" tf:"-"`
+
 	// A partner_server block as defined below.
 	PartnerServer []PartnerServerInitParameters `json:"partnerServer,omitempty" tf:"partner_server,omitempty"`
 
@@ -29,12 +43,14 @@ type MSSQLFailoverGroupInitParameters struct {
 	ReadonlyEndpointFailoverPolicyEnabled *bool `json:"readonlyEndpointFailoverPolicyEnabled,omitempty" tf:"readonly_endpoint_failover_policy_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MSSQLFailoverGroupObservation struct {
 
 	// A set of database names to include in the failover group.
+	// +listType=set
 	Databases []*string `json:"databases,omitempty" tf:"databases,omitempty"`
 
 	// The ID of the Failover Group.
@@ -53,6 +69,7 @@ type MSSQLFailoverGroupObservation struct {
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -62,6 +79,7 @@ type MSSQLFailoverGroupParameters struct {
 	// +crossplane:generate:reference:type=MSSQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Databases []*string `json:"databases,omitempty" tf:"databases,omitempty"`
 
 	// References to MSSQLDatabase to populate databases.
@@ -100,10 +118,24 @@ type MSSQLFailoverGroupParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PartnerServerInitParameters struct {
+
+	// The ID of a partner SQL server to include in the failover group.
+	// +crossplane:generate:reference:type=MSSQLServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Reference to a MSSQLServer to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLServer to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type PartnerServerObservation struct {

@@ -29,12 +29,14 @@ type LogAnalyticsSavedSearchInitParameters struct {
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
 	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
+	// +listType=set
 	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
 
 	// The query expression for the saved search. Changing this forces a new resource to be created.
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
 	// A mapping of tags which should be assigned to the Logs Analytics Saved Search. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,6 +52,7 @@ type LogAnalyticsSavedSearchObservation struct {
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
 	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
+	// +listType=set
 	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
 
 	// The Log Analytics Saved Search ID.
@@ -62,6 +65,7 @@ type LogAnalyticsSavedSearchObservation struct {
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
 	// A mapping of tags which should be assigned to the Logs Analytics Saved Search. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -81,6 +85,7 @@ type LogAnalyticsSavedSearchParameters struct {
 
 	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
 
 	// Specifies the ID of the Log Analytics Workspace that the Saved Search will be associated with. Changing this forces a new resource to be created.
@@ -103,6 +108,7 @@ type LogAnalyticsSavedSearchParameters struct {
 
 	// A mapping of tags which should be assigned to the Logs Analytics Saved Search. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

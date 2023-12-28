@@ -74,6 +74,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -182,6 +183,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   passwordSecretRef:
                     description: Password to logon to the SFTP Server for Basic Authentication.
                     properties:
@@ -229,6 +231,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -258,6 +261,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   port:
                     description: The TCP port number that the SFTP server uses to
                       listen for client connection. Default value is 22.
@@ -461,6 +465,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -497,6 +502,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   port:
                     description: The TCP port number that the SFTP server uses to
                       listen for client connection. Default value is 22.

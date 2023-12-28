@@ -26,6 +26,7 @@ type ConnectionInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
+	// +mapType=granular
 	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -47,6 +48,7 @@ type ConnectionObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 
 	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
+	// +mapType=granular
 	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -88,6 +90,7 @@ type ConnectionParameters struct {
 
 	// A mapping of key value pairs passed to the connection. Different type needs different parameters in the values. Builtin types have required field values as below:
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Values map[string]*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 

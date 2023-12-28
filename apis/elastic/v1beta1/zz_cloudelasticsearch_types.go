@@ -35,6 +35,7 @@ type CloudElasticsearchInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Elasticsearch resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -80,6 +81,7 @@ type CloudElasticsearchObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Elasticsearch resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -120,6 +122,7 @@ type CloudElasticsearchParameters struct {
 
 	// A mapping of tags which should be assigned to the Elasticsearch resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

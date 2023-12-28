@@ -26,6 +26,7 @@ type BotConnectionInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A map of additional parameters to apply to the connection.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The Scopes at which the connection should be applied.
@@ -35,6 +36,7 @@ type BotConnectionInitParameters struct {
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -53,6 +55,7 @@ type BotConnectionObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A map of additional parameters to apply to the connection.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the resource group in which to create the Bot Connection. Changing this forces a new resource to be created.
@@ -65,6 +68,7 @@ type BotConnectionObservation struct {
 	ServiceProviderName *string `json:"serviceProviderName,omitempty" tf:"service_provider_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -98,6 +102,7 @@ type BotConnectionParameters struct {
 
 	// A map of additional parameters to apply to the connection.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the resource group in which to create the Bot Connection. Changing this forces a new resource to be created.
@@ -123,6 +128,7 @@ type BotConnectionParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

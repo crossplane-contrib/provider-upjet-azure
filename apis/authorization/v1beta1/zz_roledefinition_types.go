@@ -23,12 +23,14 @@ type PermissionsInitParameters struct {
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// One or more Allowed Data Actions, such as *, Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +listType=set
 	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
 
 	// One or more Disallowed Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
 	NotActions []*string `json:"notActions,omitempty" tf:"not_actions,omitempty"`
 
 	// One or more Disallowed Data Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +listType=set
 	NotDataActions []*string `json:"notDataActions,omitempty" tf:"not_data_actions,omitempty"`
 }
 
@@ -38,12 +40,14 @@ type PermissionsObservation struct {
 	Actions []*string `json:"actions,omitempty" tf:"actions,omitempty"`
 
 	// One or more Allowed Data Actions, such as *, Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +listType=set
 	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
 
 	// One or more Disallowed Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
 	NotActions []*string `json:"notActions,omitempty" tf:"not_actions,omitempty"`
 
 	// One or more Disallowed Data Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
+	// +listType=set
 	NotDataActions []*string `json:"notDataActions,omitempty" tf:"not_data_actions,omitempty"`
 }
 
@@ -55,6 +59,7 @@ type PermissionsParameters struct {
 
 	// One or more Allowed Data Actions, such as *, Microsoft.Storage/storageAccounts/blobServices/containers/blobs/read. See 'Azure Resource Manager resource provider operations' for details.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DataActions []*string `json:"dataActions,omitempty" tf:"data_actions,omitempty"`
 
 	// One or more Disallowed Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
@@ -63,6 +68,7 @@ type PermissionsParameters struct {
 
 	// One or more Disallowed Data Actions, such as *, Microsoft.Resources/subscriptions/resourceGroups/read. See 'Azure Resource Manager resource provider operations' for details.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	NotDataActions []*string `json:"notDataActions,omitempty" tf:"not_data_actions,omitempty"`
 }
 

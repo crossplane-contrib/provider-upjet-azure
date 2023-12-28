@@ -101,6 +101,18 @@ type PermissionScopeInitParameters struct {
 	// A permissions block as defined below.
 	Permissions []PermissionsInitParameters `json:"permissions,omitempty" tf:"permissions,omitempty"`
 
+	// The container name (when service is set to blob) or the file share name (when service is set to file), used by the Storage Account Local User.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	ResourceName *string `json:"resourceName,omitempty" tf:"resource_name,omitempty"`
+
+	// Reference to a Container in storage to populate resourceName.
+	// +kubebuilder:validation:Optional
+	ResourceNameRef *v1.Reference `json:"resourceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate resourceName.
+	// +kubebuilder:validation:Optional
+	ResourceNameSelector *v1.Selector `json:"resourceNameSelector,omitempty" tf:"-"`
+
 	// The storage service used by this Storage Account Local User. Possible values are blob and file.
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 }

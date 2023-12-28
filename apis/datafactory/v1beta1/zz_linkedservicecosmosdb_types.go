@@ -23,6 +23,7 @@ type LinkedServiceCosmosDBInitParameters struct {
 	AccountEndpoint *string `json:"accountEndpoint,omitempty" tf:"account_endpoint,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -38,6 +39,7 @@ type LinkedServiceCosmosDBInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -47,6 +49,7 @@ type LinkedServiceCosmosDBObservation struct {
 	AccountEndpoint *string `json:"accountEndpoint,omitempty" tf:"account_endpoint,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -68,6 +71,7 @@ type LinkedServiceCosmosDBObservation struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -83,6 +87,7 @@ type LinkedServiceCosmosDBParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -121,6 +126,7 @@ type LinkedServiceCosmosDBParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

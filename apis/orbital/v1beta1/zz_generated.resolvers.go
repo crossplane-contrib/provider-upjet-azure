@@ -54,6 +54,22 @@ func (mg *ContactProfile) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkConfigurationSubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.NetworkConfigurationSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.NetworkConfigurationSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkConfigurationSubnetID")
+	}
+	mg.Spec.InitProvider.NetworkConfigurationSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NetworkConfigurationSubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 

@@ -112,6 +112,19 @@ type BudgetResourceGroupInitParameters struct {
 	// One or more notification blocks as defined below.
 	Notification []BudgetResourceGroupNotificationInitParameters `json:"notification,omitempty" tf:"notification,omitempty"`
 
+	// The ID of the Resource Group to create the consumption budget for in the form of /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1. Changing this forces a new Resource Group Consumption Budget to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDRef *v1.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+
 	// The time covered by a budget. Tracking of the amount will be reset based on the time grain. Must be one of BillingAnnual, BillingMonth, BillingQuarter, Annually, Monthly and Quarterly. Defaults to Monthly. Changing this forces a new resource to be created.
 	TimeGrain *string `json:"timeGrain,omitempty" tf:"time_grain,omitempty"`
 

@@ -25,6 +25,19 @@ type SecretInitParameters struct {
 	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
+	// The ID of the Key Vault where the Secret should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Key Vault Secret. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -32,6 +45,7 @@ type SecretInitParameters struct {
 	NotBeforeDate *string `json:"notBeforeDate,omitempty" tf:"not_before_date,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -62,6 +76,7 @@ type SecretObservation struct {
 	ResourceVersionlessID *string `json:"resourceVersionlessId,omitempty" tf:"resource_versionless_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The current version of the Key Vault Secret.
@@ -105,6 +120,7 @@ type SecretParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value of the Key Vault Secret.

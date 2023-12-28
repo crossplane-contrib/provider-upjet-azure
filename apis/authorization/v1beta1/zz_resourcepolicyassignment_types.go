@@ -52,6 +52,7 @@ type OverridesSelectorsParameters struct {
 type ResourcePolicyAssignmentIdentityInitParameters struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
@@ -61,6 +62,7 @@ type ResourcePolicyAssignmentIdentityInitParameters struct {
 type ResourcePolicyAssignmentIdentityObservation struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID of the Policy Assignment for this Resource.
@@ -77,6 +79,7 @@ type ResourcePolicyAssignmentIdentityParameters struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
@@ -118,6 +121,19 @@ type ResourcePolicyAssignmentInitParameters struct {
 
 	// A JSON mapping of any Parameters for this Policy.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.PolicyDefinition
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
+
+	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
+	// +kubebuilder:validation:Optional
+	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+
+	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
+	// +kubebuilder:validation:Optional
+	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Resource (or Resource Scope) where this should be applied. Changing this forces a new Resource Policy Assignment to be created.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`

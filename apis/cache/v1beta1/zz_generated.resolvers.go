@@ -55,6 +55,22 @@ func (mg *RedisCache) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SubnetIDRef,
+		Selector:     mg.Spec.InitProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
+	}
+	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -122,6 +138,22 @@ func (mg *RedisEnterpriseDatabase) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -222,6 +254,22 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.TargetRedisCacheName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetRedisCacheNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedRedisCacheID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.LinkedRedisCacheIDRef,
+		Selector:     mg.Spec.InitProvider.LinkedRedisCacheIDSelector,
+		To: reference.To{
+			List:    &RedisCacheList{},
+			Managed: &RedisCache{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedRedisCacheID")
+	}
+	mg.Spec.InitProvider.LinkedRedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedRedisCacheIDRef = rsp.ResolvedReference
 
 	return nil
 }

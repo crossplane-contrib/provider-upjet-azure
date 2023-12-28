@@ -168,6 +168,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Virtual WAN.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: 'Specifies the Virtual WAN type. Possible Values
                       include: Basic and Standard. Defaults to Standard.'
@@ -207,6 +208,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Virtual WAN.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: 'Specifies the Virtual WAN type. Possible Values
                       include: Basic and Standard. Defaults to Standard.'
@@ -411,6 +413,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Virtual WAN.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: 'Specifies the Virtual WAN type. Possible Values
                       include: Basic and Standard. Defaults to Standard.'

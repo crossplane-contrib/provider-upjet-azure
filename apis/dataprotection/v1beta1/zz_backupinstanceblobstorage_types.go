@@ -19,8 +19,34 @@ import (
 
 type BackupInstanceBlobStorageInitParameters struct {
 
+	// The ID of the Backup Policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupPolicyBlobStorage
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// Reference to a BackupPolicyBlobStorage in dataprotection to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackupPolicyBlobStorage in dataprotection to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BackupInstanceBlobStorageObservation struct {

@@ -20,6 +20,7 @@ import (
 type CustomDataSetInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Dataset.
@@ -35,6 +36,7 @@ type CustomDataSetInitParameters struct {
 	LinkedService []LinkedServiceInitParameters `json:"linkedService,omitempty" tf:"linked_service,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A JSON object that contains the schema of the Data Factory Dataset.
@@ -50,6 +52,7 @@ type CustomDataSetInitParameters struct {
 type CustomDataSetObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Dataset.
@@ -71,6 +74,7 @@ type CustomDataSetObservation struct {
 	LinkedService []LinkedServiceObservation `json:"linkedService,omitempty" tf:"linked_service,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Dataset.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A JSON object that contains the schema of the Data Factory Dataset.
@@ -87,6 +91,7 @@ type CustomDataSetParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Dataset.
@@ -121,6 +126,7 @@ type CustomDataSetParameters struct {
 
 	// A map of parameters to associate with the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A JSON object that contains the schema of the Data Factory Dataset.
@@ -138,7 +144,20 @@ type CustomDataSetParameters struct {
 
 type LinkedServiceInitParameters struct {
 
+	// The name of the Data Factory Linked Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedCustomService
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a LinkedCustomService in datafactory to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedCustomService in datafactory to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -148,6 +167,7 @@ type LinkedServiceObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -168,6 +188,7 @@ type LinkedServiceParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

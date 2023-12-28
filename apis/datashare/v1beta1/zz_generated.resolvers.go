@@ -117,6 +117,58 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 		mg.Spec.ForProvider.StorageAccount[i3].ResourceGroupNameRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ContainerNameRef,
+		Selector:     mg.Spec.InitProvider.ContainerNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ContainerList{},
+			Managed: &v1beta11.Container{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerName")
+	}
+	mg.Spec.InitProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].NameSelector,
+			To: reference.To{
+				List:    &v1beta11.AccountList{},
+				Managed: &v1beta11.Account{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].Name")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].NameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameSelector,
+			To: reference.To{
+				List:    &v1beta1.ResourceGroupList{},
+				Managed: &v1beta1.ResourceGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].ResourceGroupNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -176,6 +228,38 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FileSystemNameRef,
+		Selector:     mg.Spec.InitProvider.FileSystemNameSelector,
+		To: reference.To{
+			List:    &v1beta11.DataLakeGen2FileSystemList{},
+			Managed: &v1beta11.DataLakeGen2FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FileSystemName")
+	}
+	mg.Spec.InitProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FileSystemNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -218,6 +302,22 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoClusterID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KustoClusterIDRef,
+		Selector:     mg.Spec.InitProvider.KustoClusterIDSelector,
+		To: reference.To{
+			List:    &v1beta12.ClusterList{},
+			Managed: &v1beta12.Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KustoClusterID")
+	}
+	mg.Spec.InitProvider.KustoClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KustoClusterIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -259,6 +359,22 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoDatabaseID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KustoDatabaseIDRef,
+		Selector:     mg.Spec.InitProvider.KustoDatabaseIDSelector,
+		To: reference.To{
+			List:    &v1beta12.DatabaseList{},
+			Managed: &v1beta12.Database{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KustoDatabaseID")
+	}
+	mg.Spec.InitProvider.KustoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KustoDatabaseIDRef = rsp.ResolvedReference
 
 	return nil
 }

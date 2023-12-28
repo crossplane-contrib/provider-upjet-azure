@@ -43,6 +43,20 @@ type LoadBalancerBackendAddressPoolAddressInitParameters struct {
 
 	// The Static IP Address which should be allocated to this Backend Address Pool.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
+
+	// The ID of the Virtual Network within which the Backend Address Pool should exist.
+	// For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
+	// +crossplane:generate:reference:type=VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
+
+	// Reference to a VirtualNetwork to populate virtualNetworkId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkIDRef *v1.Reference `json:"virtualNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetwork to populate virtualNetworkId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkIDSelector *v1.Selector `json:"virtualNetworkIdSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerBackendAddressPoolAddressObservation struct {

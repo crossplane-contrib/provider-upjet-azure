@@ -117,6 +117,32 @@ type SpringCloudConnectionInitParameters struct {
 	// An option to store secret value in secure place. An secret_store block as defined below.
 	SecretStore []SecretStoreInitParameters `json:"secretStore,omitempty" tf:"secret_store,omitempty"`
 
+	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudJavaDeployment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
+
+	// Reference to a SpringCloudJavaDeployment in appplatform to populate springCloudId.
+	// +kubebuilder:validation:Optional
+	SpringCloudIDRef *v1.Reference `json:"springCloudIdRef,omitempty" tf:"-"`
+
+	// Selector for a SpringCloudJavaDeployment in appplatform to populate springCloudId.
+	// +kubebuilder:validation:Optional
+	SpringCloudIDSelector *v1.Selector `json:"springCloudIdSelector,omitempty" tf:"-"`
+
+	// The ID of the target resource. Changing this forces a new resource to be created. Possible values are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.SQLDatabase
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a SQLDatabase in cosmosdb to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a SQLDatabase in cosmosdb to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+
 	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
 	VnetSolution *string `json:"vnetSolution,omitempty" tf:"vnet_solution,omitempty"`
 }

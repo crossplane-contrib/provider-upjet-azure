@@ -75,5 +75,42 @@ func (mg *Configuration) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].IdentityClientID),
+			Extract:      resource.ExtractParamPath("client_id", true),
+			Reference:    mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef,
+			Selector:     mg.Spec.InitProvider.Encryption[i3].IdentityClientIDSelector,
+			To: reference.To{
+				List:    &v1beta1.UserAssignedIdentityList{},
+				Managed: &v1beta1.UserAssignedIdentity{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].IdentityClientID")
+		}
+		mg.Spec.InitProvider.Encryption[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierRef,
+			Selector:     mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierSelector,
+			To: reference.To{
+				List:    &v1beta11.KeyList{},
+				Managed: &v1beta11.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier")
+		}
+		mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifier = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].KeyVaultKeyIdentifierRef = rsp.ResolvedReference
+
+	}
+
 	return nil
 }

@@ -41,6 +41,7 @@ type ClusterInitParameters struct {
 	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// An list of language_extensions to enable. Valid values are: PYTHON and R.
+	// +listType=set
 	LanguageExtensions []*string `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
 
 	// The location where the Kusto Cluster should be created. Changing this forces a new resource to be created.
@@ -68,6 +69,7 @@ type ClusterInitParameters struct {
 	StreamingIngestionEnabled *bool `json:"streamingIngestionEnabled,omitempty" tf:"streaming_ingestion_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of tenant IDs that are trusted by the cluster. Default setting trusts all other tenants. Use trusted_external_tenants = ["*"] to explicitly allow all other tenants, trusted_external_tenants = ["MyTenantOnly"] for only your tenant or trusted_external_tenants = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
@@ -77,6 +79,7 @@ type ClusterInitParameters struct {
 	VirtualNetworkConfiguration []VirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -110,6 +113,7 @@ type ClusterObservation struct {
 	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// An list of language_extensions to enable. Valid values are: PYTHON and R.
+	// +listType=set
 	LanguageExtensions []*string `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
 
 	// The location where the Kusto Cluster should be created. Changing this forces a new resource to be created.
@@ -140,6 +144,7 @@ type ClusterObservation struct {
 	StreamingIngestionEnabled *bool `json:"streamingIngestionEnabled,omitempty" tf:"streaming_ingestion_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of tenant IDs that are trusted by the cluster. Default setting trusts all other tenants. Use trusted_external_tenants = ["*"] to explicitly allow all other tenants, trusted_external_tenants = ["MyTenantOnly"] for only your tenant or trusted_external_tenants = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
@@ -152,6 +157,7 @@ type ClusterObservation struct {
 	VirtualNetworkConfiguration []VirtualNetworkConfigurationObservation `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -187,6 +193,7 @@ type ClusterParameters struct {
 
 	// An list of language_extensions to enable. Valid values are: PYTHON and R.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LanguageExtensions []*string `json:"languageExtensions,omitempty" tf:"language_extensions,omitempty"`
 
 	// The location where the Kusto Cluster should be created. Changing this forces a new resource to be created.
@@ -236,6 +243,7 @@ type ClusterParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a list of tenant IDs that are trusted by the cluster. Default setting trusts all other tenants. Use trusted_external_tenants = ["*"] to explicitly allow all other tenants, trusted_external_tenants = ["MyTenantOnly"] for only your tenant or trusted_external_tenants = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
@@ -248,12 +256,14 @@ type ClusterParameters struct {
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kusto Cluster.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that is configured on this Kusto Cluster. Possible values are: SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
@@ -263,6 +273,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kusto Cluster.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this System Assigned Managed Service Identity.
@@ -279,6 +290,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kusto Cluster.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that is configured on this Kusto Cluster. Possible values are: SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
@@ -351,6 +363,19 @@ type VirtualNetworkConfigurationInitParameters struct {
 
 	// Engine service's public IP address resource id.
 	EnginePublicIPID *string `json:"enginePublicIpId,omitempty" tf:"engine_public_ip_id,omitempty"`
+
+	// The subnet resource id.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkConfigurationObservation struct {

@@ -20,10 +20,24 @@ import (
 type VirtualHubRouteTableRouteInitParameters_2 struct {
 
 	// A list of destination addresses for this route.
+	// +listType=set
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.
 	DestinationsType *string `json:"destinationsType,omitempty" tf:"destinations_type,omitempty"`
+
+	// The next hop's resource ID.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHubConnection
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NextHop *string `json:"nextHop,omitempty" tf:"next_hop,omitempty"`
+
+	// Reference to a VirtualHubConnection in network to populate nextHop.
+	// +kubebuilder:validation:Optional
+	NextHopRef *v1.Reference `json:"nextHopRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualHubConnection in network to populate nextHop.
+	// +kubebuilder:validation:Optional
+	NextHopSelector *v1.Selector `json:"nextHopSelector,omitempty" tf:"-"`
 
 	// The type of next hop. Currently the only possible value is ResourceId. Defaults to ResourceId.
 	NextHopType *string `json:"nextHopType,omitempty" tf:"next_hop_type,omitempty"`
@@ -32,6 +46,7 @@ type VirtualHubRouteTableRouteInitParameters_2 struct {
 type VirtualHubRouteTableRouteObservation_2 struct {
 
 	// A list of destination addresses for this route.
+	// +listType=set
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.
@@ -54,6 +69,7 @@ type VirtualHubRouteTableRouteParameters_2 struct {
 
 	// A list of destination addresses for this route.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Destinations []*string `json:"destinations,omitempty" tf:"destinations,omitempty"`
 
 	// The type of destinations. Possible values are CIDR, ResourceId and Service.

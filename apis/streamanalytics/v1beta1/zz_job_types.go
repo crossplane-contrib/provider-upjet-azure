@@ -81,6 +81,7 @@ type JobInitParameters struct {
 	StreamingUnits *float64 `json:"streamingUnits,omitempty" tf:"streaming_units,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the query that will be run in the streaming job, written in Stream Analytics Query Language (SAQL).
@@ -138,6 +139,7 @@ type JobObservation struct {
 	StreamingUnits *float64 `json:"streamingUnits,omitempty" tf:"streaming_units,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the query that will be run in the streaming job, written in Stream Analytics Query Language (SAQL).
@@ -212,6 +214,7 @@ type JobParameters struct {
 
 	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the query that will be run in the streaming job, written in Stream Analytics Query Language (SAQL).

@@ -50,6 +50,7 @@ type ManagerInitParameters struct {
 	ScopeAccesses []*string `json:"scopeAccesses,omitempty" tf:"scope_accesses,omitempty"`
 
 	// A mapping of tags which should be assigned to the Network Managers.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -77,6 +78,7 @@ type ManagerObservation struct {
 	ScopeAccesses []*string `json:"scopeAccesses,omitempty" tf:"scope_accesses,omitempty"`
 
 	// A mapping of tags which should be assigned to the Network Managers.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -113,6 +115,7 @@ type ManagerParameters struct {
 
 	// A mapping of tags which should be assigned to the Network Managers.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -55,6 +55,7 @@ type ProviderInitParameters struct {
 	SgxEnclavePolicyBase64 *string `json:"sgxEnclavePolicyBase64,omitempty" tf:"sgx_enclave_policy_base64,omitempty"`
 
 	// A mapping of tags which should be assigned to the Attestation Provider.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
@@ -87,6 +88,7 @@ type ProviderObservation struct {
 	SgxEnclavePolicyBase64 *string `json:"sgxEnclavePolicyBase64,omitempty" tf:"sgx_enclave_policy_base64,omitempty"`
 
 	// A mapping of tags which should be assigned to the Attestation Provider.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.
@@ -132,6 +134,7 @@ type ProviderParameters struct {
 
 	// A mapping of tags which should be assigned to the Attestation Provider.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the base64 URI Encoded RFC 7519 JWT that should be used for the TPM Policy.

@@ -30,6 +30,18 @@ type IOTHubEndpointServiceBusQueueInitParameters struct {
 
 	// ID of the User Managed Identity used to authenticate against the Service Bus Queue endpoint.
 	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+
+	// The name of the resource group under which the Service Bus Queue has been created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type IOTHubEndpointServiceBusQueueObservation struct {

@@ -82,6 +82,25 @@ func (mg *AccountLocalUser) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PermissionScope); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PermissionScope[i3].ResourceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.PermissionScope[i3].ResourceNameRef,
+			Selector:     mg.Spec.InitProvider.PermissionScope[i3].ResourceNameSelector,
+			To: reference.To{
+				List:    &ContainerList{},
+				Managed: &Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.PermissionScope[i3].ResourceName")
+		}
+		mg.Spec.InitProvider.PermissionScope[i3].ResourceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.PermissionScope[i3].ResourceNameRef = rsp.ResolvedReference
+
+	}
+
 	return nil
 }
 
@@ -107,6 +126,22 @@ func (mg *AccountNetworkRules) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -194,6 +229,40 @@ func (mg *BlobInventoryPolicy) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rules); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rules[i3].StorageContainerName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Rules[i3].StorageContainerNameRef,
+			Selector:     mg.Spec.InitProvider.Rules[i3].StorageContainerNameSelector,
+			To: reference.To{
+				List:    &ContainerList{},
+				Managed: &Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Rules[i3].StorageContainerName")
+		}
+		mg.Spec.InitProvider.Rules[i3].StorageContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Rules[i3].StorageContainerNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -246,6 +315,22 @@ func (mg *DataLakeGen2FileSystem) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -288,6 +373,38 @@ func (mg *DataLakeGen2Path) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FileSystemName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.FileSystemNameRef,
+		Selector:     mg.Spec.InitProvider.FileSystemNameSelector,
+		To: reference.To{
+			List:    &DataLakeGen2FileSystemList{},
+			Managed: &DataLakeGen2FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FileSystemName")
+	}
+	mg.Spec.InitProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FileSystemNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -314,6 +431,22 @@ func (mg *EncryptionScope) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -339,6 +472,22 @@ func (mg *ManagementPolicy) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -417,6 +566,74 @@ func (mg *ObjectReplication) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.SourceStorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceStorageAccountIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DestinationStorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DestinationStorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.DestinationStorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DestinationStorageAccountID")
+	}
+	mg.Spec.InitProvider.DestinationStorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DestinationStorageAccountIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rules); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rules[i3].DestinationContainerName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Rules[i3].DestinationContainerNameRef,
+			Selector:     mg.Spec.InitProvider.Rules[i3].DestinationContainerNameSelector,
+			To: reference.To{
+				List:    &ContainerList{},
+				Managed: &Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Rules[i3].DestinationContainerName")
+		}
+		mg.Spec.InitProvider.Rules[i3].DestinationContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Rules[i3].DestinationContainerNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rules); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Rules[i3].SourceContainerName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Rules[i3].SourceContainerNameRef,
+			Selector:     mg.Spec.InitProvider.Rules[i3].SourceContainerNameSelector,
+			To: reference.To{
+				List:    &ContainerList{},
+				Managed: &Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Rules[i3].SourceContainerName")
+		}
+		mg.Spec.InitProvider.Rules[i3].SourceContainerName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Rules[i3].SourceContainerNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceStorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SourceStorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.SourceStorageAccountIDSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceStorageAccountID")
+	}
+	mg.Spec.InitProvider.SourceStorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceStorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -512,6 +729,38 @@ func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ShareNameRef,
+		Selector:     mg.Spec.InitProvider.ShareNameSelector,
+		To: reference.To{
+			List:    &ShareList{},
+			Managed: &Share{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ShareName")
+	}
+	mg.Spec.InitProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ShareNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -537,6 +786,22 @@ func (mg *Table) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -579,6 +844,38 @@ func (mg *TableEntity) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &AccountList{},
+			Managed: &Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
+		Extract:      resource.ExtractParamPath("name", false),
+		Reference:    mg.Spec.InitProvider.TableNameRef,
+		Selector:     mg.Spec.InitProvider.TableNameSelector,
+		To: reference.To{
+			List:    &TableList{},
+			Managed: &Table{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
+	}
+	mg.Spec.InitProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TableNameRef = rsp.ResolvedReference
 
 	return nil
 }

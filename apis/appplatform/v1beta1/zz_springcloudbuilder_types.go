@@ -54,6 +54,19 @@ type SpringCloudBuilderInitParameters struct {
 	// The name which should be used for this Spring Cloud Builder. Changing this forces a new Spring Cloud Builder to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Builder to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
+
+	// Reference to a SpringCloudService in appplatform to populate springCloudServiceId.
+	// +kubebuilder:validation:Optional
+	SpringCloudServiceIDRef *v1.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
+
+	// Selector for a SpringCloudService in appplatform to populate springCloudServiceId.
+	// +kubebuilder:validation:Optional
+	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
+
 	// A stack block as defined below.
 	Stack []StackInitParameters `json:"stack,omitempty" tf:"stack,omitempty"`
 }

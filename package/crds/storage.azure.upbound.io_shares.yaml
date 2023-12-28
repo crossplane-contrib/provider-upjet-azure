@@ -112,6 +112,7 @@ spec:
                       type: string
                     description: A mapping of MetaData for this File Share.
                     type: object
+                    x-kubernetes-map-type: granular
                   quota:
                     description: The maximum size of the share, in gigabytes. For
                       Standard storage accounts, this must be 1GB (or higher) and
@@ -254,6 +255,7 @@ spec:
                       type: string
                     description: A mapping of MetaData for this File Share.
                     type: object
+                    x-kubernetes-map-type: granular
                   quota:
                     description: The maximum size of the share, in gigabytes. For
                       Standard storage accounts, this must be 1GB (or higher) and
@@ -480,6 +482,7 @@ spec:
                       type: string
                     description: A mapping of MetaData for this File Share.
                     type: object
+                    x-kubernetes-map-type: granular
                   quota:
                     description: The maximum size of the share, in gigabytes. For
                       Standard storage accounts, this must be 1GB (or higher) and

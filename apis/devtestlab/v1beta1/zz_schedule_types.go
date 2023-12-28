@@ -73,6 +73,7 @@ type ScheduleInitParameters struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The task type of the schedule. Possible values include LabVmsShutdownTask and LabVmAutoStart.
@@ -151,6 +152,7 @@ type ScheduleObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The task type of the schedule. Possible values include LabVmsShutdownTask and LabVmAutoStart.
@@ -213,6 +215,7 @@ type ScheduleParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The task type of the schedule. Possible values include LabVmsShutdownTask and LabVmAutoStart.

@@ -38,6 +38,7 @@ type VirtualMachineExtensionInitParameters struct {
 	Settings *string `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of extension, available types for a publisher can be found using the Azure CLI.
@@ -71,6 +72,7 @@ type VirtualMachineExtensionObservation struct {
 	Settings *string `json:"settings,omitempty" tf:"settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of extension, available types for a publisher can be found using the Azure CLI.
@@ -115,6 +117,7 @@ type VirtualMachineExtensionParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of extension, available types for a publisher can be found using the Azure CLI.

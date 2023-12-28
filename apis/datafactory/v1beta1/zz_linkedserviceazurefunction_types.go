@@ -49,6 +49,7 @@ type KeyVaultKeyParameters struct {
 type LinkedServiceAzureFunctionInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -64,6 +65,7 @@ type LinkedServiceAzureFunctionInitParameters struct {
 	KeyVaultKey []KeyVaultKeyInitParameters `json:"keyVaultKey,omitempty" tf:"key_vault_key,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The url of the Azure Function.
@@ -73,6 +75,7 @@ type LinkedServiceAzureFunctionInitParameters struct {
 type LinkedServiceAzureFunctionObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -94,6 +97,7 @@ type LinkedServiceAzureFunctionObservation struct {
 	KeyVaultKey []KeyVaultKeyObservation `json:"keyVaultKey,omitempty" tf:"key_vault_key,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The url of the Azure Function.
@@ -104,6 +108,7 @@ type LinkedServiceAzureFunctionParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -142,6 +147,7 @@ type LinkedServiceAzureFunctionParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The url of the Azure Function.

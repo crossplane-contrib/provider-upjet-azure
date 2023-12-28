@@ -26,6 +26,7 @@ type ClusterInitParameters struct {
 	StreamingCapacity *float64 `json:"streamingCapacity,omitempty" tf:"streaming_capacity,omitempty"`
 
 	// A mapping of tags which should be assigned to the Stream Analytics.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -44,6 +45,7 @@ type ClusterObservation struct {
 	StreamingCapacity *float64 `json:"streamingCapacity,omitempty" tf:"streaming_capacity,omitempty"`
 
 	// A mapping of tags which should be assigned to the Stream Analytics.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -72,6 +74,7 @@ type ClusterParameters struct {
 
 	// A mapping of tags which should be assigned to the Stream Analytics.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -30,6 +30,19 @@ type NATIPConfigurationInitParameters struct {
 
 	// The version of the IP Protocol which should be used. At this time the only supported value is IPv4. Defaults to IPv4.
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
+
+	// Specifies the ID of the Subnet which should be used for the Private Link Service.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NATIPConfigurationObservation struct {
@@ -86,6 +99,7 @@ type NATIPConfigurationParameters struct {
 type PrivateLinkServiceInitParameters struct {
 
 	// A list of Subscription UUID/GUID's that will be automatically be able to use this Private Link Service.
+	// +listType=set
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
 
 	// Should the Private Link Service support the Proxy Protocol?
@@ -95,6 +109,7 @@ type PrivateLinkServiceInitParameters struct {
 	Fqdns []*string `json:"fqdns,omitempty" tf:"fqdns,omitempty"`
 
 	// A list of Frontend IP Configuration IDs from a Standard Load Balancer, where traffic from the Private Link Service should be routed. You can use Load Balancer Rules to direct this traffic to appropriate backend pools where your applications are running. Changing this forces a new resource to be created.
+	// +listType=set
 	LoadBalancerFrontendIPConfigurationIds []*string `json:"loadBalancerFrontendIpConfigurationIds,omitempty" tf:"load_balancer_frontend_ip_configuration_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -104,9 +119,11 @@ type PrivateLinkServiceInitParameters struct {
 	NATIPConfiguration []NATIPConfigurationInitParameters `json:"natIpConfiguration,omitempty" tf:"nat_ip_configuration,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of Subscription UUID/GUID's that will be able to see this Private Link Service.
+	// +listType=set
 	VisibilitySubscriptionIds []*string `json:"visibilitySubscriptionIds,omitempty" tf:"visibility_subscription_ids,omitempty"`
 }
 
@@ -116,6 +133,7 @@ type PrivateLinkServiceObservation struct {
 	Alias *string `json:"alias,omitempty" tf:"alias,omitempty"`
 
 	// A list of Subscription UUID/GUID's that will be automatically be able to use this Private Link Service.
+	// +listType=set
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
 
 	// Should the Private Link Service support the Proxy Protocol?
@@ -127,6 +145,7 @@ type PrivateLinkServiceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of Frontend IP Configuration IDs from a Standard Load Balancer, where traffic from the Private Link Service should be routed. You can use Load Balancer Rules to direct this traffic to appropriate backend pools where your applications are running. Changing this forces a new resource to be created.
+	// +listType=set
 	LoadBalancerFrontendIPConfigurationIds []*string `json:"loadBalancerFrontendIpConfigurationIds,omitempty" tf:"load_balancer_frontend_ip_configuration_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -139,9 +158,11 @@ type PrivateLinkServiceObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of Subscription UUID/GUID's that will be able to see this Private Link Service.
+	// +listType=set
 	VisibilitySubscriptionIds []*string `json:"visibilitySubscriptionIds,omitempty" tf:"visibility_subscription_ids,omitempty"`
 }
 
@@ -149,6 +170,7 @@ type PrivateLinkServiceParameters struct {
 
 	// A list of Subscription UUID/GUID's that will be automatically be able to use this Private Link Service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AutoApprovalSubscriptionIds []*string `json:"autoApprovalSubscriptionIds,omitempty" tf:"auto_approval_subscription_ids,omitempty"`
 
 	// Should the Private Link Service support the Proxy Protocol?
@@ -161,6 +183,7 @@ type PrivateLinkServiceParameters struct {
 
 	// A list of Frontend IP Configuration IDs from a Standard Load Balancer, where traffic from the Private Link Service should be routed. You can use Load Balancer Rules to direct this traffic to appropriate backend pools where your applications are running. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LoadBalancerFrontendIPConfigurationIds []*string `json:"loadBalancerFrontendIpConfigurationIds,omitempty" tf:"load_balancer_frontend_ip_configuration_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -186,10 +209,12 @@ type PrivateLinkServiceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of Subscription UUID/GUID's that will be able to see this Private Link Service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VisibilitySubscriptionIds []*string `json:"visibilitySubscriptionIds,omitempty" tf:"visibility_subscription_ids,omitempty"`
 }
 

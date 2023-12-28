@@ -38,6 +38,7 @@ type AppServiceCertificateOrderInitParameters struct {
 	ProductType *string `json:"productType,omitempty" tf:"product_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Duration in years (must be between 1 and 3). Defaults to 1.
@@ -98,6 +99,7 @@ type AppServiceCertificateOrderObservation struct {
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Duration in years (must be between 1 and 3). Defaults to 1.
@@ -145,6 +147,7 @@ type AppServiceCertificateOrderParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Duration in years (must be between 1 and 3). Defaults to 1.

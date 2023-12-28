@@ -292,6 +292,7 @@ type FormParameterInitParameters struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -322,6 +323,7 @@ type FormParameterObservation struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -361,6 +363,7 @@ type FormParameterParameters struct {
 
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -450,6 +453,7 @@ type HeaderInitParameters struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -480,6 +484,7 @@ type HeaderObservation struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -519,6 +524,7 @@ type HeaderParameters struct {
 
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -608,6 +614,7 @@ type QueryParameterInitParameters struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -638,6 +645,7 @@ type QueryParameterObservation struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -677,6 +685,7 @@ type QueryParameterParameters struct {
 
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -825,6 +834,7 @@ type RepresentationFormParameterInitParameters struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -855,6 +865,7 @@ type RepresentationFormParameterObservation struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -894,6 +905,7 @@ type RepresentationFormParameterParameters struct {
 
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -1032,6 +1044,7 @@ type ResponseHeaderInitParameters struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -1062,6 +1075,7 @@ type ResponseHeaderObservation struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -1101,6 +1115,7 @@ type ResponseHeaderParameters struct {
 
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -1357,6 +1372,7 @@ type TemplateParameterInitParameters struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -1387,6 +1403,7 @@ type TemplateParameterObservation struct {
 	TypeName *string `json:"typeName,omitempty" tf:"type_name,omitempty"`
 
 	// One or more acceptable values for this Template Parameter.
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 
@@ -1426,6 +1443,7 @@ type TemplateParameterParameters struct {
 
 	// One or more acceptable values for this Template Parameter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
 }
 

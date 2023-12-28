@@ -79,18 +79,22 @@ type APIMetadataParameters struct {
 type CorsInitParameters struct {
 
 	// Allowed headers in cross-site requests. The special value * allows actual requests to send any header.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Allowed HTTP methods on cross-site requests. The special value * allows all methods. If not set, GET and HEAD are allowed by default. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Allowed origins to make cross-site requests. The special value * allows all domains.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// is user credentials are supported on cross-site requests?
 	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
 
 	// HTTP response headers to expose for cross-site requests.
+	// +listType=set
 	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
 
 	// How long, in seconds, the response from a pre-flight request can be cached by clients.
@@ -100,18 +104,22 @@ type CorsInitParameters struct {
 type CorsObservation struct {
 
 	// Allowed headers in cross-site requests. The special value * allows actual requests to send any header.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Allowed HTTP methods on cross-site requests. The special value * allows all methods. If not set, GET and HEAD are allowed by default. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Allowed origins to make cross-site requests. The special value * allows all domains.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// is user credentials are supported on cross-site requests?
 	CredentialsAllowed *bool `json:"credentialsAllowed,omitempty" tf:"credentials_allowed,omitempty"`
 
 	// HTTP response headers to expose for cross-site requests.
+	// +listType=set
 	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
 
 	// How long, in seconds, the response from a pre-flight request can be cached by clients.
@@ -122,14 +130,17 @@ type CorsParameters struct {
 
 	// Allowed headers in cross-site requests. The special value * allows actual requests to send any header.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// Allowed HTTP methods on cross-site requests. The special value * allows all methods. If not set, GET and HEAD are allowed by default. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// Allowed origins to make cross-site requests. The special value * allows all domains.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// is user credentials are supported on cross-site requests?
@@ -138,6 +149,7 @@ type CorsParameters struct {
 
 	// HTTP response headers to expose for cross-site requests.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExposedHeaders []*string `json:"exposedHeaders,omitempty" tf:"exposed_headers,omitempty"`
 
 	// How long, in seconds, the response from a pre-flight request can be cached by clients.
@@ -157,6 +169,7 @@ type SpringCloudGatewayInitParameters struct {
 	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// is only https is allowed?
@@ -187,6 +200,7 @@ type SpringCloudGatewayObservation struct {
 	Cors []CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
 
 	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// is only https is allowed?
@@ -230,6 +244,7 @@ type SpringCloudGatewayParameters struct {
 
 	// Specifies the environment variables of the Spring Cloud Gateway as a map of key-value pairs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// is only https is allowed?
@@ -312,6 +327,7 @@ type SpringCloudGatewaySsoInitParameters struct {
 	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
@@ -327,6 +343,7 @@ type SpringCloudGatewaySsoObservation struct {
 	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
@@ -346,6 +363,7 @@ type SpringCloudGatewaySsoParameters struct {
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

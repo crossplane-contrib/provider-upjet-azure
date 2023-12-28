@@ -2563,6 +2563,21 @@ func (in *HBaseClusterStorageAccountInitParameters) DeepCopyInto(out *HBaseClust
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StorageContainerID != nil {
+		in, out := &in.StorageContainerID, &out.StorageContainerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerIDRef != nil {
+		in, out := &in.StorageContainerIDRef, &out.StorageContainerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageContainerIDSelector != nil {
+		in, out := &in.StorageContainerIDSelector, &out.StorageContainerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageResourceID != nil {
 		in, out := &in.StorageResourceID, &out.StorageResourceID
 		*out = new(string)
@@ -3343,6 +3358,21 @@ func (in *HeadNodeInitParameters) DeepCopyInto(out *HeadNodeInitParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -5177,6 +5207,21 @@ func (in *InteractiveQueryClusterRolesHeadNodeInitParameters) DeepCopyInto(out *
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -5460,6 +5505,21 @@ func (in *InteractiveQueryClusterRolesWorkerNodeInitParameters) DeepCopyInto(out
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.TargetInstanceCount != nil {
 		in, out := &in.TargetInstanceCount, &out.TargetInstanceCount
@@ -5748,6 +5808,21 @@ func (in *InteractiveQueryClusterRolesZookeeperNodeInitParameters) DeepCopyInto(
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -6306,6 +6381,21 @@ func (in *InteractiveQueryClusterStorageAccountInitParameters) DeepCopyInto(out 
 		in, out := &in.IsDefault, &out.IsDefault
 		*out = new(bool)
 		**out = **in
+	}
+	if in.StorageContainerID != nil {
+		in, out := &in.StorageContainerID, &out.StorageContainerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerIDRef != nil {
+		in, out := &in.StorageContainerIDRef, &out.StorageContainerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageContainerIDSelector != nil {
+		in, out := &in.StorageContainerIDSelector, &out.StorageContainerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageResourceID != nil {
 		in, out := &in.StorageResourceID, &out.StorageResourceID
@@ -7835,6 +7925,21 @@ func (in *KafkaClusterRolesHeadNodeInitParameters) DeepCopyInto(out *KafkaCluste
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -8228,6 +8333,21 @@ func (in *KafkaClusterRolesWorkerNodeInitParameters) DeepCopyInto(out *KafkaClus
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TargetInstanceCount != nil {
 		in, out := &in.TargetInstanceCount, &out.TargetInstanceCount
 		*out = new(float64)
@@ -8511,6 +8631,21 @@ func (in *KafkaClusterRolesZookeeperNodeInitParameters) DeepCopyInto(out *KafkaC
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -9070,6 +9205,21 @@ func (in *KafkaClusterStorageAccountInitParameters) DeepCopyInto(out *KafkaClust
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StorageContainerID != nil {
+		in, out := &in.StorageContainerID, &out.StorageContainerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerIDRef != nil {
+		in, out := &in.StorageContainerIDRef, &out.StorageContainerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageContainerIDSelector != nil {
+		in, out := &in.StorageContainerIDSelector, &out.StorageContainerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageResourceID != nil {
 		in, out := &in.StorageResourceID, &out.StorageResourceID
 		*out = new(string)
@@ -9178,6 +9328,21 @@ func (in *KafkaManagementNodeInitParameters) DeepCopyInto(out *KafkaManagementNo
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -10310,6 +10475,21 @@ func (in *RolesHeadNodeInitParameters) DeepCopyInto(out *RolesHeadNodeInitParame
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -10873,6 +11053,21 @@ func (in *RolesWorkerNodeInitParameters) DeepCopyInto(out *RolesWorkerNodeInitPa
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TargetInstanceCount != nil {
 		in, out := &in.TargetInstanceCount, &out.TargetInstanceCount
 		*out = new(float64)
@@ -11160,6 +11355,21 @@ func (in *RolesZookeeperNodeInitParameters) DeepCopyInto(out *RolesZookeeperNode
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -13183,6 +13393,21 @@ func (in *SparkClusterRolesHeadNodeInitParameters) DeepCopyInto(out *SparkCluste
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -13644,6 +13869,21 @@ func (in *SparkClusterRolesWorkerNodeInitParameters) DeepCopyInto(out *SparkClus
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TargetInstanceCount != nil {
 		in, out := &in.TargetInstanceCount, &out.TargetInstanceCount
 		*out = new(float64)
@@ -13931,6 +14171,21 @@ func (in *SparkClusterRolesZookeeperNodeInitParameters) DeepCopyInto(out *SparkC
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
@@ -14490,6 +14745,21 @@ func (in *SparkClusterStorageAccountInitParameters) DeepCopyInto(out *SparkClust
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StorageContainerID != nil {
+		in, out := &in.StorageContainerID, &out.StorageContainerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerIDRef != nil {
+		in, out := &in.StorageContainerIDRef, &out.StorageContainerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageContainerIDSelector != nil {
+		in, out := &in.StorageContainerIDSelector, &out.StorageContainerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StorageResourceID != nil {
 		in, out := &in.StorageResourceID, &out.StorageResourceID
 		*out = new(string)
@@ -14690,6 +14960,21 @@ func (in *StorageAccountInitParameters) DeepCopyInto(out *StorageAccountInitPara
 		in, out := &in.IsDefault, &out.IsDefault
 		*out = new(bool)
 		**out = **in
+	}
+	if in.StorageContainerID != nil {
+		in, out := &in.StorageContainerID, &out.StorageContainerID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerIDRef != nil {
+		in, out := &in.StorageContainerIDRef, &out.StorageContainerIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageContainerIDSelector != nil {
+		in, out := &in.StorageContainerIDSelector, &out.StorageContainerIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.StorageResourceID != nil {
 		in, out := &in.StorageResourceID, &out.StorageResourceID
@@ -15227,6 +15512,21 @@ func (in *WorkerNodeInitParameters) DeepCopyInto(out *WorkerNodeInitParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TargetInstanceCount != nil {
 		in, out := &in.TargetInstanceCount, &out.TargetInstanceCount
 		*out = new(float64)
@@ -15514,6 +15814,21 @@ func (in *ZookeeperNodeInitParameters) DeepCopyInto(out *ZookeeperNodeInitParame
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.SubnetID != nil {
+		in, out := &in.SubnetID, &out.SubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SubnetIDRef != nil {
+		in, out := &in.SubnetIDRef, &out.SubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SubnetIDSelector != nil {
+		in, out := &in.SubnetIDSelector, &out.SubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username

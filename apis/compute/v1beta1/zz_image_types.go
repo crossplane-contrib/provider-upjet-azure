@@ -95,6 +95,7 @@ type ImageInitParameters struct {
 	SourceVirtualMachineID *string `json:"sourceVirtualMachineId,omitempty" tf:"source_virtual_machine_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Is zone resiliency enabled? Defaults to false. Changing this forces a new resource to be created.
@@ -127,6 +128,7 @@ type ImageObservation struct {
 	SourceVirtualMachineID *string `json:"sourceVirtualMachineId,omitempty" tf:"source_virtual_machine_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Is zone resiliency enabled? Defaults to false. Changing this forces a new resource to be created.
@@ -172,6 +174,7 @@ type ImageParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Is zone resiliency enabled? Defaults to false. Changing this forces a new resource to be created.

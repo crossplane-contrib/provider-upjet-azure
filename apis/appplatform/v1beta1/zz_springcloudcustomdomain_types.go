@@ -25,6 +25,19 @@ type SpringCloudCustomDomainInitParameters struct {
 	// Specifies the name of the Spring Cloud Custom Domain. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the resource ID of the Spring Cloud Application. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
+
+	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
+	// +kubebuilder:validation:Optional
+	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+
+	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
+	// +kubebuilder:validation:Optional
+	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
+
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Custom Domain. Required when certificate_name is specified. Changing this forces a new resource to be created.
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }

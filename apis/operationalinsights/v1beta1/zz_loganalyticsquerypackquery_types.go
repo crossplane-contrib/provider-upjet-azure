@@ -37,6 +37,19 @@ type LogAnalyticsQueryPackQueryInitParameters struct {
 	// An unique UUID/GUID which identifies this Log Analytics Query Pack Query - one will be generated if not specified. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the Log Analytics Query Pack. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.LogAnalyticsQueryPack
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	QueryPackID *string `json:"queryPackId,omitempty" tf:"query_pack_id,omitempty"`
+
+	// Reference to a LogAnalyticsQueryPack in operationalinsights to populate queryPackId.
+	// +kubebuilder:validation:Optional
+	QueryPackIDRef *v1.Reference `json:"queryPackIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogAnalyticsQueryPack in operationalinsights to populate queryPackId.
+	// +kubebuilder:validation:Optional
+	QueryPackIDSelector *v1.Selector `json:"queryPackIdSelector,omitempty" tf:"-"`
+
 	// A list of the related resource types for the function. Possible values are default, microsoft.aad/domainservices, microsoft.aadiam/tenants, microsoft.agfoodplatform/farmbeats, microsoft.analysisservices/servers, microsoft.apimanagement/service, microsoft.appconfiguration/configurationstores, microsoft.appplatform/spring, microsoft.attestation/attestationproviders, microsoft.authorization/tenants, microsoft.automation/automationaccounts, microsoft.autonomousdevelopmentplatform/accounts, microsoft.azurestackhci/virtualmachines, microsoft.batch/batchaccounts, microsoft.blockchain/blockchainmembers, microsoft.botservice/botservices, microsoft.cache/redis, microsoft.cdn/profiles, microsoft.cognitiveservices/accounts, microsoft.communication/communicationservices, microsoft.compute/virtualmachines, microsoft.compute/virtualmachinescalesets, microsoft.connectedcache/cachenodes, microsoft.connectedvehicle/platformaccounts, microsoft.conenctedvmwarevsphere/virtualmachines, microsoft.containerregistry/registries, microsoft.containerservice/managedclusters, microsoft.d365customerinsights/instances, microsoft.dashboard/grafana, microsoft.databricks/workspaces, microsoft.datacollaboration/workspaces, microsoft.datafactory/factories, microsoft.datalakeanalytics/accounts, microsoft.datalakestore/accounts, microsoft.datashare/accounts, microsoft.dbformariadb/servers, microsoft.dbformysql/servers, microsoft.dbforpostgresql/flexibleservers, microsoft.dbforpostgresql/servers, microsoft.dbforpostgresql/serversv2, microsoft.digitaltwins/digitaltwinsinstances, microsoft.documentdb/cassandraclusters, microsoft.documentdb/databaseaccounts, microsoft.desktopvirtualization/applicationgroups, microsoft.desktopvirtualization/hostpools, microsoft.desktopvirtualization/workspaces, microsoft.devices/iothubs, microsoft.devices/provisioningservices, microsoft.dynamics/fraudprotection/purchase, microsoft.eventgrid/domains, microsoft.eventgrid/topics, microsoft.eventgrid/partnernamespaces, microsoft.eventgrid/partnertopics, microsoft.eventgrid/systemtopics, microsoft.eventhub/namespaces, microsoft.experimentation/experimentworkspaces, microsoft.hdinsight/clusters, microsoft.healthcareapis/services, microsoft.informationprotection/datasecuritymanagement, microsoft.intune/operations, microsoft.insights/autoscalesettings, microsoft.insights/components, microsoft.insights/workloadmonitoring, microsoft.keyvault/vaults, microsoft.kubernetes/connectedclusters, microsoft.kusto/clusters, microsoft.loadtestservice/loadtests, microsoft.logic/workflows, microsoft.machinelearningservices/workspaces, microsoft.media/mediaservices, microsoft.netapp/netappaccounts/capacitypools, microsoft.network/applicationgateways, microsoft.network/azurefirewalls, microsoft.network/bastionhosts, microsoft.network/expressroutecircuits, microsoft.network/frontdoors, microsoft.network/loadbalancers, microsoft.network/networkinterfaces, microsoft.network/networksecuritygroups, microsoft.network/networksecurityperimeters, microsoft.network/networkwatchers/connectionmonitors, microsoft.network/networkwatchers/trafficanalytics, microsoft.network/publicipaddresses, microsoft.network/trafficmanagerprofiles, microsoft.network/virtualnetworks, microsoft.network/virtualnetworkgateways, microsoft.network/vpngateways, microsoft.networkfunction/azuretrafficcollectors, microsoft.openenergyplatform/energyservices, microsoft.openlogisticsplatform/workspaces, microsoft.operationalinsights/workspaces, microsoft.powerbi/tenants, microsoft.powerbi/tenants/workspaces, microsoft.powerbidedicated/capacities, microsoft.purview/accounts, microsoft.recoveryservices/vaults, microsoft.resources/azureactivity, microsoft.scvmm/virtualmachines, microsoft.search/searchservices, microsoft.security/antimalwaresettings, microsoft.securityinsights/amazon, microsoft.securityinsights/anomalies, microsoft.securityinsights/cef, microsoft.securityinsights/datacollection, microsoft.securityinsights/dnsnormalized, microsoft.securityinsights/mda, microsoft.securityinsights/mde, microsoft.securityinsights/mdi, microsoft.securityinsights/mdo, microsoft.securityinsights/networksessionnormalized, microsoft.securityinsights/office365, microsoft.securityinsights/purview, microsoft.securityinsights/securityinsights, microsoft.securityinsights/securityinsights/mcas, microsoft.securityinsights/tvm, microsoft.securityinsights/watchlists, microsoft.servicebus/namespaces, microsoft.servicefabric/clusters, microsoft.signalrservice/signalr, microsoft.signalrservice/webpubsub, microsoft.sql/managedinstances, microsoft.sql/servers, microsoft.sql/servers/databases, microsoft.storage/storageaccounts, microsoft.storagecache/caches, microsoft.streamanalytics/streamingjobs, microsoft.synapse/workspaces, microsoft.timeseriesinsights/environments, microsoft.videoindexer/accounts, microsoft.web/sites, microsoft.workloadmonitor/monitors, resourcegroup and subscription.
 	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
@@ -44,6 +57,7 @@ type LogAnalyticsQueryPackQueryInitParameters struct {
 	Solutions []*string `json:"solutions,omitempty" tf:"solutions,omitempty"`
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack Query.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -80,6 +94,7 @@ type LogAnalyticsQueryPackQueryObservation struct {
 	Solutions []*string `json:"solutions,omitempty" tf:"solutions,omitempty"`
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack Query.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -133,6 +148,7 @@ type LogAnalyticsQueryPackQueryParameters struct {
 
 	// A mapping of tags which should be assigned to the Log Analytics Query Pack Query.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

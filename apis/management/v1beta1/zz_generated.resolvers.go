@@ -38,6 +38,22 @@ func (mg *ManagementGroup) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.ParentManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ParentManagementGroupIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ParentManagementGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ParentManagementGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ParentManagementGroupIDSelector,
+		To: reference.To{
+			List:    &ManagementGroupList{},
+			Managed: &ManagementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ParentManagementGroupID")
+	}
+	mg.Spec.InitProvider.ParentManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ParentManagementGroupIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -79,6 +95,38 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 	}
 	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
+		To: reference.To{
+			List:    &ManagementGroupList{},
+			Managed: &ManagementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagementGroupID")
+	}
+	mg.Spec.InitProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagementGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SubscriptionIDRef,
+		Selector:     mg.Spec.InitProvider.SubscriptionIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubscriptionList{},
+			Managed: &v1beta1.Subscription{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubscriptionID")
+	}
+	mg.Spec.InitProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil
 }

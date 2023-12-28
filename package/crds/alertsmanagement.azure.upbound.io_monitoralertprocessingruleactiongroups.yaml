@@ -606,6 +606,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Alert Processing Rule.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -619,6 +620,89 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  addActionGroupIds:
+                    description: Specifies a list of Action Group IDs.
+                    items:
+                      type: string
+                    type: array
+                  addActionGroupIdsRefs:
+                    description: References to MonitorActionGroup in insights to populate
+                      addActionGroupIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: Resolution specifies whether resolution
+                                of this reference is required. The default is 'Required',
+                                which means the reconcile will fail if the reference
+                                cannot be resolved. 'Optional' means this reference
+                                will be a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: Resolve specifies when this reference should
+                                be resolved. The default is 'IfNotPresent', which
+                                will attempt to resolve the reference only when the
+                                corresponding field is not present. Use 'Always' to
+                                resolve the reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  addActionGroupIdsSelector:
+                    description: Selector for a list of MonitorActionGroup in insights
+                      to populate addActionGroupIds.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   condition:
                     description: A condition block as defined below.
                     items:
@@ -904,12 +988,97 @@ spec:
                           type: string
                       type: object
                     type: array
+                  scopes:
+                    description: A list of resource IDs which will be the target of
+                      alert processing rule.
+                    items:
+                      type: string
+                    type: array
+                  scopesRefs:
+                    description: References to ResourceGroup in azure to populate
+                      scopes.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: Resolution specifies whether resolution
+                                of this reference is required. The default is 'Required',
+                                which means the reconcile will fail if the reference
+                                cannot be resolved. 'Optional' means this reference
+                                will be a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: Resolve specifies when this reference should
+                                be resolved. The default is 'IfNotPresent', which
+                                will attempt to resolve the reference only when the
+                                corresponding field is not present. Use 'Always' to
+                                resolve the reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  scopesSelector:
+                    description: Selector for a list of ResourceGroup in azure to
+                      populate scopes.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to the
                       Alert Processing Rule.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -1387,6 +1556,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Alert Processing Rule.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

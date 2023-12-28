@@ -88,6 +88,7 @@ type HourlyScheduleParameters struct {
 type MonthlyScheduleInitParameters struct {
 
 	// List of the days of the month when the snapshots will be created, valid range is from 1 to 30.
+	// +listType=set
 	DaysOfMonth []*float64 `json:"daysOfMonth,omitempty" tf:"days_of_month,omitempty"`
 
 	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
@@ -103,6 +104,7 @@ type MonthlyScheduleInitParameters struct {
 type MonthlyScheduleObservation struct {
 
 	// List of the days of the month when the snapshots will be created, valid range is from 1 to 30.
+	// +listType=set
 	DaysOfMonth []*float64 `json:"daysOfMonth,omitempty" tf:"days_of_month,omitempty"`
 
 	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
@@ -119,6 +121,7 @@ type MonthlyScheduleParameters struct {
 
 	// List of the days of the month when the snapshots will be created, valid range is from 1 to 30.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DaysOfMonth []*float64 `json:"daysOfMonth" tf:"days_of_month,omitempty"`
 
 	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
@@ -152,6 +155,7 @@ type SnapshotPolicyInitParameters struct {
 	MonthlySchedule []MonthlyScheduleInitParameters `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
@@ -185,6 +189,7 @@ type SnapshotPolicyObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
@@ -241,6 +246,7 @@ type SnapshotPolicyParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
@@ -251,6 +257,7 @@ type SnapshotPolicyParameters struct {
 type WeeklyScheduleInitParameters struct {
 
 	// List of the week days using English names when the snapshots will be created.
+	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
@@ -266,6 +273,7 @@ type WeeklyScheduleInitParameters struct {
 type WeeklyScheduleObservation struct {
 
 	// List of the week days using English names when the snapshots will be created.
+	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.
@@ -282,6 +290,7 @@ type WeeklyScheduleParameters struct {
 
 	// List of the week days using English names when the snapshots will be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek" tf:"days_of_week,omitempty"`
 
 	// Hour of the day that the snapshots will be created, valid range is from 0 to 23.

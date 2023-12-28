@@ -28,7 +28,21 @@ type VirtualNetworkPeeringInitParameters struct {
 	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 
+	// The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	RemoteVirtualNetworkID *string `json:"remoteVirtualNetworkId,omitempty" tf:"remote_virtual_network_id,omitempty"`
+
+	// Reference to a VirtualNetwork to populate remoteVirtualNetworkId.
+	// +kubebuilder:validation:Optional
+	RemoteVirtualNetworkIDRef *v1.Reference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetwork to populate remoteVirtualNetworkId.
+	// +kubebuilder:validation:Optional
+	RemoteVirtualNetworkIDSelector *v1.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
+
 	// A mapping of key values pairs that can be used to sync network routes from the remote virtual network to the local virtual network. See the trigger example for an example on how to set it up.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false.
@@ -56,6 +70,7 @@ type VirtualNetworkPeeringObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of key values pairs that can be used to sync network routes from the remote virtual network to the local virtual network. See the trigger example for an example on how to set it up.
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false.
@@ -108,6 +123,7 @@ type VirtualNetworkPeeringParameters struct {
 
 	// A mapping of key values pairs that can be used to sync network routes from the remote virtual network to the local virtual network. See the trigger example for an example on how to set it up.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Triggers map[string]*string `json:"triggers,omitempty" tf:"triggers,omitempty"`
 
 	// Controls if remote gateways can be used on the local virtual network. If the flag is set to true, and allow_gateway_transit on the remote peering is also true, virtual network will use gateways of remote virtual network for transit. Only one peering can have this flag set to true. This flag cannot be set if virtual network already has a gateway. Defaults to false.

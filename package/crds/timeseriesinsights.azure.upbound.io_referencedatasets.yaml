@@ -97,6 +97,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeSeriesInsightsEnvironmentId:
                     description: The resource ID of the Azure IoT Time Series Insights
                       Environment in which to create the Azure IoT Time Series Insights
@@ -221,6 +222,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -430,6 +432,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   timeSeriesInsightsEnvironmentId:
                     description: The resource ID of the Azure IoT Time Series Insights
                       Environment in which to create the Azure IoT Time Series Insights

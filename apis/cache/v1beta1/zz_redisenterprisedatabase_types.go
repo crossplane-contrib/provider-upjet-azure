@@ -63,6 +63,7 @@ type RedisEnterpriseDatabaseInitParameters struct {
 	LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
 
 	// A list of database resources to link with this database with a maximum of 5.
+	// +listType=set
 	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
 	// A module block as defined below. Changing this forces a new resource to be created.
@@ -70,6 +71,18 @@ type RedisEnterpriseDatabaseInitParameters struct {
 
 	// TCP port of the database endpoint. Specified at create time. Defaults to an available port. Changing this forces a new Redis Enterprise Database to be created. Defaults to 10000.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
+
+	// The name of the Resource Group where the Redis Enterprise Database should exist. Changing this forces a new Redis Enterprise Database to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type RedisEnterpriseDatabaseObservation struct {
@@ -93,6 +106,7 @@ type RedisEnterpriseDatabaseObservation struct {
 	LinkedDatabaseGroupNickname *string `json:"linkedDatabaseGroupNickname,omitempty" tf:"linked_database_group_nickname,omitempty"`
 
 	// A list of database resources to link with this database with a maximum of 5.
+	// +listType=set
 	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
 	// A module block as defined below. Changing this forces a new resource to be created.
@@ -139,6 +153,7 @@ type RedisEnterpriseDatabaseParameters struct {
 
 	// A list of database resources to link with this database with a maximum of 5.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LinkedDatabaseID []*string `json:"linkedDatabaseId,omitempty" tf:"linked_database_id,omitempty"`
 
 	// A module block as defined below. Changing this forces a new resource to be created.

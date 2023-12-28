@@ -85,6 +85,7 @@ type AudioAnalyzerPresetInitParameters struct {
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 }
 
@@ -97,6 +98,7 @@ type AudioAnalyzerPresetObservation struct {
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 }
 
@@ -112,6 +114,7 @@ type AudioAnalyzerPresetParameters struct {
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 }
 
@@ -515,6 +518,7 @@ type FaceDetectorPresetInitParameters struct {
 	BlurType *string `json:"blurType,omitempty" tf:"blur_type,omitempty"`
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// This mode provides the ability to choose between the following settings: 1) Analyze - For detection only. This mode generates a metadata JSON file marking appearances of faces throughout the video. Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces. It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction. Default to Analyze.
@@ -530,6 +534,7 @@ type FaceDetectorPresetObservation struct {
 	BlurType *string `json:"blurType,omitempty" tf:"blur_type,omitempty"`
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// This mode provides the ability to choose between the following settings: 1) Analyze - For detection only. This mode generates a metadata JSON file marking appearances of faces throughout the video. Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces. It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction. Default to Analyze.
@@ -548,6 +553,7 @@ type FaceDetectorPresetParameters struct {
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// This mode provides the ability to choose between the following settings: 1) Analyze - For detection only. This mode generates a metadata JSON file marking appearances of faces throughout the video. Where possible, appearances of the same person are assigned the same ID. 2) Combined - Additionally redacts(blurs) detected faces. 3) Redact - This enables a 2-pass process, allowing for selective redaction of a subset of detected faces. It takes in the metadata file from a prior analyze pass, along with the source video, and a user-selected subset of IDs that require redaction. Default to Analyze.
@@ -1956,6 +1962,7 @@ type VideoAnalyzerPresetInitParameters struct {
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly, if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out. Default to AllInsights.
@@ -1971,6 +1978,7 @@ type VideoAnalyzerPresetObservation struct {
 	AudioLanguage *string `json:"audioLanguage,omitempty" tf:"audio_language,omitempty"`
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly, if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out. Default to AllInsights.
@@ -1989,6 +1997,7 @@ type VideoAnalyzerPresetParameters struct {
 
 	// Dictionary containing key value pairs for parameters not exposed in the preset itself.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	ExperimentalOptions map[string]*string `json:"experimentalOptions,omitempty" tf:"experimental_options,omitempty"`
 
 	// Defines the type of insights that you want the service to generate. The allowed values are AudioInsightsOnly, VideoInsightsOnly, and AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly, if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out. Default to AllInsights.

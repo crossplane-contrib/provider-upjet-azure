@@ -21,6 +21,19 @@ type CertificateInitParameters_2 struct {
 
 	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
 	KeyVaultIdentityClientID *string `json:"keyVaultIdentityClientId,omitempty" tf:"key_vault_identity_client_id,omitempty"`
+
+	// The ID of the Key Vault Secret containing the SSL Certificate, which must be of the type application/x-pkcs12.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("secret_id",true)
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// Reference to a Certificate in keyvault to populate keyVaultSecretId.
+	// +kubebuilder:validation:Optional
+	KeyVaultSecretIDRef *v1.Reference `json:"keyVaultSecretIdRef,omitempty" tf:"-"`
+
+	// Selector for a Certificate in keyvault to populate keyVaultSecretId.
+	// +kubebuilder:validation:Optional
+	KeyVaultSecretIDSelector *v1.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
 }
 
 type CertificateObservation_2 struct {

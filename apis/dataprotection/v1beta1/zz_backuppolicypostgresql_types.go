@@ -146,15 +146,19 @@ type RetentionRuleCriteriaInitParameters struct {
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
 
 	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
 
 	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
 
 	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 
@@ -164,15 +168,19 @@ type RetentionRuleCriteriaObservation struct {
 	AbsoluteCriteria *string `json:"absoluteCriteria,omitempty" tf:"absolute_criteria,omitempty"`
 
 	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
 
 	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
 
 	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +listType=set
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 
@@ -184,18 +192,22 @@ type RetentionRuleCriteriaParameters struct {
 
 	// Possible values are Monday, Tuesday, Thursday, Friday, Saturday and Sunday. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DaysOfWeek []*string `json:"daysOfWeek,omitempty" tf:"days_of_week,omitempty"`
 
 	// Possible values are January, February, March, April, May, June, July, August, September, October, November and December. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MonthsOfYear []*string `json:"monthsOfYear,omitempty" tf:"months_of_year,omitempty"`
 
 	// Specifies a list of backup times for backup in the RFC3339 format. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ScheduledBackupTimes []*string `json:"scheduledBackupTimes,omitempty" tf:"scheduled_backup_times,omitempty"`
 
 	// Possible values are First, Second, Third, Fourth and Last. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	WeeksOfMonth []*string `json:"weeksOfMonth,omitempty" tf:"weeks_of_month,omitempty"`
 }
 

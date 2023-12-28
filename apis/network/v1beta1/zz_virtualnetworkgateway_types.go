@@ -20,12 +20,14 @@ import (
 type CustomRouteInitParameters struct {
 
 	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 type CustomRouteObservation struct {
 
 	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
@@ -33,6 +35,7 @@ type CustomRouteParameters struct {
 
 	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
@@ -158,12 +161,14 @@ type VPNClientConfigurationInitParameters struct {
 
 	// List of the vpn authentication types for the virtual network gateway.
 	// The supported values are AAD, Radius and Certificate.
+	// +listType=set
 	VPNAuthTypes []*string `json:"vpnAuthTypes,omitempty" tf:"vpn_auth_types,omitempty"`
 
 	// List of the protocols supported by the vpn client.
 	// The supported values are SSTP, IkeV2 and OpenVPN.
 	// Values SSTP and IkeV2 are incompatible with the use of
 	// aad_tenant, aad_audience and aad_issuer.
+	// +listType=set
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
 }
 
@@ -196,12 +201,14 @@ type VPNClientConfigurationObservation struct {
 
 	// List of the vpn authentication types for the virtual network gateway.
 	// The supported values are AAD, Radius and Certificate.
+	// +listType=set
 	VPNAuthTypes []*string `json:"vpnAuthTypes,omitempty" tf:"vpn_auth_types,omitempty"`
 
 	// List of the protocols supported by the vpn client.
 	// The supported values are SSTP, IkeV2 and OpenVPN.
 	// Values SSTP and IkeV2 are incompatible with the use of
 	// aad_tenant, aad_audience and aad_issuer.
+	// +listType=set
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
 }
 
@@ -243,6 +250,7 @@ type VPNClientConfigurationParameters struct {
 	// List of the vpn authentication types for the virtual network gateway.
 	// The supported values are AAD, Radius and Certificate.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VPNAuthTypes []*string `json:"vpnAuthTypes,omitempty" tf:"vpn_auth_types,omitempty"`
 
 	// List of the protocols supported by the vpn client.
@@ -250,6 +258,7 @@ type VPNClientConfigurationParameters struct {
 	// Values SSTP and IkeV2 are incompatible with the use of
 	// aad_tenant, aad_audience and aad_issuer.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
 }
 
@@ -299,6 +308,32 @@ type VirtualNetworkGatewayIPConfigurationInitParameters struct {
 
 	// Defines how the private IP address of the gateways virtual interface is assigned. Valid options are Static or Dynamic. Defaults to Dynamic.
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
+
+	// The ID of the public IP address to associate with the Virtual Network Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP in network to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
+
+	// The ID of the gateway subnet of a virtual network in which the virtual network gateway will be created. It is mandatory that the associated subnet is named GatewaySubnet. Therefore, each virtual network can contain at most a single Virtual Network Gateway.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkGatewayIPConfigurationObservation struct {
@@ -394,6 +429,7 @@ type VirtualNetworkGatewayInitParameters struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of the Virtual Network Gateway. Valid options are Vpn or ExpressRoute. Changing the type forces a new resource to be created.
@@ -451,6 +487,7 @@ type VirtualNetworkGatewayObservation struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of the Virtual Network Gateway. Valid options are Vpn or ExpressRoute. Changing the type forces a new resource to be created.
@@ -527,6 +564,7 @@ type VirtualNetworkGatewayParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The type of the Virtual Network Gateway. Valid options are Vpn or ExpressRoute. Changing the type forces a new resource to be created.

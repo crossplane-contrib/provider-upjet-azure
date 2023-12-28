@@ -32,6 +32,7 @@ type BackupPolicyVMBackupInitParameters struct {
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 
 	// The days of the week to perform backups on. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday. This is used when frequency is Weekly.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -50,6 +51,7 @@ type BackupPolicyVMBackupObservation struct {
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 
 	// The days of the week to perform backups on. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday. This is used when frequency is Weekly.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -73,6 +75,7 @@ type BackupPolicyVMBackupParameters struct {
 
 	// The days of the week to perform backups on. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday. This is used when frequency is Weekly.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -235,9 +238,11 @@ type BackupPolicyVMRetentionMonthlyInitParameters struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -247,9 +252,11 @@ type BackupPolicyVMRetentionMonthlyObservation struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -261,10 +268,12 @@ type BackupPolicyVMRetentionMonthlyParameters struct {
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
 }
 
@@ -274,6 +283,7 @@ type BackupPolicyVMRetentionWeeklyInitParameters struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The weekday backups to retain. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -283,6 +293,7 @@ type BackupPolicyVMRetentionWeeklyObservation struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The weekday backups to retain. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -294,6 +305,7 @@ type BackupPolicyVMRetentionWeeklyParameters struct {
 
 	// The weekday backups to retain. Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 }
 
@@ -303,12 +315,15 @@ type BackupPolicyVMRetentionYearlyInitParameters struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
+	// +listType=set
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -318,12 +333,15 @@ type BackupPolicyVMRetentionYearlyObservation struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
+	// +listType=set
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -335,14 +353,17 @@ type BackupPolicyVMRetentionYearlyParameters struct {
 
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Months []*string `json:"months" tf:"months,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
 }
 

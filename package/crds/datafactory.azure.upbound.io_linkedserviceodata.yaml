@@ -74,6 +74,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service OData.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service OData.
@@ -203,6 +204,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service OData.
                     type: object
+                    x-kubernetes-map-type: granular
                   url:
                     description: The URL of the OData service endpoint.
                     type: string
@@ -225,6 +227,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service OData.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service OData.
@@ -255,6 +258,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service OData.
                     type: object
+                    x-kubernetes-map-type: granular
                   url:
                     description: The URL of the OData service endpoint.
                     type: string
@@ -435,6 +439,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service OData.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service OData.
@@ -472,6 +477,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service OData.
                     type: object
+                    x-kubernetes-map-type: granular
                   url:
                     description: The URL of the OData service endpoint.
                     type: string

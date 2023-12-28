@@ -128,7 +128,20 @@ type TriggerScheduleInitParameters struct {
 	// block as defined below.
 	Pipeline []TriggerSchedulePipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
+	// The Data Factory Pipeline name that the trigger will act on.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Pipeline
+	PipelineName *string `json:"pipelineName,omitempty" tf:"pipeline_name,omitempty"`
+
+	// Reference to a Pipeline in datafactory to populate pipelineName.
+	// +kubebuilder:validation:Optional
+	PipelineNameRef *v1.Reference `json:"pipelineNameRef,omitempty" tf:"-"`
+
+	// Selector for a Pipeline in datafactory to populate pipelineName.
+	// +kubebuilder:validation:Optional
+	PipelineNameSelector *v1.Selector `json:"pipelineNameSelector,omitempty" tf:"-"`
+
 	// The pipeline parameters that the trigger will act upon.
+	// +mapType=granular
 	PipelineParameters map[string]*string `json:"pipelineParameters,omitempty" tf:"pipeline_parameters,omitempty"`
 
 	// A schedule block as defined below, which further specifies the recurrence schedule for the trigger. A schedule is capable of limiting or increasing the number of trigger executions specified by the frequency and interval properties.
@@ -174,6 +187,7 @@ type TriggerScheduleObservation struct {
 	PipelineName *string `json:"pipelineName,omitempty" tf:"pipeline_name,omitempty"`
 
 	// The pipeline parameters that the trigger will act upon.
+	// +mapType=granular
 	PipelineParameters map[string]*string `json:"pipelineParameters,omitempty" tf:"pipeline_parameters,omitempty"`
 
 	// A schedule block as defined below, which further specifies the recurrence schedule for the trigger. A schedule is capable of limiting or increasing the number of trigger executions specified by the frequency and interval properties.
@@ -245,6 +259,7 @@ type TriggerScheduleParameters struct {
 
 	// The pipeline parameters that the trigger will act upon.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	PipelineParameters map[string]*string `json:"pipelineParameters,omitempty" tf:"pipeline_parameters,omitempty"`
 
 	// A schedule block as defined below, which further specifies the recurrence schedule for the trigger. A schedule is capable of limiting or increasing the number of trigger executions specified by the frequency and interval properties.
@@ -266,6 +281,7 @@ type TriggerSchedulePipelineInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The pipeline parameters that the trigger will act upon.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -275,6 +291,7 @@ type TriggerSchedulePipelineObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The pipeline parameters that the trigger will act upon.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -286,6 +303,7 @@ type TriggerSchedulePipelineParameters struct {
 
 	// The pipeline parameters that the trigger will act upon.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

@@ -25,6 +25,18 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	// Time interval at which blobs are written to storage. Value should be between 60 and 720 seconds. Default value is 300 seconds.
 	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
 
+	// The name of storage container in the storage account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
+
+	// Reference to a Container in storage to populate containerName.
+	// +kubebuilder:validation:Optional
+	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate containerName.
+	// +kubebuilder:validation:Optional
+	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
+
 	// Encoding that is used to serialize messages to blobs. Supported values are Avro, AvroDeflate and JSON. Default value is Avro. Changing this forces a new resource to be created.
 	Encoding *string `json:"encoding,omitempty" tf:"encoding,omitempty"`
 
@@ -39,6 +51,18 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 
 	// Maximum number of bytes for each blob written to storage. Value should be between 10485760(10MB) and 524288000(500MB). Default value is 314572800(300MB).
 	MaxChunkSizeInBytes *float64 `json:"maxChunkSizeInBytes,omitempty" tf:"max_chunk_size_in_bytes,omitempty"`
+
+	// The name of the resource group under which the Storage Container has been created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type IOTHubEndpointStorageContainerObservation struct {

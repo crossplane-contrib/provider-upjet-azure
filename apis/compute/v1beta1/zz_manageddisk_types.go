@@ -179,6 +179,19 @@ type ManagedDiskInitParameters struct {
 	// Security Type of the Managed Disk when it is used for a Confidential VM. Possible values are ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey, ConfidentialVM_DiskEncryptedWithPlatformKey and ConfidentialVM_DiskEncryptedWithCustomerKey. Changing this forces a new resource to be created.
 	SecurityType *string `json:"securityType,omitempty" tf:"security_type,omitempty"`
 
+	// The ID of an existing Managed Disk or Snapshot to copy when create_option is Copy or the recovery point to restore when create_option is Restore. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
+
+	// Reference to a ManagedDisk in compute to populate sourceResourceId.
+	// +kubebuilder:validation:Optional
+	SourceResourceIDRef *v1.Reference `json:"sourceResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedDisk in compute to populate sourceResourceId.
+	// +kubebuilder:validation:Optional
+	SourceResourceIDSelector *v1.Selector `json:"sourceResourceIdSelector,omitempty" tf:"-"`
+
 	// URI to a valid VHD file to be used when create_option is Import or ImportSecure. Changing this forces a new resource to be created.
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
@@ -189,6 +202,7 @@ type ManagedDiskInitParameters struct {
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The disk performance tier to use. Possible values are documented here. This feature is currently supported only for premium SSDs.
@@ -291,6 +305,7 @@ type ManagedDiskObservation struct {
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The disk performance tier to use. Possible values are documented here. This feature is currently supported only for premium SSDs.
@@ -437,6 +452,7 @@ type ManagedDiskParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The disk performance tier to use. Possible values are documented here. This feature is currently supported only for premium SSDs.

@@ -23,6 +23,7 @@ type ResourceGuardInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Guard.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of the critical operations which are not protected by this Resource Guard.
@@ -41,6 +42,7 @@ type ResourceGuardObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Guard.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of the critical operations which are not protected by this Resource Guard.
@@ -68,6 +70,7 @@ type ResourceGuardParameters struct {
 
 	// A mapping of tags which should be assigned to the Resource Guard.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of the critical operations which are not protected by this Resource Guard.

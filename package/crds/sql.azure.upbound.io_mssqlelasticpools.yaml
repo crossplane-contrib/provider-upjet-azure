@@ -310,6 +310,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneRedundant:
                     description: Whether or not this elastic pool is zone redundant.
                       tier needs to be Premium for DTU based or BusinessCritical for
@@ -413,6 +414,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneRedundant:
                     description: Whether or not this elastic pool is zone redundant.
                       tier needs to be Premium for DTU based or BusinessCritical for
@@ -695,6 +697,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneRedundant:
                     description: Whether or not this elastic pool is zone redundant.
                       tier needs to be Premium for DTU based or BusinessCritical for

@@ -20,6 +20,7 @@ import (
 type ManagedHardwareSecurityModuleInitParameters struct {
 
 	// Specifies a list of administrators object IDs for the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
+	// +listType=set
 	AdminObjectIds []*string `json:"adminObjectIds,omitempty" tf:"admin_object_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -41,6 +42,7 @@ type ManagedHardwareSecurityModuleInitParameters struct {
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
 	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory Tenant ID that should be used for authenticating requests to the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
@@ -79,6 +81,7 @@ type ManagedHardwareSecurityModuleNetworkAclsParameters struct {
 type ManagedHardwareSecurityModuleObservation struct {
 
 	// Specifies a list of administrators object IDs for the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
+	// +listType=set
 	AdminObjectIds []*string `json:"adminObjectIds,omitempty" tf:"admin_object_ids,omitempty"`
 
 	// The URI of the Key Vault Managed Hardware Security Module, used for performing operations on keys.
@@ -109,6 +112,7 @@ type ManagedHardwareSecurityModuleObservation struct {
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
 	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory Tenant ID that should be used for authenticating requests to the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
@@ -119,6 +123,7 @@ type ManagedHardwareSecurityModuleParameters struct {
 
 	// Specifies a list of administrators object IDs for the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AdminObjectIds []*string `json:"adminObjectIds,omitempty" tf:"admin_object_ids,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -160,6 +165,7 @@ type ManagedHardwareSecurityModuleParameters struct {
 
 	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory Tenant ID that should be used for authenticating requests to the key vault Managed Hardware Security Module. Changing this forces a new resource to be created.

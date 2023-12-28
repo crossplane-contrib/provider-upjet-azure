@@ -323,5 +323,73 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CreateFromSnapshotResourceID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.CreateFromSnapshotResourceIDRef,
+		Selector:     mg.Spec.InitProvider.CreateFromSnapshotResourceIDSelector,
+		To: reference.To{
+			List:    &SnapshotList{},
+			Managed: &Snapshot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CreateFromSnapshotResourceID")
+	}
+	mg.Spec.InitProvider.CreateFromSnapshotResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CreateFromSnapshotResourceIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataProtectionReplication); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDRef,
+			Selector:     mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDSelector,
+			To: reference.To{
+				List:    &VolumeList{},
+				Managed: &Volume{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID")
+		}
+		mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DataProtectionReplication[i3].RemoteVolumeResourceIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DataProtectionSnapshotPolicy); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDRef,
+			Selector:     mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDSelector,
+			To: reference.To{
+				List:    &SnapshotPolicyList{},
+				Managed: &SnapshotPolicy{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID")
+		}
+		mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DataProtectionSnapshotPolicy[i3].SnapshotPolicyIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SubnetIDRef,
+		Selector:     mg.Spec.InitProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
+	}
+	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }

@@ -115,6 +115,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         containerLogMaxLine:
                           description: Specifies the maximum number of container log
                             files that can be present for a container. must be at
@@ -454,6 +455,7 @@ spec:
                     description: A map of Kubernetes labels which should be applied
                       to nodes in this Node Pool.
                     type: object
+                    x-kubernetes-map-type: granular
                   nodeNetworkProfile:
                     description: A node_network_profile block as documented below.
                     items:
@@ -465,6 +467,7 @@ spec:
                             public IPs. Changing this forces a new resource to be
                             created.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   nodePublicIpPrefixId:
@@ -619,6 +622,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
@@ -740,6 +744,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -800,6 +805,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         containerLogMaxLine:
                           description: Specifies the maximum number of container log
                             files that can be present for a container. must be at
@@ -1061,6 +1067,7 @@ spec:
                     description: A map of Kubernetes labels which should be applied
                       to nodes in this Node Pool.
                     type: object
+                    x-kubernetes-map-type: granular
                   nodeNetworkProfile:
                     description: A node_network_profile block as documented below.
                     items:
@@ -1072,6 +1079,7 @@ spec:
                             public IPs. Changing this forces a new resource to be
                             created.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   nodePublicIpPrefixId:
@@ -1117,6 +1125,83 @@ spec:
                       Node Pool. Changing this forces a new resource to be created.
                       Possible values are Linux and Windows. Defaults to Linux.
                     type: string
+                  podSubnetId:
+                    description: The ID of the Subnet where the pods in the Node Pool
+                      should exist. Changing this forces a new resource to be created.
+                    type: string
+                  podSubnetIdRef:
+                    description: Reference to a Subnet in network to populate podSubnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  podSubnetIdSelector:
+                    description: Selector for a Subnet in network to populate podSubnetId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   priority:
                     description: The Priority for Virtual Machines within the Virtual
                       Machine Scale Set that powers this Node Pool. Possible values
@@ -1149,6 +1234,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
@@ -1170,6 +1256,83 @@ spec:
                       used in this Node Pool. Changing this forces a new resource
                       to be created.
                     type: string
+                  vnetSubnetId:
+                    description: The ID of the Subnet where this Node Pool should
+                      exist. Changing this forces a new resource to be created.
+                    type: string
+                  vnetSubnetIdRef:
+                    description: Reference to a Subnet in network to populate vnetSubnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  vnetSubnetIdSelector:
+                    description: Selector for a Subnet in network to populate vnetSubnetId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   windowsProfile:
                     description: A windows_profile block as documented below. Changing
                       this forces a new resource to be created.
@@ -1193,6 +1356,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -1415,6 +1579,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         containerLogMaxLine:
                           description: Specifies the maximum number of container log
                             files that can be present for a container. must be at
@@ -1681,6 +1846,7 @@ spec:
                     description: A map of Kubernetes labels which should be applied
                       to nodes in this Node Pool.
                     type: object
+                    x-kubernetes-map-type: granular
                   nodeNetworkProfile:
                     description: A node_network_profile block as documented below.
                     items:
@@ -1692,6 +1858,7 @@ spec:
                             public IPs. Changing this forces a new resource to be
                             created.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   nodePublicIpPrefixId:
@@ -1773,6 +1940,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   ultraSsdEnabled:
                     description: Used to specify whether the UltraSSD is enabled in
                       the Node Pool. Defaults to false. See the documentation for
@@ -1821,6 +1989,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

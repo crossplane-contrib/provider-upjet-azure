@@ -20,6 +20,7 @@ import (
 type IdentityInitParameters struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
@@ -29,6 +30,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID of the Policy Assignment for this Resource Group.
@@ -45,6 +47,7 @@ type IdentityParameters struct {
 
 	// A list of User Managed Identity IDs which should be assigned to the Policy Definition.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity which should be added to this Policy Definition. Possible values are SystemAssigned and UserAssigned.
@@ -141,6 +144,32 @@ type ResourceGroupPolicyAssignmentInitParameters struct {
 
 	// A JSON mapping of any Parameters for this Policy.
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The ID of the Policy Definition or Policy Definition Set. Changing this forces a new Policy Assignment to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.PolicyDefinition
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
+
+	// Reference to a PolicyDefinition in authorization to populate policyDefinitionId.
+	// +kubebuilder:validation:Optional
+	PolicyDefinitionIDRef *v1.Reference `json:"policyDefinitionIdRef,omitempty" tf:"-"`
+
+	// Selector for a PolicyDefinition in authorization to populate policyDefinitionId.
+	// +kubebuilder:validation:Optional
+	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Resource Group where this Policy Assignment should be created. Changing this forces a new Policy Assignment to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDRef *v1.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	ResourceSelectors []ResourceSelectorsInitParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`

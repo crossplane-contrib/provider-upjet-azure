@@ -311,6 +311,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpnAuthenticationTypes:
                     description: A list of Authentication Types applicable for this
                       VPN Server Configuration. Possible values are AAD (Azure Active
@@ -324,6 +325,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -481,6 +483,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpnAuthenticationTypes:
                     description: A list of Authentication Types applicable for this
                       VPN Server Configuration. Possible values are AAD (Azure Active
@@ -494,6 +497,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -822,6 +826,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   vpnAuthenticationTypes:
                     description: A list of Authentication Types applicable for this
                       VPN Server Configuration. Possible values are AAD (Azure Active
@@ -835,6 +840,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

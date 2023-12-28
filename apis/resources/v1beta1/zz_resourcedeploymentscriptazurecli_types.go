@@ -71,6 +71,20 @@ type EnvironmentVariableParameters struct {
 
 type IdentityInitParameters struct {
 
+	// Specifies the list of user-assigned managed identity IDs associated with the resource. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
+
 	// Type of the managed identity. The only possible value is UserAssigned. Changing this forces a new resource to be created.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -78,6 +92,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies the list of user-assigned managed identity IDs associated with the resource. Changing this forces a new resource to be created.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Type of the managed identity. The only possible value is UserAssigned. Changing this forces a new resource to be created.
@@ -90,6 +105,7 @@ type IdentityParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// References to UserAssignedIdentity in managedidentity to populate identityIds.
@@ -134,6 +150,18 @@ type ResourceDeploymentScriptAzureCliInitParameters struct {
 	// Uri for the script. This is the entry point for the external script. Changing this forces a new Resource Deployment Script to be created.
 	PrimaryScriptURI *string `json:"primaryScriptUri,omitempty" tf:"primary_script_uri,omitempty"`
 
+	// Specifies the name of the Resource Group where the Resource Deployment Script should exist. Changing this forces a new Resource Deployment Script to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Interval for which the service retains the script resource after it reaches a terminal state. Resource will be deleted when this duration expires. The time duration should be between 1 hour and 26 hours (inclusive) and should be specified in ISO 8601 format. Changing this forces a new Resource Deployment Script to be created.
 	RetentionInterval *string `json:"retentionInterval,omitempty" tf:"retention_interval,omitempty"`
 
@@ -147,6 +175,7 @@ type ResourceDeploymentScriptAzureCliInitParameters struct {
 	SupportingScriptUris []*string `json:"supportingScriptUris,omitempty" tf:"supporting_script_uris,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Deployment Script.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Maximum allowed script execution time specified in ISO 8601 format. Needs to be greater than 0 and smaller than 1 day. Defaults to P1D. Changing this forces a new Resource Deployment Script to be created.
@@ -207,6 +236,7 @@ type ResourceDeploymentScriptAzureCliObservation struct {
 	SupportingScriptUris []*string `json:"supportingScriptUris,omitempty" tf:"supporting_script_uris,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Deployment Script.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Maximum allowed script execution time specified in ISO 8601 format. Needs to be greater than 0 and smaller than 1 day. Defaults to P1D. Changing this forces a new Resource Deployment Script to be created.
@@ -285,6 +315,7 @@ type ResourceDeploymentScriptAzureCliParameters struct {
 
 	// A mapping of tags which should be assigned to the Resource Deployment Script.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Maximum allowed script execution time specified in ISO 8601 format. Needs to be greater than 0 and smaller than 1 day. Defaults to P1D. Changing this forces a new Resource Deployment Script to be created.

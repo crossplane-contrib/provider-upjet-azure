@@ -56,6 +56,22 @@ func (mg *ContainerApp) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
+		Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
+		To: reference.To{
+			List:    &EnvironmentList{},
+			Managed: &Environment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerAppEnvironmentID")
+	}
+	mg.Spec.InitProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -113,6 +129,38 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InfrastructureSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.InfrastructureSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.InfrastructureSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.InfrastructureSubnetID")
+	}
+	mg.Spec.InitProvider.InfrastructureSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.InfrastructureSubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogAnalyticsWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef,
+		Selector:     mg.Spec.InitProvider.LogAnalyticsWorkspaceIDSelector,
+		To: reference.To{
+			List:    &v1beta12.WorkspaceList{},
+			Managed: &v1beta12.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LogAnalyticsWorkspaceID")
+	}
+	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
 }

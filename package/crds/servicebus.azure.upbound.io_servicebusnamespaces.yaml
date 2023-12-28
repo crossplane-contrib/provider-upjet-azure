@@ -101,6 +101,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this ServiceBus Namespace.
@@ -215,6 +216,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneRedundant:
                     description: Whether or not this resource is zone redundant. sku
                       needs to be Premium. Changing this forces a new resource to
@@ -267,6 +269,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this ServiceBus Namespace.
@@ -302,6 +305,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneRedundant:
                     description: Whether or not this resource is zone redundant. sku
                       needs to be Premium. Changing this forces a new resource to
@@ -522,6 +526,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The Principal ID for the Service Principal
                             associated with the Managed Service Identity of this ServiceBus
@@ -570,6 +575,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneRedundant:
                     description: Whether or not this resource is zone redundant. sku
                       needs to be Premium. Changing this forces a new resource to

@@ -168,7 +168,21 @@ type FrontdoorFirewallPolicyInitParameters struct {
 	// If action type is redirect, this field represents redirect URL for the client.
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
 
+	// The sku's pricing tier for this Front Door Firewall Policy. Possible values include Standard_AzureFrontDoor or Premium_AzureFrontDoor. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("sku_name",false)
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// Reference to a FrontdoorProfile in cdn to populate skuName.
+	// +kubebuilder:validation:Optional
+	SkuNameRef *v1.Reference `json:"skuNameRef,omitempty" tf:"-"`
+
+	// Selector for a FrontdoorProfile in cdn to populate skuName.
+	// +kubebuilder:validation:Optional
+	SkuNameSelector *v1.Selector `json:"skuNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the Front Door Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -208,6 +222,7 @@ type FrontdoorFirewallPolicyObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the Front Door Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -270,6 +285,7 @@ type FrontdoorFirewallPolicyParameters struct {
 
 	// A mapping of tags to assign to the Front Door Firewall Policy.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

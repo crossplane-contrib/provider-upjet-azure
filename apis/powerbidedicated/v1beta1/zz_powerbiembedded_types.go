@@ -20,6 +20,7 @@ import (
 type PowerBIEmbeddedInitParameters struct {
 
 	// A set of administrator user identities, which manages the Power BI Embedded and must be a member user or a service principal in your AAD tenant.
+	// +listType=set
 	Administrators []*string `json:"administrators,omitempty" tf:"administrators,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -32,12 +33,14 @@ type PowerBIEmbeddedInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type PowerBIEmbeddedObservation struct {
 
 	// A set of administrator user identities, which manages the Power BI Embedded and must be a member user or a service principal in your AAD tenant.
+	// +listType=set
 	Administrators []*string `json:"administrators,omitempty" tf:"administrators,omitempty"`
 
 	// The ID of the PowerBI Embedded.
@@ -56,6 +59,7 @@ type PowerBIEmbeddedObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -63,6 +67,7 @@ type PowerBIEmbeddedParameters struct {
 
 	// A set of administrator user identities, which manages the Power BI Embedded and must be a member user or a service principal in your AAD tenant.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Administrators []*string `json:"administrators,omitempty" tf:"administrators,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -92,6 +97,7 @@ type PowerBIEmbeddedParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

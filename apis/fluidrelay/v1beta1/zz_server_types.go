@@ -20,6 +20,7 @@ import (
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Fluid Relay Service.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Fluid Relay Service. Possible values are SystemAssigned,UserAssigned and SystemAssigned, UserAssigned.
@@ -29,6 +30,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Fluid Relay Service.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Identity of this Fluid Relay Server.
@@ -45,6 +47,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Fluid Relay Service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Fluid Relay Service. Possible values are SystemAssigned,UserAssigned and SystemAssigned, UserAssigned.
@@ -63,10 +66,23 @@ type ServerInitParameters struct {
 	// The name which should be used for this Fluid Relay Server. Changing this forces a new Fluid Relay Server to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the Resource Group where the Fluid Relay Server should exist. Changing this forces a new Fluid Relay Server to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Sku of the storage associated with the resource, Possible values are standard and basic. Changing this forces a new Fluid Relay Server to be created.
 	StorageSku *string `json:"storageSku,omitempty" tf:"storage_sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Fluid Relay Server.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -103,6 +119,7 @@ type ServerObservation struct {
 	StorageSku *string `json:"storageSku,omitempty" tf:"storage_sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Fluid Relay Server.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -139,6 +156,7 @@ type ServerParameters struct {
 
 	// A mapping of tags which should be assigned to the Fluid Relay Server.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

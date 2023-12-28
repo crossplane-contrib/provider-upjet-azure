@@ -19,13 +19,28 @@ import (
 
 type ApplicationInsightsAPIKeyInitParameters struct {
 
+	// The ID of the Application Insights component on which the API key operates. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Application Insights API key. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the list of read permissions granted to the API key. Valid values are agentconfig, aggregate, api, draft, extendqueries, search. Please note these values are case sensitive. Changing this forces a new resource to be created.
+	// +listType=set
 	ReadPermissions []*string `json:"readPermissions,omitempty" tf:"read_permissions,omitempty"`
 
 	// Specifies the list of write permissions granted to the API key. Valid values are annotations. Please note these values are case sensitive. Changing this forces a new resource to be created.
+	// +listType=set
 	WritePermissions []*string `json:"writePermissions,omitempty" tf:"write_permissions,omitempty"`
 }
 
@@ -41,9 +56,11 @@ type ApplicationInsightsAPIKeyObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the list of read permissions granted to the API key. Valid values are agentconfig, aggregate, api, draft, extendqueries, search. Please note these values are case sensitive. Changing this forces a new resource to be created.
+	// +listType=set
 	ReadPermissions []*string `json:"readPermissions,omitempty" tf:"read_permissions,omitempty"`
 
 	// Specifies the list of write permissions granted to the API key. Valid values are annotations. Please note these values are case sensitive. Changing this forces a new resource to be created.
+	// +listType=set
 	WritePermissions []*string `json:"writePermissions,omitempty" tf:"write_permissions,omitempty"`
 }
 
@@ -69,10 +86,12 @@ type ApplicationInsightsAPIKeyParameters struct {
 
 	// Specifies the list of read permissions granted to the API key. Valid values are agentconfig, aggregate, api, draft, extendqueries, search. Please note these values are case sensitive. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ReadPermissions []*string `json:"readPermissions,omitempty" tf:"read_permissions,omitempty"`
 
 	// Specifies the list of write permissions granted to the API key. Valid values are annotations. Please note these values are case sensitive. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	WritePermissions []*string `json:"writePermissions,omitempty" tf:"write_permissions,omitempty"`
 }
 

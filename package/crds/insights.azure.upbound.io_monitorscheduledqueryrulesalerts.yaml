@@ -78,6 +78,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         actionGroupRefs:
                           description: References to MonitorActionGroup to populate
                             actionGroup.
@@ -175,6 +176,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   autoMitigationEnabled:
                     description: Should the alerts in this Metric Alert be auto resolved?
                       Defaults to false. -> NOTE auto_mitigation_enabled and throttling
@@ -377,6 +379,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   throttling:
                     description: Time (in minutes) for which Alerts should be throttled
                       or suppressed. Values must be between 0 and 10000 (inclusive).
@@ -442,6 +445,94 @@ spec:
                     description: An action block as defined below.
                     items:
                       properties:
+                        actionGroup:
+                          description: List of action group reference resource IDs.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        actionGroupRefs:
+                          description: References to MonitorActionGroup to populate
+                            actionGroup.
+                          items:
+                            description: A Reference to a named object.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: Resolution specifies whether resolution
+                                      of this reference is required. The default is
+                                      'Required', which means the reconcile will fail
+                                      if the reference cannot be resolved. 'Optional'
+                                      means this reference will be a no-op if it cannot
+                                      be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: Resolve specifies when this reference
+                                      should be resolved. The default is 'IfNotPresent',
+                                      which will attempt to resolve the reference
+                                      only when the corresponding field is not present.
+                                      Use 'Always' to resolve the reference on every
+                                      reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          type: array
+                        actionGroupSelector:
+                          description: Selector for a list of MonitorActionGroup to
+                            populate actionGroup.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         customWebhookPayload:
                           description: Custom payload to be sent for all webhook payloads
                             in alerting action.
@@ -457,11 +548,91 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   autoMitigationEnabled:
                     description: Should the alerts in this Metric Alert be auto resolved?
                       Defaults to false. -> NOTE auto_mitigation_enabled and throttling
                       are mutually exclusive and cannot both be set.
                     type: boolean
+                  dataSourceId:
+                    description: The resource URI over which log search query is to
+                      be run.
+                    type: string
+                  dataSourceIdRef:
+                    description: Reference to a ApplicationInsights in insights to
+                      populate dataSourceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  dataSourceIdSelector:
+                    description: Selector for a ApplicationInsights in insights to
+                      populate dataSourceId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   description:
                     description: The description of the scheduled query rule.
                     type: string
@@ -491,6 +662,86 @@ spec:
                       example, Heartbeat | summarize AggregatedValue = count() by
                       bin(TimeGenerated, 5m).
                     type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the scheduled query rule instance. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   severity:
                     description: 'Severity of the alert. Possible values include:
                       0, 1, 2, 3, or 4.'
@@ -500,6 +751,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   throttling:
                     description: Time (in minutes) for which Alerts should be throttled
                       or suppressed. Values must be between 0 and 10000 (inclusive).
@@ -753,6 +1005,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         customWebhookPayload:
                           description: Custom payload to be sent for all webhook payloads
                             in alerting action.
@@ -768,6 +1021,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   autoMitigationEnabled:
                     description: Should the alerts in this Metric Alert be auto resolved?
                       Defaults to false. -> NOTE auto_mitigation_enabled and throttling
@@ -823,6 +1077,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   throttling:
                     description: Time (in minutes) for which Alerts should be throttled
                       or suppressed. Values must be between 0 and 10000 (inclusive).

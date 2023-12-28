@@ -28,13 +28,62 @@ type OutputServiceBusQueueInitParameters struct {
 	// A list of property columns to add to the Service Bus Queue output.
 	PropertyColumns []*string `json:"propertyColumns,omitempty" tf:"property_columns,omitempty"`
 
+	// The name of the Service Bus Queue.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.Queue
+	QueueName *string `json:"queueName,omitempty" tf:"queue_name,omitempty"`
+
+	// Reference to a Queue in servicebus to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameRef *v1.Reference `json:"queueNameRef,omitempty" tf:"-"`
+
+	// Selector for a Queue in servicebus to populate queueName.
+	// +kubebuilder:validation:Optional
+	QueueNameSelector *v1.Selector `json:"queueNameSelector,omitempty" tf:"-"`
+
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A serialization block as defined below.
 	Serialization []OutputServiceBusQueueSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
+	ServiceBusNamespace *string `json:"servicebusNamespace,omitempty" tf:"servicebus_namespace,omitempty"`
+
+	// Reference to a ServiceBusNamespace in servicebus to populate servicebusNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceBusNamespaceRef *v1.Reference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceBusNamespace in servicebus to populate servicebusNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required if authentication_mode is ConnectionString.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Job
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Reference to a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Queue Output.
+	// +mapType=granular
 	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
 }
 
@@ -71,6 +120,7 @@ type OutputServiceBusQueueObservation struct {
 	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
 
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Queue Output.
+	// +mapType=granular
 	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
 }
 
@@ -154,6 +204,7 @@ type OutputServiceBusQueueParameters struct {
 
 	// A key-value pair of system property columns that will be attached to the outgoing messages for the Service Bus Queue Output.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	SystemPropertyColumns map[string]*string `json:"systemPropertyColumns,omitempty" tf:"system_property_columns,omitempty"`
 }
 

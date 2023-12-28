@@ -20,12 +20,14 @@ import (
 type PrivateDNSPTRRecordInitParameters struct {
 
 	// List of Fully Qualified Domain Names.
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -38,6 +40,7 @@ type PrivateDNSPTRRecordObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of Fully Qualified Domain Names.
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
@@ -47,6 +50,7 @@ type PrivateDNSPTRRecordObservation struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
@@ -57,6 +61,7 @@ type PrivateDNSPTRRecordParameters struct {
 
 	// List of Fully Qualified Domain Names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
@@ -78,6 +83,7 @@ type PrivateDNSPTRRecordParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.

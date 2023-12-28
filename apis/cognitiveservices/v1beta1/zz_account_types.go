@@ -77,6 +77,7 @@ type AccountInitParameters struct {
 	Storage []StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -149,6 +150,7 @@ type AccountObservation struct {
 	Storage []StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -249,6 +251,7 @@ type AccountParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -284,6 +287,7 @@ type CustomerManagedKeyParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -293,6 +297,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -309,6 +314,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Cognitive Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Cognitive Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -322,6 +328,7 @@ type NetworkAclsInitParameters struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// A virtual_network_rules block as defined below.
@@ -334,6 +341,7 @@ type NetworkAclsObservation struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// A virtual_network_rules block as defined below.
@@ -348,6 +356,7 @@ type NetworkAclsParameters struct {
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Cognitive Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// A virtual_network_rules block as defined below.
@@ -388,6 +397,19 @@ type VirtualNetworkRulesInitParameters struct {
 
 	// Whether ignore missing vnet service endpoint or not. Default to false.
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The ID of the subnet which should be able to access this Cognitive Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkRulesObservation struct {

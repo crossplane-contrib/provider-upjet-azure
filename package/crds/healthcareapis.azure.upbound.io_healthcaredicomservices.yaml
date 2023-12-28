@@ -78,6 +78,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of identity used for the Healthcare
                             DICOM service. Possible values are UserAssigned, SystemAssigned
@@ -102,6 +103,7 @@ spec:
                     description: A mapping of tags to assign to the Healthcare DICOM
                       Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   workspaceId:
                     description: Specifies the id of the Healthcare Workspace where
                       the Healthcare DICOM Service should exist. Changing this forces
@@ -205,6 +207,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of identity used for the Healthcare
                             DICOM service. Possible values are UserAssigned, SystemAssigned
@@ -229,6 +232,7 @@ spec:
                     description: A mapping of tags to assign to the Healthcare DICOM
                       Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -432,6 +436,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The ID of the Healthcare DICOM Service.
                           type: string
@@ -478,6 +483,7 @@ spec:
                     description: A mapping of tags to assign to the Healthcare DICOM
                       Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   workspaceId:
                     description: Specifies the id of the Healthcare Workspace where
                       the Healthcare DICOM Service should exist. Changing this forces

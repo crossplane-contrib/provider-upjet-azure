@@ -31,6 +31,31 @@ type EventGridDataConnectionInitParameters struct {
 	// The resource ID of the event grid that is subscribed to the storage account events.
 	EventGridResourceID *string `json:"eventgridResourceId,omitempty" tf:"eventgrid_resource_id,omitempty"`
 
+	// Specifies the Event Hub consumer group this data connection will use for ingestion. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
+	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameRef *v1.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+
+	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubId.
+	// +kubebuilder:validation:Optional
+	EventHubIDRef *v1.Reference `json:"eventhubIdRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubId.
+	// +kubebuilder:validation:Optional
+	EventHubIDSelector *v1.Selector `json:"eventhubIdSelector,omitempty" tf:"-"`
+
 	// The location where the Kusto Database should be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -42,6 +67,19 @@ type EventGridDataConnectionInitParameters struct {
 
 	// is the first record of every file ignored? Defaults to false.
 	SkipFirstRecord *bool `json:"skipFirstRecord,omitempty" tf:"skip_first_record,omitempty"`
+
+	// Specifies the resource id of the Storage Account this data connection will use for ingestion. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// Specifies the target table name used for the message ingestion. Table must exist before resource is created.
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`

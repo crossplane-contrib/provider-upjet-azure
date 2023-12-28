@@ -616,6 +616,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   resourceGroupName:
                     description: The name of the resource group in which the EventHub's
                       parent Namespace exists. Changing this forces a new resource

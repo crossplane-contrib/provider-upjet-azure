@@ -19,6 +19,20 @@ import (
 
 type EnvironmentInitParameters struct {
 
+	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
+	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	InfrastructureSubnetID *string `json:"infrastructureSubnetId,omitempty" tf:"infrastructure_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate infrastructureSubnetId.
+	// +kubebuilder:validation:Optional
+	InfrastructureSubnetIDRef *v1.Reference `json:"infrastructureSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate infrastructureSubnetId.
+	// +kubebuilder:validation:Optional
+	InfrastructureSubnetIDSelector *v1.Selector `json:"infrastructureSubnetIdSelector,omitempty" tf:"-"`
+
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to false. Changing this forces a new resource to be created.
 	// Should the Container Environment operate in Internal Load Balancing Mode? Defaults to `false`. **Note:** can only be set to `true` if `infrastructure_subnet_id` is specified.
 	InternalLoadBalancerEnabled *bool `json:"internalLoadBalancerEnabled,omitempty" tf:"internal_load_balancer_enabled,omitempty"`
@@ -26,7 +40,22 @@ type EnvironmentInitParameters struct {
 	// Specifies the supported Azure location where the Container App Environment is to exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
+	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
+	// +kubebuilder:validation:Optional
+	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate logAnalyticsWorkspaceId.
+	// +kubebuilder:validation:Optional
+	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -74,6 +103,7 @@ type EnvironmentObservation struct {
 	StaticIPAddress *string `json:"staticIpAddress,omitempty" tf:"static_ip_address,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -133,6 +163,7 @@ type EnvironmentParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

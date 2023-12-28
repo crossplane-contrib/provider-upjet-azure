@@ -21,6 +21,19 @@ type MaintenanceAssignmentVirtualMachineInitParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the ID of the Maintenance Configuration Resource. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/maintenance/v1beta1.MaintenanceConfiguration
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MaintenanceConfigurationID *string `json:"maintenanceConfigurationId,omitempty" tf:"maintenance_configuration_id,omitempty"`
+
+	// Reference to a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
+	// +kubebuilder:validation:Optional
+	MaintenanceConfigurationIDRef *v1.Reference `json:"maintenanceConfigurationIdRef,omitempty" tf:"-"`
+
+	// Selector for a MaintenanceConfiguration in maintenance to populate maintenanceConfigurationId.
+	// +kubebuilder:validation:Optional
+	MaintenanceConfigurationIDSelector *v1.Selector `json:"maintenanceConfigurationIdSelector,omitempty" tf:"-"`
 }
 
 type MaintenanceAssignmentVirtualMachineObservation struct {

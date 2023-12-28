@@ -55,6 +55,21 @@ func (in *LogAnalyticsSolutionInitParameters) DeepCopyInto(out *LogAnalyticsSolu
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SolutionName != nil {
 		in, out := &in.SolutionName, &out.SolutionName
 		*out = new(string)
@@ -75,6 +90,36 @@ func (in *LogAnalyticsSolutionInitParameters) DeepCopyInto(out *LogAnalyticsSolu
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.WorkspaceName != nil {
+		in, out := &in.WorkspaceName, &out.WorkspaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.WorkspaceNameRef != nil {
+		in, out := &in.WorkspaceNameRef, &out.WorkspaceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceNameSelector != nil {
+		in, out := &in.WorkspaceNameSelector, &out.WorkspaceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceResourceID != nil {
+		in, out := &in.WorkspaceResourceID, &out.WorkspaceResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.WorkspaceResourceIDRef != nil {
+		in, out := &in.WorkspaceResourceIDRef, &out.WorkspaceResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceResourceIDSelector != nil {
+		in, out := &in.WorkspaceResourceIDSelector, &out.WorkspaceResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

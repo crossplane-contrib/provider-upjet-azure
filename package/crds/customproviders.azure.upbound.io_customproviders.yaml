@@ -188,6 +188,7 @@ spec:
                     description: A mapping of tags to assign to the resource. Changing
                       this forces a new resource to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                   validation:
                     description: Any number of validation block as defined below.
                     items:
@@ -252,6 +253,7 @@ spec:
                     description: A mapping of tags to assign to the resource. Changing
                       this forces a new resource to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                   validation:
                     description: Any number of validation block as defined below.
                     items:
@@ -482,6 +484,7 @@ spec:
                     description: A mapping of tags to assign to the resource. Changing
                       this forces a new resource to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                   validation:
                     description: Any number of validation block as defined below.
                     items:

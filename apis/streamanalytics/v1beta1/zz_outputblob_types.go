@@ -37,6 +37,42 @@ type OutputBlobInitParameters struct {
 	// A serialization block as defined below.
 	Serialization []SerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
+	// The name of the Storage Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+
+	// The name of the Container within the Storage Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
+
+	// Reference to a Container in storage to populate storageContainerName.
+	// +kubebuilder:validation:Optional
+	StorageContainerNameRef *v1.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate storageContainerName.
+	// +kubebuilder:validation:Optional
+	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Job
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Reference to a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
+
 	// The time format. Wherever {time} appears in path_pattern, the value of this property is used as the time format instead.
 	TimeFormat *string `json:"timeFormat,omitempty" tf:"time_format,omitempty"`
 }

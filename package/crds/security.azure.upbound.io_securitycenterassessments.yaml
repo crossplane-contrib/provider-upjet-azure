@@ -73,6 +73,7 @@ spec:
                       type: string
                     description: A map of additional data to associate with the assessment.
                     type: object
+                    x-kubernetes-map-type: granular
                   assessmentPolicyId:
                     description: The ID of the security Assessment policy to apply
                       to this resource. Changing this forces a new security Assessment
@@ -267,6 +268,87 @@ spec:
                       type: string
                     description: A map of additional data to associate with the assessment.
                     type: object
+                    x-kubernetes-map-type: granular
+                  assessmentPolicyId:
+                    description: The ID of the security Assessment policy to apply
+                      to this resource. Changing this forces a new security Assessment
+                      to be created.
+                    type: string
+                  assessmentPolicyIdRef:
+                    description: Reference to a SecurityCenterAssessmentPolicy in
+                      security to populate assessmentPolicyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  assessmentPolicyIdSelector:
+                    description: Selector for a SecurityCenterAssessmentPolicy in
+                      security to populate assessmentPolicyId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   status:
                     description: A status block as defined below.
                     items:
@@ -284,6 +366,85 @@ spec:
                           type: string
                       type: object
                     type: array
+                  targetResourceId:
+                    description: The ID of the target resource. Changing this forces
+                      a new security Assessment to be created.
+                    type: string
+                  targetResourceIdRef:
+                    description: Reference to a LinuxVirtualMachineScaleSet in compute
+                      to populate targetResourceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  targetResourceIdSelector:
+                    description: Selector for a LinuxVirtualMachineScaleSet in compute
+                      to populate targetResourceId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -461,6 +622,7 @@ spec:
                       type: string
                     description: A map of additional data to associate with the assessment.
                     type: object
+                    x-kubernetes-map-type: granular
                   assessmentPolicyId:
                     description: The ID of the security Assessment policy to apply
                       to this resource. Changing this forces a new security Assessment

@@ -22,6 +22,32 @@ type ClusterManagedPrivateEndpointInitParameters struct {
 	// The group id in which the managed private endpoint is created. Changing this forces a new resource to be created.
 	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
 
+	// The ARM resource ID of the resource for which the managed private endpoint is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PrivateLinkResourceID *string `json:"privateLinkResourceId,omitempty" tf:"private_link_resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate privateLinkResourceId.
+	// +kubebuilder:validation:Optional
+	PrivateLinkResourceIDRef *v1.Reference `json:"privateLinkResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate privateLinkResourceId.
+	// +kubebuilder:validation:Optional
+	PrivateLinkResourceIDSelector *v1.Selector `json:"privateLinkResourceIdSelector,omitempty" tf:"-"`
+
+	// The region of the resource to which the managed private endpoint is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
+	PrivateLinkResourceRegion *string `json:"privateLinkResourceRegion,omitempty" tf:"private_link_resource_region,omitempty"`
+
+	// Reference to a Account in storage to populate privateLinkResourceRegion.
+	// +kubebuilder:validation:Optional
+	PrivateLinkResourceRegionRef *v1.Reference `json:"privateLinkResourceRegionRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate privateLinkResourceRegion.
+	// +kubebuilder:validation:Optional
+	PrivateLinkResourceRegionSelector *v1.Selector `json:"privateLinkResourceRegionSelector,omitempty" tf:"-"`
+
 	// The user request message.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 }

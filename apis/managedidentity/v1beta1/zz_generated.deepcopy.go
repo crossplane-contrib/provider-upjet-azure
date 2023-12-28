@@ -59,6 +59,21 @@ func (in *FederatedIdentityCredentialInitParameters) DeepCopyInto(out *Federated
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Subject != nil {
 		in, out := &in.Subject, &out.Subject
 		*out = new(string)
@@ -299,6 +314,21 @@ func (in *UserAssignedIdentityInitParameters) DeepCopyInto(out *UserAssignedIden
 		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags

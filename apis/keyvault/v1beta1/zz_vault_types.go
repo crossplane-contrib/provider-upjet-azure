@@ -95,9 +95,11 @@ type NetworkAclsInitParameters struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or more Subnet IDs which should be able to access this Key Vault.
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -110,9 +112,11 @@ type NetworkAclsObservation struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or more Subnet IDs which should be able to access this Key Vault.
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -128,10 +132,12 @@ type NetworkAclsParameters struct {
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Vault.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or more Subnet IDs which should be able to access this Key Vault.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -171,6 +177,7 @@ type VaultInitParameters struct {
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
@@ -222,6 +229,7 @@ type VaultObservation struct {
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.
@@ -292,6 +300,7 @@ type VaultParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure Active Directory tenant ID that should be used for authenticating requests to the key vault.

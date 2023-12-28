@@ -19,6 +19,20 @@ import (
 
 type SpringCloudAPIPortalInitParameters struct {
 
+	// Specifies a list of Spring Cloud Gateway.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +listType=set
+	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
+
+	// References to SpringCloudGateway in appplatform to populate gatewayIds.
+	// +kubebuilder:validation:Optional
+	GatewayIdsRefs []v1.Reference `json:"gatewayIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of SpringCloudGateway in appplatform to populate gatewayIds.
+	// +kubebuilder:validation:Optional
+	GatewayIdsSelector *v1.Selector `json:"gatewayIdsSelector,omitempty" tf:"-"`
+
 	// is only https is allowed?
 	HTTPSOnlyEnabled *bool `json:"httpsOnlyEnabled,omitempty" tf:"https_only_enabled,omitempty"`
 
@@ -35,6 +49,7 @@ type SpringCloudAPIPortalInitParameters struct {
 type SpringCloudAPIPortalObservation struct {
 
 	// Specifies a list of Spring Cloud Gateway.
+	// +listType=set
 	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
 
 	// is only https is allowed?
@@ -65,6 +80,7 @@ type SpringCloudAPIPortalParameters struct {
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
 
 	// References to SpringCloudGateway in appplatform to populate gatewayIds.
@@ -118,6 +134,7 @@ type SsoInitParameters struct {
 	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
@@ -133,6 +150,7 @@ type SsoObservation struct {
 	IssuerURI *string `json:"issuerUri,omitempty" tf:"issuer_uri,omitempty"`
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
@@ -152,6 +170,7 @@ type SsoParameters struct {
 
 	// It defines the specific actions applications can be allowed to do on a user's behalf.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

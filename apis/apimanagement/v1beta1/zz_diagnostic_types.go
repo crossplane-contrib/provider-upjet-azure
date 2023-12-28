@@ -171,6 +171,7 @@ type DiagnosticBackendRequestInitParameters struct {
 	DataMasking []BackendRequestDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -183,6 +184,7 @@ type DiagnosticBackendRequestObservation struct {
 	DataMasking []BackendRequestDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -198,6 +200,7 @@ type DiagnosticBackendRequestParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -239,6 +242,7 @@ type DiagnosticBackendResponseInitParameters struct {
 	DataMasking []DiagnosticBackendResponseDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -251,6 +255,7 @@ type DiagnosticBackendResponseObservation struct {
 	DataMasking []DiagnosticBackendResponseDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -266,6 +271,7 @@ type DiagnosticBackendResponseParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -365,6 +371,7 @@ type DiagnosticFrontendRequestInitParameters struct {
 	DataMasking []DiagnosticFrontendRequestDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -377,6 +384,7 @@ type DiagnosticFrontendRequestObservation struct {
 	DataMasking []DiagnosticFrontendRequestDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -392,6 +400,7 @@ type DiagnosticFrontendRequestParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -491,6 +500,7 @@ type DiagnosticFrontendResponseInitParameters struct {
 	DataMasking []DiagnosticFrontendResponseDataMaskingInitParameters `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -503,6 +513,7 @@ type DiagnosticFrontendResponseObservation struct {
 	DataMasking []DiagnosticFrontendResponseDataMaskingObservation `json:"dataMasking,omitempty" tf:"data_masking,omitempty"`
 
 	// Specifies a list of headers to log.
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
@@ -518,10 +529,24 @@ type DiagnosticFrontendResponseParameters struct {
 
 	// Specifies a list of headers to log.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	HeadersToLog []*string `json:"headersToLog,omitempty" tf:"headers_to_log,omitempty"`
 }
 
 type DiagnosticInitParameters struct {
+
+	// The id of the target API Management Logger where the API Management Diagnostic should be saved.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Logger
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	APIManagementLoggerID *string `json:"apiManagementLoggerId,omitempty" tf:"api_management_logger_id,omitempty"`
+
+	// Reference to a Logger in apimanagement to populate apiManagementLoggerId.
+	// +kubebuilder:validation:Optional
+	APIManagementLoggerIDRef *v1.Reference `json:"apiManagementLoggerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Logger in apimanagement to populate apiManagementLoggerId.
+	// +kubebuilder:validation:Optional
+	APIManagementLoggerIDSelector *v1.Selector `json:"apiManagementLoggerIdSelector,omitempty" tf:"-"`
 
 	// Always log errors. Send telemetry if there is an erroneous condition, regardless of sampling settings.
 	AlwaysLogErrors *bool `json:"alwaysLogErrors,omitempty" tf:"always_log_errors,omitempty"`

@@ -56,6 +56,40 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExportDataStorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID),
+			Extract:      resource.ExtractParamPath("resource_manager_id", true),
+			Reference:    mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef,
+			Selector:     mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
+			To: reference.To{
+				List:    &v1beta1.ContainerList{},
+				Managed: &v1beta1.Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID")
+		}
+		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupID")
+	}
+	mg.Spec.InitProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -99,6 +133,40 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 	}
 	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExportDataStorageLocation); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID),
+			Extract:      resource.ExtractParamPath("resource_manager_id", true),
+			Reference:    mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef,
+			Selector:     mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
+			To: reference.To{
+				List:    &v1beta1.ContainerList{},
+				Managed: &v1beta1.Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID")
+		}
+		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SubscriptionIDRef,
+		Selector:     mg.Spec.InitProvider.SubscriptionIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubscriptionList{},
+			Managed: &v1beta11.Subscription{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubscriptionID")
+	}
+	mg.Spec.InitProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil
 }

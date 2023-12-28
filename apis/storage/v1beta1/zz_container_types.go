@@ -23,6 +23,7 @@ type ContainerInitParameters struct {
 	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
 
 	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 }
 
@@ -41,6 +42,7 @@ type ContainerObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The Resource Manager ID of this Storage Container.
@@ -58,6 +60,7 @@ type ContainerParameters struct {
 
 	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.

@@ -145,6 +145,112 @@ func (mg *KubernetesCluster) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.APIServerAccessProfile); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.APIServerAccessProfile[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.AciConnectorLinux); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetNameRef,
+			Selector:     mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetNameSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName")
+		}
+		mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.AciConnectorLinux[i3].SubnetNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DefaultNodePool); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetIDRef,
+			Selector:     mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID")
+		}
+		mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DefaultNodePool[i3].PodSubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DefaultNodePool); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetIDRef,
+			Selector:     mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID")
+		}
+		mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DefaultNodePool[i3].VnetSubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.IngressApplicationGateway); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IngressApplicationGateway[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateDNSZoneID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PrivateDNSZoneIDRef,
+		Selector:     mg.Spec.InitProvider.PrivateDNSZoneIDSelector,
+		To: reference.To{
+			List:    &v1beta1.PrivateDNSZoneList{},
+			Managed: &v1beta1.PrivateDNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateDNSZoneID")
+	}
+	mg.Spec.InitProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -202,6 +308,38 @@ func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VnetSubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PodSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PodSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.PodSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PodSubnetID")
+	}
+	mg.Spec.InitProvider.PodSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PodSubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VnetSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VnetSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VnetSubnetID")
+	}
+	mg.Spec.InitProvider.VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VnetSubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }

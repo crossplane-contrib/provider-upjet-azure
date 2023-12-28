@@ -23,6 +23,7 @@ type TriggerBlobEventInitParameters struct {
 	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Blob Event Trigger.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Blob Event Trigger.
@@ -38,6 +39,7 @@ type TriggerBlobEventInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// List of events that will fire this trigger. Possible values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// are blobs with zero bytes ignored?
@@ -45,6 +47,19 @@ type TriggerBlobEventInitParameters struct {
 
 	// One or more pipeline blocks as defined below.
 	Pipeline []TriggerBlobEventPipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
+
+	// The ID of Storage Account in which blob event will be listened. Changing this forces a new resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type TriggerBlobEventObservation struct {
@@ -53,6 +68,7 @@ type TriggerBlobEventObservation struct {
 	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Blob Event Trigger.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Blob Event Trigger.
@@ -71,6 +87,7 @@ type TriggerBlobEventObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// List of events that will fire this trigger. Possible values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// The ID of the Data Factory Blob Event Trigger.
@@ -94,6 +111,7 @@ type TriggerBlobEventParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Blob Event Trigger.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Blob Event Trigger.
@@ -128,6 +146,7 @@ type TriggerBlobEventParameters struct {
 
 	// List of events that will fire this trigger. Possible values are Microsoft.Storage.BlobCreated and Microsoft.Storage.BlobDeleted.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// are blobs with zero bytes ignored?
@@ -155,7 +174,20 @@ type TriggerBlobEventParameters struct {
 
 type TriggerBlobEventPipelineInitParameters struct {
 
+	// The Data Factory Pipeline name that the trigger will act on.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Pipeline
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Pipeline in datafactory to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a Pipeline in datafactory to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+
 	// The Data Factory Pipeline parameters that the trigger will act on.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -165,6 +197,7 @@ type TriggerBlobEventPipelineObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -185,6 +218,7 @@ type TriggerBlobEventPipelineParameters struct {
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

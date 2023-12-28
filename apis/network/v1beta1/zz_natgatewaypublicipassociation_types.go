@@ -18,6 +18,32 @@ import (
 )
 
 type NATGatewayPublicIPAssociationInitParameters struct {
+
+	// The ID of the NAT Gateway. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=NATGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
+
+	// Reference to a NATGateway to populate natGatewayId.
+	// +kubebuilder:validation:Optional
+	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a NATGateway to populate natGatewayId.
+	// +kubebuilder:validation:Optional
+	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Public IP which this NAT Gateway which should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=PublicIP
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
+
+	// Reference to a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP to populate publicIpAddressId.
+	// +kubebuilder:validation:Optional
+	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 }
 
 type NATGatewayPublicIPAssociationObservation struct {

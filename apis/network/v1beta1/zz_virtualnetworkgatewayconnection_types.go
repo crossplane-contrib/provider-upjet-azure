@@ -188,6 +188,7 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
 
 	// A list of the egress NAT Rule Ids.
+	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
 	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
@@ -200,6 +201,7 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	ExpressRouteGatewayBypass *bool `json:"expressRouteGatewayBypass,omitempty" tf:"express_route_gateway_bypass,omitempty"`
 
 	// A list of the ingress NAT Rule Ids.
+	// +listType=set
 	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
 
 	// A ipsec_policy block which is documented below.
@@ -210,13 +212,40 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	// Use private local Azure IP for the connection. Changing this forces a new resource to be created.
 	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
 
+	// The ID of the local network gateway when creating Site-to-Site connection (i.e. when type is IPsec).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.LocalNetworkGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LocalNetworkGatewayID *string `json:"localNetworkGatewayId,omitempty" tf:"local_network_gateway_id,omitempty"`
+
+	// Reference to a LocalNetworkGateway in network to populate localNetworkGatewayId.
+	// +kubebuilder:validation:Optional
+	LocalNetworkGatewayIDRef *v1.Reference `json:"localNetworkGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a LocalNetworkGateway in network to populate localNetworkGatewayId.
+	// +kubebuilder:validation:Optional
+	LocalNetworkGatewayIDSelector *v1.Selector `json:"localNetworkGatewayIdSelector,omitempty" tf:"-"`
+
 	// The location/region where the connection is located. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the peer virtual network gateway when creating a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or in a different subscription. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=VirtualNetworkGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PeerVirtualNetworkGatewayID *string `json:"peerVirtualNetworkGatewayId,omitempty" tf:"peer_virtual_network_gateway_id,omitempty"`
+
+	// Reference to a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
+	// +kubebuilder:validation:Optional
+	PeerVirtualNetworkGatewayIDRef *v1.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
+	// +kubebuilder:validation:Optional
+	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
 	// The routing weight. Defaults to 10.
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more traffic_selector_policy blocks which are documented below.
@@ -229,6 +258,19 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 
 	// If true, policy-based traffic selectors are enabled for this connection. Enabling policy-based traffic selectors requires an ipsec_policy block. Defaults to false.
 	UsePolicyBasedTrafficSelectors *bool `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
+
+	// The ID of the Virtual Network Gateway in which the connection will be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=VirtualNetworkGateway
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkGatewayID *string `json:"virtualNetworkGatewayId,omitempty" tf:"virtual_network_gateway_id,omitempty"`
+
+	// Reference to a VirtualNetworkGateway to populate virtualNetworkGatewayId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkGatewayIDRef *v1.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetworkGateway to populate virtualNetworkGatewayId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkGatewayIDSelector *v1.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkGatewayConnectionObservation struct {
@@ -249,6 +291,7 @@ type VirtualNetworkGatewayConnectionObservation struct {
 	DpdTimeoutSeconds *float64 `json:"dpdTimeoutSeconds,omitempty" tf:"dpd_timeout_seconds,omitempty"`
 
 	// A list of the egress NAT Rule Ids.
+	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
 	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
@@ -264,6 +307,7 @@ type VirtualNetworkGatewayConnectionObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of the ingress NAT Rule Ids.
+	// +listType=set
 	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
 
 	// A ipsec_policy block which is documented below.
@@ -290,6 +334,7 @@ type VirtualNetworkGatewayConnectionObservation struct {
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more traffic_selector_policy blocks which are documented below.
@@ -334,6 +379,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// A list of the egress NAT Rule Ids.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
 	// If true, BGP (Border Gateway Protocol) is enabled for this connection. Defaults to false.
@@ -350,6 +396,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// A list of the ingress NAT Rule Ids.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
 
 	// A ipsec_policy block which is documented below.
@@ -417,6 +464,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more traffic_selector_policy blocks which are documented below.

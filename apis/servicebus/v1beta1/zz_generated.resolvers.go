@@ -96,6 +96,38 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.PrimaryNamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrimaryNamespaceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AliasAuthorizationRuleID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.AliasAuthorizationRuleIDRef,
+		Selector:     mg.Spec.InitProvider.AliasAuthorizationRuleIDSelector,
+		To: reference.To{
+			List:    &NamespaceAuthorizationRuleList{},
+			Managed: &NamespaceAuthorizationRule{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AliasAuthorizationRuleID")
+	}
+	mg.Spec.InitProvider.AliasAuthorizationRuleID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AliasAuthorizationRuleIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerNamespaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PartnerNamespaceIDRef,
+		Selector:     mg.Spec.InitProvider.PartnerNamespaceIDSelector,
+		To: reference.To{
+			List:    &ServiceBusNamespaceList{},
+			Managed: &ServiceBusNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PartnerNamespaceID")
+	}
+	mg.Spec.InitProvider.PartnerNamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PartnerNamespaceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -138,6 +170,40 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 		}
 		mg.Spec.ForProvider.NetworkRules[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.NetworkRules[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.NamespaceIDRef,
+		Selector:     mg.Spec.InitProvider.NamespaceIDSelector,
+		To: reference.To{
+			List:    &ServiceBusNamespaceList{},
+			Managed: &ServiceBusNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceID")
+	}
+	mg.Spec.InitProvider.NamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRules); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRules[i3].SubnetID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.NetworkRules[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.NetworkRules[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta1.SubnetList{},
+				Managed: &v1beta1.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRules[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.NetworkRules[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.NetworkRules[i3].SubnetIDRef = rsp.ResolvedReference
 
 	}
 

@@ -103,6 +103,7 @@ type ProtectionPolicyBackupInitParameters struct {
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -118,6 +119,7 @@ type ProtectionPolicyBackupObservation struct {
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -137,6 +139,7 @@ type ProtectionPolicyBackupParameters struct {
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -247,12 +250,15 @@ type ProtectionPolicyRetentionMonthlyInitParameters struct {
 	FormatType *string `json:"formatType,omitempty" tf:"format_type,omitempty"`
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
+	// +listType=set
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -265,12 +271,15 @@ type ProtectionPolicyRetentionMonthlyObservation struct {
 	FormatType *string `json:"formatType,omitempty" tf:"format_type,omitempty"`
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
+	// +listType=set
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -286,14 +295,17 @@ type ProtectionPolicyRetentionMonthlyParameters struct {
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -303,6 +315,7 @@ type ProtectionPolicyRetentionWeeklyInitParameters struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -312,6 +325,7 @@ type ProtectionPolicyRetentionWeeklyObservation struct {
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 }
 
@@ -323,6 +337,7 @@ type ProtectionPolicyRetentionWeeklyParameters struct {
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
 }
 
@@ -335,15 +350,19 @@ type ProtectionPolicyRetentionYearlyInitParameters struct {
 	FormatType *string `json:"formatType,omitempty" tf:"format_type,omitempty"`
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
+	// +listType=set
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The months of the year to retain backups of. Possible values are January, February, March, April, May, June, July, August, September, October, November and December.
+	// +listType=set
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -356,15 +375,19 @@ type ProtectionPolicyRetentionYearlyObservation struct {
 	FormatType *string `json:"formatType,omitempty" tf:"format_type,omitempty"`
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
+	// +listType=set
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The months of the year to retain backups of. Possible values are January, February, March, April, May, June, July, August, September, October, November and December.
+	// +listType=set
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
@@ -380,18 +403,22 @@ type ProtectionPolicyRetentionYearlyParameters struct {
 
 	// The monthday backups to retain. Possible values are between 0 and 28.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Monthdays []*float64 `json:"monthdays,omitempty" tf:"monthdays,omitempty"`
 
 	// The months of the year to retain backups of. Possible values are January, February, March, April, May, June, July, August, September, October, November and December.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Months []*string `json:"months" tf:"months,omitempty"`
 
 	// The weekday backups to retain. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Possible values are First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 

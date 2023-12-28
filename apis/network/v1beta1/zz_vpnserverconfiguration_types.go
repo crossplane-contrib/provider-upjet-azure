@@ -265,12 +265,14 @@ type VPNServerConfigurationInitParameters struct {
 	Radius []RadiusInitParameters `json:"radius,omitempty" tf:"radius,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of Authentication Types applicable for this VPN Server Configuration. Possible values are AAD (Azure Active Directory), Certificate and Radius.
 	VPNAuthenticationTypes []*string `json:"vpnAuthenticationTypes,omitempty" tf:"vpn_authentication_types,omitempty"`
 
 	// A list of VPN Protocols to use for this Server Configuration. Possible values are IkeV2 and OpenVPN.
+	// +listType=set
 	VPNProtocols []*string `json:"vpnProtocols,omitempty" tf:"vpn_protocols,omitempty"`
 }
 
@@ -390,12 +392,14 @@ type VPNServerConfigurationObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of Authentication Types applicable for this VPN Server Configuration. Possible values are AAD (Azure Active Directory), Certificate and Radius.
 	VPNAuthenticationTypes []*string `json:"vpnAuthenticationTypes,omitempty" tf:"vpn_authentication_types,omitempty"`
 
 	// A list of VPN Protocols to use for this Server Configuration. Possible values are IkeV2 and OpenVPN.
+	// +listType=set
 	VPNProtocols []*string `json:"vpnProtocols,omitempty" tf:"vpn_protocols,omitempty"`
 }
 
@@ -440,6 +444,7 @@ type VPNServerConfigurationParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A list of Authentication Types applicable for this VPN Server Configuration. Possible values are AAD (Azure Active Directory), Certificate and Radius.
@@ -448,6 +453,7 @@ type VPNServerConfigurationParameters struct {
 
 	// A list of VPN Protocols to use for this Server Configuration. Possible values are IkeV2 and OpenVPN.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VPNProtocols []*string `json:"vpnProtocols,omitempty" tf:"vpn_protocols,omitempty"`
 }
 

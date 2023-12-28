@@ -55,6 +55,18 @@ type BotChannelsRegistrationInitParameters struct {
 	// Is the Bot Channels Registration in an isolated network?
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// The name of the resource group in which to create the Bot Channels Registration. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// The SKU of the Bot Channels Registration. Valid values include F0 or S1. Changing this forces a new resource to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -62,6 +74,7 @@ type BotChannelsRegistrationInitParameters struct {
 	StreamingEndpointEnabled *bool `json:"streamingEndpointEnabled,omitempty" tf:"streaming_endpoint_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -116,6 +129,7 @@ type BotChannelsRegistrationObservation struct {
 	StreamingEndpointEnabled *bool `json:"streamingEndpointEnabled,omitempty" tf:"streaming_endpoint_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -196,6 +210,7 @@ type BotChannelsRegistrationParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

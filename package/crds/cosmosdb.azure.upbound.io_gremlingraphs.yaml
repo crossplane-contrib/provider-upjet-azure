@@ -296,12 +296,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         includedPaths:
                           description: List of paths to include in the indexing. Required
                             if indexing_mode is Consistent or Lazy.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         indexingMode:
                           description: 'Indicates the indexing mode. Possible values
                             include: Consistent, Lazy, None.'
@@ -425,6 +427,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -514,12 +517,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         includedPaths:
                           description: List of paths to include in the indexing. Required
                             if indexing_mode is Consistent or Lazy.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         indexingMode:
                           description: 'Indicates the indexing mode. Possible values
                             include: Consistent, Lazy, None.'
@@ -563,6 +568,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -822,12 +828,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         includedPaths:
                           description: List of paths to include in the indexing. Required
                             if indexing_mode is Consistent or Lazy.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         indexingMode:
                           description: 'Indicates the indexing mode. Possible values
                             include: Consistent, Lazy, None.'
@@ -847,6 +855,7 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -880,6 +889,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object

@@ -22,8 +22,33 @@ type HPCCacheBlobTargetInitParameters struct {
 	// The name of the access policy applied to this target. Defaults to default.
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
+	// The name HPC Cache, which the HPC Cache Blob Target will be added to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
+
+	// Reference to a HPCCache in storagecache to populate cacheName.
+	// +kubebuilder:validation:Optional
+	CacheNameRef *v1.Reference `json:"cacheNameRef,omitempty" tf:"-"`
+
+	// Selector for a HPCCache in storagecache to populate cacheName.
+	// +kubebuilder:validation:Optional
+	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
+
 	// The client-facing file path of the HPC Cache Blob Target.
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
+
+	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob Target. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
+
+	// Reference to a Container in storage to populate storageContainerId.
+	// +kubebuilder:validation:Optional
+	StorageContainerIDRef *v1.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate storageContainerId.
+	// +kubebuilder:validation:Optional
+	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 }
 
 type HPCCacheBlobTargetObservation struct {

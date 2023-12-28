@@ -20,6 +20,7 @@ import (
 type LinkedServiceAzureSearchInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -32,7 +33,21 @@ type LinkedServiceAzureSearchInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The key of the Azure Search Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/search/v1beta1.Service
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_key",true)
+	SearchServiceKey *string `json:"searchServiceKey,omitempty" tf:"search_service_key,omitempty"`
+
+	// Reference to a Service in search to populate searchServiceKey.
+	// +kubebuilder:validation:Optional
+	SearchServiceKeyRef *v1.Reference `json:"searchServiceKeyRef,omitempty" tf:"-"`
+
+	// Selector for a Service in search to populate searchServiceKey.
+	// +kubebuilder:validation:Optional
+	SearchServiceKeySelector *v1.Selector `json:"searchServiceKeySelector,omitempty" tf:"-"`
 
 	// The URL of the Search Service endpoint (e.g. https://{searchServiceName}.search.windows.net).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
@@ -41,6 +56,7 @@ type LinkedServiceAzureSearchInitParameters struct {
 type LinkedServiceAzureSearchObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -62,6 +78,7 @@ type LinkedServiceAzureSearchObservation struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The key of the Azure Search Service.
@@ -75,6 +92,7 @@ type LinkedServiceAzureSearchParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -105,6 +123,7 @@ type LinkedServiceAzureSearchParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The key of the Azure Search Service.

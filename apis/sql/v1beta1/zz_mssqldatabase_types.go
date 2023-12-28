@@ -202,6 +202,7 @@ type MSSQLDatabaseInitParameters struct {
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Threat detection policy configuration. The threat_detection_policy block supports fields documented below.
@@ -289,6 +290,7 @@ type MSSQLDatabaseObservation struct {
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Threat detection policy configuration. The threat_detection_policy block supports fields documented below.
@@ -407,6 +409,7 @@ type MSSQLDatabaseParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Threat detection policy configuration. The threat_detection_policy block supports fields documented below.
@@ -454,12 +457,14 @@ type ShortTermRetentionPolicyParameters struct {
 type ThreatDetectionPolicyInitParameters struct {
 
 	// Specifies a list of alerts which should be disabled. Possible values include Access_Anomaly, Sql_Injection and Sql_Injection_Vulnerability.
+	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// A list of email addresses which alerts should be sent to.
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs.
@@ -475,12 +480,14 @@ type ThreatDetectionPolicyInitParameters struct {
 type ThreatDetectionPolicyObservation struct {
 
 	// Specifies a list of alerts which should be disabled. Possible values include Access_Anomaly, Sql_Injection and Sql_Injection_Vulnerability.
+	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// A list of email addresses which alerts should be sent to.
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs.
@@ -497,6 +504,7 @@ type ThreatDetectionPolicyParameters struct {
 
 	// Specifies a list of alerts which should be disabled. Possible values include Access_Anomaly, Sql_Injection and Sql_Injection_Vulnerability.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
 	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
@@ -505,6 +513,7 @@ type ThreatDetectionPolicyParameters struct {
 
 	// A list of email addresses which alerts should be sent to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// Specifies the number of days to keep in the Threat Detection audit logs.

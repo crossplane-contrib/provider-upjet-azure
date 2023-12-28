@@ -23,6 +23,7 @@ type BotChannelWebChatInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A list of Web Chat Site names.
+	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
 }
 
@@ -41,6 +42,7 @@ type BotChannelWebChatObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A list of Web Chat Site names.
+	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
 }
 
@@ -79,6 +81,7 @@ type BotChannelWebChatParameters struct {
 
 	// A list of Web Chat Site names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
 }
 

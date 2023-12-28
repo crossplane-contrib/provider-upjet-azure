@@ -89,6 +89,22 @@ func (mg *SubAccountTagRule) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.LogzSubAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogzSubAccountIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LogzSubAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.LogzSubAccountIDRef,
+		Selector:     mg.Spec.InitProvider.LogzSubAccountIDSelector,
+		To: reference.To{
+			List:    &SubAccountList{},
+			Managed: &SubAccount{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LogzSubAccountID")
+	}
+	mg.Spec.InitProvider.LogzSubAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LogzSubAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 

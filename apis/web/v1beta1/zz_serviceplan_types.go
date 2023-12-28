@@ -38,6 +38,7 @@ type ServicePlanInitParameters struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the AppService.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of Workers (instances) to be allocated.
@@ -80,6 +81,7 @@ type ServicePlanObservation struct {
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the AppService.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of Workers (instances) to be allocated.
@@ -130,6 +132,7 @@ type ServicePlanParameters struct {
 
 	// A mapping of tags which should be assigned to the AppService.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The number of Workers (instances) to be allocated.

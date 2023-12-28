@@ -178,6 +178,7 @@ spec:
                             are a comma separated string of header values. This is
                             converted to a list before being passed to the API.
                           type: object
+                          x-kubernetes-map-type: granular
                         query:
                           additionalProperties:
                             type: string
@@ -186,6 +187,7 @@ spec:
                             are a comma separated string of query values. This is
                             converted to a list before being passed to the API.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   description:
@@ -326,6 +328,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxPartitionResolutionRetries:
                           description: The maximum number of retries when attempting
                             resolve the partition.
@@ -336,6 +339,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         serverX509Name:
                           description: One or more server_x509_name blocks as documented
                             below.
@@ -418,6 +422,7 @@ spec:
                             are a comma separated string of header values. This is
                             converted to a list before being passed to the API.
                           type: object
+                          x-kubernetes-map-type: granular
                         query:
                           additionalProperties:
                             type: string
@@ -426,6 +431,7 @@ spec:
                             are a comma separated string of query values. This is
                             converted to a list before being passed to the API.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   description:
@@ -470,6 +476,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxPartitionResolutionRetries:
                           description: The maximum number of retries when attempting
                             resolve the partition.
@@ -480,6 +487,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         serverX509Name:
                           description: One or more server_x509_name blocks as documented
                             below.
@@ -729,6 +737,7 @@ spec:
                             are a comma separated string of header values. This is
                             converted to a list before being passed to the API.
                           type: object
+                          x-kubernetes-map-type: granular
                         query:
                           additionalProperties:
                             type: string
@@ -737,6 +746,7 @@ spec:
                             are a comma separated string of query values. This is
                             converted to a list before being passed to the API.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   description:
@@ -788,6 +798,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxPartitionResolutionRetries:
                           description: The maximum number of retries when attempting
                             resolve the partition.
@@ -798,6 +809,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         serverX509Name:
                           description: One or more server_x509_name blocks as documented
                             below.

@@ -28,6 +28,19 @@ type GalleryApplicationVersionInitParameters struct {
 	// Should the Gallery Application Version be excluded from the latest filter? If set to true this Gallery Application Version won't be returned for the latest version. Defaults to false.
 	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
 
+	// The ID of the Gallery Application. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.GalleryApplication
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	GalleryApplicationID *string `json:"galleryApplicationId,omitempty" tf:"gallery_application_id,omitempty"`
+
+	// Reference to a GalleryApplication in compute to populate galleryApplicationId.
+	// +kubebuilder:validation:Optional
+	GalleryApplicationIDRef *v1.Reference `json:"galleryApplicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a GalleryApplication in compute to populate galleryApplicationId.
+	// +kubebuilder:validation:Optional
+	GalleryApplicationIDSelector *v1.Selector `json:"galleryApplicationIdSelector,omitempty" tf:"-"`
+
 	// The Azure Region where the Gallery Application Version exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -41,6 +54,7 @@ type GalleryApplicationVersionInitParameters struct {
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application Version.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more target_region blocks as defined below.
@@ -77,6 +91,7 @@ type GalleryApplicationVersionObservation struct {
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
 	// A mapping of tags to assign to the Gallery Application Version.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more target_region blocks as defined below.
@@ -129,6 +144,7 @@ type GalleryApplicationVersionParameters struct {
 
 	// A mapping of tags to assign to the Gallery Application Version.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more target_region blocks as defined below.
@@ -179,6 +195,19 @@ type SourceInitParameters struct {
 
 	// The Storage Blob URI of the default configuration. Changing this forces a new resource to be created.
 	DefaultConfigurationLink *string `json:"defaultConfigurationLink,omitempty" tf:"default_configuration_link,omitempty"`
+
+	// The Storage Blob URI of the source application package. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Blob
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MediaLink *string `json:"mediaLink,omitempty" tf:"media_link,omitempty"`
+
+	// Reference to a Blob in storage to populate mediaLink.
+	// +kubebuilder:validation:Optional
+	MediaLinkRef *v1.Reference `json:"mediaLinkRef,omitempty" tf:"-"`
+
+	// Selector for a Blob in storage to populate mediaLink.
+	// +kubebuilder:validation:Optional
+	MediaLinkSelector *v1.Selector `json:"mediaLinkSelector,omitempty" tf:"-"`
 }
 
 type SourceObservation struct {
@@ -212,6 +241,19 @@ type SourceParameters struct {
 }
 
 type TargetRegionInitParameters struct {
+
+	// The Azure Region in which the Gallery Application Version exists.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.GalleryApplication
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a GalleryApplication in compute to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a GalleryApplication in compute to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 
 	// The number of replicas of the Gallery Application Version to be created per region. Possible values are between 1 and 10.
 	RegionalReplicaCount *float64 `json:"regionalReplicaCount,omitempty" tf:"regional_replica_count,omitempty"`

@@ -19,8 +19,33 @@ import (
 
 type NotificationRecipientUserInitParameters struct {
 
+	// The ID of the API Management Service from which to create this Notification Recipient User. Changing this forces a new API Management Notification Recipient User to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
+	// Reference to a Management in apimanagement to populate apiManagementId.
+	// +kubebuilder:validation:Optional
+	APIManagementIDRef *v1.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
+
+	// Selector for a Management in apimanagement to populate apiManagementId.
+	// +kubebuilder:validation:Optional
+	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+
 	// The Notification Name to be received. Changing this forces a new API Management Notification Recipient User to be created. Possible values are AccountClosedPublisher, BCC, NewApplicationNotificationMessage, NewIssuePublisherNotificationMessage, PurchasePublisherNotificationMessage, QuotaLimitApproachingPublisherNotificationMessage, and RequestPublisherNotificationMessage.
 	NotificationType *string `json:"notificationType,omitempty" tf:"notification_type,omitempty"`
+
+	// The recipient user ID. Changing this forces a new API Management Notification Recipient User to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.User
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+
+	// Reference to a User in apimanagement to populate userId.
+	// +kubebuilder:validation:Optional
+	UserIDRef *v1.Reference `json:"userIdRef,omitempty" tf:"-"`
+
+	// Selector for a User in apimanagement to populate userId.
+	// +kubebuilder:validation:Optional
+	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 }
 
 type NotificationRecipientUserObservation struct {

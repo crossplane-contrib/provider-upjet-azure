@@ -55,6 +55,22 @@ func (mg *MonitorActionRuleActionGroup) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ActionGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ActionGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ActionGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.MonitorActionGroupList{},
+			Managed: &v1beta1.MonitorActionGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ActionGroupID")
+	}
+	mg.Spec.InitProvider.ActionGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ActionGroupIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -140,6 +156,38 @@ func (mg *MonitorAlertProcessingRuleActionGroup) ResolveReferences(ctx context.C
 	mg.Spec.ForProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ScopesRefs = mrsp.ResolvedReferences
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AddActionGroupIds),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.InitProvider.AddActionGroupIdsRefs,
+		Selector:      mg.Spec.InitProvider.AddActionGroupIdsSelector,
+		To: reference.To{
+			List:    &v1beta1.MonitorActionGroupList{},
+			Managed: &v1beta1.MonitorActionGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AddActionGroupIds")
+	}
+	mg.Spec.InitProvider.AddActionGroupIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.AddActionGroupIdsRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.InitProvider.ScopesRefs,
+		Selector:      mg.Spec.InitProvider.ScopesSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scopes")
+	}
+	mg.Spec.InitProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ScopesRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -182,6 +230,22 @@ func (mg *MonitorAlertProcessingRuleSuppression) ResolveReferences(ctx context.C
 	}
 	mg.Spec.ForProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ScopesRefs = mrsp.ResolvedReferences
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Scopes),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.InitProvider.ScopesRefs,
+		Selector:      mg.Spec.InitProvider.ScopesSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scopes")
+	}
+	mg.Spec.InitProvider.Scopes = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ScopesRefs = mrsp.ResolvedReferences
 
 	return nil
 }
@@ -243,6 +307,56 @@ func (mg *MonitorSmartDetectorAlertRule) ResolveReferences(ctx context.Context, 
 	}
 	mg.Spec.ForProvider.ScopeResourceIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.ScopeResourceIdsRefs = mrsp.ResolvedReferences
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ActionGroup); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ActionGroup[i3].Ids),
+			Extract:       rconfig.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.ActionGroup[i3].IdsRefs,
+			Selector:      mg.Spec.InitProvider.ActionGroup[i3].IdsSelector,
+			To: reference.To{
+				List:    &v1beta1.MonitorActionGroupList{},
+				Managed: &v1beta1.MonitorActionGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ActionGroup[i3].Ids")
+		}
+		mg.Spec.InitProvider.ActionGroup[i3].Ids = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.ActionGroup[i3].IdsRefs = mrsp.ResolvedReferences
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.ScopeResourceIds),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.InitProvider.ScopeResourceIdsRefs,
+		Selector:      mg.Spec.InitProvider.ScopeResourceIdsSelector,
+		To: reference.To{
+			List:    &v1beta1.ApplicationInsightsList{},
+			Managed: &v1beta1.ApplicationInsights{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ScopeResourceIds")
+	}
+	mg.Spec.InitProvider.ScopeResourceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.ScopeResourceIdsRefs = mrsp.ResolvedReferences
 
 	return nil
 }

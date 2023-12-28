@@ -28,13 +28,38 @@ type PolicyInitParameters struct {
 	// The Fact Data for this Policy.
 	FactData *string `json:"factData,omitempty" tf:"fact_data,omitempty"`
 
+	// Specifies the name of the Dev Test Lab in which the Policy should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devtestlab/v1beta1.Lab
+	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
+
+	// Reference to a Lab in devtestlab to populate labName.
+	// +kubebuilder:validation:Optional
+	LabNameRef *v1.Reference `json:"labNameRef,omitempty" tf:"-"`
+
+	// Selector for a Lab in devtestlab to populate labName.
+	// +kubebuilder:validation:Optional
+	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Dev Test Policy. Possible values are GalleryImage, LabPremiumVmCount, LabTargetCost, LabVmCount, LabVmSize, UserOwnedLabPremiumVmCount, UserOwnedLabVmCount and UserOwnedLabVmCountInSubnet. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the name of the Policy Set within the Dev Test Lab where this policy should be created. Changing this forces a new resource to be created.
 	PolicySetName *string `json:"policySetName,omitempty" tf:"policy_set_name,omitempty"`
 
+	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Threshold for this Policy.
@@ -68,6 +93,7 @@ type PolicyObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Threshold for this Policy.
@@ -124,6 +150,7 @@ type PolicyParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Threshold for this Policy.

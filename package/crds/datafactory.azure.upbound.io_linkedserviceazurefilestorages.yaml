@@ -75,6 +75,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -213,6 +214,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   passwordSecretRef:
                     description: The password to log in the server.
                     properties:
@@ -252,6 +254,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -294,6 +297,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   userId:
                     description: The user ID to log in the server.
                     type: string
@@ -474,6 +478,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -523,6 +528,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   userId:
                     description: The user ID to log in the server.
                     type: string

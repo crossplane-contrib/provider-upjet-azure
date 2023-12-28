@@ -130,6 +130,7 @@ type FrontdoorFirewallPolicyInitParameters struct {
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
 
 	// A mapping of tags to assign to the Web Application Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -169,6 +170,7 @@ type FrontdoorFirewallPolicyObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the Web Application Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -217,6 +219,7 @@ type FrontdoorFirewallPolicyParameters struct {
 
 	// A mapping of tags to assign to the Web Application Firewall Policy.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

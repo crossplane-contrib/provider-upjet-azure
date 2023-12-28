@@ -18,6 +18,32 @@ import (
 )
 
 type FrontdoorCustomDomainAssociationInitParameters struct {
+
+	// The ID of the Front Door Custom Domain that should be managed by the association resource. Changing this forces a new association resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CdnFrontdoorCustomDomainID *string `json:"cdnFrontdoorCustomDomainId,omitempty" tf:"cdn_frontdoor_custom_domain_id,omitempty"`
+
+	// Reference to a FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorCustomDomainIDRef *v1.Reference `json:"cdnFrontdoorCustomDomainIdRef,omitempty" tf:"-"`
+
+	// Selector for a FrontdoorCustomDomain in cdn to populate cdnFrontdoorCustomDomainId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorCustomDomainIDSelector *v1.Selector `json:"cdnFrontdoorCustomDomainIdSelector,omitempty" tf:"-"`
+
+	// One or more IDs of the Front Door Route to which the Front Door Custom Domain is associated with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorRoute
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CdnFrontdoorRouteIds []*string `json:"cdnFrontdoorRouteIds,omitempty" tf:"cdn_frontdoor_route_ids,omitempty"`
+
+	// References to FrontdoorRoute in cdn to populate cdnFrontdoorRouteIds.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorRouteIdsRefs []v1.Reference `json:"cdnFrontdoorRouteIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of FrontdoorRoute in cdn to populate cdnFrontdoorRouteIds.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorRouteIdsSelector *v1.Selector `json:"cdnFrontdoorRouteIdsSelector,omitempty" tf:"-"`
 }
 
 type FrontdoorCustomDomainAssociationObservation struct {

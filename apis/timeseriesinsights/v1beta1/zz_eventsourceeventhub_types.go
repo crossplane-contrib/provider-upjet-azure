@@ -19,10 +19,72 @@ import (
 
 type EventSourceEventHubInitParameters struct {
 
+	// Specifies the name of the EventHub Consumer Group that holds the partitions from which events will be read.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
+	ConsumerGroupName *string `json:"consumerGroupName,omitempty" tf:"consumer_group_name,omitempty"`
+
+	// Reference to a ConsumerGroup in eventhub to populate consumerGroupName.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupNameRef *v1.Reference `json:"consumerGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConsumerGroup in eventhub to populate consumerGroupName.
+	// +kubebuilder:validation:Optional
+	ConsumerGroupNameSelector *v1.Selector `json:"consumerGroupNameSelector,omitempty" tf:"-"`
+
+	// Specifies the name of the EventHub which will be associated with this resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
+
+	// Specifies the resource id where events will be coming from.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	EventSourceResourceID *string `json:"eventSourceResourceId,omitempty" tf:"event_source_resource_id,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventSourceResourceId.
+	// +kubebuilder:validation:Optional
+	EventSourceResourceIDRef *v1.Reference `json:"eventSourceResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventSourceResourceId.
+	// +kubebuilder:validation:Optional
+	EventSourceResourceIDSelector *v1.Selector `json:"eventSourceResourceIdSelector,omitempty" tf:"-"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Specifies the EventHub Namespace name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// Reference to a EventHubNamespace in eventhub to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHubNamespace in eventhub to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
+
+	// Specifies the name of the Shared Access key that grants the Event Source access to the EventHub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.AuthorizationRule
+	SharedAccessKeyName *string `json:"sharedAccessKeyName,omitempty" tf:"shared_access_key_name,omitempty"`
+
+	// Reference to a AuthorizationRule in eventhub to populate sharedAccessKeyName.
+	// +kubebuilder:validation:Optional
+	SharedAccessKeyNameRef *v1.Reference `json:"sharedAccessKeyNameRef,omitempty" tf:"-"`
+
+	// Selector for a AuthorizationRule in eventhub to populate sharedAccessKeyName.
+	// +kubebuilder:validation:Optional
+	SharedAccessKeyNameSelector *v1.Selector `json:"sharedAccessKeyNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value that will be used as the event source's timestamp. This value defaults to the event creation time.
@@ -56,6 +118,7 @@ type EventSourceEventHubObservation struct {
 	SharedAccessKeyName *string `json:"sharedAccessKeyName,omitempty" tf:"shared_access_key_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value that will be used as the event source's timestamp. This value defaults to the event creation time.
@@ -154,6 +217,7 @@ type EventSourceEventHubParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the value that will be used as the event source's timestamp. This value defaults to the event creation time.

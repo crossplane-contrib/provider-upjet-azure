@@ -32,6 +32,7 @@ type VirtualWANInitParameters struct {
 	Office365LocalBreakoutCategory *string `json:"office365LocalBreakoutCategory,omitempty" tf:"office365_local_breakout_category,omitempty"`
 
 	// A mapping of tags to assign to the Virtual WAN.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Virtual WAN type. Possible Values include: Basic and Standard. Defaults to Standard.
@@ -59,6 +60,7 @@ type VirtualWANObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the Virtual WAN.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Virtual WAN type. Possible Values include: Basic and Standard. Defaults to Standard.
@@ -98,6 +100,7 @@ type VirtualWANParameters struct {
 
 	// A mapping of tags to assign to the Virtual WAN.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Virtual WAN type. Possible Values include: Basic and Standard. Defaults to Standard.

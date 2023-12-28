@@ -181,6 +181,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
                             values are UserAssigned and SystemAssigned
@@ -430,6 +431,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Container App.
                     type: object
+                    x-kubernetes-map-type: granular
                   template:
                     description: A template block as detailed below.
                     items:
@@ -812,6 +814,87 @@ spec:
                   for example because of an external controller is managing them,
                   like an autoscaler.
                 properties:
+                  containerAppEnvironmentId:
+                    description: The ID of the Container App Environment within which
+                      this Container App should exist. Changing this forces a new
+                      resource to be created. The ID of the Container App Environment
+                      to host this Container App.
+                    type: string
+                  containerAppEnvironmentIdRef:
+                    description: Reference to a Environment in containerapp to populate
+                      containerAppEnvironmentId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  containerAppEnvironmentIdSelector:
+                    description: Selector for a Environment in containerapp to populate
+                      containerAppEnvironmentId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   dapr:
                     description: A dapr block as detailed below.
                     items:
@@ -845,6 +928,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
                             values are UserAssigned and SystemAssigned
@@ -975,6 +1059,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Container App.
                     type: object
+                    x-kubernetes-map-type: granular
                   template:
                     description: A template block as detailed below.
                     items:
@@ -1561,6 +1646,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The ID of the Container App.
                           type: string
@@ -1762,6 +1848,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Container App.
                     type: object
+                    x-kubernetes-map-type: granular
                   template:
                     description: A template block as detailed below.
                     items:

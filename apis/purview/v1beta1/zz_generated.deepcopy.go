@@ -55,6 +55,21 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagedResourceGroupName != nil {
+		in, out := &in.ManagedResourceGroupName, &out.ManagedResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedResourceGroupNameRef != nil {
+		in, out := &in.ManagedResourceGroupNameRef, &out.ManagedResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ManagedResourceGroupNameSelector != nil {
+		in, out := &in.ManagedResourceGroupNameSelector, &out.ManagedResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.PublicNetworkEnabled != nil {
 		in, out := &in.PublicNetworkEnabled, &out.PublicNetworkEnabled
 		*out = new(bool)

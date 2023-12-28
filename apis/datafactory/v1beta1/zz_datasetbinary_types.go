@@ -118,6 +118,7 @@ type CompressionParameters struct {
 type DataSetBinaryInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Binary Dataset.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Binary Dataset.
@@ -138,7 +139,20 @@ type DataSetBinaryInitParameters struct {
 	// A http_server_location block as defined below.
 	HTTPServerLocation []HTTPServerLocationInitParameters `json:"httpServerLocation,omitempty" tf:"http_server_location,omitempty"`
 
+	// The Data Factory Linked Service name in which to associate the Binary Dataset with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceSFTP
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceSFTP in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceSFTP in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+
 	// Specifies a list of parameters to associate with the Data Factory Binary Dataset.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A sftp_server_location block as defined below.
@@ -148,6 +162,7 @@ type DataSetBinaryInitParameters struct {
 type DataSetBinaryObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Binary Dataset.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Binary Dataset.
@@ -178,6 +193,7 @@ type DataSetBinaryObservation struct {
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Specifies a list of parameters to associate with the Data Factory Binary Dataset.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A sftp_server_location block as defined below.
@@ -188,6 +204,7 @@ type DataSetBinaryParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Binary Dataset.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Binary Dataset.
@@ -243,6 +260,7 @@ type DataSetBinaryParameters struct {
 
 	// Specifies a list of parameters to associate with the Data Factory Binary Dataset.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A sftp_server_location block as defined below.

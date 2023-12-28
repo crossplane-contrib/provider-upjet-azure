@@ -109,6 +109,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         privateKeySecretRef:
                           description: Specifies the SSH private key of git repository.
                           properties:
@@ -131,6 +132,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         strictHostKeyChecking:
                           description: Specifies whether enable the strict host key
                             checking.
@@ -259,11 +261,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         searchPaths:
                           description: Specifies a list of searching path of the repository
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         strictHostKeyChecking:
                           description: Specifies whether enable the strict host key
                             checking.
@@ -470,11 +474,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         searchPaths:
                           description: Specifies a list of searching path of the repository
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         strictHostKeyChecking:
                           description: Specifies whether enable the strict host key
                             checking.

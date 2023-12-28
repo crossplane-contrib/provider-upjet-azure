@@ -20,6 +20,7 @@ import (
 type LinkedServiceSFTPInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -41,6 +42,7 @@ type LinkedServiceSFTPInitParameters struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
@@ -56,6 +58,7 @@ type LinkedServiceSFTPInitParameters struct {
 type LinkedServiceSFTPObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -83,6 +86,7 @@ type LinkedServiceSFTPObservation struct {
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
@@ -99,6 +103,7 @@ type LinkedServiceSFTPParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -141,6 +146,7 @@ type LinkedServiceSFTPParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Password to logon to the SFTP Server for Basic Authentication.

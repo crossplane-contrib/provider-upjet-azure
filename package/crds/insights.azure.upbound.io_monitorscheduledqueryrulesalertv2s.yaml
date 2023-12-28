@@ -84,6 +84,7 @@ spec:
                             type: string
                           description: Specifies the properties of an alert payload.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   autoMitigationEnabled:
@@ -378,6 +379,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Monitor Scheduled Query Rule.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetResourceTypes:
                     description: List of resource type of the target resource(s) on
                       which the alert is created/updated. For example if the scope
@@ -429,6 +431,7 @@ spec:
                             type: string
                           description: Specifies the properties of an alert payload.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   autoMitigationEnabled:
@@ -544,6 +547,91 @@ spec:
                       Possible values are PT5M, PT10M, PT15M, PT20M, PT30M, PT45M,
                       PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D and P2D.
                     type: string
+                  scopes:
+                    description: Specifies the list of resource IDs that this scheduled
+                      query rule is scoped to. Changing this forces a new resource
+                      to be created. Currently, the API supports exactly 1 resource
+                      ID in the scopes list.
+                    items:
+                      type: string
+                    type: array
+                  scopesRefs:
+                    description: References to ApplicationInsights to populate scopes.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: Resolution specifies whether resolution
+                                of this reference is required. The default is 'Required',
+                                which means the reconcile will fail if the reference
+                                cannot be resolved. 'Optional' means this reference
+                                will be a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: Resolve specifies when this reference should
+                                be resolved. The default is 'IfNotPresent', which
+                                will attempt to resolve the reference only when the
+                                corresponding field is not present. Use 'Always' to
+                                resolve the reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  scopesSelector:
+                    description: Selector for a list of ApplicationInsights to populate
+                      scopes.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   severity:
                     description: Severity of the alert. Should be an integer between
                       0 and 4. Value of 0 is severest.
@@ -558,6 +646,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Monitor Scheduled Query Rule.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetResourceTypes:
                     description: List of resource type of the target resource(s) on
                       which the alert is created/updated. For example if the scope
@@ -780,6 +869,7 @@ spec:
                             type: string
                           description: Specifies the properties of an alert payload.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   autoMitigationEnabled:
@@ -936,6 +1026,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Monitor Scheduled Query Rule.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetResourceTypes:
                     description: List of resource type of the target resource(s) on
                       which the alert is created/updated. For example if the scope

@@ -18,6 +18,32 @@ import (
 )
 
 type PrivateEndpointApplicationSecurityGroupAssociationInitParameters struct {
+
+	// The id of application security group to associate. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ApplicationSecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
+
+	// Reference to a ApplicationSecurityGroup in network to populate applicationSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	ApplicationSecurityGroupIDRef *v1.Reference `json:"applicationSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationSecurityGroup in network to populate applicationSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	ApplicationSecurityGroupIDSelector *v1.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// The id of private endpoint to associate. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PrivateEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PrivateEndpointID *string `json:"privateEndpointId,omitempty" tf:"private_endpoint_id,omitempty"`
+
+	// Reference to a PrivateEndpoint in network to populate privateEndpointId.
+	// +kubebuilder:validation:Optional
+	PrivateEndpointIDRef *v1.Reference `json:"privateEndpointIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateEndpoint in network to populate privateEndpointId.
+	// +kubebuilder:validation:Optional
+	PrivateEndpointIDSelector *v1.Selector `json:"privateEndpointIdSelector,omitempty" tf:"-"`
 }
 
 type PrivateEndpointApplicationSecurityGroupAssociationObservation struct {
