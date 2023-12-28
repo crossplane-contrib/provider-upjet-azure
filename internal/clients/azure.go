@@ -30,6 +30,8 @@ const (
 	keyAzureSubscriptionID = "subscriptionId"
 	keyAzureClientID       = "clientId"
 	keyAzureClientSecret   = "clientSecret"
+	keyAzureClientCert     = "clientCertificate"
+	keyAzureClientCertPass = "clientCertificatePassword"
 	keyAzureTenantID       = "tenantId"
 	// Terraform Provider configuration block keys
 	keyTerraformFeatures        = "features"
@@ -40,6 +42,8 @@ const (
 	keyTenantID                 = "tenant_id"
 	keyMSIEndpoint              = "msi_endpoint"
 	keyClientSecret             = "client_secret"
+	keyClientCert               = "client_certificate"
+	keyClientCertPassword       = "client_certificate_password"
 	keyEnvironment              = "environment"
 	keyOidcTokenFilePath        = "oidc_token_file_path"
 	keyUseOIDC                  = "use_oidc"
@@ -125,6 +129,12 @@ func spAuth(ctx context.Context, pc *v1beta1.ProviderConfig, ps *terraform.Setup
 	ps.Configuration[keyTenantID] = azureCreds[keyAzureTenantID]
 	ps.Configuration[keyClientID] = azureCreds[keyAzureClientID]
 	ps.Configuration[keyClientSecret] = azureCreds[keyAzureClientSecret]
+	if clientCert, ok := azureCreds[keyAzureClientCert]; ok {
+		ps.Configuration[keyClientCert] = clientCert
+		if clientCertPass, passwordOk := azureCreds[keyAzureClientCertPass]; passwordOk {
+			ps.Configuration[keyClientCertPassword] = clientCertPass
+		}
+	}
 	if pc.Spec.SubscriptionID != nil {
 		ps.Configuration[keySubscriptionID] = *pc.Spec.SubscriptionID
 	}
