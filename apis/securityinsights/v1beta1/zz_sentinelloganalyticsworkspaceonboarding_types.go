@@ -22,8 +22,32 @@ type SentinelLogAnalyticsWorkspaceOnboardingInitParameters struct {
 	// Specifies if the Workspace is using Customer managed key. Defaults to false. Changing this forces a new resource to be created.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
+	// Specifies the name of the Resource Group where the Security Insights Sentinel Onboarding States should exist. Changing this forces the Log Analytics Workspace off the board and onboard again.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// The ID of the Security Insights Sentinel Onboarding States.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Specifies the Workspace Name. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceName.
+	// +kubebuilder:validation:Optional
+	WorkspaceNameRef *v1.Reference `json:"workspaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceName.
+	// +kubebuilder:validation:Optional
+	WorkspaceNameSelector *v1.Selector `json:"workspaceNameSelector,omitempty" tf:"-"`
 }
 
 type SentinelLogAnalyticsWorkspaceOnboardingObservation struct {

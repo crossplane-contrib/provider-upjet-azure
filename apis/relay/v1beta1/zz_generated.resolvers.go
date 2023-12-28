@@ -79,6 +79,38 @@ func (mg *HybridConnection) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RelayNamespaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RelayNamespaceNameRef,
+		Selector:     mg.Spec.InitProvider.RelayNamespaceNameSelector,
+		To: reference.To{
+			List:    &EventRelayNamespaceList{},
+			Managed: &EventRelayNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RelayNamespaceName")
+	}
+	mg.Spec.InitProvider.RelayNamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RelayNamespaceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -136,6 +168,22 @@ func (mg *HybridConnectionAuthorizationRule) ResolveReferences(ctx context.Conte
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NamespaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.NamespaceNameRef,
+		Selector:     mg.Spec.InitProvider.NamespaceNameSelector,
+		To: reference.To{
+			List:    &EventRelayNamespaceList{},
+			Managed: &EventRelayNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NamespaceName")
+	}
+	mg.Spec.InitProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.NamespaceNameRef = rsp.ResolvedReference
 
 	return nil
 }

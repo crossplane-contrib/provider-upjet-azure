@@ -20,12 +20,14 @@ import (
 type CorsInitParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 }
 
 type CorsObservation struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 }
 
@@ -33,12 +35,14 @@ type CorsParameters struct {
 
 	// A list of origins which should be able to make cross-origin calls. * can be used to allow all calls.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 }
 
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this signalR.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this signalR. Possible values are SystemAssigned, UserAssigned.
@@ -48,6 +52,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this signalR.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The ID of the SignalR service.
@@ -64,6 +69,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this signalR.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this signalR. Possible values are SystemAssigned, UserAssigned.
@@ -168,6 +174,7 @@ type ServiceInitParameters struct {
 	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
@@ -240,6 +247,7 @@ type ServiceObservation struct {
 	TLSClientCertEnabled *bool `json:"tlsClientCertEnabled,omitempty" tf:"tls_client_cert_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.
@@ -323,6 +331,7 @@ type ServiceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// An upstream_endpoint block as documented below. Using this block requires the SignalR service to be Serverless. When creating multiple blocks they will be processed in the order they are defined in.

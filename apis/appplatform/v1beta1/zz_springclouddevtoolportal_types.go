@@ -31,6 +31,19 @@ type SpringCloudDevToolPortalInitParameters struct {
 	// Is public network access enabled?
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// The ID of the Spring Cloud Service. Changing this forces a new Spring Cloud Dev Tool Portal to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SpringCloudServiceID *string `json:"springCloudServiceId,omitempty" tf:"spring_cloud_service_id,omitempty"`
+
+	// Reference to a SpringCloudService in appplatform to populate springCloudServiceId.
+	// +kubebuilder:validation:Optional
+	SpringCloudServiceIDRef *v1.Reference `json:"springCloudServiceIdRef,omitempty" tf:"-"`
+
+	// Selector for a SpringCloudService in appplatform to populate springCloudServiceId.
+	// +kubebuilder:validation:Optional
+	SpringCloudServiceIDSelector *v1.Selector `json:"springCloudServiceIdSelector,omitempty" tf:"-"`
+
 	// A sso block as defined below.
 	Sso []SpringCloudDevToolPortalSsoInitParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }
@@ -108,6 +121,7 @@ type SpringCloudDevToolPortalSsoInitParameters struct {
 	MetadataURL *string `json:"metadataUrl,omitempty" tf:"metadata_url,omitempty"`
 
 	// Specifies a list of specific actions applications can be allowed to do on a user's behalf.
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
@@ -123,6 +137,7 @@ type SpringCloudDevToolPortalSsoObservation struct {
 	MetadataURL *string `json:"metadataUrl,omitempty" tf:"metadata_url,omitempty"`
 
 	// Specifies a list of specific actions applications can be allowed to do on a user's behalf.
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 
@@ -142,6 +157,7 @@ type SpringCloudDevToolPortalSsoParameters struct {
 
 	// Specifies a list of specific actions applications can be allowed to do on a user's behalf.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Scope []*string `json:"scope,omitempty" tf:"scope,omitempty"`
 }
 

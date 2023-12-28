@@ -73,6 +73,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authentication:
                     description: An authentication block as defined below.
                     items:
@@ -102,6 +103,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   cors:
                     description: A cors block as defined below.
                     items:
@@ -111,6 +113,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
                             values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
@@ -118,11 +121,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedOrigins:
                           description: A set of origins to be allowed via CORS.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         credentialsAllowed:
                           description: If credentials are allowed via CORS.
                           type: boolean
@@ -142,6 +147,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
                             values are UserAssigned and SystemAssigned
@@ -264,6 +270,7 @@ spec:
                     description: A mapping of tags to assign to the Healthcare FHIR
                       Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   workspaceId:
                     description: Specifies the id of the Healthcare Workspace where
                       the Healthcare FHIR Service should exist. Changing this forces
@@ -362,6 +369,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authentication:
                     description: An authentication block as defined below.
                     items:
@@ -391,6 +399,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   cors:
                     description: A cors block as defined below.
                     items:
@@ -400,6 +409,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
                             values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
@@ -407,11 +417,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedOrigins:
                           description: A set of origins to be allowed via CORS.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         credentialsAllowed:
                           description: If credentials are allowed via CORS.
                           type: boolean
@@ -431,6 +443,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
                             values are UserAssigned and SystemAssigned
@@ -467,12 +480,93 @@ spec:
                           type: string
                       type: object
                     type: array
+                  resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      to create the Healthcare FHIR Service. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
                     description: A mapping of tags to assign to the Healthcare FHIR
                       Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -654,6 +748,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authentication:
                     description: An authentication block as defined below.
                     items:
@@ -683,6 +778,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   cors:
                     description: A cors block as defined below.
                     items:
@@ -692,6 +788,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
                             values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
@@ -699,11 +796,13 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedOrigins:
                           description: A set of origins to be allowed via CORS.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         credentialsAllowed:
                           description: If credentials are allowed via CORS.
                           type: boolean
@@ -726,6 +825,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The ID of the Healthcare FHIR Service.
                           type: string
@@ -782,6 +882,7 @@ spec:
                     description: A mapping of tags to assign to the Healthcare FHIR
                       Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   workspaceId:
                     description: Specifies the id of the Healthcare Workspace where
                       the Healthcare FHIR Service should exist. Changing this forces

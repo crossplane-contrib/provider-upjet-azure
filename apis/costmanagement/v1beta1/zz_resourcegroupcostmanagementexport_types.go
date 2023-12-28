@@ -48,6 +48,19 @@ type ExportDataOptionsParameters struct {
 
 type ExportDataStorageLocationInitParameters struct {
 
+	// The Resource Manager ID of the container where exports will be uploaded. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_manager_id",true)
+	ContainerID *string `json:"containerId,omitempty" tf:"container_id,omitempty"`
+
+	// Reference to a Container in storage to populate containerId.
+	// +kubebuilder:validation:Optional
+	ContainerIDRef *v1.Reference `json:"containerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate containerId.
+	// +kubebuilder:validation:Optional
+	ContainerIDSelector *v1.Selector `json:"containerIdSelector,omitempty" tf:"-"`
+
 	// The path of the directory where exports will be uploaded. Changing this forces a new resource to be created.
 	RootFolderPath *string `json:"rootFolderPath,omitempty" tf:"root_folder_path,omitempty"`
 }
@@ -101,6 +114,19 @@ type ResourceGroupCostManagementExportInitParameters struct {
 
 	// How often the requested information will be exported. Valid values include Annually, Daily, Monthly, Weekly.
 	RecurrenceType *string `json:"recurrenceType,omitempty" tf:"recurrence_type,omitempty"`
+
+	// The id of the resource group on which to create an export. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDRef *v1.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
 }
 
 type ResourceGroupCostManagementExportObservation struct {

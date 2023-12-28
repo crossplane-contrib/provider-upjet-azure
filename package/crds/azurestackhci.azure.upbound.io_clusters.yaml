@@ -162,6 +162,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Azure Stack HCI Cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenantId:
                     description: The Tenant ID of the Azure Active Directory which
                       is used by the Azure Stack HCI Cluster. Changing this forces
@@ -195,6 +196,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Azure Stack HCI Cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenantId:
                     description: The Tenant ID of the Azure Active Directory which
                       is used by the Azure Stack HCI Cluster. Changing this forces
@@ -398,6 +400,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Azure Stack HCI Cluster.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenantId:
                     description: The Tenant ID of the Azure Active Directory which
                       is used by the Azure Stack HCI Cluster. Changing this forces

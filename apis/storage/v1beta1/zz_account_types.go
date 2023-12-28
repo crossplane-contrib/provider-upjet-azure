@@ -119,6 +119,7 @@ type AccountInitParameters struct {
 	TableEncryptionKeyType *string `json:"tableEncryptionKeyType,omitempty" tf:"table_encryption_key_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -308,6 +309,7 @@ type AccountObservation struct {
 	TableEncryptionKeyType *string `json:"tableEncryptionKeyType,omitempty" tf:"table_encryption_key_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -460,6 +462,7 @@ type AccountParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -870,6 +873,7 @@ type HourMetricsParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Storage Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -879,6 +883,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Storage Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Identity of this Storage Account.
@@ -895,6 +900,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Storage Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Storage Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -1052,36 +1058,42 @@ type MinuteMetricsParameters struct {
 type NetworkRulesInitParameters struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
 	PrivateLinkAccess []PrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
 type NetworkRulesObservation struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
 	PrivateLinkAccess []PrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -1089,6 +1101,7 @@ type NetworkRulesParameters struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
@@ -1097,6 +1110,7 @@ type NetworkRulesParameters struct {
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
@@ -1105,6 +1119,7 @@ type NetworkRulesParameters struct {
 
 	// A list of resource ids for subnets.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -1357,36 +1372,44 @@ type SASPolicyParameters struct {
 type SMBInitParameters struct {
 
 	// A set of SMB authentication methods. Possible values are NTLMv2, and Kerberos.
+	// +listType=set
 	AuthenticationTypes []*string `json:"authenticationTypes,omitempty" tf:"authentication_types,omitempty"`
 
 	// A set of SMB channel encryption. Possible values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
+	// +listType=set
 	ChannelEncryptionType []*string `json:"channelEncryptionType,omitempty" tf:"channel_encryption_type,omitempty"`
 
 	// A set of Kerberos ticket encryption. Possible values are RC4-HMAC, and AES-256.
+	// +listType=set
 	KerberosTicketEncryptionType []*string `json:"kerberosTicketEncryptionType,omitempty" tf:"kerberos_ticket_encryption_type,omitempty"`
 
 	// Indicates whether multichannel is enabled. Defaults to false. This is only supported on Premium storage accounts.
 	MultichannelEnabled *bool `json:"multichannelEnabled,omitempty" tf:"multichannel_enabled,omitempty"`
 
 	// A set of SMB protocol versions. Possible values are SMB2.1, SMB3.0, and SMB3.1.1.
+	// +listType=set
 	Versions []*string `json:"versions,omitempty" tf:"versions,omitempty"`
 }
 
 type SMBObservation struct {
 
 	// A set of SMB authentication methods. Possible values are NTLMv2, and Kerberos.
+	// +listType=set
 	AuthenticationTypes []*string `json:"authenticationTypes,omitempty" tf:"authentication_types,omitempty"`
 
 	// A set of SMB channel encryption. Possible values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
+	// +listType=set
 	ChannelEncryptionType []*string `json:"channelEncryptionType,omitempty" tf:"channel_encryption_type,omitempty"`
 
 	// A set of Kerberos ticket encryption. Possible values are RC4-HMAC, and AES-256.
+	// +listType=set
 	KerberosTicketEncryptionType []*string `json:"kerberosTicketEncryptionType,omitempty" tf:"kerberos_ticket_encryption_type,omitempty"`
 
 	// Indicates whether multichannel is enabled. Defaults to false. This is only supported on Premium storage accounts.
 	MultichannelEnabled *bool `json:"multichannelEnabled,omitempty" tf:"multichannel_enabled,omitempty"`
 
 	// A set of SMB protocol versions. Possible values are SMB2.1, SMB3.0, and SMB3.1.1.
+	// +listType=set
 	Versions []*string `json:"versions,omitempty" tf:"versions,omitempty"`
 }
 
@@ -1394,14 +1417,17 @@ type SMBParameters struct {
 
 	// A set of SMB authentication methods. Possible values are NTLMv2, and Kerberos.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AuthenticationTypes []*string `json:"authenticationTypes,omitempty" tf:"authentication_types,omitempty"`
 
 	// A set of SMB channel encryption. Possible values are AES-128-CCM, AES-128-GCM, and AES-256-GCM.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ChannelEncryptionType []*string `json:"channelEncryptionType,omitempty" tf:"channel_encryption_type,omitempty"`
 
 	// A set of Kerberos ticket encryption. Possible values are RC4-HMAC, and AES-256.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	KerberosTicketEncryptionType []*string `json:"kerberosTicketEncryptionType,omitempty" tf:"kerberos_ticket_encryption_type,omitempty"`
 
 	// Indicates whether multichannel is enabled. Defaults to false. This is only supported on Premium storage accounts.
@@ -1410,6 +1436,7 @@ type SMBParameters struct {
 
 	// A set of SMB protocol versions. Possible values are SMB2.1, SMB3.0, and SMB3.1.1.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Versions []*string `json:"versions,omitempty" tf:"versions,omitempty"`
 }
 

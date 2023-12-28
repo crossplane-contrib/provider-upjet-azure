@@ -18,6 +18,32 @@ import (
 )
 
 type NamespaceDisasterRecoveryConfigInitParameters struct {
+
+	// The Shared access policies used to access the connection string for the alias.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.NamespaceAuthorizationRule
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	AliasAuthorizationRuleID *string `json:"aliasAuthorizationRuleId,omitempty" tf:"alias_authorization_rule_id,omitempty"`
+
+	// Reference to a NamespaceAuthorizationRule in servicebus to populate aliasAuthorizationRuleId.
+	// +kubebuilder:validation:Optional
+	AliasAuthorizationRuleIDRef *v1.Reference `json:"aliasAuthorizationRuleIdRef,omitempty" tf:"-"`
+
+	// Selector for a NamespaceAuthorizationRule in servicebus to populate aliasAuthorizationRuleId.
+	// +kubebuilder:validation:Optional
+	AliasAuthorizationRuleIDSelector *v1.Selector `json:"aliasAuthorizationRuleIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Service Bus Namespace to replicate to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
+
+	// Reference to a ServiceBusNamespace in servicebus to populate partnerNamespaceId.
+	// +kubebuilder:validation:Optional
+	PartnerNamespaceIDRef *v1.Reference `json:"partnerNamespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceBusNamespace in servicebus to populate partnerNamespaceId.
+	// +kubebuilder:validation:Optional
+	PartnerNamespaceIDSelector *v1.Selector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
 }
 
 type NamespaceDisasterRecoveryConfigObservation struct {

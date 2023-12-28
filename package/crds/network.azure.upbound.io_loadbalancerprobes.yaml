@@ -406,6 +406,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   loadbalancerId:
                     description: The ID of the LoadBalancer in which to create the
                       NAT Rule. Changing this forces a new resource to be created.

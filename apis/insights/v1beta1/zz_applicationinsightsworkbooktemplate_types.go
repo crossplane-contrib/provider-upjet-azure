@@ -37,7 +37,20 @@ type ApplicationInsightsWorkbookTemplateInitParameters struct {
 	// Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode. Defaults to 0.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
+	// Specifies the name of the Resource Group where the Application Insights Workbook Template should exist. Changing this forces a new Application Insights Workbook Template to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Application Insights Workbook Template.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Valid JSON object containing workbook template payload.
@@ -71,6 +84,7 @@ type ApplicationInsightsWorkbookTemplateObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Application Insights Workbook Template.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Valid JSON object containing workbook template payload.
@@ -118,6 +132,7 @@ type ApplicationInsightsWorkbookTemplateParameters struct {
 
 	// A mapping of tags which should be assigned to the Application Insights Workbook Template.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Valid JSON object containing workbook template payload.

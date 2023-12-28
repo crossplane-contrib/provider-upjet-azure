@@ -70,5 +70,53 @@ func (mg *LogAnalyticsSolution) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.WorkspaceNameRef,
+		Selector:     mg.Spec.InitProvider.WorkspaceNameSelector,
+		To: reference.To{
+			List:    &v1beta11.WorkspaceList{},
+			Managed: &v1beta11.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceName")
+	}
+	mg.Spec.InitProvider.WorkspaceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.WorkspaceResourceIDRef,
+		Selector:     mg.Spec.InitProvider.WorkspaceResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.WorkspaceList{},
+			Managed: &v1beta11.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceResourceID")
+	}
+	mg.Spec.InitProvider.WorkspaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }

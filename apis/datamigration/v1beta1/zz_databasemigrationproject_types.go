@@ -29,6 +29,7 @@ type DatabaseMigrationProjectInitParameters struct {
 	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
 
 	// A mapping of tags to assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The platform type of the migration target. Currently only support: SQLDB(Azure SQL Database). Changing this forces a new resource to be created.
@@ -56,6 +57,7 @@ type DatabaseMigrationProjectObservation struct {
 	SourcePlatform *string `json:"sourcePlatform,omitempty" tf:"source_platform,omitempty"`
 
 	// A mapping of tags to assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The platform type of the migration target. Currently only support: SQLDB(Azure SQL Database). Changing this forces a new resource to be created.
@@ -105,6 +107,7 @@ type DatabaseMigrationProjectParameters struct {
 
 	// A mapping of tags to assigned to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The platform type of the migration target. Currently only support: SQLDB(Azure SQL Database). Changing this forces a new resource to be created.

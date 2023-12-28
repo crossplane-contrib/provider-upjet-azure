@@ -19,6 +19,18 @@ import (
 
 type HPCCacheNFSTargetInitParameters struct {
 
+	// The name HPC Cache, which the HPC Cache NFS Target will be added to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
+
+	// Reference to a HPCCache in storagecache to populate cacheName.
+	// +kubebuilder:validation:Optional
+	CacheNameRef *v1.Reference `json:"cacheNameRef,omitempty" tf:"-"`
+
+	// Selector for a HPCCache in storagecache to populate cacheName.
+	// +kubebuilder:validation:Optional
+	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
+
 	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
 	NamespaceJunction []NamespaceJunctionInitParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 

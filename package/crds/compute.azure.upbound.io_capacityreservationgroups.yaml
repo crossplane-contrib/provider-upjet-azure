@@ -157,6 +157,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zones:
                     description: Specifies a list of Availability Zones for this Capacity
                       Reservation Group. Changing this forces a new resource to be
@@ -164,6 +165,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -186,6 +188,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zones:
                     description: Specifies a list of Availability Zones for this Capacity
                       Reservation Group. Changing this forces a new resource to be
@@ -193,6 +196,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -382,6 +386,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zones:
                     description: Specifies a list of Availability Zones for this Capacity
                       Reservation Group. Changing this forces a new resource to be
@@ -389,6 +394,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               conditions:
                 description: Conditions of the resource.

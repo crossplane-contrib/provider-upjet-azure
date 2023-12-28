@@ -19,6 +19,19 @@ import (
 
 type MSSQLServerMicrosoftSupportAuditingPolicyInitParameters struct {
 
+	// The blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Microsoft support auditing logs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)
+	BlobStorageEndpoint *string `json:"blobStorageEndpoint,omitempty" tf:"blob_storage_endpoint,omitempty"`
+
+	// Reference to a Account in storage to populate blobStorageEndpoint.
+	// +kubebuilder:validation:Optional
+	BlobStorageEndpointRef *v1.Reference `json:"blobStorageEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate blobStorageEndpoint.
+	// +kubebuilder:validation:Optional
+	BlobStorageEndpointSelector *v1.Selector `json:"blobStorageEndpointSelector,omitempty" tf:"-"`
+
 	// Whether to enable the extended auditing policy. Possible values are true and false. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 

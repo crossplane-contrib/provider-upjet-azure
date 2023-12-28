@@ -27,6 +27,19 @@ type RoleAssignmentInitParameters struct {
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
 	SynapseSparkPoolID *string `json:"synapseSparkPoolId,omitempty" tf:"synapse_spark_pool_id,omitempty"`
+
+	// The Synapse Workspace which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
+
+	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
+	// +kubebuilder:validation:Optional
+	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
+	// +kubebuilder:validation:Optional
+	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
 }
 
 type RoleAssignmentObservation struct {

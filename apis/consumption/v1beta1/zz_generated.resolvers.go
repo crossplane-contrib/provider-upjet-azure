@@ -40,6 +40,22 @@ func (mg *BudgetManagementGroup) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ManagementGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ManagementGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.ManagementGroupList{},
+			Managed: &v1beta1.ManagementGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagementGroupID")
+	}
+	mg.Spec.InitProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagementGroupIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -65,6 +81,22 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupID")
+	}
+	mg.Spec.InitProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -92,6 +124,24 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 		}
 		mg.Spec.ForProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Notification); i3++ {
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
+			Extract:       rconfig.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs,
+			Selector:      mg.Spec.InitProvider.Notification[i3].ContactGroupsSelector,
+			To: reference.To{
+				List:    &v1beta12.MonitorActionGroupList{},
+				Managed: &v1beta12.MonitorActionGroup{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Notification[i3].ContactGroups")
+		}
+		mg.Spec.InitProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
 
 	}
 

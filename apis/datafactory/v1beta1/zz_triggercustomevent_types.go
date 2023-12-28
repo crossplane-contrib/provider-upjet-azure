@@ -23,6 +23,7 @@ type TriggerCustomEventInitParameters struct {
 	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Custom Event Trigger.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Custom Event Trigger.
@@ -31,7 +32,21 @@ type TriggerCustomEventInitParameters struct {
 	// The description for the Data Factory Custom Event Trigger.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The ID of Event Grid Topic in which event will be listened. Changing this forces a new resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventgrid/v1beta1.Topic
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	EventGridTopicID *string `json:"eventgridTopicId,omitempty" tf:"eventgrid_topic_id,omitempty"`
+
+	// Reference to a Topic in eventgrid to populate eventgridTopicId.
+	// +kubebuilder:validation:Optional
+	EventGridTopicIDRef *v1.Reference `json:"eventgridTopicIdRef,omitempty" tf:"-"`
+
+	// Selector for a Topic in eventgrid to populate eventgridTopicId.
+	// +kubebuilder:validation:Optional
+	EventGridTopicIDSelector *v1.Selector `json:"eventgridTopicIdSelector,omitempty" tf:"-"`
+
 	// List of events that will fire this trigger. At least one event must be specified.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// One or more pipeline blocks as defined below.
@@ -50,6 +65,7 @@ type TriggerCustomEventObservation struct {
 	Activated *bool `json:"activated,omitempty" tf:"activated,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Custom Event Trigger.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Custom Event Trigger.
@@ -65,6 +81,7 @@ type TriggerCustomEventObservation struct {
 	EventGridTopicID *string `json:"eventgridTopicId,omitempty" tf:"eventgrid_topic_id,omitempty"`
 
 	// List of events that will fire this trigger. At least one event must be specified.
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// The ID of the Data Factory Custom Event Trigger.
@@ -88,6 +105,7 @@ type TriggerCustomEventParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Custom Event Trigger.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Custom Event Trigger.
@@ -128,6 +146,7 @@ type TriggerCustomEventParameters struct {
 
 	// List of events that will fire this trigger. At least one event must be specified.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Events []*string `json:"events,omitempty" tf:"events,omitempty"`
 
 	// One or more pipeline blocks as defined below.
@@ -145,7 +164,20 @@ type TriggerCustomEventParameters struct {
 
 type TriggerCustomEventPipelineInitParameters struct {
 
+	// The Data Factory Pipeline name that the trigger will act on.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Pipeline
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Pipeline in datafactory to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a Pipeline in datafactory to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+
 	// The Data Factory Pipeline parameters that the trigger will act on.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -155,6 +187,7 @@ type TriggerCustomEventPipelineObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -175,6 +208,7 @@ type TriggerCustomEventPipelineParameters struct {
 
 	// The Data Factory Pipeline parameters that the trigger will act on.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

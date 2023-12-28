@@ -28,6 +28,19 @@ type BudgetManagementGroupInitParameters struct {
 	// A filter block as defined below.
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
+	// The ID of the Management Group. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
+
+	// Reference to a ManagementGroup in management to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagementGroup in management to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+
 	// The name which should be used for this Management Group Consumption Budget. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -174,6 +174,7 @@ type SparkPoolInitParameters struct {
 	SparkVersion *string `json:"sparkVersion,omitempty" tf:"spark_version,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse Spark Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -234,6 +235,7 @@ type SparkPoolObservation struct {
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse Spark Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -319,6 +321,7 @@ type SparkPoolParameters struct {
 
 	// A mapping of tags which should be assigned to the Synapse Spark Pool.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

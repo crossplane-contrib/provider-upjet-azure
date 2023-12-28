@@ -118,6 +118,84 @@ func (mg *HBaseCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].WorkerNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].ZookeeperNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
+			To: reference.To{
+				List:    &v1beta12.ContainerList{},
+				Managed: &v1beta12.Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -223,6 +301,84 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].WorkerNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].ZookeeperNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
+			To: reference.To{
+				List:    &v1beta12.ContainerList{},
+				Managed: &v1beta12.Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -326,6 +482,84 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 		}
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].WorkerNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].ZookeeperNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
+			To: reference.To{
+				List:    &v1beta12.ContainerList{},
+				Managed: &v1beta12.Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
 
@@ -453,6 +687,104 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].KafkaManagementNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].KafkaManagementNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].WorkerNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].ZookeeperNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
+			To: reference.To{
+				List:    &v1beta12.ContainerList{},
+				Managed: &v1beta12.Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -556,6 +888,84 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		}
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].HeadNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].WorkerNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].WorkerNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].ZookeeperNode); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Roles[i3].ZookeeperNode[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDSelector,
+			To: reference.To{
+				List:    &v1beta12.ContainerList{},
+				Managed: &v1beta12.Container{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
 

@@ -31,6 +31,7 @@ type SubscriptionInitParameters struct {
 	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 
 	// A mapping of tags to assign to the Subscription.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.
@@ -55,6 +56,7 @@ type SubscriptionObservation struct {
 	SubscriptionName *string `json:"subscriptionName,omitempty" tf:"subscription_name,omitempty"`
 
 	// A mapping of tags to assign to the Subscription.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Tenant to which the subscription belongs.
@@ -84,6 +86,7 @@ type SubscriptionParameters struct {
 
 	// A mapping of tags to assign to the Subscription.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The workload type of the Subscription. Possible values are Production (default) and DevTest. Changing this forces a new Subscription to be created.

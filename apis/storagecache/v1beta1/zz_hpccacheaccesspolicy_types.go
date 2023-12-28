@@ -110,6 +110,19 @@ type HPCCacheAccessPolicyInitParameters struct {
 
 	// Up to three access_rule blocks as defined below.
 	AccessRule []HPCCacheAccessPolicyAccessRuleInitParameters `json:"accessRule,omitempty" tf:"access_rule,omitempty"`
+
+	// The ID of the HPC Cache that this HPC Cache Access Policy resides in. Changing this forces a new HPC Cache Access Policy to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	HPCCacheID *string `json:"hpcCacheId,omitempty" tf:"hpc_cache_id,omitempty"`
+
+	// Reference to a HPCCache in storagecache to populate hpcCacheId.
+	// +kubebuilder:validation:Optional
+	HPCCacheIDRef *v1.Reference `json:"hpcCacheIdRef,omitempty" tf:"-"`
+
+	// Selector for a HPCCache in storagecache to populate hpcCacheId.
+	// +kubebuilder:validation:Optional
+	HPCCacheIDSelector *v1.Selector `json:"hpcCacheIdSelector,omitempty" tf:"-"`
 }
 
 type HPCCacheAccessPolicyObservation struct {

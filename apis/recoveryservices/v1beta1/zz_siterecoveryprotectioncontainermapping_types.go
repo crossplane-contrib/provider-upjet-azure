@@ -50,6 +50,32 @@ type SiteRecoveryProtectionContainerMappingInitParameters struct {
 
 	// a automatic_update block defined as below.
 	AutomaticUpdate []AutomaticUpdateInitParameters `json:"automaticUpdate,omitempty" tf:"automatic_update,omitempty"`
+
+	// Id of the policy to use for this mapping. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.SiteRecoveryReplicationPolicy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RecoveryReplicationPolicyID *string `json:"recoveryReplicationPolicyId,omitempty" tf:"recovery_replication_policy_id,omitempty"`
+
+	// Reference to a SiteRecoveryReplicationPolicy in recoveryservices to populate recoveryReplicationPolicyId.
+	// +kubebuilder:validation:Optional
+	RecoveryReplicationPolicyIDRef *v1.Reference `json:"recoveryReplicationPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a SiteRecoveryReplicationPolicy in recoveryservices to populate recoveryReplicationPolicyId.
+	// +kubebuilder:validation:Optional
+	RecoveryReplicationPolicyIDSelector *v1.Selector `json:"recoveryReplicationPolicyIdSelector,omitempty" tf:"-"`
+
+	// Id of target protection container to map to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.SiteRecoveryProtectionContainer
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RecoveryTargetProtectionContainerID *string `json:"recoveryTargetProtectionContainerId,omitempty" tf:"recovery_target_protection_container_id,omitempty"`
+
+	// Reference to a SiteRecoveryProtectionContainer in recoveryservices to populate recoveryTargetProtectionContainerId.
+	// +kubebuilder:validation:Optional
+	RecoveryTargetProtectionContainerIDRef *v1.Reference `json:"recoveryTargetProtectionContainerIdRef,omitempty" tf:"-"`
+
+	// Selector for a SiteRecoveryProtectionContainer in recoveryservices to populate recoveryTargetProtectionContainerId.
+	// +kubebuilder:validation:Optional
+	RecoveryTargetProtectionContainerIDSelector *v1.Selector `json:"recoveryTargetProtectionContainerIdSelector,omitempty" tf:"-"`
 }
 
 type SiteRecoveryProtectionContainerMappingObservation struct {

@@ -22,8 +22,32 @@ type IOTHubEnrichmentInitParameters struct {
 	// The list of endpoints which will be enriched.
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
+	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
+
+	// Reference to a IOTHub in devices to populate iothubName.
+	// +kubebuilder:validation:Optional
+	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
+
+	// Selector for a IOTHub in devices to populate iothubName.
+	// +kubebuilder:validation:Optional
+	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
+
 	// The key of the enrichment. Changing this forces a new resource to be created.
 	Key *string `json:"key,omitempty" tf:"key,omitempty"`
+
+	// The name of the resource group under which the IoTHub resource is created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The value of the enrichment. Value can be any static string, the name of the IoT hub sending the message (use $iothubname) or information from the device twin (ex: $twin.tags.latitude)
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`

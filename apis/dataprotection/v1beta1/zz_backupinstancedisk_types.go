@@ -19,8 +19,46 @@ import (
 
 type BackupInstanceDiskInitParameters struct {
 
+	// The ID of the Backup Policy.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupPolicyDisk
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// Reference to a BackupPolicyDisk in dataprotection to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackupPolicyDisk in dataprotection to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+
+	// The ID of the source Disk. Changing this forces a new Backup Instance Disk to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DiskID *string `json:"diskId,omitempty" tf:"disk_id,omitempty"`
+
+	// Reference to a ManagedDisk in compute to populate diskId.
+	// +kubebuilder:validation:Optional
+	DiskIDRef *v1.Reference `json:"diskIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedDisk in compute to populate diskId.
+	// +kubebuilder:validation:Optional
+	DiskIDSelector *v1.Selector `json:"diskIdSelector,omitempty" tf:"-"`
+
 	// The Azure Region where the Backup Instance Disk should exist. Changing this forces a new Backup Instance Disk to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The name of the Resource Group where snapshots are stored. Changing this forces a new Backup Instance Disk to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	SnapshotResourceGroupName *string `json:"snapshotResourceGroupName,omitempty" tf:"snapshot_resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate snapshotResourceGroupName.
+	// +kubebuilder:validation:Optional
+	SnapshotResourceGroupNameRef *v1.Reference `json:"snapshotResourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate snapshotResourceGroupName.
+	// +kubebuilder:validation:Optional
+	SnapshotResourceGroupNameSelector *v1.Selector `json:"snapshotResourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type BackupInstanceDiskObservation struct {

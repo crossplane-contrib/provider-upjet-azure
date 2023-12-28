@@ -37,6 +37,22 @@ func (mg *Application) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -62,6 +78,22 @@ func (mg *ApplicationNetworkRuleSet) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.IotcentralApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IotcentralApplicationIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IotcentralApplicationID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.IotcentralApplicationIDRef,
+		Selector:     mg.Spec.InitProvider.IotcentralApplicationIDSelector,
+		To: reference.To{
+			List:    &ApplicationList{},
+			Managed: &Application{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IotcentralApplicationID")
+	}
+	mg.Spec.InitProvider.IotcentralApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IotcentralApplicationIDRef = rsp.ResolvedReference
 
 	return nil
 }

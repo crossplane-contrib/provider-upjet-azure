@@ -54,5 +54,37 @@ func (mg *SpringCloudConnection) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SpringCloudID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SpringCloudIDRef,
+		Selector:     mg.Spec.InitProvider.SpringCloudIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SpringCloudJavaDeploymentList{},
+			Managed: &v1beta1.SpringCloudJavaDeployment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SpringCloudID")
+	}
+	mg.Spec.InitProvider.SpringCloudID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SpringCloudIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SQLDatabaseList{},
+			Managed: &v1beta11.SQLDatabase{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
+	}
+	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }

@@ -130,6 +130,7 @@ type WindowsVirtualMachineGalleryApplicationParameters struct {
 type WindowsVirtualMachineIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Windows Virtual Machine.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Virtual Machine. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -139,6 +140,7 @@ type WindowsVirtualMachineIdentityInitParameters struct {
 type WindowsVirtualMachineIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Windows Virtual Machine.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -155,6 +157,7 @@ type WindowsVirtualMachineIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Windows Virtual Machine.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Virtual Machine. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -227,6 +230,19 @@ type WindowsVirtualMachineInitParameters struct {
 	// The maximum price you're willing to pay for this Virtual Machine, in US Dollars; which must be greater than the current spot price. If this bid price falls below the current spot price the Virtual Machine will be evicted using the eviction_policy. Defaults to -1, which means that the Virtual Machine should not be evicted for price reasons.
 	MaxBidPrice *float64 `json:"maxBidPrice,omitempty" tf:"max_bid_price,omitempty"`
 
+	// . A list of Network Interface IDs which should be attached to this Virtual Machine. The first Network Interface ID in this list will be the Primary Network Interface on the Virtual Machine.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NetworkInterfaceIds []*string `json:"networkInterfaceIds,omitempty" tf:"network_interface_ids,omitempty"`
+
+	// References to NetworkInterface in network to populate networkInterfaceIds.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsRefs []v1.Reference `json:"networkInterfaceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of NetworkInterface in network to populate networkInterfaceIds.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIdsSelector *v1.Selector `json:"networkInterfaceIdsSelector,omitempty" tf:"-"`
+
 	// A os_disk block as defined below.
 	OsDisk []WindowsVirtualMachineOsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
@@ -267,6 +283,7 @@ type WindowsVirtualMachineInitParameters struct {
 	SourceImageReference []WindowsVirtualMachineSourceImageReferenceInitParameters `json:"sourceImageReference,omitempty" tf:"source_image_reference,omitempty"`
 
 	// A mapping of tags which should be assigned to this Virtual Machine.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A termination_notification block as defined below.
@@ -417,6 +434,7 @@ type WindowsVirtualMachineObservation struct {
 	SourceImageReference []WindowsVirtualMachineSourceImageReferenceObservation `json:"sourceImageReference,omitempty" tf:"source_image_reference,omitempty"`
 
 	// A mapping of tags which should be assigned to this Virtual Machine.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A termination_notification block as defined below.
@@ -747,6 +765,7 @@ type WindowsVirtualMachineParameters struct {
 
 	// A mapping of tags which should be assigned to this Virtual Machine.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A termination_notification block as defined below.

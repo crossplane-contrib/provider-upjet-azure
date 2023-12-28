@@ -25,6 +25,19 @@ type CustomHTTPSConfigurationInitParameters struct {
 	// The version of the Key Vault secret representing the full certificate PFX.
 	AzureKeyVaultCertificateSecretVersion *string `json:"azureKeyVaultCertificateSecretVersion,omitempty" tf:"azure_key_vault_certificate_secret_version,omitempty"`
 
+	// The ID of the Key Vault containing the SSL certificate.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	AzureKeyVaultCertificateVaultID *string `json:"azureKeyVaultCertificateVaultId,omitempty" tf:"azure_key_vault_certificate_vault_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate azureKeyVaultCertificateVaultId.
+	// +kubebuilder:validation:Optional
+	AzureKeyVaultCertificateVaultIDRef *v1.Reference `json:"azureKeyVaultCertificateVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate azureKeyVaultCertificateVaultId.
+	// +kubebuilder:validation:Optional
+	AzureKeyVaultCertificateVaultIDSelector *v1.Selector `json:"azureKeyVaultCertificateVaultIdSelector,omitempty" tf:"-"`
+
 	// Certificate source to encrypted HTTPS traffic with. Allowed values are FrontDoor or AzureKeyVault. Defaults to FrontDoor.
 	CertificateSource *string `json:"certificateSource,omitempty" tf:"certificate_source,omitempty"`
 }

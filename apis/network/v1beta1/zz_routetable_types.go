@@ -29,6 +29,7 @@ type RouteTableInitParameters struct {
 	Route []RouteTableRouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,9 +51,11 @@ type RouteTableObservation struct {
 	Route []RouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The collection of Subnets associated with this route table.
+	// +listType=set
 	Subnets []*string `json:"subnets,omitempty" tf:"subnets,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -85,6 +88,7 @@ type RouteTableParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -581,6 +581,7 @@ type WindowsVirtualMachineScaleSetGalleryApplicationsParameters struct {
 type WindowsVirtualMachineScaleSetIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Windows Virtual Machine Scale Set.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Virtual Machine Scale Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -590,6 +591,7 @@ type WindowsVirtualMachineScaleSetIdentityInitParameters struct {
 type WindowsVirtualMachineScaleSetIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Windows Virtual Machine Scale Set.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -606,6 +608,7 @@ type WindowsVirtualMachineScaleSetIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Windows Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Virtual Machine Scale Set. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -747,6 +750,7 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	SpotRestore []WindowsVirtualMachineScaleSetSpotRestoreInitParameters `json:"spotRestore,omitempty" tf:"spot_restore,omitempty"`
 
 	// A mapping of tags which should be assigned to this Virtual Machine Scale Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A terminate_notification block as defined below.
@@ -774,21 +778,26 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located. Changing this forces a new Windows Virtual Machine Scale Set to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationInitParameters struct {
 
 	// A list of Backend Address Pools ID's from a Application Gateway which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
 
 	// A list of Application Security Group ID's which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
 
 	// A list of Backend Address Pools ID's from a Load Balancer which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
 	// A list of NAT Rule ID's from a Load Balancer which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	LoadBalancerInboundNATRulesIds []*string `json:"loadBalancerInboundNatRulesIds,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
@@ -800,6 +809,19 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationInitParameters 
 	// A public_ip_address block as defined below.
 	PublicIPAddress []NetworkInterfaceIPConfigurationPublicIPAddressInitParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
 
+	// The ID of the Subnet which this IP Configuration should be connected to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Specifies the version of the image used to create the virtual machines.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -807,15 +829,19 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationInitParameters 
 type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationObservation struct {
 
 	// A list of Backend Address Pools ID's from a Application Gateway which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
 
 	// A list of Application Security Group ID's which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
 
 	// A list of Backend Address Pools ID's from a Load Balancer which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
 	// A list of NAT Rule ID's from a Load Balancer which this Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	LoadBalancerInboundNATRulesIds []*string `json:"loadBalancerInboundNatRulesIds,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
@@ -838,18 +864,22 @@ type WindowsVirtualMachineScaleSetNetworkInterfaceIPConfigurationParameters stru
 
 	// A list of Backend Address Pools ID's from a Application Gateway which this Virtual Machine Scale Set should be connected to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
 
 	// A list of Application Security Group ID's which this Virtual Machine Scale Set should be connected to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
 
 	// A list of Backend Address Pools ID's from a Load Balancer which this Virtual Machine Scale Set should be connected to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
 	// A list of NAT Rule ID's from a Load Balancer which this Virtual Machine Scale Set should be connected to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LoadBalancerInboundNATRulesIds []*string `json:"loadBalancerInboundNatRulesIds,omitempty" tf:"load_balancer_inbound_nat_rules_ids,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
@@ -1102,6 +1132,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	SpotRestore []WindowsVirtualMachineScaleSetSpotRestoreObservation `json:"spotRestore,omitempty" tf:"spot_restore,omitempty"`
 
 	// A mapping of tags which should be assigned to this Virtual Machine Scale Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A terminate_notification block as defined below.
@@ -1132,6 +1163,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located. Changing this forces a new Windows Virtual Machine Scale Set to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -1453,6 +1485,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 
 	// A mapping of tags which should be assigned to this Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A terminate_notification block as defined below.
@@ -1489,6 +1522,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 
 	// Specifies a list of Availability Zones in which this Windows Virtual Machine Scale Set should be located. Changing this forces a new Windows Virtual Machine Scale Set to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 

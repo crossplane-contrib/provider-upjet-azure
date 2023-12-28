@@ -40,6 +40,22 @@ func (mg *IOTSecurityDeviceGroup) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.IOTHubIDRef,
+		Selector:     mg.Spec.InitProvider.IOTHubIDSelector,
+		To: reference.To{
+			List:    &v1beta1.IOTHubList{},
+			Managed: &v1beta1.IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubID")
+	}
+	mg.Spec.InitProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IOTHubIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -83,6 +99,22 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IOTHubIds),
+		Extract:       resource.ExtractParamPath("id", true),
+		References:    mg.Spec.InitProvider.IOTHubIdsRefs,
+		Selector:      mg.Spec.InitProvider.IOTHubIdsSelector,
+		To: reference.To{
+			List:    &v1beta1.IOTHubList{},
+			Managed: &v1beta1.IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubIds")
+	}
+	mg.Spec.InitProvider.IOTHubIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.IOTHubIdsRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -125,6 +157,38 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AssessmentPolicyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.AssessmentPolicyIDRef,
+		Selector:     mg.Spec.InitProvider.AssessmentPolicyIDSelector,
+		To: reference.To{
+			List:    &SecurityCenterAssessmentPolicyList{},
+			Managed: &SecurityCenterAssessmentPolicy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AssessmentPolicyID")
+	}
+	mg.Spec.InitProvider.AssessmentPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AssessmentPolicyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta12.LinuxVirtualMachineScaleSetList{},
+			Managed: &v1beta12.LinuxVirtualMachineScaleSet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
+	}
+	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -150,6 +214,22 @@ func (mg *SecurityCenterServerVulnerabilityAssessment) ResolveReferences(ctx con
 	}
 	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualMachineID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualMachineIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualMachineIDSelector,
+		To: reference.To{
+			List:    &v1beta12.LinuxVirtualMachineList{},
+			Managed: &v1beta12.LinuxVirtualMachine{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualMachineID")
+	}
+	mg.Spec.InitProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualMachineIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -202,6 +282,22 @@ func (mg *SecurityCenterWorkspace) ResolveReferences(ctx context.Context, c clie
 	}
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.WorkspaceIDRef,
+		Selector:     mg.Spec.InitProvider.WorkspaceIDSelector,
+		To: reference.To{
+			List:    &v1beta13.WorkspaceList{},
+			Managed: &v1beta13.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceID")
+	}
+	mg.Spec.InitProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
 }

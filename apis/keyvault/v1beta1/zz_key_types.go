@@ -63,6 +63,19 @@ type KeyInitParameters struct {
 	// Specifies the Key Type to use for this Key Vault Key. Possible values are EC (Elliptic Curve), EC-HSM, RSA and RSA-HSM. Changing this forces a new resource to be created.
 	KeyType *string `json:"keyType,omitempty" tf:"key_type,omitempty"`
 
+	// The ID of the Key Vault where the Key should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Key Vault Key. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -73,6 +86,7 @@ type KeyInitParameters struct {
 	RotationPolicy []RotationPolicyInitParameters `json:"rotationPolicy,omitempty" tf:"rotation_policy,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -127,6 +141,7 @@ type KeyObservation struct {
 	RotationPolicy []RotationPolicyObservation `json:"rotationPolicy,omitempty" tf:"rotation_policy,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The current version of the Key Vault Key.
@@ -192,6 +207,7 @@ type KeyParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

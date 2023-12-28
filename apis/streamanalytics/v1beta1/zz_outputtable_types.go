@@ -30,6 +30,31 @@ type OutputTableInitParameters struct {
 
 	// The name of the output column that contains the row key.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
+
+	// The name of the Storage Account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+
+	// The name of the table where the stream should be output to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+
+	// Reference to a Table in storage to populate table.
+	// +kubebuilder:validation:Optional
+	TableRef *v1.Reference `json:"tableRef,omitempty" tf:"-"`
+
+	// Selector for a Table in storage to populate table.
+	// +kubebuilder:validation:Optional
+	TableSelector *v1.Selector `json:"tableSelector,omitempty" tf:"-"`
 }
 
 type OutputTableObservation struct {

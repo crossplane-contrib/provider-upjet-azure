@@ -63,6 +63,24 @@ func (mg *CustomDataSet) ResolveReferences(ctx context.Context, c client.Reader)
 		mg.Spec.ForProvider.LinkedService[i3].NameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.LinkedService); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedService[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.LinkedService[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.LinkedService[i3].NameSelector,
+			To: reference.To{
+				List:    &LinkedCustomServiceList{},
+				Managed: &LinkedCustomService{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.LinkedService[i3].Name")
+		}
+		mg.Spec.InitProvider.LinkedService[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.LinkedService[i3].NameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -130,6 +148,46 @@ func (mg *DataFlow) ResolveReferences(ctx context.Context, c client.Reader) erro
 
 		}
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Sink); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Sink[i3].DataSet); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Sink[i3].DataSet[i4].Name),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Sink[i3].DataSet[i4].NameRef,
+				Selector:     mg.Spec.InitProvider.Sink[i3].DataSet[i4].NameSelector,
+				To: reference.To{
+					List:    &DataSetJSONList{},
+					Managed: &DataSetJSON{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Sink[i3].DataSet[i4].Name")
+			}
+			mg.Spec.InitProvider.Sink[i3].DataSet[i4].Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Sink[i3].DataSet[i4].NameRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Source[i3].DataSet); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].DataSet[i4].Name),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.Source[i3].DataSet[i4].NameRef,
+				Selector:     mg.Spec.InitProvider.Source[i3].DataSet[i4].NameSelector,
+				To: reference.To{
+					List:    &DataSetJSONList{},
+					Managed: &DataSetJSON{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].DataSet[i4].Name")
+			}
+			mg.Spec.InitProvider.Source[i3].DataSet[i4].Name = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.Source[i3].DataSet[i4].NameRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -173,6 +231,22 @@ func (mg *DataSetAzureBlob) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceAzureBlobStorageList{},
+			Managed: &LinkedServiceAzureBlobStorage{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -214,6 +288,22 @@ func (mg *DataSetBinary) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceSFTPList{},
+			Managed: &LinkedServiceSFTP{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -257,6 +347,22 @@ func (mg *DataSetCosmosDBSQLAPI) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceCosmosDBList{},
+			Managed: &LinkedServiceCosmosDB{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -298,6 +404,22 @@ func (mg *DataSetDelimitedText) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceWebList{},
+			Managed: &LinkedServiceWeb{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -341,6 +463,22 @@ func (mg *DataSetHTTP) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceWebList{},
+			Managed: &LinkedServiceWeb{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -382,6 +520,22 @@ func (mg *DataSetJSON) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceWebList{},
+			Managed: &LinkedServiceWeb{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -425,6 +579,22 @@ func (mg *DataSetMySQL) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceMySQLList{},
+			Managed: &LinkedServiceMySQL{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -466,6 +636,22 @@ func (mg *DataSetParquet) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceWebList{},
+			Managed: &LinkedServiceWeb{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -509,6 +695,22 @@ func (mg *DataSetPostgreSQL) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServicePostgreSQLList{},
+			Managed: &LinkedServicePostgreSQL{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -551,6 +753,22 @@ func (mg *DataSetSQLServerTable) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceSQLServerList{},
+			Managed: &LinkedServiceSQLServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -592,6 +810,22 @@ func (mg *DataSetSnowflake) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LinkedServiceNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LinkedServiceName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LinkedServiceNameRef,
+		Selector:     mg.Spec.InitProvider.LinkedServiceNameSelector,
+		To: reference.To{
+			List:    &LinkedServiceSnowflakeList{},
+			Managed: &LinkedServiceSnowflake{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LinkedServiceName")
+	}
+	mg.Spec.InitProvider.LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LinkedServiceNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -725,6 +959,60 @@ func (mg *IntegrationRuntimeAzureSSIS) ResolveReferences(ctx context.Context, c 
 		mg.Spec.ForProvider.VnetIntegration[i3].SubnetNameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExpressVnetIntegration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExpressVnetIntegration[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ExpressVnetIntegration[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.ExpressVnetIntegration[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ExpressVnetIntegration[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.ExpressVnetIntegration[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ExpressVnetIntegration[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VnetIntegration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetIntegration[i3].SubnetID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.VnetIntegration[i3].SubnetIDRef,
+			Selector:     mg.Spec.InitProvider.VnetIntegration[i3].SubnetIDSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VnetIntegration[i3].SubnetID")
+		}
+		mg.Spec.InitProvider.VnetIntegration[i3].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VnetIntegration[i3].SubnetIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VnetIntegration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetIntegration[i3].SubnetName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.VnetIntegration[i3].SubnetNameRef,
+			Selector:     mg.Spec.InitProvider.VnetIntegration[i3].SubnetNameSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VnetIntegration[i3].SubnetName")
+		}
+		mg.Spec.InitProvider.VnetIntegration[i3].SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VnetIntegration[i3].SubnetNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -768,6 +1056,24 @@ func (mg *IntegrationRuntimeManaged) ResolveReferences(ctx context.Context, c cl
 		}
 		mg.Spec.ForProvider.VnetIntegration[i3].SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.VnetIntegration[i3].SubnetNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.VnetIntegration); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VnetIntegration[i3].SubnetName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.VnetIntegration[i3].SubnetNameRef,
+			Selector:     mg.Spec.InitProvider.VnetIntegration[i3].SubnetNameSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.VnetIntegration[i3].SubnetName")
+		}
+		mg.Spec.InitProvider.VnetIntegration[i3].SubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.VnetIntegration[i3].SubnetNameRef = rsp.ResolvedReference
 
 	}
 
@@ -885,6 +1191,42 @@ func (mg *LinkedServiceAzureBlobStorage) ResolveReferences(ctx context.Context, 
 		mg.Spec.ForProvider.ServicePrincipalLinkedKeyVaultKey[i3].LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KeyVaultSASToken); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultSASToken[i3].LinkedServiceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KeyVaultSASToken[i3].LinkedServiceNameRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultSASToken[i3].LinkedServiceNameSelector,
+			To: reference.To{
+				List:    &LinkedServiceKeyVaultList{},
+				Managed: &LinkedServiceKeyVault{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultSASToken[i3].LinkedServiceName")
+		}
+		mg.Spec.InitProvider.KeyVaultSASToken[i3].LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultSASToken[i3].LinkedServiceNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey[i3].LinkedServiceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey[i3].LinkedServiceNameRef,
+			Selector:     mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey[i3].LinkedServiceNameSelector,
+			To: reference.To{
+				List:    &LinkedServiceKeyVaultList{},
+				Managed: &LinkedServiceKeyVault{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey[i3].LinkedServiceName")
+		}
+		mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey[i3].LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ServicePrincipalLinkedKeyVaultKey[i3].LinkedServiceNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -927,6 +1269,22 @@ func (mg *LinkedServiceAzureDatabricks) ResolveReferences(ctx context.Context, c
 	}
 	mg.Spec.ForProvider.MsiWorkSpaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MsiWorkSpaceResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MsiWorkSpaceResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MsiWorkSpaceResourceIDRef,
+		Selector:     mg.Spec.InitProvider.MsiWorkSpaceResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta12.WorkspaceList{},
+			Managed: &v1beta12.Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MsiWorkSpaceResourceID")
+	}
+	mg.Spec.InitProvider.MsiWorkSpaceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MsiWorkSpaceResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1047,6 +1405,22 @@ func (mg *LinkedServiceAzureSearch) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.SearchServiceKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SearchServiceKeyRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SearchServiceKey),
+		Extract:      resource.ExtractParamPath("primary_key", true),
+		Reference:    mg.Spec.InitProvider.SearchServiceKeyRef,
+		Selector:     mg.Spec.InitProvider.SearchServiceKeySelector,
+		To: reference.To{
+			List:    &v1beta13.ServiceList{},
+			Managed: &v1beta13.Service{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SearchServiceKey")
+	}
+	mg.Spec.InitProvider.SearchServiceKey = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SearchServiceKeyRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1194,6 +1568,22 @@ func (mg *LinkedServiceKeyVault) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &v1beta14.VaultList{},
+			Managed: &v1beta14.Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -1251,6 +1641,38 @@ func (mg *LinkedServiceKusto) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.KustoEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoEndpointRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoDatabaseName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.KustoDatabaseNameRef,
+		Selector:     mg.Spec.InitProvider.KustoDatabaseNameSelector,
+		To: reference.To{
+			List:    &v1beta15.DatabaseList{},
+			Managed: &v1beta15.Database{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KustoDatabaseName")
+	}
+	mg.Spec.InitProvider.KustoDatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KustoDatabaseNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KustoEndpoint),
+		Extract:      resource.ExtractParamPath("uri", true),
+		Reference:    mg.Spec.InitProvider.KustoEndpointRef,
+		Selector:     mg.Spec.InitProvider.KustoEndpointSelector,
+		To: reference.To{
+			List:    &v1beta15.ClusterList{},
+			Managed: &v1beta15.Cluster{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KustoEndpoint")
+	}
+	mg.Spec.InitProvider.KustoEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KustoEndpointRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1426,6 +1848,24 @@ func (mg *LinkedServiceSQLServer) ResolveReferences(ctx context.Context, c clien
 		mg.Spec.ForProvider.KeyVaultPassword[i3].LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KeyVaultPassword); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameSelector,
+			To: reference.To{
+				List:    &LinkedServiceKeyVaultList{},
+				Managed: &LinkedServiceKeyVault{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName")
+		}
+		mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -1471,6 +1911,24 @@ func (mg *LinkedServiceSnowflake) ResolveReferences(ctx context.Context, c clien
 		mg.Spec.ForProvider.KeyVaultPassword[i3].LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KeyVaultPassword); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameSelector,
+			To: reference.To{
+				List:    &LinkedServiceKeyVaultList{},
+				Managed: &LinkedServiceKeyVault{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName")
+		}
+		mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -1514,6 +1972,24 @@ func (mg *LinkedServiceSynapse) ResolveReferences(ctx context.Context, c client.
 		}
 		mg.Spec.ForProvider.KeyVaultPassword[i3].LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.KeyVaultPassword[i3].LinkedServiceNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.KeyVaultPassword); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameSelector,
+			To: reference.To{
+				List:    &LinkedServiceKeyVaultList{},
+				Managed: &LinkedServiceKeyVault{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName")
+		}
+		mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.KeyVaultPassword[i3].LinkedServiceNameRef = rsp.ResolvedReference
 
 	}
 
@@ -1584,6 +2060,38 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DataFactoryID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DataFactoryIDRef,
+		Selector:     mg.Spec.InitProvider.DataFactoryIDSelector,
+		To: reference.To{
+			List:    &FactoryList{},
+			Managed: &Factory{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DataFactoryID")
+	}
+	mg.Spec.InitProvider.DataFactoryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DataFactoryIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta16.AccountList{},
+			Managed: &v1beta16.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
+	}
+	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1671,6 +2179,40 @@ func (mg *TriggerBlobEvent) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Pipeline); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Pipeline[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Pipeline[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.Pipeline[i3].NameSelector,
+			To: reference.To{
+				List:    &PipelineList{},
+				Managed: &Pipeline{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Pipeline[i3].Name")
+		}
+		mg.Spec.InitProvider.Pipeline[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Pipeline[i3].NameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &v1beta16.AccountList{},
+			Managed: &v1beta16.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -1731,6 +2273,40 @@ func (mg *TriggerCustomEvent) ResolveReferences(ctx context.Context, c client.Re
 		mg.Spec.ForProvider.Pipeline[i3].NameRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.EventGridTopicID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.EventGridTopicIDRef,
+		Selector:     mg.Spec.InitProvider.EventGridTopicIDSelector,
+		To: reference.To{
+			List:    &v1beta17.TopicList{},
+			Managed: &v1beta17.Topic{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EventGridTopicID")
+	}
+	mg.Spec.InitProvider.EventGridTopicID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.EventGridTopicIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Pipeline); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Pipeline[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.Pipeline[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.Pipeline[i3].NameSelector,
+			To: reference.To{
+				List:    &PipelineList{},
+				Managed: &Pipeline{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Pipeline[i3].Name")
+		}
+		mg.Spec.InitProvider.Pipeline[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Pipeline[i3].NameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -1773,6 +2349,22 @@ func (mg *TriggerSchedule) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.PipelineName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PipelineNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PipelineName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.PipelineNameRef,
+		Selector:     mg.Spec.InitProvider.PipelineNameSelector,
+		To: reference.To{
+			List:    &PipelineList{},
+			Managed: &Pipeline{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PipelineName")
+	}
+	mg.Spec.InitProvider.PipelineName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PipelineNameRef = rsp.ResolvedReference
 
 	return nil
 }

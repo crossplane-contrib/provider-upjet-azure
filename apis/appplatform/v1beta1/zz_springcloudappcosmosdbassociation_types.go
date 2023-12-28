@@ -22,6 +22,32 @@ type SpringCloudAppCosmosDBAssociationInitParameters struct {
 	// Specifies the API type which should be used when connecting to the CosmosDB Account. Possible values are cassandra, gremlin, mongo, sql or table. Changing this forces a new resource to be created.
 	APIType *string `json:"apiType,omitempty" tf:"api_type,omitempty"`
 
+	// Specifies the CosmosDB Account access key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_key",true)
+	CosmosDBAccessKey *string `json:"cosmosdbAccessKey,omitempty" tf:"cosmosdb_access_key,omitempty"`
+
+	// Reference to a Account in cosmosdb to populate cosmosdbAccessKey.
+	// +kubebuilder:validation:Optional
+	CosmosDBAccessKeyRef *v1.Reference `json:"cosmosdbAccessKeyRef,omitempty" tf:"-"`
+
+	// Selector for a Account in cosmosdb to populate cosmosdbAccessKey.
+	// +kubebuilder:validation:Optional
+	CosmosDBAccessKeySelector *v1.Selector `json:"cosmosdbAccessKeySelector,omitempty" tf:"-"`
+
+	// Specifies the ID of the CosmosDB Account. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CosmosDBAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`
+
+	// Reference to a Account in cosmosdb to populate cosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	CosmosDBAccountIDRef *v1.Reference `json:"cosmosdbAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in cosmosdb to populate cosmosdbAccountId.
+	// +kubebuilder:validation:Optional
+	CosmosDBAccountIDSelector *v1.Selector `json:"cosmosdbAccountIdSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the Cassandra Keyspace which the Spring Cloud App should be associated with. Should only be set when api_type is cassandra.
 	CosmosDBCassandraKeySpaceName *string `json:"cosmosdbCassandraKeyspaceName,omitempty" tf:"cosmosdb_cassandra_keyspace_name,omitempty"`
 

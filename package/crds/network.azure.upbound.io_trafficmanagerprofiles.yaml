@@ -238,6 +238,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   trafficRoutingMethod:
                     description: Specifies the algorithm used to route traffic. Possible
                       values are Geographic, Weighted, Performance, Priority, Subnet
@@ -351,6 +352,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   trafficRoutingMethod:
                     description: Specifies the algorithm used to route traffic. Possible
                       values are Geographic, Weighted, Performance, Priority, Subnet
@@ -642,6 +644,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   trafficRoutingMethod:
                     description: Specifies the algorithm used to route traffic. Possible
                       values are Geographic, Weighted, Performance, Priority, Subnet

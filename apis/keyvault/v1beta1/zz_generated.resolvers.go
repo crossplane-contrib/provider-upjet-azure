@@ -39,6 +39,22 @@ func (mg *AccessPolicy) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -64,6 +80,22 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -91,6 +123,22 @@ func (mg *CertificateContacts) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -117,6 +165,22 @@ func (mg *CertificateIssuer) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -142,6 +206,22 @@ func (mg *Key) ResolveReferences(ctx context.Context, c client.Reader) error {
 	}
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -211,6 +291,38 @@ func (mg *ManagedStorageAccount) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &v1beta11.AccountList{},
+			Managed: &v1beta11.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -262,6 +374,22 @@ func (mg *Secret) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &VaultList{},
+			Managed: &Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
 
 	return nil
 }

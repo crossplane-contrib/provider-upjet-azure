@@ -47,6 +47,19 @@ type AssociationParameters struct {
 }
 
 type DomainInitParameters struct {
+
+	// The Resource Id of the Front Door Custom Domain or Front Door Endpoint that should be bound to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CdnFrontdoorDomainID *string `json:"cdnFrontdoorDomainId,omitempty" tf:"cdn_frontdoor_domain_id,omitempty"`
+
+	// Reference to a FrontdoorCustomDomain in cdn to populate cdnFrontdoorDomainId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorDomainIDRef *v1.Reference `json:"cdnFrontdoorDomainIdRef,omitempty" tf:"-"`
+
+	// Selector for a FrontdoorCustomDomain in cdn to populate cdnFrontdoorDomainId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorDomainIDSelector *v1.Selector `json:"cdnFrontdoorDomainIdSelector,omitempty" tf:"-"`
 }
 
 type DomainObservation struct {
@@ -79,6 +92,19 @@ type FirewallInitParameters struct {
 
 	// An association block as defined below. Changing this forces a new Front Door Security Policy to be created.
 	Association []AssociationInitParameters `json:"association,omitempty" tf:"association,omitempty"`
+
+	// The Resource Id of the Front Door Firewall Policy that should be linked to this Front Door Security Policy. Changing this forces a new Front Door Security Policy to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorFirewallPolicy
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CdnFrontdoorFirewallPolicyID *string `json:"cdnFrontdoorFirewallPolicyId,omitempty" tf:"cdn_frontdoor_firewall_policy_id,omitempty"`
+
+	// Reference to a FrontdoorFirewallPolicy in cdn to populate cdnFrontdoorFirewallPolicyId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorFirewallPolicyIDRef *v1.Reference `json:"cdnFrontdoorFirewallPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a FrontdoorFirewallPolicy in cdn to populate cdnFrontdoorFirewallPolicyId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorFirewallPolicyIDSelector *v1.Selector `json:"cdnFrontdoorFirewallPolicyIdSelector,omitempty" tf:"-"`
 }
 
 type FirewallObservation struct {

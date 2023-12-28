@@ -268,12 +268,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weeks:
                           description: The weeks of the month to retain backups of.
                             Must be one of First, Second, Third, Fourth, Last.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   retentionWeekly:
@@ -292,6 +294,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   retentionYearly:
@@ -310,6 +313,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weekdays:
                           description: The weekday backups to retain . Must be one
                             of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
@@ -317,12 +321,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weeks:
                           description: The weeks of the month to retain backups of.
                             Must be one of First, Second, Third, Fourth, Last.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   timezone:
@@ -385,12 +391,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weeks:
                           description: The weeks of the month to retain backups of.
                             Must be one of First, Second, Third, Fourth, Last.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   retentionWeekly:
@@ -409,6 +417,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   retentionYearly:
@@ -427,6 +436,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weekdays:
                           description: The weekday backups to retain . Must be one
                             of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
@@ -434,12 +444,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weeks:
                           description: The weeks of the month to retain backups of.
                             Must be one of First, Second, Third, Fourth, Last.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   timezone:
@@ -676,12 +688,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weeks:
                           description: The weeks of the month to retain backups of.
                             Must be one of First, Second, Third, Fourth, Last.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   retentionWeekly:
@@ -700,6 +714,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   retentionYearly:
@@ -718,6 +733,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weekdays:
                           description: The weekday backups to retain . Must be one
                             of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday
@@ -725,12 +741,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         weeks:
                           description: The weeks of the month to retain backups of.
                             Must be one of First, Second, Third, Fourth, Last.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   timezone:

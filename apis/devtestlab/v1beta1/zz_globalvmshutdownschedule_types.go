@@ -32,10 +32,24 @@ type GlobalVMShutdownScheduleInitParameters struct {
 	NotificationSettings []NotificationSettingsInitParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The time zone ID (e.g. Pacific Standard time). Refer to this guide for a full list of accepted time zone names.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
+
+	// The resource ID of the target ARM-based Virtual Machine. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.LinuxVirtualMachine
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
+
+	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
+	// +kubebuilder:validation:Optional
+	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+
+	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
+	// +kubebuilder:validation:Optional
+	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
 }
 
 type GlobalVMShutdownScheduleObservation struct {
@@ -56,6 +70,7 @@ type GlobalVMShutdownScheduleObservation struct {
 	NotificationSettings []NotificationSettingsObservation `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The time zone ID (e.g. Pacific Standard time). Refer to this guide for a full list of accepted time zone names.
@@ -85,6 +100,7 @@ type GlobalVMShutdownScheduleParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The time zone ID (e.g. Pacific Standard time). Refer to this guide for a full list of accepted time zone names.

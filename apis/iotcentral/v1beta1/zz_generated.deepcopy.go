@@ -70,6 +70,21 @@ func (in *ApplicationInitParameters) DeepCopyInto(out *ApplicationInitParameters
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
 		*out = new(string)
@@ -191,6 +206,21 @@ func (in *ApplicationNetworkRuleSetInitParameters) DeepCopyInto(out *Application
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.IotcentralApplicationID != nil {
+		in, out := &in.IotcentralApplicationID, &out.IotcentralApplicationID
+		*out = new(string)
+		**out = **in
+	}
+	if in.IotcentralApplicationIDRef != nil {
+		in, out := &in.IotcentralApplicationIDRef, &out.IotcentralApplicationIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.IotcentralApplicationIDSelector != nil {
+		in, out := &in.IotcentralApplicationIDSelector, &out.IotcentralApplicationIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

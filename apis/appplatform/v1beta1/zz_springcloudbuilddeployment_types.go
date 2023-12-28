@@ -55,6 +55,7 @@ type SpringCloudBuildDeploymentInitParameters struct {
 	BuildResultID *string `json:"buildResultId,omitempty" tf:"build_result_id,omitempty"`
 
 	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Specifies the required instance count of the Spring Cloud Deployment. Possible Values are between 1 and 500. Defaults to 1 if not specified.
@@ -73,6 +74,7 @@ type SpringCloudBuildDeploymentObservation struct {
 	BuildResultID *string `json:"buildResultId,omitempty" tf:"build_result_id,omitempty"`
 
 	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// The ID of the Spring Cloud Build Deployment.
@@ -100,6 +102,7 @@ type SpringCloudBuildDeploymentParameters struct {
 
 	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Specifies the required instance count of the Spring Cloud Deployment. Possible Values are between 1 and 500. Defaults to 1 if not specified.

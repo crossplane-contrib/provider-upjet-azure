@@ -35,6 +35,7 @@ type MonitorInitParameters struct {
 	Plan []PlanInitParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
 	// A mapping of tags which should be assigned to the logz Monitor.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.
@@ -71,6 +72,7 @@ type MonitorObservation struct {
 	SingleSignOnURL *string `json:"singleSignOnUrl,omitempty" tf:"single_sign_on_url,omitempty"`
 
 	// A mapping of tags which should be assigned to the logz Monitor.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.
@@ -114,6 +116,7 @@ type MonitorParameters struct {
 
 	// A mapping of tags which should be assigned to the logz Monitor.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.

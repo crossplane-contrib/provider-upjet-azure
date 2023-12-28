@@ -20,21 +20,25 @@ import (
 type Instance0BGPPeeringAddressInitParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
+	// +listType=set
 	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
 }
 
 type Instance0BGPPeeringAddressObservation struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
+	// +listType=set
 	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
 
 	// The list of default BGP peering addresses which belong to the pre-defined VPN Gateway IP configuration.
+	// +listType=set
 	DefaultIps []*string `json:"defaultIps,omitempty" tf:"default_ips,omitempty"`
 
 	// The pre-defined id of VPN Gateway IP Configuration.
 	IPConfigurationID *string `json:"ipConfigurationId,omitempty" tf:"ip_configuration_id,omitempty"`
 
 	// The list of tunnel public IP addresses which belong to the pre-defined VPN Gateway IP configuration.
+	// +listType=set
 	TunnelIps []*string `json:"tunnelIps,omitempty" tf:"tunnel_ips,omitempty"`
 }
 
@@ -42,27 +46,32 @@ type Instance0BGPPeeringAddressParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CustomIps []*string `json:"customIps" tf:"custom_ips,omitempty"`
 }
 
 type Instance1BGPPeeringAddressInitParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
+	// +listType=set
 	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
 }
 
 type Instance1BGPPeeringAddressObservation struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
+	// +listType=set
 	CustomIps []*string `json:"customIps,omitempty" tf:"custom_ips,omitempty"`
 
 	// The list of default BGP peering addresses which belong to the pre-defined VPN Gateway IP configuration.
+	// +listType=set
 	DefaultIps []*string `json:"defaultIps,omitempty" tf:"default_ips,omitempty"`
 
 	// The pre-defined id of VPN Gateway IP Configuration.
 	IPConfigurationID *string `json:"ipConfigurationId,omitempty" tf:"ip_configuration_id,omitempty"`
 
 	// The list of tunnel public IP addresses which belong to the pre-defined VPN Gateway IP configuration.
+	// +listType=set
 	TunnelIps []*string `json:"tunnelIps,omitempty" tf:"tunnel_ips,omitempty"`
 }
 
@@ -70,6 +79,7 @@ type Instance1BGPPeeringAddressParameters struct {
 
 	// A list of custom BGP peering addresses to assign to this instance.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CustomIps []*string `json:"customIps" tf:"custom_ips,omitempty"`
 }
 
@@ -143,7 +153,21 @@ type VPNGatewayInitParameters struct {
 	ScaleUnit *float64 `json:"scaleUnit,omitempty" tf:"scale_unit,omitempty"`
 
 	// A mapping of tags to assign to the VPN Gateway.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Virtual Hub within which this VPN Gateway should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
+
+	// Reference to a VirtualHub in network to populate virtualHubId.
+	// +kubebuilder:validation:Optional
+	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualHub in network to populate virtualHubId.
+	// +kubebuilder:validation:Optional
+	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 type VPNGatewayObservation struct {
@@ -170,6 +194,7 @@ type VPNGatewayObservation struct {
 	ScaleUnit *float64 `json:"scaleUnit,omitempty" tf:"scale_unit,omitempty"`
 
 	// A mapping of tags to assign to the VPN Gateway.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Hub within which this VPN Gateway should be created. Changing this forces a new resource to be created.
@@ -213,6 +238,7 @@ type VPNGatewayParameters struct {
 
 	// A mapping of tags to assign to the VPN Gateway.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Hub within which this VPN Gateway should be created. Changing this forces a new resource to be created.

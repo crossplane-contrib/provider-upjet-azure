@@ -370,6 +370,19 @@ type MonitorAlertProcessingRuleActionGroupConditionTargetResourceTypeParameters 
 
 type MonitorAlertProcessingRuleActionGroupInitParameters struct {
 
+	// Specifies a list of Action Group IDs.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	AddActionGroupIds []*string `json:"addActionGroupIds,omitempty" tf:"add_action_group_ids,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate addActionGroupIds.
+	// +kubebuilder:validation:Optional
+	AddActionGroupIdsRefs []v1.Reference `json:"addActionGroupIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate addActionGroupIds.
+	// +kubebuilder:validation:Optional
+	AddActionGroupIdsSelector *v1.Selector `json:"addActionGroupIdsSelector,omitempty" tf:"-"`
+
 	// A condition block as defined below.
 	Condition []MonitorAlertProcessingRuleActionGroupConditionInitParameters `json:"condition,omitempty" tf:"condition,omitempty"`
 
@@ -382,7 +395,21 @@ type MonitorAlertProcessingRuleActionGroupInitParameters struct {
 	// A schedule block as defined below.
 	Schedule []MonitorAlertProcessingRuleActionGroupScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// A list of resource IDs which will be the target of alert processing rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// References to ResourceGroup in azure to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -413,6 +440,7 @@ type MonitorAlertProcessingRuleActionGroupObservation struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -477,6 +505,7 @@ type MonitorAlertProcessingRuleActionGroupParameters struct {
 
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

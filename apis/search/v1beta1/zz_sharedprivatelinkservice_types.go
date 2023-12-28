@@ -24,6 +24,19 @@ type SharedPrivateLinkServiceInitParameters struct {
 
 	// Specify the sub resource name which the Azure Search Private Endpoint is able to connect to. Changing this forces a new resource to be created.
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
+
+	// Specify the ID of the Shared Private Link Enabled Remote Resource which this Azure Search Private Endpoint should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type SharedPrivateLinkServiceObservation struct {

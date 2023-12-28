@@ -50,6 +50,19 @@ type CassandraClusterInitParameters struct {
 	// A list of TLS certificates that is used to authorize client connecting to the Cassandra Cluster.
 	ClientCertificatePems []*string `json:"clientCertificatePems,omitempty" tf:"client_certificate_pems,omitempty"`
 
+	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DelegatedManagementSubnetID *string `json:"delegatedManagementSubnetId,omitempty" tf:"delegated_management_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDRef *v1.Reference `json:"delegatedManagementSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate delegatedManagementSubnetId.
+	// +kubebuilder:validation:Optional
+	DelegatedManagementSubnetIDSelector *v1.Selector `json:"delegatedManagementSubnetIdSelector,omitempty" tf:"-"`
+
 	// A list of TLS certificates that is used to authorize gossip from unmanaged Cassandra Data Center.
 	ExternalGossipCertificatePems []*string `json:"externalGossipCertificatePems,omitempty" tf:"external_gossip_certificate_pems,omitempty"`
 
@@ -69,6 +82,7 @@ type CassandraClusterInitParameters struct {
 	RepairEnabled *bool `json:"repairEnabled,omitempty" tf:"repair_enabled,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version of Cassandra what the Cluster converges to run. Possible values are 3.11 and 4.0. Defaults to 3.11. Changing this forces a new Cassandra Cluster to be created.
@@ -111,6 +125,7 @@ type CassandraClusterObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version of Cassandra what the Cluster converges to run. Possible values are 3.11 and 4.0. Defaults to 3.11. Changing this forces a new Cassandra Cluster to be created.
@@ -184,6 +199,7 @@ type CassandraClusterParameters struct {
 
 	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The version of Cassandra what the Cluster converges to run. Possible values are 3.11 and 4.0. Defaults to 3.11. Changing this forces a new Cassandra Cluster to be created.

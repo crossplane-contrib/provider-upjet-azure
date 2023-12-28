@@ -18,6 +18,19 @@ import (
 )
 
 type DataSetKustoDatabaseInitParameters struct {
+
+	// The resource ID of the Kusto Cluster Database to be shared with the receiver. Changing this forces a new Data Share Kusto Database Dataset to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Database
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	KustoDatabaseID *string `json:"kustoDatabaseId,omitempty" tf:"kusto_database_id,omitempty"`
+
+	// Reference to a Database in kusto to populate kustoDatabaseId.
+	// +kubebuilder:validation:Optional
+	KustoDatabaseIDRef *v1.Reference `json:"kustoDatabaseIdRef,omitempty" tf:"-"`
+
+	// Selector for a Database in kusto to populate kustoDatabaseId.
+	// +kubebuilder:validation:Optional
+	KustoDatabaseIDSelector *v1.Selector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
 }
 
 type DataSetKustoDatabaseObservation struct {

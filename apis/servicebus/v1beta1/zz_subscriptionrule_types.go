@@ -32,6 +32,7 @@ type CorrelationFilterInitParameters struct {
 	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
 
 	// A list of user defined properties to be included in the filter. Specified as a map of name/value pairs.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Address of the queue to reply to.
@@ -62,6 +63,7 @@ type CorrelationFilterObservation struct {
 	MessageID *string `json:"messageId,omitempty" tf:"message_id,omitempty"`
 
 	// A list of user defined properties to be included in the filter. Specified as a map of name/value pairs.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Address of the queue to reply to.
@@ -97,6 +99,7 @@ type CorrelationFilterParameters struct {
 
 	// A list of user defined properties to be included in the filter. Specified as a map of name/value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Address of the queue to reply to.

@@ -20,6 +20,7 @@ import (
 type MonitorPrivateLinkScopeInitParameters struct {
 
 	// A mapping of tags which should be assigned to the Azure Monitor Private Link Scope.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -32,6 +33,7 @@ type MonitorPrivateLinkScopeObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Monitor Private Link Scope.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -52,6 +54,7 @@ type MonitorPrivateLinkScopeParameters struct {
 
 	// A mapping of tags which should be assigned to the Azure Monitor Private Link Scope.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

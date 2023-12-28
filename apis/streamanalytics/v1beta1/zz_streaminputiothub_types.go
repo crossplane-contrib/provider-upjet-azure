@@ -22,14 +22,62 @@ type StreamInputIOTHubInitParameters struct {
 	// The IoT Hub endpoint to connect to (ie. messages/events, messages/operationsMonitoringEvents, etc.).
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
 
+	// The name of an Event Hub Consumer Group that should be used to read events from the Event Hub. Specifying distinct consumer group names for multiple inputs allows each of those inputs to receive the same events from the Event Hub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
+	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameRef *v1.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+
+	// The name or the URI of the IoT Hub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	IOTHubNamespace *string `json:"iothubNamespace,omitempty" tf:"iothub_namespace,omitempty"`
+
+	// Reference to a IOTHub in devices to populate iothubNamespace.
+	// +kubebuilder:validation:Optional
+	IOTHubNamespaceRef *v1.Reference `json:"iothubNamespaceRef,omitempty" tf:"-"`
+
+	// Selector for a IOTHub in devices to populate iothubNamespace.
+	// +kubebuilder:validation:Optional
+	IOTHubNamespaceSelector *v1.Selector `json:"iothubNamespaceSelector,omitempty" tf:"-"`
+
 	// The name of the Stream Input IoTHub. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A serialization block as defined below.
 	Serialization []StreamInputIOTHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Job
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Reference to a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type StreamInputIOTHubObservation struct {

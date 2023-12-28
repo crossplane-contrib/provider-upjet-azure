@@ -18,6 +18,44 @@ import (
 )
 
 type SpringCloudAppMySQLAssociationInitParameters struct {
+
+	// Specifies the name of the MySQL Database which the Spring Cloud App should be associated with.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Database
+	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
+
+	// Reference to a Database in dbformysql to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a Database in dbformysql to populate databaseName.
+	// +kubebuilder:validation:Optional
+	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
+
+	// Specifies the ID of the MySQL Server. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Server
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MySQLServerID *string `json:"mysqlServerId,omitempty" tf:"mysql_server_id,omitempty"`
+
+	// Reference to a Server in dbformysql to populate mysqlServerId.
+	// +kubebuilder:validation:Optional
+	MySQLServerIDRef *v1.Reference `json:"mysqlServerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Server in dbformysql to populate mysqlServerId.
+	// +kubebuilder:validation:Optional
+	MySQLServerIDSelector *v1.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
+
+	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Server
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("administrator_login",false)
+	Username *string `json:"username,omitempty" tf:"username,omitempty"`
+
+	// Reference to a Server in dbformysql to populate username.
+	// +kubebuilder:validation:Optional
+	UsernameRef *v1.Reference `json:"usernameRef,omitempty" tf:"-"`
+
+	// Selector for a Server in dbformysql to populate username.
+	// +kubebuilder:validation:Optional
+	UsernameSelector *v1.Selector `json:"usernameSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudAppMySQLAssociationObservation struct {

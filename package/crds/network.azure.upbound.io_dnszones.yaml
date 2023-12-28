@@ -183,6 +183,7 @@ spec:
                             type: string
                           description: A mapping of tags to assign to the Record Set.
                           type: object
+                          x-kubernetes-map-type: granular
                         ttl:
                           description: The Time To Live of the SOA Record in seconds.
                             Defaults to 3600.
@@ -194,6 +195,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -245,6 +247,7 @@ spec:
                             type: string
                           description: A mapping of tags to assign to the Record Set.
                           type: object
+                          x-kubernetes-map-type: granular
                         ttl:
                           description: The Time To Live of the SOA Record in seconds.
                             Defaults to 3600.
@@ -256,6 +259,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -435,6 +439,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   numberOfRecordSets:
                     description: The number of records already in the zone.
                     type: number
@@ -482,6 +487,7 @@ spec:
                             type: string
                           description: A mapping of tags to assign to the Record Set.
                           type: object
+                          x-kubernetes-map-type: granular
                         ttl:
                           description: The Time To Live of the SOA Record in seconds.
                             Defaults to 3600.
@@ -493,6 +499,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

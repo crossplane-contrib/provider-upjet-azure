@@ -19,8 +19,34 @@ import (
 
 type NetworkInterfaceBackendAddressPoolAssociationInitParameters struct {
 
+	// The ID of the Load Balancer Backend Address Pool which this Network Interface should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
+
+	// Reference to a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
+	// +kubebuilder:validation:Optional
+	BackendAddressPoolIDRef *v1.Reference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
+	// +kubebuilder:validation:Optional
+	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+
 	// The Name of the IP Configuration within the Network Interface which should be connected to the Backend Address Pool. Changing this forces a new resource to be created.
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
+
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceBackendAddressPoolAssociationObservation struct {

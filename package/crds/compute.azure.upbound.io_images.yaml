@@ -226,6 +226,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneResilient:
                     description: Is zone resiliency enabled? Defaults to false. Changing
                       this forces a new resource to be created.
@@ -322,6 +323,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneResilient:
                     description: Is zone resiliency enabled? Defaults to false. Changing
                       this forces a new resource to be created.
@@ -584,6 +586,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   zoneResilient:
                     description: Is zone resiliency enabled? Defaults to false. Changing
                       this forces a new resource to be created.

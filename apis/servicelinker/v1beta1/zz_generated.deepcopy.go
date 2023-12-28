@@ -257,6 +257,36 @@ func (in *SpringCloudConnectionInitParameters) DeepCopyInto(out *SpringCloudConn
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.SpringCloudID != nil {
+		in, out := &in.SpringCloudID, &out.SpringCloudID
+		*out = new(string)
+		**out = **in
+	}
+	if in.SpringCloudIDRef != nil {
+		in, out := &in.SpringCloudIDRef, &out.SpringCloudIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.SpringCloudIDSelector != nil {
+		in, out := &in.SpringCloudIDSelector, &out.SpringCloudIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetResourceID != nil {
+		in, out := &in.TargetResourceID, &out.TargetResourceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.TargetResourceIDRef != nil {
+		in, out := &in.TargetResourceIDRef, &out.TargetResourceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.TargetResourceIDSelector != nil {
+		in, out := &in.TargetResourceIDSelector, &out.TargetResourceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.VnetSolution != nil {
 		in, out := &in.VnetSolution, &out.VnetSolution
 		*out = new(string)

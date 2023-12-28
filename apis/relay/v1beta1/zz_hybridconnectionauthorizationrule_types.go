@@ -25,6 +25,18 @@ type HybridConnectionAuthorizationRuleInitParameters struct {
 	// Grants manage access to this Authorization Rule. When this property is true - both listen and send must be set to true too. Defaults to false.
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
+	// Name of the Azure Relay Namespace for which this Azure Relay Hybrid Connection Authorization Rule will be created. Changing this forces a new Azure Relay Hybrid Connection Authorization Rule to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/relay/v1beta1.EventRelayNamespace
+	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
+
+	// Reference to a EventRelayNamespace in relay to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventRelayNamespace in relay to populate namespaceName.
+	// +kubebuilder:validation:Optional
+	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
+
 	// Grants send access to this Authorization Rule. Defaults to false.
 	Send *bool `json:"send,omitempty" tf:"send,omitempty"`
 }

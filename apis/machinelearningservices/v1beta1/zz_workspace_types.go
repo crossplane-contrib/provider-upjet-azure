@@ -18,6 +18,45 @@ import (
 )
 
 type EncryptionInitParameters struct {
+
+	// The Key Vault URI to access the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDRef *v1.Reference `json:"keyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyId.
+	// +kubebuilder:validation:Optional
+	KeyIDSelector *v1.Selector `json:"keyIdSelector,omitempty" tf:"-"`
+
+	// The ID of the keyVault where the customer owned encryption key is present.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
+	// The Key Vault URI to access the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDRef *v1.Reference `json:"userAssignedIdentityIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate userAssignedIdentityId.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionObservation struct {
@@ -80,6 +119,7 @@ type EncryptionParameters struct {
 type WorkspaceIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -89,6 +129,7 @@ type WorkspaceIdentityInitParameters struct {
 type WorkspaceIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -105,6 +146,7 @@ type WorkspaceIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Workspace. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -113,6 +155,19 @@ type WorkspaceIdentityParameters struct {
 }
 
 type WorkspaceInitParameters struct {
+
+	// The ID of the Application Insights associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ApplicationInsightsID *string `json:"applicationInsightsId,omitempty" tf:"application_insights_id,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDRef *v1.Reference `json:"applicationInsightsIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate applicationInsightsId.
+	// +kubebuilder:validation:Optional
+	ApplicationInsightsIDSelector *v1.Selector `json:"applicationInsightsIdSelector,omitempty" tf:"-"`
 
 	// The ID of the container registry associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
@@ -135,8 +190,34 @@ type WorkspaceInitParameters struct {
 	// The compute name for image build of the Machine Learning Workspace.
 	ImageBuildComputeName *string `json:"imageBuildComputeName,omitempty" tf:"image_build_compute_name,omitempty"`
 
+	// The ID of key vault associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
 	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The user assigned identity id that represents the workspace identity.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
+	// +kubebuilder:validation:Optional
+	PrimaryUserAssignedIdentityRef *v1.Reference `json:"primaryUserAssignedIdentityRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate primaryUserAssignedIdentity.
+	// +kubebuilder:validation:Optional
+	PrimaryUserAssignedIdentitySelector *v1.Selector `json:"primaryUserAssignedIdentitySelector,omitempty" tf:"-"`
 
 	// Enable public access when this Machine Learning Workspace is behind a VNet. Changing this forces a new resource to be created.
 	PublicAccessBehindVirtualNetworkEnabled *bool `json:"publicAccessBehindVirtualNetworkEnabled,omitempty" tf:"public_access_behind_virtual_network_enabled,omitempty"`
@@ -147,7 +228,21 @@ type WorkspaceInitParameters struct {
 	// SKU/edition of the Machine Learning Workspace, possible values are Basic. Defaults to Basic.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
+	// The ID of the Storage Account associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable V1 API features, enabling v1_legacy_mode may prevent you from using features provided by the v2 API. Defaults to false.
@@ -211,6 +306,7 @@ type WorkspaceObservation struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable V1 API features, enabling v1_legacy_mode may prevent you from using features provided by the v2 API. Defaults to false.
@@ -337,6 +433,7 @@ type WorkspaceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Enable V1 API features, enabling v1_legacy_mode may prevent you from using features provided by the v2 API. Defaults to false.

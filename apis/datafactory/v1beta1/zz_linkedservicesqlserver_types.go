@@ -20,6 +20,7 @@ import (
 type LinkedServiceSQLServerInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service SQL Server.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service SQL Server.
@@ -41,6 +42,7 @@ type LinkedServiceSQLServerInitParameters struct {
 	KeyVaultPassword []LinkedServiceSQLServerKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service SQL Server.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The on-premises Windows authentication user name.
@@ -78,6 +80,18 @@ type LinkedServiceSQLServerKeyVaultConnectionStringParameters struct {
 
 type LinkedServiceSQLServerKeyVaultPasswordInitParameters struct {
 
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceKeyVault
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+
 	// Specifies the secret name in Azure Key Vault that stores SQL Server password.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
@@ -114,6 +128,7 @@ type LinkedServiceSQLServerKeyVaultPasswordParameters struct {
 type LinkedServiceSQLServerObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service SQL Server.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service SQL Server.
@@ -141,6 +156,7 @@ type LinkedServiceSQLServerObservation struct {
 	KeyVaultPassword []LinkedServiceSQLServerKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service SQL Server.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The on-premises Windows authentication user name.
@@ -151,6 +167,7 @@ type LinkedServiceSQLServerParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service SQL Server.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service SQL Server.
@@ -193,6 +210,7 @@ type LinkedServiceSQLServerParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service SQL Server.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The on-premises Windows authentication user name.

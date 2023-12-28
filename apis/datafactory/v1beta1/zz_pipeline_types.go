@@ -38,9 +38,11 @@ type PipelineInitParameters struct {
 	MoniterMetricsAfterDuration *string `json:"moniterMetricsAfterDuration,omitempty" tf:"moniter_metrics_after_duration,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Pipeline.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A map of variables to associate with the Data Factory Pipeline.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -71,9 +73,11 @@ type PipelineObservation struct {
 	MoniterMetricsAfterDuration *string `json:"moniterMetricsAfterDuration,omitempty" tf:"moniter_metrics_after_duration,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Pipeline.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A map of variables to associate with the Data Factory Pipeline.
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 
@@ -119,10 +123,12 @@ type PipelineParameters struct {
 
 	// A map of parameters to associate with the Data Factory Pipeline.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A map of variables to associate with the Data Factory Pipeline.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Variables map[string]*string `json:"variables,omitempty" tf:"variables,omitempty"`
 }
 

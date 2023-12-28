@@ -224,6 +224,7 @@ type ClientCertificateThumbprintParameters struct {
 type ClusterInitParameters struct {
 
 	// A List of one or more features which should be enabled, such as DnsService.
+	// +listType=set
 	AddOnFeatures []*string `json:"addOnFeatures,omitempty" tf:"add_on_features,omitempty"`
 
 	// An azure_active_directory block as defined below.
@@ -272,6 +273,7 @@ type ClusterInitParameters struct {
 	ServiceFabricZonalUpgradeMode *string `json:"serviceFabricZonalUpgradeMode,omitempty" tf:"service_fabric_zonal_upgrade_mode,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Upgrade Mode of the cluster. Possible values are Automatic or Manual.
@@ -290,6 +292,7 @@ type ClusterInitParameters struct {
 type ClusterObservation struct {
 
 	// A List of one or more features which should be enabled, such as DnsService.
+	// +listType=set
 	AddOnFeatures []*string `json:"addOnFeatures,omitempty" tf:"add_on_features,omitempty"`
 
 	// An azure_active_directory block as defined below.
@@ -347,6 +350,7 @@ type ClusterObservation struct {
 	ServiceFabricZonalUpgradeMode *string `json:"serviceFabricZonalUpgradeMode,omitempty" tf:"service_fabric_zonal_upgrade_mode,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Upgrade Mode of the cluster. Possible values are Automatic or Manual.
@@ -366,6 +370,7 @@ type ClusterParameters struct {
 
 	// A List of one or more features which should be enabled, such as DnsService.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddOnFeatures []*string `json:"addOnFeatures,omitempty" tf:"add_on_features,omitempty"`
 
 	// An azure_active_directory block as defined below.
@@ -443,6 +448,7 @@ type ClusterParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Upgrade Mode of the cluster. Possible values are Automatic or Manual.
@@ -624,6 +630,7 @@ type FabricSettingsInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map containing settings for the specified Fabric Setting.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -633,6 +640,7 @@ type FabricSettingsObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map containing settings for the specified Fabric Setting.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -644,6 +652,7 @@ type FabricSettingsParameters struct {
 
 	// A map containing settings for the specified Fabric Setting.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -682,6 +691,7 @@ type NodeTypeInitParameters struct {
 	ApplicationPorts []ApplicationPortsInitParameters `json:"applicationPorts,omitempty" tf:"application_ports,omitempty"`
 
 	// The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.
+	// +mapType=granular
 	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
 
 	// The Port used for the Client Endpoint for this Node Type.
@@ -712,6 +722,7 @@ type NodeTypeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.
+	// +mapType=granular
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
 	// The Port used for the Reverse Proxy Endpoint for this Node Type. Changing this will upgrade the cluster.
@@ -724,6 +735,7 @@ type NodeTypeObservation struct {
 	ApplicationPorts []ApplicationPortsObservation `json:"applicationPorts,omitempty" tf:"application_ports,omitempty"`
 
 	// The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.
+	// +mapType=granular
 	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
 
 	// The Port used for the Client Endpoint for this Node Type.
@@ -754,6 +766,7 @@ type NodeTypeObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.
+	// +mapType=granular
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
 	// The Port used for the Reverse Proxy Endpoint for this Node Type. Changing this will upgrade the cluster.
@@ -768,6 +781,7 @@ type NodeTypeParameters struct {
 
 	// The capacity tags applied to the nodes in the node type, the cluster resource manager uses these tags to understand how much resource a node has.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
 
 	// The Port used for the Client Endpoint for this Node Type.
@@ -808,6 +822,7 @@ type NodeTypeParameters struct {
 
 	// The placement tags applied to nodes in the node type, which can be used to indicate where certain services (workload) should run.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
 	// The Port used for the Reverse Proxy Endpoint for this Node Type. Changing this will upgrade the cluster.

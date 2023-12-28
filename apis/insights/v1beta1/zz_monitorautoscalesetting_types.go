@@ -187,6 +187,19 @@ type MetricTriggerInitParameters struct {
 	// The namespace of the metric that defines what the rule monitors, such as microsoft.compute/virtualmachinescalesets for Virtual Machine Scale Sets.
 	MetricNamespace *string `json:"metricNamespace,omitempty" tf:"metric_namespace,omitempty"`
 
+	// The ID of the Resource which the Rule monitors.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MetricResourceID *string `json:"metricResourceId,omitempty" tf:"metric_resource_id,omitempty"`
+
+	// Reference to a LinuxVirtualMachineScaleSet in compute to populate metricResourceId.
+	// +kubebuilder:validation:Optional
+	MetricResourceIDRef *v1.Reference `json:"metricResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a LinuxVirtualMachineScaleSet in compute to populate metricResourceId.
+	// +kubebuilder:validation:Optional
+	MetricResourceIDSelector *v1.Selector `json:"metricResourceIdSelector,omitempty" tf:"-"`
+
 	// Specifies the operator used to compare the metric data and threshold. Possible values are: Equals, NotEquals, GreaterThan, GreaterThanOrEqual, LessThan, LessThanOrEqual.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
@@ -316,8 +329,34 @@ type MonitorAutoscaleSettingInitParameters struct {
 	// Specifies one or more (up to 20) profile blocks as defined below.
 	Profile []ProfileInitParameters `json:"profile,omitempty" tf:"profile,omitempty"`
 
+	// The name of the Resource Group in the AutoScale Setting should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.LinuxVirtualMachineScaleSet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a LinuxVirtualMachineScaleSet in compute to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type MonitorAutoscaleSettingObservation struct {
@@ -344,6 +383,7 @@ type MonitorAutoscaleSettingObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
@@ -387,6 +427,7 @@ type MonitorAutoscaleSettingParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the resource ID of the resource that the autoscale setting should be added to. Changing this forces a new resource to be created.
@@ -622,6 +663,7 @@ type ScaleActionParameters struct {
 type WebhookInitParameters struct {
 
 	// A map of settings.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The HTTPS URI which should receive scale notifications.
@@ -631,6 +673,7 @@ type WebhookInitParameters struct {
 type WebhookObservation struct {
 
 	// A map of settings.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The HTTPS URI which should receive scale notifications.
@@ -641,6 +684,7 @@ type WebhookParameters struct {
 
 	// A map of settings.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The HTTPS URI which should receive scale notifications.

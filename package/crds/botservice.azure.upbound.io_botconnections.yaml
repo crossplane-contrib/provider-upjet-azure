@@ -178,6 +178,7 @@ spec:
                       type: string
                     description: A map of additional parameters to apply to the connection.
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the Bot Connection. Changing this forces a new resource to be
@@ -271,6 +272,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -297,6 +299,7 @@ spec:
                       type: string
                     description: A map of additional parameters to apply to the connection.
                     type: object
+                    x-kubernetes-map-type: granular
                   scopes:
                     description: The Scopes at which the connection should be applied.
                     type: string
@@ -310,6 +313,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -513,6 +517,7 @@ spec:
                       type: string
                     description: A map of additional parameters to apply to the connection.
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the Bot Connection. Changing this forces a new resource to be
@@ -531,6 +536,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

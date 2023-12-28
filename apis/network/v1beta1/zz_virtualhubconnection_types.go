@@ -20,6 +20,7 @@ import (
 type RoutingPropagatedRouteTableInitParameters struct {
 
 	// The list of labels to assign to this route table.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this Virtual Hub Connection.
@@ -29,6 +30,7 @@ type RoutingPropagatedRouteTableInitParameters struct {
 type RoutingPropagatedRouteTableObservation struct {
 
 	// The list of labels to assign to this route table.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this Virtual Hub Connection.
@@ -39,6 +41,7 @@ type RoutingPropagatedRouteTableParameters struct {
 
 	// The list of labels to assign to this route table.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this Virtual Hub Connection.
@@ -49,6 +52,7 @@ type RoutingPropagatedRouteTableParameters struct {
 type StaticVnetRouteInitParameters struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
 	// The name which should be used for this Static Route.
@@ -61,6 +65,7 @@ type StaticVnetRouteInitParameters struct {
 type StaticVnetRouteObservation struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
 	// The name which should be used for this Static Route.
@@ -74,6 +79,7 @@ type StaticVnetRouteParameters struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
 	// The name which should be used for this Static Route.
@@ -89,6 +95,19 @@ type VirtualHubConnectionInitParameters struct {
 
 	// Should Internet Security be enabled to secure internet traffic? Defaults to false.
 	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
+
+	// The ID of the Virtual Network which the Virtual Hub should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RemoteVirtualNetworkID *string `json:"remoteVirtualNetworkId,omitempty" tf:"remote_virtual_network_id,omitempty"`
+
+	// Reference to a VirtualNetwork in network to populate remoteVirtualNetworkId.
+	// +kubebuilder:validation:Optional
+	RemoteVirtualNetworkIDRef *v1.Reference `json:"remoteVirtualNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetwork in network to populate remoteVirtualNetworkId.
+	// +kubebuilder:validation:Optional
+	RemoteVirtualNetworkIDSelector *v1.Selector `json:"remoteVirtualNetworkIdSelector,omitempty" tf:"-"`
 
 	// A routing block as defined below.
 	Routing []VirtualHubConnectionRoutingInitParameters `json:"routing,omitempty" tf:"routing,omitempty"`
@@ -152,6 +171,19 @@ type VirtualHubConnectionParameters struct {
 }
 
 type VirtualHubConnectionRoutingInitParameters struct {
+
+	// The ID of the route table associated with this Virtual Hub connection.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHubRouteTable
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
+
+	// Reference to a VirtualHubRouteTable in network to populate associatedRouteTableId.
+	// +kubebuilder:validation:Optional
+	AssociatedRouteTableIDRef *v1.Reference `json:"associatedRouteTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualHubRouteTable in network to populate associatedRouteTableId.
+	// +kubebuilder:validation:Optional
+	AssociatedRouteTableIDSelector *v1.Selector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
 
 	// A propagated_route_table block as defined below.
 	PropagatedRouteTable []RoutingPropagatedRouteTableInitParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`

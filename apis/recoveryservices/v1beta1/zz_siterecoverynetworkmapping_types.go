@@ -22,8 +22,58 @@ type SiteRecoveryNetworkMappingInitParameters struct {
 	// The name of the network mapping. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the vault that should be updated. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameRef *v1.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+
+	// Name of the resource group where the vault that should be updated is located. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The id of the primary network. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SourceNetworkID *string `json:"sourceNetworkId,omitempty" tf:"source_network_id,omitempty"`
+
+	// Reference to a VirtualNetwork in network to populate sourceNetworkId.
+	// +kubebuilder:validation:Optional
+	SourceNetworkIDRef *v1.Reference `json:"sourceNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetwork in network to populate sourceNetworkId.
+	// +kubebuilder:validation:Optional
+	SourceNetworkIDSelector *v1.Selector `json:"sourceNetworkIdSelector,omitempty" tf:"-"`
+
 	// Specifies the ASR fabric where mapping should be created. Changing this forces a new resource to be created.
 	SourceRecoveryFabricName *string `json:"sourceRecoveryFabricName,omitempty" tf:"source_recovery_fabric_name,omitempty"`
+
+	// The id of the recovery network. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetNetworkID *string `json:"targetNetworkId,omitempty" tf:"target_network_id,omitempty"`
+
+	// Reference to a VirtualNetwork in network to populate targetNetworkId.
+	// +kubebuilder:validation:Optional
+	TargetNetworkIDRef *v1.Reference `json:"targetNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetwork in network to populate targetNetworkId.
+	// +kubebuilder:validation:Optional
+	TargetNetworkIDSelector *v1.Selector `json:"targetNetworkIdSelector,omitempty" tf:"-"`
 
 	// The Azure Site Recovery fabric object corresponding to the recovery Azure region. Changing this forces a new resource to be created.
 	TargetRecoveryFabricName *string `json:"targetRecoveryFabricName,omitempty" tf:"target_recovery_fabric_name,omitempty"`

@@ -121,12 +121,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         virtualNetworkSubnetIds:
                           description: One or more Subnet IDs which should be able
                             to access this Key Vault.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   publicNetworkAccessEnabled:
@@ -229,6 +231,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenantId:
                     description: The Azure Active Directory tenant ID that should
                       be used for authenticating requests to the key vault.
@@ -301,12 +304,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         virtualNetworkSubnetIds:
                           description: One or more Subnet IDs which should be able
                             to access this Key Vault.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   publicNetworkAccessEnabled:
@@ -330,6 +335,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenantId:
                     description: The Azure Active Directory tenant ID that should
                       be used for authenticating requests to the key vault.
@@ -626,12 +632,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         virtualNetworkSubnetIds:
                           description: One or more Subnet IDs which should be able
                             to access this Key Vault.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   publicNetworkAccessEnabled:
@@ -659,6 +667,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenantId:
                     description: The Azure Active Directory tenant ID that should
                       be used for authenticating requests to the key vault.

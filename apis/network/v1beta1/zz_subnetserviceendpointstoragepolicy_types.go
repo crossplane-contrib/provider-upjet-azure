@@ -26,6 +26,7 @@ type DefinitionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of resources that this Subnet Service Endpoint Storage Policy Definition applies to.
+	// +listType=set
 	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
 }
 
@@ -38,6 +39,7 @@ type DefinitionObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of resources that this Subnet Service Endpoint Storage Policy Definition applies to.
+	// +listType=set
 	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
 }
 
@@ -53,6 +55,7 @@ type DefinitionParameters struct {
 
 	// Specifies a list of resources that this Subnet Service Endpoint Storage Policy Definition applies to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ServiceResources []*string `json:"serviceResources" tf:"service_resources,omitempty"`
 }
 
@@ -65,6 +68,7 @@ type SubnetServiceEndpointStoragePolicyInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Subnet Service Endpoint Storage Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -83,6 +87,7 @@ type SubnetServiceEndpointStoragePolicyObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Subnet Service Endpoint Storage Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -111,6 +116,7 @@ type SubnetServiceEndpointStoragePolicyParameters struct {
 
 	// A mapping of tags which should be assigned to the Subnet Service Endpoint Storage Policy.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

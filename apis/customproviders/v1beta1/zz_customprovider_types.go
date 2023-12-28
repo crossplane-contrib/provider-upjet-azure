@@ -58,6 +58,7 @@ type CustomProviderInitParameters struct {
 	ResourceType []ResourceTypeInitParameters `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Any number of validation block as defined below.
@@ -82,6 +83,7 @@ type CustomProviderObservation struct {
 	ResourceType []ResourceTypeObservation `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
 
 	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Any number of validation block as defined below.
@@ -117,6 +119,7 @@ type CustomProviderParameters struct {
 
 	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Any number of validation block as defined below.

@@ -18,6 +18,31 @@ import (
 )
 
 type SpringCloudActiveDeploymentInitParameters struct {
+
+	// Specifies the name of Spring Cloud Deployment which is going to be active.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudJavaDeployment
+	DeploymentName *string `json:"deploymentName,omitempty" tf:"deployment_name,omitempty"`
+
+	// Reference to a SpringCloudJavaDeployment in appplatform to populate deploymentName.
+	// +kubebuilder:validation:Optional
+	DeploymentNameRef *v1.Reference `json:"deploymentNameRef,omitempty" tf:"-"`
+
+	// Selector for a SpringCloudJavaDeployment in appplatform to populate deploymentName.
+	// +kubebuilder:validation:Optional
+	DeploymentNameSelector *v1.Selector `json:"deploymentNameSelector,omitempty" tf:"-"`
+
+	// Specifies the id of the Spring Cloud Application. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
+
+	// Reference to a SpringCloudApp in appplatform to populate springCloudAppId.
+	// +kubebuilder:validation:Optional
+	SpringCloudAppIDRef *v1.Reference `json:"springCloudAppIdRef,omitempty" tf:"-"`
+
+	// Selector for a SpringCloudApp in appplatform to populate springCloudAppId.
+	// +kubebuilder:validation:Optional
+	SpringCloudAppIDSelector *v1.Selector `json:"springCloudAppIdSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudActiveDeploymentObservation struct {

@@ -246,6 +246,7 @@ spec:
                       type: string
                     description: A mapping of tags assigned to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   transformationQuery:
                     description: Specifies the query that will be run in the streaming
                       job, written in Stream Analytics Query Language (SAQL).
@@ -348,6 +349,7 @@ spec:
                       type: string
                     description: A mapping of tags assigned to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   transformationQuery:
                     description: Specifies the query that will be run in the streaming
                       job, written in Stream Analytics Query Language (SAQL).
@@ -631,6 +633,7 @@ spec:
                       type: string
                     description: A mapping of tags assigned to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   transformationQuery:
                     description: Specifies the query that will be run in the streaming
                       job, written in Stream Analytics Query Language (SAQL).

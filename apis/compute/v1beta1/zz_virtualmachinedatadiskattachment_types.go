@@ -28,6 +28,32 @@ type VirtualMachineDataDiskAttachmentInitParameters struct {
 	// The Logical Unit Number of the Data Disk, which needs to be unique within the Virtual Machine. Changing this forces a new resource to be created.
 	Lun *float64 `json:"lun,omitempty" tf:"lun,omitempty"`
 
+	// The ID of an existing Managed Disk which should be attached. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
+
+	// Reference to a ManagedDisk in compute to populate managedDiskId.
+	// +kubebuilder:validation:Optional
+	ManagedDiskIDRef *v1.Reference `json:"managedDiskIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedDisk in compute to populate managedDiskId.
+	// +kubebuilder:validation:Optional
+	ManagedDiskIDSelector *v1.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Virtual Machine to which the Data Disk should be attached. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.LinuxVirtualMachine
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
+
+	// Reference to a LinuxVirtualMachine in compute to populate virtualMachineId.
+	// +kubebuilder:validation:Optional
+	VirtualMachineIDRef *v1.Reference `json:"virtualMachineIdRef,omitempty" tf:"-"`
+
+	// Selector for a LinuxVirtualMachine in compute to populate virtualMachineId.
+	// +kubebuilder:validation:Optional
+	VirtualMachineIDSelector *v1.Selector `json:"virtualMachineIdSelector,omitempty" tf:"-"`
+
 	// Specifies if Write Accelerator is enabled on the disk. This can only be enabled on Premium_LRS managed disks with no caching and M-Series VMs. Defaults to false.
 	WriteAcceleratorEnabled *bool `json:"writeAcceleratorEnabled,omitempty" tf:"write_accelerator_enabled,omitempty"`
 }

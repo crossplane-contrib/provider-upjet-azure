@@ -19,7 +19,20 @@ import (
 
 type IntegrationRuntimeInitParameters struct {
 
+	// The integration runtime reference to associate with the Synapse Linked Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.IntegrationRuntimeAzure
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a IntegrationRuntimeAzure in synapse to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a IntegrationRuntimeAzure in synapse to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
+
 	// A map of parameters to associate with the integration runtime.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -29,6 +42,7 @@ type IntegrationRuntimeObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A map of parameters to associate with the integration runtime.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -49,12 +63,14 @@ type IntegrationRuntimeParameters struct {
 
 	// A map of parameters to associate with the integration runtime.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceInitParameters struct {
 
 	// A map of additional properties to associate with the Synapse Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Synapse Linked Service.
@@ -67,6 +83,7 @@ type LinkedServiceInitParameters struct {
 	IntegrationRuntime []IntegrationRuntimeInitParameters `json:"integrationRuntime,omitempty" tf:"integration_runtime,omitempty"`
 
 	// A map of parameters to associate with the Synapse Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The type of data stores that will be connected to Synapse. Valid Values include AmazonMWS, AmazonRdsForOracle, AmazonRdsForSqlServer, AmazonRedshift, AmazonS3, AzureBatch. Changing this forces a new resource to be created.
@@ -87,6 +104,7 @@ type LinkedServiceInitParameters struct {
 type LinkedServiceObservation struct {
 
 	// A map of additional properties to associate with the Synapse Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Synapse Linked Service.
@@ -102,6 +120,7 @@ type LinkedServiceObservation struct {
 	IntegrationRuntime []IntegrationRuntimeObservation `json:"integrationRuntime,omitempty" tf:"integration_runtime,omitempty"`
 
 	// A map of parameters to associate with the Synapse Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The Synapse Workspace ID in which to associate the Linked Service with. Changing this forces a new Synapse Linked Service to be created.
@@ -126,6 +145,7 @@ type LinkedServiceParameters struct {
 
 	// A map of additional properties to associate with the Synapse Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Synapse Linked Service.
@@ -142,6 +162,7 @@ type LinkedServiceParameters struct {
 
 	// A map of parameters to associate with the Synapse Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The Synapse Workspace ID in which to associate the Linked Service with. Changing this forces a new Synapse Linked Service to be created.

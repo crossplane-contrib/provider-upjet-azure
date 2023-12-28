@@ -162,6 +162,7 @@ spec:
                       type: string
                     description: Specifies a mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -190,6 +191,7 @@ spec:
                       type: string
                     description: Specifies a mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -388,6 +390,7 @@ spec:
                       type: string
                     description: Specifies a mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

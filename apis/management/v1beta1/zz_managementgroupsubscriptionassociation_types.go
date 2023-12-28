@@ -18,6 +18,32 @@ import (
 )
 
 type ManagementGroupSubscriptionAssociationInitParameters struct {
+
+	// The ID of the Management Group to associate the Subscription with. Changing this forces a new Management to be created.
+	// +crossplane:generate:reference:type=ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
+
+	// Reference to a ManagementGroup to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagementGroup to populate managementGroupId.
+	// +kubebuilder:validation:Optional
+	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Subscription to be associated with the Management Group. Changing this forces a new Management to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.Subscription
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// Reference to a Subscription in azure to populate subscriptionId.
+	// +kubebuilder:validation:Optional
+	SubscriptionIDRef *v1.Reference `json:"subscriptionIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subscription in azure to populate subscriptionId.
+	// +kubebuilder:validation:Optional
+	SubscriptionIDSelector *v1.Selector `json:"subscriptionIdSelector,omitempty" tf:"-"`
 }
 
 type ManagementGroupSubscriptionAssociationObservation struct {

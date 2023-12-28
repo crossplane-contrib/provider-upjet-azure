@@ -247,6 +247,7 @@ type MatchConditionsInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -265,6 +266,7 @@ type MatchConditionsObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -288,6 +290,7 @@ type MatchConditionsParameters struct {
 
 	// A list of transformations to do before the match is attempted. Possible values are HtmlEntityDecode, Lowercase, RemoveNulls, Trim, UrlDecode and UrlEncode.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -496,6 +499,7 @@ type WebApplicationFirewallPolicyInitParameters struct {
 	PolicySettings []PolicySettingsInitParameters `json:"policySettings,omitempty" tf:"policy_settings,omitempty"`
 
 	// A mapping of tags to assign to the Web Application Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -526,6 +530,7 @@ type WebApplicationFirewallPolicyObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the Web Application Firewall Policy.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -562,6 +567,7 @@ type WebApplicationFirewallPolicyParameters struct {
 
 	// A mapping of tags to assign to the Web Application Firewall Policy.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

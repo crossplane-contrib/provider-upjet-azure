@@ -527,6 +527,7 @@ type MonitorActionGroupInitParameters struct {
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more voice_receiver blocks as defined below.
@@ -581,6 +582,7 @@ type MonitorActionGroupObservation struct {
 	ShortName *string `json:"shortName,omitempty" tf:"short_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more voice_receiver blocks as defined below.
@@ -655,6 +657,7 @@ type MonitorActionGroupParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// One or more voice_receiver blocks as defined below.

@@ -20,13 +20,28 @@ import (
 type DNSARecordInitParameters struct {
 
 	// List of IPv4 Addresses. Conflicts with target_resource_id.
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// The Time To Live (TTL) of the DNS record in seconds.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The Azure resource id of the target object. Conflicts with records.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a PublicIP in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a PublicIP in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type DNSARecordObservation struct {
@@ -38,6 +53,7 @@ type DNSARecordObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of IPv4 Addresses. Conflicts with target_resource_id.
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -47,6 +63,7 @@ type DNSARecordObservation struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure resource id of the target object. Conflicts with records.
@@ -60,6 +77,7 @@ type DNSARecordParameters struct {
 
 	// List of IPv4 Addresses. Conflicts with target_resource_id.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Records []*string `json:"records,omitempty" tf:"records,omitempty"`
 
 	// Specifies the resource group where the DNS Zone (parent resource) exists. Changing this forces a new resource to be created.
@@ -81,6 +99,7 @@ type DNSARecordParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Azure resource id of the target object. Conflicts with records.

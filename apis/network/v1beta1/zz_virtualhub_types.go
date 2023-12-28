@@ -35,7 +35,21 @@ type VirtualHubInitParameters_2 struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the Virtual Hub.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=VirtualWAN
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
+
+	// Reference to a VirtualWAN to populate virtualWanId.
+	// +kubebuilder:validation:Optional
+	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualWAN to populate virtualWanId.
+	// +kubebuilder:validation:Optional
+	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubObservation_2 struct {
@@ -65,6 +79,7 @@ type VirtualHubObservation_2 struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the Virtual Hub.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Autonomous System Number of the Virtual Hub BGP router.
@@ -114,6 +129,7 @@ type VirtualHubParameters_2 struct {
 
 	// A mapping of tags to assign to the Virtual Hub.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.

@@ -65,6 +65,20 @@ type FunctionAppFunctionInitParameters struct {
 	// A file block as detailed below. Changing this forces a new resource to be created.
 	File []FileInitParameters `json:"file,omitempty" tf:"file,omitempty"`
 
+	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
+	// The ID of the Function App in which this function should reside.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.LinuxFunctionApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
+
+	// Reference to a LinuxFunctionApp in web to populate functionAppId.
+	// +kubebuilder:validation:Optional
+	FunctionAppIDRef *v1.Reference `json:"functionAppIdRef,omitempty" tf:"-"`
+
+	// Selector for a LinuxFunctionApp in web to populate functionAppId.
+	// +kubebuilder:validation:Optional
+	FunctionAppIDSelector *v1.Selector `json:"functionAppIdSelector,omitempty" tf:"-"`
+
 	// The language the Function is written in. Possible values are CSharp, Custom, Java, Javascript, Python, PowerShell, and TypeScript.
 	// The language the Function is written in.
 	Language *string `json:"language,omitempty" tf:"language,omitempty"`

@@ -107,12 +107,14 @@ type MaintenanceConfigurationInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of properties to assign to the resource.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The scope of the Maintenance Configuration. Possible values are Extension, Host, InGuestPatch, OSImage, SQLDB or SQLManagedInstance.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
@@ -137,6 +139,7 @@ type MaintenanceConfigurationObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of properties to assign to the resource.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The name of the Resource Group where the Maintenance Configuration should exist. Changing this forces a new resource to be created.
@@ -146,6 +149,7 @@ type MaintenanceConfigurationObservation struct {
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
 	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
@@ -171,6 +175,7 @@ type MaintenanceConfigurationParameters struct {
 
 	// A mapping of properties to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// The name of the Resource Group where the Maintenance Configuration should exist. Changing this forces a new resource to be created.
@@ -192,6 +197,7 @@ type MaintenanceConfigurationParameters struct {
 
 	// A mapping of tags to assign to the resource. The key could not contain upper case letter.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The visibility of the Maintenance Configuration. The only allowable value is Custom.

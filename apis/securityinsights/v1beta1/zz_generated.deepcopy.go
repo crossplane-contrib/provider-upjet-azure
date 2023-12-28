@@ -419,6 +419,21 @@ func (in *SentinelAlertRuleFusionInitParameters) DeepCopyInto(out *SentinelAlert
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LogAnalyticsWorkspaceID != nil {
+		in, out := &in.LogAnalyticsWorkspaceID, &out.LogAnalyticsWorkspaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.LogAnalyticsWorkspaceIDRef != nil {
+		in, out := &in.LogAnalyticsWorkspaceIDRef, &out.LogAnalyticsWorkspaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogAnalyticsWorkspaceIDSelector != nil {
+		in, out := &in.LogAnalyticsWorkspaceIDSelector, &out.LogAnalyticsWorkspaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -987,6 +1002,21 @@ func (in *SentinelAlertRuleMachineLearningBehaviorAnalyticsInitParameters) DeepC
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LogAnalyticsWorkspaceID != nil {
+		in, out := &in.LogAnalyticsWorkspaceID, &out.LogAnalyticsWorkspaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.LogAnalyticsWorkspaceIDRef != nil {
+		in, out := &in.LogAnalyticsWorkspaceIDRef, &out.LogAnalyticsWorkspaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogAnalyticsWorkspaceIDSelector != nil {
+		in, out := &in.LogAnalyticsWorkspaceIDSelector, &out.LogAnalyticsWorkspaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
@@ -1226,6 +1256,21 @@ func (in *SentinelAutomationRuleInitParameters) DeepCopyInto(out *SentinelAutoma
 		in, out := &in.Expiration, &out.Expiration
 		*out = new(string)
 		**out = **in
+	}
+	if in.LogAnalyticsWorkspaceID != nil {
+		in, out := &in.LogAnalyticsWorkspaceID, &out.LogAnalyticsWorkspaceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.LogAnalyticsWorkspaceIDRef != nil {
+		in, out := &in.LogAnalyticsWorkspaceIDRef, &out.LogAnalyticsWorkspaceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.LogAnalyticsWorkspaceIDSelector != nil {
+		in, out := &in.LogAnalyticsWorkspaceIDSelector, &out.LogAnalyticsWorkspaceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
@@ -1717,10 +1762,40 @@ func (in *SentinelLogAnalyticsWorkspaceOnboardingInitParameters) DeepCopyInto(ou
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.WorkspaceID != nil {
 		in, out := &in.WorkspaceID, &out.WorkspaceID
 		*out = new(string)
 		**out = **in
+	}
+	if in.WorkspaceName != nil {
+		in, out := &in.WorkspaceName, &out.WorkspaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.WorkspaceNameRef != nil {
+		in, out := &in.WorkspaceNameRef, &out.WorkspaceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.WorkspaceNameSelector != nil {
+		in, out := &in.WorkspaceNameSelector, &out.WorkspaceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 }
 

@@ -159,6 +159,7 @@ spec:
                     description: A JSON mapping of any Metadata for this Logic App
                       Integration Account Batch Configuration.
                     type: object
+                    x-kubernetes-map-type: granular
                   name:
                     description: The name which should be used for this Logic App
                       Integration Account Batch Configuration. Only Alphanumeric characters
@@ -205,6 +206,7 @@ spec:
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     minutes:
                                       description: A list containing a single item
                                         which specifies the Minute interval at which
@@ -212,12 +214,14 @@ spec:
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     monthDays:
                                       description: A list of days of the month that
                                         the job should execute on.
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     monthly:
                                       description: A monthly block as documented below.
                                       items:
@@ -242,6 +246,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               startTime:
@@ -353,12 +358,92 @@ spec:
                       Batch Configuration. Changing this forces a new resource to
                       be created.
                     type: string
+                  integrationAccountName:
+                    description: The name of the Logic App Integration Account. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  integrationAccountNameRef:
+                    description: Reference to a AppIntegrationAccount in logic to
+                      populate integrationAccountName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  integrationAccountNameSelector:
+                    description: Selector for a AppIntegrationAccount in logic to
+                      populate integrationAccountName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   metadata:
                     additionalProperties:
                       type: string
                     description: A JSON mapping of any Metadata for this Logic App
                       Integration Account Batch Configuration.
                     type: object
+                    x-kubernetes-map-type: granular
                   name:
                     description: The name which should be used for this Logic App
                       Integration Account Batch Configuration. Only Alphanumeric characters
@@ -405,6 +490,7 @@ spec:
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     minutes:
                                       description: A list containing a single item
                                         which specifies the Minute interval at which
@@ -412,12 +498,14 @@ spec:
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     monthDays:
                                       description: A list of days of the month that
                                         the job should execute on.
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     monthly:
                                       description: A monthly block as documented below.
                                       items:
@@ -442,6 +530,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               startTime:
@@ -455,6 +544,86 @@ spec:
                           type: array
                       type: object
                     type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Logic App
+                      Integration Account Batch Configuration should exist. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                 type: object
               managementPolicies:
                 default:
@@ -654,6 +823,7 @@ spec:
                     description: A JSON mapping of any Metadata for this Logic App
                       Integration Account Batch Configuration.
                     type: object
+                    x-kubernetes-map-type: granular
                   name:
                     description: The name which should be used for this Logic App
                       Integration Account Batch Configuration. Only Alphanumeric characters
@@ -700,6 +870,7 @@ spec:
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     minutes:
                                       description: A list containing a single item
                                         which specifies the Minute interval at which
@@ -707,12 +878,14 @@ spec:
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     monthDays:
                                       description: A list of days of the month that
                                         the job should execute on.
                                       items:
                                         type: number
                                       type: array
+                                      x-kubernetes-list-type: set
                                     monthly:
                                       description: A monthly block as documented below.
                                       items:
@@ -737,6 +910,7 @@ spec:
                                       items:
                                         type: string
                                       type: array
+                                      x-kubernetes-list-type: set
                                   type: object
                                 type: array
                               startTime:

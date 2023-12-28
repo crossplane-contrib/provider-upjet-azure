@@ -20,10 +20,35 @@ import (
 type ShareDirectoryInitParameters struct {
 
 	// A mapping of metadata to assign to this Directory.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Share
+	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
+
+	// Reference to a Share in storage to populate shareName.
+	// +kubebuilder:validation:Optional
+	ShareNameRef *v1.Reference `json:"shareNameRef,omitempty" tf:"-"`
+
+	// Selector for a Share in storage to populate shareName.
+	// +kubebuilder:validation:Optional
+	ShareNameSelector *v1.Selector `json:"shareNameSelector,omitempty" tf:"-"`
+
+	// The name of the Storage Account within which the File Share is located. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }
 
 type ShareDirectoryObservation struct {
@@ -32,6 +57,7 @@ type ShareDirectoryObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A mapping of metadata to assign to this Directory.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
@@ -48,6 +74,7 @@ type ShareDirectoryParameters struct {
 
 	// A mapping of metadata to assign to this Directory.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.

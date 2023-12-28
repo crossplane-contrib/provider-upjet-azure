@@ -85,6 +85,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Subscription.
                     type: object
+                    x-kubernetes-map-type: granular
                   workload:
                     description: The workload type of the Subscription. Possible values
                       are Production (default) and DevTest. Changing this forces a
@@ -122,6 +123,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Subscription.
                     type: object
+                    x-kubernetes-map-type: granular
                   workload:
                     description: The workload type of the Subscription. Possible values
                       are Production (default) and DevTest. Changing this forces a
@@ -320,6 +322,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Subscription.
                     type: object
+                    x-kubernetes-map-type: granular
                   tenantId:
                     description: The ID of the Tenant to which the subscription belongs.
                       The Tenant ID to which the subscription belongs

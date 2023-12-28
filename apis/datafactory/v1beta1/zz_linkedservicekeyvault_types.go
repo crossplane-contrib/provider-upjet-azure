@@ -20,6 +20,7 @@ import (
 type LinkedServiceKeyVaultInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Key Vault.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Key Vault.
@@ -31,13 +32,28 @@ type LinkedServiceKeyVaultInitParameters struct {
 	// The integration runtime reference to associate with the Data Factory Linked Service Key Vault.
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
+	// The ID the Azure Key Vault resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate keyVaultId.
+	// +kubebuilder:validation:Optional
+	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
+
 	// A map of parameters to associate with the Data Factory Linked Service Key Vault.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceKeyVaultObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Key Vault.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Key Vault.
@@ -59,6 +75,7 @@ type LinkedServiceKeyVaultObservation struct {
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service Key Vault.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -66,6 +83,7 @@ type LinkedServiceKeyVaultParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Key Vault.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Key Vault.
@@ -110,6 +128,7 @@ type LinkedServiceKeyVaultParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service Key Vault.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

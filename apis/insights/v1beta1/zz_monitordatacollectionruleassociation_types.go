@@ -19,6 +19,32 @@ import (
 
 type MonitorDataCollectionRuleAssociationInitParameters struct {
 
+	// The ID of the Data Collection Endpoint which will be associated to the target resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorDataCollectionEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataCollectionEndpointID *string `json:"dataCollectionEndpointId,omitempty" tf:"data_collection_endpoint_id,omitempty"`
+
+	// Reference to a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
+	// +kubebuilder:validation:Optional
+	DataCollectionEndpointIDRef *v1.Reference `json:"dataCollectionEndpointIdRef,omitempty" tf:"-"`
+
+	// Selector for a MonitorDataCollectionEndpoint in insights to populate dataCollectionEndpointId.
+	// +kubebuilder:validation:Optional
+	DataCollectionEndpointIDSelector *v1.Selector `json:"dataCollectionEndpointIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Data Collection Rule which will be associated to the target resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorDataCollectionRule
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
+	// Reference to a MonitorDataCollectionRule in insights to populate dataCollectionRuleId.
+	// +kubebuilder:validation:Optional
+	DataCollectionRuleIDRef *v1.Reference `json:"dataCollectionRuleIdRef,omitempty" tf:"-"`
+
+	// Selector for a MonitorDataCollectionRule in insights to populate dataCollectionRuleId.
+	// +kubebuilder:validation:Optional
+	DataCollectionRuleIDSelector *v1.Selector `json:"dataCollectionRuleIdSelector,omitempty" tf:"-"`
+
 	// The description of the Data Collection Rule Association.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 }

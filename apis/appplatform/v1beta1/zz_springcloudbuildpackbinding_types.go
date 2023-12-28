@@ -20,18 +20,22 @@ import (
 type LaunchInitParameters struct {
 
 	// Specifies a map of non-sensitive properties for launchProperties.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Specifies a map of sensitive properties for launchProperties.
+	// +mapType=granular
 	Secrets map[string]*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
 }
 
 type LaunchObservation struct {
 
 	// Specifies a map of non-sensitive properties for launchProperties.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Specifies a map of sensitive properties for launchProperties.
+	// +mapType=granular
 	Secrets map[string]*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
 }
 
@@ -39,10 +43,12 @@ type LaunchParameters struct {
 
 	// Specifies a map of non-sensitive properties for launchProperties.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Specifies a map of sensitive properties for launchProperties.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Secrets map[string]*string `json:"secrets,omitempty" tf:"secrets,omitempty"`
 }
 

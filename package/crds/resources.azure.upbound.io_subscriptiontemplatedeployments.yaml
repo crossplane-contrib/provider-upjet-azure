@@ -88,6 +88,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Subscription Template Deployment.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateContent:
                     description: The contents of the ARM Template which should be
                       deployed into this Subscription.
@@ -129,6 +130,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Subscription Template Deployment.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateContent:
                     description: The contents of the ARM Template which should be
                       deployed into this Subscription.
@@ -336,6 +338,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Subscription Template Deployment.
                     type: object
+                    x-kubernetes-map-type: granular
                   templateContent:
                     description: The contents of the ARM Template which should be
                       deployed into this Subscription.

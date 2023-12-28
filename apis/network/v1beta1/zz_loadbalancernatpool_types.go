@@ -40,6 +40,18 @@ type LoadBalancerNatPoolInitParameters struct {
 	// The transport protocol for the external endpoint. Possible values are All, Tcp and Udp.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
+	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Is TCP Reset enabled for this Load Balancer Rule?
 	TCPResetEnabled *bool `json:"tcpResetEnabled,omitempty" tf:"tcp_reset_enabled,omitempty"`
 }

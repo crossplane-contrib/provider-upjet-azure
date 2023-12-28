@@ -99,5 +99,39 @@ func (mg *IOTHubDeviceUpdateInstance) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DiagnosticStorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DiagnosticStorageAccount[i3].ID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.DiagnosticStorageAccount[i3].IDRef,
+			Selector:     mg.Spec.InitProvider.DiagnosticStorageAccount[i3].IDSelector,
+			To: reference.To{
+				List:    &v1beta11.AccountList{},
+				Managed: &v1beta11.Account{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DiagnosticStorageAccount[i3].ID")
+		}
+		mg.Spec.InitProvider.DiagnosticStorageAccount[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DiagnosticStorageAccount[i3].IDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.IOTHubIDRef,
+		Selector:     mg.Spec.InitProvider.IOTHubIDSelector,
+		To: reference.To{
+			List:    &v1beta12.IOTHubList{},
+			Managed: &v1beta12.IOTHub{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubID")
+	}
+	mg.Spec.InitProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IOTHubIDRef = rsp.ResolvedReference
+
 	return nil
 }

@@ -19,10 +19,36 @@ import (
 
 type LogAnalyticsDataExportRuleInitParameters struct {
 
+	// The destination resource ID. It should be a storage account, an event hub namespace or an event hub. If the destination is an event hub namespace, an event hub would be created for each table automatically.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DestinationResourceID *string `json:"destinationResourceId,omitempty" tf:"destination_resource_id,omitempty"`
+
+	// Reference to a Account in storage to populate destinationResourceId.
+	// +kubebuilder:validation:Optional
+	DestinationResourceIDRef *v1.Reference `json:"destinationResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate destinationResourceId.
+	// +kubebuilder:validation:Optional
+	DestinationResourceIDSelector *v1.Selector `json:"destinationResourceIdSelector,omitempty" tf:"-"`
+
 	// Is this Log Analytics Data Export Rule enabled? Possible values include true or false. Defaults to false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The name of the Resource Group where the Log Analytics Data Export should exist. Changing this forces a new Log Analytics Data Export Rule to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A list of table names to export to the destination resource, for example: ["Heartbeat", "SecurityEvent"].
+	// +listType=set
 	TableNames []*string `json:"tableNames,omitempty" tf:"table_names,omitempty"`
 }
 
@@ -44,6 +70,7 @@ type LogAnalyticsDataExportRuleObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A list of table names to export to the destination resource, for example: ["Heartbeat", "SecurityEvent"].
+	// +listType=set
 	TableNames []*string `json:"tableNames,omitempty" tf:"table_names,omitempty"`
 
 	// The resource ID of the workspace. Changing this forces a new Log Analytics Data Export Rule to be created.
@@ -85,6 +112,7 @@ type LogAnalyticsDataExportRuleParameters struct {
 
 	// A list of table names to export to the destination resource, for example: ["Heartbeat", "SecurityEvent"].
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TableNames []*string `json:"tableNames,omitempty" tf:"table_names,omitempty"`
 
 	// The resource ID of the workspace. Changing this forces a new Log Analytics Data Export Rule to be created.

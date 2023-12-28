@@ -51,6 +51,19 @@ type VPNGatewayConnectionInitParameters struct {
 	// Whether Internet Security is enabled for this VPN Connection. Defaults to false.
 	InternetSecurityEnabled *bool `json:"internetSecurityEnabled,omitempty" tf:"internet_security_enabled,omitempty"`
 
+	// The ID of the remote VPN Site, which will connect to the VPN Gateway. Changing this forces a new VPN Gateway Connection to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VPNSite
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RemoteVPNSiteID *string `json:"remoteVpnSiteId,omitempty" tf:"remote_vpn_site_id,omitempty"`
+
+	// Reference to a VPNSite in network to populate remoteVpnSiteId.
+	// +kubebuilder:validation:Optional
+	RemoteVPNSiteIDRef *v1.Reference `json:"remoteVpnSiteIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPNSite in network to populate remoteVpnSiteId.
+	// +kubebuilder:validation:Optional
+	RemoteVPNSiteIDSelector *v1.Selector `json:"remoteVpnSiteIdSelector,omitempty" tf:"-"`
+
 	// A routing block as defined below. If this is not specified, there will be a default route table created implicitly.
 	Routing []VPNGatewayConnectionRoutingInitParameters `json:"routing,omitempty" tf:"routing,omitempty"`
 
@@ -184,6 +197,7 @@ type VPNGatewayConnectionRoutingParameters struct {
 type VPNGatewayConnectionRoutingPropagatedRouteTableInitParameters struct {
 
 	// A list of labels to assign to this route table.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this VPN Gateway Connection.
@@ -193,6 +207,7 @@ type VPNGatewayConnectionRoutingPropagatedRouteTableInitParameters struct {
 type VPNGatewayConnectionRoutingPropagatedRouteTableObservation struct {
 
 	// A list of labels to assign to this route table.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this VPN Gateway Connection.
@@ -203,6 +218,7 @@ type VPNGatewayConnectionRoutingPropagatedRouteTableParameters struct {
 
 	// A list of labels to assign to this route table.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
 	// A list of Route Table IDs to associated with this VPN Gateway Connection.
@@ -213,18 +229,22 @@ type VPNGatewayConnectionRoutingPropagatedRouteTableParameters struct {
 type VPNGatewayConnectionTrafficSelectorPolicyInitParameters struct {
 
 	// A list of local address spaces in CIDR format for this VPN Gateway Connection.
+	// +listType=set
 	LocalAddressRanges []*string `json:"localAddressRanges,omitempty" tf:"local_address_ranges,omitempty"`
 
 	// A list of remote address spaces in CIDR format for this VPN Gateway Connection.
+	// +listType=set
 	RemoteAddressRanges []*string `json:"remoteAddressRanges,omitempty" tf:"remote_address_ranges,omitempty"`
 }
 
 type VPNGatewayConnectionTrafficSelectorPolicyObservation struct {
 
 	// A list of local address spaces in CIDR format for this VPN Gateway Connection.
+	// +listType=set
 	LocalAddressRanges []*string `json:"localAddressRanges,omitempty" tf:"local_address_ranges,omitempty"`
 
 	// A list of remote address spaces in CIDR format for this VPN Gateway Connection.
+	// +listType=set
 	RemoteAddressRanges []*string `json:"remoteAddressRanges,omitempty" tf:"remote_address_ranges,omitempty"`
 }
 
@@ -232,10 +252,12 @@ type VPNGatewayConnectionTrafficSelectorPolicyParameters struct {
 
 	// A list of local address spaces in CIDR format for this VPN Gateway Connection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LocalAddressRanges []*string `json:"localAddressRanges" tf:"local_address_ranges,omitempty"`
 
 	// A list of remote address spaces in CIDR format for this VPN Gateway Connection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	RemoteAddressRanges []*string `json:"remoteAddressRanges" tf:"remote_address_ranges,omitempty"`
 }
 
@@ -254,9 +276,11 @@ type VPNLinkInitParameters struct {
 	CustomBGPAddress []CustomBGPAddressInitParameters `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
 
 	// A list of the egress NAT Rule Ids.
+	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
 	// A list of the ingress NAT Rule Ids.
+	// +listType=set
 	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
 
 	// One or more ipsec_policy blocks as defined above.
@@ -391,9 +415,11 @@ type VPNLinkObservation struct {
 	CustomBGPAddress []CustomBGPAddressObservation `json:"customBgpAddress,omitempty" tf:"custom_bgp_address,omitempty"`
 
 	// A list of the egress NAT Rule Ids.
+	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
 	// A list of the ingress NAT Rule Ids.
+	// +listType=set
 	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
 
 	// One or more ipsec_policy blocks as defined above.
@@ -444,10 +470,12 @@ type VPNLinkParameters struct {
 
 	// A list of the egress NAT Rule Ids.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EgressNATRuleIds []*string `json:"egressNatRuleIds,omitempty" tf:"egress_nat_rule_ids,omitempty"`
 
 	// A list of the ingress NAT Rule Ids.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IngressNATRuleIds []*string `json:"ingressNatRuleIds,omitempty" tf:"ingress_nat_rule_ids,omitempty"`
 
 	// One or more ipsec_policy blocks as defined above.

@@ -22,6 +22,20 @@ type FunctionAppActiveSlotInitParameters struct {
 	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to true. Changing this forces a new resource to be created.
 	// The swap action should overwrite the Production slot's network configuration with the configuration from this slot. Defaults to `true`.
 	OverwriteNetworkConfig *bool `json:"overwriteNetworkConfig,omitempty" tf:"overwrite_network_config,omitempty"`
+
+	// The ID of the Slot to swap with Production.
+	// The ID of the Slot to swap with `Production`.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsFunctionAppSlot
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SlotID *string `json:"slotId,omitempty" tf:"slot_id,omitempty"`
+
+	// Reference to a WindowsFunctionAppSlot in web to populate slotId.
+	// +kubebuilder:validation:Optional
+	SlotIDRef *v1.Reference `json:"slotIdRef,omitempty" tf:"-"`
+
+	// Selector for a WindowsFunctionAppSlot in web to populate slotId.
+	// +kubebuilder:validation:Optional
+	SlotIDSelector *v1.Selector `json:"slotIdSelector,omitempty" tf:"-"`
 }
 
 type FunctionAppActiveSlotObservation struct {

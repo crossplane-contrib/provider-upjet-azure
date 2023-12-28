@@ -71,6 +71,18 @@ type DataLakeGen2PathInitParameters struct {
 	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
 	Ace []DataLakeGen2PathAceInitParameters `json:"ace,omitempty" tf:"ace,omitempty"`
 
+	// The name of the Data Lake Gen2 File System which should be created within the Storage Account. Must be unique within the storage account the queue is located. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.DataLakeGen2FileSystem
+	FileSystemName *string `json:"filesystemName,omitempty" tf:"filesystem_name,omitempty"`
+
+	// Reference to a DataLakeGen2FileSystem in storage to populate filesystemName.
+	// +kubebuilder:validation:Optional
+	FileSystemNameRef *v1.Reference `json:"filesystemNameRef,omitempty" tf:"-"`
+
+	// Selector for a DataLakeGen2FileSystem in storage to populate filesystemName.
+	// +kubebuilder:validation:Optional
+	FileSystemNameSelector *v1.Selector `json:"filesystemNameSelector,omitempty" tf:"-"`
+
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group. Possible values also include $superuser.
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
@@ -82,6 +94,19 @@ type DataLakeGen2PathInitParameters struct {
 
 	// Specifies the type for path to create. Currently only directory is supported. Changing this forces a new resource to be created.
 	Resource *string `json:"resource,omitempty" tf:"resource,omitempty"`
+
+	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type DataLakeGen2PathObservation struct {

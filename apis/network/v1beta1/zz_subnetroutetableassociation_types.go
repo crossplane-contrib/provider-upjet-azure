@@ -18,6 +18,32 @@ import (
 )
 
 type SubnetRouteTableAssociationInitParameters struct {
+
+	// The ID of the Route Table which should be associated with the Subnet. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=RouteTable
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	RouteTableID *string `json:"routeTableId,omitempty" tf:"route_table_id,omitempty"`
+
+	// Reference to a RouteTable to populate routeTableId.
+	// +kubebuilder:validation:Optional
+	RouteTableIDRef *v1.Reference `json:"routeTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a RouteTable to populate routeTableId.
+	// +kubebuilder:validation:Optional
+	RouteTableIDSelector *v1.Selector `json:"routeTableIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Subnet. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type SubnetRouteTableAssociationObservation struct {

@@ -84,7 +84,34 @@ type PointToSiteVPNGatewayInitParameters struct {
 	ScaleUnit *float64 `json:"scaleUnit,omitempty" tf:"scale_unit,omitempty"`
 
 	// A mapping of tags to assign to the Point-to-Site VPN Gateway.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the VPN Server Configuration which this Point-to-Site VPN Gateway should use. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=VPNServerConfiguration
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VPNServerConfigurationID *string `json:"vpnServerConfigurationId,omitempty" tf:"vpn_server_configuration_id,omitempty"`
+
+	// Reference to a VPNServerConfiguration to populate vpnServerConfigurationId.
+	// +kubebuilder:validation:Optional
+	VPNServerConfigurationIDRef *v1.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
+
+	// Selector for a VPNServerConfiguration to populate vpnServerConfigurationId.
+	// +kubebuilder:validation:Optional
+	VPNServerConfigurationIDSelector *v1.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Virtual Hub where this Point-to-Site VPN Gateway should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=VirtualHub
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
+
+	// Reference to a VirtualHub to populate virtualHubId.
+	// +kubebuilder:validation:Optional
+	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualHub to populate virtualHubId.
+	// +kubebuilder:validation:Optional
+	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 type PointToSiteVPNGatewayObservation struct {
@@ -111,6 +138,7 @@ type PointToSiteVPNGatewayObservation struct {
 	ScaleUnit *float64 `json:"scaleUnit,omitempty" tf:"scale_unit,omitempty"`
 
 	// A mapping of tags to assign to the Point-to-Site VPN Gateway.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the VPN Server Configuration which this Point-to-Site VPN Gateway should use. Changing this forces a new resource to be created.
@@ -157,6 +185,7 @@ type PointToSiteVPNGatewayParameters struct {
 
 	// A mapping of tags to assign to the Point-to-Site VPN Gateway.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the VPN Server Configuration which this Point-to-Site VPN Gateway should use. Changing this forces a new resource to be created.
@@ -243,6 +272,7 @@ type RoutePropagatedRouteTableInitParameters struct {
 	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
 
 	// The list of labels to logically group Virtual Hub Route Tables which the routes will be propagated to.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
@@ -252,6 +282,7 @@ type RoutePropagatedRouteTableObservation struct {
 	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
 
 	// The list of labels to logically group Virtual Hub Route Tables which the routes will be propagated to.
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
@@ -263,18 +294,21 @@ type RoutePropagatedRouteTableParameters struct {
 
 	// The list of labels to logically group Virtual Hub Route Tables which the routes will be propagated to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 }
 
 type VPNClientAddressPoolInitParameters struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 type VPNClientAddressPoolObservation struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
@@ -282,6 +316,7 @@ type VPNClientAddressPoolParameters struct {
 
 	// A list of CIDR Ranges which should be used as Address Prefixes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
 }
 

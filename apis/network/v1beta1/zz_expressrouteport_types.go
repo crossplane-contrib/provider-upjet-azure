@@ -20,6 +20,7 @@ import (
 type ExpressRoutePortIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Express Route Port.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Express Route Port. Only possible value is UserAssigned.
@@ -29,6 +30,7 @@ type ExpressRoutePortIdentityInitParameters struct {
 type ExpressRoutePortIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Express Route Port.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Express Route Port. Only possible value is UserAssigned.
@@ -39,6 +41,7 @@ type ExpressRoutePortIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Express Route Port.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Express Route Port. Only possible value is UserAssigned.
@@ -73,6 +76,7 @@ type ExpressRoutePortInitParameters struct {
 	PeeringLocation *string `json:"peeringLocation,omitempty" tf:"peering_location,omitempty"`
 
 	// A mapping of tags which should be assigned to the Express Route Port.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -118,6 +122,7 @@ type ExpressRoutePortObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Express Route Port.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -170,6 +175,7 @@ type ExpressRoutePortParameters struct {
 
 	// A mapping of tags which should be assigned to the Express Route Port.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

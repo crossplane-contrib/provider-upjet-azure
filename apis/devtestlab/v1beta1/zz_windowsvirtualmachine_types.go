@@ -112,6 +112,43 @@ type WindowsVirtualMachineInitParameters struct {
 	// One or more inbound_nat_rule blocks as defined below. Changing this forces a new resource to be created.
 	InboundNATRule []WindowsVirtualMachineInboundNATRuleInitParameters `json:"inboundNatRule,omitempty" tf:"inbound_nat_rule,omitempty"`
 
+	// Specifies the name of the Dev Test Lab in which the Virtual Machine should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devtestlab/v1beta1.Lab
+	LabName *string `json:"labName,omitempty" tf:"lab_name,omitempty"`
+
+	// Reference to a Lab in devtestlab to populate labName.
+	// +kubebuilder:validation:Optional
+	LabNameRef *v1.Reference `json:"labNameRef,omitempty" tf:"-"`
+
+	// Selector for a Lab in devtestlab to populate labName.
+	// +kubebuilder:validation:Optional
+	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
+
+	// The name of a Subnet within the Dev Test Virtual Network where this machine should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	LabSubnetName *string `json:"labSubnetName,omitempty" tf:"lab_subnet_name,omitempty"`
+
+	// Reference to a Subnet in network to populate labSubnetName.
+	// +kubebuilder:validation:Optional
+	LabSubnetNameRef *v1.Reference `json:"labSubnetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate labSubnetName.
+	// +kubebuilder:validation:Optional
+	LabSubnetNameSelector *v1.Selector `json:"labSubnetNameSelector,omitempty" tf:"-"`
+
+	// The ID of the Dev Test Virtual Network where this Virtual Machine should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devtestlab/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	LabVirtualNetworkID *string `json:"labVirtualNetworkId,omitempty" tf:"lab_virtual_network_id,omitempty"`
+
+	// Reference to a VirtualNetwork in devtestlab to populate labVirtualNetworkId.
+	// +kubebuilder:validation:Optional
+	LabVirtualNetworkIDRef *v1.Reference `json:"labVirtualNetworkIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualNetwork in devtestlab to populate labVirtualNetworkId.
+	// +kubebuilder:validation:Optional
+	LabVirtualNetworkIDSelector *v1.Selector `json:"labVirtualNetworkIdSelector,omitempty" tf:"-"`
+
 	// Specifies the supported Azure location where the Dev Test Lab exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -121,6 +158,18 @@ type WindowsVirtualMachineInitParameters struct {
 	// Any notes about the Virtual Machine.
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
+	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// The Machine Size to use for this Virtual Machine, such as Standard_F2. Changing this forces a new resource to be created.
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
@@ -128,6 +177,7 @@ type WindowsVirtualMachineInitParameters struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Username associated with the local administrator on this Virtual Machine. Changing this forces a new resource to be created.
@@ -182,6 +232,7 @@ type WindowsVirtualMachineObservation struct {
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The unique immutable identifier of the Virtual Machine.
@@ -288,6 +339,7 @@ type WindowsVirtualMachineParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The Username associated with the local administrator on this Virtual Machine. Changing this forces a new resource to be created.

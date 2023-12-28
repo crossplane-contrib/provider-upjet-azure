@@ -19,6 +19,18 @@ import (
 
 type KeyVaultSASTokenInitParameters struct {
 
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceKeyVault
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
+
 	// Specifies the secret name in Azure Key Vault that stores the SAS token.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
 }
@@ -55,6 +67,7 @@ type KeyVaultSASTokenParameters struct {
 type LinkedServiceAzureBlobStorageInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -73,6 +86,7 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 	KeyVaultSASToken []KeyVaultSASTokenInitParameters `json:"keyVaultSasToken,omitempty" tf:"key_vault_sas_token,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Azure Blob Storage account.
@@ -97,6 +111,7 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 type LinkedServiceAzureBlobStorageObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -121,6 +136,7 @@ type LinkedServiceAzureBlobStorageObservation struct {
 	KeyVaultSASToken []KeyVaultSASTokenObservation `json:"keyVaultSasToken,omitempty" tf:"key_vault_sas_token,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Azure Blob Storage account.
@@ -146,6 +162,7 @@ type LinkedServiceAzureBlobStorageParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -188,6 +205,7 @@ type LinkedServiceAzureBlobStorageParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The SAS URI. Conflicts with connection_string_insecure, connection_string and service_endpoint.
@@ -224,6 +242,18 @@ type LinkedServiceAzureBlobStorageParameters struct {
 }
 
 type ServicePrincipalLinkedKeyVaultKeyInitParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceKeyVault
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores the Service Principal key.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`

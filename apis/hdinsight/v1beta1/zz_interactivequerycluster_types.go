@@ -279,6 +279,7 @@ type InteractiveQueryClusterInitParameters struct {
 	TLSMinVersion *string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
 
 	// A map of Tags which should be assigned to this HDInsight Interactive Query Cluster.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight Interactive Query Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
@@ -568,6 +569,7 @@ type InteractiveQueryClusterObservation struct {
 	TLSMinVersion *string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
 
 	// A map of Tags which should be assigned to this HDInsight Interactive Query Cluster.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight Interactive Query Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
@@ -655,6 +657,7 @@ type InteractiveQueryClusterParameters struct {
 
 	// A map of Tags which should be assigned to this HDInsight Interactive Query Cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight Interactive Query Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
@@ -665,10 +668,24 @@ type InteractiveQueryClusterParameters struct {
 type InteractiveQueryClusterRolesHeadNodeInitParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	ScriptActions []RolesHeadNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -683,6 +700,7 @@ type InteractiveQueryClusterRolesHeadNodeInitParameters struct {
 type InteractiveQueryClusterRolesHeadNodeObservation struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -709,6 +727,7 @@ type InteractiveQueryClusterRolesHeadNodeParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -787,10 +806,24 @@ type InteractiveQueryClusterRolesWorkerNodeInitParameters struct {
 	Autoscale []RolesWorkerNodeAutoscaleInitParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	ScriptActions []InteractiveQueryClusterRolesWorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
@@ -811,6 +844,7 @@ type InteractiveQueryClusterRolesWorkerNodeObservation struct {
 	Autoscale []RolesWorkerNodeAutoscaleObservation `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -844,6 +878,7 @@ type InteractiveQueryClusterRolesWorkerNodeParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -923,10 +958,24 @@ type InteractiveQueryClusterRolesWorkerNodeScriptActionsParameters struct {
 type InteractiveQueryClusterRolesZookeeperNodeInitParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	ScriptActions []InteractiveQueryClusterRolesZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -941,6 +990,7 @@ type InteractiveQueryClusterRolesZookeeperNodeInitParameters struct {
 type InteractiveQueryClusterRolesZookeeperNodeObservation struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -967,6 +1017,7 @@ type InteractiveQueryClusterRolesZookeeperNodeParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -1045,6 +1096,7 @@ type InteractiveQueryClusterSecurityProfileInitParameters struct {
 	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
+	// +listType=set
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -1054,6 +1106,7 @@ type InteractiveQueryClusterSecurityProfileInitParameters struct {
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
+	// +listType=set
 	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
@@ -1066,6 +1119,7 @@ type InteractiveQueryClusterSecurityProfileObservation struct {
 	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
+	// +listType=set
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -1075,6 +1129,7 @@ type InteractiveQueryClusterSecurityProfileObservation struct {
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
+	// +listType=set
 	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
@@ -1089,6 +1144,7 @@ type InteractiveQueryClusterSecurityProfileParameters struct {
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -1105,6 +1161,7 @@ type InteractiveQueryClusterSecurityProfileParameters struct {
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LdapsUrls []*string `json:"ldapsUrls" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
@@ -1165,6 +1222,19 @@ type InteractiveQueryClusterStorageAccountInitParameters struct {
 
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// The ID of the Storage Container. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
+
+	// Reference to a Container in storage to populate storageContainerId.
+	// +kubebuilder:validation:Optional
+	StorageContainerIDRef *v1.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate storageContainerId.
+	// +kubebuilder:validation:Optional
+	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
 	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`

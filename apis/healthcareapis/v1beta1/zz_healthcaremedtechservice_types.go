@@ -18,6 +18,8 @@ import (
 )
 
 type HealthcareMedtechServiceIdentityInitParameters struct {
+
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
@@ -25,6 +27,8 @@ type HealthcareMedtechServiceIdentityInitParameters struct {
 }
 
 type HealthcareMedtechServiceIdentityObservation struct {
+
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this System Assigned Managed Service Identity.
@@ -40,6 +44,7 @@ type HealthcareMedtechServiceIdentityObservation struct {
 type HealthcareMedtechServiceIdentityParameters struct {
 
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Healthcare Med Tech Service. Possible values are SystemAssigned.
@@ -52,6 +57,42 @@ type HealthcareMedtechServiceInitParameters struct {
 	// Specifies the Device Mappings of the Med Tech Service.
 	DeviceMappingJSON *string `json:"deviceMappingJson,omitempty" tf:"device_mapping_json,omitempty"`
 
+	// Specifies the Consumer Group of the Event Hub to connect to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.ConsumerGroup
+	EventHubConsumerGroupName *string `json:"eventhubConsumerGroupName,omitempty" tf:"eventhub_consumer_group_name,omitempty"`
+
+	// Reference to a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameRef *v1.Reference `json:"eventhubConsumerGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ConsumerGroup in eventhub to populate eventhubConsumerGroupName.
+	// +kubebuilder:validation:Optional
+	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
+
+	// Specifies the name of the Event Hub to connect to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
+
+	// Specifies the namespace name of the Event Hub to connect to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	EventHubNamespaceName *string `json:"eventhubNamespaceName,omitempty" tf:"eventhub_namespace_name,omitempty"`
+
+	// Reference to a EventHubNamespace in eventhub to populate eventhubNamespaceName.
+	// +kubebuilder:validation:Optional
+	EventHubNamespaceNameRef *v1.Reference `json:"eventhubNamespaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHubNamespace in eventhub to populate eventhubNamespaceName.
+	// +kubebuilder:validation:Optional
+	EventHubNamespaceNameSelector *v1.Selector `json:"eventhubNamespaceNameSelector,omitempty" tf:"-"`
+
 	// An identity block as defined below.
 	Identity []HealthcareMedtechServiceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -59,6 +100,7 @@ type HealthcareMedtechServiceInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare Med Tech Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -86,6 +128,7 @@ type HealthcareMedtechServiceObservation struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare Med Tech Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare Med Tech Service should exist. Changing this forces a new Healthcare Med Tech Service to be created.
@@ -147,6 +190,7 @@ type HealthcareMedtechServiceParameters struct {
 
 	// A mapping of tags to assign to the Healthcare Med Tech Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare Med Tech Service should exist. Changing this forces a new Healthcare Med Tech Service to be created.

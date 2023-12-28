@@ -44,6 +44,7 @@ type AppServicePlanInitParameters struct {
 	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies if the App Service Plan should be Zone Redundant. Changing this forces a new resource to be created.
@@ -86,6 +87,7 @@ type AppServicePlanObservation struct {
 	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies if the App Service Plan should be Zone Redundant. Changing this forces a new resource to be created.
@@ -141,6 +143,7 @@ type AppServicePlanParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies if the App Service Plan should be Zone Redundant. Changing this forces a new resource to be created.

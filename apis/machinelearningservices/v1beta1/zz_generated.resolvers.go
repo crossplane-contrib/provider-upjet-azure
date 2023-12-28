@@ -59,6 +59,38 @@ func (mg *ComputeCluster) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.SubnetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MachineLearningWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MachineLearningWorkspaceIDRef,
+		Selector:     mg.Spec.InitProvider.MachineLearningWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MachineLearningWorkspaceID")
+	}
+	mg.Spec.InitProvider.MachineLearningWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MachineLearningWorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SubnetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.SubnetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetResourceID")
+	}
+	mg.Spec.InitProvider.SubnetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -101,6 +133,22 @@ func (mg *ComputeInstance) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.SubnetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SubnetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.SubnetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubnetList{},
+			Managed: &v1beta1.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetResourceID")
+	}
+	mg.Spec.InitProvider.SubnetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -142,6 +190,22 @@ func (mg *SynapseSpark) ResolveReferences(ctx context.Context, c client.Reader) 
 	}
 	mg.Spec.ForProvider.SynapseSparkPoolID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SynapseSparkPoolIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SynapseSparkPoolID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SynapseSparkPoolIDRef,
+		Selector:     mg.Spec.InitProvider.SynapseSparkPoolIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SparkPoolList{},
+			Managed: &v1beta11.SparkPool{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SynapseSparkPoolID")
+	}
+	mg.Spec.InitProvider.SynapseSparkPoolID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SynapseSparkPoolIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -286,6 +350,124 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	}
 	mg.Spec.ForProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ApplicationInsightsID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ApplicationInsightsIDRef,
+		Selector:     mg.Spec.InitProvider.ApplicationInsightsIDSelector,
+		To: reference.To{
+			List:    &v1beta12.ApplicationInsightsList{},
+			Managed: &v1beta12.ApplicationInsights{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ApplicationInsightsID")
+	}
+	mg.Spec.InitProvider.ApplicationInsightsID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ApplicationInsightsIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].KeyID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Encryption[i3].KeyIDRef,
+			Selector:     mg.Spec.InitProvider.Encryption[i3].KeyIDSelector,
+			To: reference.To{
+				List:    &v1beta13.KeyList{},
+				Managed: &v1beta13.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].KeyID")
+		}
+		mg.Spec.InitProvider.Encryption[i3].KeyID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].KeyIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].KeyVaultID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Encryption[i3].KeyVaultIDRef,
+			Selector:     mg.Spec.InitProvider.Encryption[i3].KeyVaultIDSelector,
+			To: reference.To{
+				List:    &v1beta13.VaultList{},
+				Managed: &v1beta13.Vault{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].KeyVaultID")
+		}
+		mg.Spec.InitProvider.Encryption[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].KeyVaultIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].UserAssignedIdentityID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Encryption[i3].UserAssignedIdentityIDRef,
+			Selector:     mg.Spec.InitProvider.Encryption[i3].UserAssignedIdentityIDSelector,
+			To: reference.To{
+				List:    &v1beta14.UserAssignedIdentityList{},
+				Managed: &v1beta14.UserAssignedIdentity{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].UserAssignedIdentityID")
+		}
+		mg.Spec.InitProvider.Encryption[i3].UserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].UserAssignedIdentityIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultIDSelector,
+		To: reference.To{
+			List:    &v1beta13.VaultList{},
+			Managed: &v1beta13.Vault{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultID")
+	}
+	mg.Spec.InitProvider.KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrimaryUserAssignedIdentity),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PrimaryUserAssignedIdentityRef,
+		Selector:     mg.Spec.InitProvider.PrimaryUserAssignedIdentitySelector,
+		To: reference.To{
+			List:    &v1beta14.UserAssignedIdentityList{},
+			Managed: &v1beta14.UserAssignedIdentity{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrimaryUserAssignedIdentity")
+	}
+	mg.Spec.InitProvider.PrimaryUserAssignedIdentity = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrimaryUserAssignedIdentityRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageAccountIDRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountIDSelector,
+		To: reference.To{
+			List:    &v1beta16.AccountList{},
+			Managed: &v1beta16.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountID")
+	}
+	mg.Spec.InitProvider.StorageAccountID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }

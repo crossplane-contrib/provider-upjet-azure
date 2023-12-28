@@ -168,6 +168,7 @@ type EventHubObservation struct {
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The identifiers for partitions created for Event Hubs.
+	// +listType=set
 	PartitionIds []*string `json:"partitionIds,omitempty" tf:"partition_ids,omitempty"`
 
 	// The name of the resource group in which the EventHub's parent Namespace exists. Changing this forces a new resource to be created.

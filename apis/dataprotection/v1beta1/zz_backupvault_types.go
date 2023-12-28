@@ -32,6 +32,7 @@ type BackupVaultInitParameters struct {
 	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -56,6 +57,7 @@ type BackupVaultObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -92,6 +94,7 @@ type BackupVaultParameters struct {
 
 	// A mapping of tags which should be assigned to the Backup Vault.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

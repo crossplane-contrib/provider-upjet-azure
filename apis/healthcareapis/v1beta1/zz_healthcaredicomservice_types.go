@@ -45,6 +45,7 @@ type HealthcareDICOMServiceInitParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare DICOM Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -71,6 +72,7 @@ type HealthcareDICOMServiceObservation struct {
 	ServiceURL *string `json:"serviceUrl,omitempty" tf:"service_url,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare DICOM Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
@@ -93,6 +95,7 @@ type HealthcareDICOMServiceParameters struct {
 
 	// A mapping of tags to assign to the Healthcare DICOM Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare DICOM Service should exist. Changing this forces a new Healthcare DICOM Service to be created.
@@ -113,6 +116,7 @@ type HealthcareDICOMServiceParameters struct {
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Identity IDs which should be assigned to this Healthcare DICOM service.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of identity used for the Healthcare DICOM service. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. If UserAssigned is set, an identity_ids must be set as well.
@@ -122,6 +126,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Assigned Identity IDs which should be assigned to this Healthcare DICOM service.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The ID of the Healthcare DICOM Service.
@@ -138,6 +143,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Identity IDs which should be assigned to this Healthcare DICOM service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of identity used for the Healthcare DICOM service. Possible values are UserAssigned, SystemAssigned and SystemAssigned, UserAssigned. If UserAssigned is set, an identity_ids must be set as well.

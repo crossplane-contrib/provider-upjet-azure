@@ -20,7 +20,21 @@ import (
 type APIServerAccessProfileInitParameters struct {
 
 	// Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].
+	// +listType=set
 	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
+
+	// The ID of the Subnet where the API server endpoint is delegated to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Should API Server VNet Integration be enabled? For more details please visit Use API Server VNet Integration.
 	VnetIntegrationEnabled *bool `json:"vnetIntegrationEnabled,omitempty" tf:"vnet_integration_enabled,omitempty"`
@@ -29,6 +43,7 @@ type APIServerAccessProfileInitParameters struct {
 type APIServerAccessProfileObservation struct {
 
 	// Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].
+	// +listType=set
 	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
 
 	// The ID of the Subnet where the API server endpoint is delegated to.
@@ -42,6 +57,7 @@ type APIServerAccessProfileParameters struct {
 
 	// Set of authorized IP ranges to allow access to API server, e.g. ["198.51.100.0/24"].
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
 
 	// The ID of the Subnet where the API server endpoint is delegated to.
@@ -64,6 +80,18 @@ type APIServerAccessProfileParameters struct {
 }
 
 type AciConnectorLinuxInitParameters struct {
+
+	// The subnet name for the virtual nodes to run.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetName.
+	// +kubebuilder:validation:Optional
+	SubnetNameRef *v1.Reference `json:"subnetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetName.
+	// +kubebuilder:validation:Optional
+	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 }
 
 type AciConnectorLinuxObservation struct {
@@ -97,6 +125,7 @@ type AllowedInitParameters struct {
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
 	// An array of hour slots in a day. For example, specifying 1 will allow maintenance from 1:00am to 2:00am. Specifying 1, 2 will allow maintenance from 1:00am to 3:00m. Possible values are between 0 and 23.
+	// +listType=set
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 }
 
@@ -106,6 +135,7 @@ type AllowedObservation struct {
 	Day *string `json:"day,omitempty" tf:"day,omitempty"`
 
 	// An array of hour slots in a day. For example, specifying 1 will allow maintenance from 1:00am to 2:00am. Specifying 1, 2 will allow maintenance from 1:00am to 3:00m. Possible values are between 0 and 23.
+	// +listType=set
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 }
 
@@ -117,6 +147,7 @@ type AllowedParameters struct {
 
 	// An array of hour slots in a day. For example, specifying 1 will allow maintenance from 1:00am to 2:00am. Specifying 1, 2 will allow maintenance from 1:00am to 3:00m. Possible values are between 0 and 23.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Hours []*float64 `json:"hours" tf:"hours,omitempty"`
 }
 
@@ -460,6 +491,7 @@ type DefaultNodePoolInitParameters struct {
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// A map of Kubernetes labels which should be applied to nodes in the Default Node Pool.
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A node_network_profile block as documented below.
@@ -486,6 +518,19 @@ type DefaultNodePoolInitParameters struct {
 	// Specifies the OS SKU used by the agent pool. Possible values include: Ubuntu, CBLMariner, Mariner, Windows2019, Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
+	// The ID of the Subnet where the pods in the default Node Pool should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate podSubnetId.
+	// +kubebuilder:validation:Optional
+	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate podSubnetId.
+	// +kubebuilder:validation:Optional
+	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
+
 	// The ID of the Proximity Placement Group. Changing this forces a new resource to be created.
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
 
@@ -493,6 +538,7 @@ type DefaultNodePoolInitParameters struct {
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
 	// A mapping of tags to assign to the Node Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing.
@@ -510,10 +556,24 @@ type DefaultNodePoolInitParameters struct {
 	// The size of the Virtual Machine, such as Standard_DS2_v2.
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
+	// The ID of a Subnet where the Kubernetes Node Pool should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate vnetSubnetId.
+	// +kubebuilder:validation:Optional
+	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate vnetSubnetId.
+	// +kubebuilder:validation:Optional
+	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
+
 	// Specifies the workload runtime used by the node pool. Possible values are OCIContainer and KataMshvVmIsolation.
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster should be located. Changing this forces a new Kubernetes Cluster to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -568,6 +628,7 @@ type DefaultNodePoolObservation struct {
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// A map of Kubernetes labels which should be applied to nodes in the Default Node Pool.
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A node_network_profile block as documented below.
@@ -604,6 +665,7 @@ type DefaultNodePoolObservation struct {
 	ScaleDownMode *string `json:"scaleDownMode,omitempty" tf:"scale_down_mode,omitempty"`
 
 	// A mapping of tags to assign to the Node Pool.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing.
@@ -628,6 +690,7 @@ type DefaultNodePoolObservation struct {
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster should be located. Changing this forces a new Kubernetes Cluster to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -699,6 +762,7 @@ type DefaultNodePoolParameters struct {
 
 	// A map of Kubernetes labels which should be applied to nodes in the Default Node Pool.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A node_network_profile block as documented below.
@@ -757,6 +821,7 @@ type DefaultNodePoolParameters struct {
 
 	// A mapping of tags to assign to the Node Pool.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the name of the temporary node pool used to cycle the default node pool for VM resizing.
@@ -799,6 +864,7 @@ type DefaultNodePoolParameters struct {
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster should be located. Changing this forces a new Kubernetes Cluster to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -840,6 +906,7 @@ type HTTPProxyConfigInitParameters struct {
 	HTTPSProxy *string `json:"httpsProxy,omitempty" tf:"https_proxy,omitempty"`
 
 	// The list of domains that will not use the proxy for communication.
+	// +listType=set
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 }
 
@@ -852,6 +919,7 @@ type HTTPProxyConfigObservation struct {
 	HTTPSProxy *string `json:"httpsProxy,omitempty" tf:"https_proxy,omitempty"`
 
 	// The list of domains that will not use the proxy for communication.
+	// +listType=set
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 }
 
@@ -867,6 +935,7 @@ type HTTPProxyConfigParameters struct {
 
 	// The list of domains that will not use the proxy for communication.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
 
 	// The base64 encoded alternative CA certificate content in PEM format.
@@ -877,6 +946,7 @@ type HTTPProxyConfigParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned or UserAssigned.
@@ -886,6 +956,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -902,6 +973,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Kubernetes Cluster.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Kubernetes Cluster. Possible values are SystemAssigned or UserAssigned.
@@ -937,6 +1009,19 @@ type IngressApplicationGatewayInitParameters struct {
 
 	// The subnet CIDR to be used to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
 	SubnetCidr *string `json:"subnetCidr,omitempty" tf:"subnet_cidr,omitempty"`
+
+	// The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type IngressApplicationGatewayObservation struct {
@@ -1083,6 +1168,7 @@ type KubeConfigParameters struct {
 type KubeletConfigInitParameters struct {
 
 	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
 	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
@@ -1116,6 +1202,7 @@ type KubeletConfigInitParameters struct {
 type KubeletConfigObservation struct {
 
 	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
 	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
@@ -1150,6 +1237,7 @@ type KubeletConfigParameters struct {
 
 	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
 	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
@@ -1234,6 +1322,7 @@ type KubernetesClusterInitParameters struct {
 	APIServerAccessProfile []APIServerAccessProfileInitParameters `json:"apiServerAccessProfile,omitempty" tf:"api_server_access_profile,omitempty"`
 
 	// Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
+	// +listType=set
 	APIServerAuthorizedIPRanges []*string `json:"apiServerAuthorizedIpRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
 
 	// A aci_connector_linux block as defined below. For more details, please visit Create and configure an AKS cluster to use virtual nodes.
@@ -1340,6 +1429,19 @@ type KubernetesClusterInitParameters struct {
 	// Specifies whether a Public FQDN for this Private Cluster should be added. Defaults to false.
 	PrivateClusterPublicFqdnEnabled *bool `json:"privateClusterPublicFqdnEnabled,omitempty" tf:"private_cluster_public_fqdn_enabled,omitempty"`
 
+	// Either the ID of Private DNS Zone which should be delegated to this Cluster, System to have AKS manage this or None. In case of None you will need to bring your own DNS server and set up resolving, otherwise, the cluster will have issues after provisioning. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PrivateDNSZone
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
+
+	// Reference to a PrivateDNSZone in network to populate privateDnsZoneId.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIDRef *v1.Reference `json:"privateDnsZoneIdRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
+	// +kubebuilder:validation:Optional
+	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+
 	// Whether public network access is allowed for this Kubernetes Cluster. Defaults to true. Changing this forces a new resource to be created.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -1362,6 +1464,7 @@ type KubernetesClusterInitParameters struct {
 	StorageProfile []StorageProfileInitParameters `json:"storageProfile,omitempty" tf:"storage_profile,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A web_app_routing block as defined below.
@@ -1383,6 +1486,7 @@ type KubernetesClusterObservation struct {
 	APIServerAccessProfile []APIServerAccessProfileObservation `json:"apiServerAccessProfile,omitempty" tf:"api_server_access_profile,omitempty"`
 
 	// Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
+	// +listType=set
 	APIServerAuthorizedIPRanges []*string `json:"apiServerAuthorizedIpRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
 
 	// A aci_connector_linux block as defined below. For more details, please visit Create and configure an AKS cluster to use virtual nodes.
@@ -1538,6 +1642,7 @@ type KubernetesClusterObservation struct {
 	StorageProfile []StorageProfileObservation `json:"storageProfile,omitempty" tf:"storage_profile,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A web_app_routing block as defined below.
@@ -1561,6 +1666,7 @@ type KubernetesClusterParameters struct {
 
 	// Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	APIServerAuthorizedIPRanges []*string `json:"apiServerAuthorizedIpRanges,omitempty" tf:"api_server_authorized_ip_ranges,omitempty"`
 
 	// A aci_connector_linux block as defined below. For more details, please visit Create and configure an AKS cluster to use virtual nodes.
@@ -1759,6 +1865,7 @@ type KubernetesClusterParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A web_app_routing block as defined below.
@@ -1868,9 +1975,11 @@ type LoadBalancerProfileInitParameters struct {
 	ManagedOutboundIPv6Count *float64 `json:"managedOutboundIpv6Count,omitempty" tf:"managed_outbound_ipv6_count,omitempty"`
 
 	// The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.
+	// +listType=set
 	OutboundIPAddressIds []*string `json:"outboundIpAddressIds,omitempty" tf:"outbound_ip_address_ids,omitempty"`
 
 	// The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.
+	// +listType=set
 	OutboundIPPrefixIds []*string `json:"outboundIpPrefixIds,omitempty" tf:"outbound_ip_prefix_ids,omitempty"`
 
 	// Number of desired SNAT port for each VM in the clusters load balancer. Must be between 0 and 64000 inclusive. Defaults to 0.
@@ -1880,6 +1989,7 @@ type LoadBalancerProfileInitParameters struct {
 type LoadBalancerProfileObservation struct {
 
 	// The outcome (resource IDs) of the specified arguments.
+	// +listType=set
 	EffectiveOutboundIps []*string `json:"effectiveOutboundIps,omitempty" tf:"effective_outbound_ips,omitempty"`
 
 	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 4.
@@ -1892,9 +2002,11 @@ type LoadBalancerProfileObservation struct {
 	ManagedOutboundIPv6Count *float64 `json:"managedOutboundIpv6Count,omitempty" tf:"managed_outbound_ipv6_count,omitempty"`
 
 	// The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.
+	// +listType=set
 	OutboundIPAddressIds []*string `json:"outboundIpAddressIds,omitempty" tf:"outbound_ip_address_ids,omitempty"`
 
 	// The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.
+	// +listType=set
 	OutboundIPPrefixIds []*string `json:"outboundIpPrefixIds,omitempty" tf:"outbound_ip_prefix_ids,omitempty"`
 
 	// Number of desired SNAT port for each VM in the clusters load balancer. Must be between 0 and 64000 inclusive. Defaults to 0.
@@ -1917,10 +2029,12 @@ type LoadBalancerProfileParameters struct {
 
 	// The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OutboundIPAddressIds []*string `json:"outboundIpAddressIds,omitempty" tf:"outbound_ip_address_ids,omitempty"`
 
 	// The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OutboundIPPrefixIds []*string `json:"outboundIpPrefixIds,omitempty" tf:"outbound_ip_prefix_ids,omitempty"`
 
 	// Number of desired SNAT port for each VM in the clusters load balancer. Must be between 0 and 64000 inclusive. Defaults to 0.
@@ -2017,6 +2131,7 @@ type NATGatewayProfileInitParameters struct {
 type NATGatewayProfileObservation struct {
 
 	// The outcome (resource IDs) of the specified arguments.
+	// +listType=set
 	EffectiveOutboundIps []*string `json:"effectiveOutboundIps,omitempty" tf:"effective_outbound_ips,omitempty"`
 
 	// Desired outbound flow idle timeout in minutes for the cluster load balancer. Must be between 4 and 120 inclusive. Defaults to 4.
@@ -2209,12 +2324,14 @@ type NetworkProfileParameters struct {
 type NodeNetworkProfileInitParameters struct {
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
+	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
 type NodeNetworkProfileObservation struct {
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
+	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
@@ -2222,6 +2339,7 @@ type NodeNetworkProfileParameters struct {
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 

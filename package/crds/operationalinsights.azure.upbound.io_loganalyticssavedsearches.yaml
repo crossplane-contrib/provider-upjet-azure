@@ -86,6 +86,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   logAnalyticsWorkspaceId:
                     description: Specifies the ID of the Log Analytics Workspace that
                       the Saved Search will be associated with. Changing this forces
@@ -177,6 +178,7 @@ spec:
                       Logs Analytics Saved Search. Changing this forces a new resource
                       to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -208,6 +210,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   query:
                     description: The query expression for the saved search. Changing
                       this forces a new resource to be created.
@@ -219,6 +222,7 @@ spec:
                       Logs Analytics Saved Search. Changing this forces a new resource
                       to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -417,6 +421,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The Log Analytics Saved Search ID.
                     type: string
@@ -436,6 +441,7 @@ spec:
                       Logs Analytics Saved Search. Changing this forces a new resource
                       to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

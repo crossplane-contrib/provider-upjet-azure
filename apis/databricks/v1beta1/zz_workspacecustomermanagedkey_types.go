@@ -18,6 +18,19 @@ import (
 )
 
 type WorkspaceCustomerManagedKeyInitParameters struct {
+
+	// The ID of the Key Vault.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceCustomerManagedKeyObservation struct {

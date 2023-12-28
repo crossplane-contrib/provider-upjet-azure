@@ -490,6 +490,7 @@ type WindowsWebAppSlotAuthSettingsInitParameters struct {
 
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App Slot.
@@ -600,6 +601,7 @@ type WindowsWebAppSlotAuthSettingsObservation struct {
 
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
+	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App Slot.
@@ -659,6 +661,7 @@ type WindowsWebAppSlotAuthSettingsParameters struct {
 	// Specifies a map of login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// Specifies a map of Login Parameters to send to the OpenID Connect authorization endpoint when a user logs in.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App Slot.
@@ -802,6 +805,7 @@ type WindowsWebAppSlotAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
+	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
@@ -853,6 +857,7 @@ type WindowsWebAppSlotAuthSettingsV2ActiveDirectoryV2Observation struct {
 
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
+	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
@@ -914,6 +919,7 @@ type WindowsWebAppSlotAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// A map of key-value pairs to send to the Authorisation Endpoint when a user logs in.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
@@ -1938,6 +1944,7 @@ type WindowsWebAppSlotConnectionStringParameters struct {
 type WindowsWebAppSlotIdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Windows Web App Slot.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Web App Slot. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -1947,6 +1954,7 @@ type WindowsWebAppSlotIdentityInitParameters struct {
 type WindowsWebAppSlotIdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Windows Web App Slot.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -1963,6 +1971,7 @@ type WindowsWebAppSlotIdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Windows Web App Slot.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Windows Web App Slot. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -1973,6 +1982,7 @@ type WindowsWebAppSlotIdentityParameters struct {
 type WindowsWebAppSlotInitParameters struct {
 
 	// A map of key-value pairs of App Settings.
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// An auth_settings block as defined below.
@@ -2025,7 +2035,21 @@ type WindowsWebAppSlotInitParameters struct {
 	StorageAccount []WindowsWebAppSlotStorageAccountInitParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 
 	// A mapping of tags which should be assigned to the Windows Web App Slot.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1` on the App in `app_settings`.
@@ -2236,6 +2260,7 @@ type WindowsWebAppSlotObservation struct {
 	AppServiceID *string `json:"appServiceId,omitempty" tf:"app_service_id,omitempty"`
 
 	// A map of key-value pairs of App Settings.
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// An auth_settings block as defined below.
@@ -2312,6 +2337,7 @@ type WindowsWebAppSlotObservation struct {
 	StorageAccount []WindowsWebAppSlotStorageAccountObservation `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
 
 	// A mapping of tags which should be assigned to the Windows Web App Slot.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
@@ -2340,6 +2366,7 @@ type WindowsWebAppSlotParameters struct {
 
 	// A map of key-value pairs of App Settings.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// An auth_settings block as defined below.
@@ -2409,6 +2436,7 @@ type WindowsWebAppSlotParameters struct {
 
 	// A mapping of tags which should be assigned to the Windows Web App Slot.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
@@ -2708,6 +2736,7 @@ type WindowsWebAppSlotSiteConfigCorsInitParameters struct {
 
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Whether CORS requests with credentials are allowed. Defaults to false
@@ -2719,6 +2748,7 @@ type WindowsWebAppSlotSiteConfigCorsObservation struct {
 
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Whether CORS requests with credentials are allowed. Defaults to false
@@ -2731,6 +2761,7 @@ type WindowsWebAppSlotSiteConfigCorsParameters struct {
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// Whether CORS requests with credentials are allowed. Defaults to false
@@ -2812,6 +2843,20 @@ type WindowsWebAppSlotSiteConfigIPRestrictionInitParameters struct {
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type WindowsWebAppSlotSiteConfigIPRestrictionObservation struct {
@@ -3296,6 +3341,20 @@ type WindowsWebAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 	// The Service Tag used for this IP Restriction.
 	// The Service Tag used for this IP Restriction.
 	ServiceTag *string `json:"serviceTag,omitempty" tf:"service_tag,omitempty"`
+
+	// The subnet id which will be used by this Web App Slot for regional virtual network integration.
+	// The Virtual Network Subnet ID used for this IP Restriction.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDRef *v1.Reference `json:"virtualNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 }
 
 type WindowsWebAppSlotSiteConfigScmIPRestrictionObservation struct {

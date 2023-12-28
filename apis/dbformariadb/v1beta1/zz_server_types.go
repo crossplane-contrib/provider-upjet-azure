@@ -31,6 +31,19 @@ type ServerInitParameters struct {
 	// The creation mode. Can be used to restore or replicate existing servers. Possible values are Default, Replica, GeoRestore, and PointInTimeRestore. Defaults to Default.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
+	// For creation modes other than Default, the source server ID to use.
+	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	CreationSourceServerID *string `json:"creationSourceServerId,omitempty" tf:"creation_source_server_id,omitempty"`
+
+	// Reference to a Server to populate creationSourceServerId.
+	// +kubebuilder:validation:Optional
+	CreationSourceServerIDRef *v1.Reference `json:"creationSourceServerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Server to populate creationSourceServerId.
+	// +kubebuilder:validation:Optional
+	CreationSourceServerIDSelector *v1.Selector `json:"creationSourceServerIdSelector,omitempty" tf:"-"`
+
 	// Turn Geo-redundant server backups on/off. This allows you to choose between locally redundant or geo-redundant backup storage in the General Purpose and Memory Optimized tiers. When the backups are stored in geo-redundant backup storage, they are not only stored within the region in which your server is hosted, but are also replicated to a paired data center. This provides better protection and ability to restore your server in a different region in the event of a disaster. This is not supported for the Basic tier.
 	GeoRedundantBackupEnabled *bool `json:"geoRedundantBackupEnabled,omitempty" tf:"geo_redundant_backup_enabled,omitempty"`
 
@@ -56,6 +69,7 @@ type ServerInitParameters struct {
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the version of MariaDB to use. Possible values are 10.2 and 10.3. Changing this forces a new resource to be created.
@@ -113,6 +127,7 @@ type ServerObservation struct {
 	StorageMb *float64 `json:"storageMb,omitempty" tf:"storage_mb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the version of MariaDB to use. Possible values are 10.2 and 10.3. Changing this forces a new resource to be created.
@@ -202,6 +217,7 @@ type ServerParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the version of MariaDB to use. Possible values are 10.2 and 10.3. Changing this forces a new resource to be created.

@@ -29,6 +29,7 @@ type SpacecraftInitParameters struct {
 	NoradID *string `json:"noradId,omitempty" tf:"norad_id,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Title of the two line elements (TLE).
@@ -115,6 +116,7 @@ type SpacecraftObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Title of the two line elements (TLE).
@@ -153,6 +155,7 @@ type SpacecraftParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Title of the two line elements (TLE).

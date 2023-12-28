@@ -20,6 +20,7 @@ import (
 type LinkedServiceSynapseInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Synapse.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Synapse.
@@ -38,10 +39,23 @@ type LinkedServiceSynapseInitParameters struct {
 	KeyVaultPassword []LinkedServiceSynapseKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service Synapse.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
 type LinkedServiceSynapseKeyVaultPasswordInitParameters struct {
+
+	// Specifies the name of an existing Key Vault Data Factory Linked Service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceKeyVault
+	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
+
+	// Reference to a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameRef *v1.Reference `json:"linkedServiceNameRef,omitempty" tf:"-"`
+
+	// Selector for a LinkedServiceKeyVault in datafactory to populate linkedServiceName.
+	// +kubebuilder:validation:Optional
+	LinkedServiceNameSelector *v1.Selector `json:"linkedServiceNameSelector,omitempty" tf:"-"`
 
 	// Specifies the secret name in Azure Key Vault that stores Synapse password.
 	SecretName *string `json:"secretName,omitempty" tf:"secret_name,omitempty"`
@@ -79,6 +93,7 @@ type LinkedServiceSynapseKeyVaultPasswordParameters struct {
 type LinkedServiceSynapseObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Synapse.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Synapse.
@@ -103,6 +118,7 @@ type LinkedServiceSynapseObservation struct {
 	KeyVaultPassword []LinkedServiceSynapseKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service Synapse.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -110,6 +126,7 @@ type LinkedServiceSynapseParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Synapse.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Synapse.
@@ -148,6 +165,7 @@ type LinkedServiceSynapseParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service Synapse.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 

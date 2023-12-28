@@ -19,6 +19,18 @@ import (
 
 type ReferenceInputMSSQLInitParameters struct {
 
+	// The MS SQL database name where the reference data exists.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLDatabase
+	Database *string `json:"database,omitempty" tf:"database,omitempty"`
+
+	// Reference to a MSSQLDatabase in sql to populate database.
+	// +kubebuilder:validation:Optional
+	DatabaseRef *v1.Reference `json:"databaseRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLDatabase in sql to populate database.
+	// +kubebuilder:validation:Optional
+	DatabaseSelector *v1.Selector `json:"databaseSelector,omitempty" tf:"-"`
+
 	// The query used to retrieve incremental changes in the reference data from the MS SQL database. Cannot be set when refresh_type is Static.
 	DeltaSnapshotQuery *string `json:"deltaSnapshotQuery,omitempty" tf:"delta_snapshot_query,omitempty"`
 
@@ -30,6 +42,19 @@ type ReferenceInputMSSQLInitParameters struct {
 
 	// Defines whether and how the reference data should be refreshed. Accepted values are Static, RefreshPeriodicallyWithFull and RefreshPeriodicallyWithDelta.
 	RefreshType *string `json:"refreshType,omitempty" tf:"refresh_type,omitempty"`
+
+	// The fully qualified domain name of the MS SQL server.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLServer
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("fully_qualified_domain_name",true)
+	Server *string `json:"server,omitempty" tf:"server,omitempty"`
+
+	// Reference to a MSSQLServer in sql to populate server.
+	// +kubebuilder:validation:Optional
+	ServerRef *v1.Reference `json:"serverRef,omitempty" tf:"-"`
+
+	// Selector for a MSSQLServer in sql to populate server.
+	// +kubebuilder:validation:Optional
+	ServerSelector *v1.Selector `json:"serverSelector,omitempty" tf:"-"`
 
 	// The name of the table in the Azure SQL database.
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`

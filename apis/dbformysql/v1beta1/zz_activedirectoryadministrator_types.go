@@ -25,6 +25,30 @@ type ActiveDirectoryAdministratorInitParameters struct {
 	// The ID of the principal to set as the server administrator. For a managed identity this should be the Client ID of the identity.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
+	// The name of the resource group for the MySQL server. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The name of the MySQL Server on which to set the administrator. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Server
+	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
+
+	// Reference to a Server in dbformysql to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
+
+	// Selector for a Server in dbformysql to populate serverName.
+	// +kubebuilder:validation:Optional
+	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
+
 	// The Azure Tenant ID
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }

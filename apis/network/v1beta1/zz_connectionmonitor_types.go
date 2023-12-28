@@ -29,9 +29,11 @@ type ConnectionMonitorInitParameters struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
+	// +listType=set
 	OutputWorkspaceResourceIds []*string `json:"outputWorkspaceResourceIds,omitempty" tf:"output_workspace_resource_ids,omitempty"`
 
 	// A mapping of tags which should be assigned to the Network Connection Monitor.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A test_configuration block as defined below.
@@ -59,9 +61,11 @@ type ConnectionMonitorObservation struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
+	// +listType=set
 	OutputWorkspaceResourceIds []*string `json:"outputWorkspaceResourceIds,omitempty" tf:"output_workspace_resource_ids,omitempty"`
 
 	// A mapping of tags which should be assigned to the Network Connection Monitor.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A test_configuration block as defined below.
@@ -101,10 +105,12 @@ type ConnectionMonitorParameters struct {
 
 	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	OutputWorkspaceResourceIds []*string `json:"outputWorkspaceResourceIds,omitempty" tf:"output_workspace_resource_ids,omitempty"`
 
 	// A mapping of tags which should be assigned to the Network Connection Monitor.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A test_configuration block as defined below.
@@ -125,12 +131,14 @@ type EndpointInitParameters struct {
 	CoverageLevel *string `json:"coverageLevel,omitempty" tf:"coverage_level,omitempty"`
 
 	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be excluded to the Network Connection Monitor endpoint.
+	// +listType=set
 	ExcludedIPAddresses []*string `json:"excludedIpAddresses,omitempty" tf:"excluded_ip_addresses,omitempty"`
 
 	// A filter block as defined below.
 	Filter []FilterInitParameters `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be included to the Network Connection Monitor endpoint.
+	// +listType=set
 	IncludedIPAddresses []*string `json:"includedIpAddresses,omitempty" tf:"included_ip_addresses,omitempty"`
 
 	// The name of the endpoint for the Network Connection Monitor .
@@ -152,12 +160,14 @@ type EndpointObservation struct {
 	CoverageLevel *string `json:"coverageLevel,omitempty" tf:"coverage_level,omitempty"`
 
 	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be excluded to the Network Connection Monitor endpoint.
+	// +listType=set
 	ExcludedIPAddresses []*string `json:"excludedIpAddresses,omitempty" tf:"excluded_ip_addresses,omitempty"`
 
 	// A filter block as defined below.
 	Filter []FilterObservation `json:"filter,omitempty" tf:"filter,omitempty"`
 
 	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be included to the Network Connection Monitor endpoint.
+	// +listType=set
 	IncludedIPAddresses []*string `json:"includedIpAddresses,omitempty" tf:"included_ip_addresses,omitempty"`
 
 	// The name of the endpoint for the Network Connection Monitor .
@@ -182,6 +192,7 @@ type EndpointParameters struct {
 
 	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be excluded to the Network Connection Monitor endpoint.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludedIPAddresses []*string `json:"excludedIpAddresses,omitempty" tf:"excluded_ip_addresses,omitempty"`
 
 	// A filter block as defined below.
@@ -190,6 +201,7 @@ type EndpointParameters struct {
 
 	// A list of IPv4/IPv6 subnet masks or IPv4/IPv6 IP addresses to be included to the Network Connection Monitor endpoint.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IncludedIPAddresses []*string `json:"includedIpAddresses,omitempty" tf:"included_ip_addresses,omitempty"`
 
 	// The name of the endpoint for the Network Connection Monitor .
@@ -252,6 +264,7 @@ type HTTPConfigurationInitParameters struct {
 	RequestHeader []HTTPConfigurationRequestHeaderInitParameters `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
 
 	// The HTTP status codes to consider successful. For instance, 2xx, 301-304 and 418.
+	// +listType=set
 	ValidStatusCodeRanges []*string `json:"validStatusCodeRanges,omitempty" tf:"valid_status_code_ranges,omitempty"`
 }
 
@@ -273,6 +286,7 @@ type HTTPConfigurationObservation struct {
 	RequestHeader []HTTPConfigurationRequestHeaderObservation `json:"requestHeader,omitempty" tf:"request_header,omitempty"`
 
 	// The HTTP status codes to consider successful. For instance, 2xx, 301-304 and 418.
+	// +listType=set
 	ValidStatusCodeRanges []*string `json:"validStatusCodeRanges,omitempty" tf:"valid_status_code_ranges,omitempty"`
 }
 
@@ -300,6 +314,7 @@ type HTTPConfigurationParameters struct {
 
 	// The HTTP status codes to consider successful. For instance, 2xx, 301-304 and 418.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ValidStatusCodeRanges []*string `json:"validStatusCodeRanges,omitempty" tf:"valid_status_code_ranges,omitempty"`
 }
 
@@ -540,6 +555,7 @@ type TestConfigurationParameters struct {
 type TestGroupInitParameters struct {
 
 	// A list of destination endpoint names.
+	// +listType=set
 	DestinationEndpoints []*string `json:"destinationEndpoints,omitempty" tf:"destination_endpoints,omitempty"`
 
 	// Should the test group be enabled? Defaults to true.
@@ -549,15 +565,18 @@ type TestGroupInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of source endpoint names.
+	// +listType=set
 	SourceEndpoints []*string `json:"sourceEndpoints,omitempty" tf:"source_endpoints,omitempty"`
 
 	// A list of test configuration names.
+	// +listType=set
 	TestConfigurationNames []*string `json:"testConfigurationNames,omitempty" tf:"test_configuration_names,omitempty"`
 }
 
 type TestGroupObservation struct {
 
 	// A list of destination endpoint names.
+	// +listType=set
 	DestinationEndpoints []*string `json:"destinationEndpoints,omitempty" tf:"destination_endpoints,omitempty"`
 
 	// Should the test group be enabled? Defaults to true.
@@ -567,9 +586,11 @@ type TestGroupObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of source endpoint names.
+	// +listType=set
 	SourceEndpoints []*string `json:"sourceEndpoints,omitempty" tf:"source_endpoints,omitempty"`
 
 	// A list of test configuration names.
+	// +listType=set
 	TestConfigurationNames []*string `json:"testConfigurationNames,omitempty" tf:"test_configuration_names,omitempty"`
 }
 
@@ -577,6 +598,7 @@ type TestGroupParameters struct {
 
 	// A list of destination endpoint names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DestinationEndpoints []*string `json:"destinationEndpoints" tf:"destination_endpoints,omitempty"`
 
 	// Should the test group be enabled? Defaults to true.
@@ -589,10 +611,12 @@ type TestGroupParameters struct {
 
 	// A list of source endpoint names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SourceEndpoints []*string `json:"sourceEndpoints" tf:"source_endpoints,omitempty"`
 
 	// A list of test configuration names.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TestConfigurationNames []*string `json:"testConfigurationNames" tf:"test_configuration_names,omitempty"`
 }
 

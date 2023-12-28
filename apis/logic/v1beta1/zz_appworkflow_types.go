@@ -69,12 +69,14 @@ type AccessControlParameters struct {
 type ActionInitParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
 type ActionObservation struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
@@ -82,6 +84,7 @@ type ActionParameters struct {
 
 	// A list of the allowed caller IP address ranges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
@@ -106,12 +109,15 @@ type AppWorkflowInitParameters struct {
 	LogicAppIntegrationAccountID *string `json:"logicAppIntegrationAccountId,omitempty" tf:"logic_app_integration_account_id,omitempty"`
 
 	// A map of Key-Value pairs.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a map of Key-Value pairs of the Parameter Definitions to use for this Logic App Workflow. The key is the parameter name, and the value is a JSON encoded string of the parameter definition (see: https://docs.microsoft.com/azure/logic-apps/logic-apps-workflow-definition-language#parameters).
+	// +mapType=granular
 	WorkflowParameters map[string]*string `json:"workflowParameters,omitempty" tf:"workflow_parameters,omitempty"`
 
 	// Specifies the Schema to use for this Logic App Workflow. Defaults to https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#. Changing this forces a new resource to be created.
@@ -154,12 +160,14 @@ type AppWorkflowObservation struct {
 	LogicAppIntegrationAccountID *string `json:"logicAppIntegrationAccountId,omitempty" tf:"logic_app_integration_account_id,omitempty"`
 
 	// A map of Key-Value pairs.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the Resource Group in which the Logic App Workflow should be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The list of access endpoint IP addresses of workflow.
@@ -169,6 +177,7 @@ type AppWorkflowObservation struct {
 	WorkflowOutboundIPAddresses []*string `json:"workflowOutboundIpAddresses,omitempty" tf:"workflow_outbound_ip_addresses,omitempty"`
 
 	// Specifies a map of Key-Value pairs of the Parameter Definitions to use for this Logic App Workflow. The key is the parameter name, and the value is a JSON encoded string of the parameter definition (see: https://docs.microsoft.com/azure/logic-apps/logic-apps-workflow-definition-language#parameters).
+	// +mapType=granular
 	WorkflowParameters map[string]*string `json:"workflowParameters,omitempty" tf:"workflow_parameters,omitempty"`
 
 	// Specifies the Schema to use for this Logic App Workflow. Defaults to https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#. Changing this forces a new resource to be created.
@@ -206,6 +215,7 @@ type AppWorkflowParameters struct {
 
 	// A map of Key-Value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The name of the Resource Group in which the Logic App Workflow should be created. Changing this forces a new resource to be created.
@@ -223,10 +233,12 @@ type AppWorkflowParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies a map of Key-Value pairs of the Parameter Definitions to use for this Logic App Workflow. The key is the parameter name, and the value is a JSON encoded string of the parameter definition (see: https://docs.microsoft.com/azure/logic-apps/logic-apps-workflow-definition-language#parameters).
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	WorkflowParameters map[string]*string `json:"workflowParameters,omitempty" tf:"workflow_parameters,omitempty"`
 
 	// Specifies the Schema to use for this Logic App Workflow. Defaults to https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#. Changing this forces a new resource to be created.
@@ -270,12 +282,14 @@ type ClaimParameters struct {
 type ContentInitParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
 type ContentObservation struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
@@ -283,12 +297,14 @@ type ContentParameters struct {
 
 	// A list of the allowed caller IP address ranges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Logic App Workflow.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Logic App Workflow. Possible values are SystemAssigned, UserAssigned.
@@ -298,6 +314,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Logic App Workflow.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Logic App Workflow.
@@ -314,6 +331,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Logic App Workflow.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Logic App Workflow. Possible values are SystemAssigned, UserAssigned.
@@ -353,6 +371,7 @@ type OpenAuthenticationPolicyParameters struct {
 type TriggerInitParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 
 	// A open_authentication_policy block as defined below.
@@ -362,6 +381,7 @@ type TriggerInitParameters struct {
 type TriggerObservation struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 
 	// A open_authentication_policy block as defined below.
@@ -372,6 +392,7 @@ type TriggerParameters struct {
 
 	// A list of the allowed caller IP address ranges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange" tf:"allowed_caller_ip_address_range,omitempty"`
 
 	// A open_authentication_policy block as defined below.
@@ -382,12 +403,14 @@ type TriggerParameters struct {
 type WorkflowManagementInitParameters struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
 type WorkflowManagementObservation struct {
 
 	// A list of the allowed caller IP address ranges.
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange,omitempty" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 
@@ -395,6 +418,7 @@ type WorkflowManagementParameters struct {
 
 	// A list of the allowed caller IP address ranges.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedCallerIPAddressRange []*string `json:"allowedCallerIpAddressRange" tf:"allowed_caller_ip_address_range,omitempty"`
 }
 

@@ -111,6 +111,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: Allowed HTTP methods on cross-site requests.
                             The special value * allows all methods. If not set, GET
@@ -119,12 +120,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedOrigins:
                           description: Allowed origins to make cross-site requests.
                             The special value * allows all domains.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         credentialsAllowed:
                           description: is user credentials are supported on cross-site
                             requests?
@@ -135,6 +138,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAgeSeconds:
                           description: How long, in seconds, the response from a pre-flight
                             request can be cached by clients.
@@ -148,6 +152,7 @@ spec:
                       Cloud Gateway as a map of key-value pairs. Changing this forces
                       a new resource to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                   httpsOnly:
                     description: is only https is allowed?
                     type: boolean
@@ -291,6 +296,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -350,6 +356,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: Allowed HTTP methods on cross-site requests.
                             The special value * allows all methods. If not set, GET
@@ -358,12 +365,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedOrigins:
                           description: Allowed origins to make cross-site requests.
                             The special value * allows all domains.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         credentialsAllowed:
                           description: is user credentials are supported on cross-site
                             requests?
@@ -374,6 +383,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAgeSeconds:
                           description: How long, in seconds, the response from a pre-flight
                             request can be cached by clients.
@@ -387,6 +397,7 @@ spec:
                       Cloud Gateway as a map of key-value pairs. Changing this forces
                       a new resource to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                   httpsOnly:
                     description: is only https is allowed?
                     type: boolean
@@ -436,6 +447,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                 type: object
@@ -648,6 +660,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: Allowed HTTP methods on cross-site requests.
                             The special value * allows all methods. If not set, GET
@@ -656,12 +669,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedOrigins:
                           description: Allowed origins to make cross-site requests.
                             The special value * allows all domains.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         credentialsAllowed:
                           description: is user credentials are supported on cross-site
                             requests?
@@ -672,6 +687,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAgeSeconds:
                           description: How long, in seconds, the response from a pre-flight
                             request can be cached by clients.
@@ -685,6 +701,7 @@ spec:
                       Cloud Gateway as a map of key-value pairs. Changing this forces
                       a new resource to be created.
                     type: object
+                    x-kubernetes-map-type: granular
                   httpsOnly:
                     description: is only https is allowed?
                     type: boolean
@@ -741,6 +758,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   url:

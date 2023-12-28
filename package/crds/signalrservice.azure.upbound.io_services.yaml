@@ -84,6 +84,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   httpRequestLogsEnabled:
@@ -100,6 +101,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this signalR. Possible values
@@ -257,6 +259,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   tlsClientCertEnabled:
                     description: Whether to request client certificate during TLS
                       handshake? Defaults to false.
@@ -319,6 +322,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   httpRequestLogsEnabled:
@@ -335,6 +339,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this signalR. Possible values
@@ -412,6 +417,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   tlsClientCertEnabled:
                     description: Whether to request client certificate during TLS
                       handshake? Defaults to false.
@@ -636,6 +642,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   hostname:
@@ -658,6 +665,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The ID of the SignalR service.
                           type: string
@@ -757,6 +765,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   tlsClientCertEnabled:
                     description: Whether to request client certificate during TLS
                       handshake? Defaults to false.

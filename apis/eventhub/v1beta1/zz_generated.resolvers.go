@@ -217,6 +217,27 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRulesets); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+
 	return nil
 }
 
@@ -316,6 +337,22 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PartnerNamespaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PartnerNamespaceIDRef,
+		Selector:     mg.Spec.InitProvider.PartnerNamespaceIDSelector,
+		To: reference.To{
+			List:    &EventHubNamespaceList{},
+			Managed: &EventHubNamespace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PartnerNamespaceID")
+	}
+	mg.Spec.InitProvider.PartnerNamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PartnerNamespaceIDRef = rsp.ResolvedReference
 
 	return nil
 }

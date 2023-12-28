@@ -19,11 +19,50 @@ import (
 
 type BackupProtectedVMInitParameters struct {
 
+	// Specifies the id of the backup policy to use.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.BackupPolicyVM
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
+
+	// Reference to a BackupPolicyVM in recoveryservices to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDRef *v1.Reference `json:"backupPolicyIdRef,omitempty" tf:"-"`
+
+	// Selector for a BackupPolicyVM in recoveryservices to populate backupPolicyId.
+	// +kubebuilder:validation:Optional
+	BackupPolicyIDSelector *v1.Selector `json:"backupPolicyIdSelector,omitempty" tf:"-"`
+
 	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
+	// +listType=set
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
+	// +listType=set
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
+
+	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
+	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
+
+	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameRef *v1.Reference `json:"recoveryVaultNameRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in recoveryservices to populate recoveryVaultName.
+	// +kubebuilder:validation:Optional
+	RecoveryVaultNameSelector *v1.Selector `json:"recoveryVaultNameSelector,omitempty" tf:"-"`
+
+	// The name of the resource group in which to create the Recovery Services Vault. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the ID of the VM to backup. Changing this forces a new resource to be created.
 	SourceVMID *string `json:"sourceVmId,omitempty" tf:"source_vm_id,omitempty"`
@@ -35,12 +74,14 @@ type BackupProtectedVMObservation struct {
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
+	// +listType=set
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
 	// The ID of the Backup Protected Virtual Machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
+	// +listType=set
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.
@@ -71,10 +112,12 @@ type BackupProtectedVMParameters struct {
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be excluded for VM Protection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludeDiskLuns []*float64 `json:"excludeDiskLuns,omitempty" tf:"exclude_disk_luns,omitempty"`
 
 	// A list of Disks' Logical Unit Numbers(LUN) to be included for VM Protection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IncludeDiskLuns []*float64 `json:"includeDiskLuns,omitempty" tf:"include_disk_luns,omitempty"`
 
 	// Specifies the name of the Recovery Services Vault to use. Changing this forces a new resource to be created.

@@ -20,6 +20,7 @@ import (
 type TableEntityInitParameters struct {
 
 	// A map of key/value pairs that describe the entity to be inserted/merged in to the storage table.
+	// +mapType=granular
 	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
 
 	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.
@@ -27,11 +28,37 @@ type TableEntityInitParameters struct {
 
 	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
+
+	// Specifies the storage account in which to create the storage table entity. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountName.
+	// +kubebuilder:validation:Optional
+	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+
+	// The name of the storage table in which to create the storage table entity. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Table
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
+
+	// Reference to a Table in storage to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
+
+	// Selector for a Table in storage to populate tableName.
+	// +kubebuilder:validation:Optional
+	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type TableEntityObservation struct {
 
 	// A map of key/value pairs that describe the entity to be inserted/merged in to the storage table.
+	// +mapType=granular
 	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
 
 	// The ID of the Entity within the Table in the Storage Account.
@@ -54,6 +81,7 @@ type TableEntityParameters struct {
 
 	// A map of key/value pairs that describe the entity to be inserted/merged in to the storage table.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
 
 	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.

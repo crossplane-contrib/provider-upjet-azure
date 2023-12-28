@@ -23,6 +23,7 @@ type DNSZoneInitParameters struct {
 	SoaRecord []SoaRecordInitParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -35,6 +36,7 @@ type DNSZoneObservation struct {
 	MaxNumberOfRecordSets *float64 `json:"maxNumberOfRecordSets,omitempty" tf:"max_number_of_record_sets,omitempty"`
 
 	// A list of values that make up the NS record for the zone.
+	// +listType=set
 	NameServers []*string `json:"nameServers,omitempty" tf:"name_servers,omitempty"`
 
 	// The number of records already in the zone.
@@ -47,6 +49,7 @@ type DNSZoneObservation struct {
 	SoaRecord []SoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -71,6 +74,7 @@ type DNSZoneParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -101,6 +105,7 @@ type SoaRecordInitParameters struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the Record Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -133,6 +138,7 @@ type SoaRecordObservation struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the Record Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -172,6 +178,7 @@ type SoaRecordParameters struct {
 
 	// A mapping of tags to assign to the Record Set.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

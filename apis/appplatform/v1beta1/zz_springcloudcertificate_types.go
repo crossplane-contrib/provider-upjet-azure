@@ -21,6 +21,19 @@ type SpringCloudCertificateInitParameters struct {
 
 	// The content of uploaded certificate. Changing this forces a new resource to be created.
 	CertificateContent *string `json:"certificateContent,omitempty" tf:"certificate_content,omitempty"`
+
+	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
+
+	// Reference to a Certificate in keyvault to populate keyVaultCertificateId.
+	// +kubebuilder:validation:Optional
+	KeyVaultCertificateIDRef *v1.Reference `json:"keyVaultCertificateIdRef,omitempty" tf:"-"`
+
+	// Selector for a Certificate in keyvault to populate keyVaultCertificateId.
+	// +kubebuilder:validation:Optional
+	KeyVaultCertificateIDSelector *v1.Selector `json:"keyVaultCertificateIdSelector,omitempty" tf:"-"`
 }
 
 type SpringCloudCertificateObservation struct {

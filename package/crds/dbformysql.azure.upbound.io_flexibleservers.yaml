@@ -234,6 +234,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this MySQL Flexible Server.
@@ -465,6 +466,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       MySQL Flexible Server.
                     type: object
+                    x-kubernetes-map-type: granular
                   version:
                     description: The version of the MySQL Flexible Server to use.
                       Possible values are 5.7, and 8.0.21. Changing this forces a
@@ -528,6 +530,84 @@ spec:
                           type: string
                       type: object
                     type: array
+                  delegatedSubnetId:
+                    description: The ID of the virtual network subnet to create the
+                      MySQL Flexible Server. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  delegatedSubnetIdRef:
+                    description: Reference to a Subnet in network to populate delegatedSubnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  delegatedSubnetIdSelector:
+                    description: Selector for a Subnet in network to populate delegatedSubnetId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   geoRedundantBackupEnabled:
                     description: Should geo redundant backup enabled? Defaults to
                       false. Changing this forces a new MySQL Flexible Server to be
@@ -558,6 +638,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this MySQL Flexible Server.
@@ -593,6 +674,86 @@ spec:
                       when create_mode is PointInTimeRestore. Changing this forces
                       a new MySQL Flexible Server to be created.
                     type: string
+                  privateDnsZoneId:
+                    description: The ID of the private DNS zone to create the MySQL
+                      Flexible Server. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  privateDnsZoneIdRef:
+                    description: Reference to a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  privateDnsZoneIdSelector:
+                    description: Selector for a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   replicationRole:
                     description: The replication role. Possible value is None.
                     type: string
@@ -629,6 +790,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       MySQL Flexible Server.
                     type: object
+                    x-kubernetes-map-type: granular
                   version:
                     description: The version of the MySQL Flexible Server to use.
                       Possible values are 5.7, and 8.0.21. Changing this forces a
@@ -892,6 +1054,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this MySQL Flexible Server.
@@ -980,6 +1143,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       MySQL Flexible Server.
                     type: object
+                    x-kubernetes-map-type: granular
                   version:
                     description: The version of the MySQL Flexible Server to use.
                       Possible values are 5.7, and 8.0.21. Changing this forces a

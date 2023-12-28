@@ -20,6 +20,7 @@ import (
 type QueueInitParameters struct {
 
 	// A mapping of MetaData which should be assigned to this Storage Queue.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 }
 
@@ -29,6 +30,7 @@ type QueueObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A mapping of MetaData which should be assigned to this Storage Queue.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The Resource Manager ID of this Storage Queue.
@@ -42,6 +44,7 @@ type QueueParameters struct {
 
 	// A mapping of MetaData which should be assigned to this Storage Queue.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// Specifies the Storage Account in which the Storage Queue should exist. Changing this forces a new resource to be created.

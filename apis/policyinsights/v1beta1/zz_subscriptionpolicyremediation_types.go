@@ -28,6 +28,19 @@ type SubscriptionPolicyRemediationInitParameters struct {
 	// Determines how many resources to remediate at any given time. Can be used to increase or reduce the pace of the remediation. If not provided, the default parallel deployments value is used.
 	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
 
+	// The ID of the Policy Assignment that should be remediated.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.SubscriptionPolicyAssignment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
+
+	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
+	// +kubebuilder:validation:Optional
+	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
+	// +kubebuilder:validation:Optional
+	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+
 	// The unique ID for the policy definition within the policy set definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition.
 	PolicyDefinitionID *string `json:"policyDefinitionId,omitempty" tf:"policy_definition_id,omitempty"`
 

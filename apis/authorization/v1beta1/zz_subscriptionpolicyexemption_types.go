@@ -34,6 +34,19 @@ type SubscriptionPolicyExemptionInitParameters struct {
 	// The metadata for this policy exemption. This is a JSON string representing additional metadata that should be stored with the policy exemption.
 	Metadata *string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
+	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.SubscriptionPolicyAssignment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
+
+	// Reference to a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
+	// +kubebuilder:validation:Optional
+	PolicyAssignmentIDRef *v1.Reference `json:"policyAssignmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a SubscriptionPolicyAssignment in authorization to populate policyAssignmentId.
+	// +kubebuilder:validation:Optional
+	PolicyAssignmentIDSelector *v1.Selector `json:"policyAssignmentIdSelector,omitempty" tf:"-"`
+
 	// The policy definition reference ID list when the associated policy assignment is an assignment of a policy set definition.
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
 

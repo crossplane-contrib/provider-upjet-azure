@@ -91,6 +91,7 @@ type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
 
 	// Specifies the properties of an alert payload.
+	// +mapType=granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 }
 
@@ -100,6 +101,7 @@ type MonitorScheduledQueryRulesAlertV2ActionObservation struct {
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
 
 	// Specifies the properties of an alert payload.
+	// +mapType=granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 }
 
@@ -111,6 +113,7 @@ type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 
 	// Specifies the properties of an alert payload.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	CustomProperties map[string]*string `json:"customProperties,omitempty" tf:"custom_properties,omitempty"`
 }
 
@@ -235,6 +238,19 @@ type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 	// Set this if the alert evaluation period is different from the query time range. If not specified, the value is window_duration*number_of_evaluation_periods. Possible values are PT5M, PT10M, PT15M, PT20M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D and P2D.
 	QueryTimeRangeOverride *string `json:"queryTimeRangeOverride,omitempty" tf:"query_time_range_override,omitempty"`
 
+	// Specifies the list of resource IDs that this scheduled query rule is scoped to. Changing this forces a new resource to be created. Currently, the API supports exactly 1 resource ID in the scopes list.
+	// +crossplane:generate:reference:type=ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// References to ApplicationInsights to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ApplicationInsights to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+
 	// Severity of the alert. Should be an integer between 0 and 4. Value of 0 is severest.
 	Severity *float64 `json:"severity,omitempty" tf:"severity,omitempty"`
 
@@ -242,6 +258,7 @@ type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 	SkipQueryValidation *bool `json:"skipQueryValidation,omitempty" tf:"skip_query_validation,omitempty"`
 
 	// A mapping of tags which should be assigned to the Monitor Scheduled Query Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria.
@@ -311,6 +328,7 @@ type MonitorScheduledQueryRulesAlertV2Observation struct {
 	SkipQueryValidation *bool `json:"skipQueryValidation,omitempty" tf:"skip_query_validation,omitempty"`
 
 	// A mapping of tags which should be assigned to the Monitor Scheduled Query Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria.
@@ -402,6 +420,7 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 
 	// A mapping of tags which should be assigned to the Monitor Scheduled Query Rule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// List of resource type of the target resource(s) on which the alert is created/updated. For example if the scope is a resource group and targetResourceTypes is Microsoft.Compute/virtualMachines, then a different alert will be fired for each virtual machine in the resource group which meet the alert criteria.

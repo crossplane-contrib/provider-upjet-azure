@@ -22,6 +22,18 @@ type HPCCacheBlobNFSTargetInitParameters struct {
 	// The name of the access policy applied to this target. Defaults to default.
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
+	// The name of the HPC Cache, which the HPC Cache Blob NFS Target will be added to. Changing this forces a new HPC Cache Blob NFS Target to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
+
+	// Reference to a HPCCache in storagecache to populate cacheName.
+	// +kubebuilder:validation:Optional
+	CacheNameRef *v1.Reference `json:"cacheNameRef,omitempty" tf:"-"`
+
+	// Selector for a HPCCache in storagecache to populate cacheName.
+	// +kubebuilder:validation:Optional
+	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
+
 	// The client-facing file path of the HPC Cache Blob NFS Target.
 	NamespacePath *string `json:"namespacePath,omitempty" tf:"namespace_path,omitempty"`
 

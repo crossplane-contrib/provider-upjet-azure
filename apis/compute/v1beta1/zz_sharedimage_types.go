@@ -113,6 +113,7 @@ type SharedImageInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
+	// +listType=set
 	DiskTypesNotAllowed []*string `json:"diskTypesNotAllowed,omitempty" tf:"disk_types_not_allowed,omitempty"`
 
 	// The end of life date in RFC3339 format of the Image.
@@ -158,6 +159,7 @@ type SharedImageInitParameters struct {
 	Specialized *bool `json:"specialized,omitempty" tf:"specialized,omitempty"`
 
 	// A mapping of tags to assign to the Shared Image.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.
@@ -182,6 +184,7 @@ type SharedImageObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
+	// +listType=set
 	DiskTypesNotAllowed []*string `json:"diskTypesNotAllowed,omitempty" tf:"disk_types_not_allowed,omitempty"`
 
 	// The end of life date in RFC3339 format of the Image.
@@ -236,6 +239,7 @@ type SharedImageObservation struct {
 	Specialized *bool `json:"specialized,omitempty" tf:"specialized,omitempty"`
 
 	// A mapping of tags to assign to the Shared Image.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.
@@ -266,6 +270,7 @@ type SharedImageParameters struct {
 
 	// One or more Disk Types not allowed for the Image. Possible values include Standard_LRS and Premium_LRS.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DiskTypesNotAllowed []*string `json:"diskTypesNotAllowed,omitempty" tf:"disk_types_not_allowed,omitempty"`
 
 	// The end of life date in RFC3339 format of the Image.
@@ -352,6 +357,7 @@ type SharedImageParameters struct {
 
 	// A mapping of tags to assign to the Shared Image.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.

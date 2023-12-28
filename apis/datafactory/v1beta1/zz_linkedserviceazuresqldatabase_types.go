@@ -49,6 +49,7 @@ type KeyVaultConnectionStringParameters struct {
 type LinkedServiceAzureSQLDatabaseInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Azure SQL Database.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Azure SQL Database.
@@ -70,6 +71,7 @@ type LinkedServiceAzureSQLDatabaseInitParameters struct {
 	KeyVaultPassword []LinkedServiceAzureSQLDatabaseKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service Azure SQL Database.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Azure SQL Database. Required if service_principal_key is set.
@@ -117,6 +119,7 @@ type LinkedServiceAzureSQLDatabaseKeyVaultPasswordParameters struct {
 type LinkedServiceAzureSQLDatabaseObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Azure SQL Database.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Azure SQL Database.
@@ -144,6 +147,7 @@ type LinkedServiceAzureSQLDatabaseObservation struct {
 	KeyVaultPassword []LinkedServiceAzureSQLDatabaseKeyVaultPasswordObservation `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service Azure SQL Database.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Azure SQL Database. Required if service_principal_key is set.
@@ -163,6 +167,7 @@ type LinkedServiceAzureSQLDatabaseParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service Azure SQL Database.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service Azure SQL Database.
@@ -205,6 +210,7 @@ type LinkedServiceAzureSQLDatabaseParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service Azure SQL Database.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Azure SQL Database. Required if service_principal_key is set.

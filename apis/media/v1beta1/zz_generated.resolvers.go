@@ -217,6 +217,43 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.TransformName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TransformNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.InputAsset); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.InputAsset[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.InputAsset[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.InputAsset[i3].NameSelector,
+			To: reference.To{
+				List:    &AssetList{},
+				Managed: &Asset{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.InputAsset[i3].Name")
+		}
+		mg.Spec.InitProvider.InputAsset[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.InputAsset[i3].NameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.OutputAsset); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OutputAsset[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.OutputAsset[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.OutputAsset[i3].NameSelector,
+			To: reference.To{
+				List:    &AssetList{},
+				Managed: &Asset{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.OutputAsset[i3].Name")
+		}
+		mg.Spec.InitProvider.OutputAsset[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.OutputAsset[i3].NameRef = rsp.ResolvedReference
+
+	}
+
 	return nil
 }
 
@@ -301,6 +338,22 @@ func (mg *LiveEventOutput) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.LiveEventID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LiveEventIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AssetName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.AssetNameRef,
+		Selector:     mg.Spec.InitProvider.AssetNameSelector,
+		To: reference.To{
+			List:    &AssetList{},
+			Managed: &Asset{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AssetName")
+	}
+	mg.Spec.InitProvider.AssetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AssetNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -343,6 +396,24 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 		}
 		mg.Spec.ForProvider.StorageAccount[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].IDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.StorageAccount); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccount[i3].ID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageAccount[i3].IDRef,
+			Selector:     mg.Spec.InitProvider.StorageAccount[i3].IDSelector,
+			To: reference.To{
+				List:    &v1beta11.AccountList{},
+				Managed: &v1beta11.Account{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccount[i3].ID")
+		}
+		mg.Spec.InitProvider.StorageAccount[i3].ID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.StorageAccount[i3].IDRef = rsp.ResolvedReference
 
 	}
 
@@ -488,6 +559,22 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AssetName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.AssetNameRef,
+		Selector:     mg.Spec.InitProvider.AssetNameSelector,
+		To: reference.To{
+			List:    &AssetList{},
+			Managed: &Asset{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AssetName")
+	}
+	mg.Spec.InitProvider.AssetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AssetNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -549,6 +636,27 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CommonEncryptionCenc); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName),
+				Extract:      reference.ExternalName(),
+				Reference:    mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameRef,
+				Selector:     mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameSelector,
+				To: reference.To{
+					List:    &ContentKeyPolicyList{},
+					Managed: &ContentKeyPolicy{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName")
+			}
+			mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyName = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.CommonEncryptionCenc[i3].DefaultContentKey[i4].PolicyNameRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }

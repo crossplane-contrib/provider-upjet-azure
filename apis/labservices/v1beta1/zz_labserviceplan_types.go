@@ -126,6 +126,19 @@ type LabServicePlanInitParameters struct {
 	// A default_connection block as defined below.
 	DefaultConnection []DefaultConnectionInitParameters `json:"defaultConnection,omitempty" tf:"default_connection,omitempty"`
 
+	// The resource ID of the Subnet for the Lab Service Plan network profile.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	DefaultNetworkSubnetID *string `json:"defaultNetworkSubnetId,omitempty" tf:"default_network_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate defaultNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	DefaultNetworkSubnetIDRef *v1.Reference `json:"defaultNetworkSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate defaultNetworkSubnetId.
+	// +kubebuilder:validation:Optional
+	DefaultNetworkSubnetIDSelector *v1.Selector `json:"defaultNetworkSubnetIdSelector,omitempty" tf:"-"`
+
 	// The Azure Region where the Lab Service Plan should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -136,6 +149,7 @@ type LabServicePlanInitParameters struct {
 	Support []SupportInitParameters `json:"support,omitempty" tf:"support,omitempty"`
 
 	// A mapping of tags which should be assigned to the Lab Service Plan.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -169,6 +183,7 @@ type LabServicePlanObservation struct {
 	Support []SupportObservation `json:"support,omitempty" tf:"support,omitempty"`
 
 	// A mapping of tags which should be assigned to the Lab Service Plan.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -227,6 +242,7 @@ type LabServicePlanParameters struct {
 
 	// A mapping of tags which should be assigned to the Lab Service Plan.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

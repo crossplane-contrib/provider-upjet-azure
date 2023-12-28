@@ -19,8 +19,32 @@ import (
 
 type IdentityProviderMicrosoftInitParameters struct {
 
+	// The Name of the API Management Service where this Microsoft Identity Provider should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
+	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
+
+	// Reference to a Management in apimanagement to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
+
+	// Selector for a Management in apimanagement to populate apiManagementName.
+	// +kubebuilder:validation:Optional
+	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+
 	// Client Id of the Azure AD Application.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type IdentityProviderMicrosoftObservation struct {

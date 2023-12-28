@@ -54,6 +54,38 @@ func (mg *ResourcePolicyRemediation) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
+		Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupPolicyAssignmentList{},
+			Managed: &v1beta1.ResourceGroupPolicyAssignment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyAssignmentID")
+	}
+	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta11.VirtualNetworkList{},
+			Managed: &v1beta11.VirtualNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -79,6 +111,22 @@ func (mg *SubscriptionPolicyRemediation) ResolveReferences(ctx context.Context, 
 	}
 	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
+		Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
+		To: reference.To{
+			List:    &v1beta1.SubscriptionPolicyAssignmentList{},
+			Managed: &v1beta1.SubscriptionPolicyAssignment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyAssignmentID")
+	}
+	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 
 	return nil
 }

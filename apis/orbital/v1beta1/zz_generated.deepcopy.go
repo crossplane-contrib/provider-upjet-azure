@@ -216,6 +216,21 @@ func (in *ContactProfileInitParameters) DeepCopyInto(out *ContactProfileInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.NetworkConfigurationSubnetID != nil {
+		in, out := &in.NetworkConfigurationSubnetID, &out.NetworkConfigurationSubnetID
+		*out = new(string)
+		**out = **in
+	}
+	if in.NetworkConfigurationSubnetIDRef != nil {
+		in, out := &in.NetworkConfigurationSubnetIDRef, &out.NetworkConfigurationSubnetIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.NetworkConfigurationSubnetIDSelector != nil {
+		in, out := &in.NetworkConfigurationSubnetIDSelector, &out.NetworkConfigurationSubnetIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

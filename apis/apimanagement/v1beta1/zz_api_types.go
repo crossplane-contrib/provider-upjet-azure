@@ -47,6 +47,7 @@ type APIInitParameters struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// A list of protocols the operations in this API can be invoked. Possible values are http, https, ws, and wss.
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// The Revision which used for this API. Changing this forces a new resource to be created.
@@ -125,6 +126,7 @@ type APIObservation struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// A list of protocols the operations in this API can be invoked. Possible values are http, https, ws, and wss.
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// The Name of the Resource Group where the API Management API exists. Changing this forces a new resource to be created.
@@ -217,6 +219,7 @@ type APIParameters struct {
 
 	// A list of protocols the operations in this API can be invoked. Possible values are http, https, ws, and wss.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
 	// The Name of the Resource Group where the API Management API exists. Changing this forces a new resource to be created.
@@ -416,6 +419,7 @@ type Oauth2AuthorizationParameters struct {
 type OpenIDAuthenticationInitParameters struct {
 
 	// How to send token to the server. A list of zero or more methods. Valid values are authorizationHeader and query.
+	// +listType=set
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// OpenID Connect provider identifier. The name of an OpenID Connect Provider.
@@ -425,6 +429,7 @@ type OpenIDAuthenticationInitParameters struct {
 type OpenIDAuthenticationObservation struct {
 
 	// How to send token to the server. A list of zero or more methods. Valid values are authorizationHeader and query.
+	// +listType=set
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// OpenID Connect provider identifier. The name of an OpenID Connect Provider.
@@ -435,6 +440,7 @@ type OpenIDAuthenticationParameters struct {
 
 	// How to send token to the server. A list of zero or more methods. Valid values are authorizationHeader and query.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// OpenID Connect provider identifier. The name of an OpenID Connect Provider.

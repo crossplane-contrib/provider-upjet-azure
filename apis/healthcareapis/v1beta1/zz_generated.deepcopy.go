@@ -1082,6 +1082,21 @@ func (in *HealthcareFHIRServiceInitParameters) DeepCopyInto(out *HealthcareFHIRS
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ResourceGroupName != nil {
+		in, out := &in.ResourceGroupName, &out.ResourceGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupNameRef != nil {
+		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupNameSelector != nil {
+		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -1481,6 +1496,21 @@ func (in *HealthcareMedtechServiceFHIRDestinationInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	if in.DestinationFHIRServiceID != nil {
+		in, out := &in.DestinationFHIRServiceID, &out.DestinationFHIRServiceID
+		*out = new(string)
+		**out = **in
+	}
+	if in.DestinationFHIRServiceIDRef != nil {
+		in, out := &in.DestinationFHIRServiceIDRef, &out.DestinationFHIRServiceIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.DestinationFHIRServiceIDSelector != nil {
+		in, out := &in.DestinationFHIRServiceIDSelector, &out.DestinationFHIRServiceIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DestinationIdentityResolutionType != nil {
 		in, out := &in.DestinationIdentityResolutionType, &out.DestinationIdentityResolutionType
 		*out = new(string)
@@ -1785,6 +1815,51 @@ func (in *HealthcareMedtechServiceInitParameters) DeepCopyInto(out *HealthcareMe
 		in, out := &in.DeviceMappingJSON, &out.DeviceMappingJSON
 		*out = new(string)
 		**out = **in
+	}
+	if in.EventHubConsumerGroupName != nil {
+		in, out := &in.EventHubConsumerGroupName, &out.EventHubConsumerGroupName
+		*out = new(string)
+		**out = **in
+	}
+	if in.EventHubConsumerGroupNameRef != nil {
+		in, out := &in.EventHubConsumerGroupNameRef, &out.EventHubConsumerGroupNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EventHubConsumerGroupNameSelector != nil {
+		in, out := &in.EventHubConsumerGroupNameSelector, &out.EventHubConsumerGroupNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EventHubName != nil {
+		in, out := &in.EventHubName, &out.EventHubName
+		*out = new(string)
+		**out = **in
+	}
+	if in.EventHubNameRef != nil {
+		in, out := &in.EventHubNameRef, &out.EventHubNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EventHubNameSelector != nil {
+		in, out := &in.EventHubNameSelector, &out.EventHubNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EventHubNamespaceName != nil {
+		in, out := &in.EventHubNamespaceName, &out.EventHubNamespaceName
+		*out = new(string)
+		**out = **in
+	}
+	if in.EventHubNamespaceNameRef != nil {
+		in, out := &in.EventHubNamespaceNameRef, &out.EventHubNamespaceNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.EventHubNamespaceNameSelector != nil {
+		in, out := &in.EventHubNamespaceNameSelector, &out.EventHubNamespaceNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity

@@ -86,6 +86,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   location:
@@ -179,6 +180,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Subnet Service Endpoint Storage Policy.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -210,6 +212,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   location:
@@ -223,6 +226,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Subnet Service Endpoint Storage Policy.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -413,6 +417,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   id:
@@ -434,6 +439,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Subnet Service Endpoint Storage Policy.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

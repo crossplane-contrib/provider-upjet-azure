@@ -83,12 +83,14 @@ spec:
                           description: Specifies a map of non-sensitive properties
                             for launchProperties.
                           type: object
+                          x-kubernetes-map-type: granular
                         secrets:
                           additionalProperties:
                             type: string
                           description: Specifies a map of sensitive properties for
                             launchProperties.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   springCloudBuilderId:
@@ -198,12 +200,14 @@ spec:
                           description: Specifies a map of non-sensitive properties
                             for launchProperties.
                           type: object
+                          x-kubernetes-map-type: granular
                         secrets:
                           additionalProperties:
                             type: string
                           description: Specifies a map of sensitive properties for
                             launchProperties.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                 type: object
@@ -391,12 +395,14 @@ spec:
                           description: Specifies a map of non-sensitive properties
                             for launchProperties.
                           type: object
+                          x-kubernetes-map-type: granular
                         secrets:
                           additionalProperties:
                             type: string
                           description: Specifies a map of sensitive properties for
                             launchProperties.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   springCloudBuilderId:

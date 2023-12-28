@@ -155,12 +155,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bearerTokenSendingMethods:
                     description: The mechanism by which Access Tokens are passed to
                       the API. Possible values are authorizationHeader and query.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clientAuthenticationMethod:
                     description: The Authentication Methods supported by the Token
                       endpoint of this Authorization Server.. Possible values are
@@ -168,6 +170,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clientId:
                     description: The Client/App ID registered with this Authorization
                       Server.
@@ -212,6 +215,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   resourceGroupName:
                     description: The name of the Resource Group in which the API Management
                       Service exists. Changing this forces a new resource to be created.
@@ -354,12 +358,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bearerTokenSendingMethods:
                     description: The mechanism by which Access Tokens are passed to
                       the API. Possible values are authorizationHeader and query.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clientAuthenticationMethod:
                     description: The Authentication Methods supported by the Token
                       endpoint of this Authorization Server.. Possible values are
@@ -367,6 +373,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clientId:
                     description: The Client/App ID registered with this Authorization
                       Server.
@@ -393,6 +400,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   resourceOwnerUsername:
                     description: The username associated with the Resource Owner.
                     type: string
@@ -622,12 +630,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   bearerTokenSendingMethods:
                     description: The mechanism by which Access Tokens are passed to
                       the API. Possible values are authorizationHeader and query.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clientAuthenticationMethod:
                     description: The Authentication Methods supported by the Token
                       endpoint of this Authorization Server.. Possible values are
@@ -635,6 +645,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   clientId:
                     description: The Client/App ID registered with this Authorization
                       Server.
@@ -661,6 +672,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The ID of the API Management Authorization Server.
                     type: string

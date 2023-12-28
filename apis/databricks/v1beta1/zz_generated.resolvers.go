@@ -117,6 +117,58 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CustomParameters); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetNameRef,
+			Selector:     mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetNameSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName")
+		}
+		mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CustomParameters[i3].PrivateSubnetNameRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CustomParameters); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetNameRef,
+			Selector:     mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetNameSelector,
+			To: reference.To{
+				List:    &v1beta11.SubnetList{},
+				Managed: &v1beta11.Subnet{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName")
+		}
+		mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CustomParameters[i3].PublicSubnetNameRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ManagedResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ManagedResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedResourceGroupName")
+	}
+	mg.Spec.InitProvider.ManagedResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -158,6 +210,22 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 	}
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
+	}
+	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }

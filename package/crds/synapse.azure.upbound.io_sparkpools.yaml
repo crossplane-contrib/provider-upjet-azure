@@ -247,6 +247,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Synapse Spark Pool.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -362,6 +363,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Synapse Spark Pool.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -647,6 +649,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Synapse Spark Pool.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -189,6 +189,7 @@ type StreamingEndpointInitParameters struct {
 	CrossSiteAccessPolicy []StreamingEndpointCrossSiteAccessPolicyInitParameters `json:"crossSiteAccessPolicy,omitempty" tf:"cross_site_access_policy,omitempty"`
 
 	// The custom host names of the streaming endpoint.
+	// +listType=set
 	CustomHostNames []*string `json:"customHostNames,omitempty" tf:"custom_host_names,omitempty"`
 
 	// The streaming endpoint description.
@@ -204,6 +205,7 @@ type StreamingEndpointInitParameters struct {
 	ScaleUnits *float64 `json:"scaleUnits,omitempty" tf:"scale_units,omitempty"`
 
 	// A mapping of tags which should be assigned to the Streaming Endpoint.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -228,6 +230,7 @@ type StreamingEndpointObservation struct {
 	CrossSiteAccessPolicy []StreamingEndpointCrossSiteAccessPolicyObservation `json:"crossSiteAccessPolicy,omitempty" tf:"cross_site_access_policy,omitempty"`
 
 	// The custom host names of the streaming endpoint.
+	// +listType=set
 	CustomHostNames []*string `json:"customHostNames,omitempty" tf:"custom_host_names,omitempty"`
 
 	// The streaming endpoint description.
@@ -258,6 +261,7 @@ type StreamingEndpointObservation struct {
 	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Streaming Endpoint.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -289,6 +293,7 @@ type StreamingEndpointParameters struct {
 
 	// The custom host names of the streaming endpoint.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	CustomHostNames []*string `json:"customHostNames,omitempty" tf:"custom_host_names,omitempty"`
 
 	// The streaming endpoint description.
@@ -335,6 +340,7 @@ type StreamingEndpointParameters struct {
 
 	// A mapping of tags which should be assigned to the Streaming Endpoint.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -29,6 +29,7 @@ type SubscriptionTemplateDeploymentInitParameters struct {
 	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
 
 	// A mapping of tags which should be assigned to the Subscription Template Deployment.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Subscription.
@@ -56,6 +57,7 @@ type SubscriptionTemplateDeploymentObservation struct {
 	ParametersContent *string `json:"parametersContent,omitempty" tf:"parameters_content,omitempty"`
 
 	// A mapping of tags which should be assigned to the Subscription Template Deployment.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Subscription.
@@ -81,6 +83,7 @@ type SubscriptionTemplateDeploymentParameters struct {
 
 	// A mapping of tags which should be assigned to the Subscription Template Deployment.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The contents of the ARM Template which should be deployed into this Subscription.

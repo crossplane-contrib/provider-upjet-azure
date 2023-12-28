@@ -125,6 +125,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Firewall Policy. Only
@@ -211,18 +212,21 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               destinationIpGroups:
                                 description: Specifies a list of destination IP groups
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               destinationPorts:
                                 description: Specifies a list of destination IP ports
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               name:
                                 description: The name which should be used for this
                                   bypass traffic setting.
@@ -237,12 +241,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               sourceIpGroups:
                                 description: Specifies a list of source IP groups
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -352,6 +358,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Firewall Policy.
                     type: object
+                    x-kubernetes-map-type: granular
                   threatIntelligenceAllowlist:
                     description: A threat_intelligence_allowlist block as defined
                       below.
@@ -363,12 +370,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ipAddresses:
                           description: A list of IP addresses or CIDR ranges that
                             will be skipped for threat detection.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   threatIntelligenceMode:
@@ -459,6 +468,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Firewall Policy. Only
@@ -545,18 +555,21 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               destinationIpGroups:
                                 description: Specifies a list of destination IP groups
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               destinationPorts:
                                 description: Specifies a list of destination IP ports
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               name:
                                 description: The name which should be used for this
                                   bypass traffic setting.
@@ -571,12 +584,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               sourceIpGroups:
                                 description: Specifies a list of source IP groups
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -606,6 +621,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Firewall Policy.
                     type: object
+                    x-kubernetes-map-type: granular
                   threatIntelligenceAllowlist:
                     description: A threat_intelligence_allowlist block as defined
                       below.
@@ -617,12 +633,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ipAddresses:
                           description: A list of IP addresses or CIDR ranges that
                             will be skipped for threat detection.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   threatIntelligenceMode:
@@ -886,6 +904,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Firewall Policy. Only
@@ -972,18 +991,21 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               destinationIpGroups:
                                 description: Specifies a list of destination IP groups
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               destinationPorts:
                                 description: Specifies a list of destination IP ports
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               name:
                                 description: The name which should be used for this
                                   bypass traffic setting.
@@ -998,12 +1020,14 @@ spec:
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                               sourceIpGroups:
                                 description: Specifies a list of source IP groups
                                   that shall be bypassed by intrusion detection.
                                 items:
                                   type: string
                                 type: array
+                                x-kubernetes-list-type: set
                             type: object
                           type: array
                       type: object
@@ -1044,6 +1068,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Firewall Policy.
                     type: object
+                    x-kubernetes-map-type: granular
                   threatIntelligenceAllowlist:
                     description: A threat_intelligence_allowlist block as defined
                       below.
@@ -1055,12 +1080,14 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         ipAddresses:
                           description: A list of IP addresses or CIDR ranges that
                             will be skipped for threat detection.
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                       type: object
                     type: array
                   threatIntelligenceMode:

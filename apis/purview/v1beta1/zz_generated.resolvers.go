@@ -52,5 +52,21 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ManagedResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ManagedResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedResourceGroupName")
+	}
+	mg.Spec.InitProvider.ManagedResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }

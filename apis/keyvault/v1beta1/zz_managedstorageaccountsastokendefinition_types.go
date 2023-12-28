@@ -26,6 +26,7 @@ type ManagedStorageAccountSASTokenDefinitionInitParameters struct {
 	SASType *string `json:"sasType,omitempty" tf:"sas_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Validity period of SAS token. Value needs to be in ISO 8601 duration format.
@@ -50,6 +51,7 @@ type ManagedStorageAccountSASTokenDefinitionObservation struct {
 	SecretID *string `json:"secretId,omitempty" tf:"secret_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Validity period of SAS token. Value needs to be in ISO 8601 duration format.
@@ -82,6 +84,7 @@ type ManagedStorageAccountSASTokenDefinitionParameters struct {
 
 	// A mapping of tags which should be assigned to the SAS Definition. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Validity period of SAS token. Value needs to be in ISO 8601 duration format.

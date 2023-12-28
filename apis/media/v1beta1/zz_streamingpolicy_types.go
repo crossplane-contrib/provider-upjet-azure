@@ -166,6 +166,18 @@ type CommonEncryptionCencDefaultContentKeyInitParameters struct {
 
 	// Label can be used to specify Content Key when creating a Streaming Locator. Changing this forces a new Streaming Policy to be created.
 	Label *string `json:"label,omitempty" tf:"label,omitempty"`
+
+	// Policy used by Default Key. Changing this forces a new Streaming Policy to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.ContentKeyPolicy
+	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
+
+	// Reference to a ContentKeyPolicy in media to populate policyName.
+	// +kubebuilder:validation:Optional
+	PolicyNameRef *v1.Reference `json:"policyNameRef,omitempty" tf:"-"`
+
+	// Selector for a ContentKeyPolicy in media to populate policyName.
+	// +kubebuilder:validation:Optional
+	PolicyNameSelector *v1.Selector `json:"policyNameSelector,omitempty" tf:"-"`
 }
 
 type CommonEncryptionCencDefaultContentKeyObservation struct {

@@ -28,11 +28,35 @@ type CustomParametersInitParameters struct {
 	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
 	NoPublicIP *bool `json:"noPublicIp,omitempty" tf:"no_public_ip,omitempty"`
 
+	// The name of the Private Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	PrivateSubnetName *string `json:"privateSubnetName,omitempty" tf:"private_subnet_name,omitempty"`
+
+	// Reference to a Subnet in network to populate privateSubnetName.
+	// +kubebuilder:validation:Optional
+	PrivateSubnetNameRef *v1.Reference `json:"privateSubnetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate privateSubnetName.
+	// +kubebuilder:validation:Optional
+	PrivateSubnetNameSelector *v1.Selector `json:"privateSubnetNameSelector,omitempty" tf:"-"`
+
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
 	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
+
+	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	PublicSubnetName *string `json:"publicSubnetName,omitempty" tf:"public_subnet_name,omitempty"`
+
+	// Reference to a Subnet in network to populate publicSubnetName.
+	// +kubebuilder:validation:Optional
+	PublicSubnetNameRef *v1.Reference `json:"publicSubnetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate publicSubnetName.
+	// +kubebuilder:validation:Optional
+	PublicSubnetNameSelector *v1.Selector `json:"publicSubnetNameSelector,omitempty" tf:"-"`
 
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the public_subnet_name field. This is the same as the ID of the subnet referred to by the public_subnet_name field. Required if virtual_network_id is set.
 	PublicSubnetNetworkSecurityGroupAssociationID *string `json:"publicSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"public_subnet_network_security_group_association_id,omitempty"`
@@ -217,6 +241,18 @@ type WorkspaceInitParameters struct {
 	// Whether customer managed keys for disk encryption will automatically be rotated to the latest version.
 	ManagedDiskCmkRotationToLatestVersionEnabled *bool `json:"managedDiskCmkRotationToLatestVersionEnabled,omitempty" tf:"managed_disk_cmk_rotation_to_latest_version_enabled,omitempty"`
 
+	// The name of the resource group where Azure should place the managed Databricks resources. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
+	// +kubebuilder:validation:Optional
+	ManagedResourceGroupNameRef *v1.Reference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
+	// +kubebuilder:validation:Optional
+	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Customer managed encryption properties for the Databricks Workspace managed resources(e.g. Notebooks and Artifacts).
 	ManagedServicesCmkKeyVaultKeyID *string `json:"managedServicesCmkKeyVaultKeyId,omitempty" tf:"managed_services_cmk_key_vault_key_id,omitempty"`
 
@@ -230,6 +266,7 @@ type WorkspaceInitParameters struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -290,6 +327,7 @@ type WorkspaceObservation struct {
 	StorageAccountIdentity []StorageAccountIdentityObservation `json:"storageAccountIdentity,omitempty" tf:"storage_account_identity,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The unique identifier of the databricks workspace in Databricks control plane.
@@ -373,6 +411,7 @@ type WorkspaceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

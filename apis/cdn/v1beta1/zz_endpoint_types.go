@@ -78,6 +78,7 @@ type CacheKeyQueryStringActionParameters struct {
 type CookiesConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -96,6 +97,7 @@ type CookiesConditionInitParameters struct {
 type CookiesConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -115,6 +117,7 @@ type CookiesConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -366,6 +369,7 @@ type DeliveryRuleParameters struct {
 type DeviceConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -378,6 +382,7 @@ type DeviceConditionInitParameters struct {
 type DeviceConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -391,6 +396,7 @@ type DeviceConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -405,6 +411,7 @@ type DeviceConditionParameters struct {
 type EndpointInitParameters struct {
 
 	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types.
+	// +listType=set
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
 	// Rules for the rules engine. An endpoint can contain up until 4 of those rules that consist of conditions and actions. A delivery_rule blocks as defined below.
@@ -447,12 +454,14 @@ type EndpointInitParameters struct {
 	QuerystringCachingBehaviour *string `json:"querystringCachingBehaviour,omitempty" tf:"querystring_caching_behaviour,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type EndpointObservation struct {
 
 	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types.
+	// +listType=set
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
 	// Rules for the rules engine. An endpoint can contain up until 4 of those rules that consist of conditions and actions. A delivery_rule blocks as defined below.
@@ -507,6 +516,7 @@ type EndpointObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -514,6 +524,7 @@ type EndpointParameters struct {
 
 	// An array of strings that indicates a content types on which compression will be applied. The value for the elements should be MIME types.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
 	// Rules for the rules engine. An endpoint can contain up until 4 of those rules that consist of conditions and actions. A delivery_rule blocks as defined below.
@@ -596,6 +607,7 @@ type EndpointParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -954,6 +966,7 @@ type GlobalDeliveryRuleURLRewriteActionParameters struct {
 type HTTPVersionConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -966,6 +979,7 @@ type HTTPVersionConditionInitParameters struct {
 type HTTPVersionConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -979,6 +993,7 @@ type HTTPVersionConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1120,6 +1135,7 @@ type OriginParameters struct {
 type PostArgConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1138,6 +1154,7 @@ type PostArgConditionInitParameters struct {
 type PostArgConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1157,6 +1174,7 @@ type PostArgConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1179,6 +1197,7 @@ type PostArgConditionParameters struct {
 type QueryStringConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1194,6 +1213,7 @@ type QueryStringConditionInitParameters struct {
 type QueryStringConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1210,6 +1230,7 @@ type QueryStringConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1228,6 +1249,7 @@ type QueryStringConditionParameters struct {
 type RemoteAddressConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1240,6 +1262,7 @@ type RemoteAddressConditionInitParameters struct {
 type RemoteAddressConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1253,6 +1276,7 @@ type RemoteAddressConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1267,6 +1291,7 @@ type RemoteAddressConditionParameters struct {
 type RequestBodyConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1282,6 +1307,7 @@ type RequestBodyConditionInitParameters struct {
 type RequestBodyConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1298,6 +1324,7 @@ type RequestBodyConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1316,6 +1343,7 @@ type RequestBodyConditionParameters struct {
 type RequestHeaderConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1334,6 +1362,7 @@ type RequestHeaderConditionInitParameters struct {
 type RequestHeaderConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1353,6 +1382,7 @@ type RequestHeaderConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1375,6 +1405,7 @@ type RequestHeaderConditionParameters struct {
 type RequestMethodConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1387,6 +1418,7 @@ type RequestMethodConditionInitParameters struct {
 type RequestMethodConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1400,6 +1432,7 @@ type RequestMethodConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1414,6 +1447,7 @@ type RequestMethodConditionParameters struct {
 type RequestSchemeConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1426,6 +1460,7 @@ type RequestSchemeConditionInitParameters struct {
 type RequestSchemeConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1439,6 +1474,7 @@ type RequestSchemeConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1453,6 +1489,7 @@ type RequestSchemeConditionParameters struct {
 type RequestURIConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1468,6 +1505,7 @@ type RequestURIConditionInitParameters struct {
 type RequestURIConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1484,6 +1522,7 @@ type RequestURIConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1502,6 +1541,7 @@ type RequestURIConditionParameters struct {
 type URLFileExtensionConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1517,6 +1557,7 @@ type URLFileExtensionConditionInitParameters struct {
 type URLFileExtensionConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1533,6 +1574,7 @@ type URLFileExtensionConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1551,6 +1593,7 @@ type URLFileExtensionConditionParameters struct {
 type URLFileNameConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1566,6 +1609,7 @@ type URLFileNameConditionInitParameters struct {
 type URLFileNameConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1582,6 +1626,7 @@ type URLFileNameConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1600,6 +1645,7 @@ type URLFileNameConditionParameters struct {
 type URLPathConditionInitParameters struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1615,6 +1661,7 @@ type URLPathConditionInitParameters struct {
 type URLPathConditionObservation struct {
 
 	// List of string values. This is required if operator is not Any.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.
@@ -1631,6 +1678,7 @@ type URLPathConditionParameters struct {
 
 	// List of string values. This is required if operator is not Any.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// Defaults to false.

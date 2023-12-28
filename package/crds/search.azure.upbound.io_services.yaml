@@ -75,6 +75,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authenticationFailureMode:
                     description: Specifies the response that the Search Service should
                       return for requests that fail authentication. Possible values
@@ -217,6 +218,7 @@ spec:
                     description: Specifies a mapping of tags which should be assigned
                       to this Search Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -238,6 +240,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authenticationFailureMode:
                     description: Specifies the response that the Search Service should
                       return for requests that fail authentication. Possible values
@@ -300,6 +303,7 @@ spec:
                     description: Specifies a mapping of tags which should be assigned
                       to this Search Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -483,6 +487,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authenticationFailureMode:
                     description: Specifies the response that the Search Service should
                       return for requests that fail authentication. Possible values
@@ -573,6 +578,7 @@ spec:
                     description: Specifies a mapping of tags which should be assigned
                       to this Search Service.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

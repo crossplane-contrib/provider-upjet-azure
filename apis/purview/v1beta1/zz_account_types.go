@@ -25,10 +25,23 @@ type AccountInitParameters struct {
 	// The Azure Region where the Purview Account should exist. Changing this forces a new Purview Account to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The name which should be used for the new Resource Group where Purview Account creates the managed resources. Changing this forces a new Purview Account to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
+	// +kubebuilder:validation:Optional
+	ManagedResourceGroupNameRef *v1.Reference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
+	// +kubebuilder:validation:Optional
+	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Should the Purview Account be visible to the public network? Defaults to true.
 	PublicNetworkEnabled *bool `json:"publicNetworkEnabled,omitempty" tf:"public_network_enabled,omitempty"`
 
 	// A mapping of tags which should be assigned to the Purview Account.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -65,6 +78,7 @@ type AccountObservation struct {
 	ScanEndpoint *string `json:"scanEndpoint,omitempty" tf:"scan_endpoint,omitempty"`
 
 	// A mapping of tags which should be assigned to the Purview Account.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -110,12 +124,14 @@ type AccountParameters struct {
 
 	// A mapping of tags which should be assigned to the Purview Account.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Purview Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Purview Account. Possible values are UserAssigned and SystemAssigned.
@@ -125,6 +141,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Purview Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -141,6 +158,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Purview Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Purview Account. Possible values are UserAssigned and SystemAssigned.

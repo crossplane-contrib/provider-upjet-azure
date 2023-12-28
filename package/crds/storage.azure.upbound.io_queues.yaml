@@ -73,6 +73,7 @@ spec:
                     description: A mapping of MetaData which should be assigned to
                       this Storage Queue.
                     type: object
+                    x-kubernetes-map-type: granular
                   storageAccountName:
                     description: Specifies the Storage Account in which the Storage
                       Queue should exist. Changing this forces a new resource to be
@@ -170,6 +171,7 @@ spec:
                     description: A mapping of MetaData which should be assigned to
                       this Storage Queue.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -345,6 +347,7 @@ spec:
                     description: A mapping of MetaData which should be assigned to
                       this Storage Queue.
                     type: object
+                    x-kubernetes-map-type: granular
                   resourceManagerId:
                     description: The Resource Manager ID of this Storage Queue.
                     type: string

@@ -98,6 +98,38 @@ func (mg *Configuration) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ServerNameRef,
+		Selector:     mg.Spec.InitProvider.ServerNameSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerName")
+	}
+	mg.Spec.InitProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -240,6 +272,38 @@ func (mg *FlexibleServer) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DelegatedSubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DelegatedSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.DelegatedSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DelegatedSubnetID")
+	}
+	mg.Spec.InitProvider.DelegatedSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DelegatedSubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateDNSZoneID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PrivateDNSZoneIDRef,
+		Selector:     mg.Spec.InitProvider.PrivateDNSZoneIDSelector,
+		To: reference.To{
+			List:    &v1beta11.PrivateDNSZoneList{},
+			Managed: &v1beta11.PrivateDNSZone{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateDNSZoneID")
+	}
+	mg.Spec.InitProvider.PrivateDNSZoneID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PrivateDNSZoneIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -307,6 +371,22 @@ func (mg *FlexibleServerConfiguration) ResolveReferences(ctx context.Context, c 
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ServerIDRef,
+		Selector:     mg.Spec.InitProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &FlexibleServerList{},
+			Managed: &FlexibleServer{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -428,6 +508,38 @@ func (mg *ServerKey) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta12.KeyList{},
+			Managed: &v1beta12.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
+	}
+	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServerID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ServerIDRef,
+		Selector:     mg.Spec.InitProvider.ServerIDSelector,
+		To: reference.To{
+			List:    &ServerList{},
+			Managed: &Server{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServerID")
+	}
+	mg.Spec.InitProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServerIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -485,6 +597,22 @@ func (mg *VirtualNetworkRule) ResolveReferences(ctx context.Context, c client.Re
 	}
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubnetID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SubnetIDRef,
+		Selector:     mg.Spec.InitProvider.SubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SubnetID")
+	}
+	mg.Spec.InitProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }

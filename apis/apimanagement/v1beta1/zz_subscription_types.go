@@ -25,11 +25,37 @@ type SubscriptionInitParameters struct {
 	// Determines whether tracing can be enabled. Defaults to true.
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 
+	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Product
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ProductID *string `json:"productId,omitempty" tf:"product_id,omitempty"`
+
+	// Reference to a Product to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDRef *v1.Reference `json:"productIdRef,omitempty" tf:"-"`
+
+	// Selector for a Product to populate productId.
+	// +kubebuilder:validation:Optional
+	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
+
 	// The state of this Subscription. Possible values are active, cancelled, expired, rejected, submitted and suspended. Defaults to submitted.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// An Identifier which should used as the ID of this Subscription. If not specified a new Subscription ID will be generated. Changing this forces a new resource to be created.
 	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
+
+	// The ID of the User which should be assigned to this Subscription. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=User
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`
+
+	// Reference to a User to populate userId.
+	// +kubebuilder:validation:Optional
+	UserIDRef *v1.Reference `json:"userIdRef,omitempty" tf:"-"`
+
+	// Selector for a User to populate userId.
+	// +kubebuilder:validation:Optional
+	UserIDSelector *v1.Selector `json:"userIdSelector,omitempty" tf:"-"`
 }
 
 type SubscriptionObservation struct {

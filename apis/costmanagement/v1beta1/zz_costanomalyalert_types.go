@@ -23,6 +23,7 @@ type CostAnomalyAlertInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies a list of email addresses which the Anomaly Alerts are send to.
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The email subject of the Cost Anomaly Alerts. Maximum length of the subject is 70.
@@ -38,6 +39,7 @@ type CostAnomalyAlertObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Specifies a list of email addresses which the Anomaly Alerts are send to.
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The email subject of the Cost Anomaly Alerts. Maximum length of the subject is 70.
@@ -58,6 +60,7 @@ type CostAnomalyAlertParameters struct {
 
 	// Specifies a list of email addresses which the Anomaly Alerts are send to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	EmailAddresses []*string `json:"emailAddresses,omitempty" tf:"email_addresses,omitempty"`
 
 	// The email subject of the Cost Anomaly Alerts. Maximum length of the subject is 70.

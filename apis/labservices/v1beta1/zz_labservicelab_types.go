@@ -204,6 +204,7 @@ type LabServiceLabInitParameters struct {
 	Security []SecurityInitParameters `json:"security,omitempty" tf:"security,omitempty"`
 
 	// A mapping of tags which should be assigned to the Lab Service Lab.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The title of the Lab Service Lab.
@@ -246,6 +247,7 @@ type LabServiceLabObservation struct {
 	Security []SecurityObservation `json:"security,omitempty" tf:"security,omitempty"`
 
 	// A mapping of tags which should be assigned to the Lab Service Lab.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The title of the Lab Service Lab.
@@ -304,6 +306,7 @@ type LabServiceLabParameters struct {
 
 	// A mapping of tags which should be assigned to the Lab Service Lab.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The title of the Lab Service Lab.
@@ -316,6 +319,19 @@ type LabServiceLabParameters struct {
 }
 
 type NetworkInitParameters struct {
+
+	// The resource ID of the Subnet for the network profile of the Lab Service Lab.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkObservation struct {

@@ -32,6 +32,7 @@ type BlobInitParameters struct {
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
 	// A map of custom blob metadata.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The number of workers per CPU core to run for concurrent uploads. Defaults to 8. Changing this forces a new resource to be created.
@@ -71,6 +72,7 @@ type BlobObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// A map of custom blob metadata.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The number of workers per CPU core to run for concurrent uploads. Defaults to 8. Changing this forces a new resource to be created.
@@ -122,6 +124,7 @@ type BlobParameters struct {
 
 	// A map of custom blob metadata.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The number of workers per CPU core to run for concurrent uploads. Defaults to 8. Changing this forces a new resource to be created.

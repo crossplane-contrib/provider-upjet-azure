@@ -32,6 +32,7 @@ type PoolInitParameters struct {
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -59,6 +60,7 @@ type PoolObservation struct {
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -108,6 +110,7 @@ type PoolParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

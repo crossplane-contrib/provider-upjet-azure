@@ -23,12 +23,14 @@ type AppActionHTTPInitParameters struct {
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	// +mapType=granular
 	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Specifies the HTTP Method which should be used for this HTTP Action. Possible values include DELETE, GET, PATCH, POST and PUT.
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	// +mapType=granular
 	Queries map[string]*string `json:"queries,omitempty" tf:"queries,omitempty"`
 
 	// Specifies the place of the HTTP Action in the Logic App Workflow. If not specified, the HTTP Action is right after the Trigger. A run_after block is as defined below.
@@ -44,6 +46,7 @@ type AppActionHTTPObservation struct {
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	// +mapType=granular
 	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The ID of the HTTP Action within the Logic App Workflow.
@@ -56,6 +59,7 @@ type AppActionHTTPObservation struct {
 	Method *string `json:"method,omitempty" tf:"method,omitempty"`
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
+	// +mapType=granular
 	Queries map[string]*string `json:"queries,omitempty" tf:"queries,omitempty"`
 
 	// Specifies the place of the HTTP Action in the Logic App Workflow. If not specified, the HTTP Action is right after the Trigger. A run_after block is as defined below.
@@ -73,6 +77,7 @@ type AppActionHTTPParameters struct {
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Headers map[string]*string `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
@@ -95,6 +100,7 @@ type AppActionHTTPParameters struct {
 
 	// Specifies a Map of Key-Value Pairs that should be sent to the uri when this HTTP Action is triggered.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Queries map[string]*string `json:"queries,omitempty" tf:"queries,omitempty"`
 
 	// Specifies the place of the HTTP Action in the Logic App Workflow. If not specified, the HTTP Action is right after the Trigger. A run_after block is as defined below.

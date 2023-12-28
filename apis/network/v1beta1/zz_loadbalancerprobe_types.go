@@ -46,6 +46,7 @@ type LoadBalancerProbeObservation struct {
 	// The interval, in seconds between probes to the backend endpoint for health status. The default value is 15, the minimum value is 5.
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
+	// +listType=set
 	LoadBalancerRules []*string `json:"loadBalancerRules,omitempty" tf:"load_balancer_rules,omitempty"`
 
 	// The ID of the LoadBalancer in which to create the NAT Rule. Changing this forces a new resource to be created.

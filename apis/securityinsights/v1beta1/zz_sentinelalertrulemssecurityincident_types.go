@@ -29,9 +29,11 @@ type SentinelAlertRuleMSSecurityIncidentInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Only create incidents when the alert display name doesn't contain text from this list.
+	// +listType=set
 	DisplayNameExcludeFilter []*string `json:"displayNameExcludeFilter,omitempty" tf:"display_name_exclude_filter,omitempty"`
 
 	// Only create incidents when the alert display name contain text from this list, leave empty to apply no filter.
+	// +listType=set
 	DisplayNameFilter []*string `json:"displayNameFilter,omitempty" tf:"display_name_filter,omitempty"`
 
 	// Should this Sentinel MS Security Incident Alert Rule be enabled? Defaults to true.
@@ -41,6 +43,7 @@ type SentinelAlertRuleMSSecurityIncidentInitParameters struct {
 	ProductFilter *string `json:"productFilter,omitempty" tf:"product_filter,omitempty"`
 
 	// Only create incidents from alerts when alert severity level is contained in this list. Possible values are High, Medium, Low and Informational.
+	// +listType=set
 	SeverityFilter []*string `json:"severityFilter,omitempty" tf:"severity_filter,omitempty"`
 }
 
@@ -56,9 +59,11 @@ type SentinelAlertRuleMSSecurityIncidentObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Only create incidents when the alert display name doesn't contain text from this list.
+	// +listType=set
 	DisplayNameExcludeFilter []*string `json:"displayNameExcludeFilter,omitempty" tf:"display_name_exclude_filter,omitempty"`
 
 	// Only create incidents when the alert display name contain text from this list, leave empty to apply no filter.
+	// +listType=set
 	DisplayNameFilter []*string `json:"displayNameFilter,omitempty" tf:"display_name_filter,omitempty"`
 
 	// Should this Sentinel MS Security Incident Alert Rule be enabled? Defaults to true.
@@ -74,6 +79,7 @@ type SentinelAlertRuleMSSecurityIncidentObservation struct {
 	ProductFilter *string `json:"productFilter,omitempty" tf:"product_filter,omitempty"`
 
 	// Only create incidents from alerts when alert severity level is contained in this list. Possible values are High, Medium, Low and Informational.
+	// +listType=set
 	SeverityFilter []*string `json:"severityFilter,omitempty" tf:"severity_filter,omitempty"`
 }
 
@@ -93,10 +99,12 @@ type SentinelAlertRuleMSSecurityIncidentParameters struct {
 
 	// Only create incidents when the alert display name doesn't contain text from this list.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DisplayNameExcludeFilter []*string `json:"displayNameExcludeFilter,omitempty" tf:"display_name_exclude_filter,omitempty"`
 
 	// Only create incidents when the alert display name contain text from this list, leave empty to apply no filter.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DisplayNameFilter []*string `json:"displayNameFilter,omitempty" tf:"display_name_filter,omitempty"`
 
 	// Should this Sentinel MS Security Incident Alert Rule be enabled? Defaults to true.
@@ -123,6 +131,7 @@ type SentinelAlertRuleMSSecurityIncidentParameters struct {
 
 	// Only create incidents from alerts when alert severity level is contained in this list. Possible values are High, Medium, Low and Informational.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SeverityFilter []*string `json:"severityFilter,omitempty" tf:"severity_filter,omitempty"`
 }
 

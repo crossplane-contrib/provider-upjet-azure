@@ -78,7 +78,21 @@ type DataLakeGen2FileSystemInitParameters struct {
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// A mapping of Key to Base64-Encoded Values which should be assigned to this Data Lake Gen2 File System.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
+
+	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type DataLakeGen2FileSystemObservation struct {
@@ -96,6 +110,7 @@ type DataLakeGen2FileSystemObservation struct {
 	Owner *string `json:"owner,omitempty" tf:"owner,omitempty"`
 
 	// A mapping of Key to Base64-Encoded Values which should be assigned to this Data Lake Gen2 File System.
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.
@@ -118,6 +133,7 @@ type DataLakeGen2FileSystemParameters struct {
 
 	// A mapping of Key to Base64-Encoded Values which should be assigned to this Data Lake Gen2 File System.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Properties map[string]*string `json:"properties,omitempty" tf:"properties,omitempty"`
 
 	// Specifies the ID of the Storage Account in which the Data Lake Gen2 File System should exist. Changing this forces a new resource to be created.

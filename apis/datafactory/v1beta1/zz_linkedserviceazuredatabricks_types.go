@@ -72,6 +72,7 @@ type LinkedServiceAzureDatabricksInitParameters struct {
 	AdbDomain *string `json:"adbDomain,omitempty" tf:"adb_domain,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -92,10 +93,24 @@ type LinkedServiceAzureDatabricksInitParameters struct {
 	// Authenticate to ADB via Azure Key Vault Linked Service as defined in the key_vault_password block below.
 	KeyVaultPassword []LinkedServiceAzureDatabricksKeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
+	// Authenticate to ADB via managed service identity.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/databricks/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MsiWorkSpaceResourceID *string `json:"msiWorkSpaceResourceId,omitempty" tf:"msi_work_space_resource_id,omitempty"`
+
+	// Reference to a Workspace in databricks to populate msiWorkSpaceResourceId.
+	// +kubebuilder:validation:Optional
+	MsiWorkSpaceResourceIDRef *v1.Reference `json:"msiWorkSpaceResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in databricks to populate msiWorkSpaceResourceId.
+	// +kubebuilder:validation:Optional
+	MsiWorkSpaceResourceIDSelector *v1.Selector `json:"msiWorkSpaceResourceIdSelector,omitempty" tf:"-"`
+
 	// Creates new clusters within the linked ADB instance as defined in the new_cluster_config block below.
 	NewClusterConfig []NewClusterConfigInitParameters `json:"newClusterConfig,omitempty" tf:"new_cluster_config,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -134,6 +149,7 @@ type LinkedServiceAzureDatabricksObservation struct {
 	AdbDomain *string `json:"adbDomain,omitempty" tf:"adb_domain,omitempty"`
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -167,6 +183,7 @@ type LinkedServiceAzureDatabricksObservation struct {
 	NewClusterConfig []NewClusterConfigObservation `json:"newClusterConfig,omitempty" tf:"new_cluster_config,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -182,6 +199,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -242,6 +260,7 @@ type LinkedServiceAzureDatabricksParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 }
 
@@ -251,6 +270,7 @@ type NewClusterConfigInitParameters struct {
 	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
 
 	// Tags for the cluster resource.
+	// +mapType=granular
 	CustomTags map[string]*string `json:"customTags,omitempty" tf:"custom_tags,omitempty"`
 
 	// Driver node type for the cluster.
@@ -272,9 +292,11 @@ type NewClusterConfigInitParameters struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// User-specified Spark configuration variables key-value pairs.
+	// +mapType=granular
 	SparkConfig map[string]*string `json:"sparkConfig,omitempty" tf:"spark_config,omitempty"`
 
 	// User-specified Spark environment variables key-value pairs.
+	// +mapType=granular
 	SparkEnvironmentVariables map[string]*string `json:"sparkEnvironmentVariables,omitempty" tf:"spark_environment_variables,omitempty"`
 }
 
@@ -284,6 +306,7 @@ type NewClusterConfigObservation struct {
 	ClusterVersion *string `json:"clusterVersion,omitempty" tf:"cluster_version,omitempty"`
 
 	// Tags for the cluster resource.
+	// +mapType=granular
 	CustomTags map[string]*string `json:"customTags,omitempty" tf:"custom_tags,omitempty"`
 
 	// Driver node type for the cluster.
@@ -305,9 +328,11 @@ type NewClusterConfigObservation struct {
 	NodeType *string `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
 	// User-specified Spark configuration variables key-value pairs.
+	// +mapType=granular
 	SparkConfig map[string]*string `json:"sparkConfig,omitempty" tf:"spark_config,omitempty"`
 
 	// User-specified Spark environment variables key-value pairs.
+	// +mapType=granular
 	SparkEnvironmentVariables map[string]*string `json:"sparkEnvironmentVariables,omitempty" tf:"spark_environment_variables,omitempty"`
 }
 
@@ -319,6 +344,7 @@ type NewClusterConfigParameters struct {
 
 	// Tags for the cluster resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	CustomTags map[string]*string `json:"customTags,omitempty" tf:"custom_tags,omitempty"`
 
 	// Driver node type for the cluster.
@@ -347,10 +373,12 @@ type NewClusterConfigParameters struct {
 
 	// User-specified Spark configuration variables key-value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	SparkConfig map[string]*string `json:"sparkConfig,omitempty" tf:"spark_config,omitempty"`
 
 	// User-specified Spark environment variables key-value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	SparkEnvironmentVariables map[string]*string `json:"sparkEnvironmentVariables,omitempty" tf:"spark_environment_variables,omitempty"`
 }
 

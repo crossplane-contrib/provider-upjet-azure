@@ -18,6 +18,32 @@ import (
 )
 
 type NetworkInterfaceApplicationSecurityGroupAssociationInitParameters struct {
+
+	// The ID of the Application Security Group which this Network Interface which should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=ApplicationSecurityGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ApplicationSecurityGroupID *string `json:"applicationSecurityGroupId,omitempty" tf:"application_security_group_id,omitempty"`
+
+	// Reference to a ApplicationSecurityGroup to populate applicationSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	ApplicationSecurityGroupIDRef *v1.Reference `json:"applicationSecurityGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationSecurityGroup to populate applicationSecurityGroupId.
+	// +kubebuilder:validation:Optional
+	ApplicationSecurityGroupIDSelector *v1.Selector `json:"applicationSecurityGroupIdSelector,omitempty" tf:"-"`
+
+	// The ID of the Network Interface. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=NetworkInterface
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	NetworkInterfaceID *string `json:"networkInterfaceId,omitempty" tf:"network_interface_id,omitempty"`
+
+	// Reference to a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDRef *v1.Reference `json:"networkInterfaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a NetworkInterface to populate networkInterfaceId.
+	// +kubebuilder:validation:Optional
+	NetworkInterfaceIDSelector *v1.Selector `json:"networkInterfaceIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkInterfaceApplicationSecurityGroupAssociationObservation struct {

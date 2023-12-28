@@ -27,6 +27,19 @@ type ManagementLockInitParameters struct {
 
 	// Specifies some notes about the lock. Maximum of 512 characters. Changing this forces a new resource to be created.
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
+
+	// Specifies the scope at which the Management Lock should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate scope.
+	// +kubebuilder:validation:Optional
+	ScopeRef *v1.Reference `json:"scopeRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate scope.
+	// +kubebuilder:validation:Optional
+	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
 }
 
 type ManagementLockObservation struct {

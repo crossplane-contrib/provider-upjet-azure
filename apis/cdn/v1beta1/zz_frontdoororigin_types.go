@@ -34,6 +34,32 @@ type FrontdoorOriginInitParameters struct {
 	// Should the origin be enabled? Possible values are true or false. Defaults to true.
 	HealthProbesEnabled *bool `json:"healthProbesEnabled,omitempty" tf:"health_probes_enabled,omitempty"`
 
+	// The IPv4 address, IPv6 address or Domain name of the Origin.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_host",true)
+	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
+
+	// Reference to a Account in storage to populate hostName.
+	// +kubebuilder:validation:Optional
+	HostNameRef *v1.Reference `json:"hostNameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate hostName.
+	// +kubebuilder:validation:Optional
+	HostNameSelector *v1.Selector `json:"hostNameSelector,omitempty" tf:"-"`
+
+	// The host header value (an IPv4 address, IPv6 address or Domain name) which is sent to the origin with each request. If unspecified the hostname from the request will be used.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_host",true)
+	OriginHostHeader *string `json:"originHostHeader,omitempty" tf:"origin_host_header,omitempty"`
+
+	// Reference to a Account in storage to populate originHostHeader.
+	// +kubebuilder:validation:Optional
+	OriginHostHeaderRef *v1.Reference `json:"originHostHeaderRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate originHostHeader.
+	// +kubebuilder:validation:Optional
+	OriginHostHeaderSelector *v1.Selector `json:"originHostHeaderSelector,omitempty" tf:"-"`
+
 	// Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy. Must be between 1 and 5 (inclusive). Defaults to 1.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
@@ -161,6 +187,32 @@ type FrontdoorOriginParameters struct {
 }
 
 type PrivateLinkInitParameters struct {
+
+	// Specifies the location where the Private Link resource should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Reference to a Account in storage to populate location.
+	// +kubebuilder:validation:Optional
+	LocationRef *v1.Reference `json:"locationRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate location.
+	// +kubebuilder:validation:Optional
+	LocationSelector *v1.Selector `json:"locationSelector,omitempty" tf:"-"`
+
+	// The ID of the Azure Resource to connect to via the Private Link.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	PrivateLinkTargetID *string `json:"privateLinkTargetId,omitempty" tf:"private_link_target_id,omitempty"`
+
+	// Reference to a Account in storage to populate privateLinkTargetId.
+	// +kubebuilder:validation:Optional
+	PrivateLinkTargetIDRef *v1.Reference `json:"privateLinkTargetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate privateLinkTargetId.
+	// +kubebuilder:validation:Optional
+	PrivateLinkTargetIDSelector *v1.Selector `json:"privateLinkTargetIdSelector,omitempty" tf:"-"`
 
 	// Specifies the request message that will be submitted to the private_link_target_id when requesting the private link endpoint connection. Values must be between 1 and 140 characters in length. Defaults to Access request for CDN FrontDoor Private Link Origin.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`

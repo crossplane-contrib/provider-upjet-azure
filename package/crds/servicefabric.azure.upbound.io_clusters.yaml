@@ -73,6 +73,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   azureActiveDirectory:
                     description: An azure_active_directory block as defined below.
                     items:
@@ -204,6 +205,7 @@ spec:
                           description: A map containing settings for the specified
                             Fabric Setting.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   location:
@@ -241,6 +243,7 @@ spec:
                             node type, the cluster resource manager uses these tags
                             to understand how much resource a node has.
                           type: object
+                          x-kubernetes-map-type: granular
                         clientEndpointPort:
                           description: The Port used for the Client Endpoint for this
                             Node Type.
@@ -289,6 +292,7 @@ spec:
                             node type, which can be used to indicate where certain
                             services (workload) should run.
                           type: object
+                          x-kubernetes-map-type: granular
                         reverseProxyEndpointPort:
                           description: The Port used for the Reverse Proxy Endpoint
                             for this Node Type. Changing this will upgrade the cluster.
@@ -428,6 +432,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   upgradeMode:
                     description: Specifies the Upgrade Mode of the cluster. Possible
                       values are Automatic or Manual.
@@ -558,6 +563,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   azureActiveDirectory:
                     description: An azure_active_directory block as defined below.
                     items:
@@ -689,6 +695,7 @@ spec:
                           description: A map containing settings for the specified
                             Fabric Setting.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   location:
@@ -726,6 +733,7 @@ spec:
                             node type, the cluster resource manager uses these tags
                             to understand how much resource a node has.
                           type: object
+                          x-kubernetes-map-type: granular
                         clientEndpointPort:
                           description: The Port used for the Client Endpoint for this
                             Node Type.
@@ -774,6 +782,7 @@ spec:
                             node type, which can be used to indicate where certain
                             services (workload) should run.
                           type: object
+                          x-kubernetes-map-type: granular
                         reverseProxyEndpointPort:
                           description: The Port used for the Reverse Proxy Endpoint
                             for this Node Type. Changing this will upgrade the cluster.
@@ -833,6 +842,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   upgradeMode:
                     description: Specifies the Upgrade Mode of the cluster. Possible
                       values are Automatic or Manual.
@@ -1141,6 +1151,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   azureActiveDirectory:
                     description: An azure_active_directory block as defined below.
                     items:
@@ -1275,6 +1286,7 @@ spec:
                           description: A map containing settings for the specified
                             Fabric Setting.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   id:
@@ -1315,6 +1327,7 @@ spec:
                             node type, the cluster resource manager uses these tags
                             to understand how much resource a node has.
                           type: object
+                          x-kubernetes-map-type: granular
                         clientEndpointPort:
                           description: The Port used for the Client Endpoint for this
                             Node Type.
@@ -1363,6 +1376,7 @@ spec:
                             node type, which can be used to indicate where certain
                             services (workload) should run.
                           type: object
+                          x-kubernetes-map-type: granular
                         reverseProxyEndpointPort:
                           description: The Port used for the Reverse Proxy Endpoint
                             for this Node Type. Changing this will upgrade the cluster.
@@ -1427,6 +1441,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   upgradeMode:
                     description: Specifies the Upgrade Mode of the cluster. Possible
                       values are Automatic or Manual.

@@ -229,6 +229,7 @@ type HBaseClusterInitParameters struct {
 	TLSMinVersion *string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
 
 	// A map of Tags which should be assigned to this HDInsight HBase Cluster.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight HBase Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
@@ -386,6 +387,7 @@ type HBaseClusterObservation struct {
 	TLSMinVersion *string `json:"tlsMinVersion,omitempty" tf:"tls_min_version,omitempty"`
 
 	// A map of Tags which should be assigned to this HDInsight HBase Cluster.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight HBase Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
@@ -469,6 +471,7 @@ type HBaseClusterParameters struct {
 
 	// A map of Tags which should be assigned to this HDInsight HBase Cluster.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Tier which should be used for this HDInsight HBase Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
@@ -521,6 +524,7 @@ type HBaseClusterSecurityProfileInitParameters struct {
 	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
+	// +listType=set
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -530,6 +534,7 @@ type HBaseClusterSecurityProfileInitParameters struct {
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
+	// +listType=set
 	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
@@ -542,6 +547,7 @@ type HBaseClusterSecurityProfileObservation struct {
 	AaddsResourceID *string `json:"aaddsResourceId,omitempty" tf:"aadds_resource_id,omitempty"`
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
+	// +listType=set
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -551,6 +557,7 @@ type HBaseClusterSecurityProfileObservation struct {
 	DomainUsername *string `json:"domainUsername,omitempty" tf:"domain_username,omitempty"`
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
+	// +listType=set
 	LdapsUrls []*string `json:"ldapsUrls,omitempty" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
@@ -565,6 +572,7 @@ type HBaseClusterSecurityProfileParameters struct {
 
 	// A list of the distinguished names for the cluster user groups. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ClusterUsersGroupDNS []*string `json:"clusterUsersGroupDns,omitempty" tf:"cluster_users_group_dns,omitempty"`
 
 	// The name of the Azure Active Directory Domain. Changing this forces a new resource to be created.
@@ -581,6 +589,7 @@ type HBaseClusterSecurityProfileParameters struct {
 
 	// A list of the LDAPS URLs to communicate with the Azure Active Directory. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LdapsUrls []*string `json:"ldapsUrls" tf:"ldaps_urls,omitempty"`
 
 	// The User Assigned Identity for the HDInsight Cluster. Changing this forces a new resource to be created.
@@ -641,6 +650,19 @@ type HBaseClusterStorageAccountInitParameters struct {
 
 	// Is this the Default Storage Account for the HDInsight Hadoop Cluster? Changing this forces a new resource to be created.
 	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// The ID of the Storage Container. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
+
+	// Reference to a Container in storage to populate storageContainerId.
+	// +kubebuilder:validation:Optional
+	StorageContainerIDRef *v1.Reference `json:"storageContainerIdRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate storageContainerId.
+	// +kubebuilder:validation:Optional
+	StorageContainerIDSelector *v1.Selector `json:"storageContainerIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Storage Account. Changing this forces a new resource to be created.
 	StorageResourceID *string `json:"storageResourceId,omitempty" tf:"storage_resource_id,omitempty"`
@@ -889,10 +911,24 @@ type RecurrenceScheduleParameters struct {
 type RolesHeadNodeInitParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	ScriptActions []HeadNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -907,6 +943,7 @@ type RolesHeadNodeInitParameters struct {
 type RolesHeadNodeObservation struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -933,6 +970,7 @@ type RolesHeadNodeParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -970,10 +1008,24 @@ type RolesWorkerNodeInitParameters struct {
 	Autoscale []WorkerNodeAutoscaleInitParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	ScriptActions []RolesWorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
@@ -992,6 +1044,7 @@ type RolesWorkerNodeObservation struct {
 	Autoscale []WorkerNodeAutoscaleObservation `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -1024,6 +1077,7 @@ type RolesWorkerNodeParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -1103,10 +1157,24 @@ type RolesWorkerNodeScriptActionsParameters struct {
 type RolesZookeeperNodeInitParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
 	ScriptActions []RolesZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// The Username of the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
@@ -1121,6 +1189,7 @@ type RolesZookeeperNodeInitParameters struct {
 type RolesZookeeperNodeObservation struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.
@@ -1147,6 +1216,7 @@ type RolesZookeeperNodeParameters struct {
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
 	// The script action which will run on the cluster. Changing this forces a new resource to be created.

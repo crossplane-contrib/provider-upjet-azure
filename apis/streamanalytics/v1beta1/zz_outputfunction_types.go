@@ -25,8 +25,33 @@ type OutputFunctionInitParameters struct {
 	// The maximum batch size in bytes that's sent to the function. Defaults to 262144 (256 kB).
 	BatchMaxInBytes *float64 `json:"batchMaxInBytes,omitempty" tf:"batch_max_in_bytes,omitempty"`
 
+	// The name of the Function App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.FunctionApp
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	FunctionApp *string `json:"functionApp,omitempty" tf:"function_app,omitempty"`
+
+	// Reference to a FunctionApp in web to populate functionApp.
+	// +kubebuilder:validation:Optional
+	FunctionAppRef *v1.Reference `json:"functionAppRef,omitempty" tf:"-"`
+
+	// Selector for a FunctionApp in web to populate functionApp.
+	// +kubebuilder:validation:Optional
+	FunctionAppSelector *v1.Selector `json:"functionAppSelector,omitempty" tf:"-"`
+
 	// The name of the function in the Function App.
 	FunctionName *string `json:"functionName,omitempty" tf:"function_name,omitempty"`
+
+	// The name of the Stream Analytics Job. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/streamanalytics/v1beta1.Job
+	StreamAnalyticsJobName *string `json:"streamAnalyticsJobName,omitempty" tf:"stream_analytics_job_name,omitempty"`
+
+	// Reference to a Job in streamanalytics to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameRef *v1.Reference `json:"streamAnalyticsJobNameRef,omitempty" tf:"-"`
+
+	// Selector for a Job in streamanalytics to populate streamAnalyticsJobName.
+	// +kubebuilder:validation:Optional
+	StreamAnalyticsJobNameSelector *v1.Selector `json:"streamAnalyticsJobNameSelector,omitempty" tf:"-"`
 }
 
 type OutputFunctionObservation struct {

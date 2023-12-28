@@ -95,6 +95,7 @@ spec:
                           description: A list of user defined properties to be included
                             in the filter. Specified as a map of name/value pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         replyTo:
                           description: Address of the queue to reply to.
                           type: string
@@ -239,6 +240,7 @@ spec:
                           description: A list of user defined properties to be included
                             in the filter. Specified as a map of name/value pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         replyTo:
                           description: Address of the queue to reply to.
                           type: string
@@ -461,6 +463,7 @@ spec:
                           description: A list of user defined properties to be included
                             in the filter. Specified as a map of name/value pairs.
                           type: object
+                          x-kubernetes-map-type: granular
                         replyTo:
                           description: Address of the queue to reply to.
                           type: string

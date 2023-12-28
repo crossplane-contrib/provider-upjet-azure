@@ -24,6 +24,19 @@ type ManagedDiskSASTokenInitParameters struct {
 
 	// The duration for which the export should be allowed. Should be between 30 & 4294967295 seconds. Changing this forces a new resource to be created.
 	DurationInSeconds *float64 `json:"durationInSeconds,omitempty" tf:"duration_in_seconds,omitempty"`
+
+	// The ID of an existing Managed Disk which should be exported. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
+
+	// Reference to a ManagedDisk in compute to populate managedDiskId.
+	// +kubebuilder:validation:Optional
+	ManagedDiskIDRef *v1.Reference `json:"managedDiskIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagedDisk in compute to populate managedDiskId.
+	// +kubebuilder:validation:Optional
+	ManagedDiskIDSelector *v1.Selector `json:"managedDiskIdSelector,omitempty" tf:"-"`
 }
 
 type ManagedDiskSASTokenObservation struct {

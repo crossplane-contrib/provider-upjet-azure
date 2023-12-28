@@ -20,30 +20,38 @@ import (
 type AllowRuleInitParameters struct {
 
 	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
+	// +listType=set
 	ConnectionFromIpsNotAllowed []*string `json:"connectionFromIpsNotAllowed,omitempty" tf:"connection_from_ips_not_allowed,omitempty"`
 
 	// Specifies which IP is not allowed to be connected to in current device group for outbound connection.
+	// +listType=set
 	ConnectionToIpsNotAllowed []*string `json:"connectionToIpsNotAllowed,omitempty" tf:"connection_to_ips_not_allowed,omitempty"`
 
 	// Specifies which local user is not allowed to login in current device group.
+	// +listType=set
 	LocalUsersNotAllowed []*string `json:"localUsersNotAllowed,omitempty" tf:"local_users_not_allowed,omitempty"`
 
 	// Specifies which process is not allowed to be executed in current device group.
+	// +listType=set
 	ProcessesNotAllowed []*string `json:"processesNotAllowed,omitempty" tf:"processes_not_allowed,omitempty"`
 }
 
 type AllowRuleObservation struct {
 
 	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
+	// +listType=set
 	ConnectionFromIpsNotAllowed []*string `json:"connectionFromIpsNotAllowed,omitempty" tf:"connection_from_ips_not_allowed,omitempty"`
 
 	// Specifies which IP is not allowed to be connected to in current device group for outbound connection.
+	// +listType=set
 	ConnectionToIpsNotAllowed []*string `json:"connectionToIpsNotAllowed,omitempty" tf:"connection_to_ips_not_allowed,omitempty"`
 
 	// Specifies which local user is not allowed to login in current device group.
+	// +listType=set
 	LocalUsersNotAllowed []*string `json:"localUsersNotAllowed,omitempty" tf:"local_users_not_allowed,omitempty"`
 
 	// Specifies which process is not allowed to be executed in current device group.
+	// +listType=set
 	ProcessesNotAllowed []*string `json:"processesNotAllowed,omitempty" tf:"processes_not_allowed,omitempty"`
 }
 
@@ -51,18 +59,22 @@ type AllowRuleParameters struct {
 
 	// Specifies which IP is not allowed to be connected to in current device group for inbound connection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ConnectionFromIpsNotAllowed []*string `json:"connectionFromIpsNotAllowed,omitempty" tf:"connection_from_ips_not_allowed,omitempty"`
 
 	// Specifies which IP is not allowed to be connected to in current device group for outbound connection.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ConnectionToIpsNotAllowed []*string `json:"connectionToIpsNotAllowed,omitempty" tf:"connection_to_ips_not_allowed,omitempty"`
 
 	// Specifies which local user is not allowed to login in current device group.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LocalUsersNotAllowed []*string `json:"localUsersNotAllowed,omitempty" tf:"local_users_not_allowed,omitempty"`
 
 	// Specifies which process is not allowed to be executed in current device group.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ProcessesNotAllowed []*string `json:"processesNotAllowed,omitempty" tf:"processes_not_allowed,omitempty"`
 }
 
@@ -70,6 +82,19 @@ type IOTSecurityDeviceGroupInitParameters struct {
 
 	// an allow_rule blocks as defined below.
 	AllowRule []AllowRuleInitParameters `json:"allowRule,omitempty" tf:"allow_rule,omitempty"`
+
+	// The ID of the IoT Hub which to link the Security Device Group to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
+
+	// Reference to a IOTHub in devices to populate iothubId.
+	// +kubebuilder:validation:Optional
+	IOTHubIDRef *v1.Reference `json:"iothubIdRef,omitempty" tf:"-"`
+
+	// Selector for a IOTHub in devices to populate iothubId.
+	// +kubebuilder:validation:Optional
+	IOTHubIDSelector *v1.Selector `json:"iothubIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Device Security Group. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

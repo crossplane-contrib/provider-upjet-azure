@@ -44,6 +44,19 @@ type LoadBalancerOutboundRuleInitParameters struct {
 	// The number of outbound ports to be used for NAT. Defaults to 1024.
 	AllocatedOutboundPorts *float64 `json:"allocatedOutboundPorts,omitempty" tf:"allocated_outbound_ports,omitempty"`
 
+	// The ID of the Backend Address Pool. Outbound traffic is randomly load balanced across IPs in the backend IPs.
+	// +crossplane:generate:reference:type=LoadBalancerBackendAddressPool
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
+
+	// Reference to a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
+	// +kubebuilder:validation:Optional
+	BackendAddressPoolIDRef *v1.Reference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a LoadBalancerBackendAddressPool to populate backendAddressPoolId.
+	// +kubebuilder:validation:Optional
+	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+
 	// Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP.
 	EnableTCPReset *bool `json:"enableTcpReset,omitempty" tf:"enable_tcp_reset,omitempty"`
 

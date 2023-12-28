@@ -161,6 +161,22 @@ func (mg *DiskEncryptionSet) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
+		Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
+		To: reference.To{
+			List:    &v1beta11.KeyList{},
+			Managed: &v1beta11.Key{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
+	}
+	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -249,6 +265,58 @@ func (mg *GalleryApplicationVersion) ResolveReferences(ctx context.Context, c cl
 		mg.Spec.ForProvider.TargetRegion[i3].NameRef = rsp.ResolvedReference
 
 	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.GalleryApplicationID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.GalleryApplicationIDRef,
+		Selector:     mg.Spec.InitProvider.GalleryApplicationIDSelector,
+		To: reference.To{
+			List:    &GalleryApplicationList{},
+			Managed: &GalleryApplication{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.GalleryApplicationID")
+	}
+	mg.Spec.InitProvider.GalleryApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.GalleryApplicationIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Source); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source[i3].MediaLink),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.Source[i3].MediaLinkRef,
+			Selector:     mg.Spec.InitProvider.Source[i3].MediaLinkSelector,
+			To: reference.To{
+				List:    &v1beta12.BlobList{},
+				Managed: &v1beta12.Blob{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Source[i3].MediaLink")
+		}
+		mg.Spec.InitProvider.Source[i3].MediaLink = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Source[i3].MediaLinkRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.TargetRegion); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetRegion[i3].Name),
+			Extract:      resource.ExtractParamPath("location", false),
+			Reference:    mg.Spec.InitProvider.TargetRegion[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.TargetRegion[i3].NameSelector,
+			To: reference.To{
+				List:    &GalleryApplicationList{},
+				Managed: &GalleryApplication{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.TargetRegion[i3].Name")
+		}
+		mg.Spec.InitProvider.TargetRegion[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.TargetRegion[i3].NameRef = rsp.ResolvedReference
+
+	}
 
 	return nil
 }
@@ -319,6 +387,22 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.InitProvider.NetworkInterfaceIdsRefs,
+		Selector:      mg.Spec.InitProvider.NetworkInterfaceIdsSelector,
+		To: reference.To{
+			List:    &v1beta13.NetworkInterfaceList{},
+			Managed: &v1beta13.NetworkInterface{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterfaceIds")
+	}
+	mg.Spec.InitProvider.NetworkInterfaceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.NetworkInterfaceIdsRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -365,6 +449,27 @@ func (mg *LinuxVirtualMachineScaleSet) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+
 	return nil
 }
 
@@ -407,6 +512,22 @@ func (mg *ManagedDisk) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.SourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SourceResourceIDRef,
+		Selector:     mg.Spec.InitProvider.SourceResourceIDSelector,
+		To: reference.To{
+			List:    &ManagedDiskList{},
+			Managed: &ManagedDisk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceResourceID")
+	}
+	mg.Spec.InitProvider.SourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -432,6 +553,22 @@ func (mg *ManagedDiskSASToken) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.ManagedDiskID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagedDiskIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedDiskID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ManagedDiskIDRef,
+		Selector:     mg.Spec.InitProvider.ManagedDiskIDSelector,
+		To: reference.To{
+			List:    &ManagedDiskList{},
+			Managed: &ManagedDisk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedDiskID")
+	}
+	mg.Spec.InitProvider.ManagedDiskID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedDiskIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -478,6 +615,27 @@ func (mg *OrchestratedVirtualMachineScaleSet) ResolveReferences(ctx context.Cont
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -641,6 +799,22 @@ func (mg *Snapshot) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.SourceURI = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SourceURIRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SourceURI),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SourceURIRef,
+		Selector:     mg.Spec.InitProvider.SourceURISelector,
+		To: reference.To{
+			List:    &ManagedDiskList{},
+			Managed: &ManagedDisk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SourceURI")
+	}
+	mg.Spec.InitProvider.SourceURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SourceURIRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -682,6 +856,38 @@ func (mg *VirtualMachineDataDiskAttachment) ResolveReferences(ctx context.Contex
 	}
 	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedDiskID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ManagedDiskIDRef,
+		Selector:     mg.Spec.InitProvider.ManagedDiskIDSelector,
+		To: reference.To{
+			List:    &ManagedDiskList{},
+			Managed: &ManagedDisk{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedDiskID")
+	}
+	mg.Spec.InitProvider.ManagedDiskID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedDiskIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualMachineID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualMachineIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualMachineIDSelector,
+		To: reference.To{
+			List:    &LinuxVirtualMachineList{},
+			Managed: &LinuxVirtualMachine{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualMachineID")
+	}
+	mg.Spec.InitProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualMachineIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -752,6 +958,22 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+		CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkInterfaceIds),
+		Extract:       rconfig.ExtractResourceID(),
+		References:    mg.Spec.InitProvider.NetworkInterfaceIdsRefs,
+		Selector:      mg.Spec.InitProvider.NetworkInterfaceIdsSelector,
+		To: reference.To{
+			List:    &v1beta13.NetworkInterfaceList{},
+			Managed: &v1beta13.NetworkInterface{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterfaceIds")
+	}
+	mg.Spec.InitProvider.NetworkInterfaceIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.NetworkInterfaceIdsRefs = mrsp.ResolvedReferences
+
 	return nil
 }
 
@@ -797,6 +1019,27 @@ func (mg *WindowsVirtualMachineScaleSet) ResolveReferences(ctx context.Context, 
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkInterface); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta13.SubnetList{},
+					Managed: &v1beta13.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkInterface[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }

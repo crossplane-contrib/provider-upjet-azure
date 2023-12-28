@@ -26,7 +26,21 @@ type VirtualHubSecurityPartnerProviderInitParameters struct {
 	SecurityProviderName *string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Security Partner Provider.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The ID of the Virtual Hub within which this Security Partner Provider should be created. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHub
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
+
+	// Reference to a VirtualHub in network to populate virtualHubId.
+	// +kubebuilder:validation:Optional
+	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
+
+	// Selector for a VirtualHub in network to populate virtualHubId.
+	// +kubebuilder:validation:Optional
+	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualHubSecurityPartnerProviderObservation struct {
@@ -44,6 +58,7 @@ type VirtualHubSecurityPartnerProviderObservation struct {
 	SecurityProviderName *string `json:"securityProviderName,omitempty" tf:"security_provider_name,omitempty"`
 
 	// A mapping of tags which should be assigned to the Security Partner Provider.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Hub within which this Security Partner Provider should be created. Changing this forces a new resource to be created.
@@ -75,6 +90,7 @@ type VirtualHubSecurityPartnerProviderParameters struct {
 
 	// A mapping of tags which should be assigned to the Security Partner Provider.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the Virtual Hub within which this Security Partner Provider should be created. Changing this forces a new resource to be created.

@@ -32,9 +32,11 @@ type RepositoryInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the collection of patterns of the repository.
+	// +listType=set
 	Patterns []*string `json:"patterns,omitempty" tf:"patterns,omitempty"`
 
 	// Specifies a list of searching path of the repository
+	// +listType=set
 	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
 
 	// Specifies whether enable the strict host key checking.
@@ -62,9 +64,11 @@ type RepositoryObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the collection of patterns of the repository.
+	// +listType=set
 	Patterns []*string `json:"patterns,omitempty" tf:"patterns,omitempty"`
 
 	// Specifies a list of searching path of the repository
+	// +listType=set
 	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
 
 	// Specifies whether enable the strict host key checking.
@@ -101,6 +105,7 @@ type RepositoryParameters struct {
 
 	// Specifies the collection of patterns of the repository.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Patterns []*string `json:"patterns" tf:"patterns,omitempty"`
 
 	// Specifies the SSH private key of git repository.
@@ -109,6 +114,7 @@ type RepositoryParameters struct {
 
 	// Specifies a list of searching path of the repository
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SearchPaths []*string `json:"searchPaths,omitempty" tf:"search_paths,omitempty"`
 
 	// Specifies whether enable the strict host key checking.

@@ -25,11 +25,49 @@ type LogAnalyticsSolutionInitParameters struct {
 	// A plan block as documented below.
 	Plan []PlanInitParameters `json:"plan,omitempty" tf:"plan,omitempty"`
 
+	// The name of the resource group in which the Log Analytics solution is created. Changing this forces a new resource to be created. Note: The solution and its related workspace can only exist in the same resource group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// Specifies the name of the solution to be deployed. See here for options.Changing this forces a new resource to be created.
 	SolutionName *string `json:"solutionName,omitempty" tf:"solution_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The full name of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceName.
+	// +kubebuilder:validation:Optional
+	WorkspaceNameRef *v1.Reference `json:"workspaceNameRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceName.
+	// +kubebuilder:validation:Optional
+	WorkspaceNameSelector *v1.Selector `json:"workspaceNameSelector,omitempty" tf:"-"`
+
+	// The full resource ID of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	WorkspaceResourceID *string `json:"workspaceResourceId,omitempty" tf:"workspace_resource_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate workspaceResourceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDRef *v1.Reference `json:"workspaceResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceResourceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceResourceIDSelector *v1.Selector `json:"workspaceResourceIdSelector,omitempty" tf:"-"`
 }
 
 type LogAnalyticsSolutionObservation struct {
@@ -48,6 +86,7 @@ type LogAnalyticsSolutionObservation struct {
 	SolutionName *string `json:"solutionName,omitempty" tf:"solution_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The full name of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.
@@ -86,6 +125,7 @@ type LogAnalyticsSolutionParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The full name of the Log Analytics workspace with which the solution will be linked. Changing this forces a new resource to be created.

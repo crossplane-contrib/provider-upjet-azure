@@ -231,6 +231,19 @@ type MonitorDiagnosticSettingInitParameters struct {
 	// The ID of the market partner solution where Diagnostics Data should be sent. For potential partner integrations, click to learn more about partner integration.
 	PartnerSolutionID *string `json:"partnerSolutionId,omitempty" tf:"partner_solution_id,omitempty"`
 
+	// The ID of the Storage Account where logs should be sent.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+
 	// The ID of an existing Resource on which to configure Diagnostic Settings. Changing this forces a new resource to be created.
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 }

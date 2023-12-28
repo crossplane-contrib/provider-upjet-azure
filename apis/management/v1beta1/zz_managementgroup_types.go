@@ -22,7 +22,21 @@ type ManagementGroupInitParameters struct {
 	// A friendly name for this Management Group. If not specified, this will be the same as the name.
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
+	// The ID of the Parent Management Group.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ParentManagementGroupID *string `json:"parentManagementGroupId,omitempty" tf:"parent_management_group_id,omitempty"`
+
+	// Reference to a ManagementGroup in management to populate parentManagementGroupId.
+	// +kubebuilder:validation:Optional
+	ParentManagementGroupIDRef *v1.Reference `json:"parentManagementGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ManagementGroup in management to populate parentManagementGroupId.
+	// +kubebuilder:validation:Optional
+	ParentManagementGroupIDSelector *v1.Selector `json:"parentManagementGroupIdSelector,omitempty" tf:"-"`
+
 	// A list of Subscription GUIDs which should be assigned to the Management Group.
+	// +listType=set
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
 }
 
@@ -38,6 +52,7 @@ type ManagementGroupObservation struct {
 	ParentManagementGroupID *string `json:"parentManagementGroupId,omitempty" tf:"parent_management_group_id,omitempty"`
 
 	// A list of Subscription GUIDs which should be assigned to the Management Group.
+	// +listType=set
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
 }
 
@@ -63,6 +78,7 @@ type ManagementGroupParameters struct {
 
 	// A list of Subscription GUIDs which should be assigned to the Management Group.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
 }
 

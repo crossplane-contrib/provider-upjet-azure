@@ -23,6 +23,7 @@ type PrivateDNSZoneInitParameters struct {
 	SoaRecord []PrivateDNSZoneSoaRecordInitParameters `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -50,6 +51,7 @@ type PrivateDNSZoneObservation struct {
 	SoaRecord []PrivateDNSZoneSoaRecordObservation `json:"soaRecord,omitempty" tf:"soa_record,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -74,6 +76,7 @@ type PrivateDNSZoneParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -98,6 +101,7 @@ type PrivateDNSZoneSoaRecordInitParameters struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the Record Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -131,6 +135,7 @@ type PrivateDNSZoneSoaRecordObservation struct {
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the Record Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -162,6 +167,7 @@ type PrivateDNSZoneSoaRecordParameters struct {
 
 	// A mapping of tags to assign to the Record Set.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

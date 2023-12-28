@@ -22,6 +22,19 @@ type FlexibleServerConfigurationInitParameters struct {
 	// Specifies the name of the PostgreSQL Configuration, which needs to be a valid PostgreSQL configuration name. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the PostgreSQL Flexible Server where we want to change configuration. Changing this forces a new PostgreSQL Flexible Server Configuration resource.
+	// +crossplane:generate:reference:type=FlexibleServer
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
+
+	// Reference to a FlexibleServer to populate serverId.
+	// +kubebuilder:validation:Optional
+	ServerIDRef *v1.Reference `json:"serverIdRef,omitempty" tf:"-"`
+
+	// Selector for a FlexibleServer to populate serverId.
+	// +kubebuilder:validation:Optional
+	ServerIDSelector *v1.Selector `json:"serverIdSelector,omitempty" tf:"-"`
+
 	// Specifies the value of the PostgreSQL Configuration. See the PostgreSQL documentation for valid values.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }

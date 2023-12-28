@@ -58,5 +58,26 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkAcls); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta1.SubnetList{},
+					Managed: &v1beta1.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkAcls[i3].VirtualNetworkRules[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+
 	return nil
 }

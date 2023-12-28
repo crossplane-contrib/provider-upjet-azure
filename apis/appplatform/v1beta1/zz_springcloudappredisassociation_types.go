@@ -19,6 +19,32 @@ import (
 
 type SpringCloudAppRedisAssociationInitParameters struct {
 
+	// Specifies the Redis Cache access key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_access_key",true)
+	RedisAccessKey *string `json:"redisAccessKey,omitempty" tf:"redis_access_key,omitempty"`
+
+	// Reference to a RedisCache in cache to populate redisAccessKey.
+	// +kubebuilder:validation:Optional
+	RedisAccessKeyRef *v1.Reference `json:"redisAccessKeyRef,omitempty" tf:"-"`
+
+	// Selector for a RedisCache in cache to populate redisAccessKey.
+	// +kubebuilder:validation:Optional
+	RedisAccessKeySelector *v1.Selector `json:"redisAccessKeySelector,omitempty" tf:"-"`
+
+	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
+
+	// Reference to a RedisCache in cache to populate redisCacheId.
+	// +kubebuilder:validation:Optional
+	RedisCacheIDRef *v1.Reference `json:"redisCacheIdRef,omitempty" tf:"-"`
+
+	// Selector for a RedisCache in cache to populate redisCacheId.
+	// +kubebuilder:validation:Optional
+	RedisCacheIDSelector *v1.Selector `json:"redisCacheIdSelector,omitempty" tf:"-"`
+
 	// Should SSL be used when connecting to Redis? Defaults to true.
 	SSLEnabled *bool `json:"sslEnabled,omitempty" tf:"ssl_enabled,omitempty"`
 }

@@ -88,10 +88,24 @@ type MonitorScheduledQueryRulesLogCriteriaParameters struct {
 type MonitorScheduledQueryRulesLogInitParameters struct {
 
 	// A list of IDs of Resources referred into query.
+	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// A criteria block as defined below.
 	Criteria []MonitorScheduledQueryRulesLogCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
+
+	// The resource URI over which log search query is to be run.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
+
+	// Reference to a Workspace in operationalinsights to populate dataSourceId.
+	// +kubebuilder:validation:Optional
+	DataSourceIDRef *v1.Reference `json:"dataSourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate dataSourceId.
+	// +kubebuilder:validation:Optional
+	DataSourceIDSelector *v1.Selector `json:"dataSourceIdSelector,omitempty" tf:"-"`
 
 	// The description of the scheduled query rule.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -105,13 +119,27 @@ type MonitorScheduledQueryRulesLogInitParameters struct {
 	// The name of the scheduled query rule. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The name of the resource group in which to create the scheduled query rule instance. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type MonitorScheduledQueryRulesLogObservation struct {
 
 	// A list of IDs of Resources referred into query.
+	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// A criteria block as defined below.
@@ -139,6 +167,7 @@ type MonitorScheduledQueryRulesLogObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -146,6 +175,7 @@ type MonitorScheduledQueryRulesLogParameters struct {
 
 	// A list of IDs of Resources referred into query.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
 
 	// A criteria block as defined below.
@@ -197,6 +227,7 @@ type MonitorScheduledQueryRulesLogParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

@@ -198,6 +198,7 @@ spec:
                           items:
                             type: number
                           type: array
+                          x-kubernetes-list-type: set
                         hour:
                           description: Hour of the day that the snapshots will be
                             created, valid range is from 0 to 23.
@@ -297,6 +298,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   weeklySchedule:
                     description: Sets a weekly snapshot schedule. See details in below
                       weekly_schedule block.
@@ -308,6 +310,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         hour:
                           description: Hour of the day that the snapshots will be
                             created, valid range is from 0 to 23.
@@ -388,6 +391,7 @@ spec:
                           items:
                             type: number
                           type: array
+                          x-kubernetes-list-type: set
                         hour:
                           description: Hour of the day that the snapshots will be
                             created, valid range is from 0 to 23.
@@ -407,6 +411,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   weeklySchedule:
                     description: Sets a weekly snapshot schedule. See details in below
                       weekly_schedule block.
@@ -418,6 +423,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         hour:
                           description: Hour of the day that the snapshots will be
                             created, valid range is from 0 to 23.
@@ -668,6 +674,7 @@ spec:
                           items:
                             type: number
                           type: array
+                          x-kubernetes-list-type: set
                         hour:
                           description: Hour of the day that the snapshots will be
                             created, valid range is from 0 to 23.
@@ -692,6 +699,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   weeklySchedule:
                     description: Sets a weekly snapshot schedule. See details in below
                       weekly_schedule block.
@@ -703,6 +711,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         hour:
                           description: Hour of the day that the snapshots will be
                             created, valid range is from 0 to 23.

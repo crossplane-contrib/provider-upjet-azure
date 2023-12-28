@@ -25,6 +25,19 @@ type WorkspaceSQLAADAdminInitParameters struct {
 	// The object id of the Azure AD Administrator of this Synapse Workspace.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
+	// The ID of the Synapse Workspace where the Azure AD Administrator should be configured.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
+
+	// Reference to a Workspace in synapse to populate synapseWorkspaceId.
+	// +kubebuilder:validation:Optional
+	SynapseWorkspaceIDRef *v1.Reference `json:"synapseWorkspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in synapse to populate synapseWorkspaceId.
+	// +kubebuilder:validation:Optional
+	SynapseWorkspaceIDSelector *v1.Selector `json:"synapseWorkspaceIdSelector,omitempty" tf:"-"`
+
 	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }

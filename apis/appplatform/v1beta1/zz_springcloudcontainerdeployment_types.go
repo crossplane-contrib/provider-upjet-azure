@@ -29,6 +29,7 @@ type SpringCloudContainerDeploymentInitParameters struct {
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Container image of the custom container. This should be in the form of <repository>:<tag> without the server name of the registry.
@@ -59,6 +60,7 @@ type SpringCloudContainerDeploymentObservation struct {
 	Commands []*string `json:"commands,omitempty" tf:"commands,omitempty"`
 
 	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// The ID of the Spring Cloud Container Deployment.
@@ -99,6 +101,7 @@ type SpringCloudContainerDeploymentParameters struct {
 
 	// Specifies the environment variables of the Spring Cloud Deployment as a map of key-value pairs.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	EnvironmentVariables map[string]*string `json:"environmentVariables,omitempty" tf:"environment_variables,omitempty"`
 
 	// Container image of the custom container. This should be in the form of <repository>:<tag> without the server name of the registry.

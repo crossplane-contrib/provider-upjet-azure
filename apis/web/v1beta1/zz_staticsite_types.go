@@ -20,6 +20,7 @@ import (
 type StaticSiteIdentityInitParameters struct {
 
 	// A list of Managed Identity IDs which should be assigned to this Static Site resource.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity assigned to this Static Site resource. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
@@ -29,6 +30,7 @@ type StaticSiteIdentityInitParameters struct {
 type StaticSiteIdentityObservation struct {
 
 	// A list of Managed Identity IDs which should be assigned to this Static Site resource.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -45,6 +47,7 @@ type StaticSiteIdentityParameters struct {
 
 	// A list of Managed Identity IDs which should be assigned to this Static Site resource.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Type of Managed Identity assigned to this Static Site resource. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned.
@@ -67,6 +70,7 @@ type StaticSiteInitParameters struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -94,6 +98,7 @@ type StaticSiteObservation struct {
 	SkuTier *string `json:"skuTier,omitempty" tf:"sku_tier,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -130,6 +135,7 @@ type StaticSiteParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

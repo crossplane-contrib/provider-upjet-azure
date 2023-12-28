@@ -31,6 +31,19 @@ type ComputeClusterInitParameters struct {
 	// The Azure Region where the Machine Learning Compute Cluster should exist. Changing this forces a new Machine Learning Compute Cluster to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/machinelearningservices/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
+
+	// Reference to a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
+	// +kubebuilder:validation:Optional
+	MachineLearningWorkspaceIDRef *v1.Reference `json:"machineLearningWorkspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
+	// +kubebuilder:validation:Optional
+	MachineLearningWorkspaceIDSelector *v1.Selector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
+
 	// The name which should be used for this Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -43,7 +56,21 @@ type ComputeClusterInitParameters struct {
 	// A scale_settings block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
 	ScaleSettings []ScaleSettingsInitParameters `json:"scaleSettings,omitempty" tf:"scale_settings,omitempty"`
 
+	// The ID of the Subnet that the Compute Cluster should reside in. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetResourceId.
+	// +kubebuilder:validation:Optional
+	SubnetResourceIDRef *v1.Reference `json:"subnetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetResourceId.
+	// +kubebuilder:validation:Optional
+	SubnetResourceIDSelector *v1.Selector `json:"subnetResourceIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The priority of the VM. Changing this forces a new Machine Learning Compute Cluster to be created. Accepted values are Dedicated and LowPriority.
@@ -89,6 +116,7 @@ type ComputeClusterObservation struct {
 	SubnetResourceID *string `json:"subnetResourceId,omitempty" tf:"subnet_resource_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The priority of the VM. Changing this forces a new Machine Learning Compute Cluster to be created. Accepted values are Dedicated and LowPriority.
@@ -162,6 +190,7 @@ type ComputeClusterParameters struct {
 
 	// A mapping of tags which should be assigned to the Machine Learning Compute Cluster. Changing this forces a new Machine Learning Compute Cluster to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The priority of the VM. Changing this forces a new Machine Learning Compute Cluster to be created. Accepted values are Dedicated and LowPriority.
@@ -176,6 +205,7 @@ type ComputeClusterParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.
@@ -185,6 +215,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Machine Learning Compute Cluster.
@@ -201,6 +232,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Compute Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Machine Learning Compute Cluster. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both). Changing this forces a new resource to be created.

@@ -54,6 +54,38 @@ func (mg *MaintenanceAssignmentDedicatedHost) ResolveReferences(ctx context.Cont
 	mg.Spec.ForProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DedicatedHostID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.DedicatedHostIDRef,
+		Selector:     mg.Spec.InitProvider.DedicatedHostIDSelector,
+		To: reference.To{
+			List:    &v1beta1.DedicatedHostList{},
+			Managed: &v1beta1.DedicatedHost{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.DedicatedHostID")
+	}
+	mg.Spec.InitProvider.DedicatedHostID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DedicatedHostIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MaintenanceConfigurationID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MaintenanceConfigurationIDRef,
+		Selector:     mg.Spec.InitProvider.MaintenanceConfigurationIDSelector,
+		To: reference.To{
+			List:    &MaintenanceConfigurationList{},
+			Managed: &MaintenanceConfiguration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MaintenanceConfigurationID")
+	}
+	mg.Spec.InitProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -95,6 +127,22 @@ func (mg *MaintenanceAssignmentVirtualMachine) ResolveReferences(ctx context.Con
 	}
 	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.MaintenanceConfigurationID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.MaintenanceConfigurationIDRef,
+		Selector:     mg.Spec.InitProvider.MaintenanceConfigurationIDSelector,
+		To: reference.To{
+			List:    &MaintenanceConfigurationList{},
+			Managed: &MaintenanceConfiguration{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.MaintenanceConfigurationID")
+	}
+	mg.Spec.InitProvider.MaintenanceConfigurationID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.MaintenanceConfigurationIDRef = rsp.ResolvedReference
 
 	return nil
 }

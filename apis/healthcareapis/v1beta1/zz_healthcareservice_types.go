@@ -65,12 +65,14 @@ type CorsConfigurationInitParameters struct {
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
 	// A set of headers to be allowed via CORS.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// The max age to be allowed via CORS.
@@ -83,12 +85,14 @@ type CorsConfigurationObservation struct {
 	AllowCredentials *bool `json:"allowCredentials,omitempty" tf:"allow_credentials,omitempty"`
 
 	// A set of headers to be allowed via CORS.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// The max age to be allowed via CORS.
@@ -103,6 +107,7 @@ type CorsConfigurationParameters struct {
 
 	// A set of headers to be allowed via CORS.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
@@ -111,6 +116,7 @@ type CorsConfigurationParameters struct {
 
 	// A set of origins to be allowed via CORS.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// The max age to be allowed via CORS.
@@ -121,6 +127,7 @@ type CorsConfigurationParameters struct {
 type HealthcareServiceInitParameters struct {
 
 	// A set of Azure object IDs that are allowed to access the Service.
+	// +listType=set
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication_configuration block as defined below.
@@ -145,12 +152,14 @@ type HealthcareServiceInitParameters struct {
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HealthcareServiceObservation struct {
 
 	// A set of Azure object IDs that are allowed to access the Service.
+	// +listType=set
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication_configuration block as defined below.
@@ -181,6 +190,7 @@ type HealthcareServiceObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -188,6 +198,7 @@ type HealthcareServiceParameters struct {
 
 	// A set of Azure object IDs that are allowed to access the Service.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication_configuration block as defined below.
@@ -233,6 +244,7 @@ type HealthcareServiceParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

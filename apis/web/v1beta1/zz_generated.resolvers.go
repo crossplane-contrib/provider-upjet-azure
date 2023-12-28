@@ -41,6 +41,22 @@ func (mg *AppActiveSlot) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SlotIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SlotID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SlotIDRef,
+		Selector:     mg.Spec.InitProvider.SlotIDSelector,
+		To: reference.To{
+			List:    &WindowsWebAppSlotList{},
+			Managed: &WindowsWebAppSlot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SlotID")
+	}
+	mg.Spec.InitProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SlotIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -82,6 +98,38 @@ func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.WebAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WebAppIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RelayID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RelayIDRef,
+		Selector:     mg.Spec.InitProvider.RelayIDSelector,
+		To: reference.To{
+			List:    &v1beta1.HybridConnectionList{},
+			Managed: &v1beta1.HybridConnection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RelayID")
+	}
+	mg.Spec.InitProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RelayIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WebAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.WebAppIDRef,
+		Selector:     mg.Spec.InitProvider.WebAppIDSelector,
+		To: reference.To{
+			List:    &WindowsWebAppList{},
+			Managed: &WindowsWebApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WebAppID")
+	}
+	mg.Spec.InitProvider.WebAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WebAppIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -207,6 +255,94 @@ func (mg *FunctionApp) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServicePlanID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.AppServicePlanIDRef,
+		Selector:     mg.Spec.InitProvider.AppServicePlanIDSelector,
+		To: reference.To{
+			List:    &AppServicePlanList{},
+			Managed: &AppServicePlan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AppServicePlanID")
+	}
+	mg.Spec.InitProvider.AppServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AppServicePlanIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -233,6 +369,22 @@ func (mg *FunctionAppActiveSlot) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SlotIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SlotID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SlotIDRef,
+		Selector:     mg.Spec.InitProvider.SlotIDSelector,
+		To: reference.To{
+			List:    &WindowsFunctionAppSlotList{},
+			Managed: &WindowsFunctionAppSlot{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SlotID")
+	}
+	mg.Spec.InitProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SlotIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -258,6 +410,22 @@ func (mg *FunctionAppFunction) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.FunctionAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FunctionAppIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionAppID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.FunctionAppIDRef,
+		Selector:     mg.Spec.InitProvider.FunctionAppIDSelector,
+		To: reference.To{
+			List:    &LinuxFunctionAppList{},
+			Managed: &LinuxFunctionApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FunctionAppID")
+	}
+	mg.Spec.InitProvider.FunctionAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionAppIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -300,6 +468,38 @@ func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c 
 	}
 	mg.Spec.ForProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RelayIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.FunctionAppID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.FunctionAppIDRef,
+		Selector:     mg.Spec.InitProvider.FunctionAppIDSelector,
+		To: reference.To{
+			List:    &WindowsFunctionAppList{},
+			Managed: &WindowsFunctionApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FunctionAppID")
+	}
+	mg.Spec.InitProvider.FunctionAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.FunctionAppIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RelayID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.RelayIDRef,
+		Selector:     mg.Spec.InitProvider.RelayIDSelector,
+		To: reference.To{
+			List:    &v1beta1.HybridConnectionList{},
+			Managed: &v1beta1.HybridConnection{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RelayID")
+	}
+	mg.Spec.InitProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RelayIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -415,6 +615,78 @@ func (mg *FunctionAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServicePlanID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.AppServicePlanIDRef,
+		Selector:     mg.Spec.InitProvider.AppServicePlanIDSelector,
+		To: reference.To{
+			List:    &AppServicePlanList{},
+			Managed: &AppServicePlan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AppServicePlanID")
+	}
+	mg.Spec.InitProvider.AppServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AppServicePlanIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -529,6 +801,110 @@ func (mg *LinuxFunctionApp) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
+		Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
+		To: reference.To{
+			List:    &ServicePlanList{},
+			Managed: &ServicePlan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServicePlanID")
+	}
+	mg.Spec.InitProvider.ServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServicePlanIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -626,6 +1002,78 @@ func (mg *LinuxFunctionAppSlot) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -725,6 +1173,78 @@ func (mg *LinuxWebApp) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
+		Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
+		To: reference.To{
+			List:    &ServicePlanList{},
+			Managed: &ServicePlan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServicePlanID")
+	}
+	mg.Spec.InitProvider.ServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServicePlanIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -806,6 +1326,78 @@ func (mg *LinuxWebAppSlot) ResolveReferences(ctx context.Context, c client.Reade
 	}
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AppServiceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.AppServiceIDRef,
+		Selector:     mg.Spec.InitProvider.AppServiceIDSelector,
+		To: reference.To{
+			List:    &LinuxWebAppList{},
+			Managed: &LinuxWebApp{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AppServiceID")
+	}
+	mg.Spec.InitProvider.AppServiceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AppServiceIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -973,6 +1565,94 @@ func (mg *WindowsFunctionApp) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
+		Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
+		To: reference.To{
+			List:    &ServicePlanList{},
+			Managed: &ServicePlan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServicePlanID")
+	}
+	mg.Spec.InitProvider.ServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServicePlanIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -1070,6 +1750,78 @@ func (mg *WindowsFunctionAppSlot) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
+		Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
+		To: reference.To{
+			List:    &v1beta13.AccountList{},
+			Managed: &v1beta13.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
+	}
+	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -1169,6 +1921,78 @@ func (mg *WindowsWebApp) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ServicePlanID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ServicePlanIDRef,
+		Selector:     mg.Spec.InitProvider.ServicePlanIDSelector,
+		To: reference.To{
+			List:    &ServicePlanList{},
+			Managed: &ServicePlan{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ServicePlanID")
+	}
+	mg.Spec.InitProvider.ServicePlanID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ServicePlanIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -1250,6 +2074,62 @@ func (mg *WindowsWebAppSlot) ResolveReferences(ctx context.Context, c client.Rea
 	}
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].IPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.SiteConfig); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef,
+				Selector:     mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta12.SubnetList{},
+					Managed: &v1beta12.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID")
+			}
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.SiteConfig[i3].ScmIPRestriction[i4].VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
 	return nil
 }

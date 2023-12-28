@@ -32,6 +32,7 @@ type Gen2EnvironmentInitParameters struct {
 	Storage []StorageInitParameters `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query.
@@ -62,6 +63,7 @@ type Gen2EnvironmentObservation struct {
 	Storage []StorageObservation `json:"storage,omitempty" tf:"storage,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query.
@@ -101,6 +103,7 @@ type Gen2EnvironmentParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the ISO8601 timespan specifying the minimum number of days the environment's events will be available for query.
@@ -109,6 +112,18 @@ type Gen2EnvironmentParameters struct {
 }
 
 type StorageInitParameters struct {
+
+	// Name of storage account for Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Reference to a Account in storage to populate name.
+	// +kubebuilder:validation:Optional
+	NameRef *v1.Reference `json:"nameRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate name.
+	// +kubebuilder:validation:Optional
+	NameSelector *v1.Selector `json:"nameSelector,omitempty" tf:"-"`
 }
 
 type StorageObservation struct {

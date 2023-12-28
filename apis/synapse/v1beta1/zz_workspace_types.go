@@ -139,6 +139,19 @@ type CustomerManagedKeyInitParameters struct {
 
 	// An identifier for the key. Name needs to match the name of the key used with the azurerm_synapse_workspace_key resource. Defaults to "cmk" if not specified.
 	KeyName *string `json:"keyName,omitempty" tf:"key_name,omitempty"`
+
+	// The Azure Key Vault Key Versionless ID to be used as the Customer Managed Key (CMK) for double encryption (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("versionless_id",true)
+	KeyVersionlessID *string `json:"keyVersionlessId,omitempty" tf:"key_versionless_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyVersionlessId.
+	// +kubebuilder:validation:Optional
+	KeyVersionlessIDRef *v1.Reference `json:"keyVersionlessIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyVersionlessId.
+	// +kubebuilder:validation:Optional
+	KeyVersionlessIDSelector *v1.Selector `json:"keyVersionlessIdSelector,omitempty" tf:"-"`
 }
 
 type CustomerManagedKeyObservation struct {
@@ -243,6 +256,7 @@ type GithubRepoParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Synapse Workspace.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be associated with this Synapse Workspace. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
@@ -252,6 +266,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Synapse Workspace.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
@@ -268,6 +283,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Synapse Workspace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be associated with this Synapse Workspace. Possible values are SystemAssigned, UserAssigned and SystemAssigned, UserAssigned (to enable both).
@@ -322,6 +338,19 @@ type WorkspaceInitParameters struct {
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo []AzureDevopsRepoInitParameters `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
 
+	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate computeSubnetId.
+	// +kubebuilder:validation:Optional
+	ComputeSubnetIDRef *v1.Reference `json:"computeSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate computeSubnetId.
+	// +kubebuilder:validation:Optional
+	ComputeSubnetIDSelector *v1.Selector `json:"computeSubnetIdSelector,omitempty" tf:"-"`
+
 	// A customer_managed_key block as defined below. Conflicts with aad_admin.
 	CustomerManagedKey []CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
@@ -339,6 +368,18 @@ type WorkspaceInitParameters struct {
 
 	// Specifies the Azure Region where the synapse Workspace should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Workspace managed resource group. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate managedResourceGroupName.
+	// +kubebuilder:validation:Optional
+	ManagedResourceGroupNameRef *v1.Reference `json:"managedResourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
+	// +kubebuilder:validation:Optional
+	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Is Virtual Network enabled for all computes in this workspace? Changing this forces a new resource to be created.
 	ManagedVirtualNetworkEnabled *bool `json:"managedVirtualNetworkEnabled,omitempty" tf:"managed_virtual_network_enabled,omitempty"`
@@ -358,7 +399,21 @@ type WorkspaceInitParameters struct {
 	// Are pipelines (running as workspace's system assigned identity) allowed to access SQL pools?
 	SQLIdentityControlEnabled *bool `json:"sqlIdentityControlEnabled,omitempty" tf:"sql_identity_control_enabled,omitempty"`
 
+	// Specifies the ID of storage data lake gen2 filesystem resource. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.DataLakeGen2FileSystem
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageDataLakeGen2FileSystemID *string `json:"storageDataLakeGen2FilesystemId,omitempty" tf:"storage_data_lake_gen2_filesystem_id,omitempty"`
+
+	// Reference to a DataLakeGen2FileSystem in storage to populate storageDataLakeGen2FilesystemId.
+	// +kubebuilder:validation:Optional
+	StorageDataLakeGen2FileSystemIDRef *v1.Reference `json:"storageDataLakeGen2FilesystemIdRef,omitempty" tf:"-"`
+
+	// Selector for a DataLakeGen2FileSystem in storage to populate storageDataLakeGen2FilesystemId.
+	// +kubebuilder:validation:Optional
+	StorageDataLakeGen2FileSystemIDSelector *v1.Selector `json:"storageDataLakeGen2FilesystemIdSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Synapse Workspace.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -374,6 +429,7 @@ type WorkspaceObservation struct {
 	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`
 
 	// A list of Connectivity endpoints for this Synapse Workspace.
+	// +mapType=granular
 	ConnectivityEndpoints map[string]*string `json:"connectivityEndpoints,omitempty" tf:"connectivity_endpoints,omitempty"`
 
 	// A customer_managed_key block as defined below. Conflicts with aad_admin.
@@ -425,6 +481,7 @@ type WorkspaceObservation struct {
 	StorageDataLakeGen2FileSystemID *string `json:"storageDataLakeGen2FilesystemId,omitempty" tf:"storage_data_lake_gen2_filesystem_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse Workspace.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -546,6 +603,7 @@ type WorkspaceParameters struct {
 
 	// A mapping of tags which should be assigned to the Synapse Workspace.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

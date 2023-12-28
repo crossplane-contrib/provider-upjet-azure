@@ -23,6 +23,7 @@ type CapacityReservationInitParameters struct {
 	Sku []SkuInitParameters `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Availability Zone for this Capacity Reservation. Changing this forces a new resource to be created.
@@ -41,6 +42,7 @@ type CapacityReservationObservation struct {
 	Sku []SkuObservation `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Availability Zone for this Capacity Reservation. Changing this forces a new resource to be created.
@@ -69,6 +71,7 @@ type CapacityReservationParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Availability Zone for this Capacity Reservation. Changing this forces a new resource to be created.

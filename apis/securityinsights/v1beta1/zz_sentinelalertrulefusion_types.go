@@ -25,6 +25,19 @@ type SentinelAlertRuleFusionInitParameters struct {
 	// Should this Sentinel Fusion Alert Rule be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The ID of the Log Analytics Workspace this Sentinel Fusion Alert Rule belongs to. Changing this forces a new Sentinel Fusion Alert Rule to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationsmanagement/v1beta1.LogAnalyticsSolution
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("workspace_resource_id",false)
+	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// Reference to a LogAnalyticsSolution in operationsmanagement to populate logAnalyticsWorkspaceId.
+	// +kubebuilder:validation:Optional
+	LogAnalyticsWorkspaceIDRef *v1.Reference `json:"logAnalyticsWorkspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a LogAnalyticsSolution in operationsmanagement to populate logAnalyticsWorkspaceId.
+	// +kubebuilder:validation:Optional
+	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
+
 	// The name which should be used for this Sentinel Fusion Alert Rule. Changing this forces a new Sentinel Fusion Alert Rule to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -134,6 +147,7 @@ type SubTypeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
+	// +listType=set
 	SeveritiesAllowed []*string `json:"severitiesAllowed,omitempty" tf:"severities_allowed,omitempty"`
 }
 
@@ -146,6 +160,7 @@ type SubTypeObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
+	// +listType=set
 	SeveritiesAllowed []*string `json:"severitiesAllowed,omitempty" tf:"severities_allowed,omitempty"`
 }
 
@@ -161,6 +176,7 @@ type SubTypeParameters struct {
 
 	// A list of severities that are enabled for this source subtype consumed in Fusion detection. Possible values for each element are High, Medium, Low, Informational.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	SeveritiesAllowed []*string `json:"severitiesAllowed" tf:"severities_allowed,omitempty"`
 }
 

@@ -66,6 +66,19 @@ type LoggerInitParameters struct {
 
 	// An eventhub block as documented below. Changing this forces a new resource to be created.
 	EventHub []EventHubInitParameters `json:"eventhub,omitempty" tf:"eventhub,omitempty"`
+
+	// The target resource id which will be linked in the API-Management portal page. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
+
+	// Reference to a ApplicationInsights in insights to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDRef *v1.Reference `json:"resourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a ApplicationInsights in insights to populate resourceId.
+	// +kubebuilder:validation:Optional
+	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 }
 
 type LoggerObservation struct {

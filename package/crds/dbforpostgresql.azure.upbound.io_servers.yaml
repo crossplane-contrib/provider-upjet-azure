@@ -259,6 +259,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   threatDetectionPolicy:
                     description: Threat detection policy configuration, known in the
                       API as Server Security Alerts Policy. The threat_detection_policy
@@ -272,6 +273,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         emailAccountAdmins:
                           description: Should the account administrators be emailed
                             when this alert is triggered?
@@ -282,6 +284,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Is the policy enabled?
                           type: boolean
@@ -426,6 +429,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   threatDetectionPolicy:
                     description: Threat detection policy configuration, known in the
                       API as Server Security Alerts Policy. The threat_detection_policy
@@ -439,6 +443,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         emailAccountAdmins:
                           description: Should the account administrators be emailed
                             when this alert is triggered?
@@ -449,6 +454,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Is the policy enabled?
                           type: boolean
@@ -764,6 +770,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   threatDetectionPolicy:
                     description: Threat detection policy configuration, known in the
                       API as Server Security Alerts Policy. The threat_detection_policy
@@ -777,6 +784,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         emailAccountAdmins:
                           description: Should the account administrators be emailed
                             when this alert is triggered?
@@ -787,6 +795,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         enabled:
                           description: Is the policy enabled?
                           type: boolean

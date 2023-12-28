@@ -435,6 +435,7 @@ type FrontDoorInitParameters struct {
 	RoutingRule []RoutingRuleInitParameters `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -447,18 +448,21 @@ type FrontDoorObservation struct {
 	BackendPoolHealthProbe []BackendPoolHealthProbeObservation `json:"backendPoolHealthProbe,omitempty" tf:"backend_pool_health_probe,omitempty"`
 
 	// A map/dictionary of Backend Pool Health Probe Names (key) to the Backend Pool Health Probe ID (value)
+	// +mapType=granular
 	BackendPoolHealthProbes map[string]*string `json:"backendPoolHealthProbes,omitempty" tf:"backend_pool_health_probes,omitempty"`
 
 	// A backend_pool_load_balancing block as defined below.
 	BackendPoolLoadBalancing []BackendPoolLoadBalancingObservation `json:"backendPoolLoadBalancing,omitempty" tf:"backend_pool_load_balancing,omitempty"`
 
 	// A map/dictionary of Backend Pool Load Balancing Setting Names (key) to the Backend Pool Load Balancing Setting ID (value)
+	// +mapType=granular
 	BackendPoolLoadBalancingSettings map[string]*string `json:"backendPoolLoadBalancingSettings,omitempty" tf:"backend_pool_load_balancing_settings,omitempty"`
 
 	// A backend_pool_settings block as defined below.
 	BackendPoolSettings []BackendPoolSettingsObservation `json:"backendPoolSettings,omitempty" tf:"backend_pool_settings,omitempty"`
 
 	// A map/dictionary of Backend Pool Names (key) to the Backend Pool ID (value)
+	// +mapType=granular
 	BackendPools map[string]*string `json:"backendPools,omitempty" tf:"backend_pools,omitempty"`
 
 	// The host that each frontendEndpoint must CNAME to.
@@ -473,6 +477,7 @@ type FrontDoorObservation struct {
 	FrontendEndpoint []FrontendEndpointObservation `json:"frontendEndpoint,omitempty" tf:"frontend_endpoint,omitempty"`
 
 	// A map/dictionary of Frontend Endpoint Names (key) to the Frontend Endpoint ID (value)
+	// +mapType=granular
 	FrontendEndpoints map[string]*string `json:"frontendEndpoints,omitempty" tf:"frontend_endpoints,omitempty"`
 
 	// The unique ID of the Front Door which is embedded into the incoming headers X-Azure-FDID attribute and maybe used to filter traffic sent by the Front Door to your backend.
@@ -491,9 +496,11 @@ type FrontDoorObservation struct {
 	RoutingRule []RoutingRuleObservation `json:"routingRule,omitempty" tf:"routing_rule,omitempty"`
 
 	// A map/dictionary of Routing Rule Names (key) to the Routing Rule ID (value)
+	// +mapType=granular
 	RoutingRules map[string]*string `json:"routingRules,omitempty" tf:"routing_rules,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -546,6 +553,7 @@ type FrontDoorParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

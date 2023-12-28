@@ -23,6 +23,7 @@ type SubAccountInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// A mapping of tags which should be assigned to the logz Sub Account.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.
@@ -41,6 +42,7 @@ type SubAccountObservation struct {
 	LogzMonitorID *string `json:"logzMonitorId,omitempty" tf:"logz_monitor_id,omitempty"`
 
 	// A mapping of tags which should be assigned to the logz Sub Account.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.
@@ -69,6 +71,7 @@ type SubAccountParameters struct {
 
 	// A mapping of tags which should be assigned to the logz Sub Account.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A user block as defined below. Changing this forces a new resource to be created.

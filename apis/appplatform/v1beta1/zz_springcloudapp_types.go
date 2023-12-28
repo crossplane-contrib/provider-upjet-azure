@@ -20,6 +20,7 @@ import (
 type CustomPersistentDiskInitParameters struct {
 
 	// These are the mount options for a persistent disk.
+	// +listType=set
 	MountOptions []*string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
 
 	// The mount path of the persistent disk.
@@ -38,6 +39,7 @@ type CustomPersistentDiskInitParameters struct {
 type CustomPersistentDiskObservation struct {
 
 	// These are the mount options for a persistent disk.
+	// +listType=set
 	MountOptions []*string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
 
 	// The mount path of the persistent disk.
@@ -57,6 +59,7 @@ type CustomPersistentDiskParameters struct {
 
 	// These are the mount options for a persistent disk.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MountOptions []*string `json:"mountOptions,omitempty" tf:"mount_options,omitempty"`
 
 	// The mount path of the persistent disk.
@@ -79,6 +82,7 @@ type CustomPersistentDiskParameters struct {
 type IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Spring Cloud Application.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Spring Cloud Application. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -88,6 +92,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Spring Cloud Application.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID for the Service Principal associated with the Managed Service Identity of this Spring Cloud Application.
@@ -104,6 +109,7 @@ type IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Spring Cloud Application.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Spring Cloud Application. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).

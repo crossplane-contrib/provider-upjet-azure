@@ -22,7 +22,21 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 	// The batch group name of the Logic App Integration Batch Configuration. Changing this forces a new resource to be created.
 	BatchGroupName *string `json:"batchGroupName,omitempty" tf:"batch_group_name,omitempty"`
 
+	// The name of the Logic App Integration Account. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppIntegrationAccount
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
+
+	// Reference to a AppIntegrationAccount in logic to populate integrationAccountName.
+	// +kubebuilder:validation:Optional
+	IntegrationAccountNameRef *v1.Reference `json:"integrationAccountNameRef,omitempty" tf:"-"`
+
+	// Selector for a AppIntegrationAccount in logic to populate integrationAccountName.
+	// +kubebuilder:validation:Optional
+	IntegrationAccountNameSelector *v1.Selector `json:"integrationAccountNameSelector,omitempty" tf:"-"`
+
 	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
@@ -30,6 +44,18 @@ type AppIntegrationAccountBatchConfigurationInitParameters struct {
 
 	// A release_criteria block as documented below, which is used to select the criteria to meet before processing each batch.
 	ReleaseCriteria []ReleaseCriteriaInitParameters `json:"releaseCriteria,omitempty" tf:"release_criteria,omitempty"`
+
+	// The name of the Resource Group where the Logic App Integration Account Batch Configuration should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type AppIntegrationAccountBatchConfigurationObservation struct {
@@ -44,6 +70,7 @@ type AppIntegrationAccountBatchConfigurationObservation struct {
 	IntegrationAccountName *string `json:"integrationAccountName,omitempty" tf:"integration_account_name,omitempty"`
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
@@ -78,6 +105,7 @@ type AppIntegrationAccountBatchConfigurationParameters struct {
 
 	// A JSON mapping of any Metadata for this Logic App Integration Account Batch Configuration.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name which should be used for this Logic App Integration Account Batch Configuration. Only Alphanumeric characters allowed. Changing this forces a new resource to be created.
@@ -242,36 +270,44 @@ type ReleaseCriteriaParameters struct {
 type ScheduleInitParameters struct {
 
 	// A list containing a single item, which specifies the Hour interval at which this recurrence should be triggered.
+	// +listType=set
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// A list containing a single item which specifies the Minute interval at which this recurrence should be triggered.
+	// +listType=set
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
 	// A list of days of the month that the job should execute on.
+	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
 	// A monthly block as documented below.
 	Monthly []MonthlyInitParameters `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
+	// +listType=set
 	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
 type ScheduleObservation struct {
 
 	// A list containing a single item, which specifies the Hour interval at which this recurrence should be triggered.
+	// +listType=set
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// A list containing a single item which specifies the Minute interval at which this recurrence should be triggered.
+	// +listType=set
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
 	// A list of days of the month that the job should execute on.
+	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
 	// A monthly block as documented below.
 	Monthly []MonthlyObservation `json:"monthly,omitempty" tf:"monthly,omitempty"`
 
 	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
+	// +listType=set
 	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
@@ -279,14 +315,17 @@ type ScheduleParameters struct {
 
 	// A list containing a single item, which specifies the Hour interval at which this recurrence should be triggered.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Hours []*float64 `json:"hours,omitempty" tf:"hours,omitempty"`
 
 	// A list containing a single item which specifies the Minute interval at which this recurrence should be triggered.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Minutes []*float64 `json:"minutes,omitempty" tf:"minutes,omitempty"`
 
 	// A list of days of the month that the job should execute on.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
 	// A monthly block as documented below.
@@ -295,6 +334,7 @@ type ScheduleParameters struct {
 
 	// A list of days of the week that the job should execute on. Possible values are Sunday, Monday, Tuesday, Wednesday, Thursday, Friday and Saturday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 

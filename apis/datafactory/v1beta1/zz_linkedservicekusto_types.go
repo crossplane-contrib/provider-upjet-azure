@@ -20,6 +20,7 @@ import (
 type LinkedServiceKustoInitParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -31,7 +32,33 @@ type LinkedServiceKustoInitParameters struct {
 	// The integration runtime reference to associate with the Data Factory Linked Service.
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
+	// The Kusto Database Name.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Database
+	KustoDatabaseName *string `json:"kustoDatabaseName,omitempty" tf:"kusto_database_name,omitempty"`
+
+	// Reference to a Database in kusto to populate kustoDatabaseName.
+	// +kubebuilder:validation:Optional
+	KustoDatabaseNameRef *v1.Reference `json:"kustoDatabaseNameRef,omitempty" tf:"-"`
+
+	// Selector for a Database in kusto to populate kustoDatabaseName.
+	// +kubebuilder:validation:Optional
+	KustoDatabaseNameSelector *v1.Selector `json:"kustoDatabaseNameSelector,omitempty" tf:"-"`
+
+	// The URI of the Kusto Cluster endpoint.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("uri",true)
+	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`
+
+	// Reference to a Cluster in kusto to populate kustoEndpoint.
+	// +kubebuilder:validation:Optional
+	KustoEndpointRef *v1.Reference `json:"kustoEndpointRef,omitempty" tf:"-"`
+
+	// Selector for a Cluster in kusto to populate kustoEndpoint.
+	// +kubebuilder:validation:Optional
+	KustoEndpointSelector *v1.Selector `json:"kustoEndpointSelector,omitempty" tf:"-"`
+
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Kusto Database.
@@ -47,6 +74,7 @@ type LinkedServiceKustoInitParameters struct {
 type LinkedServiceKustoObservation struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -71,6 +99,7 @@ type LinkedServiceKustoObservation struct {
 	KustoEndpoint *string `json:"kustoEndpoint,omitempty" tf:"kusto_endpoint,omitempty"`
 
 	// A map of parameters to associate with the Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Kusto Database.
@@ -87,6 +116,7 @@ type LinkedServiceKustoParameters struct {
 
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
@@ -144,6 +174,7 @@ type LinkedServiceKustoParameters struct {
 
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// The service principal id in which to authenticate against the Kusto Database.

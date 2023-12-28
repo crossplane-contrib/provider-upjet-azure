@@ -159,6 +159,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Shared Image Gallery.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -184,6 +185,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Shared Image Gallery.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -375,6 +377,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Shared Image Gallery.
                     type: object
+                    x-kubernetes-map-type: granular
                   uniqueName:
                     description: The Unique Name for this Shared Image Gallery.
                     type: string

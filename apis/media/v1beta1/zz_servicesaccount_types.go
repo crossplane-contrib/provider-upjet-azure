@@ -62,6 +62,7 @@ type EncryptionParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Media Services Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -71,6 +72,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Media Services Account.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -87,6 +89,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Media Services Account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Media Services Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -100,6 +103,7 @@ type KeyDeliveryAccessControlInitParameters struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Delivery.
+	// +listType=set
 	IPAllowList []*string `json:"ipAllowList,omitempty" tf:"ip_allow_list,omitempty"`
 }
 
@@ -109,6 +113,7 @@ type KeyDeliveryAccessControlObservation struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Delivery.
+	// +listType=set
 	IPAllowList []*string `json:"ipAllowList,omitempty" tf:"ip_allow_list,omitempty"`
 }
 
@@ -120,6 +125,7 @@ type KeyDeliveryAccessControlParameters struct {
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the Key Delivery.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPAllowList []*string `json:"ipAllowList,omitempty" tf:"ip_allow_list,omitempty"`
 }
 
@@ -176,6 +182,7 @@ type ServicesAccountInitParameters struct {
 	StorageAuthenticationType *string `json:"storageAuthenticationType,omitempty" tf:"storage_authentication_type,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -209,6 +216,7 @@ type ServicesAccountObservation struct {
 	StorageAuthenticationType *string `json:"storageAuthenticationType,omitempty" tf:"storage_authentication_type,omitempty"`
 
 	// A mapping of tags assigned to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -257,10 +265,24 @@ type ServicesAccountParameters struct {
 
 	// A mapping of tags assigned to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type StorageAccountInitParameters struct {
+
+	// Specifies the ID of the Storage Account that will be associated with the Media Services instance.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Reference to a Account in storage to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 
 	// Specifies whether the storage account should be the primary account or not. Defaults to false.
 	IsPrimary *bool `json:"isPrimary,omitempty" tf:"is_primary,omitempty"`

@@ -137,6 +137,25 @@ func (mg *LinkedService) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
 
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.IntegrationRuntime); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IntegrationRuntime[i3].Name),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.IntegrationRuntime[i3].NameRef,
+			Selector:     mg.Spec.InitProvider.IntegrationRuntime[i3].NameSelector,
+			To: reference.To{
+				List:    &IntegrationRuntimeAzureList{},
+				Managed: &IntegrationRuntimeAzure{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.IntegrationRuntime[i3].Name")
+		}
+		mg.Spec.InitProvider.IntegrationRuntime[i3].Name = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IntegrationRuntime[i3].NameRef = rsp.ResolvedReference
+
+	}
+
 	return nil
 }
 
@@ -178,6 +197,38 @@ func (mg *ManagedPrivateEndpoint) ResolveReferences(ctx context.Context, c clien
 	}
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SynapseWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SynapseWorkspaceIDRef,
+		Selector:     mg.Spec.InitProvider.SynapseWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SynapseWorkspaceID")
+	}
+	mg.Spec.InitProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
+		Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
+		To: reference.To{
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
+	}
+	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -230,6 +281,22 @@ func (mg *RoleAssignment) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SynapseWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SynapseWorkspaceIDRef,
+		Selector:     mg.Spec.InitProvider.SynapseWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SynapseWorkspaceID")
+	}
+	mg.Spec.InitProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -299,6 +366,22 @@ func (mg *SQLPoolExtendedAuditingPolicy) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageEndpoint),
+		Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+		Reference:    mg.Spec.InitProvider.StorageEndpointRef,
+		Selector:     mg.Spec.InitProvider.StorageEndpointSelector,
+		To: reference.To{
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageEndpoint")
+	}
+	mg.Spec.InitProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageEndpointRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -340,6 +423,22 @@ func (mg *SQLPoolSecurityAlertPolicy) ResolveReferences(ctx context.Context, c c
 	}
 	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageEndpoint),
+		Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+		Reference:    mg.Spec.InitProvider.StorageEndpointRef,
+		Selector:     mg.Spec.InitProvider.StorageEndpointSelector,
+		To: reference.To{
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageEndpoint")
+	}
+	mg.Spec.InitProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageEndpointRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -511,6 +610,72 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.StorageDataLakeGen2FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageDataLakeGen2FileSystemIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ComputeSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ComputeSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.ComputeSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ComputeSubnetID")
+	}
+	mg.Spec.InitProvider.ComputeSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ComputeSubnetIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.CustomerManagedKey); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CustomerManagedKey[i3].KeyVersionlessID),
+			Extract:      resource.ExtractParamPath("versionless_id", true),
+			Reference:    mg.Spec.InitProvider.CustomerManagedKey[i3].KeyVersionlessIDRef,
+			Selector:     mg.Spec.InitProvider.CustomerManagedKey[i3].KeyVersionlessIDSelector,
+			To: reference.To{
+				List:    &v1beta13.KeyList{},
+				Managed: &v1beta13.Key{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.CustomerManagedKey[i3].KeyVersionlessID")
+		}
+		mg.Spec.InitProvider.CustomerManagedKey[i3].KeyVersionlessID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.CustomerManagedKey[i3].KeyVersionlessIDRef = rsp.ResolvedReference
+
+	}
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagedResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ManagedResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ManagedResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ManagedResourceGroupName")
+	}
+	mg.Spec.InitProvider.ManagedResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ManagedResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageDataLakeGen2FileSystemID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.StorageDataLakeGen2FileSystemIDRef,
+		Selector:     mg.Spec.InitProvider.StorageDataLakeGen2FileSystemIDSelector,
+		To: reference.To{
+			List:    &v1beta1.DataLakeGen2FileSystemList{},
+			Managed: &v1beta1.DataLakeGen2FileSystem{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageDataLakeGen2FileSystemID")
+	}
+	mg.Spec.InitProvider.StorageDataLakeGen2FileSystemID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageDataLakeGen2FileSystemIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -579,6 +744,22 @@ func (mg *WorkspaceExtendedAuditingPolicy) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageEndpoint),
+		Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+		Reference:    mg.Spec.InitProvider.StorageEndpointRef,
+		Selector:     mg.Spec.InitProvider.StorageEndpointSelector,
+		To: reference.To{
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageEndpoint")
+	}
+	mg.Spec.InitProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageEndpointRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -604,6 +785,22 @@ func (mg *WorkspaceSQLAADAdmin) ResolveReferences(ctx context.Context, c client.
 	}
 	mg.Spec.ForProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SynapseWorkspaceID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SynapseWorkspaceIDRef,
+		Selector:     mg.Spec.InitProvider.SynapseWorkspaceIDSelector,
+		To: reference.To{
+			List:    &WorkspaceList{},
+			Managed: &Workspace{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SynapseWorkspaceID")
+	}
+	mg.Spec.InitProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -647,6 +844,22 @@ func (mg *WorkspaceSecurityAlertPolicy) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.SynapseWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SynapseWorkspaceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageEndpoint),
+		Extract:      resource.ExtractParamPath("primary_blob_endpoint", true),
+		Reference:    mg.Spec.InitProvider.StorageEndpointRef,
+		Selector:     mg.Spec.InitProvider.StorageEndpointSelector,
+		To: reference.To{
+			List:    &v1beta1.AccountList{},
+			Managed: &v1beta1.Account{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageEndpoint")
+	}
+	mg.Spec.InitProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageEndpointRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -672,6 +885,22 @@ func (mg *WorkspaceVulnerabilityAssessment) ResolveReferences(ctx context.Contex
 	}
 	mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceSecurityAlertPolicyIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.WorkspaceSecurityAlertPolicyID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.WorkspaceSecurityAlertPolicyIDRef,
+		Selector:     mg.Spec.InitProvider.WorkspaceSecurityAlertPolicyIDSelector,
+		To: reference.To{
+			List:    &WorkspaceSecurityAlertPolicyList{},
+			Managed: &WorkspaceSecurityAlertPolicy{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.WorkspaceSecurityAlertPolicyID")
+	}
+	mg.Spec.InitProvider.WorkspaceSecurityAlertPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.WorkspaceSecurityAlertPolicyIDRef = rsp.ResolvedReference
 
 	return nil
 }

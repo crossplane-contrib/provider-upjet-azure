@@ -77,6 +77,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         workspaceId:
                           description: The resource ID of the Log Analytics Workspace.
                           type: string
@@ -88,6 +89,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   displayName:
                     description: Specifies the Display Name for this Iot Security
                       Solution.
@@ -102,12 +104,14 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   iothubIds:
                     description: Specifies the IoT Hub resource IDs to which this
                       Iot Security Solution is applied.
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   iothubIdsRefs:
                     description: References to IOTHub in devices to populate iothubIds.
                     items:
@@ -211,6 +215,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   recommendationsEnabled:
                     description: A recommendations_enabled block of options to enable
                       or disable as defined below.
@@ -367,6 +372,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -390,6 +396,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         workspaceId:
                           description: The resource ID of the Log Analytics Workspace.
                           type: string
@@ -401,6 +408,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   displayName:
                     description: Specifies the Display Name for this Iot Security
                       Solution.
@@ -415,6 +423,91 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
+                  iothubIds:
+                    description: Specifies the IoT Hub resource IDs to which this
+                      Iot Security Solution is applied.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  iothubIdsRefs:
+                    description: References to IOTHub in devices to populate iothubIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: Resolution specifies whether resolution
+                                of this reference is required. The default is 'Required',
+                                which means the reconcile will fail if the reference
+                                cannot be resolved. 'Optional' means this reference
+                                will be a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: Resolve specifies when this reference should
+                                be resolved. The default is 'IfNotPresent', which
+                                will attempt to resolve the reference only when the
+                                corresponding field is not present. Use 'Always' to
+                                resolve the reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  iothubIdsSelector:
+                    description: Selector for a list of IOTHub in devices to populate
+                      iothubIds.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -441,6 +534,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   recommendationsEnabled:
                     description: A recommendations_enabled block of options to enable
                       or disable as defined below.
@@ -517,6 +611,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -706,6 +801,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         workspaceId:
                           description: The resource ID of the Log Analytics Workspace.
                           type: string
@@ -717,6 +813,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   displayName:
                     description: Specifies the Display Name for this Iot Security
                       Solution.
@@ -731,6 +828,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The ID of the Iot Security Solution resource.
                     type: string
@@ -740,6 +838,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -766,6 +865,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   recommendationsEnabled:
                     description: A recommendations_enabled block of options to enable
                       or disable as defined below.
@@ -847,6 +947,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -23,7 +23,21 @@ type NamespaceNetworkRuleSetInitParameters struct {
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// Specifies the ServiceBus Namespace ID to which to attach the ServiceBus Namespace Network Rule Set. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	// Reference to a ServiceBusNamespace in servicebus to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDRef *v1.Reference `json:"namespaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a ServiceBusNamespace in servicebus to populate namespaceId.
+	// +kubebuilder:validation:Optional
+	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
 	// One or more network_rules blocks as defined below.
 	NetworkRules []NetworkRulesInitParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
@@ -44,6 +58,7 @@ type NamespaceNetworkRuleSetObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// Specifies the ServiceBus Namespace ID to which to attach the ServiceBus Namespace Network Rule Set. Changing this forces a new resource to be created.
@@ -67,6 +82,7 @@ type NamespaceNetworkRuleSetParameters struct {
 
 	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// Specifies the ServiceBus Namespace ID to which to attach the ServiceBus Namespace Network Rule Set. Changing this forces a new resource to be created.
@@ -100,6 +116,19 @@ type NetworkRulesInitParameters struct {
 
 	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
 	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The Subnet ID which should be able to access this ServiceBus Namespace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkRulesObservation struct {

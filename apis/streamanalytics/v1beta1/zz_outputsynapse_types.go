@@ -27,6 +27,19 @@ type OutputSynapseInitParameters struct {
 
 	// The name of the table in the Azure SQL database. Changing this forces a new resource to be created.
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
+
+	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("sql_administrator_login",false)
+	User *string `json:"user,omitempty" tf:"user,omitempty"`
+
+	// Reference to a Workspace in synapse to populate user.
+	// +kubebuilder:validation:Optional
+	UserRef *v1.Reference `json:"userRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in synapse to populate user.
+	// +kubebuilder:validation:Optional
+	UserSelector *v1.Selector `json:"userSelector,omitempty" tf:"-"`
 }
 
 type OutputSynapseObservation struct {

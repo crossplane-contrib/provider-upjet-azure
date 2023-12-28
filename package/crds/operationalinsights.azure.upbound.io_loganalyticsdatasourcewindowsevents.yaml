@@ -79,6 +79,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   resourceGroupName:
                     description: The name of the Resource Group where the Log Analytics
                       Windows Event DataSource should exist. Changing this forces
@@ -264,6 +265,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                 type: object
               managementPolicies:
                 default:
@@ -451,6 +453,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   id:
                     description: The ID of the Log Analytics Windows Event DataSource.
                     type: string

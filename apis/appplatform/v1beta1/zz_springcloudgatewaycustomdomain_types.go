@@ -22,6 +22,19 @@ type SpringCloudGatewayCustomDomainInitParameters struct {
 	// The name which should be used for this Spring Cloud Gateway Custom Domain. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// The ID of the Spring Cloud Gateway. Changing this forces a new Spring Cloud Gateway Custom Domain to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SpringCloudGatewayID *string `json:"springCloudGatewayId,omitempty" tf:"spring_cloud_gateway_id,omitempty"`
+
+	// Reference to a SpringCloudGateway in appplatform to populate springCloudGatewayId.
+	// +kubebuilder:validation:Optional
+	SpringCloudGatewayIDRef *v1.Reference `json:"springCloudGatewayIdRef,omitempty" tf:"-"`
+
+	// Selector for a SpringCloudGateway in appplatform to populate springCloudGatewayId.
+	// +kubebuilder:validation:Optional
+	SpringCloudGatewayIDSelector *v1.Selector `json:"springCloudGatewayIdSelector,omitempty" tf:"-"`
+
 	// Specifies the thumbprint of the Spring Cloud Certificate that binds to the Spring Cloud Gateway Custom Domain.
 	Thumbprint *string `json:"thumbprint,omitempty" tf:"thumbprint,omitempty"`
 }

@@ -61,6 +61,7 @@ type ScheduleInitParameters struct {
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// List of days of the month that the job should execute on. Must be between 1 and 31. -1 for last day of the month. Only valid when frequency is Month.
+	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
 	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
@@ -73,6 +74,7 @@ type ScheduleInitParameters struct {
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	// +listType=set
 	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
@@ -97,6 +99,7 @@ type ScheduleObservation struct {
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
 	// List of days of the month that the job should execute on. Must be between 1 and 31. -1 for last day of the month. Only valid when frequency is Month.
+	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
 	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
@@ -112,6 +115,7 @@ type ScheduleObservation struct {
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 
 	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
+	// +listType=set
 	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 
@@ -148,6 +152,7 @@ type ScheduleParameters struct {
 
 	// List of days of the month that the job should execute on. Must be between 1 and 31. -1 for last day of the month. Only valid when frequency is Month.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
 	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
@@ -177,6 +182,7 @@ type ScheduleParameters struct {
 
 	// List of days of the week that the job should execute on. Only valid when frequency is Week. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	WeekDays []*string `json:"weekDays,omitempty" tf:"week_days,omitempty"`
 }
 

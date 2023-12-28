@@ -71,6 +71,7 @@ type KubernetesClusterNodePoolInitParameters struct {
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// A map of Kubernetes labels which should be applied to nodes in this Node Pool.
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A node_network_profile block as documented below.
@@ -97,6 +98,19 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are Linux and Windows. Defaults to Linux.
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
+	// The ID of the Subnet where the pods in the Node Pool should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	PodSubnetID *string `json:"podSubnetId,omitempty" tf:"pod_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate podSubnetId.
+	// +kubebuilder:validation:Optional
+	PodSubnetIDRef *v1.Reference `json:"podSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate podSubnetId.
+	// +kubebuilder:validation:Optional
+	PodSubnetIDSelector *v1.Selector `json:"podSubnetIdSelector,omitempty" tf:"-"`
+
 	// The Priority for Virtual Machines within the Virtual Machine Scale Set that powers this Node Pool. Possible values are Regular and Spot. Defaults to Regular. Changing this forces a new resource to be created.
 	Priority *string `json:"priority,omitempty" tf:"priority,omitempty"`
 
@@ -113,6 +127,7 @@ type KubernetesClusterNodePoolInitParameters struct {
 	SpotMaxPrice *float64 `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
@@ -124,6 +139,19 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// The SKU which should be used for the Virtual Machines used in this Node Pool. Changing this forces a new resource to be created.
 	VMSize *string `json:"vmSize,omitempty" tf:"vm_size,omitempty"`
 
+	// The ID of the Subnet where this Node Pool should exist. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate vnetSubnetId.
+	// +kubebuilder:validation:Optional
+	VnetSubnetIDRef *v1.Reference `json:"vnetSubnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate vnetSubnetId.
+	// +kubebuilder:validation:Optional
+	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
+
 	// A windows_profile block as documented below. Changing this forces a new resource to be created.
 	WindowsProfile []KubernetesClusterNodePoolWindowsProfileInitParameters `json:"windowsProfile,omitempty" tf:"windows_profile,omitempty"`
 
@@ -131,12 +159,14 @@ type KubernetesClusterNodePoolInitParameters struct {
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
 type KubernetesClusterNodePoolKubeletConfigInitParameters struct {
 
 	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
 	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
@@ -170,6 +200,7 @@ type KubernetesClusterNodePoolKubeletConfigInitParameters struct {
 type KubernetesClusterNodePoolKubeletConfigObservation struct {
 
 	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
+	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
 	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
@@ -204,6 +235,7 @@ type KubernetesClusterNodePoolKubeletConfigParameters struct {
 
 	// Specifies the allow list of unsafe sysctls command or patterns (ending in *). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedUnsafeSysctls []*string `json:"allowedUnsafeSysctls,omitempty" tf:"allowed_unsafe_sysctls,omitempty"`
 
 	// Is CPU CFS quota enforcement for containers enabled? Changing this forces a new resource to be created.
@@ -295,12 +327,14 @@ type KubernetesClusterNodePoolLinuxOsConfigParameters struct {
 type KubernetesClusterNodePoolNodeNetworkProfileInitParameters struct {
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
+	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
 type KubernetesClusterNodePoolNodeNetworkProfileObservation struct {
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
+	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
@@ -308,6 +342,7 @@ type KubernetesClusterNodePoolNodeNetworkProfileParameters struct {
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
@@ -371,6 +406,7 @@ type KubernetesClusterNodePoolObservation struct {
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
 	// A map of Kubernetes labels which should be applied to nodes in this Node Pool.
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A node_network_profile block as documented below.
@@ -416,6 +452,7 @@ type KubernetesClusterNodePoolObservation struct {
 	SpotMaxPrice *float64 `json:"spotMaxPrice,omitempty" tf:"spot_max_price,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
@@ -437,6 +474,7 @@ type KubernetesClusterNodePoolObservation struct {
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -526,6 +564,7 @@ type KubernetesClusterNodePoolParameters struct {
 
 	// A map of Kubernetes labels which should be applied to nodes in this Node Pool.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	NodeLabels map[string]*string `json:"nodeLabels,omitempty" tf:"node_labels,omitempty"`
 
 	// A node_network_profile block as documented below.
@@ -596,6 +635,7 @@ type KubernetesClusterNodePoolParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Used to specify whether the UltraSSD is enabled in the Node Pool. Defaults to false. See the documentation for more information. Changing this forces a new resource to be created.
@@ -634,6 +674,7 @@ type KubernetesClusterNodePoolParameters struct {
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster Node Pool should be located. Changing this forces a new Kubernetes Cluster Node Pool to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 

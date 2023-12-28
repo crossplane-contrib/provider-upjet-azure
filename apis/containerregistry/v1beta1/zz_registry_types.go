@@ -22,6 +22,19 @@ type EncryptionInitParameters struct {
 	// Boolean value that indicates whether encryption is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 
+	// The client ID of the managed identity associated with the encryption key.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("client_id",true)
+	IdentityClientID *string `json:"identityClientId,omitempty" tf:"identity_client_id"`
+
+	// Reference to a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDRef *v1.Reference `json:"identityClientIdRef,omitempty" tf:"-"`
+
+	// Selector for a UserAssignedIdentity in managedidentity to populate identityClientId.
+	// +kubebuilder:validation:Optional
+	IdentityClientIDSelector *v1.Selector `json:"identityClientIdSelector,omitempty" tf:"-"`
+
 	// The ID of the Key Vault Key.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id"`
 }
@@ -72,6 +85,7 @@ type GeoreplicationsInitParameters struct {
 	RegionalEndpointEnabled *bool `json:"regionalEndpointEnabled,omitempty" tf:"regional_endpoint_enabled,omitempty"`
 
 	// A mapping of tags to assign to this replication location.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
@@ -87,6 +101,7 @@ type GeoreplicationsObservation struct {
 	RegionalEndpointEnabled *bool `json:"regionalEndpointEnabled,omitempty" tf:"regional_endpoint_enabled,omitempty"`
 
 	// A mapping of tags to assign to this replication location.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
@@ -105,6 +120,7 @@ type GeoreplicationsParameters struct {
 
 	// A mapping of tags to assign to this replication location.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
@@ -144,6 +160,7 @@ type IPRuleParameters struct {
 type IdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -153,6 +170,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
@@ -169,6 +187,7 @@ type IdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Container Registry.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Container Registry. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
@@ -260,6 +279,7 @@ type RegistryInitParameters struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trust_policy block as documented below.
@@ -326,6 +346,7 @@ type RegistryObservation struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trust_policy block as documented below.
@@ -408,6 +429,7 @@ type RegistryParameters struct {
 
 	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trust_policy block as documented below.
@@ -471,6 +493,19 @@ type VirtualNetworkInitParameters struct {
 
 	// The behaviour for requests matching this rule. At this time the only supported value is Allow
 	Action *string `json:"action,omitempty" tf:"action"`
+
+	// The subnet id from which requests will match the rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type VirtualNetworkObservation struct {

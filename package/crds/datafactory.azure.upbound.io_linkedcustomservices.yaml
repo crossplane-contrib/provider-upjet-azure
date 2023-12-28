@@ -75,6 +75,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -177,6 +178,7 @@ spec:
                           description: A map of parameters to associate with the integration
                             runtime.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   parameters:
@@ -185,6 +187,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of data stores that will be connected to
                       Data Factory. For full list of supported data stores, please
@@ -214,6 +217,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -237,6 +241,7 @@ spec:
                           description: A map of parameters to associate with the integration
                             runtime.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   parameters:
@@ -245,6 +250,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of data stores that will be connected to
                       Data Factory. For full list of supported data stores, please
@@ -436,6 +442,7 @@ spec:
                     description: A map of additional properties to associate with
                       the Data Factory Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   annotations:
                     description: List of tags that can be used for describing the
                       Data Factory Linked Service.
@@ -466,6 +473,7 @@ spec:
                           description: A map of parameters to associate with the integration
                             runtime.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   parameters:
@@ -474,6 +482,7 @@ spec:
                     description: A map of parameters to associate with the Data Factory
                       Linked Service.
                     type: object
+                    x-kubernetes-map-type: granular
                   type:
                     description: The type of data stores that will be connected to
                       Data Factory. For full list of supported data stores, please

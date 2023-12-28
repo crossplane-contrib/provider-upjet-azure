@@ -238,6 +238,7 @@ type ConditionsCookiesConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -256,6 +257,7 @@ type ConditionsCookiesConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -279,12 +281,14 @@ type ConditionsCookiesConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsHTTPVersionConditionInitParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -297,6 +301,7 @@ type ConditionsHTTPVersionConditionInitParameters struct {
 type ConditionsHTTPVersionConditionObservation struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -310,6 +315,7 @@ type ConditionsHTTPVersionConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -532,6 +538,7 @@ type ConditionsQueryStringConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -547,6 +554,7 @@ type ConditionsQueryStringConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -566,6 +574,7 @@ type ConditionsQueryStringConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -620,6 +629,7 @@ type ConditionsRequestBodyConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -635,6 +645,7 @@ type ConditionsRequestBodyConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -654,6 +665,7 @@ type ConditionsRequestBodyConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -672,6 +684,7 @@ type ConditionsRequestHeaderConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -690,6 +703,7 @@ type ConditionsRequestHeaderConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -713,12 +727,14 @@ type ConditionsRequestHeaderConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
 type ConditionsRequestMethodConditionInitParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -731,6 +747,7 @@ type ConditionsRequestMethodConditionInitParameters struct {
 type ConditionsRequestMethodConditionObservation struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -744,6 +761,7 @@ type ConditionsRequestMethodConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -806,6 +824,7 @@ type ConditionsRequestURIConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -821,6 +840,7 @@ type ConditionsRequestURIConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -840,6 +860,7 @@ type ConditionsRequestURIConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -855,6 +876,7 @@ type ConditionsURLFileExtensionConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -870,6 +892,7 @@ type ConditionsURLFileExtensionConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -889,6 +912,7 @@ type ConditionsURLFileExtensionConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -904,6 +928,7 @@ type ConditionsURLPathConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -919,6 +944,7 @@ type ConditionsURLPathConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -938,6 +964,7 @@ type ConditionsURLPathConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1025,6 +1052,7 @@ type HostNameConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1040,6 +1068,7 @@ type HostNameConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1059,6 +1088,7 @@ type HostNameConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1116,6 +1146,7 @@ type PostArgsConditionInitParameters struct {
 	PostArgsName *string `json:"postArgsName,omitempty" tf:"post_args_name,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1134,6 +1165,7 @@ type PostArgsConditionObservation struct {
 	PostArgsName *string `json:"postArgsName,omitempty" tf:"post_args_name,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1157,6 +1189,7 @@ type PostArgsConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1246,6 +1279,19 @@ type RouteConfigurationOverrideActionInitParameters struct {
 	// When Cache behavior is set to Override or SetIfMissing, this field specifies the cache duration to use. The maximum duration is 366 days specified in the d.HH:MM:SS format(e.g. 365.23:59:59). If the desired maximum cache duration is less than 1 day then the maximum cache duration should be specified in the HH:MM:SS format(e.g. 23:59:59).
 	CacheDuration *string `json:"cacheDuration,omitempty" tf:"cache_duration,omitempty"`
 
+	// The Front Door Origin Group resource ID that the request should be routed to. This overrides the configuration specified in the Front Door Endpoint route.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorOriginGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	CdnFrontdoorOriginGroupID *string `json:"cdnFrontdoorOriginGroupId,omitempty" tf:"cdn_frontdoor_origin_group_id,omitempty"`
+
+	// Reference to a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorOriginGroupIDRef *v1.Reference `json:"cdnFrontdoorOriginGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a FrontdoorOriginGroup in cdn to populate cdnFrontdoorOriginGroupId.
+	// +kubebuilder:validation:Optional
+	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
+
 	// Should the Front Door dynamically compress the content? Possible values include true or false.
 	CompressionEnabled *bool `json:"compressionEnabled,omitempty" tf:"compression_enabled,omitempty"`
 
@@ -1327,6 +1373,7 @@ type RouteConfigurationOverrideActionParameters struct {
 type SSLProtocolConditionInitParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -1339,6 +1386,7 @@ type SSLProtocolConditionInitParameters struct {
 type SSLProtocolConditionObservation struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -1352,6 +1400,7 @@ type SSLProtocolConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -1366,6 +1415,7 @@ type SSLProtocolConditionParameters struct {
 type ServerPortConditionInitParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -1378,6 +1428,7 @@ type ServerPortConditionInitParameters struct {
 type ServerPortConditionObservation struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
+	// +listType=set
 	MatchValues []*string `json:"matchValues,omitempty" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -1391,6 +1442,7 @@ type ServerPortConditionParameters struct {
 
 	// One or more string or integer values(e.g. "1") representing the value of the request path to match. Don't include the leading slash (/). If multiple values are specified, they're evaluated using OR logic.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	MatchValues []*string `json:"matchValues" tf:"match_values,omitempty"`
 
 	// If true operator becomes the opposite of its value. Possible values true or false. Defaults to false. Details can be found in the Condition Operator List below.
@@ -1453,6 +1505,7 @@ type URLFilenameConditionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1468,6 +1521,7 @@ type URLFilenameConditionObservation struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 
@@ -1487,6 +1541,7 @@ type URLFilenameConditionParameters struct {
 
 	// A Conditional operator. Possible values include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode or UrlEncode. Details can be found in the Condition Transform List below.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Transforms []*string `json:"transforms,omitempty" tf:"transforms,omitempty"`
 }
 

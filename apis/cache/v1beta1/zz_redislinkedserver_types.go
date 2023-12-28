@@ -19,6 +19,19 @@ import (
 
 type RedisLinkedServerInitParameters struct {
 
+	// The ID of the linked Redis cache. Changing this forces a new Redis to be created.
+	// +crossplane:generate:reference:type=RedisCache
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	LinkedRedisCacheID *string `json:"linkedRedisCacheId,omitempty" tf:"linked_redis_cache_id,omitempty"`
+
+	// Reference to a RedisCache to populate linkedRedisCacheId.
+	// +kubebuilder:validation:Optional
+	LinkedRedisCacheIDRef *v1.Reference `json:"linkedRedisCacheIdRef,omitempty" tf:"-"`
+
+	// Selector for a RedisCache to populate linkedRedisCacheId.
+	// +kubebuilder:validation:Optional
+	LinkedRedisCacheIDSelector *v1.Selector `json:"linkedRedisCacheIdSelector,omitempty" tf:"-"`
+
 	// The location of the linked Redis cache. Changing this forces a new Redis to be created.
 	LinkedRedisCacheLocation *string `json:"linkedRedisCacheLocation,omitempty" tf:"linked_redis_cache_location,omitempty"`
 

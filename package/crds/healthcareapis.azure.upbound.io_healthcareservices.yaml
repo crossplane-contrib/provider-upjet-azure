@@ -73,6 +73,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authenticationConfiguration:
                     description: An authentication_configuration block as defined
                       below.
@@ -106,6 +107,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
                             values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
@@ -118,6 +120,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAgeInSeconds:
                           description: The max age to be allowed via CORS.
                           type: number
@@ -229,6 +232,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -248,6 +252,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authenticationConfiguration:
                     description: An authentication_configuration block as defined
                       below.
@@ -281,6 +286,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
                             values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
@@ -293,6 +299,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAgeInSeconds:
                           description: The max age to be allowed via CORS.
                           type: number
@@ -325,6 +332,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -502,6 +510,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   authenticationConfiguration:
                     description: An authentication_configuration block as defined
                       below.
@@ -535,6 +544,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         allowedMethods:
                           description: The methods to be allowed via CORS. Possible
                             values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH
@@ -547,6 +557,7 @@ spec:
                           items:
                             type: string
                           type: array
+                          x-kubernetes-list-type: set
                         maxAgeInSeconds:
                           description: The max age to be allowed via CORS.
                           type: number
@@ -586,6 +597,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               conditions:
                 description: Conditions of the resource.

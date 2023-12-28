@@ -174,6 +174,7 @@ type IndexingPolicySpatialIndexObservation struct {
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
 	// A set of spatial types of the path.
+	// +listType=set
 	Types []*string `json:"types,omitempty" tf:"types,omitempty"`
 }
 
@@ -395,12 +396,14 @@ type SQLContainerParameters struct {
 type SQLContainerUniqueKeyInitParameters struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+	// +listType=set
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
 }
 
 type SQLContainerUniqueKeyObservation struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
+	// +listType=set
 	Paths []*string `json:"paths,omitempty" tf:"paths,omitempty"`
 }
 
@@ -408,6 +411,7 @@ type SQLContainerUniqueKeyParameters struct {
 
 	// A list of paths to use for this unique key. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Paths []*string `json:"paths" tf:"paths,omitempty"`
 }
 

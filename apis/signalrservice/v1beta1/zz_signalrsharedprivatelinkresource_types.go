@@ -25,8 +25,34 @@ type SignalrSharedPrivateLinkResourceInitParameters struct {
 	// The request message for requesting approval of the Shared Private Link Enabled Remote Resource.
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
+	// The id of the Signalr Service. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.Service
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
+
+	// Reference to a Service in signalrservice to populate signalrServiceId.
+	// +kubebuilder:validation:Optional
+	SignalrServiceIDRef *v1.Reference `json:"signalrServiceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Service in signalrservice to populate signalrServiceId.
+	// +kubebuilder:validation:Optional
+	SignalrServiceIDSelector *v1.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
+
 	// The sub resource name which the Signalr Private Endpoint can connect to. Possible values are sites, vault. Changing this forces a new resource to be created.
 	SubResourceName *string `json:"subResourceName,omitempty" tf:"sub_resource_name,omitempty"`
+
+	// The ID of the Shared Private Link Enabled Remote Resource which this Signalr Private Endpoint should be connected to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a Vault in keyvault to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Vault in keyvault to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 }
 
 type SignalrSharedPrivateLinkResourceObservation struct {

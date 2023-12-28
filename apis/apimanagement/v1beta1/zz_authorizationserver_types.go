@@ -23,12 +23,15 @@ type AuthorizationServerInitParameters struct {
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
 	// The HTTP Verbs supported by the Authorization Endpoint. Possible values are DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT and TRACE.
+	// +listType=set
 	AuthorizationMethods []*string `json:"authorizationMethods,omitempty" tf:"authorization_methods,omitempty"`
 
 	// The mechanism by which Access Tokens are passed to the API. Possible values are authorizationHeader and query.
+	// +listType=set
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// The Authentication Methods supported by the Token endpoint of this Authorization Server.. Possible values are Basic and Body.
+	// +listType=set
 	ClientAuthenticationMethod []*string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
 
 	// The Client/App ID registered with this Authorization Server.
@@ -47,6 +50,7 @@ type AuthorizationServerInitParameters struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Form of Authorization Grants required when requesting an Access Token. Possible values are authorizationCode, clientCredentials, implicit and resourceOwnerPassword.
+	// +listType=set
 	GrantTypes []*string `json:"grantTypes,omitempty" tf:"grant_types,omitempty"`
 
 	// The username associated with the Resource Owner.
@@ -71,12 +75,15 @@ type AuthorizationServerObservation struct {
 	AuthorizationEndpoint *string `json:"authorizationEndpoint,omitempty" tf:"authorization_endpoint,omitempty"`
 
 	// The HTTP Verbs supported by the Authorization Endpoint. Possible values are DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT and TRACE.
+	// +listType=set
 	AuthorizationMethods []*string `json:"authorizationMethods,omitempty" tf:"authorization_methods,omitempty"`
 
 	// The mechanism by which Access Tokens are passed to the API. Possible values are authorizationHeader and query.
+	// +listType=set
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// The Authentication Methods supported by the Token endpoint of this Authorization Server.. Possible values are Basic and Body.
+	// +listType=set
 	ClientAuthenticationMethod []*string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
 
 	// The Client/App ID registered with this Authorization Server.
@@ -95,6 +102,7 @@ type AuthorizationServerObservation struct {
 	DisplayName *string `json:"displayName,omitempty" tf:"display_name,omitempty"`
 
 	// Form of Authorization Grants required when requesting an Access Token. Possible values are authorizationCode, clientCredentials, implicit and resourceOwnerPassword.
+	// +listType=set
 	GrantTypes []*string `json:"grantTypes,omitempty" tf:"grant_types,omitempty"`
 
 	// The ID of the API Management Authorization Server.
@@ -137,14 +145,17 @@ type AuthorizationServerParameters struct {
 
 	// The HTTP Verbs supported by the Authorization Endpoint. Possible values are DELETE, GET, HEAD, OPTIONS, PATCH, POST, PUT and TRACE.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AuthorizationMethods []*string `json:"authorizationMethods,omitempty" tf:"authorization_methods,omitempty"`
 
 	// The mechanism by which Access Tokens are passed to the API. Possible values are authorizationHeader and query.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	BearerTokenSendingMethods []*string `json:"bearerTokenSendingMethods,omitempty" tf:"bearer_token_sending_methods,omitempty"`
 
 	// The Authentication Methods supported by the Token endpoint of this Authorization Server.. Possible values are Basic and Body.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ClientAuthenticationMethod []*string `json:"clientAuthenticationMethod,omitempty" tf:"client_authentication_method,omitempty"`
 
 	// The Client/App ID registered with this Authorization Server.
@@ -173,6 +184,7 @@ type AuthorizationServerParameters struct {
 
 	// Form of Authorization Grants required when requesting an Access Token. Possible values are authorizationCode, clientCredentials, implicit and resourceOwnerPassword.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	GrantTypes []*string `json:"grantTypes,omitempty" tf:"grant_types,omitempty"`
 
 	// The name of the Resource Group in which the API Management Service exists. Changing this forces a new resource to be created.

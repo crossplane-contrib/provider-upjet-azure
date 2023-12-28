@@ -19,6 +19,19 @@ import (
 
 type GatewayInitParameters struct {
 
+	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
+
+	// Reference to a Management in apimanagement to populate apiManagementId.
+	// +kubebuilder:validation:Optional
+	APIManagementIDRef *v1.Reference `json:"apiManagementIdRef,omitempty" tf:"-"`
+
+	// Selector for a Management in apimanagement to populate apiManagementId.
+	// +kubebuilder:validation:Optional
+	APIManagementIDSelector *v1.Selector `json:"apiManagementIdSelector,omitempty" tf:"-"`
+
 	// The description of the API Management Gateway.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

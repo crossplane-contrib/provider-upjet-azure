@@ -19,6 +19,19 @@ import (
 
 type LoadBalancerNatRuleInitParameters struct {
 
+	// Specifies a reference to backendAddressPool resource.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.LoadBalancerBackendAddressPool
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	BackendAddressPoolID *string `json:"backendAddressPoolId,omitempty" tf:"backend_address_pool_id,omitempty"`
+
+	// Reference to a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
+	// +kubebuilder:validation:Optional
+	BackendAddressPoolIDRef *v1.Reference `json:"backendAddressPoolIdRef,omitempty" tf:"-"`
+
+	// Selector for a LoadBalancerBackendAddressPool in network to populate backendAddressPoolId.
+	// +kubebuilder:validation:Optional
+	BackendAddressPoolIDSelector *v1.Selector `json:"backendAddressPoolIdSelector,omitempty" tf:"-"`
+
 	// The port used for internal connections on the endpoint. Possible values range between 1 and 65535, inclusive.
 	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
 
@@ -45,6 +58,18 @@ type LoadBalancerNatRuleInitParameters struct {
 
 	// The transport protocol for the external endpoint. Possible values are Udp, Tcp or All.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+
+	// The name of the resource group in which to create the resource. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 }
 
 type LoadBalancerNatRuleObservation struct {

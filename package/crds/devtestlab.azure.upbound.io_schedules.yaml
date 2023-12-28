@@ -278,6 +278,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskType:
                     description: The task type of the schedule. Possible values include
                       LabVmsShutdownTask and LabVmAutoStart.
@@ -370,6 +371,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskType:
                     description: The task type of the schedule. Possible values include
                       LabVmsShutdownTask and LabVmAutoStart.
@@ -644,6 +646,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   taskType:
                     description: The task type of the schedule. Possible values include
                       LabVmsShutdownTask and LabVmAutoStart.

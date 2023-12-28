@@ -21,6 +21,19 @@ type BlobInventoryPolicyInitParameters struct {
 
 	// One or more rules blocks as defined below.
 	Rules []RulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
+
+	// The ID of the storage account to apply this Blob Inventory Policy to. Changing this forces a new Storage Blob Inventory Policy to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type BlobInventoryPolicyObservation struct {
@@ -59,9 +72,11 @@ type BlobInventoryPolicyParameters struct {
 type FilterInitParameters struct {
 
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
+	// +listType=set
 	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
+	// +listType=set
 	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
 
 	// Includes blob versions in blob inventory or not? Defaults to false.
@@ -74,15 +89,18 @@ type FilterInitParameters struct {
 	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`
 
 	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
+	// +listType=set
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }
 
 type FilterObservation struct {
 
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
+	// +listType=set
 	BlobTypes []*string `json:"blobTypes,omitempty" tf:"blob_types,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
+	// +listType=set
 	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
 
 	// Includes blob versions in blob inventory or not? Defaults to false.
@@ -95,6 +113,7 @@ type FilterObservation struct {
 	IncludeSnapshots *bool `json:"includeSnapshots,omitempty" tf:"include_snapshots,omitempty"`
 
 	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
+	// +listType=set
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }
 
@@ -102,10 +121,12 @@ type FilterParameters struct {
 
 	// A set of blob types. Possible values are blockBlob, appendBlob, and pageBlob. The storage account with is_hns_enabled is true doesn't support pageBlob.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	BlobTypes []*string `json:"blobTypes" tf:"blob_types,omitempty"`
 
 	// A set of strings for blob prefixes to be excluded. Maximum of 10 blob prefixes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ExcludePrefixes []*string `json:"excludePrefixes,omitempty" tf:"exclude_prefixes,omitempty"`
 
 	// Includes blob versions in blob inventory or not? Defaults to false.
@@ -122,6 +143,7 @@ type FilterParameters struct {
 
 	// A set of strings for blob prefixes to be matched. Maximum of 10 blob prefixes.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	PrefixMatch []*string `json:"prefixMatch,omitempty" tf:"prefix_match,omitempty"`
 }
 
@@ -144,6 +166,18 @@ type RulesInitParameters struct {
 
 	// The scope of the inventory for this rule. Possible values are Blob and Container.
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
+
+	// The storage container name to store the blob inventory files for this rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
+	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
+
+	// Reference to a Container in storage to populate storageContainerName.
+	// +kubebuilder:validation:Optional
+	StorageContainerNameRef *v1.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
+
+	// Selector for a Container in storage to populate storageContainerName.
+	// +kubebuilder:validation:Optional
+	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 }
 
 type RulesObservation struct {

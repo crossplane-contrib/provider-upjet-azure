@@ -188,6 +188,7 @@ type ExpressCustomSetupInitParameters struct {
 	Component []ComponentInitParameters `json:"component,omitempty" tf:"component,omitempty"`
 
 	// The Environment Variables for the Azure-SSIS Integration Runtime.
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The version of Azure Powershell installed for the Azure-SSIS Integration Runtime.
@@ -203,6 +204,7 @@ type ExpressCustomSetupObservation struct {
 	Component []ComponentObservation `json:"component,omitempty" tf:"component,omitempty"`
 
 	// The Environment Variables for the Azure-SSIS Integration Runtime.
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The version of Azure Powershell installed for the Azure-SSIS Integration Runtime.
@@ -221,6 +223,7 @@ type ExpressCustomSetupParameters struct {
 
 	// The Environment Variables for the Azure-SSIS Integration Runtime.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Environment map[string]*string `json:"environment,omitempty" tf:"environment,omitempty"`
 
 	// The version of Azure Powershell installed for the Azure-SSIS Integration Runtime.
@@ -229,6 +232,19 @@ type ExpressCustomSetupParameters struct {
 }
 
 type ExpressVnetIntegrationInitParameters struct {
+
+	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 }
 
 type ExpressVnetIntegrationObservation struct {
@@ -429,6 +445,7 @@ type KeyVaultLicenseInitParameters struct {
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault.
@@ -444,6 +461,7 @@ type KeyVaultLicenseObservation struct {
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault.
@@ -461,6 +479,7 @@ type KeyVaultLicenseParameters struct {
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault.
@@ -478,6 +497,7 @@ type KeyVaultPasswordInitParameters struct {
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault.
@@ -493,6 +513,7 @@ type KeyVaultPasswordObservation struct {
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault.
@@ -510,6 +531,7 @@ type KeyVaultPasswordParameters struct {
 
 	// A map of parameters to associate with the Key Vault Data Factory Linked Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
 	// Specifies the secret name in Azure Key Vault.
@@ -593,6 +615,31 @@ type VnetIntegrationInitParameters struct {
 
 	// Static public IP addresses for the Azure-SSIS Integration Runtime. The size must be 2.
 	PublicIps []*string `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
+
+	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
+	// Name of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetName.
+	// +kubebuilder:validation:Optional
+	SubnetNameRef *v1.Reference `json:"subnetNameRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetName.
+	// +kubebuilder:validation:Optional
+	SubnetNameSelector *v1.Selector `json:"subnetNameSelector,omitempty" tf:"-"`
 
 	// ID of the virtual network to which the nodes of the Azure-SSIS Integration Runtime will be added.
 	VnetID *string `json:"vnetId,omitempty" tf:"vnet_id,omitempty"`

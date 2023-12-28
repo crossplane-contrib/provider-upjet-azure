@@ -27,6 +27,19 @@ type ApplicationNetworkRuleSetInitParameters struct {
 
 	// One or more ip_rule blocks as defined below.
 	IPRule []IPRuleInitParameters `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
+
+	// The ID of the IoT Central Application. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/iotcentral/v1beta1.Application
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	IotcentralApplicationID *string `json:"iotcentralApplicationId,omitempty" tf:"iotcentral_application_id,omitempty"`
+
+	// Reference to a Application in iotcentral to populate iotcentralApplicationId.
+	// +kubebuilder:validation:Optional
+	IotcentralApplicationIDRef *v1.Reference `json:"iotcentralApplicationIdRef,omitempty" tf:"-"`
+
+	// Selector for a Application in iotcentral to populate iotcentralApplicationId.
+	// +kubebuilder:validation:Optional
+	IotcentralApplicationIDSelector *v1.Selector `json:"iotcentralApplicationIdSelector,omitempty" tf:"-"`
 }
 
 type ApplicationNetworkRuleSetObservation struct {

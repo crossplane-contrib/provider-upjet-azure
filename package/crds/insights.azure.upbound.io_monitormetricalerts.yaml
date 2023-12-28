@@ -160,6 +160,7 @@ spec:
                             with the post operation. These data are appended to the
                             webhook payload.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   applicationInsightsWebTestLocationAvailabilityCriteria:
@@ -393,6 +394,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   scopesRefs:
                     description: References to Account in storage to populate scopes.
                     items:
@@ -479,6 +481,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetResourceLocation:
                     description: The location of the target resource. The location
                       of the target pluginsdk. Required when using subscription, resource
@@ -513,6 +516,88 @@ spec:
                     description: One or more action blocks as defined below.
                     items:
                       properties:
+                        actionGroupId:
+                          description: The ID of the Action Group can be sourced from
+                            the
+                          type: string
+                        actionGroupIdRef:
+                          description: Reference to a MonitorActionGroup to populate
+                            actionGroupId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        actionGroupIdSelector:
+                          description: Selector for a MonitorActionGroup to populate
+                            actionGroupId.
+                          properties:
+                            matchControllerRef:
+                              description: MatchControllerRef ensures an object with
+                                the same controller reference as the selecting object
+                                is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: Resolution specifies whether resolution
+                                    of this reference is required. The default is
+                                    'Required', which means the reconcile will fail
+                                    if the reference cannot be resolved. 'Optional'
+                                    means this reference will be a no-op if it cannot
+                                    be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: Resolve specifies when this reference
+                                    should be resolved. The default is 'IfNotPresent',
+                                    which will attempt to resolve the reference only
+                                    when the corresponding field is not present. Use
+                                    'Always' to resolve the reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
                         webhookProperties:
                           additionalProperties:
                             type: string
@@ -520,6 +605,7 @@ spec:
                             with the post operation. These data are appended to the
                             webhook payload.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   applicationInsightsWebTestLocationAvailabilityCriteria:
@@ -667,6 +753,90 @@ spec:
                       in ISO 8601 duration format. Possible values are PT1M, PT5M,
                       PT15M, PT30M and PT1H. Defaults to PT1M.
                     type: string
+                  scopes:
+                    description: A set of strings of resource IDs at which the metric
+                      criteria should be applied.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  scopesRefs:
+                    description: References to Account in storage to populate scopes.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: Resolution specifies whether resolution
+                                of this reference is required. The default is 'Required',
+                                which means the reconcile will fail if the reference
+                                cannot be resolved. 'Optional' means this reference
+                                will be a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: Resolve specifies when this reference should
+                                be resolved. The default is 'IfNotPresent', which
+                                will attempt to resolve the reference only when the
+                                corresponding field is not present. Use 'Always' to
+                                resolve the reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  scopesSelector:
+                    description: Selector for a list of Account in storage to populate
+                      scopes.
+                    properties:
+                      matchControllerRef:
+                        description: MatchControllerRef ensures an object with the
+                          same controller reference as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: Resolution specifies whether resolution of
+                              this reference is required. The default is 'Required',
+                              which means the reconcile will fail if the reference
+                              cannot be resolved. 'Optional' means this reference
+                              will be a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: Resolve specifies when this reference should
+                              be resolved. The default is 'IfNotPresent', which will
+                              attempt to resolve the reference only when the corresponding
+                              field is not present. Use 'Always' to resolve the reference
+                              on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   severity:
                     description: The severity of this Metric Alert. Possible values
                       are 0, 1, 2, 3 and 4. Defaults to 3.
@@ -676,6 +846,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetResourceLocation:
                     description: The location of the target resource. The location
                       of the target pluginsdk. Required when using subscription, resource
@@ -874,6 +1045,7 @@ spec:
                             with the post operation. These data are appended to the
                             webhook payload.
                           type: object
+                          x-kubernetes-map-type: granular
                       type: object
                     type: array
                   applicationInsightsWebTestLocationAvailabilityCriteria:
@@ -1035,6 +1207,7 @@ spec:
                     items:
                       type: string
                     type: array
+                    x-kubernetes-list-type: set
                   severity:
                     description: The severity of this Metric Alert. Possible values
                       are 0, 1, 2, 3 and 4. Defaults to 3.
@@ -1044,6 +1217,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetResourceLocation:
                     description: The location of the target resource. The location
                       of the target pluginsdk. Required when using subscription, resource

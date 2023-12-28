@@ -72,6 +72,22 @@ func (mg *AgentPool) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualNetworkSubnetID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualNetworkSubnetIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualNetworkSubnetIDSelector,
+		To: reference.To{
+			List:    &v1beta11.SubnetList{},
+			Managed: &v1beta11.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualNetworkSubnetID")
+	}
+	mg.Spec.InitProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -113,6 +129,38 @@ func (mg *ContainerConnectedRegistry) ResolveReferences(ctx context.Context, c c
 	}
 	mg.Spec.ForProvider.SyncTokenID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SyncTokenIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerRegistryID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ContainerRegistryIDRef,
+		Selector:     mg.Spec.InitProvider.ContainerRegistryIDSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerRegistryID")
+	}
+	mg.Spec.InitProvider.ContainerRegistryID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerRegistryIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SyncTokenID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.SyncTokenIDRef,
+		Selector:     mg.Spec.InitProvider.SyncTokenIDSelector,
+		To: reference.To{
+			List:    &TokenList{},
+			Managed: &Token{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.SyncTokenID")
+	}
+	mg.Spec.InitProvider.SyncTokenID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SyncTokenIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -177,6 +225,45 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].IdentityClientID),
+			Extract:      resource.ExtractParamPath("client_id", true),
+			Reference:    mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef,
+			Selector:     mg.Spec.InitProvider.Encryption[i3].IdentityClientIDSelector,
+			To: reference.To{
+				List:    &v1beta12.UserAssignedIdentityList{},
+				Managed: &v1beta12.UserAssignedIdentity{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].IdentityClientID")
+		}
+		mg.Spec.InitProvider.Encryption[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRuleSet); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork); i4++ {
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID),
+				Extract:      rconfig.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDSelector,
+				To: reference.To{
+					List:    &v1beta11.SubnetList{},
+					Managed: &v1beta11.Subnet{},
+				},
+			})
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 
 	return nil
 }
@@ -278,6 +365,22 @@ func (mg *Token) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.ScopeMapID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScopeMapIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ScopeMapID),
+		Extract:      rconfig.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ScopeMapIDRef,
+		Selector:     mg.Spec.InitProvider.ScopeMapIDSelector,
+		To: reference.To{
+			List:    &ScopeMapList{},
+			Managed: &ScopeMap{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ScopeMapID")
+	}
+	mg.Spec.InitProvider.ScopeMapID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScopeMapIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -303,6 +406,22 @@ func (mg *TokenPassword) ResolveReferences(ctx context.Context, c client.Reader)
 	}
 	mg.Spec.ForProvider.ContainerRegistryTokenID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerRegistryTokenIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerRegistryTokenID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ContainerRegistryTokenIDRef,
+		Selector:     mg.Spec.InitProvider.ContainerRegistryTokenIDSelector,
+		To: reference.To{
+			List:    &TokenList{},
+			Managed: &Token{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerRegistryTokenID")
+	}
+	mg.Spec.InitProvider.ContainerRegistryTokenID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerRegistryTokenIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -345,6 +464,22 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.RegistryNameRef,
+		Selector:     mg.Spec.InitProvider.RegistryNameSelector,
+		To: reference.To{
+			List:    &RegistryList{},
+			Managed: &Registry{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RegistryName")
+	}
+	mg.Spec.InitProvider.RegistryName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RegistryNameRef = rsp.ResolvedReference
 
 	return nil
 }

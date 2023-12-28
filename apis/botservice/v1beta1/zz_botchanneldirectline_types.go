@@ -94,6 +94,7 @@ type SiteInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
+	// +listType=set
 	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
 
 	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.
@@ -118,6 +119,7 @@ type SiteObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
+	// +listType=set
 	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
 
 	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.
@@ -143,6 +145,7 @@ type SiteParameters struct {
 
 	// This field is required when is_secure_site_enabled is enabled. Determines which origins can establish a Directline conversation for this site.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	TrustedOrigins []*string `json:"trustedOrigins,omitempty" tf:"trusted_origins,omitempty"`
 
 	// Enables v1 of the Directline protocol for this site. Enabled by default Defaults to true.

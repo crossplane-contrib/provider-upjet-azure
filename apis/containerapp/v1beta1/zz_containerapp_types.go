@@ -19,6 +19,20 @@ import (
 
 type ContainerAppInitParameters struct {
 
+	// The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
+	// The ID of the Container App Environment to host this Container App.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerapp/v1beta1.Environment
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ContainerAppEnvironmentID *string `json:"containerAppEnvironmentId,omitempty" tf:"container_app_environment_id,omitempty"`
+
+	// Reference to a Environment in containerapp to populate containerAppEnvironmentId.
+	// +kubebuilder:validation:Optional
+	ContainerAppEnvironmentIDRef *v1.Reference `json:"containerAppEnvironmentIdRef,omitempty" tf:"-"`
+
+	// Selector for a Environment in containerapp to populate containerAppEnvironmentId.
+	// +kubebuilder:validation:Optional
+	ContainerAppEnvironmentIDSelector *v1.Selector `json:"containerAppEnvironmentIdSelector,omitempty" tf:"-"`
+
 	// A dapr block as detailed below.
 	Dapr []DaprInitParameters `json:"dapr,omitempty" tf:"dapr,omitempty"`
 
@@ -38,6 +52,7 @@ type ContainerAppInitParameters struct {
 	Secret []SecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// A mapping of tags to assign to the Container App.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template block as detailed below.
@@ -89,6 +104,7 @@ type ContainerAppObservation struct {
 	Secret []SecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// A mapping of tags to assign to the Container App.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template block as detailed below.
@@ -151,6 +167,7 @@ type ContainerAppParameters struct {
 
 	// A mapping of tags to assign to the Container App.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A template block as detailed below.
@@ -478,6 +495,7 @@ type HeaderParameters struct {
 type IdentityInitParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
@@ -487,6 +505,7 @@ type IdentityInitParameters struct {
 type IdentityObservation struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The ID of the Container App.
@@ -503,6 +522,7 @@ type IdentityParameters struct {
 
 	// - A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned

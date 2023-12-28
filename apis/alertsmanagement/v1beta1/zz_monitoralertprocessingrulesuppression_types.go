@@ -469,7 +469,21 @@ type MonitorAlertProcessingRuleSuppressionInitParameters struct {
 	// A schedule block as defined below.
 	Schedule []MonitorAlertProcessingRuleSuppressionScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// A list of resource IDs which will be the target of Alert Processing Rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
+
+	// References to ResourceGroup in azure to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate scopes.
+	// +kubebuilder:validation:Optional
+	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
+
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -497,6 +511,7 @@ type MonitorAlertProcessingRuleSuppressionObservation struct {
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
@@ -547,6 +562,7 @@ type MonitorAlertProcessingRuleSuppressionParameters struct {
 
 	// A mapping of tags which should be assigned to the Alert Processing Rule.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 

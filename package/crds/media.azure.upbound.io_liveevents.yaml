@@ -393,6 +393,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Live Event.
                     type: object
+                    x-kubernetes-map-type: granular
                   transcriptionLanguages:
                     description: 'Specifies a list of languages (locale) to be used
                       for speech-to-text transcription – it should match the spoken
@@ -591,6 +592,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Live Event.
                     type: object
+                    x-kubernetes-map-type: granular
                   transcriptionLanguages:
                     description: 'Specifies a list of languages (locale) to be used
                       for speech-to-text transcription – it should match the spoken
@@ -980,6 +982,7 @@ spec:
                     description: A mapping of tags which should be assigned to the
                       Live Event.
                     type: object
+                    x-kubernetes-map-type: granular
                   transcriptionLanguages:
                     description: 'Specifies a list of languages (locale) to be used
                       for speech-to-text transcription – it should match the spoken

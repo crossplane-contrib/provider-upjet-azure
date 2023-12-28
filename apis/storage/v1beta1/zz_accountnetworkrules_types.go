@@ -20,24 +20,41 @@ import (
 type AccountNetworkRulesInitParameters struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
+	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
+
 	// A list of virtual network subnet ids to secure the storage account.
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
 type AccountNetworkRulesObservation struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
@@ -47,6 +64,7 @@ type AccountNetworkRulesObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
@@ -56,6 +74,7 @@ type AccountNetworkRulesObservation struct {
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
 	// A list of virtual network subnet ids to secure the storage account.
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 
@@ -63,6 +82,7 @@ type AccountNetworkRulesParameters struct {
 
 	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
@@ -71,6 +91,7 @@ type AccountNetworkRulesParameters struct {
 
 	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. Private IP address ranges (as defined in RFC 1918) are not allowed.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
 	// One or More private_link_access block as defined below.
@@ -93,6 +114,7 @@ type AccountNetworkRulesParameters struct {
 
 	// A list of virtual network subnet ids to secure the storage account.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
 }
 

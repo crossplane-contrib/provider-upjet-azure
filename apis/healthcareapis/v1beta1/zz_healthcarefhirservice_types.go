@@ -20,12 +20,15 @@ import (
 type CorsInitParameters struct {
 
 	// A set of headers to be allowed via CORS.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// If credentials are allowed via CORS.
@@ -38,12 +41,15 @@ type CorsInitParameters struct {
 type CorsObservation struct {
 
 	// A set of headers to be allowed via CORS.
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders,omitempty" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
 
 	// If credentials are allowed via CORS.
@@ -57,14 +63,17 @@ type CorsParameters struct {
 
 	// A set of headers to be allowed via CORS.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedHeaders []*string `json:"allowedHeaders" tf:"allowed_headers,omitempty"`
 
 	// The methods to be allowed via CORS. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS, PATCH and PUT.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods" tf:"allowed_methods,omitempty"`
 
 	// A set of origins to be allowed via CORS.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
 
 	// If credentials are allowed via CORS.
@@ -121,6 +130,7 @@ type HealthcareFHIRServiceAuthenticationParameters struct {
 type HealthcareFHIRServiceIdentityInitParameters struct {
 
 	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
@@ -130,6 +140,7 @@ type HealthcareFHIRServiceIdentityInitParameters struct {
 type HealthcareFHIRServiceIdentityObservation struct {
 
 	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The ID of the Healthcare FHIR Service.
@@ -146,6 +157,7 @@ type HealthcareFHIRServiceIdentityParameters struct {
 
 	// A list of one or more Resource IDs for User Assigned Managed identities to assign. Required when type is set to UserAssigned.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of managed identity to assign. Possible values are UserAssigned and SystemAssigned
@@ -156,6 +168,7 @@ type HealthcareFHIRServiceIdentityParameters struct {
 type HealthcareFHIRServiceInitParameters struct {
 
 	// A list of the access policies of the service instance.
+	// +listType=set
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication block as defined below.
@@ -165,6 +178,7 @@ type HealthcareFHIRServiceInitParameters struct {
 	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
 
 	// A list of azure container registry settings used for convert data operation of the service instance.
+	// +listType=set
 	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
 
 	// A cors block as defined below.
@@ -182,13 +196,27 @@ type HealthcareFHIRServiceInitParameters struct {
 	// A list of objects describing OCI artifacts for export as defined below.
 	OciArtifact []OciArtifactInitParameters `json:"ociArtifact,omitempty" tf:"oci_artifact,omitempty"`
 
+	// Specifies the name of the Resource Group in which to create the Healthcare FHIR Service. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameRef *v1.Reference `json:"resourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupName.
+	// +kubebuilder:validation:Optional
+	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
 	// A mapping of tags to assign to the Healthcare FHIR Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 }
 
 type HealthcareFHIRServiceObservation struct {
 
 	// A list of the access policies of the service instance.
+	// +listType=set
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication block as defined below.
@@ -198,6 +226,7 @@ type HealthcareFHIRServiceObservation struct {
 	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
 
 	// A list of azure container registry settings used for convert data operation of the service instance.
+	// +listType=set
 	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
 
 	// A cors block as defined below.
@@ -225,6 +254,7 @@ type HealthcareFHIRServiceObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A mapping of tags to assign to the Healthcare FHIR Service.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare FHIR Service should exist. Changing this forces a new Healthcare FHIR Service to be created.
@@ -235,6 +265,7 @@ type HealthcareFHIRServiceParameters struct {
 
 	// A list of the access policies of the service instance.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AccessPolicyObjectIds []*string `json:"accessPolicyObjectIds,omitempty" tf:"access_policy_object_ids,omitempty"`
 
 	// An authentication block as defined below.
@@ -247,6 +278,7 @@ type HealthcareFHIRServiceParameters struct {
 
 	// A list of azure container registry settings used for convert data operation of the service instance.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ContainerRegistryLoginServerURL []*string `json:"containerRegistryLoginServerUrl,omitempty" tf:"container_registry_login_server_url,omitempty"`
 
 	// A cors block as defined below.
@@ -284,6 +316,7 @@ type HealthcareFHIRServiceParameters struct {
 
 	// A mapping of tags to assign to the Healthcare FHIR Service.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare FHIR Service should exist. Changing this forces a new Healthcare FHIR Service to be created.

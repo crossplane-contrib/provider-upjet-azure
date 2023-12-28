@@ -184,6 +184,19 @@ type StorageLocationInitParameters struct {
 
 	// A valid local path on the targeting VM. Must include the name of the capture file (*.cap). For Linux virtual machine it must start with /var/captures.
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
+
+	// The ID of the storage account to save the packet capture session
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// Reference to a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
+
+	// Selector for a Account in storage to populate storageAccountId.
+	// +kubebuilder:validation:Optional
+	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type StorageLocationObservation struct {

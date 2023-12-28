@@ -39,6 +39,22 @@ func (mg *GlobalVMShutdownSchedule) ResolveReferences(ctx context.Context, c cli
 	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.VirtualMachineID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.VirtualMachineIDRef,
+		Selector:     mg.Spec.InitProvider.VirtualMachineIDSelector,
+		To: reference.To{
+			List:    &v1beta1.LinuxVirtualMachineList{},
+			Managed: &v1beta1.LinuxVirtualMachine{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.VirtualMachineID")
+	}
+	mg.Spec.InitProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.VirtualMachineIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -139,6 +155,70 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LabNameRef,
+		Selector:     mg.Spec.InitProvider.LabNameSelector,
+		To: reference.To{
+			List:    &LabList{},
+			Managed: &Lab{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabName")
+	}
+	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabSubnetName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LabSubnetNameRef,
+		Selector:     mg.Spec.InitProvider.LabSubnetNameSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabSubnetName")
+	}
+	mg.Spec.InitProvider.LabSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabSubnetNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabVirtualNetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.LabVirtualNetworkIDRef,
+		Selector:     mg.Spec.InitProvider.LabVirtualNetworkIDSelector,
+		To: reference.To{
+			List:    &VirtualNetworkList{},
+			Managed: &VirtualNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabVirtualNetworkID")
+	}
+	mg.Spec.InitProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -180,6 +260,38 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LabNameRef,
+		Selector:     mg.Spec.InitProvider.LabNameSelector,
+		To: reference.To{
+			List:    &LabList{},
+			Managed: &Lab{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabName")
+	}
+	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -265,6 +377,38 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LabNameRef,
+		Selector:     mg.Spec.InitProvider.LabNameSelector,
+		To: reference.To{
+			List:    &LabList{},
+			Managed: &Lab{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabName")
+	}
+	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -338,6 +482,70 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LabNameRef,
+		Selector:     mg.Spec.InitProvider.LabNameSelector,
+		To: reference.To{
+			List:    &LabList{},
+			Managed: &Lab{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabName")
+	}
+	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabSubnetName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.LabSubnetNameRef,
+		Selector:     mg.Spec.InitProvider.LabSubnetNameSelector,
+		To: reference.To{
+			List:    &v1beta12.SubnetList{},
+			Managed: &v1beta12.Subnet{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabSubnetName")
+	}
+	mg.Spec.InitProvider.LabSubnetName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabSubnetNameRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.LabVirtualNetworkID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.LabVirtualNetworkIDRef,
+		Selector:     mg.Spec.InitProvider.LabVirtualNetworkIDSelector,
+		To: reference.To{
+			List:    &VirtualNetworkList{},
+			Managed: &VirtualNetwork{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.LabVirtualNetworkID")
+	}
+	mg.Spec.InitProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
+		Extract:      reference.ExternalName(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
+		To: reference.To{
+			List:    &v1beta11.ResourceGroupList{},
+			Managed: &v1beta11.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
+	}
+	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }

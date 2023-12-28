@@ -287,6 +287,7 @@ type ManagedClusterInitParameters struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Upgrade wave for the fabric runtime. Default is Wave0, allowed value must be one of Wave0, Wave1, or Wave2.
@@ -302,6 +303,7 @@ type ManagedClusterNodeTypeInitParameters struct {
 	ApplicationPortRange *string `json:"applicationPortRange,omitempty" tf:"application_port_range,omitempty"`
 
 	// Specifies a list of key/value pairs used to set capacity tags for this node type.
+	// +mapType=granular
 	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
 
 	// The size of the data disk in gigabytes..
@@ -320,6 +322,7 @@ type ManagedClusterNodeTypeInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of placement tags that can be used to indicate where services should run..
+	// +mapType=granular
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
 	// If set to true, system services will run on this node type. Only one node type should be marked as primary. Primary node type cannot be deleted or changed once they're created.
@@ -356,6 +359,7 @@ type ManagedClusterNodeTypeObservation struct {
 	ApplicationPortRange *string `json:"applicationPortRange,omitempty" tf:"application_port_range,omitempty"`
 
 	// Specifies a list of key/value pairs used to set capacity tags for this node type.
+	// +mapType=granular
 	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
 
 	// The size of the data disk in gigabytes..
@@ -377,6 +381,7 @@ type ManagedClusterNodeTypeObservation struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies a list of placement tags that can be used to indicate where services should run..
+	// +mapType=granular
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
 	// If set to true, system services will run on this node type. Only one node type should be marked as primary. Primary node type cannot be deleted or changed once they're created.
@@ -415,6 +420,7 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// Specifies a list of key/value pairs used to set capacity tags for this node type.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Capacities map[string]*string `json:"capacities,omitempty" tf:"capacities,omitempty"`
 
 	// The size of the data disk in gigabytes..
@@ -439,6 +445,7 @@ type ManagedClusterNodeTypeParameters struct {
 
 	// Specifies a list of placement tags that can be used to indicate where services should run..
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	PlacementProperties map[string]*string `json:"placementProperties,omitempty" tf:"placement_properties,omitempty"`
 
 	// If set to true, system services will run on this node type. Only one node type should be marked as primary. Primary node type cannot be deleted or changed once they're created.
@@ -520,6 +527,7 @@ type ManagedClusterObservation struct {
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Upgrade wave for the fabric runtime. Default is Wave0, allowed value must be one of Wave0, Wave1, or Wave2.
@@ -594,6 +602,7 @@ type ManagedClusterParameters struct {
 
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Upgrade wave for the fabric runtime. Default is Wave0, allowed value must be one of Wave0, Wave1, or Wave2.

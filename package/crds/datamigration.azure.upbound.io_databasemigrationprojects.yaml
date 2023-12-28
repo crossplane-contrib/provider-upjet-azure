@@ -245,6 +245,7 @@ spec:
                       type: string
                     description: A mapping of tags to assigned to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetPlatform:
                     description: 'The platform type of the migration target. Currently
                       only support: SQLDB(Azure SQL Database). Changing this forces
@@ -281,6 +282,7 @@ spec:
                       type: string
                     description: A mapping of tags to assigned to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetPlatform:
                     description: 'The platform type of the migration target. Currently
                       only support: SQLDB(Azure SQL Database). Changing this forces
@@ -500,6 +502,7 @@ spec:
                       type: string
                     description: A mapping of tags to assigned to the resource.
                     type: object
+                    x-kubernetes-map-type: granular
                   targetPlatform:
                     description: 'The platform type of the migration target. Currently
                       only support: SQLDB(Azure SQL Database). Changing this forces

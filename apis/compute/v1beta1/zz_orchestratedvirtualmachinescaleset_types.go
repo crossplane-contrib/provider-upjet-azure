@@ -298,12 +298,15 @@ type LinuxConfigurationSecretParameters struct {
 type NetworkInterfaceIPConfigurationInitParameters struct {
 
 	// A list of Backend Address Pools IDs from a Application Gateway which this Orchestrated Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
 
 	// A list of Application Security Group IDs which this Orchestrated Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
 
 	// A list of Backend Address Pools IDs from a Load Balancer which this Orchestrated Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
@@ -315,6 +318,19 @@ type NetworkInterfaceIPConfigurationInitParameters struct {
 	// A public_ip_address block as defined below.
 	PublicIPAddress []IPConfigurationPublicIPAddressInitParameters `json:"publicIpAddress,omitempty" tf:"public_ip_address,omitempty"`
 
+	// The ID of the Subnet which this IP Configuration should be connected to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+
 	// Specifies the version of the image used to create the virtual machines.
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
@@ -322,12 +338,15 @@ type NetworkInterfaceIPConfigurationInitParameters struct {
 type NetworkInterfaceIPConfigurationObservation struct {
 
 	// A list of Backend Address Pools IDs from a Application Gateway which this Orchestrated Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
 
 	// A list of Application Security Group IDs which this Orchestrated Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
 
 	// A list of Backend Address Pools IDs from a Load Balancer which this Orchestrated Virtual Machine Scale Set should be connected to.
+	// +listType=set
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
@@ -350,14 +369,17 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 	// A list of Backend Address Pools IDs from a Application Gateway which this Orchestrated Virtual Machine Scale Set should be connected to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ApplicationGatewayBackendAddressPoolIds []*string `json:"applicationGatewayBackendAddressPoolIds,omitempty" tf:"application_gateway_backend_address_pool_ids,omitempty"`
 
 	// A list of Application Security Group IDs which this Orchestrated Virtual Machine Scale Set should be connected to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
 
 	// A list of Backend Address Pools IDs from a Load Balancer which this Orchestrated Virtual Machine Scale Set should be connected to.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	LoadBalancerBackendAddressPoolIds []*string `json:"loadBalancerBackendAddressPoolIds,omitempty" tf:"load_balancer_backend_address_pool_ids,omitempty"`
 
 	// The Name of the Public IP Address Configuration.
@@ -667,6 +689,7 @@ type OrchestratedVirtualMachineScaleSetExtensionParameters struct {
 type OrchestratedVirtualMachineScaleSetIdentityInitParameters struct {
 
 	// Specifies a list of User Managed Identity IDs to be assigned to this Orchestrated Windows Virtual Machine Scale Set.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Identity that should be configured on this Orchestrated Windows Virtual Machine Scale Set. Only possible value is UserAssigned.
@@ -676,6 +699,7 @@ type OrchestratedVirtualMachineScaleSetIdentityInitParameters struct {
 type OrchestratedVirtualMachineScaleSetIdentityObservation struct {
 
 	// Specifies a list of User Managed Identity IDs to be assigned to this Orchestrated Windows Virtual Machine Scale Set.
+	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Identity that should be configured on this Orchestrated Windows Virtual Machine Scale Set. Only possible value is UserAssigned.
@@ -686,6 +710,7 @@ type OrchestratedVirtualMachineScaleSetIdentityParameters struct {
 
 	// Specifies a list of User Managed Identity IDs to be assigned to this Orchestrated Windows Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
 
 	// The type of Managed Identity that should be configured on this Orchestrated Windows Virtual Machine Scale Set. Only possible value is UserAssigned.
@@ -777,6 +802,7 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 	SourceImageReference []OrchestratedVirtualMachineScaleSetSourceImageReferenceInitParameters `json:"sourceImageReference,omitempty" tf:"source_image_reference,omitempty"`
 
 	// A mapping of tags which should be assigned to this Orchestrated Virtual Machine Scale Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A termination_notification block as defined below.
@@ -786,6 +812,7 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Orchestrated Virtual Machine should be located. Changing this forces a new Orchestrated Virtual Machine to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -958,6 +985,7 @@ type OrchestratedVirtualMachineScaleSetObservation struct {
 	SourceImageReference []OrchestratedVirtualMachineScaleSetSourceImageReferenceObservation `json:"sourceImageReference,omitempty" tf:"source_image_reference,omitempty"`
 
 	// A mapping of tags which should be assigned to this Orchestrated Virtual Machine Scale Set.
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A termination_notification block as defined below.
@@ -970,6 +998,7 @@ type OrchestratedVirtualMachineScaleSetObservation struct {
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Orchestrated Virtual Machine should be located. Changing this forces a new Orchestrated Virtual Machine to be created.
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 
@@ -1196,6 +1225,7 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 
 	// A mapping of tags which should be assigned to this Orchestrated Virtual Machine Scale Set.
 	// +kubebuilder:validation:Optional
+	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A termination_notification block as defined below.
@@ -1212,6 +1242,7 @@ type OrchestratedVirtualMachineScaleSetParameters struct {
 
 	// Specifies a list of Availability Zones in which this Orchestrated Virtual Machine should be located. Changing this forces a new Orchestrated Virtual Machine to be created.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
 

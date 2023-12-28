@@ -37,6 +37,22 @@ func (mg *ManagementLock) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ScopeRef,
+		Selector:     mg.Spec.InitProvider.ScopeSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scope")
+	}
+	mg.Spec.InitProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScopeRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -79,6 +95,38 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 	mg.Spec.ForProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
+		Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
+		To: reference.To{
+			List:    &PolicyDefinitionList{},
+			Managed: &PolicyDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDefinitionID")
+	}
+	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
+		To: reference.To{
+			List:    &v1beta1.ResourceGroupList{},
+			Managed: &v1beta1.ResourceGroup{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupID")
+	}
+	mg.Spec.InitProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -104,6 +152,22 @@ func (mg *ResourcePolicyAssignment) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
+		Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
+		To: reference.To{
+			List:    &PolicyDefinitionList{},
+			Managed: &PolicyDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDefinitionID")
+	}
+	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -147,6 +211,38 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
+		Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
+		To: reference.To{
+			List:    &ResourcePolicyAssignmentList{},
+			Managed: &ResourcePolicyAssignment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyAssignmentID")
+	}
+	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceID),
+		Extract:      resource.ExtractParamPath("resource_id", false),
+		Reference:    mg.Spec.InitProvider.ResourceIDRef,
+		Selector:     mg.Spec.InitProvider.ResourceIDSelector,
+		To: reference.To{
+			List:    &ResourcePolicyAssignmentList{},
+			Managed: &ResourcePolicyAssignment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceID")
+	}
+	mg.Spec.InitProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -172,6 +268,22 @@ func (mg *RoleAssignment) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleDefinitionIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RoleDefinitionID),
+		Extract:      resource.ExtractParamPath("role_definition_resource_id", true),
+		Reference:    mg.Spec.InitProvider.RoleDefinitionIDRef,
+		Selector:     mg.Spec.InitProvider.RoleDefinitionIDSelector,
+		To: reference.To{
+			List:    &RoleDefinitionList{},
+			Managed: &RoleDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RoleDefinitionID")
+	}
+	mg.Spec.InitProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RoleDefinitionIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -199,6 +311,22 @@ func (mg *SubscriptionPolicyAssignment) ResolveReferences(ctx context.Context, c
 	mg.Spec.ForProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyDefinitionID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PolicyDefinitionIDRef,
+		Selector:     mg.Spec.InitProvider.PolicyDefinitionIDSelector,
+		To: reference.To{
+			List:    &PolicyDefinitionList{},
+			Managed: &PolicyDefinition{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyDefinitionID")
+	}
+	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
+
 	return nil
 }
 
@@ -224,6 +352,22 @@ func (mg *SubscriptionPolicyExemption) ResolveReferences(ctx context.Context, c 
 	}
 	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PolicyAssignmentID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.InitProvider.PolicyAssignmentIDRef,
+		Selector:     mg.Spec.InitProvider.PolicyAssignmentIDSelector,
+		To: reference.To{
+			List:    &SubscriptionPolicyAssignmentList{},
+			Managed: &SubscriptionPolicyAssignment{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PolicyAssignmentID")
+	}
+	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 
 	return nil
 }

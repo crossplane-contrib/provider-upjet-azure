@@ -157,6 +157,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Azure Maps Account.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               initProvider:
                 description: THIS IS A BETA FIELD. It will be honored unless the Management
@@ -180,6 +181,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Azure Maps Account.
                     type: object
+                    x-kubernetes-map-type: granular
                 type: object
               managementPolicies:
                 default:
@@ -369,6 +371,7 @@ spec:
                       type: string
                     description: A mapping of tags to assign to the Azure Maps Account.
                     type: object
+                    x-kubernetes-map-type: granular
                   xMsClientId:
                     description: A unique identifier for the Maps Account.
                     type: string

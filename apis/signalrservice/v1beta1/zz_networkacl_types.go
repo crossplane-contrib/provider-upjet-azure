@@ -27,6 +27,19 @@ type NetworkACLInitParameters struct {
 
 	// A public_network block as defined below.
 	PublicNetwork []PublicNetworkInitParameters `json:"publicNetwork,omitempty" tf:"public_network,omitempty"`
+
+	// The ID of the SignalR service. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/signalrservice/v1beta1.Service
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	SignalrServiceID *string `json:"signalrServiceId,omitempty" tf:"signalr_service_id,omitempty"`
+
+	// Reference to a Service in signalrservice to populate signalrServiceId.
+	// +kubebuilder:validation:Optional
+	SignalrServiceIDRef *v1.Reference `json:"signalrServiceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Service in signalrservice to populate signalrServiceId.
+	// +kubebuilder:validation:Optional
+	SignalrServiceIDSelector *v1.Selector `json:"signalrServiceIdSelector,omitempty" tf:"-"`
 }
 
 type NetworkACLObservation struct {
@@ -79,18 +92,35 @@ type NetworkACLParameters struct {
 type PrivateEndpointInitParameters struct {
 
 	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
+
+	// The ID of the Private Endpoint which is based on the SignalR service.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PrivateEndpoint
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Reference to a PrivateEndpoint in network to populate id.
+	// +kubebuilder:validation:Optional
+	IDRef *v1.Reference `json:"idRef,omitempty" tf:"-"`
+
+	// Selector for a PrivateEndpoint in network to populate id.
+	// +kubebuilder:validation:Optional
+	IDSelector *v1.Selector `json:"idSelector,omitempty" tf:"-"`
 }
 
 type PrivateEndpointObservation struct {
 
 	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
@@ -101,10 +131,12 @@ type PrivateEndpointParameters struct {
 
 	// The allowed request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the Private Endpoint Connection. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 
 	// The ID of the Private Endpoint which is based on the SignalR service.
@@ -125,18 +157,22 @@ type PrivateEndpointParameters struct {
 type PublicNetworkInitParameters struct {
 
 	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 }
 
 type PublicNetworkObservation struct {
 
 	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
+	// +listType=set
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 }
 
@@ -144,10 +180,12 @@ type PublicNetworkParameters struct {
 
 	// The allowed request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	AllowedRequestTypes []*string `json:"allowedRequestTypes,omitempty" tf:"allowed_request_types,omitempty"`
 
 	// The denied request types for the public network. Possible values are ClientConnection, ServerConnection, RESTAPI and Trace.
 	// +kubebuilder:validation:Optional
+	// +listType=set
 	DeniedRequestTypes []*string `json:"deniedRequestTypes,omitempty" tf:"denied_request_types,omitempty"`
 }
 

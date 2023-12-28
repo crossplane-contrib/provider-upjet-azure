@@ -75,6 +75,19 @@ type TrafficManagerNestedEndpointInitParameters struct {
 	// One or more subnet blocks as defined below. Changing this forces a new resource to be created.
 	Subnet []TrafficManagerNestedEndpointSubnetInitParameters `json:"subnet,omitempty" tf:"subnet,omitempty"`
 
+	// The resource id of an Azure resource to target.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.TrafficManagerProfile
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
+
+	// Reference to a TrafficManagerProfile in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDRef *v1.Reference `json:"targetResourceIdRef,omitempty" tf:"-"`
+
+	// Selector for a TrafficManagerProfile in network to populate targetResourceId.
+	// +kubebuilder:validation:Optional
+	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
+
 	// Specifies how much traffic should be distributed to this endpoint, this must be specified for Profiles using the Weighted traffic routing method. Valid values are between 1 and 1000.
 	Weight *float64 `json:"weight,omitempty" tf:"weight,omitempty"`
 }

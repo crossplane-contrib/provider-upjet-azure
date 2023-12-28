@@ -22,6 +22,18 @@ type OutputEventHubInitParameters struct {
 	// The authentication mode for the Stream Output. Possible values are Msi and ConnectionString. Defaults to ConnectionString.
 	AuthenticationMode *string `json:"authenticationMode,omitempty" tf:"authentication_mode,omitempty"`
 
+	// The name of the Event Hub.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
+
+	// Reference to a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
+
+	// Selector for a EventHub in eventhub to populate eventhubName.
+	// +kubebuilder:validation:Optional
+	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
+
 	// The column that is used for the Event Hub partition key.
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
@@ -30,6 +42,18 @@ type OutputEventHubInitParameters struct {
 
 	// A serialization block as defined below.
 	Serialization []OutputEventHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
+
+	// The namespace that is associated with the desired Event Hub, Service Bus Queue, Service Bus Topic, etc.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	ServiceBusNamespace *string `json:"servicebusNamespace,omitempty" tf:"servicebus_namespace,omitempty"`
+
+	// Reference to a EventHubNamespace in eventhub to populate servicebusNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceBusNamespaceRef *v1.Reference `json:"servicebusNamespaceRef,omitempty" tf:"-"`
+
+	// Selector for a EventHubNamespace in eventhub to populate servicebusNamespace.
+	// +kubebuilder:validation:Optional
+	ServiceBusNamespaceSelector *v1.Selector `json:"servicebusNamespaceSelector,omitempty" tf:"-"`
 
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc. Required when authentication_mode is set to ConnectionString.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
