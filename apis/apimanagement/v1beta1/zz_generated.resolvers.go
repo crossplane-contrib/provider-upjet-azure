@@ -816,22 +816,6 @@ func (mg *Gateway) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.APIManagementID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIManagementIDRef = rsp.ResolvedReference
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.APIManagementID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.InitProvider.APIManagementIDRef,
-		Selector:     mg.Spec.InitProvider.APIManagementIDSelector,
-		To: reference.To{
-			List:    &ManagementList{},
-			Managed: &Management{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.APIManagementID")
-	}
-	mg.Spec.InitProvider.APIManagementID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.APIManagementIDRef = rsp.ResolvedReference
-
 	return nil
 }
 

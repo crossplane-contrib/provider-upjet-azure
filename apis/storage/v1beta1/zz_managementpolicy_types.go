@@ -224,19 +224,6 @@ type ManagementPolicyInitParameters struct {
 
 	// A rule block as documented below.
 	Rule []RuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
-
-	// Specifies the id of the storage account to apply the management policy to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
-
-	// Reference to a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
-
-	// Selector for a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type ManagementPolicyObservation struct {

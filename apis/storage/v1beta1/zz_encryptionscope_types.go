@@ -27,19 +27,6 @@ type EncryptionScopeInitParameters struct {
 
 	// The source of the Storage Encryption Scope. Possible values are Microsoft.KeyVault and Microsoft.Storage.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
-
-	// The ID of the Storage Account where this Storage Encryption Scope is created. Changing this forces a new Storage Encryption Scope to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
-
-	// Reference to a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDRef *v1.Reference `json:"storageAccountIdRef,omitempty" tf:"-"`
-
-	// Selector for a Account in storage to populate storageAccountId.
-	// +kubebuilder:validation:Optional
-	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 }
 
 type EncryptionScopeObservation struct {

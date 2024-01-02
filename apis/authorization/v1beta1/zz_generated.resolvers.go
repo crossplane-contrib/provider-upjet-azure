@@ -111,22 +111,6 @@ func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, 
 	mg.Spec.InitProvider.PolicyDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyDefinitionIDRef = rsp.ResolvedReference
 
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
-		Extract:      resource.ExtractResourceID(),
-		Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
-		Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
-		To: reference.To{
-			List:    &v1beta1.ResourceGroupList{},
-			Managed: &v1beta1.ResourceGroup{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupID")
-	}
-	mg.Spec.InitProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ResourceGroupIDRef = rsp.ResolvedReference
-
 	return nil
 }
 

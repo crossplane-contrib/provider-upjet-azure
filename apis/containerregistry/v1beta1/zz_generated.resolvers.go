@@ -131,22 +131,6 @@ func (mg *ContainerConnectedRegistry) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.SyncTokenIDRef = rsp.ResolvedReference
 
 	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerRegistryID),
-		Extract:      rconfig.ExtractResourceID(),
-		Reference:    mg.Spec.InitProvider.ContainerRegistryIDRef,
-		Selector:     mg.Spec.InitProvider.ContainerRegistryIDSelector,
-		To: reference.To{
-			List:    &RegistryList{},
-			Managed: &Registry{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerRegistryID")
-	}
-	mg.Spec.InitProvider.ContainerRegistryID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ContainerRegistryIDRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SyncTokenID),
 		Extract:      rconfig.ExtractResourceID(),
 		Reference:    mg.Spec.InitProvider.SyncTokenIDRef,
@@ -464,22 +448,6 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
-
-	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-		CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RegistryName),
-		Extract:      reference.ExternalName(),
-		Reference:    mg.Spec.InitProvider.RegistryNameRef,
-		Selector:     mg.Spec.InitProvider.RegistryNameSelector,
-		To: reference.To{
-			List:    &RegistryList{},
-			Managed: &Registry{},
-		},
-	})
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.RegistryName")
-	}
-	mg.Spec.InitProvider.RegistryName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.RegistryNameRef = rsp.ResolvedReference
 
 	return nil
 }
