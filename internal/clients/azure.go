@@ -65,16 +65,9 @@ var (
 // TerraformSetupBuilder returns Terraform setup with provider specific
 // configuration like provider credentials used to connect to cloud APIs in the
 // expected form of a Terraform provider.
-func TerraformSetupBuilder(version, providerSource, providerVersion string, tfProvider *schema.Provider, scheduler terraform.ProviderScheduler) terraform.SetupFn { //nolint:gocyclo
+func TerraformSetupBuilder(tfProvider *schema.Provider) terraform.SetupFn { //nolint:gocyclo
 	return func(ctx context.Context, client client.Client, mg xpresource.Managed) (terraform.Setup, error) {
-		ps := terraform.Setup{
-			Version: version,
-			Requirement: terraform.ProviderRequirement{
-				Source:  providerSource,
-				Version: providerVersion,
-			},
-			Scheduler: scheduler,
-		}
+		ps := terraform.Setup{}
 
 		configRef := mg.GetProviderConfigReference()
 		if configRef == nil {
