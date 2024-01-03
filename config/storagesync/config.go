@@ -23,7 +23,6 @@ import (
 // Configure configures storagesync group
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_storage_sync", func(r *config.Resource) {
-		r.UseAsync = false
 		r.Kind = "StorageSync"
 	})
 }

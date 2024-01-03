@@ -23,6 +23,7 @@ jobs:
       subpackages: ${{ github.event.inputs.subpackages }}
       size: ${{ github.event.inputs.size }}
       concurrency: ${{ github.event.inputs.concurrency }}
+      go-version: 1.21
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR_RC }}
       UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW_RC }}

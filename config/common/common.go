@@ -45,6 +45,9 @@ const (
 	ErrFmtUnexpectedType = `unexpected type for attribute %s: Expecting a string`
 	// ErrGetPasswordSecret is an error string for failing to get password secret
 	ErrGetPasswordSecret = "cannot get password secret"
+	// VersionV1Beta1 is used for resources that meet the v1beta1 criteria
+	// here: https://github.com/upbound/arch/pull/33
+	VersionV1Beta1 = "v1beta1"
 
 	// nameReferenceKind represents name reference kind
 	nameReferenceKind = "name"
@@ -223,4 +226,14 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) tjconfig.NewI
 			return errors.Wrap(resource.NewAPIPatchingApplicator(client).Apply(ctx, s), "cannot apply password secret")
 		})
 	}
+}
+
+func RemoveIndex(s []string, elementToRemove string) []string {
+	var result []string
+	for _, value := range s {
+		if value != elementToRemove {
+			result = append(result, value)
+		}
+	}
+	return result
 }

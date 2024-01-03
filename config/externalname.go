@@ -5,14 +5,17 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/upbound/provider-azure/config/common"
+
 	"github.com/pkg/errors"
 
 	"github.com/crossplane/upjet/pkg/config"
 )
 
-// ExternalNameConfigs is a map of external name configurations for the whole
-// provider.
-var ExternalNameConfigs = map[string]config.ExternalName{
+// NoForkExternalNameConfigs contains all external name configurations
+// belonging to Terraform resources to be reconciled under the no-fork
+// architecture for this provider.
+var NoForkExternalNameConfigs = map[string]config.ExternalName{
 	// apimanagement
 	// API Management Services can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1
@@ -61,7 +64,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_api_management_email_template": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/templates/{{ .parameters.template_name }}"),
 	// API Management Gateways can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.ApiManagement/service/service1/gateways/gateway1
-	"azurerm_api_management_gateway": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/gateways/{{ .external_name }}"),
+	"azurerm_api_management_gateway": config.TemplatedStringAsIdentifier("name", "{{ .parameters.api_management_id }}/gateways/{{ .external_name }}"),
 	// API Management AAD Identity Provider can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1/identityProviders/aad
 	"azurerm_api_management_identity_provider_aad": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/identityProviders/aad"),
@@ -121,7 +124,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_api_management_global_schema": config.TemplatedStringAsIdentifier("schema_id", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ApiManagement/service/{{ .parameters.api_management_name }}/schemas/{{ .external_name }}"),
 
 	// authorization
-	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
+	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
 	"azurerm_role_assignment":                  config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Authorization/locks/lock1
 	"azurerm_management_lock": config.IdentifierFromProvider,
@@ -200,7 +203,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_snapshot":                               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Compute/snapshots/{{ .external_name }}"),
 	// Arguments make up the ID.
 	"azurerm_marketplace_agreement": config.IdentifierFromProvider,
-	"azurerm_dedicated_host":        config.TemplatedStringAsIdentifier("name", "{{ .parameters.dedicated_host_group_id }}/hosts/{ .external_name }}"),
+	"azurerm_dedicated_host":        config.TemplatedStringAsIdentifier("name", "{{ .parameters.dedicated_host_group_id }}/hosts/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/galleries/gallery1/applications/galleryApplication1
 	"azurerm_gallery_application": config.TemplatedStringAsIdentifier("name", "{{ .parameters.gallery_id }}/applications/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Compute/galleries/gallery1/applications/galleryApplication1/versions/galleryApplicationVersion1
@@ -386,8 +389,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_container_registry_agent_pool": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerRegistry/registries/{{ .parameters.container_registry_name }}/agentPools/{{ .external_name }}"),
 	"azurerm_container_registry_scope_map":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerRegistry/registries/{{ .parameters.container_registry_name }}/scopeMaps/{{ .external_name }}"),
 	"azurerm_container_registry_token":      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerRegistry/registries/{{ .parameters.container_registry_name }}/tokens/{{ .external_name }}"),
-	"azurerm_container_registry_webhook":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerRegistry/registries/{{ .parameters.container_registry_name }}/webHooks/{{ .external_name }}"),
-	"azurerm_container_connected_registry":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerRegistry/registries/{{ .parameters.container_registry_name }}/connectedRegistries/{{ .external_name }}"),
+	"azurerm_container_registry_webhook":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerRegistry/registries/{{ .parameters.registry_name }}/webHooks/{{ .external_name }}"),
+	"azurerm_container_connected_registry":  config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_registry_id }}/connectedRegistries/{{ .external_name }}"),
 	// /subscriptions/12345678-1234-9876-4563-123456789012/resourceGroups/group1/providers/Microsoft.ContainerRegistry/registries/registry1/tokens/token1/passwords/password
 	"azurerm_container_registry_token_password": config.IdentifierFromProvider,
 
@@ -548,7 +551,7 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_nat_gateway":                               config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/natGateways/{{ .external_name }}"),
 	"azurerm_network_watcher":                           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkWatchers/{{ .external_name }}"),
 	"azurerm_network_watcher_flow_log":                  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkWatchers/{{ .parameters.network_watcher_name }}/flowLogs/{{ .external_name }}"),
-	"azurerm_network_connection_monitor":                config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_watcher_id }}/backendAddressPools/{{ .connectionMonitors }}"),
+	"azurerm_network_connection_monitor":                config.TemplatedStringAsIdentifier("name", "{{ .parameters.network_watcher_id }}/connectionMonitors/{{ .external_name }}"),
 	"azurerm_network_ddos_protection_plan":              config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/ddosProtectionPlans/{{ .external_name }}"),
 	"azurerm_application_security_group":                config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/applicationSecurityGroups/{{ .external_name }}"),
 	"azurerm_network_security_group":                    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/networkSecurityGroups/{{ .external_name }}"),
@@ -792,11 +795,11 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	// Following _Case 6_ from the **Adding a New Resource** guide
 	"azurerm_storage_account_network_rules":     config.IdentifierFromProvider,
 	"azurerm_storage_blob":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .external_name }}"),
-	"azurerm_storage_blob_inventory_policy":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/inventoryPolicies/Default"),
+	"azurerm_storage_blob_inventory_policy":     config.IdentifierFromProvider,
 	"azurerm_storage_container":                 config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
 	"azurerm_storage_data_lake_gen2_filesystem": storageDataLakeGen2Filesystem(),
-	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/encryptionScopes/{{ .external_name }}"),
-	"azurerm_storage_management_policy":         config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .storage_account_id }}/managementPolicies/default"),
+	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/encryptionScopes/{{ .external_name }}"),
+	"azurerm_storage_management_policy":         config.TemplatedStringAsIdentifier("", "{{ .parameters.storage_account_id }}/managementPolicies/default"),
 	// The id of this resource is a concatenation of 2 resource names, but in the terraform documentation
 	// this reasource does not have a name so instead it concatenates destination and target storage account IDs
 	"azurerm_storage_object_replication": config.IdentifierFromProvider,
@@ -1875,6 +1878,8 @@ var ExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_load_test": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.LoadTestService/loadTests/{{ .external_name }}"),
 }
 
+var CLIReconciledExternalNameConfigs = map[string]config.ExternalName{}
+
 func keyVaultURLIDConf(resourceType string) config.ExternalName {
 	e := config.IdentifierFromProvider
 	e.GetExternalNameFn = func(tfstate map[string]any) (string, error) {
@@ -2017,25 +2022,24 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 	return e
 }
 
-// ExternalNameConfigurations adds all external name configurations from
-// the main table ExternalNameConfigs.
-func ExternalNameConfigurations() config.ResourceOption {
+// ResourceConfigurator applies all external name configs
+// listed in the table NoForkExternalNameConfigs and
+// CLIReconciledExternalNameConfigs and sets the version
+// of those resources to v1beta1. For those resource in
+// NoForkExternalNameConfigs, it also sets
+// config.Resource.UseNoForkClient to `true`.
+func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
-		if e, ok := ExternalNameConfigs[r.Name]; ok {
-			r.ExternalName = e
-			r.Version = "v1beta1"
+		// if configured both for the no-fork and CLI based architectures,
+		// no-fork configuration prevails
+		e, configured := NoForkExternalNameConfigs[r.Name]
+		if !configured {
+			e, configured = CLIReconciledExternalNameConfigs[r.Name]
 		}
+		if !configured {
+			return
+		}
+		r.Version = common.VersionV1Beta1
+		r.ExternalName = e
 	}
-}
-
-// ResourcesWithExternalNameConfig returns a list of resources that have external
-// name config defined in the external name table.
-func ResourcesWithExternalNameConfig() []string {
-	l := make([]string, len(ExternalNameConfigs))
-	i := 0
-	for r := range ExternalNameConfigs {
-		l[i] = r + "$"
-		i++
-	}
-	return l
 }

@@ -45,7 +45,7 @@ GO_TEST_PARALLEL := $(shell echo $$(( $(NPROCS) / 2 )))
 # correctly.
 export GOPRIVATE = github.com/upbound/*
 
-GO_REQUIRED_VERSION ?= 1.19
+GO_REQUIRED_VERSION ?= 1.21
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
 # GOLANGCILINT_VERSION ?= 1.54.0
@@ -67,7 +67,7 @@ export SUBPACKAGES := $(SUBPACKAGES)
 KIND_VERSION = v0.15.0
 UP_VERSION = v0.20.0
 UP_CHANNEL = stable
-UPTEST_VERSION = v0.6.1
+UPTEST_VERSION = v0.8.0
 
 export UP_VERSION := $(UP_VERSION)
 export UP_CHANNEL := $(UP_CHANNEL)
@@ -212,8 +212,8 @@ family-e2e:
 	for m in $$(tr ',' ' ' <<< $${UPTEST_EXAMPLE_LIST}); do \
 	  	$(INFO) Processing the example manifest "$${m}"; \
 		for api in $$(sed -nE 's/^apiVersion: *(.+)/\1/p' "$${m}" | cut -d. -f1); do \
-		    if [[ $${api} == "v1" ]]; then \
-		        $(INFO) v1 is not a valid provider. Skipping...; \
+		    if [[ $${api} == "v1" || $${api} == "azure" ]]; then \
+		        $(INFO) $${api} is not a valid provider. Skipping...; \
 		        continue; \
 		    fi; \
 			if [[ $${INSTALL_APIS} =~ " $${api} " ]]; then \
@@ -242,7 +242,7 @@ crddiff: $(UPTEST)
 			continue ; \
 		fi ; \
 		echo "Checking $${crd} for breaking API changes..." ; \
-		changes_detected=$$($(UPTEST) crddiff revision <(git cat-file -p "$${GITHUB_BASE_REF}:$${crd}") "$${crd}" 2>&1) ; \
+		changes_detected=$$($(UPTEST) crddiff revision --enable-upjet-extensions <(git cat-file -p "$${GITHUB_BASE_REF}:$${crd}") "$${crd}" 2>&1) ; \
 		if [[ $$? != 0 ]] ; then \
 			printf "\033[31m"; echo "Breaking change detected!"; printf "\033[0m" ; \
 			echo "$${changes_detected}" ; \

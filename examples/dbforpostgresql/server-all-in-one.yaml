@@ -6,6 +6,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    login: anotheradmin
     objectId: ${data.azurerm_client_config.current.object_id}
     resourceGroupNameSelector:
       matchLabels:

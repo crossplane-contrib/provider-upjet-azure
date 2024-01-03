@@ -1,7 +1,7 @@
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
-  name: example-resources
+  name: example-resources-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: "West Europe"

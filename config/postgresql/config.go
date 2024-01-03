@@ -51,7 +51,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_configuration", func(r *config.Resource) {
-		r.UseAsync = false
 		r.References["server_id"] = config.Reference{
 			Type:      "FlexibleServer",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
@@ -145,7 +144,6 @@ func Configure(p *config.Provider) {
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_configuration", func(r *config.Resource) {
-		r.UseAsync = false
 		r.References["server_name"] = config.Reference{
 			Type: "Server",
 		}

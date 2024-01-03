@@ -17,9 +17,10 @@ limitations under the License.
 package storage
 
 import (
-	"github.com/upbound/provider-azure/apis/rconfig"
-
 	"github.com/crossplane/upjet/pkg/config"
+
+	"github.com/upbound/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/config/common"
 )
 
 // Configure configures storage group
@@ -44,5 +45,13 @@ func Configure(p *config.Provider) {
 			Type:      "Account",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_encryption_scope", func(r *config.Resource) {
+		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "storage_account_id")
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_management_policy", func(r *config.Resource) {
+		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "storage_account_id")
 	})
 }
