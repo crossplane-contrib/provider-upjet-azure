@@ -18,17 +18,10 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"os"
 	"path/filepath"
 	"time"
-
-	"gopkg.in/alecthomas/kingpin.v2"
-	kerrors "k8s.io/apimachinery/pkg/api/errors"
-	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-	"k8s.io/client-go/tools/leaderelection/resourcelock"
-	ctrl "sigs.k8s.io/controller-runtime"
-	"sigs.k8s.io/controller-runtime/pkg/cache"
-	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/certificates"
@@ -38,7 +31,13 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/ratelimiter"
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
-	"github.com/crossplane/upjet/pkg/terraform"
+	"gopkg.in/alecthomas/kingpin.v2"
+	kerrors "k8s.io/apimachinery/pkg/api/errors"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/tools/leaderelection/resourcelock"
+	ctrl "sigs.k8s.io/controller-runtime"
+	"sigs.k8s.io/controller-runtime/pkg/cache"
+	"sigs.k8s.io/controller-runtime/pkg/log/zap"
 
 	"github.com/upbound/provider-azure/apis"
 	"github.com/upbound/provider-azure/apis/v1alpha1"
@@ -48,24 +47,34 @@ import (
 	"github.com/upbound/provider-azure/internal/features"
 )
 
+func deprecationAction(flagName string) kingpin.Action {
+	return func(c *kingpin.ParseContext) error {
+		_, err := fmt.Fprintf(os.Stderr, "warning: Command-line flag %q is deprecated and no longer used. It will be removed in a future release. Please remove it from all of your configurations (ControllerConfigs, etc.).\n", flagName)
+		kingpin.FatalIfError(err, "Failed to print the deprecation notice.")
+		return nil
+	}
+}
+
 func main() {
 	var (
-		app                = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Azure").DefaultEnvars()
-		debug              = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
-		syncInterval       = app.Flag("sync", "Sync interval controls how often all resources will be double checked for drift.").Short('s').Default("1h").Duration()
-		pollInterval       = app.Flag("poll", "Poll interval controls how often an individual resource should be checked for drift.").Default("10m").Duration()
-		leaderElection     = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
-		maxReconcileRate   = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("10").Int()
-		terraformVersion   = app.Flag("terraform-version", "Terraform version.").Required().Envar("TERRAFORM_VERSION").String()
-		providerSource     = app.Flag("terraform-provider-source", "Terraform provider source.").Required().Envar("TERRAFORM_PROVIDER_SOURCE").String()
-		providerVersion    = app.Flag("terraform-provider-version", "Terraform provider version.").Required().Envar("TERRAFORM_PROVIDER_VERSION").String()
-		nativeProviderPath = app.Flag("terraform-native-provider-path", "Terraform native provider path for shared execution.").Default("").Envar("TERRAFORM_NATIVE_PROVIDER_PATH").String()
-		pluginProcessTTL   = app.Flag("provider-ttl", "TTL for the native plugin processes before they are replaced. Changing the default may increase memory consumption.").Default("100").Int()
+		app              = kingpin.New(filepath.Base(os.Args[0]), "Terraform based Crossplane provider for Azure").DefaultEnvars()
+		debug            = app.Flag("debug", "Run with debug logging.").Short('d').Bool()
+		syncInterval     = app.Flag("sync", "Sync interval controls how often all resources will be double checked for drift.").Short('s').Default("1h").Duration()
+		pollInterval     = app.Flag("poll", "Poll interval controls how often an individual resource should be checked for drift.").Default("10m").Duration()
+		leaderElection   = app.Flag("leader-election", "Use leader election for the controller manager.").Short('l').Default("false").OverrideDefaultFromEnvar("LEADER_ELECTION").Bool()
+		maxReconcileRate = app.Flag("max-reconcile-rate", "The global maximum rate per second at which resources may checked for drift from the desired state.").Default("100").Int()
 
 		namespace                  = app.Flag("namespace", "Namespace used to set as default scope in default secret store config.").Default("crossplane-system").Envar("POD_NAMESPACE").String()
 		essTLSCertsPath            = app.Flag("ess-tls-cert-dir", "Path of ESS TLS certificates.").Envar("ESS_TLS_CERTS_DIR").String()
 		enableExternalSecretStores = app.Flag("enable-external-secret-stores", "Enable support for ExternalSecretStores.").Default("false").Envar("ENABLE_EXTERNAL_SECRET_STORES").Bool()
 		enableManagementPolicies   = app.Flag("enable-management-policies", "Enable support for Management Policies.").Default("true").Envar("ENABLE_MANAGEMENT_POLICIES").Bool()
+
+		// now deprecated command-line arguments with the Terraform SDK-based upjet architecture
+		_ = app.Flag("provider-ttl", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] TTL for the native plugin processes before they are replaced. Changing the default may increase memory consumption.").Hidden().Action(deprecationAction("provider-ttl")).Int()
+		_ = app.Flag("terraform-version", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform version.").Envar("TERRAFORM_VERSION").Hidden().Action(deprecationAction("terraform-version")).String()
+		_ = app.Flag("terraform-provider-version", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform provider version.").Envar("TERRAFORM_PROVIDER_VERSION").Hidden().Action(deprecationAction("terraform-provider-version")).String()
+		_ = app.Flag("terraform-native-provider-path", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform native provider path for shared execution.").Envar("TERRAFORM_NATIVE_PROVIDER_PATH").Hidden().Action(deprecationAction("terraform-native-provider-path")).String()
+		_ = app.Flag("terraform-provider-source", "[DEPRECATED: This option is no longer used and it will be removed in a future release.] Terraform provider source.").Envar("TERRAFORM_PROVIDER_SOURCE").Hidden().Action(deprecationAction("terraform-provider-source")).String()
 	)
 
 	kingpin.MustParse(app.Parse(os.Args[1:]))
@@ -100,18 +109,6 @@ func main() {
 	kingpin.FatalIfError(err, "Cannot create controller manager")
 	kingpin.FatalIfError(apis.AddToScheme(mgr.GetScheme()), "Cannot add Azure APIs to scheme")
 
-	// if the native Terraform provider plugin's path is not configured via
-	// the env. variable TERRAFORM_NATIVE_PROVIDER_PATH or
-	// the `--terraform-native-provider-path` command-line option,
-	// we do not use the shared gRPC server and default to the regular
-	// Terraform CLI behaviour (of forking a plugin process per invocation).
-	// This removes some complexity for setting up development environments.
-	var scheduler terraform.ProviderScheduler = terraform.NewNoOpProviderScheduler()
-	if len(*nativeProviderPath) != 0 {
-		scheduler = terraform.NewSharedProviderScheduler(log, *pluginProcessTTL,
-			terraform.WithSharedProviderOptions(terraform.WithNativeProviderPath(*nativeProviderPath), terraform.WithNativeProviderName("registry.terraform.io/"+*providerSource)))
-	}
-
 	ctx := context.Background()
 	provider, err := config.GetProvider(ctx, false)
 	kingpin.FatalIfError(err, "Cannot initialize the provider configuration")
@@ -124,7 +121,7 @@ func main() {
 			Features:                &feature.Flags{},
 		},
 		Provider:              provider,
-		SetupFn:               clients.TerraformSetupBuilder(*terraformVersion, *providerSource, *providerVersion, provider.TerraformProvider, scheduler),
+		SetupFn:               clients.TerraformSetupBuilder(provider.TerraformProvider),
 		PollJitter:            pollJitter,
 		OperationTrackerStore: tjcontroller.NewOperationStore(log),
 	}
@@ -133,8 +130,6 @@ func main() {
 		o.Features.Enable(features.EnableBetaManagementPolicies)
 		log.Info("Beta feature enabled", "flag", features.EnableBetaManagementPolicies)
 	}
-
-	o.WorkspaceStore = terraform.NewWorkspaceStore(log, terraform.WithDisableInit(len(*nativeProviderPath) != 0), terraform.WithProcessReportInterval(*pollInterval), terraform.WithFeatures(o.Features))
 
 	if *enableExternalSecretStores {
 		o.SecretStoreConfigGVK = &v1alpha1.StoreConfigGroupVersionKind
