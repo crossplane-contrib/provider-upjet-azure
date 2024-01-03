@@ -4,6 +4,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/config/common"
 )
 
 // Configure configures containerregistry group
@@ -30,5 +31,10 @@ func Configure(p *config.Provider) {
 			Type:      "Token",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "container_registry_id")
+	})
+
+	p.AddResourceConfigurator("azurerm_container_registry_webhook", func(r *config.Resource) {
+		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "registry_name")
 	})
 }

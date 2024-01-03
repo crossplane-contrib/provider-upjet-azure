@@ -371,6 +371,21 @@ func (in *ContainerConnectedRegistryInitParameters) DeepCopyInto(out *ContainerC
 			}
 		}
 	}
+	if in.ContainerRegistryID != nil {
+		in, out := &in.ContainerRegistryID, &out.ContainerRegistryID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ContainerRegistryIDRef != nil {
+		in, out := &in.ContainerRegistryIDRef, &out.ContainerRegistryIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ContainerRegistryIDSelector != nil {
+		in, out := &in.ContainerRegistryIDSelector, &out.ContainerRegistryIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.LogLevel != nil {
 		in, out := &in.LogLevel, &out.LogLevel
 		*out = new(string)
@@ -2912,6 +2927,21 @@ func (in *WebhookInitParameters) DeepCopyInto(out *WebhookInitParameters) {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
 		**out = **in
+	}
+	if in.RegistryName != nil {
+		in, out := &in.RegistryName, &out.RegistryName
+		*out = new(string)
+		**out = **in
+	}
+	if in.RegistryNameRef != nil {
+		in, out := &in.RegistryNameRef, &out.RegistryNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.RegistryNameSelector != nil {
+		in, out := &in.RegistryNameSelector, &out.RegistryNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Scope != nil {
 		in, out := &in.Scope, &out.Scope

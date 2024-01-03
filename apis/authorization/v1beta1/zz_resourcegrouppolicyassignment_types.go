@@ -158,6 +158,19 @@ type ResourceGroupPolicyAssignmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PolicyDefinitionIDSelector *v1.Selector `json:"policyDefinitionIdSelector,omitempty" tf:"-"`
 
+	// The ID of the Resource Group where this Policy Assignment should be created. Changing this forces a new Policy Assignment to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	ResourceGroupID *string `json:"resourceGroupId,omitempty" tf:"resource_group_id,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDRef *v1.Reference `json:"resourceGroupIdRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate resourceGroupId.
+	// +kubebuilder:validation:Optional
+	ResourceGroupIDSelector *v1.Selector `json:"resourceGroupIdSelector,omitempty" tf:"-"`
+
 	// One or more resource_selectors blocks as defined below to filter polices by resource properties.
 	ResourceSelectors []ResourceSelectorsInitParameters `json:"resourceSelectors,omitempty" tf:"resource_selectors,omitempty"`
 }

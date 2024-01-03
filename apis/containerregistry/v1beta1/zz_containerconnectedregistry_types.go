@@ -25,6 +25,19 @@ type ContainerConnectedRegistryInitParameters struct {
 	// Specifies a list of IDs of Container Registry Tokens, which are meant to be used by the clients to connect to the Connected Registry.
 	ClientTokenIds []*string `json:"clientTokenIds,omitempty" tf:"client_token_ids,omitempty"`
 
+	// The ID of the Container Registry that this Connected Registry will reside in. Changing this forces a new Container Connected Registry to be created.
+	// +crossplane:generate:reference:type=Registry
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	ContainerRegistryID *string `json:"containerRegistryId,omitempty" tf:"container_registry_id,omitempty"`
+
+	// Reference to a Registry to populate containerRegistryId.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryIDRef *v1.Reference `json:"containerRegistryIdRef,omitempty" tf:"-"`
+
+	// Selector for a Registry to populate containerRegistryId.
+	// +kubebuilder:validation:Optional
+	ContainerRegistryIDSelector *v1.Selector `json:"containerRegistryIdSelector,omitempty" tf:"-"`
+
 	// The verbosity of the logs. Possible values are None, Debug, Information, Warning and Error.
 	LogLevel *string `json:"logLevel,omitempty" tf:"log_level,omitempty"`
 

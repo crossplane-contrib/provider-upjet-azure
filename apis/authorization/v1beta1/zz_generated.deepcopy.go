@@ -1171,6 +1171,21 @@ func (in *ResourceGroupPolicyAssignmentInitParameters) DeepCopyInto(out *Resourc
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ResourceGroupID != nil {
+		in, out := &in.ResourceGroupID, &out.ResourceGroupID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ResourceGroupIDRef != nil {
+		in, out := &in.ResourceGroupIDRef, &out.ResourceGroupIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.ResourceGroupIDSelector != nil {
+		in, out := &in.ResourceGroupIDSelector, &out.ResourceGroupIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.ResourceSelectors != nil {
 		in, out := &in.ResourceSelectors, &out.ResourceSelectors
 		*out = make([]ResourceSelectorsInitParameters, len(*in))

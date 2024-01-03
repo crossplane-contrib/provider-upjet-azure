@@ -227,3 +227,13 @@ func PasswordGenerator(secretRefFieldPath, toggleFieldPath string) tjconfig.NewI
 		})
 	}
 }
+
+func RemoveIndex(s []string, elementToRemove string) []string {
+	var result []string
+	for _, value := range s {
+		if value != elementToRemove {
+			result = append(result, value)
+		}
+	}
+	return result
+}

@@ -30,6 +30,18 @@ type WebhookInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.Registry
+	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
+
+	// Reference to a Registry in containerregistry to populate registryName.
+	// +kubebuilder:validation:Optional
+	RegistryNameRef *v1.Reference `json:"registryNameRef,omitempty" tf:"-"`
+
+	// Selector for a Registry in containerregistry to populate registryName.
+	// +kubebuilder:validation:Optional
+	RegistryNameSelector *v1.Selector `json:"registryNameSelector,omitempty" tf:"-"`
+
 	// Specifies the scope of repositories that can trigger an event. For example, foo:* means events for all tags under repository foo. foo:bar means events for 'foo:bar' only. foo is equivalent to foo:latest. Empty means all events. Defaults to "".
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 

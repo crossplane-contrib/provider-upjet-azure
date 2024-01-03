@@ -20,6 +20,7 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
+	"github.com/upbound/provider-azure/config/common"
 )
 
 // Configure configures apimanagement group
@@ -99,5 +100,8 @@ func Configure(p *config.Provider) {
 			Type:      "API",
 			Extractor: rconfig.ExtractResourceIDFuncPath,
 		}
+	})
+	p.AddResourceConfigurator("azurerm_api_management_gateway", func(r *config.Resource) {
+		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "api_management_id")
 	})
 }
