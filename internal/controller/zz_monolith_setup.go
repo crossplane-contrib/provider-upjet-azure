@@ -28,6 +28,7 @@ import (
 	authorizationserver "github.com/upbound/provider-azure/internal/controller/apimanagement/authorizationserver"
 	backend "github.com/upbound/provider-azure/internal/controller/apimanagement/backend"
 	certificate "github.com/upbound/provider-azure/internal/controller/apimanagement/certificate"
+	customdomain "github.com/upbound/provider-azure/internal/controller/apimanagement/customdomain"
 	diagnostic "github.com/upbound/provider-azure/internal/controller/apimanagement/diagnostic"
 	emailtemplate "github.com/upbound/provider-azure/internal/controller/apimanagement/emailtemplate"
 	gateway "github.com/upbound/provider-azure/internal/controller/apimanagement/gateway"
@@ -753,6 +754,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		authorizationserver.Setup,
 		backend.Setup,
 		certificate.Setup,
+		customdomain.Setup,
 		diagnostic.Setup,
 		emailtemplate.Setup,
 		gateway.Setup,

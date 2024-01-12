@@ -17,7 +17,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type GatewayInitParameters struct {
+type GatewayInitParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
@@ -39,7 +39,7 @@ type GatewayInitParameters struct {
 	LocationData []LocationDataInitParameters `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
-type GatewayObservation struct {
+type GatewayObservation_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
 	APIManagementID *string `json:"apiManagementId,omitempty" tf:"api_management_id,omitempty"`
@@ -54,7 +54,7 @@ type GatewayObservation struct {
 	LocationData []LocationDataObservation `json:"locationData,omitempty" tf:"location_data,omitempty"`
 }
 
-type GatewayParameters struct {
+type GatewayParameters_2 struct {
 
 	// The ID of the API Management Resource in which the gateway will be created. Changing this forces a new API Management Gateway resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
@@ -131,7 +131,7 @@ type LocationDataParameters struct {
 // GatewaySpec defines the desired state of Gateway
 type GatewaySpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     GatewayParameters `json:"forProvider"`
+	ForProvider     GatewayParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -142,13 +142,13 @@ type GatewaySpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GatewayInitParameters `json:"initProvider,omitempty"`
+	InitProvider GatewayInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // GatewayStatus defines the observed state of Gateway.
 type GatewayStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        GatewayObservation `json:"atProvider,omitempty"`
+	AtProvider        GatewayObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true

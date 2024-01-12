@@ -1,0 +1,207 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: CustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/customdomain
+    uptest.upbound.io/timeout: "7200"
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: custom-domain-example
+  name: custom-domain-example
+spec:
+  forProvider:
+    apiManagementIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custom-domain-example
+    developerPortal:
+    - hostName: portal.example.com
+      keyVaultIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: custom-domain-example
+    gateway:
+    - hostName: api.example.com
+      keyVaultIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: custom-domain-example
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/customdomain
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: custom-domain-example
+  name: cdexample${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    enabledForDiskEncryption: true
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custom-domain-example
+    skuName: standard
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/customdomain
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: custom-domain-example
+  name: custom-domain-example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    name: custom-domain-example
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custom-domain-example
+    certificatePolicy:
+      - issuerParameters:
+          - name: Self
+        keyProperties:
+          - exportable: true
+            keySize: 4096
+            keyType: RSA
+            reuseKey: true
+        secretProperties:
+          - contentType: application/x-pkcs12
+        lifetimeAction:
+          - action:
+              - actionType: AutoRenew
+            trigger:
+              - daysBeforeExpiry: 30
+        x509CertificateProperties:
+          - keyUsage:
+              - cRLSign
+              - dataEncipherment
+              - digitalSignature
+              - keyAgreement
+              - keyCertSign
+              - keyEncipherment
+            subjectAlternativeNames:
+              - dnsNames:
+                - api.example.com
+                - portal.example.com
+            subject: CN=api.example.com
+            validityInMonths: 12
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/customdomain
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: custom-domain-example
+  name: custom-domain-example
+spec:
+  forProvider:
+    certificatePermissions:
+      - Create
+      - Delete
+      - DeleteIssuers
+      - Get
+      - GetIssuers
+      - SetIssuers
+      - Import
+      - List
+      - ListIssuers
+      - ManageContacts
+      - ManageIssuers
+      - Purge
+      - SetIssuers
+      - Update
+      - Recover
+    keyPermissions:
+      - Create
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custom-domain-example
+    objectId: ${data.azurerm_client_config.service_principal.object_id}
+    secretPermissions:
+      - Set
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta1
+kind: AccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/customdomain
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: custom-domain-example-apim
+  name: custom-domain-example-apim
+spec:
+  forProvider:
+    certificatePermissions:
+      - Get
+      - GetIssuers
+      - List
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custom-domain-example
+    # To grant the system assigned identtiy from APIM to the key vault, we need to extract the `principal_id` from APIM. 
+    # Use the command below to fetch the relevant management API information and filter out the `principal_id` for 
+    # identities that are system-assigned:
+    # kubectl get management.apimanagement -l testing.upbound.io/example-name=custom-domain-example -o json |
+    # jq '.items[] | select(.status.atProvider.identity != null) | .status.atProvider.identity[] |
+    # select(.type == "SystemAssigned") | .principalId'
+    # example: objectId: 00000000-0000-0000-0000-000000000000
+    objectId: # set-me
+    secretPermissions:
+      - Get
+      - List
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/customdomain
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: custom-domain-example
+  name: custom-domain-example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: custom-domain-example
+    skuName: Developer_1
+    # https://github.com/hashicorp/terraform-provider-azurerm/issues/18323
+    identity:
+      - type: SystemAssigned
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/customdomain
+    upjet.upbound.io/manual-intervention: "This resource requires manual intervention."
+  labels:
+    testing.upbound.io/example-name: custom-domain-example
+  name: custom-domain-example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

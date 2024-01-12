@@ -677,6 +677,105 @@ func (mg *Certificate) ResolveReferences(ctx context.Context, c client.Reader) e
 	return nil
 }
 
+// ResolveReferences of this CustomDomain.
+func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) error {
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+		CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.APIManagementID),
+		Extract:      resource.ExtractResourceID(),
+		Reference:    mg.Spec.ForProvider.APIManagementIDRef,
+		Selector:     mg.Spec.ForProvider.APIManagementIDSelector,
+		To: reference.To{
+			List:    &ManagementList{},
+			Managed: &Management{},
+		},
+	})
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.APIManagementID")
+	}
+	mg.Spec.ForProvider.APIManagementID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.APIManagementIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.DeveloperPortal); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultID),
+			Extract:      resource.ExtractParamPath("versionless_secret_id", true),
+			Reference:    mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultIDRef,
+			Selector:     mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultIDSelector,
+			To: reference.To{
+				List:    &v1beta11.CertificateList{},
+				Managed: &v1beta11.Certificate{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultID")
+		}
+		mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.DeveloperPortal[i3].KeyVaultIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Gateway); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Gateway[i3].KeyVaultID),
+			Extract:      resource.ExtractParamPath("versionless_secret_id", true),
+			Reference:    mg.Spec.ForProvider.Gateway[i3].KeyVaultIDRef,
+			Selector:     mg.Spec.ForProvider.Gateway[i3].KeyVaultIDSelector,
+			To: reference.To{
+				List:    &v1beta11.CertificateList{},
+				Managed: &v1beta11.Certificate{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Gateway[i3].KeyVaultID")
+		}
+		mg.Spec.ForProvider.Gateway[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Gateway[i3].KeyVaultIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.DeveloperPortal); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultID),
+			Extract:      resource.ExtractParamPath("versionless_secret_id", true),
+			Reference:    mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultIDRef,
+			Selector:     mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultIDSelector,
+			To: reference.To{
+				List:    &v1beta11.CertificateList{},
+				Managed: &v1beta11.Certificate{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultID")
+		}
+		mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.DeveloperPortal[i3].KeyVaultIDRef = rsp.ResolvedReference
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Gateway); i3++ {
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Gateway[i3].KeyVaultID),
+			Extract:      resource.ExtractParamPath("versionless_secret_id", true),
+			Reference:    mg.Spec.InitProvider.Gateway[i3].KeyVaultIDRef,
+			Selector:     mg.Spec.InitProvider.Gateway[i3].KeyVaultIDSelector,
+			To: reference.To{
+				List:    &v1beta11.CertificateList{},
+				Managed: &v1beta11.Certificate{},
+			},
+		})
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Gateway[i3].KeyVaultID")
+		}
+		mg.Spec.InitProvider.Gateway[i3].KeyVaultID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Gateway[i3].KeyVaultIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this Diagnostic.
 func (mg *Diagnostic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	r := reference.NewAPIResolver(c, mg)
