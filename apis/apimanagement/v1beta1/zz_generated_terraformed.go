@@ -1614,6 +1614,120 @@ func (tr *Certificate) GetTerraformSchemaVersion() int {
 	return 0
 }
 
+// GetTerraformResourceType returns Terraform resource type for this CustomDomain
+func (mg *CustomDomain) GetTerraformResourceType() string {
+	return "azurerm_api_management_custom_domain"
+}
+
+// GetConnectionDetailsMapping for this CustomDomain
+func (tr *CustomDomain) GetConnectionDetailsMapping() map[string]string {
+	return map[string]string{"developer_portal[*].certificate": "spec.forProvider.developerPortal[*].certificateSecretRef", "developer_portal[*].certificate_password": "spec.forProvider.developerPortal[*].certificatePasswordSecretRef", "gateway[*].certificate": "spec.forProvider.gateway[*].certificateSecretRef", "gateway[*].certificate_password": "spec.forProvider.gateway[*].certificatePasswordSecretRef", "management[*].certificate": "spec.forProvider.management[*].certificateSecretRef", "management[*].certificate_password": "spec.forProvider.management[*].certificatePasswordSecretRef", "portal[*].certificate": "spec.forProvider.portal[*].certificateSecretRef", "portal[*].certificate_password": "spec.forProvider.portal[*].certificatePasswordSecretRef", "scm[*].certificate": "spec.forProvider.scm[*].certificateSecretRef", "scm[*].certificate_password": "spec.forProvider.scm[*].certificatePasswordSecretRef"}
+}
+
+// GetObservation of this CustomDomain
+func (tr *CustomDomain) GetObservation() (map[string]any, error) {
+	o, err := json.TFParser.Marshal(tr.Status.AtProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(o, &base)
+}
+
+// SetObservation for this CustomDomain
+func (tr *CustomDomain) SetObservation(obs map[string]any) error {
+	p, err := json.TFParser.Marshal(obs)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Status.AtProvider)
+}
+
+// GetID returns ID of underlying Terraform resource of this CustomDomain
+func (tr *CustomDomain) GetID() string {
+	if tr.Status.AtProvider.ID == nil {
+		return ""
+	}
+	return *tr.Status.AtProvider.ID
+}
+
+// GetParameters of this CustomDomain
+func (tr *CustomDomain) GetParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.ForProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// SetParameters for this CustomDomain
+func (tr *CustomDomain) SetParameters(params map[string]any) error {
+	p, err := json.TFParser.Marshal(params)
+	if err != nil {
+		return err
+	}
+	return json.TFParser.Unmarshal(p, &tr.Spec.ForProvider)
+}
+
+// GetInitParameters of this CustomDomain
+func (tr *CustomDomain) GetInitParameters() (map[string]any, error) {
+	p, err := json.TFParser.Marshal(tr.Spec.InitProvider)
+	if err != nil {
+		return nil, err
+	}
+	base := map[string]any{}
+	return base, json.TFParser.Unmarshal(p, &base)
+}
+
+// GetInitParameters of this CustomDomain
+func (tr *CustomDomain) GetMergedParameters(shouldMergeInitProvider bool) (map[string]any, error) {
+	params, err := tr.GetParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get parameters for resource '%q'", tr.GetName())
+	}
+	if !shouldMergeInitProvider {
+		return params, nil
+	}
+
+	initParams, err := tr.GetInitParameters()
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot get init parameters for resource '%q'", tr.GetName())
+	}
+
+	// Note(lsviben): mergo.WithSliceDeepCopy is needed to merge the
+	// slices from the initProvider to forProvider. As it also sets
+	// overwrite to true, we need to set it back to false, we don't
+	// want to overwrite the forProvider fields with the initProvider
+	// fields.
+	err = mergo.Merge(&params, initParams, mergo.WithSliceDeepCopy, func(c *mergo.Config) {
+		c.Overwrite = false
+	})
+	if err != nil {
+		return nil, errors.Wrapf(err, "cannot merge spec.initProvider and spec.forProvider parameters for resource '%q'", tr.GetName())
+	}
+
+	return params, nil
+}
+
+// LateInitialize this CustomDomain using its observed tfState.
+// returns True if there are any spec changes for the resource.
+func (tr *CustomDomain) LateInitialize(attrs []byte) (bool, error) {
+	params := &CustomDomainParameters{}
+	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
+		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
+	}
+	opts := []resource.GenericLateInitializerOption{resource.WithZeroValueJSONOmitEmptyFilter(resource.CNameWildcard)}
+
+	li := resource.NewGenericLateInitializer(opts...)
+	return li.LateInitialize(&tr.Spec.ForProvider, params)
+}
+
+// GetTerraformSchemaVersion returns the associated Terraform schema version
+func (tr *CustomDomain) GetTerraformSchemaVersion() int {
+	return 0
+}
+
 // GetTerraformResourceType returns Terraform resource type for this Diagnostic
 func (mg *Diagnostic) GetTerraformResourceType() string {
 	return "azurerm_api_management_diagnostic"
@@ -1941,7 +2055,7 @@ func (tr *Gateway) GetMergedParameters(shouldMergeInitProvider bool) (map[string
 // LateInitialize this Gateway using its observed tfState.
 // returns True if there are any spec changes for the resource.
 func (tr *Gateway) LateInitialize(attrs []byte) (bool, error) {
-	params := &GatewayParameters{}
+	params := &GatewayParameters_2{}
 	if err := json.TFParser.Unmarshal(attrs, params); err != nil {
 		return false, errors.Wrap(err, "failed to unmarshal Terraform state parameters for late-initialization")
 	}
