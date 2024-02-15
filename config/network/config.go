@@ -31,6 +31,11 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
 		r.Kind = "NetworkInterface"
+
+		r.References["ip_configuration.public_ip_address_id"] = config.Reference{
+			Type:      "PublicIP",
+			Extractor: rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {
