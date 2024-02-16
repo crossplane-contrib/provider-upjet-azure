@@ -33,8 +33,8 @@ func Configure(p *config.Provider) {
 		r.Kind = "NetworkInterface"
 
 		r.References["ip_configuration.public_ip_address_id"] = config.Reference{
-			Type:      "PublicIP",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_public_ip",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 

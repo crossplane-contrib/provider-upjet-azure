@@ -127,7 +127,8 @@ spec:
                             with this NIC
                           type: string
                         publicIpAddressIdRef:
-                          description: Reference to a PublicIP to populate publicIpAddressId.
+                          description: Reference to a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -161,7 +162,8 @@ spec:
                           - name
                           type: object
                         publicIpAddressIdSelector:
-                          description: Selector for a PublicIP to populate publicIpAddressId.
+                          description: Selector for a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -441,7 +443,8 @@ spec:
                             with this NIC
                           type: string
                         publicIpAddressIdRef:
-                          description: Reference to a PublicIP to populate publicIpAddressId.
+                          description: Reference to a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -475,7 +478,8 @@ spec:
                           - name
                           type: object
                         publicIpAddressIdSelector:
-                          description: Selector for a PublicIP to populate publicIpAddressId.
+                          description: Selector for a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             matchControllerRef:
                               description: |-
