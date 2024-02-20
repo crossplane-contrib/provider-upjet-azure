@@ -1,29 +1,11 @@
 apiVersion: network.azure.upbound.io/v1beta1
-kind: PublicIP
-metadata:
-  annotations:
-    meta.upbound.io/example-id: network/v1beta1/networkinterface
-  labels:
-    testing.upbound.io/example-name: example-public-ip
-  name: example
-spec:
-  forProvider:
-    allocationMethod: Static
-    location: West Europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example-network-interface
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
 kind: NetworkInterface
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/networkinterface
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-with-publicip
 spec:
   forProvider:
     ipConfiguration:
@@ -35,6 +17,24 @@ spec:
       publicIpAddressIdSelector:
         matchLabels:
           testing.upbound.io/example-name: example-public-ip
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-network-interface
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/networkinterface
+  labels:
+    testing.upbound.io/example-name: example-public-ip
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Static
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
