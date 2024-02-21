@@ -31,6 +31,11 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_interface", func(r *config.Resource) {
 		r.Kind = "NetworkInterface"
+
+		r.References["ip_configuration.public_ip_address_id"] = config.Reference{
+			TerraformName: "azurerm_public_ip",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {

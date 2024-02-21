@@ -26822,6 +26822,16 @@ func (in *NetworkInterfaceIPConfigurationInitParameters) DeepCopyInto(out *Netwo
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicIPAddressIDRef != nil {
+		in, out := &in.PublicIPAddressIDRef, &out.PublicIPAddressIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PublicIPAddressIDSelector != nil {
+		in, out := &in.PublicIPAddressIDSelector, &out.PublicIPAddressIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
 		*out = new(string)
@@ -26941,6 +26951,16 @@ func (in *NetworkInterfaceIPConfigurationParameters) DeepCopyInto(out *NetworkIn
 		in, out := &in.PublicIPAddressID, &out.PublicIPAddressID
 		*out = new(string)
 		**out = **in
+	}
+	if in.PublicIPAddressIDRef != nil {
+		in, out := &in.PublicIPAddressIDRef, &out.PublicIPAddressIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.PublicIPAddressIDSelector != nil {
+		in, out := &in.PublicIPAddressIDSelector, &out.PublicIPAddressIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SubnetID != nil {
 		in, out := &in.SubnetID, &out.SubnetID
