@@ -12,10 +12,10 @@ import (
 	"github.com/crossplane/upjet/pkg/config"
 )
 
-// NoForkExternalNameConfigs contains all external name configurations
+// TerraformPluginSDKExternalNameConfigs contains all external name configurations
 // belonging to Terraform resources to be reconciled under the no-fork
 // architecture for this provider.
-var NoForkExternalNameConfigs = map[string]config.ExternalName{
+var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// apimanagement
 	// API Management Services can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.ApiManagement/service/instance1
@@ -2026,16 +2026,16 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 }
 
 // ResourceConfigurator applies all external name configs
-// listed in the table NoForkExternalNameConfigs and
+// listed in the table TerraformPluginSDKExternalNameConfigs and
 // CLIReconciledExternalNameConfigs and sets the version
 // of those resources to v1beta1. For those resource in
-// NoForkExternalNameConfigs, it also sets
+// TerraformPluginSDKExternalNameConfigs, it also sets
 // config.Resource.UseNoForkClient to `true`.
 func ResourceConfigurator() config.ResourceOption {
 	return func(r *config.Resource) {
 		// if configured both for the no-fork and CLI based architectures,
 		// no-fork configuration prevails
-		e, configured := NoForkExternalNameConfigs[r.Name]
+		e, configured := TerraformPluginSDKExternalNameConfigs[r.Name]
 		if !configured {
 			e, configured = CLIReconciledExternalNameConfigs[r.Name]
 		}
