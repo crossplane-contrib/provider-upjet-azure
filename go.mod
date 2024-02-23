@@ -120,8 +120,8 @@ require (
 	github.com/tombuildsstuff/giovanni v0.20.0 // indirect
 	github.com/tombuildsstuff/kermit v0.20230424.1090808 // indirect
 	github.com/vmihailenco/msgpack v4.0.4+incompatible // indirect
-	github.com/vmihailenco/msgpack/v5 v5.3.5 // indirect
-	github.com/vmihailenco/tagparser/v2 v2.0.0 // indirect
+	github.com/vmihailenco/msgpack/v4 v4.3.12 // indirect
+	github.com/vmihailenco/tagparser v0.1.1 // indirect
 	github.com/yuin/goldmark v1.4.13 // indirect
 	github.com/zclconf/go-cty v1.14.1 // indirect
 	github.com/zclconf/go-cty-yaml v1.0.3 // indirect
@@ -158,12 +158,12 @@ require (
 
 replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20231115141655-4efad3ac0449
 
-replace golang.org/x/exp => golang.org/x/exp v0.0.0-20230713183714-613f0c0eb8a1
+replace golang.org/x/exp => golang.org/x/exp v0.0.0-20231110203233-9a3e6036ecaa
 
-replace github.com/hashicorp/terraform-json => github.com/hashicorp/terraform-json v0.17.0
+replace github.com/hashicorp/terraform-json => github.com/hashicorp/terraform-json v0.16.0
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/hashicorp/terraform-plugin-sdk/v2 v2.26.1
 
-replace github.com/hashicorp/terraform-plugin-go => github.com/hashicorp/terraform-plugin-go v0.16.0
+replace github.com/hashicorp/terraform-plugin-go => github.com/hashicorp/terraform-plugin-go v0.14.3
 
 replace github.com/hashicorp/terraform-plugin-framework => github.com/hashicorp/terraform-plugin-framework v1.2.0
