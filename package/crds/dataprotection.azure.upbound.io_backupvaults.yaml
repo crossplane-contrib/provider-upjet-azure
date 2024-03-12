@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -75,8 +75,8 @@ spec:
                 properties:
                   datastoreType:
                     description: Specifies the type of the data store. Possible values
-                      are ArchiveStore, SnapshotStore and VaultStore. Changing this
-                      forces a new resource to be created.
+                      are ArchiveStore, OperationalStore, SnapshotStore and VaultStore.
+                      Changing this forces a new resource to be created.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -95,8 +95,8 @@ spec:
                     type: string
                   redundancy:
                     description: Specifies the backup storage redundancy. Possible
-                      values are GeoRedundant and LocallyRedundant. Changing this
-                      forces a new Backup Vault to be created.
+                      values are GeoRedundant, LocallyRedundant and ZoneRedundant.
+                      Changing this forces a new Backup Vault to be created.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Backup Vault
@@ -179,6 +179,14 @@ spec:
                             type: string
                         type: object
                     type: object
+                  retentionDurationInDays:
+                    description: The soft delete retention duration for this Backup
+                      Vault. Possible values are between 14 and 180. Defaults to 14.
+                    type: number
+                  softDelete:
+                    description: The state of soft delete for this Backup Vault. Possible
+                      values are AlwaysOn, Off and On. Defaults to On.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -202,8 +210,8 @@ spec:
                 properties:
                   datastoreType:
                     description: Specifies the type of the data store. Possible values
-                      are ArchiveStore, SnapshotStore and VaultStore. Changing this
-                      forces a new resource to be created.
+                      are ArchiveStore, OperationalStore, SnapshotStore and VaultStore.
+                      Changing this forces a new resource to be created.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -222,8 +230,16 @@ spec:
                     type: string
                   redundancy:
                     description: Specifies the backup storage redundancy. Possible
-                      values are GeoRedundant and LocallyRedundant. Changing this
-                      forces a new Backup Vault to be created.
+                      values are GeoRedundant, LocallyRedundant and ZoneRedundant.
+                      Changing this forces a new Backup Vault to be created.
+                    type: string
+                  retentionDurationInDays:
+                    description: The soft delete retention duration for this Backup
+                      Vault. Possible values are between 14 and 180. Defaults to 14.
+                    type: number
+                  softDelete:
+                    description: The state of soft delete for this Backup Vault. Possible
+                      values are AlwaysOn, Off and On. Defaults to On.
                     type: string
                   tags:
                     additionalProperties:
@@ -420,8 +436,8 @@ spec:
                 properties:
                   datastoreType:
                     description: Specifies the type of the data store. Possible values
-                      are ArchiveStore, SnapshotStore and VaultStore. Changing this
-                      forces a new resource to be created.
+                      are ArchiveStore, OperationalStore, SnapshotStore and VaultStore.
+                      Changing this forces a new resource to be created.
                     type: string
                   id:
                     description: The ID of the Backup Vault.
@@ -451,13 +467,21 @@ spec:
                     type: string
                   redundancy:
                     description: Specifies the backup storage redundancy. Possible
-                      values are GeoRedundant and LocallyRedundant. Changing this
-                      forces a new Backup Vault to be created.
+                      values are GeoRedundant, LocallyRedundant and ZoneRedundant.
+                      Changing this forces a new Backup Vault to be created.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Backup Vault
                       should exist. Changing this forces a new Backup Vault to be
                       created.
+                    type: string
+                  retentionDurationInDays:
+                    description: The soft delete retention duration for this Backup
+                      Vault. Possible values are between 14 and 180. Defaults to 14.
+                    type: number
+                  softDelete:
+                    description: The state of soft delete for this Backup Vault. Possible
+                      values are AlwaysOn, Off and On. Defaults to On.
                     type: string
                   tags:
                     additionalProperties:

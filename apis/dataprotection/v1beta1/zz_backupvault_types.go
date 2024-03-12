@@ -15,7 +15,7 @@ import (
 
 type BackupVaultInitParameters struct {
 
-	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
 	// An identity block as defined below.
@@ -24,8 +24,14 @@ type BackupVaultInitParameters struct {
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the backup storage redundancy. Possible values are GeoRedundant and LocallyRedundant. Changing this forces a new Backup Vault to be created.
+	// Specifies the backup storage redundancy. Possible values are GeoRedundant, LocallyRedundant and ZoneRedundant. Changing this forces a new Backup Vault to be created.
 	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
+
+	// The soft delete retention duration for this Backup Vault. Possible values are between 14 and 180. Defaults to 14.
+	RetentionDurationInDays *float64 `json:"retentionDurationInDays,omitempty" tf:"retention_duration_in_days,omitempty"`
+
+	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off and On. Defaults to On.
+	SoftDelete *string `json:"softDelete,omitempty" tf:"soft_delete,omitempty"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
 	// +mapType=granular
@@ -34,7 +40,7 @@ type BackupVaultInitParameters struct {
 
 type BackupVaultObservation struct {
 
-	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
 	// The ID of the Backup Vault.
@@ -46,11 +52,17 @@ type BackupVaultObservation struct {
 	// The Azure Region where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the backup storage redundancy. Possible values are GeoRedundant and LocallyRedundant. Changing this forces a new Backup Vault to be created.
+	// Specifies the backup storage redundancy. Possible values are GeoRedundant, LocallyRedundant and ZoneRedundant. Changing this forces a new Backup Vault to be created.
 	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
 
 	// The name of the Resource Group where the Backup Vault should exist. Changing this forces a new Backup Vault to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The soft delete retention duration for this Backup Vault. Possible values are between 14 and 180. Defaults to 14.
+	RetentionDurationInDays *float64 `json:"retentionDurationInDays,omitempty" tf:"retention_duration_in_days,omitempty"`
+
+	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off and On. Defaults to On.
+	SoftDelete *string `json:"softDelete,omitempty" tf:"soft_delete,omitempty"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
 	// +mapType=granular
@@ -59,7 +71,7 @@ type BackupVaultObservation struct {
 
 type BackupVaultParameters struct {
 
-	// Specifies the type of the data store. Possible values are ArchiveStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
+	// Specifies the type of the data store. Possible values are ArchiveStore, OperationalStore, SnapshotStore and VaultStore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	DatastoreType *string `json:"datastoreType,omitempty" tf:"datastore_type,omitempty"`
 
@@ -71,7 +83,7 @@ type BackupVaultParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Specifies the backup storage redundancy. Possible values are GeoRedundant and LocallyRedundant. Changing this forces a new Backup Vault to be created.
+	// Specifies the backup storage redundancy. Possible values are GeoRedundant, LocallyRedundant and ZoneRedundant. Changing this forces a new Backup Vault to be created.
 	// +kubebuilder:validation:Optional
 	Redundancy *string `json:"redundancy,omitempty" tf:"redundancy,omitempty"`
 
@@ -87,6 +99,14 @@ type BackupVaultParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The soft delete retention duration for this Backup Vault. Possible values are between 14 and 180. Defaults to 14.
+	// +kubebuilder:validation:Optional
+	RetentionDurationInDays *float64 `json:"retentionDurationInDays,omitempty" tf:"retention_duration_in_days,omitempty"`
+
+	// The state of soft delete for this Backup Vault. Possible values are AlwaysOn, Off and On. Defaults to On.
+	// +kubebuilder:validation:Optional
+	SoftDelete *string `json:"softDelete,omitempty" tf:"soft_delete,omitempty"`
 
 	// A mapping of tags which should be assigned to the Backup Vault.
 	// +kubebuilder:validation:Optional
@@ -147,8 +167,8 @@ type BackupVaultStatus struct {
 // +kubebuilder:storageversion
 
 // BackupVault is the Schema for the BackupVaults API. Manages a Backup Vault.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

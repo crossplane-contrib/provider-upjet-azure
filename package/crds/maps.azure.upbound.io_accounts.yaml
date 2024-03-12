@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -73,6 +73,12 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  localAuthenticationEnabled:
+                    description: Is local authentication enabled for this Azure Maps
+                      Account? When false, all authentication to the Azure Maps data-plane
+                      REST API is disabled, except Azure AD authentication. Defaults
+                      to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group in which the Azure
                       Maps Account should exist. Changing this forces a new resource
@@ -179,6 +185,12 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  localAuthenticationEnabled:
+                    description: Is local authentication enabled for this Azure Maps
+                      Account? When false, all authentication to the Azure Maps data-plane
+                      REST API is disabled, except Azure AD authentication. Defaults
+                      to true.
+                    type: boolean
                   skuName:
                     description: The SKU of the Azure Maps Account. Possible values
                       are S0, S1 and G2. Changing this forces a new resource to be
@@ -371,6 +383,12 @@ spec:
                   id:
                     description: The ID of the Azure Maps Account.
                     type: string
+                  localAuthenticationEnabled:
+                    description: Is local authentication enabled for this Azure Maps
+                      Account? When false, all authentication to the Azure Maps data-plane
+                      REST API is disabled, except Azure AD authentication. Defaults
+                      to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the Resource Group in which the Azure
                       Maps Account should exist. Changing this forces a new resource

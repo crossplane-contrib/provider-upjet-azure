@@ -23,6 +23,9 @@ type BackupPolicyPostgreSQLInitParameters struct {
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
 	RetentionRule []BackupPolicyPostgreSQLRetentionRuleInitParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+
+	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy PostgreSQL to be created.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type BackupPolicyPostgreSQLObservation struct {
@@ -41,6 +44,9 @@ type BackupPolicyPostgreSQLObservation struct {
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
 	RetentionRule []BackupPolicyPostgreSQLRetentionRuleObservation `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+
+	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy PostgreSQL to be created.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The name of the Backup Vault where the Backup Policy PostgreSQL should exist. Changing this forces a new Backup Policy PostgreSQL to be created.
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
@@ -72,6 +78,10 @@ type BackupPolicyPostgreSQLParameters struct {
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +kubebuilder:validation:Optional
 	RetentionRule []BackupPolicyPostgreSQLRetentionRuleParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+
+	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy PostgreSQL to be created.
+	// +kubebuilder:validation:Optional
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The name of the Backup Vault where the Backup Policy PostgreSQL should exist. Changing this forces a new Backup Policy PostgreSQL to be created.
 	// +crossplane:generate:reference:type=BackupVault
@@ -235,8 +245,8 @@ type BackupPolicyPostgreSQLStatus struct {
 // +kubebuilder:storageversion
 
 // BackupPolicyPostgreSQL is the Schema for the BackupPolicyPostgreSQLs API. Manages a Backup Policy to back up PostgreSQL.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

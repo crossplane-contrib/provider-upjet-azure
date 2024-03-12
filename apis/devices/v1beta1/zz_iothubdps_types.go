@@ -173,7 +173,7 @@ type IPFilterRuleInitParameters struct {
 	// The name of the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
+	// Target for requests captured by this rule. Possible values are all, deviceApi and serviceApi.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
@@ -188,7 +188,7 @@ type IPFilterRuleObservation struct {
 	// The name of the filter.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
+	// Target for requests captured by this rule. Possible values are all, deviceApi and serviceApi.
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
 
@@ -206,7 +206,7 @@ type IPFilterRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Target for requests captured by this rule. Possible values are All, DeviceApi and ServiceApi.
+	// Target for requests captured by this rule. Possible values are all, deviceApi and serviceApi.
 	// +kubebuilder:validation:Optional
 	Target *string `json:"target,omitempty" tf:"target,omitempty"`
 }
@@ -285,8 +285,8 @@ type IOTHubDPSStatus struct {
 // +kubebuilder:storageversion
 
 // IOTHubDPS is the Schema for the IOTHubDPSs API. Manages an IoT Device Provisioning Service.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure},path=iothubdps

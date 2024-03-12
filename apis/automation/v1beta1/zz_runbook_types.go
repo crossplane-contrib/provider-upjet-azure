@@ -350,7 +350,7 @@ type RunBookInitParameters struct {
 	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The published runbook content link.
+	// One publish_content_link block as defined below.
 	PublishContentLink []PublishContentLinkInitParameters `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
 	// The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created.
@@ -365,7 +365,7 @@ type RunBookInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3, Python2 or Script. Changing this forces a new resource to be created.
+	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72, Python3, Python2 or Script. Changing this forces a new resource to be created.
 	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -407,13 +407,13 @@ type RunBookObservation struct {
 	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The published runbook content link.
+	// One publish_content_link block as defined below.
 	PublishContentLink []PublishContentLinkObservation `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
 	// The name of the resource group in which the Runbook is created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3, Python2 or Script. Changing this forces a new resource to be created.
+	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72, Python3, Python2 or Script. Changing this forces a new resource to be created.
 	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -471,7 +471,7 @@ type RunBookParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The published runbook content link.
+	// One publish_content_link block as defined below.
 	// +kubebuilder:validation:Optional
 	PublishContentLink []PublishContentLinkParameters `json:"publishContentLink,omitempty" tf:"publish_content_link,omitempty"`
 
@@ -488,7 +488,7 @@ type RunBookParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3, Python2 or Script. Changing this forces a new resource to be created.
+	// The type of the runbook - can be either Graph, GraphPowerShell, GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72, Python3, Python2 or Script. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RunBookType *string `json:"runbookType,omitempty" tf:"runbook_type,omitempty"`
 
@@ -526,8 +526,8 @@ type RunBookStatus struct {
 // +kubebuilder:storageversion
 
 // RunBook is the Schema for the RunBooks API. Manages a Automation Runbook.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -164,6 +164,7 @@ spec:
                     x-kubernetes-map-type: granular
                   ttl:
                     description: The Time To Live (TTL) of the DNS record in seconds.
+                      Possible values are between 0 and 2147483647.
                     type: number
                   zoneName:
                     description: Specifies the Private DNS Zone where the resource
@@ -268,6 +269,7 @@ spec:
                     x-kubernetes-map-type: granular
                   ttl:
                     description: The Time To Live (TTL) of the DNS record in seconds.
+                      Possible values are between 0 and 2147483647.
                     type: number
                 type: object
               managementPolicies:
@@ -473,6 +475,7 @@ spec:
                     x-kubernetes-map-type: granular
                   ttl:
                     description: The Time To Live (TTL) of the DNS record in seconds.
+                      Possible values are between 0 and 2147483647.
                     type: number
                   zoneName:
                     description: Specifies the Private DNS Zone where the resource

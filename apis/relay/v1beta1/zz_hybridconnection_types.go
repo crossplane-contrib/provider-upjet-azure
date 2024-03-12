@@ -30,7 +30,7 @@ type HybridConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	RelayNamespaceNameSelector *v1.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
 
-	// Specify if client authorization is needed for this hybrid connection. True by default. Changing this forces a new resource to be created. Defaults to true.
+	// Specify if client authorization is needed for this hybrid connection. Changing this forces a new resource to be created. Defaults to true.
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
 
 	// The name of the resource group in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
@@ -60,7 +60,7 @@ type HybridConnectionObservation struct {
 	// The name of the Azure Relay in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
 	RelayNamespaceName *string `json:"relayNamespaceName,omitempty" tf:"relay_namespace_name,omitempty"`
 
-	// Specify if client authorization is needed for this hybrid connection. True by default. Changing this forces a new resource to be created. Defaults to true.
+	// Specify if client authorization is needed for this hybrid connection. Changing this forces a new resource to be created. Defaults to true.
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
 
 	// The name of the resource group in which to create the Azure Relay Hybrid Connection. Changing this forces a new resource to be created.
@@ -89,7 +89,7 @@ type HybridConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	RelayNamespaceNameSelector *v1.Selector `json:"relayNamespaceNameSelector,omitempty" tf:"-"`
 
-	// Specify if client authorization is needed for this hybrid connection. True by default. Changing this forces a new resource to be created. Defaults to true.
+	// Specify if client authorization is needed for this hybrid connection. Changing this forces a new resource to be created. Defaults to true.
 	// +kubebuilder:validation:Optional
 	RequiresClientAuthorization *bool `json:"requiresClientAuthorization,omitempty" tf:"requires_client_authorization,omitempty"`
 
@@ -139,8 +139,8 @@ type HybridConnectionStatus struct {
 // +kubebuilder:storageversion
 
 // HybridConnection is the Schema for the HybridConnections API. Manages an Azure Relay Hybrid Connection.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

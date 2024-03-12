@@ -125,5 +125,5 @@ func (tr *MaintenanceAssignmentVirtualMachine) LateInitialize(attrs []byte) (boo
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *MaintenanceAssignmentVirtualMachine) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

@@ -96,7 +96,7 @@ type ShareInitParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
+	// The maximum size of the share, in gigabytes.
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 }
 
@@ -118,7 +118,7 @@ type ShareObservation struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
+	// The maximum size of the share, in gigabytes.
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 
 	// The Resource Manager ID of this File Share.
@@ -150,7 +150,7 @@ type ShareParameters struct {
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
-	// The maximum size of the share, in gigabytes. For Standard storage accounts, this must be 1GB (or higher) and at most 5120 GB (5 TB). For Premium FileStorage storage accounts, this must be greater than 100 GB and at most 102400 GB (100 TB).
+	// The maximum size of the share, in gigabytes.
 	// +kubebuilder:validation:Optional
 	Quota *float64 `json:"quota,omitempty" tf:"quota,omitempty"`
 
@@ -196,8 +196,8 @@ type ShareStatus struct {
 // +kubebuilder:storageversion
 
 // Share is the Schema for the Shares API. Manages a File Share within Azure Storage.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

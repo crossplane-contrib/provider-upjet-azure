@@ -135,26 +135,26 @@ type MonthlyScheduleParameters struct {
 
 type SnapshotPolicyInitParameters struct {
 
-	// Sets a daily snapshot schedule. See details in below daily_schedule block.
+	// Sets a daily snapshot schedule. A daily_schedule block as defined below.
 	DailySchedule []DailyScheduleInitParameters `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
 
 	// Defines that the NetApp Snapshot Policy is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Sets an hourly snapshot schedule. See details in below hourly_schedule block.
+	// Sets an hourly snapshot schedule. A hourly_schedule block as defined below.
 	HourlySchedule []HourlyScheduleInitParameters `json:"hourlySchedule,omitempty" tf:"hourly_schedule,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Sets a monthly snapshot schedule. See details in below monthly_schedule block.
+	// Sets a monthly snapshot schedule. A monthly_schedule block as defined below.
 	MonthlySchedule []MonthlyScheduleInitParameters `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
+	// Sets a weekly snapshot schedule. A weekly_schedule block as defined below.
 	WeeklySchedule []WeeklyScheduleInitParameters `json:"weeklySchedule,omitempty" tf:"weekly_schedule,omitempty"`
 }
 
@@ -163,13 +163,13 @@ type SnapshotPolicyObservation struct {
 	// The name of the NetApp Account in which the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Sets a daily snapshot schedule. See details in below daily_schedule block.
+	// Sets a daily snapshot schedule. A daily_schedule block as defined below.
 	DailySchedule []DailyScheduleObservation `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
 
 	// Defines that the NetApp Snapshot Policy is enabled or not.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Sets an hourly snapshot schedule. See details in below hourly_schedule block.
+	// Sets an hourly snapshot schedule. A hourly_schedule block as defined below.
 	HourlySchedule []HourlyScheduleObservation `json:"hourlySchedule,omitempty" tf:"hourly_schedule,omitempty"`
 
 	// The ID of the NetApp Snapshot.
@@ -178,7 +178,7 @@ type SnapshotPolicyObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Sets a monthly snapshot schedule. See details in below monthly_schedule block.
+	// Sets a monthly snapshot schedule. A monthly_schedule block as defined below.
 	MonthlySchedule []MonthlyScheduleObservation `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
 	// The name of the resource group where the NetApp Snapshot Policy should be created. Changing this forces a new resource to be created.
@@ -188,7 +188,7 @@ type SnapshotPolicyObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
+	// Sets a weekly snapshot schedule. A weekly_schedule block as defined below.
 	WeeklySchedule []WeeklyScheduleObservation `json:"weeklySchedule,omitempty" tf:"weekly_schedule,omitempty"`
 }
 
@@ -207,7 +207,7 @@ type SnapshotPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
-	// Sets a daily snapshot schedule. See details in below daily_schedule block.
+	// Sets a daily snapshot schedule. A daily_schedule block as defined below.
 	// +kubebuilder:validation:Optional
 	DailySchedule []DailyScheduleParameters `json:"dailySchedule,omitempty" tf:"daily_schedule,omitempty"`
 
@@ -215,7 +215,7 @@ type SnapshotPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Sets an hourly snapshot schedule. See details in below hourly_schedule block.
+	// Sets an hourly snapshot schedule. A hourly_schedule block as defined below.
 	// +kubebuilder:validation:Optional
 	HourlySchedule []HourlyScheduleParameters `json:"hourlySchedule,omitempty" tf:"hourly_schedule,omitempty"`
 
@@ -223,7 +223,7 @@ type SnapshotPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Sets a monthly snapshot schedule. See details in below monthly_schedule block.
+	// Sets a monthly snapshot schedule. A monthly_schedule block as defined below.
 	// +kubebuilder:validation:Optional
 	MonthlySchedule []MonthlyScheduleParameters `json:"monthlySchedule,omitempty" tf:"monthly_schedule,omitempty"`
 
@@ -245,7 +245,7 @@ type SnapshotPolicyParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// Sets a weekly snapshot schedule. See details in below weekly_schedule block.
+	// Sets a weekly snapshot schedule. A weekly_schedule block as defined below.
 	// +kubebuilder:validation:Optional
 	WeeklySchedule []WeeklyScheduleParameters `json:"weeklySchedule,omitempty" tf:"weekly_schedule,omitempty"`
 }
@@ -330,8 +330,8 @@ type SnapshotPolicyStatus struct {
 // +kubebuilder:storageversion
 
 // SnapshotPolicy is the Schema for the SnapshotPolicys API. Manages a NetApp Snapshot Policy.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

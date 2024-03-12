@@ -38,11 +38,14 @@ type BasicAuthParameters struct {
 
 type GitRepositoryInitParameters struct {
 
-	// A basic_auth block as defined below. Conflicts with git_repository.0.ssh_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	// A basic_auth block as defined below. Conflicts with git_repository[0].ssh_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
 	BasicAuth []BasicAuthInitParameters `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 
 	// Specifies the Git repository branch to be used.
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// Specifies the ID of the CA Spring Cloud Certificate for https URL of Git repository.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
 
 	// Specifies the Git repository commit to be used.
 	Commit *string `json:"commit,omitempty" tf:"commit,omitempty"`
@@ -53,7 +56,10 @@ type GitRepositoryInitParameters struct {
 	// Specifies the interval for checking for updates to Git or image repository. It should be greater than 10.
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// A ssh_auth block as defined below. Conflicts with git_repository.0.basic_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	// Specifies the path under the git repository to be treated as the root directory of the accelerator or the fragment (depending on accelerator_type).
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// A ssh_auth block as defined below. Conflicts with git_repository[0].basic_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
 	SSHAuth []SSHAuthInitParameters `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
 
 	// Specifies Git repository URL for the accelerator.
@@ -62,11 +68,14 @@ type GitRepositoryInitParameters struct {
 
 type GitRepositoryObservation struct {
 
-	// A basic_auth block as defined below. Conflicts with git_repository.0.ssh_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	// A basic_auth block as defined below. Conflicts with git_repository[0].ssh_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
 	BasicAuth []BasicAuthObservation `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 
 	// Specifies the Git repository branch to be used.
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// Specifies the ID of the CA Spring Cloud Certificate for https URL of Git repository.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
 
 	// Specifies the Git repository commit to be used.
 	Commit *string `json:"commit,omitempty" tf:"commit,omitempty"`
@@ -77,7 +86,10 @@ type GitRepositoryObservation struct {
 	// Specifies the interval for checking for updates to Git or image repository. It should be greater than 10.
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// A ssh_auth block as defined below. Conflicts with git_repository.0.basic_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	// Specifies the path under the git repository to be treated as the root directory of the accelerator or the fragment (depending on accelerator_type).
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// A ssh_auth block as defined below. Conflicts with git_repository[0].basic_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
 	SSHAuth []SSHAuthObservation `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
 
 	// Specifies Git repository URL for the accelerator.
@@ -86,13 +98,17 @@ type GitRepositoryObservation struct {
 
 type GitRepositoryParameters struct {
 
-	// A basic_auth block as defined below. Conflicts with git_repository.0.ssh_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	// A basic_auth block as defined below. Conflicts with git_repository[0].ssh_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
 	// +kubebuilder:validation:Optional
 	BasicAuth []BasicAuthParameters `json:"basicAuth,omitempty" tf:"basic_auth,omitempty"`
 
 	// Specifies the Git repository branch to be used.
 	// +kubebuilder:validation:Optional
 	Branch *string `json:"branch,omitempty" tf:"branch,omitempty"`
+
+	// Specifies the ID of the CA Spring Cloud Certificate for https URL of Git repository.
+	// +kubebuilder:validation:Optional
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
 
 	// Specifies the Git repository commit to be used.
 	// +kubebuilder:validation:Optional
@@ -106,7 +122,11 @@ type GitRepositoryParameters struct {
 	// +kubebuilder:validation:Optional
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
-	// A ssh_auth block as defined below. Conflicts with git_repository.0.basic_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
+	// Specifies the path under the git repository to be treated as the root directory of the accelerator or the fragment (depending on accelerator_type).
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// A ssh_auth block as defined below. Conflicts with git_repository[0].basic_auth. Changing this forces a new Spring Cloud Customized Accelerator to be created.
 	// +kubebuilder:validation:Optional
 	SSHAuth []SSHAuthParameters `json:"sshAuth,omitempty" tf:"ssh_auth,omitempty"`
 
@@ -147,6 +167,9 @@ type SpringCloudCustomizedAcceleratorInitParameters struct {
 	// Specifies a list of accelerator tags.
 	AcceleratorTags []*string `json:"acceleratorTags,omitempty" tf:"accelerator_tags,omitempty"`
 
+	// Specifies the type of the Spring Cloud Customized Accelerator. Possible values are Accelerator and Fragment. Defaults to Accelerator.
+	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
+
 	// Specifies the description of the Spring Cloud Customized Accelerator.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -164,6 +187,9 @@ type SpringCloudCustomizedAcceleratorObservation struct {
 
 	// Specifies a list of accelerator tags.
 	AcceleratorTags []*string `json:"acceleratorTags,omitempty" tf:"accelerator_tags,omitempty"`
+
+	// Specifies the type of the Spring Cloud Customized Accelerator. Possible values are Accelerator and Fragment. Defaults to Accelerator.
+	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
 	// Specifies the description of the Spring Cloud Customized Accelerator.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
@@ -189,6 +215,10 @@ type SpringCloudCustomizedAcceleratorParameters struct {
 	// Specifies a list of accelerator tags.
 	// +kubebuilder:validation:Optional
 	AcceleratorTags []*string `json:"acceleratorTags,omitempty" tf:"accelerator_tags,omitempty"`
+
+	// Specifies the type of the Spring Cloud Customized Accelerator. Possible values are Accelerator and Fragment. Defaults to Accelerator.
+	// +kubebuilder:validation:Optional
+	AcceleratorType *string `json:"acceleratorType,omitempty" tf:"accelerator_type,omitempty"`
 
 	// Specifies the description of the Spring Cloud Customized Accelerator.
 	// +kubebuilder:validation:Optional
@@ -249,8 +279,8 @@ type SpringCloudCustomizedAcceleratorStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudCustomizedAccelerator is the Schema for the SpringCloudCustomizedAccelerators API. Manages a Spring Cloud Customized Accelerator.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

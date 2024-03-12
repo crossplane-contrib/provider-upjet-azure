@@ -131,7 +131,7 @@ type ResourceTypeInitParameters struct {
 	// Specifies the name of the route definition.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. Defaults to Proxy.
 	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }
 
@@ -143,7 +143,7 @@ type ResourceTypeObservation struct {
 	// Specifies the name of the route definition.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. Defaults to Proxy.
 	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }
 
@@ -157,7 +157,7 @@ type ResourceTypeParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. This value defaults to ResourceTypeRoutingProxy.
+	// The routing type that is supported for the resource request. Valid values are Proxy and Proxy,Cache. Defaults to Proxy.
 	// +kubebuilder:validation:Optional
 	RoutingType *string `json:"routingType,omitempty" tf:"routing_type,omitempty"`
 }
@@ -209,8 +209,8 @@ type CustomProviderStatus struct {
 // +kubebuilder:storageversion
 
 // CustomProvider is the Schema for the CustomProviders API. Manages an Azure Custom Provider.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

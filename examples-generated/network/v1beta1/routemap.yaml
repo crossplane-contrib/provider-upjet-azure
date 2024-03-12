@@ -46,8 +46,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/routemap
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     addressPrefix: 10.0.1.0/24

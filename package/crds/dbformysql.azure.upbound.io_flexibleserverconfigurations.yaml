@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -237,7 +237,6 @@ spec:
                   value:
                     description: Specifies the value of the MySQL Flexible Server
                       Configuration. See the MySQL documentation for valid values.
-                      Changing this forces a new resource to be created.
                     type: string
                 type: object
               initProvider:
@@ -256,7 +255,6 @@ spec:
                   value:
                     description: Specifies the value of the MySQL Flexible Server
                       Configuration. See the MySQL documentation for valid values.
-                      Changing this forces a new resource to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -452,7 +450,6 @@ spec:
                   value:
                     description: Specifies the value of the MySQL Flexible Server
                       Configuration. See the MySQL documentation for valid values.
-                      Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

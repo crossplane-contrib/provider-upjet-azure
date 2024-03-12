@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -171,7 +171,7 @@ spec:
                     description: The SKU name and capacity of the Integration Service
                       Environment. Possible values are Developer_0, Premium_0, Premium_1,
                       Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7,
-                      Premium_8, Premium_9 and Premium_10.
+                      Premium_8, Premium_9 and Premium_10. Defaults to Developer_0.
                     type: string
                   tags:
                     additionalProperties:
@@ -296,7 +296,7 @@ spec:
                     description: The SKU name and capacity of the Integration Service
                       Environment. Possible values are Developer_0, Premium_0, Premium_1,
                       Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7,
-                      Premium_8, Premium_9 and Premium_10.
+                      Premium_8, Premium_9 and Premium_10. Defaults to Developer_0.
                     type: string
                   tags:
                     additionalProperties:
@@ -608,7 +608,7 @@ spec:
                     description: The SKU name and capacity of the Integration Service
                       Environment. Possible values are Developer_0, Premium_0, Premium_1,
                       Premium_2, Premium_3, Premium_4, Premium_5, Premium_6, Premium_7,
-                      Premium_8, Premium_9 and Premium_10.
+                      Premium_8, Premium_9 and Premium_10. Defaults to Developer_0.
                     type: string
                   tags:
                     additionalProperties:

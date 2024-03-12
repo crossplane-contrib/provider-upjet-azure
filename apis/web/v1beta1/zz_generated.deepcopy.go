@@ -5383,9 +5383,9 @@ func (in *AutoHealSettingTriggerStatusCodeInitParameters) DeepCopyInto(out *Auto
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5428,9 +5428,9 @@ func (in *AutoHealSettingTriggerStatusCodeObservation) DeepCopyInto(out *AutoHea
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -5473,9 +5473,9 @@ func (in *AutoHealSettingTriggerStatusCodeParameters) DeepCopyInto(out *AutoHeal
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -12166,6 +12166,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -12196,6 +12201,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ResourceGroupName != nil {
@@ -12304,6 +12314,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -12441,6 +12456,11 @@ func (in *LinuxFunctionAppObservation) DeepCopyInto(out *LinuxFunctionAppObserva
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -12520,6 +12540,11 @@ func (in *LinuxFunctionAppObservation) DeepCopyInto(out *LinuxFunctionAppObserva
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -12585,6 +12610,11 @@ func (in *LinuxFunctionAppObservation) DeepCopyInto(out *LinuxFunctionAppObserva
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ZipDeployFile != nil {
@@ -12686,6 +12716,11 @@ func (in *LinuxFunctionAppParameters) DeepCopyInto(out *LinuxFunctionAppParamete
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -12716,6 +12751,11 @@ func (in *LinuxFunctionAppParameters) DeepCopyInto(out *LinuxFunctionAppParamete
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ResourceGroupName != nil {
@@ -12829,6 +12869,11 @@ func (in *LinuxFunctionAppParameters) DeepCopyInto(out *LinuxFunctionAppParamete
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -12948,6 +12993,11 @@ func (in *LinuxFunctionAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]SiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -13010,6 +13060,11 @@ func (in *LinuxFunctionAppSiteConfigIPRestrictionObservation) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]SiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -13059,6 +13114,11 @@ func (in *LinuxFunctionAppSiteConfigIPRestrictionParameters) DeepCopyInto(out *L
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -13218,6 +13278,11 @@ func (in *LinuxFunctionAppSiteConfigInitParameters) DeepCopyInto(out *LinuxFunct
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -13259,6 +13324,11 @@ func (in *LinuxFunctionAppSiteConfigInitParameters) DeepCopyInto(out *LinuxFunct
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -13409,6 +13479,11 @@ func (in *LinuxFunctionAppSiteConfigObservation) DeepCopyInto(out *LinuxFunction
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LinuxFxVersion != nil {
 		in, out := &in.LinuxFxVersion, &out.LinuxFxVersion
 		*out = new(string)
@@ -13455,6 +13530,11 @@ func (in *LinuxFunctionAppSiteConfigObservation) DeepCopyInto(out *LinuxFunction
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -13615,6 +13695,11 @@ func (in *LinuxFunctionAppSiteConfigParameters) DeepCopyInto(out *LinuxFunctionA
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -13656,6 +13741,11 @@ func (in *LinuxFunctionAppSiteConfigParameters) DeepCopyInto(out *LinuxFunctionA
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -13884,6 +13974,11 @@ func (in *LinuxFunctionAppSiteConfigScmIPRestrictionInitParameters) DeepCopyInto
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -13946,6 +14041,11 @@ func (in *LinuxFunctionAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxFunctionAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -13995,6 +14095,11 @@ func (in *LinuxFunctionAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(out
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -15834,6 +15939,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -15854,6 +15964,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 	if in.KeyVaultReferenceIdentityID != nil {
 		in, out := &in.KeyVaultReferenceIdentityID, &out.KeyVaultReferenceIdentityID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -15930,6 +16045,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -16062,6 +16182,11 @@ func (in *LinuxFunctionAppSlotObservation) DeepCopyInto(out *LinuxFunctionAppSlo
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionAppID != nil {
 		in, out := &in.FunctionAppID, &out.FunctionAppID
 		*out = new(string)
@@ -16136,6 +16261,11 @@ func (in *LinuxFunctionAppSlotObservation) DeepCopyInto(out *LinuxFunctionAppSlo
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -16189,6 +16319,11 @@ func (in *LinuxFunctionAppSlotObservation) DeepCopyInto(out *LinuxFunctionAppSlo
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -16285,6 +16420,11 @@ func (in *LinuxFunctionAppSlotParameters) DeepCopyInto(out *LinuxFunctionAppSlot
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionAppID != nil {
 		in, out := &in.FunctionAppID, &out.FunctionAppID
 		*out = new(string)
@@ -16320,6 +16460,11 @@ func (in *LinuxFunctionAppSlotParameters) DeepCopyInto(out *LinuxFunctionAppSlot
 	if in.KeyVaultReferenceIdentityID != nil {
 		in, out := &in.KeyVaultReferenceIdentityID, &out.KeyVaultReferenceIdentityID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -16401,6 +16546,11 @@ func (in *LinuxFunctionAppSlotParameters) DeepCopyInto(out *LinuxFunctionAppSlot
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -16692,6 +16842,11 @@ func (in *LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyInt
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -16754,6 +16909,11 @@ func (in *LinuxFunctionAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -16803,6 +16963,11 @@ func (in *LinuxFunctionAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(ou
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -16967,6 +17132,11 @@ func (in *LinuxFunctionAppSlotSiteConfigInitParameters) DeepCopyInto(out *LinuxF
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -17008,6 +17178,11 @@ func (in *LinuxFunctionAppSlotSiteConfigInitParameters) DeepCopyInto(out *LinuxF
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -17163,6 +17338,11 @@ func (in *LinuxFunctionAppSlotSiteConfigObservation) DeepCopyInto(out *LinuxFunc
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LinuxFxVersion != nil {
 		in, out := &in.LinuxFxVersion, &out.LinuxFxVersion
 		*out = new(string)
@@ -17209,6 +17389,11 @@ func (in *LinuxFunctionAppSlotSiteConfigObservation) DeepCopyInto(out *LinuxFunc
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -17374,6 +17559,11 @@ func (in *LinuxFunctionAppSlotSiteConfigParameters) DeepCopyInto(out *LinuxFunct
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -17415,6 +17605,11 @@ func (in *LinuxFunctionAppSlotSiteConfigParameters) DeepCopyInto(out *LinuxFunct
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -17643,6 +17838,11 @@ func (in *LinuxFunctionAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCopy
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -17705,6 +17905,11 @@ func (in *LinuxFunctionAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyInt
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -17754,6 +17959,11 @@ func (in *LinuxFunctionAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyInto
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -21508,6 +21718,11 @@ func (in *LinuxWebAppInitParameters) DeepCopyInto(out *LinuxWebAppInitParameters
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -21536,6 +21751,11 @@ func (in *LinuxWebAppInitParameters) DeepCopyInto(out *LinuxWebAppInitParameters
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
@@ -21603,6 +21823,11 @@ func (in *LinuxWebAppInitParameters) DeepCopyInto(out *LinuxWebAppInitParameters
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -21730,6 +21955,11 @@ func (in *LinuxWebAppObservation) DeepCopyInto(out *LinuxWebAppObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -21806,6 +22036,11 @@ func (in *LinuxWebAppObservation) DeepCopyInto(out *LinuxWebAppObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -21856,6 +22091,11 @@ func (in *LinuxWebAppObservation) DeepCopyInto(out *LinuxWebAppObservation) {
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ZipDeployFile != nil {
@@ -21947,6 +22187,11 @@ func (in *LinuxWebAppParameters) DeepCopyInto(out *LinuxWebAppParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -21975,6 +22220,11 @@ func (in *LinuxWebAppParameters) DeepCopyInto(out *LinuxWebAppParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
@@ -22058,6 +22308,11 @@ func (in *LinuxWebAppParameters) DeepCopyInto(out *LinuxWebAppParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
 		*out = new(string)
@@ -22083,8 +22338,23 @@ func (in *LinuxWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -22153,8 +22423,23 @@ func (in *LinuxWebAppSiteConfigApplicationStackObservation) DeepCopyInto(out *Li
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -22223,8 +22508,28 @@ func (in *LinuxWebAppSiteConfigApplicationStackParameters) DeepCopyInto(out *Lin
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -22563,6 +22868,11 @@ func (in *LinuxWebAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(out *Li
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -22625,6 +22935,11 @@ func (in *LinuxWebAppSiteConfigIPRestrictionObservation) DeepCopyInto(out *Linux
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -22674,6 +22989,11 @@ func (in *LinuxWebAppSiteConfigIPRestrictionParameters) DeepCopyInto(out *LinuxW
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -22828,6 +23148,11 @@ func (in *LinuxWebAppSiteConfigInitParameters) DeepCopyInto(out *LinuxWebAppSite
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -22864,6 +23189,11 @@ func (in *LinuxWebAppSiteConfigInitParameters) DeepCopyInto(out *LinuxWebAppSite
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -23009,6 +23339,11 @@ func (in *LinuxWebAppSiteConfigObservation) DeepCopyInto(out *LinuxWebAppSiteCon
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LinuxFxVersion != nil {
 		in, out := &in.LinuxFxVersion, &out.LinuxFxVersion
 		*out = new(string)
@@ -23050,6 +23385,11 @@ func (in *LinuxWebAppSiteConfigObservation) DeepCopyInto(out *LinuxWebAppSiteCon
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -23195,6 +23535,11 @@ func (in *LinuxWebAppSiteConfigParameters) DeepCopyInto(out *LinuxWebAppSiteConf
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -23231,6 +23576,11 @@ func (in *LinuxWebAppSiteConfigParameters) DeepCopyInto(out *LinuxWebAppSiteConf
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -23459,6 +23809,11 @@ func (in *LinuxWebAppSiteConfigScmIPRestrictionInitParameters) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -23521,6 +23876,11 @@ func (in *LinuxWebAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(out *Li
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -23570,6 +23930,11 @@ func (in *LinuxWebAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(out *Lin
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -27148,6 +27513,11 @@ func (in *LinuxWebAppSlotInitParameters) DeepCopyInto(out *LinuxWebAppSlotInitPa
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -27175,6 +27545,11 @@ func (in *LinuxWebAppSlotInitParameters) DeepCopyInto(out *LinuxWebAppSlotInitPa
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -27226,6 +27601,11 @@ func (in *LinuxWebAppSlotInitParameters) DeepCopyInto(out *LinuxWebAppSlotInitPa
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -27491,6 +27871,11 @@ func (in *LinuxWebAppSlotObservation) DeepCopyInto(out *LinuxWebAppSlotObservati
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -27567,6 +27952,11 @@ func (in *LinuxWebAppSlotObservation) DeepCopyInto(out *LinuxWebAppSlotObservati
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -27605,6 +27995,11 @@ func (in *LinuxWebAppSlotObservation) DeepCopyInto(out *LinuxWebAppSlotObservati
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ZipDeployFile != nil {
@@ -27711,6 +28106,11 @@ func (in *LinuxWebAppSlotParameters) DeepCopyInto(out *LinuxWebAppSlotParameters
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -27738,6 +28138,11 @@ func (in *LinuxWebAppSlotParameters) DeepCopyInto(out *LinuxWebAppSlotParameters
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -27790,6 +28195,11 @@ func (in *LinuxWebAppSlotParameters) DeepCopyInto(out *LinuxWebAppSlotParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
 		*out = new(string)
@@ -27815,8 +28225,23 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInto(
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -27885,8 +28310,23 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackObservation) DeepCopyInto(out
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -27955,8 +28395,28 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackParameters) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -28295,6 +28755,11 @@ func (in *LinuxWebAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyInto(out
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -28357,6 +28822,11 @@ func (in *LinuxWebAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto(out *L
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -28406,6 +28876,11 @@ func (in *LinuxWebAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(out *Li
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -28565,6 +29040,11 @@ func (in *LinuxWebAppSlotSiteConfigInitParameters) DeepCopyInto(out *LinuxWebApp
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -28601,6 +29081,11 @@ func (in *LinuxWebAppSlotSiteConfigInitParameters) DeepCopyInto(out *LinuxWebApp
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -28751,6 +29236,11 @@ func (in *LinuxWebAppSlotSiteConfigObservation) DeepCopyInto(out *LinuxWebAppSlo
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LinuxFxVersion != nil {
 		in, out := &in.LinuxFxVersion, &out.LinuxFxVersion
 		*out = new(string)
@@ -28792,6 +29282,11 @@ func (in *LinuxWebAppSlotSiteConfigObservation) DeepCopyInto(out *LinuxWebAppSlo
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -28942,6 +29437,11 @@ func (in *LinuxWebAppSlotSiteConfigParameters) DeepCopyInto(out *LinuxWebAppSlot
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -28978,6 +29478,11 @@ func (in *LinuxWebAppSlotSiteConfigParameters) DeepCopyInto(out *LinuxWebAppSlot
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -29206,6 +29711,11 @@ func (in *LinuxWebAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCopyInto(
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -29268,6 +29778,11 @@ func (in *LinuxWebAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyInto(out
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -29317,6 +29832,11 @@ func (in *LinuxWebAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyInto(out 
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -32481,9 +33001,9 @@ func (in *SiteConfigAutoHealSettingTriggerStatusCodeInitParameters) DeepCopyInto
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -32526,9 +33046,9 @@ func (in *SiteConfigAutoHealSettingTriggerStatusCodeObservation) DeepCopyInto(ou
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -32571,9 +33091,9 @@ func (in *SiteConfigAutoHealSettingTriggerStatusCodeParameters) DeepCopyInto(out
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -34544,6 +35064,22 @@ func (in *StaticSiteIdentityParameters) DeepCopy() *StaticSiteIdentityParameters
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *StaticSiteInitParameters) DeepCopyInto(out *StaticSiteInitParameters) {
 	*out = *in
+	if in.AppSettings != nil {
+		in, out := &in.AppSettings, &out.AppSettings
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]StaticSiteIdentityInitParameters, len(*in))
@@ -34629,6 +35165,22 @@ func (in *StaticSiteList) DeepCopyObject() runtime.Object {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *StaticSiteObservation) DeepCopyInto(out *StaticSiteObservation) {
 	*out = *in
+	if in.AppSettings != nil {
+		in, out := &in.AppSettings, &out.AppSettings
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.DefaultHostName != nil {
 		in, out := &in.DefaultHostName, &out.DefaultHostName
 		*out = new(string)
@@ -34697,6 +35249,22 @@ func (in *StaticSiteObservation) DeepCopy() *StaticSiteObservation {
 // DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
 func (in *StaticSiteParameters) DeepCopyInto(out *StaticSiteParameters) {
 	*out = *in
+	if in.AppSettings != nil {
+		in, out := &in.AppSettings, &out.AppSettings
+		*out = make(map[string]*string, len(*in))
+		for key, val := range *in {
+			var outVal *string
+			if val == nil {
+				(*out)[key] = nil
+			} else {
+				inVal := (*in)[key]
+				in, out := &inVal, &outVal
+				*out = new(string)
+				**out = **in
+			}
+			(*out)[key] = outVal
+		}
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]StaticSiteIdentityParameters, len(*in))
@@ -34825,9 +35393,9 @@ func (in *StatusCodeInitParameters) DeepCopyInto(out *StatusCodeInitParameters) 
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -34870,9 +35438,9 @@ func (in *StatusCodeObservation) DeepCopyInto(out *StatusCodeObservation) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -34915,9 +35483,9 @@ func (in *StatusCodeParameters) DeepCopyInto(out *StatusCodeParameters) {
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -35480,9 +36048,9 @@ func (in *TriggerStatusCodeInitParameters) DeepCopyInto(out *TriggerStatusCodeIn
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -35525,9 +36093,9 @@ func (in *TriggerStatusCodeObservation) DeepCopyInto(out *TriggerStatusCodeObser
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -35570,9 +36138,9 @@ func (in *TriggerStatusCodeParameters) DeepCopyInto(out *TriggerStatusCodeParame
 		*out = new(float64)
 		**out = **in
 	}
-	if in.Win32Status != nil {
-		in, out := &in.Win32Status, &out.Win32Status
-		*out = new(string)
+	if in.Win32StatusCode != nil {
+		in, out := &in.Win32StatusCode, &out.Win32StatusCode
+		*out = new(float64)
 		**out = **in
 	}
 }
@@ -39445,6 +40013,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -39470,6 +40043,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -39563,6 +40141,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -39700,6 +40283,11 @@ func (in *WindowsFunctionAppObservation) DeepCopyInto(out *WindowsFunctionAppObs
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -39774,6 +40362,11 @@ func (in *WindowsFunctionAppObservation) DeepCopyInto(out *WindowsFunctionAppObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -39839,6 +40432,11 @@ func (in *WindowsFunctionAppObservation) DeepCopyInto(out *WindowsFunctionAppObs
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ZipDeployFile != nil {
@@ -39940,6 +40538,11 @@ func (in *WindowsFunctionAppParameters) DeepCopyInto(out *WindowsFunctionAppPara
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -39965,6 +40568,11 @@ func (in *WindowsFunctionAppParameters) DeepCopyInto(out *WindowsFunctionAppPara
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ResourceGroupName != nil {
@@ -40078,6 +40686,11 @@ func (in *WindowsFunctionAppParameters) DeepCopyInto(out *WindowsFunctionAppPara
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -40584,6 +41197,11 @@ func (in *WindowsFunctionAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -40646,6 +41264,11 @@ func (in *WindowsFunctionAppSiteConfigIPRestrictionObservation) DeepCopyInto(out
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -40695,6 +41318,11 @@ func (in *WindowsFunctionAppSiteConfigIPRestrictionParameters) DeepCopyInto(out 
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -40844,6 +41472,11 @@ func (in *WindowsFunctionAppSiteConfigInitParameters) DeepCopyInto(out *WindowsF
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -40885,6 +41518,11 @@ func (in *WindowsFunctionAppSiteConfigInitParameters) DeepCopyInto(out *WindowsF
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -41025,6 +41663,11 @@ func (in *WindowsFunctionAppSiteConfigObservation) DeepCopyInto(out *WindowsFunc
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -41066,6 +41709,11 @@ func (in *WindowsFunctionAppSiteConfigObservation) DeepCopyInto(out *WindowsFunc
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -41221,6 +41869,11 @@ func (in *WindowsFunctionAppSiteConfigParameters) DeepCopyInto(out *WindowsFunct
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -41262,6 +41915,11 @@ func (in *WindowsFunctionAppSiteConfigParameters) DeepCopyInto(out *WindowsFunct
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -41490,6 +42148,11 @@ func (in *WindowsFunctionAppSiteConfigScmIPRestrictionInitParameters) DeepCopyIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -41552,6 +42215,11 @@ func (in *WindowsFunctionAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -41601,6 +42269,11 @@ func (in *WindowsFunctionAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(o
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -45174,6 +45847,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionsExtensionVersion != nil {
 		in, out := &in.FunctionsExtensionVersion, &out.FunctionsExtensionVersion
 		*out = new(string)
@@ -45194,6 +45872,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 	if in.KeyVaultReferenceIdentityID != nil {
 		in, out := &in.KeyVaultReferenceIdentityID, &out.KeyVaultReferenceIdentityID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -45270,6 +45953,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -45402,6 +46090,11 @@ func (in *WindowsFunctionAppSlotObservation) DeepCopyInto(out *WindowsFunctionAp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionAppID != nil {
 		in, out := &in.FunctionAppID, &out.FunctionAppID
 		*out = new(string)
@@ -45476,6 +46169,11 @@ func (in *WindowsFunctionAppSlotObservation) DeepCopyInto(out *WindowsFunctionAp
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -45529,6 +46227,11 @@ func (in *WindowsFunctionAppSlotObservation) DeepCopyInto(out *WindowsFunctionAp
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -45625,6 +46328,11 @@ func (in *WindowsFunctionAppSlotParameters) DeepCopyInto(out *WindowsFunctionApp
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.FunctionAppID != nil {
 		in, out := &in.FunctionAppID, &out.FunctionAppID
 		*out = new(string)
@@ -45660,6 +46368,11 @@ func (in *WindowsFunctionAppSlotParameters) DeepCopyInto(out *WindowsFunctionApp
 	if in.KeyVaultReferenceIdentityID != nil {
 		in, out := &in.KeyVaultReferenceIdentityID, &out.KeyVaultReferenceIdentityID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ServicePlanID != nil {
@@ -45741,6 +46454,11 @@ func (in *WindowsFunctionAppSlotParameters) DeepCopyInto(out *WindowsFunctionApp
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 }
 
@@ -46242,6 +46960,11 @@ func (in *WindowsFunctionAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyI
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -46304,6 +47027,11 @@ func (in *WindowsFunctionAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -46353,6 +47081,11 @@ func (in *WindowsFunctionAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -46507,6 +47240,11 @@ func (in *WindowsFunctionAppSlotSiteConfigInitParameters) DeepCopyInto(out *Wind
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -46548,6 +47286,11 @@ func (in *WindowsFunctionAppSlotSiteConfigInitParameters) DeepCopyInto(out *Wind
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -46693,6 +47436,11 @@ func (in *WindowsFunctionAppSlotSiteConfigObservation) DeepCopyInto(out *Windows
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -46734,6 +47482,11 @@ func (in *WindowsFunctionAppSlotSiteConfigObservation) DeepCopyInto(out *Windows
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -46894,6 +47647,11 @@ func (in *WindowsFunctionAppSlotSiteConfigParameters) DeepCopyInto(out *WindowsF
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -46935,6 +47693,11 @@ func (in *WindowsFunctionAppSlotSiteConfigParameters) DeepCopyInto(out *WindowsF
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -47163,6 +47926,11 @@ func (in *WindowsFunctionAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCo
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -47225,6 +47993,11 @@ func (in *WindowsFunctionAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyI
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -47274,6 +48047,11 @@ func (in *WindowsFunctionAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyIn
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -51260,6 +52038,11 @@ func (in *WindowsWebAppInitParameters) DeepCopyInto(out *WindowsWebAppInitParame
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -51288,6 +52071,11 @@ func (in *WindowsWebAppInitParameters) DeepCopyInto(out *WindowsWebAppInitParame
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
@@ -51355,6 +52143,11 @@ func (in *WindowsWebAppInitParameters) DeepCopyInto(out *WindowsWebAppInitParame
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -51828,6 +52621,11 @@ func (in *WindowsWebAppObservation) DeepCopyInto(out *WindowsWebAppObservation) 
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -51904,6 +52702,11 @@ func (in *WindowsWebAppObservation) DeepCopyInto(out *WindowsWebAppObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -51954,6 +52757,11 @@ func (in *WindowsWebAppObservation) DeepCopyInto(out *WindowsWebAppObservation) 
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ZipDeployFile != nil {
@@ -52045,6 +52853,11 @@ func (in *WindowsWebAppParameters) DeepCopyInto(out *WindowsWebAppParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -52073,6 +52886,11 @@ func (in *WindowsWebAppParameters) DeepCopyInto(out *WindowsWebAppParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
@@ -52156,6 +52974,11 @@ func (in *WindowsWebAppParameters) DeepCopyInto(out *WindowsWebAppParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
 		*out = new(string)
@@ -52193,6 +53016,21 @@ func (in *WindowsWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(ou
 	}
 	if in.DockerContainerTag != nil {
 		in, out := &in.DockerContainerTag, &out.DockerContainerTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -52286,6 +53124,21 @@ func (in *WindowsWebAppSiteConfigApplicationStackObservation) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
+		*out = new(string)
+		**out = **in
+	}
 	if in.DotnetCoreVersion != nil {
 		in, out := &in.DotnetCoreVersion, &out.DotnetCoreVersion
 		*out = new(string)
@@ -52373,6 +53226,26 @@ func (in *WindowsWebAppSiteConfigApplicationStackParameters) DeepCopyInto(out *W
 	}
 	if in.DockerContainerTag != nil {
 		in, out := &in.DockerContainerTag, &out.DockerContainerTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -52808,6 +53681,11 @@ func (in *WindowsWebAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -52870,6 +53748,11 @@ func (in *WindowsWebAppSiteConfigIPRestrictionObservation) DeepCopyInto(out *Win
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -52919,6 +53802,11 @@ func (in *WindowsWebAppSiteConfigIPRestrictionParameters) DeepCopyInto(out *Wind
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -53073,6 +53961,11 @@ func (in *WindowsWebAppSiteConfigInitParameters) DeepCopyInto(out *WindowsWebApp
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -53109,6 +54002,11 @@ func (in *WindowsWebAppSiteConfigInitParameters) DeepCopyInto(out *WindowsWebApp
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -53261,6 +54159,11 @@ func (in *WindowsWebAppSiteConfigObservation) DeepCopyInto(out *WindowsWebAppSit
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LinuxFxVersion != nil {
 		in, out := &in.LinuxFxVersion, &out.LinuxFxVersion
 		*out = new(string)
@@ -53302,6 +54205,11 @@ func (in *WindowsWebAppSiteConfigObservation) DeepCopyInto(out *WindowsWebAppSit
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -53459,6 +54367,11 @@ func (in *WindowsWebAppSiteConfigParameters) DeepCopyInto(out *WindowsWebAppSite
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -53495,6 +54408,11 @@ func (in *WindowsWebAppSiteConfigParameters) DeepCopyInto(out *WindowsWebAppSite
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -53730,6 +54648,11 @@ func (in *WindowsWebAppSiteConfigScmIPRestrictionInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -53792,6 +54715,11 @@ func (in *WindowsWebAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -53841,6 +54769,11 @@ func (in *WindowsWebAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(out *W
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -57404,6 +58337,11 @@ func (in *WindowsWebAppSlotInitParameters) DeepCopyInto(out *WindowsWebAppSlotIn
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -57427,6 +58365,11 @@ func (in *WindowsWebAppSlotInitParameters) DeepCopyInto(out *WindowsWebAppSlotIn
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
@@ -57477,6 +58420,11 @@ func (in *WindowsWebAppSlotInitParameters) DeepCopyInto(out *WindowsWebAppSlotIn
 		in, out := &in.VirtualNetworkSubnetIDSelector, &out.VirtualNetworkSubnetIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
@@ -58120,6 +59068,11 @@ func (in *WindowsWebAppSlotObservation) DeepCopyInto(out *WindowsWebAppSlotObser
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -58191,6 +59144,11 @@ func (in *WindowsWebAppSlotObservation) DeepCopyInto(out *WindowsWebAppSlotObser
 		*out = new(string)
 		**out = **in
 	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
 		*out = new(string)
@@ -58229,6 +59187,11 @@ func (in *WindowsWebAppSlotObservation) DeepCopyInto(out *WindowsWebAppSlotObser
 	if in.VirtualNetworkSubnetID != nil {
 		in, out := &in.VirtualNetworkSubnetID, &out.VirtualNetworkSubnetID
 		*out = new(string)
+		**out = **in
+	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ZipDeployFile != nil {
@@ -58335,6 +59298,11 @@ func (in *WindowsWebAppSlotParameters) DeepCopyInto(out *WindowsWebAppSlotParame
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FtpPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.FtpPublishBasicAuthenticationEnabled, &out.FtpPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HTTPSOnly != nil {
 		in, out := &in.HTTPSOnly, &out.HTTPSOnly
 		*out = new(bool)
@@ -58358,6 +59326,11 @@ func (in *WindowsWebAppSlotParameters) DeepCopyInto(out *WindowsWebAppSlotParame
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ServicePlanID != nil {
 		in, out := &in.ServicePlanID, &out.ServicePlanID
@@ -58409,6 +59382,11 @@ func (in *WindowsWebAppSlotParameters) DeepCopyInto(out *WindowsWebAppSlotParame
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.WebdeployPublishBasicAuthenticationEnabled != nil {
+		in, out := &in.WebdeployPublishBasicAuthenticationEnabled, &out.WebdeployPublishBasicAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ZipDeployFile != nil {
 		in, out := &in.ZipDeployFile, &out.ZipDeployFile
 		*out = new(string)
@@ -58446,6 +59424,21 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInt
 	}
 	if in.DockerContainerTag != nil {
 		in, out := &in.DockerContainerTag, &out.DockerContainerTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -58539,6 +59532,21 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackObservation) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
+		*out = new(string)
+		**out = **in
+	}
 	if in.DotnetCoreVersion != nil {
 		in, out := &in.DotnetCoreVersion, &out.DotnetCoreVersion
 		*out = new(string)
@@ -58626,6 +59634,26 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackParameters) DeepCopyInto(ou
 	}
 	if in.DockerContainerTag != nil {
 		in, out := &in.DockerContainerTag, &out.DockerContainerTag
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerImageName != nil {
+		in, out := &in.DockerImageName, &out.DockerImageName
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.DockerRegistryURL != nil {
+		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
+		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryUsername != nil {
+		in, out := &in.DockerRegistryUsername, &out.DockerRegistryUsername
 		*out = new(string)
 		**out = **in
 	}
@@ -59280,6 +60308,11 @@ func (in *WindowsWebAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
@@ -59342,6 +60375,11 @@ func (in *WindowsWebAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
@@ -59391,6 +60429,11 @@ func (in *WindowsWebAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(out *
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}
@@ -59550,6 +60593,11 @@ func (in *WindowsWebAppSlotSiteConfigInitParameters) DeepCopyInto(out *WindowsWe
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -59586,6 +60634,11 @@ func (in *WindowsWebAppSlotSiteConfigInitParameters) DeepCopyInto(out *WindowsWe
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -59743,6 +60796,11 @@ func (in *WindowsWebAppSlotSiteConfigObservation) DeepCopyInto(out *WindowsWebAp
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -59779,6 +60837,11 @@ func (in *WindowsWebAppSlotSiteConfigObservation) DeepCopyInto(out *WindowsWebAp
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -59941,6 +61004,11 @@ func (in *WindowsWebAppSlotSiteConfigParameters) DeepCopyInto(out *WindowsWebApp
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.IPRestrictionDefaultAction != nil {
+		in, out := &in.IPRestrictionDefaultAction, &out.IPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
+	}
 	if in.LoadBalancingMode != nil {
 		in, out := &in.LoadBalancingMode, &out.LoadBalancingMode
 		*out = new(string)
@@ -59977,6 +61045,11 @@ func (in *WindowsWebAppSlotSiteConfigParameters) DeepCopyInto(out *WindowsWebApp
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ScmIPRestrictionDefaultAction != nil {
+		in, out := &in.ScmIPRestrictionDefaultAction, &out.ScmIPRestrictionDefaultAction
+		*out = new(string)
+		**out = **in
 	}
 	if in.ScmMinimumTLSVersion != nil {
 		in, out := &in.ScmMinimumTLSVersion, &out.ScmMinimumTLSVersion
@@ -60212,6 +61285,11 @@ func (in *WindowsWebAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCopyInt
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
@@ -60274,6 +61352,11 @@ func (in *WindowsWebAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
+		*out = new(string)
+		**out = **in
+	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
 		*out = make([]WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
@@ -60323,6 +61406,11 @@ func (in *WindowsWebAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyInto(ou
 	*out = *in
 	if in.Action != nil {
 		in, out := &in.Action, &out.Action
+		*out = new(string)
+		**out = **in
+	}
+	if in.Description != nil {
+		in, out := &in.Description, &out.Description
 		*out = new(string)
 		**out = **in
 	}

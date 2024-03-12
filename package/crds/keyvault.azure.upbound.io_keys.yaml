@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -80,7 +80,10 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   expirationDate:
-                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When
+                      this parameter gets changed on reruns, if newer date is ahead
+                      of current date, an update is performed. If the newer date is
+                      before the current date, resource will be force created.
                     type: string
                   keyOpts:
                     description: 'A list of JSON web key operations. Possible values
@@ -209,7 +212,7 @@ spec:
                           type: string
                         notifyBeforeExpiry:
                           description: Notify at a given duration before expiry as
-                            an ISO 8601 duration. Default is P30D.
+                            an ISO 8601 duration.
                           type: string
                       type: object
                     type: array
@@ -241,7 +244,10 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   expirationDate:
-                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When
+                      this parameter gets changed on reruns, if newer date is ahead
+                      of current date, an update is performed. If the newer date is
+                      before the current date, resource will be force created.
                     type: string
                   keyOpts:
                     description: 'A list of JSON web key operations. Possible values
@@ -370,7 +376,7 @@ spec:
                           type: string
                         notifyBeforeExpiry:
                           description: Notify at a given duration before expiry as
-                            an ISO 8601 duration. Default is P30D.
+                            an ISO 8601 duration.
                           type: string
                       type: object
                     type: array
@@ -577,7 +583,10 @@ spec:
                     description: The RSA public exponent of this Key Vault Key.
                     type: string
                   expirationDate:
-                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+                    description: Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When
+                      this parameter gets changed on reruns, if newer date is ahead
+                      of current date, an update is performed. If the newer date is
+                      before the current date, resource will be force created.
                     type: string
                   id:
                     description: The Key Vault Key ID.
@@ -655,7 +664,7 @@ spec:
                           type: string
                         notifyBeforeExpiry:
                           description: Notify at a given duration before expiry as
-                            an ISO 8601 duration. Default is P30D.
+                            an ISO 8601 duration.
                           type: string
                       type: object
                     type: array

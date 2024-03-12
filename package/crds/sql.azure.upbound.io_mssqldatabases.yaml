@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -76,8 +76,7 @@ spec:
                   autoPauseDelayInMinutes:
                     description: Time in minutes after which database is automatically
                       paused. A value of -1 means that automatic pause is disabled.
-                      This property is only settable for General Purpose Serverless
-                      databases.
+                      This property is only settable for Serverless databases.
                     type: number
                   collation:
                     description: Specifies the collation of the database. Changing
@@ -89,6 +88,7 @@ spec:
                       Restore, RestoreExternalBackup, RestoreExternalBackupSecondary,
                       RestoreLongTermRetentionBackup and Secondary. Mutually exclusive
                       with import. Changing this forces a new resource to be created.
+                      Defaults to Default.
                     type: string
                   creationSourceDatabaseId:
                     description: The ID of the source database from which to create
@@ -100,13 +100,35 @@ spec:
                     description: Specifies the ID of the elastic pool containing this
                       database.
                     type: string
+                  enclaveType:
+                    description: Specifies the type of enclave to be used by the database.
+                      Possible value VBS.
+                    type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
                       is enabled. Defaults to true.
                     type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this SQL Database.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this SQL Database. Possible
+                            value is UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   import:
-                    description: A Database Import block as documented below. Mutually
-                      exclusive with create_mode.
+                    description: A import block as documented below. Mutually exclusive
+                      with create_mode.
                     items:
                       properties:
                         administratorLogin:
@@ -181,6 +203,10 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     items:
                       properties:
+                        immutableBackupsEnabled:
+                          description: Specifies if the backups are immutable. Defaults
+                            to false.
+                          type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
@@ -230,8 +256,8 @@ spec:
                     type: number
                   minCapacity:
                     description: Minimal capacity that database will always have allocated,
-                      if not paused. This property is only settable for General Purpose
-                      Serverless databases.
+                      if not paused. This property is only settable for Serverless
+                      databases.
                     type: number
                   readReplicaCount:
                     description: The number of readonly secondary replicas associated
@@ -249,9 +275,18 @@ spec:
                     description: The ID of the database to be recovered. This property
                       is only applicable when the create_mode is Recovery.
                     type: string
+                  recoveryPointId:
+                    description: The ID of the Recovery Services Recovery Point Id
+                      to be restored. This property is only applicable when the create_mode
+                      is Recovery.
+                    type: string
                   restoreDroppedDatabaseId:
                     description: The ID of the database to be restored. This property
                       is only applicable when the create_mode is Restore.
+                    type: string
+                  restoreLongTermRetentionBackupId:
+                    description: The ID of the long term retention backup to be restored.
+                      This property is only applicable when the create_mode is RestoreLongTermRetentionBackup.
                     type: string
                   restorePointInTime:
                     description: Specifies the point in time (ISO8601 format) of the
@@ -352,7 +387,7 @@ spec:
                           type: number
                         retentionDays:
                           description: Point In Time Restore configuration. Value
-                            has to be between 7 and 35.
+                            has to be between 1 and 35.
                           type: number
                       type: object
                     type: array
@@ -364,8 +399,8 @@ spec:
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store
-                      backups for this database. Possible values are Geo, Local and
-                      Zone. The default value is Geo.
+                      backups for this database. Possible values are Geo, GeoZone,
+                      Local and Zone. Defaults to Geo.
                     type: string
                   tags:
                     additionalProperties:
@@ -388,8 +423,8 @@ spec:
                           x-kubernetes-list-type: set
                         emailAccountAdmins:
                           description: Should the account administrators be emailed
-                            when this alert is triggered? Possible values are Disabled
-                            and Enabled.
+                            when this alert is triggered? Possible values are Enabled
+                            or Disabled. Defaults to Disabled.
                           type: string
                         emailAddresses:
                           description: A list of email addresses which alerts should
@@ -404,7 +439,7 @@ spec:
                           type: number
                         state:
                           description: The State of the Policy. Possible values are
-                            Enabled, Disabled or New.
+                            Enabled or Disabled. Defaults to Disabled.
                           type: string
                         storageAccountAccessKeySecretRef:
                           description: Specifies the identifier key of the Threat
@@ -436,6 +471,90 @@ spec:
                     description: If set to true, Transparent Data Encryption will
                       be enabled on the database. Defaults to true.
                     type: boolean
+                  transparentDataEncryptionKeyAutomaticRotationEnabled:
+                    description: Boolean flag to specify whether TDE automatically
+                      rotates the encryption Key to latest version or not. Possible
+                      values are true or false. Defaults to false.
+                    type: boolean
+                  transparentDataEncryptionKeyVaultKeyId:
+                    description: The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>)
+                      to be used as the Customer Managed Key(CMK/BYOK) for the Transparent
+                      Data Encryption(TDE) layer.
+                    type: string
+                  transparentDataEncryptionKeyVaultKeyIdRef:
+                    description: Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  transparentDataEncryptionKeyVaultKeyIdSelector:
+                    description: Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   zoneRedundant:
                     description: Whether or not this database is zone redundant, which
                       means the replicas of this database will be spread across multiple
@@ -459,8 +578,7 @@ spec:
                   autoPauseDelayInMinutes:
                     description: Time in minutes after which database is automatically
                       paused. A value of -1 means that automatic pause is disabled.
-                      This property is only settable for General Purpose Serverless
-                      databases.
+                      This property is only settable for Serverless databases.
                     type: number
                   collation:
                     description: Specifies the collation of the database. Changing
@@ -472,6 +590,7 @@ spec:
                       Restore, RestoreExternalBackup, RestoreExternalBackupSecondary,
                       RestoreLongTermRetentionBackup and Secondary. Mutually exclusive
                       with import. Changing this forces a new resource to be created.
+                      Defaults to Default.
                     type: string
                   creationSourceDatabaseId:
                     description: The ID of the source database from which to create
@@ -483,13 +602,35 @@ spec:
                     description: Specifies the ID of the elastic pool containing this
                       database.
                     type: string
+                  enclaveType:
+                    description: Specifies the type of enclave to be used by the database.
+                      Possible value VBS.
+                    type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
                       is enabled. Defaults to true.
                     type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this SQL Database.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this SQL Database. Possible
+                            value is UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   import:
-                    description: A Database Import block as documented below. Mutually
-                      exclusive with create_mode.
+                    description: A import block as documented below. Mutually exclusive
+                      with create_mode.
                     items:
                       properties:
                         administratorLogin:
@@ -527,6 +668,10 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     items:
                       properties:
+                        immutableBackupsEnabled:
+                          description: Specifies if the backups are immutable. Defaults
+                            to false.
+                          type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
@@ -576,8 +721,8 @@ spec:
                     type: number
                   minCapacity:
                     description: Minimal capacity that database will always have allocated,
-                      if not paused. This property is only settable for General Purpose
-                      Serverless databases.
+                      if not paused. This property is only settable for Serverless
+                      databases.
                     type: number
                   readReplicaCount:
                     description: The number of readonly secondary replicas associated
@@ -595,9 +740,18 @@ spec:
                     description: The ID of the database to be recovered. This property
                       is only applicable when the create_mode is Recovery.
                     type: string
+                  recoveryPointId:
+                    description: The ID of the Recovery Services Recovery Point Id
+                      to be restored. This property is only applicable when the create_mode
+                      is Recovery.
+                    type: string
                   restoreDroppedDatabaseId:
                     description: The ID of the database to be restored. This property
                       is only applicable when the create_mode is Restore.
+                    type: string
+                  restoreLongTermRetentionBackupId:
+                    description: The ID of the long term retention backup to be restored.
+                      This property is only applicable when the create_mode is RestoreLongTermRetentionBackup.
                     type: string
                   restorePointInTime:
                     description: Specifies the point in time (ISO8601 format) of the
@@ -620,7 +774,7 @@ spec:
                           type: number
                         retentionDays:
                           description: Point In Time Restore configuration. Value
-                            has to be between 7 and 35.
+                            has to be between 1 and 35.
                           type: number
                       type: object
                     type: array
@@ -632,8 +786,8 @@ spec:
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store
-                      backups for this database. Possible values are Geo, Local and
-                      Zone. The default value is Geo.
+                      backups for this database. Possible values are Geo, GeoZone,
+                      Local and Zone. Defaults to Geo.
                     type: string
                   tags:
                     additionalProperties:
@@ -656,8 +810,8 @@ spec:
                           x-kubernetes-list-type: set
                         emailAccountAdmins:
                           description: Should the account administrators be emailed
-                            when this alert is triggered? Possible values are Disabled
-                            and Enabled.
+                            when this alert is triggered? Possible values are Enabled
+                            or Disabled. Defaults to Disabled.
                           type: string
                         emailAddresses:
                           description: A list of email addresses which alerts should
@@ -672,7 +826,7 @@ spec:
                           type: number
                         state:
                           description: The State of the Policy. Possible values are
-                            Enabled, Disabled or New.
+                            Enabled or Disabled. Defaults to Disabled.
                           type: string
                         storageEndpoint:
                           description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
@@ -685,6 +839,90 @@ spec:
                     description: If set to true, Transparent Data Encryption will
                       be enabled on the database. Defaults to true.
                     type: boolean
+                  transparentDataEncryptionKeyAutomaticRotationEnabled:
+                    description: Boolean flag to specify whether TDE automatically
+                      rotates the encryption Key to latest version or not. Possible
+                      values are true or false. Defaults to false.
+                    type: boolean
+                  transparentDataEncryptionKeyVaultKeyId:
+                    description: The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>)
+                      to be used as the Customer Managed Key(CMK/BYOK) for the Transparent
+                      Data Encryption(TDE) layer.
+                    type: string
+                  transparentDataEncryptionKeyVaultKeyIdRef:
+                    description: Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  transparentDataEncryptionKeyVaultKeyIdSelector:
+                    description: Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
                   zoneRedundant:
                     description: Whether or not this database is zone redundant, which
                       means the replicas of this database will be spread across multiple
@@ -867,8 +1105,7 @@ spec:
                   autoPauseDelayInMinutes:
                     description: Time in minutes after which database is automatically
                       paused. A value of -1 means that automatic pause is disabled.
-                      This property is only settable for General Purpose Serverless
-                      databases.
+                      This property is only settable for Serverless databases.
                     type: number
                   collation:
                     description: Specifies the collation of the database. Changing
@@ -880,6 +1117,7 @@ spec:
                       Restore, RestoreExternalBackup, RestoreExternalBackupSecondary,
                       RestoreLongTermRetentionBackup and Secondary. Mutually exclusive
                       with import. Changing this forces a new resource to be created.
+                      Defaults to Default.
                     type: string
                   creationSourceDatabaseId:
                     description: The ID of the source database from which to create
@@ -891,6 +1129,10 @@ spec:
                     description: Specifies the ID of the elastic pool containing this
                       database.
                     type: string
+                  enclaveType:
+                    description: Specifies the type of enclave to be used by the database.
+                      Possible value VBS.
+                    type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
                       is enabled. Defaults to true.
@@ -898,9 +1140,27 @@ spec:
                   id:
                     description: The ID of the MS SQL Database.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this SQL Database.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this SQL Database. Possible
+                            value is UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   import:
-                    description: A Database Import block as documented below. Mutually
-                      exclusive with create_mode.
+                    description: A import block as documented below. Mutually exclusive
+                      with create_mode.
                     items:
                       properties:
                         administratorLogin:
@@ -938,6 +1198,10 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     items:
                       properties:
+                        immutableBackupsEnabled:
+                          description: Specifies if the backups are immutable. Defaults
+                            to false.
+                          type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
@@ -987,8 +1251,8 @@ spec:
                     type: number
                   minCapacity:
                     description: Minimal capacity that database will always have allocated,
-                      if not paused. This property is only settable for General Purpose
-                      Serverless databases.
+                      if not paused. This property is only settable for Serverless
+                      databases.
                     type: number
                   readReplicaCount:
                     description: The number of readonly secondary replicas associated
@@ -1006,9 +1270,18 @@ spec:
                     description: The ID of the database to be recovered. This property
                       is only applicable when the create_mode is Recovery.
                     type: string
+                  recoveryPointId:
+                    description: The ID of the Recovery Services Recovery Point Id
+                      to be restored. This property is only applicable when the create_mode
+                      is Recovery.
+                    type: string
                   restoreDroppedDatabaseId:
                     description: The ID of the database to be restored. This property
                       is only applicable when the create_mode is Restore.
+                    type: string
+                  restoreLongTermRetentionBackupId:
+                    description: The ID of the long term retention backup to be restored.
+                      This property is only applicable when the create_mode is RestoreLongTermRetentionBackup.
                     type: string
                   restorePointInTime:
                     description: Specifies the point in time (ISO8601 format) of the
@@ -1035,7 +1308,7 @@ spec:
                           type: number
                         retentionDays:
                           description: Point In Time Restore configuration. Value
-                            has to be between 7 and 35.
+                            has to be between 1 and 35.
                           type: number
                       type: object
                     type: array
@@ -1047,8 +1320,8 @@ spec:
                     type: string
                   storageAccountType:
                     description: Specifies the storage account type used to store
-                      backups for this database. Possible values are Geo, Local and
-                      Zone. The default value is Geo.
+                      backups for this database. Possible values are Geo, GeoZone,
+                      Local and Zone. Defaults to Geo.
                     type: string
                   tags:
                     additionalProperties:
@@ -1071,8 +1344,8 @@ spec:
                           x-kubernetes-list-type: set
                         emailAccountAdmins:
                           description: Should the account administrators be emailed
-                            when this alert is triggered? Possible values are Disabled
-                            and Enabled.
+                            when this alert is triggered? Possible values are Enabled
+                            or Disabled. Defaults to Disabled.
                           type: string
                         emailAddresses:
                           description: A list of email addresses which alerts should
@@ -1087,7 +1360,7 @@ spec:
                           type: number
                         state:
                           description: The State of the Policy. Possible values are
-                            Enabled, Disabled or New.
+                            Enabled or Disabled. Defaults to Disabled.
                           type: string
                         storageEndpoint:
                           description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
@@ -1100,6 +1373,16 @@ spec:
                     description: If set to true, Transparent Data Encryption will
                       be enabled on the database. Defaults to true.
                     type: boolean
+                  transparentDataEncryptionKeyAutomaticRotationEnabled:
+                    description: Boolean flag to specify whether TDE automatically
+                      rotates the encryption Key to latest version or not. Possible
+                      values are true or false. Defaults to false.
+                    type: boolean
+                  transparentDataEncryptionKeyVaultKeyId:
+                    description: The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>)
+                      to be used as the Customer Managed Key(CMK/BYOK) for the Transparent
+                      Data Encryption(TDE) layer.
+                    type: string
                   zoneRedundant:
                     description: Whether or not this database is zone redundant, which
                       means the replicas of this database will be spread across multiple

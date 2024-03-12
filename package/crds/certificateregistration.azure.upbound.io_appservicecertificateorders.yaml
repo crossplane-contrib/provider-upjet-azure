@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -95,6 +95,7 @@ spec:
                     type: string
                   productType:
                     description: Certificate product type, such as Standard or WildCard.
+                      Defaults to Standard.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -221,6 +222,7 @@ spec:
                     type: string
                   productType:
                     description: Certificate product type, such as Standard or WildCard.
+                      Defaults to Standard.
                     type: string
                   tags:
                     additionalProperties:
@@ -472,6 +474,7 @@ spec:
                     type: string
                   productType:
                     description: Certificate product type, such as Standard or WildCard.
+                      Defaults to Standard.
                     type: string
                   resourceGroupName:
                     description: The name of the resource group in which to create

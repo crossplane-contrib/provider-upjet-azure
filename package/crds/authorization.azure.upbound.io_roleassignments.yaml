@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -100,6 +100,14 @@ spec:
                     description: The ID of the Principal (User, Group or Service Principal)
                       to assign the Role Definition to. Changing this forces a new
                       resource to be created.
+                    type: string
+                  principalType:
+                    description: The type of the principal_id. Possible values are
+                      User, Group and ServicePrincipal. Changing this forces a new
+                      resource to be created. It is necessary to explicitly set this
+                      attribute when creating role assignments if the principal creating
+                      the assignment is constrained by ABAC rules that filters on
+                      the PrincipalType attribute.
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
@@ -241,6 +249,14 @@ spec:
                     description: The ID of the Principal (User, Group or Service Principal)
                       to assign the Role Definition to. Changing this forces a new
                       resource to be created.
+                    type: string
+                  principalType:
+                    description: The type of the principal_id. Possible values are
+                      User, Group and ServicePrincipal. Changing this forces a new
+                      resource to be created. It is necessary to explicitly set this
+                      attribute when creating role assignments if the principal creating
+                      the assignment is constrained by ABAC rules that filters on
+                      the PrincipalType attribute.
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this
@@ -555,8 +571,12 @@ spec:
                       resource to be created.
                     type: string
                   principalType:
-                    description: The type of the principal_id, e.g. User, Group, Service
-                      Principal, Application, etc.
+                    description: The type of the principal_id. Possible values are
+                      User, Group and ServicePrincipal. Changing this forces a new
+                      resource to be created. It is necessary to explicitly set this
+                      attribute when creating role assignments if the principal creating
+                      the assignment is constrained by ABAC rules that filters on
+                      the PrincipalType attribute.
                     type: string
                   roleDefinitionId:
                     description: The Scoped-ID of the Role Definition. Changing this

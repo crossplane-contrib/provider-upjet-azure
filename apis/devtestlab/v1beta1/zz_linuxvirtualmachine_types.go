@@ -172,7 +172,7 @@ type LinuxVirtualMachineInitParameters struct {
 	// The Machine Size to use for this Virtual Machine, such as Standard_F2. Changing this forces a new resource to be created.
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium.
+	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium. Changing this forces a new resource to be created.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -230,7 +230,7 @@ type LinuxVirtualMachineObservation struct {
 	// The Machine Size to use for this Virtual Machine, such as Standard_F2. Changing this forces a new resource to be created.
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium.
+	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium. Changing this forces a new resource to be created.
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -339,7 +339,7 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	Size *string `json:"size,omitempty" tf:"size,omitempty"`
 
-	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium.
+	// The type of Storage to use on this Virtual Machine. Possible values are Standard and Premium. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	StorageType *string `json:"storageType,omitempty" tf:"storage_type,omitempty"`
 
@@ -381,8 +381,8 @@ type LinuxVirtualMachineStatus struct {
 // +kubebuilder:storageversion
 
 // LinuxVirtualMachine is the Schema for the LinuxVirtualMachines API. Manages a Linux Virtual Machine within a Dev Test Lab.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -125,5 +125,5 @@ func (tr *APIPolicy) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *APIPolicy) GetTerraformSchemaVersion() int {
-	return 0
+	return 2
 }

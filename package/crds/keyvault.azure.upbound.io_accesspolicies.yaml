@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -174,7 +174,7 @@ spec:
                   objectId:
                     description: The object ID of a user, service principal or security
                       group in the Azure Active Directory tenant for the vault. The
-                      object ID of a service principal can be fetched from  azuread_service_principal.object_id.
+                      object ID of a service principal can be fetched from azuread_service_principal.object_id.
                       The object ID must be unique for the list of access policies.
                       Changing this forces a new resource to be created.
                     type: string
@@ -313,7 +313,7 @@ spec:
                   objectId:
                     description: The object ID of a user, service principal or security
                       group in the Azure Active Directory tenant for the vault. The
-                      object ID of a service principal can be fetched from  azuread_service_principal.object_id.
+                      object ID of a service principal can be fetched from azuread_service_principal.object_id.
                       The object ID must be unique for the list of access policies.
                       Changing this forces a new resource to be created.
                     type: string
@@ -549,7 +549,7 @@ spec:
                   objectId:
                     description: The object ID of a user, service principal or security
                       group in the Azure Active Directory tenant for the vault. The
-                      object ID of a service principal can be fetched from  azuread_service_principal.object_id.
+                      object ID of a service principal can be fetched from azuread_service_principal.object_id.
                       The object ID must be unique for the list of access policies.
                       Changing this forces a new resource to be created.
                     type: string

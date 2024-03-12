@@ -103,7 +103,7 @@ type ObjectReplicationParameters struct {
 
 type ObjectReplicationRulesInitParameters struct {
 
-	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z.
+	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
 	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
@@ -137,7 +137,7 @@ type ObjectReplicationRulesInitParameters struct {
 
 type ObjectReplicationRulesObservation struct {
 
-	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z.
+	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
 	// The destination storage container name. Changing this forces a new Storage Object Replication to be created.
@@ -155,7 +155,7 @@ type ObjectReplicationRulesObservation struct {
 
 type ObjectReplicationRulesParameters struct {
 
-	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z.
+	// The time after which the Block Blobs created will be copies to the destination. Possible values are OnlyNewObjects, Everything and time in RFC3339 format: 2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.
 	// +kubebuilder:validation:Optional
 	CopyBlobsCreatedAfter *string `json:"copyBlobsCreatedAfter,omitempty" tf:"copy_blobs_created_after,omitempty"`
 
@@ -219,8 +219,8 @@ type ObjectReplicationStatus struct {
 // +kubebuilder:storageversion
 
 // ObjectReplication is the Schema for the ObjectReplications API. Copy Block Blobs between a source storage account and a destination account
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

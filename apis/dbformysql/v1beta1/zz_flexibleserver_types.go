@@ -441,6 +441,9 @@ type StorageInitParameters struct {
 	// Should Storage Auto Grow be enabled? Defaults to true.
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
 
+	// Should IOPS be scaled automatically? If true, iops can not be set. Defaults to false.
+	IoScalingEnabled *bool `json:"ioScalingEnabled,omitempty" tf:"io_scaling_enabled,omitempty"`
+
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
 
@@ -452,6 +455,9 @@ type StorageObservation struct {
 
 	// Should Storage Auto Grow be enabled? Defaults to true.
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
+
+	// Should IOPS be scaled automatically? If true, iops can not be set. Defaults to false.
+	IoScalingEnabled *bool `json:"ioScalingEnabled,omitempty" tf:"io_scaling_enabled,omitempty"`
 
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	Iops *float64 `json:"iops,omitempty" tf:"iops,omitempty"`
@@ -465,6 +471,10 @@ type StorageParameters struct {
 	// Should Storage Auto Grow be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
+
+	// Should IOPS be scaled automatically? If true, iops can not be set. Defaults to false.
+	// +kubebuilder:validation:Optional
+	IoScalingEnabled *bool `json:"ioScalingEnabled,omitempty" tf:"io_scaling_enabled,omitempty"`
 
 	// The storage IOPS for the MySQL Flexible Server. Possible values are between 360 and 20000.
 	// +kubebuilder:validation:Optional
@@ -503,8 +513,8 @@ type FlexibleServerStatus struct {
 // +kubebuilder:storageversion
 
 // FlexibleServer is the Schema for the FlexibleServers API. Manages a MySQL Flexible Server.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

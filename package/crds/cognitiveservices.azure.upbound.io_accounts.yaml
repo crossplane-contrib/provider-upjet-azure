@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -97,7 +97,8 @@ spec:
                     type: object
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      Changing this forces a new resource to be created.
+                      This property is required when network_acls is specified. Changing
+                      this forces a new resource to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as documented below.
@@ -148,12 +149,13 @@ spec:
                       should be created. Possible values are Academic, AnomalyDetector,
                       Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
                       Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
-                      CognitiveServices, ComputerVision, ContentModerator, CustomSpeech,
-                      CustomVision.Prediction, CustomVision.Training, Emotion, Face,
-                      FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor,
-                      OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition,
-                      Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation
-                      and WebLM. Changing this forces a new resource to be created.
+                      CognitiveServices, ComputerVision, ContentModerator, ContentSafety,
+                      CustomSpeech, CustomVision.Prediction, CustomVision.Training,
+                      Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring,
+                      MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations,
+                      SpeakerRecognition, Speech, SpeechServices, SpeechTranslation,
+                      TextAnalytics, TextTranslation and WebLM. Changing this forces
+                      a new resource to be created.
                     type: string
                   localAuthEnabled:
                     description: Whether local authentication methods is enabled for
@@ -184,7 +186,9 @@ spec:
                       a new resource to be created.
                     type: string
                   networkAcls:
-                    description: A network_acls block as defined below.
+                    description: A network_acls block as defined below. When this
+                      property is specified, custom_subdomain_name is also required
+                      to be set.
                     items:
                       properties:
                         defaultAction:
@@ -428,7 +432,8 @@ spec:
                     type: string
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      Changing this forces a new resource to be created.
+                      This property is required when network_acls is specified. Changing
+                      this forces a new resource to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as documented below.
@@ -479,12 +484,13 @@ spec:
                       should be created. Possible values are Academic, AnomalyDetector,
                       Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
                       Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
-                      CognitiveServices, ComputerVision, ContentModerator, CustomSpeech,
-                      CustomVision.Prediction, CustomVision.Training, Emotion, Face,
-                      FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor,
-                      OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition,
-                      Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation
-                      and WebLM. Changing this forces a new resource to be created.
+                      CognitiveServices, ComputerVision, ContentModerator, ContentSafety,
+                      CustomSpeech, CustomVision.Prediction, CustomVision.Training,
+                      Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring,
+                      MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations,
+                      SpeakerRecognition, Speech, SpeechServices, SpeechTranslation,
+                      TextAnalytics, TextTranslation and WebLM. Changing this forces
+                      a new resource to be created.
                     type: string
                   localAuthEnabled:
                     description: Whether local authentication methods is enabled for
@@ -515,7 +521,9 @@ spec:
                       a new resource to be created.
                     type: string
                   networkAcls:
-                    description: A network_acls block as defined below.
+                    description: A network_acls block as defined below. When this
+                      property is specified, custom_subdomain_name is also required
+                      to be set.
                     items:
                       properties:
                         defaultAction:
@@ -850,7 +858,8 @@ spec:
                     type: string
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      Changing this forces a new resource to be created.
+                      This property is required when network_acls is specified. Changing
+                      this forces a new resource to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as documented below.
@@ -916,12 +925,13 @@ spec:
                       should be created. Possible values are Academic, AnomalyDetector,
                       Bing.Autosuggest, Bing.Autosuggest.v7, Bing.CustomSearch, Bing.Search,
                       Bing.Search.v7, Bing.Speech, Bing.SpellCheck, Bing.SpellCheck.v7,
-                      CognitiveServices, ComputerVision, ContentModerator, CustomSpeech,
-                      CustomVision.Prediction, CustomVision.Training, Emotion, Face,
-                      FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring, MetricsAdvisor,
-                      OpenAI, Personalizer, QnAMaker, Recommendations, SpeakerRecognition,
-                      Speech, SpeechServices, SpeechTranslation, TextAnalytics, TextTranslation
-                      and WebLM. Changing this forces a new resource to be created.
+                      CognitiveServices, ComputerVision, ContentModerator, ContentSafety,
+                      CustomSpeech, CustomVision.Prediction, CustomVision.Training,
+                      Emotion, Face, FormRecognizer, ImmersiveReader, LUIS, LUIS.Authoring,
+                      MetricsAdvisor, OpenAI, Personalizer, QnAMaker, Recommendations,
+                      SpeakerRecognition, Speech, SpeechServices, SpeechTranslation,
+                      TextAnalytics, TextTranslation and WebLM. Changing this forces
+                      a new resource to be created.
                     type: string
                   localAuthEnabled:
                     description: Whether local authentication methods is enabled for
@@ -952,7 +962,9 @@ spec:
                       a new resource to be created.
                     type: string
                   networkAcls:
-                    description: A network_acls block as defined below.
+                    description: A network_acls block as defined below. When this
+                      property is specified, custom_subdomain_name is also required
+                      to be set.
                     items:
                       properties:
                         defaultAction:

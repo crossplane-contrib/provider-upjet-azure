@@ -119,7 +119,7 @@ type FrontdoorFirewallPolicyInitParameters struct {
 	// One or more managed_rule blocks as defined below.
 	ManagedRule []ManagedRuleInitParameters `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
 
-	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	// The firewall policy mode. Possible values are Detection, Prevention. Defaults to Prevention.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// If action type is redirect, this field represents redirect URL for the client.
@@ -156,7 +156,7 @@ type FrontdoorFirewallPolicyObservation struct {
 	// One or more managed_rule blocks as defined below.
 	ManagedRule []ManagedRuleObservation `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
 
-	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	// The firewall policy mode. Possible values are Detection, Prevention. Defaults to Prevention.
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
 	// If action type is redirect, this field represents redirect URL for the client.
@@ -192,7 +192,7 @@ type FrontdoorFirewallPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedRule []ManagedRuleParameters `json:"managedRule,omitempty" tf:"managed_rule,omitempty"`
 
-	// The firewall policy mode. Possible values are Detection, Prevention and defaults to Prevention.
+	// The firewall policy mode. Possible values are Detection, Prevention. Defaults to Prevention.
 	// +kubebuilder:validation:Optional
 	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
 
@@ -570,8 +570,8 @@ type FrontdoorFirewallPolicyStatus struct {
 // +kubebuilder:storageversion
 
 // FrontdoorFirewallPolicy is the Schema for the FrontdoorFirewallPolicys API. Manages an Azure Front Door (classic) Web Application Firewall Policy instance.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

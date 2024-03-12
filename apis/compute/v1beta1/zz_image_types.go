@@ -18,7 +18,7 @@ type DataDiskInitParameters struct {
 	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
-	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
+	// Specifies the caching mode as ReadWrite, ReadOnly, or None. Defaults to None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
 	// Specifies the logical unit number of the data disk.
@@ -36,7 +36,7 @@ type DataDiskObservation struct {
 	// Specifies the URI in Azure storage of the blob that you want to use to create the image.
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
-	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
+	// Specifies the caching mode as ReadWrite, ReadOnly, or None. Defaults to None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
 	// Specifies the logical unit number of the data disk.
@@ -55,7 +55,7 @@ type DataDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	BlobURI *string `json:"blobUri,omitempty" tf:"blob_uri,omitempty"`
 
-	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
+	// Specifies the caching mode as ReadWrite, ReadOnly, or None. Defaults to None.
 	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
@@ -74,17 +74,16 @@ type DataDiskParameters struct {
 
 type ImageInitParameters struct {
 
-	// One or more data_disk elements as defined below.
+	// One or more data_disk blocks as defined below.
 	DataDisk []DataDiskInitParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1. Changing this forces a new resource to be created.
+	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// One or more os_disk elements as defined below. Changing this forces a new resource to be created.
+	// One or more os_disk blocks as defined below. Changing this forces a new resource to be created.
 	OsDisk []OsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
 	// The Virtual Machine ID from which to create the image.
@@ -100,24 +99,22 @@ type ImageInitParameters struct {
 
 type ImageObservation struct {
 
-	// One or more data_disk elements as defined below.
+	// One or more data_disk blocks as defined below.
 	DataDisk []DataDiskObservation `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1. Changing this forces a new resource to be created.
+	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// The ID of the Image.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// One or more os_disk elements as defined below. Changing this forces a new resource to be created.
+	// One or more os_disk blocks as defined below. Changing this forces a new resource to be created.
 	OsDisk []OsDiskObservation `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
-	// The name of the resource group in which to create. Changing this forces a new resource to be created.
-	// the image. Changing this forces a new resource to be created.
+	// The name of the resource group in which to create the image. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// The Virtual Machine ID from which to create the image.
@@ -133,25 +130,23 @@ type ImageObservation struct {
 
 type ImageParameters struct {
 
-	// One or more data_disk elements as defined below.
+	// One or more data_disk blocks as defined below.
 	// +kubebuilder:validation:Optional
 	DataDisk []DataDiskParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
 
-	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. The default is V1. Changing this forces a new resource to be created.
+	// The HyperVGenerationType of the VirtualMachine created from the image as V1, V2. Defaults to V1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HyperVGeneration *string `json:"hyperVGeneration,omitempty" tf:"hyper_v_generation,omitempty"`
 
 	// Specified the supported Azure location where the resource exists. Changing this forces a new resource to be created.
-	// Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// One or more os_disk elements as defined below. Changing this forces a new resource to be created.
+	// One or more os_disk blocks as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	OsDisk []OsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
-	// The name of the resource group in which to create. Changing this forces a new resource to be created.
-	// the image. Changing this forces a new resource to be created.
+	// The name of the resource group in which to create the image. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -186,6 +181,9 @@ type OsDiskInitParameters struct {
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this image. Changing this forces a new resource to be created.
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
 	// Specifies the ID of the managed disk resource that you want to use to create the image.
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
@@ -195,7 +193,7 @@ type OsDiskInitParameters struct {
 	// Specifies the type of operating system contained in the virtual machine image. Possible values are: Windows or Linux.
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
-	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
+	// Specifies the size of the image to be created. Changing this forces a new resource to be created.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
 
@@ -207,6 +205,9 @@ type OsDiskObservation struct {
 	// Specifies the caching mode as ReadWrite, ReadOnly, or None. The default is None.
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this image. Changing this forces a new resource to be created.
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
 	// Specifies the ID of the managed disk resource that you want to use to create the image.
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
@@ -216,7 +217,7 @@ type OsDiskObservation struct {
 	// Specifies the type of operating system contained in the virtual machine image. Possible values are: Windows or Linux.
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
-	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
+	// Specifies the size of the image to be created. Changing this forces a new resource to be created.
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
 
@@ -230,6 +231,10 @@ type OsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	Caching *string `json:"caching,omitempty" tf:"caching,omitempty"`
 
+	// The ID of the Disk Encryption Set which should be used to encrypt this image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
+
 	// Specifies the ID of the managed disk resource that you want to use to create the image.
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
@@ -242,7 +247,7 @@ type OsDiskParameters struct {
 	// +kubebuilder:validation:Optional
 	OsType *string `json:"osType,omitempty" tf:"os_type,omitempty"`
 
-	// Specifies the size of the image to be created. The target size can't be smaller than the source size.
+	// Specifies the size of the image to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SizeGb *float64 `json:"sizeGb,omitempty" tf:"size_gb,omitempty"`
 }
@@ -275,8 +280,8 @@ type ImageStatus struct {
 // +kubebuilder:storageversion
 
 // Image is the Schema for the Images API. Manages a custom virtual machine image that can be used to create virtual machines.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

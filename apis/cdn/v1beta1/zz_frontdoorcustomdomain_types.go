@@ -37,7 +37,7 @@ type FrontdoorCustomDomainInitParameters struct {
 
 type FrontdoorCustomDomainObservation struct {
 
-	// The ID of the Front Door Profile. Changing this forces a new Front Door Profile to be created.
+	// The ID of the Front Door Profile. Changing this forces a new Front Door Custom Domain to be created.
 	CdnFrontdoorProfileID *string `json:"cdnFrontdoorProfileId,omitempty" tf:"cdn_frontdoor_profile_id,omitempty"`
 
 	// The ID of the Azure DNS Zone which should be used for this Front Door Custom Domain. If you are using Azure to host your DNS domains, you must delegate the domain provider's domain name system (DNS) to an Azure DNS Zone. For more information, see Delegate a domain to Azure DNS. Otherwise, if you're using your own domain provider to handle your DNS, you must validate the Front Door Custom Domain by creating the DNS TXT records manually.
@@ -61,7 +61,7 @@ type FrontdoorCustomDomainObservation struct {
 
 type FrontdoorCustomDomainParameters struct {
 
-	// The ID of the Front Door Profile. Changing this forces a new Front Door Profile to be created.
+	// The ID of the Front Door Profile. Changing this forces a new Front Door Custom Domain to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -165,8 +165,8 @@ type FrontdoorCustomDomainStatus struct {
 // +kubebuilder:storageversion
 
 // FrontdoorCustomDomain is the Schema for the FrontdoorCustomDomains API. Manages a Front Door (standard/premium) Custom Domain.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

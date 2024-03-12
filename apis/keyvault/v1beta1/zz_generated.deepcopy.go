@@ -2704,6 +2704,22 @@ func (in *ManagedHardwareSecurityModuleInitParameters) DeepCopyInto(out *Managed
 		*out = new(bool)
 		**out = **in
 	}
+	if in.SecurityDomainKeyVaultCertificateIds != nil {
+		in, out := &in.SecurityDomainKeyVaultCertificateIds, &out.SecurityDomainKeyVaultCertificateIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityDomainQuorum != nil {
+		in, out := &in.SecurityDomainQuorum, &out.SecurityDomainQuorum
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
 		*out = new(string)
@@ -2905,6 +2921,22 @@ func (in *ManagedHardwareSecurityModuleObservation) DeepCopyInto(out *ManagedHar
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecurityDomainKeyVaultCertificateIds != nil {
+		in, out := &in.SecurityDomainKeyVaultCertificateIds, &out.SecurityDomainKeyVaultCertificateIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityDomainQuorum != nil {
+		in, out := &in.SecurityDomainQuorum, &out.SecurityDomainQuorum
+		*out = new(float64)
+		**out = **in
+	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
 		*out = new(string)
@@ -2998,6 +3030,22 @@ func (in *ManagedHardwareSecurityModuleParameters) DeepCopyInto(out *ManagedHard
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SecurityDomainKeyVaultCertificateIds != nil {
+		in, out := &in.SecurityDomainKeyVaultCertificateIds, &out.SecurityDomainKeyVaultCertificateIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
+	if in.SecurityDomainQuorum != nil {
+		in, out := &in.SecurityDomainQuorum, &out.SecurityDomainQuorum
+		*out = new(float64)
+		**out = **in
 	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName

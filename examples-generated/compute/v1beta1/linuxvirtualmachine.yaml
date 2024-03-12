@@ -23,9 +23,9 @@ spec:
         testing.upbound.io/example-name: example
     size: Standard_F2
     sourceImageReference:
-    - offer: UbuntuServer
+    - offer: 0001-com-ubuntu-server-jammy
       publisher: Canonical
-      sku: 20.04-LTS
+      sku: 22_04-lts
       version: latest
 
 ---

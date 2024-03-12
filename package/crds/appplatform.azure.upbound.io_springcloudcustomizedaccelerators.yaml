@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -79,6 +79,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  acceleratorType:
+                    description: Specifies the type of the Spring Cloud Customized
+                      Accelerator. Possible values are Accelerator and Fragment. Defaults
+                      to Accelerator.
+                    type: string
                   description:
                     description: Specifies the description of the Spring Cloud Customized
                       Accelerator.
@@ -93,8 +98,8 @@ spec:
                       properties:
                         basicAuth:
                           description: A basic_auth block as defined below. Conflicts
-                            with git_repository.0.ssh_auth. Changing this forces a
-                            new Spring Cloud Customized Accelerator to be created.
+                            with git_repository[0].ssh_auth. Changing this forces
+                            a new Spring Cloud Customized Accelerator to be created.
                           items:
                             properties:
                               passwordSecretRef:
@@ -126,6 +131,10 @@ spec:
                         branch:
                           description: Specifies the Git repository branch to be used.
                           type: string
+                        caCertificateId:
+                          description: Specifies the ID of the CA Spring Cloud Certificate
+                            for https URL of Git repository.
+                          type: string
                         commit:
                           description: Specifies the Git repository commit to be used.
                           type: string
@@ -137,9 +146,14 @@ spec:
                             to Git or image repository. It should be greater than
                             10.
                           type: number
+                        path:
+                          description: Specifies the path under the git repository
+                            to be treated as the root directory of the accelerator
+                            or the fragment (depending on accelerator_type).
+                          type: string
                         sshAuth:
                           description: A ssh_auth block as defined below. Conflicts
-                            with git_repository.0.basic_auth. Changing this forces
+                            with git_repository[0].basic_auth. Changing this forces
                             a new Spring Cloud Customized Accelerator to be created.
                           items:
                             properties:
@@ -296,6 +310,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  acceleratorType:
+                    description: Specifies the type of the Spring Cloud Customized
+                      Accelerator. Possible values are Accelerator and Fragment. Defaults
+                      to Accelerator.
+                    type: string
                   description:
                     description: Specifies the description of the Spring Cloud Customized
                       Accelerator.
@@ -310,8 +329,8 @@ spec:
                       properties:
                         basicAuth:
                           description: A basic_auth block as defined below. Conflicts
-                            with git_repository.0.ssh_auth. Changing this forces a
-                            new Spring Cloud Customized Accelerator to be created.
+                            with git_repository[0].ssh_auth. Changing this forces
+                            a new Spring Cloud Customized Accelerator to be created.
                           items:
                             properties:
                               username:
@@ -322,6 +341,10 @@ spec:
                           type: array
                         branch:
                           description: Specifies the Git repository branch to be used.
+                          type: string
+                        caCertificateId:
+                          description: Specifies the ID of the CA Spring Cloud Certificate
+                            for https URL of Git repository.
                           type: string
                         commit:
                           description: Specifies the Git repository commit to be used.
@@ -334,9 +357,14 @@ spec:
                             to Git or image repository. It should be greater than
                             10.
                           type: number
+                        path:
+                          description: Specifies the path under the git repository
+                            to be treated as the root directory of the accelerator
+                            or the fragment (depending on accelerator_type).
+                          type: string
                         sshAuth:
                           description: A ssh_auth block as defined below. Conflicts
-                            with git_repository.0.basic_auth. Changing this forces
+                            with git_repository[0].basic_auth. Changing this forces
                             a new Spring Cloud Customized Accelerator to be created.
                           items:
                             properties:
@@ -539,6 +567,11 @@ spec:
                     items:
                       type: string
                     type: array
+                  acceleratorType:
+                    description: Specifies the type of the Spring Cloud Customized
+                      Accelerator. Possible values are Accelerator and Fragment. Defaults
+                      to Accelerator.
+                    type: string
                   description:
                     description: Specifies the description of the Spring Cloud Customized
                       Accelerator.
@@ -553,8 +586,8 @@ spec:
                       properties:
                         basicAuth:
                           description: A basic_auth block as defined below. Conflicts
-                            with git_repository.0.ssh_auth. Changing this forces a
-                            new Spring Cloud Customized Accelerator to be created.
+                            with git_repository[0].ssh_auth. Changing this forces
+                            a new Spring Cloud Customized Accelerator to be created.
                           items:
                             properties:
                               username:
@@ -565,6 +598,10 @@ spec:
                           type: array
                         branch:
                           description: Specifies the Git repository branch to be used.
+                          type: string
+                        caCertificateId:
+                          description: Specifies the ID of the CA Spring Cloud Certificate
+                            for https URL of Git repository.
                           type: string
                         commit:
                           description: Specifies the Git repository commit to be used.
@@ -577,9 +614,14 @@ spec:
                             to Git or image repository. It should be greater than
                             10.
                           type: number
+                        path:
+                          description: Specifies the path under the git repository
+                            to be treated as the root directory of the accelerator
+                            or the fragment (depending on accelerator_type).
+                          type: string
                         sshAuth:
                           description: A ssh_auth block as defined below. Conflicts
-                            with git_repository.0.basic_auth. Changing this forces
+                            with git_repository[0].basic_auth. Changing this forces
                             a new Spring Cloud Customized Accelerator to be created.
                           items:
                             properties:

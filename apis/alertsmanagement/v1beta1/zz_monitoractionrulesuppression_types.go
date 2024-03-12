@@ -251,7 +251,7 @@ type MonitorActionRuleSuppressionConditionInitParameters struct {
 	// A monitor block as defined below.
 	Monitor []ConditionMonitorInitParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []ConditionMonitorServiceInitParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -275,7 +275,7 @@ type MonitorActionRuleSuppressionConditionObservation struct {
 	// A monitor block as defined below.
 	Monitor []ConditionMonitorObservation `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []ConditionMonitorServiceObservation `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -303,7 +303,7 @@ type MonitorActionRuleSuppressionConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	Monitor []ConditionMonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	// +kubebuilder:validation:Optional
 	MonitorService []ConditionMonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
@@ -551,8 +551,8 @@ type MonitorActionRuleSuppressionStatus struct {
 // +kubebuilder:storageversion
 
 // MonitorActionRuleSuppression is the Schema for the MonitorActionRuleSuppressions API. Manages an Monitor Action Rule which type is suppression.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

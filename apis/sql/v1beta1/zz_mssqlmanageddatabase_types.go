@@ -18,11 +18,17 @@ type MSSQLManagedDatabaseInitParameters struct {
 	// A long_term_retention_policy block as defined below.
 	LongTermRetentionPolicy []MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
 
+	// A point_in_time_restore block as defined below. Changing this forces a new resource to be created.
+	PointInTimeRestore []PointInTimeRestoreInitParameters `json:"pointInTimeRestore,omitempty" tf:"point_in_time_restore,omitempty"`
+
 	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
 	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
 }
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
+	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
 	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
@@ -39,6 +45,9 @@ type MSSQLManagedDatabaseLongTermRetentionPolicyInitParameters struct {
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyObservation struct {
 
+	// Specifies if the backups are immutable. Defaults to false.
+	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
+
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
 	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
@@ -53,6 +62,10 @@ type MSSQLManagedDatabaseLongTermRetentionPolicyObservation struct {
 }
 
 type MSSQLManagedDatabaseLongTermRetentionPolicyParameters struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
 	// +kubebuilder:validation:Optional
@@ -82,6 +95,9 @@ type MSSQLManagedDatabaseObservation struct {
 	// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
+	// A point_in_time_restore block as defined below. Changing this forces a new resource to be created.
+	PointInTimeRestore []PointInTimeRestoreObservation `json:"pointInTimeRestore,omitempty" tf:"point_in_time_restore,omitempty"`
+
 	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
 	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
 }
@@ -106,9 +122,42 @@ type MSSQLManagedDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
+	// A point_in_time_restore block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PointInTimeRestore []PointInTimeRestoreParameters `json:"pointInTimeRestore,omitempty" tf:"point_in_time_restore,omitempty"`
+
 	// The backup retention period in days. This is how many days Point-in-Time Restore will be supported.
 	// +kubebuilder:validation:Optional
 	ShortTermRetentionDays *float64 `json:"shortTermRetentionDays,omitempty" tf:"short_term_retention_days,omitempty"`
+}
+
+type PointInTimeRestoreInitParameters struct {
+
+	// The point in time for the restore from source_database_id. Changing this forces a new resource to be created.
+	RestorePointInTime *string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
+
+	// The source database id that will be used to restore from. Changing this forces a new resource to be created.
+	SourceDatabaseID *string `json:"sourceDatabaseId,omitempty" tf:"source_database_id,omitempty"`
+}
+
+type PointInTimeRestoreObservation struct {
+
+	// The point in time for the restore from source_database_id. Changing this forces a new resource to be created.
+	RestorePointInTime *string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
+
+	// The source database id that will be used to restore from. Changing this forces a new resource to be created.
+	SourceDatabaseID *string `json:"sourceDatabaseId,omitempty" tf:"source_database_id,omitempty"`
+}
+
+type PointInTimeRestoreParameters struct {
+
+	// The point in time for the restore from source_database_id. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	RestorePointInTime *string `json:"restorePointInTime" tf:"restore_point_in_time,omitempty"`
+
+	// The source database id that will be used to restore from. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	SourceDatabaseID *string `json:"sourceDatabaseId" tf:"source_database_id,omitempty"`
 }
 
 // MSSQLManagedDatabaseSpec defines the desired state of MSSQLManagedDatabase
@@ -139,8 +188,8 @@ type MSSQLManagedDatabaseStatus struct {
 // +kubebuilder:storageversion
 
 // MSSQLManagedDatabase is the Schema for the MSSQLManagedDatabases API. Manages an Azure SQL Azure Managed Database.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

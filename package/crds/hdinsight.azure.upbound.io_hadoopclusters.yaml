@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -362,7 +362,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -458,7 +458,8 @@ spec:
                             properties:
                               httpsEndpoints:
                                 description: The HTTPS Connectivity Endpoint for this
-                                  HDInsight Hadoop Cluster.
+                                  HDInsight Hadoop Cluster. One or more https_endpoints
+                                  blocks as defined below.
                                 items:
                                   properties:
                                     accessModes:
@@ -508,8 +509,7 @@ spec:
                                 type: number
                               uninstallScriptActions:
                                 description: A uninstall_script_actions block as defined
-                                  below. Changing this forces a new resource to be
-                                  created.
+                                  below.
                                 items:
                                   properties:
                                     name:
@@ -586,8 +586,8 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -822,8 +822,8 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -1004,8 +1004,8 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -1558,7 +1558,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -1573,7 +1573,8 @@ spec:
                             properties:
                               httpsEndpoints:
                                 description: The HTTPS Connectivity Endpoint for this
-                                  HDInsight Hadoop Cluster.
+                                  HDInsight Hadoop Cluster. One or more https_endpoints
+                                  blocks as defined below.
                                 items:
                                   properties:
                                     accessModes:
@@ -1623,8 +1624,7 @@ spec:
                                 type: number
                               uninstallScriptActions:
                                 description: A uninstall_script_actions block as defined
-                                  below. Changing this forces a new resource to be
-                                  created.
+                                  below.
                                 items:
                                   properties:
                                     name:
@@ -1682,8 +1682,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -1899,8 +1899,8 @@ spec:
                                 type: array
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -2062,8 +2062,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -2766,7 +2766,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -2786,7 +2786,8 @@ spec:
                             properties:
                               httpsEndpoints:
                                 description: The HTTPS Connectivity Endpoint for this
-                                  HDInsight Hadoop Cluster.
+                                  HDInsight Hadoop Cluster. One or more https_endpoints
+                                  blocks as defined below.
                                 items:
                                   properties:
                                     accessModes:
@@ -2836,8 +2837,7 @@ spec:
                                 type: number
                               uninstallScriptActions:
                                 description: A uninstall_script_actions block as defined
-                                  below. Changing this forces a new resource to be
-                                  created.
+                                  below.
                                 items:
                                   properties:
                                     name:
@@ -2895,8 +2895,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -3036,8 +3036,8 @@ spec:
                                 type: array
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -3123,8 +3123,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:

@@ -36,8 +36,14 @@ type HPCCacheBlobNFSTargetInitParameters struct {
 	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob NFS Target. Changing this forces a new resource to be created.
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
-	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
+
+	// The amount of time the cache waits before it checks the back-end storage for file updates. Possible values are between 1 and 31536000.
+	VerificationTimerInSeconds *float64 `json:"verificationTimerInSeconds,omitempty" tf:"verification_timer_in_seconds,omitempty"`
+
+	// The amount of time the cache waits after the last file change before it copies the changed file to back-end storage. Possible values are between 1 and 31536000.
+	WriteBackTimerInSeconds *float64 `json:"writeBackTimerInSeconds,omitempty" tf:"write_back_timer_in_seconds,omitempty"`
 }
 
 type HPCCacheBlobNFSTargetObservation struct {
@@ -60,8 +66,14 @@ type HPCCacheBlobNFSTargetObservation struct {
 	// The Resource Manager ID of the Storage Container used as the HPC Cache Blob NFS Target. Changing this forces a new resource to be created.
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
-	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
+
+	// The amount of time the cache waits before it checks the back-end storage for file updates. Possible values are between 1 and 31536000.
+	VerificationTimerInSeconds *float64 `json:"verificationTimerInSeconds,omitempty" tf:"verification_timer_in_seconds,omitempty"`
+
+	// The amount of time the cache waits after the last file change before it copies the changed file to back-end storage. Possible values are between 1 and 31536000.
+	WriteBackTimerInSeconds *float64 `json:"writeBackTimerInSeconds,omitempty" tf:"write_back_timer_in_seconds,omitempty"`
 }
 
 type HPCCacheBlobNFSTargetParameters struct {
@@ -104,9 +116,17 @@ type HPCCacheBlobNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageContainerID *string `json:"storageContainerId,omitempty" tf:"storage_container_id,omitempty"`
 
-	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache Blob NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	// +kubebuilder:validation:Optional
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
+
+	// The amount of time the cache waits before it checks the back-end storage for file updates. Possible values are between 1 and 31536000.
+	// +kubebuilder:validation:Optional
+	VerificationTimerInSeconds *float64 `json:"verificationTimerInSeconds,omitempty" tf:"verification_timer_in_seconds,omitempty"`
+
+	// The amount of time the cache waits after the last file change before it copies the changed file to back-end storage. Possible values are between 1 and 31536000.
+	// +kubebuilder:validation:Optional
+	WriteBackTimerInSeconds *float64 `json:"writeBackTimerInSeconds,omitempty" tf:"write_back_timer_in_seconds,omitempty"`
 }
 
 // HPCCacheBlobNFSTargetSpec defines the desired state of HPCCacheBlobNFSTarget
@@ -137,8 +157,8 @@ type HPCCacheBlobNFSTargetStatus struct {
 // +kubebuilder:storageversion
 
 // HPCCacheBlobNFSTarget is the Schema for the HPCCacheBlobNFSTargets API. Manages a Blob NFSv3 Target within a HPC Cache.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

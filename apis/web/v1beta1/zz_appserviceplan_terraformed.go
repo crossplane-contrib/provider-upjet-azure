@@ -125,5 +125,5 @@ func (tr *AppServicePlan) LateInitialize(attrs []byte) (bool, error) {
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *AppServicePlan) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

@@ -27,6 +27,9 @@ type VirtualMachineExtensionInitParameters struct {
 	// A protected_settings_from_key_vault block as defined below.
 	ProtectedSettingsFromKeyVault []VirtualMachineExtensionProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
+	// Specifies the collection of extension names after which this extension needs to be provisioned.
+	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
+
 	// The publisher of the extension, available publishers can be found by using the Azure CLI. Changing this forces a new resource to be created.
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 
@@ -60,6 +63,9 @@ type VirtualMachineExtensionObservation struct {
 
 	// A protected_settings_from_key_vault block as defined below.
 	ProtectedSettingsFromKeyVault []VirtualMachineExtensionProtectedSettingsFromKeyVaultObservation `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
+
+	// Specifies the collection of extension names after which this extension needs to be provisioned.
+	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
 
 	// The publisher of the extension, available publishers can be found by using the Azure CLI. Changing this forces a new resource to be created.
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
@@ -102,6 +108,10 @@ type VirtualMachineExtensionParameters struct {
 	// The protected_settings passed to the extension, like settings, these are specified as a JSON object in a string.
 	// +kubebuilder:validation:Optional
 	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+
+	// Specifies the collection of extension names after which this extension needs to be provisioned.
+	// +kubebuilder:validation:Optional
+	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
 
 	// The publisher of the extension, available publishers can be found by using the Azure CLI. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -196,8 +206,8 @@ type VirtualMachineExtensionStatus struct {
 // +kubebuilder:storageversion
 
 // VirtualMachineExtension is the Schema for the VirtualMachineExtensions API. Manages a Virtual Machine Extension to provide post deployment configuration and run automated tasks.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

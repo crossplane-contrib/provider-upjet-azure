@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -100,8 +100,8 @@ spec:
                     description: Enable/Disable auto-growing of the storage. Storage
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
-                      automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      automatically grows without impacting the workload. Defaults
+                      to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values
@@ -352,8 +352,8 @@ spec:
                     description: Enable/Disable auto-growing of the storage. Storage
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
-                      automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      automatically grows without impacting the workload. Defaults
+                      to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values
@@ -681,8 +681,8 @@ spec:
                     description: Enable/Disable auto-growing of the storage. Storage
                       auto-grow prevents your server from running out of storage and
                       becoming read-only. If storage auto grow is enabled, the storage
-                      automatically grows without impacting the workload. The default
-                      value if not explicitly specified is true.
+                      automatically grows without impacting the workload. Defaults
+                      to true.
                     type: boolean
                   backupRetentionDays:
                     description: Backup retention days for the server, supported values

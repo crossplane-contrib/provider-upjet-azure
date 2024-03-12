@@ -37,7 +37,7 @@ type AccessPolicyInitParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
-	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from  azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
+	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// List of secret permissions, must be one or more from the following: Backup, Delete, Get, List, Purge, Recover, Restore and Set.
@@ -67,7 +67,7 @@ type AccessPolicyObservation_2 struct {
 	// Specifies the id of the Key Vault resource. Changing this forces a new resource to be created.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
-	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from  azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
+	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// List of secret permissions, must be one or more from the following: Backup, Delete, Get, List, Purge, Recover, Restore and Set.
@@ -108,7 +108,7 @@ type AccessPolicyParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
-	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from  azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
+	// The object ID of a user, service principal or security group in the Azure Active Directory tenant for the vault. The object ID of a service principal can be fetched from azuread_service_principal.object_id. The object ID must be unique for the list of access policies. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
@@ -153,8 +153,8 @@ type AccessPolicyStatus struct {
 // +kubebuilder:storageversion
 
 // AccessPolicy is the Schema for the AccessPolicys API. Manages a Key Vault Access Policy.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

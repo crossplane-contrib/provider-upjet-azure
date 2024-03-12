@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -185,7 +185,7 @@ spec:
                         routingType:
                           description: The routing type that is supported for the
                             resource request. Valid values are Proxy and Proxy,Cache.
-                            This value defaults to ResourceTypeRoutingProxy.
+                            Defaults to Proxy.
                           type: string
                       type: object
                     type: array
@@ -251,7 +251,7 @@ spec:
                         routingType:
                           description: The routing type that is supported for the
                             resource request. Valid values are Proxy and Proxy,Cache.
-                            This value defaults to ResourceTypeRoutingProxy.
+                            Defaults to Proxy.
                           type: string
                       type: object
                     type: array
@@ -489,7 +489,7 @@ spec:
                         routingType:
                           description: The routing type that is supported for the
                             resource request. Valid values are Proxy and Proxy,Cache.
-                            This value defaults to ResourceTypeRoutingProxy.
+                            Defaults to Proxy.
                           type: string
                       type: object
                     type: array

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -109,7 +109,7 @@ spec:
                     x-kubernetes-map-type: granular
                   ipVersion:
                     description: The IP Version to use, IPv6 or IPv4. Changing this
-                      forces a new resource to be created.
+                      forces a new resource to be created. Defaults to IPv4.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the
@@ -282,7 +282,7 @@ spec:
                     x-kubernetes-map-type: granular
                   ipVersion:
                     description: The IP Version to use, IPv6 or IPv4. Changing this
-                      forces a new resource to be created.
+                      forces a new resource to be created. Defaults to IPv4.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the
@@ -554,7 +554,7 @@ spec:
                     x-kubernetes-map-type: granular
                   ipVersion:
                     description: The IP Version to use, IPv6 or IPv4. Changing this
-                      forces a new resource to be created.
+                      forces a new resource to be created. Defaults to IPv4.
                     type: string
                   location:
                     description: Specifies the supported Azure location where the

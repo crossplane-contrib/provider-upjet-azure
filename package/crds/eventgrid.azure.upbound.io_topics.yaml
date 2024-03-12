@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -97,7 +97,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.
@@ -305,7 +305,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.
@@ -611,7 +611,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.

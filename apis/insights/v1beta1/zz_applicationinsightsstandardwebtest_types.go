@@ -253,7 +253,7 @@ type RequestInitParameters struct {
 	// Should the following of redirects be enabled? Defaults to true.
 	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
 
-	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'. Defaults to GET.
 	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
 
 	// One or more header blocks as defined above.
@@ -274,7 +274,7 @@ type RequestObservation struct {
 	// Should the following of redirects be enabled? Defaults to true.
 	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
 
-	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'. Defaults to GET.
 	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
 
 	// One or more header blocks as defined above.
@@ -297,7 +297,7 @@ type RequestParameters struct {
 	// +kubebuilder:validation:Optional
 	FollowRedirectsEnabled *bool `json:"followRedirectsEnabled,omitempty" tf:"follow_redirects_enabled,omitempty"`
 
-	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'.
+	// Which HTTP verb to use for the call. Options are 'GET', 'POST', 'PUT', 'PATCH', and 'DELETE'. Defaults to GET.
 	// +kubebuilder:validation:Optional
 	HTTPVerb *string `json:"httpVerb,omitempty" tf:"http_verb,omitempty"`
 
@@ -391,8 +391,8 @@ type ApplicationInsightsStandardWebTestStatus struct {
 // +kubebuilder:storageversion
 
 // ApplicationInsightsStandardWebTest is the Schema for the ApplicationInsightsStandardWebTests API. Manages a Application Insights Standard WebTest.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

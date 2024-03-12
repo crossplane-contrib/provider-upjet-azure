@@ -90,6 +90,117 @@ type IdentityParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 }
 
+type NetworkRuleSetInitParameters struct {
+
+	// Specifies the default action for the Network Rule Set. Possible values are Allow and Deny. Defaults to Allow.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or more network_rules blocks as defined below.
+	NetworkRules []NetworkRulesInitParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+
+	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Are Azure Services that are known and trusted for this resource type are allowed to bypass firewall configuration? See Trusted Microsoft Services
+	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
+}
+
+type NetworkRuleSetObservation struct {
+
+	// Specifies the default action for the Network Rule Set. Possible values are Allow and Deny. Defaults to Allow.
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or more network_rules blocks as defined below.
+	NetworkRules []NetworkRulesObservation `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+
+	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Are Azure Services that are known and trusted for this resource type are allowed to bypass firewall configuration? See Trusted Microsoft Services
+	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
+}
+
+type NetworkRuleSetParameters struct {
+
+	// Specifies the default action for the Network Rule Set. Possible values are Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
+
+	// One or more IP Addresses, or CIDR Blocks which should be able to access the ServiceBus Namespace.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
+
+	// One or more network_rules blocks as defined below.
+	// +kubebuilder:validation:Optional
+	NetworkRules []NetworkRulesParameters `json:"networkRules,omitempty" tf:"network_rules,omitempty"`
+
+	// Whether to allow traffic over public network. Possible values are true and false. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
+	// Are Azure Services that are known and trusted for this resource type are allowed to bypass firewall configuration? See Trusted Microsoft Services
+	// +kubebuilder:validation:Optional
+	TrustedServicesAllowed *bool `json:"trustedServicesAllowed,omitempty" tf:"trusted_services_allowed,omitempty"`
+}
+
+type NetworkRulesInitParameters struct {
+
+	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The Subnet ID which should be able to access this ServiceBus Namespace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type NetworkRulesObservation struct {
+
+	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The Subnet ID which should be able to access this ServiceBus Namespace.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type NetworkRulesParameters struct {
+
+	// Should the ServiceBus Namespace Network Rule Set ignore missing Virtual Network Service Endpoint option in the Subnet? Defaults to false.
+	// +kubebuilder:validation:Optional
+	IgnoreMissingVnetServiceEndpoint *bool `json:"ignoreMissingVnetServiceEndpoint,omitempty" tf:"ignore_missing_vnet_service_endpoint,omitempty"`
+
+	// The Subnet ID which should be able to access this ServiceBus Namespace.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
 type ServiceBusNamespaceInitParameters struct {
 
 	// Specifies the capacity. When sku is Premium, capacity can be 1, 2, 4, 8 or 16. When sku is Basic or Standard, capacity can be 0 only.
@@ -109,6 +220,12 @@ type ServiceBusNamespaceInitParameters struct {
 
 	// The minimum supported TLS version for this Service Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default minimum TLS version is 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// An network_rule_set block as defined below.
+	NetworkRuleSet []NetworkRuleSetInitParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
+
+	// Specifies the number messaging partitions. Only valid when sku is Premium and the minimum number is 1. Possible values include 0, 1, 2, and 4. Defaults to 0 for Standard, Basic namespace. Changing this forces a new resource to be created.
+	PremiumMessagingPartitions *float64 `json:"premiumMessagingPartitions,omitempty" tf:"premium_messaging_partitions,omitempty"`
 
 	// Is public network access enabled for the Service Bus Namespace? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -149,6 +266,12 @@ type ServiceBusNamespaceObservation struct {
 
 	// The minimum supported TLS version for this Service Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default minimum TLS version is 1.2.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// An network_rule_set block as defined below.
+	NetworkRuleSet []NetworkRuleSetObservation `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
+
+	// Specifies the number messaging partitions. Only valid when sku is Premium and the minimum number is 1. Possible values include 0, 1, 2, and 4. Defaults to 0 for Standard, Basic namespace. Changing this forces a new resource to be created.
+	PremiumMessagingPartitions *float64 `json:"premiumMessagingPartitions,omitempty" tf:"premium_messaging_partitions,omitempty"`
 
 	// Is public network access enabled for the Service Bus Namespace? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -193,6 +316,14 @@ type ServiceBusNamespaceParameters struct {
 	// The minimum supported TLS version for this Service Bus Namespace. Valid values are: 1.0, 1.1 and 1.2. The current default minimum TLS version is 1.2.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// An network_rule_set block as defined below.
+	// +kubebuilder:validation:Optional
+	NetworkRuleSet []NetworkRuleSetParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
+
+	// Specifies the number messaging partitions. Only valid when sku is Premium and the minimum number is 1. Possible values include 0, 1, 2, and 4. Defaults to 0 for Standard, Basic namespace. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PremiumMessagingPartitions *float64 `json:"premiumMessagingPartitions,omitempty" tf:"premium_messaging_partitions,omitempty"`
 
 	// Is public network access enabled for the Service Bus Namespace? Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -254,8 +385,8 @@ type ServiceBusNamespaceStatus struct {
 // +kubebuilder:storageversion
 
 // ServiceBusNamespace is the Schema for the ServiceBusNamespaces API. Manages a ServiceBus Namespace.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

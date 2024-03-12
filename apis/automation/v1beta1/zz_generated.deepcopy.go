@@ -1951,6 +1951,16 @@ func (in *HybridRunBookWorkerGroupInitParameters) DeepCopyInto(out *HybridRunBoo
 		*out = new(string)
 		**out = **in
 	}
+	if in.AutomationAccountNameRef != nil {
+		in, out := &in.AutomationAccountNameRef, &out.AutomationAccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AutomationAccountNameSelector != nil {
+		in, out := &in.AutomationAccountNameSelector, &out.AutomationAccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CredentialName != nil {
 		in, out := &in.CredentialName, &out.CredentialName
 		*out = new(string)
@@ -2067,6 +2077,16 @@ func (in *HybridRunBookWorkerGroupParameters) DeepCopyInto(out *HybridRunBookWor
 		in, out := &in.AutomationAccountName, &out.AutomationAccountName
 		*out = new(string)
 		**out = **in
+	}
+	if in.AutomationAccountNameRef != nil {
+		in, out := &in.AutomationAccountNameRef, &out.AutomationAccountNameRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.AutomationAccountNameSelector != nil {
+		in, out := &in.AutomationAccountNameSelector, &out.AutomationAccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CredentialName != nil {
 		in, out := &in.CredentialName, &out.CredentialName

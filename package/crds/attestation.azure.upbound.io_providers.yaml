@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -79,7 +79,7 @@ spec:
                     type: string
                   openEnclavePolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                   policy:
                     items:
@@ -175,9 +175,13 @@ spec:
                             type: string
                         type: object
                     type: object
+                  sevSnpPolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the Attestation Policy.
+                    type: string
                   sgxEnclavePolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                   tags:
                     additionalProperties:
@@ -188,7 +192,7 @@ spec:
                     x-kubernetes-map-type: granular
                   tpmPolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                 type: object
               initProvider:
@@ -210,7 +214,7 @@ spec:
                     type: string
                   openEnclavePolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                   policy:
                     items:
@@ -225,9 +229,13 @@ spec:
                     description: A valid X.509 certificate (Section 4 of RFC4648).
                       Changing this forces a new resource to be created.
                     type: string
+                  sevSnpPolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the Attestation Policy.
+                    type: string
                   sgxEnclavePolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                   tags:
                     additionalProperties:
@@ -238,7 +246,7 @@ spec:
                     x-kubernetes-map-type: granular
                   tpmPolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                 type: object
               managementPolicies:
@@ -430,7 +438,7 @@ spec:
                     type: string
                   openEnclavePolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                   policy:
                     items:
@@ -450,9 +458,13 @@ spec:
                       provider should exist. Changing this forces a new resource to
                       be created.
                     type: string
+                  sevSnpPolicyBase64:
+                    description: Specifies the base64 URI Encoded RFC 7519 JWT that
+                      should be used for the Attestation Policy.
+                    type: string
                   sgxEnclavePolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                   tags:
                     additionalProperties:
@@ -463,7 +475,7 @@ spec:
                     x-kubernetes-map-type: granular
                   tpmPolicyBase64:
                     description: Specifies the base64 URI Encoded RFC 7519 JWT that
-                      should be used for the TPM Policy.
+                      should be used for the Attestation Policy.
                     type: string
                   trustModel:
                     description: Trust model used for the Attestation Service.

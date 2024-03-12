@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -74,10 +74,22 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  generation:
+                    description: The generation of the Spring Cloud Configuration
+                      Service. Possible values are Gen1 and Gen2.
+                    type: string
+                  refreshIntervalInSeconds:
+                    description: Specifies how often to check repository updates.
+                      Minimum value is 0.
+                    type: number
                   repository:
                     description: One or more repository blocks as defined below.
                     items:
                       properties:
+                        caCertificateId:
+                          description: Specifies the ID of the Certificate Authority
+                            used when retrieving the Git Repository via HTTPS.
+                          type: string
                         hostKey:
                           description: Specifies the SSH public key of git repository.
                           type: string
@@ -246,10 +258,22 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  generation:
+                    description: The generation of the Spring Cloud Configuration
+                      Service. Possible values are Gen1 and Gen2.
+                    type: string
+                  refreshIntervalInSeconds:
+                    description: Specifies how often to check repository updates.
+                      Minimum value is 0.
+                    type: number
                   repository:
                     description: One or more repository blocks as defined below.
                     items:
                       properties:
+                        caCertificateId:
+                          description: Specifies the ID of the Certificate Authority
+                            used when retrieving the Git Repository via HTTPS.
+                          type: string
                         hostKey:
                           description: Specifies the SSH public key of git repository.
                           type: string
@@ -463,13 +487,25 @@ spec:
             properties:
               atProvider:
                 properties:
+                  generation:
+                    description: The generation of the Spring Cloud Configuration
+                      Service. Possible values are Gen1 and Gen2.
+                    type: string
                   id:
                     description: The ID of the Spring Cloud Configuration Service.
                     type: string
+                  refreshIntervalInSeconds:
+                    description: Specifies how often to check repository updates.
+                      Minimum value is 0.
+                    type: number
                   repository:
                     description: One or more repository blocks as defined below.
                     items:
                       properties:
+                        caCertificateId:
+                          description: Specifies the ID of the Certificate Authority
+                            used when retrieving the Git Repository via HTTPS.
+                          type: string
                         hostKey:
                           description: Specifies the SSH public key of git repository.
                           type: string

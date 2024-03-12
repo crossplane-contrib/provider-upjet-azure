@@ -236,7 +236,7 @@ type ResponseHeaderParameters struct {
 
 type RuleMatchConditionInitParameters struct {
 
-	// can be set to true or false to negate the given condition. Defaults to true.
+	// can be set to true or false to negate the given condition. Defaults to false.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
@@ -257,7 +257,7 @@ type RuleMatchConditionInitParameters struct {
 
 type RuleMatchConditionObservation struct {
 
-	// can be set to true or false to negate the given condition. Defaults to true.
+	// can be set to true or false to negate the given condition. Defaults to false.
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
 	// can be set to Any, IPMatch, GeoMatch, Equal, Contains, LessThan, GreaterThan, LessThanOrEqual, GreaterThanOrEqual, BeginsWith or EndsWith
@@ -278,7 +278,7 @@ type RuleMatchConditionObservation struct {
 
 type RuleMatchConditionParameters struct {
 
-	// can be set to true or false to negate the given condition. Defaults to true.
+	// can be set to true or false to negate the given condition. Defaults to false.
 	// +kubebuilder:validation:Optional
 	NegateCondition *bool `json:"negateCondition,omitempty" tf:"negate_condition,omitempty"`
 
@@ -331,8 +331,8 @@ type FrontdoorRulesEngineStatus struct {
 // +kubebuilder:storageversion
 
 // FrontdoorRulesEngine is the Schema for the FrontdoorRulesEngines API. Manages an Azure Front Door (classic) Rules Engine configuration and rules.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

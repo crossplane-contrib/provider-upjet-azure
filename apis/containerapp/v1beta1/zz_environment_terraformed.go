@@ -21,7 +21,7 @@ func (mg *Environment) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Environment
 func (tr *Environment) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"dapr_application_insights_connection_string": "spec.forProvider.daprApplicationInsightsConnectionStringSecretRef"}
 }
 
 // GetObservation of this Environment

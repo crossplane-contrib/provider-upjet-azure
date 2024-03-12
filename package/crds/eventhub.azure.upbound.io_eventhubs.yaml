@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -210,7 +210,7 @@ spec:
                     type: object
                   partitionCount:
                     description: Specifies the current number of shards on the Event
-                      Hub. Changing this will force-recreate the resource.
+                      Hub.
                     type: number
                   resourceGroupName:
                     description: The name of the resource group in which the EventHub's
@@ -370,7 +370,7 @@ spec:
                     type: number
                   partitionCount:
                     description: Specifies the current number of shards on the Event
-                      Hub. Changing this will force-recreate the resource.
+                      Hub.
                     type: number
                   status:
                     description: Specifies the status of the Event Hub resource. Possible
@@ -624,7 +624,7 @@ spec:
                     type: string
                   partitionCount:
                     description: Specifies the current number of shards on the Event
-                      Hub. Changing this will force-recreate the resource.
+                      Hub.
                     type: number
                   partitionIds:
                     description: The identifiers for partitions created for Event

@@ -164,6 +164,9 @@ type FrontdoorFirewallPolicyInitParameters struct {
 	// If action type is redirect, this field represents redirect URL for the client.
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
 
+	// Should policy managed rules inspect the request body content? Defaults to true.
+	RequestBodyCheckEnabled *bool `json:"requestBodyCheckEnabled,omitempty" tf:"request_body_check_enabled,omitempty"`
+
 	// The sku's pricing tier for this Front Door Firewall Policy. Possible values include Standard_AzureFrontDoor or Premium_AzureFrontDoor. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("sku_name",false)
@@ -211,6 +214,9 @@ type FrontdoorFirewallPolicyObservation struct {
 	// If action type is redirect, this field represents redirect URL for the client.
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
 
+	// Should policy managed rules inspect the request body content? Defaults to true.
+	RequestBodyCheckEnabled *bool `json:"requestBodyCheckEnabled,omitempty" tf:"request_body_check_enabled,omitempty"`
+
 	// The name of the resource group. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -251,6 +257,10 @@ type FrontdoorFirewallPolicyParameters struct {
 	// If action type is redirect, this field represents redirect URL for the client.
 	// +kubebuilder:validation:Optional
 	RedirectURL *string `json:"redirectUrl,omitempty" tf:"redirect_url,omitempty"`
+
+	// Should policy managed rules inspect the request body content? Defaults to true.
+	// +kubebuilder:validation:Optional
+	RequestBodyCheckEnabled *bool `json:"requestBodyCheckEnabled,omitempty" tf:"request_body_check_enabled,omitempty"`
 
 	// The name of the resource group. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -607,8 +617,8 @@ type FrontdoorFirewallPolicyStatus struct {
 // +kubebuilder:storageversion
 
 // FrontdoorFirewallPolicy is the Schema for the FrontdoorFirewallPolicys API. Manages a Front Door (standard/premium) Firewall Policy instance.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -76,9 +76,9 @@ spec:
                 properties:
                   clientProtocol:
                     description: Specifies whether redis clients can connect using
-                      TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.
-                      Possible values are Encrypted and Plaintext. Defaults to Encrypted.
-                      Changing this forces a new Redis Enterprise Database to be created.
+                      TLS-encrypted or plaintext redis protocols. Possible values
+                      are Encrypted and Plaintext. Defaults to Encrypted. Changing
+                      this forces a new Redis Enterprise Database to be created.
                     type: string
                   clusterId:
                     description: The resource id of the Redis Enterprise Cluster to
@@ -162,16 +162,15 @@ spec:
                         type: object
                     type: object
                   clusteringPolicy:
-                    description: Clustering policy - default is OSSCluster. Specified
-                      at create time. Possible values are EnterpriseCluster and OSSCluster.
-                      Defaults to OSSCluster. Changing this forces a new Redis Enterprise
-                      Database to be created.
+                    description: Clustering policy Specified at create time. Possible
+                      values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster.
+                      Changing this forces a new Redis Enterprise Database to be created.
                     type: string
                   evictionPolicy:
-                    description: Redis eviction policy - default is VolatileLRU. Possible
-                      values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
-                      VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing
-                      this forces a new Redis Enterprise Database to be created.
+                    description: Redis eviction policy possible values are AllKeysLFU,
+                      AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL,
+                      VolatileRandom and NoEviction. Changing this forces a new Redis
+                      Enterprise Database to be created. Defaults to VolatileLRU.
                     type: string
                   linkedDatabaseGroupNickname:
                     description: Nickname of the group of linked databases. Changing
@@ -304,21 +303,20 @@ spec:
                 properties:
                   clientProtocol:
                     description: Specifies whether redis clients can connect using
-                      TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.
-                      Possible values are Encrypted and Plaintext. Defaults to Encrypted.
-                      Changing this forces a new Redis Enterprise Database to be created.
+                      TLS-encrypted or plaintext redis protocols. Possible values
+                      are Encrypted and Plaintext. Defaults to Encrypted. Changing
+                      this forces a new Redis Enterprise Database to be created.
                     type: string
                   clusteringPolicy:
-                    description: Clustering policy - default is OSSCluster. Specified
-                      at create time. Possible values are EnterpriseCluster and OSSCluster.
-                      Defaults to OSSCluster. Changing this forces a new Redis Enterprise
-                      Database to be created.
+                    description: Clustering policy Specified at create time. Possible
+                      values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster.
+                      Changing this forces a new Redis Enterprise Database to be created.
                     type: string
                   evictionPolicy:
-                    description: Redis eviction policy - default is VolatileLRU. Possible
-                      values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
-                      VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing
-                      this forces a new Redis Enterprise Database to be created.
+                    description: Redis eviction policy possible values are AllKeysLFU,
+                      AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL,
+                      VolatileRandom and NoEviction. Changing this forces a new Redis
+                      Enterprise Database to be created. Defaults to VolatileLRU.
                     type: string
                   linkedDatabaseGroupNickname:
                     description: Nickname of the group of linked databases. Changing
@@ -611,9 +609,9 @@ spec:
                 properties:
                   clientProtocol:
                     description: Specifies whether redis clients can connect using
-                      TLS-encrypted or plaintext redis protocols. Default is TLS-encrypted.
-                      Possible values are Encrypted and Plaintext. Defaults to Encrypted.
-                      Changing this forces a new Redis Enterprise Database to be created.
+                      TLS-encrypted or plaintext redis protocols. Possible values
+                      are Encrypted and Plaintext. Defaults to Encrypted. Changing
+                      this forces a new Redis Enterprise Database to be created.
                     type: string
                   clusterId:
                     description: The resource id of the Redis Enterprise Cluster to
@@ -621,16 +619,15 @@ spec:
                       a new Redis Enterprise Database to be created.
                     type: string
                   clusteringPolicy:
-                    description: Clustering policy - default is OSSCluster. Specified
-                      at create time. Possible values are EnterpriseCluster and OSSCluster.
-                      Defaults to OSSCluster. Changing this forces a new Redis Enterprise
-                      Database to be created.
+                    description: Clustering policy Specified at create time. Possible
+                      values are EnterpriseCluster and OSSCluster. Defaults to OSSCluster.
+                      Changing this forces a new Redis Enterprise Database to be created.
                     type: string
                   evictionPolicy:
-                    description: Redis eviction policy - default is VolatileLRU. Possible
-                      values are AllKeysLFU, AllKeysLRU, AllKeysRandom, VolatileLRU,
-                      VolatileLFU, VolatileTTL, VolatileRandom and NoEviction. Changing
-                      this forces a new Redis Enterprise Database to be created.
+                    description: Redis eviction policy possible values are AllKeysLFU,
+                      AllKeysLRU, AllKeysRandom, VolatileLRU, VolatileLFU, VolatileTTL,
+                      VolatileRandom and NoEviction. Changing this forces a new Redis
+                      Enterprise Database to be created. Defaults to VolatileLRU.
                     type: string
                   id:
                     description: The ID of the Redis Enterprise Database.

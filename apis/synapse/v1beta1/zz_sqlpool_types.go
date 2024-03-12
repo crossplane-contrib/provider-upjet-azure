@@ -44,26 +44,29 @@ type RestoreParameters struct {
 
 type SQLPoolInitParameters struct {
 
-	// The name of the collation to use with this pool, only applicable when create_mode is set to Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new resource to be created.
+	// The name of the collation to use with this pool, only applicable when create_mode is set to Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new Synapse SQL Pool to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// Specifies how to create the SQL Pool. Valid values are: Default, Recovery or PointInTimeRestore. Must be Default to create a new database. Defaults to Default. Changing this forces a new resource to be created.
+	// Specifies how to create the SQL Pool. Valid values are: Default, Recovery or PointInTimeRestore. Must be Default to create a new database. Defaults to Default. Changing this forces a new Synapse SQL Pool to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// Is transparent data encryption enabled?
 	DataEncrypted *bool `json:"dataEncrypted,omitempty" tf:"data_encrypted,omitempty"`
 
-	// Is geo-backup policy enabled? Defaults to true.
+	// Is geo-backup policy enabled? Possible values include true or false. Defaults to true.
 	GeoBackupPolicyEnabled *bool `json:"geoBackupPolicyEnabled,omitempty" tf:"geo_backup_policy_enabled,omitempty"`
 
 	// The ID of the Synapse SQL Pool or SQL Database which is to back up, only applicable when create_mode is set to Recovery. Changing this forces a new Synapse SQL Pool to be created.
 	RecoveryDatabaseID *string `json:"recoveryDatabaseId,omitempty" tf:"recovery_database_id,omitempty"`
 
-	// A restore block as defined below. only applicable when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
+	// A restore block as defined below. Only applicable when create_mode is set to PointInTimeRestore. Changing this forces a new Synapse SQL Pool to be created.
 	Restore []RestoreInitParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// Specifies the SKU Name for this Synapse SQL Pool. Possible values are DW100c, DW200c, DW300c, DW400c, DW500c, DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c, DW7500c, DW10000c, DW15000c or DW30000c.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created. Defaults to GRS.
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags which should be assigned to the Synapse SQL Pool.
 	// +mapType=granular
@@ -72,16 +75,16 @@ type SQLPoolInitParameters struct {
 
 type SQLPoolObservation struct {
 
-	// The name of the collation to use with this pool, only applicable when create_mode is set to Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new resource to be created.
+	// The name of the collation to use with this pool, only applicable when create_mode is set to Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new Synapse SQL Pool to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// Specifies how to create the SQL Pool. Valid values are: Default, Recovery or PointInTimeRestore. Must be Default to create a new database. Defaults to Default. Changing this forces a new resource to be created.
+	// Specifies how to create the SQL Pool. Valid values are: Default, Recovery or PointInTimeRestore. Must be Default to create a new database. Defaults to Default. Changing this forces a new Synapse SQL Pool to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// Is transparent data encryption enabled?
 	DataEncrypted *bool `json:"dataEncrypted,omitempty" tf:"data_encrypted,omitempty"`
 
-	// Is geo-backup policy enabled? Defaults to true.
+	// Is geo-backup policy enabled? Possible values include true or false. Defaults to true.
 	GeoBackupPolicyEnabled *bool `json:"geoBackupPolicyEnabled,omitempty" tf:"geo_backup_policy_enabled,omitempty"`
 
 	// The ID of the Synapse SQL Pool.
@@ -90,11 +93,14 @@ type SQLPoolObservation struct {
 	// The ID of the Synapse SQL Pool or SQL Database which is to back up, only applicable when create_mode is set to Recovery. Changing this forces a new Synapse SQL Pool to be created.
 	RecoveryDatabaseID *string `json:"recoveryDatabaseId,omitempty" tf:"recovery_database_id,omitempty"`
 
-	// A restore block as defined below. only applicable when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
+	// A restore block as defined below. Only applicable when create_mode is set to PointInTimeRestore. Changing this forces a new Synapse SQL Pool to be created.
 	Restore []RestoreObservation `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// Specifies the SKU Name for this Synapse SQL Pool. Possible values are DW100c, DW200c, DW300c, DW400c, DW500c, DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c, DW7500c, DW10000c, DW15000c or DW30000c.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created. Defaults to GRS.
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// The ID of Synapse Workspace within which this SQL Pool should be created. Changing this forces a new Synapse SQL Pool to be created.
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`
@@ -106,11 +112,11 @@ type SQLPoolObservation struct {
 
 type SQLPoolParameters struct {
 
-	// The name of the collation to use with this pool, only applicable when create_mode is set to Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new resource to be created.
+	// The name of the collation to use with this pool, only applicable when create_mode is set to Default. Azure default is SQL_LATIN1_GENERAL_CP1_CI_AS. Changing this forces a new Synapse SQL Pool to be created.
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// Specifies how to create the SQL Pool. Valid values are: Default, Recovery or PointInTimeRestore. Must be Default to create a new database. Defaults to Default. Changing this forces a new resource to be created.
+	// Specifies how to create the SQL Pool. Valid values are: Default, Recovery or PointInTimeRestore. Must be Default to create a new database. Defaults to Default. Changing this forces a new Synapse SQL Pool to be created.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -118,7 +124,7 @@ type SQLPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	DataEncrypted *bool `json:"dataEncrypted,omitempty" tf:"data_encrypted,omitempty"`
 
-	// Is geo-backup policy enabled? Defaults to true.
+	// Is geo-backup policy enabled? Possible values include true or false. Defaults to true.
 	// +kubebuilder:validation:Optional
 	GeoBackupPolicyEnabled *bool `json:"geoBackupPolicyEnabled,omitempty" tf:"geo_backup_policy_enabled,omitempty"`
 
@@ -126,13 +132,17 @@ type SQLPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	RecoveryDatabaseID *string `json:"recoveryDatabaseId,omitempty" tf:"recovery_database_id,omitempty"`
 
-	// A restore block as defined below. only applicable when create_mode is set to PointInTimeRestore. Changing this forces a new resource to be created.
+	// A restore block as defined below. Only applicable when create_mode is set to PointInTimeRestore. Changing this forces a new Synapse SQL Pool to be created.
 	// +kubebuilder:validation:Optional
 	Restore []RestoreParameters `json:"restore,omitempty" tf:"restore,omitempty"`
 
 	// Specifies the SKU Name for this Synapse SQL Pool. Possible values are DW100c, DW200c, DW300c, DW400c, DW500c, DW1000c, DW1500c, DW2000c, DW2500c, DW3000c, DW5000c, DW6000c, DW7500c, DW10000c, DW15000c or DW30000c.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
+	// The storage account type that will be used to store backups for this Synapse SQL Pool. Possible values are LRS or GRS. Changing this forces a new Synapse SQL Pool to be created. Defaults to GRS.
+	// +kubebuilder:validation:Optional
+	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// The ID of Synapse Workspace within which this SQL Pool should be created. Changing this forces a new Synapse SQL Pool to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
@@ -182,8 +192,8 @@ type SQLPoolStatus struct {
 // +kubebuilder:storageversion
 
 // SQLPool is the Schema for the SQLPools API. Manages a Synapse SQL Pool.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

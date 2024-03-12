@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -314,6 +314,55 @@ spec:
                           type: string
                       type: object
                     type: array
+                  containerRegistry:
+                    description: One or more container_registry block as defined below.
+                      This field is applicable only for Spring Cloud Service with
+                      enterprise tier.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies the name of the container registry.
+                          type: string
+                        passwordSecretRef:
+                          description: Specifies the password of the container registry.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        server:
+                          description: Specifies the login server of the container
+                            registry.
+                          type: string
+                        username:
+                          description: Specifies the username of the container registry.
+                          type: string
+                      required:
+                      - passwordSecretRef
+                      type: object
+                    type: array
+                  defaultBuildService:
+                    description: A default_build_service block as defined below. This
+                      field is applicable only for Spring Cloud Service with enterprise
+                      tier.
+                    items:
+                      properties:
+                        containerRegistryName:
+                          description: Specifies the name of the container registry
+                            used in the default build service.
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -322,6 +371,30 @@ spec:
                     description: Should the log stream in vnet injection instance
                       could be accessed from Internet?
                     type: boolean
+                  managedEnvironmentId:
+                    description: The resource Id of the Managed Environment that the
+                      Spring Apps instance builds on. Can only be specified when sku_tier
+                      is set to StandardGen2.
+                    type: string
+                  marketplace:
+                    description: A marketplace block as defined below. Can only be
+                      specified when sku is set to E0.
+                    items:
+                      properties:
+                        plan:
+                          description: Specifies the plan ID of the 3rd Party Artifact
+                            that is being procured.
+                          type: string
+                        product:
+                          description: Specifies the 3rd Party artifact that is being
+                            procured.
+                          type: string
+                        publisher:
+                          description: Specifies the publisher ID of the 3rd Party
+                            Artifact that is being procured.
+                          type: string
+                      type: object
+                    type: array
                   network:
                     description: A network block as defined below. Changing this forces
                       a new resource to be created.
@@ -423,6 +496,12 @@ spec:
                           items:
                             type: string
                           type: array
+                        outboundType:
+                          description: Specifies the egress traffic type of the Spring
+                            Cloud Service. Possible values are loadBalancer and userDefinedRouting.
+                            Defaults to loadBalancer. Changing this forces a new resource
+                            to be created.
+                          type: string
                         readTimeoutSeconds:
                           description: Ingress read time out in seconds.
                           type: number
@@ -604,6 +683,13 @@ spec:
                     description: Specifies the SKU Name for this Spring Cloud Service.
                       Possible values are B0, S0 and E0. Defaults to S0. Changing
                       this forces a new resource to be created.
+                    type: string
+                  skuTier:
+                    description: Specifies the SKU Tier for this Spring Cloud Service.
+                      Possible values are Basic, Enterprise, Standard and StandardGen2.
+                      The attribute is automatically computed from API response except
+                      when managed_environment_id is defined. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -838,6 +924,36 @@ spec:
                           type: string
                       type: object
                     type: array
+                  containerRegistry:
+                    description: One or more container_registry block as defined below.
+                      This field is applicable only for Spring Cloud Service with
+                      enterprise tier.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies the name of the container registry.
+                          type: string
+                        server:
+                          description: Specifies the login server of the container
+                            registry.
+                          type: string
+                        username:
+                          description: Specifies the username of the container registry.
+                          type: string
+                      type: object
+                    type: array
+                  defaultBuildService:
+                    description: A default_build_service block as defined below. This
+                      field is applicable only for Spring Cloud Service with enterprise
+                      tier.
+                    items:
+                      properties:
+                        containerRegistryName:
+                          description: Specifies the name of the container registry
+                            used in the default build service.
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -846,6 +962,30 @@ spec:
                     description: Should the log stream in vnet injection instance
                       could be accessed from Internet?
                     type: boolean
+                  managedEnvironmentId:
+                    description: The resource Id of the Managed Environment that the
+                      Spring Apps instance builds on. Can only be specified when sku_tier
+                      is set to StandardGen2.
+                    type: string
+                  marketplace:
+                    description: A marketplace block as defined below. Can only be
+                      specified when sku is set to E0.
+                    items:
+                      properties:
+                        plan:
+                          description: Specifies the plan ID of the 3rd Party Artifact
+                            that is being procured.
+                          type: string
+                        product:
+                          description: Specifies the 3rd Party artifact that is being
+                            procured.
+                          type: string
+                        publisher:
+                          description: Specifies the publisher ID of the 3rd Party
+                            Artifact that is being procured.
+                          type: string
+                      type: object
+                    type: array
                   network:
                     description: A network block as defined below. Changing this forces
                       a new resource to be created.
@@ -947,6 +1087,12 @@ spec:
                           items:
                             type: string
                           type: array
+                        outboundType:
+                          description: Specifies the egress traffic type of the Spring
+                            Cloud Service. Possible values are loadBalancer and userDefinedRouting.
+                            Defaults to loadBalancer. Changing this forces a new resource
+                            to be created.
+                          type: string
                         readTimeoutSeconds:
                           description: Ingress read time out in seconds.
                           type: number
@@ -1047,6 +1193,13 @@ spec:
                     description: Specifies the SKU Name for this Spring Cloud Service.
                       Possible values are B0, S0 and E0. Defaults to S0. Changing
                       this forces a new resource to be created.
+                    type: string
+                  skuTier:
+                    description: Specifies the SKU Tier for this Spring Cloud Service.
+                      Possible values are Basic, Enterprise, Standard and StandardGen2.
+                      The attribute is automatically computed from API response except
+                      when managed_environment_id is defined. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -1445,6 +1598,36 @@ spec:
                           type: string
                       type: object
                     type: array
+                  containerRegistry:
+                    description: One or more container_registry block as defined below.
+                      This field is applicable only for Spring Cloud Service with
+                      enterprise tier.
+                    items:
+                      properties:
+                        name:
+                          description: Specifies the name of the container registry.
+                          type: string
+                        server:
+                          description: Specifies the login server of the container
+                            registry.
+                          type: string
+                        username:
+                          description: Specifies the username of the container registry.
+                          type: string
+                      type: object
+                    type: array
+                  defaultBuildService:
+                    description: A default_build_service block as defined below. This
+                      field is applicable only for Spring Cloud Service with enterprise
+                      tier.
+                    items:
+                      properties:
+                        containerRegistryName:
+                          description: Specifies the name of the container registry
+                            used in the default build service.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Spring Cloud Service.
                     type: string
@@ -1456,6 +1639,30 @@ spec:
                     description: Should the log stream in vnet injection instance
                       could be accessed from Internet?
                     type: boolean
+                  managedEnvironmentId:
+                    description: The resource Id of the Managed Environment that the
+                      Spring Apps instance builds on. Can only be specified when sku_tier
+                      is set to StandardGen2.
+                    type: string
+                  marketplace:
+                    description: A marketplace block as defined below. Can only be
+                      specified when sku is set to E0.
+                    items:
+                      properties:
+                        plan:
+                          description: Specifies the plan ID of the 3rd Party Artifact
+                            that is being procured.
+                          type: string
+                        product:
+                          description: Specifies the 3rd Party artifact that is being
+                            procured.
+                          type: string
+                        publisher:
+                          description: Specifies the publisher ID of the 3rd Party
+                            Artifact that is being procured.
+                          type: string
+                      type: object
+                    type: array
                   network:
                     description: A network block as defined below. Changing this forces
                       a new resource to be created.
@@ -1481,6 +1688,12 @@ spec:
                           items:
                             type: string
                           type: array
+                        outboundType:
+                          description: Specifies the egress traffic type of the Spring
+                            Cloud Service. Possible values are loadBalancer and userDefinedRouting.
+                            Defaults to loadBalancer. Changing this forces a new resource
+                            to be created.
+                          type: string
                         readTimeoutSeconds:
                           description: Ingress read time out in seconds.
                           type: number
@@ -1546,6 +1759,13 @@ spec:
                     description: Specifies the SKU Name for this Spring Cloud Service.
                       Possible values are B0, S0 and E0. Defaults to S0. Changing
                       this forces a new resource to be created.
+                    type: string
+                  skuTier:
+                    description: Specifies the SKU Tier for this Spring Cloud Service.
+                      Possible values are Basic, Enterprise, Standard and StandardGen2.
+                      The attribute is automatically computed from API response except
+                      when managed_environment_id is defined. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:

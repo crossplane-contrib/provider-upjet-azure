@@ -24,7 +24,7 @@ type ApplicationRuleCollectionInitParameters struct {
 	// The priority of the application rule collection. The range is 100 - 65000.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// One or more application_rule (application rule) blocks as defined below.
+	// One or more application_rule blocks as defined below.
 	Rule []ApplicationRuleCollectionRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -39,7 +39,7 @@ type ApplicationRuleCollectionObservation struct {
 	// The priority of the application rule collection. The range is 100 - 65000.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// One or more application_rule (application rule) blocks as defined below.
+	// One or more application_rule blocks as defined below.
 	Rule []ApplicationRuleCollectionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -57,7 +57,7 @@ type ApplicationRuleCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
-	// One or more application_rule (application rule) blocks as defined below.
+	// One or more application_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Rule []ApplicationRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
@@ -78,6 +78,9 @@ type ApplicationRuleCollectionRuleInitParameters struct {
 
 	// Specifies a list of destination URLs for which policy should hold. Needs Premium SKU for Firewall Policy. Conflicts with destination_fqdns.
 	DestinationUrls []*string `json:"destinationUrls,omitempty" tf:"destination_urls,omitempty"`
+
+	// Specifies a list of HTTP/HTTPS headers to insert. One or more http_headers blocks as defined below.
+	HTTPHeaders []HTTPHeadersInitParameters `json:"httpHeaders,omitempty" tf:"http_headers,omitempty"`
 
 	// The name which should be used for this network rule collection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -114,6 +117,9 @@ type ApplicationRuleCollectionRuleObservation struct {
 
 	// Specifies a list of destination URLs for which policy should hold. Needs Premium SKU for Firewall Policy. Conflicts with destination_fqdns.
 	DestinationUrls []*string `json:"destinationUrls,omitempty" tf:"destination_urls,omitempty"`
+
+	// Specifies a list of HTTP/HTTPS headers to insert. One or more http_headers blocks as defined below.
+	HTTPHeaders []HTTPHeadersObservation `json:"httpHeaders,omitempty" tf:"http_headers,omitempty"`
 
 	// The name which should be used for this network rule collection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -155,6 +161,10 @@ type ApplicationRuleCollectionRuleParameters struct {
 	// Specifies a list of destination URLs for which policy should hold. Needs Premium SKU for Firewall Policy. Conflicts with destination_fqdns.
 	// +kubebuilder:validation:Optional
 	DestinationUrls []*string `json:"destinationUrls,omitempty" tf:"destination_urls,omitempty"`
+
+	// Specifies a list of HTTP/HTTPS headers to insert. One or more http_headers blocks as defined below.
+	// +kubebuilder:validation:Optional
+	HTTPHeaders []HTTPHeadersParameters `json:"httpHeaders,omitempty" tf:"http_headers,omitempty"`
 
 	// The name which should be used for this network rule collection.
 	// +kubebuilder:validation:Optional
@@ -250,6 +260,35 @@ type FirewallPolicyRuleCollectionGroupParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 }
 
+type HTTPHeadersInitParameters struct {
+
+	// The name which should be used for this network rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the value of the value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type HTTPHeadersObservation struct {
+
+	// The name which should be used for this network rule collection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the value of the value.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type HTTPHeadersParameters struct {
+
+	// The name which should be used for this network rule collection.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Specifies the value of the value.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
 type NATRuleCollectionInitParameters struct {
 
 	// The action to take for the NAT rules in this collection. Currently, the only possible value is Dnat.
@@ -261,7 +300,7 @@ type NATRuleCollectionInitParameters struct {
 	// The priority of the NAT rule collection. The range is 100 - 65000.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// A nat_rule (NAT rule) block as defined below.
+	// A nat_rule block as defined below.
 	Rule []NATRuleCollectionRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -276,7 +315,7 @@ type NATRuleCollectionObservation struct {
 	// The priority of the NAT rule collection. The range is 100 - 65000.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// A nat_rule (NAT rule) block as defined below.
+	// A nat_rule block as defined below.
 	Rule []NATRuleCollectionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -294,12 +333,15 @@ type NATRuleCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
-	// A nat_rule (NAT rule) block as defined below.
+	// A nat_rule block as defined below.
 	// +kubebuilder:validation:Optional
 	Rule []NATRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
 
 type NATRuleCollectionRuleInitParameters struct {
+
+	// The description which should be used for this rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The destination IP address (including CIDR).
 	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
@@ -331,6 +373,9 @@ type NATRuleCollectionRuleInitParameters struct {
 
 type NATRuleCollectionRuleObservation struct {
 
+	// The description which should be used for this rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// The destination IP address (including CIDR).
 	DestinationAddress *string `json:"destinationAddress,omitempty" tf:"destination_address,omitempty"`
 
@@ -360,6 +405,10 @@ type NATRuleCollectionRuleObservation struct {
 }
 
 type NATRuleCollectionRuleParameters struct {
+
+	// The description which should be used for this rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The destination IP address (including CIDR).
 	// +kubebuilder:validation:Optional
@@ -409,7 +458,7 @@ type NetworkRuleCollectionInitParameters struct {
 	// The priority of the network rule collection. The range is 100 - 65000.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// One or more network_rule (network rule) blocks as defined below.
+	// One or more network_rule blocks as defined below.
 	Rule []NetworkRuleCollectionRuleInitParameters `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -424,7 +473,7 @@ type NetworkRuleCollectionObservation struct {
 	// The priority of the network rule collection. The range is 100 - 65000.
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
-	// One or more network_rule (network rule) blocks as defined below.
+	// One or more network_rule blocks as defined below.
 	Rule []NetworkRuleCollectionRuleObservation `json:"rule,omitempty" tf:"rule,omitempty"`
 }
 
@@ -442,12 +491,15 @@ type NetworkRuleCollectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Priority *float64 `json:"priority" tf:"priority,omitempty"`
 
-	// One or more network_rule (network rule) blocks as defined below.
+	// One or more network_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Rule []NetworkRuleCollectionRuleParameters `json:"rule" tf:"rule,omitempty"`
 }
 
 type NetworkRuleCollectionRuleInitParameters struct {
+
+	// The description which should be used for this rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies a list of destination IP addresses (including CIDR, IP range and *) or Service Tags.
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
@@ -476,6 +528,9 @@ type NetworkRuleCollectionRuleInitParameters struct {
 
 type NetworkRuleCollectionRuleObservation struct {
 
+	// The description which should be used for this rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
+
 	// Specifies a list of destination IP addresses (including CIDR, IP range and *) or Service Tags.
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
 
@@ -502,6 +557,10 @@ type NetworkRuleCollectionRuleObservation struct {
 }
 
 type NetworkRuleCollectionRuleParameters struct {
+
+	// The description which should be used for this rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies a list of destination IP addresses (including CIDR, IP range and *) or Service Tags.
 	// +kubebuilder:validation:Optional
@@ -593,8 +652,8 @@ type FirewallPolicyRuleCollectionGroupStatus struct {
 // +kubebuilder:storageversion
 
 // FirewallPolicyRuleCollectionGroup is the Schema for the FirewallPolicyRuleCollectionGroups API. Manages a Firewall Policy Rule Collection Group.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

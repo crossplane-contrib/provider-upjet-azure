@@ -23,6 +23,9 @@ type BackupPolicyDiskInitParameters struct {
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Disk to be created.
 	RetentionRule []RetentionRuleInitParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+
+	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy Disk to be created.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 }
 
 type BackupPolicyDiskObservation struct {
@@ -38,6 +41,9 @@ type BackupPolicyDiskObservation struct {
 
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Disk to be created.
 	RetentionRule []RetentionRuleObservation `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+
+	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy Disk to be created.
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Disk should exist. Changing this forces a new Backup Policy Disk to be created.
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
@@ -56,6 +62,10 @@ type BackupPolicyDiskParameters struct {
 	// One or more retention_rule blocks as defined below. Changing this forces a new Backup Policy Disk to be created.
 	// +kubebuilder:validation:Optional
 	RetentionRule []RetentionRuleParameters `json:"retentionRule,omitempty" tf:"retention_rule,omitempty"`
+
+	// Specifies the Time Zone which should be used by the backup schedule. Changing this forces a new Backup Policy Disk to be created.
+	// +kubebuilder:validation:Optional
+	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Disk should exist. Changing this forces a new Backup Policy Disk to be created.
 	// +crossplane:generate:reference:type=BackupVault
@@ -168,8 +178,8 @@ type BackupPolicyDiskStatus struct {
 // +kubebuilder:storageversion
 
 // BackupPolicyDisk is the Schema for the BackupPolicyDisks API. Manages a Backup Policy Disk.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

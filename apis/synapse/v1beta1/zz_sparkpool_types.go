@@ -151,7 +151,7 @@ type SparkPoolInitParameters struct {
 	// The level of node in the Spark Pool. Possible values are Small, Medium, Large, None, XLarge, XXLarge and XXXLarge.
 	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
-	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
+	// The kind of nodes that the Spark Pool provides. Possible values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU, MemoryOptimized, and None.
 	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
 
 	// Indicates whether session level packages are enabled or not. Defaults to false.
@@ -209,7 +209,7 @@ type SparkPoolObservation struct {
 	// The level of node in the Spark Pool. Possible values are Small, Medium, Large, None, XLarge, XXLarge and XXXLarge.
 	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
-	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
+	// The kind of nodes that the Spark Pool provides. Possible values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU, MemoryOptimized, and None.
 	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
 
 	// Indicates whether session level packages are enabled or not. Defaults to false.
@@ -277,7 +277,7 @@ type SparkPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeSize *string `json:"nodeSize,omitempty" tf:"node_size,omitempty"`
 
-	// The kind of nodes that the Spark Pool provides. Possible values are MemoryOptimized and None.
+	// The kind of nodes that the Spark Pool provides. Possible values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU, MemoryOptimized, and None.
 	// +kubebuilder:validation:Optional
 	NodeSizeFamily *string `json:"nodeSizeFamily,omitempty" tf:"node_size_family,omitempty"`
 
@@ -349,8 +349,8 @@ type SparkPoolStatus struct {
 // +kubebuilder:storageversion
 
 // SparkPool is the Schema for the SparkPools API. Manages a Synapse Spark Pool.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

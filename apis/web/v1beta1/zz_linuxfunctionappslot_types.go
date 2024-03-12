@@ -171,7 +171,7 @@ type AuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -223,7 +223,7 @@ type AuthSettingsV2ActiveDirectoryV2Observation struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -286,7 +286,7 @@ type AuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	// +kubebuilder:validation:Optional
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
@@ -1115,7 +1115,7 @@ type LinuxFunctionAppSlotAuthSettingsInitParameters struct {
 	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
-	// an allowed_external_redirect_urls block as detailed below.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
 	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
@@ -1226,7 +1226,7 @@ type LinuxFunctionAppSlotAuthSettingsObservation struct {
 	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
-	// an allowed_external_redirect_urls block as detailed below.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
 	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
 
@@ -1286,7 +1286,7 @@ type LinuxFunctionAppSlotAuthSettingsParameters struct {
 	// +mapType=granular
 	AdditionalLoginParameters map[string]*string `json:"additionalLoginParameters,omitempty" tf:"additional_login_parameters,omitempty"`
 
-	// an allowed_external_redirect_urls block as detailed below.
+	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
 	// Specifies a list of External URLs that can be redirected to as part of logging in or logging out of the Windows Web App.
 	// +kubebuilder:validation:Optional
 	AllowedExternalRedirectUrls []*string `json:"allowedExternalRedirectUrls,omitempty" tf:"allowed_external_redirect_urls,omitempty"`
@@ -1409,8 +1409,8 @@ type LinuxFunctionAppSlotAuthSettingsV2InitParameters struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []AuthSettingsV2CustomOidcV2InitParameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1420,7 +1420,7 @@ type LinuxFunctionAppSlotAuthSettingsV2InitParameters struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []AuthSettingsV2FacebookV2InitParameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1490,8 +1490,8 @@ type LinuxFunctionAppSlotAuthSettingsV2Observation struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []AuthSettingsV2CustomOidcV2Observation `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1501,7 +1501,7 @@ type LinuxFunctionAppSlotAuthSettingsV2Observation struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []AuthSettingsV2FacebookV2Observation `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1577,8 +1577,8 @@ type LinuxFunctionAppSlotAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	CustomOidcV2 []AuthSettingsV2CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
@@ -1591,7 +1591,7 @@ type LinuxFunctionAppSlotAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	FacebookV2 []AuthSettingsV2FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	// +kubebuilder:validation:Optional
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
@@ -1808,7 +1808,7 @@ type LinuxFunctionAppSlotInitParameters struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
+	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser. Defaults to Optional.
 	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`.
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
@@ -1827,11 +1827,14 @@ type LinuxFunctionAppSlotInitParameters struct {
 	// Is the Linux Function App Slot enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Are the default FTP Basic Authentication publishing credentials enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
 	// The runtime version associated with the Function App Slot. Defaults to ~4.
 	// The runtime version associated with the Function App Slot.
 	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
 
-	// Can the Function App Slot only be accessed via HTTPS?
+	// Can the Function App Slot only be accessed via HTTPS?. Defaults to false.
 	// Can the Function App Slot only be accessed via HTTPS?
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
@@ -1841,6 +1844,9 @@ type LinuxFunctionAppSlotInitParameters struct {
 	// The User Assigned Identity ID used for accessing KeyVault secrets. The identity must be assigned to the application in the identity block. For more information see - Access vaults with a user-assigned identity
 	// The User Assigned Identity to use for Key Vault access.
 	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
+
+	// Should public network access be enabled for the Function App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Service Plan in which to run this slot. If not specified the same Service Plan as the Linux Function App will be used.
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
@@ -1888,6 +1894,9 @@ type LinuxFunctionAppSlotInitParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 }
 
 type LinuxFunctionAppSlotObservation struct {
@@ -1918,7 +1927,7 @@ type LinuxFunctionAppSlotObservation struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
+	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser. Defaults to Optional.
 	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`.
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
@@ -1940,6 +1949,9 @@ type LinuxFunctionAppSlotObservation struct {
 	// Is the Linux Function App Slot enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Are the default FTP Basic Authentication publishing credentials enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
 	// The ID of the Linux Function App this Slot is a member of. Changing this forces a new resource to be created.
 	// The ID of the Linux Function App this Slot is a member of.
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
@@ -1948,7 +1960,7 @@ type LinuxFunctionAppSlotObservation struct {
 	// The runtime version associated with the Function App Slot.
 	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
 
-	// Can the Function App Slot only be accessed via HTTPS?
+	// Can the Function App Slot only be accessed via HTTPS?. Defaults to false.
 	// Can the Function App Slot only be accessed via HTTPS?
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
@@ -1980,6 +1992,9 @@ type LinuxFunctionAppSlotObservation struct {
 	// A comma separated list of possible outbound IP addresses as a string. For example 52.23.25.3,52.143.43.12,52.143.43.17. This is a superset of outbound_ip_addresses. For example ["52.23.25.3", "52.143.43.12","52.143.43.17"].
 	PossibleOutboundIPAddresses *string `json:"possibleOutboundIpAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty"`
 
+	// Should public network access be enabled for the Function App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
 	// The ID of the Service Plan in which to run this slot. If not specified the same Service Plan as the Linux Function App will be used.
 	ServicePlanID *string `json:"servicePlanId,omitempty" tf:"service_plan_id,omitempty"`
 
@@ -2007,6 +2022,9 @@ type LinuxFunctionAppSlotObservation struct {
 
 	// The subnet id which will be used by this Function App Slot for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 }
 
 type LinuxFunctionAppSlotParameters struct {
@@ -2044,7 +2062,7 @@ type LinuxFunctionAppSlotParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
+	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser. Defaults to Optional.
 	// The mode of the Function App Slot's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`.
 	// +kubebuilder:validation:Optional
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
@@ -2068,6 +2086,10 @@ type LinuxFunctionAppSlotParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Are the default FTP Basic Authentication publishing credentials enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
 	// The ID of the Linux Function App this Slot is a member of. Changing this forces a new resource to be created.
 	// The ID of the Linux Function App this Slot is a member of.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.LinuxFunctionApp
@@ -2088,7 +2110,7 @@ type LinuxFunctionAppSlotParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
 
-	// Can the Function App Slot only be accessed via HTTPS?
+	// Can the Function App Slot only be accessed via HTTPS?. Defaults to false.
 	// Can the Function App Slot only be accessed via HTTPS?
 	// +kubebuilder:validation:Optional
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
@@ -2101,6 +2123,10 @@ type LinuxFunctionAppSlotParameters struct {
 	// The User Assigned Identity to use for Key Vault access.
 	// +kubebuilder:validation:Optional
 	KeyVaultReferenceIdentityID *string `json:"keyVaultReferenceIdentityId,omitempty" tf:"key_vault_reference_identity_id,omitempty"`
+
+	// Should public network access be enabled for the Function App. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Service Plan in which to run this slot. If not specified the same Service Plan as the Linux Function App will be used.
 	// +kubebuilder:validation:Optional
@@ -2161,11 +2187,15 @@ type LinuxFunctionAppSlotParameters struct {
 	// Selector for a Subnet in network to populate virtualNetworkSubnetId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
+
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 }
 
 type LinuxFunctionAppSlotSiteConfigCorsInitParameters struct {
 
-	// an allowed_origins block as detailed below.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
@@ -2177,7 +2207,7 @@ type LinuxFunctionAppSlotSiteConfigCorsInitParameters struct {
 
 type LinuxFunctionAppSlotSiteConfigCorsObservation struct {
 
-	// an allowed_origins block as detailed below.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// +listType=set
 	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
@@ -2189,7 +2219,7 @@ type LinuxFunctionAppSlotSiteConfigCorsObservation struct {
 
 type LinuxFunctionAppSlotSiteConfigCorsParameters struct {
 
-	// an allowed_origins block as detailed below.
+	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// Specifies a list of origins that should be allowed to make cross-origin calls.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -2252,9 +2282,13 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersParameters struct {
 
 type LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
 	Headers []LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2292,9 +2326,13 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 
 type LinuxFunctionAppSlotSiteConfigIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
 	Headers []LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2322,10 +2360,15 @@ type LinuxFunctionAppSlotSiteConfigIPRestrictionObservation struct {
 
 type LinuxFunctionAppSlotSiteConfigIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
 	// +kubebuilder:validation:Optional
@@ -2409,7 +2452,7 @@ type LinuxFunctionAppSlotSiteConfigInitParameters struct {
 	// a cors block as detailed below.
 	Cors []LinuxFunctionAppSlotSiteConfigCorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// a default_documents block as detailed below.
+	// Specifies a list of Default Documents for the Linux Web App.
 	// Specifies a list of Default Documents for the Linux Web App.
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
@@ -2421,7 +2464,7 @@ type LinuxFunctionAppSlotSiteConfigInitParameters struct {
 	// State of FTP / FTPS service for this function app. Possible values include: `AllAllowed`, `FtpsOnly` and `Disabled`. Defaults to `Disabled`.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Defaults to 10. Only valid in conjunction with health_check_path
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Defaults to 0. Only valid in conjunction with health_check_path.
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
@@ -2435,6 +2478,9 @@ type LinuxFunctionAppSlotSiteConfigInitParameters struct {
 
 	// an ip_restriction block as detailed below.
 	IPRestriction []LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
 
 	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
@@ -2466,6 +2512,9 @@ type LinuxFunctionAppSlotSiteConfigInitParameters struct {
 
 	// a scm_ip_restriction block as detailed below.
 	ScmIPRestriction []LinuxFunctionAppSlotSiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
@@ -2534,7 +2583,7 @@ type LinuxFunctionAppSlotSiteConfigObservation struct {
 	// a cors block as detailed below.
 	Cors []LinuxFunctionAppSlotSiteConfigCorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// a default_documents block as detailed below.
+	// Specifies a list of Default Documents for the Linux Web App.
 	// Specifies a list of Default Documents for the Linux Web App.
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
@@ -2550,7 +2599,7 @@ type LinuxFunctionAppSlotSiteConfigObservation struct {
 	// State of FTP / FTPS service for this function app. Possible values include: `AllAllowed`, `FtpsOnly` and `Disabled`. Defaults to `Disabled`.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Defaults to 10. Only valid in conjunction with health_check_path
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Defaults to 0. Only valid in conjunction with health_check_path.
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
@@ -2564,6 +2613,9 @@ type LinuxFunctionAppSlotSiteConfigObservation struct {
 
 	// an ip_restriction block as detailed below.
 	IPRestriction []LinuxFunctionAppSlotSiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
 
 	// The Linux FX Version
 	// The Linux FX Version
@@ -2599,6 +2651,9 @@ type LinuxFunctionAppSlotSiteConfigObservation struct {
 
 	// a scm_ip_restriction block as detailed below.
 	ScmIPRestriction []LinuxFunctionAppSlotSiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
@@ -2692,7 +2747,7 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	Cors []LinuxFunctionAppSlotSiteConfigCorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
 
-	// a default_documents block as detailed below.
+	// Specifies a list of Default Documents for the Linux Web App.
 	// Specifies a list of Default Documents for the Linux Web App.
 	// +kubebuilder:validation:Optional
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
@@ -2707,7 +2762,7 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Defaults to 10. Only valid in conjunction with health_check_path
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Defaults to 0. Only valid in conjunction with health_check_path.
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
 	// +kubebuilder:validation:Optional
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
@@ -2725,6 +2780,10 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 	// an ip_restriction block as detailed below.
 	// +kubebuilder:validation:Optional
 	IPRestriction []LinuxFunctionAppSlotSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
 
 	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
@@ -2764,6 +2823,10 @@ type LinuxFunctionAppSlotSiteConfigParameters struct {
 	// a scm_ip_restriction block as detailed below.
 	// +kubebuilder:validation:Optional
 	ScmIPRestriction []LinuxFunctionAppSlotSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
@@ -2847,9 +2910,13 @@ type LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters struct {
 
 type LinuxFunctionAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
 	Headers []LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2887,9 +2954,13 @@ type LinuxFunctionAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 
 type LinuxFunctionAppSlotSiteConfigScmIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
 	Headers []LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2917,10 +2988,15 @@ type LinuxFunctionAppSlotSiteConfigScmIPRestrictionObservation struct {
 
 type LinuxFunctionAppSlotSiteConfigScmIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
 	// +kubebuilder:validation:Optional
@@ -3081,7 +3157,7 @@ type SiteConfigApplicationStackInitParameters struct {
 	// A docker block
 	Docker []ApplicationStackDockerInitParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0 and 7.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0 and 8.0.
 	// The version of .Net. Possible values are `3.1`, `6.0` and `7.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -3097,8 +3173,8 @@ type SiteConfigApplicationStackInitParameters struct {
 	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
-	// The version of Python to use. Possible values are 3.10, 3.9, 3.8 and 3.7.
-	// The version of Python to use. Possible values include `3.10`, `3.9`, `3.8`, and `3.7`.
+	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
+	// The version of Python to use. Possible values include `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// Should the Linux Function App use a custom runtime?
@@ -3115,7 +3191,7 @@ type SiteConfigApplicationStackObservation struct {
 	// A docker block
 	Docker []ApplicationStackDockerObservation `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0 and 7.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0 and 8.0.
 	// The version of .Net. Possible values are `3.1`, `6.0` and `7.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -3131,8 +3207,8 @@ type SiteConfigApplicationStackObservation struct {
 	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
-	// The version of Python to use. Possible values are 3.10, 3.9, 3.8 and 3.7.
-	// The version of Python to use. Possible values include `3.10`, `3.9`, `3.8`, and `3.7`.
+	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
+	// The version of Python to use. Possible values include `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
 	// Should the Linux Function App use a custom runtime?
@@ -3150,7 +3226,7 @@ type SiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	Docker []ApplicationStackDockerParameters `json:"docker,omitempty" tf:"docker,omitempty"`
 
-	// The version of .Net. Possible values are 3.1, 6.0 and 7.0.
+	// The version of .Net. Possible values are 3.1, 6.0, 7.0 and 8.0.
 	// The version of .Net. Possible values are `3.1`, `6.0` and `7.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
@@ -3170,8 +3246,8 @@ type SiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
-	// The version of Python to use. Possible values are 3.10, 3.9, 3.8 and 3.7.
-	// The version of Python to use. Possible values include `3.10`, `3.9`, `3.8`, and `3.7`.
+	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
+	// The version of Python to use. Possible values include `3.12`, `3.11`, `3.10`, `3.9`, `3.8`, and `3.7`.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
@@ -3213,8 +3289,8 @@ type LinuxFunctionAppSlotStatus struct {
 // +kubebuilder:storageversion
 
 // LinuxFunctionAppSlot is the Schema for the LinuxFunctionAppSlots API. Manages a Linux Function App Slot.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

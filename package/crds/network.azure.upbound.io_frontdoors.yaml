@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -148,7 +148,7 @@ spec:
                         probeMethod:
                           description: 'Specifies HTTP method the health probe uses
                             when querying the backend pool instances. Possible values
-                            include: Get and Head. Defaults to GET.'
+                            include: GET and HEAD. Defaults to GET.'
                           type: string
                         protocol:
                           description: Protocol scheme to use for the Health Probe.
@@ -517,7 +517,7 @@ spec:
                         probeMethod:
                           description: 'Specifies HTTP method the health probe uses
                             when querying the backend pool instances. Possible values
-                            include: Get and Head. Defaults to GET.'
+                            include: GET and HEAD. Defaults to GET.'
                           type: string
                         protocol:
                           description: Protocol scheme to use for the Health Probe.
@@ -991,7 +991,7 @@ spec:
                         probeMethod:
                           description: 'Specifies HTTP method the health probe uses
                             when querying the backend pool instances. Possible values
-                            include: Get and Head. Defaults to GET.'
+                            include: GET and HEAD. Defaults to GET.'
                           type: string
                         protocol:
                           description: Protocol scheme to use for the Health Probe.

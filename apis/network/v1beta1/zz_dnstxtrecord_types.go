@@ -95,19 +95,19 @@ type DNSTXTRecordParameters struct {
 
 type DNSTXTRecordRecordInitParameters struct {
 
-	// The value of the record. Max length: 1024 characters
+	// The value of the record. Max length: 4096 characters
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DNSTXTRecordRecordObservation struct {
 
-	// The value of the record. Max length: 1024 characters
+	// The value of the record. Max length: 4096 characters
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
 
 type DNSTXTRecordRecordParameters struct {
 
-	// The value of the record. Max length: 1024 characters
+	// The value of the record. Max length: 4096 characters
 	// +kubebuilder:validation:Optional
 	Value *string `json:"value" tf:"value,omitempty"`
 }
@@ -140,8 +140,8 @@ type DNSTXTRecordStatus struct {
 // +kubebuilder:storageversion
 
 // DNSTXTRecord is the Schema for the DNSTXTRecords API. Manages a DNS TXT Record.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

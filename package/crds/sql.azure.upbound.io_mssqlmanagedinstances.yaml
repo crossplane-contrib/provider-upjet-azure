@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -314,8 +314,8 @@ spec:
                   storageAccountType:
                     description: Specifies the storage account type used to store
                       backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, LRS and ZRS. The default
-                      value is GRS.
+                      to be created. Possible values are GRS, LRS and ZRS. Defaults
+                      to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -414,8 +414,13 @@ spec:
                   vcores:
                     description: Number of cores that should be assigned to the SQL
                       Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs,
-                      or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
+                      or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or
+                      128 for Gen5 SKUs.
                     type: number
+                  zoneRedundantEnabled:
+                    description: Specifies whether or not the SQL Managed Instance
+                      is zone redundant. Defaults to false.
+                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -572,8 +577,8 @@ spec:
                   storageAccountType:
                     description: Specifies the storage account type used to store
                       backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, LRS and ZRS. The default
-                      value is GRS.
+                      to be created. Possible values are GRS, LRS and ZRS. Defaults
+                      to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -672,8 +677,13 @@ spec:
                   vcores:
                     description: Number of cores that should be assigned to the SQL
                       Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs,
-                      or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
+                      or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or
+                      128 for Gen5 SKUs.
                     type: number
+                  zoneRedundantEnabled:
+                    description: Specifies whether or not the SQL Managed Instance
+                      is zone redundant. Defaults to false.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -886,6 +896,9 @@ spec:
                       Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
                       forces a new resource to be created.
                     type: string
+                  dnsZone:
+                    description: The Dns Zone where the SQL Managed Instance is located.
+                    type: string
                   dnsZonePartnerId:
                     description: The ID of the SQL Managed Instance which will share
                       the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group.
@@ -965,8 +978,8 @@ spec:
                   storageAccountType:
                     description: Specifies the storage account type used to store
                       backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, LRS and ZRS. The default
-                      value is GRS.
+                      to be created. Possible values are GRS, LRS and ZRS. Defaults
+                      to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -991,8 +1004,13 @@ spec:
                   vcores:
                     description: Number of cores that should be assigned to the SQL
                       Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs,
-                      or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
+                      or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or
+                      128 for Gen5 SKUs.
                     type: number
+                  zoneRedundantEnabled:
+                    description: Specifies whether or not the SQL Managed Instance
+                      is zone redundant. Defaults to false.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

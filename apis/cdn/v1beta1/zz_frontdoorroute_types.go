@@ -21,7 +21,7 @@ type CacheInitParameters struct {
 	// A list of one or more Content types (formerly known as MIME types) to compress. Possible values include application/eot, application/font, application/font-sfnt, application/javascript, application/json, application/opentype, application/otf, application/pkcs7-mime, application/truetype, application/ttf, application/vnd.ms-fontobject, application/xhtml+xml, application/xml, application/xml+rss, application/x-font-opentype, application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi, application/x-mpegurl, application/x-opentype, application/x-otf, application/x-perl, application/x-ttf, application/x-javascript, font/eot, font/ttf, font/otf, font/opentype, image/svg+xml, text/css, text/csv, text/html, text/javascript, text/js, text/plain, text/richtext, text/tab-separated-values, text/xml, text/x-script, text/x-component or text/x-java-source.
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
-	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults it IgnoreQueryString.
+	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults to IgnoreQueryString.
 	QueryStringCachingBehavior *string `json:"queryStringCachingBehavior,omitempty" tf:"query_string_caching_behavior,omitempty"`
 
 	// Query strings to include or ignore.
@@ -36,7 +36,7 @@ type CacheObservation struct {
 	// A list of one or more Content types (formerly known as MIME types) to compress. Possible values include application/eot, application/font, application/font-sfnt, application/javascript, application/json, application/opentype, application/otf, application/pkcs7-mime, application/truetype, application/ttf, application/vnd.ms-fontobject, application/xhtml+xml, application/xml, application/xml+rss, application/x-font-opentype, application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi, application/x-mpegurl, application/x-opentype, application/x-otf, application/x-perl, application/x-ttf, application/x-javascript, font/eot, font/ttf, font/otf, font/opentype, image/svg+xml, text/css, text/csv, text/html, text/javascript, text/js, text/plain, text/richtext, text/tab-separated-values, text/xml, text/x-script, text/x-component or text/x-java-source.
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
-	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults it IgnoreQueryString.
+	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults to IgnoreQueryString.
 	QueryStringCachingBehavior *string `json:"queryStringCachingBehavior,omitempty" tf:"query_string_caching_behavior,omitempty"`
 
 	// Query strings to include or ignore.
@@ -53,7 +53,7 @@ type CacheParameters struct {
 	// +kubebuilder:validation:Optional
 	ContentTypesToCompress []*string `json:"contentTypesToCompress,omitempty" tf:"content_types_to_compress,omitempty"`
 
-	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults it IgnoreQueryString.
+	// Defines how the Front Door Route will cache requests that include query strings. Possible values include IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings or UseQueryString. Defaults to IgnoreQueryString.
 	// +kubebuilder:validation:Optional
 	QueryStringCachingBehavior *string `json:"queryStringCachingBehavior,omitempty" tf:"query_string_caching_behavior,omitempty"`
 
@@ -127,7 +127,7 @@ type FrontdoorRouteInitParameters struct {
 	// Is this Front Door Route enabled? Possible values are true or false. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest. Defaults to MatchRequest.
 	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
 
 	// Automatically redirect HTTP traffic to HTTPS traffic? Possible values are true or false. Defaults to true.
@@ -172,7 +172,7 @@ type FrontdoorRouteObservation struct {
 	// Is this Front Door Route enabled? Possible values are true or false. Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest. Defaults to MatchRequest.
 	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
 
 	// Automatically redirect HTTP traffic to HTTPS traffic? Possible values are true or false. Defaults to true.
@@ -278,7 +278,7 @@ type FrontdoorRouteParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+	// The Protocol that will be use when forwarding traffic to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest. Defaults to MatchRequest.
 	// +kubebuilder:validation:Optional
 	ForwardingProtocol *string `json:"forwardingProtocol,omitempty" tf:"forwarding_protocol,omitempty"`
 
@@ -328,8 +328,8 @@ type FrontdoorRouteStatus struct {
 // +kubebuilder:storageversion
 
 // FrontdoorRoute is the Schema for the FrontdoorRoutes API. Manages a Front Door (standard/premium) Route.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

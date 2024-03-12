@@ -29,7 +29,7 @@ spec:
     - name: my-gateway-ip-configuration
       subnetIdSelector:
         matchLabels:
-          testing.upbound.io/example-name: frontend
+          testing.upbound.io/example-name: example
     httpListener:
     - frontendIpConfigurationName: ${local.frontend_ip_configuration_name}
       frontendPortName: ${local.frontend_port_name}
@@ -41,14 +41,15 @@ spec:
       backendHttpSettingsName: ${local.http_setting_name}
       httpListenerName: ${local.listener_name}
       name: ${local.request_routing_rule_name}
+      priority: 9
       ruleType: Basic
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     sku:
     - capacity: 2
-      name: Standard_Small
-      tier: Standard
+      name: Standard_v2
+      tier: Standard_v2
 
 ---
 
@@ -90,29 +91,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/applicationgateway
   labels:
-    testing.upbound.io/example-name: backend
-  name: backend
-spec:
-  forProvider:
-    addressPrefixes:
-    - 10.254.2.0/24
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    virtualNetworkNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: Subnet
-metadata:
-  annotations:
-    meta.upbound.io/example-id: network/v1beta1/applicationgateway
-  labels:
-    testing.upbound.io/example-name: frontend
-  name: frontend
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     addressPrefixes:

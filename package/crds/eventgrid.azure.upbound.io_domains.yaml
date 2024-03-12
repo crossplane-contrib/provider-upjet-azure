@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -107,7 +107,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.
@@ -176,7 +176,7 @@ spec:
                   inputSchema:
                     description: Specifies the schema in which incoming events will
                       be published to this domain. Allowed values are CloudEventSchemaV1_0,
-                      CustomEventSchema, or EventGridSchema. Defaults to eventgridschema.
+                      CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema.
                       Changing this forces a new resource to be created.
                     type: string
                   localAuthEnabled:
@@ -325,7 +325,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.
@@ -394,7 +394,7 @@ spec:
                   inputSchema:
                     description: Specifies the schema in which incoming events will
                       be published to this domain. Allowed values are CloudEventSchemaV1_0,
-                      CustomEventSchema, or EventGridSchema. Defaults to eventgridschema.
+                      CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema.
                       Changing this forces a new resource to be created.
                     type: string
                   localAuthEnabled:
@@ -641,7 +641,7 @@ spec:
                       properties:
                         action:
                           description: The action to take when the rule is matched.
-                            Possible values are Allow.
+                            Possible values are Allow. Defaults to Allow.
                           type: string
                         ipMask:
                           description: The IP mask (CIDR) to match on.
@@ -710,7 +710,7 @@ spec:
                   inputSchema:
                     description: Specifies the schema in which incoming events will
                       be published to this domain. Allowed values are CloudEventSchemaV1_0,
-                      CustomEventSchema, or EventGridSchema. Defaults to eventgridschema.
+                      CustomEventSchema, or EventGridSchema. Defaults to EventGridSchema.
                       Changing this forces a new resource to be created.
                     type: string
                   localAuthEnabled:

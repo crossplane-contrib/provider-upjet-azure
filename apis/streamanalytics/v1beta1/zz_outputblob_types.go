@@ -21,8 +21,11 @@ type OutputBlobInitParameters struct {
 	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
-	// The minimum number of rows per batch (must be between 0 and 10000).
+	// The minimum number of rows per batch (must be between 0 and 1000000).
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
+
+	// Determines whether blob blocks are either committed automatically or appended. Possible values are Append and Once. Defaults to Append.
+	BlobWriteMode *string `json:"blobWriteMode,omitempty" tf:"blob_write_mode,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
@@ -81,8 +84,11 @@ type OutputBlobObservation struct {
 	// The maximum wait time per batch in hh:mm:ss e.g. 00:02:00 for two minutes.
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
-	// The minimum number of rows per batch (must be between 0 and 10000).
+	// The minimum number of rows per batch (must be between 0 and 1000000).
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
+
+	// Determines whether blob blocks are either committed automatically or appended. Possible values are Append and Once. Defaults to Append.
+	BlobWriteMode *string `json:"blobWriteMode,omitempty" tf:"blob_write_mode,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	DateFormat *string `json:"dateFormat,omitempty" tf:"date_format,omitempty"`
@@ -122,9 +128,13 @@ type OutputBlobParameters struct {
 	// +kubebuilder:validation:Optional
 	BatchMaxWaitTime *string `json:"batchMaxWaitTime,omitempty" tf:"batch_max_wait_time,omitempty"`
 
-	// The minimum number of rows per batch (must be between 0 and 10000).
+	// The minimum number of rows per batch (must be between 0 and 1000000).
 	// +kubebuilder:validation:Optional
 	BatchMinRows *float64 `json:"batchMinRows,omitempty" tf:"batch_min_rows,omitempty"`
+
+	// Determines whether blob blocks are either committed automatically or appended. Possible values are Append and Once. Defaults to Append.
+	// +kubebuilder:validation:Optional
+	BlobWriteMode *string `json:"blobWriteMode,omitempty" tf:"blob_write_mode,omitempty"`
 
 	// The date format. Wherever {date} appears in path_pattern, the value of this property is used as the date format instead.
 	// +kubebuilder:validation:Optional
@@ -276,8 +286,8 @@ type OutputBlobStatus struct {
 // +kubebuilder:storageversion
 
 // OutputBlob is the Schema for the OutputBlobs API. Manages a Stream Analytics Output to Blob Storage.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

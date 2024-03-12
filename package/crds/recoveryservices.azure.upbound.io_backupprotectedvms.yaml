@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -74,7 +74,8 @@ spec:
               forProvider:
                 properties:
                   backupPolicyId:
-                    description: Specifies the id of the backup policy to use.
+                    description: Specifies the id of the backup policy to use. Required
+                      in creation or when protection_stopped is not specified.
                     type: string
                   backupPolicyIdRef:
                     description: Reference to a BackupPolicyVM in recoveryservices
@@ -166,6 +167,11 @@ spec:
                       type: number
                     type: array
                     x-kubernetes-list-type: set
+                  protectionState:
+                    description: Specifies Protection state of the backup. Possible
+                      values are Invalid, IRPending, Protected, ProtectionStopped,
+                      ProtectionError and ProtectionPaused.
+                    type: string
                   recoveryVaultName:
                     description: Specifies the name of the Recovery Services Vault
                       to use. Changing this forces a new resource to be created.
@@ -346,7 +352,8 @@ spec:
                   autoscaler.
                 properties:
                   backupPolicyId:
-                    description: Specifies the id of the backup policy to use.
+                    description: Specifies the id of the backup policy to use. Required
+                      in creation or when protection_stopped is not specified.
                     type: string
                   backupPolicyIdRef:
                     description: Reference to a BackupPolicyVM in recoveryservices
@@ -438,6 +445,11 @@ spec:
                       type: number
                     type: array
                     x-kubernetes-list-type: set
+                  protectionState:
+                    description: Specifies Protection state of the backup. Possible
+                      values are Invalid, IRPending, Protected, ProtectionStopped,
+                      ProtectionError and ProtectionPaused.
+                    type: string
                   recoveryVaultName:
                     description: Specifies the name of the Recovery Services Vault
                       to use. Changing this forces a new resource to be created.
@@ -777,7 +789,8 @@ spec:
               atProvider:
                 properties:
                   backupPolicyId:
-                    description: Specifies the id of the backup policy to use.
+                    description: Specifies the id of the backup policy to use. Required
+                      in creation or when protection_stopped is not specified.
                     type: string
                   excludeDiskLuns:
                     description: A list of Disks' Logical Unit Numbers(LUN) to be
@@ -796,6 +809,11 @@ spec:
                       type: number
                     type: array
                     x-kubernetes-list-type: set
+                  protectionState:
+                    description: Specifies Protection state of the backup. Possible
+                      values are Invalid, IRPending, Protected, ProtectionStopped,
+                      ProtectionError and ProtectionPaused.
+                    type: string
                   recoveryVaultName:
                     description: Specifies the name of the Recovery Services Vault
                       to use. Changing this forces a new resource to be created.

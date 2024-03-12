@@ -15,6 +15,9 @@ import (
 
 type RepositoryInitParameters struct {
 
+	// Specifies the ID of the Certificate Authority used when retrieving the Git Repository via HTTPS.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
+
 	// Specifies the SSH public key of git repository.
 	HostKey *string `json:"hostKey,omitempty" tf:"host_key,omitempty"`
 
@@ -47,6 +50,9 @@ type RepositoryInitParameters struct {
 
 type RepositoryObservation struct {
 
+	// Specifies the ID of the Certificate Authority used when retrieving the Git Repository via HTTPS.
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
+
 	// Specifies the SSH public key of git repository.
 	HostKey *string `json:"hostKey,omitempty" tf:"host_key,omitempty"`
 
@@ -78,6 +84,10 @@ type RepositoryObservation struct {
 }
 
 type RepositoryParameters struct {
+
+	// Specifies the ID of the Certificate Authority used when retrieving the Git Repository via HTTPS.
+	// +kubebuilder:validation:Optional
+	CACertificateID *string `json:"caCertificateId,omitempty" tf:"ca_certificate_id,omitempty"`
 
 	// Specifies the SSH public key of git repository.
 	// +kubebuilder:validation:Optional
@@ -128,14 +138,26 @@ type RepositoryParameters struct {
 
 type SpringCloudConfigurationServiceInitParameters struct {
 
+	// The generation of the Spring Cloud Configuration Service. Possible values are Gen1 and Gen2.
+	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
+
+	// Specifies how often to check repository updates. Minimum value is 0.
+	RefreshIntervalInSeconds *float64 `json:"refreshIntervalInSeconds,omitempty" tf:"refresh_interval_in_seconds,omitempty"`
+
 	// One or more repository blocks as defined below.
 	Repository []RepositoryInitParameters `json:"repository,omitempty" tf:"repository,omitempty"`
 }
 
 type SpringCloudConfigurationServiceObservation struct {
 
+	// The generation of the Spring Cloud Configuration Service. Possible values are Gen1 and Gen2.
+	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
+
 	// The ID of the Spring Cloud Configuration Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies how often to check repository updates. Minimum value is 0.
+	RefreshIntervalInSeconds *float64 `json:"refreshIntervalInSeconds,omitempty" tf:"refresh_interval_in_seconds,omitempty"`
 
 	// One or more repository blocks as defined below.
 	Repository []RepositoryObservation `json:"repository,omitempty" tf:"repository,omitempty"`
@@ -145,6 +167,14 @@ type SpringCloudConfigurationServiceObservation struct {
 }
 
 type SpringCloudConfigurationServiceParameters struct {
+
+	// The generation of the Spring Cloud Configuration Service. Possible values are Gen1 and Gen2.
+	// +kubebuilder:validation:Optional
+	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
+
+	// Specifies how often to check repository updates. Minimum value is 0.
+	// +kubebuilder:validation:Optional
+	RefreshIntervalInSeconds *float64 `json:"refreshIntervalInSeconds,omitempty" tf:"refresh_interval_in_seconds,omitempty"`
 
 	// One or more repository blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -193,8 +223,8 @@ type SpringCloudConfigurationServiceStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudConfigurationService is the Schema for the SpringCloudConfigurationServices API. Manages a Spring Cloud Configuration Service.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

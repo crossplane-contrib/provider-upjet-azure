@@ -32,8 +32,6 @@ type HubProfileParameters struct {
 }
 
 type KubernetesFleetManagerInitParameters struct {
-
-	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
 	HubProfile []HubProfileInitParameters `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
 
 	// The Azure Region where the Kubernetes Fleet Manager should exist. Changing this forces a new Kubernetes Fleet Manager to be created.
@@ -45,8 +43,6 @@ type KubernetesFleetManagerInitParameters struct {
 }
 
 type KubernetesFleetManagerObservation struct {
-
-	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
 	HubProfile []HubProfileObservation `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
 
 	// The ID of the Kubernetes Fleet Manager.
@@ -65,7 +61,6 @@ type KubernetesFleetManagerObservation struct {
 
 type KubernetesFleetManagerParameters struct {
 
-	// A hub_profile block as defined below. The FleetHubProfile configures the Fleet's hub. Changing this forces a new Kubernetes Fleet Manager to be created.
 	// +kubebuilder:validation:Optional
 	HubProfile []HubProfileParameters `json:"hubProfile,omitempty" tf:"hub_profile,omitempty"`
 
@@ -120,8 +115,8 @@ type KubernetesFleetManagerStatus struct {
 // +kubebuilder:storageversion
 
 // KubernetesFleetManager is the Schema for the KubernetesFleetManagers API. Manages a Kubernetes Fleet Manager.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

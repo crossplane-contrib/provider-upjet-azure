@@ -11,7 +11,7 @@ spec:
     automationAccountNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    field_definitions:
+    field:
     - name: example
       type: string
     name: example

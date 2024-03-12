@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -388,7 +388,7 @@ spec:
                     items:
                       properties:
                         aadAuth:
-                          description: The aad_auth block as defined below
+                          description: The aad_auth block as defined below.
                           items:
                             properties:
                               identifierUri:
@@ -664,7 +664,7 @@ spec:
                     items:
                       properties:
                         aadAuth:
-                          description: The aad_auth block as defined below
+                          description: The aad_auth block as defined below.
                           items:
                             properties:
                               identifierUri:
@@ -1112,7 +1112,7 @@ spec:
                     items:
                       properties:
                         aadAuth:
-                          description: The aad_auth block as defined below
+                          description: The aad_auth block as defined below.
                           items:
                             properties:
                               identifierUri:

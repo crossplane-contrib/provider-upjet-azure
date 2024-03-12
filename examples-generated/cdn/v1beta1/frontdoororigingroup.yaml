@@ -38,6 +38,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    skuName: Standard_AzureFrontDoor
 
 ---
 

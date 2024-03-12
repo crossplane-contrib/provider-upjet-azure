@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -193,6 +193,7 @@ spec:
                         dataDiskType:
                           description: The type of the disk to use for storing data.
                             It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+                            Defaults to Standard_LRS.
                           type: string
                         ephemeralPortRange:
                           description: Sets the port range available for the OS. Format
@@ -529,6 +530,7 @@ spec:
                         dataDiskType:
                           description: The type of the disk to use for storing data.
                             It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+                            Defaults to Standard_LRS.
                           type: string
                         ephemeralPortRange:
                           description: Sets the port range available for the OS. Format
@@ -945,6 +947,7 @@ spec:
                         dataDiskType:
                           description: The type of the disk to use for storing data.
                             It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+                            Defaults to Standard_LRS.
                           type: string
                         ephemeralPortRange:
                           description: Sets the port range available for the OS. Format

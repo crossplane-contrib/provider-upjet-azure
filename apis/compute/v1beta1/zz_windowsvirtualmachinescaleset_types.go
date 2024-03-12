@@ -158,7 +158,7 @@ type WindowsVirtualMachineScaleSetAutomaticInstanceRepairInitParameters struct {
 	// Should the automatic instance repair be enabled on this Virtual Machine Scale Set?
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amount of time (in minutes, between 30 and 90, defaults to 30 minutes) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
+	// Amount of time (in minutes, between 30 and 90) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
 
@@ -167,7 +167,7 @@ type WindowsVirtualMachineScaleSetAutomaticInstanceRepairObservation struct {
 	// Should the automatic instance repair be enabled on this Virtual Machine Scale Set?
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Amount of time (in minutes, between 30 and 90, defaults to 30 minutes) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
+	// Amount of time (in minutes, between 30 and 90) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
 
@@ -177,7 +177,7 @@ type WindowsVirtualMachineScaleSetAutomaticInstanceRepairParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// Amount of time (in minutes, between 30 and 90, defaults to 30 minutes) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
+	// Amount of time (in minutes, between 30 and 90) for which automatic repairs will be delayed. The grace period starts right after the VM is found unhealthy. The time duration should be specified in ISO 8601 format. Defaults to PT30M.
 	// +kubebuilder:validation:Optional
 	GracePeriod *string `json:"gracePeriod,omitempty" tf:"grace_period,omitempty"`
 }
@@ -662,7 +662,7 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	// Should extension operations be allowed on the Virtual Machine Scale Set? Possible values are true or false. Defaults to true. Changing this forces a new Windows Virtual Machine Scale Set to be created.
 	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// One or more gallery_application blocks as defined below.
@@ -736,7 +736,7 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 	// The Virtual Machine SKU for the Scale Set, such as Standard_F2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
-	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
+	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image ID, Shared Image ID, Shared Image Version ID, Community Gallery Image ID, Community Gallery Image Version ID, Shared Gallery Image ID and Shared Gallery Image Version ID.
 	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
 
 	// A source_image_reference block as defined below.
@@ -1038,7 +1038,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// Should extension operations be allowed on the Virtual Machine Scale Set? Possible values are true or false. Defaults to true. Changing this forces a new Windows Virtual Machine Scale Set to be created.
 	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// One or more gallery_application blocks as defined below.
@@ -1118,7 +1118,7 @@ type WindowsVirtualMachineScaleSetObservation struct {
 	// The Virtual Machine SKU for the Scale Set, such as Standard_F2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
-	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
+	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image ID, Shared Image ID, Shared Image Version ID, Community Gallery Image ID, Community Gallery Image Version ID, Shared Gallery Image ID and Shared Gallery Image Version ID.
 	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
 
 	// A source_image_reference block as defined below.
@@ -1355,7 +1355,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	ExtensionOperationsEnabled *bool `json:"extensionOperationsEnabled,omitempty" tf:"extension_operations_enabled,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
@@ -1467,7 +1467,7 @@ type WindowsVirtualMachineScaleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
-	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image IDs, Shared Image IDs, Shared Image Version IDs, Community Gallery Image IDs, Community Gallery Image Version IDs, Shared Gallery Image IDs and Shared Gallery Image Version IDs.
+	// The ID of an Image which each Virtual Machine in this Scale Set should be based on. Possible Image ID types include Image ID, Shared Image ID, Shared Image Version ID, Community Gallery Image ID, Community Gallery Image Version ID, Shared Gallery Image ID and Shared Gallery Image Version ID.
 	// +kubebuilder:validation:Optional
 	SourceImageID *string `json:"sourceImageId,omitempty" tf:"source_image_id,omitempty"`
 
@@ -1771,7 +1771,7 @@ type WindowsVirtualMachineScaleSetSpotRestoreInitParameters struct {
 	// Should the Spot-Try-Restore feature be enabled? The Spot-Try-Restore feature will attempt to automatically restore the evicted Spot Virtual Machine Scale Set VM instances opportunistically based on capacity availability and pricing constraints. Possible values are true or false. Defaults to false. Changing this forces a new resource to be created.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to 90 minutes (e.g. PT1H30M). Changing this forces a new resource to be created.
+	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to PT1H. Changing this forces a new resource to be created.
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
@@ -1780,7 +1780,7 @@ type WindowsVirtualMachineScaleSetSpotRestoreObservation struct {
 	// Should the Spot-Try-Restore feature be enabled? The Spot-Try-Restore feature will attempt to automatically restore the evicted Spot Virtual Machine Scale Set VM instances opportunistically based on capacity availability and pricing constraints. Possible values are true or false. Defaults to false. Changing this forces a new resource to be created.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to 90 minutes (e.g. PT1H30M). Changing this forces a new resource to be created.
+	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to PT1H. Changing this forces a new resource to be created.
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
@@ -1790,7 +1790,7 @@ type WindowsVirtualMachineScaleSetSpotRestoreParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to 90 minutes (e.g. PT1H30M). Changing this forces a new resource to be created.
+	// The length of time that the Virtual Machine Scale Set should attempt to restore the Spot VM instances which have been evicted. The time duration should be between 15 minutes and 120 minutes (inclusive). The time duration should be specified in the ISO 8601 format. Defaults to PT1H. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
@@ -1910,8 +1910,8 @@ type WindowsVirtualMachineScaleSetStatus struct {
 // +kubebuilder:storageversion
 
 // WindowsVirtualMachineScaleSet is the Schema for the WindowsVirtualMachineScaleSets API. Manages a Windows Virtual Machine Scale Set.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

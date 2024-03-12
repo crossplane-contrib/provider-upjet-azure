@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -80,6 +80,10 @@ spec:
                       or an UltraPerformance SKU. If false, an active-standby gateway
                       will be created. Defaults to false.
                     type: boolean
+                  bgpRouteTranslationForNatEnabled:
+                    description: Is BGP Route Translation for NAT enabled? Defaults
+                      to false.
+                    type: boolean
                   bgpSettings:
                     description: A bgp_settings block which is documented below. In
                       this block the BGP specific settings can be defined.
@@ -95,10 +99,10 @@ spec:
                             0 and 100.
                           type: number
                         peeringAddresses:
-                          description: A list of peering_addresses as defined below.
-                            Only one peering_addresses block can be specified except
-                            when active_active of this Virtual Network Gateway is
-                            true.
+                          description: A list of peering_addresses blocks as defined
+                            below. Only one peering_addresses block can be specified
+                            except when active_active of this Virtual Network Gateway
+                            is true.
                           items:
                             properties:
                               apipaAddresses:
@@ -126,7 +130,7 @@ spec:
                       properties:
                         addressPrefixes:
                           description: A list of address blocks reserved for this
-                            virtual network in CIDR notation as defined below.
+                            virtual network in CIDR notation.
                           items:
                             type: string
                           type: array
@@ -140,6 +144,9 @@ spec:
                       to the Azure documentation on forced tunnelling. If not specified,
                       forced tunnelling is disabled.
                     type: string
+                  dnsForwardingEnabled:
+                    description: Is DNS forwarding enabled?
+                    type: boolean
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Virtual Network Gateway should exist. Changing this forces
@@ -156,7 +163,7 @@ spec:
                     type: string
                   ipConfiguration:
                     description: |-
-                      One, two or three ip_configuration blocks documented below.
+                      One or more (up to 3) ip_configuration blocks documented below.
                       An active-standby gateway requires exactly one ip_configuration block,
                       an active-active gateway requires exactly two ip_configuration blocks whereas
                       an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
@@ -168,8 +175,9 @@ spec:
                           type: string
                         privateIpAddressAllocation:
                           description: Defines how the private IP address of the gateways
-                            virtual interface is assigned. Valid options are Static
-                            or Dynamic. Defaults to Dynamic.
+                            virtual interface is assigned. The only valid value is
+                            Dynamic for Virtual Network Gateway (Static is not supported
+                            by the service yet). Defaults to Dynamic.
                           type: string
                         publicIpAddressId:
                           description: The ID of the public IP address to associate
@@ -334,13 +342,60 @@ spec:
                           type: object
                       type: object
                     type: array
+                  ipSecReplayProtectionEnabled:
+                    description: Is IP Sec Replay Protection enabled? Defaults to
+                      true.
+                    type: boolean
                   location:
                     description: The location/region where the Virtual Network Gateway
                       is located. Changing this forces a new resource to be created.
                     type: string
+                  policyGroup:
+                    description: One or more policy_group blocks as defined below.
+                    items:
+                      properties:
+                        isDefault:
+                          description: Is this a Default Virtual Network Gateway Policy
+                            Group? Defaults to false.
+                          type: boolean
+                        name:
+                          description: The name of the Virtual Network Gateway Policy
+                            Group.
+                          type: string
+                        policyMember:
+                          description: One or more policy_member blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
+                                type: string
+                              type:
+                                description: The type of the Virtual Network Gateway.
+                                  Valid options are Vpn or ExpressRoute. Changing
+                                  the type forces a new resource to be created.
+                                type: string
+                              value:
+                                description: The value of attribute that is used for
+                                  this Virtual Network Gateway Policy Group Member.
+                                type: string
+                            type: object
+                          type: array
+                        priority:
+                          description: The priority for the Virtual Network Gateway
+                            Policy Group. Defaults to 0.
+                          type: number
+                      type: object
+                    type: array
                   privateIpAddressEnabled:
                     description: Should private IP be enabled on this gateway for
                       connections? Changing this forces a new resource to be created.
+                    type: boolean
+                  remoteVnetTrafficEnabled:
+                    description: Is remote vnet traffic that is used to configure
+                      this gateway to accept traffic from other Azure Virtual Networks
+                      enabled? Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -444,6 +499,11 @@ spec:
                       are Vpn or ExpressRoute. Changing the type forces a new resource
                       to be created.
                     type: string
+                  virtualWanTrafficEnabled:
+                    description: Is remote vnet traffic that is used to configure
+                      this gateway to accept traffic from remote Virtual WAN networks
+                      enabled? Defaults to false.
+                    type: boolean
                   vpnClientConfiguration:
                     description: A vpn_client_configuration block which is documented
                       below. In this block the Virtual Network Gateway can be configured
@@ -468,6 +528,88 @@ spec:
                           items:
                             type: string
                           type: array
+                        ipsecPolicy:
+                          description: An ipsec_policy block as defined below.
+                          items:
+                            properties:
+                              dhGroup:
+                                description: The DH Group, used in IKE Phase 1. Possible
+                                  values are DHGroup1, DHGroup2, DHGroup14, DHGroup24,
+                                  DHGroup2048, ECP256, ECP384 and None.
+                                type: string
+                              ikeEncryption:
+                                description: The IKE encryption algorithm, used for
+                                  IKE Phase 2. Possible values are AES128, AES192,
+                                  AES256, DES, DES3, GCMAES128 and GCMAES256.
+                                type: string
+                              ikeIntegrity:
+                                description: The IKE encryption integrity algorithm,
+                                  used for IKE Phase 2. Possible values are GCMAES128,
+                                  GCMAES256, MD5, SHA1, SHA256 and SHA384.
+                                type: string
+                              ipsecEncryption:
+                                description: The IPSec encryption algorithm, used
+                                  for IKE phase 1. Possible values are AES128, AES192,
+                                  AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256
+                                  and None.
+                                type: string
+                              ipsecIntegrity:
+                                description: The IPSec integrity algorithm, used for
+                                  IKE phase 1. Possible values are GCMAES128, GCMAES192,
+                                  GCMAES256, MD5, SHA1 and SHA256.
+                                type: string
+                              pfsGroup:
+                                description: The Pfs Group, used in IKE Phase 2. Possible
+                                  values are ECP256, ECP384, PFS1, PFS2, PFS14, PFS24,
+                                  PFS2048, PFSMM and None.
+                                type: string
+                              saDataSizeInKilobytes:
+                                description: The IPSec Security Association payload
+                                  size in KB for a Site-to-Site VPN tunnel. Possible
+                                  values are between 1024 and 2147483647.
+                                type: number
+                              saLifetimeInSeconds:
+                                description: The IPSec Security Association lifetime
+                                  in seconds for a Site-to-Site VPN tunnel. Possible
+                                  values are between 300 and 172799.
+                                type: number
+                            type: object
+                          type: array
+                        radiusServer:
+                          description: One or more radius_server blocks as defined
+                            below.
+                          items:
+                            properties:
+                              address:
+                                description: The address of the Radius Server.
+                                type: string
+                              score:
+                                description: The score of the Radius Server determines
+                                  the priority of the server. Possible values are
+                                  between 1 and 30.
+                                type: number
+                              secretSecretRef:
+                                description: The secret that is used to communicate
+                                  with the Radius Server.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                            required:
+                            - secretSecretRef
+                            type: object
+                          type: array
                         radiusServerAddress:
                           description: The address of the Radius server.
                           type: string
@@ -480,7 +622,8 @@ spec:
                           items:
                             properties:
                               name:
-                                description: A user-defined name of the root certificate.
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
                                 type: string
                               thumbprint:
                                 description: Specifies the public data of the certificate.
@@ -495,15 +638,39 @@ spec:
                           items:
                             properties:
                               name:
-                                description: A user-defined name of the root certificate.
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
                                 type: string
                               publicCertData:
                                 description: The public certificate of the root certificate
                                   authority. The certificate must be provided in Base-64
                                   encoded X.509 format (PEM). In particular, this
                                   argument must not include the -----BEGIN CERTIFICATE-----
-                                  or -----END CERTIFICATE----- markers.
+                                  or -----END CERTIFICATE----- markers, nor any newlines.
                                 type: string
+                            type: object
+                          type: array
+                        virtualNetworkGatewayClientConnection:
+                          description: One or more virtual_network_gateway_client_connection
+                            blocks as defined below.
+                          items:
+                            properties:
+                              addressPrefixes:
+                                description: A list of address prefixes for P2S VPN
+                                  Client.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
+                                type: string
+                              policyGroupNames:
+                                description: A list of names of Virtual Network Gateway
+                                  Policy Groups.
+                                items:
+                                  type: string
+                                type: array
                             type: object
                           type: array
                         vpnAuthTypes:
@@ -551,6 +718,10 @@ spec:
                       or an UltraPerformance SKU. If false, an active-standby gateway
                       will be created. Defaults to false.
                     type: boolean
+                  bgpRouteTranslationForNatEnabled:
+                    description: Is BGP Route Translation for NAT enabled? Defaults
+                      to false.
+                    type: boolean
                   bgpSettings:
                     description: A bgp_settings block which is documented below. In
                       this block the BGP specific settings can be defined.
@@ -566,10 +737,10 @@ spec:
                             0 and 100.
                           type: number
                         peeringAddresses:
-                          description: A list of peering_addresses as defined below.
-                            Only one peering_addresses block can be specified except
-                            when active_active of this Virtual Network Gateway is
-                            true.
+                          description: A list of peering_addresses blocks as defined
+                            below. Only one peering_addresses block can be specified
+                            except when active_active of this Virtual Network Gateway
+                            is true.
                           items:
                             properties:
                               apipaAddresses:
@@ -597,7 +768,7 @@ spec:
                       properties:
                         addressPrefixes:
                           description: A list of address blocks reserved for this
-                            virtual network in CIDR notation as defined below.
+                            virtual network in CIDR notation.
                           items:
                             type: string
                           type: array
@@ -611,6 +782,9 @@ spec:
                       to the Azure documentation on forced tunnelling. If not specified,
                       forced tunnelling is disabled.
                     type: string
+                  dnsForwardingEnabled:
+                    description: Is DNS forwarding enabled?
+                    type: boolean
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Virtual Network Gateway should exist. Changing this forces
@@ -627,7 +801,7 @@ spec:
                     type: string
                   ipConfiguration:
                     description: |-
-                      One, two or three ip_configuration blocks documented below.
+                      One or more (up to 3) ip_configuration blocks documented below.
                       An active-standby gateway requires exactly one ip_configuration block,
                       an active-active gateway requires exactly two ip_configuration blocks whereas
                       an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
@@ -639,8 +813,9 @@ spec:
                           type: string
                         privateIpAddressAllocation:
                           description: Defines how the private IP address of the gateways
-                            virtual interface is assigned. Valid options are Static
-                            or Dynamic. Defaults to Dynamic.
+                            virtual interface is assigned. The only valid value is
+                            Dynamic for Virtual Network Gateway (Static is not supported
+                            by the service yet). Defaults to Dynamic.
                           type: string
                         publicIpAddressId:
                           description: The ID of the public IP address to associate
@@ -805,13 +980,60 @@ spec:
                           type: object
                       type: object
                     type: array
+                  ipSecReplayProtectionEnabled:
+                    description: Is IP Sec Replay Protection enabled? Defaults to
+                      true.
+                    type: boolean
                   location:
                     description: The location/region where the Virtual Network Gateway
                       is located. Changing this forces a new resource to be created.
                     type: string
+                  policyGroup:
+                    description: One or more policy_group blocks as defined below.
+                    items:
+                      properties:
+                        isDefault:
+                          description: Is this a Default Virtual Network Gateway Policy
+                            Group? Defaults to false.
+                          type: boolean
+                        name:
+                          description: The name of the Virtual Network Gateway Policy
+                            Group.
+                          type: string
+                        policyMember:
+                          description: One or more policy_member blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
+                                type: string
+                              type:
+                                description: The type of the Virtual Network Gateway.
+                                  Valid options are Vpn or ExpressRoute. Changing
+                                  the type forces a new resource to be created.
+                                type: string
+                              value:
+                                description: The value of attribute that is used for
+                                  this Virtual Network Gateway Policy Group Member.
+                                type: string
+                            type: object
+                          type: array
+                        priority:
+                          description: The priority for the Virtual Network Gateway
+                            Policy Group. Defaults to 0.
+                          type: number
+                      type: object
+                    type: array
                   privateIpAddressEnabled:
                     description: Should private IP be enabled on this gateway for
                       connections? Changing this forces a new resource to be created.
+                    type: boolean
+                  remoteVnetTrafficEnabled:
+                    description: Is remote vnet traffic that is used to configure
+                      this gateway to accept traffic from other Azure Virtual Networks
+                      enabled? Defaults to false.
                     type: boolean
                   sku:
                     description: Configuration of the size and capacity of the virtual
@@ -834,6 +1056,11 @@ spec:
                       are Vpn or ExpressRoute. Changing the type forces a new resource
                       to be created.
                     type: string
+                  virtualWanTrafficEnabled:
+                    description: Is remote vnet traffic that is used to configure
+                      this gateway to accept traffic from remote Virtual WAN networks
+                      enabled? Defaults to false.
+                    type: boolean
                   vpnClientConfiguration:
                     description: A vpn_client_configuration block which is documented
                       below. In this block the Virtual Network Gateway can be configured
@@ -858,6 +1085,68 @@ spec:
                           items:
                             type: string
                           type: array
+                        ipsecPolicy:
+                          description: An ipsec_policy block as defined below.
+                          items:
+                            properties:
+                              dhGroup:
+                                description: The DH Group, used in IKE Phase 1. Possible
+                                  values are DHGroup1, DHGroup2, DHGroup14, DHGroup24,
+                                  DHGroup2048, ECP256, ECP384 and None.
+                                type: string
+                              ikeEncryption:
+                                description: The IKE encryption algorithm, used for
+                                  IKE Phase 2. Possible values are AES128, AES192,
+                                  AES256, DES, DES3, GCMAES128 and GCMAES256.
+                                type: string
+                              ikeIntegrity:
+                                description: The IKE encryption integrity algorithm,
+                                  used for IKE Phase 2. Possible values are GCMAES128,
+                                  GCMAES256, MD5, SHA1, SHA256 and SHA384.
+                                type: string
+                              ipsecEncryption:
+                                description: The IPSec encryption algorithm, used
+                                  for IKE phase 1. Possible values are AES128, AES192,
+                                  AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256
+                                  and None.
+                                type: string
+                              ipsecIntegrity:
+                                description: The IPSec integrity algorithm, used for
+                                  IKE phase 1. Possible values are GCMAES128, GCMAES192,
+                                  GCMAES256, MD5, SHA1 and SHA256.
+                                type: string
+                              pfsGroup:
+                                description: The Pfs Group, used in IKE Phase 2. Possible
+                                  values are ECP256, ECP384, PFS1, PFS2, PFS14, PFS24,
+                                  PFS2048, PFSMM and None.
+                                type: string
+                              saDataSizeInKilobytes:
+                                description: The IPSec Security Association payload
+                                  size in KB for a Site-to-Site VPN tunnel. Possible
+                                  values are between 1024 and 2147483647.
+                                type: number
+                              saLifetimeInSeconds:
+                                description: The IPSec Security Association lifetime
+                                  in seconds for a Site-to-Site VPN tunnel. Possible
+                                  values are between 300 and 172799.
+                                type: number
+                            type: object
+                          type: array
+                        radiusServer:
+                          description: One or more radius_server blocks as defined
+                            below.
+                          items:
+                            properties:
+                              address:
+                                description: The address of the Radius Server.
+                                type: string
+                              score:
+                                description: The score of the Radius Server determines
+                                  the priority of the server. Possible values are
+                                  between 1 and 30.
+                                type: number
+                            type: object
+                          type: array
                         radiusServerAddress:
                           description: The address of the Radius server.
                           type: string
@@ -870,7 +1159,8 @@ spec:
                           items:
                             properties:
                               name:
-                                description: A user-defined name of the root certificate.
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
                                 type: string
                               thumbprint:
                                 description: Specifies the public data of the certificate.
@@ -885,15 +1175,39 @@ spec:
                           items:
                             properties:
                               name:
-                                description: A user-defined name of the root certificate.
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
                                 type: string
                               publicCertData:
                                 description: The public certificate of the root certificate
                                   authority. The certificate must be provided in Base-64
                                   encoded X.509 format (PEM). In particular, this
                                   argument must not include the -----BEGIN CERTIFICATE-----
-                                  or -----END CERTIFICATE----- markers.
+                                  or -----END CERTIFICATE----- markers, nor any newlines.
                                 type: string
+                            type: object
+                          type: array
+                        virtualNetworkGatewayClientConnection:
+                          description: One or more virtual_network_gateway_client_connection
+                            blocks as defined below.
+                          items:
+                            properties:
+                              addressPrefixes:
+                                description: A list of address prefixes for P2S VPN
+                                  Client.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
+                                type: string
+                              policyGroupNames:
+                                description: A list of names of Virtual Network Gateway
+                                  Policy Groups.
+                                items:
+                                  type: string
+                                type: array
                             type: object
                           type: array
                         vpnAuthTypes:
@@ -1118,6 +1432,10 @@ spec:
                       or an UltraPerformance SKU. If false, an active-standby gateway
                       will be created. Defaults to false.
                     type: boolean
+                  bgpRouteTranslationForNatEnabled:
+                    description: Is BGP Route Translation for NAT enabled? Defaults
+                      to false.
+                    type: boolean
                   bgpSettings:
                     description: A bgp_settings block which is documented below. In
                       this block the BGP specific settings can be defined.
@@ -1133,10 +1451,10 @@ spec:
                             0 and 100.
                           type: number
                         peeringAddresses:
-                          description: A list of peering_addresses as defined below.
-                            Only one peering_addresses block can be specified except
-                            when active_active of this Virtual Network Gateway is
-                            true.
+                          description: A list of peering_addresses blocks as defined
+                            below. Only one peering_addresses block can be specified
+                            except when active_active of this Virtual Network Gateway
+                            is true.
                           items:
                             properties:
                               apipaAddresses:
@@ -1176,7 +1494,7 @@ spec:
                       properties:
                         addressPrefixes:
                           description: A list of address blocks reserved for this
-                            virtual network in CIDR notation as defined below.
+                            virtual network in CIDR notation.
                           items:
                             type: string
                           type: array
@@ -1190,6 +1508,9 @@ spec:
                       to the Azure documentation on forced tunnelling. If not specified,
                       forced tunnelling is disabled.
                     type: string
+                  dnsForwardingEnabled:
+                    description: Is DNS forwarding enabled?
+                    type: boolean
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Virtual Network Gateway should exist. Changing this forces
@@ -1209,7 +1530,7 @@ spec:
                     type: string
                   ipConfiguration:
                     description: |-
-                      One, two or three ip_configuration blocks documented below.
+                      One or more (up to 3) ip_configuration blocks documented below.
                       An active-standby gateway requires exactly one ip_configuration block,
                       an active-active gateway requires exactly two ip_configuration blocks whereas
                       an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
@@ -1221,8 +1542,9 @@ spec:
                           type: string
                         privateIpAddressAllocation:
                           description: Defines how the private IP address of the gateways
-                            virtual interface is assigned. Valid options are Static
-                            or Dynamic. Defaults to Dynamic.
+                            virtual interface is assigned. The only valid value is
+                            Dynamic for Virtual Network Gateway (Static is not supported
+                            by the service yet). Defaults to Dynamic.
                           type: string
                         publicIpAddressId:
                           description: The ID of the public IP address to associate
@@ -1237,13 +1559,60 @@ spec:
                           type: string
                       type: object
                     type: array
+                  ipSecReplayProtectionEnabled:
+                    description: Is IP Sec Replay Protection enabled? Defaults to
+                      true.
+                    type: boolean
                   location:
                     description: The location/region where the Virtual Network Gateway
                       is located. Changing this forces a new resource to be created.
                     type: string
+                  policyGroup:
+                    description: One or more policy_group blocks as defined below.
+                    items:
+                      properties:
+                        isDefault:
+                          description: Is this a Default Virtual Network Gateway Policy
+                            Group? Defaults to false.
+                          type: boolean
+                        name:
+                          description: The name of the Virtual Network Gateway Policy
+                            Group.
+                          type: string
+                        policyMember:
+                          description: One or more policy_member blocks as defined
+                            below.
+                          items:
+                            properties:
+                              name:
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
+                                type: string
+                              type:
+                                description: The type of the Virtual Network Gateway.
+                                  Valid options are Vpn or ExpressRoute. Changing
+                                  the type forces a new resource to be created.
+                                type: string
+                              value:
+                                description: The value of attribute that is used for
+                                  this Virtual Network Gateway Policy Group Member.
+                                type: string
+                            type: object
+                          type: array
+                        priority:
+                          description: The priority for the Virtual Network Gateway
+                            Policy Group. Defaults to 0.
+                          type: number
+                      type: object
+                    type: array
                   privateIpAddressEnabled:
                     description: Should private IP be enabled on this gateway for
                       connections? Changing this forces a new resource to be created.
+                    type: boolean
+                  remoteVnetTrafficEnabled:
+                    description: Is remote vnet traffic that is used to configure
+                      this gateway to accept traffic from other Azure Virtual Networks
+                      enabled? Defaults to false.
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
@@ -1271,6 +1640,11 @@ spec:
                       are Vpn or ExpressRoute. Changing the type forces a new resource
                       to be created.
                     type: string
+                  virtualWanTrafficEnabled:
+                    description: Is remote vnet traffic that is used to configure
+                      this gateway to accept traffic from remote Virtual WAN networks
+                      enabled? Defaults to false.
+                    type: boolean
                   vpnClientConfiguration:
                     description: A vpn_client_configuration block which is documented
                       below. In this block the Virtual Network Gateway can be configured
@@ -1295,6 +1669,68 @@ spec:
                           items:
                             type: string
                           type: array
+                        ipsecPolicy:
+                          description: An ipsec_policy block as defined below.
+                          items:
+                            properties:
+                              dhGroup:
+                                description: The DH Group, used in IKE Phase 1. Possible
+                                  values are DHGroup1, DHGroup2, DHGroup14, DHGroup24,
+                                  DHGroup2048, ECP256, ECP384 and None.
+                                type: string
+                              ikeEncryption:
+                                description: The IKE encryption algorithm, used for
+                                  IKE Phase 2. Possible values are AES128, AES192,
+                                  AES256, DES, DES3, GCMAES128 and GCMAES256.
+                                type: string
+                              ikeIntegrity:
+                                description: The IKE encryption integrity algorithm,
+                                  used for IKE Phase 2. Possible values are GCMAES128,
+                                  GCMAES256, MD5, SHA1, SHA256 and SHA384.
+                                type: string
+                              ipsecEncryption:
+                                description: The IPSec encryption algorithm, used
+                                  for IKE phase 1. Possible values are AES128, AES192,
+                                  AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256
+                                  and None.
+                                type: string
+                              ipsecIntegrity:
+                                description: The IPSec integrity algorithm, used for
+                                  IKE phase 1. Possible values are GCMAES128, GCMAES192,
+                                  GCMAES256, MD5, SHA1 and SHA256.
+                                type: string
+                              pfsGroup:
+                                description: The Pfs Group, used in IKE Phase 2. Possible
+                                  values are ECP256, ECP384, PFS1, PFS2, PFS14, PFS24,
+                                  PFS2048, PFSMM and None.
+                                type: string
+                              saDataSizeInKilobytes:
+                                description: The IPSec Security Association payload
+                                  size in KB for a Site-to-Site VPN tunnel. Possible
+                                  values are between 1024 and 2147483647.
+                                type: number
+                              saLifetimeInSeconds:
+                                description: The IPSec Security Association lifetime
+                                  in seconds for a Site-to-Site VPN tunnel. Possible
+                                  values are between 300 and 172799.
+                                type: number
+                            type: object
+                          type: array
+                        radiusServer:
+                          description: One or more radius_server blocks as defined
+                            below.
+                          items:
+                            properties:
+                              address:
+                                description: The address of the Radius Server.
+                                type: string
+                              score:
+                                description: The score of the Radius Server determines
+                                  the priority of the server. Possible values are
+                                  between 1 and 30.
+                                type: number
+                            type: object
+                          type: array
                         radiusServerAddress:
                           description: The address of the Radius server.
                           type: string
@@ -1307,7 +1743,8 @@ spec:
                           items:
                             properties:
                               name:
-                                description: A user-defined name of the root certificate.
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
                                 type: string
                               thumbprint:
                                 description: Specifies the public data of the certificate.
@@ -1322,15 +1759,39 @@ spec:
                           items:
                             properties:
                               name:
-                                description: A user-defined name of the root certificate.
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
                                 type: string
                               publicCertData:
                                 description: The public certificate of the root certificate
                                   authority. The certificate must be provided in Base-64
                                   encoded X.509 format (PEM). In particular, this
                                   argument must not include the -----BEGIN CERTIFICATE-----
-                                  or -----END CERTIFICATE----- markers.
+                                  or -----END CERTIFICATE----- markers, nor any newlines.
                                 type: string
+                            type: object
+                          type: array
+                        virtualNetworkGatewayClientConnection:
+                          description: One or more virtual_network_gateway_client_connection
+                            blocks as defined below.
+                          items:
+                            properties:
+                              addressPrefixes:
+                                description: A list of address prefixes for P2S VPN
+                                  Client.
+                                items:
+                                  type: string
+                                type: array
+                              name:
+                                description: The name of the Virtual Network Gateway
+                                  Client Connection.
+                                type: string
+                              policyGroupNames:
+                                description: A list of names of Virtual Network Gateway
+                                  Policy Groups.
+                                items:
+                                  type: string
+                                type: array
                             type: object
                           type: array
                         vpnAuthTypes:

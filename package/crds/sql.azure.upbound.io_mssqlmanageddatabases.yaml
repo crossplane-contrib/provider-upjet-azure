@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -77,6 +77,10 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     items:
                       properties:
+                        immutableBackupsEnabled:
+                          description: Specifies if the backups are immutable. Defaults
+                            to false.
+                          type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
@@ -177,6 +181,22 @@ spec:
                             type: string
                         type: object
                     type: object
+                  pointInTimeRestore:
+                    description: A point_in_time_restore block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        restorePointInTime:
+                          description: The point in time for the restore from source_database_id.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        sourceDatabaseId:
+                          description: The source database id that will be used to
+                            restore from. Changing this forces a new resource to be
+                            created.
+                          type: string
+                      type: object
+                    type: array
                   shortTermRetentionDays:
                     description: The backup retention period in days. This is how
                       many days Point-in-Time Restore will be supported.
@@ -199,6 +219,10 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     items:
                       properties:
+                        immutableBackupsEnabled:
+                          description: Specifies if the backups are immutable. Defaults
+                            to false.
+                          type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
@@ -217,6 +241,22 @@ spec:
                           description: The yearly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 10
                             years. e.g. P1Y, P12M, P52W or P365D.
+                          type: string
+                      type: object
+                    type: array
+                  pointInTimeRestore:
+                    description: A point_in_time_restore block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        restorePointInTime:
+                          description: The point in time for the restore from source_database_id.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        sourceDatabaseId:
+                          description: The source database id that will be used to
+                            restore from. Changing this forces a new resource to be
+                            created.
                           type: string
                       type: object
                     type: array
@@ -405,6 +445,10 @@ spec:
                     description: A long_term_retention_policy block as defined below.
                     items:
                       properties:
+                        immutableBackupsEnabled:
+                          description: Specifies if the backups are immutable. Defaults
+                            to false.
+                          type: boolean
                         monthlyRetention:
                           description: The monthly retention policy for an LTR backup
                             in an ISO 8601 format. Valid value is between 1 to 120
@@ -431,6 +475,22 @@ spec:
                       to create this Managed Database. Changing this forces a new
                       resource to be created.
                     type: string
+                  pointInTimeRestore:
+                    description: A point_in_time_restore block as defined below. Changing
+                      this forces a new resource to be created.
+                    items:
+                      properties:
+                        restorePointInTime:
+                          description: The point in time for the restore from source_database_id.
+                            Changing this forces a new resource to be created.
+                          type: string
+                        sourceDatabaseId:
+                          description: The source database id that will be used to
+                            restore from. Changing this forces a new resource to be
+                            created.
+                          type: string
+                      type: object
+                    type: array
                   shortTermRetentionDays:
                     description: The backup retention period in days. This is how
                       many days Point-in-Time Restore will be supported.

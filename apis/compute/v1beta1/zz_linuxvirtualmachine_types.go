@@ -130,6 +130,9 @@ type DiffDiskSettingsParameters struct {
 
 type LinuxVirtualMachineGalleryApplicationInitParameters struct {
 
+	// Specifies whether the version will be automatically updated for the VM when a new Gallery Application version is available in PIR/SIG. Defaults to false.
+	AutomaticUpgradeEnabled *bool `json:"automaticUpgradeEnabled,omitempty" tf:"automatic_upgrade_enabled,omitempty"`
+
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
@@ -138,6 +141,9 @@ type LinuxVirtualMachineGalleryApplicationInitParameters struct {
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+
+	// Specifies whether any failure for any operation in the VmApplication will fail the deployment of the VM. Defaults to false.
+	TreatFailureAsDeploymentFailureEnabled *bool `json:"treatFailureAsDeploymentFailureEnabled,omitempty" tf:"treat_failure_as_deployment_failure_enabled,omitempty"`
 
 	// Specifies the Gallery Application Version resource ID.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
@@ -145,6 +151,9 @@ type LinuxVirtualMachineGalleryApplicationInitParameters struct {
 
 type LinuxVirtualMachineGalleryApplicationObservation struct {
 
+	// Specifies whether the version will be automatically updated for the VM when a new Gallery Application version is available in PIR/SIG. Defaults to false.
+	AutomaticUpgradeEnabled *bool `json:"automaticUpgradeEnabled,omitempty" tf:"automatic_upgrade_enabled,omitempty"`
+
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
@@ -153,6 +162,9 @@ type LinuxVirtualMachineGalleryApplicationObservation struct {
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+
+	// Specifies whether any failure for any operation in the VmApplication will fail the deployment of the VM. Defaults to false.
+	TreatFailureAsDeploymentFailureEnabled *bool `json:"treatFailureAsDeploymentFailureEnabled,omitempty" tf:"treat_failure_as_deployment_failure_enabled,omitempty"`
 
 	// Specifies the Gallery Application Version resource ID.
 	VersionID *string `json:"versionId,omitempty" tf:"version_id,omitempty"`
@@ -160,6 +172,10 @@ type LinuxVirtualMachineGalleryApplicationObservation struct {
 
 type LinuxVirtualMachineGalleryApplicationParameters struct {
 
+	// Specifies whether the version will be automatically updated for the VM when a new Gallery Application version is available in PIR/SIG. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AutomaticUpgradeEnabled *bool `json:"automaticUpgradeEnabled,omitempty" tf:"automatic_upgrade_enabled,omitempty"`
+
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	// +kubebuilder:validation:Optional
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
@@ -171,6 +187,10 @@ type LinuxVirtualMachineGalleryApplicationParameters struct {
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
 	// +kubebuilder:validation:Optional
 	Tag *string `json:"tag,omitempty" tf:"tag,omitempty"`
+
+	// Specifies whether any failure for any operation in the VmApplication will fail the deployment of the VM. Defaults to false.
+	// +kubebuilder:validation:Optional
+	TreatFailureAsDeploymentFailureEnabled *bool `json:"treatFailureAsDeploymentFailureEnabled,omitempty" tf:"treat_failure_as_deployment_failure_enabled,omitempty"`
 
 	// Specifies the Gallery Application Version resource ID.
 	// +kubebuilder:validation:Optional
@@ -235,6 +255,9 @@ type LinuxVirtualMachineInitParameters struct {
 	// A boot_diagnostics block as defined below.
 	BootDiagnostics []BootDiagnosticsInitParameters `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
 
+	// Specifies whether to skip platform scheduled patching when a user schedule is associated with the VM. Defaults to false.
+	BypassPlatformSafetyChecksOnUserScheduleEnabled *bool `json:"bypassPlatformSafetyChecksOnUserScheduleEnabled,omitempty" tf:"bypass_platform_safety_checks_on_user_schedule_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
@@ -250,6 +273,9 @@ type LinuxVirtualMachineInitParameters struct {
 	// Should Password Authentication be disabled on this Virtual Machine? Defaults to true. Changing this forces a new resource to be created.
 	DisablePasswordAuthentication *bool `json:"disablePasswordAuthentication,omitempty" tf:"disable_password_authentication,omitempty"`
 
+	// Specifies the Disk Controller Type used for this Virtual Machine. Possible values are SCSI and NVMe.
+	DiskControllerType *string `json:"diskControllerType,omitempty" tf:"disk_controller_type,omitempty"`
+
 	// Specifies the Edge Zone within the Azure Region where this Linux Virtual Machine should exist. Changing this forces a new Linux Virtual Machine to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
@@ -259,7 +285,7 @@ type LinuxVirtualMachineInitParameters struct {
 	// Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// One or more gallery_application blocks as defined below.
@@ -293,6 +319,9 @@ type LinuxVirtualMachineInitParameters struct {
 	// A os_disk block as defined below.
 	OsDisk []LinuxVirtualMachineOsDiskInitParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
+	// A os_image_notification block as defined below.
+	OsImageNotification []OsImageNotificationInitParameters `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
 
@@ -313,6 +342,9 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// The ID of the Proximity Placement Group which the Virtual Machine should be assigned to.
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
+
+	// Specifies the reboot setting for platform scheduled patching. Possible values are Always, IfRequired and Never.
+	RebootSetting *string `json:"rebootSetting,omitempty" tf:"reboot_setting,omitempty"`
 
 	// One or more secret blocks as defined below.
 	Secret []SecretInitParameters `json:"secret,omitempty" tf:"secret,omitempty"`
@@ -339,7 +371,10 @@ type LinuxVirtualMachineInitParameters struct {
 	// The Base64-Encoded User Data which should be used for this Virtual Machine.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within. Changing this forces a new resource to be created.
+	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
+
+	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within.
 	VirtualMachineScaleSetID *string `json:"virtualMachineScaleSetId,omitempty" tf:"virtual_machine_scale_set_id,omitempty"`
 
 	// Specifies whether vTPM should be enabled on the virtual machine. Changing this forces a new resource to be created.
@@ -369,6 +404,9 @@ type LinuxVirtualMachineObservation struct {
 	// A boot_diagnostics block as defined below.
 	BootDiagnostics []BootDiagnosticsObservation `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
 
+	// Specifies whether to skip platform scheduled patching when a user schedule is associated with the VM. Defaults to false.
+	BypassPlatformSafetyChecksOnUserScheduleEnabled *bool `json:"bypassPlatformSafetyChecksOnUserScheduleEnabled,omitempty" tf:"bypass_platform_safety_checks_on_user_schedule_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
@@ -384,6 +422,9 @@ type LinuxVirtualMachineObservation struct {
 	// Should Password Authentication be disabled on this Virtual Machine? Defaults to true. Changing this forces a new resource to be created.
 	DisablePasswordAuthentication *bool `json:"disablePasswordAuthentication,omitempty" tf:"disable_password_authentication,omitempty"`
 
+	// Specifies the Disk Controller Type used for this Virtual Machine. Possible values are SCSI and NVMe.
+	DiskControllerType *string `json:"diskControllerType,omitempty" tf:"disk_controller_type,omitempty"`
+
 	// Specifies the Edge Zone within the Azure Region where this Linux Virtual Machine should exist. Changing this forces a new Linux Virtual Machine to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
@@ -393,7 +434,7 @@ type LinuxVirtualMachineObservation struct {
 	// Specifies what should happen when the Virtual Machine is evicted for price reasons when using a Spot instance. Possible values are Deallocate and Delete. Changing this forces a new resource to be created.
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
 	// One or more gallery_application blocks as defined below.
@@ -419,6 +460,9 @@ type LinuxVirtualMachineObservation struct {
 
 	// A os_disk block as defined below.
 	OsDisk []LinuxVirtualMachineOsDiskObservation `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
+
+	// A os_image_notification block as defined below.
+	OsImageNotification []OsImageNotificationObservation `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
 
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
@@ -453,6 +497,9 @@ type LinuxVirtualMachineObservation struct {
 	// A list of the Public IP Addresses assigned to this Virtual Machine.
 	PublicIPAddresses []*string `json:"publicIpAddresses,omitempty" tf:"public_ip_addresses,omitempty"`
 
+	// Specifies the reboot setting for platform scheduled patching. Possible values are Always, IfRequired and Never.
+	RebootSetting *string `json:"rebootSetting,omitempty" tf:"reboot_setting,omitempty"`
+
 	// The name of the Resource Group in which the Linux Virtual Machine should be exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -481,10 +528,13 @@ type LinuxVirtualMachineObservation struct {
 	// The Base64-Encoded User Data which should be used for this Virtual Machine.
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
+	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
+
 	// A 128-bit identifier which uniquely identifies this Virtual Machine.
 	VirtualMachineID *string `json:"virtualMachineId,omitempty" tf:"virtual_machine_id,omitempty"`
 
-	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within. Changing this forces a new resource to be created.
+	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within.
 	VirtualMachineScaleSetID *string `json:"virtualMachineScaleSetId,omitempty" tf:"virtual_machine_scale_set_id,omitempty"`
 
 	// Specifies whether vTPM should be enabled on the virtual machine. Changing this forces a new resource to be created.
@@ -623,6 +673,10 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	BootDiagnostics []BootDiagnosticsParameters `json:"bootDiagnostics,omitempty" tf:"boot_diagnostics,omitempty"`
 
+	// Specifies whether to skip platform scheduled patching when a user schedule is associated with the VM. Defaults to false.
+	// +kubebuilder:validation:Optional
+	BypassPlatformSafetyChecksOnUserScheduleEnabled *bool `json:"bypassPlatformSafetyChecksOnUserScheduleEnabled,omitempty" tf:"bypass_platform_safety_checks_on_user_schedule_enabled,omitempty"`
+
 	// Specifies the ID of the Capacity Reservation Group which the Virtual Machine should be allocated to.
 	// +kubebuilder:validation:Optional
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
@@ -647,6 +701,10 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	DisablePasswordAuthentication *bool `json:"disablePasswordAuthentication,omitempty" tf:"disable_password_authentication,omitempty"`
 
+	// Specifies the Disk Controller Type used for this Virtual Machine. Possible values are SCSI and NVMe.
+	// +kubebuilder:validation:Optional
+	DiskControllerType *string `json:"diskControllerType,omitempty" tf:"disk_controller_type,omitempty"`
+
 	// Specifies the Edge Zone within the Azure Region where this Linux Virtual Machine should exist. Changing this forces a new Linux Virtual Machine to be created.
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
@@ -659,7 +717,7 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	EvictionPolicy *string `json:"evictionPolicy,omitempty" tf:"eviction_policy,omitempty"`
 
-	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to 90 minutes (PT1H30M).
+	// Specifies the duration allocated for all extensions to start. The time duration should be between 15 minutes and 120 minutes (inclusive) and should be specified in ISO 8601 format. Defaults to PT1H30M.
 	// +kubebuilder:validation:Optional
 	ExtensionsTimeBudget *string `json:"extensionsTimeBudget,omitempty" tf:"extensions_time_budget,omitempty"`
 
@@ -701,6 +759,10 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	OsDisk []LinuxVirtualMachineOsDiskParameters `json:"osDisk,omitempty" tf:"os_disk,omitempty"`
 
+	// A os_image_notification block as defined below.
+	// +kubebuilder:validation:Optional
+	OsImageNotification []OsImageNotificationParameters `json:"osImageNotification,omitempty" tf:"os_image_notification,omitempty"`
+
 	// Specifies the mode of VM Guest Patching for the Virtual Machine. Possible values are AutomaticByPlatform or ImageDefault. Defaults to ImageDefault.
 	// +kubebuilder:validation:Optional
 	PatchAssessmentMode *string `json:"patchAssessmentMode,omitempty" tf:"patch_assessment_mode,omitempty"`
@@ -728,6 +790,10 @@ type LinuxVirtualMachineParameters struct {
 	// The ID of the Proximity Placement Group which the Virtual Machine should be assigned to.
 	// +kubebuilder:validation:Optional
 	ProximityPlacementGroupID *string `json:"proximityPlacementGroupId,omitempty" tf:"proximity_placement_group_id,omitempty"`
+
+	// Specifies the reboot setting for platform scheduled patching. Possible values are Always, IfRequired and Never.
+	// +kubebuilder:validation:Optional
+	RebootSetting *string `json:"rebootSetting,omitempty" tf:"reboot_setting,omitempty"`
 
 	// The name of the Resource Group in which the Linux Virtual Machine should be exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -775,7 +841,11 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	UserData *string `json:"userData,omitempty" tf:"user_data,omitempty"`
 
-	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within. Changing this forces a new resource to be created.
+	// Specifies whether VMAgent Platform Updates is enabled. Defaults to false.
+	// +kubebuilder:validation:Optional
+	VMAgentPlatformUpdatesEnabled *bool `json:"vmAgentPlatformUpdatesEnabled,omitempty" tf:"vm_agent_platform_updates_enabled,omitempty"`
+
+	// Specifies the Orchestrated Virtual Machine Scale Set that this Virtual Machine should be created within.
 	// +kubebuilder:validation:Optional
 	VirtualMachineScaleSetID *string `json:"virtualMachineScaleSetId,omitempty" tf:"virtual_machine_scale_set_id,omitempty"`
 
@@ -786,6 +856,25 @@ type LinuxVirtualMachineParameters struct {
 	// Specifies the Availability Zones in which this Linux Virtual Machine should be located. Changing this forces a new Linux Virtual Machine to be created.
 	// +kubebuilder:validation:Optional
 	Zone *string `json:"zone,omitempty" tf:"zone,omitempty"`
+}
+
+type OsImageNotificationInitParameters struct {
+
+	// Length of time a notification to be sent to the VM on the instance metadata server till the VM gets OS upgraded. The only possible value is PT15M. Defaults to PT15M.
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type OsImageNotificationObservation struct {
+
+	// Length of time a notification to be sent to the VM on the instance metadata server till the VM gets OS upgraded. The only possible value is PT15M. Defaults to PT15M.
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
+}
+
+type OsImageNotificationParameters struct {
+
+	// Length of time a notification to be sent to the VM on the instance metadata server till the VM gets OS upgraded. The only possible value is PT15M. Defaults to PT15M.
+	// +kubebuilder:validation:Optional
+	Timeout *string `json:"timeout,omitempty" tf:"timeout,omitempty"`
 }
 
 type PlanInitParameters struct {
@@ -962,8 +1051,8 @@ type LinuxVirtualMachineStatus struct {
 // +kubebuilder:storageversion
 
 // LinuxVirtualMachine is the Schema for the LinuxVirtualMachines API. Manages a Linux Virtual Machine.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

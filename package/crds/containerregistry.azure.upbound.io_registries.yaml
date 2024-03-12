@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -262,8 +262,6 @@ spec:
                             type: object
                           type: array
                         virtualNetwork:
-                          description: One or more virtual_network blocks as defined
-                            below.
                           items:
                             properties:
                               action:
@@ -271,8 +269,7 @@ spec:
                                   rule. At this time the only supported value is Allow
                                 type: string
                               subnetId:
-                                description: The subnet id from which requests will
-                                  match the rule.
+                                description: The ID of the Container Registry.
                                 type: string
                               subnetIdRef:
                                 description: Reference to a Subnet in network to populate
@@ -685,8 +682,6 @@ spec:
                             type: object
                           type: array
                         virtualNetwork:
-                          description: One or more virtual_network blocks as defined
-                            below.
                           items:
                             properties:
                               action:
@@ -694,8 +689,7 @@ spec:
                                   rule. At this time the only supported value is Allow
                                 type: string
                               subnetId:
-                                description: The subnet id from which requests will
-                                  match the rule.
+                                description: The ID of the Container Registry.
                                 type: string
                               subnetIdRef:
                                 description: Reference to a Subnet in network to populate
@@ -1138,8 +1132,6 @@ spec:
                             type: object
                           type: array
                         virtualNetwork:
-                          description: One or more virtual_network blocks as defined
-                            below.
                           items:
                             properties:
                               action:
@@ -1147,8 +1139,7 @@ spec:
                                   rule. At this time the only supported value is Allow
                                 type: string
                               subnetId:
-                                description: The subnet id from which requests will
-                                  match the rule.
+                                description: The ID of the Container Registry.
                                 type: string
                             type: object
                           type: array

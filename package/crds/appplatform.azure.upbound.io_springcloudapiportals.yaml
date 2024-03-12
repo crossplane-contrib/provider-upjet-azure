@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -73,6 +73,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  apiTryOutEnabled:
+                    description: Specifies whether the API try-out feature is enabled.
+                      When enabled, users can try out the API by sending requests
+                      and viewing responses in API portal.
+                    type: boolean
                   gatewayIds:
                     description: Specifies a list of Spring Cloud Gateway.
                     items:
@@ -286,6 +291,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  apiTryOutEnabled:
+                    description: Specifies whether the API try-out feature is enabled.
+                      When enabled, users can try out the API by sending requests
+                      and viewing responses in API portal.
+                    type: boolean
                   gatewayIds:
                     description: Specifies a list of Spring Cloud Gateway.
                     items:
@@ -579,6 +589,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  apiTryOutEnabled:
+                    description: Specifies whether the API try-out feature is enabled.
+                      When enabled, users can try out the API by sending requests
+                      and viewing responses in API portal.
+                    type: boolean
                   gatewayIds:
                     description: Specifies a list of Spring Cloud Gateway.
                     items:

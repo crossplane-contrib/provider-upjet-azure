@@ -13,6 +13,75 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type DataSetParquetAzureBlobFsLocationInitParameters struct {
+
+	// Is the file_system using dynamic expression, function or system variables? Defaults to false.
+	DynamicFileSystemEnabled *bool `json:"dynamicFileSystemEnabled,omitempty" tf:"dynamic_file_system_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The container on the Azure Data Lake Storage Account hosting the file.
+	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
+
+	// The filename of the file on the Azure Data Lake Storage Account.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the Azure Data Lake Storage Account.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type DataSetParquetAzureBlobFsLocationObservation struct {
+
+	// Is the file_system using dynamic expression, function or system variables? Defaults to false.
+	DynamicFileSystemEnabled *bool `json:"dynamicFileSystemEnabled,omitempty" tf:"dynamic_file_system_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The container on the Azure Data Lake Storage Account hosting the file.
+	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
+
+	// The filename of the file on the Azure Data Lake Storage Account.
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the Azure Data Lake Storage Account.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
+type DataSetParquetAzureBlobFsLocationParameters struct {
+
+	// Is the file_system using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
+	DynamicFileSystemEnabled *bool `json:"dynamicFileSystemEnabled,omitempty" tf:"dynamic_file_system_enabled,omitempty"`
+
+	// Is the filename using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
+	DynamicFilenameEnabled *bool `json:"dynamicFilenameEnabled,omitempty" tf:"dynamic_filename_enabled,omitempty"`
+
+	// Is the path using dynamic expression, function or system variables? Defaults to false.
+	// +kubebuilder:validation:Optional
+	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
+
+	// The container on the Azure Data Lake Storage Account hosting the file.
+	// +kubebuilder:validation:Optional
+	FileSystem *string `json:"fileSystem,omitempty" tf:"file_system,omitempty"`
+
+	// The filename of the file on the Azure Data Lake Storage Account.
+	// +kubebuilder:validation:Optional
+	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
+
+	// The folder path to the file on the Azure Data Lake Storage Account.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+}
+
 type DataSetParquetAzureBlobStorageLocationInitParameters struct {
 
 	// The container on the Azure Blob Storage Account hosting the file.
@@ -27,10 +96,10 @@ type DataSetParquetAzureBlobStorageLocationInitParameters struct {
 	// Is the path using dynamic expression, function or system variables? Defaults to false.
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
-	// The filename of the file on the web server.
+	// The filename of the file on the Azure Blob Storage Account.
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
-	// The folder path to the file on the web server.
+	// The folder path to the file on the Azure Blob Storage Account.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
@@ -48,10 +117,10 @@ type DataSetParquetAzureBlobStorageLocationObservation struct {
 	// Is the path using dynamic expression, function or system variables? Defaults to false.
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
-	// The filename of the file on the web server.
+	// The filename of the file on the Azure Blob Storage Account.
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
-	// The folder path to the file on the web server.
+	// The folder path to the file on the Azure Blob Storage Account.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
 
@@ -73,11 +142,11 @@ type DataSetParquetAzureBlobStorageLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	DynamicPathEnabled *bool `json:"dynamicPathEnabled,omitempty" tf:"dynamic_path_enabled,omitempty"`
 
-	// The filename of the file on the web server.
+	// The filename of the file on the Azure Blob Storage Account.
 	// +kubebuilder:validation:Optional
 	Filename *string `json:"filename,omitempty" tf:"filename,omitempty"`
 
-	// The folder path to the file on the web server.
+	// The folder path to the file on the Azure Blob Storage Account.
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 }
@@ -150,6 +219,9 @@ type DataSetParquetInitParameters struct {
 	// List of tags that can be used for describing the Data Factory Dataset.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
+	// A azure_blob_fs_location block as defined below.
+	AzureBlobFsLocation []DataSetParquetAzureBlobFsLocationInitParameters `json:"azureBlobFsLocation,omitempty" tf:"azure_blob_fs_location,omitempty"`
+
 	// A azure_blob_storage_location block as defined below.
 	AzureBlobStorageLocation []DataSetParquetAzureBlobStorageLocationInitParameters `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
 
@@ -197,6 +269,9 @@ type DataSetParquetObservation struct {
 	// List of tags that can be used for describing the Data Factory Dataset.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
+	// A azure_blob_fs_location block as defined below.
+	AzureBlobFsLocation []DataSetParquetAzureBlobFsLocationObservation `json:"azureBlobFsLocation,omitempty" tf:"azure_blob_fs_location,omitempty"`
+
 	// A azure_blob_storage_location block as defined below.
 	AzureBlobStorageLocation []DataSetParquetAzureBlobStorageLocationObservation `json:"azureBlobStorageLocation,omitempty" tf:"azure_blob_storage_location,omitempty"`
 
@@ -242,6 +317,10 @@ type DataSetParquetParameters struct {
 	// List of tags that can be used for describing the Data Factory Dataset.
 	// +kubebuilder:validation:Optional
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// A azure_blob_fs_location block as defined below.
+	// +kubebuilder:validation:Optional
+	AzureBlobFsLocation []DataSetParquetAzureBlobFsLocationParameters `json:"azureBlobFsLocation,omitempty" tf:"azure_blob_fs_location,omitempty"`
 
 	// A azure_blob_storage_location block as defined below.
 	// +kubebuilder:validation:Optional
@@ -371,8 +450,8 @@ type DataSetParquetStatus struct {
 // +kubebuilder:storageversion
 
 // DataSetParquet is the Schema for the DataSetParquets API. Manages an Azure Parquet Dataset inside an Azure Data Factory.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

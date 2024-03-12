@@ -15,6 +15,7 @@ spec:
         maxDeliveryCount: 15
         timeToLive: PT1H10M
       maxDeliveryCount: 30
+    localAuthenticationEnabled: false
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

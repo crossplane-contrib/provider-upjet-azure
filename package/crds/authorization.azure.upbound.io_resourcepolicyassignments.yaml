@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -113,7 +113,7 @@ spec:
                   name:
                     description: The name which should be used for this Policy Assignment.
                       Changing this forces a new Resource Policy Assignment to be
-                      created.
+                      created. Cannot exceed 64 characters in length.
                     type: string
                   nonComplianceMessage:
                     description: One or more non_compliance_message blocks as defined
@@ -147,7 +147,8 @@ spec:
                     items:
                       properties:
                         selectors:
-                          description: One or more override_selector as defined below.
+                          description: One or more override_selector block as defined
+                            below.
                           items:
                             properties:
                               in:
@@ -284,7 +285,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the
@@ -350,7 +351,7 @@ spec:
                   name:
                     description: The name which should be used for this Policy Assignment.
                       Changing this forces a new Resource Policy Assignment to be
-                      created.
+                      created. Cannot exceed 64 characters in length.
                     type: string
                   nonComplianceMessage:
                     description: One or more non_compliance_message blocks as defined
@@ -384,7 +385,8 @@ spec:
                     items:
                       properties:
                         selectors:
-                          description: One or more override_selector as defined below.
+                          description: One or more override_selector block as defined
+                            below.
                           items:
                             properties:
                               in:
@@ -521,7 +523,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the
@@ -767,7 +769,7 @@ spec:
                   name:
                     description: The name which should be used for this Policy Assignment.
                       Changing this forces a new Resource Policy Assignment to be
-                      created.
+                      created. Cannot exceed 64 characters in length.
                     type: string
                   nonComplianceMessage:
                     description: One or more non_compliance_message blocks as defined
@@ -801,7 +803,8 @@ spec:
                     items:
                       properties:
                         selectors:
-                          description: One or more override_selector as defined below.
+                          description: One or more override_selector block as defined
+                            below.
                           items:
                             properties:
                               in:
@@ -814,7 +817,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the
@@ -867,7 +870,7 @@ spec:
                               kind:
                                 description: Specifies which characteristic will narrow
                                   down the set of evaluated resources. Possible values
-                                  are resourceLocation,  resourceType and resourceWithoutLocation.
+                                  are resourceLocation, resourceType and resourceWithoutLocation.
                                 type: string
                               notIn:
                                 description: The list of not-allowed values for the

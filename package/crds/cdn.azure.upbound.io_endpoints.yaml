@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -548,7 +548,8 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are MatchRequest, Http and Https.
+                                  Valid values are MatchRequest, Http and Https. Defaults
+                                  to MatchRequest.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -570,7 +571,8 @@ spec:
                                   be longer than 260 characters.
                                 type: string
                               preserveUnmatchedPath:
-                                description: Defaults to true.
+                                description: Whether preserve an unmatched path. Defaults
+                                  to true.
                                 type: boolean
                               sourcePattern:
                                 description: This value must start with a / and can't
@@ -696,7 +698,8 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are MatchRequest, Http and Https.
+                                  Valid values are MatchRequest, Http and Https. Defaults
+                                  to MatchRequest.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -718,7 +721,8 @@ spec:
                                   be longer than 260 characters.
                                 type: string
                               preserveUnmatchedPath:
-                                description: Defaults to true.
+                                description: Whether preserve an unmatched path. Defaults
+                                  to true.
                                 type: boolean
                               sourcePattern:
                                 description: This value must start with a / and can't
@@ -732,10 +736,10 @@ spec:
                     description: Indicates whether compression is to be enabled.
                     type: boolean
                   isHttpAllowed:
-                    description: Defaults to true.
+                    description: Specifies if http allowed. Defaults to true.
                     type: boolean
                   isHttpsAllowed:
-                    description: Defaults to true.
+                    description: Specifies if https allowed. Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the
@@ -1450,7 +1454,8 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are MatchRequest, Http and Https.
+                                  Valid values are MatchRequest, Http and Https. Defaults
+                                  to MatchRequest.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -1472,7 +1477,8 @@ spec:
                                   be longer than 260 characters.
                                 type: string
                               preserveUnmatchedPath:
-                                description: Defaults to true.
+                                description: Whether preserve an unmatched path. Defaults
+                                  to true.
                                 type: boolean
                               sourcePattern:
                                 description: This value must start with a / and can't
@@ -1598,7 +1604,8 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are MatchRequest, Http and Https.
+                                  Valid values are MatchRequest, Http and Https. Defaults
+                                  to MatchRequest.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -1620,7 +1627,8 @@ spec:
                                   be longer than 260 characters.
                                 type: string
                               preserveUnmatchedPath:
-                                description: Defaults to true.
+                                description: Whether preserve an unmatched path. Defaults
+                                  to true.
                                 type: boolean
                               sourcePattern:
                                 description: This value must start with a / and can't
@@ -1634,10 +1642,10 @@ spec:
                     description: Indicates whether compression is to be enabled.
                     type: boolean
                   isHttpAllowed:
-                    description: Defaults to true.
+                    description: Specifies if http allowed. Defaults to true.
                     type: boolean
                   isHttpsAllowed:
-                    description: Defaults to true.
+                    description: Specifies if https allowed. Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the
@@ -2361,7 +2369,8 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are MatchRequest, Http and Https.
+                                  Valid values are MatchRequest, Http and Https. Defaults
+                                  to MatchRequest.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -2383,7 +2392,8 @@ spec:
                                   be longer than 260 characters.
                                 type: string
                               preserveUnmatchedPath:
-                                description: Defaults to true.
+                                description: Whether preserve an unmatched path. Defaults
+                                  to true.
                                 type: boolean
                               sourcePattern:
                                 description: This value must start with a / and can't
@@ -2512,7 +2522,8 @@ spec:
                                 type: string
                               protocol:
                                 description: Specifies the protocol part of the URL.
-                                  Valid values are MatchRequest, Http and Https.
+                                  Valid values are MatchRequest, Http and Https. Defaults
+                                  to MatchRequest.
                                 type: string
                               queryString:
                                 description: Specifies the query string part of the
@@ -2534,7 +2545,8 @@ spec:
                                   be longer than 260 characters.
                                 type: string
                               preserveUnmatchedPath:
-                                description: Defaults to true.
+                                description: Whether preserve an unmatched path. Defaults
+                                  to true.
                                 type: boolean
                               sourcePattern:
                                 description: This value must start with a / and can't
@@ -2551,10 +2563,10 @@ spec:
                     description: Indicates whether compression is to be enabled.
                     type: boolean
                   isHttpAllowed:
-                    description: Defaults to true.
+                    description: Specifies if http allowed. Defaults to true.
                     type: boolean
                   isHttpsAllowed:
-                    description: Defaults to true.
+                    description: Specifies if https allowed. Defaults to true.
                     type: boolean
                   location:
                     description: Specifies the supported Azure location where the

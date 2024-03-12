@@ -213,7 +213,7 @@ type DiskEncryptionParameters struct {
 
 type EdgeNodeInitParameters struct {
 
-	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster. One or more https_endpoints blocks as defined below.
 	HTTPSEndpoints []HTTPSEndpointsInitParameters `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
 
 	// A install_script_action block as defined below.
@@ -222,7 +222,7 @@ type EdgeNodeInitParameters struct {
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
 
-	// A uninstall_script_actions block as defined below. Changing this forces a new resource to be created.
+	// A uninstall_script_actions block as defined below.
 	UninstallScriptActions []UninstallScriptActionsInitParameters `json:"uninstallScriptActions,omitempty" tf:"uninstall_script_actions,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
@@ -231,7 +231,7 @@ type EdgeNodeInitParameters struct {
 
 type EdgeNodeObservation struct {
 
-	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster. One or more https_endpoints blocks as defined below.
 	HTTPSEndpoints []HTTPSEndpointsObservation `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
 
 	// A install_script_action block as defined below.
@@ -240,7 +240,7 @@ type EdgeNodeObservation struct {
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
 
-	// A uninstall_script_actions block as defined below. Changing this forces a new resource to be created.
+	// A uninstall_script_actions block as defined below.
 	UninstallScriptActions []UninstallScriptActionsObservation `json:"uninstallScriptActions,omitempty" tf:"uninstall_script_actions,omitempty"`
 
 	// The Size of the Virtual Machine which should be used as the Zookeeper Nodes. Possible values are ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6, A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2, Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2, Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2, Standard_D3, Standard_D4, Standard_D11, Standard_D12, Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2, Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2, Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2, Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2, Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2, Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3, Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3, Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3, Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3, Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3, Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4, Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4, Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4, Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4, Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4, Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3, Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2, Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2, Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2, Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24. Changing this forces a new resource to be created.
@@ -249,7 +249,7 @@ type EdgeNodeObservation struct {
 
 type EdgeNodeParameters struct {
 
-	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster.
+	// The HTTPS Connectivity Endpoint for this HDInsight Hadoop Cluster. One or more https_endpoints blocks as defined below.
 	// +kubebuilder:validation:Optional
 	HTTPSEndpoints []HTTPSEndpointsParameters `json:"httpsEndpoints,omitempty" tf:"https_endpoints,omitempty"`
 
@@ -261,7 +261,7 @@ type EdgeNodeParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetInstanceCount *float64 `json:"targetInstanceCount" tf:"target_instance_count,omitempty"`
 
-	// A uninstall_script_actions block as defined below. Changing this forces a new resource to be created.
+	// A uninstall_script_actions block as defined below.
 	// +kubebuilder:validation:Optional
 	UninstallScriptActions []UninstallScriptActionsParameters `json:"uninstallScriptActions,omitempty" tf:"uninstall_script_actions,omitempty"`
 
@@ -588,7 +588,7 @@ type HeadNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []ScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -620,7 +620,7 @@ type HeadNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []ScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -647,7 +647,7 @@ type HeadNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []ScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -827,7 +827,7 @@ type NetworkInitParameters struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -836,7 +836,7 @@ type NetworkObservation struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -846,7 +846,7 @@ type NetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
@@ -1289,7 +1289,7 @@ type WorkerNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []WorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1327,7 +1327,7 @@ type WorkerNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []WorkerNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1361,7 +1361,7 @@ type WorkerNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []WorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1441,7 +1441,7 @@ type ZookeeperNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []ZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1473,7 +1473,7 @@ type ZookeeperNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []ZookeeperNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1500,7 +1500,7 @@ type ZookeeperNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []ZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1598,8 +1598,8 @@ type HadoopClusterStatus struct {
 // +kubebuilder:storageversion
 
 // HadoopCluster is the Schema for the HadoopClusters API. Manages a HDInsight Hadoop Cluster.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -21,7 +21,7 @@ type RouteTableInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// List of objects representing routes. Each object accepts the arguments documented below.
+	// List of route objects representing routes as defined below. Each object accepts the arguments documented below.
 	Route []RouteTableRouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -43,7 +43,7 @@ type RouteTableObservation struct {
 	// The name of the resource group in which to create the route table. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// List of objects representing routes. Each object accepts the arguments documented below.
+	// List of route objects representing routes as defined below. Each object accepts the arguments documented below.
 	Route []RouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The collection of Subnets associated with this route table.
@@ -78,7 +78,7 @@ type RouteTableParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// List of objects representing routes. Each object accepts the arguments documented below.
+	// List of route objects representing routes as defined below. Each object accepts the arguments documented below.
 	// +kubebuilder:validation:Optional
 	Route []RouteTableRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
@@ -165,8 +165,8 @@ type RouteTableStatus struct {
 // +kubebuilder:storageversion
 
 // RouteTable is the Schema for the RouteTables API. Manages a Route Table
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

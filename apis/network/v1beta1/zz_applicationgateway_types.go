@@ -18,7 +18,7 @@ type ApplicationGatewayInitParameters struct {
 	// One or more authentication_certificate blocks as defined below.
 	AuthenticationCertificate []AuthenticationCertificateInitParameters `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
-	// A autoscale_configuration block as defined below.
+	// An autoscale_configuration block as defined below.
 	AutoscaleConfiguration []AutoscaleConfigurationInitParameters `json:"autoscaleConfiguration,omitempty" tf:"autoscale_configuration,omitempty"`
 
 	// One or more backend_address_pool blocks as defined below.
@@ -116,7 +116,7 @@ type ApplicationGatewayObservation struct {
 	// One or more authentication_certificate blocks as defined below.
 	AuthenticationCertificate []AuthenticationCertificateObservation `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
-	// A autoscale_configuration block as defined below.
+	// An autoscale_configuration block as defined below.
 	AutoscaleConfiguration []AutoscaleConfigurationObservation `json:"autoscaleConfiguration,omitempty" tf:"autoscale_configuration,omitempty"`
 
 	// One or more backend_address_pool blocks as defined below.
@@ -224,7 +224,7 @@ type ApplicationGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationCertificate []AuthenticationCertificateParameters `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
-	// A autoscale_configuration block as defined below.
+	// An autoscale_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	AutoscaleConfiguration []AutoscaleConfigurationParameters `json:"autoscaleConfiguration,omitempty" tf:"autoscale_configuration,omitempty"`
 
@@ -490,7 +490,7 @@ type BackendHTTPSettingsInitParameters struct {
 	// The name of the affinity cookie.
 	AffinityCookieName *string `json:"affinityCookieName,omitempty" tf:"affinity_cookie_name,omitempty"`
 
-	// One or more authentication_certificate blocks as defined below.
+	// One or more authentication_certificate_backend blocks as defined below.
 	AuthenticationCertificate []BackendHTTPSettingsAuthenticationCertificateInitParameters `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
 	// A connection_draining block as defined below.
@@ -532,7 +532,7 @@ type BackendHTTPSettingsObservation struct {
 	// The name of the affinity cookie.
 	AffinityCookieName *string `json:"affinityCookieName,omitempty" tf:"affinity_cookie_name,omitempty"`
 
-	// One or more authentication_certificate blocks as defined below.
+	// One or more authentication_certificate_backend blocks as defined below.
 	AuthenticationCertificate []BackendHTTPSettingsAuthenticationCertificateObservation `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
 	// A connection_draining block as defined below.
@@ -581,7 +581,7 @@ type BackendHTTPSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	AffinityCookieName *string `json:"affinityCookieName,omitempty" tf:"affinity_cookie_name,omitempty"`
 
-	// One or more authentication_certificate blocks as defined below.
+	// One or more authentication_certificate_backend blocks as defined below.
 	// +kubebuilder:validation:Optional
 	AuthenticationCertificate []BackendHTTPSettingsAuthenticationCertificateParameters `json:"authenticationCertificate,omitempty" tf:"authentication_certificate,omitempty"`
 
@@ -742,7 +742,7 @@ type CustomErrorConfigurationParameters struct {
 
 type DisabledRuleGroupInitParameters struct {
 
-	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
+	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, crs_49_inbound_blocking, General, GoodBots, KnownBadBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA, UnknownBots, METHOD-ENFORCEMENT, PROTOCOL-ENFORCEMENT, PROTOCOL-ATTACK, LFI, RFI, RCE, PHP, NODEJS, XSS, SQLI, FIX, JAVA, MS-ThreatIntel-WebShells, MS-ThreatIntel-AppSec, MS-ThreatIntel-SQLI and MS-ThreatIntel-CVEs.
 	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
 
 	// A list of rules which should be disabled in that group. Disables all rules in the specified group if rules is not specified.
@@ -751,7 +751,7 @@ type DisabledRuleGroupInitParameters struct {
 
 type DisabledRuleGroupObservation struct {
 
-	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
+	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, crs_49_inbound_blocking, General, GoodBots, KnownBadBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA, UnknownBots, METHOD-ENFORCEMENT, PROTOCOL-ENFORCEMENT, PROTOCOL-ATTACK, LFI, RFI, RCE, PHP, NODEJS, XSS, SQLI, FIX, JAVA, MS-ThreatIntel-WebShells, MS-ThreatIntel-AppSec, MS-ThreatIntel-SQLI and MS-ThreatIntel-CVEs.
 	RuleGroupName *string `json:"ruleGroupName,omitempty" tf:"rule_group_name,omitempty"`
 
 	// A list of rules which should be disabled in that group. Disables all rules in the specified group if rules is not specified.
@@ -760,7 +760,7 @@ type DisabledRuleGroupObservation struct {
 
 type DisabledRuleGroupParameters struct {
 
-	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, General, GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
+	// The rule group where specific rules should be disabled. Possible values are BadBots, crs_20_protocol_violations, crs_21_protocol_anomalies, crs_23_request_limits, crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks, crs_41_sql_injection_attacks, crs_41_xss_attacks, crs_42_tight_security, crs_45_trojans, crs_49_inbound_blocking, General, GoodBots, KnownBadBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT, REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT, REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI, REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE, REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS, REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION, REQUEST-944-APPLICATION-ATTACK-JAVA, UnknownBots, METHOD-ENFORCEMENT, PROTOCOL-ENFORCEMENT, PROTOCOL-ATTACK, LFI, RFI, RCE, PHP, NODEJS, XSS, SQLI, FIX, JAVA, MS-ThreatIntel-WebShells, MS-ThreatIntel-AppSec, MS-ThreatIntel-SQLI and MS-ThreatIntel-CVEs.
 	// +kubebuilder:validation:Optional
 	RuleGroupName *string `json:"ruleGroupName" tf:"rule_group_name,omitempty"`
 
@@ -816,7 +816,7 @@ type FrontendIPConfigurationInitParameters struct {
 	// The Private IP Address to use for the Application Gateway.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The Allocation Method for the Private IP Address. Possible values are Dynamic and Static.
+	// The Allocation Method for the Private IP Address. Possible values are Dynamic and Static. Defaults to Dynamic.
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The name of the private link configuration to use for this frontend IP configuration.
@@ -860,7 +860,7 @@ type FrontendIPConfigurationObservation struct {
 	// The Private IP Address to use for the Application Gateway.
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The Allocation Method for the Private IP Address. Possible values are Dynamic and Static.
+	// The Allocation Method for the Private IP Address. Possible values are Dynamic and Static. Defaults to Dynamic.
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the associated private link configuration.
@@ -886,7 +886,7 @@ type FrontendIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
 
-	// The Allocation Method for the Private IP Address. Possible values are Dynamic and Static.
+	// The Allocation Method for the Private IP Address. Possible values are Dynamic and Static. Defaults to Dynamic.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
@@ -1353,7 +1353,7 @@ type PathRuleInitParameters struct {
 	// The Name of the Backend HTTP Settings Collection which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
 	BackendHTTPSettingsName *string `json:"backendHttpSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
 
-	// The ID of the Web Application Firewall Policy which should be used as a HTTP Listener.
+	// The ID of the Web Application Firewall Policy which should be used as an HTTP Listener.
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
 	// The Name of the URL Path Map.
@@ -1383,7 +1383,7 @@ type PathRuleObservation struct {
 	// The Name of the Backend HTTP Settings Collection which should be used for this Routing Rule. Cannot be set if redirect_configuration_name is set.
 	BackendHTTPSettingsName *string `json:"backendHttpSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
 
-	// The ID of the Web Application Firewall Policy which should be used as a HTTP Listener.
+	// The ID of the Web Application Firewall Policy which should be used as an HTTP Listener.
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
 	// The ID of the URL Path Map.
@@ -1418,7 +1418,7 @@ type PathRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	BackendHTTPSettingsName *string `json:"backendHttpSettingsName,omitempty" tf:"backend_http_settings_name,omitempty"`
 
-	// The ID of the Web Application Firewall Policy which should be used as a HTTP Listener.
+	// The ID of the Web Application Firewall Policy which should be used as an HTTP Listener.
 	// +kubebuilder:validation:Optional
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
@@ -1610,10 +1610,10 @@ type ProbeParameters struct {
 
 type RedirectConfigurationInitParameters struct {
 
-	// Whether or not to include the path in the redirected Url. Defaults to false
+	// Whether to include the path in the redirected URL. Defaults to false
 	IncludePath *bool `json:"includePath,omitempty" tf:"include_path,omitempty"`
 
-	// Whether or not to include the query string in the redirected Url. Default to false
+	// Whether to include the query string in the redirected URL. Default to false
 	IncludeQueryString *bool `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty"`
 
 	// Unique name of the redirect configuration block
@@ -1625,7 +1625,7 @@ type RedirectConfigurationInitParameters struct {
 	// The name of the listener to redirect to. Cannot be set if target_url is set.
 	TargetListenerName *string `json:"targetListenerName,omitempty" tf:"target_listener_name,omitempty"`
 
-	// The Url to redirect the request to. Cannot be set if target_listener_name is set.
+	// The URL to redirect the request to. Cannot be set if target_listener_name is set.
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
 
@@ -1634,10 +1634,10 @@ type RedirectConfigurationObservation struct {
 	// The ID of the Redirect Configuration.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Whether or not to include the path in the redirected Url. Defaults to false
+	// Whether to include the path in the redirected URL. Defaults to false
 	IncludePath *bool `json:"includePath,omitempty" tf:"include_path,omitempty"`
 
-	// Whether or not to include the query string in the redirected Url. Default to false
+	// Whether to include the query string in the redirected URL. Default to false
 	IncludeQueryString *bool `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty"`
 
 	// Unique name of the redirect configuration block
@@ -1652,17 +1652,17 @@ type RedirectConfigurationObservation struct {
 	// The name of the listener to redirect to. Cannot be set if target_url is set.
 	TargetListenerName *string `json:"targetListenerName,omitempty" tf:"target_listener_name,omitempty"`
 
-	// The Url to redirect the request to. Cannot be set if target_listener_name is set.
+	// The URL to redirect the request to. Cannot be set if target_listener_name is set.
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
 
 type RedirectConfigurationParameters struct {
 
-	// Whether or not to include the path in the redirected Url. Defaults to false
+	// Whether to include the path in the redirected URL. Defaults to false
 	// +kubebuilder:validation:Optional
 	IncludePath *bool `json:"includePath,omitempty" tf:"include_path,omitempty"`
 
-	// Whether or not to include the query string in the redirected Url. Default to false
+	// Whether to include the query string in the redirected URL. Default to false
 	// +kubebuilder:validation:Optional
 	IncludeQueryString *bool `json:"includeQueryString,omitempty" tf:"include_query_string,omitempty"`
 
@@ -1678,7 +1678,7 @@ type RedirectConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetListenerName *string `json:"targetListenerName,omitempty" tf:"target_listener_name,omitempty"`
 
-	// The Url to redirect the request to. Cannot be set if target_listener_name is set.
+	// The URL to redirect the request to. Cannot be set if target_listener_name is set.
 	// +kubebuilder:validation:Optional
 	TargetURL *string `json:"targetUrl,omitempty" tf:"target_url,omitempty"`
 }
@@ -1935,7 +1935,7 @@ type RewriteRuleSetInitParameters struct {
 	// Unique name of the rewrite rule set block
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// One or more rewrite_rule blocks as defined above.
+	// One or more rewrite_rule blocks as defined below.
 	RewriteRule []RewriteRuleInitParameters `json:"rewriteRule,omitempty" tf:"rewrite_rule,omitempty"`
 }
 
@@ -1947,7 +1947,7 @@ type RewriteRuleSetObservation struct {
 	// Unique name of the rewrite rule set block
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// One or more rewrite_rule blocks as defined above.
+	// One or more rewrite_rule blocks as defined below.
 	RewriteRule []RewriteRuleObservation `json:"rewriteRule,omitempty" tf:"rewrite_rule,omitempty"`
 }
 
@@ -1957,14 +1957,14 @@ type RewriteRuleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// One or more rewrite_rule blocks as defined above.
+	// One or more rewrite_rule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	RewriteRule []RewriteRuleParameters `json:"rewriteRule,omitempty" tf:"rewrite_rule,omitempty"`
 }
 
 type SSLCertificateInitParameters struct {
 
-	// Secret Id of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for keyvault to use this feature. Required if data is not set.
+	// The Secret ID of (base-64 encoded unencrypted pfx) the Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The Name of the SSL certificate that is unique within this Application Gateway
@@ -1976,7 +1976,7 @@ type SSLCertificateObservation struct {
 	// The ID of the SSL Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Secret Id of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for keyvault to use this feature. Required if data is not set.
+	// The Secret ID of (base-64 encoded unencrypted pfx) the Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The Name of the SSL certificate that is unique within this Application Gateway
@@ -1992,7 +1992,7 @@ type SSLCertificateParameters struct {
 	// +kubebuilder:validation:Optional
 	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
-	// Secret Id of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for keyvault to use this feature. Required if data is not set.
+	// The Secret ID of (base-64 encoded unencrypted pfx) the Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
@@ -2016,7 +2016,7 @@ type SSLPolicyInitParameters struct {
 	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g. AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
@@ -2034,7 +2034,7 @@ type SSLPolicyObservation struct {
 	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g. AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
@@ -2055,7 +2055,7 @@ type SSLPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g. AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
@@ -2077,6 +2077,9 @@ type SSLProfileInitParameters struct {
 
 	// Should client certificate issuer DN be verified? Defaults to false.
 	VerifyClientCertIssuerDn *bool `json:"verifyClientCertIssuerDn,omitempty" tf:"verify_client_cert_issuer_dn,omitempty"`
+
+	// Specify the method to check client certificate revocation status. Possible value is OCSP.
+	VerifyClientCertificateRevocation *string `json:"verifyClientCertificateRevocation,omitempty" tf:"verify_client_certificate_revocation,omitempty"`
 }
 
 type SSLProfileObservation struct {
@@ -2095,6 +2098,9 @@ type SSLProfileObservation struct {
 
 	// Should client certificate issuer DN be verified? Defaults to false.
 	VerifyClientCertIssuerDn *bool `json:"verifyClientCertIssuerDn,omitempty" tf:"verify_client_cert_issuer_dn,omitempty"`
+
+	// Specify the method to check client certificate revocation status. Possible value is OCSP.
+	VerifyClientCertificateRevocation *string `json:"verifyClientCertificateRevocation,omitempty" tf:"verify_client_certificate_revocation,omitempty"`
 }
 
 type SSLProfileParameters struct {
@@ -2114,6 +2120,10 @@ type SSLProfileParameters struct {
 	// Should client certificate issuer DN be verified? Defaults to false.
 	// +kubebuilder:validation:Optional
 	VerifyClientCertIssuerDn *bool `json:"verifyClientCertIssuerDn,omitempty" tf:"verify_client_cert_issuer_dn,omitempty"`
+
+	// Specify the method to check client certificate revocation status. Possible value is OCSP.
+	// +kubebuilder:validation:Optional
+	VerifyClientCertificateRevocation *string `json:"verifyClientCertificateRevocation,omitempty" tf:"verify_client_certificate_revocation,omitempty"`
 }
 
 type SSLProfileSSLPolicyInitParameters struct {
@@ -2127,7 +2137,7 @@ type SSLProfileSSLPolicyInitParameters struct {
 	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g. AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
@@ -2145,7 +2155,7 @@ type SSLProfileSSLPolicyObservation struct {
 	// The minimal TLS version. Possible values are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g. AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
 	// The Type of the Policy. Possible values are Predefined, Custom and CustomV2.
@@ -2166,7 +2176,7 @@ type SSLProfileSSLPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	MinProtocolVersion *string `json:"minProtocolVersion,omitempty" tf:"min_protocol_version,omitempty"`
 
-	// The Name of the Policy e.g AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
+	// The Name of the Policy e.g. AppGwSslPolicy20170401S. Required if policy_type is set to Predefined. Possible values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview. Not compatible with disabled_protocols.
 	// +kubebuilder:validation:Optional
 	PolicyName *string `json:"policyName,omitempty" tf:"policy_name,omitempty"`
 
@@ -2287,7 +2297,7 @@ type URLInitParameters struct {
 	// The query string to rewrite.
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
-	// Whether the URL path map should be reevaluated after this rewrite has been applied. More info on rewrite configutation
+	// Whether the URL path map should be reevaluated after this rewrite has been applied. More info on rewrite configuration
 	Reroute *bool `json:"reroute,omitempty" tf:"reroute,omitempty"`
 }
 
@@ -2302,7 +2312,7 @@ type URLObservation struct {
 	// The query string to rewrite.
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
-	// Whether the URL path map should be reevaluated after this rewrite has been applied. More info on rewrite configutation
+	// Whether the URL path map should be reevaluated after this rewrite has been applied. More info on rewrite configuration
 	Reroute *bool `json:"reroute,omitempty" tf:"reroute,omitempty"`
 }
 
@@ -2320,7 +2330,7 @@ type URLParameters struct {
 	// +kubebuilder:validation:Optional
 	QueryString *string `json:"queryString,omitempty" tf:"query_string,omitempty"`
 
-	// Whether the URL path map should be reevaluated after this rewrite has been applied. More info on rewrite configutation
+	// Whether the URL path map should be reevaluated after this rewrite has been applied. More info on rewrite configuration
 	// +kubebuilder:validation:Optional
 	Reroute *bool `json:"reroute,omitempty" tf:"reroute,omitempty"`
 }
@@ -2411,13 +2421,13 @@ type URLPathMapParameters struct {
 
 type WafConfigurationInitParameters struct {
 
-	// one or more disabled_rule_group blocks as defined below.
+	// One or more disabled_rule_group blocks as defined below.
 	DisabledRuleGroup []DisabledRuleGroupInitParameters `json:"disabledRuleGroup,omitempty" tf:"disabled_rule_group,omitempty"`
 
 	// Is the Web Application Firewall enabled?
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// one or more exclusion blocks as defined below.
+	// One or more exclusion blocks as defined below.
 	Exclusion []ExclusionInitParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
 	// The File Upload Limit in MB. Accepted values are in the range 1MB to 750MB for the WAF_v2 SKU, and 1MB to 500MB for all other SKUs. Defaults to 100MB.
@@ -2432,22 +2442,22 @@ type WafConfigurationInitParameters struct {
 	// Is Request Body Inspection enabled? Defaults to true.
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 
-	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
+	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet and Microsoft_DefaultRuleSet. Defaults to OWASP.
 	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
 
-	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.2.9, 3.0, 3.1 and 3.2.
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	RuleSetVersion *string `json:"ruleSetVersion,omitempty" tf:"rule_set_version,omitempty"`
 }
 
 type WafConfigurationObservation struct {
 
-	// one or more disabled_rule_group blocks as defined below.
+	// One or more disabled_rule_group blocks as defined below.
 	DisabledRuleGroup []DisabledRuleGroupObservation `json:"disabledRuleGroup,omitempty" tf:"disabled_rule_group,omitempty"`
 
 	// Is the Web Application Firewall enabled?
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// one or more exclusion blocks as defined below.
+	// One or more exclusion blocks as defined below.
 	Exclusion []ExclusionObservation `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
 	// The File Upload Limit in MB. Accepted values are in the range 1MB to 750MB for the WAF_v2 SKU, and 1MB to 500MB for all other SKUs. Defaults to 100MB.
@@ -2462,16 +2472,16 @@ type WafConfigurationObservation struct {
 	// Is Request Body Inspection enabled? Defaults to true.
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 
-	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
+	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet and Microsoft_DefaultRuleSet. Defaults to OWASP.
 	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
 
-	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.2.9, 3.0, 3.1 and 3.2.
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	RuleSetVersion *string `json:"ruleSetVersion,omitempty" tf:"rule_set_version,omitempty"`
 }
 
 type WafConfigurationParameters struct {
 
-	// one or more disabled_rule_group blocks as defined below.
+	// One or more disabled_rule_group blocks as defined below.
 	// +kubebuilder:validation:Optional
 	DisabledRuleGroup []DisabledRuleGroupParameters `json:"disabledRuleGroup,omitempty" tf:"disabled_rule_group,omitempty"`
 
@@ -2479,7 +2489,7 @@ type WafConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 
-	// one or more exclusion blocks as defined below.
+	// One or more exclusion blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Exclusion []ExclusionParameters `json:"exclusion,omitempty" tf:"exclusion,omitempty"`
 
@@ -2499,11 +2509,11 @@ type WafConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	RequestBodyCheck *bool `json:"requestBodyCheck,omitempty" tf:"request_body_check,omitempty"`
 
-	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
+	// The Type of the Rule Set used for this Web Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet and Microsoft_DefaultRuleSet. Defaults to OWASP.
 	// +kubebuilder:validation:Optional
 	RuleSetType *string `json:"ruleSetType,omitempty" tf:"rule_set_type,omitempty"`
 
-	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.2.9, 3.0, 3.1 and 3.2.
+	// The Version of the Rule Set used for this Web Application Firewall. Possible values are 0.1, 1.0, 2.1, 2.2.9, 3.0, 3.1 and 3.2.
 	// +kubebuilder:validation:Optional
 	RuleSetVersion *string `json:"ruleSetVersion" tf:"rule_set_version,omitempty"`
 }
@@ -2536,8 +2546,8 @@ type ApplicationGatewayStatus struct {
 // +kubebuilder:storageversion
 
 // ApplicationGateway is the Schema for the ApplicationGateways API. Manages an Application Gateway.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

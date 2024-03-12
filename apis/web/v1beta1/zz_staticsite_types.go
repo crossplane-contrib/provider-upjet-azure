@@ -53,6 +53,10 @@ type StaticSiteIdentityParameters struct {
 
 type StaticSiteInitParameters struct {
 
+	// A key-value pair of App Settings.
+	// +mapType=granular
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
+
 	// An identity block as defined below.
 	Identity []StaticSiteIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -71,6 +75,10 @@ type StaticSiteInitParameters struct {
 }
 
 type StaticSiteObservation struct {
+
+	// A key-value pair of App Settings.
+	// +mapType=granular
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// The default host name of the Static Web App.
 	DefaultHostName *string `json:"defaultHostName,omitempty" tf:"default_host_name,omitempty"`
@@ -99,6 +107,11 @@ type StaticSiteObservation struct {
 }
 
 type StaticSiteParameters struct {
+
+	// A key-value pair of App Settings.
+	// +kubebuilder:validation:Optional
+	// +mapType=granular
+	AppSettings map[string]*string `json:"appSettings,omitempty" tf:"app_settings,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -163,8 +176,8 @@ type StaticSiteStatus struct {
 // +kubebuilder:storageversion
 
 // StaticSite is the Schema for the StaticSites API. Manages a Static Site.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

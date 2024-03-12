@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -103,7 +103,7 @@ spec:
                           description: Defines how the Front Door Route will cache
                             requests that include query strings. Possible values include
                             IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings
-                            or UseQueryString. Defaults it IgnoreQueryString.
+                            or UseQueryString. Defaults to IgnoreQueryString.
                           type: string
                         queryStrings:
                           description: Query strings to include or ignore.
@@ -541,6 +541,7 @@ spec:
                   forwardingProtocol:
                     description: The Protocol that will be use when forwarding traffic
                       to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+                      Defaults to MatchRequest.
                     type: string
                   httpsRedirectEnabled:
                     description: Automatically redirect HTTP traffic to HTTPS traffic?
@@ -607,7 +608,7 @@ spec:
                           description: Defines how the Front Door Route will cache
                             requests that include query strings. Possible values include
                             IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings
-                            or UseQueryString. Defaults it IgnoreQueryString.
+                            or UseQueryString. Defaults to IgnoreQueryString.
                           type: string
                         queryStrings:
                           description: Query strings to include or ignore.
@@ -964,6 +965,7 @@ spec:
                   forwardingProtocol:
                     description: The Protocol that will be use when forwarding traffic
                       to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+                      Defaults to MatchRequest.
                     type: string
                   httpsRedirectEnabled:
                     description: Automatically redirect HTTP traffic to HTTPS traffic?
@@ -1198,7 +1200,7 @@ spec:
                           description: Defines how the Front Door Route will cache
                             requests that include query strings. Possible values include
                             IgnoreQueryString, IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings
-                            or UseQueryString. Defaults it IgnoreQueryString.
+                            or UseQueryString. Defaults to IgnoreQueryString.
                           type: string
                         queryStrings:
                           description: Query strings to include or ignore.
@@ -1247,6 +1249,7 @@ spec:
                   forwardingProtocol:
                     description: The Protocol that will be use when forwarding traffic
                       to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+                      Defaults to MatchRequest.
                     type: string
                   httpsRedirectEnabled:
                     description: Automatically redirect HTTP traffic to HTTPS traffic?

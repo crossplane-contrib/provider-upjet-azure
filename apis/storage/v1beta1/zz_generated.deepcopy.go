@@ -411,6 +411,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LocalUserEnabled != nil {
+		in, out := &in.LocalUserEnabled, &out.LocalUserEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -1308,6 +1313,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.LocalUserEnabled != nil {
+		in, out := &in.LocalUserEnabled, &out.LocalUserEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -1340,6 +1350,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrimaryBlobInternetEndpoint != nil {
+		in, out := &in.PrimaryBlobInternetEndpoint, &out.PrimaryBlobInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryBlobInternetHost != nil {
+		in, out := &in.PrimaryBlobInternetHost, &out.PrimaryBlobInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryBlobMicrosoftEndpoint != nil {
+		in, out := &in.PrimaryBlobMicrosoftEndpoint, &out.PrimaryBlobMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryBlobMicrosoftHost != nil {
+		in, out := &in.PrimaryBlobMicrosoftHost, &out.PrimaryBlobMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrimaryDfsEndpoint != nil {
 		in, out := &in.PrimaryDfsEndpoint, &out.PrimaryDfsEndpoint
 		*out = new(string)
@@ -1350,6 +1380,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrimaryDfsInternetEndpoint != nil {
+		in, out := &in.PrimaryDfsInternetEndpoint, &out.PrimaryDfsInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryDfsInternetHost != nil {
+		in, out := &in.PrimaryDfsInternetHost, &out.PrimaryDfsInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryDfsMicrosoftEndpoint != nil {
+		in, out := &in.PrimaryDfsMicrosoftEndpoint, &out.PrimaryDfsMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryDfsMicrosoftHost != nil {
+		in, out := &in.PrimaryDfsMicrosoftHost, &out.PrimaryDfsMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrimaryFileEndpoint != nil {
 		in, out := &in.PrimaryFileEndpoint, &out.PrimaryFileEndpoint
 		*out = new(string)
@@ -1357,6 +1407,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	}
 	if in.PrimaryFileHost != nil {
 		in, out := &in.PrimaryFileHost, &out.PrimaryFileHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryFileInternetEndpoint != nil {
+		in, out := &in.PrimaryFileInternetEndpoint, &out.PrimaryFileInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryFileInternetHost != nil {
+		in, out := &in.PrimaryFileInternetHost, &out.PrimaryFileInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryFileMicrosoftEndpoint != nil {
+		in, out := &in.PrimaryFileMicrosoftEndpoint, &out.PrimaryFileMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryFileMicrosoftHost != nil {
+		in, out := &in.PrimaryFileMicrosoftHost, &out.PrimaryFileMicrosoftHost
 		*out = new(string)
 		**out = **in
 	}
@@ -1375,6 +1445,16 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrimaryQueueMicrosoftEndpoint != nil {
+		in, out := &in.PrimaryQueueMicrosoftEndpoint, &out.PrimaryQueueMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryQueueMicrosoftHost != nil {
+		in, out := &in.PrimaryQueueMicrosoftHost, &out.PrimaryQueueMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrimaryTableEndpoint != nil {
 		in, out := &in.PrimaryTableEndpoint, &out.PrimaryTableEndpoint
 		*out = new(string)
@@ -1385,6 +1465,16 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrimaryTableMicrosoftEndpoint != nil {
+		in, out := &in.PrimaryTableMicrosoftEndpoint, &out.PrimaryTableMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryTableMicrosoftHost != nil {
+		in, out := &in.PrimaryTableMicrosoftHost, &out.PrimaryTableMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.PrimaryWebEndpoint != nil {
 		in, out := &in.PrimaryWebEndpoint, &out.PrimaryWebEndpoint
 		*out = new(string)
@@ -1392,6 +1482,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	}
 	if in.PrimaryWebHost != nil {
 		in, out := &in.PrimaryWebHost, &out.PrimaryWebHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryWebInternetEndpoint != nil {
+		in, out := &in.PrimaryWebInternetEndpoint, &out.PrimaryWebInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryWebInternetHost != nil {
+		in, out := &in.PrimaryWebInternetHost, &out.PrimaryWebInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryWebMicrosoftEndpoint != nil {
+		in, out := &in.PrimaryWebMicrosoftEndpoint, &out.PrimaryWebMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrimaryWebMicrosoftHost != nil {
+		in, out := &in.PrimaryWebMicrosoftHost, &out.PrimaryWebMicrosoftHost
 		*out = new(string)
 		**out = **in
 	}
@@ -1446,6 +1556,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecondaryBlobInternetEndpoint != nil {
+		in, out := &in.SecondaryBlobInternetEndpoint, &out.SecondaryBlobInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryBlobInternetHost != nil {
+		in, out := &in.SecondaryBlobInternetHost, &out.SecondaryBlobInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryBlobMicrosoftEndpoint != nil {
+		in, out := &in.SecondaryBlobMicrosoftEndpoint, &out.SecondaryBlobMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryBlobMicrosoftHost != nil {
+		in, out := &in.SecondaryBlobMicrosoftHost, &out.SecondaryBlobMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecondaryDfsEndpoint != nil {
 		in, out := &in.SecondaryDfsEndpoint, &out.SecondaryDfsEndpoint
 		*out = new(string)
@@ -1456,6 +1586,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecondaryDfsInternetEndpoint != nil {
+		in, out := &in.SecondaryDfsInternetEndpoint, &out.SecondaryDfsInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryDfsInternetHost != nil {
+		in, out := &in.SecondaryDfsInternetHost, &out.SecondaryDfsInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryDfsMicrosoftEndpoint != nil {
+		in, out := &in.SecondaryDfsMicrosoftEndpoint, &out.SecondaryDfsMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryDfsMicrosoftHost != nil {
+		in, out := &in.SecondaryDfsMicrosoftHost, &out.SecondaryDfsMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecondaryFileEndpoint != nil {
 		in, out := &in.SecondaryFileEndpoint, &out.SecondaryFileEndpoint
 		*out = new(string)
@@ -1463,6 +1613,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	}
 	if in.SecondaryFileHost != nil {
 		in, out := &in.SecondaryFileHost, &out.SecondaryFileHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryFileInternetEndpoint != nil {
+		in, out := &in.SecondaryFileInternetEndpoint, &out.SecondaryFileInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryFileInternetHost != nil {
+		in, out := &in.SecondaryFileInternetHost, &out.SecondaryFileInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryFileMicrosoftEndpoint != nil {
+		in, out := &in.SecondaryFileMicrosoftEndpoint, &out.SecondaryFileMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryFileMicrosoftHost != nil {
+		in, out := &in.SecondaryFileMicrosoftHost, &out.SecondaryFileMicrosoftHost
 		*out = new(string)
 		**out = **in
 	}
@@ -1481,6 +1651,16 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecondaryQueueMicrosoftEndpoint != nil {
+		in, out := &in.SecondaryQueueMicrosoftEndpoint, &out.SecondaryQueueMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryQueueMicrosoftHost != nil {
+		in, out := &in.SecondaryQueueMicrosoftHost, &out.SecondaryQueueMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecondaryTableEndpoint != nil {
 		in, out := &in.SecondaryTableEndpoint, &out.SecondaryTableEndpoint
 		*out = new(string)
@@ -1491,6 +1671,16 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecondaryTableMicrosoftEndpoint != nil {
+		in, out := &in.SecondaryTableMicrosoftEndpoint, &out.SecondaryTableMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryTableMicrosoftHost != nil {
+		in, out := &in.SecondaryTableMicrosoftHost, &out.SecondaryTableMicrosoftHost
+		*out = new(string)
+		**out = **in
+	}
 	if in.SecondaryWebEndpoint != nil {
 		in, out := &in.SecondaryWebEndpoint, &out.SecondaryWebEndpoint
 		*out = new(string)
@@ -1498,6 +1688,26 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	}
 	if in.SecondaryWebHost != nil {
 		in, out := &in.SecondaryWebHost, &out.SecondaryWebHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryWebInternetEndpoint != nil {
+		in, out := &in.SecondaryWebInternetEndpoint, &out.SecondaryWebInternetEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryWebInternetHost != nil {
+		in, out := &in.SecondaryWebInternetHost, &out.SecondaryWebInternetHost
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryWebMicrosoftEndpoint != nil {
+		in, out := &in.SecondaryWebMicrosoftEndpoint, &out.SecondaryWebMicrosoftEndpoint
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryWebMicrosoftHost != nil {
+		in, out := &in.SecondaryWebMicrosoftHost, &out.SecondaryWebMicrosoftHost
 		*out = new(string)
 		**out = **in
 	}
@@ -1660,6 +1870,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	}
 	if in.LargeFileShareEnabled != nil {
 		in, out := &in.LargeFileShareEnabled, &out.LargeFileShareEnabled
+		*out = new(bool)
+		**out = **in
+	}
+	if in.LocalUserEnabled != nil {
+		in, out := &in.LocalUserEnabled, &out.LocalUserEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -2295,6 +2510,21 @@ func (in *BaseBlobInitParameters) DeepCopyInto(out *BaseBlobInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceLastAccessTimeGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceLastAccessTimeGreaterThan, &out.TierToColdAfterDaysSinceLastAccessTimeGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceModificationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceModificationGreaterThan, &out.TierToColdAfterDaysSinceModificationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
 	if in.TierToCoolAfterDaysSinceCreationGreaterThan != nil {
 		in, out := &in.TierToCoolAfterDaysSinceCreationGreaterThan, &out.TierToCoolAfterDaysSinceCreationGreaterThan
 		*out = new(float64)
@@ -2365,6 +2595,21 @@ func (in *BaseBlobObservation) DeepCopyInto(out *BaseBlobObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceLastAccessTimeGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceLastAccessTimeGreaterThan, &out.TierToColdAfterDaysSinceLastAccessTimeGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceModificationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceModificationGreaterThan, &out.TierToColdAfterDaysSinceModificationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
 	if in.TierToCoolAfterDaysSinceCreationGreaterThan != nil {
 		in, out := &in.TierToCoolAfterDaysSinceCreationGreaterThan, &out.TierToCoolAfterDaysSinceCreationGreaterThan
 		*out = new(float64)
@@ -2432,6 +2677,21 @@ func (in *BaseBlobParameters) DeepCopyInto(out *BaseBlobParameters) {
 	}
 	if in.TierToArchiveAfterDaysSinceModificationGreaterThan != nil {
 		in, out := &in.TierToArchiveAfterDaysSinceModificationGreaterThan, &out.TierToArchiveAfterDaysSinceModificationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceLastAccessTimeGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceLastAccessTimeGreaterThan, &out.TierToColdAfterDaysSinceLastAccessTimeGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceModificationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceModificationGreaterThan, &out.TierToColdAfterDaysSinceModificationGreaterThan
 		*out = new(float64)
 		**out = **in
 	}
@@ -9186,6 +9446,11 @@ func (in *SnapshotInitParameters) DeepCopyInto(out *SnapshotInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SnapshotInitParameters.
@@ -9221,6 +9486,11 @@ func (in *SnapshotObservation) DeepCopyInto(out *SnapshotObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new SnapshotObservation.
@@ -9253,6 +9523,11 @@ func (in *SnapshotParameters) DeepCopyInto(out *SnapshotParameters) {
 	}
 	if in.TierToArchiveAfterDaysSinceLastTierChangeGreaterThan != nil {
 		in, out := &in.TierToArchiveAfterDaysSinceLastTierChangeGreaterThan, &out.TierToArchiveAfterDaysSinceLastTierChangeGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
 		*out = new(float64)
 		**out = **in
 	}
@@ -9954,6 +10229,11 @@ func (in *VersionInitParameters) DeepCopyInto(out *VersionInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VersionInitParameters.
@@ -9989,6 +10269,11 @@ func (in *VersionObservation) DeepCopyInto(out *VersionObservation) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new VersionObservation.
@@ -10021,6 +10306,11 @@ func (in *VersionParameters) DeepCopyInto(out *VersionParameters) {
 	}
 	if in.TierToArchiveAfterDaysSinceLastTierChangeGreaterThan != nil {
 		in, out := &in.TierToArchiveAfterDaysSinceLastTierChangeGreaterThan, &out.TierToArchiveAfterDaysSinceLastTierChangeGreaterThan
+		*out = new(float64)
+		**out = **in
+	}
+	if in.TierToColdAfterDaysSinceCreationGreaterThan != nil {
+		in, out := &in.TierToColdAfterDaysSinceCreationGreaterThan, &out.TierToColdAfterDaysSinceCreationGreaterThan
 		*out = new(float64)
 		**out = **in
 	}

@@ -15,25 +15,38 @@ import (
 
 type IdentityInitParameters struct {
 
-	// The type of Managed Service Identity that is configured on this Digital Twins instance. The only possible value is SystemAssigned.
+	// A list of User Assigned Managed Identity IDs to be assigned to this Digital Twins instance.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Digital Twins instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
 
-	// The ID of the Digital Twins instance.
+	// A list of User Assigned Managed Identity IDs to be assigned to this Digital Twins instance.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The ID of the Digital Twins instance.
+	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// The type of Managed Service Identity that is configured on this Digital Twins instance. The only possible value is SystemAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this Digital Twins instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
 
-	// The type of Managed Service Identity that is configured on this Digital Twins instance. The only possible value is SystemAssigned.
+	// A list of User Assigned Managed Identity IDs to be assigned to this Digital Twins instance.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Digital Twins instance. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -130,8 +143,8 @@ type InstanceStatus struct {
 // +kubebuilder:storageversion
 
 // Instance is the Schema for the Instances API. Manages a Digital Twins instance.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

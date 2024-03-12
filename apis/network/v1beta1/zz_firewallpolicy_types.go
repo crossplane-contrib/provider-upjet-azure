@@ -127,6 +127,12 @@ type FirewallPolicyIdentityObservation struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// The ID of the Firewall Policy.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the Firewall Policy.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
 	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -136,7 +142,7 @@ type FirewallPolicyIdentityParameters struct {
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Firewall Policy.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Firewall Policy. Only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -685,8 +691,8 @@ type FirewallPolicyStatus struct {
 // +kubebuilder:storageversion
 
 // FirewallPolicy is the Schema for the FirewallPolicys API. Manages a Firewall Policy.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

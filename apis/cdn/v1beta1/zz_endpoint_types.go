@@ -422,10 +422,10 @@ type EndpointInitParameters struct {
 	// Indicates whether compression is to be enabled.
 	IsCompressionEnabled *bool `json:"isCompressionEnabled,omitempty" tf:"is_compression_enabled,omitempty"`
 
-	// Defaults to true.
+	// Specifies if http allowed. Defaults to true.
 	IsHTTPAllowed *bool `json:"isHttpAllowed,omitempty" tf:"is_http_allowed,omitempty"`
 
-	// Defaults to true.
+	// Specifies if https allowed. Defaults to true.
 	IsHTTPSAllowed *bool `json:"isHttpsAllowed,omitempty" tf:"is_https_allowed,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -478,10 +478,10 @@ type EndpointObservation struct {
 	// Indicates whether compression is to be enabled.
 	IsCompressionEnabled *bool `json:"isCompressionEnabled,omitempty" tf:"is_compression_enabled,omitempty"`
 
-	// Defaults to true.
+	// Specifies if http allowed. Defaults to true.
 	IsHTTPAllowed *bool `json:"isHttpAllowed,omitempty" tf:"is_http_allowed,omitempty"`
 
-	// Defaults to true.
+	// Specifies if https allowed. Defaults to true.
 	IsHTTPSAllowed *bool `json:"isHttpsAllowed,omitempty" tf:"is_https_allowed,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -539,11 +539,11 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	IsCompressionEnabled *bool `json:"isCompressionEnabled,omitempty" tf:"is_compression_enabled,omitempty"`
 
-	// Defaults to true.
+	// Specifies if http allowed. Defaults to true.
 	// +kubebuilder:validation:Optional
 	IsHTTPAllowed *bool `json:"isHttpAllowed,omitempty" tf:"is_http_allowed,omitempty"`
 
-	// Defaults to true.
+	// Specifies if https allowed. Defaults to true.
 	// +kubebuilder:validation:Optional
 	IsHTTPSAllowed *bool `json:"isHttpsAllowed,omitempty" tf:"is_https_allowed,omitempty"`
 
@@ -862,7 +862,7 @@ type GlobalDeliveryRuleURLRedirectActionInitParameters struct {
 	// Specifies the path part of the URL. This value must begin with a /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https. Defaults to MatchRequest.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Specifies the query string part of the URL. This value must not start with a ? or & and must be in <key>=<value> format separated by &.
@@ -883,7 +883,7 @@ type GlobalDeliveryRuleURLRedirectActionObservation struct {
 	// Specifies the path part of the URL. This value must begin with a /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https. Defaults to MatchRequest.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Specifies the query string part of the URL. This value must not start with a ? or & and must be in <key>=<value> format separated by &.
@@ -907,7 +907,7 @@ type GlobalDeliveryRuleURLRedirectActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https. Defaults to MatchRequest.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -925,7 +925,7 @@ type GlobalDeliveryRuleURLRewriteActionInitParameters struct {
 	// This value must start with a / and can't be longer than 260 characters.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Defaults to true.
+	// Whether preserve an unmatched path. Defaults to true.
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
 
 	// This value must start with a / and can't be longer than 260 characters.
@@ -937,7 +937,7 @@ type GlobalDeliveryRuleURLRewriteActionObservation struct {
 	// This value must start with a / and can't be longer than 260 characters.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Defaults to true.
+	// Whether preserve an unmatched path. Defaults to true.
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
 
 	// This value must start with a / and can't be longer than 260 characters.
@@ -950,7 +950,7 @@ type GlobalDeliveryRuleURLRewriteActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination" tf:"destination,omitempty"`
 
-	// Defaults to true.
+	// Whether preserve an unmatched path. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
 
@@ -1701,7 +1701,7 @@ type URLRedirectActionInitParameters struct {
 	// Specifies the path part of the URL. This value must begin with a /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https. Defaults to MatchRequest.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Specifies the query string part of the URL. This value must not start with a ? or & and must be in <key>=<value> format separated by &.
@@ -1722,7 +1722,7 @@ type URLRedirectActionObservation struct {
 	// Specifies the path part of the URL. This value must begin with a /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https. Defaults to MatchRequest.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
 	// Specifies the query string part of the URL. This value must not start with a ? or & and must be in <key>=<value> format separated by &.
@@ -1746,7 +1746,7 @@ type URLRedirectActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https.
+	// Specifies the protocol part of the URL. Valid values are MatchRequest, Http and Https. Defaults to MatchRequest.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
@@ -1764,7 +1764,7 @@ type URLRewriteActionInitParameters struct {
 	// This value must start with a / and can't be longer than 260 characters.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Defaults to true.
+	// Whether preserve an unmatched path. Defaults to true.
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
 
 	// This value must start with a / and can't be longer than 260 characters.
@@ -1776,7 +1776,7 @@ type URLRewriteActionObservation struct {
 	// This value must start with a / and can't be longer than 260 characters.
 	Destination *string `json:"destination,omitempty" tf:"destination,omitempty"`
 
-	// Defaults to true.
+	// Whether preserve an unmatched path. Defaults to true.
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
 
 	// This value must start with a / and can't be longer than 260 characters.
@@ -1789,7 +1789,7 @@ type URLRewriteActionParameters struct {
 	// +kubebuilder:validation:Optional
 	Destination *string `json:"destination" tf:"destination,omitempty"`
 
-	// Defaults to true.
+	// Whether preserve an unmatched path. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PreserveUnmatchedPath *bool `json:"preserveUnmatchedPath,omitempty" tf:"preserve_unmatched_path,omitempty"`
 
@@ -1826,8 +1826,8 @@ type EndpointStatus struct {
 // +kubebuilder:storageversion
 
 // Endpoint is the Schema for the Endpoints API. Manages a CDN Endpoint.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

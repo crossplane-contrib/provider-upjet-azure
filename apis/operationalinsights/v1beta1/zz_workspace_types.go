@@ -13,6 +13,44 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityInitParameters struct {
+
+	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the identity type of the Log Analytics Workspace. Possible values are SystemAssigned (where Azure will generate a Service Principal for you) and UserAssigned where you can specify the Service Principal IDs in the identity_ids field.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Log Analytics Workspace ID.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Log Analytics Workspace ID.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the identity type of the Log Analytics Workspace. Possible values are SystemAssigned (where Azure will generate a Service Principal for you) and UserAssigned where you can specify the Service Principal IDs in the identity_ids field.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// Specifies a list of user managed identity ids to be assigned. Required if type is UserAssigned.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the identity type of the Log Analytics Workspace. Possible values are SystemAssigned (where Azure will generate a Service Principal for you) and UserAssigned where you can specify the Service Principal IDs in the identity_ids field.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type WorkspaceInitParameters struct {
 
 	// Specifies if the log Analytics Workspace allow users accessing to data associated with resources they have permission to view, without permission to workspace. Defaults to true.
@@ -23,6 +61,15 @@ type WorkspaceInitParameters struct {
 
 	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
+
+	// The ID of the Data Collection Rule to use for this workspace.
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether to remove the data in the Log Analytics Workspace immediately after 30 days.
+	ImmediateDataPurgeOn30DaysEnabled *bool `json:"immediateDataPurgeOn30DaysEnabled,omitempty" tf:"immediate_data_purge_on_30_days_enabled,omitempty"`
 
 	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
@@ -36,7 +83,7 @@ type WorkspaceInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	// The capacity reservation level in GB for this workspace. Possible values are 100, 200, 300, 400, 500, 1000, 2000 and 5000.
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 
 	// The workspace data retention in days. Possible values are either 7 (Free Tier only) or range between 30 and 730.
@@ -61,8 +108,17 @@ type WorkspaceObservation struct {
 	// The workspace daily quota for ingestion in GB. Defaults to -1 (unlimited) if omitted.
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
+	// The ID of the Data Collection Rule to use for this workspace.
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
 	// The Log Analytics Workspace ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity block as defined below.
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether to remove the data in the Log Analytics Workspace immediately after 30 days.
+	ImmediateDataPurgeOn30DaysEnabled *bool `json:"immediateDataPurgeOn30DaysEnabled,omitempty" tf:"immediate_data_purge_on_30_days_enabled,omitempty"`
 
 	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
@@ -76,7 +132,7 @@ type WorkspaceObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	// The capacity reservation level in GB for this workspace. Possible values are 100, 200, 300, 400, 500, 1000, 2000 and 5000.
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 
 	// The name of the resource group in which the Log Analytics workspace is created. Changing this forces a new resource to be created.
@@ -110,6 +166,18 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	DailyQuotaGb *float64 `json:"dailyQuotaGb,omitempty" tf:"daily_quota_gb,omitempty"`
 
+	// The ID of the Data Collection Rule to use for this workspace.
+	// +kubebuilder:validation:Optional
+	DataCollectionRuleID *string `json:"dataCollectionRuleId,omitempty" tf:"data_collection_rule_id,omitempty"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// Whether to remove the data in the Log Analytics Workspace immediately after 30 days.
+	// +kubebuilder:validation:Optional
+	ImmediateDataPurgeOn30DaysEnabled *bool `json:"immediateDataPurgeOn30DaysEnabled,omitempty" tf:"immediate_data_purge_on_30_days_enabled,omitempty"`
+
 	// Should the Log Analytics Workspace support ingestion over the Public Internet? Defaults to true.
 	// +kubebuilder:validation:Optional
 	InternetIngestionEnabled *bool `json:"internetIngestionEnabled,omitempty" tf:"internet_ingestion_enabled,omitempty"`
@@ -126,7 +194,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The capacity reservation level in GB for this workspace. Must be in increments of 100 between 100 and 5000.
+	// The capacity reservation level in GB for this workspace. Possible values are 100, 200, 300, 400, 500, 1000, 2000 and 5000.
 	// +kubebuilder:validation:Optional
 	ReservationCapacityInGbPerDay *float64 `json:"reservationCapacityInGbPerDay,omitempty" tf:"reservation_capacity_in_gb_per_day,omitempty"`
 
@@ -185,8 +253,8 @@ type WorkspaceStatus struct {
 // +kubebuilder:storageversion
 
 // Workspace is the Schema for the Workspaces API. Manages a Log Analytics (formally Operational Insights) Workspace.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

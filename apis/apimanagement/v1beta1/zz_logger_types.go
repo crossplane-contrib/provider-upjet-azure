@@ -28,25 +28,45 @@ type ApplicationInsightsParameters struct {
 
 type EventHubInitParameters struct {
 
+	// The endpoint address of an EventHub Namespace. Required when client_id is set.
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+
 	// The name of an EventHub.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Client Id of the User Assigned Identity with the "Azure Event Hubs Data Sender" role to the target EventHub Namespace. Required when endpoint_uri is set. If not specified the System Assigned Identity will be used.
+	UserAssignedIdentityClientID *string `json:"userAssignedIdentityClientId,omitempty" tf:"user_assigned_identity_client_id,omitempty"`
 }
 
 type EventHubObservation struct {
 
+	// The endpoint address of an EventHub Namespace. Required when client_id is set.
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
+
 	// The name of an EventHub.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The Client Id of the User Assigned Identity with the "Azure Event Hubs Data Sender" role to the target EventHub Namespace. Required when endpoint_uri is set. If not specified the System Assigned Identity will be used.
+	UserAssignedIdentityClientID *string `json:"userAssignedIdentityClientId,omitempty" tf:"user_assigned_identity_client_id,omitempty"`
 }
 
 type EventHubParameters struct {
 
 	// The connection string of an EventHub Namespace.
-	// +kubebuilder:validation:Required
-	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+	// +kubebuilder:validation:Optional
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
+	// The endpoint address of an EventHub Namespace. Required when client_id is set.
+	// +kubebuilder:validation:Optional
+	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
 	// The name of an EventHub.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The Client Id of the User Assigned Identity with the "Azure Event Hubs Data Sender" role to the target EventHub Namespace. Required when endpoint_uri is set. If not specified the System Assigned Identity will be used.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityClientID *string `json:"userAssignedIdentityClientId,omitempty" tf:"user_assigned_identity_client_id,omitempty"`
 }
 
 type LoggerInitParameters struct {
@@ -191,8 +211,8 @@ type LoggerStatus struct {
 // +kubebuilder:storageversion
 
 // Logger is the Schema for the Loggers API. Manages a Logger within an API Management Service.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

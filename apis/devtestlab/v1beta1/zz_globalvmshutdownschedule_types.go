@@ -24,7 +24,7 @@ type GlobalVMShutdownScheduleInitParameters struct {
 	// The location where the schedule is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	NotificationSettings []NotificationSettingsInitParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -62,7 +62,7 @@ type GlobalVMShutdownScheduleObservation struct {
 	// The location where the schedule is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	NotificationSettings []NotificationSettingsObservation `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -90,7 +90,7 @@ type GlobalVMShutdownScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	NotificationSettings []NotificationSettingsParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
@@ -195,8 +195,8 @@ type GlobalVMShutdownScheduleStatus struct {
 // +kubebuilder:storageversion
 
 // GlobalVMShutdownSchedule is the Schema for the GlobalVMShutdownSchedules API. Manages automated shutdown schedules for Azure Resource Manager VMs outside of Dev Test Labs.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

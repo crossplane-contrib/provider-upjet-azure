@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -74,7 +74,8 @@ spec:
               forProvider:
                 properties:
                   accessRule:
-                    description: Up to three access_rule blocks as defined below.
+                    description: One or more access_rule blocks (up to three) as defined
+                      below.
                     items:
                       properties:
                         access:
@@ -210,7 +211,8 @@ spec:
                   autoscaler.
                 properties:
                   accessRule:
-                    description: Up to three access_rule blocks as defined below.
+                    description: One or more access_rule blocks (up to three) as defined
+                      below.
                     items:
                       properties:
                         access:
@@ -511,7 +513,8 @@ spec:
               atProvider:
                 properties:
                   accessRule:
-                    description: Up to three access_rule blocks as defined below.
+                    description: One or more access_rule blocks (up to three) as defined
+                      below.
                     items:
                       properties:
                         access:

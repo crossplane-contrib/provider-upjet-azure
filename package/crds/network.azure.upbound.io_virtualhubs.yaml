@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -193,6 +193,10 @@ spec:
                     description: A mapping of tags to assign to the Virtual Hub.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualRouterAutoScaleMinCapacity:
+                    description: Minimum instance capacity for the scaling configuration
+                      of the Virtual Hub Router.
+                    type: number
                   virtualWanId:
                     description: The ID of a Virtual WAN within which the Virtual
                       Hub should be created. Changing this forces a new resource to
@@ -325,6 +329,10 @@ spec:
                     description: A mapping of tags to assign to the Virtual Hub.
                     type: object
                     x-kubernetes-map-type: granular
+                  virtualRouterAutoScaleMinCapacity:
+                    description: Minimum instance capacity for the scaling configuration
+                      of the Virtual Hub Router.
+                    type: number
                   virtualWanId:
                     description: The ID of a Virtual WAN within which the Virtual
                       Hub should be created. Changing this forces a new resource to
@@ -636,6 +644,10 @@ spec:
                   virtualRouterAsn:
                     description: The Autonomous System Number of the Virtual Hub BGP
                       router.
+                    type: number
+                  virtualRouterAutoScaleMinCapacity:
+                    description: Minimum instance capacity for the scaling configuration
+                      of the Virtual Hub Router.
                     type: number
                   virtualRouterIps:
                     description: The IP addresses of the Virtual Hub BGP router.

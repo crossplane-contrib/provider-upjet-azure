@@ -18,6 +18,9 @@ type SpringCloudContainerDeploymentInitParameters struct {
 	// A JSON object that contains the addon configurations of the Spring Cloud Container Deployment.
 	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
 
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
+
 	// Specifies the arguments to the entrypoint. The docker image's CMD is used if not specified.
 	Arguments []*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
 
@@ -48,6 +51,9 @@ type SpringCloudContainerDeploymentObservation struct {
 
 	// A JSON object that contains the addon configurations of the Spring Cloud Container Deployment.
 	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
 
 	// Specifies the arguments to the entrypoint. The docker image's CMD is used if not specified.
 	Arguments []*string `json:"arguments,omitempty" tf:"arguments,omitempty"`
@@ -86,6 +92,10 @@ type SpringCloudContainerDeploymentParameters struct {
 	// A JSON object that contains the addon configurations of the Spring Cloud Container Deployment.
 	// +kubebuilder:validation:Optional
 	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	// +kubebuilder:validation:Optional
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
 
 	// Specifies the arguments to the entrypoint. The docker image's CMD is used if not specified.
 	// +kubebuilder:validation:Optional
@@ -192,8 +202,8 @@ type SpringCloudContainerDeploymentStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudContainerDeployment is the Schema for the SpringCloudContainerDeployments API. Manages a Spring Cloud Container Deployment.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

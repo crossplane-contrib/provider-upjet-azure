@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -261,7 +261,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   publishContentLink:
-                    description: The published runbook content link.
+                    description: One publish_content_link block as defined below.
                     items:
                       properties:
                         hash:
@@ -368,9 +368,9 @@ spec:
                     type: object
                   runbookType:
                     description: The type of the runbook - can be either Graph, GraphPowerShell,
-                      GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3,
-                      Python2 or Script. Changing this forces a new resource to be
-                      created.
+                      GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72,
+                      Python3, Python2 or Script. Changing this forces a new resource
+                      to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -580,7 +580,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   publishContentLink:
-                    description: The published runbook content link.
+                    description: One publish_content_link block as defined below.
                     items:
                       properties:
                         hash:
@@ -687,9 +687,9 @@ spec:
                     type: object
                   runbookType:
                     description: The type of the runbook - can be either Graph, GraphPowerShell,
-                      GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3,
-                      Python2 or Script. Changing this forces a new resource to be
-                      created.
+                      GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72,
+                      Python3, Python2 or Script. Changing this forces a new resource
+                      to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -1010,7 +1010,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   publishContentLink:
-                    description: The published runbook content link.
+                    description: One publish_content_link block as defined below.
                     items:
                       properties:
                         hash:
@@ -1041,9 +1041,9 @@ spec:
                     type: string
                   runbookType:
                     description: The type of the runbook - can be either Graph, GraphPowerShell,
-                      GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, Python3,
-                      Python2 or Script. Changing this forces a new resource to be
-                      created.
+                      GraphPowerShellWorkflow, PowerShellWorkflow, PowerShell, PowerShell72,
+                      Python3, Python2 or Script. Changing this forces a new resource
+                      to be created.
                     type: string
                   tags:
                     additionalProperties:

@@ -125,5 +125,5 @@ func (tr *SpringCloudCustomizedAccelerator) LateInitialize(attrs []byte) (bool, 
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *SpringCloudCustomizedAccelerator) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

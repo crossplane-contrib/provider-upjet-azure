@@ -8,8 +8,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    objectId: ${data.azurerm_client_config.current.object_id}
-    principalName: example-sp
+    objectId: ${data.azuread_service_principal.example.object_id}
+    principalName: ${data.azuread_service_principal.example.display_name}
     principalType: ServicePrincipal
     resourceGroupNameSelector:
       matchLabels:
@@ -31,8 +31,11 @@ metadata:
   name: example
 spec:
   forProvider:
-    administrator_login_password: 4-v3ry-53cr37-p455w0rd
-    administratorLogin: 4dm1n157r470r
+    administratorLogin: adminTerraform
+    administratorPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
     authentication:
     - activeDirectoryAuthEnabled: true
       tenantId: ${data.azurerm_client_config.current.tenant_id}
@@ -41,6 +44,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: GP_Standard_D2s_v3
+    storageMb: 32768
     version: "12"
     zone: "2"
 

@@ -264,7 +264,7 @@ type EndPointParameters struct {
 
 type LinksInitParameters struct {
 
-	// A list of contact profile link channels. A channels block as defined below. Changing this forces a new resource to be created.
+	// A list of contact profile link channels. A channels block as defined below.
 	Channels []ChannelsInitParameters `json:"channels,omitempty" tf:"channels,omitempty"`
 
 	// Direction of the link. Possible values are Uplink and Downlink.
@@ -279,7 +279,7 @@ type LinksInitParameters struct {
 
 type LinksObservation struct {
 
-	// A list of contact profile link channels. A channels block as defined below. Changing this forces a new resource to be created.
+	// A list of contact profile link channels. A channels block as defined below.
 	Channels []ChannelsObservation `json:"channels,omitempty" tf:"channels,omitempty"`
 
 	// Direction of the link. Possible values are Uplink and Downlink.
@@ -294,7 +294,7 @@ type LinksObservation struct {
 
 type LinksParameters struct {
 
-	// A list of contact profile link channels. A channels block as defined below. Changing this forces a new resource to be created.
+	// A list of contact profile link channels. A channels block as defined below.
 	// +kubebuilder:validation:Optional
 	Channels []ChannelsParameters `json:"channels" tf:"channels,omitempty"`
 
@@ -339,8 +339,8 @@ type ContactProfileStatus struct {
 // +kubebuilder:storageversion
 
 // ContactProfile is the Schema for the ContactProfiles API. Manages a orbital contact profile resource.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

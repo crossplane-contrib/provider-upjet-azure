@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -78,6 +78,12 @@ spec:
                     description: A JSON object that contains the addon configurations
                       of the Spring Cloud Container Deployment.
                     type: string
+                  applicationPerformanceMonitoringIds:
+                    description: Specifies a list of Spring Cloud Application Performance
+                      Monitoring IDs.
+                    items:
+                      type: string
+                    type: array
                   arguments:
                     description: Specifies the arguments to the entrypoint. The docker
                       image's CMD is used if not specified.
@@ -231,6 +237,12 @@ spec:
                     description: A JSON object that contains the addon configurations
                       of the Spring Cloud Container Deployment.
                     type: string
+                  applicationPerformanceMonitoringIds:
+                    description: Specifies a list of Spring Cloud Application Performance
+                      Monitoring IDs.
+                    items:
+                      type: string
+                    type: array
                   arguments:
                     description: Specifies the arguments to the entrypoint. The docker
                       image's CMD is used if not specified.
@@ -473,6 +485,12 @@ spec:
                     description: A JSON object that contains the addon configurations
                       of the Spring Cloud Container Deployment.
                     type: string
+                  applicationPerformanceMonitoringIds:
+                    description: Specifies a list of Spring Cloud Application Performance
+                      Monitoring IDs.
+                    items:
+                      type: string
+                    type: array
                   arguments:
                     description: Specifies the arguments to the entrypoint. The docker
                       image's CMD is used if not specified.

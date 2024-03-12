@@ -62,7 +62,7 @@ type ScheduleInitParameters struct {
 	// The location where the schedule is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	NotificationSettings []ScheduleNotificationSettingsInitParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// The status of this schedule. Possible values are Enabled and Disabled. Defaults to Disabled.
@@ -138,7 +138,7 @@ type ScheduleObservation struct {
 	// The location where the schedule is created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	NotificationSettings []ScheduleNotificationSettingsObservation `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
 	// The name of the resource group in which to create the dev test lab schedule. Changing this forces a new resource to be created.
@@ -188,7 +188,7 @@ type ScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// The notification setting of a schedule. A notification_settings as defined below.
+	// The notification setting of a schedule. A notification_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	NotificationSettings []ScheduleNotificationSettingsParameters `json:"notificationSettings,omitempty" tf:"notification_settings,omitempty"`
 
@@ -284,8 +284,8 @@ type ScheduleStatus struct {
 // +kubebuilder:storageversion
 
 // Schedule is the Schema for the Schedules API. Manages automated startup and shutdown schedules for Azure Dev Test Lab.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

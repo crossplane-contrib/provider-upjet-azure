@@ -91,6 +91,9 @@ type CassandraDatacenterObservation struct {
 	// The number of nodes the Cassandra Datacenter should have. The number should be equal or greater than 3. Defaults to 3.
 	NodeCount *float64 `json:"nodeCount,omitempty" tf:"node_count,omitempty"`
 
+	// A list of IP Address for the seed nodes in this Cassandra Datacenter.
+	SeedNodeIPAddresses []*string `json:"seedNodeIpAddresses,omitempty" tf:"seed_node_ip_addresses,omitempty"`
+
 	// Determines the selected sku.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 }
@@ -190,8 +193,8 @@ type CassandraDatacenterStatus struct {
 // +kubebuilder:storageversion
 
 // CassandraDatacenter is the Schema for the CassandraDatacenters API. Manages a Cassandra Datacenter.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

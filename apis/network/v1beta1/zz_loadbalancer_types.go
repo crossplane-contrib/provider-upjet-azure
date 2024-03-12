@@ -175,7 +175,7 @@ type LoadBalancerInitParameters struct {
 	// Specifies the Edge Zone within the Azure Region where this Load Balancer should exist. Changing this forces a new Load Balancer to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// One or multiple frontend_ip_configuration blocks as documented below.
+	// One or more frontend_ip_configuration blocks as documented below.
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationInitParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// Specifies the supported Azure Region where the Load Balancer should be created. Changing this forces a new resource to be created.
@@ -197,7 +197,7 @@ type LoadBalancerObservation struct {
 	// Specifies the Edge Zone within the Azure Region where this Load Balancer should exist. Changing this forces a new Load Balancer to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// One or multiple frontend_ip_configuration blocks as documented below.
+	// One or more frontend_ip_configuration blocks as documented below.
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationObservation `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
 	// The Load Balancer ID.
@@ -232,7 +232,7 @@ type LoadBalancerParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// One or multiple frontend_ip_configuration blocks as documented below.
+	// One or more frontend_ip_configuration blocks as documented below.
 	// +kubebuilder:validation:Optional
 	FrontendIPConfiguration []LoadBalancerFrontendIPConfigurationParameters `json:"frontendIpConfiguration,omitempty" tf:"frontend_ip_configuration,omitempty"`
 
@@ -295,8 +295,8 @@ type LoadBalancerStatus struct {
 // +kubebuilder:storageversion
 
 // LoadBalancer is the Schema for the LoadBalancers API. Manages a Load Balancer Resource.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

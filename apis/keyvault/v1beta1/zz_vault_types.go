@@ -182,7 +182,7 @@ type VaultInitParameters struct {
 
 type VaultObservation struct {
 
-	// A list of up to 1024 objects describing access policies, as described below.
+	// A list of access_policy objects (up to 1024) describing access policies, as described below.
 	AccessPolicy []AccessPolicyObservation `json:"accessPolicy,omitempty" tf:"access_policy,omitempty"`
 
 	// One or more contact block as defined below.
@@ -332,8 +332,8 @@ type VaultStatus struct {
 // +kubebuilder:storageversion
 
 // Vault is the Schema for the Vaults API. Manages a Key Vault.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

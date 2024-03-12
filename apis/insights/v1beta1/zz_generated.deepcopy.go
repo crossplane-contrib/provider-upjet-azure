@@ -3958,6 +3958,17 @@ func (in *CriteriaInitParameters) DeepCopyInto(out *CriteriaInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Levels != nil {
+		in, out := &in.Levels, &out.Levels
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.OperationName != nil {
 		in, out := &in.OperationName, &out.OperationName
 		*out = new(string)
@@ -3983,6 +3994,17 @@ func (in *CriteriaInitParameters) DeepCopyInto(out *CriteriaInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroups != nil {
+		in, out := &in.ResourceGroups, &out.ResourceGroups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceHealth != nil {
 		in, out := &in.ResourceHealth, &out.ResourceHealth
 		*out = make([]ResourceHealthInitParameters, len(*in))
@@ -4005,15 +4027,48 @@ func (in *CriteriaInitParameters) DeepCopyInto(out *CriteriaInitParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ResourceIds != nil {
+		in, out := &in.ResourceIds, &out.ResourceIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceProvider != nil {
 		in, out := &in.ResourceProvider, &out.ResourceProvider
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceProviders != nil {
+		in, out := &in.ResourceProviders, &out.ResourceProviders
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceType != nil {
 		in, out := &in.ResourceType, &out.ResourceType
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceTypes != nil {
+		in, out := &in.ResourceTypes, &out.ResourceTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ServiceHealth != nil {
 		in, out := &in.ServiceHealth, &out.ServiceHealth
@@ -4027,10 +4082,32 @@ func (in *CriteriaInitParameters) DeepCopyInto(out *CriteriaInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Statuses != nil {
+		in, out := &in.Statuses, &out.Statuses
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SubStatus != nil {
 		in, out := &in.SubStatus, &out.SubStatus
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubStatuses != nil {
+		in, out := &in.SubStatuses, &out.SubStatuses
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 }
 
@@ -4062,6 +4139,17 @@ func (in *CriteriaObservation) DeepCopyInto(out *CriteriaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Levels != nil {
+		in, out := &in.Levels, &out.Levels
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.OperationName != nil {
 		in, out := &in.OperationName, &out.OperationName
 		*out = new(string)
@@ -4087,6 +4175,17 @@ func (in *CriteriaObservation) DeepCopyInto(out *CriteriaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroups != nil {
+		in, out := &in.ResourceGroups, &out.ResourceGroups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceHealth != nil {
 		in, out := &in.ResourceHealth, &out.ResourceHealth
 		*out = make([]ResourceHealthObservation, len(*in))
@@ -4099,15 +4198,48 @@ func (in *CriteriaObservation) DeepCopyInto(out *CriteriaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceIds != nil {
+		in, out := &in.ResourceIds, &out.ResourceIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceProvider != nil {
 		in, out := &in.ResourceProvider, &out.ResourceProvider
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceProviders != nil {
+		in, out := &in.ResourceProviders, &out.ResourceProviders
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceType != nil {
 		in, out := &in.ResourceType, &out.ResourceType
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceTypes != nil {
+		in, out := &in.ResourceTypes, &out.ResourceTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ServiceHealth != nil {
 		in, out := &in.ServiceHealth, &out.ServiceHealth
@@ -4121,10 +4253,32 @@ func (in *CriteriaObservation) DeepCopyInto(out *CriteriaObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Statuses != nil {
+		in, out := &in.Statuses, &out.Statuses
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SubStatus != nil {
 		in, out := &in.SubStatus, &out.SubStatus
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubStatuses != nil {
+		in, out := &in.SubStatuses, &out.SubStatuses
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 }
 
@@ -4156,6 +4310,17 @@ func (in *CriteriaParameters) DeepCopyInto(out *CriteriaParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Levels != nil {
+		in, out := &in.Levels, &out.Levels
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.OperationName != nil {
 		in, out := &in.OperationName, &out.OperationName
 		*out = new(string)
@@ -4181,6 +4346,17 @@ func (in *CriteriaParameters) DeepCopyInto(out *CriteriaParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceGroups != nil {
+		in, out := &in.ResourceGroups, &out.ResourceGroups
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceHealth != nil {
 		in, out := &in.ResourceHealth, &out.ResourceHealth
 		*out = make([]ResourceHealthParameters, len(*in))
@@ -4203,15 +4379,48 @@ func (in *CriteriaParameters) DeepCopyInto(out *CriteriaParameters) {
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.ResourceIds != nil {
+		in, out := &in.ResourceIds, &out.ResourceIds
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceProvider != nil {
 		in, out := &in.ResourceProvider, &out.ResourceProvider
 		*out = new(string)
 		**out = **in
 	}
+	if in.ResourceProviders != nil {
+		in, out := &in.ResourceProviders, &out.ResourceProviders
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.ResourceType != nil {
 		in, out := &in.ResourceType, &out.ResourceType
 		*out = new(string)
 		**out = **in
+	}
+	if in.ResourceTypes != nil {
+		in, out := &in.ResourceTypes, &out.ResourceTypes
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.ServiceHealth != nil {
 		in, out := &in.ServiceHealth, &out.ServiceHealth
@@ -4225,10 +4434,32 @@ func (in *CriteriaParameters) DeepCopyInto(out *CriteriaParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.Statuses != nil {
+		in, out := &in.Statuses, &out.Statuses
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
+	}
 	if in.SubStatus != nil {
 		in, out := &in.SubStatus, &out.SubStatus
 		*out = new(string)
 		**out = **in
+	}
+	if in.SubStatuses != nil {
+		in, out := &in.SubStatuses, &out.SubStatuses
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 }
 
@@ -9042,6 +9273,13 @@ func (in *MonitorAutoscaleSettingInitParameters) DeepCopyInto(out *MonitorAutosc
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Predictive != nil {
+		in, out := &in.Predictive, &out.Predictive
+		*out = make([]PredictiveInitParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Profile != nil {
 		in, out := &in.Profile, &out.Profile
 		*out = make([]ProfileInitParameters, len(*in))
@@ -9169,6 +9407,13 @@ func (in *MonitorAutoscaleSettingObservation) DeepCopyInto(out *MonitorAutoscale
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.Predictive != nil {
+		in, out := &in.Predictive, &out.Predictive
+		*out = make([]PredictiveObservation, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
 	if in.Profile != nil {
 		in, out := &in.Profile, &out.Profile
 		*out = make([]ProfileObservation, len(*in))
@@ -9235,6 +9480,13 @@ func (in *MonitorAutoscaleSettingParameters) DeepCopyInto(out *MonitorAutoscaleS
 	if in.Notification != nil {
 		in, out := &in.Notification, &out.Notification
 		*out = make([]NotificationParameters, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.Predictive != nil {
+		in, out := &in.Predictive, &out.Predictive
+		*out = make([]PredictiveParameters, len(*in))
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
@@ -14268,6 +14520,81 @@ func (in *PlatformTelemetryParameters) DeepCopy() *PlatformTelemetryParameters {
 		return nil
 	}
 	out := new(PlatformTelemetryParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PredictiveInitParameters) DeepCopyInto(out *PredictiveInitParameters) {
+	*out = *in
+	if in.LookAheadTime != nil {
+		in, out := &in.LookAheadTime, &out.LookAheadTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.ScaleMode != nil {
+		in, out := &in.ScaleMode, &out.ScaleMode
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PredictiveInitParameters.
+func (in *PredictiveInitParameters) DeepCopy() *PredictiveInitParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PredictiveInitParameters)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PredictiveObservation) DeepCopyInto(out *PredictiveObservation) {
+	*out = *in
+	if in.LookAheadTime != nil {
+		in, out := &in.LookAheadTime, &out.LookAheadTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.ScaleMode != nil {
+		in, out := &in.ScaleMode, &out.ScaleMode
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PredictiveObservation.
+func (in *PredictiveObservation) DeepCopy() *PredictiveObservation {
+	if in == nil {
+		return nil
+	}
+	out := new(PredictiveObservation)
+	in.DeepCopyInto(out)
+	return out
+}
+
+// DeepCopyInto is an autogenerated deepcopy function, copying the receiver, writing into out. in must be non-nil.
+func (in *PredictiveParameters) DeepCopyInto(out *PredictiveParameters) {
+	*out = *in
+	if in.LookAheadTime != nil {
+		in, out := &in.LookAheadTime, &out.LookAheadTime
+		*out = new(string)
+		**out = **in
+	}
+	if in.ScaleMode != nil {
+		in, out := &in.ScaleMode, &out.ScaleMode
+		*out = new(string)
+		**out = **in
+	}
+}
+
+// DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new PredictiveParameters.
+func (in *PredictiveParameters) DeepCopy() *PredictiveParameters {
+	if in == nil {
+		return nil
+	}
+	out := new(PredictiveParameters)
 	in.DeepCopyInto(out)
 	return out
 }

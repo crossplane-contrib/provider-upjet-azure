@@ -19,7 +19,7 @@ type VirtualHubRouteTableInitParameters struct {
 	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A route block as defined below.
+	// One or more route blocks as defined below.
 	Route []VirtualHubRouteTableRouteInitParameters `json:"route,omitempty" tf:"route,omitempty"`
 }
 
@@ -32,7 +32,7 @@ type VirtualHubRouteTableObservation struct {
 	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A route block as defined below.
+	// One or more route blocks as defined below.
 	Route []VirtualHubRouteTableRouteObservation `json:"route,omitempty" tf:"route,omitempty"`
 
 	// The ID of the Virtual Hub within which this route table should be created. Changing this forces a new resource to be created.
@@ -46,7 +46,7 @@ type VirtualHubRouteTableParameters struct {
 	// +listType=set
 	Labels []*string `json:"labels,omitempty" tf:"labels,omitempty"`
 
-	// A route block as defined below.
+	// One or more route blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Route []VirtualHubRouteTableRouteParameters `json:"route,omitempty" tf:"route,omitempty"`
 
@@ -175,8 +175,8 @@ type VirtualHubRouteTableStatus struct {
 // +kubebuilder:storageversion
 
 // VirtualHubRouteTable is the Schema for the VirtualHubRouteTables API. Manages a Virtual Hub Route Table.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

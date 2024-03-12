@@ -4,32 +4,32 @@ metadata:
   annotations:
     meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservice
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
-    deviceMappingJson: |
-      {
-          "templateType": "CollectionContent",
-          "template": [
-                      {
-                        "templateType": "JsonPathContent",
-                        "template": {
-                          "typeName": "heartrate",
-                          "typeMatchExpression": "$..[?(@heartrate)]",
-                          "deviceIdExpression": "$.deviceid",
-                          "timestampExpression": "$.measurementdatetime",
-                          "values": [
-                            {
-                              "required": "true",
-                              "valueExpression": "$.heartrate",
-                              "valueName": "hr"
-                            }
-                          ]
-                        }
-                      }
-                    ]
-      }
+    deviceMappingJson: |-
+      ${jsonencode({
+          "templateType" : "CollectionContent",
+          "template" : [
+            {
+              "templateType" : "JsonPathContent",
+              "template" : {
+                "typeName" : "heartrate",
+                "typeMatchExpression" : "$..[?(@heartrate)]",
+                "deviceIdExpression" : "$.deviceid",
+                "timestampExpression" : "$.measurementdatetime",
+                "values" : [
+                  {
+                    "required" : "true",
+                    "valueExpression" : "$.heartrate",
+                    "valueName" : "hr"
+                  }
+                ]
+              }
+            }
+          ]
+        })}
     eventhubConsumerGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -45,3 +45,34 @@ spec:
     workspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaremedtechservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us

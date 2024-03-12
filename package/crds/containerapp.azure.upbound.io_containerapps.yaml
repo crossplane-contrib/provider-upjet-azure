@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -182,14 +182,15 @@ spec:
                         identityIds:
                           description: '- A list of one or more Resource IDs for User
                             Assigned Managed identities to assign. Required when type
-                            is set to UserAssigned.'
+                            is set to UserAssigned or SystemAssigned, UserAssigned.'
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are SystemAssigned, UserAssigned, and SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -223,18 +224,51 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exposedPort:
+                          description: |-
+                            The exposed port on the container for the Ingress traffic.
+                            The exposed port on the container for the Ingress traffic.
+                          type: number
                         externalEnabled:
                           description: |-
-                            Is this an external Ingress.
+                            Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
                             Is this an external Ingress.
                           type: boolean
+                        ipSecurityRestriction:
+                          description: One or more ip_security_restriction blocks
+                            for IP-filtering rules as defined below.
+                          items:
+                            properties:
+                              action:
+                                description: |-
+                                  The IP-filter action. Allow or Deny.
+                                  The action. Allow or Deny.
+                                type: string
+                              description:
+                                description: |-
+                                  Describe the IP restriction rule that is being sent to the container-app.
+                                  Describe the IP restriction rule that is being sent to the container-app.
+                                type: string
+                              ipAddressRange:
+                                description: |-
+                                  CIDR notation to match incoming IP address.
+                                  CIDR notation to match incoming IP address.
+                                type: string
+                              name:
+                                description: |-
+                                  The name of the Volume to be mounted in the container.
+                                  Name for the IP restriction rule.
+                                type: string
+                            type: object
+                          type: array
                         targetPort:
                           description: |-
                             The target port on the container for the Ingress traffic.
                             The target port on the container for the Ingress traffic.
                           type: number
                         trafficWeight:
-                          description: A traffic_weight block as detailed below.
+                          description: One or more traffic_weight blocks as detailed
+                            below.
                           items:
                             properties:
                               label:
@@ -244,7 +278,7 @@ spec:
                                 type: string
                               latestRevision:
                                 description: |-
-                                  This traffic Weight relates to the latest stable Container Revision.
+                                  This traffic Weight applies to the latest stable Container Revision. At most only one traffic_weight block can have the latest_revision set to true.
                                   This traffic Weight relates to the latest stable Container Revision.
                                 type: boolean
                               percentage:
@@ -261,8 +295,8 @@ spec:
                           type: array
                         transport:
                           description: |-
-                            The transport method for the Ingress. Possible values include auto, http, and http2. Defaults to auto
-                            The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`. Defaults to `auto`
+                            The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+                            The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
                           type: string
                       type: object
                     type: array
@@ -438,6 +472,39 @@ spec:
                     description: A template block as detailed below.
                     items:
                       properties:
+                        azureQueueScaleRule:
+                          description: One or more azure_queue_scale_rule blocks as
+                            defined below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                              queueLength:
+                                description: The value of the length of the queue
+                                  to trigger scaling actions.
+                                type: number
+                              queueName:
+                                description: The name of the Azure Queue
+                                type: string
+                            type: object
+                          type: array
                         container:
                           description: One or more container blocks as detailed below.
                           items:
@@ -458,8 +525,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`
+                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -551,8 +618,8 @@ spec:
                                 type: array
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values include 0.5Gi, 1.0Gi, 1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
+                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
                                 type: string
                               name:
                                 description: |-
@@ -696,6 +763,166 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        customScaleRule:
+                          description: One or more custom_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              customRuleType:
+                                description: 'The Custom rule type. Possible values
+                                  include: activemq, artemis-queue, kafka, pulsar,
+                                  aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams,
+                                  aws-kinesis-stream, aws-sqs-queue, azure-app-insights,
+                                  azure-blob, azure-data-explorer, azure-eventhub,
+                                  azure-log-analytics, azure-monitor, azure-pipelines,
+                                  azure-servicebus, azure-queue, cassandra, cpu, cron,
+                                  datadog, elasticsearch, external, external-push,
+                                  gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                  http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                  liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                  nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                  openstack-swift, postgresql, predictkube, prometheus,
+                                  rabbitmq, redis, redis-cluster, redis-sentinel,
+                                  redis-streams, redis-cluster-streams, redis-sentinel-streams,
+                                  selenium-grid,solace-event-queue, and github-runner.'
+                                type: string
+                              metadata:
+                                additionalProperties:
+                                  type: string
+                                description: '- A map of string key-value pairs to
+                                  configure the Custom Scale Rule.'
+                                type: object
+                                x-kubernetes-map-type: granular
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        httpScaleRule:
+                          description: One or more http_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        initContainer:
+                          description: The definition of an init container that is
+                            part of the group as documented in the init_container
+                            block below.
+                          items:
+                            properties:
+                              args:
+                                description: |-
+                                  A list of extra arguments to pass to the container.
+                                  A list of args to pass to the container.
+                                items:
+                                  type: string
+                                type: array
+                              command:
+                                description: |-
+                                  A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                  A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                items:
+                                  type: string
+                                type: array
+                              cpu:
+                                description: |-
+                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                type: number
+                              env:
+                                description: One or more env blocks as detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: |-
+                                        The name of the Volume to be mounted in the container.
+                                        The name of the environment variable for the container.
+                                      type: string
+                                    secretName:
+                                      description: |-
+                                        The name of the secret that contains the value for this environment variable.
+                                        The name of the secret that contains the value for this environment variable.
+                                      type: string
+                                    value:
+                                      description: |-
+                                        The value for this secret.
+                                        The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                      type: string
+                                  type: object
+                                type: array
+                              image:
+                                description: |-
+                                  The image to use to create the container.
+                                  The image to use to create the container.
+                                type: string
+                              memory:
+                                description: |-
+                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                type: string
+                              name:
+                                description: |-
+                                  The name of the Volume to be mounted in the container.
+                                  The name of the container.
+                                type: string
+                              volumeMounts:
+                                description: A volume_mounts block as detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: |-
+                                        The name of the Volume to be mounted in the container.
+                                        The name of the Volume to be mounted in the container.
+                                      type: string
+                                    path:
+                                      description: |-
+                                        The path in the container at which to mount this volume.
+                                        The path in the container at which to mount this volume.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         maxReplicas:
                           description: |-
                             The maximum number of replicas for this container.
@@ -711,6 +938,36 @@ spec:
                             The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
                             The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
                           type: string
+                        tcpScaleRule:
+                          description: One or more tcp_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         volume:
                           description: A volume block as detailed below.
                           items:
@@ -727,13 +984,17 @@ spec:
                                 type: string
                               storageType:
                                 description: |-
-                                  The type of storage volume. Possible values include AzureFile and EmptyDir. Defaults to EmptyDir.
+                                  The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
                                   The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  workloadProfileName:
+                    description: The name of the Workload Profile in the Container
+                      App Environment to place this Container App.
+                    type: string
                 type: object
               initProvider:
                 description: |-
@@ -857,14 +1118,15 @@ spec:
                         identityIds:
                           description: '- A list of one or more Resource IDs for User
                             Assigned Managed identities to assign. Required when type
-                            is set to UserAssigned.'
+                            is set to UserAssigned or SystemAssigned, UserAssigned.'
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are SystemAssigned, UserAssigned, and SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -898,18 +1160,51 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exposedPort:
+                          description: |-
+                            The exposed port on the container for the Ingress traffic.
+                            The exposed port on the container for the Ingress traffic.
+                          type: number
                         externalEnabled:
                           description: |-
-                            Is this an external Ingress.
+                            Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
                             Is this an external Ingress.
                           type: boolean
+                        ipSecurityRestriction:
+                          description: One or more ip_security_restriction blocks
+                            for IP-filtering rules as defined below.
+                          items:
+                            properties:
+                              action:
+                                description: |-
+                                  The IP-filter action. Allow or Deny.
+                                  The action. Allow or Deny.
+                                type: string
+                              description:
+                                description: |-
+                                  Describe the IP restriction rule that is being sent to the container-app.
+                                  Describe the IP restriction rule that is being sent to the container-app.
+                                type: string
+                              ipAddressRange:
+                                description: |-
+                                  CIDR notation to match incoming IP address.
+                                  CIDR notation to match incoming IP address.
+                                type: string
+                              name:
+                                description: |-
+                                  The name of the Volume to be mounted in the container.
+                                  Name for the IP restriction rule.
+                                type: string
+                            type: object
+                          type: array
                         targetPort:
                           description: |-
                             The target port on the container for the Ingress traffic.
                             The target port on the container for the Ingress traffic.
                           type: number
                         trafficWeight:
-                          description: A traffic_weight block as detailed below.
+                          description: One or more traffic_weight blocks as detailed
+                            below.
                           items:
                             properties:
                               label:
@@ -919,7 +1214,7 @@ spec:
                                 type: string
                               latestRevision:
                                 description: |-
-                                  This traffic Weight relates to the latest stable Container Revision.
+                                  This traffic Weight applies to the latest stable Container Revision. At most only one traffic_weight block can have the latest_revision set to true.
                                   This traffic Weight relates to the latest stable Container Revision.
                                 type: boolean
                               percentage:
@@ -936,8 +1231,8 @@ spec:
                           type: array
                         transport:
                           description: |-
-                            The transport method for the Ingress. Possible values include auto, http, and http2. Defaults to auto
-                            The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`. Defaults to `auto`
+                            The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+                            The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
                           type: string
                       type: object
                     type: array
@@ -990,6 +1285,39 @@ spec:
                     description: A template block as detailed below.
                     items:
                       properties:
+                        azureQueueScaleRule:
+                          description: One or more azure_queue_scale_rule blocks as
+                            defined below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                              queueLength:
+                                description: The value of the length of the queue
+                                  to trigger scaling actions.
+                                type: number
+                              queueName:
+                                description: The name of the Azure Queue
+                                type: string
+                            type: object
+                          type: array
                         container:
                           description: One or more container blocks as detailed below.
                           items:
@@ -1010,8 +1338,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`
+                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -1103,8 +1431,8 @@ spec:
                                 type: array
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values include 0.5Gi, 1.0Gi, 1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
+                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
                                 type: string
                               name:
                                 description: |-
@@ -1248,6 +1576,166 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        customScaleRule:
+                          description: One or more custom_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              customRuleType:
+                                description: 'The Custom rule type. Possible values
+                                  include: activemq, artemis-queue, kafka, pulsar,
+                                  aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams,
+                                  aws-kinesis-stream, aws-sqs-queue, azure-app-insights,
+                                  azure-blob, azure-data-explorer, azure-eventhub,
+                                  azure-log-analytics, azure-monitor, azure-pipelines,
+                                  azure-servicebus, azure-queue, cassandra, cpu, cron,
+                                  datadog, elasticsearch, external, external-push,
+                                  gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                  http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                  liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                  nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                  openstack-swift, postgresql, predictkube, prometheus,
+                                  rabbitmq, redis, redis-cluster, redis-sentinel,
+                                  redis-streams, redis-cluster-streams, redis-sentinel-streams,
+                                  selenium-grid,solace-event-queue, and github-runner.'
+                                type: string
+                              metadata:
+                                additionalProperties:
+                                  type: string
+                                description: '- A map of string key-value pairs to
+                                  configure the Custom Scale Rule.'
+                                type: object
+                                x-kubernetes-map-type: granular
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        httpScaleRule:
+                          description: One or more http_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        initContainer:
+                          description: The definition of an init container that is
+                            part of the group as documented in the init_container
+                            block below.
+                          items:
+                            properties:
+                              args:
+                                description: |-
+                                  A list of extra arguments to pass to the container.
+                                  A list of args to pass to the container.
+                                items:
+                                  type: string
+                                type: array
+                              command:
+                                description: |-
+                                  A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                  A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                items:
+                                  type: string
+                                type: array
+                              cpu:
+                                description: |-
+                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                type: number
+                              env:
+                                description: One or more env blocks as detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: |-
+                                        The name of the Volume to be mounted in the container.
+                                        The name of the environment variable for the container.
+                                      type: string
+                                    secretName:
+                                      description: |-
+                                        The name of the secret that contains the value for this environment variable.
+                                        The name of the secret that contains the value for this environment variable.
+                                      type: string
+                                    value:
+                                      description: |-
+                                        The value for this secret.
+                                        The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                      type: string
+                                  type: object
+                                type: array
+                              image:
+                                description: |-
+                                  The image to use to create the container.
+                                  The image to use to create the container.
+                                type: string
+                              memory:
+                                description: |-
+                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                type: string
+                              name:
+                                description: |-
+                                  The name of the Volume to be mounted in the container.
+                                  The name of the container.
+                                type: string
+                              volumeMounts:
+                                description: A volume_mounts block as detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: |-
+                                        The name of the Volume to be mounted in the container.
+                                        The name of the Volume to be mounted in the container.
+                                      type: string
+                                    path:
+                                      description: |-
+                                        The path in the container at which to mount this volume.
+                                        The path in the container at which to mount this volume.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         maxReplicas:
                           description: |-
                             The maximum number of replicas for this container.
@@ -1263,6 +1751,36 @@ spec:
                             The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
                             The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
                           type: string
+                        tcpScaleRule:
+                          description: One or more tcp_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         volume:
                           description: A volume block as detailed below.
                           items:
@@ -1279,13 +1797,17 @@ spec:
                                 type: string
                               storageType:
                                 description: |-
-                                  The type of storage volume. Possible values include AzureFile and EmptyDir. Defaults to EmptyDir.
+                                  The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
                                   The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  workloadProfileName:
+                    description: The name of the Workload Profile in the Container
+                      App Environment to place this Container App.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -1504,7 +2026,7 @@ spec:
                         identityIds:
                           description: '- A list of one or more Resource IDs for User
                             Assigned Managed identities to assign. Required when type
-                            is set to UserAssigned.'
+                            is set to UserAssigned or SystemAssigned, UserAssigned.'
                           items:
                             type: string
                           type: array
@@ -1517,7 +2039,8 @@ spec:
                           type: string
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are SystemAssigned, UserAssigned, and SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -1551,9 +2074,14 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        exposedPort:
+                          description: |-
+                            The exposed port on the container for the Ingress traffic.
+                            The exposed port on the container for the Ingress traffic.
+                          type: number
                         externalEnabled:
                           description: |-
-                            Is this an external Ingress.
+                            Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
                             Is this an external Ingress.
                           type: boolean
                         fqdn:
@@ -1561,13 +2089,41 @@ spec:
                             The FQDN of the ingress.
                             The FQDN of the ingress.
                           type: string
+                        ipSecurityRestriction:
+                          description: One or more ip_security_restriction blocks
+                            for IP-filtering rules as defined below.
+                          items:
+                            properties:
+                              action:
+                                description: |-
+                                  The IP-filter action. Allow or Deny.
+                                  The action. Allow or Deny.
+                                type: string
+                              description:
+                                description: |-
+                                  Describe the IP restriction rule that is being sent to the container-app.
+                                  Describe the IP restriction rule that is being sent to the container-app.
+                                type: string
+                              ipAddressRange:
+                                description: |-
+                                  CIDR notation to match incoming IP address.
+                                  CIDR notation to match incoming IP address.
+                                type: string
+                              name:
+                                description: |-
+                                  The name of the Volume to be mounted in the container.
+                                  Name for the IP restriction rule.
+                                type: string
+                            type: object
+                          type: array
                         targetPort:
                           description: |-
                             The target port on the container for the Ingress traffic.
                             The target port on the container for the Ingress traffic.
                           type: number
                         trafficWeight:
-                          description: A traffic_weight block as detailed below.
+                          description: One or more traffic_weight blocks as detailed
+                            below.
                           items:
                             properties:
                               label:
@@ -1577,7 +2133,7 @@ spec:
                                 type: string
                               latestRevision:
                                 description: |-
-                                  This traffic Weight relates to the latest stable Container Revision.
+                                  This traffic Weight applies to the latest stable Container Revision. At most only one traffic_weight block can have the latest_revision set to true.
                                   This traffic Weight relates to the latest stable Container Revision.
                                 type: boolean
                               percentage:
@@ -1594,8 +2150,8 @@ spec:
                           type: array
                         transport:
                           description: |-
-                            The transport method for the Ingress. Possible values include auto, http, and http2. Defaults to auto
-                            The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`. Defaults to `auto`
+                            The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+                            The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
                           type: string
                       type: object
                     type: array
@@ -1715,6 +2271,39 @@ spec:
                     description: A template block as detailed below.
                     items:
                       properties:
+                        azureQueueScaleRule:
+                          description: One or more azure_queue_scale_rule blocks as
+                            defined below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                              queueLength:
+                                description: The value of the length of the queue
+                                  to trigger scaling actions.
+                                type: number
+                              queueName:
+                                description: The name of the Azure Queue
+                                type: string
+                            type: object
+                          type: array
                         container:
                           description: One or more container blocks as detailed below.
                           items:
@@ -1735,8 +2324,8 @@ spec:
                                 type: array
                               cpu:
                                 description: |-
-                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0.
-                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`
+                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
                                 type: number
                               env:
                                 description: One or more env blocks as detailed below.
@@ -1838,8 +2427,8 @@ spec:
                                 type: array
                               memory:
                                 description: |-
-                                  The amount of memory to allocate to the container. Possible values include 0.5Gi, 1.0Gi, 1.5Gi, 2.0Gi, 2.5Gi, 3.0Gi, 3.5Gi, and 4.0Gi.
-                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`
+                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
                                 type: string
                               name:
                                 description: |-
@@ -1988,6 +2577,171 @@ spec:
                                 type: array
                             type: object
                           type: array
+                        customScaleRule:
+                          description: One or more custom_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              customRuleType:
+                                description: 'The Custom rule type. Possible values
+                                  include: activemq, artemis-queue, kafka, pulsar,
+                                  aws-cloudwatch, aws-dynamodb, aws-dynamodb-streams,
+                                  aws-kinesis-stream, aws-sqs-queue, azure-app-insights,
+                                  azure-blob, azure-data-explorer, azure-eventhub,
+                                  azure-log-analytics, azure-monitor, azure-pipelines,
+                                  azure-servicebus, azure-queue, cassandra, cpu, cron,
+                                  datadog, elasticsearch, external, external-push,
+                                  gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                  http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                  liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                  nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                  openstack-swift, postgresql, predictkube, prometheus,
+                                  rabbitmq, redis, redis-cluster, redis-sentinel,
+                                  redis-streams, redis-cluster-streams, redis-sentinel-streams,
+                                  selenium-grid,solace-event-queue, and github-runner.'
+                                type: string
+                              metadata:
+                                additionalProperties:
+                                  type: string
+                                description: '- A map of string key-value pairs to
+                                  configure the Custom Scale Rule.'
+                                type: object
+                                x-kubernetes-map-type: granular
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        httpScaleRule:
+                          description: One or more http_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
+                        initContainer:
+                          description: The definition of an init container that is
+                            part of the group as documented in the init_container
+                            block below.
+                          items:
+                            properties:
+                              args:
+                                description: |-
+                                  A list of extra arguments to pass to the container.
+                                  A list of args to pass to the container.
+                                items:
+                                  type: string
+                                type: array
+                              command:
+                                description: |-
+                                  A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                  A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                items:
+                                  type: string
+                                type: array
+                              cpu:
+                                description: |-
+                                  The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                  The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                                type: number
+                              env:
+                                description: One or more env blocks as detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: |-
+                                        The name of the Volume to be mounted in the container.
+                                        The name of the environment variable for the container.
+                                      type: string
+                                    secretName:
+                                      description: |-
+                                        The name of the secret that contains the value for this environment variable.
+                                        The name of the secret that contains the value for this environment variable.
+                                      type: string
+                                    value:
+                                      description: |-
+                                        The value for this secret.
+                                        The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                      type: string
+                                  type: object
+                                type: array
+                              ephemeralStorage:
+                                description: |-
+                                  The amount of ephemeral storage available to the Container App.
+                                  The amount of ephemeral storage available to the Container App.
+                                type: string
+                              image:
+                                description: |-
+                                  The image to use to create the container.
+                                  The image to use to create the container.
+                                type: string
+                              memory:
+                                description: |-
+                                  The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                  The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                                type: string
+                              name:
+                                description: |-
+                                  The name of the Volume to be mounted in the container.
+                                  The name of the container.
+                                type: string
+                              volumeMounts:
+                                description: A volume_mounts block as detailed below.
+                                items:
+                                  properties:
+                                    name:
+                                      description: |-
+                                        The name of the Volume to be mounted in the container.
+                                        The name of the Volume to be mounted in the container.
+                                      type: string
+                                    path:
+                                      description: |-
+                                        The path in the container at which to mount this volume.
+                                        The path in the container at which to mount this volume.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         maxReplicas:
                           description: |-
                             The maximum number of replicas for this container.
@@ -2003,6 +2757,36 @@ spec:
                             The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
                             The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
                           type: string
+                        tcpScaleRule:
+                          description: One or more tcp_scale_rule blocks as defined
+                            below.
+                          items:
+                            properties:
+                              authentication:
+                                description: Zero or more authentication blocks as
+                                  defined below.
+                                items:
+                                  properties:
+                                    secretName:
+                                      description: The name of the secret that contains
+                                        the value for this environment variable.
+                                      type: string
+                                    triggerParameter:
+                                      description: The Trigger Parameter name to use
+                                        the supply the value retrieved from the secret_name.
+                                      type: string
+                                  type: object
+                                type: array
+                              concurrentRequests:
+                                description: '- The number of concurrent requests
+                                  to trigger scaling.'
+                                type: string
+                              name:
+                                description: The name of the Volume to be mounted
+                                  in the container.
+                                type: string
+                            type: object
+                          type: array
                         volume:
                           description: A volume block as detailed below.
                           items:
@@ -2019,13 +2803,17 @@ spec:
                                 type: string
                               storageType:
                                 description: |-
-                                  The type of storage volume. Possible values include AzureFile and EmptyDir. Defaults to EmptyDir.
+                                  The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
                                   The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
                                 type: string
                             type: object
                           type: array
                       type: object
                     type: array
+                  workloadProfileName:
+                    description: The name of the Workload Profile in the Container
+                      App Environment to place this Container App.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

@@ -18,7 +18,10 @@ type RoleAssignmentInitParameters struct {
 	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	// The Type of the Principal. One of User, Group or ServicePrincipal. Changing this forces a new resource to be created.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// The Role Name of the Synapse Built-In Role. Possible values are Apache Spark Administrator, Synapse Administrator, Synapse Artifact Publisher, Synapse Artifact User, Synapse Compute Operator, Synapse Contributor, Synapse Credential User, Synapse Linked Data Manager, Synapse Monitoring Operator, Synapse SQL Administrator and Synapse User. Changing this forces a new resource to be created.
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
@@ -46,7 +49,10 @@ type RoleAssignmentObservation struct {
 	// The ID of the Principal (User, Group or Service Principal) to assign the Synapse Role Definition to. Changing this forces a new resource to be created.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	// The Type of the Principal. One of User, Group or ServicePrincipal. Changing this forces a new resource to be created.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// The Role Name of the Synapse Built-In Role. Possible values are Apache Spark Administrator, Synapse Administrator, Synapse Artifact Publisher, Synapse Artifact User, Synapse Compute Operator, Synapse Contributor, Synapse Credential User, Synapse Linked Data Manager, Synapse Monitoring Operator, Synapse SQL Administrator and Synapse User. Changing this forces a new resource to be created.
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
 	// The Synapse Spark Pool which the Synapse Role Assignment applies to. Changing this forces a new resource to be created.
@@ -62,7 +68,11 @@ type RoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The Role Name of the Synapse Built-In Role. Changing this forces a new resource to be created.
+	// The Type of the Principal. One of User, Group or ServicePrincipal. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
+	// The Role Name of the Synapse Built-In Role. Possible values are Apache Spark Administrator, Synapse Administrator, Synapse Artifact Publisher, Synapse Artifact User, Synapse Compute Operator, Synapse Contributor, Synapse Credential User, Synapse Linked Data Manager, Synapse Monitoring Operator, Synapse SQL Administrator and Synapse User. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RoleName *string `json:"roleName,omitempty" tf:"role_name,omitempty"`
 
@@ -113,8 +123,8 @@ type RoleAssignmentStatus struct {
 // +kubebuilder:storageversion
 
 // RoleAssignment is the Schema for the RoleAssignments API. Manages a Synapse Role Assignment.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

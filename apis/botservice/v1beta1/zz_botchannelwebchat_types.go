@@ -18,6 +18,9 @@ type BotChannelWebChatInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// A site represents a client application that you want to connect to your bot. One or more site blocks as defined below.
+	Site []BotChannelWebChatSiteInitParameters `json:"site,omitempty" tf:"site,omitempty"`
+
 	// A list of Web Chat Site names.
 	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
@@ -36,6 +39,9 @@ type BotChannelWebChatObservation struct {
 
 	// The name of the resource group where the Web Chat Channel should be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A site represents a client application that you want to connect to your bot. One or more site blocks as defined below.
+	Site []BotChannelWebChatSiteObservation `json:"site,omitempty" tf:"site,omitempty"`
 
 	// A list of Web Chat Site names.
 	// +listType=set
@@ -75,10 +81,63 @@ type BotChannelWebChatParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A site represents a client application that you want to connect to your bot. One or more site blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Site []BotChannelWebChatSiteParameters `json:"site,omitempty" tf:"site,omitempty"`
+
 	// A list of Web Chat Site names.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
+}
+
+type BotChannelWebChatSiteInitParameters struct {
+
+	// Is the endpoint parameters enabled for this site?
+	EndpointParametersEnabled *bool `json:"endpointParametersEnabled,omitempty" tf:"endpoint_parameters_enabled,omitempty"`
+
+	// The name of the site.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is the storage site enabled for detailed logging? Defaults to true.
+	StorageEnabled *bool `json:"storageEnabled,omitempty" tf:"storage_enabled,omitempty"`
+
+	// Is the user upload enabled for this site? Defaults to true.
+	UserUploadEnabled *bool `json:"userUploadEnabled,omitempty" tf:"user_upload_enabled,omitempty"`
+}
+
+type BotChannelWebChatSiteObservation struct {
+
+	// Is the endpoint parameters enabled for this site?
+	EndpointParametersEnabled *bool `json:"endpointParametersEnabled,omitempty" tf:"endpoint_parameters_enabled,omitempty"`
+
+	// The name of the site.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Is the storage site enabled for detailed logging? Defaults to true.
+	StorageEnabled *bool `json:"storageEnabled,omitempty" tf:"storage_enabled,omitempty"`
+
+	// Is the user upload enabled for this site? Defaults to true.
+	UserUploadEnabled *bool `json:"userUploadEnabled,omitempty" tf:"user_upload_enabled,omitempty"`
+}
+
+type BotChannelWebChatSiteParameters struct {
+
+	// Is the endpoint parameters enabled for this site?
+	// +kubebuilder:validation:Optional
+	EndpointParametersEnabled *bool `json:"endpointParametersEnabled,omitempty" tf:"endpoint_parameters_enabled,omitempty"`
+
+	// The name of the site.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Is the storage site enabled for detailed logging? Defaults to true.
+	// +kubebuilder:validation:Optional
+	StorageEnabled *bool `json:"storageEnabled,omitempty" tf:"storage_enabled,omitempty"`
+
+	// Is the user upload enabled for this site? Defaults to true.
+	// +kubebuilder:validation:Optional
+	UserUploadEnabled *bool `json:"userUploadEnabled,omitempty" tf:"user_upload_enabled,omitempty"`
 }
 
 // BotChannelWebChatSpec defines the desired state of BotChannelWebChat
@@ -109,8 +168,8 @@ type BotChannelWebChatStatus struct {
 // +kubebuilder:storageversion
 
 // BotChannelWebChat is the Schema for the BotChannelWebChats API. Manages a Web Chat integration for a Bot Channel
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
@@ -118,7 +177,6 @@ type BotChannelWebChat struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.siteNames) || (has(self.initProvider) && has(self.initProvider.siteNames))",message="spec.forProvider.siteNames is a required parameter"
 	Spec   BotChannelWebChatSpec   `json:"spec"`
 	Status BotChannelWebChatStatus `json:"status,omitempty"`
 }

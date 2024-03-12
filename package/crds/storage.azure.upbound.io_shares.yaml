@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -120,11 +120,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   quota:
-                    description: The maximum size of the share, in gigabytes. For
-                      Standard storage accounts, this must be 1GB (or higher) and
-                      at most 5120 GB (5 TB). For Premium FileStorage storage accounts,
-                      this must be greater than 100 GB and at most 102400 GB (100
-                      TB).
+                    description: The maximum size of the share, in gigabytes.
                     type: number
                   storageAccountName:
                     description: Specifies the storage account in which to create
@@ -265,11 +261,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   quota:
-                    description: The maximum size of the share, in gigabytes. For
-                      Standard storage accounts, this must be 1GB (or higher) and
-                      at most 5120 GB (5 TB). For Premium FileStorage storage accounts,
-                      this must be greater than 100 GB and at most 102400 GB (100
-                      TB).
+                    description: The maximum size of the share, in gigabytes.
                     type: number
                 type: object
               managementPolicies:
@@ -499,11 +491,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   quota:
-                    description: The maximum size of the share, in gigabytes. For
-                      Standard storage accounts, this must be 1GB (or higher) and
-                      at most 5120 GB (5 TB). For Premium FileStorage storage accounts,
-                      this must be greater than 100 GB and at most 102400 GB (100
-                      TB).
+                    description: The maximum size of the share, in gigabytes.
                     type: number
                   resourceManagerId:
                     description: The Resource Manager ID of this File Share.

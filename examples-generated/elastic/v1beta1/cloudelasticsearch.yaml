@@ -13,7 +13,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: test
-    skuName: ess-monthly-consumption_Monthly
+    skuName: ess-consumption-2024_Monthly
 
 ---
 

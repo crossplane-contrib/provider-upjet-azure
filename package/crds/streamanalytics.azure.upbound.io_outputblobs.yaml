@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -83,8 +83,13 @@ spec:
                     type: string
                   batchMinRows:
                     description: The minimum number of rows per batch (must be between
-                      0 and 10000).
+                      0 and 1000000).
                     type: number
+                  blobWriteMode:
+                    description: Determines whether blob blocks are either committed
+                      automatically or appended. Possible values are Append and Once.
+                      Defaults to Append.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -478,8 +483,13 @@ spec:
                     type: string
                   batchMinRows:
                     description: The minimum number of rows per batch (must be between
-                      0 and 10000).
+                      0 and 1000000).
                     type: number
+                  blobWriteMode:
+                    description: Determines whether blob blocks are either committed
+                      automatically or appended. Possible values are Append and Once.
+                      Defaults to Append.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.
@@ -951,8 +961,13 @@ spec:
                     type: string
                   batchMinRows:
                     description: The minimum number of rows per batch (must be between
-                      0 and 10000).
+                      0 and 1000000).
                     type: number
+                  blobWriteMode:
+                    description: Determines whether blob blocks are either committed
+                      automatically or appended. Possible values are Append and Once.
+                      Defaults to Append.
+                    type: string
                   dateFormat:
                     description: The date format. Wherever {date} appears in path_pattern,
                       the value of this property is used as the date format instead.

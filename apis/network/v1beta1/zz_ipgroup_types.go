@@ -33,10 +33,10 @@ type IPGroupObservation struct {
 	// +listType=set
 	Cidrs []*string `json:"cidrs,omitempty" tf:"cidrs,omitempty"`
 
-	// A firewall_ids block as defined below.
+	// A list of ID of Firewall.
 	FirewallIds []*string `json:"firewallIds,omitempty" tf:"firewall_ids,omitempty"`
 
-	// A firewall_policy_ids block as defined below.
+	// A list of ID of Firewall Policy`.
 	FirewallPolicyIds []*string `json:"firewallPolicyIds,omitempty" tf:"firewall_policy_ids,omitempty"`
 
 	// The ID of the IP group.
@@ -111,8 +111,8 @@ type IPGroupStatus struct {
 // +kubebuilder:storageversion
 
 // IPGroup is the Schema for the IPGroups API. Manages an IP group which contains a list of CIDRs and/or IP addresses.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

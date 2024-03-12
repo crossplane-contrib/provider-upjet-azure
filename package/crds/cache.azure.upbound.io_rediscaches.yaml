@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -143,10 +143,14 @@ spec:
                       endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
-                    description: A redis_configuration as defined below - with some
-                      limitations by SKU - defaults/details are shown below.
+                    description: A redis_configuration block as defined below - with
+                      some limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
+                        activeDirectoryAuthenticationEnabled:
+                          description: Enable Microsoft Entra (AAD) authentication.
+                            Defaults to false.
+                          type: boolean
                         aofBackupEnabled:
                           description: Enable or disable AOF persistence for this
                             Redis Cache. Defaults to false.
@@ -187,6 +191,11 @@ spec:
                           - name
                           - namespace
                           type: object
+                        dataPersistenceAuthenticationMethod:
+                          description: Preferred auth method to communicate to storage
+                            account used for data persistence. Possible values are
+                            SAS and ManagedIdentity. Defaults to SAS.
+                          type: string
                         enableAuthentication:
                           description: If set to false, the Redis instance will be
                             accessible without authentication. Defaults to true.
@@ -201,7 +210,7 @@ spec:
                           type: number
                         maxmemoryPolicy:
                           description: How Redis will select what to remove when maxmemory
-                            is reached. Defaults are shown below. Defaults to volatile-lru.
+                            is reached. Defaults to volatile-lru.
                           type: string
                         maxmemoryReserved:
                           description: Value in megabytes reserved for non-cache usage
@@ -243,6 +252,10 @@ spec:
                           - name
                           - namespace
                           type: object
+                        storageAccountSubscriptionId:
+                          description: The ID of the Subscription containing the Storage
+                            Account.
+                          type: string
                       type: object
                     type: array
                   redisVersion:
@@ -532,14 +545,23 @@ spec:
                       endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
-                    description: A redis_configuration as defined below - with some
-                      limitations by SKU - defaults/details are shown below.
+                    description: A redis_configuration block as defined below - with
+                      some limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
+                        activeDirectoryAuthenticationEnabled:
+                          description: Enable Microsoft Entra (AAD) authentication.
+                            Defaults to false.
+                          type: boolean
                         aofBackupEnabled:
                           description: Enable or disable AOF persistence for this
                             Redis Cache. Defaults to false.
                           type: boolean
+                        dataPersistenceAuthenticationMethod:
+                          description: Preferred auth method to communicate to storage
+                            account used for data persistence. Possible values are
+                            SAS and ManagedIdentity. Defaults to SAS.
+                          type: string
                         enableAuthentication:
                           description: If set to false, the Redis instance will be
                             accessible without authentication. Defaults to true.
@@ -554,7 +576,7 @@ spec:
                           type: number
                         maxmemoryPolicy:
                           description: How Redis will select what to remove when maxmemory
-                            is reached. Defaults are shown below. Defaults to volatile-lru.
+                            is reached. Defaults to volatile-lru.
                           type: string
                         maxmemoryReserved:
                           description: Value in megabytes reserved for non-cache usage
@@ -578,6 +600,10 @@ spec:
                           description: The maximum number of snapshots to create as
                             a backup. Only supported for Premium SKUs.
                           type: number
+                        storageAccountSubscriptionId:
+                          description: The ID of the Subscription containing the Storage
+                            Account.
+                          type: string
                       type: object
                     type: array
                   redisVersion:
@@ -981,14 +1007,23 @@ spec:
                       endpoint access is allowed. Defaults to true.
                     type: boolean
                   redisConfiguration:
-                    description: A redis_configuration as defined below - with some
-                      limitations by SKU - defaults/details are shown below.
+                    description: A redis_configuration block as defined below - with
+                      some limitations by SKU - defaults/details are shown below.
                     items:
                       properties:
+                        activeDirectoryAuthenticationEnabled:
+                          description: Enable Microsoft Entra (AAD) authentication.
+                            Defaults to false.
+                          type: boolean
                         aofBackupEnabled:
                           description: Enable or disable AOF persistence for this
                             Redis Cache. Defaults to false.
                           type: boolean
+                        dataPersistenceAuthenticationMethod:
+                          description: Preferred auth method to communicate to storage
+                            account used for data persistence. Possible values are
+                            SAS and ManagedIdentity. Defaults to SAS.
+                          type: string
                         enableAuthentication:
                           description: If set to false, the Redis instance will be
                             accessible without authentication. Defaults to true.
@@ -1007,7 +1042,7 @@ spec:
                           type: number
                         maxmemoryPolicy:
                           description: How Redis will select what to remove when maxmemory
-                            is reached. Defaults are shown below. Defaults to volatile-lru.
+                            is reached. Defaults to volatile-lru.
                           type: string
                         maxmemoryReserved:
                           description: Value in megabytes reserved for non-cache usage
@@ -1031,6 +1066,10 @@ spec:
                           description: The maximum number of snapshots to create as
                             a backup. Only supported for Premium SKUs.
                           type: number
+                        storageAccountSubscriptionId:
+                          description: The ID of the Subscription containing the Storage
+                            Account.
+                          type: string
                       type: object
                     type: array
                   redisVersion:

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -250,7 +250,7 @@ spec:
                     x-kubernetes-map-type: granular
                   visibility:
                     description: The visibility of the Maintenance Configuration.
-                      The only allowable value is Custom.
+                      The only allowable value is Custom. Defaults to Custom.
                     type: string
                   window:
                     description: A window block as defined below.
@@ -389,7 +389,7 @@ spec:
                     x-kubernetes-map-type: granular
                   visibility:
                     description: The visibility of the Maintenance Configuration.
-                      The only allowable value is Custom.
+                      The only allowable value is Custom. Defaults to Custom.
                     type: string
                   window:
                     description: A window block as defined below.
@@ -705,7 +705,7 @@ spec:
                     x-kubernetes-map-type: granular
                   visibility:
                     description: The visibility of the Maintenance Configuration.
-                      The only allowable value is Custom.
+                      The only allowable value is Custom. Defaults to Custom.
                     type: string
                   window:
                     description: A window block as defined below.

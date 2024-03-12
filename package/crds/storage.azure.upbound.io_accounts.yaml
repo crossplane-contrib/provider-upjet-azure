@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -86,6 +86,9 @@ spec:
                   accountReplicationType:
                     description: Defines the type of replication to use for this storage
                       account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
+                      Changing this forces a new resource to be created when types
+                      LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice
+                      versa.
                     type: string
                   accountTier:
                     description: Defines the Tier to use for this storage account.
@@ -120,16 +123,20 @@ spec:
                                 type: string
                               domainSid:
                                 description: Specifies the security identifier (SID).
+                                  This is required when directory_type is set to AD.
                                 type: string
                               forestName:
                                 description: Specifies the Active Directory forest.
+                                  This is required when directory_type is set to AD.
                                 type: string
                               netbiosDomainName:
-                                description: Specifies the NetBIOS domain name.
+                                description: Specifies the NetBIOS domain name. This
+                                  is required when directory_type is set to AD.
                                 type: string
                               storageSid:
                                 description: Specifies the security identifier (SID)
-                                  for Azure Storage.
+                                  for Azure Storage. This is required when directory_type
+                                  is set to AD.
                                 type: string
                             type: object
                           type: array
@@ -344,6 +351,9 @@ spec:
                   largeFileShareEnabled:
                     description: Is Large File Share Enabled?
                     type: boolean
+                  localUserEnabled:
+                    description: Is Local User Enabled? Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -372,20 +382,20 @@ spec:
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
                             Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
-                            and Private IP address ranges (as defined in RFC 1918),  are
-                            not allowed.
+                            and Private IP address ranges (as defined in RFC 1918),
+                            are not allowed.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         privateLinkAccess:
-                          description: One or More private_link_access block as defined
+                          description: One or more private_link_access block as defined
                             below.
                           items:
                             properties:
                               endpointResourceId:
-                                description: The resource id of the resource access
-                                  rule to be granted access.
+                                description: The ID of the Azure resource that should
+                                  be allowed access to the target storage account.
                                 type: string
                               endpointTenantId:
                                 description: The tenant id of the resource of the
@@ -734,8 +744,8 @@ spec:
                     description: Indicates whether the storage account permits requests
                       to be authorized with the account access key via Shared Key.
                       If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory (Azure AD). The
-                      default value is true.
+                      must be authorized with Azure Active Directory (Azure AD). Defaults
+                      to true.
                     type: boolean
                   staticWebsite:
                     description: A static_website block as defined below.
@@ -791,6 +801,9 @@ spec:
                   accountReplicationType:
                     description: Defines the type of replication to use for this storage
                       account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
+                      Changing this forces a new resource to be created when types
+                      LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice
+                      versa.
                     type: string
                   accountTier:
                     description: Defines the Tier to use for this storage account.
@@ -825,16 +838,20 @@ spec:
                                 type: string
                               domainSid:
                                 description: Specifies the security identifier (SID).
+                                  This is required when directory_type is set to AD.
                                 type: string
                               forestName:
                                 description: Specifies the Active Directory forest.
+                                  This is required when directory_type is set to AD.
                                 type: string
                               netbiosDomainName:
-                                description: Specifies the NetBIOS domain name.
+                                description: Specifies the NetBIOS domain name. This
+                                  is required when directory_type is set to AD.
                                 type: string
                               storageSid:
                                 description: Specifies the security identifier (SID)
-                                  for Azure Storage.
+                                  for Azure Storage. This is required when directory_type
+                                  is set to AD.
                                 type: string
                             type: object
                           type: array
@@ -1049,6 +1066,9 @@ spec:
                   largeFileShareEnabled:
                     description: Is Large File Share Enabled?
                     type: boolean
+                  localUserEnabled:
+                    description: Is Local User Enabled? Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -1077,20 +1097,20 @@ spec:
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
                             Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
-                            and Private IP address ranges (as defined in RFC 1918),  are
-                            not allowed.
+                            and Private IP address ranges (as defined in RFC 1918),
+                            are not allowed.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         privateLinkAccess:
-                          description: One or More private_link_access block as defined
+                          description: One or more private_link_access block as defined
                             below.
                           items:
                             properties:
                               endpointResourceId:
-                                description: The resource id of the resource access
-                                  rule to be granted access.
+                                description: The ID of the Azure resource that should
+                                  be allowed access to the target storage account.
                                 type: string
                               endpointTenantId:
                                 description: The tenant id of the resource of the
@@ -1358,8 +1378,8 @@ spec:
                     description: Indicates whether the storage account permits requests
                       to be authorized with the account access key via Shared Key.
                       If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory (Azure AD). The
-                      default value is true.
+                      must be authorized with Azure Active Directory (Azure AD). Defaults
+                      to true.
                     type: boolean
                   staticWebsite:
                     description: A static_website block as defined below.
@@ -1587,6 +1607,9 @@ spec:
                   accountReplicationType:
                     description: Defines the type of replication to use for this storage
                       account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
+                      Changing this forces a new resource to be created when types
+                      LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice
+                      versa.
                     type: string
                   accountTier:
                     description: Defines the Tier to use for this storage account.
@@ -1621,16 +1644,20 @@ spec:
                                 type: string
                               domainSid:
                                 description: Specifies the security identifier (SID).
+                                  This is required when directory_type is set to AD.
                                 type: string
                               forestName:
                                 description: Specifies the Active Directory forest.
+                                  This is required when directory_type is set to AD.
                                 type: string
                               netbiosDomainName:
-                                description: Specifies the NetBIOS domain name.
+                                description: Specifies the NetBIOS domain name. This
+                                  is required when directory_type is set to AD.
                                 type: string
                               storageSid:
                                 description: Specifies the security identifier (SID)
-                                  for Azure Storage.
+                                  for Azure Storage. This is required when directory_type
+                                  is set to AD.
                                 type: string
                             type: object
                           type: array
@@ -1856,6 +1883,9 @@ spec:
                   largeFileShareEnabled:
                     description: Is Large File Share Enabled?
                     type: boolean
+                  localUserEnabled:
+                    description: Is Local User Enabled? Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
@@ -1884,20 +1914,20 @@ spec:
                         ipRules:
                           description: List of public IP or IP ranges in CIDR Format.
                             Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs,
-                            and Private IP address ranges (as defined in RFC 1918),  are
-                            not allowed.
+                            and Private IP address ranges (as defined in RFC 1918),
+                            are not allowed.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         privateLinkAccess:
-                          description: One or More private_link_access block as defined
+                          description: One or more private_link_access block as defined
                             below.
                           items:
                             properties:
                               endpointResourceId:
-                                description: The resource id of the resource access
-                                  rule to be granted access.
+                                description: The ID of the Azure resource that should
+                                  be allowed access to the target storage account.
                                 type: string
                               endpointTenantId:
                                 description: The tenant id of the resource of the
@@ -1926,12 +1956,44 @@ spec:
                     description: The hostname with port if applicable for blob storage
                       in the primary location.
                     type: string
+                  primaryBlobInternetEndpoint:
+                    description: The internet routing endpoint URL for blob storage
+                      in the primary location.
+                    type: string
+                  primaryBlobInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for blob storage in the primary location.
+                    type: string
+                  primaryBlobMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for blob storage
+                      in the primary location.
+                    type: string
+                  primaryBlobMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for blob storage in the primary location.
+                    type: string
                   primaryDfsEndpoint:
                     description: The endpoint URL for DFS storage in the primary location.
                     type: string
                   primaryDfsHost:
                     description: The hostname with port if applicable for DFS storage
                       in the primary location.
+                    type: string
+                  primaryDfsInternetEndpoint:
+                    description: The internet routing endpoint URL for DFS storage
+                      in the primary location.
+                    type: string
+                  primaryDfsInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for DFS storage in the primary location.
+                    type: string
+                  primaryDfsMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for DFS storage
+                      in the primary location.
+                    type: string
+                  primaryDfsMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for DFS storage in the primary location.
                     type: string
                   primaryFileEndpoint:
                     description: The endpoint URL for file storage in the primary
@@ -1940,6 +2002,22 @@ spec:
                   primaryFileHost:
                     description: The hostname with port if applicable for file storage
                       in the primary location.
+                    type: string
+                  primaryFileInternetEndpoint:
+                    description: The internet routing endpoint URL for file storage
+                      in the primary location.
+                    type: string
+                  primaryFileInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for file storage in the primary location.
+                    type: string
+                  primaryFileMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for file storage
+                      in the primary location.
+                    type: string
+                  primaryFileMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for file storage in the primary location.
                     type: string
                   primaryLocation:
                     description: The primary location of the storage account.
@@ -1952,6 +2030,14 @@ spec:
                     description: The hostname with port if applicable for queue storage
                       in the primary location.
                     type: string
+                  primaryQueueMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for queue storage
+                      in the primary location.
+                    type: string
+                  primaryQueueMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for queue storage in the primary location.
+                    type: string
                   primaryTableEndpoint:
                     description: The endpoint URL for table storage in the primary
                       location.
@@ -1960,12 +2046,36 @@ spec:
                     description: The hostname with port if applicable for table storage
                       in the primary location.
                     type: string
+                  primaryTableMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for table storage
+                      in the primary location.
+                    type: string
+                  primaryTableMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for table storage in the primary location.
+                    type: string
                   primaryWebEndpoint:
                     description: The endpoint URL for web storage in the primary location.
                     type: string
                   primaryWebHost:
                     description: The hostname with port if applicable for web storage
                       in the primary location.
+                    type: string
+                  primaryWebInternetEndpoint:
+                    description: The internet routing endpoint URL for web storage
+                      in the primary location.
+                    type: string
+                  primaryWebInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for web storage in the primary location.
+                    type: string
+                  primaryWebMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for web storage
+                      in the primary location.
+                    type: string
+                  primaryWebMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for web storage in the primary location.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether the public network access is enabled? Defaults
@@ -2129,6 +2239,22 @@ spec:
                     description: The hostname with port if applicable for blob storage
                       in the secondary location.
                     type: string
+                  secondaryBlobInternetEndpoint:
+                    description: The internet routing endpoint URL for blob storage
+                      in the secondary location.
+                    type: string
+                  secondaryBlobInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for blob storage in the secondary location.
+                    type: string
+                  secondaryBlobMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for blob storage
+                      in the secondary location.
+                    type: string
+                  secondaryBlobMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for blob storage in the secondary location.
+                    type: string
                   secondaryDfsEndpoint:
                     description: The endpoint URL for DFS storage in the secondary
                       location.
@@ -2137,6 +2263,22 @@ spec:
                     description: The hostname with port if applicable for DFS storage
                       in the secondary location.
                     type: string
+                  secondaryDfsInternetEndpoint:
+                    description: The internet routing endpoint URL for DFS storage
+                      in the secondary location.
+                    type: string
+                  secondaryDfsInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for DFS storage in the secondary location.
+                    type: string
+                  secondaryDfsMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for DFS storage
+                      in the secondary location.
+                    type: string
+                  secondaryDfsMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for DFS storage in the secondary location.
+                    type: string
                   secondaryFileEndpoint:
                     description: The endpoint URL for file storage in the secondary
                       location.
@@ -2144,6 +2286,22 @@ spec:
                   secondaryFileHost:
                     description: The hostname with port if applicable for file storage
                       in the secondary location.
+                    type: string
+                  secondaryFileInternetEndpoint:
+                    description: The internet routing endpoint URL for file storage
+                      in the secondary location.
+                    type: string
+                  secondaryFileInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for file storage in the secondary location.
+                    type: string
+                  secondaryFileMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for file storage
+                      in the secondary location.
+                    type: string
+                  secondaryFileMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for file storage in the secondary location.
                     type: string
                   secondaryLocation:
                     description: The secondary location of the storage account.
@@ -2156,6 +2314,14 @@ spec:
                     description: The hostname with port if applicable for queue storage
                       in the secondary location.
                     type: string
+                  secondaryQueueMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for queue storage
+                      in the secondary location.
+                    type: string
+                  secondaryQueueMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for queue storage in the secondary location.
+                    type: string
                   secondaryTableEndpoint:
                     description: The endpoint URL for table storage in the secondary
                       location.
@@ -2164,6 +2330,14 @@ spec:
                     description: The hostname with port if applicable for table storage
                       in the secondary location.
                     type: string
+                  secondaryTableMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for table storage
+                      in the secondary location.
+                    type: string
+                  secondaryTableMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for table storage in the secondary location.
+                    type: string
                   secondaryWebEndpoint:
                     description: The endpoint URL for web storage in the secondary
                       location.
@@ -2171,6 +2345,22 @@ spec:
                   secondaryWebHost:
                     description: The hostname with port if applicable for web storage
                       in the secondary location.
+                    type: string
+                  secondaryWebInternetEndpoint:
+                    description: The internet routing endpoint URL for web storage
+                      in the secondary location.
+                    type: string
+                  secondaryWebInternetHost:
+                    description: The internet routing hostname with port if applicable
+                      for web storage in the secondary location.
+                    type: string
+                  secondaryWebMicrosoftEndpoint:
+                    description: The microsoft routing endpoint URL for web storage
+                      in the secondary location.
+                    type: string
+                  secondaryWebMicrosoftHost:
+                    description: The microsoft routing hostname with port if applicable
+                      for web storage in the secondary location.
                     type: string
                   sftpEnabled:
                     description: Boolean, enable SFTP for the storage account
@@ -2270,8 +2460,8 @@ spec:
                     description: Indicates whether the storage account permits requests
                       to be authorized with the account access key via Shared Key.
                       If false, then all requests, including shared access signatures,
-                      must be authorized with Azure Active Directory (Azure AD). The
-                      default value is true.
+                      must be authorized with Azure Active Directory (Azure AD). Defaults
+                      to true.
                     type: boolean
                   staticWebsite:
                     description: A static_website block as defined below.

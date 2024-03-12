@@ -83,7 +83,7 @@ spec:
       key: example-key
       name: example-secret
       namespace: upbound-system
-    location: West Europe
+    location: North Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

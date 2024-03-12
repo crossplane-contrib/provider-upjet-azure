@@ -47,7 +47,7 @@ type ApplicationLogsInitParameters struct {
 	// A azure_blob_storage_http block as defined below.
 	AzureBlobStorage []AzureBlobStorageInitParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
-	// Log level. Possible values include: Verbose, Information, Warning, and Error.
+	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
 	FileSystemLevel *string `json:"fileSystemLevel,omitempty" tf:"file_system_level,omitempty"`
 }
 
@@ -56,7 +56,7 @@ type ApplicationLogsObservation struct {
 	// A azure_blob_storage_http block as defined below.
 	AzureBlobStorage []AzureBlobStorageObservation `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
-	// Log level. Possible values include: Verbose, Information, Warning, and Error.
+	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
 	FileSystemLevel *string `json:"fileSystemLevel,omitempty" tf:"file_system_level,omitempty"`
 }
 
@@ -66,14 +66,14 @@ type ApplicationLogsParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureBlobStorage []AzureBlobStorageParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
-	// Log level. Possible values include: Verbose, Information, Warning, and Error.
+	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
 	// +kubebuilder:validation:Optional
 	FileSystemLevel *string `json:"fileSystemLevel" tf:"file_system_level,omitempty"`
 }
 
 type AutoHealSettingInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	Action []ActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A trigger block as defined below.
@@ -82,7 +82,7 @@ type AutoHealSettingInitParameters struct {
 
 type AutoHealSettingObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	Action []ActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A trigger block as defined below.
@@ -91,7 +91,7 @@ type AutoHealSettingObservation struct {
 
 type AutoHealSettingParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action []ActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
@@ -761,7 +761,7 @@ type LinuxWebAppAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -813,7 +813,7 @@ type LinuxWebAppAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -876,7 +876,7 @@ type LinuxWebAppAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	// +kubebuilder:validation:Optional
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
@@ -1232,8 +1232,8 @@ type LinuxWebAppAuthSettingsV2InitParameters struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []LinuxWebAppAuthSettingsV2CustomOidcV2InitParameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1243,7 +1243,7 @@ type LinuxWebAppAuthSettingsV2InitParameters struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []LinuxWebAppAuthSettingsV2FacebookV2InitParameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1526,8 +1526,8 @@ type LinuxWebAppAuthSettingsV2Observation struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []LinuxWebAppAuthSettingsV2CustomOidcV2Observation `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1537,7 +1537,7 @@ type LinuxWebAppAuthSettingsV2Observation struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []LinuxWebAppAuthSettingsV2FacebookV2Observation `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1613,8 +1613,8 @@ type LinuxWebAppAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	CustomOidcV2 []LinuxWebAppAuthSettingsV2CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
@@ -1627,7 +1627,7 @@ type LinuxWebAppAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	FacebookV2 []LinuxWebAppAuthSettingsV2FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	// +kubebuilder:validation:Optional
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
@@ -1953,7 +1953,7 @@ type LinuxWebAppInitParameters struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_certificate_enabled is false
+	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_certificate_enabled is false. Defaults to Required.
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
@@ -1962,7 +1962,10 @@ type LinuxWebAppInitParameters struct {
 	// Should the Linux Web App be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Should the Linux Web App require HTTPS connections.
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
+	// Should the Linux Web App require HTTPS connections. Defaults to false.
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// An identity block as defined below.
@@ -1976,6 +1979,9 @@ type LinuxWebAppInitParameters struct {
 
 	// A logs block as defined below.
 	Logs []LogsInitParameters `json:"logs,omitempty" tf:"logs,omitempty"`
+
+	// Should public network access be enabled for the Web App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Service Plan that this Linux App Service will be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.ServicePlan
@@ -2016,6 +2022,9 @@ type LinuxWebAppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
+
 	// The local path and filename of the Zip packaged application to deploy to this Linux Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Linux Web App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
 	ZipDeployFile *string `json:"zipDeployFile,omitempty" tf:"zip_deploy_file,omitempty"`
@@ -2046,7 +2055,7 @@ type LinuxWebAppObservation struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_certificate_enabled is false
+	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_certificate_enabled is false. Defaults to Required.
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
@@ -2058,7 +2067,10 @@ type LinuxWebAppObservation struct {
 	// Should the Linux Web App be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Should the Linux Web App require HTTPS connections.
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
+	// Should the Linux Web App require HTTPS connections. Defaults to false.
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// The ID of the App Service Environment used by App Service.
@@ -2088,11 +2100,14 @@ type LinuxWebAppObservation struct {
 	// A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12.
 	OutboundIPAddresses *string `json:"outboundIpAddresses,omitempty" tf:"outbound_ip_addresses,omitempty"`
 
-	// A possible_outbound_ip_address_list block as defined below.
+	// A list of possible outbound ip address.
 	PossibleOutboundIPAddressList []*string `json:"possibleOutboundIpAddressList,omitempty" tf:"possible_outbound_ip_address_list,omitempty"`
 
 	// A comma-separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12,52.143.43.17 - not all of which are necessarily in use. Superset of outbound_ip_addresses.
 	PossibleOutboundIPAddresses *string `json:"possibleOutboundIpAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty"`
+
+	// Should public network access be enabled for the Web App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Linux Web App should exist. Changing this forces a new Linux Web App to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -2115,6 +2130,9 @@ type LinuxWebAppObservation struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 
 	// The local path and filename of the Zip packaged application to deploy to this Linux Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Linux Web App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
@@ -2153,7 +2171,7 @@ type LinuxWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_certificate_enabled is false
+	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_certificate_enabled is false. Defaults to Required.
 	// +kubebuilder:validation:Optional
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
@@ -2165,7 +2183,11 @@ type LinuxWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Should the Linux Web App require HTTPS connections.
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
+	// Should the Linux Web App require HTTPS connections. Defaults to false.
 	// +kubebuilder:validation:Optional
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
@@ -2184,6 +2206,10 @@ type LinuxWebAppParameters struct {
 	// A logs block as defined below.
 	// +kubebuilder:validation:Optional
 	Logs []LogsParameters `json:"logs,omitempty" tf:"logs,omitempty"`
+
+	// Should public network access be enabled for the Web App. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Linux Web App should exist. Changing this forces a new Linux Web App to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -2243,6 +2269,10 @@ type LinuxWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
+
 	// The local path and filename of the Zip packaged application to deploy to this Linux Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Linux Web App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
 	// +kubebuilder:validation:Optional
@@ -2250,14 +2280,20 @@ type LinuxWebAppParameters struct {
 }
 
 type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
-
-	// The Docker image reference, including repository host as needed.
 	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
 
-	// The image Tag to use. e.g. latest.
+	// The docker image, including tag, to be used. e.g. appsvc/staticsite:latest.
+	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
+
 	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0 and 7.0.
+	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
+	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
+
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0 and 8.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2272,28 +2308,34 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The Version of Java to use. Possible values include 8, 11, and 17.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, and 18-lts. This property conflicts with java_version.
+	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
-	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10 and 3.11.
+	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
-	// Te version of Ruby to run. Possible values include 2.6 and 2.7.
+	// The version of Ruby to run. Possible values include 2.6 and 2.7.
 	RubyVersion *string `json:"rubyVersion,omitempty" tf:"ruby_version,omitempty"`
 }
 
 type LinuxWebAppSiteConfigApplicationStackObservation struct {
-
-	// The Docker image reference, including repository host as needed.
 	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
 
-	// The image Tag to use. e.g. latest.
+	// The docker image, including tag, to be used. e.g. appsvc/staticsite:latest.
+	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
+
 	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0 and 7.0.
+	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
+	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
+
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0 and 8.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	// The version of Go to use. Possible values include 1.18, and 1.19.
@@ -2308,30 +2350,44 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The Version of Java to use. Possible values include 8, 11, and 17.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, and 18-lts. This property conflicts with java_version.
+	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
-	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10 and 3.11.
+	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
-	// Te version of Ruby to run. Possible values include 2.6 and 2.7.
+	// The version of Ruby to run. Possible values include 2.6 and 2.7.
 	RubyVersion *string `json:"rubyVersion,omitempty" tf:"ruby_version,omitempty"`
 }
 
 type LinuxWebAppSiteConfigApplicationStackParameters struct {
 
-	// The Docker image reference, including repository host as needed.
 	// +kubebuilder:validation:Optional
 	DockerImage *string `json:"dockerImage,omitempty" tf:"docker_image,omitempty"`
 
-	// The image Tag to use. e.g. latest.
+	// The docker image, including tag, to be used. e.g. appsvc/staticsite:latest.
+	// +kubebuilder:validation:Optional
+	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
 
-	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0 and 7.0.
+	// The User Name to use for authentication against the registry to pull the image.
+	// +kubebuilder:validation:Optional
+	DockerRegistryPasswordSecretRef *v1.SecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
+
+	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
+	// +kubebuilder:validation:Optional
+	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	// +kubebuilder:validation:Optional
+	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
+
+	// The version of .NET to use. Possible values include 3.1, 5.0, 6.0, 7.0 and 8.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2351,19 +2407,19 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, and 18-lts. This property conflicts with java_version.
+	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
 	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
-	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10 and 3.11.
+	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
 	// +kubebuilder:validation:Optional
 	PythonVersion *string `json:"pythonVersion,omitempty" tf:"python_version,omitempty"`
 
-	// Te version of Ruby to run. Possible values include 2.6 and 2.7.
+	// The version of Ruby to run. Possible values include 2.6 and 2.7.
 	// +kubebuilder:validation:Optional
 	RubyVersion *string `json:"rubyVersion,omitempty" tf:"ruby_version,omitempty"`
 }
@@ -2457,9 +2513,13 @@ type LinuxWebAppSiteConfigIPRestrictionHeadersParameters struct {
 
 type LinuxWebAppSiteConfigIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []LinuxWebAppSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2497,9 +2557,13 @@ type LinuxWebAppSiteConfigIPRestrictionInitParameters struct {
 
 type LinuxWebAppSiteConfigIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []LinuxWebAppSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2527,10 +2591,15 @@ type LinuxWebAppSiteConfigIPRestrictionObservation struct {
 
 type LinuxWebAppSiteConfigIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
@@ -2607,7 +2676,7 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	// Specifies a list of Default Documents for the Linux Web App.
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
-	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled.
+	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled. Defaults to Disabled.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
@@ -2623,13 +2692,16 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	// One or more ip_restriction blocks as defined above.
 	IPRestriction []LinuxWebAppSiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
 
 	// Use Local MySQL. Defaults to false.
 	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
 
-	// Managed pipeline mode. Possible values include Integrated, and Classic.
+	// Managed pipeline mode. Possible values include Integrated, and Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
@@ -2638,11 +2710,14 @@ type LinuxWebAppSiteConfigInitParameters struct {
 	// Should Remote Debugging be enabled? Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
 	ScmIPRestriction []LinuxWebAppSiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
@@ -2702,7 +2777,7 @@ type LinuxWebAppSiteConfigObservation struct {
 	// Should the Linux Web App be enabled? Defaults to true.
 	DetailedErrorLoggingEnabled *bool `json:"detailedErrorLoggingEnabled,omitempty" tf:"detailed_error_logging_enabled,omitempty"`
 
-	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled.
+	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled. Defaults to Disabled.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
@@ -2718,6 +2793,9 @@ type LinuxWebAppSiteConfigObservation struct {
 	// One or more ip_restriction blocks as defined above.
 	IPRestriction []LinuxWebAppSiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	LinuxFxVersion *string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
 
 	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
@@ -2726,7 +2804,7 @@ type LinuxWebAppSiteConfigObservation struct {
 	// Use Local MySQL. Defaults to false.
 	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
 
-	// Managed pipeline mode. Possible values include Integrated, and Classic.
+	// Managed pipeline mode. Possible values include Integrated, and Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
@@ -2735,11 +2813,14 @@ type LinuxWebAppSiteConfigObservation struct {
 	// Should Remote Debugging be enabled? Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
 	ScmIPRestriction []LinuxWebAppSiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
@@ -2809,7 +2890,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
-	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled.
+	// The State of FTP / FTPS service. Possible values include AllAllowed, FtpsOnly, and Disabled. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
@@ -2830,6 +2911,10 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IPRestriction []LinuxWebAppSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// +kubebuilder:validation:Optional
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
@@ -2838,7 +2923,7 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
 
-	// Managed pipeline mode. Possible values include Integrated, and Classic.
+	// Managed pipeline mode. Possible values include Integrated, and Classic. Defaults to Integrated.
 	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
@@ -2850,13 +2935,17 @@ type LinuxWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScmIPRestriction []LinuxWebAppSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
@@ -2935,9 +3024,13 @@ type LinuxWebAppSiteConfigScmIPRestrictionHeadersParameters struct {
 
 type LinuxWebAppSiteConfigScmIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []LinuxWebAppSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2975,9 +3068,13 @@ type LinuxWebAppSiteConfigScmIPRestrictionInitParameters struct {
 
 type LinuxWebAppSiteConfigScmIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []LinuxWebAppSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -3005,10 +3102,15 @@ type LinuxWebAppSiteConfigScmIPRestrictionObservation struct {
 
 type LinuxWebAppSiteConfigScmIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
@@ -3302,7 +3404,7 @@ type StatusCodeInitParameters struct {
 	SubStatus *float64 `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
 
 	// The Win32 Status Code of the Request.
-	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
+	Win32StatusCode *float64 `json:"win32StatusCode,omitempty" tf:"win32_status_code,omitempty"`
 }
 
 type StatusCodeObservation struct {
@@ -3323,7 +3425,7 @@ type StatusCodeObservation struct {
 	SubStatus *float64 `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
 
 	// The Win32 Status Code of the Request.
-	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
+	Win32StatusCode *float64 `json:"win32StatusCode,omitempty" tf:"win32_status_code,omitempty"`
 }
 
 type StatusCodeParameters struct {
@@ -3350,7 +3452,7 @@ type StatusCodeParameters struct {
 
 	// The Win32 Status Code of the Request.
 	// +kubebuilder:validation:Optional
-	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
+	Win32StatusCode *float64 `json:"win32StatusCode,omitempty" tf:"win32_status_code,omitempty"`
 }
 
 type TriggerInitParameters struct {
@@ -3420,8 +3522,8 @@ type LinuxWebAppStatus struct {
 // +kubebuilder:storageversion
 
 // LinuxWebApp is the Schema for the LinuxWebApps API. Manages a Linux Web App.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

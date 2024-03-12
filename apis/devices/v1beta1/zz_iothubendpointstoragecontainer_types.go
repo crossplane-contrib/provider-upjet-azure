@@ -39,7 +39,7 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	// URI of the Storage Container endpoint. This corresponds to the primary_blob_endpoint of the parent storage account. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
-	// File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered.
+	// File name format for the blob. All parameters are mandatory but can be reordered. Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
 	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
 
 	// ID of the User Managed Identity used to authenticate against the storage endpoint.
@@ -78,7 +78,7 @@ type IOTHubEndpointStorageContainerObservation struct {
 	// URI of the Storage Container endpoint. This corresponds to the primary_blob_endpoint of the parent storage account. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
-	// File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered.
+	// File name format for the blob. All parameters are mandatory but can be reordered. Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
 	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
 
 	// The ID of the IoTHub Storage Container Endpoint.
@@ -132,7 +132,7 @@ type IOTHubEndpointStorageContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 
-	// File name format for the blob. Default format is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters are mandatory but can be reordered.
+	// File name format for the blob. All parameters are mandatory but can be reordered. Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
 	// +kubebuilder:validation:Optional
 	FileNameFormat *string `json:"fileNameFormat,omitempty" tf:"file_name_format,omitempty"`
 
@@ -200,8 +200,8 @@ type IOTHubEndpointStorageContainerStatus struct {
 // +kubebuilder:storageversion
 
 // IOTHubEndpointStorageContainer is the Schema for the IOTHubEndpointStorageContainers API. Manages an IotHub Storage Container Endpoint
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

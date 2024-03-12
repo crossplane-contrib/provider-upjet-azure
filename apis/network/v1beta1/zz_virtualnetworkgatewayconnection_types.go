@@ -39,102 +39,7 @@ type CustomBGPAddressesParameters struct {
 
 	// single IP address that is part of the azurerm_virtual_network_gateway ip_configuration (second one)
 	// +kubebuilder:validation:Optional
-	Secondary *string `json:"secondary" tf:"secondary,omitempty"`
-}
-
-type IpsecPolicyInitParameters struct {
-
-	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
-	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
-
-	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
-	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
-
-	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
-	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
-
-	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
-	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
-
-	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
-	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
-
-	// The DH group used in IKE phase 2 for new child SA.
-	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
-	// or None.
-	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
-
-	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
-	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
-
-	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
-	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
-}
-
-type IpsecPolicyObservation struct {
-
-	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
-	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
-
-	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
-	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
-
-	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
-	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
-
-	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
-	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
-
-	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
-	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
-
-	// The DH group used in IKE phase 2 for new child SA.
-	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
-	// or None.
-	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
-
-	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
-	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
-
-	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
-	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
-}
-
-type IpsecPolicyParameters struct {
-
-	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
-	// +kubebuilder:validation:Optional
-	DhGroup *string `json:"dhGroup" tf:"dh_group,omitempty"`
-
-	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
-	// +kubebuilder:validation:Optional
-	IkeEncryption *string `json:"ikeEncryption" tf:"ike_encryption,omitempty"`
-
-	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
-	// +kubebuilder:validation:Optional
-	IkeIntegrity *string `json:"ikeIntegrity" tf:"ike_integrity,omitempty"`
-
-	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
-	// +kubebuilder:validation:Optional
-	IpsecEncryption *string `json:"ipsecEncryption" tf:"ipsec_encryption,omitempty"`
-
-	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
-	// +kubebuilder:validation:Optional
-	IpsecIntegrity *string `json:"ipsecIntegrity" tf:"ipsec_integrity,omitempty"`
-
-	// The DH group used in IKE phase 2 for new child SA.
-	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
-	// or None.
-	// +kubebuilder:validation:Optional
-	PfsGroup *string `json:"pfsGroup" tf:"pfs_group,omitempty"`
-
-	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
-	// +kubebuilder:validation:Optional
-	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
-
-	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
-	// +kubebuilder:validation:Optional
-	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
+	Secondary *string `json:"secondary,omitempty" tf:"secondary,omitempty"`
 }
 
 type TrafficSelectorPolicyInitParameters struct {
@@ -175,7 +80,7 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	// -> Note: Only valid for IPSec connections on virtual network gateways with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
 
-	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// A custom_bgp_addresses block which is documented below.
 	// The block can only be used on IPSec / activeactive connections,
 	// For details about see the relevant section in the Azure documentation.
 	CustomBGPAddresses []CustomBGPAddressesInitParameters `json:"customBgpAddresses,omitempty" tf:"custom_bgp_addresses,omitempty"`
@@ -203,7 +108,7 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	// A ipsec_policy block which is documented below.
 	// Only a single policy can be defined for a connection. For details on
 	// custom policies refer to the relevant section in the Azure documentation.
-	IpsecPolicy []IpsecPolicyInitParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+	IpsecPolicy []VirtualNetworkGatewayConnectionIpsecPolicyInitParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
 
 	// Use private local Azure IP for the connection. Changing this forces a new resource to be created.
 	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
@@ -269,6 +174,101 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	VirtualNetworkGatewayIDSelector *v1.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 }
 
+type VirtualNetworkGatewayConnectionIpsecPolicyInitParameters struct {
+
+	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
+	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
+	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+
+	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
+	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
+	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
+	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+
+	// The DH group used in IKE phase 2 for new child SA.
+	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
+	// or None.
+	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+
+	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
+	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
+
+	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
+	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
+}
+
+type VirtualNetworkGatewayConnectionIpsecPolicyObservation struct {
+
+	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
+	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
+	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+
+	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
+	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
+	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
+	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+
+	// The DH group used in IKE phase 2 for new child SA.
+	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
+	// or None.
+	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+
+	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
+	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
+
+	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
+	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
+}
+
+type VirtualNetworkGatewayConnectionIpsecPolicyParameters struct {
+
+	// The DH group used in IKE phase 1 for initial SA. Valid options are DHGroup1, DHGroup14, DHGroup2, DHGroup2048, DHGroup24, ECP256, ECP384, or None.
+	// +kubebuilder:validation:Optional
+	DhGroup *string `json:"dhGroup" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, or GCMAES256.
+	// +kubebuilder:validation:Optional
+	IkeEncryption *string `json:"ikeEncryption" tf:"ike_encryption,omitempty"`
+
+	// The IKE integrity algorithm. Valid options are GCMAES128, GCMAES256, MD5, SHA1, SHA256, or SHA384.
+	// +kubebuilder:validation:Optional
+	IkeIntegrity *string `json:"ikeIntegrity" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm. Valid options are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256, or None.
+	// +kubebuilder:validation:Optional
+	IpsecEncryption *string `json:"ipsecEncryption" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm. Valid options are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1, or SHA256.
+	// +kubebuilder:validation:Optional
+	IpsecIntegrity *string `json:"ipsecIntegrity" tf:"ipsec_integrity,omitempty"`
+
+	// The DH group used in IKE phase 2 for new child SA.
+	// Valid options are ECP256, ECP384, PFS1, PFS14, PFS2, PFS2048, PFS24, PFSMM,
+	// or None.
+	// +kubebuilder:validation:Optional
+	PfsGroup *string `json:"pfsGroup" tf:"pfs_group,omitempty"`
+
+	// The IPSec SA payload size in KB. Must be at least 1024 KB. Defaults to 102400000 KB.
+	// +kubebuilder:validation:Optional
+	SaDatasize *float64 `json:"saDatasize,omitempty" tf:"sa_datasize,omitempty"`
+
+	// The IPSec SA lifetime in seconds. Must be at least 300 seconds. Defaults to 27000 seconds.
+	// +kubebuilder:validation:Optional
+	SaLifetime *float64 `json:"saLifetime,omitempty" tf:"sa_lifetime,omitempty"`
+}
+
 type VirtualNetworkGatewayConnectionObservation struct {
 
 	// Connection mode to use. Possible values are Default, InitiatorOnly and ResponderOnly. Defaults to Default. Changing this value will force a resource to be created.
@@ -278,7 +278,7 @@ type VirtualNetworkGatewayConnectionObservation struct {
 	// -> Note: Only valid for IPSec connections on virtual network gateways with SKU VpnGw1, VpnGw2, VpnGw3, VpnGw1AZ, VpnGw2AZ or VpnGw3AZ.
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
 
-	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// A custom_bgp_addresses block which is documented below.
 	// The block can only be used on IPSec / activeactive connections,
 	// For details about see the relevant section in the Azure documentation.
 	CustomBGPAddresses []CustomBGPAddressesObservation `json:"customBgpAddresses,omitempty" tf:"custom_bgp_addresses,omitempty"`
@@ -309,7 +309,7 @@ type VirtualNetworkGatewayConnectionObservation struct {
 	// A ipsec_policy block which is documented below.
 	// Only a single policy can be defined for a connection. For details on
 	// custom policies refer to the relevant section in the Azure documentation.
-	IpsecPolicy []IpsecPolicyObservation `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+	IpsecPolicy []VirtualNetworkGatewayConnectionIpsecPolicyObservation `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
 
 	// Use private local Azure IP for the connection. Changing this forces a new resource to be created.
 	LocalAzureIPAddressEnabled *bool `json:"localAzureIpAddressEnabled,omitempty" tf:"local_azure_ip_address_enabled,omitempty"`
@@ -363,7 +363,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionProtocol *string `json:"connectionProtocol,omitempty" tf:"connection_protocol,omitempty"`
 
-	// A custom_bgp_addresses (Border Gateway Protocol custom IP Addresses) block which is documented below.
+	// A custom_bgp_addresses block which is documented below.
 	// The block can only be used on IPSec / activeactive connections,
 	// For details about see the relevant section in the Azure documentation.
 	// +kubebuilder:validation:Optional
@@ -399,7 +399,7 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// Only a single policy can be defined for a connection. For details on
 	// custom policies refer to the relevant section in the Azure documentation.
 	// +kubebuilder:validation:Optional
-	IpsecPolicy []IpsecPolicyParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+	IpsecPolicy []VirtualNetworkGatewayConnectionIpsecPolicyParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
 
 	// Use private local Azure IP for the connection. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -520,8 +520,8 @@ type VirtualNetworkGatewayConnectionStatus struct {
 // +kubebuilder:storageversion
 
 // VirtualNetworkGatewayConnection is the Schema for the VirtualNetworkGatewayConnections API. Manages a connection in an existing Virtual Network Gateway.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

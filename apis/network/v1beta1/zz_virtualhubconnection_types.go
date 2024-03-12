@@ -181,8 +181,17 @@ type VirtualHubConnectionRoutingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	AssociatedRouteTableIDSelector *v1.Selector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
 
+	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The resource ID of the Route Map associated with this Routing Configuration for outbound advertised routes.
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
+
 	// A propagated_route_table block as defined below.
 	PropagatedRouteTable []RoutingPropagatedRouteTableInitParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+
+	// The static VNet local route override criteria that is used to determine whether NVA in spoke VNet is bypassed for traffic with destination in spoke VNet. Possible values are Contains and Equal. Defaults to Contains. Changing this forces a new resource to be created.
+	StaticVnetLocalRouteOverrideCriteria *string `json:"staticVnetLocalRouteOverrideCriteria,omitempty" tf:"static_vnet_local_route_override_criteria,omitempty"`
 
 	// A static_vnet_route block as defined below.
 	StaticVnetRoute []StaticVnetRouteInitParameters `json:"staticVnetRoute,omitempty" tf:"static_vnet_route,omitempty"`
@@ -193,8 +202,17 @@ type VirtualHubConnectionRoutingObservation struct {
 	// The ID of the route table associated with this Virtual Hub connection.
 	AssociatedRouteTableID *string `json:"associatedRouteTableId,omitempty" tf:"associated_route_table_id,omitempty"`
 
+	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The resource ID of the Route Map associated with this Routing Configuration for outbound advertised routes.
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
+
 	// A propagated_route_table block as defined below.
 	PropagatedRouteTable []RoutingPropagatedRouteTableObservation `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+
+	// The static VNet local route override criteria that is used to determine whether NVA in spoke VNet is bypassed for traffic with destination in spoke VNet. Possible values are Contains and Equal. Defaults to Contains. Changing this forces a new resource to be created.
+	StaticVnetLocalRouteOverrideCriteria *string `json:"staticVnetLocalRouteOverrideCriteria,omitempty" tf:"static_vnet_local_route_override_criteria,omitempty"`
 
 	// A static_vnet_route block as defined below.
 	StaticVnetRoute []StaticVnetRouteObservation `json:"staticVnetRoute,omitempty" tf:"static_vnet_route,omitempty"`
@@ -216,9 +234,21 @@ type VirtualHubConnectionRoutingParameters struct {
 	// +kubebuilder:validation:Optional
 	AssociatedRouteTableIDSelector *v1.Selector `json:"associatedRouteTableIdSelector,omitempty" tf:"-"`
 
+	// The resource ID of the Route Map associated with this Routing Configuration for inbound learned routes.
+	// +kubebuilder:validation:Optional
+	InboundRouteMapID *string `json:"inboundRouteMapId,omitempty" tf:"inbound_route_map_id,omitempty"`
+
+	// The resource ID of the Route Map associated with this Routing Configuration for outbound advertised routes.
+	// +kubebuilder:validation:Optional
+	OutboundRouteMapID *string `json:"outboundRouteMapId,omitempty" tf:"outbound_route_map_id,omitempty"`
+
 	// A propagated_route_table block as defined below.
 	// +kubebuilder:validation:Optional
 	PropagatedRouteTable []RoutingPropagatedRouteTableParameters `json:"propagatedRouteTable,omitempty" tf:"propagated_route_table,omitempty"`
+
+	// The static VNet local route override criteria that is used to determine whether NVA in spoke VNet is bypassed for traffic with destination in spoke VNet. Possible values are Contains and Equal. Defaults to Contains. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	StaticVnetLocalRouteOverrideCriteria *string `json:"staticVnetLocalRouteOverrideCriteria,omitempty" tf:"static_vnet_local_route_override_criteria,omitempty"`
 
 	// A static_vnet_route block as defined below.
 	// +kubebuilder:validation:Optional
@@ -253,8 +283,8 @@ type VirtualHubConnectionStatus struct {
 // +kubebuilder:storageversion
 
 // VirtualHubConnection is the Schema for the VirtualHubConnections API. Manages a Connection for a Virtual Hub.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

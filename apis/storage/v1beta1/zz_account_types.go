@@ -21,7 +21,7 @@ type AccountInitParameters struct {
 	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults to StorageV2.
 	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 
-	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
+	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS. Changing this forces a new resource to be created when types LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice versa.
 	AccountReplicationType *string `json:"accountReplicationType,omitempty" tf:"account_replication_type,omitempty"`
 
 	// Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created.
@@ -72,6 +72,9 @@ type AccountInitParameters struct {
 	// Is Large File Share Enabled?
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
+	// Is Local User Enabled? Defaults to true.
+	LocalUserEnabled *bool `json:"localUserEnabled,omitempty" tf:"local_user_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -105,7 +108,7 @@ type AccountInitParameters struct {
 	// A share_properties block as defined below.
 	ShareProperties []SharePropertiesInitParameters `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
-	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). Defaults to true.
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
 	// A static_website block as defined below.
@@ -127,7 +130,7 @@ type AccountObservation struct {
 	// Defines the Kind of account. Valid options are BlobStorage, BlockBlobStorage, FileStorage, Storage and StorageV2. Defaults to StorageV2.
 	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 
-	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
+	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS. Changing this forces a new resource to be created when types LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice versa.
 	AccountReplicationType *string `json:"accountReplicationType,omitempty" tf:"account_replication_type,omitempty"`
 
 	// Defines the Tier to use for this storage account. Valid options are Standard and Premium. For BlockBlobStorage and FileStorage accounts only Premium is valid. Changing this forces a new resource to be created.
@@ -181,6 +184,9 @@ type AccountObservation struct {
 	// Is Large File Share Enabled?
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
+	// Is Local User Enabled? Defaults to true.
+	LocalUserEnabled *bool `json:"localUserEnabled,omitempty" tf:"local_user_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -199,17 +205,53 @@ type AccountObservation struct {
 	// The hostname with port if applicable for blob storage in the primary location.
 	PrimaryBlobHost *string `json:"primaryBlobHost,omitempty" tf:"primary_blob_host,omitempty"`
 
+	// The internet routing endpoint URL for blob storage in the primary location.
+	PrimaryBlobInternetEndpoint *string `json:"primaryBlobInternetEndpoint,omitempty" tf:"primary_blob_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for blob storage in the primary location.
+	PrimaryBlobInternetHost *string `json:"primaryBlobInternetHost,omitempty" tf:"primary_blob_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for blob storage in the primary location.
+	PrimaryBlobMicrosoftEndpoint *string `json:"primaryBlobMicrosoftEndpoint,omitempty" tf:"primary_blob_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for blob storage in the primary location.
+	PrimaryBlobMicrosoftHost *string `json:"primaryBlobMicrosoftHost,omitempty" tf:"primary_blob_microsoft_host,omitempty"`
+
 	// The endpoint URL for DFS storage in the primary location.
 	PrimaryDfsEndpoint *string `json:"primaryDfsEndpoint,omitempty" tf:"primary_dfs_endpoint,omitempty"`
 
 	// The hostname with port if applicable for DFS storage in the primary location.
 	PrimaryDfsHost *string `json:"primaryDfsHost,omitempty" tf:"primary_dfs_host,omitempty"`
 
+	// The internet routing endpoint URL for DFS storage in the primary location.
+	PrimaryDfsInternetEndpoint *string `json:"primaryDfsInternetEndpoint,omitempty" tf:"primary_dfs_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for DFS storage in the primary location.
+	PrimaryDfsInternetHost *string `json:"primaryDfsInternetHost,omitempty" tf:"primary_dfs_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for DFS storage in the primary location.
+	PrimaryDfsMicrosoftEndpoint *string `json:"primaryDfsMicrosoftEndpoint,omitempty" tf:"primary_dfs_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for DFS storage in the primary location.
+	PrimaryDfsMicrosoftHost *string `json:"primaryDfsMicrosoftHost,omitempty" tf:"primary_dfs_microsoft_host,omitempty"`
+
 	// The endpoint URL for file storage in the primary location.
 	PrimaryFileEndpoint *string `json:"primaryFileEndpoint,omitempty" tf:"primary_file_endpoint,omitempty"`
 
 	// The hostname with port if applicable for file storage in the primary location.
 	PrimaryFileHost *string `json:"primaryFileHost,omitempty" tf:"primary_file_host,omitempty"`
+
+	// The internet routing endpoint URL for file storage in the primary location.
+	PrimaryFileInternetEndpoint *string `json:"primaryFileInternetEndpoint,omitempty" tf:"primary_file_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for file storage in the primary location.
+	PrimaryFileInternetHost *string `json:"primaryFileInternetHost,omitempty" tf:"primary_file_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for file storage in the primary location.
+	PrimaryFileMicrosoftEndpoint *string `json:"primaryFileMicrosoftEndpoint,omitempty" tf:"primary_file_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for file storage in the primary location.
+	PrimaryFileMicrosoftHost *string `json:"primaryFileMicrosoftHost,omitempty" tf:"primary_file_microsoft_host,omitempty"`
 
 	// The primary location of the storage account.
 	PrimaryLocation *string `json:"primaryLocation,omitempty" tf:"primary_location,omitempty"`
@@ -220,17 +262,41 @@ type AccountObservation struct {
 	// The hostname with port if applicable for queue storage in the primary location.
 	PrimaryQueueHost *string `json:"primaryQueueHost,omitempty" tf:"primary_queue_host,omitempty"`
 
+	// The microsoft routing endpoint URL for queue storage in the primary location.
+	PrimaryQueueMicrosoftEndpoint *string `json:"primaryQueueMicrosoftEndpoint,omitempty" tf:"primary_queue_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for queue storage in the primary location.
+	PrimaryQueueMicrosoftHost *string `json:"primaryQueueMicrosoftHost,omitempty" tf:"primary_queue_microsoft_host,omitempty"`
+
 	// The endpoint URL for table storage in the primary location.
 	PrimaryTableEndpoint *string `json:"primaryTableEndpoint,omitempty" tf:"primary_table_endpoint,omitempty"`
 
 	// The hostname with port if applicable for table storage in the primary location.
 	PrimaryTableHost *string `json:"primaryTableHost,omitempty" tf:"primary_table_host,omitempty"`
 
+	// The microsoft routing endpoint URL for table storage in the primary location.
+	PrimaryTableMicrosoftEndpoint *string `json:"primaryTableMicrosoftEndpoint,omitempty" tf:"primary_table_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for table storage in the primary location.
+	PrimaryTableMicrosoftHost *string `json:"primaryTableMicrosoftHost,omitempty" tf:"primary_table_microsoft_host,omitempty"`
+
 	// The endpoint URL for web storage in the primary location.
 	PrimaryWebEndpoint *string `json:"primaryWebEndpoint,omitempty" tf:"primary_web_endpoint,omitempty"`
 
 	// The hostname with port if applicable for web storage in the primary location.
 	PrimaryWebHost *string `json:"primaryWebHost,omitempty" tf:"primary_web_host,omitempty"`
+
+	// The internet routing endpoint URL for web storage in the primary location.
+	PrimaryWebInternetEndpoint *string `json:"primaryWebInternetEndpoint,omitempty" tf:"primary_web_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for web storage in the primary location.
+	PrimaryWebInternetHost *string `json:"primaryWebInternetHost,omitempty" tf:"primary_web_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for web storage in the primary location.
+	PrimaryWebMicrosoftEndpoint *string `json:"primaryWebMicrosoftEndpoint,omitempty" tf:"primary_web_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for web storage in the primary location.
+	PrimaryWebMicrosoftHost *string `json:"primaryWebMicrosoftHost,omitempty" tf:"primary_web_microsoft_host,omitempty"`
 
 	// Whether the public network access is enabled? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -259,17 +325,53 @@ type AccountObservation struct {
 	// The hostname with port if applicable for blob storage in the secondary location.
 	SecondaryBlobHost *string `json:"secondaryBlobHost,omitempty" tf:"secondary_blob_host,omitempty"`
 
+	// The internet routing endpoint URL for blob storage in the secondary location.
+	SecondaryBlobInternetEndpoint *string `json:"secondaryBlobInternetEndpoint,omitempty" tf:"secondary_blob_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for blob storage in the secondary location.
+	SecondaryBlobInternetHost *string `json:"secondaryBlobInternetHost,omitempty" tf:"secondary_blob_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for blob storage in the secondary location.
+	SecondaryBlobMicrosoftEndpoint *string `json:"secondaryBlobMicrosoftEndpoint,omitempty" tf:"secondary_blob_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for blob storage in the secondary location.
+	SecondaryBlobMicrosoftHost *string `json:"secondaryBlobMicrosoftHost,omitempty" tf:"secondary_blob_microsoft_host,omitempty"`
+
 	// The endpoint URL for DFS storage in the secondary location.
 	SecondaryDfsEndpoint *string `json:"secondaryDfsEndpoint,omitempty" tf:"secondary_dfs_endpoint,omitempty"`
 
 	// The hostname with port if applicable for DFS storage in the secondary location.
 	SecondaryDfsHost *string `json:"secondaryDfsHost,omitempty" tf:"secondary_dfs_host,omitempty"`
 
+	// The internet routing endpoint URL for DFS storage in the secondary location.
+	SecondaryDfsInternetEndpoint *string `json:"secondaryDfsInternetEndpoint,omitempty" tf:"secondary_dfs_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for DFS storage in the secondary location.
+	SecondaryDfsInternetHost *string `json:"secondaryDfsInternetHost,omitempty" tf:"secondary_dfs_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for DFS storage in the secondary location.
+	SecondaryDfsMicrosoftEndpoint *string `json:"secondaryDfsMicrosoftEndpoint,omitempty" tf:"secondary_dfs_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for DFS storage in the secondary location.
+	SecondaryDfsMicrosoftHost *string `json:"secondaryDfsMicrosoftHost,omitempty" tf:"secondary_dfs_microsoft_host,omitempty"`
+
 	// The endpoint URL for file storage in the secondary location.
 	SecondaryFileEndpoint *string `json:"secondaryFileEndpoint,omitempty" tf:"secondary_file_endpoint,omitempty"`
 
 	// The hostname with port if applicable for file storage in the secondary location.
 	SecondaryFileHost *string `json:"secondaryFileHost,omitempty" tf:"secondary_file_host,omitempty"`
+
+	// The internet routing endpoint URL for file storage in the secondary location.
+	SecondaryFileInternetEndpoint *string `json:"secondaryFileInternetEndpoint,omitempty" tf:"secondary_file_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for file storage in the secondary location.
+	SecondaryFileInternetHost *string `json:"secondaryFileInternetHost,omitempty" tf:"secondary_file_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for file storage in the secondary location.
+	SecondaryFileMicrosoftEndpoint *string `json:"secondaryFileMicrosoftEndpoint,omitempty" tf:"secondary_file_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for file storage in the secondary location.
+	SecondaryFileMicrosoftHost *string `json:"secondaryFileMicrosoftHost,omitempty" tf:"secondary_file_microsoft_host,omitempty"`
 
 	// The secondary location of the storage account.
 	SecondaryLocation *string `json:"secondaryLocation,omitempty" tf:"secondary_location,omitempty"`
@@ -280,11 +382,23 @@ type AccountObservation struct {
 	// The hostname with port if applicable for queue storage in the secondary location.
 	SecondaryQueueHost *string `json:"secondaryQueueHost,omitempty" tf:"secondary_queue_host,omitempty"`
 
+	// The microsoft routing endpoint URL for queue storage in the secondary location.
+	SecondaryQueueMicrosoftEndpoint *string `json:"secondaryQueueMicrosoftEndpoint,omitempty" tf:"secondary_queue_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for queue storage in the secondary location.
+	SecondaryQueueMicrosoftHost *string `json:"secondaryQueueMicrosoftHost,omitempty" tf:"secondary_queue_microsoft_host,omitempty"`
+
 	// The endpoint URL for table storage in the secondary location.
 	SecondaryTableEndpoint *string `json:"secondaryTableEndpoint,omitempty" tf:"secondary_table_endpoint,omitempty"`
 
 	// The hostname with port if applicable for table storage in the secondary location.
 	SecondaryTableHost *string `json:"secondaryTableHost,omitempty" tf:"secondary_table_host,omitempty"`
+
+	// The microsoft routing endpoint URL for table storage in the secondary location.
+	SecondaryTableMicrosoftEndpoint *string `json:"secondaryTableMicrosoftEndpoint,omitempty" tf:"secondary_table_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for table storage in the secondary location.
+	SecondaryTableMicrosoftHost *string `json:"secondaryTableMicrosoftHost,omitempty" tf:"secondary_table_microsoft_host,omitempty"`
 
 	// The endpoint URL for web storage in the secondary location.
 	SecondaryWebEndpoint *string `json:"secondaryWebEndpoint,omitempty" tf:"secondary_web_endpoint,omitempty"`
@@ -292,10 +406,22 @@ type AccountObservation struct {
 	// The hostname with port if applicable for web storage in the secondary location.
 	SecondaryWebHost *string `json:"secondaryWebHost,omitempty" tf:"secondary_web_host,omitempty"`
 
+	// The internet routing endpoint URL for web storage in the secondary location.
+	SecondaryWebInternetEndpoint *string `json:"secondaryWebInternetEndpoint,omitempty" tf:"secondary_web_internet_endpoint,omitempty"`
+
+	// The internet routing hostname with port if applicable for web storage in the secondary location.
+	SecondaryWebInternetHost *string `json:"secondaryWebInternetHost,omitempty" tf:"secondary_web_internet_host,omitempty"`
+
+	// The microsoft routing endpoint URL for web storage in the secondary location.
+	SecondaryWebMicrosoftEndpoint *string `json:"secondaryWebMicrosoftEndpoint,omitempty" tf:"secondary_web_microsoft_endpoint,omitempty"`
+
+	// The microsoft routing hostname with port if applicable for web storage in the secondary location.
+	SecondaryWebMicrosoftHost *string `json:"secondaryWebMicrosoftHost,omitempty" tf:"secondary_web_microsoft_host,omitempty"`
+
 	// A share_properties block as defined below.
 	ShareProperties []SharePropertiesObservation `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
-	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). Defaults to true.
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
 	// A static_website block as defined below.
@@ -319,7 +445,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountKind *string `json:"accountKind,omitempty" tf:"account_kind,omitempty"`
 
-	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS.
+	// Defines the type of replication to use for this storage account. Valid options are LRS, GRS, RAGRS, ZRS, GZRS and RAGZRS. Changing this forces a new resource to be created when types LRS, GRS and RAGRS are changed to ZRS, GZRS or RAGZRS and vice versa.
 	// +kubebuilder:validation:Optional
 	AccountReplicationType *string `json:"accountReplicationType,omitempty" tf:"account_replication_type,omitempty"`
 
@@ -387,6 +513,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
+	// Is Local User Enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
+	LocalUserEnabled *bool `json:"localUserEnabled,omitempty" tf:"local_user_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -444,7 +574,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ShareProperties []SharePropertiesParameters `json:"shareProperties,omitempty" tf:"share_properties,omitempty"`
 
-	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). The default value is true.
+	// Indicates whether the storage account permits requests to be authorized with the account access key via Shared Key. If false, then all requests, including shared access signatures, must be authorized with Azure Active Directory (Azure AD). Defaults to true.
 	// +kubebuilder:validation:Optional
 	SharedAccessKeyEnabled *bool `json:"sharedAccessKeyEnabled,omitempty" tf:"shared_access_key_enabled,omitempty"`
 
@@ -470,16 +600,16 @@ type ActiveDirectoryInitParameters struct {
 	// Specifies the primary domain that the AD DNS server is authoritative for.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Specifies the security identifier (SID).
+	// Specifies the security identifier (SID). This is required when directory_type is set to AD.
 	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
 
-	// Specifies the Active Directory forest.
+	// Specifies the Active Directory forest. This is required when directory_type is set to AD.
 	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
 
-	// Specifies the NetBIOS domain name.
+	// Specifies the NetBIOS domain name. This is required when directory_type is set to AD.
 	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
 
-	// Specifies the security identifier (SID) for Azure Storage.
+	// Specifies the security identifier (SID) for Azure Storage. This is required when directory_type is set to AD.
 	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
 }
 
@@ -491,16 +621,16 @@ type ActiveDirectoryObservation struct {
 	// Specifies the primary domain that the AD DNS server is authoritative for.
 	DomainName *string `json:"domainName,omitempty" tf:"domain_name,omitempty"`
 
-	// Specifies the security identifier (SID).
+	// Specifies the security identifier (SID). This is required when directory_type is set to AD.
 	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
 
-	// Specifies the Active Directory forest.
+	// Specifies the Active Directory forest. This is required when directory_type is set to AD.
 	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
 
-	// Specifies the NetBIOS domain name.
+	// Specifies the NetBIOS domain name. This is required when directory_type is set to AD.
 	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
 
-	// Specifies the security identifier (SID) for Azure Storage.
+	// Specifies the security identifier (SID) for Azure Storage. This is required when directory_type is set to AD.
 	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
 }
 
@@ -514,21 +644,21 @@ type ActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	DomainName *string `json:"domainName" tf:"domain_name,omitempty"`
 
-	// Specifies the security identifier (SID).
+	// Specifies the security identifier (SID). This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	DomainSid *string `json:"domainSid" tf:"domain_sid,omitempty"`
+	DomainSid *string `json:"domainSid,omitempty" tf:"domain_sid,omitempty"`
 
-	// Specifies the Active Directory forest.
+	// Specifies the Active Directory forest. This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	ForestName *string `json:"forestName" tf:"forest_name,omitempty"`
+	ForestName *string `json:"forestName,omitempty" tf:"forest_name,omitempty"`
 
-	// Specifies the NetBIOS domain name.
+	// Specifies the NetBIOS domain name. This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	NetbiosDomainName *string `json:"netbiosDomainName" tf:"netbios_domain_name,omitempty"`
+	NetbiosDomainName *string `json:"netbiosDomainName,omitempty" tf:"netbios_domain_name,omitempty"`
 
-	// Specifies the security identifier (SID) for Azure Storage.
+	// Specifies the security identifier (SID) for Azure Storage. This is required when directory_type is set to AD.
 	// +kubebuilder:validation:Optional
-	StorageSid *string `json:"storageSid" tf:"storage_sid,omitempty"`
+	StorageSid *string `json:"storageSid,omitempty" tf:"storage_sid,omitempty"`
 }
 
 type AzureFilesAuthenticationInitParameters struct {
@@ -1060,11 +1190,11 @@ type NetworkRulesInitParameters struct {
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918), are not allowed.
 	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []PrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
@@ -1081,11 +1211,11 @@ type NetworkRulesObservation struct {
 	// Specifies the default action of allow or deny when no other rules match. Valid options are Deny or Allow.
 	DefaultAction *string `json:"defaultAction,omitempty" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918), are not allowed.
 	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []PrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
@@ -1104,12 +1234,12 @@ type NetworkRulesParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultAction *string `json:"defaultAction" tf:"default_action,omitempty"`
 
-	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918),  are not allowed.
+	// List of public IP or IP ranges in CIDR Format. Only IPv4 addresses are allowed. /31 CIDRs, /32 CIDRs, and Private IP address ranges (as defined in RFC 1918), are not allowed.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateLinkAccess []PrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
@@ -1121,7 +1251,7 @@ type NetworkRulesParameters struct {
 
 type PrivateLinkAccessInitParameters struct {
 
-	// The resource id of the resource access rule to be granted access.
+	// The ID of the Azure resource that should be allowed access to the target storage account.
 	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
 
 	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
@@ -1130,7 +1260,7 @@ type PrivateLinkAccessInitParameters struct {
 
 type PrivateLinkAccessObservation struct {
 
-	// The resource id of the resource access rule to be granted access.
+	// The ID of the Azure resource that should be allowed access to the target storage account.
 	EndpointResourceID *string `json:"endpointResourceId,omitempty" tf:"endpoint_resource_id,omitempty"`
 
 	// The tenant id of the resource of the resource access rule to be granted access. Defaults to the current tenant id.
@@ -1139,7 +1269,7 @@ type PrivateLinkAccessObservation struct {
 
 type PrivateLinkAccessParameters struct {
 
-	// The resource id of the resource access rule to be granted access.
+	// The ID of the Azure resource that should be allowed access to the target storage account.
 	// +kubebuilder:validation:Optional
 	EndpointResourceID *string `json:"endpointResourceId" tf:"endpoint_resource_id,omitempty"`
 
@@ -1594,8 +1724,8 @@ type AccountStatus struct {
 // +kubebuilder:storageversion
 
 // Account is the Schema for the Accounts API. Manages a Azure Storage Account.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

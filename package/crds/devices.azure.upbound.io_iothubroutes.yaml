@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -75,8 +75,8 @@ spec:
                 properties:
                   condition:
                     description: 'The condition that is evaluated to apply the routing
-                      rule. If no condition is provided, it evaluates to true by default.
-                      For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
+                      rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+                      Defaults to true.'
                     type: string
                   enabled:
                     description: Specifies whether a route is enabled.
@@ -268,8 +268,8 @@ spec:
                 properties:
                   condition:
                     description: 'The condition that is evaluated to apply the routing
-                      rule. If no condition is provided, it evaluates to true by default.
-                      For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
+                      rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+                      Defaults to true.'
                     type: string
                   enabled:
                     description: Specifies whether a route is enabled.
@@ -474,8 +474,8 @@ spec:
                 properties:
                   condition:
                     description: 'The condition that is evaluated to apply the routing
-                      rule. If no condition is provided, it evaluates to true by default.
-                      For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.'
+                      rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+                      Defaults to true.'
                     type: string
                   enabled:
                     description: Specifies whether a route is enabled.

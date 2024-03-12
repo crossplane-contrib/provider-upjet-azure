@@ -52,7 +52,7 @@ type AttachedDatabaseConfigurationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// The default principals modification kind. Valid values are: None (default), Replace and Union.
+	// The default principals modification kind. Valid values are: None (default), Replace and Union. Defaults to None.
 	DefaultPrincipalModificationKind *string `json:"defaultPrincipalModificationKind,omitempty" tf:"default_principal_modification_kind,omitempty"`
 
 	// Specifies the location of the Kusto Cluster for which the configuration will be created. Changing this forces a new resource to be created.
@@ -91,7 +91,7 @@ type AttachedDatabaseConfigurationObservation struct {
 	// The name of the database which you would like to attach, use * if you want to follow all current and future databases. Changing this forces a new resource to be created.
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// The default principals modification kind. Valid values are: None (default), Replace and Union.
+	// The default principals modification kind. Valid values are: None (default), Replace and Union. Defaults to None.
 	DefaultPrincipalModificationKind *string `json:"defaultPrincipalModificationKind,omitempty" tf:"default_principal_modification_kind,omitempty"`
 
 	// The Kusto Attached Database Configuration ID.
@@ -152,7 +152,7 @@ type AttachedDatabaseConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 
-	// The default principals modification kind. Valid values are: None (default), Replace and Union.
+	// The default principals modification kind. Valid values are: None (default), Replace and Union. Defaults to None.
 	// +kubebuilder:validation:Optional
 	DefaultPrincipalModificationKind *string `json:"defaultPrincipalModificationKind,omitempty" tf:"default_principal_modification_kind,omitempty"`
 
@@ -297,8 +297,8 @@ type AttachedDatabaseConfigurationStatus struct {
 // +kubebuilder:storageversion
 
 // AttachedDatabaseConfiguration is the Schema for the AttachedDatabaseConfigurations API. Manages Kusto / Data Explorer Attached Database Configuration
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

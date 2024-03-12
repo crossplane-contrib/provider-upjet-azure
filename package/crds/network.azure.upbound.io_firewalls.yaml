@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -73,6 +73,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  dnsProxyEnabled:
+                    description: Whether DNS proxy is enabled. It will forward DNS
+                      requests to the DNS servers when set to true. It will be set
+                      to true if dns_servers provided with a not empty list.
+                    type: boolean
                   dnsServers:
                     description: A list of DNS servers that the Azure Firewall will
                       direct DNS traffic to the for name resolution.
@@ -492,6 +497,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  dnsProxyEnabled:
+                    description: Whether DNS proxy is enabled. It will forward DNS
+                      requests to the DNS servers when set to true. It will be set
+                      to true if dns_servers provided with a not empty list.
+                    type: boolean
                   dnsServers:
                     description: A list of DNS servers that the Azure Firewall will
                       direct DNS traffic to the for name resolution.
@@ -1003,6 +1013,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  dnsProxyEnabled:
+                    description: Whether DNS proxy is enabled. It will forward DNS
+                      requests to the DNS servers when set to true. It will be set
+                      to true if dns_servers provided with a not empty list.
+                    type: boolean
                   dnsServers:
                     description: A list of DNS servers that the Azure Firewall will
                       direct DNS traffic to the for name resolution.

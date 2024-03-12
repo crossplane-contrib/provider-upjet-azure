@@ -118,7 +118,7 @@ type SnapshotInitParameters struct {
 	// A encryption_settings block as defined below.
 	EncryptionSettings []SnapshotEncryptionSettingsInitParameters `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
 
-	// Specifies if the Snapshot is incremental.
+	// Specifies if the Snapshot is incremental. Changing this forces a new resource to be created.
 	IncrementalEnabled *bool `json:"incrementalEnabled,omitempty" tf:"incremental_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -162,7 +162,7 @@ type SnapshotObservation struct {
 	// The Snapshot ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies if the Snapshot is incremental.
+	// Specifies if the Snapshot is incremental. Changing this forces a new resource to be created.
 	IncrementalEnabled *bool `json:"incrementalEnabled,omitempty" tf:"incremental_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -202,7 +202,7 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	EncryptionSettings []SnapshotEncryptionSettingsParameters `json:"encryptionSettings,omitempty" tf:"encryption_settings,omitempty"`
 
-	// Specifies if the Snapshot is incremental.
+	// Specifies if the Snapshot is incremental. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	IncrementalEnabled *bool `json:"incrementalEnabled,omitempty" tf:"incremental_enabled,omitempty"`
 
@@ -279,8 +279,8 @@ type SnapshotStatus struct {
 // +kubebuilder:storageversion
 
 // Snapshot is the Schema for the Snapshots API. Manages a Disk Snapshot.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

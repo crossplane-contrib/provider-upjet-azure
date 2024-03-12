@@ -3660,6 +3660,11 @@ func (in *IOTHubInitParameters) DeepCopyInto(out *IOTHubInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -3839,6 +3844,11 @@ func (in *IOTHubObservation) DeepCopyInto(out *IOTHubObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location
 		*out = new(string)
@@ -3953,6 +3963,11 @@ func (in *IOTHubParameters) DeepCopyInto(out *IOTHubParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.LocalAuthenticationEnabled != nil {
+		in, out := &in.LocalAuthenticationEnabled, &out.LocalAuthenticationEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Location != nil {
 		in, out := &in.Location, &out.Location

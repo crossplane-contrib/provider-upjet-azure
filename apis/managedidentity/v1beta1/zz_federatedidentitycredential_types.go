@@ -15,10 +15,10 @@ import (
 
 type FederatedIdentityCredentialInitParameters struct {
 
-	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the audience for this Federated Identity Credential.
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
-	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the issuer of this Federated Identity Credential.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// Specifies the name of the Resource Group within which this Federated Identity Credential should exist. Changing this forces a new Federated Identity Credential to be created.
@@ -33,19 +33,19 @@ type FederatedIdentityCredentialInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the subject for this Federated Identity Credential.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 type FederatedIdentityCredentialObservation struct {
 
-	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the audience for this Federated Identity Credential.
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
 	// The ID of the Federated Identity Credential.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the issuer of this Federated Identity Credential.
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
 	// Specifies parent ID of User Assigned Identity for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
@@ -54,17 +54,17 @@ type FederatedIdentityCredentialObservation struct {
 	// Specifies the name of the Resource Group within which this Federated Identity Credential should exist. Changing this forces a new Federated Identity Credential to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the subject for this Federated Identity Credential.
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
 
 type FederatedIdentityCredentialParameters struct {
 
-	// Specifies the audience for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the audience for this Federated Identity Credential.
 	// +kubebuilder:validation:Optional
 	Audience []*string `json:"audience,omitempty" tf:"audience,omitempty"`
 
-	// Specifies the issuer of this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the issuer of this Federated Identity Credential.
 	// +kubebuilder:validation:Optional
 	Issuer *string `json:"issuer,omitempty" tf:"issuer,omitempty"`
 
@@ -95,7 +95,7 @@ type FederatedIdentityCredentialParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies the subject for this Federated Identity Credential. Changing this forces a new Federated Identity Credential to be created.
+	// Specifies the subject for this Federated Identity Credential.
 	// +kubebuilder:validation:Optional
 	Subject *string `json:"subject,omitempty" tf:"subject,omitempty"`
 }
@@ -128,8 +128,8 @@ type FederatedIdentityCredentialStatus struct {
 // +kubebuilder:storageversion
 
 // FederatedIdentityCredential is the Schema for the FederatedIdentityCredentials API. Manages a Federated Identity Credential.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

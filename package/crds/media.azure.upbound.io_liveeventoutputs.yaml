@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -258,6 +258,14 @@ spec:
                       this forces a new Live Output to be created.
                     type: number
                   rewindWindowDuration:
+                    description: ISO 8601 time between 1 minute to the duration of
+                      archive_window_duration to control seek-able window length during
+                      Live. The service won't use this property once LiveOutput stops.
+                      The archived VOD will have full content with original ArchiveWindowLength.
+                      For example, use PT1H30M to indicate 1 hour and 30 minutes of
+                      rewind window length. Service will use implicit default value
+                      30m only if Live Event enables LL. Changing this forces a new
+                      Live Output to be created.
                     type: string
                 type: object
               initProvider:
@@ -380,6 +388,14 @@ spec:
                       this forces a new Live Output to be created.
                     type: number
                   rewindWindowDuration:
+                    description: ISO 8601 time between 1 minute to the duration of
+                      archive_window_duration to control seek-able window length during
+                      Live. The service won't use this property once LiveOutput stops.
+                      The archived VOD will have full content with original ArchiveWindowLength.
+                      For example, use PT1H30M to indicate 1 hour and 30 minutes of
+                      rewind window length. Service will use implicit default value
+                      30m only if Live Event enables LL. Changing this forces a new
+                      Live Output to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -599,6 +615,14 @@ spec:
                       this forces a new Live Output to be created.
                     type: number
                   rewindWindowDuration:
+                    description: ISO 8601 time between 1 minute to the duration of
+                      archive_window_duration to control seek-able window length during
+                      Live. The service won't use this property once LiveOutput stops.
+                      The archived VOD will have full content with original ArchiveWindowLength.
+                      For example, use PT1H30M to indicate 1 hour and 30 minutes of
+                      rewind window length. Service will use implicit default value
+                      30m only if Live Event enables LL. Changing this forces a new
+                      Live Output to be created.
                     type: string
                 type: object
               conditions:

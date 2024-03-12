@@ -165,6 +165,9 @@ type GithubConfigurationInitParameters struct {
 	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
 
+	// Is automated publishing enabled? Defaults to true.
+	PublishingEnabled *bool `json:"publishingEnabled,omitempty" tf:"publishing_enabled,omitempty"`
+
 	// Specifies the name of the git repository.
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
@@ -182,6 +185,9 @@ type GithubConfigurationObservation struct {
 
 	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
 	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
+
+	// Is automated publishing enabled? Defaults to true.
+	PublishingEnabled *bool `json:"publishingEnabled,omitempty" tf:"publishing_enabled,omitempty"`
 
 	// Specifies the name of the git repository.
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
@@ -202,7 +208,11 @@ type GithubConfigurationParameters struct {
 
 	// Specifies the GitHub Enterprise host name. For example: https://github.mydomain.com. Use https://github.com for open source repositories.
 	// +kubebuilder:validation:Optional
-	GitURL *string `json:"gitUrl" tf:"git_url,omitempty"`
+	GitURL *string `json:"gitUrl,omitempty" tf:"git_url,omitempty"`
+
+	// Is automated publishing enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublishingEnabled *bool `json:"publishingEnabled,omitempty" tf:"publishing_enabled,omitempty"`
 
 	// Specifies the name of the git repository.
 	// +kubebuilder:validation:Optional
@@ -301,6 +311,9 @@ type VstsConfigurationInitParameters struct {
 	// Specifies the name of the VSTS project.
 	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
 
+	// Is automated publishing enabled? Defaults to true.
+	PublishingEnabled *bool `json:"publishingEnabled,omitempty" tf:"publishing_enabled,omitempty"`
+
 	// Specifies the name of the git repository.
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
 
@@ -321,6 +334,9 @@ type VstsConfigurationObservation struct {
 
 	// Specifies the name of the VSTS project.
 	ProjectName *string `json:"projectName,omitempty" tf:"project_name,omitempty"`
+
+	// Is automated publishing enabled? Defaults to true.
+	PublishingEnabled *bool `json:"publishingEnabled,omitempty" tf:"publishing_enabled,omitempty"`
 
 	// Specifies the name of the git repository.
 	RepositoryName *string `json:"repositoryName,omitempty" tf:"repository_name,omitempty"`
@@ -345,6 +361,10 @@ type VstsConfigurationParameters struct {
 	// Specifies the name of the VSTS project.
 	// +kubebuilder:validation:Optional
 	ProjectName *string `json:"projectName" tf:"project_name,omitempty"`
+
+	// Is automated publishing enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublishingEnabled *bool `json:"publishingEnabled,omitempty" tf:"publishing_enabled,omitempty"`
 
 	// Specifies the name of the git repository.
 	// +kubebuilder:validation:Optional
@@ -387,8 +407,8 @@ type FactoryStatus struct {
 // +kubebuilder:storageversion
 
 // Factory is the Schema for the Factorys API. Manages an Azure Data Factory (Version 2).
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

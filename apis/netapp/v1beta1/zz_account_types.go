@@ -18,6 +18,9 @@ type AccountInitParameters struct {
 	// A active_directory block as defined below.
 	ActiveDirectory []ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
+	// The identity block where it is used when customer managed keys based encryption will be enabled as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -33,6 +36,9 @@ type AccountObservation struct {
 
 	// The ID of the NetApp Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The identity block where it is used when customer managed keys based encryption will be enabled as defined below.
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -50,6 +56,10 @@ type AccountParameters struct {
 	// A active_directory block as defined below.
 	// +kubebuilder:validation:Optional
 	ActiveDirectory []ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// The identity block where it is used when customer managed keys based encryption will be enabled as defined below.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -137,6 +147,44 @@ type ActiveDirectoryParameters struct {
 	Username *string `json:"username" tf:"username,omitempty"`
 }
 
+type IdentityInitParameters struct {
+
+	// The identity id of the user assigned identity to use when type is UserAssigned
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The identity type, which can be SystemAssigned or UserAssigned. Only one type at a time is supported by Azure NetApp Files.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// The identity id of the user assigned identity to use when type is UserAssigned
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The ID of the NetApp Account.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the NetApp Account.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The identity type, which can be SystemAssigned or UserAssigned. Only one type at a time is supported by Azure NetApp Files.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// The identity id of the user assigned identity to use when type is UserAssigned
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The identity type, which can be SystemAssigned or UserAssigned. Only one type at a time is supported by Azure NetApp Files.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 // AccountSpec defines the desired state of Account
 type AccountSpec struct {
 	v1.ResourceSpec `json:",inline"`
@@ -165,8 +213,8 @@ type AccountStatus struct {
 // +kubebuilder:storageversion
 
 // Account is the Schema for the Accounts API. Manages a NetApp Account.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -203,6 +203,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    principalId: ${azurerm_data_protection_backup_vault.example.identity.0.principal_id}
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
     roleDefinitionName: Reader
     scope: ${azurerm_postgresql_server.example.id}

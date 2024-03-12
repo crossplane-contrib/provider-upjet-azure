@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -78,8 +78,8 @@ spec:
                     type: boolean
                   settingName:
                     description: The setting to manage. Possible values are MCAS ,
-                      WDATP and SENTINEL. Changing this forces a new resource to be
-                      created.
+                      WDATP, WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW, WDATP_UNIFIED_SOLUTION
+                      and Sentinel. Changing this forces a new resource to be created.
                     type: string
                 type: object
               initProvider:
@@ -100,8 +100,8 @@ spec:
                     type: boolean
                   settingName:
                     description: The setting to manage. Possible values are MCAS ,
-                      WDATP and SENTINEL. Changing this forces a new resource to be
-                      created.
+                      WDATP, WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW, WDATP_UNIFIED_SOLUTION
+                      and Sentinel. Changing this forces a new resource to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -294,8 +294,8 @@ spec:
                     type: string
                   settingName:
                     description: The setting to manage. Possible values are MCAS ,
-                      WDATP and SENTINEL. Changing this forces a new resource to be
-                      created.
+                      WDATP, WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW, WDATP_UNIFIED_SOLUTION
+                      and Sentinel. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

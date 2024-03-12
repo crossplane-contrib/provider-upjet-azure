@@ -18,6 +18,9 @@ type SpringCloudCertificateInitParameters struct {
 	// The content of uploaded certificate. Changing this forces a new resource to be created.
 	CertificateContent *string `json:"certificateContent,omitempty" tf:"certificate_content,omitempty"`
 
+	// Specifies whether the private key should be excluded from the Key Vault Certificate. Changing this forces a new resource to be created. Defaults to false.
+	ExcludePrivateKey *bool `json:"excludePrivateKey,omitempty" tf:"exclude_private_key,omitempty"`
+
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -36,6 +39,9 @@ type SpringCloudCertificateObservation struct {
 
 	// The content of uploaded certificate. Changing this forces a new resource to be created.
 	CertificateContent *string `json:"certificateContent,omitempty" tf:"certificate_content,omitempty"`
+
+	// Specifies whether the private key should be excluded from the Key Vault Certificate. Changing this forces a new resource to be created. Defaults to false.
+	ExcludePrivateKey *bool `json:"excludePrivateKey,omitempty" tf:"exclude_private_key,omitempty"`
 
 	// The ID of the Spring Cloud Certificate.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -58,6 +64,10 @@ type SpringCloudCertificateParameters struct {
 	// The content of uploaded certificate. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CertificateContent *string `json:"certificateContent,omitempty" tf:"certificate_content,omitempty"`
+
+	// Specifies whether the private key should be excluded from the Key Vault Certificate. Changing this forces a new resource to be created. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ExcludePrivateKey *bool `json:"excludePrivateKey,omitempty" tf:"exclude_private_key,omitempty"`
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Certificate
@@ -128,8 +138,8 @@ type SpringCloudCertificateStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudCertificate is the Schema for the SpringCloudCertificates API. Manages an Azure Spring Cloud Certificate.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

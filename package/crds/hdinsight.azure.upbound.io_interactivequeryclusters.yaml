@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -367,7 +367,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -482,8 +482,8 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -641,18 +641,11 @@ spec:
                                 items:
                                   properties:
                                     capacity:
-                                      description: A capacity block as defined below.
                                       items:
                                         properties:
                                           maxInstanceCount:
-                                            description: The maximum number of worker
-                                              nodes to autoscale to based on the cluster's
-                                              activity.
                                             type: number
                                           minInstanceCount:
-                                            description: The minimum number of worker
-                                              nodes to autoscale to based on the cluster's
-                                              activity.
                                             type: number
                                         type: object
                                       type: array
@@ -715,8 +708,8 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -894,8 +887,8 @@ spec:
                                 type: object
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -1449,7 +1442,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -1464,8 +1457,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -1623,18 +1616,11 @@ spec:
                                 items:
                                   properties:
                                     capacity:
-                                      description: A capacity block as defined below.
                                       items:
                                         properties:
                                           maxInstanceCount:
-                                            description: The maximum number of worker
-                                              nodes to autoscale to based on the cluster's
-                                              activity.
                                             type: number
                                           minInstanceCount:
-                                            description: The minimum number of worker
-                                              nodes to autoscale to based on the cluster's
-                                              activity.
                                             type: number
                                         type: object
                                       type: array
@@ -1678,8 +1664,8 @@ spec:
                                 type: array
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -1838,8 +1824,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -2544,7 +2530,7 @@ spec:
                           type: string
                         privateLinkEnabled:
                           description: Is the private link enabled? Possible values
-                            include True or False. Defaults to False. Changing this
+                            include true or false. Defaults to false. Changing this
                             forces a new resource to be created.
                           type: boolean
                       type: object
@@ -2564,8 +2550,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -2647,18 +2633,11 @@ spec:
                                 items:
                                   properties:
                                     capacity:
-                                      description: A capacity block as defined below.
                                       items:
                                         properties:
                                           maxInstanceCount:
-                                            description: The maximum number of worker
-                                              nodes to autoscale to based on the cluster's
-                                              activity.
                                             type: number
                                           minInstanceCount:
-                                            description: The minimum number of worker
-                                              nodes to autoscale to based on the cluster's
-                                              activity.
                                             type: number
                                         type: object
                                       type: array
@@ -2702,8 +2681,8 @@ spec:
                                 type: array
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:
@@ -2786,8 +2765,8 @@ spec:
                             properties:
                               scriptActions:
                                 description: The script action which will run on the
-                                  cluster. Changing this forces a new resource to
-                                  be created.
+                                  cluster. One or more script_actions blocks as defined
+                                  above.
                                 items:
                                   properties:
                                     name:

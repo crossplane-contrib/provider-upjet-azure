@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -138,10 +138,10 @@ spec:
                           type: boolean
                         gracePeriod:
                           description: Amount of time (in minutes, between 30 and
-                            90, defaults to 30 minutes) for which automatic repairs
-                            will be delayed. The grace period starts right after the
-                            VM is found unhealthy. The time duration should be specified
-                            in ISO 8601 format. Defaults to PT30M.
+                            90) for which automatic repairs will be delayed. The grace
+                            period starts right after the VM is found unhealthy. The
+                            time duration should be specified in ISO 8601 format.
+                            Defaults to PT30M.
                           type: string
                       type: object
                     type: array
@@ -365,7 +365,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -971,9 +971,9 @@ spec:
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
                       this Scale Set should be based on. Possible Image ID types include
-                      Image IDs, Shared Image IDs, Shared Image Version IDs, Community
-                      Gallery Image IDs, Community Gallery Image Version IDs, Shared
-                      Gallery Image IDs and Shared Gallery Image Version IDs.
+                      Image ID, Shared Image ID, Shared Image Version ID, Community
+                      Gallery Image ID, Community Gallery Image Version ID, Shared
+                      Gallery Image ID and Shared Gallery Image Version ID.
                     type: string
                   sourceImageReference:
                     description: A source_image_reference block as defined below.
@@ -1018,8 +1018,7 @@ spec:
                             which have been evicted. The time duration should be between
                             15 minutes and 120 minutes (inclusive). The time duration
                             should be specified in the ISO 8601 format. Defaults to
-                            90 minutes (e.g. PT1H30M). Changing this forces a new
-                            resource to be created.
+                            PT1H. Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array
@@ -1148,10 +1147,10 @@ spec:
                           type: boolean
                         gracePeriod:
                           description: Amount of time (in minutes, between 30 and
-                            90, defaults to 30 minutes) for which automatic repairs
-                            will be delayed. The grace period starts right after the
-                            VM is found unhealthy. The time duration should be specified
-                            in ISO 8601 format. Defaults to PT30M.
+                            90) for which automatic repairs will be delayed. The grace
+                            period starts right after the VM is found unhealthy. The
+                            time duration should be specified in ISO 8601 format.
+                            Defaults to PT30M.
                           type: string
                       type: object
                     type: array
@@ -1339,7 +1338,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -1864,9 +1863,9 @@ spec:
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
                       this Scale Set should be based on. Possible Image ID types include
-                      Image IDs, Shared Image IDs, Shared Image Version IDs, Community
-                      Gallery Image IDs, Community Gallery Image Version IDs, Shared
-                      Gallery Image IDs and Shared Gallery Image Version IDs.
+                      Image ID, Shared Image ID, Shared Image Version ID, Community
+                      Gallery Image ID, Community Gallery Image Version ID, Shared
+                      Gallery Image ID and Shared Gallery Image Version ID.
                     type: string
                   sourceImageReference:
                     description: A source_image_reference block as defined below.
@@ -1911,8 +1910,7 @@ spec:
                             which have been evicted. The time duration should be between
                             15 minutes and 120 minutes (inclusive). The time duration
                             should be specified in the ISO 8601 format. Defaults to
-                            90 minutes (e.g. PT1H30M). Changing this forces a new
-                            resource to be created.
+                            PT1H. Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array
@@ -2222,10 +2220,10 @@ spec:
                           type: boolean
                         gracePeriod:
                           description: Amount of time (in minutes, between 30 and
-                            90, defaults to 30 minutes) for which automatic repairs
-                            will be delayed. The grace period starts right after the
-                            VM is found unhealthy. The time duration should be specified
-                            in ISO 8601 format. Defaults to PT30M.
+                            90) for which automatic repairs will be delayed. The grace
+                            period starts right after the VM is found unhealthy. The
+                            time duration should be specified in ISO 8601 format.
+                            Defaults to PT30M.
                           type: string
                       type: object
                     type: array
@@ -2413,7 +2411,7 @@ spec:
                     description: Specifies the duration allocated for all extensions
                       to start. The time duration should be between 15 minutes and
                       120 minutes (inclusive) and should be specified in ISO 8601
-                      format. Defaults to 90 minutes (PT1H30M).
+                      format. Defaults to PT1H30M.
                     type: string
                   galleryApplication:
                     description: One or more gallery_application blocks as defined
@@ -2880,9 +2878,9 @@ spec:
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
                       this Scale Set should be based on. Possible Image ID types include
-                      Image IDs, Shared Image IDs, Shared Image Version IDs, Community
-                      Gallery Image IDs, Community Gallery Image Version IDs, Shared
-                      Gallery Image IDs and Shared Gallery Image Version IDs.
+                      Image ID, Shared Image ID, Shared Image Version ID, Community
+                      Gallery Image ID, Community Gallery Image Version ID, Shared
+                      Gallery Image ID and Shared Gallery Image Version ID.
                     type: string
                   sourceImageReference:
                     description: A source_image_reference block as defined below.
@@ -2927,8 +2925,7 @@ spec:
                             which have been evicted. The time duration should be between
                             15 minutes and 120 minutes (inclusive). The time duration
                             should be specified in the ISO 8601 format. Defaults to
-                            90 minutes (e.g. PT1H30M). Changing this forces a new
-                            resource to be created.
+                            PT1H. Changing this forces a new resource to be created.
                           type: string
                       type: object
                     type: array

@@ -15,6 +15,9 @@ import (
 
 type MSSQLElasticPoolInitParameters struct {
 
+	// Specifies the type of enclave to be used by the elastic pool. Possible value VBS.
+	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
+
 	// Specifies the license type applied to this database. Possible values are LicenseIncluded and BasePrice.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
@@ -45,6 +48,9 @@ type MSSQLElasticPoolInitParameters struct {
 }
 
 type MSSQLElasticPoolObservation struct {
+
+	// Specifies the type of enclave to be used by the elastic pool. Possible value VBS.
+	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
 
 	// The ID of the MS SQL Elastic Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -85,6 +91,10 @@ type MSSQLElasticPoolObservation struct {
 }
 
 type MSSQLElasticPoolParameters struct {
+
+	// Specifies the type of enclave to be used by the elastic pool. Possible value VBS.
+	// +kubebuilder:validation:Optional
+	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
 
 	// Specifies the license type applied to this database. Possible values are LicenseIncluded and BasePrice.
 	// +kubebuilder:validation:Optional
@@ -187,10 +197,10 @@ type SkuInitParameters struct {
 	// The family of hardware Gen4, Gen5, Fsv2 or DC.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Specifies the SKU Name for this Elasticpool. The name of the SKU, will be either vCore based tier + family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based BasicPool, StandardPool, or PremiumPool pattern. Possible values are BasicPool, StandardPool, PremiumPool, GP_Gen4, GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+	// Specifies the SKU Name for this Elasticpool. The name of the SKU, will be either vCore based or DTU based. Possible DTU based values are BasicPool, StandardPool, PremiumPool while possible vCore based values are GP_Gen4, GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The tier of the particular SKU. Possible values are GeneralPurpose, BusinessCritical, Basic, Standard, or Premium. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
+	// The tier of the particular SKU. Possible values are GeneralPurpose, BusinessCritical, Basic, Standard, Premium, or HyperScale. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
@@ -202,10 +212,10 @@ type SkuObservation struct {
 	// The family of hardware Gen4, Gen5, Fsv2 or DC.
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Specifies the SKU Name for this Elasticpool. The name of the SKU, will be either vCore based tier + family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based BasicPool, StandardPool, or PremiumPool pattern. Possible values are BasicPool, StandardPool, PremiumPool, GP_Gen4, GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+	// Specifies the SKU Name for this Elasticpool. The name of the SKU, will be either vCore based or DTU based. Possible DTU based values are BasicPool, StandardPool, PremiumPool while possible vCore based values are GP_Gen4, GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The tier of the particular SKU. Possible values are GeneralPurpose, BusinessCritical, Basic, Standard, or Premium. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
+	// The tier of the particular SKU. Possible values are GeneralPurpose, BusinessCritical, Basic, Standard, Premium, or HyperScale. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
@@ -219,11 +229,11 @@ type SkuParameters struct {
 	// +kubebuilder:validation:Optional
 	Family *string `json:"family,omitempty" tf:"family,omitempty"`
 
-	// Specifies the SKU Name for this Elasticpool. The name of the SKU, will be either vCore based tier + family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based BasicPool, StandardPool, or PremiumPool pattern. Possible values are BasicPool, StandardPool, PremiumPool, GP_Gen4, GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+	// Specifies the SKU Name for this Elasticpool. The name of the SKU, will be either vCore based or DTU based. Possible DTU based values are BasicPool, StandardPool, PremiumPool while possible vCore based values are GP_Gen4, GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The tier of the particular SKU. Possible values are GeneralPurpose, BusinessCritical, Basic, Standard, or Premium. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
+	// The tier of the particular SKU. Possible values are GeneralPurpose, BusinessCritical, Basic, Standard, Premium, or HyperScale. For more information see the documentation for your Elasticpool configuration: vCore-based or DTU-based.
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier" tf:"tier,omitempty"`
 }
@@ -255,9 +265,9 @@ type MSSQLElasticPoolStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// MSSQLElasticPool is the Schema for the MSSQLElasticPools API. Manages a SQL Elastic Pool.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
+// MSSQLElasticPool is the Schema for the MSSQLElasticPools API. Manages an Azure SQL Elastic Pool.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

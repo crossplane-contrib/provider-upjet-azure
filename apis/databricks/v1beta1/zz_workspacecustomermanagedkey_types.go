@@ -16,17 +16,7 @@ import (
 type WorkspaceCustomerManagedKeyInitParameters struct {
 
 	// The ID of the Key Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
-
-	// Reference to a Key in keyvault to populate keyVaultKeyId.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
-
-	// Selector for a Key in keyvault to populate keyVaultKeyId.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceCustomerManagedKeyObservation struct {
@@ -44,32 +34,12 @@ type WorkspaceCustomerManagedKeyObservation struct {
 type WorkspaceCustomerManagedKeyParameters struct {
 
 	// The ID of the Key Vault.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
-	// Reference to a Key in keyvault to populate keyVaultKeyId.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
-
-	// Selector for a Key in keyvault to populate keyVaultKeyId.
-	// +kubebuilder:validation:Optional
-	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
-
 	// The ID of the Databricks Workspace..
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/databricks/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	// +kubebuilder:validation:Optional
-	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
-
-	// Reference to a Workspace in databricks to populate workspaceId.
-	// +kubebuilder:validation:Optional
-	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
-
-	// Selector for a Workspace in databricks to populate workspaceId.
-	// +kubebuilder:validation:Optional
-	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+	// +kubebuilder:validation:Required
+	WorkspaceID *string `json:"workspaceId" tf:"workspace_id,omitempty"`
 }
 
 // WorkspaceCustomerManagedKeySpec defines the desired state of WorkspaceCustomerManagedKey
@@ -99,17 +69,18 @@ type WorkspaceCustomerManagedKeyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys API. Manages a Customer Managed Key for a Databricks Workspace
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
+// WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys API. Manages a Customer Managed Key for a Databricks Workspace root DBFS
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
 type WorkspaceCustomerManagedKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	Spec              WorkspaceCustomerManagedKeySpec   `json:"spec"`
-	Status            WorkspaceCustomerManagedKeyStatus `json:"status,omitempty"`
+	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyVaultKeyId) || (has(self.initProvider) && has(self.initProvider.keyVaultKeyId))",message="spec.forProvider.keyVaultKeyId is a required parameter"
+	Spec   WorkspaceCustomerManagedKeySpec   `json:"spec"`
+	Status WorkspaceCustomerManagedKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

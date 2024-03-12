@@ -141,7 +141,7 @@ type RadiusClientRootCertificateParameters struct {
 
 type RadiusInitParameters struct {
 
-	// One or more client_root_certificate blocks as defined above.
+	// One or more client_root_certificate blocks as defined below.
 	ClientRootCertificate []RadiusClientRootCertificateInitParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 
 	// One or more server blocks as defined below.
@@ -153,7 +153,7 @@ type RadiusInitParameters struct {
 
 type RadiusObservation struct {
 
-	// One or more client_root_certificate blocks as defined above.
+	// One or more client_root_certificate blocks as defined below.
 	ClientRootCertificate []RadiusClientRootCertificateObservation `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 
 	// One or more server blocks as defined below.
@@ -165,7 +165,7 @@ type RadiusObservation struct {
 
 type RadiusParameters struct {
 
-	// One or more client_root_certificate blocks as defined above.
+	// One or more client_root_certificate blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ClientRootCertificate []RadiusClientRootCertificateParameters `json:"clientRootCertificate,omitempty" tf:"client_root_certificate,omitempty"`
 
@@ -481,8 +481,8 @@ type VPNServerConfigurationStatus struct {
 // +kubebuilder:storageversion
 
 // VPNServerConfiguration is the Schema for the VPNServerConfigurations API. Manages a VPN Server Configuration.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

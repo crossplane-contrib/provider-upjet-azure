@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -192,7 +192,7 @@ spec:
                       type: object
                     type: array
                   certificate:
-                    description: One or more (up to 10) certificate blocks as defined
+                    description: One or more certificate blocks (up to 10) as defined
                       below.
                     items:
                       properties:
@@ -343,8 +343,8 @@ spec:
                     description: ID of a standard SKU IPv4 Public IP.
                     type: string
                   publicNetworkAccessEnabled:
-                    description: Is public access to the service allowed?. Defaults
-                      to true
+                    description: Is public access to the service allowed? Defaults
+                      to true.
                     type: boolean
                   publisherEmail:
                     description: The email of publisher/company.
@@ -656,12 +656,11 @@ spec:
                     type: array
                   virtualNetworkType:
                     description: 'The type of virtual network you want to use, valid
-                      values include: None, External, Internal.'
+                      values include: None, External, Internal. Defaults to None.'
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
-                      API Management service should be located. Changing this forces
-                      a new API Management service to be created.
+                      API Management service should be located.
                     items:
                       type: string
                     type: array
@@ -799,7 +798,7 @@ spec:
                       type: object
                     type: array
                   certificate:
-                    description: One or more (up to 10) certificate blocks as defined
+                    description: One or more certificate blocks (up to 10) as defined
                       below.
                     items:
                       properties:
@@ -895,8 +894,8 @@ spec:
                     description: ID of a standard SKU IPv4 Public IP.
                     type: string
                   publicNetworkAccessEnabled:
-                    description: Is public access to the service allowed?. Defaults
-                      to true
+                    description: Is public access to the service allowed? Defaults
+                      to true.
                     type: boolean
                   publisherEmail:
                     description: The email of publisher/company.
@@ -1127,12 +1126,11 @@ spec:
                     type: array
                   virtualNetworkType:
                     description: 'The type of virtual network you want to use, valid
-                      values include: None, External, Internal.'
+                      values include: None, External, Internal. Defaults to None.'
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
-                      API Management service should be located. Changing this forces
-                      a new API Management service to be created.
+                      API Management service should be located.
                     items:
                       type: string
                     type: array
@@ -1388,7 +1386,7 @@ spec:
                       type: object
                     type: array
                   certificate:
-                    description: One or more (up to 10) certificate blocks as defined
+                    description: One or more certificate blocks (up to 10) as defined
                       below.
                     items:
                       properties:
@@ -1748,8 +1746,8 @@ spec:
                       type: string
                     type: array
                   publicNetworkAccessEnabled:
-                    description: Is public access to the service allowed?. Defaults
-                      to true
+                    description: Is public access to the service allowed? Defaults
+                      to true.
                     type: boolean
                   publisherEmail:
                     description: The email of publisher/company.
@@ -1917,12 +1915,11 @@ spec:
                     type: array
                   virtualNetworkType:
                     description: 'The type of virtual network you want to use, valid
-                      values include: None, External, Internal.'
+                      values include: None, External, Internal. Defaults to None.'
                     type: string
                   zones:
                     description: Specifies a list of Availability Zones in which this
-                      API Management service should be located. Changing this forces
-                      a new API Management service to be created.
+                      API Management service should be located.
                     items:
                       type: string
                     type: array

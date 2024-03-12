@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -186,7 +186,8 @@ spec:
                     type: object
                   sku:
                     description: Sku of the IoT Hub Device Update Account. Possible
-                      values are Free and Standard. Defaults to Standard.
+                      values are Free and Standard. Defaults to Standard. Changing
+                      this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -240,7 +241,8 @@ spec:
                     type: boolean
                   sku:
                     description: Sku of the IoT Hub Device Update Account. Possible
-                      values are Free and Standard. Defaults to Standard.
+                      values are Free and Standard. Defaults to Standard. Changing
+                      this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -480,7 +482,8 @@ spec:
                     type: string
                   sku:
                     description: Sku of the IoT Hub Device Update Account. Possible
-                      values are Free and Standard. Defaults to Standard.
+                      values are Free and Standard. Defaults to Standard. Changing
+                      this forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:

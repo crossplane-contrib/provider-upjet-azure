@@ -15,7 +15,7 @@ import (
 
 type DiskEncryptionSetInitParameters struct {
 
-	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version.
+	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates the encryption Key to latest version or not. Possible values are true or false. Defaults to false.
 	AutoKeyRotationEnabled *bool `json:"autoKeyRotationEnabled,omitempty" tf:"auto_key_rotation_enabled,omitempty"`
 
 	// The type of key used to encrypt the data of the disk. Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey. Changing this forces a new resource to be created.
@@ -50,7 +50,7 @@ type DiskEncryptionSetInitParameters struct {
 
 type DiskEncryptionSetObservation struct {
 
-	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version.
+	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates the encryption Key to latest version or not. Possible values are true or false. Defaults to false.
 	AutoKeyRotationEnabled *bool `json:"autoKeyRotationEnabled,omitempty" tf:"auto_key_rotation_enabled,omitempty"`
 
 	// The type of key used to encrypt the data of the disk. Possible values are EncryptionAtRestWithCustomerKey, EncryptionAtRestWithPlatformAndCustomerKeys and ConfidentialVmEncryptedWithCustomerKey. Defaults to EncryptionAtRestWithCustomerKey. Changing this forces a new resource to be created.
@@ -68,6 +68,9 @@ type DiskEncryptionSetObservation struct {
 	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
+	// The URL for the Key Vault Key or Key Vault Secret that is currently being used by the service.
+	KeyVaultKeyURL *string `json:"keyVaultKeyUrl,omitempty" tf:"key_vault_key_url,omitempty"`
+
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -81,7 +84,7 @@ type DiskEncryptionSetObservation struct {
 
 type DiskEncryptionSetParameters struct {
 
-	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates encryption Key to latest version.
+	// Boolean flag to specify whether Azure Disk Encryption Set automatically rotates the encryption Key to latest version or not. Possible values are true or false. Defaults to false.
 	// +kubebuilder:validation:Optional
 	AutoKeyRotationEnabled *bool `json:"autoKeyRotationEnabled,omitempty" tf:"auto_key_rotation_enabled,omitempty"`
 
@@ -200,8 +203,8 @@ type DiskEncryptionSetStatus struct {
 // +kubebuilder:storageversion
 
 // DiskEncryptionSet is the Schema for the DiskEncryptionSets API. Manages a Disk Encryption Set.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

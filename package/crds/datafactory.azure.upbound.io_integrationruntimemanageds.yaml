@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -101,7 +101,7 @@ spec:
                         pricingTier:
                           description: 'Pricing tier for the database that will be
                             created for the SSIS catalog. Valid values are: Basic,
-                            Standard, Premium and PremiumRS.'
+                            Standard, Premium and PremiumRS. Defaults to Basic.'
                           type: string
                         serverEndpoint:
                           description: The endpoint of an Azure SQL Server that will
@@ -109,6 +109,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  credentialName:
+                    description: The name of the credential to use for the Managed
+                      Integration Runtime.
+                    type: string
                   customSetupScript:
                     description: A custom_setup_script block as defined below.
                     items:
@@ -239,7 +243,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Managed Integration
@@ -367,7 +371,7 @@ spec:
                         pricingTier:
                           description: 'Pricing tier for the database that will be
                             created for the SSIS catalog. Valid values are: Basic,
-                            Standard, Premium and PremiumRS.'
+                            Standard, Premium and PremiumRS. Defaults to Basic.'
                           type: string
                         serverEndpoint:
                           description: The endpoint of an Azure SQL Server that will
@@ -375,6 +379,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  credentialName:
+                    description: The name of the credential to use for the Managed
+                      Integration Runtime.
+                    type: string
                   customSetupScript:
                     description: A custom_setup_script block as defined below.
                     items:
@@ -404,7 +412,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Managed Integration
@@ -701,7 +709,7 @@ spec:
                         pricingTier:
                           description: 'Pricing tier for the database that will be
                             created for the SSIS catalog. Valid values are: Basic,
-                            Standard, Premium and PremiumRS.'
+                            Standard, Premium and PremiumRS. Defaults to Basic.'
                           type: string
                         serverEndpoint:
                           description: The endpoint of an Azure SQL Server that will
@@ -709,6 +717,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  credentialName:
+                    description: The name of the credential to use for the Managed
+                      Integration Runtime.
+                    type: string
                   customSetupScript:
                     description: A custom_setup_script block as defined below.
                     items:
@@ -745,7 +757,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Managed Integration

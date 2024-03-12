@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -197,7 +197,7 @@ spec:
                     type: string
                   instancePool:
                     description: Leverages an instance pool within the linked ADB
-                      instance as defined by instance_pool block below.
+                      instance as one instance_pool block defined below.
                     items:
                       properties:
                         clusterVersion:
@@ -417,7 +417,7 @@ spec:
                     type: string
                   instancePool:
                     description: Leverages an instance pool within the linked ADB
-                      instance as defined by instance_pool block below.
+                      instance as one instance_pool block defined below.
                     items:
                       properties:
                         clusterVersion:
@@ -809,7 +809,7 @@ spec:
                     type: string
                   instancePool:
                     description: Leverages an instance pool within the linked ADB
-                      instance as defined by instance_pool block below.
+                      instance as one instance_pool block defined below.
                     items:
                       properties:
                         clusterVersion:

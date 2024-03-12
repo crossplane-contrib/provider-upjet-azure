@@ -91,7 +91,7 @@ type ConditionInitParameters struct {
 	// A monitor block as defined below.
 	Monitor []MonitorInitParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []MonitorServiceInitParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -115,7 +115,7 @@ type ConditionObservation struct {
 	// A monitor block as defined below.
 	Monitor []MonitorObservation `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	MonitorService []MonitorServiceObservation `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
 	// A severity block as defined below.
@@ -143,7 +143,7 @@ type ConditionParameters struct {
 	// +kubebuilder:validation:Optional
 	Monitor []MonitorParameters `json:"monitor,omitempty" tf:"monitor,omitempty"`
 
-	// A monitor_service as block defined below.
+	// A monitor_service block as defined below.
 	// +kubebuilder:validation:Optional
 	MonitorService []MonitorServiceParameters `json:"monitorService,omitempty" tf:"monitor_service,omitempty"`
 
@@ -487,8 +487,8 @@ type MonitorActionRuleActionGroupStatus struct {
 // +kubebuilder:storageversion
 
 // MonitorActionRuleActionGroup is the Schema for the MonitorActionRuleActionGroups API. Manages an Monitor Action Rule which type is action group.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

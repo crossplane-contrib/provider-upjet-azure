@@ -44,6 +44,9 @@ type CustomHeaderParameters struct {
 
 type TrafficManagerAzureEndpointInitParameters struct {
 
+	// If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method. Defaults to false.
+	AlwaysServeEnabled *bool `json:"alwaysServeEnabled,omitempty" tf:"always_serve_enabled,omitempty"`
+
 	// One or more custom_header blocks as defined below.
 	CustomHeader []CustomHeaderInitParameters `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
 
@@ -78,6 +81,9 @@ type TrafficManagerAzureEndpointInitParameters struct {
 
 type TrafficManagerAzureEndpointObservation struct {
 
+	// If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method. Defaults to false.
+	AlwaysServeEnabled *bool `json:"alwaysServeEnabled,omitempty" tf:"always_serve_enabled,omitempty"`
+
 	// One or more custom_header blocks as defined below.
 	CustomHeader []CustomHeaderObservation `json:"customHeader,omitempty" tf:"custom_header,omitempty"`
 
@@ -107,6 +113,10 @@ type TrafficManagerAzureEndpointObservation struct {
 }
 
 type TrafficManagerAzureEndpointParameters struct {
+
+	// If Always Serve is enabled, probing for endpoint health will be disabled and endpoints will be included in the traffic routing method. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AlwaysServeEnabled *bool `json:"alwaysServeEnabled,omitempty" tf:"always_serve_enabled,omitempty"`
 
 	// One or more custom_header blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -228,8 +238,8 @@ type TrafficManagerAzureEndpointStatus struct {
 // +kubebuilder:storageversion
 
 // TrafficManagerAzureEndpoint is the Schema for the TrafficManagerAzureEndpoints API. Manages an Azure Endpoint within a Traffic Manager Profile..
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

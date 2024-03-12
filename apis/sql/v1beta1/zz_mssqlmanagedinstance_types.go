@@ -13,7 +13,7 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
-type IdentityInitParameters struct {
+type MSSQLManagedInstanceIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
 	// +listType=set
@@ -23,7 +23,7 @@ type IdentityInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type IdentityObservation struct {
+type MSSQLManagedInstanceIdentityObservation struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
 	// +listType=set
@@ -39,7 +39,7 @@ type IdentityObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type IdentityParameters struct {
+type MSSQLManagedInstanceIdentityParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Managed Instance. Required when type is set to UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -73,7 +73,7 @@ type MSSQLManagedInstanceInitParameters struct {
 	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
 	// An identity block as defined below.
-	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []MSSQLManagedInstanceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// What type of license the Managed Instance will use. Possible values are LicenseIncluded and BasePrice.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
@@ -96,7 +96,7 @@ type MSSQLManagedInstanceInitParameters struct {
 	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. The default value is GRS.
+	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. Defaults to GRS.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 (GB).
@@ -122,8 +122,11 @@ type MSSQLManagedInstanceInitParameters struct {
 	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
 	TimezoneID *string `json:"timezoneId,omitempty" tf:"timezone_id,omitempty"`
 
-	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
+	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or 128 for Gen5 SKUs.
 	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
+
+	// Specifies whether or not the SQL Managed Instance is zone redundant. Defaults to false.
+	ZoneRedundantEnabled *bool `json:"zoneRedundantEnabled,omitempty" tf:"zone_redundant_enabled,omitempty"`
 }
 
 type MSSQLManagedInstanceObservation struct {
@@ -133,6 +136,9 @@ type MSSQLManagedInstanceObservation struct {
 
 	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
+
+	// The Dns Zone where the SQL Managed Instance is located.
+	DNSZone *string `json:"dnsZone,omitempty" tf:"dns_zone,omitempty"`
 
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
@@ -144,7 +150,7 @@ type MSSQLManagedInstanceObservation struct {
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below.
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []MSSQLManagedInstanceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// What type of license the Managed Instance will use. Possible values are LicenseIncluded and BasePrice.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
@@ -170,7 +176,7 @@ type MSSQLManagedInstanceObservation struct {
 	// Specifies the SKU Name for the SQL Managed Instance. Valid values include GP_Gen4, GP_Gen5, GP_Gen8IM, GP_Gen8IH, BC_Gen4, BC_Gen5, BC_Gen8IM or BC_Gen8IH.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. The default value is GRS.
+	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. Defaults to GRS.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// Maximum storage space for the SQL Managed instance. This should be a multiple of 32 (GB).
@@ -186,8 +192,11 @@ type MSSQLManagedInstanceObservation struct {
 	// The TimeZone ID that the SQL Managed Instance will be operating in. Default value is UTC. Changing this forces a new resource to be created.
 	TimezoneID *string `json:"timezoneId,omitempty" tf:"timezone_id,omitempty"`
 
-	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
+	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or 128 for Gen5 SKUs.
 	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
+
+	// Specifies whether or not the SQL Managed Instance is zone redundant. Defaults to false.
+	ZoneRedundantEnabled *bool `json:"zoneRedundantEnabled,omitempty" tf:"zone_redundant_enabled,omitempty"`
 }
 
 type MSSQLManagedInstanceParameters struct {
@@ -220,7 +229,7 @@ type MSSQLManagedInstanceParameters struct {
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
-	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []MSSQLManagedInstanceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// What type of license the Managed Instance will use. Possible values are LicenseIncluded and BasePrice.
 	// +kubebuilder:validation:Optional
@@ -263,7 +272,7 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. The default value is GRS.
+	// Specifies the storage account type used to store backups for this database. Changing this forces a new resource to be created. Possible values are GRS, LRS and ZRS. Defaults to GRS.
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
@@ -294,9 +303,13 @@ type MSSQLManagedInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	TimezoneID *string `json:"timezoneId,omitempty" tf:"timezone_id,omitempty"`
 
-	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 8, 16, 24, 32, 40, 64, or 80 for Gen5 SKUs.
+	// Number of cores that should be assigned to the SQL Managed Instance. Values can be 8, 16, or 24 for Gen4 SKUs, or 4, 6, 8, 10, 12, 16, 20, 24, 32, 40, 48, 56, 64, 80, 96 or 128 for Gen5 SKUs.
 	// +kubebuilder:validation:Optional
 	Vcores *float64 `json:"vcores,omitempty" tf:"vcores,omitempty"`
+
+	// Specifies whether or not the SQL Managed Instance is zone redundant. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ZoneRedundantEnabled *bool `json:"zoneRedundantEnabled,omitempty" tf:"zone_redundant_enabled,omitempty"`
 }
 
 // MSSQLManagedInstanceSpec defines the desired state of MSSQLManagedInstance
@@ -327,8 +340,8 @@ type MSSQLManagedInstanceStatus struct {
 // +kubebuilder:storageversion
 
 // MSSQLManagedInstance is the Schema for the MSSQLManagedInstances API. Manages a Microsoft SQL Azure Managed Instance.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -104,7 +104,7 @@ type SpringCloudConnectionInitParameters struct {
 	// The authentication info. An authentication block as defined below.
 	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
+	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The name of the service connection. Changing this forces a new resource to be created.
@@ -126,7 +126,7 @@ type SpringCloudConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SpringCloudIDSelector *v1.Selector `json:"springCloudIdSelector,omitempty" tf:"-"`
 
-	// The ID of the target resource. Changing this forces a new resource to be created. Possible values are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka.
+	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.SQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
@@ -148,7 +148,7 @@ type SpringCloudConnectionObservation struct {
 	// The authentication info. An authentication block as defined below.
 	Authentication []AuthenticationObservation `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
+	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
 	// The ID of the service connector.
@@ -163,7 +163,7 @@ type SpringCloudConnectionObservation struct {
 	// The ID of the data source spring cloud. Changing this forces a new resource to be created.
 	SpringCloudID *string `json:"springCloudId,omitempty" tf:"spring_cloud_id,omitempty"`
 
-	// The ID of the target resource. Changing this forces a new resource to be created. Possible values are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka.
+	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
 	// The type of the VNet solution. Possible values are serviceEndpoint, privateLink.
@@ -176,7 +176,7 @@ type SpringCloudConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	Authentication []AuthenticationParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
-	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot.
+	// The application client type. Possible values are none, dotnet, java, python, go, php, ruby, django, nodejs and springBoot. Defaults to none.
 	// +kubebuilder:validation:Optional
 	ClientType *string `json:"clientType,omitempty" tf:"client_type,omitempty"`
 
@@ -202,7 +202,7 @@ type SpringCloudConnectionParameters struct {
 	// +kubebuilder:validation:Optional
 	SpringCloudIDSelector *v1.Selector `json:"springCloudIdSelector,omitempty" tf:"-"`
 
-	// The ID of the target resource. Changing this forces a new resource to be created. Possible values are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka.
+	// The ID of the target resource. Changing this forces a new resource to be created. Possible target resources are Postgres, PostgresFlexible, Mysql, Sql, Redis, RedisEnterprise, CosmosCassandra, CosmosGremlin, CosmosMongo, CosmosSql, CosmosTable, StorageBlob, StorageQueue, StorageFile, StorageTable, AppConfig, EventHub, ServiceBus, SignalR, WebPubSub, ConfluentKafka. The integration guide can be found here.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.SQLDatabase
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -249,8 +249,8 @@ type SpringCloudConnectionStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudConnection is the Schema for the SpringCloudConnections API. Manages a service connector for spring cloud app.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

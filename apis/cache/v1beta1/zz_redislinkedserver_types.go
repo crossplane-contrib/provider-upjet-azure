@@ -37,6 +37,9 @@ type RedisLinkedServerInitParameters struct {
 
 type RedisLinkedServerObservation struct {
 
+	// The geo-replicated primary hostname for this linked server.
+	GeoReplicatedPrimaryHostName *string `json:"geoReplicatedPrimaryHostName,omitempty" tf:"geo_replicated_primary_host_name,omitempty"`
+
 	// The ID of the Redis.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -138,8 +141,8 @@ type RedisLinkedServerStatus struct {
 // +kubebuilder:storageversion
 
 // RedisLinkedServer is the Schema for the RedisLinkedServers API. Manages a Redis Linked Server.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -74,6 +74,11 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  alwaysServeEnabled:
+                    description: If Always Serve is enabled, probing for endpoint
+                      health will be disabled and endpoints will be included in the
+                      traffic routing method. Defaults to false.
+                    type: boolean
                   customHeader:
                     description: One or more custom_header blocks as defined below.
                     items:
@@ -301,6 +306,11 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  alwaysServeEnabled:
+                    description: If Always Serve is enabled, probing for endpoint
+                      health will be disabled and endpoints will be included in the
+                      traffic routing method. Defaults to false.
+                    type: boolean
                   customHeader:
                     description: One or more custom_header blocks as defined below.
                     items:
@@ -607,6 +617,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  alwaysServeEnabled:
+                    description: If Always Serve is enabled, probing for endpoint
+                      health will be disabled and endpoints will be included in the
+                      traffic routing method. Defaults to false.
+                    type: boolean
                   customHeader:
                     description: One or more custom_header blocks as defined below.
                     items:

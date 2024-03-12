@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -476,7 +476,8 @@ spec:
                     type: string
                   storageType:
                     description: The type of Storage to use on this Virtual Machine.
-                      Possible values are Standard and Premium.
+                      Possible values are Standard and Premium. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -887,7 +888,8 @@ spec:
                     type: string
                   storageType:
                     description: The type of Storage to use on this Virtual Machine.
-                      Possible values are Standard and Premium.
+                      Possible values are Standard and Premium. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -1196,7 +1198,8 @@ spec:
                     type: string
                   storageType:
                     description: The type of Storage to use on this Virtual Machine.
-                      Possible values are Standard and Premium.
+                      Possible values are Standard and Premium. Changing this forces
+                      a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:

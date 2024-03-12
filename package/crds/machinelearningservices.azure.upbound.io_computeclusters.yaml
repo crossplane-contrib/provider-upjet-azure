@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -195,6 +195,12 @@ spec:
                       Compute Cluster. Changing this forces a new Machine Learning
                       Compute Cluster to be created.
                     type: string
+                  nodePublicIpEnabled:
+                    description: Whether the compute cluster will have a public ip.
+                      To set this to false a subnet_resource_id needs to be set. Defaults
+                      to true. Changing this forces a new Machine Learning Compute
+                      Cluster to be created.
+                    type: boolean
                   scaleSettings:
                     description: A scale_settings block as defined below. Changing
                       this forces a new Machine Learning Compute Cluster to be created.
@@ -478,6 +484,12 @@ spec:
                       Compute Cluster. Changing this forces a new Machine Learning
                       Compute Cluster to be created.
                     type: string
+                  nodePublicIpEnabled:
+                    description: Whether the compute cluster will have a public ip.
+                      To set this to false a subnet_resource_id needs to be set. Defaults
+                      to true. Changing this forces a new Machine Learning Compute
+                      Cluster to be created.
+                    type: boolean
                   scaleSettings:
                     description: A scale_settings block as defined below. Changing
                       this forces a new Machine Learning Compute Cluster to be created.
@@ -878,6 +890,12 @@ spec:
                       Compute Cluster. Changing this forces a new Machine Learning
                       Compute Cluster to be created.
                     type: string
+                  nodePublicIpEnabled:
+                    description: Whether the compute cluster will have a public ip.
+                      To set this to false a subnet_resource_id needs to be set. Defaults
+                      to true. Changing this forces a new Machine Learning Compute
+                      Cluster to be created.
+                    type: boolean
                   scaleSettings:
                     description: A scale_settings block as defined below. Changing
                       this forces a new Machine Learning Compute Cluster to be created.

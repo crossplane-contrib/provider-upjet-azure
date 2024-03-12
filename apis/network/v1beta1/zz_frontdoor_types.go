@@ -106,7 +106,7 @@ type BackendPoolHealthProbeInitParameters struct {
 	// The path to use for the Health Probe. Default is /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: GET and HEAD. Defaults to GET.
 	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 
 	// Protocol scheme to use for the Health Probe. Possible values are Http and Https. Defaults to Http.
@@ -130,7 +130,7 @@ type BackendPoolHealthProbeObservation struct {
 	// The path to use for the Health Probe. Default is /.
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: GET and HEAD. Defaults to GET.
 	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 
 	// Protocol scheme to use for the Health Probe. Possible values are Http and Https. Defaults to Http.
@@ -155,7 +155,7 @@ type BackendPoolHealthProbeParameters struct {
 	// +kubebuilder:validation:Optional
 	Path *string `json:"path,omitempty" tf:"path,omitempty"`
 
-	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: Get and Head. Defaults to GET.
+	// Specifies HTTP method the health probe uses when querying the backend pool instances. Possible values include: GET and HEAD. Defaults to GET.
 	// +kubebuilder:validation:Optional
 	ProbeMethod *string `json:"probeMethod,omitempty" tf:"probe_method,omitempty"`
 
@@ -794,8 +794,8 @@ type FrontDoorStatus struct {
 // +kubebuilder:storageversion
 
 // FrontDoor is the Schema for the FrontDoors API. Manages an Azure Front Door (classic) instance.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

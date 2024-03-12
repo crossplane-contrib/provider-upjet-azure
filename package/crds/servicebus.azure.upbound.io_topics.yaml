@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -96,10 +96,9 @@ spec:
                       before writing it to persistent storage.
                     type: boolean
                   enablePartitioning:
-                    description: |-
-                      Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-                      the topic to be partitioned across multiple message brokers. Defaults to false.
-                      Changing this forces a new resource to be created.
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   maxMessageSizeInKilobytes:
                     description: Integer value which controls the maximum size of
@@ -112,9 +111,8 @@ spec:
                       section of this document.
                     type: number
                   namespaceId:
-                    description: |-
-                      The ID of the ServiceBus Namespace to create Changing this forces a new resource to be created.
-                      this topic in. Changing this forces a new resource to be created.
+                    description: The ID of the ServiceBus Namespace to create this
+                      topic in. Changing this forces a new resource to be created.
                     type: string
                   namespaceIdRef:
                     description: Reference to a ServiceBusNamespace in servicebus
@@ -193,9 +191,8 @@ spec:
                         type: object
                     type: object
                   requiresDuplicateDetection:
-                    description: |-
-                      Boolean flag which controls whether Changing this forces a new resource to be created.
-                      the Topic requires duplicate detection. Defaults to false. Changing this forces
+                    description: Boolean flag which controls whether the Topic requires
+                      duplicate detection. Defaults to false. Changing this forces
                       a new resource to be created.
                     type: boolean
                   status:
@@ -243,10 +240,9 @@ spec:
                       before writing it to persistent storage.
                     type: boolean
                   enablePartitioning:
-                    description: |-
-                      Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-                      the topic to be partitioned across multiple message brokers. Defaults to false.
-                      Changing this forces a new resource to be created.
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   maxMessageSizeInKilobytes:
                     description: Integer value which controls the maximum size of
@@ -259,9 +255,8 @@ spec:
                       section of this document.
                     type: number
                   requiresDuplicateDetection:
-                    description: |-
-                      Boolean flag which controls whether Changing this forces a new resource to be created.
-                      the Topic requires duplicate detection. Defaults to false. Changing this forces
+                    description: Boolean flag which controls whether the Topic requires
+                      duplicate detection. Defaults to false. Changing this forces
                       a new resource to be created.
                     type: boolean
                   status:
@@ -468,10 +463,9 @@ spec:
                       before writing it to persistent storage.
                     type: boolean
                   enablePartitioning:
-                    description: |-
-                      Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-                      the topic to be partitioned across multiple message brokers. Defaults to false.
-                      Changing this forces a new resource to be created.
+                    description: Boolean flag which controls whether to enable the
+                      topic to be partitioned across multiple message brokers. Changing
+                      this forces a new resource to be created.
                     type: boolean
                   id:
                     description: The ServiceBus Topic ID.
@@ -487,14 +481,12 @@ spec:
                       section of this document.
                     type: number
                   namespaceId:
-                    description: |-
-                      The ID of the ServiceBus Namespace to create Changing this forces a new resource to be created.
-                      this topic in. Changing this forces a new resource to be created.
+                    description: The ID of the ServiceBus Namespace to create this
+                      topic in. Changing this forces a new resource to be created.
                     type: string
                   requiresDuplicateDetection:
-                    description: |-
-                      Boolean flag which controls whether Changing this forces a new resource to be created.
-                      the Topic requires duplicate detection. Defaults to false. Changing this forces
+                    description: Boolean flag which controls whether the Topic requires
+                      duplicate detection. Defaults to false. Changing this forces
                       a new resource to be created.
                     type: boolean
                   status:

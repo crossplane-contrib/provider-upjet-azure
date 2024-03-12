@@ -22,4 +22,8 @@ spec:
         testing.upbound.io/example-name: azurerm_api_management_api
     response:
     - statusCode: 200
+    templateParameter:
+    - name: id
+      required: true
+      type: number
     urlTemplate: /users/{id}/delete

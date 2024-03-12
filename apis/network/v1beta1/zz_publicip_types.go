@@ -34,7 +34,7 @@ type PublicIPInitParameters struct {
 	// +mapType=granular
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
-	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Defaults to IPv4.
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
 	// Specifies the timeout for the TCP idle connection. The value can be set between 4 and 30 minutes.
@@ -94,7 +94,7 @@ type PublicIPObservation struct {
 	// +mapType=granular
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
-	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Defaults to IPv4.
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
 	// Specifies the timeout for the TCP idle connection. The value can be set between 4 and 30 minutes.
@@ -154,7 +154,7 @@ type PublicIPParameters struct {
 	// +mapType=granular
 	IPTags map[string]*string `json:"ipTags,omitempty" tf:"ip_tags,omitempty"`
 
-	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created.
+	// The IP Version to use, IPv6 or IPv4. Changing this forces a new resource to be created. Defaults to IPv4.
 	// +kubebuilder:validation:Optional
 	IPVersion *string `json:"ipVersion,omitempty" tf:"ip_version,omitempty"`
 
@@ -234,8 +234,8 @@ type PublicIPStatus struct {
 // +kubebuilder:storageversion
 
 // PublicIP is the Schema for the PublicIPs API. Manages a Public IP Address.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

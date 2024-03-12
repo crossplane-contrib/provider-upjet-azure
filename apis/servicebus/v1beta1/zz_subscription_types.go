@@ -53,7 +53,7 @@ type SubscriptionInitParameters struct {
 	// A client_scoped_subscription block as defined below.
 	ClientScopedSubscription []ClientScopedSubscriptionInitParameters `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
-	// whether the subscription is scoped to a client id. Defaults to False.
+	// whether the subscription is scoped to a client id. Defaults to false.
 	ClientScopedSubscriptionEnabled *bool `json:"clientScopedSubscriptionEnabled,omitempty" tf:"client_scoped_subscription_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Subscription has dead letter support on filter evaluation exceptions. Defaults to true.
@@ -95,7 +95,7 @@ type SubscriptionObservation struct {
 	// A client_scoped_subscription block as defined below.
 	ClientScopedSubscription []ClientScopedSubscriptionObservation `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
-	// whether the subscription is scoped to a client id. Defaults to False.
+	// whether the subscription is scoped to a client id. Defaults to false.
 	ClientScopedSubscriptionEnabled *bool `json:"clientScopedSubscriptionEnabled,omitempty" tf:"client_scoped_subscription_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Subscription has dead letter support on filter evaluation exceptions. Defaults to true.
@@ -145,7 +145,7 @@ type SubscriptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientScopedSubscription []ClientScopedSubscriptionParameters `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
-	// whether the subscription is scoped to a client id. Defaults to False.
+	// whether the subscription is scoped to a client id. Defaults to false.
 	// +kubebuilder:validation:Optional
 	ClientScopedSubscriptionEnabled *bool `json:"clientScopedSubscriptionEnabled,omitempty" tf:"client_scoped_subscription_enabled,omitempty"`
 
@@ -232,8 +232,8 @@ type SubscriptionStatus struct {
 // +kubebuilder:storageversion
 
 // Subscription is the Schema for the Subscriptions API. Manages a ServiceBus Subscription.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

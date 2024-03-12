@@ -33,6 +33,9 @@ type RoleAssignmentInitParameters struct {
 	// The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to. Changing this forces a new resource to be created.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
+	// The type of the principal_id. Possible values are User, Group and ServicePrincipal. Changing this forces a new resource to be created. It is necessary to explicitly set this attribute when creating role assignments if the principal creating the assignment is constrained by ABAC rules that filters on the PrincipalType attribute.
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
+
 	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. Conflicts with role_definition_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.RoleDefinition
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("role_definition_resource_id",true)
@@ -79,7 +82,7 @@ type RoleAssignmentObservation struct {
 	// The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to. Changing this forces a new resource to be created.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The type of the principal_id, e.g. User, Group, Service Principal, Application, etc.
+	// The type of the principal_id. Possible values are User, Group and ServicePrincipal. Changing this forces a new resource to be created. It is necessary to explicitly set this attribute when creating role assignments if the principal creating the assignment is constrained by ABAC rules that filters on the PrincipalType attribute.
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
 	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. Conflicts with role_definition_name.
@@ -120,6 +123,10 @@ type RoleAssignmentParameters struct {
 	// The ID of the Principal (User, Group or Service Principal) to assign the Role Definition to. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The type of the principal_id. Possible values are User, Group and ServicePrincipal. Changing this forces a new resource to be created. It is necessary to explicitly set this attribute when creating role assignments if the principal creating the assignment is constrained by ABAC rules that filters on the PrincipalType attribute.
+	// +kubebuilder:validation:Optional
+	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
 	// The Scoped-ID of the Role Definition. Changing this forces a new resource to be created. Conflicts with role_definition_name.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.RoleDefinition
@@ -176,8 +183,8 @@ type RoleAssignmentStatus struct {
 // +kubebuilder:storageversion
 
 // RoleAssignment is the Schema for the RoleAssignments API. Assigns a given Principal (User or Group) to a given Role.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

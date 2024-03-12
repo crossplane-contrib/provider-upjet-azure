@@ -27,6 +27,9 @@ type CostAnomalyAlertInitParameters struct {
 
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The ID of the Subscription this Cost Anomaly Alert is scoped to. Changing this forces a new resource to be created. When not supplied this defaults to the subscription configured in the provider.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type CostAnomalyAlertObservation struct {
@@ -46,6 +49,9 @@ type CostAnomalyAlertObservation struct {
 
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The ID of the Subscription this Cost Anomaly Alert is scoped to. Changing this forces a new resource to be created. When not supplied this defaults to the subscription configured in the provider.
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 type CostAnomalyAlertParameters struct {
@@ -66,6 +72,10 @@ type CostAnomalyAlertParameters struct {
 	// The message of the Cost Anomaly Alert. Maximum length of the message is 250.
 	// +kubebuilder:validation:Optional
 	Message *string `json:"message,omitempty" tf:"message,omitempty"`
+
+	// The ID of the Subscription this Cost Anomaly Alert is scoped to. Changing this forces a new resource to be created. When not supplied this defaults to the subscription configured in the provider.
+	// +kubebuilder:validation:Optional
+	SubscriptionID *string `json:"subscriptionId,omitempty" tf:"subscription_id,omitempty"`
 }
 
 // CostAnomalyAlertSpec defines the desired state of CostAnomalyAlert
@@ -96,8 +106,8 @@ type CostAnomalyAlertStatus struct {
 // +kubebuilder:storageversion
 
 // CostAnomalyAlert is the Schema for the CostAnomalyAlerts API. Manages a Cost Anomaly Alert.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

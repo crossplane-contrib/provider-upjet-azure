@@ -64,8 +64,8 @@ spec:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    objectId: ${azurerm_disk_encryption_set.example.identity.0.principal_id}
-    tenantId: ${azurerm_disk_encryption_set.example.identity.0.tenant_id}
+    objectId: ${azurerm_disk_encryption_set.example.identity[0].principal_id}
+    tenantId: ${azurerm_disk_encryption_set.example.identity[0].tenant_id}
 
 ---
 
@@ -148,6 +148,6 @@ metadata:
   name: example-disk
 spec:
   forProvider:
-    principalId: ${azurerm_disk_encryption_set.example.identity.0.principal_id}
+    principalId: ${azurerm_disk_encryption_set.example.identity[0].principal_id}
     roleDefinitionName: Key Vault Crypto Service Encryption User
     scope: ${azurerm_key_vault.example.id}

@@ -44,41 +44,41 @@ type CrossSiteAccessPolicyParameters struct {
 
 type EncodingInitParameters struct {
 
-	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). If this value is not set for an encoding live event, the fragment duration defaults to 2 seconds. The value cannot be set for pass-through live events.
+	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). The value cannot be set for pass-through live events. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
-	// The optional encoding preset name, used when type is not None. If the type is set to Standard, then the default preset name is Default720p. Else if the type is set to Premium1080p, the default preset is Default1080p. Changing this forces a new resource to be created.
+	// The optional encoding preset name, used when type is not None. If the type is set to Standard, then the default preset name is Default720p. Else if the type is set to Premium1080p, Changing this forces a new resource to be created.
 	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
 
 	// Specifies how the input video will be resized to fit the desired output resolution(s). Allowed values are None, AutoFit or AutoSize. Default is None.
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
-	// Live event type. Allowed values are None, Premium1080p or Standard. When set to None, the service simply passes through the incoming video and audio layer(s) to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
+	// Live event type. Possible values are None, Premium1080p, PassthroughBasic, PassthroughStandard and Standard. When set to None, the service simply passes through the incoming video and audio layer(s) to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncodingObservation struct {
 
-	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). If this value is not set for an encoding live event, the fragment duration defaults to 2 seconds. The value cannot be set for pass-through live events.
+	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). The value cannot be set for pass-through live events. Defaults to PT2S.
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
-	// The optional encoding preset name, used when type is not None. If the type is set to Standard, then the default preset name is Default720p. Else if the type is set to Premium1080p, the default preset is Default1080p. Changing this forces a new resource to be created.
+	// The optional encoding preset name, used when type is not None. If the type is set to Standard, then the default preset name is Default720p. Else if the type is set to Premium1080p, Changing this forces a new resource to be created.
 	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
 
 	// Specifies how the input video will be resized to fit the desired output resolution(s). Allowed values are None, AutoFit or AutoSize. Default is None.
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
-	// Live event type. Allowed values are None, Premium1080p or Standard. When set to None, the service simply passes through the incoming video and audio layer(s) to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
+	// Live event type. Possible values are None, Premium1080p, PassthroughBasic, PassthroughStandard and Standard. When set to None, the service simply passes through the incoming video and audio layer(s) to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type EncodingParameters struct {
 
-	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). If this value is not set for an encoding live event, the fragment duration defaults to 2 seconds. The value cannot be set for pass-through live events.
+	// Use an ISO 8601 time value between 0.5 to 20 seconds to specify the output fragment length for the video and audio tracks of an encoding live event. For example, use PT2S to indicate 2 seconds. For the video track it also defines the key frame interval, or the length of a GoP (group of pictures). The value cannot be set for pass-through live events. Defaults to PT2S.
 	// +kubebuilder:validation:Optional
 	KeyFrameInterval *string `json:"keyFrameInterval,omitempty" tf:"key_frame_interval,omitempty"`
 
-	// The optional encoding preset name, used when type is not None. If the type is set to Standard, then the default preset name is Default720p. Else if the type is set to Premium1080p, the default preset is Default1080p. Changing this forces a new resource to be created.
+	// The optional encoding preset name, used when type is not None. If the type is set to Standard, then the default preset name is Default720p. Else if the type is set to Premium1080p, Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PresetName *string `json:"presetName,omitempty" tf:"preset_name,omitempty"`
 
@@ -86,7 +86,7 @@ type EncodingParameters struct {
 	// +kubebuilder:validation:Optional
 	StretchMode *string `json:"stretchMode,omitempty" tf:"stretch_mode,omitempty"`
 
-	// Live event type. Allowed values are None, Premium1080p or Standard. When set to None, the service simply passes through the incoming video and audio layer(s) to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
+	// Live event type. Possible values are None, Premium1080p, PassthroughBasic, PassthroughStandard and Standard. When set to None, the service simply passes through the incoming video and audio layer(s) to the output. When type is set to Standard or Premium1080p, a live encoder transcodes the incoming stream into multiple bitrates or layers. Defaults to None. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -195,7 +195,7 @@ type InputParameters struct {
 
 type LiveEventInitParameters struct {
 
-	// The flag indicates if the resource should be automatically started on creation. Default is false. Changing this forces a new resource to be created.
+	// The flag indicates if the resource should be automatically started on creation. Changing this forces a new resource to be created.
 	AutoStartEnabled *bool `json:"autoStartEnabled,omitempty" tf:"auto_start_enabled,omitempty"`
 
 	// A cross_site_access_policy block as defined below.
@@ -235,7 +235,7 @@ type LiveEventInitParameters struct {
 
 type LiveEventObservation struct {
 
-	// The flag indicates if the resource should be automatically started on creation. Default is false. Changing this forces a new resource to be created.
+	// The flag indicates if the resource should be automatically started on creation. Changing this forces a new resource to be created.
 	AutoStartEnabled *bool `json:"autoStartEnabled,omitempty" tf:"auto_start_enabled,omitempty"`
 
 	// A cross_site_access_policy block as defined below.
@@ -284,7 +284,7 @@ type LiveEventObservation struct {
 
 type LiveEventParameters struct {
 
-	// The flag indicates if the resource should be automatically started on creation. Default is false. Changing this forces a new resource to be created.
+	// The flag indicates if the resource should be automatically started on creation. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	AutoStartEnabled *bool `json:"autoStartEnabled,omitempty" tf:"auto_start_enabled,omitempty"`
 
@@ -490,8 +490,8 @@ type LiveEventStatus struct {
 // +kubebuilder:storageversion
 
 // LiveEvent is the Schema for the LiveEvents API. Manages a Live Event.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

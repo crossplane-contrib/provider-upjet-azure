@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -80,7 +80,8 @@ spec:
                     type: string
                   contentStoragePolicy:
                     description: The policy for storing stream analytics content.
-                      Possible values are JobStorageAccount, SystemAccount.
+                      Possible values are JobStorageAccount, SystemAccount. Defaults
+                      to SystemAccount.
                     type: string
                   dataLocale:
                     description: Specifies the Data Locale of the Job, which should
@@ -90,12 +91,12 @@ spec:
                     description: Specifies the maximum tolerable delay in seconds
                       where events arriving late could be included. Supported range
                       is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is
-                      0.
+                      5.
                     type: number
                   eventsOutOfOrderMaxDelayInSeconds:
                     description: Specifies the maximum tolerable delay in seconds
                       where out-of-order events can be adjusted to be back in order.
-                      Supported range is 0 to 599 (9m 59s). Default is 5.
+                      Supported range is 0 to 599 (9m 59s). Default is 0.
                     type: number
                   eventsOutOfOrderPolicy:
                     description: Specifies the policy which should be applied to events
@@ -106,10 +107,17 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: The identity id of the user assigned identity
+                            to use when type is UserAssigned
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Stream Analytics Job.
-                            The only possible value is SystemAssigned.
+                            Possible values are SystemAssigned and UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -239,6 +247,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  skuName:
+                    description: The SKU Name to use for the Stream Analytics Job.
+                      Possible values are Standard, StandardV2. Defaults to Standard.
+                    type: string
                   streamAnalyticsClusterId:
                     description: The ID of an existing Stream Analytics Cluster where
                       the Stream Analytics Job should run.
@@ -284,7 +296,8 @@ spec:
                     type: string
                   contentStoragePolicy:
                     description: The policy for storing stream analytics content.
-                      Possible values are JobStorageAccount, SystemAccount.
+                      Possible values are JobStorageAccount, SystemAccount. Defaults
+                      to SystemAccount.
                     type: string
                   dataLocale:
                     description: Specifies the Data Locale of the Job, which should
@@ -294,12 +307,12 @@ spec:
                     description: Specifies the maximum tolerable delay in seconds
                       where events arriving late could be included. Supported range
                       is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is
-                      0.
+                      5.
                     type: number
                   eventsOutOfOrderMaxDelayInSeconds:
                     description: Specifies the maximum tolerable delay in seconds
                       where out-of-order events can be adjusted to be back in order.
-                      Supported range is 0 to 599 (9m 59s). Default is 5.
+                      Supported range is 0 to 599 (9m 59s). Default is 0.
                     type: number
                   eventsOutOfOrderPolicy:
                     description: Specifies the policy which should be applied to events
@@ -310,10 +323,17 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: The identity id of the user assigned identity
+                            to use when type is UserAssigned
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Stream Analytics Job.
-                            The only possible value is SystemAssigned.
+                            Possible values are SystemAssigned and UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -342,6 +362,10 @@ spec:
                       storage due to being malformed (such as missing column values,
                       column values of wrong type or size). Possible values are Drop
                       and Stop. Default is Drop.
+                    type: string
+                  skuName:
+                    description: The SKU Name to use for the Stream Analytics Job.
+                      Possible values are Standard, StandardV2. Defaults to Standard.
                     type: string
                   streamAnalyticsClusterId:
                     description: The ID of an existing Stream Analytics Cluster where
@@ -556,7 +580,8 @@ spec:
                     type: string
                   contentStoragePolicy:
                     description: The policy for storing stream analytics content.
-                      Possible values are JobStorageAccount, SystemAccount.
+                      Possible values are JobStorageAccount, SystemAccount. Defaults
+                      to SystemAccount.
                     type: string
                   dataLocale:
                     description: Specifies the Data Locale of the Job, which should
@@ -566,12 +591,12 @@ spec:
                     description: Specifies the maximum tolerable delay in seconds
                       where events arriving late could be included. Supported range
                       is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is
-                      0.
+                      5.
                     type: number
                   eventsOutOfOrderMaxDelayInSeconds:
                     description: Specifies the maximum tolerable delay in seconds
                       where out-of-order events can be adjusted to be back in order.
-                      Supported range is 0 to 599 (9m 59s). Default is 5.
+                      Supported range is 0 to 599 (9m 59s). Default is 0.
                     type: number
                   eventsOutOfOrderPolicy:
                     description: Specifies the policy which should be applied to events
@@ -585,6 +610,13 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: The identity id of the user assigned identity
+                            to use when type is UserAssigned
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         principalId:
                           description: The Principal ID associated with this Managed
                             Service Identity.
@@ -596,7 +628,7 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Stream Analytics Job.
-                            The only possible value is SystemAssigned.
+                            Possible values are SystemAssigned and UserAssigned.
                           type: string
                       type: object
                     type: array
@@ -633,6 +665,10 @@ spec:
                     description: The name of the Resource Group where the Stream Analytics
                       Job should exist. Changing this forces a new resource to be
                       created.
+                    type: string
+                  skuName:
+                    description: The SKU Name to use for the Stream Analytics Job.
+                      Possible values are Standard, StandardV2. Defaults to Standard.
                     type: string
                   streamAnalyticsClusterId:
                     description: The ID of an existing Stream Analytics Cluster where
