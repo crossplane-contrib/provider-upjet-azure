@@ -19,6 +19,9 @@ spec:
     security: 
     - openAccessEnabled: true
     title: Test label
+    connectionSetting:
+    - clientSshAccess: Public
+      clientRdpAccess: Public
     virtualMachine:
     - adminUser:
       - username: user 
