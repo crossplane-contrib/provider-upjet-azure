@@ -2046,3 +2046,5 @@ func ResourceConfigurator() config.ResourceOption {
 		r.ExternalName = e
 	}
 }
+
+// test change
