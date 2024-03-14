@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: logic.azure.upbound.io/v1beta1
 kind: AppIntegrationAccountPartner
 metadata:
@@ -50,4 +54,3 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-

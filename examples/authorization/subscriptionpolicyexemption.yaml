@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: authorization.azure.upbound.io/v1beta1
 kind: SubscriptionPolicyExemption
 metadata:
@@ -48,7 +52,18 @@ spec:
   forProvider:
     displayName: somename
     mode: All
-    policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n
-      \       \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\":
-      \"Deny\"\n    }\n  }\n"
+    policyRule: "	{
+    \"if\": {
+      \"not\": {
+        \"field\": \"location\",
+
+      \       \"equals\": \"westeurope\"
+      }
+    },
+    \"then\": {
+      \"effect\":
+      \"Deny\"
+    }
+  }
+"
     policyType: Custom

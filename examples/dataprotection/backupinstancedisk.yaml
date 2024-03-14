@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: dataprotection.azure.upbound.io/v1beta1
 kind: BackupInstanceDisk
 metadata:
@@ -137,5 +141,3 @@ spec:
     principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
     roleDefinitionName: Disk Backup Reader
     scope: ${azurerm_managed_disk.example.id}
-
-
