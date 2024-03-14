@@ -1,8 +1,19 @@
+<!--
+SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Official Azure Provider
 
 <div align="center">
 
-![CI](https://github.com/upbound/provider-azure/workflows/CI/badge.svg) [![GitHub release](https://img.shields.io/github/release/upbound/provider-azure/all.svg?style=flat-square)](https://github.com/upbound/provider-azure/releases) [![Go Report Card](https://goreportcard.com/badge/github.com/upbound/provider-azure)](https://goreportcard.com/report/github.com/upbound/provider-azure) [![Slack](https://slack.crossplane.io/badge.svg)](https://crossplane.slack.com/archives/C01TRKD4623) [![Twitter Follow](https://img.shields.io/twitter/follow/upbound_io.svg?style=social&label=Follow)](https://twitter.com/intent/follow?screen_name=upbound_io&user_id=788180534543339520)
+![CI](https://github.com/crossplane-contrib/provider-upjet-azure/workflows/CI/badge.svg)
+[![GitHub release](https://img.shields.io/github/release/crossplane-contrib/provider-upjet-azure/all.svg)](https://github.com/crossplane-contrib/provider-upjet-azure/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/crossplane-contrib/provider-upjet-azure)](https://goreportcard.com/report/github.com/crossplane-contrib/provider-upjet-azure)
+[![Contributors](https://img.shields.io/github/contributors/crossplane-contrib/provider-upjet-azure)](https://github.com/crossplane-contrib/provider-upjet-azure/graphs/contributors)
+[![Slack](https://img.shields.io/badge/Slack-4A154B?logo=slack)](https://crossplane.slack.com/archives/C05E4LDNNG5)
+[![X (formerly Twitter) Follow](https://img.shields.io/twitter/follow/crossplane_io)](https://twitter.com/crossplane_io)
 
 </div>
 
@@ -34,15 +45,12 @@ Follow the guide [here](https://github.com/crossplane/upjet/blob/v0.10.0/docs/ad
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please
-open an [issue](https://github.com/upbound/provider-azure/issues).
+open an [issue](https://github.com/crossplane-contrib/provider-upjet-azure/issues).
 
 ## Contact
 
-Please open a Github issue for all requests. If you need to reach out to Upbound,
-you can do so via the following channels:
-* Slack: [#upbound](https://crossplane.slack.com/archives/C01TRKD4623) channel in [Crossplane Slack](https://slack.crossplane.io)
-* Twitter: [@upbound_io](https://twitter.com/upbound_io)
-* Email: [support@upbound.io](mailto:support@upbound.io)
+[#upbound-provider-azure](https://crossplane.slack.com/archives/C05E4LDNNG5) channel in
+[Crossplane Slack](https://slack.crossplane.io)
 
 ## Licensing
 

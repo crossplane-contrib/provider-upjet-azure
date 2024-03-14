@@ -1,7 +1,7 @@
 ---
 name: Feature Request
 about: Help us make Official Azure Provider more useful
-labels: enhancement,needs:triage
+labels: enhancement
 title: "A new auth option"
 ---
 <!--

@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2023 The Crossplane Authors <https://crossplane.io>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 ## Authentication mechanisms supported by provider-azure
 
 `provider-azure` needs to authenticate itself to the Azure API. Like other
