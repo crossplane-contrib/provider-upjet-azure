@@ -76,6 +76,10 @@ func main() {
 		ctrl.SetLogger(zl)
 	}
 
+	log.Info("warning: The monolithic package is deprecated in favor of the Azure family's resource packages " +
+		"and will no longer be maintained after 12 June 2024. Please consider switching to the family provider packages " +
+		"as we will no longer be publishing new versions of the monolithic package.")
+
 	// currently, we configure the jitter to be the 5% of the poll interval
 	pollJitter := time.Duration(float64(*pollInterval) * 0.05)
 	log.Debug("Starting", "sync-interval", syncInterval.String(),
