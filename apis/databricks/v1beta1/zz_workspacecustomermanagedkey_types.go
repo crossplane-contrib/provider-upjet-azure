@@ -20,7 +20,17 @@ import (
 type WorkspaceCustomerManagedKeyInitParameters struct {
 
 	// The ID of the Key Vault.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
 }
 
 type WorkspaceCustomerManagedKeyObservation struct {
@@ -38,12 +48,32 @@ type WorkspaceCustomerManagedKeyObservation struct {
 type WorkspaceCustomerManagedKeyParameters struct {
 
 	// The ID of the Key Vault.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
+	// Reference to a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDRef *v1.Reference `json:"keyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate keyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+
 	// The ID of the Databricks Workspace..
-	// +kubebuilder:validation:Required
-	WorkspaceID *string `json:"workspaceId" tf:"workspace_id,omitempty"`
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/databricks/v1beta1.Workspace
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
+
+	// Reference to a Workspace in databricks to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in databricks to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }
 
 // WorkspaceCustomerManagedKeySpec defines the desired state of WorkspaceCustomerManagedKey
@@ -82,9 +112,8 @@ type WorkspaceCustomerManagedKeyStatus struct {
 type WorkspaceCustomerManagedKey struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.keyVaultKeyId) || (has(self.initProvider) && has(self.initProvider.keyVaultKeyId))",message="spec.forProvider.keyVaultKeyId is a required parameter"
-	Spec   WorkspaceCustomerManagedKeySpec   `json:"spec"`
-	Status WorkspaceCustomerManagedKeyStatus `json:"status,omitempty"`
+	Spec              WorkspaceCustomerManagedKeySpec   `json:"spec"`
+	Status            WorkspaceCustomerManagedKeyStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true
