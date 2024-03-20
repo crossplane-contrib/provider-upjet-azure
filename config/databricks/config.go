@@ -22,5 +22,6 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_key_vault_key",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.MetaResource.Description = "Manages a Customer Managed Key for a Databricks Workspace root DBFS. This resource has been deprecated and will be removed in future versions of provider. Please use the WorkspaceRootDbfsCustomerManagedKey resource instead."
 	})
 }

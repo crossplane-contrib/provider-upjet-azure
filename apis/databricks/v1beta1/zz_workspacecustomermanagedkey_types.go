@@ -99,7 +99,7 @@ type WorkspaceCustomerManagedKeyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys API. Manages a Customer Managed Key for a Databricks Workspace root DBFS
+// WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys API. Manages a Customer Managed Key for a Databricks Workspace root DBFS. This resource has been deprecated and will be removed in future versions of provider. Please use the WorkspaceRootDbfsCustomerManagedKey resource instead.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

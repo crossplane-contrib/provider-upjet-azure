@@ -46,6 +46,44 @@ func (mg *MSSQLDatabase) ResolveReferences( // ResolveReferences of this MSSQLDa
 	}
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
+			Selector:     mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID")
+	}
+	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef,
+			Selector:     mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID")
+	}
+	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TransparentDataEncryptionKeyVaultKeyIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -216,7 +254,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -541,7 +579,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.DNSZonePartnerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DNSZonePartnerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -871,7 +909,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.PrimaryUserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1101,7 +1139,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
