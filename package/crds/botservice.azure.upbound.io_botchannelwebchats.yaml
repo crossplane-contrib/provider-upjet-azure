@@ -261,7 +261,8 @@ spec:
                       type: object
                     type: array
                   siteNames:
-                    description: A list of Web Chat Site names.
+                    description: 'Deprecated: siteNames will be removed in favour
+                      of the site code block.'
                     items:
                       type: string
                     type: array
@@ -307,7 +308,8 @@ spec:
                       type: object
                     type: array
                   siteNames:
-                    description: A list of Web Chat Site names.
+                    description: 'Deprecated: siteNames will be removed in favour
+                      of the site code block.'
                     items:
                       type: string
                     type: array
@@ -529,7 +531,8 @@ spec:
                       type: object
                     type: array
                   siteNames:
-                    description: A list of Web Chat Site names.
+                    description: 'Deprecated: siteNames will be removed in favour
+                      of the site code block.'
                     items:
                       type: string
                     type: array

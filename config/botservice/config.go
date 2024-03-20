@@ -13,4 +13,10 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_bot_channel_sms", func(r *config.Resource) {
 		r.Path = "botchannelsms"
 	})
+	p.AddResourceConfigurator("azurerm_bot_channel_web_chat", func(r *config.Resource) {
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"site_names", "site"},
+		}
+		r.MetaResource.ArgumentDocs["site_names"] = "Deprecated: siteNames will be removed in favour of the site code block."
+	})
 }

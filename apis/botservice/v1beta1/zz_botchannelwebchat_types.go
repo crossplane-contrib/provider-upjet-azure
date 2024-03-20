@@ -21,7 +21,7 @@ type BotChannelWebChatInitParameters struct {
 	// A site represents a client application that you want to connect to your bot. One or more site blocks as defined below.
 	Site []BotChannelWebChatSiteInitParameters `json:"site,omitempty" tf:"site,omitempty"`
 
-	// A list of Web Chat Site names.
+	// Deprecated: siteNames will be removed in favour of the site code block.
 	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
 }
@@ -43,7 +43,7 @@ type BotChannelWebChatObservation struct {
 	// A site represents a client application that you want to connect to your bot. One or more site blocks as defined below.
 	Site []BotChannelWebChatSiteObservation `json:"site,omitempty" tf:"site,omitempty"`
 
-	// A list of Web Chat Site names.
+	// Deprecated: siteNames will be removed in favour of the site code block.
 	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
 }
@@ -85,7 +85,7 @@ type BotChannelWebChatParameters struct {
 	// +kubebuilder:validation:Optional
 	Site []BotChannelWebChatSiteParameters `json:"site,omitempty" tf:"site,omitempty"`
 
-	// A list of Web Chat Site names.
+	// Deprecated: siteNames will be removed in favour of the site code block.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	SiteNames []*string `json:"siteNames,omitempty" tf:"site_names,omitempty"`
