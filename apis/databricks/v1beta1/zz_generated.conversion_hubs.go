@@ -18,3 +18,6 @@ func (tr *Workspace) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *WorkspaceCustomerManagedKey) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *WorkspaceRootDbfsCustomerManagedKey) Hub() {}
