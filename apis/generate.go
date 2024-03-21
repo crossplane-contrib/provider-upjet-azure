@@ -11,11 +11,9 @@
 //go:generate rm -rf ../package/crds
 
 // Remove generated files
-//go:generate bash -c "find . -iname 'zz_*' ! -iname 'zz_generated.managed*.go' -delete"
 //go:generate bash -c "find . -type d -empty -delete"
 //go:generate bash -c "find ../internal/controller -iname 'zz_*' -delete"
 //go:generate bash -c "find ../internal/controller -type d -empty -delete"
-//go:generate rm -rf ../examples-generated
 //go:generate bash -c "find ../cmd/provider -name 'zz_*' -type f -delete"
 //go:generate bash -c "find ../cmd/provider -type d -maxdepth 1 -mindepth 1 -empty -delete"
 
@@ -30,6 +28,10 @@
 
 // Generate crossplane-runtime methodsets (resource.Claim, etc)
 //go:generate go run -tags generate github.com/crossplane/crossplane-tools/cmd/angryjet generate-methodsets --header-file=../hack/boilerplate.go.txt ./...
+
+// Run upjet's transformer for the generated resolvers to get rid of the cross
+// API-group imports and to prevent import cycles
+//go:generate go run github.com/crossplane/upjet/cmd/resolver -g azure.upbound.io -a github.com/upbound/provider-azure/internal/apis -s
 
 package apis
 
