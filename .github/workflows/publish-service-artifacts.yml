@@ -18,12 +18,13 @@ on:
 
 jobs:
   publish-service-artifacts:
-    uses: upbound/uptest/.github/workflows/provider-publish-service-artifacts.yml@main
+    uses: upbound/uptest/.github/workflows/provider-publish-service-artifacts.yml@standard-runners
     with:
       subpackages: ${{ github.event.inputs.subpackages }}
       size: ${{ github.event.inputs.size }}
       concurrency: ${{ github.event.inputs.concurrency }}
       go-version: 1.21
+      cleanup-disk: true
     secrets:
       UPBOUND_MARKETPLACE_PUSH_ROBOT_USR: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_USR_RC }}
       UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW: ${{ secrets.UPBOUND_MARKETPLACE_PUSH_ROBOT_PSW_RC }}
