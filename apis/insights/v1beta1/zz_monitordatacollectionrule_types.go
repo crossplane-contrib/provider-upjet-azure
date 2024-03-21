@@ -72,7 +72,7 @@ type DataFlowInitParameters struct {
 	// The output stream of the transform. Only required if the data flow changes data to a different stream.
 	OutputStream *string `json:"outputStream,omitempty" tf:"output_stream,omitempty"`
 
-	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog, Microsoft-WindowsEvent, and Microsoft-PrometheusMetrics.
 	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
 
 	// The KQL query to transform stream data.
@@ -90,7 +90,7 @@ type DataFlowObservation struct {
 	// The output stream of the transform. Only required if the data flow changes data to a different stream.
 	OutputStream *string `json:"outputStream,omitempty" tf:"output_stream,omitempty"`
 
-	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog, Microsoft-WindowsEvent, and Microsoft-PrometheusMetrics.
 	Streams []*string `json:"streams,omitempty" tf:"streams,omitempty"`
 
 	// The KQL query to transform stream data.
@@ -111,7 +111,7 @@ type DataFlowParameters struct {
 	// +kubebuilder:validation:Optional
 	OutputStream *string `json:"outputStream,omitempty" tf:"output_stream,omitempty"`
 
-	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+	// Specifies a list of streams. Possible values include but not limited to Microsoft-Event, Microsoft-InsightsMetrics, Microsoft-Perf, Microsoft-Syslog, Microsoft-WindowsEvent, and Microsoft-PrometheusMetrics.
 	// +kubebuilder:validation:Optional
 	Streams []*string `json:"streams" tf:"streams,omitempty"`
 
@@ -786,7 +786,7 @@ type MonitorDataCollectionRuleInitParameters struct {
 	// An identity block as defined below.
 	Identity []MonitorDataCollectionRuleIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The kind of the Data Collection Rule. Possible values are Linux, Windows,and AgentDirectToStore. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
+	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore and WorkspaceTransforms. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The Azure Region where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
@@ -826,7 +826,7 @@ type MonitorDataCollectionRuleObservation struct {
 	// The immutable ID of the Data Collection Rule.
 	ImmutableID *string `json:"immutableId,omitempty" tf:"immutable_id,omitempty"`
 
-	// The kind of the Data Collection Rule. Possible values are Linux, Windows,and AgentDirectToStore. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
+	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore and WorkspaceTransforms. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The Azure Region where the Data Collection Rule should exist. Changing this forces a new Data Collection Rule to be created.
@@ -879,7 +879,7 @@ type MonitorDataCollectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity []MonitorDataCollectionRuleIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// The kind of the Data Collection Rule. Possible values are Linux, Windows,and AgentDirectToStore. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
+	// The kind of the Data Collection Rule. Possible values are Linux, Windows, AgentDirectToStore and WorkspaceTransforms. A rule of kind Linux does not allow for windows_event_log data sources. And a rule of kind Windows does not allow for syslog data sources. If kind is not specified, all kinds of data sources are allowed.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
@@ -1232,7 +1232,7 @@ type StreamDeclarationParameters struct {
 
 type SyslogInitParameters struct {
 
-	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are auth, authpriv, cron, daemon, kern, lpr, mail, mark, news, syslog, user, uucp, local0, local1, local2, local3, local4, local5, local6, local7,and *.
+	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are alert, *, audit, auth, authpriv, clock, cron, daemon, ftp, kern, local5, local4, local1, local7, local6, local3, local2, local0, lpr, mail, mark, news, nopri, ntp, syslog, user and uucp.
 	FacilityNames []*string `json:"facilityNames,omitempty" tf:"facility_names,omitempty"`
 
 	// Specifies a list of log levels. Use a wildcard * to collect logs for all log levels. Possible values are Debug, Info, Notice, Warning, Error, Critical, Alert, Emergency,and *.
@@ -1247,7 +1247,7 @@ type SyslogInitParameters struct {
 
 type SyslogObservation struct {
 
-	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are auth, authpriv, cron, daemon, kern, lpr, mail, mark, news, syslog, user, uucp, local0, local1, local2, local3, local4, local5, local6, local7,and *.
+	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are alert, *, audit, auth, authpriv, clock, cron, daemon, ftp, kern, local5, local4, local1, local7, local6, local3, local2, local0, lpr, mail, mark, news, nopri, ntp, syslog, user and uucp.
 	FacilityNames []*string `json:"facilityNames,omitempty" tf:"facility_names,omitempty"`
 
 	// Specifies a list of log levels. Use a wildcard * to collect logs for all log levels. Possible values are Debug, Info, Notice, Warning, Error, Critical, Alert, Emergency,and *.
@@ -1262,7 +1262,7 @@ type SyslogObservation struct {
 
 type SyslogParameters struct {
 
-	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are auth, authpriv, cron, daemon, kern, lpr, mail, mark, news, syslog, user, uucp, local0, local1, local2, local3, local4, local5, local6, local7,and *.
+	// Specifies a list of facility names. Use a wildcard * to collect logs for all facility names. Possible values are alert, *, audit, auth, authpriv, clock, cron, daemon, ftp, kern, local5, local4, local1, local7, local6, local3, local2, local0, lpr, mail, mark, news, nopri, ntp, syslog, user and uucp.
 	// +kubebuilder:validation:Optional
 	FacilityNames []*string `json:"facilityNames" tf:"facility_names,omitempty"`
 
@@ -1394,8 +1394,8 @@ type MonitorDataCollectionRuleStatus struct {
 // +kubebuilder:storageversion
 
 // MonitorDataCollectionRule is the Schema for the MonitorDataCollectionRules API. Manages a Data Collection Rule.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

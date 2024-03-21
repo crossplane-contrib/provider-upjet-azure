@@ -33,6 +33,9 @@ type ConfigurationInitParameters struct {
 	// Whether Purge Protection is enabled. This field only works for standard sku. Defaults to false.
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
+	// One or more replica blocks as defined below.
+	Replica []ReplicaInitParameters `json:"replica,omitempty" tf:"replica,omitempty"`
+
 	// The SKU name of the App Configuration. Possible values are free and standard. Defaults to free.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -75,6 +78,9 @@ type ConfigurationObservation struct {
 
 	// Whether Purge Protection is enabled. This field only works for standard sku. Defaults to false.
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// One or more replica blocks as defined below.
+	Replica []ReplicaObservation `json:"replica,omitempty" tf:"replica,omitempty"`
 
 	// The name of the resource group in which to create the App Configuration. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -121,6 +127,10 @@ type ConfigurationParameters struct {
 	// Whether Purge Protection is enabled. This field only works for standard sku. Defaults to false.
 	// +kubebuilder:validation:Optional
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
+
+	// One or more replica blocks as defined below.
+	// +kubebuilder:validation:Optional
+	Replica []ReplicaParameters `json:"replica,omitempty" tf:"replica,omitempty"`
 
 	// The name of the resource group in which to create the App Configuration. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -292,6 +302,41 @@ type PrimaryWriteKeyObservation struct {
 type PrimaryWriteKeyParameters struct {
 }
 
+type ReplicaInitParameters struct {
+
+	// Specifies the supported Azure location where the replica exists.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the replica.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type ReplicaObservation struct {
+
+	// The URL of the App Configuration Replica.
+	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// The ID of the App Configuration Replica.
+	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Specifies the supported Azure location where the replica exists.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Specifies the name of the replica.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type ReplicaParameters struct {
+
+	// Specifies the supported Azure location where the replica exists.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location" tf:"location,omitempty"`
+
+	// Specifies the name of the replica.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type SecondaryReadKeyInitParameters struct {
 }
 
@@ -356,8 +401,8 @@ type ConfigurationStatus struct {
 // +kubebuilder:storageversion
 
 // Configuration is the Schema for the Configurations API. Manages an Azure App Configuration.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

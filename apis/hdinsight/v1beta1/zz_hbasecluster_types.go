@@ -14,22 +14,30 @@ import (
 )
 
 type AutoscaleRecurrenceInitParameters struct {
+
+	// A list of schedule blocks as defined below.
 	Schedule []RecurrenceScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// The time zone for the autoscale schedule times.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type AutoscaleRecurrenceObservation struct {
+
+	// A list of schedule blocks as defined below.
 	Schedule []RecurrenceScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
+	// The time zone for the autoscale schedule times.
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
 
 type AutoscaleRecurrenceParameters struct {
 
+	// A list of schedule blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Schedule []RecurrenceScheduleParameters `json:"schedule" tf:"schedule,omitempty"`
 
+	// The time zone for the autoscale schedule times.
 	// +kubebuilder:validation:Optional
 	Timezone *string `json:"timezone" tf:"timezone,omitempty"`
 }
@@ -299,7 +307,7 @@ type HBaseClusterNetworkInitParameters struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -308,7 +316,7 @@ type HBaseClusterNetworkObservation struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -318,7 +326,7 @@ type HBaseClusterNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
@@ -874,25 +882,32 @@ type MetastoresOozieParameters struct {
 }
 
 type RecurrenceScheduleInitParameters struct {
+
+	// The days of the week to perform autoscale. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	Days []*string `json:"days,omitempty" tf:"days,omitempty"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
 
+	// The time of day to perform the autoscale in 24hour format.
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type RecurrenceScheduleObservation struct {
+
+	// The days of the week to perform autoscale. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	Days []*string `json:"days,omitempty" tf:"days,omitempty"`
 
 	// The number of instances which should be run for the Worker Nodes.
 	TargetInstanceCount *float64 `json:"targetInstanceCount,omitempty" tf:"target_instance_count,omitempty"`
 
+	// The time of day to perform the autoscale in 24hour format.
 	Time *string `json:"time,omitempty" tf:"time,omitempty"`
 }
 
 type RecurrenceScheduleParameters struct {
 
+	// The days of the week to perform autoscale. Possible values are Monday, Tuesday, Wednesday, Thursday, Friday, Saturday and Sunday.
 	// +kubebuilder:validation:Optional
 	Days []*string `json:"days" tf:"days,omitempty"`
 
@@ -900,6 +915,7 @@ type RecurrenceScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetInstanceCount *float64 `json:"targetInstanceCount" tf:"target_instance_count,omitempty"`
 
+	// The time of day to perform the autoscale in 24hour format.
 	// +kubebuilder:validation:Optional
 	Time *string `json:"time" tf:"time,omitempty"`
 }
@@ -910,7 +926,7 @@ type RolesHeadNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []HeadNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -942,7 +958,7 @@ type RolesHeadNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []HeadNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -969,7 +985,7 @@ type RolesHeadNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []HeadNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1001,13 +1017,15 @@ type RolesHeadNodeParameters struct {
 }
 
 type RolesWorkerNodeInitParameters struct {
+
+	// A autoscale block as defined below.
 	Autoscale []WorkerNodeAutoscaleInitParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []RolesWorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1037,13 +1055,15 @@ type RolesWorkerNodeInitParameters struct {
 }
 
 type RolesWorkerNodeObservation struct {
+
+	// A autoscale block as defined below.
 	Autoscale []WorkerNodeAutoscaleObservation `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []RolesWorkerNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1064,6 +1084,7 @@ type RolesWorkerNodeObservation struct {
 
 type RolesWorkerNodeParameters struct {
 
+	// A autoscale block as defined below.
 	// +kubebuilder:validation:Optional
 	Autoscale []WorkerNodeAutoscaleParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
@@ -1076,7 +1097,7 @@ type RolesWorkerNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []RolesWorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1156,7 +1177,7 @@ type RolesZookeeperNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []RolesZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1188,7 +1209,7 @@ type RolesZookeeperNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []RolesZookeeperNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1215,7 +1236,7 @@ type RolesZookeeperNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []RolesZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1286,15 +1307,20 @@ type RolesZookeeperNodeScriptActionsParameters struct {
 }
 
 type WorkerNodeAutoscaleInitParameters struct {
+
+	// A recurrence block as defined below.
 	Recurrence []AutoscaleRecurrenceInitParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
 type WorkerNodeAutoscaleObservation struct {
+
+	// A recurrence block as defined below.
 	Recurrence []AutoscaleRecurrenceObservation `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
 
 type WorkerNodeAutoscaleParameters struct {
 
+	// A recurrence block as defined below.
 	// +kubebuilder:validation:Optional
 	Recurrence []AutoscaleRecurrenceParameters `json:"recurrence,omitempty" tf:"recurrence,omitempty"`
 }
@@ -1327,8 +1353,8 @@ type HBaseClusterStatus struct {
 // +kubebuilder:storageversion
 
 // HBaseCluster is the Schema for the HBaseClusters API. Manages a HDInsight HBase Cluster.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

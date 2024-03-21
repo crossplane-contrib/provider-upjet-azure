@@ -125,5 +125,5 @@ func (tr *WebApplicationFirewallPolicy) LateInitialize(attrs []byte) (bool, erro
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *WebApplicationFirewallPolicy) GetTerraformSchemaVersion() int {
-	return 0
+	return 1
 }

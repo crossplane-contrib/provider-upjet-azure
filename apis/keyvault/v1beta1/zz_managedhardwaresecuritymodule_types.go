@@ -31,13 +31,19 @@ type ManagedHardwareSecurityModuleInitParameters struct {
 	// Is Purge Protection enabled for this Key Vault Managed Hardware Security Module? Changing this forces a new resource to be created.
 	PurgeProtectionEnabled *bool `json:"purgeProtectionEnabled,omitempty" tf:"purge_protection_enabled,omitempty"`
 
+	// A list of KeyVault certificates resource IDs (minimum of three and up to a maximum of 10) to activate this Managed HSM. More information see activate-your-managed-hsm
+	SecurityDomainKeyVaultCertificateIds []*string `json:"securityDomainKeyVaultCertificateIds,omitempty" tf:"security_domain_key_vault_certificate_ids,omitempty"`
+
+	// Specifies the minimum number of shares required to decrypt the security domain for recovery. This is required when security_domain_key_vault_certificate_ids is specified. Valid values are between 2 and 10.
+	SecurityDomainQuorum *float64 `json:"securityDomainQuorum,omitempty" tf:"security_domain_quorum,omitempty"`
+
 	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 days. Defaults to 90. Changing this forces a new resource to be created.
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
-	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -101,13 +107,19 @@ type ManagedHardwareSecurityModuleObservation struct {
 	// The name of the resource group in which to create the Key Vault Managed Hardware Security Module. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// A list of KeyVault certificates resource IDs (minimum of three and up to a maximum of 10) to activate this Managed HSM. More information see activate-your-managed-hsm
+	SecurityDomainKeyVaultCertificateIds []*string `json:"securityDomainKeyVaultCertificateIds,omitempty" tf:"security_domain_key_vault_certificate_ids,omitempty"`
+
+	// Specifies the minimum number of shares required to decrypt the security domain for recovery. This is required when security_domain_key_vault_certificate_ids is specified. Valid values are between 2 and 10.
+	SecurityDomainQuorum *float64 `json:"securityDomainQuorum,omitempty" tf:"security_domain_quorum,omitempty"`
+
 	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The number of days that items should be retained for once soft-deleted. This value can be between 7 and 90 days. Defaults to 90. Changing this forces a new resource to be created.
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
-	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
@@ -151,6 +163,14 @@ type ManagedHardwareSecurityModuleParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
+	// A list of KeyVault certificates resource IDs (minimum of three and up to a maximum of 10) to activate this Managed HSM. More information see activate-your-managed-hsm
+	// +kubebuilder:validation:Optional
+	SecurityDomainKeyVaultCertificateIds []*string `json:"securityDomainKeyVaultCertificateIds,omitempty" tf:"security_domain_key_vault_certificate_ids,omitempty"`
+
+	// Specifies the minimum number of shares required to decrypt the security domain for recovery. This is required when security_domain_key_vault_certificate_ids is specified. Valid values are between 2 and 10.
+	// +kubebuilder:validation:Optional
+	SecurityDomainQuorum *float64 `json:"securityDomainQuorum,omitempty" tf:"security_domain_quorum,omitempty"`
+
 	// The Name of the SKU used for this Key Vault Managed Hardware Security Module. Possible value is Standard_B1. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
@@ -159,7 +179,7 @@ type ManagedHardwareSecurityModuleParameters struct {
 	// +kubebuilder:validation:Optional
 	SoftDeleteRetentionDays *float64 `json:"softDeleteRetentionDays,omitempty" tf:"soft_delete_retention_days,omitempty"`
 
-	// A mapping of tags to assign to the resource. Changing this forces a new resource to be created.
+	// A mapping of tags to assign to the resource.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -197,8 +217,8 @@ type ManagedHardwareSecurityModuleStatus struct {
 // +kubebuilder:storageversion
 
 // ManagedHardwareSecurityModule is the Schema for the ManagedHardwareSecurityModules API. Manages a Key Vault Managed Hardware Security Module.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

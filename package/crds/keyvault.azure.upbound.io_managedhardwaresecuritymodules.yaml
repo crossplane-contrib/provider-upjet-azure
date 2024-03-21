@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -191,6 +191,19 @@ spec:
                             type: string
                         type: object
                     type: object
+                  securityDomainKeyVaultCertificateIds:
+                    description: A list of KeyVault certificates resource IDs (minimum
+                      of three and up to a maximum of 10) to activate this Managed
+                      HSM. More information see activate-your-managed-hsm
+                    items:
+                      type: string
+                    type: array
+                  securityDomainQuorum:
+                    description: Specifies the minimum number of shares required to
+                      decrypt the security domain for recovery. This is required when
+                      security_domain_key_vault_certificate_ids is specified. Valid
+                      values are between 2 and 10.
+                    type: number
                   skuName:
                     description: The Name of the SKU used for this Key Vault Managed
                       Hardware Security Module. Possible value is Standard_B1. Changing
@@ -204,8 +217,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource. Changing
-                      this forces a new resource to be created.
+                    description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
                   tenantId:
@@ -264,6 +276,19 @@ spec:
                       Hardware Security Module? Changing this forces a new resource
                       to be created.
                     type: boolean
+                  securityDomainKeyVaultCertificateIds:
+                    description: A list of KeyVault certificates resource IDs (minimum
+                      of three and up to a maximum of 10) to activate this Managed
+                      HSM. More information see activate-your-managed-hsm
+                    items:
+                      type: string
+                    type: array
+                  securityDomainQuorum:
+                    description: Specifies the minimum number of shares required to
+                      decrypt the security domain for recovery. This is required when
+                      security_domain_key_vault_certificate_ids is specified. Valid
+                      values are between 2 and 10.
+                    type: number
                   skuName:
                     description: The Name of the SKU used for this Key Vault Managed
                       Hardware Security Module. Possible value is Standard_B1. Changing
@@ -277,8 +302,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource. Changing
-                      this forces a new resource to be created.
+                    description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
                   tenantId:
@@ -527,6 +551,19 @@ spec:
                       the Key Vault Managed Hardware Security Module. Changing this
                       forces a new resource to be created.
                     type: string
+                  securityDomainKeyVaultCertificateIds:
+                    description: A list of KeyVault certificates resource IDs (minimum
+                      of three and up to a maximum of 10) to activate this Managed
+                      HSM. More information see activate-your-managed-hsm
+                    items:
+                      type: string
+                    type: array
+                  securityDomainQuorum:
+                    description: Specifies the minimum number of shares required to
+                      decrypt the security domain for recovery. This is required when
+                      security_domain_key_vault_certificate_ids is specified. Valid
+                      values are between 2 and 10.
+                    type: number
                   skuName:
                     description: The Name of the SKU used for this Key Vault Managed
                       Hardware Security Module. Possible value is Standard_B1. Changing
@@ -540,8 +577,7 @@ spec:
                   tags:
                     additionalProperties:
                       type: string
-                    description: A mapping of tags to assign to the resource. Changing
-                      this forces a new resource to be created.
+                    description: A mapping of tags to assign to the resource.
                     type: object
                     x-kubernetes-map-type: granular
                   tenantId:

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -175,7 +175,8 @@ spec:
                         streams:
                           description: Specifies a list of streams. Possible values
                             include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
-                            Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+                            Microsoft-Perf, Microsoft-Syslog, Microsoft-WindowsEvent,
+                            and Microsoft-PrometheusMetrics.
                           items:
                             type: string
                           type: array
@@ -437,10 +438,11 @@ spec:
                               facilityNames:
                                 description: Specifies a list of facility names. Use
                                   a wildcard * to collect logs for all facility names.
-                                  Possible values are auth, authpriv, cron, daemon,
-                                  kern, lpr, mail, mark, news, syslog, user, uucp,
-                                  local0, local1, local2, local3, local4, local5,
-                                  local6, local7,and *.
+                                  Possible values are alert, *, audit, auth, authpriv,
+                                  clock, cron, daemon, ftp, kern, local5, local4,
+                                  local1, local7, local6, local3, local2, local0,
+                                  lpr, mail, mark, news, nopri, ntp, syslog, user
+                                  and uucp.
                                 items:
                                   type: string
                                 type: array
@@ -987,10 +989,11 @@ spec:
                     type: array
                   kind:
                     description: The kind of the Data Collection Rule. Possible values
-                      are Linux, Windows,and AgentDirectToStore. A rule of kind Linux
-                      does not allow for windows_event_log data sources. And a rule
-                      of kind Windows does not allow for syslog data sources. If kind
-                      is not specified, all kinds of data sources are allowed.
+                      are Linux, Windows, AgentDirectToStore and WorkspaceTransforms.
+                      A rule of kind Linux does not allow for windows_event_log data
+                      sources. And a rule of kind Windows does not allow for syslog
+                      data sources. If kind is not specified, all kinds of data sources
+                      are allowed.
                     type: string
                   location:
                     description: The Azure Region where the Data Collection Rule should
@@ -1228,7 +1231,8 @@ spec:
                         streams:
                           description: Specifies a list of streams. Possible values
                             include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
-                            Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+                            Microsoft-Perf, Microsoft-Syslog, Microsoft-WindowsEvent,
+                            and Microsoft-PrometheusMetrics.
                           items:
                             type: string
                           type: array
@@ -1490,10 +1494,11 @@ spec:
                               facilityNames:
                                 description: Specifies a list of facility names. Use
                                   a wildcard * to collect logs for all facility names.
-                                  Possible values are auth, authpriv, cron, daemon,
-                                  kern, lpr, mail, mark, news, syslog, user, uucp,
-                                  local0, local1, local2, local3, local4, local5,
-                                  local6, local7,and *.
+                                  Possible values are alert, *, audit, auth, authpriv,
+                                  clock, cron, daemon, ftp, kern, local5, local4,
+                                  local1, local7, local6, local3, local2, local0,
+                                  lpr, mail, mark, news, nopri, ntp, syslog, user
+                                  and uucp.
                                 items:
                                   type: string
                                 type: array
@@ -2040,10 +2045,11 @@ spec:
                     type: array
                   kind:
                     description: The kind of the Data Collection Rule. Possible values
-                      are Linux, Windows,and AgentDirectToStore. A rule of kind Linux
-                      does not allow for windows_event_log data sources. And a rule
-                      of kind Windows does not allow for syslog data sources. If kind
-                      is not specified, all kinds of data sources are allowed.
+                      are Linux, Windows, AgentDirectToStore and WorkspaceTransforms.
+                      A rule of kind Linux does not allow for windows_event_log data
+                      sources. And a rule of kind Windows does not allow for syslog
+                      data sources. If kind is not specified, all kinds of data sources
+                      are allowed.
                     type: string
                   location:
                     description: The Azure Region where the Data Collection Rule should
@@ -2297,7 +2303,8 @@ spec:
                         streams:
                           description: Specifies a list of streams. Possible values
                             include but not limited to Microsoft-Event, Microsoft-InsightsMetrics,
-                            Microsoft-Perf, Microsoft-Syslog,and Microsoft-WindowsEvent.
+                            Microsoft-Perf, Microsoft-Syslog, Microsoft-WindowsEvent,
+                            and Microsoft-PrometheusMetrics.
                           items:
                             type: string
                           type: array
@@ -2559,10 +2566,11 @@ spec:
                               facilityNames:
                                 description: Specifies a list of facility names. Use
                                   a wildcard * to collect logs for all facility names.
-                                  Possible values are auth, authpriv, cron, daemon,
-                                  kern, lpr, mail, mark, news, syslog, user, uucp,
-                                  local0, local1, local2, local3, local4, local5,
-                                  local6, local7,and *.
+                                  Possible values are alert, *, audit, auth, authpriv,
+                                  clock, cron, daemon, ftp, kern, local5, local4,
+                                  local1, local7, local6, local3, local2, local0,
+                                  lpr, mail, mark, news, nopri, ntp, syslog, user
+                                  and uucp.
                                 items:
                                   type: string
                                 type: array
@@ -2819,10 +2827,11 @@ spec:
                     type: string
                   kind:
                     description: The kind of the Data Collection Rule. Possible values
-                      are Linux, Windows,and AgentDirectToStore. A rule of kind Linux
-                      does not allow for windows_event_log data sources. And a rule
-                      of kind Windows does not allow for syslog data sources. If kind
-                      is not specified, all kinds of data sources are allowed.
+                      are Linux, Windows, AgentDirectToStore and WorkspaceTransforms.
+                      A rule of kind Linux does not allow for windows_event_log data
+                      sources. And a rule of kind Windows does not allow for syslog
+                      data sources. If kind is not specified, all kinds of data sources
+                      are allowed.
                     type: string
                   location:
                     description: The Azure Region where the Data Collection Rule should

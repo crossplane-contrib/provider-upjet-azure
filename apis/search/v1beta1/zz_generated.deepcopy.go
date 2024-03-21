@@ -226,6 +226,11 @@ func (in *ServiceInitParameters) DeepCopyInto(out *ServiceInitParameters) {
 		*out = new(float64)
 		**out = **in
 	}
+	if in.SemanticSearchSku != nil {
+		in, out := &in.SemanticSearchSku, &out.SemanticSearchSku
+		*out = new(string)
+		**out = **in
+	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
 		*out = new(string)
@@ -369,6 +374,11 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SemanticSearchSku != nil {
+		in, out := &in.SemanticSearchSku, &out.SemanticSearchSku
+		*out = new(string)
+		**out = **in
+	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
 		*out = new(string)
@@ -477,6 +487,11 @@ func (in *ServiceParameters) DeepCopyInto(out *ServiceParameters) {
 		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.SemanticSearchSku != nil {
+		in, out := &in.SemanticSearchSku, &out.SemanticSearchSku
+		*out = new(string)
+		**out = **in
 	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku

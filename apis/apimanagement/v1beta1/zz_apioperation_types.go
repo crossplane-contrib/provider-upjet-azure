@@ -30,7 +30,7 @@ type APIOperationInitParameters struct {
 	// One or more response blocks as defined below.
 	Response []ResponseInitParameters `json:"response,omitempty" tf:"response,omitempty"`
 
-	// One or more template_parameter blocks as defined below.
+	// One or more template_parameter blocks as defined below. Required if url_template contains one or more parameters.
 	TemplateParameter []TemplateParameterInitParameters `json:"templateParameter,omitempty" tf:"template_parameter,omitempty"`
 
 	// The relative URL Template identifying the target resource for this operation, which may include parameters.
@@ -66,7 +66,7 @@ type APIOperationObservation struct {
 	// One or more response blocks as defined below.
 	Response []ResponseObservation `json:"response,omitempty" tf:"response,omitempty"`
 
-	// One or more template_parameter blocks as defined below.
+	// One or more template_parameter blocks as defined below. Required if url_template contains one or more parameters.
 	TemplateParameter []TemplateParameterObservation `json:"templateParameter,omitempty" tf:"template_parameter,omitempty"`
 
 	// The relative URL Template identifying the target resource for this operation, which may include parameters.
@@ -134,7 +134,7 @@ type APIOperationParameters struct {
 	// +kubebuilder:validation:Optional
 	Response []ResponseParameters `json:"response,omitempty" tf:"response,omitempty"`
 
-	// One or more template_parameter blocks as defined below.
+	// One or more template_parameter blocks as defined below. Required if url_template contains one or more parameters.
 	// +kubebuilder:validation:Optional
 	TemplateParameter []TemplateParameterParameters `json:"templateParameter,omitempty" tf:"template_parameter,omitempty"`
 
@@ -1471,8 +1471,8 @@ type APIOperationStatus struct {
 // +kubebuilder:storageversion
 
 // APIOperation is the Schema for the APIOperations API. Manages an API Operation within an API Management Service.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

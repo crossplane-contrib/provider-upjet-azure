@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -431,7 +431,8 @@ spec:
               atProvider:
                 properties:
                   crossTenantScopes:
-                    description: A cross_tenant_scopes block as defined below.
+                    description: One or more cross_tenant_scopes blocks as defined
+                      below.
                     items:
                       properties:
                         managementGroups:

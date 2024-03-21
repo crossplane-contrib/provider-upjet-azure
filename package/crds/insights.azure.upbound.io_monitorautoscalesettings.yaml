@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -128,6 +128,21 @@ spec:
                                 type: string
                             type: object
                           type: array
+                      type: object
+                    type: array
+                  predictive:
+                    description: A predictive block as defined below.
+                    items:
+                      properties:
+                        lookAheadTime:
+                          description: Specifies the amount of time by which instances
+                            are launched in advance. It must be between PT1M and PT1H
+                            in ISO 8601 format.
+                          type: string
+                        scaleMode:
+                          description: Specifies the predictive scale mode. Possible
+                            values are Enabled or ForecastOnly.
+                          type: string
                       type: object
                     type: array
                   profile:
@@ -643,6 +658,21 @@ spec:
                                 type: string
                             type: object
                           type: array
+                      type: object
+                    type: array
+                  predictive:
+                    description: A predictive block as defined below.
+                    items:
+                      properties:
+                        lookAheadTime:
+                          description: Specifies the amount of time by which instances
+                            are launched in advance. It must be between PT1M and PT1H
+                            in ISO 8601 format.
+                          type: string
+                        scaleMode:
+                          description: Specifies the predictive scale mode. Possible
+                            values are Enabled or ForecastOnly.
+                          type: string
                       type: object
                     type: array
                   profile:
@@ -1334,6 +1364,21 @@ spec:
                                 type: string
                             type: object
                           type: array
+                      type: object
+                    type: array
+                  predictive:
+                    description: A predictive block as defined below.
+                    items:
+                      properties:
+                        lookAheadTime:
+                          description: Specifies the amount of time by which instances
+                            are launched in advance. It must be between PT1M and PT1H
+                            in ISO 8601 format.
+                          type: string
+                        scaleMode:
+                          description: Specifies the predictive scale mode. Possible
+                            values are Enabled or ForecastOnly.
+                          type: string
                       type: object
                     type: array
                   profile:

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -74,6 +74,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  configFile:
+                    description: Specifies the name of the config file on the VM.
+                      Changing this forces a new resource to be created.
+                    type: string
                   enableHealthCheck:
                     description: Should the Gallery Application reports health. Defaults
                       to false.
@@ -194,6 +198,10 @@ spec:
                     description: The version name of the Gallery Application Version,
                       such as 1.0.0. Changing this forces a new resource to be created.
                     type: string
+                  packageFile:
+                    description: Specifies the name of the package file on the VM.
+                      Changing this forces a new resource to be created.
+                    type: string
                   source:
                     description: A source block as defined below.
                     items:
@@ -295,6 +303,12 @@ spec:
                     description: One or more target_region blocks as defined below.
                     items:
                       properties:
+                        excludeFromLatest:
+                          description: Specifies whether this Gallery Application
+                            Version should be excluded from the latest filter. If
+                            set to true, this Gallery Application Version won't be
+                            returned for the latest version. Defaults to false.
+                          type: boolean
                         name:
                           description: The Azure Region in which the Gallery Application
                             Version exists.
@@ -401,6 +415,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  configFile:
+                    description: Specifies the name of the config file on the VM.
+                      Changing this forces a new resource to be created.
+                    type: string
                   enableHealthCheck:
                     description: Should the Gallery Application reports health. Defaults
                       to false.
@@ -521,6 +539,10 @@ spec:
                     description: The version name of the Gallery Application Version,
                       such as 1.0.0. Changing this forces a new resource to be created.
                     type: string
+                  packageFile:
+                    description: Specifies the name of the package file on the VM.
+                      Changing this forces a new resource to be created.
+                    type: string
                   source:
                     description: A source block as defined below.
                     items:
@@ -622,6 +644,12 @@ spec:
                     description: One or more target_region blocks as defined below.
                     items:
                       properties:
+                        excludeFromLatest:
+                          description: Specifies whether this Gallery Application
+                            Version should be excluded from the latest filter. If
+                            set to true, this Gallery Application Version won't be
+                            returned for the latest version. Defaults to false.
+                          type: boolean
                         name:
                           description: The Azure Region in which the Gallery Application
                             Version exists.
@@ -909,6 +937,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  configFile:
+                    description: Specifies the name of the config file on the VM.
+                      Changing this forces a new resource to be created.
+                    type: string
                   enableHealthCheck:
                     description: Should the Gallery Application reports health. Defaults
                       to false.
@@ -956,6 +988,10 @@ spec:
                     description: The version name of the Gallery Application Version,
                       such as 1.0.0. Changing this forces a new resource to be created.
                     type: string
+                  packageFile:
+                    description: Specifies the name of the package file on the VM.
+                      Changing this forces a new resource to be created.
+                    type: string
                   source:
                     description: A source block as defined below.
                     items:
@@ -981,6 +1017,12 @@ spec:
                     description: One or more target_region blocks as defined below.
                     items:
                       properties:
+                        excludeFromLatest:
+                          description: Specifies whether this Gallery Application
+                            Version should be excluded from the latest filter. If
+                            set to true, this Gallery Application Version won't be
+                            returned for the latest version. Defaults to false.
+                          type: boolean
                         name:
                           description: The Azure Region in which the Gallery Application
                             Version exists.

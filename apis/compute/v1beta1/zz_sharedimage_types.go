@@ -160,6 +160,9 @@ type SharedImageInitParameters struct {
 
 	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.
 	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
+
+	// Specifies if supports creation of both Trusted Launch virtual machines and Gen2 virtual machines with standard security created from the Shared Image. Changing this forces a new resource to be created.
+	TrustedLaunchSupported *bool `json:"trustedLaunchSupported,omitempty" tf:"trusted_launch_supported,omitempty"`
 }
 
 type SharedImageObservation struct {
@@ -240,6 +243,9 @@ type SharedImageObservation struct {
 
 	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.
 	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
+
+	// Specifies if supports creation of both Trusted Launch virtual machines and Gen2 virtual machines with standard security created from the Shared Image. Changing this forces a new resource to be created.
+	TrustedLaunchSupported *bool `json:"trustedLaunchSupported,omitempty" tf:"trusted_launch_supported,omitempty"`
 }
 
 type SharedImageParameters struct {
@@ -359,6 +365,10 @@ type SharedImageParameters struct {
 	// Specifies if Trusted Launch has to be enabled for the Virtual Machine created from the Shared Image. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TrustedLaunchEnabled *bool `json:"trustedLaunchEnabled,omitempty" tf:"trusted_launch_enabled,omitempty"`
+
+	// Specifies if supports creation of both Trusted Launch virtual machines and Gen2 virtual machines with standard security created from the Shared Image. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	TrustedLaunchSupported *bool `json:"trustedLaunchSupported,omitempty" tf:"trusted_launch_supported,omitempty"`
 }
 
 // SharedImageSpec defines the desired state of SharedImage
@@ -389,8 +399,8 @@ type SharedImageStatus struct {
 // +kubebuilder:storageversion
 
 // SharedImage is the Schema for the SharedImages API. Manages a Shared Image within a Shared Image Gallery.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

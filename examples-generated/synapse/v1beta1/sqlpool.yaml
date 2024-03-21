@@ -10,6 +10,7 @@ spec:
   forProvider:
     createMode: Default
     skuName: DW100c
+    storageAccountType: GRS
     synapseWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

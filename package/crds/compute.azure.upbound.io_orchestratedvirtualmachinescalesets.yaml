@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: OrchestratedVirtualMachineScaleSet is the Schema for the OrchestratedVirtualMachineScaleSets
-          API. Manages an Orchestrated Virtual Machine Scale Set.
+          API. Manages an Virtual Machine Scale Set in Flexible Orchestration Mode.
         properties:
           apiVersion:
             description: |-
@@ -81,8 +81,8 @@ spec:
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
-                            this Orchestrated Virtual Machine Scale Set? Defaults
-                            to false. Changing this forces a new resource to be created.
+                            this Virtual Machine Scale Set? Defaults to false. Changing
+                            this forces a new resource to be created.
                           type: boolean
                       type: object
                     type: array
@@ -92,16 +92,16 @@ spec:
                       properties:
                         enabled:
                           description: Should the automatic instance repair be enabled
-                            on this Orchestrated Virtual Machine Scale Set? Possible
-                            values are true and false.
+                            on this Virtual Machine Scale Set? Possible values are
+                            true and false.
                           type: boolean
                         gracePeriod:
                           description: Amount of time for which automatic repairs
                             will be delayed. The grace period starts right after the
                             VM is found unhealthy. Possible values are between 30
-                            and 90 minutes. Defaults to 30 minutes. The time duration
-                            should be specified in ISO 8601 format (e.g. PT30M to
-                            PT90M).
+                            and 90 minutes. The time duration should be specified
+                            in ISO 8601 format (e.g. PT30M to PT90M). Defaults to
+                            PT30M.
                           type: string
                       type: object
                     type: array
@@ -147,10 +147,12 @@ spec:
                           type: string
                         diskSizeGb:
                           description: The size of the Data Disk which should be created.
+                            Required if create_option is specified as Empty.
                           type: number
                         lun:
                           description: The Logical Unit Number of the Data Disk, which
-                            must be unique within the Virtual Machine.
+                            must be unique within the Virtual Machine. Required if
+                            create_option is specified as Empty.
                           type: number
                         storageAccountType:
                           description: The Type of Storage Account which should back
@@ -159,8 +161,14 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
+                          description: Specifies the Read-Write IOPS for this Data
+                            Disk. Only settable when storage_account_type is PremiumV2_LRS
+                            or UltraSSD_LRS.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
+                          description: Specifies the bandwidth in MB per second for
+                            this Data Disk. Only settable when storage_account_type
+                            is PremiumV2_LRS or UltraSSD_LRS.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on
@@ -173,8 +181,8 @@ spec:
                       Set be encrypted by enabling Encryption at Host?
                     type: boolean
                   evictionPolicy:
-                    description: The Policy which should be used Virtual Machines
-                      are Evicted from the Scale Set. Possible values are Deallocate
+                    description: The Policy which should be used by Spot Virtual Machines
+                      that are Evicted from the Scale Set. Possible values are Deallocate
                       and Delete. Changing this forces a new resource to be created.
                     type: string
                   extension:
@@ -188,8 +196,8 @@ spec:
                             Defaults to true.
                           type: boolean
                         extensionsToProvisionAfterVmCreation:
-                          description: An ordered list of Extension names which Orchestrated
-                            Virtual Machine Scale Set should provision after VM creation.
+                          description: An ordered list of Extension names which Virtual
+                            Machine Scale Set should provision after VM creation.
                           items:
                             type: string
                           type: array
@@ -257,14 +265,14 @@ spec:
                   extensionOperationsEnabled:
                     description: Should extension operations be allowed on the Virtual
                       Machine Scale Set? Possible values are true or false. Defaults
-                      to true. Changing this forces a new Orchestrated Virtual Machine
-                      Scale Set to be created.
+                      to true. Changing this forces a new Virtual Machine Scale Set
+                      to be created.
                     type: boolean
                   extensionsTimeBudget:
                     description: Specifies the time alloted for all extensions to
                       start. The time duration should be between 15 minutes and 120
                       minutes (inclusive) and should be specified in ISO 8601 format.
-                      The default value is 90 minutes (PT1H30M).
+                      Defaults to PT1H30M.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -272,42 +280,41 @@ spec:
                       properties:
                         identityIds:
                           description: Specifies a list of User Managed Identity IDs
-                            to be assigned to this Orchestrated Windows Virtual Machine
-                            Scale Set.
+                            to be assigned to this Windows Virtual Machine Scale Set.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
                           description: The type of Managed Identity that should be
-                            configured on this Orchestrated Windows Virtual Machine
-                            Scale Set. Only possible value is UserAssigned.
+                            configured on this Windows Virtual Machine Scale Set.
+                            Only possible value is UserAssigned.
                           type: string
                       type: object
                     type: array
                   instances:
-                    description: The number of Virtual Machines in the Orcestrated
-                      Virtual Machine Scale Set.
+                    description: The number of Virtual Machines in the Virtual Machine
+                      Scale Set.
                     type: number
                   licenseType:
                     description: Specifies the type of on-premise license (also known
-                      as Azure Hybrid Use Benefit) which should be used for this Orchestrated
-                      Virtual Machine Scale Set. Possible values are None, Windows_Client
+                      as Azure Hybrid Use Benefit) which should be used for this Virtual
+                      Machine Scale Set. Possible values are None, Windows_Client
                       and Windows_Server.
                     type: string
                   location:
-                    description: The Azure location where the Orchestrated Virtual
-                      Machine Scale Set should exist. Changing this forces a new resource
-                      to be created.
+                    description: The Azure location where the Virtual Machine Scale
+                      Set should exist. Changing this forces a new resource to be
+                      created.
                     type: string
                   maxBidPrice:
                     description: The maximum price you're willing to pay for each
-                      Orchestrated Virtual Machine in this Scale Set, in US Dollars;
-                      which must be greater than the current spot price. If this bid
-                      price falls below the current spot price the Virtual Machines
-                      in the Scale Set will be evicted using the eviction_policy.
-                      Defaults to -1, which means that each Virtual Machine in the
-                      Orchestrated Scale Set should not be evicted for price reasons.
+                      Virtual Machine in this Scale Set, in US Dollars; which must
+                      be greater than the current spot price. If this bid price falls
+                      below the current spot price the Virtual Machines in the Scale
+                      Set will be evicted using the eviction_policy. Defaults to -1,
+                      which means that each Virtual Machine in the Scale Set should
+                      not be evicted for price reasons.
                     type: number
                   networkInterface:
                     description: One or more network_interface blocks as defined below.
@@ -335,24 +342,24 @@ spec:
                             properties:
                               applicationGatewayBackendAddressPoolIds:
                                 description: A list of Backend Address Pools IDs from
-                                  a Application Gateway which this Orchestrated Virtual
-                                  Machine Scale Set should be connected to.
+                                  a Application Gateway which this Virtual Machine
+                                  Scale Set should be connected to.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               applicationSecurityGroupIds:
                                 description: A list of Application Security Group
-                                  IDs which this Orchestrated Virtual Machine Scale
-                                  Set should be connected to.
+                                  IDs which this Virtual Machine Scale Set should
+                                  be connected to.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               loadBalancerBackendAddressPoolIds:
                                 description: A list of Backend Address Pools IDs from
-                                  a Load Balancer which this Orchestrated Virtual
-                                  Machine Scale Set should be connected to.
+                                  a Load Balancer which this Virtual Machine Scale
+                                  Set should be connected to.
                                 items:
                                   type: string
                                 type: array
@@ -417,12 +424,11 @@ spec:
                                       type: string
                                     skuName:
                                       description: 'The name of the SKU to be used
-                                        by this Orcestrated Virtual Machine Scale
-                                        Set. Valid values include: any of the General
-                                        purpose, Compute optimized, Memory optimized,
-                                        Storage optimized, GPU optimized, FPGA optimized,
-                                        High performance, or Previous generation virtual
-                                        machine SKUs.'
+                                        by this Virtual Machine Scale Set. Valid values
+                                        include: any of the General purpose, Compute
+                                        optimized, Memory optimized, Storage optimized,
+                                        GPU optimized, FPGA optimized, High performance,
+                                        or Previous generation virtual machine SKUs.'
                                       type: string
                                     version:
                                       description: Specifies the version of the image
@@ -586,7 +592,7 @@ spec:
                       properties:
                         customDataSecretRef:
                           description: The Base64-Encoded Custom Data which should
-                            be used for this Orchestrated Virtual Machine Scale Set.
+                            be used for this Virtual Machine Scale Set.
                           properties:
                             key:
                               description: The key to select.
@@ -642,8 +648,8 @@ spec:
                                 type: array
                               adminUsername:
                                 description: The username of the local administrator
-                                  on each Orchestrated Virtual Machine Scale Set instance.
-                                  Changing this forces a new resource to be created.
+                                  on each Virtual Machine Scale Set instance. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
                                 description: The prefix which should be used for the
@@ -661,9 +667,9 @@ spec:
                               patchAssessmentMode:
                                 description: Specifies the mode of VM Guest Patching
                                   for the virtual machines that are associated to
-                                  the Orchestrated Virtual Machine Scale Set. Possible
-                                  values are AutomaticByPlatform or ImageDefault.
-                                  Defaults to ImageDefault.
+                                  the Virtual Machine Scale Set. Possible values are
+                                  AutomaticByPlatform or ImageDefault. Defaults to
+                                  ImageDefault.
                                 type: string
                               patchMode:
                                 description: Specifies the mode of in-guest patching
@@ -707,6 +713,42 @@ spec:
                             below.
                           items:
                             properties:
+                              additionalUnattendContent:
+                                description: One or more additional_unattend_content
+                                  blocks as defined below. Changing this forces a
+                                  new resource to be created.
+                                items:
+                                  properties:
+                                    contentSecretRef:
+                                      description: The XML formatted content that
+                                        is added to the unattend.xml file for the
+                                        specified path and component. Changing this
+                                        forces a new resource to be created.
+                                      properties:
+                                        key:
+                                          description: The key to select.
+                                          type: string
+                                        name:
+                                          description: Name of the secret.
+                                          type: string
+                                        namespace:
+                                          description: Namespace of the secret.
+                                          type: string
+                                      required:
+                                      - key
+                                      - name
+                                      - namespace
+                                      type: object
+                                    setting:
+                                      description: The name of the setting to which
+                                        the content applies. Possible values are AutoLogon
+                                        and FirstLogonCommands. Changing this forces
+                                        a new resource to be created.
+                                      type: string
+                                  required:
+                                  - contentSecretRef
+                                  type: object
+                                type: array
                               adminPasswordSecretRef:
                                 description: The Password which should be used for
                                   the local-administrator on this Virtual Machine.
@@ -728,8 +770,8 @@ spec:
                                 type: object
                               adminUsername:
                                 description: The username of the local administrator
-                                  on each Orchestrated Virtual Machine Scale Set instance.
-                                  Changing this forces a new resource to be created.
+                                  on each Virtual Machine Scale Set instance. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
                                 description: The prefix which should be used for the
@@ -753,9 +795,9 @@ spec:
                               patchAssessmentMode:
                                 description: Specifies the mode of VM Guest Patching
                                   for the virtual machines that are associated to
-                                  the Orchestrated Virtual Machine Scale Set. Possible
-                                  values are AutomaticByPlatform or ImageDefault.
-                                  Defaults to ImageDefault.
+                                  the Virtual Machine Scale Set. Possible values are
+                                  AutomaticByPlatform or ImageDefault. Defaults to
+                                  ImageDefault.
                                 type: string
                               patchMode:
                                 description: Specifies the mode of in-guest patching
@@ -848,13 +890,13 @@ spec:
                     type: array
                   platformFaultDomainCount:
                     description: Specifies the number of fault domains that are used
-                      by this Orchestrated Virtual Machine Scale Set. Changing this
-                      forces a new resource to be created.
+                      by this Virtual Machine Scale Set. Changing this forces a new
+                      resource to be created.
                     type: number
                   priority:
-                    description: The Priority of this Orchestrated Virtual Machine
-                      Scale Set. Possible values are Regular and Spot. Defaults to
-                      Regular. Changing this value forces a new resource.
+                    description: The Priority of this Virtual Machine Scale Set. Possible
+                      values are Regular and Spot. Defaults to Regular. Changing this
+                      value forces a new resource.
                     type: string
                   priorityMix:
                     description: a priority_mix block as defined below
@@ -876,13 +918,13 @@ spec:
                     type: array
                   proximityPlacementGroupId:
                     description: The ID of the Proximity Placement Group which the
-                      Orchestrated Virtual Machine should be assigned to. Changing
-                      this forces a new resource to be created.
+                      Virtual Machine should be assigned to. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupName:
-                    description: The name of the Resource Group in which the Orchestrated
-                      Virtual Machine Scale Set should exist. Changing this forces
-                      a new resource to be created.
+                    description: The name of the Resource Group in which the Virtual
+                      Machine Scale Set should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -967,11 +1009,11 @@ spec:
                       true or false.
                     type: boolean
                   skuName:
-                    description: 'The name of the SKU to be used by this Orcestrated
-                      Virtual Machine Scale Set. Valid values include: any of the
-                      General purpose, Compute optimized, Memory optimized, Storage
-                      optimized, GPU optimized, FPGA optimized, High performance,
-                      or Previous generation virtual machine SKUs.'
+                    description: 'The name of the SKU to be used by this Virtual Machine
+                      Scale Set. Valid values include: any of the General purpose,
+                      Compute optimized, Memory optimized, Storage optimized, GPU
+                      optimized, FPGA optimized, High performance, or Previous generation
+                      virtual machine SKUs.'
                     type: string
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
@@ -1008,7 +1050,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to this
-                      Orchestrated Virtual Machine Scale Set.
+                      Virtual Machine Scale Set.
                     type: object
                     x-kubernetes-map-type: granular
                   terminationNotification:
@@ -1052,9 +1094,9 @@ spec:
                       to false. Changing this forces a new resource to be created.
                     type: boolean
                   zones:
-                    description: Specifies a list of Availability Zones in which this
-                      Orchestrated Virtual Machine should be located. Changing this
-                      forces a new Orchestrated Virtual Machine to be created.
+                    description: Specifies a list of Availability Zones across which
+                      the Virtual Machine Scale Set will create instances. Changing
+                      this forces a new Virtual Machine Scale Set to be created.
                     items:
                       type: string
                     type: array
@@ -1080,8 +1122,8 @@ spec:
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
-                            this Orchestrated Virtual Machine Scale Set? Defaults
-                            to false. Changing this forces a new resource to be created.
+                            this Virtual Machine Scale Set? Defaults to false. Changing
+                            this forces a new resource to be created.
                           type: boolean
                       type: object
                     type: array
@@ -1091,16 +1133,16 @@ spec:
                       properties:
                         enabled:
                           description: Should the automatic instance repair be enabled
-                            on this Orchestrated Virtual Machine Scale Set? Possible
-                            values are true and false.
+                            on this Virtual Machine Scale Set? Possible values are
+                            true and false.
                           type: boolean
                         gracePeriod:
                           description: Amount of time for which automatic repairs
                             will be delayed. The grace period starts right after the
                             VM is found unhealthy. Possible values are between 30
-                            and 90 minutes. Defaults to 30 minutes. The time duration
-                            should be specified in ISO 8601 format (e.g. PT30M to
-                            PT90M).
+                            and 90 minutes. The time duration should be specified
+                            in ISO 8601 format (e.g. PT30M to PT90M). Defaults to
+                            PT30M.
                           type: string
                       type: object
                     type: array
@@ -1146,10 +1188,12 @@ spec:
                           type: string
                         diskSizeGb:
                           description: The size of the Data Disk which should be created.
+                            Required if create_option is specified as Empty.
                           type: number
                         lun:
                           description: The Logical Unit Number of the Data Disk, which
-                            must be unique within the Virtual Machine.
+                            must be unique within the Virtual Machine. Required if
+                            create_option is specified as Empty.
                           type: number
                         storageAccountType:
                           description: The Type of Storage Account which should back
@@ -1158,8 +1202,14 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
+                          description: Specifies the Read-Write IOPS for this Data
+                            Disk. Only settable when storage_account_type is PremiumV2_LRS
+                            or UltraSSD_LRS.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
+                          description: Specifies the bandwidth in MB per second for
+                            this Data Disk. Only settable when storage_account_type
+                            is PremiumV2_LRS or UltraSSD_LRS.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on
@@ -1172,8 +1222,8 @@ spec:
                       Set be encrypted by enabling Encryption at Host?
                     type: boolean
                   evictionPolicy:
-                    description: The Policy which should be used Virtual Machines
-                      are Evicted from the Scale Set. Possible values are Deallocate
+                    description: The Policy which should be used by Spot Virtual Machines
+                      that are Evicted from the Scale Set. Possible values are Deallocate
                       and Delete. Changing this forces a new resource to be created.
                     type: string
                   extension:
@@ -1187,8 +1237,8 @@ spec:
                             Defaults to true.
                           type: boolean
                         extensionsToProvisionAfterVmCreation:
-                          description: An ordered list of Extension names which Orchestrated
-                            Virtual Machine Scale Set should provision after VM creation.
+                          description: An ordered list of Extension names which Virtual
+                            Machine Scale Set should provision after VM creation.
                           items:
                             type: string
                           type: array
@@ -1238,14 +1288,14 @@ spec:
                   extensionOperationsEnabled:
                     description: Should extension operations be allowed on the Virtual
                       Machine Scale Set? Possible values are true or false. Defaults
-                      to true. Changing this forces a new Orchestrated Virtual Machine
-                      Scale Set to be created.
+                      to true. Changing this forces a new Virtual Machine Scale Set
+                      to be created.
                     type: boolean
                   extensionsTimeBudget:
                     description: Specifies the time alloted for all extensions to
                       start. The time duration should be between 15 minutes and 120
                       minutes (inclusive) and should be specified in ISO 8601 format.
-                      The default value is 90 minutes (PT1H30M).
+                      Defaults to PT1H30M.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -1253,42 +1303,41 @@ spec:
                       properties:
                         identityIds:
                           description: Specifies a list of User Managed Identity IDs
-                            to be assigned to this Orchestrated Windows Virtual Machine
-                            Scale Set.
+                            to be assigned to this Windows Virtual Machine Scale Set.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
                           description: The type of Managed Identity that should be
-                            configured on this Orchestrated Windows Virtual Machine
-                            Scale Set. Only possible value is UserAssigned.
+                            configured on this Windows Virtual Machine Scale Set.
+                            Only possible value is UserAssigned.
                           type: string
                       type: object
                     type: array
                   instances:
-                    description: The number of Virtual Machines in the Orcestrated
-                      Virtual Machine Scale Set.
+                    description: The number of Virtual Machines in the Virtual Machine
+                      Scale Set.
                     type: number
                   licenseType:
                     description: Specifies the type of on-premise license (also known
-                      as Azure Hybrid Use Benefit) which should be used for this Orchestrated
-                      Virtual Machine Scale Set. Possible values are None, Windows_Client
+                      as Azure Hybrid Use Benefit) which should be used for this Virtual
+                      Machine Scale Set. Possible values are None, Windows_Client
                       and Windows_Server.
                     type: string
                   location:
-                    description: The Azure location where the Orchestrated Virtual
-                      Machine Scale Set should exist. Changing this forces a new resource
-                      to be created.
+                    description: The Azure location where the Virtual Machine Scale
+                      Set should exist. Changing this forces a new resource to be
+                      created.
                     type: string
                   maxBidPrice:
                     description: The maximum price you're willing to pay for each
-                      Orchestrated Virtual Machine in this Scale Set, in US Dollars;
-                      which must be greater than the current spot price. If this bid
-                      price falls below the current spot price the Virtual Machines
-                      in the Scale Set will be evicted using the eviction_policy.
-                      Defaults to -1, which means that each Virtual Machine in the
-                      Orchestrated Scale Set should not be evicted for price reasons.
+                      Virtual Machine in this Scale Set, in US Dollars; which must
+                      be greater than the current spot price. If this bid price falls
+                      below the current spot price the Virtual Machines in the Scale
+                      Set will be evicted using the eviction_policy. Defaults to -1,
+                      which means that each Virtual Machine in the Scale Set should
+                      not be evicted for price reasons.
                     type: number
                   networkInterface:
                     description: One or more network_interface blocks as defined below.
@@ -1316,24 +1365,24 @@ spec:
                             properties:
                               applicationGatewayBackendAddressPoolIds:
                                 description: A list of Backend Address Pools IDs from
-                                  a Application Gateway which this Orchestrated Virtual
-                                  Machine Scale Set should be connected to.
+                                  a Application Gateway which this Virtual Machine
+                                  Scale Set should be connected to.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               applicationSecurityGroupIds:
                                 description: A list of Application Security Group
-                                  IDs which this Orchestrated Virtual Machine Scale
-                                  Set should be connected to.
+                                  IDs which this Virtual Machine Scale Set should
+                                  be connected to.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               loadBalancerBackendAddressPoolIds:
                                 description: A list of Backend Address Pools IDs from
-                                  a Load Balancer which this Orchestrated Virtual
-                                  Machine Scale Set should be connected to.
+                                  a Load Balancer which this Virtual Machine Scale
+                                  Set should be connected to.
                                 items:
                                   type: string
                                 type: array
@@ -1398,12 +1447,11 @@ spec:
                                       type: string
                                     skuName:
                                       description: 'The name of the SKU to be used
-                                        by this Orcestrated Virtual Machine Scale
-                                        Set. Valid values include: any of the General
-                                        purpose, Compute optimized, Memory optimized,
-                                        Storage optimized, GPU optimized, FPGA optimized,
-                                        High performance, or Previous generation virtual
-                                        machine SKUs.'
+                                        by this Virtual Machine Scale Set. Valid values
+                                        include: any of the General purpose, Compute
+                                        optimized, Memory optimized, Storage optimized,
+                                        GPU optimized, FPGA optimized, High performance,
+                                        or Previous generation virtual machine SKUs.'
                                       type: string
                                     version:
                                       description: Specifies the version of the image
@@ -1586,8 +1634,8 @@ spec:
                                 type: array
                               adminUsername:
                                 description: The username of the local administrator
-                                  on each Orchestrated Virtual Machine Scale Set instance.
-                                  Changing this forces a new resource to be created.
+                                  on each Virtual Machine Scale Set instance. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
                                 description: The prefix which should be used for the
@@ -1605,9 +1653,9 @@ spec:
                               patchAssessmentMode:
                                 description: Specifies the mode of VM Guest Patching
                                   for the virtual machines that are associated to
-                                  the Orchestrated Virtual Machine Scale Set. Possible
-                                  values are AutomaticByPlatform or ImageDefault.
-                                  Defaults to ImageDefault.
+                                  the Virtual Machine Scale Set. Possible values are
+                                  AutomaticByPlatform or ImageDefault. Defaults to
+                                  ImageDefault.
                                 type: string
                               patchMode:
                                 description: Specifies the mode of in-guest patching
@@ -1651,10 +1699,24 @@ spec:
                             below.
                           items:
                             properties:
+                              additionalUnattendContent:
+                                description: One or more additional_unattend_content
+                                  blocks as defined below. Changing this forces a
+                                  new resource to be created.
+                                items:
+                                  properties:
+                                    setting:
+                                      description: The name of the setting to which
+                                        the content applies. Possible values are AutoLogon
+                                        and FirstLogonCommands. Changing this forces
+                                        a new resource to be created.
+                                      type: string
+                                  type: object
+                                type: array
                               adminUsername:
                                 description: The username of the local administrator
-                                  on each Orchestrated Virtual Machine Scale Set instance.
-                                  Changing this forces a new resource to be created.
+                                  on each Virtual Machine Scale Set instance. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
                                 description: The prefix which should be used for the
@@ -1678,9 +1740,9 @@ spec:
                               patchAssessmentMode:
                                 description: Specifies the mode of VM Guest Patching
                                   for the virtual machines that are associated to
-                                  the Orchestrated Virtual Machine Scale Set. Possible
-                                  values are AutomaticByPlatform or ImageDefault.
-                                  Defaults to ImageDefault.
+                                  the Virtual Machine Scale Set. Possible values are
+                                  AutomaticByPlatform or ImageDefault. Defaults to
+                                  ImageDefault.
                                 type: string
                               patchMode:
                                 description: Specifies the mode of in-guest patching
@@ -1771,13 +1833,13 @@ spec:
                     type: array
                   platformFaultDomainCount:
                     description: Specifies the number of fault domains that are used
-                      by this Orchestrated Virtual Machine Scale Set. Changing this
-                      forces a new resource to be created.
+                      by this Virtual Machine Scale Set. Changing this forces a new
+                      resource to be created.
                     type: number
                   priority:
-                    description: The Priority of this Orchestrated Virtual Machine
-                      Scale Set. Possible values are Regular and Spot. Defaults to
-                      Regular. Changing this value forces a new resource.
+                    description: The Priority of this Virtual Machine Scale Set. Possible
+                      values are Regular and Spot. Defaults to Regular. Changing this
+                      value forces a new resource.
                     type: string
                   priorityMix:
                     description: a priority_mix block as defined below
@@ -1799,8 +1861,8 @@ spec:
                     type: array
                   proximityPlacementGroupId:
                     description: The ID of the Proximity Placement Group which the
-                      Orchestrated Virtual Machine should be assigned to. Changing
-                      this forces a new resource to be created.
+                      Virtual Machine should be assigned to. Changing this forces
+                      a new resource to be created.
                     type: string
                   singlePlacementGroup:
                     description: Should this Virtual Machine Scale Set be limited
@@ -1809,11 +1871,11 @@ spec:
                       true or false.
                     type: boolean
                   skuName:
-                    description: 'The name of the SKU to be used by this Orcestrated
-                      Virtual Machine Scale Set. Valid values include: any of the
-                      General purpose, Compute optimized, Memory optimized, Storage
-                      optimized, GPU optimized, FPGA optimized, High performance,
-                      or Previous generation virtual machine SKUs.'
+                    description: 'The name of the SKU to be used by this Virtual Machine
+                      Scale Set. Valid values include: any of the General purpose,
+                      Compute optimized, Memory optimized, Storage optimized, GPU
+                      optimized, FPGA optimized, High performance, or Previous generation
+                      virtual machine SKUs.'
                     type: string
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
@@ -1850,7 +1912,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to this
-                      Orchestrated Virtual Machine Scale Set.
+                      Virtual Machine Scale Set.
                     type: object
                     x-kubernetes-map-type: granular
                   terminationNotification:
@@ -1876,9 +1938,9 @@ spec:
                       to false. Changing this forces a new resource to be created.
                     type: boolean
                   zones:
-                    description: Specifies a list of Availability Zones in which this
-                      Orchestrated Virtual Machine should be located. Changing this
-                      forces a new Orchestrated Virtual Machine to be created.
+                    description: Specifies a list of Availability Zones across which
+                      the Virtual Machine Scale Set will create instances. Changing
+                      this forces a new Virtual Machine Scale Set to be created.
                     items:
                       type: string
                     type: array
@@ -2073,8 +2135,8 @@ spec:
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
-                            this Orchestrated Virtual Machine Scale Set? Defaults
-                            to false. Changing this forces a new resource to be created.
+                            this Virtual Machine Scale Set? Defaults to false. Changing
+                            this forces a new resource to be created.
                           type: boolean
                       type: object
                     type: array
@@ -2084,16 +2146,16 @@ spec:
                       properties:
                         enabled:
                           description: Should the automatic instance repair be enabled
-                            on this Orchestrated Virtual Machine Scale Set? Possible
-                            values are true and false.
+                            on this Virtual Machine Scale Set? Possible values are
+                            true and false.
                           type: boolean
                         gracePeriod:
                           description: Amount of time for which automatic repairs
                             will be delayed. The grace period starts right after the
                             VM is found unhealthy. Possible values are between 30
-                            and 90 minutes. Defaults to 30 minutes. The time duration
-                            should be specified in ISO 8601 format (e.g. PT30M to
-                            PT90M).
+                            and 90 minutes. The time duration should be specified
+                            in ISO 8601 format (e.g. PT30M to PT90M). Defaults to
+                            PT30M.
                           type: string
                       type: object
                     type: array
@@ -2139,10 +2201,12 @@ spec:
                           type: string
                         diskSizeGb:
                           description: The size of the Data Disk which should be created.
+                            Required if create_option is specified as Empty.
                           type: number
                         lun:
                           description: The Logical Unit Number of the Data Disk, which
-                            must be unique within the Virtual Machine.
+                            must be unique within the Virtual Machine. Required if
+                            create_option is specified as Empty.
                           type: number
                         storageAccountType:
                           description: The Type of Storage Account which should back
@@ -2151,8 +2215,14 @@ spec:
                             Premium_ZRS and UltraSSD_LRS.
                           type: string
                         ultraSsdDiskIopsReadWrite:
+                          description: Specifies the Read-Write IOPS for this Data
+                            Disk. Only settable when storage_account_type is PremiumV2_LRS
+                            or UltraSSD_LRS.
                           type: number
                         ultraSsdDiskMbpsReadWrite:
+                          description: Specifies the bandwidth in MB per second for
+                            this Data Disk. Only settable when storage_account_type
+                            is PremiumV2_LRS or UltraSSD_LRS.
                           type: number
                         writeAcceleratorEnabled:
                           description: Specifies if Write Accelerator is enabled on
@@ -2165,8 +2235,8 @@ spec:
                       Set be encrypted by enabling Encryption at Host?
                     type: boolean
                   evictionPolicy:
-                    description: The Policy which should be used Virtual Machines
-                      are Evicted from the Scale Set. Possible values are Deallocate
+                    description: The Policy which should be used by Spot Virtual Machines
+                      that are Evicted from the Scale Set. Possible values are Deallocate
                       and Delete. Changing this forces a new resource to be created.
                     type: string
                   extension:
@@ -2180,8 +2250,8 @@ spec:
                             Defaults to true.
                           type: boolean
                         extensionsToProvisionAfterVmCreation:
-                          description: An ordered list of Extension names which Orchestrated
-                            Virtual Machine Scale Set should provision after VM creation.
+                          description: An ordered list of Extension names which Virtual
+                            Machine Scale Set should provision after VM creation.
                           items:
                             type: string
                           type: array
@@ -2231,18 +2301,17 @@ spec:
                   extensionOperationsEnabled:
                     description: Should extension operations be allowed on the Virtual
                       Machine Scale Set? Possible values are true or false. Defaults
-                      to true. Changing this forces a new Orchestrated Virtual Machine
-                      Scale Set to be created.
+                      to true. Changing this forces a new Virtual Machine Scale Set
+                      to be created.
                     type: boolean
                   extensionsTimeBudget:
                     description: Specifies the time alloted for all extensions to
                       start. The time duration should be between 15 minutes and 120
                       minutes (inclusive) and should be specified in ISO 8601 format.
-                      The default value is 90 minutes (PT1H30M).
+                      Defaults to PT1H30M.
                     type: string
                   id:
-                    description: The ID of the Orchestrated Virtual Machine Scale
-                      Set.
+                    description: The ID of the Virtual Machine Scale Set.
                     type: string
                   identity:
                     description: An identity block as defined below.
@@ -2250,42 +2319,41 @@ spec:
                       properties:
                         identityIds:
                           description: Specifies a list of User Managed Identity IDs
-                            to be assigned to this Orchestrated Windows Virtual Machine
-                            Scale Set.
+                            to be assigned to this Windows Virtual Machine Scale Set.
                           items:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
                         type:
                           description: The type of Managed Identity that should be
-                            configured on this Orchestrated Windows Virtual Machine
-                            Scale Set. Only possible value is UserAssigned.
+                            configured on this Windows Virtual Machine Scale Set.
+                            Only possible value is UserAssigned.
                           type: string
                       type: object
                     type: array
                   instances:
-                    description: The number of Virtual Machines in the Orcestrated
-                      Virtual Machine Scale Set.
+                    description: The number of Virtual Machines in the Virtual Machine
+                      Scale Set.
                     type: number
                   licenseType:
                     description: Specifies the type of on-premise license (also known
-                      as Azure Hybrid Use Benefit) which should be used for this Orchestrated
-                      Virtual Machine Scale Set. Possible values are None, Windows_Client
+                      as Azure Hybrid Use Benefit) which should be used for this Virtual
+                      Machine Scale Set. Possible values are None, Windows_Client
                       and Windows_Server.
                     type: string
                   location:
-                    description: The Azure location where the Orchestrated Virtual
-                      Machine Scale Set should exist. Changing this forces a new resource
-                      to be created.
+                    description: The Azure location where the Virtual Machine Scale
+                      Set should exist. Changing this forces a new resource to be
+                      created.
                     type: string
                   maxBidPrice:
                     description: The maximum price you're willing to pay for each
-                      Orchestrated Virtual Machine in this Scale Set, in US Dollars;
-                      which must be greater than the current spot price. If this bid
-                      price falls below the current spot price the Virtual Machines
-                      in the Scale Set will be evicted using the eviction_policy.
-                      Defaults to -1, which means that each Virtual Machine in the
-                      Orchestrated Scale Set should not be evicted for price reasons.
+                      Virtual Machine in this Scale Set, in US Dollars; which must
+                      be greater than the current spot price. If this bid price falls
+                      below the current spot price the Virtual Machines in the Scale
+                      Set will be evicted using the eviction_policy. Defaults to -1,
+                      which means that each Virtual Machine in the Scale Set should
+                      not be evicted for price reasons.
                     type: number
                   networkInterface:
                     description: One or more network_interface blocks as defined below.
@@ -2313,24 +2381,24 @@ spec:
                             properties:
                               applicationGatewayBackendAddressPoolIds:
                                 description: A list of Backend Address Pools IDs from
-                                  a Application Gateway which this Orchestrated Virtual
-                                  Machine Scale Set should be connected to.
+                                  a Application Gateway which this Virtual Machine
+                                  Scale Set should be connected to.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               applicationSecurityGroupIds:
                                 description: A list of Application Security Group
-                                  IDs which this Orchestrated Virtual Machine Scale
-                                  Set should be connected to.
+                                  IDs which this Virtual Machine Scale Set should
+                                  be connected to.
                                 items:
                                   type: string
                                 type: array
                                 x-kubernetes-list-type: set
                               loadBalancerBackendAddressPoolIds:
                                 description: A list of Backend Address Pools IDs from
-                                  a Load Balancer which this Orchestrated Virtual
-                                  Machine Scale Set should be connected to.
+                                  a Load Balancer which this Virtual Machine Scale
+                                  Set should be connected to.
                                 items:
                                   type: string
                                 type: array
@@ -2395,12 +2463,11 @@ spec:
                                       type: string
                                     skuName:
                                       description: 'The name of the SKU to be used
-                                        by this Orcestrated Virtual Machine Scale
-                                        Set. Valid values include: any of the General
-                                        purpose, Compute optimized, Memory optimized,
-                                        Storage optimized, GPU optimized, FPGA optimized,
-                                        High performance, or Previous generation virtual
-                                        machine SKUs.'
+                                        by this Virtual Machine Scale Set. Valid values
+                                        include: any of the General purpose, Compute
+                                        optimized, Memory optimized, Storage optimized,
+                                        GPU optimized, FPGA optimized, High performance,
+                                        or Previous generation virtual machine SKUs.'
                                       type: string
                                     version:
                                       description: Specifies the version of the image
@@ -2507,8 +2574,8 @@ spec:
                                 type: array
                               adminUsername:
                                 description: The username of the local administrator
-                                  on each Orchestrated Virtual Machine Scale Set instance.
-                                  Changing this forces a new resource to be created.
+                                  on each Virtual Machine Scale Set instance. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
                                 description: The prefix which should be used for the
@@ -2526,9 +2593,9 @@ spec:
                               patchAssessmentMode:
                                 description: Specifies the mode of VM Guest Patching
                                   for the virtual machines that are associated to
-                                  the Orchestrated Virtual Machine Scale Set. Possible
-                                  values are AutomaticByPlatform or ImageDefault.
-                                  Defaults to ImageDefault.
+                                  the Virtual Machine Scale Set. Possible values are
+                                  AutomaticByPlatform or ImageDefault. Defaults to
+                                  ImageDefault.
                                 type: string
                               patchMode:
                                 description: Specifies the mode of in-guest patching
@@ -2572,10 +2639,24 @@ spec:
                             below.
                           items:
                             properties:
+                              additionalUnattendContent:
+                                description: One or more additional_unattend_content
+                                  blocks as defined below. Changing this forces a
+                                  new resource to be created.
+                                items:
+                                  properties:
+                                    setting:
+                                      description: The name of the setting to which
+                                        the content applies. Possible values are AutoLogon
+                                        and FirstLogonCommands. Changing this forces
+                                        a new resource to be created.
+                                      type: string
+                                  type: object
+                                type: array
                               adminUsername:
                                 description: The username of the local administrator
-                                  on each Orchestrated Virtual Machine Scale Set instance.
-                                  Changing this forces a new resource to be created.
+                                  on each Virtual Machine Scale Set instance. Changing
+                                  this forces a new resource to be created.
                                 type: string
                               computerNamePrefix:
                                 description: The prefix which should be used for the
@@ -2599,9 +2680,9 @@ spec:
                               patchAssessmentMode:
                                 description: Specifies the mode of VM Guest Patching
                                   for the virtual machines that are associated to
-                                  the Orchestrated Virtual Machine Scale Set. Possible
-                                  values are AutomaticByPlatform or ImageDefault.
-                                  Defaults to ImageDefault.
+                                  the Virtual Machine Scale Set. Possible values are
+                                  AutomaticByPlatform or ImageDefault. Defaults to
+                                  ImageDefault.
                                 type: string
                               patchMode:
                                 description: Specifies the mode of in-guest patching
@@ -2692,13 +2773,13 @@ spec:
                     type: array
                   platformFaultDomainCount:
                     description: Specifies the number of fault domains that are used
-                      by this Orchestrated Virtual Machine Scale Set. Changing this
-                      forces a new resource to be created.
+                      by this Virtual Machine Scale Set. Changing this forces a new
+                      resource to be created.
                     type: number
                   priority:
-                    description: The Priority of this Orchestrated Virtual Machine
-                      Scale Set. Possible values are Regular and Spot. Defaults to
-                      Regular. Changing this value forces a new resource.
+                    description: The Priority of this Virtual Machine Scale Set. Possible
+                      values are Regular and Spot. Defaults to Regular. Changing this
+                      value forces a new resource.
                     type: string
                   priorityMix:
                     description: a priority_mix block as defined below
@@ -2720,13 +2801,13 @@ spec:
                     type: array
                   proximityPlacementGroupId:
                     description: The ID of the Proximity Placement Group which the
-                      Orchestrated Virtual Machine should be assigned to. Changing
-                      this forces a new resource to be created.
+                      Virtual Machine should be assigned to. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupName:
-                    description: The name of the Resource Group in which the Orchestrated
-                      Virtual Machine Scale Set should exist. Changing this forces
-                      a new resource to be created.
+                    description: The name of the Resource Group in which the Virtual
+                      Machine Scale Set should exist. Changing this forces a new resource
+                      to be created.
                     type: string
                   singlePlacementGroup:
                     description: Should this Virtual Machine Scale Set be limited
@@ -2735,11 +2816,11 @@ spec:
                       true or false.
                     type: boolean
                   skuName:
-                    description: 'The name of the SKU to be used by this Orcestrated
-                      Virtual Machine Scale Set. Valid values include: any of the
-                      General purpose, Compute optimized, Memory optimized, Storage
-                      optimized, GPU optimized, FPGA optimized, High performance,
-                      or Previous generation virtual machine SKUs.'
+                    description: 'The name of the SKU to be used by this Virtual Machine
+                      Scale Set. Valid values include: any of the General purpose,
+                      Compute optimized, Memory optimized, Storage optimized, GPU
+                      optimized, FPGA optimized, High performance, or Previous generation
+                      virtual machine SKUs.'
                     type: string
                   sourceImageId:
                     description: The ID of an Image which each Virtual Machine in
@@ -2776,7 +2857,7 @@ spec:
                     additionalProperties:
                       type: string
                     description: A mapping of tags which should be assigned to this
-                      Orchestrated Virtual Machine Scale Set.
+                      Virtual Machine Scale Set.
                     type: object
                     x-kubernetes-map-type: granular
                   terminationNotification:
@@ -2797,8 +2878,7 @@ spec:
                       type: object
                     type: array
                   uniqueId:
-                    description: The Unique ID for the Orchestrated Virtual Machine
-                      Scale Set.
+                    description: The Unique ID for the Virtual Machine Scale Set.
                     type: string
                   zoneBalance:
                     description: Should the Virtual Machines in this Scale Set be
@@ -2806,9 +2886,9 @@ spec:
                       to false. Changing this forces a new resource to be created.
                     type: boolean
                   zones:
-                    description: Specifies a list of Availability Zones in which this
-                      Orchestrated Virtual Machine should be located. Changing this
-                      forces a new Orchestrated Virtual Machine to be created.
+                    description: Specifies a list of Availability Zones across which
+                      the Virtual Machine Scale Set will create instances. Changing
+                      this forces a new Virtual Machine Scale Set to be created.
                     items:
                       type: string
                     type: array

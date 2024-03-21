@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -161,8 +161,8 @@ spec:
                         type: object
                     type: object
                   securityRule:
-                    description: List of objects representing security rules, as defined
-                      below.
+                    description: List of security_rule objects representing security
+                      rules, as defined below.
                     items:
                       properties:
                         access:
@@ -285,8 +285,8 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   securityRule:
-                    description: List of objects representing security rules, as defined
-                      below.
+                    description: List of security_rule objects representing security
+                      rules, as defined below.
                     items:
                       properties:
                         access:
@@ -581,8 +581,8 @@ spec:
                       to be created.
                     type: string
                   securityRule:
-                    description: List of objects representing security rules, as defined
-                      below.
+                    description: List of security_rule objects representing security
+                      rules, as defined below.
                     items:
                       properties:
                         access:

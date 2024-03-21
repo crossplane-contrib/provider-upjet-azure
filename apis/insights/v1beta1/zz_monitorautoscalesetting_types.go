@@ -322,6 +322,9 @@ type MonitorAutoscaleSettingInitParameters struct {
 	// Specifies a notification block as defined below.
 	Notification []NotificationInitParameters `json:"notification,omitempty" tf:"notification,omitempty"`
 
+	// A predictive block as defined below.
+	Predictive []PredictiveInitParameters `json:"predictive,omitempty" tf:"predictive,omitempty"`
+
 	// Specifies one or more (up to 20) profile blocks as defined below.
 	Profile []ProfileInitParameters `json:"profile,omitempty" tf:"profile,omitempty"`
 
@@ -372,6 +375,9 @@ type MonitorAutoscaleSettingObservation struct {
 	// Specifies a notification block as defined below.
 	Notification []NotificationObservation `json:"notification,omitempty" tf:"notification,omitempty"`
 
+	// A predictive block as defined below.
+	Predictive []PredictiveObservation `json:"predictive,omitempty" tf:"predictive,omitempty"`
+
 	// Specifies one or more (up to 20) profile blocks as defined below.
 	Profile []ProfileObservation `json:"profile,omitempty" tf:"profile,omitempty"`
 
@@ -403,6 +409,10 @@ type MonitorAutoscaleSettingParameters struct {
 	// Specifies a notification block as defined below.
 	// +kubebuilder:validation:Optional
 	Notification []NotificationParameters `json:"notification,omitempty" tf:"notification,omitempty"`
+
+	// A predictive block as defined below.
+	// +kubebuilder:validation:Optional
+	Predictive []PredictiveParameters `json:"predictive,omitempty" tf:"predictive,omitempty"`
 
 	// Specifies one or more (up to 20) profile blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -468,6 +478,35 @@ type NotificationParameters struct {
 	// One or more webhook blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Webhook []WebhookParameters `json:"webhook,omitempty" tf:"webhook,omitempty"`
+}
+
+type PredictiveInitParameters struct {
+
+	// Specifies the amount of time by which instances are launched in advance. It must be between PT1M and PT1H in ISO 8601 format.
+	LookAheadTime *string `json:"lookAheadTime,omitempty" tf:"look_ahead_time,omitempty"`
+
+	// Specifies the predictive scale mode. Possible values are Enabled or ForecastOnly.
+	ScaleMode *string `json:"scaleMode,omitempty" tf:"scale_mode,omitempty"`
+}
+
+type PredictiveObservation struct {
+
+	// Specifies the amount of time by which instances are launched in advance. It must be between PT1M and PT1H in ISO 8601 format.
+	LookAheadTime *string `json:"lookAheadTime,omitempty" tf:"look_ahead_time,omitempty"`
+
+	// Specifies the predictive scale mode. Possible values are Enabled or ForecastOnly.
+	ScaleMode *string `json:"scaleMode,omitempty" tf:"scale_mode,omitempty"`
+}
+
+type PredictiveParameters struct {
+
+	// Specifies the amount of time by which instances are launched in advance. It must be between PT1M and PT1H in ISO 8601 format.
+	// +kubebuilder:validation:Optional
+	LookAheadTime *string `json:"lookAheadTime,omitempty" tf:"look_ahead_time,omitempty"`
+
+	// Specifies the predictive scale mode. Possible values are Enabled or ForecastOnly.
+	// +kubebuilder:validation:Optional
+	ScaleMode *string `json:"scaleMode" tf:"scale_mode,omitempty"`
 }
 
 type ProfileInitParameters struct {
@@ -716,8 +755,8 @@ type MonitorAutoscaleSettingStatus struct {
 // +kubebuilder:storageversion
 
 // MonitorAutoscaleSetting is the Schema for the MonitorAutoscaleSettings API. Manages an AutoScale Setting which can be applied to Virtual Machine Scale Sets, App Services and other scalable resources.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

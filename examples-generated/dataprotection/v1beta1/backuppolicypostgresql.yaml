@@ -39,6 +39,7 @@ spec:
       duration: P1D
       name: monthly
       priority: 15
+    timeZone: India Standard Time
     vaultNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

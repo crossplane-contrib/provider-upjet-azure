@@ -15,6 +15,9 @@ import (
 
 type SpringCloudAPIPortalInitParameters struct {
 
+	// Specifies whether the API try-out feature is enabled. When enabled, users can try out the API by sending requests and viewing responses in API portal.
+	APITryOutEnabled *bool `json:"apiTryOutEnabled,omitempty" tf:"api_try_out_enabled,omitempty"`
+
 	// Specifies a list of Spring Cloud Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -44,6 +47,9 @@ type SpringCloudAPIPortalInitParameters struct {
 
 type SpringCloudAPIPortalObservation struct {
 
+	// Specifies whether the API try-out feature is enabled. When enabled, users can try out the API by sending requests and viewing responses in API portal.
+	APITryOutEnabled *bool `json:"apiTryOutEnabled,omitempty" tf:"api_try_out_enabled,omitempty"`
+
 	// Specifies a list of Spring Cloud Gateway.
 	// +listType=set
 	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
@@ -71,6 +77,10 @@ type SpringCloudAPIPortalObservation struct {
 }
 
 type SpringCloudAPIPortalParameters struct {
+
+	// Specifies whether the API try-out feature is enabled. When enabled, users can try out the API by sending requests and viewing responses in API portal.
+	// +kubebuilder:validation:Optional
+	APITryOutEnabled *bool `json:"apiTryOutEnabled,omitempty" tf:"api_try_out_enabled,omitempty"`
 
 	// Specifies a list of Spring Cloud Gateway.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
@@ -198,8 +208,8 @@ type SpringCloudAPIPortalStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudAPIPortal is the Schema for the SpringCloudAPIPortals API. Manages a Spring Cloud API Portal.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

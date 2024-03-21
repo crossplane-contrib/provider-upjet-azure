@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -156,7 +156,7 @@ spec:
                     type: object
                   namespaceJunction:
                     description: Can be specified multiple times to define multiple
-                      namespace_junction. Each namespace_juntion block supports fields
+                      namespace_junction. Each namespace_junction block supports fields
                       documented below.
                     items:
                       properties:
@@ -267,10 +267,20 @@ spec:
                     type: string
                   usageModel:
                     description: 'The type of usage of the HPC Cache NFS Target. Possible
-                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
-                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY,
+                      READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
+                  verificationTimerInSeconds:
+                    description: The amount of time the cache waits before it checks
+                      the back-end storage for file updates. Possible values are between
+                      1 and 31536000.
+                    type: number
+                  writeBackTimerInSeconds:
+                    description: The amount of time the cache waits after the last
+                      file change before it copies the changed file to back-end storage.
+                      Possible values are between 1 and 31536000.
+                    type: number
                 type: object
               initProvider:
                 description: |-
@@ -368,7 +378,7 @@ spec:
                     type: object
                   namespaceJunction:
                     description: Can be specified multiple times to define multiple
-                      namespace_junction. Each namespace_juntion block supports fields
+                      namespace_junction. Each namespace_junction block supports fields
                       documented below.
                     items:
                       properties:
@@ -398,10 +408,20 @@ spec:
                     type: string
                   usageModel:
                     description: 'The type of usage of the HPC Cache NFS Target. Possible
-                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
-                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY,
+                      READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
+                  verificationTimerInSeconds:
+                    description: The amount of time the cache waits before it checks
+                      the back-end storage for file updates. Possible values are between
+                      1 and 31536000.
+                    type: number
+                  writeBackTimerInSeconds:
+                    description: The amount of time the cache waits after the last
+                      file change before it copies the changed file to back-end storage.
+                      Possible values are between 1 and 31536000.
+                    type: number
                 type: object
               managementPolicies:
                 default:
@@ -598,7 +618,7 @@ spec:
                     type: string
                   namespaceJunction:
                     description: Can be specified multiple times to define multiple
-                      namespace_junction. Each namespace_juntion block supports fields
+                      namespace_junction. Each namespace_junction block supports fields
                       documented below.
                     items:
                       properties:
@@ -633,10 +653,20 @@ spec:
                     type: string
                   usageModel:
                     description: 'The type of usage of the HPC Cache NFS Target. Possible
-                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15,
-                      WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60
-                      and WRITE_WORKLOAD_CLOUDWS.'
+                      values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY,
+                      READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30,
+                      WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.'
                     type: string
+                  verificationTimerInSeconds:
+                    description: The amount of time the cache waits before it checks
+                      the back-end storage for file updates. Possible values are between
+                      1 and 31536000.
+                    type: number
+                  writeBackTimerInSeconds:
+                    description: The amount of time the cache waits after the last
+                      file change before it copies the changed file to back-end storage.
+                      Possible values are between 1 and 31536000.
+                    type: number
                 type: object
               conditions:
                 description: Conditions of the resource.

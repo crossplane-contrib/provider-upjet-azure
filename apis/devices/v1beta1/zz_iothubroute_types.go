@@ -15,7 +15,7 @@ import (
 
 type IOTHubRouteInitParameters struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Specifies whether a route is enabled.
@@ -30,7 +30,7 @@ type IOTHubRouteInitParameters struct {
 
 type IOTHubRouteObservation struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
 	// Specifies whether a route is enabled.
@@ -54,7 +54,7 @@ type IOTHubRouteObservation struct {
 
 type IOTHubRouteParameters struct {
 
-	// The condition that is evaluated to apply the routing rule. If no condition is provided, it evaluates to true by default. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language.
+	// The condition that is evaluated to apply the routing rule. For grammar, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-query-language. Defaults to true.
 	// +kubebuilder:validation:Optional
 	Condition *string `json:"condition,omitempty" tf:"condition,omitempty"`
 
@@ -125,8 +125,8 @@ type IOTHubRouteStatus struct {
 // +kubebuilder:storageversion
 
 // IOTHubRoute is the Schema for the IOTHubRoutes API. Manages an IotHub Route
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

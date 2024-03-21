@@ -21,9 +21,9 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     location: West Europe
-    sharedAccessKeyName: ${azurerm_iothub.example.shared_access_policy.0.key_name}
+    sharedAccessKeyName: ${azurerm_iothub.example.shared_access_policy[0].key_name}
     sharedAccessKeySecretRef:
-      key: attribute.shared_access_policy.0.primary_key
+      key: attribute.shared_access_policy[0].primary_key
       name: example-iothub
       namespace: upbound-system
 

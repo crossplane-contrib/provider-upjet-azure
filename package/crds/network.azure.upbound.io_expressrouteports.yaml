@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -125,6 +125,10 @@ spec:
                           description: The ID of the Key Vault Secret that contains
                             the MACSec CKN key for this Express Route Port Link.
                           type: string
+                        macsecSciEnabled:
+                          description: Should Secure Channel Identifier on the Express
+                            Route Port Link be enabled? Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   link2:
@@ -148,6 +152,10 @@ spec:
                           description: The ID of the Key Vault Secret that contains
                             the MACSec CKN key for this Express Route Port Link.
                           type: string
+                        macsecSciEnabled:
+                          description: Should Secure Channel Identifier on the Express
+                            Route Port Link be enabled? Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   location:
@@ -313,6 +321,10 @@ spec:
                           description: The ID of the Key Vault Secret that contains
                             the MACSec CKN key for this Express Route Port Link.
                           type: string
+                        macsecSciEnabled:
+                          description: Should Secure Channel Identifier on the Express
+                            Route Port Link be enabled? Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   link2:
@@ -336,6 +348,10 @@ spec:
                           description: The ID of the Key Vault Secret that contains
                             the MACSec CKN key for this Express Route Port Link.
                           type: string
+                        macsecSciEnabled:
+                          description: Should Secure Channel Identifier on the Express
+                            Route Port Link be enabled? Defaults to false.
+                          type: boolean
                       type: object
                     type: array
                   location:
@@ -616,6 +632,10 @@ spec:
                           description: The ID of the Key Vault Secret that contains
                             the MACSec CKN key for this Express Route Port Link.
                           type: string
+                        macsecSciEnabled:
+                          description: Should Secure Channel Identifier on the Express
+                            Route Port Link be enabled? Defaults to false.
+                          type: boolean
                         patchPanelId:
                           description: The ID that maps from the Express Route Port
                             Link to the patch panel port.
@@ -662,6 +682,10 @@ spec:
                           description: The ID of the Key Vault Secret that contains
                             the MACSec CKN key for this Express Route Port Link.
                           type: string
+                        macsecSciEnabled:
+                          description: Should Secure Channel Identifier on the Express
+                            Route Port Link be enabled? Defaults to false.
+                          type: boolean
                         patchPanelId:
                           description: The ID that maps from the Express Route Port
                             Link to the patch panel port.

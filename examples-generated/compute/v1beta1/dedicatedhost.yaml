@@ -11,7 +11,7 @@ spec:
     dedicatedHostGroupId: ${azurerm_dedicated_host_group.example.id}
     location: West Europe
     platformFaultDomain: 1
-    skuName: DSv3-Type1
+    skuName: DSv3-Type3
 
 ---
 

@@ -233,6 +233,13 @@ type BackupPolicyVMRetentionMonthlyInitParameters struct {
 	// The number of monthly backups to keep. Must be between 1 and 9999
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
+	// The days of the month to retain backups of. Must be between 1 and 31.
+	// +listType=set
+	Days []*float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Including the last day of the month, default to false.
+	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
+
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +listType=set
 	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
@@ -246,6 +253,13 @@ type BackupPolicyVMRetentionMonthlyObservation struct {
 
 	// The number of monthly backups to keep. Must be between 1 and 9999
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The days of the month to retain backups of. Must be between 1 and 31.
+	// +listType=set
+	Days []*float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Including the last day of the month, default to false.
+	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
 
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +listType=set
@@ -262,15 +276,24 @@ type BackupPolicyVMRetentionMonthlyParameters struct {
 	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count" tf:"count,omitempty"`
 
+	// The days of the month to retain backups of. Must be between 1 and 31.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Days []*float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Including the last day of the month, default to false.
+	// +kubebuilder:validation:Optional
+	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
+
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
+	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
 type BackupPolicyVMRetentionWeeklyInitParameters struct {
@@ -310,6 +333,13 @@ type BackupPolicyVMRetentionYearlyInitParameters struct {
 	// The number of yearly backups to keep. Must be between 1 and 9999
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
 
+	// The days of the month to retain backups of. Must be between 1 and 31.
+	// +listType=set
+	Days []*float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Including the last day of the month, default to false.
+	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
+
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
 	// +listType=set
 	Months []*string `json:"months,omitempty" tf:"months,omitempty"`
@@ -327,6 +357,13 @@ type BackupPolicyVMRetentionYearlyObservation struct {
 
 	// The number of yearly backups to keep. Must be between 1 and 9999
 	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The days of the month to retain backups of. Must be between 1 and 31.
+	// +listType=set
+	Days []*float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Including the last day of the month, default to false.
+	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
 
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
 	// +listType=set
@@ -347,6 +384,15 @@ type BackupPolicyVMRetentionYearlyParameters struct {
 	// +kubebuilder:validation:Optional
 	Count *float64 `json:"count" tf:"count,omitempty"`
 
+	// The days of the month to retain backups of. Must be between 1 and 31.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	Days []*float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Including the last day of the month, default to false.
+	// +kubebuilder:validation:Optional
+	IncludeLastDays *bool `json:"includeLastDays,omitempty" tf:"include_last_days,omitempty"`
+
 	// The months of the year to retain backups of. Must be one of January, February, March, April, May, June, July, August, September, October, November and December.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -355,12 +401,12 @@ type BackupPolicyVMRetentionYearlyParameters struct {
 	// The weekday backups to retain . Must be one of Sunday, Monday, Tuesday, Wednesday, Thursday, Friday or Saturday.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Weekdays []*string `json:"weekdays" tf:"weekdays,omitempty"`
+	Weekdays []*string `json:"weekdays,omitempty" tf:"weekdays,omitempty"`
 
 	// The weeks of the month to retain backups of. Must be one of First, Second, Third, Fourth, Last.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	Weeks []*string `json:"weeks" tf:"weeks,omitempty"`
+	Weeks []*string `json:"weeks,omitempty" tf:"weeks,omitempty"`
 }
 
 type InstantRestoreResourceGroupInitParameters struct {
@@ -420,8 +466,8 @@ type BackupPolicyVMStatus struct {
 // +kubebuilder:storageversion
 
 // BackupPolicyVM is the Schema for the BackupPolicyVMs API. Manages an Azure Backup VM Backup Policy.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

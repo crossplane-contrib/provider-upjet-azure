@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -409,12 +409,28 @@ spec:
                           type: object
                       type: object
                     type: array
+                  featureStore:
+                    description: A feature_store block as defined below.
+                    items:
+                      properties:
+                        computerSparkRuntimeVersion:
+                          description: The version of Spark runtime.
+                          type: string
+                        offlineConnectionName:
+                          description: The name of offline store connection.
+                          type: string
+                        onlineConnectionName:
+                          description: The name of online store connection.
+                          type: string
+                      type: object
+                    type: array
                   friendlyName:
                     description: Display name for this Machine Learning Workspace.
                     type: string
                   highBusinessImpact:
                     description: Flag to signal High Business Impact (HBI) data in
-                      the workspace and reduce diagnostic data collected by the service
+                      the workspace and reduce diagnostic data collected by the service.
+                      Changing this forces a new resource to be created.
                     type: boolean
                   identity:
                     description: An identity block as defined below.
@@ -518,11 +534,26 @@ spec:
                             type: string
                         type: object
                     type: object
+                  kind:
+                    description: The type of the Workspace. Possible values are Default,
+                      FeatureStore. Defaults to Default
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Machine Learning Workspace should exist. Changing this forces
                       a new resource to be created.
                     type: string
+                  managedNetwork:
+                    description: A managed_network block as defined below.
+                    items:
+                      properties:
+                        isolationMode:
+                          description: The isolation mode of the Machine Learning
+                            Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound,
+                            and AllowInternetOutbound
+                          type: string
+                      type: object
+                    type: array
                   primaryUserAssignedIdentity:
                     description: The user assigned identity id that represents the
                       workspace identity.
@@ -695,7 +726,7 @@ spec:
                     type: object
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
-                      values are Basic. Defaults to Basic.
+                      values are Free, Basic, Standard and Premium. Defaults to Basic.
                     type: string
                   storageAccountId:
                     description: The ID of the Storage Account associated with this
@@ -1137,12 +1168,28 @@ spec:
                           type: object
                       type: object
                     type: array
+                  featureStore:
+                    description: A feature_store block as defined below.
+                    items:
+                      properties:
+                        computerSparkRuntimeVersion:
+                          description: The version of Spark runtime.
+                          type: string
+                        offlineConnectionName:
+                          description: The name of offline store connection.
+                          type: string
+                        onlineConnectionName:
+                          description: The name of online store connection.
+                          type: string
+                      type: object
+                    type: array
                   friendlyName:
                     description: Display name for this Machine Learning Workspace.
                     type: string
                   highBusinessImpact:
                     description: Flag to signal High Business Impact (HBI) data in
-                      the workspace and reduce diagnostic data collected by the service
+                      the workspace and reduce diagnostic data collected by the service.
+                      Changing this forces a new resource to be created.
                     type: boolean
                   identity:
                     description: An identity block as defined below.
@@ -1246,11 +1293,26 @@ spec:
                             type: string
                         type: object
                     type: object
+                  kind:
+                    description: The type of the Workspace. Possible values are Default,
+                      FeatureStore. Defaults to Default
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Machine Learning Workspace should exist. Changing this forces
                       a new resource to be created.
                     type: string
+                  managedNetwork:
+                    description: A managed_network block as defined below.
+                    items:
+                      properties:
+                        isolationMode:
+                          description: The isolation mode of the Machine Learning
+                            Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound,
+                            and AllowInternetOutbound
+                          type: string
+                      type: object
+                    type: array
                   primaryUserAssignedIdentity:
                     description: The user assigned identity id that represents the
                       workspace identity.
@@ -1342,7 +1404,7 @@ spec:
                     type: boolean
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
-                      values are Basic. Defaults to Basic.
+                      values are Free, Basic, Standard and Premium. Defaults to Basic.
                     type: string
                   storageAccountId:
                     description: The ID of the Storage Account associated with this
@@ -1652,12 +1714,28 @@ spec:
                           type: string
                       type: object
                     type: array
+                  featureStore:
+                    description: A feature_store block as defined below.
+                    items:
+                      properties:
+                        computerSparkRuntimeVersion:
+                          description: The version of Spark runtime.
+                          type: string
+                        offlineConnectionName:
+                          description: The name of offline store connection.
+                          type: string
+                        onlineConnectionName:
+                          description: The name of online store connection.
+                          type: string
+                      type: object
+                    type: array
                   friendlyName:
                     description: Display name for this Machine Learning Workspace.
                     type: string
                   highBusinessImpact:
                     description: Flag to signal High Business Impact (HBI) data in
-                      the workspace and reduce diagnostic data collected by the service
+                      the workspace and reduce diagnostic data collected by the service.
+                      Changing this forces a new resource to be created.
                     type: boolean
                   id:
                     description: The ID of the Machine Learning Workspace.
@@ -1698,11 +1776,26 @@ spec:
                       Learning Workspace. Changing this forces a new resource to be
                       created.
                     type: string
+                  kind:
+                    description: The type of the Workspace. Possible values are Default,
+                      FeatureStore. Defaults to Default
+                    type: string
                   location:
                     description: Specifies the supported Azure location where the
                       Machine Learning Workspace should exist. Changing this forces
                       a new resource to be created.
                     type: string
+                  managedNetwork:
+                    description: A managed_network block as defined below.
+                    items:
+                      properties:
+                        isolationMode:
+                          description: The isolation mode of the Machine Learning
+                            Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound,
+                            and AllowInternetOutbound
+                          type: string
+                      type: object
+                    type: array
                   primaryUserAssignedIdentity:
                     description: The user assigned identity id that represents the
                       workspace identity.
@@ -1723,7 +1816,7 @@ spec:
                     type: string
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
-                      values are Basic. Defaults to Basic.
+                      values are Free, Basic, Standard and Premium. Defaults to Basic.
                     type: string
                   storageAccountId:
                     description: The ID of the Storage Account associated with this

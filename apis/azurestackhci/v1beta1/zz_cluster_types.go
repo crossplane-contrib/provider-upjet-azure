@@ -15,6 +15,9 @@ import (
 
 type ClusterInitParameters struct {
 
+	// The ID of the Automanage Configuration assigned to the Azure Stack HCI Cluster.
+	AutomanageConfigurationID *string `json:"automanageConfigurationId,omitempty" tf:"automanage_configuration_id,omitempty"`
+
 	// The Client ID of the Azure Active Directory which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
@@ -30,6 +33,9 @@ type ClusterInitParameters struct {
 }
 
 type ClusterObservation struct {
+
+	// The ID of the Automanage Configuration assigned to the Azure Stack HCI Cluster.
+	AutomanageConfigurationID *string `json:"automanageConfigurationId,omitempty" tf:"automanage_configuration_id,omitempty"`
 
 	// The Client ID of the Azure Active Directory which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
@@ -52,6 +58,10 @@ type ClusterObservation struct {
 }
 
 type ClusterParameters struct {
+
+	// The ID of the Automanage Configuration assigned to the Azure Stack HCI Cluster.
+	// +kubebuilder:validation:Optional
+	AutomanageConfigurationID *string `json:"automanageConfigurationId,omitempty" tf:"automanage_configuration_id,omitempty"`
 
 	// The Client ID of the Azure Active Directory which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -112,8 +122,8 @@ type ClusterStatus struct {
 // +kubebuilder:storageversion
 
 // Cluster is the Schema for the Clusters API. Manages an Azure Stack HCI Cluster.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

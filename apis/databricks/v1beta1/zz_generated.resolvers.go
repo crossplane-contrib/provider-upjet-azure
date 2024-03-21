@@ -13,6 +13,7 @@ import (
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
+	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -203,6 +204,75 @@ func (mg *Workspace) ResolveReferences(ctx context.Context, c client.Reader) err
 
 // ResolveReferences of this WorkspaceCustomerManagedKey.
 func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.KeyVaultKeyID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.KeyVaultKeyIDRef,
+			Selector:     mg.Spec.ForProvider.KeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.KeyVaultKeyID")
+	}
+	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.WorkspaceID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.WorkspaceIDRef,
+			Selector:     mg.Spec.ForProvider.WorkspaceIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.WorkspaceID")
+	}
+	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.KeyVaultKeyID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.KeyVaultKeyIDRef,
+			Selector:     mg.Spec.InitProvider.KeyVaultKeyIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.KeyVaultKeyID")
+	}
+	mg.Spec.InitProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this WorkspaceRootDbfsCustomerManagedKey.
+func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
 	var l xpresource.ManagedList
 	r := reference.NewAPIResolver(c, mg)

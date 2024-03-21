@@ -112,6 +112,64 @@ type EncryptionParameters struct {
 	UserAssignedIdentityIDSelector *v1.Selector `json:"userAssignedIdentityIdSelector,omitempty" tf:"-"`
 }
 
+type FeatureStoreInitParameters struct {
+
+	// The version of Spark runtime.
+	ComputerSparkRuntimeVersion *string `json:"computerSparkRuntimeVersion,omitempty" tf:"computer_spark_runtime_version,omitempty"`
+
+	// The name of offline store connection.
+	OfflineConnectionName *string `json:"offlineConnectionName,omitempty" tf:"offline_connection_name,omitempty"`
+
+	// The name of online store connection.
+	OnlineConnectionName *string `json:"onlineConnectionName,omitempty" tf:"online_connection_name,omitempty"`
+}
+
+type FeatureStoreObservation struct {
+
+	// The version of Spark runtime.
+	ComputerSparkRuntimeVersion *string `json:"computerSparkRuntimeVersion,omitempty" tf:"computer_spark_runtime_version,omitempty"`
+
+	// The name of offline store connection.
+	OfflineConnectionName *string `json:"offlineConnectionName,omitempty" tf:"offline_connection_name,omitempty"`
+
+	// The name of online store connection.
+	OnlineConnectionName *string `json:"onlineConnectionName,omitempty" tf:"online_connection_name,omitempty"`
+}
+
+type FeatureStoreParameters struct {
+
+	// The version of Spark runtime.
+	// +kubebuilder:validation:Optional
+	ComputerSparkRuntimeVersion *string `json:"computerSparkRuntimeVersion,omitempty" tf:"computer_spark_runtime_version,omitempty"`
+
+	// The name of offline store connection.
+	// +kubebuilder:validation:Optional
+	OfflineConnectionName *string `json:"offlineConnectionName,omitempty" tf:"offline_connection_name,omitempty"`
+
+	// The name of online store connection.
+	// +kubebuilder:validation:Optional
+	OnlineConnectionName *string `json:"onlineConnectionName,omitempty" tf:"online_connection_name,omitempty"`
+}
+
+type ManagedNetworkInitParameters struct {
+
+	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
+type ManagedNetworkObservation struct {
+
+	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
+type ManagedNetworkParameters struct {
+
+	// The isolation mode of the Machine Learning Workspace. Possible values are Disabled, AllowOnlyApprovedOutbound, and AllowInternetOutbound
+	// +kubebuilder:validation:Optional
+	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
+}
+
 type WorkspaceIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
@@ -174,10 +232,13 @@ type WorkspaceInitParameters struct {
 	// An encryption block as defined below. Changing this forces a new resource to be created.
 	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
+	// A feature_store block as defined below.
+	FeatureStore []FeatureStoreInitParameters `json:"featureStore,omitempty" tf:"feature_store,omitempty"`
+
 	// Display name for this Machine Learning Workspace.
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
 
-	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service
+	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service. Changing this forces a new resource to be created.
 	HighBusinessImpact *bool `json:"highBusinessImpact,omitempty" tf:"high_business_impact,omitempty"`
 
 	// An identity block as defined below.
@@ -199,8 +260,14 @@ type WorkspaceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
+	// The type of the Workspace. Possible values are Default, FeatureStore. Defaults to Default
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
 	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A managed_network block as defined below.
+	ManagedNetwork []ManagedNetworkInitParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
@@ -221,7 +288,7 @@ type WorkspaceInitParameters struct {
 	// Enable public access when this Machine Learning Workspace is behind VNet.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// SKU/edition of the Machine Learning Workspace, possible values are Basic. Defaults to Basic.
+	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The ID of the Storage Account associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
@@ -262,10 +329,13 @@ type WorkspaceObservation struct {
 	// An encryption block as defined below. Changing this forces a new resource to be created.
 	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
+	// A feature_store block as defined below.
+	FeatureStore []FeatureStoreObservation `json:"featureStore,omitempty" tf:"feature_store,omitempty"`
+
 	// Display name for this Machine Learning Workspace.
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
 
-	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service
+	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service. Changing this forces a new resource to be created.
 	HighBusinessImpact *bool `json:"highBusinessImpact,omitempty" tf:"high_business_impact,omitempty"`
 
 	// The ID of the Machine Learning Workspace.
@@ -280,8 +350,14 @@ type WorkspaceObservation struct {
 	// The ID of key vault associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
+	// The type of the Workspace. Possible values are Default, FeatureStore. Defaults to Default
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
 	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A managed_network block as defined below.
+	ManagedNetwork []ManagedNetworkObservation `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
 	PrimaryUserAssignedIdentity *string `json:"primaryUserAssignedIdentity,omitempty" tf:"primary_user_assigned_identity,omitempty"`
@@ -295,7 +371,7 @@ type WorkspaceObservation struct {
 	// Specifies the name of the Resource Group in which the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// SKU/edition of the Machine Learning Workspace, possible values are Basic. Defaults to Basic.
+	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The ID of the Storage Account associated with this Machine Learning Workspace. Changing this forces a new resource to be created.
@@ -340,11 +416,15 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
+	// A feature_store block as defined below.
+	// +kubebuilder:validation:Optional
+	FeatureStore []FeatureStoreParameters `json:"featureStore,omitempty" tf:"feature_store,omitempty"`
+
 	// Display name for this Machine Learning Workspace.
 	// +kubebuilder:validation:Optional
 	FriendlyName *string `json:"friendlyName,omitempty" tf:"friendly_name,omitempty"`
 
-	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service
+	// Flag to signal High Business Impact (HBI) data in the workspace and reduce diagnostic data collected by the service. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HighBusinessImpact *bool `json:"highBusinessImpact,omitempty" tf:"high_business_impact,omitempty"`
 
@@ -370,9 +450,17 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
+	// The type of the Workspace. Possible values are Default, FeatureStore. Defaults to Default
+	// +kubebuilder:validation:Optional
+	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
+
 	// Specifies the supported Azure location where the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// A managed_network block as defined below.
+	// +kubebuilder:validation:Optional
+	ManagedNetwork []ManagedNetworkParameters `json:"managedNetwork,omitempty" tf:"managed_network,omitempty"`
 
 	// The user assigned identity id that represents the workspace identity.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
@@ -409,7 +497,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// SKU/edition of the Machine Learning Workspace, possible values are Basic. Defaults to Basic.
+	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -465,8 +553,8 @@ type WorkspaceStatus struct {
 // +kubebuilder:storageversion
 
 // Workspace is the Schema for the Workspaces API. Manages a Azure Machine Learning Workspace.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -159,7 +159,7 @@ spec:
                           description: 'The time after which the Block Blobs created
                             will be copies to the destination. Possible values are
                             OnlyNewObjects, Everything and time in RFC3339 format:
-                            2006-01-02T15:04:00Z.'
+                            2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.'
                           type: string
                         destinationContainerName:
                           description: The destination storage container name. Changing
@@ -508,7 +508,7 @@ spec:
                           description: 'The time after which the Block Blobs created
                             will be copies to the destination. Possible values are
                             OnlyNewObjects, Everything and time in RFC3339 format:
-                            2006-01-02T15:04:00Z.'
+                            2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.'
                           type: string
                         destinationContainerName:
                           description: The destination storage container name. Changing
@@ -955,7 +955,7 @@ spec:
                           description: 'The time after which the Block Blobs created
                             will be copies to the destination. Possible values are
                             OnlyNewObjects, Everything and time in RFC3339 format:
-                            2006-01-02T15:04:00Z.'
+                            2006-01-02T15:04:00Z. Defaults to OnlyNewObjects.'
                           type: string
                         destinationContainerName:
                           description: The destination storage container name. Changing

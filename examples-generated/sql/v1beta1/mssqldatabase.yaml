@@ -4,11 +4,12 @@ metadata:
   annotations:
     meta.upbound.io/example-id: sql/v1beta1/mssqldatabase
   labels:
-    testing.upbound.io/example-name: test
-  name: test
+    testing.upbound.io/example-name: example
+  name: example
 spec:
   forProvider:
     collation: SQL_Latin1_General_CP1_CI_AS
+    enclaveType: VBS
     licenseType: LicenseIncluded
     maxSizeGb: 4
     readScale: true

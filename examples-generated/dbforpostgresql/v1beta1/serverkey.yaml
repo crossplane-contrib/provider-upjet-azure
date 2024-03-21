@@ -89,7 +89,7 @@ spec:
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    objectId: ${azurerm_postgresql_server.example.identity.0.principal_id}
+    objectId: ${azurerm_postgresql_server.example.identity[0].principal_id}
     secretPermissions:
     - Get
     tenantId: ${data.azurerm_client_config.current.tenant_id}

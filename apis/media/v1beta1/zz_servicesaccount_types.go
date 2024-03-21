@@ -21,7 +21,7 @@ type EncryptionInitParameters struct {
 	// A managed_identity block as defined below.
 	ManagedIdentity []ManagedIdentityInitParameters `json:"managedIdentity,omitempty" tf:"managed_identity,omitempty"`
 
-	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey.
+	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey. Defaults to SystemKey.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -36,7 +36,7 @@ type EncryptionObservation struct {
 	// A managed_identity block as defined below.
 	ManagedIdentity []ManagedIdentityObservation `json:"managedIdentity,omitempty" tf:"managed_identity,omitempty"`
 
-	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey.
+	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey. Defaults to SystemKey.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
@@ -50,7 +50,7 @@ type EncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	ManagedIdentity []ManagedIdentityParameters `json:"managedIdentity,omitempty" tf:"managed_identity,omitempty"`
 
-	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey.
+	// Specifies the type of key used to encrypt the account data. Possible values are SystemKey and CustomerKey. Defaults to SystemKey.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -381,8 +381,8 @@ type ServicesAccountStatus struct {
 // +kubebuilder:storageversion
 
 // ServicesAccount is the Schema for the ServicesAccounts API. Manages a Media Services Account.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -113,8 +113,8 @@ type FrontdoorCustomDomainAssociationStatus struct {
 // +kubebuilder:storageversion
 
 // FrontdoorCustomDomainAssociation is the Schema for the FrontdoorCustomDomainAssociations API. Manages the association between a Front Door (standard/premium) Custom Domain and one or more Front Door (standard/premium) Routes.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

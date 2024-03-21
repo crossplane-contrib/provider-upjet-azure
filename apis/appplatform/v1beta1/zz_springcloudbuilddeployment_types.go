@@ -47,6 +47,9 @@ type SpringCloudBuildDeploymentInitParameters struct {
 	// A JSON object that contains the addon configurations of the Spring Cloud Build Deployment.
 	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
 
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
+
 	// The ID of the Spring Cloud Build Result.
 	BuildResultID *string `json:"buildResultId,omitempty" tf:"build_result_id,omitempty"`
 
@@ -65,6 +68,9 @@ type SpringCloudBuildDeploymentObservation struct {
 
 	// A JSON object that contains the addon configurations of the Spring Cloud Build Deployment.
 	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
 
 	// The ID of the Spring Cloud Build Result.
 	BuildResultID *string `json:"buildResultId,omitempty" tf:"build_result_id,omitempty"`
@@ -91,6 +97,10 @@ type SpringCloudBuildDeploymentParameters struct {
 	// A JSON object that contains the addon configurations of the Spring Cloud Build Deployment.
 	// +kubebuilder:validation:Optional
 	AddonJSON *string `json:"addonJson,omitempty" tf:"addon_json,omitempty"`
+
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	// +kubebuilder:validation:Optional
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
 
 	// The ID of the Spring Cloud Build Result.
 	// +kubebuilder:validation:Optional
@@ -152,8 +162,8 @@ type SpringCloudBuildDeploymentStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudBuildDeployment is the Schema for the SpringCloudBuildDeployments API. Manages a Spring Cloud Build Deployment.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

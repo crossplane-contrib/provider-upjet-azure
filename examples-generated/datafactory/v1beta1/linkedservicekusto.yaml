@@ -96,13 +96,13 @@ spec:
     databaseNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    principalId: ${azurerm_data_factory.example.identity.0.principal_id}
+    principalId: ${azurerm_data_factory.example.identity[0].principal_id}
     principalType: App
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     role: Viewer
-    tenantId: ${azurerm_data_factory.example.identity.0.tenant_id}
+    tenantId: ${azurerm_data_factory.example.identity[0].tenant_id}
 
 ---
 

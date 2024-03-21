@@ -119,7 +119,7 @@ type RedisCacheInitParameters struct {
 	// Whether or not public network access is allowed for this Redis Cache. true means this resource could be accessed by both public and private endpoint. false means only private endpoint access is allowed. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
+	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	RedisConfiguration []RedisConfigurationInitParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
 	// Redis version. Only major version needed. Valid values: 4, 6.
@@ -201,7 +201,7 @@ type RedisCacheObservation struct {
 	// Whether or not public network access is allowed for this Redis Cache. true means this resource could be accessed by both public and private endpoint. false means only private endpoint access is allowed. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
+	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	RedisConfiguration []RedisConfigurationObservation `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
 	// Redis version. Only major version needed. Valid values: 4, 6.
@@ -279,7 +279,7 @@ type RedisCacheParameters struct {
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// A redis_configuration as defined below - with some limitations by SKU - defaults/details are shown below.
+	// A redis_configuration block as defined below - with some limitations by SKU - defaults/details are shown below.
 	// +kubebuilder:validation:Optional
 	RedisConfiguration []RedisConfigurationParameters `json:"redisConfiguration,omitempty" tf:"redis_configuration,omitempty"`
 
@@ -348,8 +348,14 @@ type RedisCacheParameters struct {
 
 type RedisConfigurationInitParameters struct {
 
+	// Enable Microsoft Entra (AAD) authentication. Defaults to false.
+	ActiveDirectoryAuthenticationEnabled *bool `json:"activeDirectoryAuthenticationEnabled,omitempty" tf:"active_directory_authentication_enabled,omitempty"`
+
 	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
+
+	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
+	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
 
 	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	EnableAuthentication *bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
@@ -360,7 +366,7 @@ type RedisConfigurationInitParameters struct {
 	// The max-memory delta for this Redis instance. Defaults are shown below.
 	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
 
-	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
+	// How Redis will select what to remove when maxmemory is reached. Defaults to volatile-lru.
 	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
 
 	// Value in megabytes reserved for non-cache usage e.g. failover. Defaults are shown below.
@@ -377,12 +383,21 @@ type RedisConfigurationInitParameters struct {
 
 	// The maximum number of snapshots to create as a backup. Only supported for Premium SKUs.
 	RdbBackupMaxSnapshotCount *float64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty"`
+
+	// The ID of the Subscription containing the Storage Account.
+	StorageAccountSubscriptionID *string `json:"storageAccountSubscriptionId,omitempty" tf:"storage_account_subscription_id,omitempty"`
 }
 
 type RedisConfigurationObservation struct {
 
+	// Enable Microsoft Entra (AAD) authentication. Defaults to false.
+	ActiveDirectoryAuthenticationEnabled *bool `json:"activeDirectoryAuthenticationEnabled,omitempty" tf:"active_directory_authentication_enabled,omitempty"`
+
 	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
+
+	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
+	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
 
 	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	EnableAuthentication *bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
@@ -396,7 +411,7 @@ type RedisConfigurationObservation struct {
 	// The max-memory delta for this Redis instance. Defaults are shown below.
 	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
 
-	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
+	// How Redis will select what to remove when maxmemory is reached. Defaults to volatile-lru.
 	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
 
 	// Value in megabytes reserved for non-cache usage e.g. failover. Defaults are shown below.
@@ -413,9 +428,16 @@ type RedisConfigurationObservation struct {
 
 	// The maximum number of snapshots to create as a backup. Only supported for Premium SKUs.
 	RdbBackupMaxSnapshotCount *float64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty"`
+
+	// The ID of the Subscription containing the Storage Account.
+	StorageAccountSubscriptionID *string `json:"storageAccountSubscriptionId,omitempty" tf:"storage_account_subscription_id,omitempty"`
 }
 
 type RedisConfigurationParameters struct {
+
+	// Enable Microsoft Entra (AAD) authentication. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ActiveDirectoryAuthenticationEnabled *bool `json:"activeDirectoryAuthenticationEnabled,omitempty" tf:"active_directory_authentication_enabled,omitempty"`
 
 	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -429,6 +451,10 @@ type RedisConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
 
+	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
+	// +kubebuilder:validation:Optional
+	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
+
 	// If set to false, the Redis instance will be accessible without authentication. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableAuthentication *bool `json:"enableAuthentication,omitempty" tf:"enable_authentication,omitempty"`
@@ -441,7 +467,7 @@ type RedisConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxmemoryDelta *float64 `json:"maxmemoryDelta,omitempty" tf:"maxmemory_delta,omitempty"`
 
-	// How Redis will select what to remove when maxmemory is reached. Defaults are shown below. Defaults to volatile-lru.
+	// How Redis will select what to remove when maxmemory is reached. Defaults to volatile-lru.
 	// +kubebuilder:validation:Optional
 	MaxmemoryPolicy *string `json:"maxmemoryPolicy,omitempty" tf:"maxmemory_policy,omitempty"`
 
@@ -468,6 +494,10 @@ type RedisConfigurationParameters struct {
 	// The Connection String to the Storage Account. Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=${azurerm_storage_account.example.primary_blob_endpoint};AccountName=${azurerm_storage_account.example.name};AccountKey=${azurerm_storage_account.example.primary_access_key}.
 	// +kubebuilder:validation:Optional
 	RdbStorageConnectionStringSecretRef *v1.SecretKeySelector `json:"rdbStorageConnectionStringSecretRef,omitempty" tf:"-"`
+
+	// The ID of the Subscription containing the Storage Account.
+	// +kubebuilder:validation:Optional
+	StorageAccountSubscriptionID *string `json:"storageAccountSubscriptionId,omitempty" tf:"storage_account_subscription_id,omitempty"`
 }
 
 // RedisCacheSpec defines the desired state of RedisCache
@@ -498,8 +528,8 @@ type RedisCacheStatus struct {
 // +kubebuilder:storageversion
 
 // RedisCache is the Schema for the RedisCaches API. Manages a Redis Cache
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -74,8 +74,7 @@ spec:
               forProvider:
                 properties:
                   aadAdmin:
-                    description: An aad_admin block as defined below. Conflicts with
-                      customer_managed_key.
+                    description: An aad_admin block as defined below.
                     items:
                       properties:
                         login:
@@ -121,6 +120,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  azureadAuthenticationOnly:
+                    description: Is Azure Active Directory Authentication the only
+                      way to authenticate with resources inside this synapse Workspace.
+                      Defaults to false.
+                    type: boolean
                   computeSubnetId:
                     description: Subnet ID used for computes in workspace Changing
                       this forces a new resource to be created.
@@ -200,8 +204,7 @@ spec:
                         type: object
                     type: object
                   customerManagedKey:
-                    description: A customer_managed_key block as defined below. Conflicts
-                      with aad_admin.
+                    description: A customer_managed_key block as defined below.
                     items:
                       properties:
                         keyName:
@@ -290,6 +293,10 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        userAssignedIdentityId:
+                          description: The User Assigned Identity ID to be used for
+                            accessing the Customer Managed Key for encryption.
+                          type: string
                       type: object
                     type: array
                   dataExfiltrationProtectionEnabled:
@@ -672,8 +679,7 @@ spec:
                   autoscaler.
                 properties:
                   aadAdmin:
-                    description: An aad_admin block as defined below. Conflicts with
-                      customer_managed_key.
+                    description: An aad_admin block as defined below.
                     items:
                       properties:
                         login:
@@ -719,6 +725,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  azureadAuthenticationOnly:
+                    description: Is Azure Active Directory Authentication the only
+                      way to authenticate with resources inside this synapse Workspace.
+                      Defaults to false.
+                    type: boolean
                   computeSubnetId:
                     description: Subnet ID used for computes in workspace Changing
                       this forces a new resource to be created.
@@ -798,8 +809,7 @@ spec:
                         type: object
                     type: object
                   customerManagedKey:
-                    description: A customer_managed_key block as defined below. Conflicts
-                      with aad_admin.
+                    description: A customer_managed_key block as defined below.
                     items:
                       properties:
                         keyName:
@@ -888,6 +898,10 @@ spec:
                                   type: string
                               type: object
                           type: object
+                        userAssignedIdentityId:
+                          description: The User Assigned Identity ID to be used for
+                            accessing the Customer Managed Key for encryption.
+                          type: string
                       type: object
                     type: array
                   dataExfiltrationProtectionEnabled:
@@ -1334,8 +1348,7 @@ spec:
               atProvider:
                 properties:
                   aadAdmin:
-                    description: An aad_admin block as defined below. Conflicts with
-                      customer_managed_key.
+                    description: An aad_admin block as defined below.
                     items:
                       properties:
                         login:
@@ -1381,6 +1394,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  azureadAuthenticationOnly:
+                    description: Is Azure Active Directory Authentication the only
+                      way to authenticate with resources inside this synapse Workspace.
+                      Defaults to false.
+                    type: boolean
                   computeSubnetId:
                     description: Subnet ID used for computes in workspace Changing
                       this forces a new resource to be created.
@@ -1393,8 +1411,7 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   customerManagedKey:
-                    description: A customer_managed_key block as defined below. Conflicts
-                      with aad_admin.
+                    description: A customer_managed_key block as defined below.
                     items:
                       properties:
                         keyName:
@@ -1406,6 +1423,10 @@ spec:
                           description: The Azure Key Vault Key Versionless ID to be
                             used as the Customer Managed Key (CMK) for double encryption
                             (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
+                          type: string
+                        userAssignedIdentityId:
+                          description: The User Assigned Identity ID to be used for
+                            accessing the Customer Managed Key for encryption.
                           type: string
                       type: object
                     type: array

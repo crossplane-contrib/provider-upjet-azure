@@ -18,7 +18,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionInitParameters struct {
 	// Name of the dimension.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Operator for dimension values, - 'Include'.
+	// Operator for dimension values, - 'Include'. Defaults to Include.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// List of dimension values.
@@ -30,7 +30,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionObservation struct {
 	// Name of the dimension.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Operator for dimension values, - 'Include'.
+	// Operator for dimension values, - 'Include'. Defaults to Include.
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// List of dimension values.
@@ -43,7 +43,7 @@ type MonitorScheduledQueryRulesLogCriteriaDimensionParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Operator for dimension values, - 'Include'.
+	// Operator for dimension values, - 'Include'. Defaults to Include.
 	// +kubebuilder:validation:Optional
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
@@ -90,7 +90,7 @@ type MonitorScheduledQueryRulesLogInitParameters struct {
 	// A criteria block as defined below.
 	Criteria []MonitorScheduledQueryRulesLogCriteriaInitParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
-	// The resource URI over which log search query is to be run.
+	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
@@ -141,7 +141,7 @@ type MonitorScheduledQueryRulesLogObservation struct {
 	// A criteria block as defined below.
 	Criteria []MonitorScheduledQueryRulesLogCriteriaObservation `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
-	// The resource URI over which log search query is to be run.
+	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
 	// The description of the scheduled query rule.
@@ -178,7 +178,7 @@ type MonitorScheduledQueryRulesLogParameters struct {
 	// +kubebuilder:validation:Optional
 	Criteria []MonitorScheduledQueryRulesLogCriteriaParameters `json:"criteria,omitempty" tf:"criteria,omitempty"`
 
-	// The resource URI over which log search query is to be run.
+	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -255,8 +255,8 @@ type MonitorScheduledQueryRulesLogStatus struct {
 // +kubebuilder:storageversion
 
 // MonitorScheduledQueryRulesLog is the Schema for the MonitorScheduledQueryRulesLogs API. Manages a LogToMetricAction Scheduled Query Rules resources within Azure Monitor
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

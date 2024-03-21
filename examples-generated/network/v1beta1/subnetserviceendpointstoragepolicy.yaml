@@ -11,9 +11,20 @@ spec:
     definition:
     - description: definition1
       name: name1
+      service: Microsoft.Storage
       serviceResources:
       - ${azurerm_resource_group.example.id}
       - ${azurerm_storage_account.example.id}
+    - description: definition2
+      name: name2
+      service: Global
+      serviceResources:
+      - /services/Azure
+      - /services/Azure/Batch
+      - /services/Azure/DataFactory
+      - /services/Azure/MachineLearning
+      - /services/Azure/ManagedInstance
+      - /services/Azure/WebPI
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

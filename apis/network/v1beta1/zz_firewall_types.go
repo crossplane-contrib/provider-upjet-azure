@@ -97,6 +97,9 @@ type FirewallIPConfigurationParameters struct {
 
 type FirewallInitParameters struct {
 
+	// Whether DNS proxy is enabled. It will forward DNS requests to the DNS servers when set to true. It will be set to true if dns_servers provided with a not empty list.
+	DNSProxyEnabled *bool `json:"dnsProxyEnabled,omitempty" tf:"dns_proxy_enabled,omitempty"`
+
 	// A list of DNS servers that the Azure Firewall will direct DNS traffic to the for name resolution.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
@@ -138,6 +141,9 @@ type FirewallInitParameters struct {
 }
 
 type FirewallObservation struct {
+
+	// Whether DNS proxy is enabled. It will forward DNS requests to the DNS servers when set to true. It will be set to true if dns_servers provided with a not empty list.
+	DNSProxyEnabled *bool `json:"dnsProxyEnabled,omitempty" tf:"dns_proxy_enabled,omitempty"`
 
 	// A list of DNS servers that the Azure Firewall will direct DNS traffic to the for name resolution.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
@@ -186,6 +192,10 @@ type FirewallObservation struct {
 }
 
 type FirewallParameters struct {
+
+	// Whether DNS proxy is enabled. It will forward DNS requests to the DNS servers when set to true. It will be set to true if dns_servers provided with a not empty list.
+	// +kubebuilder:validation:Optional
+	DNSProxyEnabled *bool `json:"dnsProxyEnabled,omitempty" tf:"dns_proxy_enabled,omitempty"`
 
 	// A list of DNS servers that the Azure Firewall will direct DNS traffic to the for name resolution.
 	// +kubebuilder:validation:Optional
@@ -377,8 +387,8 @@ type FirewallStatus struct {
 // +kubebuilder:storageversion
 
 // Firewall is the Schema for the Firewalls API. Manages an Azure Firewall.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

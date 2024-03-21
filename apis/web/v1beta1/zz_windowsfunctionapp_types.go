@@ -554,7 +554,7 @@ type WindowsFunctionAppAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -606,7 +606,7 @@ type WindowsFunctionAppAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -669,7 +669,7 @@ type WindowsFunctionAppAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	// +kubebuilder:validation:Optional
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
@@ -1025,8 +1025,8 @@ type WindowsFunctionAppAuthSettingsV2InitParameters struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []WindowsFunctionAppAuthSettingsV2CustomOidcV2InitParameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1036,7 +1036,7 @@ type WindowsFunctionAppAuthSettingsV2InitParameters struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []WindowsFunctionAppAuthSettingsV2FacebookV2InitParameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1319,8 +1319,8 @@ type WindowsFunctionAppAuthSettingsV2Observation struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []WindowsFunctionAppAuthSettingsV2CustomOidcV2Observation `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1330,7 +1330,7 @@ type WindowsFunctionAppAuthSettingsV2Observation struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []WindowsFunctionAppAuthSettingsV2FacebookV2Observation `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1406,8 +1406,8 @@ type WindowsFunctionAppAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	CustomOidcV2 []WindowsFunctionAppAuthSettingsV2CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
@@ -1420,7 +1420,7 @@ type WindowsFunctionAppAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	FacebookV2 []WindowsFunctionAppAuthSettingsV2FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	// +kubebuilder:validation:Optional
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
@@ -1749,7 +1749,7 @@ type WindowsFunctionAppInitParameters struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
+	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser. Defaults to Optional.
 	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
@@ -1768,11 +1768,14 @@ type WindowsFunctionAppInitParameters struct {
 	// Is the Windows Function App enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
 	// The runtime version associated with the Function App. Defaults to ~4.
 	// The runtime version associated with the Function App.
 	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
 
-	// Can the Function App only be accessed via HTTPS? Defaults to false.
+	// Can the Function App only be accessed via HTTPS?. Defaults to false.
 	// Can the Function App only be accessed via HTTPS?
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
@@ -1785,6 +1788,9 @@ type WindowsFunctionAppInitParameters struct {
 
 	// The Azure Region where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Should public network access be enabled for the Function App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the App Service Plan within which to create this Function App.
 	// The ID of the App Service Plan within which to create this Function App
@@ -1847,6 +1853,9 @@ type WindowsFunctionAppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
+
 	// The local path and filename of the Zip packaged application to deploy to this Windows Function App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Function App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1` to be set on the App in `app_settings`.
 	ZipDeployFile *string `json:"zipDeployFile,omitempty" tf:"zip_deploy_file,omitempty"`
@@ -1880,7 +1889,7 @@ type WindowsFunctionAppObservation struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
+	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser. Defaults to Optional.
 	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
@@ -1902,11 +1911,14 @@ type WindowsFunctionAppObservation struct {
 	// Is the Windows Function App enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
 	// The runtime version associated with the Function App. Defaults to ~4.
 	// The runtime version associated with the Function App.
 	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
 
-	// Can the Function App only be accessed via HTTPS? Defaults to false.
+	// Can the Function App only be accessed via HTTPS?. Defaults to false.
 	// Can the Function App only be accessed via HTTPS?
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
@@ -1940,6 +1952,9 @@ type WindowsFunctionAppObservation struct {
 
 	// A comma separated list of possible outbound IP addresses as a string. For example 52.23.25.3,52.143.43.12,52.143.43.17. This is a superset of outbound_ip_addresses.
 	PossibleOutboundIPAddresses *string `json:"possibleOutboundIpAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty"`
+
+	// Should public network access be enabled for the Function App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -1975,6 +1990,9 @@ type WindowsFunctionAppObservation struct {
 
 	// The subnet id which will be used by this Function App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 
 	// The local path and filename of the Zip packaged application to deploy to this Windows Function App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Function App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1` to be set on the App in `app_settings`.
@@ -2016,7 +2034,7 @@ type WindowsFunctionAppParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser.
+	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are Required, Optional, and OptionalInteractiveUser. Defaults to Optional.
 	// The mode of the Function App's client certificates requirement for incoming requests. Possible values are `Required`, `Optional`, and `OptionalInteractiveUser`
 	// +kubebuilder:validation:Optional
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
@@ -2040,12 +2058,16 @@ type WindowsFunctionAppParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
 	// The runtime version associated with the Function App. Defaults to ~4.
 	// The runtime version associated with the Function App.
 	// +kubebuilder:validation:Optional
 	FunctionsExtensionVersion *string `json:"functionsExtensionVersion,omitempty" tf:"functions_extension_version,omitempty"`
 
-	// Can the Function App only be accessed via HTTPS? Defaults to false.
+	// Can the Function App only be accessed via HTTPS?. Defaults to false.
 	// Can the Function App only be accessed via HTTPS?
 	// +kubebuilder:validation:Optional
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
@@ -2062,6 +2084,10 @@ type WindowsFunctionAppParameters struct {
 	// The Azure Region where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Should public network access be enabled for the Function App. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Windows Function App should exist. Changing this forces a new Windows Function App to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -2151,6 +2177,10 @@ type WindowsFunctionAppParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
+
 	// The local path and filename of the Zip packaged application to deploy to this Windows Function App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Function App. **Note:** Using this value requires `WEBSITE_RUN_FROM_PACKAGE=1` to be set on the App in `app_settings`.
 	// +kubebuilder:validation:Optional
@@ -2194,7 +2224,7 @@ type WindowsFunctionAppSiteConfigAppServiceLogsParameters struct {
 
 type WindowsFunctionAppSiteConfigApplicationStackInitParameters struct {
 
-	// The version of .NET to use. Possible values include v3.0, v4.0 v6.0 and v7.0.
+	// The version of .NET to use. Possible values include v3.0, v4.0 v6.0, v7.0 and v8.0. Defaults to v4.0.
 	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2221,7 +2251,7 @@ type WindowsFunctionAppSiteConfigApplicationStackInitParameters struct {
 
 type WindowsFunctionAppSiteConfigApplicationStackObservation struct {
 
-	// The version of .NET to use. Possible values include v3.0, v4.0 v6.0 and v7.0.
+	// The version of .NET to use. Possible values include v3.0, v4.0 v6.0, v7.0 and v8.0. Defaults to v4.0.
 	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2248,7 +2278,7 @@ type WindowsFunctionAppSiteConfigApplicationStackObservation struct {
 
 type WindowsFunctionAppSiteConfigApplicationStackParameters struct {
 
-	// The version of .NET to use. Possible values include v3.0, v4.0 v6.0 and v7.0.
+	// The version of .NET to use. Possible values include v3.0, v4.0 v6.0, v7.0 and v8.0. Defaults to v4.0.
 	// The version of .Net. Possible values are `v3.0`, `v4.0`, `v6.0` and `v7.0`
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
@@ -2368,9 +2398,13 @@ type WindowsFunctionAppSiteConfigIPRestrictionHeadersParameters struct {
 
 type WindowsFunctionAppSiteConfigIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsFunctionAppSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2408,9 +2442,13 @@ type WindowsFunctionAppSiteConfigIPRestrictionInitParameters struct {
 
 type WindowsFunctionAppSiteConfigIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsFunctionAppSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2438,10 +2476,15 @@ type WindowsFunctionAppSiteConfigIPRestrictionObservation struct {
 
 type WindowsFunctionAppSiteConfigIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
@@ -2541,6 +2584,9 @@ type WindowsFunctionAppSiteConfigInitParameters struct {
 	// One or more ip_restriction blocks as defined above.
 	IPRestriction []WindowsFunctionAppSiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
@@ -2571,6 +2617,9 @@ type WindowsFunctionAppSiteConfigInitParameters struct {
 
 	// One or more scm_ip_restriction blocks as defined above.
 	ScmIPRestriction []WindowsFunctionAppSiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// Configures the minimum version of TLS required for SSL requests to the SCM site. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
@@ -2659,6 +2708,9 @@ type WindowsFunctionAppSiteConfigObservation struct {
 	// One or more ip_restriction blocks as defined above.
 	IPRestriction []WindowsFunctionAppSiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
@@ -2689,6 +2741,9 @@ type WindowsFunctionAppSiteConfigObservation struct {
 
 	// One or more scm_ip_restriction blocks as defined above.
 	ScmIPRestriction []WindowsFunctionAppSiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// Configures the minimum version of TLS required for SSL requests to the SCM site. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
@@ -2804,6 +2859,10 @@ type WindowsFunctionAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IPRestriction []WindowsFunctionAppSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	// The Site load balancing mode. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// The Site load balancing mode. Possible values include: `WeightedRoundRobin`, `LeastRequests`, `LeastResponseTime`, `WeightedTotalTraffic`, `RequestHash`, `PerSiteRoundRobin`. Defaults to `LeastRequests` if omitted.
 	// +kubebuilder:validation:Optional
@@ -2842,6 +2901,10 @@ type WindowsFunctionAppSiteConfigParameters struct {
 	// One or more scm_ip_restriction blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScmIPRestriction []WindowsFunctionAppSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// Configures the minimum version of TLS required for SSL requests to the SCM site. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// Configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: `1.0`, `1.1`, and  `1.2`. Defaults to `1.2`.
@@ -2925,9 +2988,13 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionHeadersParameters struct {
 
 type WindowsFunctionAppSiteConfigScmIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2965,9 +3032,13 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionInitParameters struct {
 
 type WindowsFunctionAppSiteConfigScmIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsFunctionAppSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2995,10 +3066,15 @@ type WindowsFunctionAppSiteConfigScmIPRestrictionObservation struct {
 
 type WindowsFunctionAppSiteConfigScmIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
@@ -3175,8 +3251,8 @@ type WindowsFunctionAppStatus struct {
 // +kubebuilder:storageversion
 
 // WindowsFunctionApp is the Schema for the WindowsFunctionApps API. Manages a Windows Function App.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

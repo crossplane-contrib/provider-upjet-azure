@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -157,6 +157,11 @@ spec:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
                     type: string
+                  deploymentEnvironment:
+                    description: The deployment environment for Microsoft Teams channel
+                      calls. Possible values are CommercialDeployment and GCCModerateDeployment.
+                      Defaults to CommercialDeployment.
+                    type: string
                   enableCalling:
                     description: Specifies whether to enable Microsoft Teams channel
                       calls. This defaults to false.
@@ -262,6 +267,11 @@ spec:
                   callingWebHook:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
+                    type: string
+                  deploymentEnvironment:
+                    description: The deployment environment for Microsoft Teams channel
+                      calls. Possible values are CommercialDeployment and GCCModerateDeployment.
+                      Defaults to CommercialDeployment.
                     type: string
                   enableCalling:
                     description: Specifies whether to enable Microsoft Teams channel
@@ -456,6 +466,11 @@ spec:
                   callingWebHook:
                     description: Specifies the webhook for Microsoft Teams channel
                       calls.
+                    type: string
+                  deploymentEnvironment:
+                    description: The deployment environment for Microsoft Teams channel
+                      calls. Possible values are CommercialDeployment and GCCModerateDeployment.
+                      Defaults to CommercialDeployment.
                     type: string
                   enableCalling:
                     description: Specifies whether to enable Microsoft Teams channel

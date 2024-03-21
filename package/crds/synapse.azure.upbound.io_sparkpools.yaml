@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -139,7 +139,8 @@ spec:
                     type: string
                   nodeSizeFamily:
                     description: The kind of nodes that the Spark Pool provides. Possible
-                      values are MemoryOptimized and None.
+                      values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU,
+                      MemoryOptimized, and None.
                     type: string
                   sessionLevelPackagesEnabled:
                     description: Indicates whether session level packages are enabled
@@ -335,7 +336,8 @@ spec:
                     type: string
                   nodeSizeFamily:
                     description: The kind of nodes that the Spark Pool provides. Possible
-                      values are MemoryOptimized and None.
+                      values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU,
+                      MemoryOptimized, and None.
                     type: string
                   sessionLevelPackagesEnabled:
                     description: Indicates whether session level packages are enabled
@@ -623,7 +625,8 @@ spec:
                     type: string
                   nodeSizeFamily:
                     description: The kind of nodes that the Spark Pool provides. Possible
-                      values are MemoryOptimized and None.
+                      values are HardwareAcceleratedFPGA, HardwareAcceleratedGPU,
+                      MemoryOptimized, and None.
                     type: string
                   sessionLevelPackagesEnabled:
                     description: Indicates whether session level packages are enabled

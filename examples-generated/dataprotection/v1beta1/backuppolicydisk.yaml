@@ -22,6 +22,7 @@ spec:
       duration: P7D
       name: Weekly
       priority: 20
+    timeZone: W. Europe Standard Time
     vaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

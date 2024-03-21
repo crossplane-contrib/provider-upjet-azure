@@ -12,6 +12,7 @@ import (
 	accessconnector "github.com/upbound/provider-azure/internal/controller/databricks/accessconnector"
 	workspace "github.com/upbound/provider-azure/internal/controller/databricks/workspace"
 	workspacecustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacecustomermanagedkey"
+	workspacerootdbfscustomermanagedkey "github.com/upbound/provider-azure/internal/controller/databricks/workspacerootdbfscustomermanagedkey"
 )
 
 // Setup_databricks creates all controllers with the supplied logger and adds them to
@@ -21,6 +22,7 @@ func Setup_databricks(mgr ctrl.Manager, o controller.Options) error {
 		accessconnector.Setup,
 		workspace.Setup,
 		workspacecustomermanagedkey.Setup,
+		workspacerootdbfscustomermanagedkey.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

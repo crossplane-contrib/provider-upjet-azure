@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -77,10 +77,18 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Digital Twins instance.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         type:
-                          description: The type of Managed Service Identity that is
-                            configured on this Digital Twins instance. The only possible
-                            value is SystemAssigned.
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Digital Twins instance.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -195,10 +203,18 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Digital Twins instance.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         type:
-                          description: The type of Managed Service Identity that is
-                            configured on this Digital Twins instance. The only possible
-                            value is SystemAssigned.
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Digital Twins instance.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -403,16 +419,26 @@ spec:
                     description: An identity block as defined below.
                     items:
                       properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Digital Twins instance.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         principalId:
-                          description: The ID of the Digital Twins instance.
+                          description: The Principal ID associated with this Managed
+                            Service Identity.
                           type: string
                         tenantId:
-                          description: The ID of the Digital Twins instance.
+                          description: The Tenant ID associated with this Managed
+                            Service Identity.
                           type: string
                         type:
-                          description: The type of Managed Service Identity that is
-                            configured on this Digital Twins instance. The only possible
-                            value is SystemAssigned.
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Digital Twins instance.
+                            Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array

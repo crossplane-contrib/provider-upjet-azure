@@ -15,11 +15,19 @@ import (
 
 type IdentityInitParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. The only possible value is SystemAssigned.
+	// The identity id of the user assigned identity to use when type is UserAssigned
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. Possible values are SystemAssigned and UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityObservation struct {
+
+	// The identity id of the user assigned identity to use when type is UserAssigned
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// The Principal ID associated with this Managed Service Identity.
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
@@ -27,13 +35,18 @@ type IdentityObservation struct {
 	// The Tenant ID associated with this Managed Service Identity.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 
-	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. The only possible value is SystemAssigned.
+	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. Possible values are SystemAssigned and UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type IdentityParameters struct {
 
-	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. The only possible value is SystemAssigned.
+	// The identity id of the user assigned identity to use when type is UserAssigned
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Stream Analytics Job. Possible values are SystemAssigned and UserAssigned.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }
@@ -43,16 +56,16 @@ type JobInitParameters struct {
 	// Specifies the compatibility level for this job - which controls certain runtime behaviours of the streaming job. Possible values are 1.0, 1.1 and 1.2.
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
-	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
 	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
+	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 0.
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
 	// Specifies the policy which should be applied to events which arrive out of order in the input event stream. Possible values are Adjust and Drop. Default is Adjust.
@@ -69,6 +82,9 @@ type JobInitParameters struct {
 
 	// Specifies the policy which should be applied to events which arrive at the output and cannot be written to the external storage due to being malformed (such as missing column values, column values of wrong type or size). Possible values are Drop and Stop. Default is Drop.
 	OutputErrorPolicy *string `json:"outputErrorPolicy,omitempty" tf:"output_error_policy,omitempty"`
+
+	// The SKU Name to use for the Stream Analytics Job. Possible values are Standard, StandardV2. Defaults to Standard.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The ID of an existing Stream Analytics Cluster where the Stream Analytics Job should run.
 	StreamAnalyticsClusterID *string `json:"streamAnalyticsClusterId,omitempty" tf:"stream_analytics_cluster_id,omitempty"`
@@ -92,16 +108,16 @@ type JobObservation struct {
 	// Specifies the compatibility level for this job - which controls certain runtime behaviours of the streaming job. Possible values are 1.0, 1.1 and 1.2.
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
-	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
 	// Specifies the Data Locale of the Job, which should be a supported .NET Culture.
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
+	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 0.
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
 	// Specifies the policy which should be applied to events which arrive out of order in the input event stream. Possible values are Adjust and Drop. Default is Adjust.
@@ -128,6 +144,9 @@ type JobObservation struct {
 	// The name of the Resource Group where the Stream Analytics Job should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
+	// The SKU Name to use for the Stream Analytics Job. Possible values are Standard, StandardV2. Defaults to Standard.
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
+
 	// The ID of an existing Stream Analytics Cluster where the Stream Analytics Job should run.
 	StreamAnalyticsClusterID *string `json:"streamAnalyticsClusterId,omitempty" tf:"stream_analytics_cluster_id,omitempty"`
 
@@ -151,7 +170,7 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	CompatibilityLevel *string `json:"compatibilityLevel,omitempty" tf:"compatibility_level,omitempty"`
 
-	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount.
+	// The policy for storing stream analytics content. Possible values are JobStorageAccount, SystemAccount. Defaults to SystemAccount.
 	// +kubebuilder:validation:Optional
 	ContentStoragePolicy *string `json:"contentStoragePolicy,omitempty" tf:"content_storage_policy,omitempty"`
 
@@ -159,11 +178,11 @@ type JobParameters struct {
 	// +kubebuilder:validation:Optional
 	DataLocale *string `json:"dataLocale,omitempty" tf:"data_locale,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 0.
+	// Specifies the maximum tolerable delay in seconds where events arriving late could be included. Supported range is -1 (indefinite) to 1814399 (20d 23h 59m 59s). Default is 5.
 	// +kubebuilder:validation:Optional
 	EventsLateArrivalMaxDelayInSeconds *float64 `json:"eventsLateArrivalMaxDelayInSeconds,omitempty" tf:"events_late_arrival_max_delay_in_seconds,omitempty"`
 
-	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 5.
+	// Specifies the maximum tolerable delay in seconds where out-of-order events can be adjusted to be back in order. Supported range is 0 to 599 (9m 59s). Default is 0.
 	// +kubebuilder:validation:Optional
 	EventsOutOfOrderMaxDelayInSeconds *float64 `json:"eventsOutOfOrderMaxDelayInSeconds,omitempty" tf:"events_out_of_order_max_delay_in_seconds,omitempty"`
 
@@ -199,6 +218,10 @@ type JobParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// The SKU Name to use for the Stream Analytics Job. Possible values are Standard, StandardV2. Defaults to Standard.
+	// +kubebuilder:validation:Optional
+	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
 	// The ID of an existing Stream Analytics Cluster where the Stream Analytics Job should run.
 	// +kubebuilder:validation:Optional
@@ -283,8 +306,8 @@ type JobStatus struct {
 // +kubebuilder:storageversion
 
 // Job is the Schema for the Jobs API. Manages a Stream Analytics Job.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -148,6 +148,9 @@ type CustomerManagedKeyInitParameters struct {
 	// Selector for a Key in keyvault to populate keyVersionlessId.
 	// +kubebuilder:validation:Optional
 	KeyVersionlessIDSelector *v1.Selector `json:"keyVersionlessIdSelector,omitempty" tf:"-"`
+
+	// The User Assigned Identity ID to be used for accessing the Customer Managed Key for encryption.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type CustomerManagedKeyObservation struct {
@@ -157,6 +160,9 @@ type CustomerManagedKeyObservation struct {
 
 	// The Azure Key Vault Key Versionless ID to be used as the Customer Managed Key (CMK) for double encryption (e.g. https://example-keyvault.vault.azure.net/type/cmk/).
 	KeyVersionlessID *string `json:"keyVersionlessId,omitempty" tf:"key_versionless_id,omitempty"`
+
+	// The User Assigned Identity ID to be used for accessing the Customer Managed Key for encryption.
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type CustomerManagedKeyParameters struct {
@@ -178,6 +184,10 @@ type CustomerManagedKeyParameters struct {
 	// Selector for a Key in keyvault to populate keyVersionlessId.
 	// +kubebuilder:validation:Optional
 	KeyVersionlessIDSelector *v1.Selector `json:"keyVersionlessIdSelector,omitempty" tf:"-"`
+
+	// The User Assigned Identity ID to be used for accessing the Customer Managed Key for encryption.
+	// +kubebuilder:validation:Optional
+	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
 }
 
 type GithubRepoInitParameters struct {
@@ -328,11 +338,14 @@ type SQLAADAdminParameters struct {
 
 type WorkspaceInitParameters struct {
 
-	// An aad_admin block as defined below. Conflicts with customer_managed_key.
+	// An aad_admin block as defined below.
 	AADAdmin []AADAdminInitParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo []AzureDevopsRepoInitParameters `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
+
+	// Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace. Defaults to false.
+	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -347,7 +360,7 @@ type WorkspaceInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeSubnetIDSelector *v1.Selector `json:"computeSubnetIdSelector,omitempty" tf:"-"`
 
-	// A customer_managed_key block as defined below. Conflicts with aad_admin.
+	// A customer_managed_key block as defined below.
 	CustomerManagedKey []CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// Is data exfiltration protection enabled in this workspace? If set to true, managed_virtual_network_enabled must also be set to true. Changing this forces a new resource to be created.
@@ -415,11 +428,14 @@ type WorkspaceInitParameters struct {
 
 type WorkspaceObservation struct {
 
-	// An aad_admin block as defined below. Conflicts with customer_managed_key.
+	// An aad_admin block as defined below.
 	AADAdmin []AADAdminObservation `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo []AzureDevopsRepoObservation `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
+
+	// Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace. Defaults to false.
+	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
 	ComputeSubnetID *string `json:"computeSubnetId,omitempty" tf:"compute_subnet_id,omitempty"`
@@ -428,7 +444,7 @@ type WorkspaceObservation struct {
 	// +mapType=granular
 	ConnectivityEndpoints map[string]*string `json:"connectivityEndpoints,omitempty" tf:"connectivity_endpoints,omitempty"`
 
-	// A customer_managed_key block as defined below. Conflicts with aad_admin.
+	// A customer_managed_key block as defined below.
 	CustomerManagedKey []CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
 	// Is data exfiltration protection enabled in this workspace? If set to true, managed_virtual_network_enabled must also be set to true. Changing this forces a new resource to be created.
@@ -483,13 +499,17 @@ type WorkspaceObservation struct {
 
 type WorkspaceParameters struct {
 
-	// An aad_admin block as defined below. Conflicts with customer_managed_key.
+	// An aad_admin block as defined below.
 	// +kubebuilder:validation:Optional
 	AADAdmin []AADAdminParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	// +kubebuilder:validation:Optional
 	AzureDevopsRepo []AzureDevopsRepoParameters `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
+
+	// Is Azure Active Directory Authentication the only way to authenticate with resources inside this synapse Workspace. Defaults to false.
+	// +kubebuilder:validation:Optional
+	AzureadAuthenticationOnly *bool `json:"azureadAuthenticationOnly,omitempty" tf:"azuread_authentication_only,omitempty"`
 
 	// Subnet ID used for computes in workspace Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -505,7 +525,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	ComputeSubnetIDSelector *v1.Selector `json:"computeSubnetIdSelector,omitempty" tf:"-"`
 
-	// A customer_managed_key block as defined below. Conflicts with aad_admin.
+	// A customer_managed_key block as defined below.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
@@ -631,8 +651,8 @@ type WorkspaceStatus struct {
 // +kubebuilder:storageversion
 
 // Workspace is the Schema for the Workspaces API. Manages a Synapse Workspace.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

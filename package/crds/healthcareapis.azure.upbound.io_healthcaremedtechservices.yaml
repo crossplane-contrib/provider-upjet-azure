@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -319,6 +319,8 @@ spec:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Healthcare Med Tech Service.
                           items:
                             type: string
                           type: array
@@ -680,6 +682,8 @@ spec:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Healthcare Med Tech Service.
                           items:
                             type: string
                           type: array
@@ -908,6 +912,8 @@ spec:
                     items:
                       properties:
                         identityIds:
+                          description: Specifies a list of User Assigned Managed Identity
+                            IDs to be assigned to this Healthcare Med Tech Service.
                           items:
                             type: string
                           type: array

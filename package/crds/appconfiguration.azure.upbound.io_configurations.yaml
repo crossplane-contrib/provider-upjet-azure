@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -274,6 +274,19 @@ spec:
                     description: Whether Purge Protection is enabled. This field only
                       works for standard sku. Defaults to false.
                     type: boolean
+                  replica:
+                    description: One or more replica blocks as defined below.
+                    items:
+                      properties:
+                        location:
+                          description: Specifies the supported Azure location where
+                            the replica exists.
+                          type: string
+                        name:
+                          description: Specifies the name of the replica.
+                          type: string
+                      type: object
+                    type: array
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the App Configuration. Changing this forces a new resource to
@@ -586,6 +599,19 @@ spec:
                     description: Whether Purge Protection is enabled. This field only
                       works for standard sku. Defaults to false.
                     type: boolean
+                  replica:
+                    description: One or more replica blocks as defined below.
+                    items:
+                      properties:
+                        location:
+                          description: Specifies the supported Azure location where
+                            the replica exists.
+                          type: string
+                        name:
+                          description: Specifies the name of the replica.
+                          type: string
+                      type: object
+                    type: array
                   sku:
                     description: The SKU name of the App Configuration. Possible values
                       are free and standard. Defaults to free.
@@ -877,6 +903,25 @@ spec:
                     description: Whether Purge Protection is enabled. This field only
                       works for standard sku. Defaults to false.
                     type: boolean
+                  replica:
+                    description: One or more replica blocks as defined below.
+                    items:
+                      properties:
+                        endpoint:
+                          description: The URL of the App Configuration Replica.
+                          type: string
+                        id:
+                          description: The ID of the App Configuration Replica.
+                          type: string
+                        location:
+                          description: Specifies the supported Azure location where
+                            the replica exists.
+                          type: string
+                        name:
+                          description: Specifies the name of the replica.
+                          type: string
+                      type: object
+                    type: array
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the App Configuration. Changing this forces a new resource to

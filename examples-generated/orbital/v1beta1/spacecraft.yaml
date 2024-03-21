@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     links:
-    - bandwidthMhz: 100
-      centerFrequencyMhz: 101
+    - bandwidthMhz: 30
+      centerFrequencyMhz: 2050
       direction: Uplink
       name: examplename
       polarization: LHCP
@@ -18,7 +18,7 @@ spec:
     noradId: "12345"
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: test
+        testing.upbound.io/example-name: example
     tags:
       aks-managed-cluster-name: 9a57225d-a405-4d40-aa46-f13d2342abef
     titleLine: AQUA

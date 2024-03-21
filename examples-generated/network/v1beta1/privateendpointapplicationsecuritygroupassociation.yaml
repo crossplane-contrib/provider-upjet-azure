@@ -94,7 +94,7 @@ spec:
     autoApprovalSubscriptionIds:
     - ${data.azurerm_subscription.current.subscription_id}
     loadBalancerFrontendIpConfigurationIds:
-    - ${azurerm_lb.example.frontend_ip_configuration.0.id}
+    - ${azurerm_lb.example.frontend_ip_configuration[0].id}
     location: West Europe
     natIpConfiguration:
     - name: primaryIpConfiguration

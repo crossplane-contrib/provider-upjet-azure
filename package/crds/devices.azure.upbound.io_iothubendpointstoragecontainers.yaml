@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -192,9 +192,8 @@ spec:
                       is identityBased.
                     type: string
                   fileNameFormat:
-                    description: File name format for the blob. Default format is
-                      {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters
-                      are mandatory but can be reordered.
+                    description: File name format for the blob. All parameters are
+                      mandatory but can be reordered. Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
                     type: string
                   identityId:
                     description: ID of the User Managed Identity used to authenticate
@@ -477,9 +476,8 @@ spec:
                       is identityBased.
                     type: string
                   fileNameFormat:
-                    description: File name format for the blob. Default format is
-                      {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters
-                      are mandatory but can be reordered.
+                    description: File name format for the blob. All parameters are
+                      mandatory but can be reordered. Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
                     type: string
                   identityId:
                     description: ID of the User Managed Identity used to authenticate
@@ -770,9 +768,8 @@ spec:
                       is identityBased.
                     type: string
                   fileNameFormat:
-                    description: File name format for the blob. Default format is
-                      {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All parameters
-                      are mandatory but can be reordered.
+                    description: File name format for the blob. All parameters are
+                      mandatory but can be reordered. Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
                     type: string
                   id:
                     description: The ID of the IoTHub Storage Container Endpoint.

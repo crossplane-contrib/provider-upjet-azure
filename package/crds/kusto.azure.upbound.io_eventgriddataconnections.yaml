@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -247,7 +247,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventgridResourceId:
                     description: The resource ID of the event grid that is subscribed
@@ -622,7 +622,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventgridResourceId:
                     description: The resource ID of the event grid that is subscribed
@@ -1092,7 +1092,7 @@ spec:
                     description: 'Indication for database routing information from
                       the data connection, by default only database routing information
                       is allowed. Allowed values: Single, Multi. Changing this forces
-                      a new resource to be created.'
+                      a new resource to be created. Defaults to Single.'
                     type: string
                   eventgridResourceId:
                     description: The resource ID of the event grid that is subscribed

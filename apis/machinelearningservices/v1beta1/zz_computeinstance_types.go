@@ -100,6 +100,9 @@ type ComputeInstanceInitParameters struct {
 	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Whether the compute instance will have a public ip. To set this to false a subnet_resource_id needs to be set. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
+	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
+
 	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
 	SSH []ComputeInstanceSSHInitParameters `json:"ssh,omitempty" tf:"ssh,omitempty"`
 
@@ -149,6 +152,9 @@ type ComputeInstanceObservation struct {
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
+
+	// Whether the compute instance will have a public ip. To set this to false a subnet_resource_id needs to be set. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
+	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
 
 	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
 	SSH []ComputeInstanceSSHObservation `json:"ssh,omitempty" tf:"ssh,omitempty"`
@@ -203,6 +209,10 @@ type ComputeInstanceParameters struct {
 	// Selector for a Workspace in machinelearningservices to populate machineLearningWorkspaceId.
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceIDSelector *v1.Selector `json:"machineLearningWorkspaceIdSelector,omitempty" tf:"-"`
+
+	// Whether the compute instance will have a public ip. To set this to false a subnet_resource_id needs to be set. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// +kubebuilder:validation:Optional
+	NodePublicIPEnabled *bool `json:"nodePublicIpEnabled,omitempty" tf:"node_public_ip_enabled,omitempty"`
 
 	// A ssh block as defined below. Specifies policy and settings for SSH access. Changing this forces a new Machine Learning Compute Instance to be created.
 	// +kubebuilder:validation:Optional
@@ -285,8 +295,8 @@ type ComputeInstanceStatus struct {
 // +kubebuilder:storageversion
 
 // ComputeInstance is the Schema for the ComputeInstances API. Manages a Machine Learning Compute Instance.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

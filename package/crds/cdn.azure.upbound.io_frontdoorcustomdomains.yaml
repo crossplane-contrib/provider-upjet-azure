@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -75,7 +75,7 @@ spec:
                 properties:
                   cdnFrontdoorProfileId:
                     description: The ID of the Front Door Profile. Changing this forces
-                      a new Front Door Profile to be created.
+                      a new Front Door Custom Domain to be created.
                     type: string
                   cdnFrontdoorProfileIdRef:
                     description: Reference to a FrontdoorProfile in cdn to populate
@@ -568,7 +568,7 @@ spec:
                 properties:
                   cdnFrontdoorProfileId:
                     description: The ID of the Front Door Profile. Changing this forces
-                      a new Front Door Profile to be created.
+                      a new Front Door Custom Domain to be created.
                     type: string
                   dnsZoneId:
                     description: The ID of the Azure DNS Zone which should be used

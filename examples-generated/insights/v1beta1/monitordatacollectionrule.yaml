@@ -71,6 +71,8 @@ spec:
         logLevels:
         - '*'
         name: example-datasource-syslog
+        streams:
+        - Microsoft-Syslog
       windowsEventLog:
       - name: example-datasource-wineventlog
         streams:

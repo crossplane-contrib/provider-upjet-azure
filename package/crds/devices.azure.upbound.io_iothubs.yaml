@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -206,6 +206,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  localAuthenticationEnabled:
+                    description: If false, SAS tokens with Iot hub scoped SAS keys
+                      cannot be used for authentication. Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource has to be created. Changing this forces a new resource
@@ -481,6 +485,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  localAuthenticationEnabled:
+                    description: If false, SAS tokens with Iot hub scoped SAS keys
+                      cannot be used for authentication. Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource has to be created. Changing this forces a new resource
@@ -811,10 +819,10 @@ spec:
                             or AzureIotHub.EventHub.
                           type: string
                         fileNameFormat:
-                          description: File name format for the blob. Default format
-                            is {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}. All
-                            parameters are mandatory but can be reordered. This attribute
-                            is applicable for endpoint type AzureIotHub.StorageContainer.
+                          description: File name format for the blob. All parameters
+                            are mandatory but can be reordered. This attribute is
+                            applicable for endpoint type AzureIotHub.StorageContainer.
+                            Defaults to {iothub}/{partition}/{YYYY}/{MM}/{DD}/{HH}/{mm}.
                           type: string
                         identityId:
                           description: The ID of the User Managed Identity used to
@@ -913,7 +921,7 @@ spec:
                             applied to, such as DeviceMessages. Possible values include:
                             Invalid, DeviceMessages, TwinChangeEvents, DeviceLifecycleEvents,
                             DeviceConnectionStateEvents, DeviceJobLifecycleEvents
-                            and DigitalTwinChangeEvents.'
+                            and DigitalTwinChangeEvents. Defaults to DeviceMessages.'
                           type: string
                       type: object
                     type: array
@@ -997,6 +1005,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  localAuthenticationEnabled:
+                    description: If false, SAS tokens with Iot hub scoped SAS keys
+                      cannot be used for authentication. Defaults to true.
+                    type: boolean
                   location:
                     description: Specifies the supported Azure location where the
                       resource has to be created. Changing this forces a new resource

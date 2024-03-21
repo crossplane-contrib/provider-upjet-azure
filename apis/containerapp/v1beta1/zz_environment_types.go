@@ -15,6 +15,19 @@ import (
 
 type EnvironmentInitParameters struct {
 
+	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
+	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	InfrastructureResourceGroupName *string `json:"infrastructureResourceGroupName,omitempty" tf:"infrastructure_resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate infrastructureResourceGroupName.
+	// +kubebuilder:validation:Optional
+	InfrastructureResourceGroupNameRef *v1.Reference `json:"infrastructureResourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate infrastructureResourceGroupName.
+	// +kubebuilder:validation:Optional
+	InfrastructureResourceGroupNameSelector *v1.Selector `json:"infrastructureResourceGroupNameSelector,omitempty" tf:"-"`
+
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
@@ -53,6 +66,12 @@ type EnvironmentInitParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The profile of the workload to scope the container app execution. A workload_profile block as defined below.
+	WorkloadProfile []WorkloadProfileInitParameters `json:"workloadProfile,omitempty" tf:"workload_profile,omitempty"`
+
+	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 type EnvironmentObservation struct {
@@ -67,6 +86,10 @@ type EnvironmentObservation struct {
 
 	// The ID of the Container App Environment
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
+	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
+	InfrastructureResourceGroupName *string `json:"infrastructureResourceGroupName,omitempty" tf:"infrastructure_resource_group_name,omitempty"`
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
@@ -101,9 +124,34 @@ type EnvironmentObservation struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The profile of the workload to scope the container app execution. A workload_profile block as defined below.
+	WorkloadProfile []WorkloadProfileObservation `json:"workloadProfile,omitempty" tf:"workload_profile,omitempty"`
+
+	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
 }
 
 type EnvironmentParameters struct {
+
+	// Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
+	// Application Insights connection string used by Dapr to export Service to Service communication telemetry.
+	// +kubebuilder:validation:Optional
+	DaprApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+
+	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
+	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +kubebuilder:validation:Optional
+	InfrastructureResourceGroupName *string `json:"infrastructureResourceGroupName,omitempty" tf:"infrastructure_resource_group_name,omitempty"`
+
+	// Reference to a ResourceGroup in azure to populate infrastructureResourceGroupName.
+	// +kubebuilder:validation:Optional
+	InfrastructureResourceGroupNameRef *v1.Reference `json:"infrastructureResourceGroupNameRef,omitempty" tf:"-"`
+
+	// Selector for a ResourceGroup in azure to populate infrastructureResourceGroupName.
+	// +kubebuilder:validation:Optional
+	InfrastructureResourceGroupNameSelector *v1.Selector `json:"infrastructureResourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The existing Subnet to use for the Container Apps Control Plane. Changing this forces a new resource to be created.
 	// The existing Subnet to use for the Container Apps Control Plane. **NOTE:** The Subnet must have a `/21` or larger address space.
@@ -161,6 +209,63 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// The profile of the workload to scope the container app execution. A workload_profile block as defined below.
+	// +kubebuilder:validation:Optional
+	WorkloadProfile []WorkloadProfileParameters `json:"workloadProfile,omitempty" tf:"workload_profile,omitempty"`
+
+	// Should the Container App Environment be created with Zone Redundancy enabled? Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
+}
+
+type WorkloadProfileInitParameters struct {
+
+	// The maximum number of instances of workload profile that can be deployed in the Container App Environment.
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
+
+	// The minimum number of instances of workload profile that can be deployed in the Container App Environment.
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
+
+	// The name of the workload profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Workload profile type for the workloads to run on. Possible values include D4, D8, D16, D32, E4, E8, E16 and E32.
+	WorkloadProfileType *string `json:"workloadProfileType,omitempty" tf:"workload_profile_type,omitempty"`
+}
+
+type WorkloadProfileObservation struct {
+
+	// The maximum number of instances of workload profile that can be deployed in the Container App Environment.
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
+
+	// The minimum number of instances of workload profile that can be deployed in the Container App Environment.
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
+
+	// The name of the workload profile.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Workload profile type for the workloads to run on. Possible values include D4, D8, D16, D32, E4, E8, E16 and E32.
+	WorkloadProfileType *string `json:"workloadProfileType,omitempty" tf:"workload_profile_type,omitempty"`
+}
+
+type WorkloadProfileParameters struct {
+
+	// The maximum number of instances of workload profile that can be deployed in the Container App Environment.
+	// +kubebuilder:validation:Optional
+	MaximumCount *float64 `json:"maximumCount" tf:"maximum_count,omitempty"`
+
+	// The minimum number of instances of workload profile that can be deployed in the Container App Environment.
+	// +kubebuilder:validation:Optional
+	MinimumCount *float64 `json:"minimumCount" tf:"minimum_count,omitempty"`
+
+	// The name of the workload profile.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Workload profile type for the workloads to run on. Possible values include D4, D8, D16, D32, E4, E8, E16 and E32.
+	// +kubebuilder:validation:Optional
+	WorkloadProfileType *string `json:"workloadProfileType" tf:"workload_profile_type,omitempty"`
 }
 
 // EnvironmentSpec defines the desired state of Environment
@@ -191,8 +296,8 @@ type EnvironmentStatus struct {
 // +kubebuilder:storageversion
 
 // Environment is the Schema for the Environments API. Manages a Container App Environment.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

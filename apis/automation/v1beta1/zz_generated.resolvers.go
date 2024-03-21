@@ -296,6 +296,25 @@ func (mg *HybridRunBookWorkerGroup) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.ResolutionResponse
 	var err error
 	{
+		m, l, err = apisresolver.GetManagedResource("automation.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AutomationAccountName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.AutomationAccountNameRef,
+			Selector:     mg.Spec.ForProvider.AutomationAccountNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AutomationAccountName")
+	}
+	mg.Spec.ForProvider.AutomationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AutomationAccountNameRef = rsp.ResolvedReference
+	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
@@ -314,6 +333,25 @@ func (mg *HybridRunBookWorkerGroup) ResolveReferences(ctx context.Context, c cli
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("automation.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AutomationAccountName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.AutomationAccountNameRef,
+			Selector:     mg.Spec.InitProvider.AutomationAccountNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AutomationAccountName")
+	}
+	mg.Spec.InitProvider.AutomationAccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AutomationAccountNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {

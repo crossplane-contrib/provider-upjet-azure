@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -117,6 +117,25 @@ spec:
                           type: string
                       required:
                       - passwordSecretRef
+                      type: object
+                    type: array
+                  identity:
+                    description: The identity block where it is used when customer
+                      managed keys based encryption will be enabled as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: The identity id of the user assigned identity
+                            to use when type is UserAssigned
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        type:
+                          description: The identity type, which can be SystemAssigned
+                            or UserAssigned. Only one type at a time is supported
+                            by Azure NetApp Files.
+                          type: string
                       type: object
                     type: array
                   location:
@@ -248,6 +267,25 @@ spec:
                           type: string
                         username:
                           description: The Username of Active Directory Domain Administrator.
+                          type: string
+                      type: object
+                    type: array
+                  identity:
+                    description: The identity block where it is used when customer
+                      managed keys based encryption will be enabled as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: The identity id of the user assigned identity
+                            to use when type is UserAssigned
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        type:
+                          description: The identity type, which can be SystemAssigned
+                            or UserAssigned. Only one type at a time is supported
+                            by Azure NetApp Files.
                           type: string
                       type: object
                     type: array
@@ -469,6 +507,31 @@ spec:
                   id:
                     description: The ID of the NetApp Account.
                     type: string
+                  identity:
+                    description: The identity block where it is used when customer
+                      managed keys based encryption will be enabled as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: The identity id of the user assigned identity
+                            to use when type is UserAssigned
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        principalId:
+                          description: The ID of the NetApp Account.
+                          type: string
+                        tenantId:
+                          description: The ID of the NetApp Account.
+                          type: string
+                        type:
+                          description: The identity type, which can be SystemAssigned
+                            or UserAssigned. Only one type at a time is supported
+                            by Azure NetApp Files.
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.

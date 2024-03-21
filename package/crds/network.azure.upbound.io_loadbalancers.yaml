@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -79,8 +79,8 @@ spec:
                       Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
-                    description: One or multiple frontend_ip_configuration blocks
-                      as documented below.
+                    description: One or more frontend_ip_configuration blocks as documented
+                      below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:
@@ -396,8 +396,8 @@ spec:
                       Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
-                    description: One or multiple frontend_ip_configuration blocks
-                      as documented below.
+                    description: One or more frontend_ip_configuration blocks as documented
+                      below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:
@@ -796,8 +796,8 @@ spec:
                       Load Balancer to be created.
                     type: string
                   frontendIpConfiguration:
-                    description: One or multiple frontend_ip_configuration blocks
-                      as documented below.
+                    description: One or more frontend_ip_configuration blocks as documented
+                      below.
                     items:
                       properties:
                         gatewayLoadBalancerFrontendIpConfigurationId:

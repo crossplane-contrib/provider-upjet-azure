@@ -113,7 +113,7 @@ type MaintenanceConfigurationInitParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
+	// The visibility of the Maintenance Configuration. The only allowable value is Custom. Defaults to Custom.
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// A window block as defined below.
@@ -148,7 +148,7 @@ type MaintenanceConfigurationObservation struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
+	// The visibility of the Maintenance Configuration. The only allowable value is Custom. Defaults to Custom.
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
 	// A window block as defined below.
@@ -196,7 +196,7 @@ type MaintenanceConfigurationParameters struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// The visibility of the Maintenance Configuration. The only allowable value is Custom.
+	// The visibility of the Maintenance Configuration. The only allowable value is Custom. Defaults to Custom.
 	// +kubebuilder:validation:Optional
 	Visibility *string `json:"visibility,omitempty" tf:"visibility,omitempty"`
 
@@ -331,8 +331,8 @@ type MaintenanceConfigurationStatus struct {
 // +kubebuilder:storageversion
 
 // MaintenanceConfiguration is the Schema for the MaintenanceConfigurations API. Manages a Maintenance Configuration.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

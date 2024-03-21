@@ -88,7 +88,7 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
 	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
 
-	// The resource URI over which log search query is to be run.
+	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
@@ -119,7 +119,7 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 	// Log search query.
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
+	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to ResultCount, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
 
 	// The name of the resource group in which to create the scheduled query rule instance. Changing this forces a new resource to be created.
@@ -164,7 +164,7 @@ type MonitorScheduledQueryRulesAlertObservation struct {
 	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
 	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
 
-	// The resource URI over which log search query is to be run.
+	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	DataSourceID *string `json:"dataSourceId,omitempty" tf:"data_source_id,omitempty"`
 
 	// The description of the scheduled query rule.
@@ -188,7 +188,7 @@ type MonitorScheduledQueryRulesAlertObservation struct {
 	// Log search query.
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
+	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to ResultCount, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
 
 	// The name of the resource group in which to create the scheduled query rule instance. Changing this forces a new resource to be created.
@@ -227,7 +227,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoMitigationEnabled *bool `json:"autoMitigationEnabled,omitempty" tf:"auto_mitigation_enabled,omitempty"`
 
-	// The resource URI over which log search query is to be run.
+	// The resource URI over which log search query is to be run. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -265,7 +265,7 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	// +kubebuilder:validation:Optional
 	Query *string `json:"query,omitempty" tf:"query,omitempty"`
 
-	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to Number, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
+	// The type of query results. Possible values are ResultCount and Number. Default is ResultCount. If set to ResultCount, query must include an AggregatedValue column of a numeric type, for example, Heartbeat | summarize AggregatedValue = count() by bin(TimeGenerated, 5m).
 	// +kubebuilder:validation:Optional
 	QueryType *string `json:"queryType,omitempty" tf:"query_type,omitempty"`
 
@@ -420,8 +420,8 @@ type MonitorScheduledQueryRulesAlertStatus struct {
 // +kubebuilder:storageversion
 
 // MonitorScheduledQueryRulesAlert is the Schema for the MonitorScheduledQueryRulesAlerts API. Manages an AlertingAction Scheduled Query Rules resource within Azure Monitor
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

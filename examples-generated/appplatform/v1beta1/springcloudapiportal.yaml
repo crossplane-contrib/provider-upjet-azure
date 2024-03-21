@@ -8,6 +8,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    apiTryOutEnabled: true
     gatewayIdsRefs:
     - name: example
     httpsOnlyEnabled: false

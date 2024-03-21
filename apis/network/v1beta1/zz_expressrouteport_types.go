@@ -188,6 +188,9 @@ type Link1InitParameters struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 type Link1Observation struct {
@@ -212,6 +215,9 @@ type Link1Observation struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
 	PatchPanelID *string `json:"patchPanelId,omitempty" tf:"patch_panel_id,omitempty"`
@@ -240,6 +246,10 @@ type Link1Parameters struct {
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 type Link2InitParameters struct {
@@ -255,6 +265,9 @@ type Link2InitParameters struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 type Link2Observation struct {
@@ -279,6 +292,9 @@ type Link2Observation struct {
 
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 
 	// The ID that maps from the Express Route Port Link to the patch panel port.
 	PatchPanelID *string `json:"patchPanelId,omitempty" tf:"patch_panel_id,omitempty"`
@@ -307,6 +323,10 @@ type Link2Parameters struct {
 	// The ID of the Key Vault Secret that contains the MACSec CKN key for this Express Route Port Link.
 	// +kubebuilder:validation:Optional
 	MacsecCknKeyvaultSecretID *string `json:"macsecCknKeyvaultSecretId,omitempty" tf:"macsec_ckn_keyvault_secret_id,omitempty"`
+
+	// Should Secure Channel Identifier on the Express Route Port Link be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	MacsecSciEnabled *bool `json:"macsecSciEnabled,omitempty" tf:"macsec_sci_enabled,omitempty"`
 }
 
 // ExpressRoutePortSpec defines the desired state of ExpressRoutePort
@@ -337,8 +357,8 @@ type ExpressRoutePortStatus struct {
 // +kubebuilder:storageversion
 
 // ExpressRoutePort is the Schema for the ExpressRoutePorts API. Manages a Express Route Port.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

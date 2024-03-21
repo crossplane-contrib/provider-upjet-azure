@@ -32,7 +32,7 @@ type GremlinDatabaseAutoscaleSettingsParameters struct {
 	MaxThroughput *float64 `json:"maxThroughput,omitempty" tf:"max_throughput,omitempty"`
 }
 
-type GremlinDatabaseInitParameters struct {
+type GremlinDatabaseInitParameters_2 struct {
 
 	// An autoscale_settings block as defined below.
 	AutoscaleSettings []GremlinDatabaseAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
@@ -41,7 +41,7 @@ type GremlinDatabaseInitParameters struct {
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
-type GremlinDatabaseObservation struct {
+type GremlinDatabaseObservation_2 struct {
 
 	// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
@@ -59,7 +59,7 @@ type GremlinDatabaseObservation struct {
 	Throughput *float64 `json:"throughput,omitempty" tf:"throughput,omitempty"`
 }
 
-type GremlinDatabaseParameters struct {
+type GremlinDatabaseParameters_2 struct {
 
 	// The name of the CosmosDB Account to create the Gremlin Database within. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=Account
@@ -99,7 +99,7 @@ type GremlinDatabaseParameters struct {
 // GremlinDatabaseSpec defines the desired state of GremlinDatabase
 type GremlinDatabaseSpec struct {
 	v1.ResourceSpec `json:",inline"`
-	ForProvider     GremlinDatabaseParameters `json:"forProvider"`
+	ForProvider     GremlinDatabaseParameters_2 `json:"forProvider"`
 	// THIS IS A BETA FIELD. It will be honored
 	// unless the Management Policies feature flag is disabled.
 	// InitProvider holds the same fields as ForProvider, with the exception
@@ -110,13 +110,13 @@ type GremlinDatabaseSpec struct {
 	// required on creation, but we do not desire to update them after creation,
 	// for example because of an external controller is managing them, like an
 	// autoscaler.
-	InitProvider GremlinDatabaseInitParameters `json:"initProvider,omitempty"`
+	InitProvider GremlinDatabaseInitParameters_2 `json:"initProvider,omitempty"`
 }
 
 // GremlinDatabaseStatus defines the observed state of GremlinDatabase.
 type GremlinDatabaseStatus struct {
 	v1.ResourceStatus `json:",inline"`
-	AtProvider        GremlinDatabaseObservation `json:"atProvider,omitempty"`
+	AtProvider        GremlinDatabaseObservation_2 `json:"atProvider,omitempty"`
 }
 
 // +kubebuilder:object:root=true
@@ -124,8 +124,8 @@ type GremlinDatabaseStatus struct {
 // +kubebuilder:storageversion
 
 // GremlinDatabase is the Schema for the GremlinDatabases API. Manages a Gremlin Database within a Cosmos DB Account.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

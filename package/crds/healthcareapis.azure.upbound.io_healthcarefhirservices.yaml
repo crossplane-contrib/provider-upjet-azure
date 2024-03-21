@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -86,7 +86,7 @@ spec:
                       properties:
                         audience:
                           description: The intended audience to receive authentication
-                            tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+                            tokens for the service.
                           type: string
                         authority:
                           description: |-
@@ -155,7 +155,7 @@ spec:
                           x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are UserAssigned and SystemAssigned.
                           type: string
                       type: object
                     type: array
@@ -170,8 +170,8 @@ spec:
                       FHIR Service to be created.
                     type: string
                   ociArtifact:
-                    description: A list of objects describing OCI artifacts for export
-                      as defined below.
+                    description: A list of oci_artifact objects as defined below to
+                      describe OCI artifacts for export.
                     items:
                       properties:
                         digest:
@@ -384,7 +384,7 @@ spec:
                       properties:
                         audience:
                           description: The intended audience to receive authentication
-                            tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+                            tokens for the service.
                           type: string
                         authority:
                           description: |-
@@ -453,7 +453,7 @@ spec:
                           x-kubernetes-list-type: set
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are UserAssigned and SystemAssigned.
                           type: string
                       type: object
                     type: array
@@ -468,8 +468,8 @@ spec:
                       FHIR Service to be created.
                     type: string
                   ociArtifact:
-                    description: A list of objects describing OCI artifacts for export
-                      as defined below.
+                    description: A list of oci_artifact objects as defined below to
+                      describe OCI artifacts for export.
                     items:
                       properties:
                         digest:
@@ -770,7 +770,7 @@ spec:
                       properties:
                         audience:
                           description: The intended audience to receive authentication
-                            tokens for the service. The default value is https://<name>.fhir.azurehealthcareapis.com.
+                            tokens for the service.
                           type: string
                         authority:
                           description: |-
@@ -848,7 +848,7 @@ spec:
                           type: string
                         type:
                           description: The type of managed identity to assign. Possible
-                            values are UserAssigned and SystemAssigned
+                            values are UserAssigned and SystemAssigned.
                           type: string
                       type: object
                     type: array
@@ -863,8 +863,8 @@ spec:
                       FHIR Service to be created.
                     type: string
                   ociArtifact:
-                    description: A list of objects describing OCI artifacts for export
-                      as defined below.
+                    description: A list of oci_artifact objects as defined below to
+                      describe OCI artifacts for export.
                     items:
                       properties:
                         digest:

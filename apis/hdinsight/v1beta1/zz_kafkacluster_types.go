@@ -413,7 +413,7 @@ type KafkaClusterNetworkInitParameters struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -422,7 +422,7 @@ type KafkaClusterNetworkObservation struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -432,7 +432,7 @@ type KafkaClusterNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
@@ -612,7 +612,7 @@ type KafkaClusterRolesHeadNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaClusterRolesHeadNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -644,7 +644,7 @@ type KafkaClusterRolesHeadNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaClusterRolesHeadNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -671,7 +671,7 @@ type KafkaClusterRolesHeadNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaClusterRolesHeadNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -799,7 +799,7 @@ type KafkaClusterRolesWorkerNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaClusterRolesWorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -837,7 +837,7 @@ type KafkaClusterRolesWorkerNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaClusterRolesWorkerNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -871,7 +871,7 @@ type KafkaClusterRolesWorkerNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaClusterRolesWorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -951,7 +951,7 @@ type KafkaClusterRolesZookeeperNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaClusterRolesZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -983,7 +983,7 @@ type KafkaClusterRolesZookeeperNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaClusterRolesZookeeperNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1010,7 +1010,7 @@ type KafkaClusterRolesZookeeperNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaClusterRolesZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1277,7 +1277,7 @@ type KafkaManagementNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaManagementNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1309,7 +1309,7 @@ type KafkaManagementNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	ScriptActions []KafkaManagementNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1336,7 +1336,7 @@ type KafkaManagementNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined below.
 	// +kubebuilder:validation:Optional
 	ScriptActions []KafkaManagementNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1463,8 +1463,8 @@ type KafkaClusterStatus struct {
 // +kubebuilder:storageversion
 
 // KafkaCluster is the Schema for the KafkaClusters API. Manages a HDInsight Kafka Cluster.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

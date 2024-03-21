@@ -271,6 +271,9 @@ type IntegrationRuntimeAzureSSISInitParameters struct {
 	// A catalog_info block as defined below.
 	CatalogInfo []CatalogInfoInitParameters `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
 
+	// The name of a Data Factory Credential that the SSIS integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
+
 	// A custom_setup_script block as defined below.
 	CustomSetupScript []CustomSetupScriptInitParameters `json:"customSetupScript,omitempty" tf:"custom_setup_script,omitempty"`
 
@@ -292,7 +295,7 @@ type IntegrationRuntimeAzureSSISInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
 	// The size of the nodes on which the Azure-SSIS Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
@@ -315,6 +318,9 @@ type IntegrationRuntimeAzureSSISObservation struct {
 
 	// A catalog_info block as defined below.
 	CatalogInfo []CatalogInfoObservation `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
+
+	// The name of a Data Factory Credential that the SSIS integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
 	// A custom_setup_script block as defined below.
 	CustomSetupScript []CustomSetupScriptObservation `json:"customSetupScript,omitempty" tf:"custom_setup_script,omitempty"`
@@ -343,7 +349,7 @@ type IntegrationRuntimeAzureSSISObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
 	// The size of the nodes on which the Azure-SSIS Integration Runtime runs. Valid values are: Standard_D2_v3, Standard_D4_v3, Standard_D8_v3, Standard_D16_v3, Standard_D32_v3, Standard_D64_v3, Standard_E2_v3, Standard_E4_v3, Standard_E8_v3, Standard_E16_v3, Standard_E32_v3, Standard_E64_v3, Standard_D1_v2, Standard_D2_v2, Standard_D3_v2, Standard_D4_v2, Standard_A4_v2 and Standard_A8_v2
@@ -367,6 +373,10 @@ type IntegrationRuntimeAzureSSISParameters struct {
 	// A catalog_info block as defined below.
 	// +kubebuilder:validation:Optional
 	CatalogInfo []CatalogInfoParameters `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
+
+	// The name of a Data Factory Credential that the SSIS integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
+	// +kubebuilder:validation:Optional
+	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
 	// A custom_setup_script block as defined below.
 	// +kubebuilder:validation:Optional
@@ -410,7 +420,7 @@ type IntegrationRuntimeAzureSSISParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Defines the maximum parallel executions per node. Defaults to 1. Max is 16.
+	// Defines the maximum parallel executions per node. Defaults to 1. Max is 1.
 	// +kubebuilder:validation:Optional
 	MaxParallelExecutionsPerNode *float64 `json:"maxParallelExecutionsPerNode,omitempty" tf:"max_parallel_executions_per_node,omitempty"`
 
@@ -722,8 +732,8 @@ type IntegrationRuntimeAzureSSISStatus struct {
 // +kubebuilder:storageversion
 
 // IntegrationRuntimeAzureSSIS is the Schema for the IntegrationRuntimeAzureSSISs API. Manages a Data Factory Azure-SSIS Integration Runtime.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure},path=integrationruntimeazuressis

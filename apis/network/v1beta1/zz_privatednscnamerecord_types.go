@@ -18,7 +18,7 @@ type PrivateDNSCNAMERecordInitParameters struct {
 	// The target of the CNAME.
 	Record *string `json:"record,omitempty" tf:"record,omitempty"`
 
-	// The Time To Live (TTL) of the DNS record in seconds.
+	// The Time To Live (TTL) of the DNS record in seconds. Possible values are between 0 and 2147483647.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -40,7 +40,7 @@ type PrivateDNSCNAMERecordObservation struct {
 	// Specifies the resource group where the resource exists. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The Time To Live (TTL) of the DNS record in seconds.
+	// The Time To Live (TTL) of the DNS record in seconds. Possible values are between 0 and 2147483647.
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -70,7 +70,7 @@ type PrivateDNSCNAMERecordParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The Time To Live (TTL) of the DNS record in seconds.
+	// The Time To Live (TTL) of the DNS record in seconds. Possible values are between 0 and 2147483647.
 	// +kubebuilder:validation:Optional
 	TTL *float64 `json:"ttl,omitempty" tf:"ttl,omitempty"`
 
@@ -121,8 +121,8 @@ type PrivateDNSCNAMERecordStatus struct {
 // +kubebuilder:storageversion
 
 // PrivateDNSCNAMERecord is the Schema for the PrivateDNSCNAMERecords API. Manages a Private DNS CNAME Record.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

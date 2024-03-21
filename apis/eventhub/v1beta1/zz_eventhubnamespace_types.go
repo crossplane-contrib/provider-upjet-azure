@@ -176,7 +176,7 @@ type EventHubNamespaceParameters struct {
 
 type IPRuleInitParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action"`
 
 	// The IP mask to match on.
@@ -185,7 +185,7 @@ type IPRuleInitParameters struct {
 
 type IPRuleObservation struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The IP mask to match on.
@@ -194,7 +194,7 @@ type IPRuleObservation struct {
 
 type IPRuleParameters struct {
 
-	// The action to take when the rule is matched. Possible values are Allow.
+	// The action to take when the rule is matched. Possible values are Allow. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
@@ -377,8 +377,8 @@ type EventHubNamespaceStatus struct {
 // +kubebuilder:storageversion
 
 // EventHubNamespace is the Schema for the EventHubNamespaces API. Manages an EventHub Namespace.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

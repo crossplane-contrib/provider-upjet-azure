@@ -26,6 +26,7 @@ metadata:
   name: example
 spec:
   forProvider:
+    displayName: my-policy-definition
     mode: All
     policyRule: |2
        {

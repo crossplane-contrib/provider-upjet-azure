@@ -15,16 +15,19 @@ import (
 
 type PoolInitParameters struct {
 
+	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// QoS Type of the pool. Valid values include Auto or Manual.
 	QosType *string `json:"qosType,omitempty" tf:"qos_type,omitempty"`
 
-	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	// Provisioned size of the pool in TB. Value must be between 2 and 500.
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -36,6 +39,9 @@ type PoolObservation struct {
 
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
+
+	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
 
 	// The ID of the NetApp Pool.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -49,10 +55,10 @@ type PoolObservation struct {
 	// The name of the resource group where the NetApp Pool should be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	// Provisioned size of the pool in TB. Value must be between 2 and 500.
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -75,6 +81,10 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
+	// The encryption type of the pool. Valid values include Single, and Double. Defaults to Single. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	EncryptionType *string `json:"encryptionType,omitempty" tf:"encryption_type,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -96,11 +106,11 @@ type PoolParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The service level of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
+	// The service level of the file system. Valid values include Premium, Standard, and Ultra. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ServiceLevel *string `json:"serviceLevel,omitempty" tf:"service_level,omitempty"`
 
-	// Provisioned size of the pool in TB. Value must be between 4 and 500.
+	// Provisioned size of the pool in TB. Value must be between 2 and 500.
 	// +kubebuilder:validation:Optional
 	SizeInTb *float64 `json:"sizeInTb,omitempty" tf:"size_in_tb,omitempty"`
 
@@ -138,8 +148,8 @@ type PoolStatus struct {
 // +kubebuilder:storageversion
 
 // Pool is the Schema for the Pools API. Manages a Pool within a NetApp Account.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

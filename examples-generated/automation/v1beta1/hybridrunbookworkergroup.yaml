@@ -8,8 +8,42 @@ metadata:
   name: example
 spec:
   forProvider:
-    automationAccountName: example
+    automationAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
     name: example
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: automation.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/hybridrunbookworkergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Basic
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: automation/v1beta1/hybridrunbookworkergroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

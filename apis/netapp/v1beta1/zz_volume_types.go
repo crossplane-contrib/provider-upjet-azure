@@ -217,20 +217,32 @@ type VolumeInitParameters struct {
 	// A data_protection_snapshot_policy block as defined below.
 	DataProtectionSnapshotPolicy []DataProtectionSnapshotPolicyInitParameters `json:"dataProtectionSnapshotPolicy,omitempty" tf:"data_protection_snapshot_policy,omitempty"`
 
+	// The encryption key source, it can be Microsoft.NetApp for platform managed keys or Microsoft.KeyVault for customer-managed keys. This is required with key_vault_private_endpoint_id. Changing this forces a new resource to be created.
+	EncryptionKeySource *string `json:"encryptionKeySource,omitempty" tf:"encryption_key_source,omitempty"`
+
 	// One or more export_policy_rule block defined below.
 	ExportPolicyRule []ExportPolicyRuleInitParameters `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
+
+	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
+	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume. Changing this forces a new resource to be created.
+	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume.
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
 	// The target volume protocol expressed as a list. Supported single value include CIFS, NFSv3, or NFSv4.1. If argument is not defined it will default to NFSv3. Changing this forces a new resource to be created and data will be lost. Dual protocol scenario is supported for CIFS and NFSv3, for more information, please refer to Create a dual-protocol volume for Azure NetApp Files document.
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// Volume security style, accepted values are Unix or Ntfs. If not provided, single-protocol volume is created defaulting to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to Ntfs. In a dual-protocol volume, if not provided, its value will be Ntfs. Changing this forces a new resource to be created.
+	// Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
+
+	// Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+	SMBNonBrowsableEnabled *bool `json:"smbNonBrowsableEnabled,omitempty" tf:"smb_non_browsable_enabled,omitempty"`
+
+	// Volume security style, accepted values are unix or ntfs. If not provided, single-protocol volume is created defaulting to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to ntfs. In a dual-protocol volume, if not provided, its value will be ntfs. Changing this forces a new resource to be created.
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
 	// The target performance of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
@@ -286,11 +298,17 @@ type VolumeObservation struct {
 	// A data_protection_snapshot_policy block as defined below.
 	DataProtectionSnapshotPolicy []DataProtectionSnapshotPolicyObservation `json:"dataProtectionSnapshotPolicy,omitempty" tf:"data_protection_snapshot_policy,omitempty"`
 
+	// The encryption key source, it can be Microsoft.NetApp for platform managed keys or Microsoft.KeyVault for customer-managed keys. This is required with key_vault_private_endpoint_id. Changing this forces a new resource to be created.
+	EncryptionKeySource *string `json:"encryptionKeySource,omitempty" tf:"encryption_key_source,omitempty"`
+
 	// One or more export_policy_rule block defined below.
 	ExportPolicyRule []ExportPolicyRuleObservation `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
 
 	// The ID of the NetApp Volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
+	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -298,7 +316,7 @@ type VolumeObservation struct {
 	// A list of IPv4 Addresses which should be used to mount the volume.
 	MountIPAddresses []*string `json:"mountIpAddresses,omitempty" tf:"mount_ip_addresses,omitempty"`
 
-	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume. Changing this forces a new resource to be created.
+	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume.
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
 	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
@@ -311,7 +329,13 @@ type VolumeObservation struct {
 	// The name of the resource group where the NetApp Volume should be created. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Volume security style, accepted values are Unix or Ntfs. If not provided, single-protocol volume is created defaulting to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to Ntfs. In a dual-protocol volume, if not provided, its value will be Ntfs. Changing this forces a new resource to be created.
+	// Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
+
+	// Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+	SMBNonBrowsableEnabled *bool `json:"smbNonBrowsableEnabled,omitempty" tf:"smb_non_browsable_enabled,omitempty"`
+
+	// Volume security style, accepted values are unix or ntfs. If not provided, single-protocol volume is created defaulting to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to ntfs. In a dual-protocol volume, if not provided, its value will be ntfs. Changing this forces a new resource to be created.
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
 	// The target performance of the file system. Valid values include Premium, Standard, or Ultra. Changing this forces a new resource to be created.
@@ -381,15 +405,23 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	DataProtectionSnapshotPolicy []DataProtectionSnapshotPolicyParameters `json:"dataProtectionSnapshotPolicy,omitempty" tf:"data_protection_snapshot_policy,omitempty"`
 
+	// The encryption key source, it can be Microsoft.NetApp for platform managed keys or Microsoft.KeyVault for customer-managed keys. This is required with key_vault_private_endpoint_id. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	EncryptionKeySource *string `json:"encryptionKeySource,omitempty" tf:"encryption_key_source,omitempty"`
+
 	// One or more export_policy_rule block defined below.
 	// +kubebuilder:validation:Optional
 	ExportPolicyRule []ExportPolicyRuleParameters `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
+
+	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume. Changing this forces a new resource to be created.
+	// Indicates which network feature to use, accepted values are Basic or Standard, it defaults to Basic if not defined. This is a feature in public preview and for more information about it and how to register, please refer to Configure network features for an Azure NetApp Files volume.
 	// +kubebuilder:validation:Optional
 	NetworkFeatures *string `json:"networkFeatures,omitempty" tf:"network_features,omitempty"`
 
@@ -424,7 +456,15 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Volume security style, accepted values are Unix or Ntfs. If not provided, single-protocol volume is created defaulting to Unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to Ntfs. In a dual-protocol volume, if not provided, its value will be Ntfs. Changing this forces a new resource to be created.
+	// Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+	// +kubebuilder:validation:Optional
+	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
+
+	// Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
+	// +kubebuilder:validation:Optional
+	SMBNonBrowsableEnabled *bool `json:"smbNonBrowsableEnabled,omitempty" tf:"smb_non_browsable_enabled,omitempty"`
+
+	// Volume security style, accepted values are unix or ntfs. If not provided, single-protocol volume is created defaulting to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default to ntfs. In a dual-protocol volume, if not provided, its value will be ntfs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SecurityStyle *string `json:"securityStyle,omitempty" tf:"security_style,omitempty"`
 
@@ -500,8 +540,8 @@ type VolumeStatus struct {
 // +kubebuilder:storageversion
 
 // Volume is the Schema for the Volumes API. Manages a NetApp Volume.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -237,6 +237,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  timeZone:
+                    description: Specifies the Time Zone which should be used by the
+                      backup schedule. Changing this forces a new Backup Policy PostgreSQL
+                      to be created.
+                    type: string
                   vaultName:
                     description: The name of the Backup Vault where the Backup Policy
                       PostgreSQL should exist. Changing this forces a new Backup Policy
@@ -413,6 +418,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  timeZone:
+                    description: Specifies the Time Zone which should be used by the
+                      backup schedule. Changing this forces a new Backup Policy PostgreSQL
+                      to be created.
+                    type: string
                 type: object
               managementPolicies:
                 default:
@@ -688,6 +698,11 @@ spec:
                           type: number
                       type: object
                     type: array
+                  timeZone:
+                    description: Specifies the Time Zone which should be used by the
+                      backup schedule. Changing this forces a new Backup Policy PostgreSQL
+                      to be created.
+                    type: string
                   vaultName:
                     description: The name of the Backup Vault where the Backup Policy
                       PostgreSQL should exist. Changing this forces a new Backup Policy

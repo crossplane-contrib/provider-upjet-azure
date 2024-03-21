@@ -72,6 +72,35 @@ type APIMetadataParameters struct {
 	Version *string `json:"version,omitempty" tf:"version,omitempty"`
 }
 
+type ClientAuthorizationInitParameters struct {
+
+	// Specifies the Spring Cloud Certificate IDs of the Spring Cloud Gateway.
+	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
+
+	// Specifies whether the client certificate verification is enabled.
+	VerificationEnabled *bool `json:"verificationEnabled,omitempty" tf:"verification_enabled,omitempty"`
+}
+
+type ClientAuthorizationObservation struct {
+
+	// Specifies the Spring Cloud Certificate IDs of the Spring Cloud Gateway.
+	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
+
+	// Specifies whether the client certificate verification is enabled.
+	VerificationEnabled *bool `json:"verificationEnabled,omitempty" tf:"verification_enabled,omitempty"`
+}
+
+type ClientAuthorizationParameters struct {
+
+	// Specifies the Spring Cloud Certificate IDs of the Spring Cloud Gateway.
+	// +kubebuilder:validation:Optional
+	CertificateIds []*string `json:"certificateIds,omitempty" tf:"certificate_ids,omitempty"`
+
+	// Specifies whether the client certificate verification is enabled.
+	// +kubebuilder:validation:Optional
+	VerificationEnabled *bool `json:"verificationEnabled,omitempty" tf:"verification_enabled,omitempty"`
+}
+
 type CorsInitParameters struct {
 
 	// Allowed headers in cross-site requests. The special value * allows actual requests to send any header.
@@ -81,6 +110,10 @@ type CorsInitParameters struct {
 	// Allowed HTTP methods on cross-site requests. The special value * allows all methods. If not set, GET and HEAD are allowed by default. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
 	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Allowed origin patterns to make cross-site requests.
+	// +listType=set
+	AllowedOriginPatterns []*string `json:"allowedOriginPatterns,omitempty" tf:"allowed_origin_patterns,omitempty"`
 
 	// Allowed origins to make cross-site requests. The special value * allows all domains.
 	// +listType=set
@@ -106,6 +139,10 @@ type CorsObservation struct {
 	// Allowed HTTP methods on cross-site requests. The special value * allows all methods. If not set, GET and HEAD are allowed by default. Possible values are DELETE, GET, HEAD, MERGE, POST, OPTIONS and PUT.
 	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
+
+	// Allowed origin patterns to make cross-site requests.
+	// +listType=set
+	AllowedOriginPatterns []*string `json:"allowedOriginPatterns,omitempty" tf:"allowed_origin_patterns,omitempty"`
 
 	// Allowed origins to make cross-site requests. The special value * allows all domains.
 	// +listType=set
@@ -134,6 +171,11 @@ type CorsParameters struct {
 	// +listType=set
 	AllowedMethods []*string `json:"allowedMethods,omitempty" tf:"allowed_methods,omitempty"`
 
+	// Allowed origin patterns to make cross-site requests.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	AllowedOriginPatterns []*string `json:"allowedOriginPatterns,omitempty" tf:"allowed_origin_patterns,omitempty"`
+
 	// Allowed origins to make cross-site requests. The special value * allows all domains.
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -153,13 +195,77 @@ type CorsParameters struct {
 	MaxAgeSeconds *float64 `json:"maxAgeSeconds,omitempty" tf:"max_age_seconds,omitempty"`
 }
 
+type LocalResponseCachePerInstanceInitParameters struct {
+
+	// Specifies the maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Specifies the time before a cached entry is expired (300s, 5m, 1h...).
+	TimeToLive *string `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type LocalResponseCachePerInstanceObservation struct {
+
+	// Specifies the maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Specifies the time before a cached entry is expired (300s, 5m, 1h...).
+	TimeToLive *string `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type LocalResponseCachePerInstanceParameters struct {
+
+	// Specifies the maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.
+	// +kubebuilder:validation:Optional
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Specifies the time before a cached entry is expired (300s, 5m, 1h...).
+	// +kubebuilder:validation:Optional
+	TimeToLive *string `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type LocalResponseCachePerRouteInitParameters struct {
+
+	// Specifies the maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Specifies the time before a cached entry is expired (300s, 5m, 1h...).
+	TimeToLive *string `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type LocalResponseCachePerRouteObservation struct {
+
+	// Specifies the maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Specifies the time before a cached entry is expired (300s, 5m, 1h...).
+	TimeToLive *string `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type LocalResponseCachePerRouteParameters struct {
+
+	// Specifies the maximum size of cache (10MB, 900KB, 1GB...) to determine if the cache needs to evict some entries.
+	// +kubebuilder:validation:Optional
+	Size *string `json:"size,omitempty" tf:"size,omitempty"`
+
+	// Specifies the time before a cached entry is expired (300s, 5m, 1h...).
+	// +kubebuilder:validation:Optional
+	TimeToLive *string `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
 type SpringCloudGatewayInitParameters struct {
 
 	// A api_metadata block as defined below.
 	APIMetadata []APIMetadataInitParameters `json:"apiMetadata,omitempty" tf:"api_metadata,omitempty"`
 
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
+
 	// Specifies a list of application performance monitoring types used in the Spring Cloud Gateway. The allowed values are AppDynamics, ApplicationInsights, Dynatrace, ElasticAPM and NewRelic.
 	ApplicationPerformanceMonitoringTypes []*string `json:"applicationPerformanceMonitoringTypes,omitempty" tf:"application_performance_monitoring_types,omitempty"`
+
+	// A client_authorization block as defined below.
+	ClientAuthorization []ClientAuthorizationInitParameters `json:"clientAuthorization,omitempty" tf:"client_authorization,omitempty"`
 
 	// A cors block as defined below.
 	Cors []CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
@@ -173,6 +279,12 @@ type SpringCloudGatewayInitParameters struct {
 
 	// Specifies the required instance count of the Spring Cloud Gateway. Possible Values are between 1 and 500. Defaults to 1 if not specified.
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// A local_response_cache_per_instance block as defined below. Only one of local_response_cache_per_instance or local_response_cache_per_route can be specified.
+	LocalResponseCachePerInstance []LocalResponseCachePerInstanceInitParameters `json:"localResponseCachePerInstance,omitempty" tf:"local_response_cache_per_instance,omitempty"`
+
+	// A local_response_cache_per_route block as defined below. Only one of local_response_cache_per_instance or local_response_cache_per_route can be specified.
+	LocalResponseCachePerRoute []LocalResponseCachePerRouteInitParameters `json:"localResponseCachePerRoute,omitempty" tf:"local_response_cache_per_route,omitempty"`
 
 	// Indicates whether the Spring Cloud Gateway exposes endpoint.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -189,8 +301,14 @@ type SpringCloudGatewayObservation struct {
 	// A api_metadata block as defined below.
 	APIMetadata []APIMetadataObservation `json:"apiMetadata,omitempty" tf:"api_metadata,omitempty"`
 
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
+
 	// Specifies a list of application performance monitoring types used in the Spring Cloud Gateway. The allowed values are AppDynamics, ApplicationInsights, Dynatrace, ElasticAPM and NewRelic.
 	ApplicationPerformanceMonitoringTypes []*string `json:"applicationPerformanceMonitoringTypes,omitempty" tf:"application_performance_monitoring_types,omitempty"`
+
+	// A client_authorization block as defined below.
+	ClientAuthorization []ClientAuthorizationObservation `json:"clientAuthorization,omitempty" tf:"client_authorization,omitempty"`
 
 	// A cors block as defined below.
 	Cors []CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
@@ -207,6 +325,12 @@ type SpringCloudGatewayObservation struct {
 
 	// Specifies the required instance count of the Spring Cloud Gateway. Possible Values are between 1 and 500. Defaults to 1 if not specified.
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// A local_response_cache_per_instance block as defined below. Only one of local_response_cache_per_instance or local_response_cache_per_route can be specified.
+	LocalResponseCachePerInstance []LocalResponseCachePerInstanceObservation `json:"localResponseCachePerInstance,omitempty" tf:"local_response_cache_per_instance,omitempty"`
+
+	// A local_response_cache_per_route block as defined below. Only one of local_response_cache_per_instance or local_response_cache_per_route can be specified.
+	LocalResponseCachePerRoute []LocalResponseCachePerRouteObservation `json:"localResponseCachePerRoute,omitempty" tf:"local_response_cache_per_route,omitempty"`
 
 	// Indicates whether the Spring Cloud Gateway exposes endpoint.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -230,9 +354,17 @@ type SpringCloudGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	APIMetadata []APIMetadataParameters `json:"apiMetadata,omitempty" tf:"api_metadata,omitempty"`
 
+	// Specifies a list of Spring Cloud Application Performance Monitoring IDs.
+	// +kubebuilder:validation:Optional
+	ApplicationPerformanceMonitoringIds []*string `json:"applicationPerformanceMonitoringIds,omitempty" tf:"application_performance_monitoring_ids,omitempty"`
+
 	// Specifies a list of application performance monitoring types used in the Spring Cloud Gateway. The allowed values are AppDynamics, ApplicationInsights, Dynatrace, ElasticAPM and NewRelic.
 	// +kubebuilder:validation:Optional
 	ApplicationPerformanceMonitoringTypes []*string `json:"applicationPerformanceMonitoringTypes,omitempty" tf:"application_performance_monitoring_types,omitempty"`
+
+	// A client_authorization block as defined below.
+	// +kubebuilder:validation:Optional
+	ClientAuthorization []ClientAuthorizationParameters `json:"clientAuthorization,omitempty" tf:"client_authorization,omitempty"`
 
 	// A cors block as defined below.
 	// +kubebuilder:validation:Optional
@@ -250,6 +382,14 @@ type SpringCloudGatewayParameters struct {
 	// Specifies the required instance count of the Spring Cloud Gateway. Possible Values are between 1 and 500. Defaults to 1 if not specified.
 	// +kubebuilder:validation:Optional
 	InstanceCount *float64 `json:"instanceCount,omitempty" tf:"instance_count,omitempty"`
+
+	// A local_response_cache_per_instance block as defined below. Only one of local_response_cache_per_instance or local_response_cache_per_route can be specified.
+	// +kubebuilder:validation:Optional
+	LocalResponseCachePerInstance []LocalResponseCachePerInstanceParameters `json:"localResponseCachePerInstance,omitempty" tf:"local_response_cache_per_instance,omitempty"`
+
+	// A local_response_cache_per_route block as defined below. Only one of local_response_cache_per_instance or local_response_cache_per_route can be specified.
+	// +kubebuilder:validation:Optional
+	LocalResponseCachePerRoute []LocalResponseCachePerRouteParameters `json:"localResponseCachePerRoute,omitempty" tf:"local_response_cache_per_route,omitempty"`
 
 	// Indicates whether the Spring Cloud Gateway exposes endpoint.
 	// +kubebuilder:validation:Optional
@@ -287,7 +427,7 @@ type SpringCloudGatewayQuotaInitParameters struct {
 	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 2Gi if not specified.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
@@ -296,7 +436,7 @@ type SpringCloudGatewayQuotaObservation struct {
 	// Specifies the required cpu of the Spring Cloud Deployment. Possible Values are 500m, 1, 2, 3 and 4. Defaults to 1 if not specified.
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 2Gi if not specified.
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
 
@@ -306,7 +446,7 @@ type SpringCloudGatewayQuotaParameters struct {
 	// +kubebuilder:validation:Optional
 	CPU *string `json:"cpu,omitempty" tf:"cpu,omitempty"`
 
-	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 1Gi if not specified.
+	// Specifies the required memory size of the Spring Cloud Deployment. Possible Values are 512Mi, 1Gi, 2Gi, 3Gi, 4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 2Gi if not specified.
 	// +kubebuilder:validation:Optional
 	Memory *string `json:"memory,omitempty" tf:"memory,omitempty"`
 }
@@ -391,8 +531,8 @@ type SpringCloudGatewayStatus struct {
 // +kubebuilder:storageversion
 
 // SpringCloudGateway is the Schema for the SpringCloudGateways API. Manages a Spring Cloud Gateway.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

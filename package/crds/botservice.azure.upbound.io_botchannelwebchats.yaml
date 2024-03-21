@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -238,8 +238,31 @@ spec:
                             type: string
                         type: object
                     type: object
+                  site:
+                    description: A site represents a client application that you want
+                      to connect to your bot. One or more site blocks as defined below.
+                    items:
+                      properties:
+                        endpointParametersEnabled:
+                          description: Is the endpoint parameters enabled for this
+                            site?
+                          type: boolean
+                        name:
+                          description: The name of the site.
+                          type: string
+                        storageEnabled:
+                          description: Is the storage site enabled for detailed logging?
+                            Defaults to true.
+                          type: boolean
+                        userUploadEnabled:
+                          description: Is the user upload enabled for this site? Defaults
+                            to true.
+                          type: boolean
+                      type: object
+                    type: array
                   siteNames:
-                    description: A list of Web Chat Site names.
+                    description: 'Deprecated: siteNames will be removed in favour
+                      of the site code block.'
                     items:
                       type: string
                     type: array
@@ -262,8 +285,31 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  site:
+                    description: A site represents a client application that you want
+                      to connect to your bot. One or more site blocks as defined below.
+                    items:
+                      properties:
+                        endpointParametersEnabled:
+                          description: Is the endpoint parameters enabled for this
+                            site?
+                          type: boolean
+                        name:
+                          description: The name of the site.
+                          type: string
+                        storageEnabled:
+                          description: Is the storage site enabled for detailed logging?
+                            Defaults to true.
+                          type: boolean
+                        userUploadEnabled:
+                          description: Is the user upload enabled for this site? Defaults
+                            to true.
+                          type: boolean
+                      type: object
+                    type: array
                   siteNames:
-                    description: A list of Web Chat Site names.
+                    description: 'Deprecated: siteNames will be removed in favour
+                      of the site code block.'
                     items:
                       type: string
                     type: array
@@ -441,10 +487,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
                 || (has(self.initProvider) && has(self.initProvider.location))'
-            - message: spec.forProvider.siteNames is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.siteNames)
-                || (has(self.initProvider) && has(self.initProvider.siteNames))'
           status:
             description: BotChannelWebChatStatus defines the observed state of BotChannelWebChat.
             properties:
@@ -466,8 +508,31 @@ spec:
                       Channel should be created. Changing this forces a new resource
                       to be created.
                     type: string
+                  site:
+                    description: A site represents a client application that you want
+                      to connect to your bot. One or more site blocks as defined below.
+                    items:
+                      properties:
+                        endpointParametersEnabled:
+                          description: Is the endpoint parameters enabled for this
+                            site?
+                          type: boolean
+                        name:
+                          description: The name of the site.
+                          type: string
+                        storageEnabled:
+                          description: Is the storage site enabled for detailed logging?
+                            Defaults to true.
+                          type: boolean
+                        userUploadEnabled:
+                          description: Is the user upload enabled for this site? Defaults
+                            to true.
+                          type: boolean
+                      type: object
+                    type: array
                   siteNames:
-                    description: A list of Web Chat Site names.
+                    description: 'Deprecated: siteNames will be removed in favour
+                      of the site code block.'
                     items:
                       type: string
                     type: array

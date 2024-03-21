@@ -15,6 +15,9 @@ import (
 
 type GalleryApplicationVersionInitParameters struct {
 
+	// Specifies the name of the config file on the VM. Changing this forces a new resource to be created.
+	ConfigFile *string `json:"configFile,omitempty" tf:"config_file,omitempty"`
+
 	// Should the Gallery Application reports health. Defaults to false.
 	EnableHealthCheck *bool `json:"enableHealthCheck,omitempty" tf:"enable_health_check,omitempty"`
 
@@ -46,6 +49,9 @@ type GalleryApplicationVersionInitParameters struct {
 	// The version name of the Gallery Application Version, such as 1.0.0. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the name of the package file on the VM. Changing this forces a new resource to be created.
+	PackageFile *string `json:"packageFile,omitempty" tf:"package_file,omitempty"`
+
 	// A source block as defined below.
 	Source []SourceInitParameters `json:"source,omitempty" tf:"source,omitempty"`
 
@@ -58,6 +64,9 @@ type GalleryApplicationVersionInitParameters struct {
 }
 
 type GalleryApplicationVersionObservation struct {
+
+	// Specifies the name of the config file on the VM. Changing this forces a new resource to be created.
+	ConfigFile *string `json:"configFile,omitempty" tf:"config_file,omitempty"`
 
 	// Should the Gallery Application reports health. Defaults to false.
 	EnableHealthCheck *bool `json:"enableHealthCheck,omitempty" tf:"enable_health_check,omitempty"`
@@ -83,6 +92,9 @@ type GalleryApplicationVersionObservation struct {
 	// The version name of the Gallery Application Version, such as 1.0.0. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the name of the package file on the VM. Changing this forces a new resource to be created.
+	PackageFile *string `json:"packageFile,omitempty" tf:"package_file,omitempty"`
+
 	// A source block as defined below.
 	Source []SourceObservation `json:"source,omitempty" tf:"source,omitempty"`
 
@@ -95,6 +107,10 @@ type GalleryApplicationVersionObservation struct {
 }
 
 type GalleryApplicationVersionParameters struct {
+
+	// Specifies the name of the config file on the VM. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	ConfigFile *string `json:"configFile,omitempty" tf:"config_file,omitempty"`
 
 	// Should the Gallery Application reports health. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -133,6 +149,10 @@ type GalleryApplicationVersionParameters struct {
 	// The version name of the Gallery Application Version, such as 1.0.0. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Specifies the name of the package file on the VM. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PackageFile *string `json:"packageFile,omitempty" tf:"package_file,omitempty"`
 
 	// A source block as defined below.
 	// +kubebuilder:validation:Optional
@@ -238,6 +258,9 @@ type SourceParameters struct {
 
 type TargetRegionInitParameters struct {
 
+	// Specifies whether this Gallery Application Version should be excluded from the latest filter. If set to true, this Gallery Application Version won't be returned for the latest version. Defaults to false.
+	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
+
 	// The Azure Region in which the Gallery Application Version exists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.GalleryApplication
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
@@ -260,6 +283,9 @@ type TargetRegionInitParameters struct {
 
 type TargetRegionObservation struct {
 
+	// Specifies whether this Gallery Application Version should be excluded from the latest filter. If set to true, this Gallery Application Version won't be returned for the latest version. Defaults to false.
+	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
+
 	// The Azure Region in which the Gallery Application Version exists.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -271,6 +297,10 @@ type TargetRegionObservation struct {
 }
 
 type TargetRegionParameters struct {
+
+	// Specifies whether this Gallery Application Version should be excluded from the latest filter. If set to true, this Gallery Application Version won't be returned for the latest version. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ExcludeFromLatest *bool `json:"excludeFromLatest,omitempty" tf:"exclude_from_latest,omitempty"`
 
 	// The Azure Region in which the Gallery Application Version exists.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.GalleryApplication
@@ -323,8 +353,8 @@ type GalleryApplicationVersionStatus struct {
 // +kubebuilder:storageversion
 
 // GalleryApplicationVersion is the Schema for the GalleryApplicationVersions API. Manages a Gallery Application Version.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

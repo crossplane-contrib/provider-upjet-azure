@@ -15,24 +15,113 @@ import (
 
 type CustomRouteInitParameters struct {
 
-	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// A list of address blocks reserved for this virtual network in CIDR notation.
 	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 type CustomRouteObservation struct {
 
-	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// A list of address blocks reserved for this virtual network in CIDR notation.
 	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 }
 
 type CustomRouteParameters struct {
 
-	// A list of address blocks reserved for this virtual network in CIDR notation as defined below.
+	// A list of address blocks reserved for this virtual network in CIDR notation.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+}
+
+type IpsecPolicyInitParameters struct {
+
+	// The DH Group, used in IKE Phase 1. Possible values are DHGroup1, DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256, ECP384 and None.
+	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm, used for IKE Phase 2. Possible values are AES128, AES192, AES256, DES, DES3, GCMAES128 and GCMAES256.
+	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+
+	// The IKE encryption integrity algorithm, used for IKE Phase 2. Possible values are GCMAES128, GCMAES256, MD5, SHA1, SHA256 and SHA384.
+	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm, used for IKE phase 1. Possible values are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
+	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm, used for IKE phase 1. Possible values are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1 and SHA256.
+	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+
+	// The Pfs Group, used in IKE Phase 2. Possible values are ECP256, ECP384, PFS1, PFS2, PFS14, PFS24, PFS2048, PFSMM and None.
+	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+
+	// The IPSec Security Association payload size in KB for a Site-to-Site VPN tunnel. Possible values are between 1024 and 2147483647.
+	SaDataSizeInKilobytes *float64 `json:"saDataSizeInKilobytes,omitempty" tf:"sa_data_size_in_kilobytes,omitempty"`
+
+	// The IPSec Security Association lifetime in seconds for a Site-to-Site VPN tunnel. Possible values are between 300 and 172799.
+	SaLifetimeInSeconds *float64 `json:"saLifetimeInSeconds,omitempty" tf:"sa_lifetime_in_seconds,omitempty"`
+}
+
+type IpsecPolicyObservation struct {
+
+	// The DH Group, used in IKE Phase 1. Possible values are DHGroup1, DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256, ECP384 and None.
+	DhGroup *string `json:"dhGroup,omitempty" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm, used for IKE Phase 2. Possible values are AES128, AES192, AES256, DES, DES3, GCMAES128 and GCMAES256.
+	IkeEncryption *string `json:"ikeEncryption,omitempty" tf:"ike_encryption,omitempty"`
+
+	// The IKE encryption integrity algorithm, used for IKE Phase 2. Possible values are GCMAES128, GCMAES256, MD5, SHA1, SHA256 and SHA384.
+	IkeIntegrity *string `json:"ikeIntegrity,omitempty" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm, used for IKE phase 1. Possible values are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
+	IpsecEncryption *string `json:"ipsecEncryption,omitempty" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm, used for IKE phase 1. Possible values are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1 and SHA256.
+	IpsecIntegrity *string `json:"ipsecIntegrity,omitempty" tf:"ipsec_integrity,omitempty"`
+
+	// The Pfs Group, used in IKE Phase 2. Possible values are ECP256, ECP384, PFS1, PFS2, PFS14, PFS24, PFS2048, PFSMM and None.
+	PfsGroup *string `json:"pfsGroup,omitempty" tf:"pfs_group,omitempty"`
+
+	// The IPSec Security Association payload size in KB for a Site-to-Site VPN tunnel. Possible values are between 1024 and 2147483647.
+	SaDataSizeInKilobytes *float64 `json:"saDataSizeInKilobytes,omitempty" tf:"sa_data_size_in_kilobytes,omitempty"`
+
+	// The IPSec Security Association lifetime in seconds for a Site-to-Site VPN tunnel. Possible values are between 300 and 172799.
+	SaLifetimeInSeconds *float64 `json:"saLifetimeInSeconds,omitempty" tf:"sa_lifetime_in_seconds,omitempty"`
+}
+
+type IpsecPolicyParameters struct {
+
+	// The DH Group, used in IKE Phase 1. Possible values are DHGroup1, DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256, ECP384 and None.
+	// +kubebuilder:validation:Optional
+	DhGroup *string `json:"dhGroup" tf:"dh_group,omitempty"`
+
+	// The IKE encryption algorithm, used for IKE Phase 2. Possible values are AES128, AES192, AES256, DES, DES3, GCMAES128 and GCMAES256.
+	// +kubebuilder:validation:Optional
+	IkeEncryption *string `json:"ikeEncryption" tf:"ike_encryption,omitempty"`
+
+	// The IKE encryption integrity algorithm, used for IKE Phase 2. Possible values are GCMAES128, GCMAES256, MD5, SHA1, SHA256 and SHA384.
+	// +kubebuilder:validation:Optional
+	IkeIntegrity *string `json:"ikeIntegrity" tf:"ike_integrity,omitempty"`
+
+	// The IPSec encryption algorithm, used for IKE phase 1. Possible values are AES128, AES192, AES256, DES, DES3, GCMAES128, GCMAES192, GCMAES256 and None.
+	// +kubebuilder:validation:Optional
+	IpsecEncryption *string `json:"ipsecEncryption" tf:"ipsec_encryption,omitempty"`
+
+	// The IPSec integrity algorithm, used for IKE phase 1. Possible values are GCMAES128, GCMAES192, GCMAES256, MD5, SHA1 and SHA256.
+	// +kubebuilder:validation:Optional
+	IpsecIntegrity *string `json:"ipsecIntegrity" tf:"ipsec_integrity,omitempty"`
+
+	// The Pfs Group, used in IKE Phase 2. Possible values are ECP256, ECP384, PFS1, PFS2, PFS14, PFS24, PFS2048, PFSMM and None.
+	// +kubebuilder:validation:Optional
+	PfsGroup *string `json:"pfsGroup" tf:"pfs_group,omitempty"`
+
+	// The IPSec Security Association payload size in KB for a Site-to-Site VPN tunnel. Possible values are between 1024 and 2147483647.
+	// +kubebuilder:validation:Optional
+	SaDataSizeInKilobytes *float64 `json:"saDataSizeInKilobytes" tf:"sa_data_size_in_kilobytes,omitempty"`
+
+	// The IPSec Security Association lifetime in seconds for a Site-to-Site VPN tunnel. Possible values are between 300 and 172799.
+	// +kubebuilder:validation:Optional
+	SaLifetimeInSeconds *float64 `json:"saLifetimeInSeconds" tf:"sa_lifetime_in_seconds,omitempty"`
 }
 
 type PeeringAddressesInitParameters struct {
@@ -70,9 +159,130 @@ type PeeringAddressesParameters struct {
 	IPConfigurationName *string `json:"ipConfigurationName,omitempty" tf:"ip_configuration_name,omitempty"`
 }
 
+type PolicyGroupInitParameters struct {
+
+	// Is this a Default Virtual Network Gateway Policy Group? Defaults to false.
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// The name of the Virtual Network Gateway Policy Group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more policy_member blocks as defined below.
+	PolicyMember []PolicyMemberInitParameters `json:"policyMember,omitempty" tf:"policy_member,omitempty"`
+
+	// The priority for the Virtual Network Gateway Policy Group. Defaults to 0.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
+type PolicyGroupObservation struct {
+
+	// Is this a Default Virtual Network Gateway Policy Group? Defaults to false.
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// The name of the Virtual Network Gateway Policy Group.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// One or more policy_member blocks as defined below.
+	PolicyMember []PolicyMemberObservation `json:"policyMember,omitempty" tf:"policy_member,omitempty"`
+
+	// The priority for the Virtual Network Gateway Policy Group. Defaults to 0.
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
+type PolicyGroupParameters struct {
+
+	// Is this a Default Virtual Network Gateway Policy Group? Defaults to false.
+	// +kubebuilder:validation:Optional
+	IsDefault *bool `json:"isDefault,omitempty" tf:"is_default,omitempty"`
+
+	// The name of the Virtual Network Gateway Policy Group.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// One or more policy_member blocks as defined below.
+	// +kubebuilder:validation:Optional
+	PolicyMember []PolicyMemberParameters `json:"policyMember" tf:"policy_member,omitempty"`
+
+	// The priority for the Virtual Network Gateway Policy Group. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
+}
+
+type PolicyMemberInitParameters struct {
+
+	// The name of the Virtual Network Gateway Client Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of the Virtual Network Gateway. Valid options are Vpn or ExpressRoute. Changing the type forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value of attribute that is used for this Virtual Network Gateway Policy Group Member.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type PolicyMemberObservation struct {
+
+	// The name of the Virtual Network Gateway Client Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// The type of the Virtual Network Gateway. Valid options are Vpn or ExpressRoute. Changing the type forces a new resource to be created.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value of attribute that is used for this Virtual Network Gateway Policy Group Member.
+	Value *string `json:"value,omitempty" tf:"value,omitempty"`
+}
+
+type PolicyMemberParameters struct {
+
+	// The name of the Virtual Network Gateway Client Connection.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// The type of the Virtual Network Gateway. Valid options are Vpn or ExpressRoute. Changing the type forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+
+	// The value of attribute that is used for this Virtual Network Gateway Policy Group Member.
+	// +kubebuilder:validation:Optional
+	Value *string `json:"value" tf:"value,omitempty"`
+}
+
+type RadiusServerInitParameters struct {
+
+	// The address of the Radius Server.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The score of the Radius Server determines the priority of the server. Possible values are between 1 and 30.
+	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
+}
+
+type RadiusServerObservation struct {
+
+	// The address of the Radius Server.
+	Address *string `json:"address,omitempty" tf:"address,omitempty"`
+
+	// The score of the Radius Server determines the priority of the server. Possible values are between 1 and 30.
+	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
+}
+
+type RadiusServerParameters struct {
+
+	// The address of the Radius Server.
+	// +kubebuilder:validation:Optional
+	Address *string `json:"address" tf:"address,omitempty"`
+
+	// The score of the Radius Server determines the priority of the server. Possible values are between 1 and 30.
+	// +kubebuilder:validation:Optional
+	Score *float64 `json:"score" tf:"score,omitempty"`
+
+	// The secret that is used to communicate with the Radius Server.
+	// +kubebuilder:validation:Required
+	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
+}
+
 type RevokedCertificateInitParameters struct {
 
-	// A user-defined name of the root certificate.
+	// The name of the Virtual Network Gateway Client Connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the public data of the certificate.
@@ -81,7 +291,7 @@ type RevokedCertificateInitParameters struct {
 
 type RevokedCertificateObservation struct {
 
-	// A user-defined name of the root certificate.
+	// The name of the Virtual Network Gateway Client Connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the public data of the certificate.
@@ -90,7 +300,7 @@ type RevokedCertificateObservation struct {
 
 type RevokedCertificateParameters struct {
 
-	// A user-defined name of the root certificate.
+	// The name of the Virtual Network Gateway Client Connection.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
@@ -101,29 +311,29 @@ type RevokedCertificateParameters struct {
 
 type RootCertificateInitParameters struct {
 
-	// A user-defined name of the root certificate.
+	// The name of the Virtual Network Gateway Client Connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
+	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers, nor any newlines.
 	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
 }
 
 type RootCertificateObservation struct {
 
-	// A user-defined name of the root certificate.
+	// The name of the Virtual Network Gateway Client Connection.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
+	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers, nor any newlines.
 	PublicCertData *string `json:"publicCertData,omitempty" tf:"public_cert_data,omitempty"`
 }
 
 type RootCertificateParameters struct {
 
-	// A user-defined name of the root certificate.
+	// The name of the Virtual Network Gateway Client Connection.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers.
+	// The public certificate of the root certificate authority. The certificate must be provided in Base-64 encoded X.509 format (PEM). In particular, this argument must not include the -----BEGIN CERTIFICATE----- or -----END CERTIFICATE----- markers, nor any newlines.
 	// +kubebuilder:validation:Optional
 	PublicCertData *string `json:"publicCertData" tf:"public_cert_data,omitempty"`
 }
@@ -142,6 +352,12 @@ type VPNClientConfigurationInitParameters struct {
 
 	// The address space out of which IP addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation.
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
+
+	// An ipsec_policy block as defined below.
+	IpsecPolicy []IpsecPolicyInitParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+
+	// One or more radius_server blocks as defined below.
+	RadiusServer []RadiusServerInitParameters `json:"radiusServer,omitempty" tf:"radius_server,omitempty"`
 
 	// The address of the Radius server.
 	RadiusServerAddress *string `json:"radiusServerAddress,omitempty" tf:"radius_server_address,omitempty"`
@@ -166,6 +382,9 @@ type VPNClientConfigurationInitParameters struct {
 	// aad_tenant, aad_audience and aad_issuer.
 	// +listType=set
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
+
+	// One or more virtual_network_gateway_client_connection blocks as defined below.
+	VirtualNetworkGatewayClientConnection []VirtualNetworkGatewayClientConnectionInitParameters `json:"virtualNetworkGatewayClientConnection,omitempty" tf:"virtual_network_gateway_client_connection,omitempty"`
 }
 
 type VPNClientConfigurationObservation struct {
@@ -182,6 +401,12 @@ type VPNClientConfigurationObservation struct {
 
 	// The address space out of which IP addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation.
 	AddressSpace []*string `json:"addressSpace,omitempty" tf:"address_space,omitempty"`
+
+	// An ipsec_policy block as defined below.
+	IpsecPolicy []IpsecPolicyObservation `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+
+	// One or more radius_server blocks as defined below.
+	RadiusServer []RadiusServerObservation `json:"radiusServer,omitempty" tf:"radius_server,omitempty"`
 
 	// The address of the Radius server.
 	RadiusServerAddress *string `json:"radiusServerAddress,omitempty" tf:"radius_server_address,omitempty"`
@@ -206,6 +431,9 @@ type VPNClientConfigurationObservation struct {
 	// aad_tenant, aad_audience and aad_issuer.
 	// +listType=set
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
+
+	// One or more virtual_network_gateway_client_connection blocks as defined below.
+	VirtualNetworkGatewayClientConnection []VirtualNetworkGatewayClientConnectionObservation `json:"virtualNetworkGatewayClientConnection,omitempty" tf:"virtual_network_gateway_client_connection,omitempty"`
 }
 
 type VPNClientConfigurationParameters struct {
@@ -226,6 +454,14 @@ type VPNClientConfigurationParameters struct {
 	// The address space out of which IP addresses for vpn clients will be taken. You can provide more than one address space, e.g. in CIDR notation.
 	// +kubebuilder:validation:Optional
 	AddressSpace []*string `json:"addressSpace" tf:"address_space,omitempty"`
+
+	// An ipsec_policy block as defined below.
+	// +kubebuilder:validation:Optional
+	IpsecPolicy []IpsecPolicyParameters `json:"ipsecPolicy,omitempty" tf:"ipsec_policy,omitempty"`
+
+	// One or more radius_server blocks as defined below.
+	// +kubebuilder:validation:Optional
+	RadiusServer []RadiusServerParameters `json:"radiusServer,omitempty" tf:"radius_server,omitempty"`
 
 	// The address of the Radius server.
 	// +kubebuilder:validation:Optional
@@ -256,6 +492,10 @@ type VPNClientConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VPNClientProtocols []*string `json:"vpnClientProtocols,omitempty" tf:"vpn_client_protocols,omitempty"`
+
+	// One or more virtual_network_gateway_client_connection blocks as defined below.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkGatewayClientConnection []VirtualNetworkGatewayClientConnectionParameters `json:"virtualNetworkGatewayClientConnection,omitempty" tf:"virtual_network_gateway_client_connection,omitempty"`
 }
 
 type VirtualNetworkGatewayBGPSettingsInitParameters struct {
@@ -266,7 +506,7 @@ type VirtualNetworkGatewayBGPSettingsInitParameters struct {
 	// The weight added to routes which have been learned through BGP peering. Valid values can be between 0 and 100.
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
-	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
+	// A list of peering_addresses blocks as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	PeeringAddresses []PeeringAddressesInitParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
 }
 
@@ -278,7 +518,7 @@ type VirtualNetworkGatewayBGPSettingsObservation struct {
 	// The weight added to routes which have been learned through BGP peering. Valid values can be between 0 and 100.
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
-	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
+	// A list of peering_addresses blocks as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	PeeringAddresses []PeeringAddressesObservation `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
 }
 
@@ -292,9 +532,48 @@ type VirtualNetworkGatewayBGPSettingsParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerWeight *float64 `json:"peerWeight,omitempty" tf:"peer_weight,omitempty"`
 
-	// A list of peering_addresses as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
+	// A list of peering_addresses blocks as defined below. Only one peering_addresses block can be specified except when active_active of this Virtual Network Gateway is true.
 	// +kubebuilder:validation:Optional
 	PeeringAddresses []PeeringAddressesParameters `json:"peeringAddresses,omitempty" tf:"peering_addresses,omitempty"`
+}
+
+type VirtualNetworkGatewayClientConnectionInitParameters struct {
+
+	// A list of address prefixes for P2S VPN Client.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// The name of the Virtual Network Gateway Client Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of names of Virtual Network Gateway Policy Groups.
+	PolicyGroupNames []*string `json:"policyGroupNames,omitempty" tf:"policy_group_names,omitempty"`
+}
+
+type VirtualNetworkGatewayClientConnectionObservation struct {
+
+	// A list of address prefixes for P2S VPN Client.
+	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
+
+	// The name of the Virtual Network Gateway Client Connection.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// A list of names of Virtual Network Gateway Policy Groups.
+	PolicyGroupNames []*string `json:"policyGroupNames,omitempty" tf:"policy_group_names,omitempty"`
+}
+
+type VirtualNetworkGatewayClientConnectionParameters struct {
+
+	// A list of address prefixes for P2S VPN Client.
+	// +kubebuilder:validation:Optional
+	AddressPrefixes []*string `json:"addressPrefixes" tf:"address_prefixes,omitempty"`
+
+	// The name of the Virtual Network Gateway Client Connection.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// A list of names of Virtual Network Gateway Policy Groups.
+	// +kubebuilder:validation:Optional
+	PolicyGroupNames []*string `json:"policyGroupNames" tf:"policy_group_names,omitempty"`
 }
 
 type VirtualNetworkGatewayIPConfigurationInitParameters struct {
@@ -302,7 +581,7 @@ type VirtualNetworkGatewayIPConfigurationInitParameters struct {
 	// A user-defined name of the IP configuration. Defaults to vnetGatewayConfig.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Defines how the private IP address of the gateways virtual interface is assigned. Valid options are Static or Dynamic. Defaults to Dynamic.
+	// Defines how the private IP address of the gateways virtual interface is assigned. The only valid value is Dynamic for Virtual Network Gateway (Static is not supported by the service yet). Defaults to Dynamic.
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the public IP address to associate with the Virtual Network Gateway.
@@ -337,7 +616,7 @@ type VirtualNetworkGatewayIPConfigurationObservation struct {
 	// A user-defined name of the IP configuration. Defaults to vnetGatewayConfig.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Defines how the private IP address of the gateways virtual interface is assigned. Valid options are Static or Dynamic. Defaults to Dynamic.
+	// Defines how the private IP address of the gateways virtual interface is assigned. The only valid value is Dynamic for Virtual Network Gateway (Static is not supported by the service yet). Defaults to Dynamic.
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
 	// The ID of the public IP address to associate with the Virtual Network Gateway.
@@ -353,7 +632,7 @@ type VirtualNetworkGatewayIPConfigurationParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Defines how the private IP address of the gateways virtual interface is assigned. Valid options are Static or Dynamic. Defaults to Dynamic.
+	// Defines how the private IP address of the gateways virtual interface is assigned. The only valid value is Dynamic for Virtual Network Gateway (Static is not supported by the service yet). Defaults to Dynamic.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddressAllocation *string `json:"privateIpAddressAllocation,omitempty" tf:"private_ip_address_allocation,omitempty"`
 
@@ -391,11 +670,17 @@ type VirtualNetworkGatewayInitParameters struct {
 	// If true, an active-active Virtual Network Gateway will be created. An active-active gateway requires a HighPerformance or an UltraPerformance SKU. If false, an active-standby gateway will be created. Defaults to false.
 	ActiveActive *bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
 
+	// Is BGP Route Translation for NAT enabled? Defaults to false.
+	BGPRouteTranslationForNATEnabled *bool `json:"bgpRouteTranslationForNatEnabled,omitempty" tf:"bgp_route_translation_for_nat_enabled,omitempty"`
+
 	// A bgp_settings block which is documented below. In this block the BGP specific settings can be defined.
 	BGPSettings []VirtualNetworkGatewayBGPSettingsInitParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
 	// A custom_route block as defined below. Specifies a custom routes address space for a virtual network gateway and a VpnClient.
 	CustomRoute []CustomRouteInitParameters `json:"customRoute,omitempty" tf:"custom_route,omitempty"`
+
+	// Is DNS forwarding enabled?
+	DNSForwardingEnabled *bool `json:"dnsForwardingEnabled,omitempty" tf:"dns_forwarding_enabled,omitempty"`
 
 	// The ID of the local network gateway through which outbound Internet traffic from the virtual network in which the gateway is created will be routed (forced tunnelling). Refer to the Azure documentation on forced tunnelling. If not specified, forced tunnelling is disabled.
 	DefaultLocalNetworkGatewayID *string `json:"defaultLocalNetworkGatewayId,omitempty" tf:"default_local_network_gateway_id,omitempty"`
@@ -409,17 +694,26 @@ type VirtualNetworkGatewayInitParameters struct {
 	// The Generation of the Virtual Network gateway. Possible values include Generation1, Generation2 or None. Changing this forces a new resource to be created.
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One, two or three ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
 	IPConfiguration []VirtualNetworkGatewayIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
+	// Is IP Sec Replay Protection enabled? Defaults to true.
+	IPSecReplayProtectionEnabled *bool `json:"ipSecReplayProtectionEnabled,omitempty" tf:"ip_sec_replay_protection_enabled,omitempty"`
+
 	// The location/region where the Virtual Network Gateway is located. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// One or more policy_group blocks as defined below.
+	PolicyGroup []PolicyGroupInitParameters `json:"policyGroup,omitempty" tf:"policy_group,omitempty"`
+
 	// Should private IP be enabled on this gateway for connections? Changing this forces a new resource to be created.
 	PrivateIPAddressEnabled *bool `json:"privateIpAddressEnabled,omitempty" tf:"private_ip_address_enabled,omitempty"`
+
+	// Is remote vnet traffic that is used to configure this gateway to accept traffic from other Azure Virtual Networks enabled? Defaults to false.
+	RemoteVnetTrafficEnabled *bool `json:"remoteVnetTrafficEnabled,omitempty" tf:"remote_vnet_traffic_enabled,omitempty"`
 
 	// Configuration of the size and capacity of the virtual network gateway. Valid options are Basic, Standard, HighPerformance, UltraPerformance, ErGw1AZ, ErGw2AZ, ErGw3AZ, VpnGw1, VpnGw2, VpnGw3, VpnGw4,VpnGw5, VpnGw1AZ, VpnGw2AZ, VpnGw3AZ,VpnGw4AZ and VpnGw5AZ and depend on the type, vpn_type and generation arguments. A PolicyBased gateway only supports the Basic SKU. Further, the UltraPerformance SKU is only supported by an ExpressRoute gateway.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -436,6 +730,9 @@ type VirtualNetworkGatewayInitParameters struct {
 
 	// The routing type of the Virtual Network Gateway. Valid options are RouteBased or PolicyBased. Defaults to RouteBased. Changing this forces a new resource to be created.
 	VPNType *string `json:"vpnType,omitempty" tf:"vpn_type,omitempty"`
+
+	// Is remote vnet traffic that is used to configure this gateway to accept traffic from remote Virtual WAN networks enabled? Defaults to false.
+	VirtualWanTrafficEnabled *bool `json:"virtualWanTrafficEnabled,omitempty" tf:"virtual_wan_traffic_enabled,omitempty"`
 }
 
 type VirtualNetworkGatewayObservation struct {
@@ -443,11 +740,17 @@ type VirtualNetworkGatewayObservation struct {
 	// If true, an active-active Virtual Network Gateway will be created. An active-active gateway requires a HighPerformance or an UltraPerformance SKU. If false, an active-standby gateway will be created. Defaults to false.
 	ActiveActive *bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
 
+	// Is BGP Route Translation for NAT enabled? Defaults to false.
+	BGPRouteTranslationForNATEnabled *bool `json:"bgpRouteTranslationForNatEnabled,omitempty" tf:"bgp_route_translation_for_nat_enabled,omitempty"`
+
 	// A bgp_settings block which is documented below. In this block the BGP specific settings can be defined.
 	BGPSettings []VirtualNetworkGatewayBGPSettingsObservation `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
 
 	// A custom_route block as defined below. Specifies a custom routes address space for a virtual network gateway and a VpnClient.
 	CustomRoute []CustomRouteObservation `json:"customRoute,omitempty" tf:"custom_route,omitempty"`
+
+	// Is DNS forwarding enabled?
+	DNSForwardingEnabled *bool `json:"dnsForwardingEnabled,omitempty" tf:"dns_forwarding_enabled,omitempty"`
 
 	// The ID of the local network gateway through which outbound Internet traffic from the virtual network in which the gateway is created will be routed (forced tunnelling). Refer to the Azure documentation on forced tunnelling. If not specified, forced tunnelling is disabled.
 	DefaultLocalNetworkGatewayID *string `json:"defaultLocalNetworkGatewayId,omitempty" tf:"default_local_network_gateway_id,omitempty"`
@@ -464,17 +767,26 @@ type VirtualNetworkGatewayObservation struct {
 	// The ID of the Virtual Network Gateway.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// One, two or three ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
 	IPConfiguration []VirtualNetworkGatewayIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
+	// Is IP Sec Replay Protection enabled? Defaults to true.
+	IPSecReplayProtectionEnabled *bool `json:"ipSecReplayProtectionEnabled,omitempty" tf:"ip_sec_replay_protection_enabled,omitempty"`
+
 	// The location/region where the Virtual Network Gateway is located. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// One or more policy_group blocks as defined below.
+	PolicyGroup []PolicyGroupObservation `json:"policyGroup,omitempty" tf:"policy_group,omitempty"`
+
 	// Should private IP be enabled on this gateway for connections? Changing this forces a new resource to be created.
 	PrivateIPAddressEnabled *bool `json:"privateIpAddressEnabled,omitempty" tf:"private_ip_address_enabled,omitempty"`
+
+	// Is remote vnet traffic that is used to configure this gateway to accept traffic from other Azure Virtual Networks enabled? Defaults to false.
+	RemoteVnetTrafficEnabled *bool `json:"remoteVnetTrafficEnabled,omitempty" tf:"remote_vnet_traffic_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Virtual Network Gateway. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -494,6 +806,9 @@ type VirtualNetworkGatewayObservation struct {
 
 	// The routing type of the Virtual Network Gateway. Valid options are RouteBased or PolicyBased. Defaults to RouteBased. Changing this forces a new resource to be created.
 	VPNType *string `json:"vpnType,omitempty" tf:"vpn_type,omitempty"`
+
+	// Is remote vnet traffic that is used to configure this gateway to accept traffic from remote Virtual WAN networks enabled? Defaults to false.
+	VirtualWanTrafficEnabled *bool `json:"virtualWanTrafficEnabled,omitempty" tf:"virtual_wan_traffic_enabled,omitempty"`
 }
 
 type VirtualNetworkGatewayParameters struct {
@@ -502,6 +817,10 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	ActiveActive *bool `json:"activeActive,omitempty" tf:"active_active,omitempty"`
 
+	// Is BGP Route Translation for NAT enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	BGPRouteTranslationForNATEnabled *bool `json:"bgpRouteTranslationForNatEnabled,omitempty" tf:"bgp_route_translation_for_nat_enabled,omitempty"`
+
 	// A bgp_settings block which is documented below. In this block the BGP specific settings can be defined.
 	// +kubebuilder:validation:Optional
 	BGPSettings []VirtualNetworkGatewayBGPSettingsParameters `json:"bgpSettings,omitempty" tf:"bgp_settings,omitempty"`
@@ -509,6 +828,10 @@ type VirtualNetworkGatewayParameters struct {
 	// A custom_route block as defined below. Specifies a custom routes address space for a virtual network gateway and a VpnClient.
 	// +kubebuilder:validation:Optional
 	CustomRoute []CustomRouteParameters `json:"customRoute,omitempty" tf:"custom_route,omitempty"`
+
+	// Is DNS forwarding enabled?
+	// +kubebuilder:validation:Optional
+	DNSForwardingEnabled *bool `json:"dnsForwardingEnabled,omitempty" tf:"dns_forwarding_enabled,omitempty"`
 
 	// The ID of the local network gateway through which outbound Internet traffic from the virtual network in which the gateway is created will be routed (forced tunnelling). Refer to the Azure documentation on forced tunnelling. If not specified, forced tunnelling is disabled.
 	// +kubebuilder:validation:Optional
@@ -526,20 +849,32 @@ type VirtualNetworkGatewayParameters struct {
 	// +kubebuilder:validation:Optional
 	Generation *string `json:"generation,omitempty" tf:"generation,omitempty"`
 
-	// One, two or three ip_configuration blocks documented below.
+	// One or more (up to 3) ip_configuration blocks documented below.
 	// An active-standby gateway requires exactly one ip_configuration block,
 	// an active-active gateway requires exactly two ip_configuration blocks whereas
 	// an active-active zone redundant gateway with P2S configuration requires exactly three ip_configuration blocks.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []VirtualNetworkGatewayIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
 
+	// Is IP Sec Replay Protection enabled? Defaults to true.
+	// +kubebuilder:validation:Optional
+	IPSecReplayProtectionEnabled *bool `json:"ipSecReplayProtectionEnabled,omitempty" tf:"ip_sec_replay_protection_enabled,omitempty"`
+
 	// The location/region where the Virtual Network Gateway is located. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// One or more policy_group blocks as defined below.
+	// +kubebuilder:validation:Optional
+	PolicyGroup []PolicyGroupParameters `json:"policyGroup,omitempty" tf:"policy_group,omitempty"`
+
 	// Should private IP be enabled on this gateway for connections? Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateIPAddressEnabled *bool `json:"privateIpAddressEnabled,omitempty" tf:"private_ip_address_enabled,omitempty"`
+
+	// Is remote vnet traffic that is used to configure this gateway to accept traffic from other Azure Virtual Networks enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	RemoteVnetTrafficEnabled *bool `json:"remoteVnetTrafficEnabled,omitempty" tf:"remote_vnet_traffic_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Virtual Network Gateway. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -574,6 +909,10 @@ type VirtualNetworkGatewayParameters struct {
 	// The routing type of the Virtual Network Gateway. Valid options are RouteBased or PolicyBased. Defaults to RouteBased. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VPNType *string `json:"vpnType,omitempty" tf:"vpn_type,omitempty"`
+
+	// Is remote vnet traffic that is used to configure this gateway to accept traffic from remote Virtual WAN networks enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	VirtualWanTrafficEnabled *bool `json:"virtualWanTrafficEnabled,omitempty" tf:"virtual_wan_traffic_enabled,omitempty"`
 }
 
 // VirtualNetworkGatewaySpec defines the desired state of VirtualNetworkGateway
@@ -604,8 +943,8 @@ type VirtualNetworkGatewayStatus struct {
 // +kubebuilder:storageversion
 
 // VirtualNetworkGateway is the Schema for the VirtualNetworkGateways API. Manages a virtual network gateway to establish secure, cross-premises connectivity.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

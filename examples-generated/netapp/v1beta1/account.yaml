@@ -19,6 +19,10 @@ spec:
         namespace: upbound-system
       smbServerName: SMBSERVER
       username: aduser
+    identity:
+    - identityIds:
+      - ${azurerm_user_assigned_identity.example.id}
+      type: UserAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -37,3 +41,21 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta1/account
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: anf-user-assigned-identity
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

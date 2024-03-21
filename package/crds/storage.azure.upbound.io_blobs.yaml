@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -126,9 +126,9 @@ spec:
                       specified if source or source_content is specified.
                     type: string
                   storageAccountName:
-                    description: |-
-                      Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
-                      Changing this forces a new resource to be created.
+                    description: Specifies the storage account in which to create
+                      the storage container. Changing this forces a new resource to
+                      be created.
                     type: string
                   storageAccountNameRef:
                     description: Reference to a Account to populate storageAccountName.
@@ -593,9 +593,9 @@ spec:
                       specified if source or source_content is specified.
                     type: string
                   storageAccountName:
-                    description: |-
-                      Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
-                      Changing this forces a new resource to be created.
+                    description: Specifies the storage account in which to create
+                      the storage container. Changing this forces a new resource to
+                      be created.
                     type: string
                   storageContainerName:
                     description: The name of the storage container in which this blob

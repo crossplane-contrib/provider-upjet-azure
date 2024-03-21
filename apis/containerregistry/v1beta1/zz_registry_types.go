@@ -199,7 +199,6 @@ type NetworkRuleSetInitParameters struct {
 	// One or more ip_rule blocks as defined below.
 	IPRule []IPRuleInitParameters `json:"ipRule,omitempty" tf:"ip_rule"`
 
-	// One or more virtual_network blocks as defined below.
 	VirtualNetwork []VirtualNetworkInitParameters `json:"virtualNetwork,omitempty" tf:"virtual_network"`
 }
 
@@ -211,7 +210,6 @@ type NetworkRuleSetObservation struct {
 	// One or more ip_rule blocks as defined below.
 	IPRule []IPRuleObservation `json:"ipRule,omitempty" tf:"ip_rule,omitempty"`
 
-	// One or more virtual_network blocks as defined below.
 	VirtualNetwork []VirtualNetworkObservation `json:"virtualNetwork,omitempty" tf:"virtual_network,omitempty"`
 }
 
@@ -225,7 +223,6 @@ type NetworkRuleSetParameters struct {
 	// +kubebuilder:validation:Optional
 	IPRule []IPRuleParameters `json:"ipRule,omitempty" tf:"ip_rule"`
 
-	// One or more virtual_network blocks as defined below.
 	// +kubebuilder:validation:Optional
 	VirtualNetwork []VirtualNetworkParameters `json:"virtualNetwork,omitempty" tf:"virtual_network"`
 }
@@ -490,7 +487,7 @@ type VirtualNetworkInitParameters struct {
 	// The behaviour for requests matching this rule. At this time the only supported value is Allow
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The subnet id from which requests will match the rule.
+	// The ID of the Container Registry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id"`
@@ -509,7 +506,7 @@ type VirtualNetworkObservation struct {
 	// The behaviour for requests matching this rule. At this time the only supported value is Allow
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
-	// The subnet id from which requests will match the rule.
+	// The ID of the Container Registry.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 }
 
@@ -519,7 +516,7 @@ type VirtualNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action"`
 
-	// The subnet id from which requests will match the rule.
+	// The ID of the Container Registry.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -562,8 +559,8 @@ type RegistryStatus struct {
 // +kubebuilder:storageversion
 
 // Registry is the Schema for the Registrys API. Manages an Azure Container Registry.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

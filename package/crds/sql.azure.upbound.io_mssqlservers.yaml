@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -106,8 +106,8 @@ spec:
                       properties:
                         azureadAuthenticationOnly:
                           description: Specifies whether only AD Users and administrators
-                            (e.g. azuread_administrator.0.login_username) can be used
-                            to login, or also local database users (e.g. administrator_login).
+                            (e.g. azuread_administrator[0].login_username) can be
+                            used to login, or also local database users (e.g. administrator_login).
                             When true, the administrator_login and administrator_login_password
                             properties can be omitted.
                           type: boolean
@@ -295,7 +295,8 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this SQL Server. Possible
-                            values are SystemAssigned, UserAssigned.
+                            values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -594,8 +595,8 @@ spec:
                       properties:
                         azureadAuthenticationOnly:
                           description: Specifies whether only AD Users and administrators
-                            (e.g. azuread_administrator.0.login_username) can be used
-                            to login, or also local database users (e.g. administrator_login).
+                            (e.g. azuread_administrator[0].login_username) can be
+                            used to login, or also local database users (e.g. administrator_login).
                             When true, the administrator_login and administrator_login_password
                             properties can be omitted.
                           type: boolean
@@ -783,7 +784,8 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this SQL Server. Possible
-                            values are SystemAssigned, UserAssigned.
+                            values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array
@@ -1169,8 +1171,8 @@ spec:
                       properties:
                         azureadAuthenticationOnly:
                           description: Specifies whether only AD Users and administrators
-                            (e.g. azuread_administrator.0.login_username) can be used
-                            to login, or also local database users (e.g. administrator_login).
+                            (e.g. azuread_administrator[0].login_username) can be
+                            used to login, or also local database users (e.g. administrator_login).
                             When true, the administrator_login and administrator_login_password
                             properties can be omitted.
                           type: boolean
@@ -1221,7 +1223,8 @@ spec:
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this SQL Server. Possible
-                            values are SystemAssigned, UserAssigned.
+                            values are SystemAssigned, UserAssigned, SystemAssigned,
+                            UserAssigned (to enable both).
                           type: string
                       type: object
                     type: array

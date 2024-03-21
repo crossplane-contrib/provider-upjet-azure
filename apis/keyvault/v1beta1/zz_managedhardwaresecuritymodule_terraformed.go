@@ -21,7 +21,7 @@ func (mg *ManagedHardwareSecurityModule) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ManagedHardwareSecurityModule
 func (tr *ManagedHardwareSecurityModule) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"security_domain_encrypted_data": "status.atProvider.securityDomainEncryptedData"}
 }
 
 // GetObservation of this ManagedHardwareSecurityModule

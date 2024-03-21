@@ -139,7 +139,7 @@ type EventHubInitParameters struct {
 	// Specifies the number of days to retain the events for this Event Hub.
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
-	// Specifies the current number of shards on the Event Hub. Changing this will force-recreate the resource.
+	// Specifies the current number of shards on the Event Hub.
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// Specifies the status of the Event Hub resource. Possible values are Active, Disabled and SendDisabled. Defaults to Active.
@@ -160,7 +160,7 @@ type EventHubObservation struct {
 	// Specifies the name of the EventHub Namespace. Changing this forces a new resource to be created.
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
-	// Specifies the current number of shards on the Event Hub. Changing this will force-recreate the resource.
+	// Specifies the current number of shards on the Event Hub.
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
 	// The identifiers for partitions created for Event Hubs.
@@ -197,7 +197,7 @@ type EventHubParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
-	// Specifies the current number of shards on the Event Hub. Changing this will force-recreate the resource.
+	// Specifies the current number of shards on the Event Hub.
 	// +kubebuilder:validation:Optional
 	PartitionCount *float64 `json:"partitionCount,omitempty" tf:"partition_count,omitempty"`
 
@@ -247,8 +247,8 @@ type EventHubStatus struct {
 // +kubebuilder:storageversion
 
 // EventHub is the Schema for the EventHubs API. Manages a Event Hubs as a nested resource within an Event Hubs namespace.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

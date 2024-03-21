@@ -179,7 +179,7 @@ type SubscriptionPolicyAssignmentObservation struct {
 
 type SubscriptionPolicyAssignmentOverridesInitParameters struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	Selectors []SubscriptionPolicyAssignmentOverridesSelectorsInitParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
@@ -188,7 +188,7 @@ type SubscriptionPolicyAssignmentOverridesInitParameters struct {
 
 type SubscriptionPolicyAssignmentOverridesObservation struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	Selectors []SubscriptionPolicyAssignmentOverridesSelectorsObservation `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
 	// Specifies the value to override the policy property. Possible values for policyEffect override listed policy effects.
@@ -197,7 +197,7 @@ type SubscriptionPolicyAssignmentOverridesObservation struct {
 
 type SubscriptionPolicyAssignmentOverridesParameters struct {
 
-	// One or more override_selector as defined below.
+	// One or more override_selector block as defined below.
 	// +kubebuilder:validation:Optional
 	Selectors []SubscriptionPolicyAssignmentOverridesSelectorsParameters `json:"selectors,omitempty" tf:"selectors,omitempty"`
 
@@ -220,7 +220,7 @@ type SubscriptionPolicyAssignmentOverridesSelectorsObservation struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -337,7 +337,7 @@ type SubscriptionPolicyAssignmentResourceSelectorsSelectorsInitParameters struct
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -349,7 +349,7 @@ type SubscriptionPolicyAssignmentResourceSelectorsSelectorsObservation struct {
 	// The list of allowed values for the specified kind. Cannot be used with not_in. Can contain up to 50 values.
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 
 	// The list of not-allowed values for the specified kind. Cannot be used with in. Can contain up to 50 values.
@@ -362,7 +362,7 @@ type SubscriptionPolicyAssignmentResourceSelectorsSelectorsParameters struct {
 	// +kubebuilder:validation:Optional
 	In []*string `json:"in,omitempty" tf:"in,omitempty"`
 
-	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation,  resourceType and resourceWithoutLocation.
+	// Specifies which characteristic will narrow down the set of evaluated resources. Possible values are resourceLocation, resourceType and resourceWithoutLocation.
 	// +kubebuilder:validation:Optional
 	Kind *string `json:"kind" tf:"kind,omitempty"`
 
@@ -399,8 +399,8 @@ type SubscriptionPolicyAssignmentStatus struct {
 // +kubebuilder:storageversion
 
 // SubscriptionPolicyAssignment is the Schema for the SubscriptionPolicyAssignments API. Manages a Subscription Policy Assignment.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

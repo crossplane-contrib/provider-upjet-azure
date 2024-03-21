@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: MSSQLElasticPool is the Schema for the MSSQLElasticPools API.
-          Manages a SQL Elastic Pool.
+          Manages an Azure SQL Elastic Pool.
         properties:
           apiVersion:
             description: |-
@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  enclaveType:
+                    description: Specifies the type of enclave to be used by the elastic
+                      pool. Possible value VBS.
+                    type: string
                   licenseType:
                     description: Specifies the license type applied to this database.
                       Possible values are LicenseIncluded and BasePrice.
@@ -299,16 +303,15 @@ spec:
                           type: string
                         name:
                           description: Specifies the SKU Name for this Elasticpool.
-                            The name of the SKU, will be either vCore based tier +
-                            family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based
-                            BasicPool, StandardPool, or PremiumPool pattern. Possible
-                            values are BasicPool, StandardPool, PremiumPool, GP_Gen4,
-                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+                            The name of the SKU, will be either vCore based or DTU
+                            based. Possible DTU based values are BasicPool, StandardPool,
+                            PremiumPool while possible vCore based values are GP_Gen4,
+                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
                           type: string
                         tier:
                           description: 'The tier of the particular SKU. Possible values
                             are GeneralPurpose, BusinessCritical, Basic, Standard,
-                            or Premium. For more information see the documentation
+                            Premium, or HyperScale. For more information see the documentation
                             for your Elasticpool configuration: vCore-based or DTU-based.'
                           type: string
                       type: object
@@ -338,6 +341,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  enclaveType:
+                    description: Specifies the type of enclave to be used by the elastic
+                      pool. Possible value VBS.
+                    type: string
                   licenseType:
                     description: Specifies the license type applied to this database.
                       Possible values are LicenseIncluded and BasePrice.
@@ -404,16 +411,15 @@ spec:
                           type: string
                         name:
                           description: Specifies the SKU Name for this Elasticpool.
-                            The name of the SKU, will be either vCore based tier +
-                            family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based
-                            BasicPool, StandardPool, or PremiumPool pattern. Possible
-                            values are BasicPool, StandardPool, PremiumPool, GP_Gen4,
-                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+                            The name of the SKU, will be either vCore based or DTU
+                            based. Possible DTU based values are BasicPool, StandardPool,
+                            PremiumPool while possible vCore based values are GP_Gen4,
+                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
                           type: string
                         tier:
                           description: 'The tier of the particular SKU. Possible values
                             are GeneralPurpose, BusinessCritical, Basic, Standard,
-                            or Premium. For more information see the documentation
+                            Premium, or HyperScale. For more information see the documentation
                             for your Elasticpool configuration: vCore-based or DTU-based.'
                           type: string
                       type: object
@@ -615,6 +621,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  enclaveType:
+                    description: Specifies the type of enclave to be used by the elastic
+                      pool. Possible value VBS.
+                    type: string
                   id:
                     description: The ID of the MS SQL Elastic Pool.
                     type: string
@@ -694,16 +704,15 @@ spec:
                           type: string
                         name:
                           description: Specifies the SKU Name for this Elasticpool.
-                            The name of the SKU, will be either vCore based tier +
-                            family pattern (e.g. GP_Gen4, BC_Gen5) or the DTU based
-                            BasicPool, StandardPool, or PremiumPool pattern. Possible
-                            values are BasicPool, StandardPool, PremiumPool, GP_Gen4,
-                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5 and BC_DC.
+                            The name of the SKU, will be either vCore based or DTU
+                            based. Possible DTU based values are BasicPool, StandardPool,
+                            PremiumPool while possible vCore based values are GP_Gen4,
+                            GP_Gen5, GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
                           type: string
                         tier:
                           description: 'The tier of the particular SKU. Possible values
                             are GeneralPurpose, BusinessCritical, Basic, Standard,
-                            or Premium. For more information see the documentation
+                            Premium, or HyperScale. For more information see the documentation
                             for your Elasticpool configuration: vCore-based or DTU-based.'
                           type: string
                       type: object

@@ -5256,6 +5256,11 @@ func (in *FrontdoorFirewallPolicyInitParameters) DeepCopyInto(out *FrontdoorFire
 		*out = new(string)
 		**out = **in
 	}
+	if in.RequestBodyCheckEnabled != nil {
+		in, out := &in.RequestBodyCheckEnabled, &out.RequestBodyCheckEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
 		*out = new(string)
@@ -5389,6 +5394,11 @@ func (in *FrontdoorFirewallPolicyObservation) DeepCopyInto(out *FrontdoorFirewal
 		*out = new(string)
 		**out = **in
 	}
+	if in.RequestBodyCheckEnabled != nil {
+		in, out := &in.RequestBodyCheckEnabled, &out.RequestBodyCheckEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -5467,6 +5477,11 @@ func (in *FrontdoorFirewallPolicyParameters) DeepCopyInto(out *FrontdoorFirewall
 	if in.RedirectURL != nil {
 		in, out := &in.RedirectURL, &out.RedirectURL
 		*out = new(string)
+		**out = **in
+	}
+	if in.RequestBodyCheckEnabled != nil {
+		in, out := &in.RequestBodyCheckEnabled, &out.RequestBodyCheckEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ResourceGroupName != nil {

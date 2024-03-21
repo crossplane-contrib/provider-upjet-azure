@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -363,6 +363,12 @@ spec:
                       the Virtual Machine created from the Shared Image. Changing
                       this forces a new resource to be created.
                     type: boolean
+                  trustedLaunchSupported:
+                    description: Specifies if supports creation of both Trusted Launch
+                      virtual machines and Gen2 virtual machines with standard security
+                      created from the Shared Image. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -504,6 +510,12 @@ spec:
                     description: Specifies if Trusted Launch has to be enabled for
                       the Virtual Machine created from the Shared Image. Changing
                       this forces a new resource to be created.
+                    type: boolean
+                  trustedLaunchSupported:
+                    description: Specifies if supports creation of both Trusted Launch
+                      virtual machines and Gen2 virtual machines with standard security
+                      created from the Shared Image. Changing this forces a new resource
+                      to be created.
                     type: boolean
                 type: object
               managementPolicies:
@@ -831,6 +843,12 @@ spec:
                     description: Specifies if Trusted Launch has to be enabled for
                       the Virtual Machine created from the Shared Image. Changing
                       this forces a new resource to be created.
+                    type: boolean
+                  trustedLaunchSupported:
+                    description: Specifies if supports creation of both Trusted Launch
+                      virtual machines and Gen2 virtual machines with standard security
+                      created from the Shared Image. Changing this forces a new resource
+                      to be created.
                     type: boolean
                 type: object
               conditions:

@@ -439,7 +439,7 @@ type SparkClusterNetworkInitParameters struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -448,7 +448,7 @@ type SparkClusterNetworkObservation struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -458,7 +458,7 @@ type SparkClusterNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
@@ -628,7 +628,7 @@ type SparkClusterRolesHeadNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []SparkClusterRolesHeadNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -660,7 +660,7 @@ type SparkClusterRolesHeadNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []SparkClusterRolesHeadNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -687,7 +687,7 @@ type SparkClusterRolesHeadNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []SparkClusterRolesHeadNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -834,7 +834,7 @@ type SparkClusterRolesWorkerNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []SparkClusterRolesWorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -872,7 +872,7 @@ type SparkClusterRolesWorkerNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []SparkClusterRolesWorkerNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -906,7 +906,7 @@ type SparkClusterRolesWorkerNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []SparkClusterRolesWorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -986,7 +986,7 @@ type SparkClusterRolesZookeeperNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []SparkClusterRolesZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1018,7 +1018,7 @@ type SparkClusterRolesZookeeperNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []SparkClusterRolesZookeeperNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1045,7 +1045,7 @@ type SparkClusterRolesZookeeperNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []SparkClusterRolesZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1402,8 +1402,8 @@ type SparkClusterStatus struct {
 // +kubebuilder:storageversion
 
 // SparkCluster is the Schema for the SparkClusters API. Manages a HDInsight Spark Cluster.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

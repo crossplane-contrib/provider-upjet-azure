@@ -121,7 +121,7 @@ type TriggerScheduleInitParameters struct {
 	// The interval for how often the trigger occurs. This defaults to 1.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// block as defined below.
+	// A pipeline block as defined below.
 	Pipeline []TriggerSchedulePipelineInitParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The Data Factory Pipeline name that the trigger will act on.
@@ -176,7 +176,7 @@ type TriggerScheduleObservation struct {
 	// The interval for how often the trigger occurs. This defaults to 1.
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// block as defined below.
+	// A pipeline block as defined below.
 	Pipeline []TriggerSchedulePipelineObservation `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
 	// The Data Factory Pipeline name that the trigger will act on.
@@ -236,7 +236,7 @@ type TriggerScheduleParameters struct {
 	// +kubebuilder:validation:Optional
 	Interval *float64 `json:"interval,omitempty" tf:"interval,omitempty"`
 
-	// block as defined below.
+	// A pipeline block as defined below.
 	// +kubebuilder:validation:Optional
 	Pipeline []TriggerSchedulePipelineParameters `json:"pipeline,omitempty" tf:"pipeline,omitempty"`
 
@@ -331,8 +331,8 @@ type TriggerScheduleStatus struct {
 // +kubebuilder:storageversion
 
 // TriggerSchedule is the Schema for the TriggerSchedules API. Manages a Trigger Schedule inside a Azure Data Factory.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

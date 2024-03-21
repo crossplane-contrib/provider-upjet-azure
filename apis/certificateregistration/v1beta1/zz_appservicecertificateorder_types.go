@@ -30,7 +30,7 @@ type AppServiceCertificateOrderInitParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Currently the only valid value is global.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Certificate product type, such as Standard or WildCard.
+	// Certificate product type, such as Standard or WildCard. Defaults to Standard.
 	ProductType *string `json:"productType,omitempty" tf:"product_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -79,7 +79,7 @@ type AppServiceCertificateOrderObservation struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Currently the only valid value is global.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Certificate product type, such as Standard or WildCard.
+	// Certificate product type, such as Standard or WildCard. Defaults to Standard.
 	ProductType *string `json:"productType,omitempty" tf:"product_type,omitempty"`
 
 	// The name of the resource group in which to create the certificate. Changing this forces a new resource to be created.
@@ -124,7 +124,7 @@ type AppServiceCertificateOrderParameters struct {
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
-	// Certificate product type, such as Standard or WildCard.
+	// Certificate product type, such as Standard or WildCard. Defaults to Standard.
 	// +kubebuilder:validation:Optional
 	ProductType *string `json:"productType,omitempty" tf:"product_type,omitempty"`
 
@@ -200,8 +200,8 @@ type AppServiceCertificateOrderStatus struct {
 // +kubebuilder:storageversion
 
 // AppServiceCertificateOrder is the Schema for the AppServiceCertificateOrders API. Manages an App Service Certificate Order.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

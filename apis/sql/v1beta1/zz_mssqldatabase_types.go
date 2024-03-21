@@ -13,6 +13,38 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type IdentityInitParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Database.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Database. Possible value is UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Database.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Database. Possible value is UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this SQL Database.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this SQL Database. Possible value is UserAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type ImportInitParameters struct {
 
 	// Specifies the name of the SQL administrator.
@@ -82,6 +114,9 @@ type ImportParameters struct {
 
 type LongTermRetentionPolicyInitParameters struct {
 
+	// Specifies if the backups are immutable. Defaults to false.
+	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
+
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
 	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
@@ -97,6 +132,9 @@ type LongTermRetentionPolicyInitParameters struct {
 
 type LongTermRetentionPolicyObservation struct {
 
+	// Specifies if the backups are immutable. Defaults to false.
+	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
+
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
 	MonthlyRetention *string `json:"monthlyRetention,omitempty" tf:"monthly_retention,omitempty"`
 
@@ -111,6 +149,10 @@ type LongTermRetentionPolicyObservation struct {
 }
 
 type LongTermRetentionPolicyParameters struct {
+
+	// Specifies if the backups are immutable. Defaults to false.
+	// +kubebuilder:validation:Optional
+	ImmutableBackupsEnabled *bool `json:"immutableBackupsEnabled,omitempty" tf:"immutable_backups_enabled,omitempty"`
 
 	// The monthly retention policy for an LTR backup in an ISO 8601 format. Valid value is between 1 to 120 months. e.g. P1Y, P1M, P4W or P30D.
 	// +kubebuilder:validation:Optional
@@ -131,13 +173,13 @@ type LongTermRetentionPolicyParameters struct {
 
 type MSSQLDatabaseInitParameters struct {
 
-	// Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for General Purpose Serverless databases.
+	// Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for Serverless databases.
 	AutoPauseDelayInMinutes *float64 `json:"autoPauseDelayInMinutes,omitempty" tf:"auto_pause_delay_in_minutes,omitempty"`
 
 	// Specifies the collation of the database. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created.
+	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created. Defaults to Default.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// The ID of the source database from which to create the new database. This should only be used for databases with create_mode values that use another database as reference. Changing this forces a new resource to be created.
@@ -146,10 +188,16 @@ type MSSQLDatabaseInitParameters struct {
 	// Specifies the ID of the elastic pool containing this database.
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
 
+	// Specifies the type of enclave to be used by the database. Possible value VBS.
+	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
+
 	// A boolean that specifies if the Geo Backup Policy is enabled. Defaults to true.
 	GeoBackupEnabled *bool `json:"geoBackupEnabled,omitempty" tf:"geo_backup_enabled,omitempty"`
 
-	// A Database Import block as documented below. Mutually exclusive with create_mode.
+	// An identity block as defined below.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// A import block as documented below. Mutually exclusive with create_mode.
 	Import []ImportInitParameters `json:"import,omitempty" tf:"import,omitempty"`
 
 	// A boolean that specifies if this is a ledger database. Defaults to false. Changing this forces a new resource to be created.
@@ -167,7 +215,7 @@ type MSSQLDatabaseInitParameters struct {
 	// The max size of the database in gigabytes.
 	MaxSizeGb *float64 `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty"`
 
-	// Minimal capacity that database will always have allocated, if not paused. This property is only settable for General Purpose Serverless databases.
+	// Minimal capacity that database will always have allocated, if not paused. This property is only settable for Serverless databases.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// The number of readonly secondary replicas associated with the database to which readonly application intent connections may be routed. This property is only settable for Hyperscale edition databases.
@@ -179,8 +227,14 @@ type MSSQLDatabaseInitParameters struct {
 	// The ID of the database to be recovered. This property is only applicable when the create_mode is Recovery.
 	RecoverDatabaseID *string `json:"recoverDatabaseId,omitempty" tf:"recover_database_id,omitempty"`
 
+	// The ID of the Recovery Services Recovery Point Id to be restored. This property is only applicable when the create_mode is Recovery.
+	RecoveryPointID *string `json:"recoveryPointId,omitempty" tf:"recovery_point_id,omitempty"`
+
 	// The ID of the database to be restored. This property is only applicable when the create_mode is Restore.
 	RestoreDroppedDatabaseID *string `json:"restoreDroppedDatabaseId,omitempty" tf:"restore_dropped_database_id,omitempty"`
+
+	// The ID of the long term retention backup to be restored. This property is only applicable when the create_mode is RestoreLongTermRetentionBackup.
+	RestoreLongTermRetentionBackupID *string `json:"restoreLongTermRetentionBackupId,omitempty" tf:"restore_long_term_retention_backup_id,omitempty"`
 
 	// Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. This property is only settable for create_mode= PointInTimeRestore databases.
 	RestorePointInTime *string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
@@ -194,7 +248,7 @@ type MSSQLDatabaseInitParameters struct {
 	// Specifies the name of the SKU used by the database. For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100. Changing this from the HyperScale service tier to another service tier will create a new resource.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. The default value is Geo.
+	// Specifies the storage account type used to store backups for this database. Possible values are Geo, GeoZone, Local and Zone. Defaults to Geo.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -207,19 +261,35 @@ type MSSQLDatabaseInitParameters struct {
 	// If set to true, Transparent Data Encryption will be enabled on the database. Defaults to true.
 	TransparentDataEncryptionEnabled *bool `json:"transparentDataEncryptionEnabled,omitempty" tf:"transparent_data_encryption_enabled,omitempty"`
 
+	// Boolean flag to specify whether TDE automatically rotates the encryption Key to latest version or not. Possible values are true or false. Defaults to false.
+	TransparentDataEncryptionKeyAutomaticRotationEnabled *bool `json:"transparentDataEncryptionKeyAutomaticRotationEnabled,omitempty" tf:"transparent_data_encryption_key_automatic_rotation_enabled,omitempty"`
+
+	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyIDRef *v1.Reference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyIDSelector *v1.Selector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
+
 	// Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones. This property is only settable for Premium and Business Critical databases.
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type MSSQLDatabaseObservation struct {
 
-	// Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for General Purpose Serverless databases.
+	// Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for Serverless databases.
 	AutoPauseDelayInMinutes *float64 `json:"autoPauseDelayInMinutes,omitempty" tf:"auto_pause_delay_in_minutes,omitempty"`
 
 	// Specifies the collation of the database. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created.
+	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created. Defaults to Default.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// The ID of the source database from which to create the new database. This should only be used for databases with create_mode values that use another database as reference. Changing this forces a new resource to be created.
@@ -228,13 +298,19 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the ID of the elastic pool containing this database.
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
 
+	// Specifies the type of enclave to be used by the database. Possible value VBS.
+	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
+
 	// A boolean that specifies if the Geo Backup Policy is enabled. Defaults to true.
 	GeoBackupEnabled *bool `json:"geoBackupEnabled,omitempty" tf:"geo_backup_enabled,omitempty"`
 
 	// The ID of the MS SQL Database.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// A Database Import block as documented below. Mutually exclusive with create_mode.
+	// An identity block as defined below.
+	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// A import block as documented below. Mutually exclusive with create_mode.
 	Import []ImportObservation `json:"import,omitempty" tf:"import,omitempty"`
 
 	// A boolean that specifies if this is a ledger database. Defaults to false. Changing this forces a new resource to be created.
@@ -252,7 +328,7 @@ type MSSQLDatabaseObservation struct {
 	// The max size of the database in gigabytes.
 	MaxSizeGb *float64 `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty"`
 
-	// Minimal capacity that database will always have allocated, if not paused. This property is only settable for General Purpose Serverless databases.
+	// Minimal capacity that database will always have allocated, if not paused. This property is only settable for Serverless databases.
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
 	// The number of readonly secondary replicas associated with the database to which readonly application intent connections may be routed. This property is only settable for Hyperscale edition databases.
@@ -264,8 +340,14 @@ type MSSQLDatabaseObservation struct {
 	// The ID of the database to be recovered. This property is only applicable when the create_mode is Recovery.
 	RecoverDatabaseID *string `json:"recoverDatabaseId,omitempty" tf:"recover_database_id,omitempty"`
 
+	// The ID of the Recovery Services Recovery Point Id to be restored. This property is only applicable when the create_mode is Recovery.
+	RecoveryPointID *string `json:"recoveryPointId,omitempty" tf:"recovery_point_id,omitempty"`
+
 	// The ID of the database to be restored. This property is only applicable when the create_mode is Restore.
 	RestoreDroppedDatabaseID *string `json:"restoreDroppedDatabaseId,omitempty" tf:"restore_dropped_database_id,omitempty"`
+
+	// The ID of the long term retention backup to be restored. This property is only applicable when the create_mode is RestoreLongTermRetentionBackup.
+	RestoreLongTermRetentionBackupID *string `json:"restoreLongTermRetentionBackupId,omitempty" tf:"restore_long_term_retention_backup_id,omitempty"`
 
 	// Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. This property is only settable for create_mode= PointInTimeRestore databases.
 	RestorePointInTime *string `json:"restorePointInTime,omitempty" tf:"restore_point_in_time,omitempty"`
@@ -282,7 +364,7 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the name of the SKU used by the database. For example, GP_S_Gen5_2,HS_Gen4_1,BC_Gen5_2, ElasticPool, Basic,S0, P2 ,DW100c, DS100. Changing this from the HyperScale service tier to another service tier will create a new resource.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. The default value is Geo.
+	// Specifies the storage account type used to store backups for this database. Possible values are Geo, GeoZone, Local and Zone. Defaults to Geo.
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -295,13 +377,19 @@ type MSSQLDatabaseObservation struct {
 	// If set to true, Transparent Data Encryption will be enabled on the database. Defaults to true.
 	TransparentDataEncryptionEnabled *bool `json:"transparentDataEncryptionEnabled,omitempty" tf:"transparent_data_encryption_enabled,omitempty"`
 
+	// Boolean flag to specify whether TDE automatically rotates the encryption Key to latest version or not. Possible values are true or false. Defaults to false.
+	TransparentDataEncryptionKeyAutomaticRotationEnabled *bool `json:"transparentDataEncryptionKeyAutomaticRotationEnabled,omitempty" tf:"transparent_data_encryption_key_automatic_rotation_enabled,omitempty"`
+
+	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
+	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
+
 	// Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones. This property is only settable for Premium and Business Critical databases.
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
 }
 
 type MSSQLDatabaseParameters struct {
 
-	// Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for General Purpose Serverless databases.
+	// Time in minutes after which database is automatically paused. A value of -1 means that automatic pause is disabled. This property is only settable for Serverless databases.
 	// +kubebuilder:validation:Optional
 	AutoPauseDelayInMinutes *float64 `json:"autoPauseDelayInMinutes,omitempty" tf:"auto_pause_delay_in_minutes,omitempty"`
 
@@ -309,7 +397,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
-	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created.
+	// The create mode of the database. Possible values are Copy, Default, OnlineSecondary, PointInTimeRestore, Recovery, Restore, RestoreExternalBackup, RestoreExternalBackupSecondary, RestoreLongTermRetentionBackup and Secondary. Mutually exclusive with import. Changing this forces a new resource to be created. Defaults to Default.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -321,11 +409,19 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
 
+	// Specifies the type of enclave to be used by the database. Possible value VBS.
+	// +kubebuilder:validation:Optional
+	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
+
 	// A boolean that specifies if the Geo Backup Policy is enabled. Defaults to true.
 	// +kubebuilder:validation:Optional
 	GeoBackupEnabled *bool `json:"geoBackupEnabled,omitempty" tf:"geo_backup_enabled,omitempty"`
 
-	// A Database Import block as documented below. Mutually exclusive with create_mode.
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// A import block as documented below. Mutually exclusive with create_mode.
 	// +kubebuilder:validation:Optional
 	Import []ImportParameters `json:"import,omitempty" tf:"import,omitempty"`
 
@@ -349,7 +445,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxSizeGb *float64 `json:"maxSizeGb,omitempty" tf:"max_size_gb,omitempty"`
 
-	// Minimal capacity that database will always have allocated, if not paused. This property is only settable for General Purpose Serverless databases.
+	// Minimal capacity that database will always have allocated, if not paused. This property is only settable for Serverless databases.
 	// +kubebuilder:validation:Optional
 	MinCapacity *float64 `json:"minCapacity,omitempty" tf:"min_capacity,omitempty"`
 
@@ -365,9 +461,17 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	RecoverDatabaseID *string `json:"recoverDatabaseId,omitempty" tf:"recover_database_id,omitempty"`
 
+	// The ID of the Recovery Services Recovery Point Id to be restored. This property is only applicable when the create_mode is Recovery.
+	// +kubebuilder:validation:Optional
+	RecoveryPointID *string `json:"recoveryPointId,omitempty" tf:"recovery_point_id,omitempty"`
+
 	// The ID of the database to be restored. This property is only applicable when the create_mode is Restore.
 	// +kubebuilder:validation:Optional
 	RestoreDroppedDatabaseID *string `json:"restoreDroppedDatabaseId,omitempty" tf:"restore_dropped_database_id,omitempty"`
+
+	// The ID of the long term retention backup to be restored. This property is only applicable when the create_mode is RestoreLongTermRetentionBackup.
+	// +kubebuilder:validation:Optional
+	RestoreLongTermRetentionBackupID *string `json:"restoreLongTermRetentionBackupId,omitempty" tf:"restore_long_term_retention_backup_id,omitempty"`
 
 	// Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. This property is only settable for create_mode= PointInTimeRestore databases.
 	// +kubebuilder:validation:Optional
@@ -399,7 +503,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// Specifies the storage account type used to store backups for this database. Possible values are Geo, Local and Zone. The default value is Geo.
+	// Specifies the storage account type used to store backups for this database. Possible values are Geo, GeoZone, Local and Zone. Defaults to Geo.
 	// +kubebuilder:validation:Optional
 	StorageAccountType *string `json:"storageAccountType,omitempty" tf:"storage_account_type,omitempty"`
 
@@ -416,6 +520,24 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	TransparentDataEncryptionEnabled *bool `json:"transparentDataEncryptionEnabled,omitempty" tf:"transparent_data_encryption_enabled,omitempty"`
 
+	// Boolean flag to specify whether TDE automatically rotates the encryption Key to latest version or not. Possible values are true or false. Defaults to false.
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyAutomaticRotationEnabled *bool `json:"transparentDataEncryptionKeyAutomaticRotationEnabled,omitempty" tf:"transparent_data_encryption_key_automatic_rotation_enabled,omitempty"`
+
+	// The fully versioned Key Vault Key URL (e.g. 'https://<YourVaultName>.vault.azure.net/keys/<YourKeyName>/<YourKeyVersion>) to be used as the Customer Managed Key(CMK/BYOK) for the Transparent Data Encryption(TDE) layer.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyID *string `json:"transparentDataEncryptionKeyVaultKeyId,omitempty" tf:"transparent_data_encryption_key_vault_key_id,omitempty"`
+
+	// Reference to a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyIDRef *v1.Reference `json:"transparentDataEncryptionKeyVaultKeyIdRef,omitempty" tf:"-"`
+
+	// Selector for a Key in keyvault to populate transparentDataEncryptionKeyVaultKeyId.
+	// +kubebuilder:validation:Optional
+	TransparentDataEncryptionKeyVaultKeyIDSelector *v1.Selector `json:"transparentDataEncryptionKeyVaultKeyIdSelector,omitempty" tf:"-"`
+
 	// Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones. This property is only settable for Premium and Business Critical databases.
 	// +kubebuilder:validation:Optional
 	ZoneRedundant *bool `json:"zoneRedundant,omitempty" tf:"zone_redundant,omitempty"`
@@ -426,7 +548,7 @@ type ShortTermRetentionPolicyInitParameters struct {
 	// The hours between each differential backup. This is only applicable to live databases but not dropped databases. Value has to be 12 or 24. Defaults to 12 hours.
 	BackupIntervalInHours *float64 `json:"backupIntervalInHours,omitempty" tf:"backup_interval_in_hours,omitempty"`
 
-	// Point In Time Restore configuration. Value has to be between 7 and 35.
+	// Point In Time Restore configuration. Value has to be between 1 and 35.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
@@ -435,7 +557,7 @@ type ShortTermRetentionPolicyObservation struct {
 	// The hours between each differential backup. This is only applicable to live databases but not dropped databases. Value has to be 12 or 24. Defaults to 12 hours.
 	BackupIntervalInHours *float64 `json:"backupIntervalInHours,omitempty" tf:"backup_interval_in_hours,omitempty"`
 
-	// Point In Time Restore configuration. Value has to be between 7 and 35.
+	// Point In Time Restore configuration. Value has to be between 1 and 35.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 }
 
@@ -445,7 +567,7 @@ type ShortTermRetentionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupIntervalInHours *float64 `json:"backupIntervalInHours,omitempty" tf:"backup_interval_in_hours,omitempty"`
 
-	// Point In Time Restore configuration. Value has to be between 7 and 35.
+	// Point In Time Restore configuration. Value has to be between 1 and 35.
 	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays" tf:"retention_days,omitempty"`
 }
@@ -456,7 +578,7 @@ type ThreatDetectionPolicyInitParameters struct {
 	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
+	// Should the account administrators be emailed when this alert is triggered? Possible values are Enabled or Disabled. Defaults to Disabled.
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// A list of email addresses which alerts should be sent to.
@@ -466,7 +588,7 @@ type ThreatDetectionPolicyInitParameters struct {
 	// Specifies the number of days to keep in the Threat Detection audit logs.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// The State of the Policy. Possible values are Enabled, Disabled or New.
+	// The State of the Policy. Possible values are Enabled or Disabled. Defaults to Disabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
@@ -479,7 +601,7 @@ type ThreatDetectionPolicyObservation struct {
 	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
+	// Should the account administrators be emailed when this alert is triggered? Possible values are Enabled or Disabled. Defaults to Disabled.
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
 	// A list of email addresses which alerts should be sent to.
@@ -489,7 +611,7 @@ type ThreatDetectionPolicyObservation struct {
 	// Specifies the number of days to keep in the Threat Detection audit logs.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// The State of the Policy. Possible values are Enabled, Disabled or New.
+	// The State of the Policy. Possible values are Enabled or Disabled. Defaults to Disabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
@@ -503,7 +625,7 @@ type ThreatDetectionPolicyParameters struct {
 	// +listType=set
 	DisabledAlerts []*string `json:"disabledAlerts,omitempty" tf:"disabled_alerts,omitempty"`
 
-	// Should the account administrators be emailed when this alert is triggered? Possible values are Disabled and Enabled.
+	// Should the account administrators be emailed when this alert is triggered? Possible values are Enabled or Disabled. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	EmailAccountAdmins *string `json:"emailAccountAdmins,omitempty" tf:"email_account_admins,omitempty"`
 
@@ -516,7 +638,7 @@ type ThreatDetectionPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
-	// The State of the Policy. Possible values are Enabled, Disabled or New.
+	// The State of the Policy. Possible values are Enabled or Disabled. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
@@ -557,8 +679,8 @@ type MSSQLDatabaseStatus struct {
 // +kubebuilder:storageversion
 
 // MSSQLDatabase is the Schema for the MSSQLDatabases API. Manages a MS SQL Database.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

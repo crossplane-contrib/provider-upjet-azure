@@ -109,7 +109,7 @@ type AutoHealSettingTriggerStatusCodeInitParameters struct {
 	SubStatus *float64 `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
 
 	// The Win32 Status Code of the Request.
-	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
+	Win32StatusCode *float64 `json:"win32StatusCode,omitempty" tf:"win32_status_code,omitempty"`
 }
 
 type AutoHealSettingTriggerStatusCodeObservation struct {
@@ -130,7 +130,7 @@ type AutoHealSettingTriggerStatusCodeObservation struct {
 	SubStatus *float64 `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
 
 	// The Win32 Status Code of the Request.
-	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
+	Win32StatusCode *float64 `json:"win32StatusCode,omitempty" tf:"win32_status_code,omitempty"`
 }
 
 type AutoHealSettingTriggerStatusCodeParameters struct {
@@ -157,7 +157,7 @@ type AutoHealSettingTriggerStatusCodeParameters struct {
 
 	// The Win32 Status Code of the Request.
 	// +kubebuilder:validation:Optional
-	Win32Status *string `json:"win32Status,omitempty" tf:"win32_status,omitempty"`
+	Win32StatusCode *float64 `json:"win32StatusCode,omitempty" tf:"win32_status_code,omitempty"`
 }
 
 type CustomActionInitParameters struct {
@@ -964,7 +964,7 @@ type WindowsWebAppAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -1016,7 +1016,7 @@ type WindowsWebAppAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
 }
@@ -1079,7 +1079,7 @@ type WindowsWebAppAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
 
-	// Should the www-authenticate provider should be omitted from the request? Defaults to false
+	// Should the www-authenticate provider should be omitted from the request? Defaults to false.
 	// Should the www-authenticate provider should be omitted from the request? Defaults to `false`
 	// +kubebuilder:validation:Optional
 	WwwAuthenticationDisabled *bool `json:"wwwAuthenticationDisabled,omitempty" tf:"www_authentication_disabled,omitempty"`
@@ -1435,8 +1435,8 @@ type WindowsWebAppAuthSettingsV2InitParameters struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []WindowsWebAppAuthSettingsV2CustomOidcV2InitParameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1446,7 +1446,7 @@ type WindowsWebAppAuthSettingsV2InitParameters struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []WindowsWebAppAuthSettingsV2FacebookV2InitParameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1729,8 +1729,8 @@ type WindowsWebAppAuthSettingsV2Observation struct {
 	// Zero or more custom_oidc_v2 blocks as defined below.
 	CustomOidcV2 []WindowsWebAppAuthSettingsV2CustomOidcV2Observation `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
 	// The paths which should be excluded from the unauthenticated_action when it is set to RedirectToLoginPage.
@@ -1740,7 +1740,7 @@ type WindowsWebAppAuthSettingsV2Observation struct {
 	// A facebook_v2 block as defined below.
 	FacebookV2 []WindowsWebAppAuthSettingsV2FacebookV2Observation `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
 
@@ -1816,8 +1816,8 @@ type WindowsWebAppAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	CustomOidcV2 []WindowsWebAppAuthSettingsV2CustomOidcV2Parameters `json:"customOidcV2,omitempty" tf:"custom_oidc_v2,omitempty"`
 
-	// The Default Authentication Provider to use when more than one Authentication Provider is configured and the unauthenticated_action is set to RedirectToLoginPage.
-	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`.
+	// The Default Authentication Provider to use when the unauthenticated_action is set to RedirectToLoginPage. Possible values include: apple, azureactivedirectory, facebook, github, google, twitter and the name of your custom_oidc_v2 provider.
+	// The Default Authentication Provider to use when the `unauthenticated_action` is set to `RedirectToLoginPage`. Possible values include: `apple`, `azureactivedirectory`, `facebook`, `github`, `google`, `twitter` and the `name` of your `custom_oidc_v2` provider.
 	// +kubebuilder:validation:Optional
 	DefaultProvider *string `json:"defaultProvider,omitempty" tf:"default_provider,omitempty"`
 
@@ -1830,7 +1830,7 @@ type WindowsWebAppAuthSettingsV2Parameters struct {
 	// +kubebuilder:validation:Optional
 	FacebookV2 []WindowsWebAppAuthSettingsV2FacebookV2Parameters `json:"facebookV2,omitempty" tf:"facebook_v2,omitempty"`
 
-	// The convention used to determine the url of the request made. Possible values include ForwardProxyConventionNoProxy, ForwardProxyConventionStandard, ForwardProxyConventionCustom. Defaults to ForwardProxyConventionNoProxy.
+	// The convention used to determine the url of the request made. Possible values include NoProxy, Standard, Custom. Defaults to NoProxy.
 	// The convention used to determine the url of the request made. Possible values include `ForwardProxyConventionNoProxy`, `ForwardProxyConventionStandard`, `ForwardProxyConventionCustom`. Defaults to `ForwardProxyConventionNoProxy`
 	// +kubebuilder:validation:Optional
 	ForwardProxyConvention *string `json:"forwardProxyConvention,omitempty" tf:"forward_proxy_convention,omitempty"`
@@ -2156,7 +2156,7 @@ type WindowsWebAppInitParameters struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false
+	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false. Defaults to Required.
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
@@ -2165,7 +2165,10 @@ type WindowsWebAppInitParameters struct {
 	// Should the Windows Web App be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Should the Windows Web App require HTTPS connections.
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
+	// Should the Windows Web App require HTTPS connections. Defaults to false.
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// An identity block as defined below.
@@ -2179,6 +2182,9 @@ type WindowsWebAppInitParameters struct {
 
 	// A logs block as defined below.
 	Logs []WindowsWebAppLogsInitParameters `json:"logs,omitempty" tf:"logs,omitempty"`
+
+	// Should public network access be enabled for the Web App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The ID of the Service Plan that this Windows App Service will be created in.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.ServicePlan
@@ -2219,6 +2225,9 @@ type WindowsWebAppInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
+
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
 	ZipDeployFile *string `json:"zipDeployFile,omitempty" tf:"zip_deploy_file,omitempty"`
@@ -2229,7 +2238,7 @@ type WindowsWebAppLogsApplicationLogsInitParameters struct {
 	// A azure_blob_storage_http block as defined above.
 	AzureBlobStorage []LogsApplicationLogsAzureBlobStorageInitParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
-	// Log level. Possible values include: Verbose, Information, Warning, and Error.
+	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
 	FileSystemLevel *string `json:"fileSystemLevel,omitempty" tf:"file_system_level,omitempty"`
 }
 
@@ -2238,7 +2247,7 @@ type WindowsWebAppLogsApplicationLogsObservation struct {
 	// A azure_blob_storage_http block as defined above.
 	AzureBlobStorage []LogsApplicationLogsAzureBlobStorageObservation `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
-	// Log level. Possible values include: Verbose, Information, Warning, and Error.
+	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
 	FileSystemLevel *string `json:"fileSystemLevel,omitempty" tf:"file_system_level,omitempty"`
 }
 
@@ -2248,7 +2257,7 @@ type WindowsWebAppLogsApplicationLogsParameters struct {
 	// +kubebuilder:validation:Optional
 	AzureBlobStorage []LogsApplicationLogsAzureBlobStorageParameters `json:"azureBlobStorage,omitempty" tf:"azure_blob_storage,omitempty"`
 
-	// Log level. Possible values include: Verbose, Information, Warning, and Error.
+	// Log level. Possible values include: Off, Verbose, Information, Warning, and Error.
 	// +kubebuilder:validation:Optional
 	FileSystemLevel *string `json:"fileSystemLevel" tf:"file_system_level,omitempty"`
 }
@@ -2379,7 +2388,7 @@ type WindowsWebAppObservation struct {
 	// Paths to exclude when using client certificates, separated by ;
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false
+	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false. Defaults to Required.
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
 	// One or more connection_string blocks as defined below.
@@ -2391,7 +2400,10 @@ type WindowsWebAppObservation struct {
 	// Should the Windows Web App be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Should the Windows Web App require HTTPS connections.
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
+	// Should the Windows Web App require HTTPS connections. Defaults to false.
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
 	// The ID of the App Service Environment used by App Service.
@@ -2421,11 +2433,14 @@ type WindowsWebAppObservation struct {
 	// A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12.
 	OutboundIPAddresses *string `json:"outboundIpAddresses,omitempty" tf:"outbound_ip_addresses,omitempty"`
 
-	// A possible_outbound_ip_address_list block as defined below.
+	// A list of possible outbound ip address.
 	PossibleOutboundIPAddressList []*string `json:"possibleOutboundIpAddressList,omitempty" tf:"possible_outbound_ip_address_list,omitempty"`
 
 	// A comma separated list of outbound IP addresses - such as 52.23.25.3,52.143.43.12,52.143.43.17 - not all of which are necessarily in use. Superset of outbound_ip_addresses.
 	PossibleOutboundIPAddresses *string `json:"possibleOutboundIpAddresses,omitempty" tf:"possible_outbound_ip_addresses,omitempty"`
+
+	// Should public network access be enabled for the Web App. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Windows Web App should exist. Changing this forces a new Windows Web App to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -2448,6 +2463,9 @@ type WindowsWebAppObservation struct {
 
 	// The subnet id which will be used by this Web App for regional virtual network integration.
 	VirtualNetworkSubnetID *string `json:"virtualNetworkSubnetId,omitempty" tf:"virtual_network_subnet_id,omitempty"`
+
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
 
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
@@ -2486,7 +2504,7 @@ type WindowsWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientCertificateExclusionPaths *string `json:"clientCertificateExclusionPaths,omitempty" tf:"client_certificate_exclusion_paths,omitempty"`
 
-	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false
+	// The Client Certificate mode. Possible values are Required, Optional, and OptionalInteractiveUser. This property has no effect when client_cert_enabled is false. Defaults to Required.
 	// +kubebuilder:validation:Optional
 	ClientCertificateMode *string `json:"clientCertificateMode,omitempty" tf:"client_certificate_mode,omitempty"`
 
@@ -2498,7 +2516,11 @@ type WindowsWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Should the Windows Web App require HTTPS connections.
+	// Should the default FTP Basic Authentication publishing profile be enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	FtpPublishBasicAuthenticationEnabled *bool `json:"ftpPublishBasicAuthenticationEnabled,omitempty" tf:"ftp_publish_basic_authentication_enabled,omitempty"`
+
+	// Should the Windows Web App require HTTPS connections. Defaults to false.
 	// +kubebuilder:validation:Optional
 	HTTPSOnly *bool `json:"httpsOnly,omitempty" tf:"https_only,omitempty"`
 
@@ -2517,6 +2539,10 @@ type WindowsWebAppParameters struct {
 	// A logs block as defined below.
 	// +kubebuilder:validation:Optional
 	Logs []WindowsWebAppLogsParameters `json:"logs,omitempty" tf:"logs,omitempty"`
+
+	// Should public network access be enabled for the Web App. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the Resource Group where the Windows Web App should exist. Changing this forces a new Windows Web App to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -2576,6 +2602,10 @@ type WindowsWebAppParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkSubnetIDSelector *v1.Selector `json:"virtualNetworkSubnetIdSelector,omitempty" tf:"-"`
 
+	// Should the default WebDeploy Basic Authentication publishing credentials enabled. Defaults to true.
+	// +kubebuilder:validation:Optional
+	WebdeployPublishBasicAuthenticationEnabled *bool `json:"webdeployPublishBasicAuthenticationEnabled,omitempty" tf:"webdeploy_publish_basic_authentication_enabled,omitempty"`
+
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App.
 	// The local path and filename of the Zip packaged application to deploy to this Windows Web App. **Note:** Using this value requires either `WEBSITE_RUN_FROM_PACKAGE=1` or `SCM_DO_BUILD_DURING_DEPLOYMENT=true` to be set on the App in `app_settings`.
 	// +kubebuilder:validation:Optional
@@ -2587,20 +2617,28 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 	// The Application Stack for the Windows Web App. Possible values include dotnet, dotnetcore, node, python, php, and java.
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
 
-	// The name of the Docker Container. For example azure-app-service/samples/aspnethelloworld
+	// The name of the container to be used. This value is required with docker_container_tag.
 	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
 
-	// The registry Host on which the specified Docker Container can be located. For example mcr.microsoft.com
 	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
 
-	// The Image Tag of the specified Docker Container to use. For example latest
+	// The tag of the container to be used. This value is required with docker_container_name.
 	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
+
+	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
+	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
+
+	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
+	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
 	// The version of .NET to use when current_stack is set to dotnetcore. Possible values include v4.0.
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0 and v7.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2634,20 +2672,28 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 	// The Application Stack for the Windows Web App. Possible values include dotnet, dotnetcore, node, python, php, and java.
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
 
-	// The name of the Docker Container. For example azure-app-service/samples/aspnethelloworld
+	// The name of the container to be used. This value is required with docker_container_tag.
 	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
 
-	// The registry Host on which the specified Docker Container can be located. For example mcr.microsoft.com
 	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
 
-	// The Image Tag of the specified Docker Container to use. For example latest
+	// The tag of the container to be used. This value is required with docker_container_name.
 	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
+
+	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
+	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
+
+	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
+	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
 	// The version of .NET to use when current_stack is set to dotnetcore. Possible values include v4.0.
 	// The version of DotNetCore to use.
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0 and v7.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
 	JavaContainer *string `json:"javaContainer,omitempty" tf:"java_container,omitempty"`
@@ -2682,24 +2728,39 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	CurrentStack *string `json:"currentStack,omitempty" tf:"current_stack,omitempty"`
 
-	// The name of the Docker Container. For example azure-app-service/samples/aspnethelloworld
+	// The name of the container to be used. This value is required with docker_container_tag.
 	// +kubebuilder:validation:Optional
 	DockerContainerName *string `json:"dockerContainerName,omitempty" tf:"docker_container_name,omitempty"`
 
-	// The registry Host on which the specified Docker Container can be located. For example mcr.microsoft.com
 	// +kubebuilder:validation:Optional
 	DockerContainerRegistry *string `json:"dockerContainerRegistry,omitempty" tf:"docker_container_registry,omitempty"`
 
-	// The Image Tag of the specified Docker Container to use. For example latest
+	// The tag of the container to be used. This value is required with docker_container_name.
 	// +kubebuilder:validation:Optional
 	DockerContainerTag *string `json:"dockerContainerTag,omitempty" tf:"docker_container_tag,omitempty"`
+
+	// The docker image, including tag, to be used. e.g. azure-app-service/windows/parkingpage:latest.
+	// +kubebuilder:validation:Optional
+	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	// +kubebuilder:validation:Optional
+	DockerRegistryPasswordSecretRef *v1.SecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
+
+	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
+	// +kubebuilder:validation:Optional
+	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	// +kubebuilder:validation:Optional
+	DockerRegistryUsername *string `json:"dockerRegistryUsername,omitempty" tf:"docker_registry_username,omitempty"`
 
 	// The version of .NET to use when current_stack is set to dotnetcore. Possible values include v4.0.
 	// The version of DotNetCore to use.
 	// +kubebuilder:validation:Optional
 	DotnetCoreVersion *string `json:"dotnetCoreVersion,omitempty" tf:"dotnet_core_version,omitempty"`
 
-	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0 and v7.0.
+	// The version of .NET to use when current_stack is set to dotnet. Possible values include v2.0,v3.0, v4.0, v5.0, v6.0, v7.0 and v8.0.
 	// +kubebuilder:validation:Optional
 	DotnetVersion *string `json:"dotnetVersion,omitempty" tf:"dotnet_version,omitempty"`
 
@@ -2740,7 +2801,7 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 
 type WindowsWebAppSiteConfigAutoHealSettingInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	Action []SiteConfigAutoHealSettingActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A trigger block as defined below.
@@ -2749,7 +2810,7 @@ type WindowsWebAppSiteConfigAutoHealSettingInitParameters struct {
 
 type WindowsWebAppSiteConfigAutoHealSettingObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	Action []SiteConfigAutoHealSettingActionObservation `json:"action,omitempty" tf:"action,omitempty"`
 
 	// A trigger block as defined below.
@@ -2758,7 +2819,7 @@ type WindowsWebAppSiteConfigAutoHealSettingObservation struct {
 
 type WindowsWebAppSiteConfigAutoHealSettingParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional
 	Action []SiteConfigAutoHealSettingActionParameters `json:"action" tf:"action,omitempty"`
 
@@ -2856,9 +2917,13 @@ type WindowsWebAppSiteConfigIPRestrictionHeadersParameters struct {
 
 type WindowsWebAppSiteConfigIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsWebAppSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2896,9 +2961,13 @@ type WindowsWebAppSiteConfigIPRestrictionInitParameters struct {
 
 type WindowsWebAppSiteConfigIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsWebAppSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -2926,10 +2995,15 @@ type WindowsWebAppSiteConfigIPRestrictionObservation struct {
 
 type WindowsWebAppSiteConfigIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
@@ -3006,7 +3080,7 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// Specifies a list of Default Documents for the Windows Web App.
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
-	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled.
+	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled. Defaults to Disabled.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
@@ -3022,13 +3096,16 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// One or more ip_restriction blocks as defined above.
 	IPRestriction []WindowsWebAppSiteConfigIPRestrictionInitParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
 
 	// Use Local MySQL. Defaults to false.
 	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
 
-	// Managed pipeline mode. Possible values include: Integrated, Classic.
+	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
@@ -3037,11 +3114,14 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
 	ScmIPRestriction []WindowsWebAppSiteConfigScmIPRestrictionInitParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
@@ -3104,7 +3184,7 @@ type WindowsWebAppSiteConfigObservation struct {
 	// Should the Windows Web App be enabled? Defaults to true.
 	DetailedErrorLoggingEnabled *bool `json:"detailedErrorLoggingEnabled,omitempty" tf:"detailed_error_logging_enabled,omitempty"`
 
-	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled.
+	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled. Defaults to Disabled.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
@@ -3120,6 +3200,9 @@ type WindowsWebAppSiteConfigObservation struct {
 	// One or more ip_restriction blocks as defined above.
 	IPRestriction []WindowsWebAppSiteConfigIPRestrictionObservation `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	LinuxFxVersion *string `json:"linuxFxVersion,omitempty" tf:"linux_fx_version,omitempty"`
 
 	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
@@ -3128,7 +3211,7 @@ type WindowsWebAppSiteConfigObservation struct {
 	// Use Local MySQL. Defaults to false.
 	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
 
-	// Managed pipeline mode. Possible values include: Integrated, Classic.
+	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests. Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
@@ -3137,11 +3220,14 @@ type WindowsWebAppSiteConfigObservation struct {
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
 	ScmIPRestriction []WindowsWebAppSiteConfigScmIPRestrictionObservation `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	ScmMinimumTLSVersion *string `json:"scmMinimumTlsVersion,omitempty" tf:"scm_minimum_tls_version,omitempty"`
@@ -3216,7 +3302,7 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultDocuments []*string `json:"defaultDocuments,omitempty" tf:"default_documents,omitempty"`
 
-	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled.
+	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
@@ -3237,6 +3323,10 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	IPRestriction []WindowsWebAppSiteConfigIPRestrictionParameters `json:"ipRestriction,omitempty" tf:"ip_restriction,omitempty"`
 
+	// The Default action for traffic that does not match any ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	IPRestrictionDefaultAction *string `json:"ipRestrictionDefaultAction,omitempty" tf:"ip_restriction_default_action,omitempty"`
+
 	// The Site load balancing. Possible values include: WeightedRoundRobin, LeastRequests, LeastResponseTime, WeightedTotalTraffic, RequestHash, PerSiteRoundRobin. Defaults to LeastRequests if omitted.
 	// +kubebuilder:validation:Optional
 	LoadBalancingMode *string `json:"loadBalancingMode,omitempty" tf:"load_balancing_mode,omitempty"`
@@ -3245,7 +3335,7 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalMySQLEnabled *bool `json:"localMysqlEnabled,omitempty" tf:"local_mysql_enabled,omitempty"`
 
-	// Managed pipeline mode. Possible values include: Integrated, Classic.
+	// Managed pipeline mode. Possible values include: Integrated, Classic. Defaults to Integrated.
 	// +kubebuilder:validation:Optional
 	ManagedPipelineMode *string `json:"managedPipelineMode,omitempty" tf:"managed_pipeline_mode,omitempty"`
 
@@ -3257,13 +3347,17 @@ type WindowsWebAppSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022.
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScmIPRestriction []WindowsWebAppSiteConfigScmIPRestrictionParameters `json:"scmIpRestriction,omitempty" tf:"scm_ip_restriction,omitempty"`
+
+	// The Default action for traffic that does not match any scm_ip_restriction rule. possible values include Allow and Deny. Defaults to Allow.
+	// +kubebuilder:validation:Optional
+	ScmIPRestrictionDefaultAction *string `json:"scmIpRestrictionDefaultAction,omitempty" tf:"scm_ip_restriction_default_action,omitempty"`
 
 	// The configures the minimum version of TLS required for SSL requests to the SCM site Possible values include: 1.0, 1.1, and 1.2. Defaults to 1.2.
 	// +kubebuilder:validation:Optional
@@ -3346,9 +3440,13 @@ type WindowsWebAppSiteConfigScmIPRestrictionHeadersParameters struct {
 
 type WindowsWebAppSiteConfigScmIPRestrictionInitParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsWebAppSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -3386,9 +3484,13 @@ type WindowsWebAppSiteConfigScmIPRestrictionInitParameters struct {
 
 type WindowsWebAppSiteConfigScmIPRestrictionObservation struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	Headers []WindowsWebAppSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
@@ -3416,10 +3518,15 @@ type WindowsWebAppSiteConfigScmIPRestrictionObservation struct {
 
 type WindowsWebAppSiteConfigScmIPRestrictionParameters struct {
 
-	// The action to take. Possible values are Allow or Deny.
+	// The action to take. Possible values are Allow or Deny. Defaults to Allow.
 	// The action to take. Possible values are `Allow` or `Deny`.
 	// +kubebuilder:validation:Optional
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
+	// The Description of this IP Restriction.
+	// The description of the IP restriction rule.
+	// +kubebuilder:validation:Optional
+	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
@@ -3596,8 +3703,8 @@ type WindowsWebAppStatus struct {
 // +kubebuilder:storageversion
 
 // WindowsWebApp is the Schema for the WindowsWebApps API. Manages a Windows Web App.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

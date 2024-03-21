@@ -24,7 +24,7 @@ type IOTHubDeviceUpdateAccountInitParameters struct {
 	// Specifies whether the public network access is enabled for the IoT Hub Device Update Account. Possible values are true and false. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
-	// Sku of the IoT Hub Device Update Account. Possible values are Free and Standard. Defaults to Standard.
+	// Sku of the IoT Hub Device Update Account. Possible values are Free and Standard. Defaults to Standard. Changing this forces a new resource to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Account.
@@ -52,7 +52,7 @@ type IOTHubDeviceUpdateAccountObservation struct {
 	// Specifies the name of the Resource Group where the IoT Hub Device Update Account should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// Sku of the IoT Hub Device Update Account. Possible values are Free and Standard. Defaults to Standard.
+	// Sku of the IoT Hub Device Update Account. Possible values are Free and Standard. Defaults to Standard. Changing this forces a new resource to be created.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags which should be assigned to the IoT Hub Device Update Account.
@@ -87,7 +87,7 @@ type IOTHubDeviceUpdateAccountParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Sku of the IoT Hub Device Update Account. Possible values are Free and Standard. Defaults to Standard.
+	// Sku of the IoT Hub Device Update Account. Possible values are Free and Standard. Defaults to Standard. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -163,8 +163,8 @@ type IOTHubDeviceUpdateAccountStatus struct {
 // +kubebuilder:storageversion
 
 // IOTHubDeviceUpdateAccount is the Schema for the IOTHubDeviceUpdateAccounts API. Manages an IoT Hub Device Update Account.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

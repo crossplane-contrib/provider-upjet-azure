@@ -76,10 +76,13 @@ type CriteriaInitParameters struct {
 	// The severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
+	// A list of severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
+	Levels []*string `json:"levels,omitempty" tf:"levels,omitempty"`
+
 	// The Resource Manager Role-Based Access Control operation name. Supported operation should be of the form: <resourceProvider>/<resourceType>/<operation>.
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
-	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence and Performance. It is only allowed when category is Recommendation.
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability and Performance. It is only allowed when category is Recommendation.
 	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
 
 	// The recommendation impact of the event. Possible values are High, Medium and Low. It is only allowed when category is Recommendation.
@@ -90,6 +93,9 @@ type CriteriaInitParameters struct {
 
 	// The name of resource group monitored by the activity log alert.
 	ResourceGroup *string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
+
+	// A list of names of resource groups monitored by the activity log alert.
+	ResourceGroups []*string `json:"resourceGroups,omitempty" tf:"resource_groups,omitempty"`
 
 	// A block to define fine grain resource health settings.
 	ResourceHealth []ResourceHealthInitParameters `json:"resourceHealth,omitempty" tf:"resource_health,omitempty"`
@@ -107,11 +113,20 @@ type CriteriaInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
+	// A list of specific resources monitored by the activity log alert. It should be within one of the scopes.
+	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
+
 	// The name of the resource provider monitored by the activity log alert.
 	ResourceProvider *string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty"`
 
+	// A list of names of resource providers monitored by the activity log alert.
+	ResourceProviders []*string `json:"resourceProviders,omitempty" tf:"resource_providers,omitempty"`
+
 	// The resource type monitored by the activity log alert.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// A list of resource types monitored by the activity log alert.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
 	// A block to define fine grain service health settings.
 	ServiceHealth []ServiceHealthInitParameters `json:"serviceHealth,omitempty" tf:"service_health,omitempty"`
@@ -119,8 +134,14 @@ type CriteriaInitParameters struct {
 	// The status of the event. For example, Started, Failed, or Succeeded.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// A list of status of the event. For example, Started, Failed, or Succeeded.
+	Statuses []*string `json:"statuses,omitempty" tf:"statuses,omitempty"`
+
 	// The sub status of the event.
 	SubStatus *string `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
+
+	// A list of sub status of the event.
+	SubStatuses []*string `json:"subStatuses,omitempty" tf:"sub_statuses,omitempty"`
 }
 
 type CriteriaObservation struct {
@@ -134,10 +155,13 @@ type CriteriaObservation struct {
 	// The severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
+	// A list of severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
+	Levels []*string `json:"levels,omitempty" tf:"levels,omitempty"`
+
 	// The Resource Manager Role-Based Access Control operation name. Supported operation should be of the form: <resourceProvider>/<resourceType>/<operation>.
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
-	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence and Performance. It is only allowed when category is Recommendation.
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability and Performance. It is only allowed when category is Recommendation.
 	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
 
 	// The recommendation impact of the event. Possible values are High, Medium and Low. It is only allowed when category is Recommendation.
@@ -149,17 +173,29 @@ type CriteriaObservation struct {
 	// The name of resource group monitored by the activity log alert.
 	ResourceGroup *string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
 
+	// A list of names of resource groups monitored by the activity log alert.
+	ResourceGroups []*string `json:"resourceGroups,omitempty" tf:"resource_groups,omitempty"`
+
 	// A block to define fine grain resource health settings.
 	ResourceHealth []ResourceHealthObservation `json:"resourceHealth,omitempty" tf:"resource_health,omitempty"`
 
 	// The specific resource monitored by the activity log alert. It should be within one of the scopes.
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
+	// A list of specific resources monitored by the activity log alert. It should be within one of the scopes.
+	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
+
 	// The name of the resource provider monitored by the activity log alert.
 	ResourceProvider *string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty"`
 
+	// A list of names of resource providers monitored by the activity log alert.
+	ResourceProviders []*string `json:"resourceProviders,omitempty" tf:"resource_providers,omitempty"`
+
 	// The resource type monitored by the activity log alert.
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// A list of resource types monitored by the activity log alert.
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
 	// A block to define fine grain service health settings.
 	ServiceHealth []ServiceHealthObservation `json:"serviceHealth,omitempty" tf:"service_health,omitempty"`
@@ -167,8 +203,14 @@ type CriteriaObservation struct {
 	// The status of the event. For example, Started, Failed, or Succeeded.
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// A list of status of the event. For example, Started, Failed, or Succeeded.
+	Statuses []*string `json:"statuses,omitempty" tf:"statuses,omitempty"`
+
 	// The sub status of the event.
 	SubStatus *string `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
+
+	// A list of sub status of the event.
+	SubStatuses []*string `json:"subStatuses,omitempty" tf:"sub_statuses,omitempty"`
 }
 
 type CriteriaParameters struct {
@@ -185,11 +227,15 @@ type CriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	Level *string `json:"level,omitempty" tf:"level,omitempty"`
 
+	// A list of severity level of the event. Possible values are Verbose, Informational, Warning, Error, and Critical.
+	// +kubebuilder:validation:Optional
+	Levels []*string `json:"levels,omitempty" tf:"levels,omitempty"`
+
 	// The Resource Manager Role-Based Access Control operation name. Supported operation should be of the form: <resourceProvider>/<resourceType>/<operation>.
 	// +kubebuilder:validation:Optional
 	OperationName *string `json:"operationName,omitempty" tf:"operation_name,omitempty"`
 
-	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence and Performance. It is only allowed when category is Recommendation.
+	// The recommendation category of the event. Possible values are Cost, Reliability, OperationalExcellence, HighAvailability and Performance. It is only allowed when category is Recommendation.
 	// +kubebuilder:validation:Optional
 	RecommendationCategory *string `json:"recommendationCategory,omitempty" tf:"recommendation_category,omitempty"`
 
@@ -204,6 +250,10 @@ type CriteriaParameters struct {
 	// The name of resource group monitored by the activity log alert.
 	// +kubebuilder:validation:Optional
 	ResourceGroup *string `json:"resourceGroup,omitempty" tf:"resource_group,omitempty"`
+
+	// A list of names of resource groups monitored by the activity log alert.
+	// +kubebuilder:validation:Optional
+	ResourceGroups []*string `json:"resourceGroups,omitempty" tf:"resource_groups,omitempty"`
 
 	// A block to define fine grain resource health settings.
 	// +kubebuilder:validation:Optional
@@ -223,13 +273,25 @@ type CriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceIDSelector *v1.Selector `json:"resourceIdSelector,omitempty" tf:"-"`
 
+	// A list of specific resources monitored by the activity log alert. It should be within one of the scopes.
+	// +kubebuilder:validation:Optional
+	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
+
 	// The name of the resource provider monitored by the activity log alert.
 	// +kubebuilder:validation:Optional
 	ResourceProvider *string `json:"resourceProvider,omitempty" tf:"resource_provider,omitempty"`
 
+	// A list of names of resource providers monitored by the activity log alert.
+	// +kubebuilder:validation:Optional
+	ResourceProviders []*string `json:"resourceProviders,omitempty" tf:"resource_providers,omitempty"`
+
 	// The resource type monitored by the activity log alert.
 	// +kubebuilder:validation:Optional
 	ResourceType *string `json:"resourceType,omitempty" tf:"resource_type,omitempty"`
+
+	// A list of resource types monitored by the activity log alert.
+	// +kubebuilder:validation:Optional
+	ResourceTypes []*string `json:"resourceTypes,omitempty" tf:"resource_types,omitempty"`
 
 	// A block to define fine grain service health settings.
 	// +kubebuilder:validation:Optional
@@ -239,9 +301,17 @@ type CriteriaParameters struct {
 	// +kubebuilder:validation:Optional
 	Status *string `json:"status,omitempty" tf:"status,omitempty"`
 
+	// A list of status of the event. For example, Started, Failed, or Succeeded.
+	// +kubebuilder:validation:Optional
+	Statuses []*string `json:"statuses,omitempty" tf:"statuses,omitempty"`
+
 	// The sub status of the event.
 	// +kubebuilder:validation:Optional
 	SubStatus *string `json:"subStatus,omitempty" tf:"sub_status,omitempty"`
+
+	// A list of sub status of the event.
+	// +kubebuilder:validation:Optional
+	SubStatuses []*string `json:"subStatuses,omitempty" tf:"sub_statuses,omitempty"`
 }
 
 type MonitorActivityLogAlertInitParameters struct {
@@ -504,8 +574,8 @@ type MonitorActivityLogAlertStatus struct {
 // +kubebuilder:storageversion
 
 // MonitorActivityLogAlert is the Schema for the MonitorActivityLogAlerts API. Manages an Activity Log Alert within Azure Monitor
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

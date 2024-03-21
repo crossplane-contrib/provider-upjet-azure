@@ -60,7 +60,7 @@ type ScheduleInitParameters struct {
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
 	MonthlyOccurrence []MonthlyOccurrenceInitParameters `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
 
 	// Start time of the schedule. Must be at least five minutes in the future. Defaults to seven minutes in the future from the time the resource is created.
@@ -98,7 +98,7 @@ type ScheduleObservation struct {
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
 	MonthlyOccurrence []MonthlyOccurrenceObservation `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
 
 	// The name of the resource group in which the Schedule is created. Changing this forces a new resource to be created.
@@ -151,7 +151,7 @@ type ScheduleParameters struct {
 	// +listType=set
 	MonthDays []*float64 `json:"monthDays,omitempty" tf:"month_days,omitempty"`
 
-	// List of monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
+	// One monthly_occurrence blocks as defined below to specifies occurrences of days within a month. Only valid when frequency is Month. The monthly_occurrence block supports fields documented below.
 	// +kubebuilder:validation:Optional
 	MonthlyOccurrence []MonthlyOccurrenceParameters `json:"monthlyOccurrence,omitempty" tf:"monthly_occurrence,omitempty"`
 
@@ -210,8 +210,8 @@ type ScheduleStatus struct {
 // +kubebuilder:storageversion
 
 // Schedule is the Schema for the Schedules API. Manages a Automation Schedule.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

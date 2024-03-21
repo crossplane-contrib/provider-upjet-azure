@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -99,7 +99,8 @@ spec:
                           type: string
                         useSystemAssignedIdentity:
                           description: Indicate that system assigned identity should
-                            be used or not. Defaults to true.
+                            be used or not. Defaults to true. Must be set to false
+                            when user_assigned_identity_id is set.
                           type: boolean
                         userAssignedIdentityId:
                           description: Specifies the user assigned identity ID to
@@ -294,7 +295,8 @@ spec:
                           type: string
                         useSystemAssignedIdentity:
                           description: Indicate that system assigned identity should
-                            be used or not. Defaults to true.
+                            be used or not. Defaults to true. Must be set to false
+                            when user_assigned_identity_id is set.
                           type: boolean
                         userAssignedIdentityId:
                           description: Specifies the user assigned identity ID to
@@ -576,7 +578,8 @@ spec:
                           type: string
                         useSystemAssignedIdentity:
                           description: Indicate that system assigned identity should
-                            be used or not. Defaults to true.
+                            be used or not. Defaults to true. Must be set to false
+                            when user_assigned_identity_id is set.
                           type: boolean
                         userAssignedIdentityId:
                           description: Specifies the user assigned identity ID to

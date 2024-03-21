@@ -14,30 +14,22 @@ import (
 )
 
 type AutoscaleCapacityInitParameters struct {
-
-	// The maximum number of worker nodes to autoscale to based on the cluster's activity.
 	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
 
-	// The minimum number of worker nodes to autoscale to based on the cluster's activity.
 	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
 }
 
 type AutoscaleCapacityObservation struct {
-
-	// The maximum number of worker nodes to autoscale to based on the cluster's activity.
 	MaxInstanceCount *float64 `json:"maxInstanceCount,omitempty" tf:"max_instance_count,omitempty"`
 
-	// The minimum number of worker nodes to autoscale to based on the cluster's activity.
 	MinInstanceCount *float64 `json:"minInstanceCount,omitempty" tf:"min_instance_count,omitempty"`
 }
 
 type AutoscaleCapacityParameters struct {
 
-	// The maximum number of worker nodes to autoscale to based on the cluster's activity.
 	// +kubebuilder:validation:Optional
 	MaxInstanceCount *float64 `json:"maxInstanceCount" tf:"max_instance_count,omitempty"`
 
-	// The minimum number of worker nodes to autoscale to based on the cluster's activity.
 	// +kubebuilder:validation:Optional
 	MinInstanceCount *float64 `json:"minInstanceCount" tf:"min_instance_count,omitempty"`
 }
@@ -478,7 +470,7 @@ type InteractiveQueryClusterNetworkInitParameters struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -487,7 +479,7 @@ type InteractiveQueryClusterNetworkObservation struct {
 	// The direction of the resource provider connection. Possible values include Inbound or Outbound. Defaults to Inbound. Changing this forces a new resource to be created.
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
 
@@ -497,7 +489,7 @@ type InteractiveQueryClusterNetworkParameters struct {
 	// +kubebuilder:validation:Optional
 	ConnectionDirection *string `json:"connectionDirection,omitempty" tf:"connection_direction,omitempty"`
 
-	// Is the private link enabled? Possible values include True or False. Defaults to False. Changing this forces a new resource to be created.
+	// Is the private link enabled? Possible values include true or false. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PrivateLinkEnabled *bool `json:"privateLinkEnabled,omitempty" tf:"private_link_enabled,omitempty"`
 }
@@ -667,7 +659,7 @@ type InteractiveQueryClusterRolesHeadNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []RolesHeadNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -699,7 +691,7 @@ type InteractiveQueryClusterRolesHeadNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []RolesHeadNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -726,7 +718,7 @@ type InteractiveQueryClusterRolesHeadNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []RolesHeadNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -805,7 +797,7 @@ type InteractiveQueryClusterRolesWorkerNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []InteractiveQueryClusterRolesWorkerNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -843,7 +835,7 @@ type InteractiveQueryClusterRolesWorkerNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []InteractiveQueryClusterRolesWorkerNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -877,7 +869,7 @@ type InteractiveQueryClusterRolesWorkerNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []InteractiveQueryClusterRolesWorkerNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -957,7 +949,7 @@ type InteractiveQueryClusterRolesZookeeperNodeInitParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []InteractiveQueryClusterRolesZookeeperNodeScriptActionsInitParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -989,7 +981,7 @@ type InteractiveQueryClusterRolesZookeeperNodeObservation struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	ScriptActions []InteractiveQueryClusterRolesZookeeperNodeScriptActionsObservation `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
 	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
@@ -1016,7 +1008,7 @@ type InteractiveQueryClusterRolesZookeeperNodeParameters struct {
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
 
-	// The script action which will run on the cluster. Changing this forces a new resource to be created.
+	// The script action which will run on the cluster. One or more script_actions blocks as defined above.
 	// +kubebuilder:validation:Optional
 	ScriptActions []InteractiveQueryClusterRolesZookeeperNodeScriptActionsParameters `json:"scriptActions,omitempty" tf:"script_actions,omitempty"`
 
@@ -1317,8 +1309,6 @@ type RolesHeadNodeScriptActionsParameters struct {
 }
 
 type RolesWorkerNodeAutoscaleInitParameters struct {
-
-	// A capacity block as defined below.
 	Capacity []AutoscaleCapacityInitParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// A recurrence block as defined below.
@@ -1326,8 +1316,6 @@ type RolesWorkerNodeAutoscaleInitParameters struct {
 }
 
 type RolesWorkerNodeAutoscaleObservation struct {
-
-	// A capacity block as defined below.
 	Capacity []AutoscaleCapacityObservation `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// A recurrence block as defined below.
@@ -1336,7 +1324,6 @@ type RolesWorkerNodeAutoscaleObservation struct {
 
 type RolesWorkerNodeAutoscaleParameters struct {
 
-	// A capacity block as defined below.
 	// +kubebuilder:validation:Optional
 	Capacity []AutoscaleCapacityParameters `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
@@ -1402,8 +1389,8 @@ type InteractiveQueryClusterStatus struct {
 // +kubebuilder:storageversion
 
 // InteractiveQueryCluster is the Schema for the InteractiveQueryClusters API. Manages a HDInsight Interactive Query Cluster.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -144,6 +144,12 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 type NetworkInterfaceInitParameters struct {
 
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A8, A4, A1, A2 and None.
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
+
 	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
@@ -174,6 +180,12 @@ type NetworkInterfaceObservation struct {
 
 	// If the Virtual Machine using this Network Interface is part of an Availability Set, then this list will have the union of all DNS servers from all Network Interfaces that are part of the Availability Set.
 	AppliedDNSServers []*string `json:"appliedDnsServers,omitempty" tf:"applied_dns_servers,omitempty"`
+
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A8, A4, A1, A2 and None.
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
 
 	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
@@ -223,6 +235,14 @@ type NetworkInterfaceObservation struct {
 }
 
 type NetworkInterfaceParameters struct {
+
+	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
+	// +kubebuilder:validation:Optional
+	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
+
+	// Specifies the SKU used for the network high-performance feature on Network Virtual Appliances (NVAs). Possible values are A8, A4, A1, A2 and None.
+	// +kubebuilder:validation:Optional
+	AuxiliarySku *string `json:"auxiliarySku,omitempty" tf:"auxiliary_sku,omitempty"`
 
 	// A list of IP Addresses defining the DNS Servers which should be used for this Network Interface.
 	// +kubebuilder:validation:Optional
@@ -299,8 +319,8 @@ type NetworkInterfaceStatus struct {
 // +kubebuilder:storageversion
 
 // NetworkInterface is the Schema for the NetworkInterfaces API. Manages a Network Interface.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

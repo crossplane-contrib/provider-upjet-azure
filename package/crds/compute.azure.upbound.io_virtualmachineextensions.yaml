@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -119,6 +119,12 @@ spec:
                     - name
                     - namespace
                     type: object
+                  provisionAfterExtensions:
+                    description: Specifies the collection of extension names after
+                      which this extension needs to be provisioned.
+                    items:
+                      type: string
+                    type: array
                   publisher:
                     description: The publisher of the extension, available publishers
                       can be found by using the Azure CLI. Changing this forces a
@@ -261,6 +267,12 @@ spec:
                           description: The ID of the source Key Vault.
                           type: string
                       type: object
+                    type: array
+                  provisionAfterExtensions:
+                    description: Specifies the collection of extension names after
+                      which this extension needs to be provisioned.
+                    items:
+                      type: string
                     type: array
                   publisher:
                     description: The publisher of the extension, available publishers
@@ -500,6 +512,12 @@ spec:
                           description: The ID of the source Key Vault.
                           type: string
                       type: object
+                    type: array
+                  provisionAfterExtensions:
+                    description: Specifies the collection of extension names after
+                      which this extension needs to be provisioned.
+                    items:
+                      type: string
                     type: array
                   publisher:
                     description: The publisher of the extension, available publishers

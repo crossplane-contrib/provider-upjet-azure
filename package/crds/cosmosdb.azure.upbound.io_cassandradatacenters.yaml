@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -629,6 +629,12 @@ spec:
                       have. The number should be equal or greater than 3. Defaults
                       to 3.
                     type: number
+                  seedNodeIpAddresses:
+                    description: A list of IP Address for the seed nodes in this Cassandra
+                      Datacenter.
+                    items:
+                      type: string
+                    type: array
                   skuName:
                     description: Determines the selected sku.
                     type: string

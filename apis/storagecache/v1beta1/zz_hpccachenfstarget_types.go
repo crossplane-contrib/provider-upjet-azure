@@ -27,14 +27,20 @@ type HPCCacheNFSTargetInitParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
-	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
+	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	NamespaceJunction []NamespaceJunctionInitParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 
 	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
 	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
 
-	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
+
+	// The amount of time the cache waits before it checks the back-end storage for file updates. Possible values are between 1 and 31536000.
+	VerificationTimerInSeconds *float64 `json:"verificationTimerInSeconds,omitempty" tf:"verification_timer_in_seconds,omitempty"`
+
+	// The amount of time the cache waits after the last file change before it copies the changed file to back-end storage. Possible values are between 1 and 31536000.
+	WriteBackTimerInSeconds *float64 `json:"writeBackTimerInSeconds,omitempty" tf:"write_back_timer_in_seconds,omitempty"`
 }
 
 type HPCCacheNFSTargetObservation struct {
@@ -45,7 +51,7 @@ type HPCCacheNFSTargetObservation struct {
 	// The ID of the HPC Cache NFS Target.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
+	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	NamespaceJunction []NamespaceJunctionObservation `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 
 	// The name of the Resource Group in which to create the HPC Cache NFS Target. Changing this forces a new resource to be created.
@@ -54,8 +60,14 @@ type HPCCacheNFSTargetObservation struct {
 	// The IP address or fully qualified domain name (FQDN) of the HPC Cache NFS target. Changing this forces a new resource to be created.
 	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
 
-	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
+
+	// The amount of time the cache waits before it checks the back-end storage for file updates. Possible values are between 1 and 31536000.
+	VerificationTimerInSeconds *float64 `json:"verificationTimerInSeconds,omitempty" tf:"verification_timer_in_seconds,omitempty"`
+
+	// The amount of time the cache waits after the last file change before it copies the changed file to back-end storage. Possible values are between 1 and 31536000.
+	WriteBackTimerInSeconds *float64 `json:"writeBackTimerInSeconds,omitempty" tf:"write_back_timer_in_seconds,omitempty"`
 }
 
 type HPCCacheNFSTargetParameters struct {
@@ -73,7 +85,7 @@ type HPCCacheNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	CacheNameSelector *v1.Selector `json:"cacheNameSelector,omitempty" tf:"-"`
 
-	// Can be specified multiple times to define multiple namespace_junction. Each namespace_juntion block supports fields documented below.
+	// Can be specified multiple times to define multiple namespace_junction. Each namespace_junction block supports fields documented below.
 	// +kubebuilder:validation:Optional
 	NamespaceJunction []NamespaceJunctionParameters `json:"namespaceJunction,omitempty" tf:"namespace_junction,omitempty"`
 
@@ -94,9 +106,17 @@ type HPCCacheNFSTargetParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetHostName *string `json:"targetHostName,omitempty" tf:"target_host_name,omitempty"`
 
-	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
+	// The type of usage of the HPC Cache NFS Target. Possible values are: READ_HEAVY_INFREQ, READ_HEAVY_CHECK_180, READ_ONLY, READ_WRITE, WRITE_WORKLOAD_15, WRITE_AROUND, WRITE_WORKLOAD_CHECK_30, WRITE_WORKLOAD_CHECK_60 and WRITE_WORKLOAD_CLOUDWS.
 	// +kubebuilder:validation:Optional
 	UsageModel *string `json:"usageModel,omitempty" tf:"usage_model,omitempty"`
+
+	// The amount of time the cache waits before it checks the back-end storage for file updates. Possible values are between 1 and 31536000.
+	// +kubebuilder:validation:Optional
+	VerificationTimerInSeconds *float64 `json:"verificationTimerInSeconds,omitempty" tf:"verification_timer_in_seconds,omitempty"`
+
+	// The amount of time the cache waits after the last file change before it copies the changed file to back-end storage. Possible values are between 1 and 31536000.
+	// +kubebuilder:validation:Optional
+	WriteBackTimerInSeconds *float64 `json:"writeBackTimerInSeconds,omitempty" tf:"write_back_timer_in_seconds,omitempty"`
 }
 
 type NamespaceJunctionInitParameters struct {
@@ -176,8 +196,8 @@ type HPCCacheNFSTargetStatus struct {
 // +kubebuilder:storageversion
 
 // HPCCacheNFSTarget is the Schema for the HPCCacheNFSTargets API. Manages a NFS Target within a HPC Cache.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

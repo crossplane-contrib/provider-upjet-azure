@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -86,6 +86,36 @@ spec:
                     items:
                       type: string
                     type: array
+                  azureBlobFsLocation:
+                    description: A azure_blob_fs_location block as defined below.
+                    items:
+                      properties:
+                        dynamicFileSystemEnabled:
+                          description: Is the file_system using dynamic expression,
+                            function or system variables? Defaults to false.
+                          type: boolean
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        fileSystem:
+                          description: The container on the Azure Data Lake Storage
+                            Account hosting the file.
+                          type: string
+                        filename:
+                          description: The filename of the file on the Azure Data
+                            Lake Storage Account.
+                          type: string
+                        path:
+                          description: The folder path to the file on the Azure Data
+                            Lake Storage Account.
+                          type: string
+                      type: object
+                    type: array
                   azureBlobStorageLocation:
                     description: A azure_blob_storage_location block as defined below.
                     items:
@@ -107,10 +137,12 @@ spec:
                             or system variables? Defaults to false.
                           type: boolean
                         filename:
-                          description: The filename of the file on the web server.
+                          description: The filename of the file on the Azure Blob
+                            Storage Account.
                           type: string
                         path:
-                          description: The folder path to the file on the web server.
+                          description: The folder path to the file on the Azure Blob
+                            Storage Account.
                           type: string
                       type: object
                     type: array
@@ -366,6 +398,36 @@ spec:
                     items:
                       type: string
                     type: array
+                  azureBlobFsLocation:
+                    description: A azure_blob_fs_location block as defined below.
+                    items:
+                      properties:
+                        dynamicFileSystemEnabled:
+                          description: Is the file_system using dynamic expression,
+                            function or system variables? Defaults to false.
+                          type: boolean
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        fileSystem:
+                          description: The container on the Azure Data Lake Storage
+                            Account hosting the file.
+                          type: string
+                        filename:
+                          description: The filename of the file on the Azure Data
+                            Lake Storage Account.
+                          type: string
+                        path:
+                          description: The folder path to the file on the Azure Data
+                            Lake Storage Account.
+                          type: string
+                      type: object
+                    type: array
                   azureBlobStorageLocation:
                     description: A azure_blob_storage_location block as defined below.
                     items:
@@ -387,10 +449,12 @@ spec:
                             or system variables? Defaults to false.
                           type: boolean
                         filename:
-                          description: The filename of the file on the web server.
+                          description: The filename of the file on the Azure Blob
+                            Storage Account.
                           type: string
                         path:
-                          description: The folder path to the file on the web server.
+                          description: The folder path to the file on the Azure Blob
+                            Storage Account.
                           type: string
                       type: object
                     type: array
@@ -725,6 +789,36 @@ spec:
                     items:
                       type: string
                     type: array
+                  azureBlobFsLocation:
+                    description: A azure_blob_fs_location block as defined below.
+                    items:
+                      properties:
+                        dynamicFileSystemEnabled:
+                          description: Is the file_system using dynamic expression,
+                            function or system variables? Defaults to false.
+                          type: boolean
+                        dynamicFilenameEnabled:
+                          description: Is the filename using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        dynamicPathEnabled:
+                          description: Is the path using dynamic expression, function
+                            or system variables? Defaults to false.
+                          type: boolean
+                        fileSystem:
+                          description: The container on the Azure Data Lake Storage
+                            Account hosting the file.
+                          type: string
+                        filename:
+                          description: The filename of the file on the Azure Data
+                            Lake Storage Account.
+                          type: string
+                        path:
+                          description: The folder path to the file on the Azure Data
+                            Lake Storage Account.
+                          type: string
+                      type: object
+                    type: array
                   azureBlobStorageLocation:
                     description: A azure_blob_storage_location block as defined below.
                     items:
@@ -746,10 +840,12 @@ spec:
                             or system variables? Defaults to false.
                           type: boolean
                         filename:
-                          description: The filename of the file on the web server.
+                          description: The filename of the file on the Azure Blob
+                            Storage Account.
                           type: string
                         path:
-                          description: The folder path to the file on the web server.
+                          description: The folder path to the file on the Azure Blob
+                            Storage Account.
                           type: string
                       type: object
                     type: array

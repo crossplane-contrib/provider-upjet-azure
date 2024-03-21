@@ -26,7 +26,7 @@ type AccountNetworkRulesInitParameters struct {
 	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
@@ -63,7 +63,7 @@ type AccountNetworkRulesObservation struct {
 	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessObservation `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// Specifies the ID of the storage account. Changing this forces a new resource to be created.
@@ -90,7 +90,7 @@ type AccountNetworkRulesParameters struct {
 	// +listType=set
 	IPRules []*string `json:"ipRules,omitempty" tf:"ip_rules,omitempty"`
 
-	// One or More private_link_access block as defined below.
+	// One or more private_link_access block as defined below.
 	// +kubebuilder:validation:Optional
 	PrivateLinkAccess []AccountNetworkRulesPrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
@@ -171,8 +171,8 @@ type AccountNetworkRulesStatus struct {
 // +kubebuilder:storageversion
 
 // AccountNetworkRules is the Schema for the AccountNetworkRuless API. Manages network rules inside of a Azure Storage Account.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

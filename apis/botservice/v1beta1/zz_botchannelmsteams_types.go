@@ -18,6 +18,9 @@ type BotChannelMSTeamsInitParameters struct {
 	// Specifies the webhook for Microsoft Teams channel calls.
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
 
+	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
+	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
+
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
 
@@ -32,6 +35,9 @@ type BotChannelMSTeamsObservation struct {
 
 	// Specifies the webhook for Microsoft Teams channel calls.
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
+
+	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
+	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
 
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	EnableCalling *bool `json:"enableCalling,omitempty" tf:"enable_calling,omitempty"`
@@ -65,6 +71,10 @@ type BotChannelMSTeamsParameters struct {
 	// Specifies the webhook for Microsoft Teams channel calls.
 	// +kubebuilder:validation:Optional
 	CallingWebHook *string `json:"callingWebHook,omitempty" tf:"calling_web_hook,omitempty"`
+
+	// The deployment environment for Microsoft Teams channel calls. Possible values are CommercialDeployment and GCCModerateDeployment. Defaults to CommercialDeployment.
+	// +kubebuilder:validation:Optional
+	DeploymentEnvironment *string `json:"deploymentEnvironment,omitempty" tf:"deployment_environment,omitempty"`
 
 	// Specifies whether to enable Microsoft Teams channel calls. This defaults to false.
 	// +kubebuilder:validation:Optional
@@ -116,8 +126,8 @@ type BotChannelMSTeamsStatus struct {
 // +kubebuilder:storageversion
 
 // BotChannelMSTeams is the Schema for the BotChannelMSTeamss API. Manages an MS Teams integration for a Bot Channel
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

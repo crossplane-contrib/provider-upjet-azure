@@ -28,6 +28,29 @@ spec:
 
 ---
 
+apiVersion: sql.azure.upbound.io/v1beta1
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlelasticpool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    version: "12.0"
+
+---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

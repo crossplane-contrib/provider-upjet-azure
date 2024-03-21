@@ -34,6 +34,9 @@ type VirtualHubInitParameters_2 struct {
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
+	// Minimum instance capacity for the scaling configuration of the Virtual Hub Router.
+	VirtualRouterAutoScaleMinCapacity *float64 `json:"virtualRouterAutoScaleMinCapacity,omitempty" tf:"virtual_router_auto_scale_min_capacity,omitempty"`
+
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualWAN
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -81,6 +84,9 @@ type VirtualHubObservation_2 struct {
 	// The Autonomous System Number of the Virtual Hub BGP router.
 	VirtualRouterAsn *float64 `json:"virtualRouterAsn,omitempty" tf:"virtual_router_asn,omitempty"`
 
+	// Minimum instance capacity for the scaling configuration of the Virtual Hub Router.
+	VirtualRouterAutoScaleMinCapacity *float64 `json:"virtualRouterAutoScaleMinCapacity,omitempty" tf:"virtual_router_auto_scale_min_capacity,omitempty"`
+
 	// The IP addresses of the Virtual Hub BGP router.
 	VirtualRouterIps []*string `json:"virtualRouterIps,omitempty" tf:"virtual_router_ips,omitempty"`
 
@@ -127,6 +133,10 @@ type VirtualHubParameters_2 struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Minimum instance capacity for the scaling configuration of the Virtual Hub Router.
+	// +kubebuilder:validation:Optional
+	VirtualRouterAutoScaleMinCapacity *float64 `json:"virtualRouterAutoScaleMinCapacity,omitempty" tf:"virtual_router_auto_scale_min_capacity,omitempty"`
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=VirtualWAN
@@ -200,8 +210,8 @@ type VirtualHubStatus struct {
 // +kubebuilder:storageversion
 
 // VirtualHub is the Schema for the VirtualHubs API. Manages a Virtual Hub within a Virtual WAN.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

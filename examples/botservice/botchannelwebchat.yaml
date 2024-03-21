@@ -6,7 +6,7 @@ apiVersion: botservice.azure.upbound.io/v1beta1
 kind: BotChannelWebChat
 metadata:
   annotations:
-    upjet.upbound.io/manual-intervention: "microsoftAppId is a part of application which we cannot obtain and need to be hardcoded"
+    upjet.upbound.io/manual-intervention: "microsoftAppId (Application (client) ID) is a part of application which we cannot obtain and need to be hardcoded"
     meta.upbound.io/example-id: botservice/v1beta1/botchannelwebchat
   labels:
     testing.upbound.io/example-name: example
@@ -20,8 +20,8 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: azure-bot-r-group-label
-    siteNames:
-      - TestSite
+    site:
+    - name: TestSite
 
 ---
 

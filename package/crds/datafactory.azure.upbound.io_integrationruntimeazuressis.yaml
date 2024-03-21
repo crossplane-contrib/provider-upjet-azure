@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -131,6 +131,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  credentialName:
+                    description: The name of a Data Factory Credential that the SSIS
+                      integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
+                    type: string
                   customSetupScript:
                     description: A custom_setup_script block as defined below.
                     items:
@@ -471,7 +475,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Azure-SSIS Integration
@@ -748,6 +752,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  credentialName:
+                    description: The name of a Data Factory Credential that the SSIS
+                      integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
+                    type: string
                   customSetupScript:
                     description: A custom_setup_script block as defined below.
                     items:
@@ -953,7 +961,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Azure-SSIS Integration
@@ -1399,6 +1407,10 @@ spec:
                           type: string
                       type: object
                     type: array
+                  credentialName:
+                    description: The name of a Data Factory Credential that the SSIS
+                      integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
+                    type: string
                   customSetupScript:
                     description: A custom_setup_script block as defined below.
                     items:
@@ -1536,7 +1548,7 @@ spec:
                     type: string
                   maxParallelExecutionsPerNode:
                     description: Defines the maximum parallel executions per node.
-                      Defaults to 1. Max is 16.
+                      Defaults to 1. Max is 1.
                     type: number
                   nodeSize:
                     description: 'The size of the nodes on which the Azure-SSIS Integration

@@ -10,7 +10,197 @@ spec:
   forProvider:
     cdnFrontdoorCustomDomainIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: contoso
+        testing.upbound.io/example-name: example
     cdnFrontdoorRouteIdsRefs:
-    - name: contoso
-    - name: fabrikam
+    - name: example
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorCustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    hostName: ${join(".", ["contoso", azurerm_dns_zone.example.name])}
+    tls:
+    - certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorOrigin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorOriginGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    certificateNameCheckEnabled: false
+    enabled: true
+    hostNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    httpPort: 80
+    httpsPort: 443
+    originHostHeaderSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 1
+    weight: 1
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorOriginGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    healthProbe:
+    - intervalInSeconds: 240
+      path: /healthProbe
+      protocol: Https
+      requestType: HEAD
+    loadBalancing:
+    - additionalLatencyInMilliseconds: 0
+      sampleSize: 16
+      successfulSamplesRequired: 3
+    restoreTrafficTimeToHealedOrNewEndpointInMinutes: 10
+    sessionAffinityEnabled: true
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_AzureFrontDoor
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorRoute
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorCustomDomainIdsRefs:
+    - name: example
+    cdnFrontdoorEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    cdnFrontdoorOriginGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    cdnFrontdoorOriginIdsRefs:
+    - name: example
+    cdnFrontdoorRuleSetIdsRefs:
+    - name: example
+    enabled: true
+    forwardingProtocol: HttpsOnly
+    httpsRedirectEnabled: true
+    linkToDefaultDomain: false
+    patternsToMatch:
+    - /*
+    supportedProtocols:
+    - Http
+    - Https
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorRuleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorcustomdomainassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

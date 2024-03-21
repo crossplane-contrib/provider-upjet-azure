@@ -2971,6 +2971,11 @@ func (in *RoleAssignmentInitParameters) DeepCopyInto(out *RoleAssignmentInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrincipalType != nil {
+		in, out := &in.PrincipalType, &out.PrincipalType
+		*out = new(string)
+		**out = **in
+	}
 	if in.RoleDefinitionID != nil {
 		in, out := &in.RoleDefinitionID, &out.RoleDefinitionID
 		*out = new(string)
@@ -3150,6 +3155,11 @@ func (in *RoleAssignmentParameters) DeepCopyInto(out *RoleAssignmentParameters) 
 	}
 	if in.PrincipalID != nil {
 		in, out := &in.PrincipalID, &out.PrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrincipalType != nil {
+		in, out := &in.PrincipalType, &out.PrincipalType
 		*out = new(string)
 		**out = **in
 	}

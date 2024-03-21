@@ -18,7 +18,7 @@ type SecurityCenterSettingInitParameters struct {
 	// Boolean flag to enable/disable data access.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
+	// The setting to manage. Possible values are MCAS , WDATP, WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW, WDATP_UNIFIED_SOLUTION and Sentinel. Changing this forces a new resource to be created.
 	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
 }
 
@@ -30,7 +30,7 @@ type SecurityCenterSettingObservation struct {
 	// The subscription security center setting id.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
+	// The setting to manage. Possible values are MCAS , WDATP, WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW, WDATP_UNIFIED_SOLUTION and Sentinel. Changing this forces a new resource to be created.
 	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
 }
 
@@ -40,7 +40,7 @@ type SecurityCenterSettingParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// The setting to manage. Possible values are MCAS , WDATP and SENTINEL. Changing this forces a new resource to be created.
+	// The setting to manage. Possible values are MCAS , WDATP, WDATP_EXCLUDE_LINUX_PUBLIC_PREVIEW, WDATP_UNIFIED_SOLUTION and Sentinel. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	SettingName *string `json:"settingName,omitempty" tf:"setting_name,omitempty"`
 }
@@ -73,8 +73,8 @@ type SecurityCenterSettingStatus struct {
 // +kubebuilder:storageversion
 
 // SecurityCenterSetting is the Schema for the SecurityCenterSettings API. Manages the Data Access Settings for Azure Security Center.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

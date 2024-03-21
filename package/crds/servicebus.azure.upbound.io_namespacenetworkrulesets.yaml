@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -77,7 +77,7 @@ spec:
                   defaultAction:
                     description: Specifies the default action for the ServiceBus Namespace
                       Network Rule Set. Possible values are Allow and Deny. Defaults
-                      to Deny.
+                      to Allow.
                     type: string
                   ipRules:
                     description: One or more IP Addresses, or CIDR Blocks which should
@@ -284,7 +284,7 @@ spec:
                   defaultAction:
                     description: Specifies the default action for the ServiceBus Namespace
                       Network Rule Set. Possible values are Allow and Deny. Defaults
-                      to Deny.
+                      to Allow.
                     type: string
                   ipRules:
                     description: One or more IP Addresses, or CIDR Blocks which should
@@ -651,7 +651,7 @@ spec:
                   defaultAction:
                     description: Specifies the default action for the ServiceBus Namespace
                       Network Rule Set. Possible values are Allow and Deny. Defaults
-                      to Deny.
+                      to Allow.
                     type: string
                   id:
                     description: The ID of the ServiceBus Namespace Network Rule Set.

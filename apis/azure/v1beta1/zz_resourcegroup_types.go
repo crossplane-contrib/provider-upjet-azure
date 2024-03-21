@@ -18,6 +18,9 @@ type ResourceGroupInitParameters struct {
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID of the resource or application that manages this Resource Group.
+	ManagedBy *string `json:"managedBy,omitempty" tf:"managed_by,omitempty"`
+
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -31,6 +34,9 @@ type ResourceGroupObservation struct {
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The ID of the resource or application that manages this Resource Group.
+	ManagedBy *string `json:"managedBy,omitempty" tf:"managed_by,omitempty"`
+
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -41,6 +47,10 @@ type ResourceGroupParameters struct {
 	// The Azure Region where the Resource Group should exist. Changing this forces a new Resource Group to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The ID of the resource or application that manages this Resource Group.
+	// +kubebuilder:validation:Optional
+	ManagedBy *string `json:"managedBy,omitempty" tf:"managed_by,omitempty"`
 
 	// A mapping of tags which should be assigned to the Resource Group.
 	// +kubebuilder:validation:Optional
@@ -76,8 +86,8 @@ type ResourceGroupStatus struct {
 // +kubebuilder:storageversion
 
 // ResourceGroup is the Schema for the ResourceGroups API. Manages a Resource Group.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

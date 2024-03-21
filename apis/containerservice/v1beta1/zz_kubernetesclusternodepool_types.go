@@ -36,6 +36,9 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
+	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
+	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
+
 	// The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
 
@@ -76,7 +79,7 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
-	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule). Changing this forces a new resource to be created.
+	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule).
 	NodeTaints []*string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
 
 	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as 1.22 are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in the documentation.
@@ -88,7 +91,7 @@ type KubernetesClusterNodePoolInitParameters struct {
 	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this forces a new resource to be created.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values include: Ubuntu, CBLMariner, Mariner, Windows2019, Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are Linux and Windows. Defaults to Linux.
@@ -322,6 +325,12 @@ type KubernetesClusterNodePoolLinuxOsConfigParameters struct {
 
 type KubernetesClusterNodePoolNodeNetworkProfileInitParameters struct {
 
+	// One or more allowed_host_ports blocks as defined below.
+	AllowedHostPorts []NodeNetworkProfileAllowedHostPortsInitParameters `json:"allowedHostPorts,omitempty" tf:"allowed_host_ports,omitempty"`
+
+	// A list of Application Security Group IDs which should be associated with this Node Pool.
+	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
+
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
 	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
@@ -329,12 +338,26 @@ type KubernetesClusterNodePoolNodeNetworkProfileInitParameters struct {
 
 type KubernetesClusterNodePoolNodeNetworkProfileObservation struct {
 
+	// One or more allowed_host_ports blocks as defined below.
+	AllowedHostPorts []NodeNetworkProfileAllowedHostPortsObservation `json:"allowedHostPorts,omitempty" tf:"allowed_host_ports,omitempty"`
+
+	// A list of Application Security Group IDs which should be associated with this Node Pool.
+	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
+
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
 	// +mapType=granular
 	NodePublicIPTags map[string]*string `json:"nodePublicIpTags,omitempty" tf:"node_public_ip_tags,omitempty"`
 }
 
 type KubernetesClusterNodePoolNodeNetworkProfileParameters struct {
+
+	// One or more allowed_host_ports blocks as defined below.
+	// +kubebuilder:validation:Optional
+	AllowedHostPorts []NodeNetworkProfileAllowedHostPortsParameters `json:"allowedHostPorts,omitempty" tf:"allowed_host_ports,omitempty"`
+
+	// A list of Application Security Group IDs which should be associated with this Node Pool.
+	// +kubebuilder:validation:Optional
+	ApplicationSecurityGroupIds []*string `json:"applicationSecurityGroupIds,omitempty" tf:"application_security_group_ids,omitempty"`
 
 	// Specifies a mapping of tags to the instance-level public IPs. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -364,6 +387,9 @@ type KubernetesClusterNodePoolObservation struct {
 
 	// Should the nodes in this Node Pool have Federal Information Processing Standard enabled? Changing this forces a new resource to be created.
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
+
+	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
+	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
 
 	// The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
@@ -411,7 +437,7 @@ type KubernetesClusterNodePoolObservation struct {
 	// Resource ID for the Public IP Addresses Prefix for the nodes in this Node Pool. enable_node_public_ip should be true. Changing this forces a new resource to be created.
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
-	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule). Changing this forces a new resource to be created.
+	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule).
 	NodeTaints []*string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
 
 	// Version of Kubernetes used for the Agents. If not specified, the latest recommended version will be used at provisioning time (but won't auto-upgrade). AKS does not require an exact patch version to be specified, minor version aliases such as 1.22 are also supported. - The minor version's latest GA patch is automatically chosen in that case. More details can be found in the documentation.
@@ -423,7 +449,7 @@ type KubernetesClusterNodePoolObservation struct {
 	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. Changing this forces a new resource to be created.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values include: Ubuntu, CBLMariner, Mariner, Windows2019, Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The Operating System which should be used for this Node Pool. Changing this forces a new resource to be created. Possible values are Linux and Windows. Defaults to Linux.
@@ -504,6 +530,10 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	FipsEnabled *bool `json:"fipsEnabled,omitempty" tf:"fips_enabled,omitempty"`
 
+	// Specifies the GPU MIG instance profile for supported GPU VM SKU. The allowed values are MIG1g, MIG2g, MIG3g, MIG4g and MIG7g. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	GpuInstance *string `json:"gpuInstance,omitempty" tf:"gpu_instance,omitempty"`
+
 	// The fully qualified resource ID of the Dedicated Host Group to provision virtual machines from. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	HostGroupID *string `json:"hostGroupId,omitempty" tf:"host_group_id,omitempty"`
@@ -571,7 +601,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	NodePublicIPPrefixID *string `json:"nodePublicIpPrefixId,omitempty" tf:"node_public_ip_prefix_id,omitempty"`
 
-	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule). Changing this forces a new resource to be created.
+	// A list of Kubernetes taints which should be applied to nodes in the agent pool (e.g key=value:NoSchedule).
 	// +kubebuilder:validation:Optional
 	NodeTaints []*string `json:"nodeTaints,omitempty" tf:"node_taints,omitempty"`
 
@@ -587,7 +617,7 @@ type KubernetesClusterNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values include: Ubuntu, CBLMariner, Mariner, Windows2019, Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
@@ -750,7 +780,7 @@ type LinuxOsConfigSysctlConfigInitParameters struct {
 	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
 	NetCoreWmemMax *float64 `json:"netCoreWmemMax,omitempty" tf:"net_core_wmem_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535. Changing this forces a new resource to be created.
 	NetIPv4IPLocalPortRangeMax *float64 `json:"netIpv4IpLocalPortRangeMax,omitempty" tf:"net_ipv4_ip_local_port_range_max,omitempty"`
 
 	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
@@ -768,7 +798,7 @@ type LinuxOsConfigSysctlConfigInitParameters struct {
 	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120. Changing this forces a new resource to be created.
 	NetIPv4TCPFinTimeout *float64 `json:"netIpv4TcpFinTimeout,omitempty" tf:"net_ipv4_tcp_fin_timeout,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 75. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90. Changing this forces a new resource to be created.
 	NetIPv4TCPKeepaliveIntvl *float64 `json:"netIpv4TcpKeepaliveIntvl,omitempty" tf:"net_ipv4_tcp_keepalive_intvl,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15. Changing this forces a new resource to be created.
@@ -786,10 +816,10 @@ type LinuxOsConfigSysctlConfigInitParameters struct {
 	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled? Changing this forces a new resource to be created.
 	NetIPv4TCPTwReuse *bool `json:"netIpv4TcpTwReuse,omitempty" tf:"net_ipv4_tcp_tw_reuse,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 147456. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288. Changing this forces a new resource to be created.
 	NetNetfilterNfConntrackBuckets *float64 `json:"netNetfilterNfConntrackBuckets,omitempty" tf:"net_netfilter_nf_conntrack_buckets,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 1048576. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152. Changing this forces a new resource to be created.
 	NetNetfilterNfConntrackMax *float64 `json:"netNetfilterNfConntrackMax,omitempty" tf:"net_netfilter_nf_conntrack_max,omitempty"`
 
 	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144. Changing this forces a new resource to be created.
@@ -840,7 +870,7 @@ type LinuxOsConfigSysctlConfigObservation struct {
 	// The sysctl setting net.core.wmem_max. Must be between 212992 and 134217728. Changing this forces a new resource to be created.
 	NetCoreWmemMax *float64 `json:"netCoreWmemMax,omitempty" tf:"net_core_wmem_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535. Changing this forces a new resource to be created.
 	NetIPv4IPLocalPortRangeMax *float64 `json:"netIpv4IpLocalPortRangeMax,omitempty" tf:"net_ipv4_ip_local_port_range_max,omitempty"`
 
 	// The sysctl setting net.ipv4.ip_local_port_range min value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
@@ -858,7 +888,7 @@ type LinuxOsConfigSysctlConfigObservation struct {
 	// The sysctl setting net.ipv4.tcp_fin_timeout. Must be between 5 and 120. Changing this forces a new resource to be created.
 	NetIPv4TCPFinTimeout *float64 `json:"netIpv4TcpFinTimeout,omitempty" tf:"net_ipv4_tcp_fin_timeout,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 75. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90. Changing this forces a new resource to be created.
 	NetIPv4TCPKeepaliveIntvl *float64 `json:"netIpv4TcpKeepaliveIntvl,omitempty" tf:"net_ipv4_tcp_keepalive_intvl,omitempty"`
 
 	// The sysctl setting net.ipv4.tcp_keepalive_probes. Must be between 1 and 15. Changing this forces a new resource to be created.
@@ -876,10 +906,10 @@ type LinuxOsConfigSysctlConfigObservation struct {
 	// Is sysctl setting net.ipv4.tcp_tw_reuse enabled? Changing this forces a new resource to be created.
 	NetIPv4TCPTwReuse *bool `json:"netIpv4TcpTwReuse,omitempty" tf:"net_ipv4_tcp_tw_reuse,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 147456. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288. Changing this forces a new resource to be created.
 	NetNetfilterNfConntrackBuckets *float64 `json:"netNetfilterNfConntrackBuckets,omitempty" tf:"net_netfilter_nf_conntrack_buckets,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 1048576. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152. Changing this forces a new resource to be created.
 	NetNetfilterNfConntrackMax *float64 `json:"netNetfilterNfConntrackMax,omitempty" tf:"net_netfilter_nf_conntrack_max,omitempty"`
 
 	// The sysctl setting vm.max_map_count. Must be between 65530 and 262144. Changing this forces a new resource to be created.
@@ -942,7 +972,7 @@ type LinuxOsConfigSysctlConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	NetCoreWmemMax *float64 `json:"netCoreWmemMax,omitempty" tf:"net_core_wmem_max,omitempty"`
 
-	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 1024 and 60999. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.ip_local_port_range max value. Must be between 32768 and 65535. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NetIPv4IPLocalPortRangeMax *float64 `json:"netIpv4IpLocalPortRangeMax,omitempty" tf:"net_ipv4_ip_local_port_range_max,omitempty"`
 
@@ -966,7 +996,7 @@ type LinuxOsConfigSysctlConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPFinTimeout *float64 `json:"netIpv4TcpFinTimeout,omitempty" tf:"net_ipv4_tcp_fin_timeout,omitempty"`
 
-	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 75. Changing this forces a new resource to be created.
+	// The sysctl setting net.ipv4.tcp_keepalive_intvl. Must be between 10 and 90. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPKeepaliveIntvl *float64 `json:"netIpv4TcpKeepaliveIntvl,omitempty" tf:"net_ipv4_tcp_keepalive_intvl,omitempty"`
 
@@ -990,11 +1020,11 @@ type LinuxOsConfigSysctlConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	NetIPv4TCPTwReuse *bool `json:"netIpv4TcpTwReuse,omitempty" tf:"net_ipv4_tcp_tw_reuse,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 147456. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_buckets. Must be between 65536 and 524288. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NetNetfilterNfConntrackBuckets *float64 `json:"netNetfilterNfConntrackBuckets,omitempty" tf:"net_netfilter_nf_conntrack_buckets,omitempty"`
 
-	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 1048576. Changing this forces a new resource to be created.
+	// The sysctl setting net.netfilter.nf_conntrack_max. Must be between 131072 and 2097152. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NetNetfilterNfConntrackMax *float64 `json:"netNetfilterNfConntrackMax,omitempty" tf:"net_netfilter_nf_conntrack_max,omitempty"`
 
@@ -1009,6 +1039,45 @@ type LinuxOsConfigSysctlConfigParameters struct {
 	// The sysctl setting vm.vfs_cache_pressure. Must be between 0 and 100. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	VMVfsCachePressure *float64 `json:"vmVfsCachePressure,omitempty" tf:"vm_vfs_cache_pressure,omitempty"`
+}
+
+type NodeNetworkProfileAllowedHostPortsInitParameters struct {
+
+	// Specifies the end of the port range.
+	PortEnd *float64 `json:"portEnd,omitempty" tf:"port_end,omitempty"`
+
+	// Specifies the start of the port range.
+	PortStart *float64 `json:"portStart,omitempty" tf:"port_start,omitempty"`
+
+	// Specifies the protocol of the port range. Possible values are TCP and UDP.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+}
+
+type NodeNetworkProfileAllowedHostPortsObservation struct {
+
+	// Specifies the end of the port range.
+	PortEnd *float64 `json:"portEnd,omitempty" tf:"port_end,omitempty"`
+
+	// Specifies the start of the port range.
+	PortStart *float64 `json:"portStart,omitempty" tf:"port_start,omitempty"`
+
+	// Specifies the protocol of the port range. Possible values are TCP and UDP.
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
+}
+
+type NodeNetworkProfileAllowedHostPortsParameters struct {
+
+	// Specifies the end of the port range.
+	// +kubebuilder:validation:Optional
+	PortEnd *float64 `json:"portEnd,omitempty" tf:"port_end,omitempty"`
+
+	// Specifies the start of the port range.
+	// +kubebuilder:validation:Optional
+	PortStart *float64 `json:"portStart,omitempty" tf:"port_start,omitempty"`
+
+	// Specifies the protocol of the port range. Possible values are TCP and UDP.
+	// +kubebuilder:validation:Optional
+	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 }
 
 // KubernetesClusterNodePoolSpec defines the desired state of KubernetesClusterNodePool
@@ -1039,8 +1108,8 @@ type KubernetesClusterNodePoolStatus struct {
 // +kubebuilder:storageversion
 
 // KubernetesClusterNodePool is the Schema for the KubernetesClusterNodePools API. Manages a Node Pool within a Kubernetes Cluster
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -306,6 +306,10 @@ spec:
                     description: If action type is redirect, this field represents
                       redirect URL for the client.
                     type: string
+                  requestBodyCheckEnabled:
+                    description: Should policy managed rules inspect the request body
+                      content? Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group. Changing this forces
                       a new resource to be created.
@@ -720,6 +724,10 @@ spec:
                     description: If action type is redirect, this field represents
                       redirect URL for the client.
                     type: string
+                  requestBodyCheckEnabled:
+                    description: Should policy managed rules inspect the request body
+                      content? Defaults to true.
+                    type: boolean
                   skuName:
                     description: The sku's pricing tier for this Front Door Firewall
                       Policy. Possible values include Standard_AzureFrontDoor or Premium_AzureFrontDoor.
@@ -1228,6 +1236,10 @@ spec:
                     description: If action type is redirect, this field represents
                       redirect URL for the client.
                     type: string
+                  requestBodyCheckEnabled:
+                    description: Should policy managed rules inspect the request body
+                      content? Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group. Changing this forces
                       a new resource to be created.

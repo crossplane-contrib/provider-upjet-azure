@@ -17,7 +17,7 @@ type WorkspaceCustomerManagedKeyInitParameters struct {
 
 	// The ID of the Key Vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// Reference to a Key in keyvault to populate keyVaultKeyId.
@@ -45,7 +45,7 @@ type WorkspaceCustomerManagedKeyParameters struct {
 
 	// The ID of the Key Vault.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
@@ -59,7 +59,7 @@ type WorkspaceCustomerManagedKeyParameters struct {
 
 	// The ID of the Databricks Workspace..
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/databricks/v1beta1.Workspace
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
@@ -99,9 +99,9 @@ type WorkspaceCustomerManagedKeyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys API. Manages a Customer Managed Key for a Databricks Workspace
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
+// WorkspaceCustomerManagedKey is the Schema for the WorkspaceCustomerManagedKeys API. Manages a Customer Managed Key for a Databricks Workspace root DBFS. This resource has been deprecated and will be removed in future versions of provider. Please use the WorkspaceRootDbfsCustomerManagedKey resource instead.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

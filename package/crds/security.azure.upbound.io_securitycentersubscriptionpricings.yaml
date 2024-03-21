@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -74,9 +74,25 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  extension:
+                    description: One or more extension blocks as defined below.
+                    items:
+                      properties:
+                        additionalExtensionProperties:
+                          additionalProperties:
+                            type: string
+                          description: Key/Value pairs that are required for some
+                            extensions.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        name:
+                          description: The name of extension.
+                          type: string
+                      type: object
+                    type: array
                   resourceType:
                     description: The resource type this setting affects. Possible
-                      values are AppServices, ContainerRegistry, KeyVaults, KubernetesService,
+                      values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService,
                       SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines,
                       Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs
                       and CloudPosture. Defaults to VirtualMachines
@@ -103,9 +119,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  extension:
+                    description: One or more extension blocks as defined below.
+                    items:
+                      properties:
+                        additionalExtensionProperties:
+                          additionalProperties:
+                            type: string
+                          description: Key/Value pairs that are required for some
+                            extensions.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        name:
+                          description: The name of extension.
+                          type: string
+                      type: object
+                    type: array
                   resourceType:
                     description: The resource type this setting affects. Possible
-                      values are AppServices, ContainerRegistry, KeyVaults, KubernetesService,
+                      values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService,
                       SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines,
                       Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs
                       and CloudPosture. Defaults to VirtualMachines
@@ -297,12 +329,28 @@ spec:
             properties:
               atProvider:
                 properties:
+                  extension:
+                    description: One or more extension blocks as defined below.
+                    items:
+                      properties:
+                        additionalExtensionProperties:
+                          additionalProperties:
+                            type: string
+                          description: Key/Value pairs that are required for some
+                            extensions.
+                          type: object
+                          x-kubernetes-map-type: granular
+                        name:
+                          description: The name of extension.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The subscription pricing ID.
                     type: string
                   resourceType:
                     description: The resource type this setting affects. Possible
-                      values are AppServices, ContainerRegistry, KeyVaults, KubernetesService,
+                      values are Api, AppServices, ContainerRegistry, KeyVaults, KubernetesService,
                       SqlServers, SqlServerVirtualMachines, StorageAccounts, VirtualMachines,
                       Arm, Dns, OpenSourceRelationalDatabases, Containers, CosmosDbs
                       and CloudPosture. Defaults to VirtualMachines

@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -105,7 +105,7 @@ spec:
                       type: object
                     type: array
                   autoscaleConfiguration:
-                    description: A autoscale_configuration block as defined below.
+                    description: An autoscale_configuration block as defined below.
                     items:
                       properties:
                         maxCapacity:
@@ -151,8 +151,8 @@ spec:
                           description: The name of the affinity cookie.
                           type: string
                         authenticationCertificate:
-                          description: One or more authentication_certificate blocks
-                            as defined below.
+                          description: One or more authentication_certificate_backend
+                            blocks as defined below.
                           items:
                             properties:
                               name:
@@ -259,7 +259,7 @@ spec:
                           type: string
                         privateIpAddressAllocation:
                           description: The Allocation Method for the Private IP Address.
-                            Possible values are Dynamic and Static.
+                            Possible values are Dynamic and Static. Defaults to Dynamic.
                           type: string
                         privateLinkConfigurationName:
                           description: The name of the private link configuration
@@ -812,12 +812,12 @@ spec:
                     items:
                       properties:
                         includePath:
-                          description: Whether or not to include the path in the redirected
-                            Url. Defaults to false
+                          description: Whether to include the path in the redirected
+                            URL. Defaults to false
                           type: boolean
                         includeQueryString:
-                          description: Whether or not to include the query string
-                            in the redirected Url. Default to false
+                          description: Whether to include the query string in the
+                            redirected URL. Default to false
                           type: boolean
                         name:
                           description: Unique name of the redirect configuration block
@@ -831,7 +831,7 @@ spec:
                             be set if target_url is set.
                           type: string
                         targetUrl:
-                          description: The Url to redirect the request to. Cannot
+                          description: The URL to redirect the request to. Cannot
                             be set if target_listener_name is set.
                           type: string
                       type: object
@@ -974,7 +974,7 @@ spec:
                           type: string
                         rewriteRule:
                           description: One or more rewrite_rule blocks as defined
-                            above.
+                            below.
                           items:
                             properties:
                               condition:
@@ -1056,7 +1056,7 @@ spec:
                                     reroute:
                                       description: Whether the URL path map should
                                         be reevaluated after this rewrite has been
-                                        applied. More info on rewrite configutation
+                                        applied. More info on rewrite configuration
                                       type: boolean
                                   type: object
                                 type: array
@@ -1110,10 +1110,10 @@ spec:
                           - namespace
                           type: object
                         keyVaultSecretId:
-                          description: Secret Id of (base-64 encoded unencrypted pfx)
-                            Secret or Certificate object stored in Azure KeyVault.
-                            You need to enable soft delete for keyvault to use this
-                            feature. Required if data is not set.
+                          description: The Secret ID of (base-64 encoded unencrypted
+                            pfx) the Secret or Certificate object stored in Azure
+                            KeyVault. You need to enable soft delete for Key Vault
+                            to use this feature. Required if data is not set.
                           type: string
                         name:
                           description: The Name of the SSL certificate that is unique
@@ -1174,7 +1174,7 @@ spec:
                             TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                           type: string
                         policyName:
-                          description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                          description: The Name of the Policy e.g. AppGwSslPolicy20170401S.
                             Required if policy_type is set to Predefined. Possible
                             values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
                             Not compatible with disabled_protocols.
@@ -1228,7 +1228,7 @@ spec:
                                   are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                                 type: string
                               policyName:
-                                description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                                description: The Name of the Policy e.g. AppGwSslPolicy20170401S.
                                   Required if policy_type is set to Predefined. Possible
                                   values can change over time and are published here
                                   https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
@@ -1250,6 +1250,10 @@ spec:
                           description: Should client certificate issuer DN be verified?
                             Defaults to false.
                           type: boolean
+                        verifyClientCertificateRevocation:
+                          description: Specify the method to check client certificate
+                            revocation status. Possible value is OCSP.
+                          type: string
                       type: object
                     type: array
                   tags:
@@ -1370,7 +1374,7 @@ spec:
                                 type: string
                               firewallPolicyId:
                                 description: The ID of the Web Application Firewall
-                                  Policy which should be used as a HTTP Listener.
+                                  Policy which should be used as an HTTP Listener.
                                 type: string
                               name:
                                 description: The Name of the URL Path Map.
@@ -1400,7 +1404,7 @@ spec:
                     items:
                       properties:
                         disabledRuleGroup:
-                          description: one or more disabled_rule_group blocks as defined
+                          description: One or more disabled_rule_group blocks as defined
                             below.
                           items:
                             properties:
@@ -1410,14 +1414,18 @@ spec:
                                   crs_21_protocol_anomalies, crs_23_request_limits,
                                   crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks,
                                   crs_41_sql_injection_attacks, crs_41_xss_attacks,
-                                  crs_42_tight_security, crs_45_trojans, General,
-                                  GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT,
+                                  crs_42_tight_security, crs_45_trojans, crs_49_inbound_blocking,
+                                  General, GoodBots, KnownBadBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT,
                                   REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT,
                                   REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI,
                                   REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE,
                                   REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS,
                                   REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION,
-                                  REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
+                                  REQUEST-944-APPLICATION-ATTACK-JAVA, UnknownBots,
+                                  METHOD-ENFORCEMENT, PROTOCOL-ENFORCEMENT, PROTOCOL-ATTACK,
+                                  LFI, RFI, RCE, PHP, NODEJS, XSS, SQLI, FIX, JAVA,
+                                  MS-ThreatIntel-WebShells, MS-ThreatIntel-AppSec,
+                                  MS-ThreatIntel-SQLI and MS-ThreatIntel-CVEs.
                                 type: string
                               rules:
                                 description: A list of rules which should be disabled
@@ -1432,7 +1440,7 @@ spec:
                           description: Is the Web Application Firewall enabled?
                           type: boolean
                         exclusion:
-                          description: one or more exclusion blocks as defined below.
+                          description: One or more exclusion blocks as defined below.
                           items:
                             properties:
                               matchVariable:
@@ -1474,12 +1482,13 @@ spec:
                           type: boolean
                         ruleSetType:
                           description: The Type of the Rule Set used for this Web
-                            Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
+                            Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet
+                            and Microsoft_DefaultRuleSet. Defaults to OWASP.
                           type: string
                         ruleSetVersion:
                           description: The Version of the Rule Set used for this Web
-                            Application Firewall. Possible values are 0.1, 1.0, 2.2.9,
-                            3.0, 3.1 and 3.2.
+                            Application Firewall. Possible values are 0.1, 1.0, 2.1,
+                            2.2.9, 3.0, 3.1 and 3.2.
                           type: string
                       type: object
                     type: array
@@ -1517,7 +1526,7 @@ spec:
                       type: object
                     type: array
                   autoscaleConfiguration:
-                    description: A autoscale_configuration block as defined below.
+                    description: An autoscale_configuration block as defined below.
                     items:
                       properties:
                         maxCapacity:
@@ -1563,8 +1572,8 @@ spec:
                           description: The name of the affinity cookie.
                           type: string
                         authenticationCertificate:
-                          description: One or more authentication_certificate blocks
-                            as defined below.
+                          description: One or more authentication_certificate_backend
+                            blocks as defined below.
                           items:
                             properties:
                               name:
@@ -1671,7 +1680,7 @@ spec:
                           type: string
                         privateIpAddressAllocation:
                           description: The Allocation Method for the Private IP Address.
-                            Possible values are Dynamic and Static.
+                            Possible values are Dynamic and Static. Defaults to Dynamic.
                           type: string
                         privateLinkConfigurationName:
                           description: The name of the private link configuration
@@ -2224,12 +2233,12 @@ spec:
                     items:
                       properties:
                         includePath:
-                          description: Whether or not to include the path in the redirected
-                            Url. Defaults to false
+                          description: Whether to include the path in the redirected
+                            URL. Defaults to false
                           type: boolean
                         includeQueryString:
-                          description: Whether or not to include the query string
-                            in the redirected Url. Default to false
+                          description: Whether to include the query string in the
+                            redirected URL. Default to false
                           type: boolean
                         name:
                           description: Unique name of the redirect configuration block
@@ -2243,7 +2252,7 @@ spec:
                             be set if target_url is set.
                           type: string
                         targetUrl:
-                          description: The Url to redirect the request to. Cannot
+                          description: The URL to redirect the request to. Cannot
                             be set if target_listener_name is set.
                           type: string
                       type: object
@@ -2305,7 +2314,7 @@ spec:
                           type: string
                         rewriteRule:
                           description: One or more rewrite_rule blocks as defined
-                            above.
+                            below.
                           items:
                             properties:
                               condition:
@@ -2387,7 +2396,7 @@ spec:
                                     reroute:
                                       description: Whether the URL path map should
                                         be reevaluated after this rewrite has been
-                                        applied. More info on rewrite configutation
+                                        applied. More info on rewrite configuration
                                       type: boolean
                                   type: object
                                 type: array
@@ -2423,10 +2432,10 @@ spec:
                     items:
                       properties:
                         keyVaultSecretId:
-                          description: Secret Id of (base-64 encoded unencrypted pfx)
-                            Secret or Certificate object stored in Azure KeyVault.
-                            You need to enable soft delete for keyvault to use this
-                            feature. Required if data is not set.
+                          description: The Secret ID of (base-64 encoded unencrypted
+                            pfx) the Secret or Certificate object stored in Azure
+                            KeyVault. You need to enable soft delete for Key Vault
+                            to use this feature. Required if data is not set.
                           type: string
                         name:
                           description: The Name of the SSL certificate that is unique
@@ -2469,7 +2478,7 @@ spec:
                             TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                           type: string
                         policyName:
-                          description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                          description: The Name of the Policy e.g. AppGwSslPolicy20170401S.
                             Required if policy_type is set to Predefined. Possible
                             values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
                             Not compatible with disabled_protocols.
@@ -2523,7 +2532,7 @@ spec:
                                   are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                                 type: string
                               policyName:
-                                description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                                description: The Name of the Policy e.g. AppGwSslPolicy20170401S.
                                   Required if policy_type is set to Predefined. Possible
                                   values can change over time and are published here
                                   https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
@@ -2545,6 +2554,10 @@ spec:
                           description: Should client certificate issuer DN be verified?
                             Defaults to false.
                           type: boolean
+                        verifyClientCertificateRevocation:
+                          description: Specify the method to check client certificate
+                            revocation status. Possible value is OCSP.
+                          type: string
                       type: object
                     type: array
                   tags:
@@ -2627,7 +2640,7 @@ spec:
                                 type: string
                               firewallPolicyId:
                                 description: The ID of the Web Application Firewall
-                                  Policy which should be used as a HTTP Listener.
+                                  Policy which should be used as an HTTP Listener.
                                 type: string
                               name:
                                 description: The Name of the URL Path Map.
@@ -2657,7 +2670,7 @@ spec:
                     items:
                       properties:
                         disabledRuleGroup:
-                          description: one or more disabled_rule_group blocks as defined
+                          description: One or more disabled_rule_group blocks as defined
                             below.
                           items:
                             properties:
@@ -2667,14 +2680,18 @@ spec:
                                   crs_21_protocol_anomalies, crs_23_request_limits,
                                   crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks,
                                   crs_41_sql_injection_attacks, crs_41_xss_attacks,
-                                  crs_42_tight_security, crs_45_trojans, General,
-                                  GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT,
+                                  crs_42_tight_security, crs_45_trojans, crs_49_inbound_blocking,
+                                  General, GoodBots, KnownBadBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT,
                                   REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT,
                                   REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI,
                                   REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE,
                                   REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS,
                                   REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION,
-                                  REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
+                                  REQUEST-944-APPLICATION-ATTACK-JAVA, UnknownBots,
+                                  METHOD-ENFORCEMENT, PROTOCOL-ENFORCEMENT, PROTOCOL-ATTACK,
+                                  LFI, RFI, RCE, PHP, NODEJS, XSS, SQLI, FIX, JAVA,
+                                  MS-ThreatIntel-WebShells, MS-ThreatIntel-AppSec,
+                                  MS-ThreatIntel-SQLI and MS-ThreatIntel-CVEs.
                                 type: string
                               rules:
                                 description: A list of rules which should be disabled
@@ -2689,7 +2706,7 @@ spec:
                           description: Is the Web Application Firewall enabled?
                           type: boolean
                         exclusion:
-                          description: one or more exclusion blocks as defined below.
+                          description: One or more exclusion blocks as defined below.
                           items:
                             properties:
                               matchVariable:
@@ -2731,12 +2748,13 @@ spec:
                           type: boolean
                         ruleSetType:
                           description: The Type of the Rule Set used for this Web
-                            Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
+                            Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet
+                            and Microsoft_DefaultRuleSet. Defaults to OWASP.
                           type: string
                         ruleSetVersion:
                           description: The Version of the Rule Set used for this Web
-                            Application Firewall. Possible values are 0.1, 1.0, 2.2.9,
-                            3.0, 3.1 and 3.2.
+                            Application Firewall. Possible values are 0.1, 1.0, 2.1,
+                            2.2.9, 3.0, 3.1 and 3.2.
                           type: string
                       type: object
                     type: array
@@ -2973,7 +2991,7 @@ spec:
                       type: object
                     type: array
                   autoscaleConfiguration:
-                    description: A autoscale_configuration block as defined below.
+                    description: An autoscale_configuration block as defined below.
                     items:
                       properties:
                         maxCapacity:
@@ -3022,8 +3040,8 @@ spec:
                           description: The name of the affinity cookie.
                           type: string
                         authenticationCertificate:
-                          description: One or more authentication_certificate blocks
-                            as defined below.
+                          description: One or more authentication_certificate_backend
+                            blocks as defined below.
                           items:
                             properties:
                               id:
@@ -3145,7 +3163,7 @@ spec:
                           type: string
                         privateIpAddressAllocation:
                           description: The Allocation Method for the Private IP Address.
-                            Possible values are Dynamic and Static.
+                            Possible values are Dynamic and Static. Defaults to Dynamic.
                           type: string
                         privateLinkConfigurationId:
                           description: The ID of the associated private link configuration.
@@ -3452,12 +3470,12 @@ spec:
                           description: The ID of the Redirect Configuration.
                           type: string
                         includePath:
-                          description: Whether or not to include the path in the redirected
-                            Url. Defaults to false
+                          description: Whether to include the path in the redirected
+                            URL. Defaults to false
                           type: boolean
                         includeQueryString:
-                          description: Whether or not to include the query string
-                            in the redirected Url. Default to false
+                          description: Whether to include the query string in the
+                            redirected URL. Default to false
                           type: boolean
                         name:
                           description: Unique name of the redirect configuration block
@@ -3474,7 +3492,7 @@ spec:
                             be set if target_url is set.
                           type: string
                         targetUrl:
-                          description: The Url to redirect the request to. Cannot
+                          description: The URL to redirect the request to. Cannot
                             be set if target_listener_name is set.
                           type: string
                       type: object
@@ -3566,7 +3584,7 @@ spec:
                           type: string
                         rewriteRule:
                           description: One or more rewrite_rule blocks as defined
-                            above.
+                            below.
                           items:
                             properties:
                               condition:
@@ -3648,7 +3666,7 @@ spec:
                                     reroute:
                                       description: Whether the URL path map should
                                         be reevaluated after this rewrite has been
-                                        applied. More info on rewrite configutation
+                                        applied. More info on rewrite configuration
                                       type: boolean
                                   type: object
                                 type: array
@@ -3687,10 +3705,10 @@ spec:
                           description: The ID of the SSL Certificate.
                           type: string
                         keyVaultSecretId:
-                          description: Secret Id of (base-64 encoded unencrypted pfx)
-                            Secret or Certificate object stored in Azure KeyVault.
-                            You need to enable soft delete for keyvault to use this
-                            feature. Required if data is not set.
+                          description: The Secret ID of (base-64 encoded unencrypted
+                            pfx) the Secret or Certificate object stored in Azure
+                            KeyVault. You need to enable soft delete for Key Vault
+                            to use this feature. Required if data is not set.
                           type: string
                         name:
                           description: The Name of the SSL certificate that is unique
@@ -3737,7 +3755,7 @@ spec:
                             TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                           type: string
                         policyName:
-                          description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                          description: The Name of the Policy e.g. AppGwSslPolicy20170401S.
                             Required if policy_type is set to Predefined. Possible
                             values can change over time and are published here https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
                             Not compatible with disabled_protocols.
@@ -3794,7 +3812,7 @@ spec:
                                   are TLSv1_0, TLSv1_1, TLSv1_2 and TLSv1_3.
                                 type: string
                               policyName:
-                                description: The Name of the Policy e.g AppGwSslPolicy20170401S.
+                                description: The Name of the Policy e.g. AppGwSslPolicy20170401S.
                                   Required if policy_type is set to Predefined. Possible
                                   values can change over time and are published here
                                   https://docs.microsoft.com/azure/application-gateway/application-gateway-ssl-policy-overview.
@@ -3816,6 +3834,10 @@ spec:
                           description: Should client certificate issuer DN be verified?
                             Defaults to false.
                           type: boolean
+                        verifyClientCertificateRevocation:
+                          description: Specify the method to check client certificate
+                            revocation status. Possible value is OCSP.
+                          type: string
                       type: object
                     type: array
                   tags:
@@ -3928,7 +3950,7 @@ spec:
                                 type: string
                               firewallPolicyId:
                                 description: The ID of the Web Application Firewall
-                                  Policy which should be used as a HTTP Listener.
+                                  Policy which should be used as an HTTP Listener.
                                 type: string
                               id:
                                 description: The ID of the URL Path Map.
@@ -3968,7 +3990,7 @@ spec:
                     items:
                       properties:
                         disabledRuleGroup:
-                          description: one or more disabled_rule_group blocks as defined
+                          description: One or more disabled_rule_group blocks as defined
                             below.
                           items:
                             properties:
@@ -3978,14 +4000,18 @@ spec:
                                   crs_21_protocol_anomalies, crs_23_request_limits,
                                   crs_30_http_policy, crs_35_bad_robots, crs_40_generic_attacks,
                                   crs_41_sql_injection_attacks, crs_41_xss_attacks,
-                                  crs_42_tight_security, crs_45_trojans, General,
-                                  GoodBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT,
+                                  crs_42_tight_security, crs_45_trojans, crs_49_inbound_blocking,
+                                  General, GoodBots, KnownBadBots, Known-CVEs, REQUEST-911-METHOD-ENFORCEMENT,
                                   REQUEST-913-SCANNER-DETECTION, REQUEST-920-PROTOCOL-ENFORCEMENT,
                                   REQUEST-921-PROTOCOL-ATTACK, REQUEST-930-APPLICATION-ATTACK-LFI,
                                   REQUEST-931-APPLICATION-ATTACK-RFI, REQUEST-932-APPLICATION-ATTACK-RCE,
                                   REQUEST-933-APPLICATION-ATTACK-PHP, REQUEST-941-APPLICATION-ATTACK-XSS,
                                   REQUEST-942-APPLICATION-ATTACK-SQLI, REQUEST-943-APPLICATION-ATTACK-SESSION-FIXATION,
-                                  REQUEST-944-APPLICATION-ATTACK-JAVA and UnknownBots.
+                                  REQUEST-944-APPLICATION-ATTACK-JAVA, UnknownBots,
+                                  METHOD-ENFORCEMENT, PROTOCOL-ENFORCEMENT, PROTOCOL-ATTACK,
+                                  LFI, RFI, RCE, PHP, NODEJS, XSS, SQLI, FIX, JAVA,
+                                  MS-ThreatIntel-WebShells, MS-ThreatIntel-AppSec,
+                                  MS-ThreatIntel-SQLI and MS-ThreatIntel-CVEs.
                                 type: string
                               rules:
                                 description: A list of rules which should be disabled
@@ -4000,7 +4026,7 @@ spec:
                           description: Is the Web Application Firewall enabled?
                           type: boolean
                         exclusion:
-                          description: one or more exclusion blocks as defined below.
+                          description: One or more exclusion blocks as defined below.
                           items:
                             properties:
                               matchVariable:
@@ -4042,12 +4068,13 @@ spec:
                           type: boolean
                         ruleSetType:
                           description: The Type of the Rule Set used for this Web
-                            Application Firewall. Possible values are OWASP and Microsoft_BotManagerRuleSet.
+                            Application Firewall. Possible values are OWASP, Microsoft_BotManagerRuleSet
+                            and Microsoft_DefaultRuleSet. Defaults to OWASP.
                           type: string
                         ruleSetVersion:
                           description: The Version of the Rule Set used for this Web
-                            Application Firewall. Possible values are 0.1, 1.0, 2.2.9,
-                            3.0, 3.1 and 3.2.
+                            Application Firewall. Possible values are 0.1, 1.0, 2.1,
+                            2.2.9, 3.0, 3.1 and 3.2.
                           type: string
                       type: object
                     type: array

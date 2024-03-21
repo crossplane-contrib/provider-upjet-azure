@@ -21,7 +21,7 @@ type EncryptionInitParameters struct {
 	// The Key Vault key id used to encrypt this vault. Key managed by Vault Managed Hardware Security Module is also supported.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Indicate that system assigned identity should be used or not. Defaults to true.
+	// Indicate that system assigned identity should be used or not. Defaults to true. Must be set to false when user_assigned_identity_id is set.
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
 
 	// Specifies the user assigned identity ID to be used.
@@ -36,7 +36,7 @@ type EncryptionObservation struct {
 	// The Key Vault key id used to encrypt this vault. Key managed by Vault Managed Hardware Security Module is also supported.
 	KeyID *string `json:"keyId,omitempty" tf:"key_id,omitempty"`
 
-	// Indicate that system assigned identity should be used or not. Defaults to true.
+	// Indicate that system assigned identity should be used or not. Defaults to true. Must be set to false when user_assigned_identity_id is set.
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
 
 	// Specifies the user assigned identity ID to be used.
@@ -53,7 +53,7 @@ type EncryptionParameters struct {
 	// +kubebuilder:validation:Optional
 	KeyID *string `json:"keyId" tf:"key_id,omitempty"`
 
-	// Indicate that system assigned identity should be used or not. Defaults to true.
+	// Indicate that system assigned identity should be used or not. Defaults to true. Must be set to false when user_assigned_identity_id is set.
 	// +kubebuilder:validation:Optional
 	UseSystemAssignedIdentity *bool `json:"useSystemAssignedIdentity,omitempty" tf:"use_system_assigned_identity,omitempty"`
 
@@ -308,8 +308,8 @@ type VaultStatus struct {
 // +kubebuilder:storageversion
 
 // Vault is the Schema for the Vaults API. Manages a Recovery Services Vault.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

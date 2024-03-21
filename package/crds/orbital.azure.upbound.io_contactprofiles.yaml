@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -89,8 +89,7 @@ spec:
                       properties:
                         channels:
                           description: A list of contact profile link channels. A
-                            channels block as defined below. Changing this forces
-                            a new resource to be created.
+                            channels block as defined below.
                           items:
                             properties:
                               bandwidthMhz:
@@ -363,8 +362,7 @@ spec:
                       properties:
                         channels:
                           description: A list of contact profile link channels. A
-                            channels block as defined below. Changing this forces
-                            a new resource to be created.
+                            channels block as defined below.
                           items:
                             properties:
                               bandwidthMhz:
@@ -737,8 +735,7 @@ spec:
                       properties:
                         channels:
                           description: A list of contact profile link channels. A
-                            channels block as defined below. Changing this forces
-                            a new resource to be created.
+                            channels block as defined below.
                           items:
                             properties:
                               bandwidthMhz:

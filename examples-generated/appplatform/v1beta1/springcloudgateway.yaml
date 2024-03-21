@@ -27,6 +27,9 @@ spec:
       maxAgeSeconds: 86400
     httpsOnly: false
     instanceCount: 2
+    localResponseCachePerInstance:
+    - size: 100MB
+      timeToLive: 30s
     publicNetworkAccessEnabled: true
     quota:
     - cpu: "1"

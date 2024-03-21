@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -153,8 +153,8 @@ spec:
                         type: object
                     type: object
                   dailySchedule:
-                    description: Sets a daily snapshot schedule. See details in below
-                      daily_schedule block.
+                    description: Sets a daily snapshot schedule. A daily_schedule
+                      block as defined below.
                     items:
                       properties:
                         hour:
@@ -176,8 +176,8 @@ spec:
                       or not.
                     type: boolean
                   hourlySchedule:
-                    description: Sets an hourly snapshot schedule. See details in
-                      below hourly_schedule block.
+                    description: Sets an hourly snapshot schedule. A hourly_schedule
+                      block as defined below.
                     items:
                       properties:
                         minute:
@@ -195,8 +195,8 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   monthlySchedule:
-                    description: Sets a monthly snapshot schedule. See details in
-                      below monthly_schedule block.
+                    description: Sets a monthly snapshot schedule. A monthly_schedule
+                      block as defined below.
                     items:
                       properties:
                         daysOfMonth:
@@ -308,8 +308,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   weeklySchedule:
-                    description: Sets a weekly snapshot schedule. See details in below
-                      weekly_schedule block.
+                    description: Sets a weekly snapshot schedule. A weekly_schedule
+                      block as defined below.
                     items:
                       properties:
                         daysOfWeek:
@@ -348,8 +348,8 @@ spec:
                   autoscaler.
                 properties:
                   dailySchedule:
-                    description: Sets a daily snapshot schedule. See details in below
-                      daily_schedule block.
+                    description: Sets a daily snapshot schedule. A daily_schedule
+                      block as defined below.
                     items:
                       properties:
                         hour:
@@ -371,8 +371,8 @@ spec:
                       or not.
                     type: boolean
                   hourlySchedule:
-                    description: Sets an hourly snapshot schedule. See details in
-                      below hourly_schedule block.
+                    description: Sets an hourly snapshot schedule. A hourly_schedule
+                      block as defined below.
                     items:
                       properties:
                         minute:
@@ -390,8 +390,8 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   monthlySchedule:
-                    description: Sets a monthly snapshot schedule. See details in
-                      below monthly_schedule block.
+                    description: Sets a monthly snapshot schedule. A monthly_schedule
+                      block as defined below.
                     items:
                       properties:
                         daysOfMonth:
@@ -422,8 +422,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   weeklySchedule:
-                    description: Sets a weekly snapshot schedule. See details in below
-                      weekly_schedule block.
+                    description: Sets a weekly snapshot schedule. A weekly_schedule
+                      block as defined below.
                     items:
                       properties:
                         daysOfWeek:
@@ -635,8 +635,8 @@ spec:
                       resource to be created.
                     type: string
                   dailySchedule:
-                    description: Sets a daily snapshot schedule. See details in below
-                      daily_schedule block.
+                    description: Sets a daily snapshot schedule. A daily_schedule
+                      block as defined below.
                     items:
                       properties:
                         hour:
@@ -658,8 +658,8 @@ spec:
                       or not.
                     type: boolean
                   hourlySchedule:
-                    description: Sets an hourly snapshot schedule. See details in
-                      below hourly_schedule block.
+                    description: Sets an hourly snapshot schedule. A hourly_schedule
+                      block as defined below.
                     items:
                       properties:
                         minute:
@@ -680,8 +680,8 @@ spec:
                       resource exists. Changing this forces a new resource to be created.
                     type: string
                   monthlySchedule:
-                    description: Sets a monthly snapshot schedule. See details in
-                      below monthly_schedule block.
+                    description: Sets a monthly snapshot schedule. A monthly_schedule
+                      block as defined below.
                     items:
                       properties:
                         daysOfMonth:
@@ -717,8 +717,8 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   weeklySchedule:
-                    description: Sets a weekly snapshot schedule. See details in below
-                      weekly_schedule block.
+                    description: Sets a weekly snapshot schedule. A weekly_schedule
+                      block as defined below.
                     items:
                       properties:
                         daysOfWeek:

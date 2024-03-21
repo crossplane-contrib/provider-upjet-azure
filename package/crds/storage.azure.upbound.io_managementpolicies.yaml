@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -129,6 +129,24 @@ spec:
                                         blob currently at Hot or Cool tier. Must be
                                         between 0 and 99999. Defaults to -1.
                                       type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to tier blobs to cold storage. Supports
+                                        blob currently at Hot tier. Must be between
+                                        0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to tier blobs to cold storage. Supports blob
+                                        currently at Hot tier. Must be between 0 and
+                                        99999. Defaults to -1.
+                                      type: number
                                     tierToCoolAfterDaysSinceCreationGreaterThan:
                                       description: The age in days after creation
                                         to cool storage. Supports blob currently at
@@ -173,6 +191,12 @@ spec:
                                         change to the blobs to skip to be archved.
                                         Must be between 0 and 99999. Defaults to -1.
                                       type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
+                                      type: number
                                   type: object
                                 type: array
                               version:
@@ -198,6 +222,12 @@ spec:
                                       description: The age in days after last tier
                                         change to the blobs to skip to be archved.
                                         Must be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
                                       type: number
                                   type: object
                                 type: array
@@ -403,6 +433,24 @@ spec:
                                         blob currently at Hot or Cool tier. Must be
                                         between 0 and 99999. Defaults to -1.
                                       type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to tier blobs to cold storage. Supports
+                                        blob currently at Hot tier. Must be between
+                                        0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to tier blobs to cold storage. Supports blob
+                                        currently at Hot tier. Must be between 0 and
+                                        99999. Defaults to -1.
+                                      type: number
                                     tierToCoolAfterDaysSinceCreationGreaterThan:
                                       description: The age in days after creation
                                         to cool storage. Supports blob currently at
@@ -447,6 +495,12 @@ spec:
                                         change to the blobs to skip to be archved.
                                         Must be between 0 and 99999. Defaults to -1.
                                       type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
+                                      type: number
                                   type: object
                                 type: array
                               version:
@@ -472,6 +526,12 @@ spec:
                                       description: The age in days after last tier
                                         change to the blobs to skip to be archved.
                                         Must be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
                                       type: number
                                   type: object
                                 type: array
@@ -839,6 +899,24 @@ spec:
                                         blob currently at Hot or Cool tier. Must be
                                         between 0 and 99999. Defaults to -1.
                                       type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceLastAccessTimeGreaterThan:
+                                      description: The age in days after last access
+                                        time to tier blobs to cold storage. Supports
+                                        blob currently at Hot tier. Must be between
+                                        0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceModificationGreaterThan:
+                                      description: The age in days after last modification
+                                        to tier blobs to cold storage. Supports blob
+                                        currently at Hot tier. Must be between 0 and
+                                        99999. Defaults to -1.
+                                      type: number
                                     tierToCoolAfterDaysSinceCreationGreaterThan:
                                       description: The age in days after creation
                                         to cool storage. Supports blob currently at
@@ -883,6 +961,12 @@ spec:
                                         change to the blobs to skip to be archved.
                                         Must be between 0 and 99999. Defaults to -1.
                                       type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
+                                      type: number
                                   type: object
                                 type: array
                               version:
@@ -908,6 +992,12 @@ spec:
                                       description: The age in days after last tier
                                         change to the blobs to skip to be archved.
                                         Must be between 0 and 99999. Defaults to -1.
+                                      type: number
+                                    tierToColdAfterDaysSinceCreationGreaterThan:
+                                      description: The age in days after creation
+                                        to cold storage. Supports blob currently at
+                                        Hot tier. Must be between 0 and 99999. Defaults
+                                        to -1.
                                       type: number
                                   type: object
                                 type: array

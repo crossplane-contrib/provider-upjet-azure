@@ -19,11 +19,11 @@ spec:
   scope: Cluster
   versions:
   - additionalPrinterColumns:
-    - jsonPath: .status.conditions[?(@.type=='Ready')].status
-      name: READY
-      type: string
     - jsonPath: .status.conditions[?(@.type=='Synced')].status
       name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
       type: string
     - jsonPath: .metadata.annotations.crossplane\.io/external-name
       name: EXTERNAL-NAME
@@ -177,10 +177,10 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   monthlyOccurrence:
-                    description: List of monthly_occurrence blocks as defined below
-                      to specifies occurrences of days within a month. Only valid
-                      when frequency is Month. The monthly_occurrence block supports
-                      fields documented below.
+                    description: One monthly_occurrence blocks as defined below to
+                      specifies occurrences of days within a month. Only valid when
+                      frequency is Month. The monthly_occurrence block supports fields
+                      documented below.
                     items:
                       properties:
                         day:
@@ -328,10 +328,10 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   monthlyOccurrence:
-                    description: List of monthly_occurrence blocks as defined below
-                      to specifies occurrences of days within a month. Only valid
-                      when frequency is Month. The monthly_occurrence block supports
-                      fields documented below.
+                    description: One monthly_occurrence blocks as defined below to
+                      specifies occurrences of days within a month. Only valid when
+                      frequency is Month. The monthly_occurrence block supports fields
+                      documented below.
                     items:
                       properties:
                         day:
@@ -570,10 +570,10 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   monthlyOccurrence:
-                    description: List of monthly_occurrence blocks as defined below
-                      to specifies occurrences of days within a month. Only valid
-                      when frequency is Month. The monthly_occurrence block supports
-                      fields documented below.
+                    description: One monthly_occurrence blocks as defined below to
+                      specifies occurrences of days within a month. Only valid when
+                      frequency is Month. The monthly_occurrence block supports fields
+                      documented below.
                     items:
                       properties:
                         day:

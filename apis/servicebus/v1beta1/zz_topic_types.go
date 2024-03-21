@@ -30,9 +30,7 @@ type TopicInitParameters struct {
 	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
 	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 
-	// Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-	// the topic to be partitioned across multiple message brokers. Defaults to false.
-	// Changing this forces a new resource to be created.
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
 	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
@@ -41,9 +39,7 @@ type TopicInitParameters struct {
 	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
-	// Boolean flag which controls whether Changing this forces a new resource to be created.
-	// the Topic requires duplicate detection. Defaults to false. Changing this forces
-	// a new resource to be created.
+	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
 
 	// The Status of the Service Bus Topic. Acceptable values are Active or Disabled. Defaults to Active.
@@ -70,9 +66,7 @@ type TopicObservation struct {
 	// Boolean flag which controls whether Express Entities are enabled. An express topic holds a message in memory temporarily before writing it to persistent storage.
 	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 
-	// Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-	// the topic to be partitioned across multiple message brokers. Defaults to false.
-	// Changing this forces a new resource to be created.
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
 	// The ServiceBus Topic ID.
@@ -84,13 +78,10 @@ type TopicObservation struct {
 	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
-	// The ID of the ServiceBus Namespace to create Changing this forces a new resource to be created.
-	// this topic in. Changing this forces a new resource to be created.
+	// The ID of the ServiceBus Namespace to create this topic in. Changing this forces a new resource to be created.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
-	// Boolean flag which controls whether Changing this forces a new resource to be created.
-	// the Topic requires duplicate detection. Defaults to false. Changing this forces
-	// a new resource to be created.
+	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
 
 	// The Status of the Service Bus Topic. Acceptable values are Active or Disabled. Defaults to Active.
@@ -122,9 +113,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableExpress *bool `json:"enableExpress,omitempty" tf:"enable_express,omitempty"`
 
-	// Boolean flag which controls whether to enable Changing this forces a new resource to be created.
-	// the topic to be partitioned across multiple message brokers. Defaults to false.
-	// Changing this forces a new resource to be created.
+	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
@@ -136,8 +125,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
-	// The ID of the ServiceBus Namespace to create Changing this forces a new resource to be created.
-	// this topic in. Changing this forces a new resource to be created.
+	// The ID of the ServiceBus Namespace to create this topic in. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -151,9 +139,7 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
 
-	// Boolean flag which controls whether Changing this forces a new resource to be created.
-	// the Topic requires duplicate detection. Defaults to false. Changing this forces
-	// a new resource to be created.
+	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
 
@@ -194,8 +180,8 @@ type TopicStatus struct {
 // +kubebuilder:storageversion
 
 // Topic is the Schema for the Topics API. Manages a ServiceBus Topic.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

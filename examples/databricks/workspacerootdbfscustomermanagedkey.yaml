@@ -1,11 +1,16 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
 apiVersion: databricks.azure.upbound.io/v1beta1
-kind: WorkspaceCustomerManagedKey
+kind: WorkspaceRootDbfsCustomerManagedKey
 metadata:
   annotations:
-    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+    meta.upbound.io/example-id: databricks/v1beta1/workspacerootdbfscustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource depends on AccessPolicy. This resource is skipped because the child resource is skipped"
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-managedkey
 spec:
   forProvider:
     keyVaultKeyIdSelector:
@@ -16,15 +21,15 @@ spec:
         testing.upbound.io/example-name: example
 
 ---
-
 apiVersion: databricks.azure.upbound.io/v1beta1
 kind: Workspace
 metadata:
   annotations:
-    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+    meta.upbound.io/example-id: databricks/v1beta1/workspacerootdbfscustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is dependency of WorkspaceRootDbfsCustomerManagedKey. This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-workspace
 spec:
   forProvider:
     customerManagedKeyEnabled: true
@@ -37,15 +42,15 @@ spec:
       Environment: Production
 
 ---
-
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Vault
 metadata:
   annotations:
-    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+    meta.upbound.io/example-id: databricks/v1beta1/workspacerootdbfscustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource needs a valid tenantId."
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-managedkey
 spec:
   forProvider:
     location: West Europe
@@ -54,30 +59,31 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: premium
+    softDeleteRetentionDays: 7
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
 ---
-
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+    meta.upbound.io/example-id: databricks/v1beta1/workspacerootdbfscustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource needs a valid objectId and tenantId."
   labels:
     testing.upbound.io/example-name: databricks
-  name: databricks
+  name: databricks-managedkey
 spec:
   forProvider:
     keyPermissions:
-    - Create
-    - Delete
-    - Get
-    - Purge
-    - Recover
-    - Update
-    - List
-    - Decrypt
-    - Sign
+      - Create
+      - Delete
+      - Get
+      - Purge
+      - Recover
+      - Update
+      - List
+      - Decrypt
+      - Sign
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -85,28 +91,28 @@ spec:
     tenantId: ${azurerm_databricks_workspace.example.storage_account_identity.0.tenant_id}
 
 ---
-
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: AccessPolicy
 metadata:
   annotations:
-    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+    meta.upbound.io/example-id: databricks/v1beta1/workspacerootdbfscustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource needs a valid objectId and tenantId."
   labels:
-    testing.upbound.io/example-name: terraform
-  name: terraform
+    testing.upbound.io/example-name: example
+  name: example-managedkey
 spec:
   forProvider:
     keyPermissions:
-    - Create
-    - Delete
-    - Get
-    - Purge
-    - Recover
-    - Update
-    - List
-    - Decrypt
-    - Sign
-    - GetRotationPolicy
+      - Create
+      - Delete
+      - Get
+      - Purge
+      - Recover
+      - Update
+      - List
+      - Decrypt
+      - Sign
+      - GetRotationPolicy
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -114,41 +120,41 @@ spec:
     tenantId: ${data.azurerm_client_config.current.tenant_id}
 
 ---
-
 apiVersion: keyvault.azure.upbound.io/v1beta1
 kind: Key
 metadata:
   annotations:
-    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+    meta.upbound.io/example-id: databricks/v1beta1/workspacerootdbfscustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is dependency of WorkspaceRootDbfsCustomerManagedKey. This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-managedkey
 spec:
   forProvider:
+    name: exampleKey
     keyOpts:
-    - decrypt
-    - encrypt
-    - sign
-    - unwrapKey
-    - verify
-    - wrapKey
+      - decrypt
+      - encrypt
+      - sign
+      - unwrapKey
+      - verify
+      - wrapKey
     keySize: 2048
     keyType: RSA
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    name: example-certificate
 
 ---
-
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
   annotations:
-    meta.upbound.io/example-id: databricks/v1beta1/workspacecustomermanagedkey
+    meta.upbound.io/example-id: databricks/v1beta1/workspacerootdbfscustomermanagedkey
+    upjet.upbound.io/manual-intervention: "This resource is dependency of WorkspaceRootDbfsCustomerManagedKey. This resource is skipping because parent resource was skipped."
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-managedkey
 spec:
   forProvider:
     location: West Europe

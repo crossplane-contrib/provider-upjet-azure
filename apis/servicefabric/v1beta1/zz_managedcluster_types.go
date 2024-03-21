@@ -305,7 +305,7 @@ type ManagedClusterNodeTypeInitParameters struct {
 	// The size of the data disk in gigabytes..
 	DataDiskSizeGb *float64 `json:"dataDiskSizeGb,omitempty" tf:"data_disk_size_gb,omitempty"`
 
-	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS. Defaults to Standard_LRS.
 	DataDiskType *string `json:"dataDiskType,omitempty" tf:"data_disk_type,omitempty"`
 
 	// Sets the port range available for the OS. Format is <from_port>-<to_port>, for example 10000-20000. There has to be at least 255 ports available and cannot overlap with application_port_range..
@@ -361,7 +361,7 @@ type ManagedClusterNodeTypeObservation struct {
 	// The size of the data disk in gigabytes..
 	DataDiskSizeGb *float64 `json:"dataDiskSizeGb,omitempty" tf:"data_disk_size_gb,omitempty"`
 
-	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS. Defaults to Standard_LRS.
 	DataDiskType *string `json:"dataDiskType,omitempty" tf:"data_disk_type,omitempty"`
 
 	// Sets the port range available for the OS. Format is <from_port>-<to_port>, for example 10000-20000. There has to be at least 255 ports available and cannot overlap with application_port_range..
@@ -423,7 +423,7 @@ type ManagedClusterNodeTypeParameters struct {
 	// +kubebuilder:validation:Optional
 	DataDiskSizeGb *float64 `json:"dataDiskSizeGb" tf:"data_disk_size_gb,omitempty"`
 
-	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS.
+	// The type of the disk to use for storing data. It can be one of Premium_LRS, Standard_LRS, or StandardSSD_LRS. Defaults to Standard_LRS.
 	// +kubebuilder:validation:Optional
 	DataDiskType *string `json:"dataDiskType,omitempty" tf:"data_disk_type,omitempty"`
 
@@ -667,8 +667,8 @@ type ManagedClusterStatus struct {
 // +kubebuilder:storageversion
 
 // ManagedCluster is the Schema for the ManagedClusters API. Manages a Resource Group.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}

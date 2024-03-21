@@ -47,7 +47,7 @@ type KeyInitParameters struct {
 	// Specifies the curve to use when creating an EC key. Possible values are P-256, P-256K, P-384, and P-521. This field will be required in a future release if key_type is EC or EC-HSM. The API will default to P-256 if nothing is specified. Changing this forces a new resource to be created.
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When this parameter gets changed on reruns, if newer date is ahead of current date, an update is performed. If the newer date is before the current date, resource will be force created.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// A list of JSON web key operations. Possible values include: decrypt, encrypt, sign, unwrapKey, verify and wrapKey. Please note these values are case sensitive.
@@ -94,7 +94,7 @@ type KeyObservation struct {
 	// The RSA public exponent of this Key Vault Key.
 	E *string `json:"e,omitempty" tf:"e,omitempty"`
 
-	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When this parameter gets changed on reruns, if newer date is ahead of current date, an update is performed. If the newer date is before the current date, resource will be force created.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
 	// The Key Vault Key ID.
@@ -159,7 +159,7 @@ type KeyParameters struct {
 	// +kubebuilder:validation:Optional
 	Curve *string `json:"curve,omitempty" tf:"curve,omitempty"`
 
-	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z').
+	// Expiration UTC datetime (Y-m-d'T'H:M:S'Z'). When this parameter gets changed on reruns, if newer date is ahead of current date, an update is performed. If the newer date is before the current date, resource will be force created.
 	// +kubebuilder:validation:Optional
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
@@ -215,7 +215,7 @@ type RotationPolicyInitParameters struct {
 	// Expire a Key Vault Key after given duration as an ISO 8601 duration.
 	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
 
-	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// Notify at a given duration before expiry as an ISO 8601 duration.
 	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }
 
@@ -227,7 +227,7 @@ type RotationPolicyObservation struct {
 	// Expire a Key Vault Key after given duration as an ISO 8601 duration.
 	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
 
-	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// Notify at a given duration before expiry as an ISO 8601 duration.
 	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }
 
@@ -241,7 +241,7 @@ type RotationPolicyParameters struct {
 	// +kubebuilder:validation:Optional
 	ExpireAfter *string `json:"expireAfter,omitempty" tf:"expire_after,omitempty"`
 
-	// Notify at a given duration before expiry as an ISO 8601 duration. Default is P30D.
+	// Notify at a given duration before expiry as an ISO 8601 duration.
 	// +kubebuilder:validation:Optional
 	NotifyBeforeExpiry *string `json:"notifyBeforeExpiry,omitempty" tf:"notify_before_expiry,omitempty"`
 }
@@ -274,8 +274,8 @@ type KeyStatus struct {
 // +kubebuilder:storageversion
 
 // Key is the Schema for the Keys API. Manages a Key Vault Key.
-// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
+// +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"
 // +kubebuilder:printcolumn:name="AGE",type="date",JSONPath=".metadata.creationTimestamp"
 // +kubebuilder:resource:scope=Cluster,categories={crossplane,managed,azure}
