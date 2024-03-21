@@ -402,6 +402,8 @@ spec:
                     description: The ID of the Version Set which this API is associated
                       with.
                     type: string
+                required:
+                - revision
                 type: object
               initProvider:
                 description: |-
@@ -531,10 +533,6 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
-                  revision:
-                    description: The Revision which used for this API. Changing this
-                      forces a new resource to be created.
-                    type: string
                   revisionDescription:
                     description: The description of the API Revision of the API Management
                       API.
@@ -752,11 +750,6 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.revision is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.revision)
-                || (has(self.initProvider) && has(self.initProvider.revision))'
           status:
             description: APIStatus defines the observed state of API.
             properties:

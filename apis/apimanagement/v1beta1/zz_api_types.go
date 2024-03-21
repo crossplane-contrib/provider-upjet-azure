@@ -46,9 +46,6 @@ type APIInitParameters struct {
 	// +listType=set
 	Protocols []*string `json:"protocols,omitempty" tf:"protocols,omitempty"`
 
-	// The Revision which used for this API. Changing this forces a new resource to be created.
-	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
-
 	// The description of the API Revision of the API Management API.
 	RevisionDescription *string `json:"revisionDescription,omitempty" tf:"revision_description,omitempty"`
 
@@ -232,8 +229,8 @@ type APIParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The Revision which used for this API. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Revision *string `json:"revision,omitempty" tf:"revision,omitempty"`
+	// +kubebuilder:validation:Required
+	Revision *string `json:"revision" tf:"revision,omitempty"`
 
 	// The description of the API Revision of the API Management API.
 	// +kubebuilder:validation:Optional
@@ -538,9 +535,8 @@ type APIStatus struct {
 type API struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.revision) || (has(self.initProvider) && has(self.initProvider.revision))",message="spec.forProvider.revision is a required parameter"
-	Spec   APISpec   `json:"spec"`
-	Status APIStatus `json:"status,omitempty"`
+	Spec              APISpec   `json:"spec"`
+	Status            APIStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

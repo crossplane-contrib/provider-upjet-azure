@@ -522,11 +522,6 @@ func (in *APIInitParameters) DeepCopyInto(out *APIInitParameters) {
 			}
 		}
 	}
-	if in.Revision != nil {
-		in, out := &in.Revision, &out.Revision
-		*out = new(string)
-		**out = **in
-	}
 	if in.RevisionDescription != nil {
 		in, out := &in.RevisionDescription, &out.RevisionDescription
 		*out = new(string)
