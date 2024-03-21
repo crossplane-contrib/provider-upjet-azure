@@ -96,7 +96,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -134,7 +134,7 @@ func (mg *ManagementGroupSubscriptionAssociation) ResolveReferences(ctx context.
 	mg.Spec.InitProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ManagementGroupIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "Subscription", "SubscriptionList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

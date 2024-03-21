@@ -216,7 +216,7 @@ func (mg *MSSQLElasticPool) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -541,7 +541,7 @@ func (mg *MSSQLManagedInstance) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.DNSZonePartnerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DNSZonePartnerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -871,7 +871,7 @@ func (mg *MSSQLServer) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.PrimaryUserAssignedIdentityID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PrimaryUserAssignedIdentityIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1101,7 +1101,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

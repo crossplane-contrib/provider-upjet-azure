@@ -76,7 +76,7 @@ func (mg *Lab) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -164,7 +164,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -240,7 +240,7 @@ func (mg *LinuxVirtualMachine) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -290,7 +290,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -328,7 +328,7 @@ func (mg *Policy) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -378,7 +378,7 @@ func (mg *Schedule) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -428,7 +428,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -466,7 +466,7 @@ func (mg *VirtualNetwork) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.InitProvider.LabName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -554,7 +554,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -630,7 +630,7 @@ func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client
 	mg.Spec.InitProvider.LabVirtualNetworkID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LabVirtualNetworkIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

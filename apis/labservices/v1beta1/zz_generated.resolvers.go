@@ -48,7 +48,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -119,7 +119,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	mg.Spec.ForProvider.DefaultNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DefaultNetworkSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

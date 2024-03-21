@@ -96,7 +96,7 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.IOTHubIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.IOTHubIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
