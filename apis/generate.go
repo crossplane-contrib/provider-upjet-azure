@@ -31,7 +31,7 @@
 
 // Run upjet's transformer for the generated resolvers to get rid of the cross
 // API-group imports and to prevent import cycles
-//go:generate go run github.com/crossplane/upjet/cmd/resolver -g azure.upbound.io -a github.com/upbound/provider-azure/internal/apis -s
+//go:generate go run github.com/crossplane/upjet/cmd/resolver -g azure.upbound.io -a github.com/upbound/provider-azure/internal/apis -o azure.azure.upbound.io=azure.upbound.io -s
 
 package apis
 

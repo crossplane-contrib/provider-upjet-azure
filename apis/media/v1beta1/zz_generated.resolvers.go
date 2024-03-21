@@ -48,7 +48,7 @@ func (mg *Asset) ResolveReferences(ctx context.Context, c client.Reader) error {
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -129,7 +129,7 @@ func (mg *ContentKeyPolicy) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -222,7 +222,7 @@ func (mg *Job) ResolveReferences(ctx context.Context, c client.Reader) error {
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -333,7 +333,7 @@ func (mg *LiveEvent) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -433,7 +433,7 @@ func (mg *ServicesAccount) ResolveReferences(ctx context.Context, c client.Reade
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -526,7 +526,7 @@ func (mg *ServicesAccountFilter) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -576,7 +576,7 @@ func (mg *StreamingEndpoint) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -645,7 +645,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -737,7 +737,7 @@ func (mg *StreamingPolicy) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -811,7 +811,7 @@ func (mg *Transform) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.MediaServicesAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MediaServicesAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("azure.azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
