@@ -106,7 +106,7 @@ func Configure(p *config.Provider) {
 	})
 }
 
-func apiIdCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, resourceConfig *terraform.ResourceConfig) (*terraform.InstanceDiff, error) {
+func apiIdCustomDiff(diff *terraform.InstanceDiff, state *terraform.InstanceState, resourceConfig *terraform.ResourceConfig) (*terraform.InstanceDiff, error) { //nolint:gocyclo
 	if state == nil || state.Empty() || diff == nil || diff.Empty() || diff.Destroy {
 		return diff, nil
 	}
