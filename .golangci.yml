@@ -3,14 +3,13 @@
 # SPDX-License-Identifier: CC0-1.0
 
 run:
-  deadline: 20m
-
-  skip-files:
-  - "zz_.*go$"
+  timeout: 90m
+  concurrency: 1
 
 output:
   # colored-line-number|line-number|json|tab|checkstyle|code-climate, default is "colored-line-number"
   format: colored-line-number
+  print-linter-name: true
 
 linters-settings:
   errcheck:
@@ -131,6 +130,11 @@ linters:
 issues:
   # Excluding configuration per-path and per-linter
   exclude-rules:
+    # some group names we have (like "hdinsight") make this linter
+    # unhappy, so just disable the "misspell" linter on generated files.
+    - path: zz_.+\.go$
+      linters:
+        - misspell
     # Exclude some linters from running on tests files.
     - path: _test(ing)?\.go
       linters:
