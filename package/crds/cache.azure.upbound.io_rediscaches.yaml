@@ -600,6 +600,24 @@ spec:
                           description: The maximum number of snapshots to create as
                             a backup. Only supported for Premium SKUs.
                           type: number
+                        rdbStorageConnectionStringSecretRef:
+                          description: 'The Connection String to the Storage Account.
+                            Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=${azurerm_storage_account.example.primary_blob_endpoint};AccountName=${azurerm_storage_account.example.name};AccountKey=${azurerm_storage_account.example.primary_access_key}.'
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                            - key
+                            - name
+                            - namespace
+                          type: object
                         storageAccountSubscriptionId:
                           description: The ID of the Subscription containing the Storage
                             Account.
