@@ -24,9 +24,9 @@ generation tools and exposes XRM-conformant managed resources for
 
 ## Getting Started
 
-Follow the quick start guide [here](https://marketplace.upbound.io/providers/upbound/provider-azure/latest/docs/quickstart).
+Follow the quick start guide [here](https://marketplace.upbound.io/providers/upbound/provider-family-azure/latest/docs/quickstart).
 
-You can find a detailed API reference for all the managed resources with examples in the [Upbound Marketplace](https://marketplace.upbound.io/providers/upbound/provider-azure/latest/managed-resources).
+You can find a detailed API reference for all the managed resources with examples in the [Upbound Marketplace](https://marketplace.upbound.io/providers/upbound/provider-family-azure/latest/managed-resources).
 
 For getting more information about resource consumption and monitoring
 the upjet runtime, please see [Sizing Guide](https://github.com/crossplane/upjet/blob/v0.10.0/docs/sizing-guide.md)
