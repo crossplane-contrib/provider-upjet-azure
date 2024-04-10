@@ -135,6 +135,7 @@ import (
 	profile "github.com/upbound/provider-azure/internal/controller/cdn/profile"
 	appservicecertificateorder "github.com/upbound/provider-azure/internal/controller/certificateregistration/appservicecertificateorder"
 	accountcognitiveservices "github.com/upbound/provider-azure/internal/controller/cognitiveservices/account"
+	deployment "github.com/upbound/provider-azure/internal/controller/cognitiveservices/deployment"
 	service "github.com/upbound/provider-azure/internal/controller/communication/service"
 	availabilityset "github.com/upbound/provider-azure/internal/controller/compute/availabilityset"
 	capacityreservation "github.com/upbound/provider-azure/internal/controller/compute/capacityreservation"
@@ -865,6 +866,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		profile.Setup,
 		appservicecertificateorder.Setup,
 		accountcognitiveservices.Setup,
+		deployment.Setup,
 		service.Setup,
 		availabilityset.Setup,
 		capacityreservation.Setup,
