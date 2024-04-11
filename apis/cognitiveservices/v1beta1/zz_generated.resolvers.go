@@ -124,25 +124,6 @@ func (mg *Deployment) ResolveReferences(ctx context.Context, c client.Reader) er
 	}
 	mg.Spec.ForProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CognitiveAccountIDRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("cognitiveservices.azure.upbound.io", "v1beta1", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CognitiveAccountID),
-			Extract:      resource.ExtractResourceID(),
-			Reference:    mg.Spec.InitProvider.CognitiveAccountIDRef,
-			Selector:     mg.Spec.InitProvider.CognitiveAccountIDSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.CognitiveAccountID")
-	}
-	mg.Spec.InitProvider.CognitiveAccountID = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.CognitiveAccountIDRef = rsp.ResolvedReference
 
 	return nil
 }

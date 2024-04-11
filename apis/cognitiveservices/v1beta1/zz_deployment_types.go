@@ -15,19 +15,6 @@ import (
 
 type DeploymentInitParameters struct {
 
-	// The ID of the Cognitive Services Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cognitiveservices/v1beta1.Account
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
-	CognitiveAccountID *string `json:"cognitiveAccountId,omitempty" tf:"cognitive_account_id,omitempty"`
-
-	// Reference to a Account in cognitiveservices to populate cognitiveAccountId.
-	// +kubebuilder:validation:Optional
-	CognitiveAccountIDRef *v1.Reference `json:"cognitiveAccountIdRef,omitempty" tf:"-"`
-
-	// Selector for a Account in cognitiveservices to populate cognitiveAccountId.
-	// +kubebuilder:validation:Optional
-	CognitiveAccountIDSelector *v1.Selector `json:"cognitiveAccountIdSelector,omitempty" tf:"-"`
-
 	// A model block as defined below. Changing this forces a new resource to be created.
 	Model []ModelInitParameters `json:"model,omitempty" tf:"model,omitempty"`
 
