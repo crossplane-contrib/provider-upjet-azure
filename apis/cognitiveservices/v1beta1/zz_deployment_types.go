@@ -31,9 +31,6 @@ type DeploymentInitParameters struct {
 	// A model block as defined below. Changing this forces a new resource to be created.
 	Model []ModelInitParameters `json:"model,omitempty" tf:"model,omitempty"`
 
-	// The name of the Cognitive Services Account Deployment. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
-
 	// The name of RAI policy.
 	RaiPolicyName *string `json:"raiPolicyName,omitempty" tf:"rai_policy_name,omitempty"`
 
@@ -54,9 +51,6 @@ type DeploymentObservation struct {
 
 	// A model block as defined below. Changing this forces a new resource to be created.
 	Model []ModelObservation `json:"model,omitempty" tf:"model,omitempty"`
-
-	// The name of the Cognitive Services Account Deployment. Changing this forces a new resource to be created.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of RAI policy.
 	RaiPolicyName *string `json:"raiPolicyName,omitempty" tf:"rai_policy_name,omitempty"`
@@ -87,10 +81,6 @@ type DeploymentParameters struct {
 	// A model block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Model []ModelParameters `json:"model,omitempty" tf:"model,omitempty"`
-
-	// The name of the Cognitive Services Account Deployment. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of RAI policy.
 	// +kubebuilder:validation:Optional
@@ -240,7 +230,6 @@ type Deployment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.model) || (has(self.initProvider) && has(self.initProvider.model))",message="spec.forProvider.model is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.name) || (has(self.initProvider) && has(self.initProvider.name))",message="spec.forProvider.name is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.scale) || (has(self.initProvider) && has(self.initProvider.scale))",message="spec.forProvider.scale is a required parameter"
 	Spec   DeploymentSpec   `json:"spec"`
 	Status DeploymentStatus `json:"status,omitempty"`

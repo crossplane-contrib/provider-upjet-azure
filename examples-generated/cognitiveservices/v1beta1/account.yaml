@@ -10,7 +10,6 @@ spec:
   forProvider:
     kind: Face
     location: West Europe
-    name: example-account
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

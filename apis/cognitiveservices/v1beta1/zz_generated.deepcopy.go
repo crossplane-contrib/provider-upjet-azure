@@ -118,11 +118,6 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.NetworkAcls != nil {
 		in, out := &in.NetworkAcls, &out.NetworkAcls
 		*out = make([]NetworkAclsInitParameters, len(*in))
@@ -144,21 +139,6 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		in, out := &in.QnaRuntimeEndpoint, &out.QnaRuntimeEndpoint
 		*out = new(string)
 		**out = **in
-	}
-	if in.ResourceGroupName != nil {
-		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
-	}
-	if in.ResourceGroupNameRef != nil {
-		in, out := &in.ResourceGroupNameRef, &out.ResourceGroupNameRef
-		*out = new(v1.Reference)
-		(*in).DeepCopyInto(*out)
-	}
-	if in.ResourceGroupNameSelector != nil {
-		in, out := &in.ResourceGroupNameSelector, &out.ResourceGroupNameSelector
-		*out = new(v1.Selector)
-		(*in).DeepCopyInto(*out)
 	}
 	if in.SkuName != nil {
 		in, out := &in.SkuName, &out.SkuName
@@ -320,11 +300,6 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.NetworkAcls != nil {
 		in, out := &in.NetworkAcls, &out.NetworkAcls
 		*out = make([]NetworkAclsObservation, len(*in))
@@ -472,11 +447,6 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	}
 	if in.MetricsAdvisorWebsiteName != nil {
 		in, out := &in.MetricsAdvisorWebsiteName, &out.MetricsAdvisorWebsiteName
-		*out = new(string)
-		**out = **in
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
 		*out = new(string)
 		**out = **in
 	}
@@ -719,11 +689,6 @@ func (in *DeploymentInitParameters) DeepCopyInto(out *DeploymentInitParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.RaiPolicyName != nil {
 		in, out := &in.RaiPolicyName, &out.RaiPolicyName
 		*out = new(string)
@@ -805,11 +770,6 @@ func (in *DeploymentObservation) DeepCopyInto(out *DeploymentObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
-	}
 	if in.RaiPolicyName != nil {
 		in, out := &in.RaiPolicyName, &out.RaiPolicyName
 		*out = new(string)
@@ -863,11 +823,6 @@ func (in *DeploymentParameters) DeepCopyInto(out *DeploymentParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
-	}
-	if in.Name != nil {
-		in, out := &in.Name, &out.Name
-		*out = new(string)
-		**out = **in
 	}
 	if in.RaiPolicyName != nil {
 		in, out := &in.RaiPolicyName, &out.RaiPolicyName

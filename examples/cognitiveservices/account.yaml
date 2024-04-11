@@ -14,7 +14,6 @@ spec:
   forProvider:
     kind: SpeechServices
     location: East US
-    name: cognitiveservices-name
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: azure-bot-r-group-label

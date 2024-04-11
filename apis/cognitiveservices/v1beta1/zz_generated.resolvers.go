@@ -93,24 +93,6 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 
 		}
 	}
-	{
-		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.ResourceGroupNameRef,
-			Selector:     mg.Spec.InitProvider.ResourceGroupNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupName")
-	}
-	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	return nil
 }

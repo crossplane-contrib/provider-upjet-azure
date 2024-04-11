@@ -15,7 +15,6 @@ spec:
     - format: OpenAI
       name: text-curie-001
       version: "1"
-    name: example-cd
     scale:
     - type: Standard
 
@@ -33,7 +32,6 @@ spec:
   forProvider:
     kind: OpenAI
     location: West Europe
-    name: example-ca
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -175,10 +175,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  name:
-                    description: The name of the Cognitive Services Account Deployment.
-                      Changing this forces a new resource to be created.
-                    type: string
                   raiPolicyName:
                     description: The name of RAI policy.
                     type: string
@@ -340,10 +336,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  name:
-                    description: The name of the Cognitive Services Account Deployment.
-                      Changing this forces a new resource to be created.
-                    type: string
                   raiPolicyName:
                     description: The name of RAI policy.
                     type: string
@@ -562,10 +554,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.model)
                 || (has(self.initProvider) && has(self.initProvider.model))'
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.scale is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.scale)
@@ -605,10 +593,6 @@ spec:
                           type: string
                       type: object
                     type: array
-                  name:
-                    description: The name of the Cognitive Services Account Deployment.
-                      Changing this forces a new resource to be created.
-                    type: string
                   raiPolicyName:
                     description: The name of RAI policy.
                     type: string

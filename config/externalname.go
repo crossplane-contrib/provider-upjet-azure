@@ -187,9 +187,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// cognitiveservices
 	//
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.CognitiveServices/accounts/account1
-	"azurerm_cognitive_account": config.IdentifierFromProvider,
+	"azurerm_cognitive_account": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.CognitiveServices/accounts/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroup1/providers/Microsoft.CognitiveServices/accounts/account1/deployments/deployment1
-	"azurerm_cognitive_deployment": config.IdentifierFromProvider,
+	"azurerm_cognitive_deployment": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.CognitiveServices/accounts/{{ .parameters.account_name }}/deployments/{{ .external_name }}"),
 
 	// communication
 	//

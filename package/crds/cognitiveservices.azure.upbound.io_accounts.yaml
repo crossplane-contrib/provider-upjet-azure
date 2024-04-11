@@ -185,10 +185,6 @@ spec:
                       is only set when kind is MetricsAdvisor. Changing this forces
                       a new resource to be created.
                     type: string
-                  name:
-                    description: Specifies the name of the Cognitive Service Account.
-                      Changing this forces a new resource to be created.
-                    type: string
                   networkAcls:
                     description: A network_acls block as defined below. When this
                       property is specified, custom_subdomain_name is also required
@@ -524,10 +520,6 @@ spec:
                       is only set when kind is MetricsAdvisor. Changing this forces
                       a new resource to be created.
                     type: string
-                  name:
-                    description: Specifies the name of the Cognitive Service Account.
-                      Changing this forces a new resource to be created.
-                    type: string
                   networkAcls:
                     description: A network_acls block as defined below. When this
                       property is specified, custom_subdomain_name is also required
@@ -650,87 +642,6 @@ spec:
                     description: A URL to link a QnAMaker cognitive account to a QnA
                       runtime.
                     type: string
-                  resourceGroupName:
-                    description: The name of the resource group in which the Cognitive
-                      Service Account is created. Changing this forces a new resource
-                      to be created.
-                    type: string
-                  resourceGroupNameRef:
-                    description: Reference to a ResourceGroup in azure to populate
-                      resourceGroupName.
-                    properties:
-                      name:
-                        description: Name of the referenced object.
-                        type: string
-                      policy:
-                        description: Policies for referencing.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    required:
-                    - name
-                    type: object
-                  resourceGroupNameSelector:
-                    description: Selector for a ResourceGroup in azure to populate
-                      resourceGroupName.
-                    properties:
-                      matchControllerRef:
-                        description: |-
-                          MatchControllerRef ensures an object with the same controller reference
-                          as the selecting object is selected.
-                        type: boolean
-                      matchLabels:
-                        additionalProperties:
-                          type: string
-                        description: MatchLabels ensures an object with matching labels
-                          is selected.
-                        type: object
-                      policy:
-                        description: Policies for selection.
-                        properties:
-                          resolution:
-                            default: Required
-                            description: |-
-                              Resolution specifies whether resolution of this reference is required.
-                              The default is 'Required', which means the reconcile will fail if the
-                              reference cannot be resolved. 'Optional' means this reference will be
-                              a no-op if it cannot be resolved.
-                            enum:
-                            - Required
-                            - Optional
-                            type: string
-                          resolve:
-                            description: |-
-                              Resolve specifies when this reference should be resolved. The default
-                              is 'IfNotPresent', which will attempt to resolve the reference only when
-                              the corresponding field is not present. Use 'Always' to resolve the
-                              reference on every reconcile.
-                            enum:
-                            - Always
-                            - IfNotPresent
-                            type: string
-                        type: object
-                    type: object
                   skuName:
                     description: Specifies the SKU Name for this Cognitive Service
                       Account. Possible values are F0, F1, S0, S, S1, S2, S3, S4,
@@ -932,10 +843,6 @@ spec:
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
                 || (has(self.initProvider) && has(self.initProvider.location))'
-            - message: spec.forProvider.name is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.name)
-                || (has(self.initProvider) && has(self.initProvider.name))'
             - message: spec.forProvider.skuName is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
@@ -1053,10 +960,6 @@ spec:
                     description: The website name of Metrics Advisor. This attribute
                       is only set when kind is MetricsAdvisor. Changing this forces
                       a new resource to be created.
-                    type: string
-                  name:
-                    description: Specifies the name of the Cognitive Service Account.
-                      Changing this forces a new resource to be created.
                     type: string
                   networkAcls:
                     description: A network_acls block as defined below. When this

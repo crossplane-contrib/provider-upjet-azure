@@ -15,12 +15,10 @@ spec:
     - format: OpenAI
       name: text-embedding-ada-002
       version: "2"
-    name: example-cd
     scale:
     - type: Standard
 
 ---
-
 apiVersion: cognitiveservices.azure.upbound.io/v1beta1
 kind: Account
 metadata:
@@ -33,14 +31,12 @@ spec:
   forProvider:
     kind: OpenAI
     location: West Europe
-    name: example-ca
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: S0
 
 ---
-
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:
