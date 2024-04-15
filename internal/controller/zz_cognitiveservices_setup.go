@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/pkg/controller"
 
 	account "github.com/upbound/provider-azure/internal/controller/cognitiveservices/account"
+	deployment "github.com/upbound/provider-azure/internal/controller/cognitiveservices/deployment"
 )
 
 // Setup_cognitiveservices creates all controllers with the supplied logger and adds them to
@@ -17,6 +18,7 @@ import (
 func Setup_cognitiveservices(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		account.Setup,
+		deployment.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
