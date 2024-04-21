@@ -45,11 +45,11 @@ Follow the guide [here](https://github.com/crossplane/upjet/blob/v0.10.0/docs/ad
 ## Report a Bug
 
 For filing bugs, suggesting improvements, or requesting new features, please
-open an [issue](https://github.com/crossplane-contrib/provider-upjet-azure/issues).
+open an [issue](https://github.com/crossplane-contrib/provider-upjet-azure/issues/new/choose).
 
 ## Contact
 
-[#upbound-provider-azure](https://crossplane.slack.com/archives/C05E4LDNNG5) channel in
+[#upjet-provider-azure](https://crossplane.slack.com/archives/C05E4LDNNG5) channel in
 [Crossplane Slack](https://slack.crossplane.io)
 
 ## Licensing
