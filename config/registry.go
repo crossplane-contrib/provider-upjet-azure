@@ -9,7 +9,8 @@ import (
 	_ "embed"
 
 	"github.com/crossplane/upjet/pkg/config"
-	tjconfig "github.com/crossplane/upjet/pkg/config"
+	ujconfig "github.com/crossplane/upjet/pkg/config"
+	"github.com/crossplane/upjet/pkg/config/conversion"
 	"github.com/crossplane/upjet/pkg/registry/reference"
 	conversiontfjson "github.com/crossplane/upjet/pkg/types/conversion/tfjson"
 	tfjson "github.com/hashicorp/terraform-json"
@@ -124,7 +125,7 @@ func getProviderSchema(s string) (*schema.Provider, error) {
 }
 
 // GetProvider returns provider configuration
-func GetProvider(ctx context.Context, generationProvider bool) (*tjconfig.Provider, error) {
+func GetProvider(ctx context.Context, generationProvider bool) (*ujconfig.Provider, error) {
 	var p *schema.Provider
 	var err error
 	if generationProvider {
@@ -136,18 +137,21 @@ func GetProvider(ctx context.Context, generationProvider bool) (*tjconfig.Provid
 		return nil, errors.Wrapf(err, "cannot get the Terraform provider schema with generation mode set to %t", generationProvider)
 	}
 
-	pc := tjconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, providerMetadata,
-		tjconfig.WithShortName("azure"),
-		tjconfig.WithRootGroup("azure.upbound.io"),
-		tjconfig.WithIncludeList(CLIReconciledResourceList()),
-		tjconfig.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
-		tjconfig.WithSkipList(skipList),
-		tjconfig.WithDefaultResourceOptions(ResourceConfigurator()),
-		tjconfig.WithReferenceInjectors([]tjconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
-		tjconfig.WithFeaturesPackage("internal/features"),
-		tjconfig.WithMainTemplate(hack.MainTemplate),
-		tjconfig.WithTerraformProvider(p),
+	pc := ujconfig.NewProvider([]byte(providerSchema), resourcePrefix, modulePath, providerMetadata,
+		ujconfig.WithShortName("azure"),
+		ujconfig.WithRootGroup("azure.upbound.io"),
+		ujconfig.WithIncludeList(CLIReconciledResourceList()),
+		ujconfig.WithTerraformPluginSDKIncludeList(TerraformPluginSDKResourceList()),
+		ujconfig.WithSkipList(skipList),
+		ujconfig.WithDefaultResourceOptions(ResourceConfigurator()),
+		ujconfig.WithReferenceInjectors([]ujconfig.ReferenceInjector{reference.NewInjector(modulePath)}),
+		ujconfig.WithFeaturesPackage("internal/features"),
+		ujconfig.WithMainTemplate(hack.MainTemplate),
+		ujconfig.WithTerraformProvider(p),
+		ujconfig.WithSchemaTraversers(&ujconfig.SingletonListEmbedder{}),
 	)
+
+	bumpVersionsWithEmbeddedLists(pc)
 	// "azure" group contains resources that actually do not have a specific
 	// group, e.g. ResourceGroup with APIVersion "azure.upbound.io/v1beta1".
 	// We need to include the controllers for this group into the base packages
@@ -178,6 +182,26 @@ func GetProvider(ctx context.Context, generationProvider bool) (*tjconfig.Provid
 		}
 	}
 	return pc, nil
+}
+
+func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
+	for name, r := range pc.Resources {
+		r := r
+		// nothing to do if no singleton list has been converted to
+		// an embedded object
+		if len(r.CRDListConversionPaths()) == 0 {
+			continue
+		}
+		r.Version = "v1beta2"
+		// we would like to set the storage version to v1beta1 to facilitate
+		// downgrades.
+		r.SetCRDStorageVersion("v1beta1")
+		r.Conversions = []conversion.Conversion{
+			conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, []string{"spec.forProvider", "spec.initProvider", "status.atProvider"}, r.CRDListConversionPaths()...),
+			conversion.NewSingletonListConversion("v1beta1", "v1beta2", r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
+			conversion.NewSingletonListConversion("v1beta2", "v1beta1", r.CRDListConversionPaths(), conversion.ToSingletonList)}
+		pc.Resources[name] = r
+	}
 }
 
 // CLIReconciledResourceList returns the list of resources that have external
