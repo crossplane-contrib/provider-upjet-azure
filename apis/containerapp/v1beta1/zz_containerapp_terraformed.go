@@ -21,7 +21,7 @@ func (mg *ContainerApp) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ContainerApp
 func (tr *ContainerApp) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "secret[*].name": "spec.forProvider.secret[*].nameSecretRef", "secret[*].value": "spec.forProvider.secret[*].valueSecretRef"}
+	return map[string]string{"custom_domain_verification_id": "status.atProvider.customDomainVerificationId", "secret[*].value": "spec.forProvider.secret[*].valueSecretRef"}
 }
 
 // GetObservation of this ContainerApp

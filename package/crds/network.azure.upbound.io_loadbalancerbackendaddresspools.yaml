@@ -158,20 +158,20 @@ spec:
                     items:
                       properties:
                         identifier:
-                          description: The unique identifier of this Gateway Lodbalancer
-                            Tunnel Interface.
+                          description: The unique identifier of this Gateway Load
+                            Balancer Tunnel Interface.
                           type: number
                         port:
-                          description: The port number that this Gateway Lodbalancer
+                          description: The port number that this Gateway Load Balancer
                             Tunnel Interface listens to.
                           type: number
                         protocol:
-                          description: The protocol used for this Gateway Lodbalancer
+                          description: The protocol used for this Gateway Load Balancer
                             Tunnel Interface. Possible values are None, Native and
                             VXLAN.
                           type: string
                         type:
-                          description: The traffic type of this Gateway Lodbalancer
+                          description: The traffic type of this Gateway Load Balancer
                             Tunnel Interface. Possible values are None, Internal and
                             External.
                           type: string
@@ -200,20 +200,20 @@ spec:
                     items:
                       properties:
                         identifier:
-                          description: The unique identifier of this Gateway Lodbalancer
-                            Tunnel Interface.
+                          description: The unique identifier of this Gateway Load
+                            Balancer Tunnel Interface.
                           type: number
                         port:
-                          description: The port number that this Gateway Lodbalancer
+                          description: The port number that this Gateway Load Balancer
                             Tunnel Interface listens to.
                           type: number
                         protocol:
-                          description: The protocol used for this Gateway Lodbalancer
+                          description: The protocol used for this Gateway Load Balancer
                             Tunnel Interface. Possible values are None, Native and
                             VXLAN.
                           type: string
                         type:
-                          description: The traffic type of this Gateway Lodbalancer
+                          description: The traffic type of this Gateway Load Balancer
                             Tunnel Interface. Possible values are None, Internal and
                             External.
                           type: string
@@ -434,20 +434,20 @@ spec:
                     items:
                       properties:
                         identifier:
-                          description: The unique identifier of this Gateway Lodbalancer
-                            Tunnel Interface.
+                          description: The unique identifier of this Gateway Load
+                            Balancer Tunnel Interface.
                           type: number
                         port:
-                          description: The port number that this Gateway Lodbalancer
+                          description: The port number that this Gateway Load Balancer
                             Tunnel Interface listens to.
                           type: number
                         protocol:
-                          description: The protocol used for this Gateway Lodbalancer
+                          description: The protocol used for this Gateway Load Balancer
                             Tunnel Interface. Possible values are None, Native and
                             VXLAN.
                           type: string
                         type:
-                          description: The traffic type of this Gateway Lodbalancer
+                          description: The traffic type of this Gateway Load Balancer
                             Tunnel Interface. Possible values are None, Internal and
                             External.
                           type: string

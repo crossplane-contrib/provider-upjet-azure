@@ -48,6 +48,9 @@ type AccountInitParameters struct {
 	// A customer_managed_key block as documented below.
 	CustomerManagedKey []CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
+	// Specifies which DNS endpoint type to use. Possible values are Standard and AzureDnsZone. Defaults to Standard. Changing this forces a new resource to be created.
+	DNSEndpointType *string `json:"dnsEndpointType,omitempty" tf:"dns_endpoint_type,omitempty"`
+
 	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
 	DefaultToOauthAuthentication *bool `json:"defaultToOauthAuthentication,omitempty" tf:"default_to_oauth_authentication,omitempty"`
 
@@ -156,6 +159,9 @@ type AccountObservation struct {
 
 	// A customer_managed_key block as documented below.
 	CustomerManagedKey []CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
+	// Specifies which DNS endpoint type to use. Possible values are Standard and AzureDnsZone. Defaults to Standard. Changing this forces a new resource to be created.
+	DNSEndpointType *string `json:"dnsEndpointType,omitempty" tf:"dns_endpoint_type,omitempty"`
 
 	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
 	DefaultToOauthAuthentication *bool `json:"defaultToOauthAuthentication,omitempty" tf:"default_to_oauth_authentication,omitempty"`
@@ -480,6 +486,10 @@ type AccountParameters struct {
 	// A customer_managed_key block as documented below.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKey []CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
+	// Specifies which DNS endpoint type to use. Possible values are Standard and AzureDnsZone. Defaults to Standard. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DNSEndpointType *string `json:"dnsEndpointType,omitempty" tf:"dns_endpoint_type,omitempty"`
 
 	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
 	// +kubebuilder:validation:Optional

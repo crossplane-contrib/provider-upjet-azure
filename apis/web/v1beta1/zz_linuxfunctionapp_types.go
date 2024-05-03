@@ -268,8 +268,8 @@ type ApplicationStackInitParameters struct {
 	// The version of Java to use. Possible values are `8`, `11`, and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12, 14, 16 and 18.
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to run. Possible values include 12, 14, 16, 18 and 20.
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PowerShell Core to run. Possible values are 7, and 7.2.
@@ -302,8 +302,8 @@ type ApplicationStackObservation struct {
 	// The version of Java to use. Possible values are `8`, `11`, and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12, 14, 16 and 18.
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to run. Possible values include 12, 14, 16, 18 and 20.
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PowerShell Core to run. Possible values are 7, and 7.2.
@@ -339,8 +339,8 @@ type ApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include 12, 14, 16 and 18.
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to run. Possible values include 12, 14, 16, 18 and 20.
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 

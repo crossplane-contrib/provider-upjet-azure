@@ -22,29 +22,24 @@ type ShareDirectoryInitParameters struct {
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Share
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
-	// Reference to a Share in storage to populate shareName.
-	// +kubebuilder:validation:Optional
-	ShareNameRef *v1.Reference `json:"shareNameRef,omitempty" tf:"-"`
-
-	// Selector for a Share in storage to populate shareName.
-	// +kubebuilder:validation:Optional
-	ShareNameSelector *v1.Selector `json:"shareNameSelector,omitempty" tf:"-"`
-
-	// The name of the Storage Account within which the File Share is located. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Reference to a Account in storage to populate storageAccountName.
-	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Share
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
 
-	// Selector for a Account in storage to populate storageAccountName.
+	// Reference to a Share in storage to populate storageShareId.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageShareIDRef *v1.Reference `json:"storageShareIdRef,omitempty" tf:"-"`
+
+	// Selector for a Share in storage to populate storageShareId.
+	// +kubebuilder:validation:Optional
+	StorageShareIDSelector *v1.Selector `json:"storageShareIdSelector,omitempty" tf:"-"`
 }
 
 type ShareDirectoryObservation struct {
@@ -59,11 +54,14 @@ type ShareDirectoryObservation struct {
 	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
-	// The name of the Storage Account within which the File Share is located. Changing this forces a new resource to be created.
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
+
+	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
+	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
 }
 
 type ShareDirectoryParameters struct {
@@ -77,31 +75,27 @@ type ShareDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The name of the File Share where this Directory should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Share
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ShareName *string `json:"shareName,omitempty" tf:"share_name,omitempty"`
 
-	// Reference to a Share in storage to populate shareName.
-	// +kubebuilder:validation:Optional
-	ShareNameRef *v1.Reference `json:"shareNameRef,omitempty" tf:"-"`
-
-	// Selector for a Share in storage to populate shareName.
-	// +kubebuilder:validation:Optional
-	ShareNameSelector *v1.Selector `json:"shareNameSelector,omitempty" tf:"-"`
-
-	// The name of the Storage Account within which the File Share is located. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// The name (or path) of the Directory that should be created within this File Share. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Reference to a Account in storage to populate storageAccountName.
+	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Share
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
+	StorageShareID *string `json:"storageShareId,omitempty" tf:"storage_share_id,omitempty"`
 
-	// Selector for a Account in storage to populate storageAccountName.
+	// Reference to a Share in storage to populate storageShareId.
 	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
+	StorageShareIDRef *v1.Reference `json:"storageShareIdRef,omitempty" tf:"-"`
+
+	// Selector for a Share in storage to populate storageShareId.
+	// +kubebuilder:validation:Optional
+	StorageShareIDSelector *v1.Selector `json:"storageShareIdSelector,omitempty" tf:"-"`
 }
 
 // ShareDirectorySpec defines the desired state of ShareDirectory

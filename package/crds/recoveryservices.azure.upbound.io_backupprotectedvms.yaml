@@ -253,9 +253,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
-                    description: The name of the resource group in which to create
-                      the Recovery Services Vault. Changing this forces a new resource
-                      to be created.
+                    description: Specifies the name of the Resource Group associated
+                      with the Recovery Services Vault to use. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -531,9 +531,9 @@ spec:
                         type: object
                     type: object
                   resourceGroupName:
-                    description: The name of the resource group in which to create
-                      the Recovery Services Vault. Changing this forces a new resource
-                      to be created.
+                    description: Specifies the name of the Resource Group associated
+                      with the Recovery Services Vault to use. Changing this forces
+                      a new resource to be created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -819,9 +819,9 @@ spec:
                       to use. Changing this forces a new resource to be created.
                     type: string
                   resourceGroupName:
-                    description: The name of the resource group in which to create
-                      the Recovery Services Vault. Changing this forces a new resource
-                      to be created.
+                    description: Specifies the name of the Resource Group associated
+                      with the Recovery Services Vault to use. Changing this forces
+                      a new resource to be created.
                     type: string
                   sourceVmId:
                     description: Specifies the ID of the VM to backup. Changing this

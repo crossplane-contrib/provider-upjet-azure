@@ -17,6 +17,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    status: Enabled
     tags:
       environment: Production
     taskType: LabVmsStartupTask

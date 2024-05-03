@@ -1294,8 +1294,8 @@ spec:
                                 type: string
                               nodeVersion:
                                 description: |-
-                                  The version of Node to run. Possible values include 12, 14, 16 and 18.
-                                  The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+                                  The version of Node to run. Possible values include 12, 14, 16, 18 and 20.
+                                  The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
                                 type: string
                               powershellCoreVersion:
                                 description: |-
@@ -3024,8 +3024,8 @@ spec:
                                 type: string
                               nodeVersion:
                                 description: |-
-                                  The version of Node to run. Possible values include 12, 14, 16 and 18.
-                                  The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+                                  The version of Node to run. Possible values include 12, 14, 16, 18 and 20.
+                                  The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
                                 type: string
                               powershellCoreVersion:
                                 description: |-
@@ -4820,8 +4820,8 @@ spec:
                                 type: string
                               nodeVersion:
                                 description: |-
-                                  The version of Node to run. Possible values include 12, 14, 16 and 18.
-                                  The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+                                  The version of Node to run. Possible values include 12, 14, 16, 18 and 20.
+                                  The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
                                 type: string
                               powershellCoreVersion:
                                 description: |-

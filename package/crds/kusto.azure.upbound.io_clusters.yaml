@@ -295,7 +295,7 @@ spec:
                     type: array
                   virtualNetworkConfiguration:
                     description: A virtual_network_configuration block as defined
-                      below. Changing this forces a new resource to be created.
+                      below.
                     items:
                       properties:
                         dataManagementPublicIpId:
@@ -551,7 +551,7 @@ spec:
                     type: array
                   virtualNetworkConfiguration:
                     description: A virtual_network_configuration block as defined
-                      below. Changing this forces a new resource to be created.
+                      below.
                     items:
                       properties:
                         dataManagementPublicIpId:
@@ -996,7 +996,7 @@ spec:
                     type: string
                   virtualNetworkConfiguration:
                     description: A virtual_network_configuration block as defined
-                      below. Changing this forces a new resource to be created.
+                      below.
                     items:
                       properties:
                         dataManagementPublicIpId:

@@ -15,6 +15,9 @@ import (
 
 type WorkspaceRootDbfsCustomerManagedKeyInitParameters struct {
 
+	// Specifies the Resource ID of the Key Vault which contains the key_vault_key_id.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
 	// The resource ID of the Key Vault Key to be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -34,6 +37,9 @@ type WorkspaceRootDbfsCustomerManagedKeyObservation struct {
 	// The ID of the Databricks Workspace.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Specifies the Resource ID of the Key Vault which contains the key_vault_key_id.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
 	// The resource ID of the Key Vault Key to be used.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
@@ -42,6 +48,10 @@ type WorkspaceRootDbfsCustomerManagedKeyObservation struct {
 }
 
 type WorkspaceRootDbfsCustomerManagedKeyParameters struct {
+
+	// Specifies the Resource ID of the Key Vault which contains the key_vault_key_id.
+	// +kubebuilder:validation:Optional
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
 	// The resource ID of the Key Vault Key to be used.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Key
@@ -99,7 +109,7 @@ type WorkspaceRootDbfsCustomerManagedKeyStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// WorkspaceRootDbfsCustomerManagedKey is the Schema for the WorkspaceRootDbfsCustomerManagedKeys API. Manages a Customer Managed Key for the Databricks Workspaces root Databricks File System(DBFS)
+// WorkspaceRootDbfsCustomerManagedKey is the Schema for the WorkspaceRootDbfsCustomerManagedKeys API. Manages a Customer Managed Key for the Databricks Workspaces Root Databricks File System(DBFS)
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

@@ -36,6 +36,10 @@ spec:
     displayName: example-sqr
     enabled: true
     evaluationFrequency: PT10M
+    identity:
+    - identityIds:
+      - ${azurerm_user_assigned_identity.example.id}
+      type: UserAssigned
     location: West Europe
     queryTimeRangeOverride: PT1H
     resourceGroupNameSelector:
@@ -99,3 +103,37 @@ metadata:
 spec:
   forProvider:
     location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorscheduledqueryrulesalertv2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalId: ${azurerm_user_assigned_identity.example.principal_id}
+    roleDefinitionName: Reader
+    scope: ${azurerm_application_insights.example.id}
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/monitorscheduledqueryrulesalertv2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-uai
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -834,37 +834,18 @@ func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.ShareNameRef,
-			Selector:     mg.Spec.ForProvider.ShareNameSelector,
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageShareID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.StorageShareIDRef,
+			Selector:     mg.Spec.ForProvider.StorageShareIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.ShareName")
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageShareID")
 	}
-	mg.Spec.ForProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.ShareNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
-	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.StorageShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageShareIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Share", "ShareList")
 		if err != nil {
@@ -872,37 +853,18 @@ func (mg *ShareDirectory) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.ShareNameRef,
-			Selector:     mg.Spec.InitProvider.ShareNameSelector,
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageShareID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageShareIDRef,
+			Selector:     mg.Spec.InitProvider.StorageShareIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.ShareName")
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageShareID")
 	}
-	mg.Spec.InitProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.ShareNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
-	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
+	mg.Spec.InitProvider.StorageShareID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageShareIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -966,24 +928,24 @@ func (mg *TableEntity) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Table", "TableList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.ForProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.ForProvider.StorageAccountNameSelector,
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageTableID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.StorageTableIDRef,
+			Selector:     mg.Spec.ForProvider.StorageTableIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.StorageAccountName")
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageTableID")
 	}
-	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
+	mg.Spec.ForProvider.StorageTableID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageTableIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Table", "TableList")
 		if err != nil {
@@ -991,56 +953,18 @@ func (mg *TableEntity) ResolveReferences(ctx context.Context, c client.Reader) e
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TableName),
-			Extract:      resource.ExtractParamPath("name", false),
-			Reference:    mg.Spec.ForProvider.TableNameRef,
-			Selector:     mg.Spec.ForProvider.TableNameSelector,
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageTableID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.StorageTableIDRef,
+			Selector:     mg.Spec.InitProvider.StorageTableIDSelector,
 			To:           reference.To{List: l, Managed: m},
 		})
 	}
 	if err != nil {
-		return errors.Wrap(err, "mg.Spec.ForProvider.TableName")
+		return errors.Wrap(err, "mg.Spec.InitProvider.StorageTableID")
 	}
-	mg.Spec.ForProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.ForProvider.TableNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.StorageAccountName),
-			Extract:      reference.ExternalName(),
-			Reference:    mg.Spec.InitProvider.StorageAccountNameRef,
-			Selector:     mg.Spec.InitProvider.StorageAccountNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.StorageAccountName")
-	}
-	mg.Spec.InitProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.StorageAccountNameRef = rsp.ResolvedReference
-	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Table", "TableList")
-		if err != nil {
-			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
-		}
-
-		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TableName),
-			Extract:      resource.ExtractParamPath("name", false),
-			Reference:    mg.Spec.InitProvider.TableNameRef,
-			Selector:     mg.Spec.InitProvider.TableNameSelector,
-			To:           reference.To{List: l, Managed: m},
-		})
-	}
-	if err != nil {
-		return errors.Wrap(err, "mg.Spec.InitProvider.TableName")
-	}
-	mg.Spec.InitProvider.TableName = reference.ToPtrValue(rsp.ResolvedValue)
-	mg.Spec.InitProvider.TableNameRef = rsp.ResolvedReference
+	mg.Spec.InitProvider.StorageTableID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.StorageTableIDRef = rsp.ResolvedReference
 
 	return nil
 }

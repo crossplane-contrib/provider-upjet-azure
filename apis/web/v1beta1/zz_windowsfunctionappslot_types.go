@@ -2186,7 +2186,7 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use. Possible values are `1.8`, `11` and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -2213,7 +2213,7 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 	// The version of Java to use. Possible values are `1.8`, `11` and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -2242,7 +2242,7 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
@@ -2587,7 +2587,7 @@ type WindowsFunctionAppSlotSiteConfigInitParameters struct {
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Windows Web App use a 32-bit worker. Defaults to true.
-	// Should the Windows Web App use a 32-bit worker.
+	// Should the Windows Function App use a 32-bit worker.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// Should all outbound traffic to have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
@@ -2718,7 +2718,7 @@ type WindowsFunctionAppSlotSiteConfigObservation struct {
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Windows Web App use a 32-bit worker. Defaults to true.
-	// Should the Windows Web App use a 32-bit worker.
+	// Should the Windows Function App use a 32-bit worker.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// Should all outbound traffic to have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
@@ -2883,7 +2883,7 @@ type WindowsFunctionAppSlotSiteConfigParameters struct {
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Windows Web App use a 32-bit worker. Defaults to true.
-	// Should the Windows Web App use a 32-bit worker.
+	// Should the Windows Function App use a 32-bit worker.
 	// +kubebuilder:validation:Optional
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 

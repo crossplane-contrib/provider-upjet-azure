@@ -2652,7 +2652,7 @@ type WindowsWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use when current_stack is set to java.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2707,7 +2707,7 @@ type WindowsWebAppSiteConfigApplicationStackObservation struct {
 	// The version of Java to use when current_stack is set to java.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2779,7 +2779,7 @@ type WindowsWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 

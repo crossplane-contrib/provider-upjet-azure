@@ -168,6 +168,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  selfContainedInteractiveAuthoringEnabled:
+                    description: Specifies whether enable interactive authoring function
+                      when your self-hosted integration runtime is unable to establish
+                      a connection with Azure Relay.
+                    type: boolean
                 type: object
               initProvider:
                 description: |-
@@ -196,6 +201,11 @@ spec:
                           type: string
                       type: object
                     type: array
+                  selfContainedInteractiveAuthoringEnabled:
+                    description: Specifies whether enable interactive authoring function
+                      when your self-hosted integration runtime is unable to establish
+                      a connection with Azure Relay.
+                    type: boolean
                 type: object
               managementPolicies:
                 default:
@@ -398,6 +408,11 @@ spec:
                     description: The secondary integration runtime authentication
                       key.
                     type: string
+                  selfContainedInteractiveAuthoringEnabled:
+                    description: Specifies whether enable interactive authoring function
+                      when your self-hosted integration runtime is unable to establish
+                      a connection with Azure Relay.
+                    type: boolean
                 type: object
               conditions:
                 description: Conditions of the resource.

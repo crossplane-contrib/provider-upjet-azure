@@ -2525,7 +2525,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use when current_stack is set to java. Possible values include 1.7, 1.8, 11 and 17. Required with java_container and java_container_version.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18 and ~20.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2580,7 +2580,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackObservation struct {
 	// The version of Java to use when current_stack is set to java. Possible values include 1.7, 1.8, 11 and 17. Required with java_container and java_container_version.
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18 and ~20.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
 	// The version of PHP to use when current_stack is set to php. Possible values are 7.1, 7.4 and Off.
@@ -2652,7 +2652,7 @@ type WindowsWebAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, and ~18.
+	// The version of node to use when current_stack is set to node. Possible values include ~12, ~14, ~16, ~18 and ~20.
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
@@ -3093,7 +3093,7 @@ type WindowsWebAppSlotSiteConfigInitParameters struct {
 	// Should the Windows Web App Slot ip_restriction configuration be used for the SCM also.
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Windows Web App Slotuse a 32-bit worker. Defaults to true.
+	// Should the Windows Web App Slot use a 32-bit worker. The default value varies from different service plans.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// One or more virtual_application blocks as defined below.
@@ -3202,7 +3202,7 @@ type WindowsWebAppSlotSiteConfigObservation struct {
 	// Should the Windows Web App Slot ip_restriction configuration be used for the SCM also.
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Windows Web App Slotuse a 32-bit worker. Defaults to true.
+	// Should the Windows Web App Slot use a 32-bit worker. The default value varies from different service plans.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// One or more virtual_application blocks as defined below.
@@ -3336,7 +3336,7 @@ type WindowsWebAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
-	// Should the Windows Web App Slotuse a 32-bit worker. Defaults to true.
+	// Should the Windows Web App Slot use a 32-bit worker. The default value varies from different service plans.
 	// +kubebuilder:validation:Optional
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 

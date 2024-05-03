@@ -19,36 +19,28 @@ type TableEntityInitParameters struct {
 	// +mapType=granular
 	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
 
-	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.
+	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
-	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource.
+	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// Specifies the storage account in which to create the storage table entity. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Reference to a Account in storage to populate storageAccountName.
-	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
-
-	// Selector for a Account in storage to populate storageAccountName.
-	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
-
-	// The name of the storage table in which to create the storage table entity. Changing this forces a new resource to be created.
+	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
+
+	// Reference to a Table in storage to populate storageTableId.
+	// +kubebuilder:validation:Optional
+	StorageTableIDRef *v1.Reference `json:"storageTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a Table in storage to populate storageTableId.
+	// +kubebuilder:validation:Optional
+	StorageTableIDSelector *v1.Selector `json:"storageTableIdSelector,omitempty" tf:"-"`
+
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
-
-	// Reference to a Table in storage to populate tableName.
-	// +kubebuilder:validation:Optional
-	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
-
-	// Selector for a Table in storage to populate tableName.
-	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 type TableEntityObservation struct {
@@ -60,16 +52,17 @@ type TableEntityObservation struct {
 	// The ID of the Entity within the Table in the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.
+	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
-	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource.
+	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// Specifies the storage account in which to create the storage table entity. Changing this forces a new resource to be created.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// The name of the storage table in which to create the storage table entity. Changing this forces a new resource to be created.
+	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
+	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
+
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
 }
 
@@ -80,40 +73,33 @@ type TableEntityParameters struct {
 	// +mapType=granular
 	Entity map[string]*string `json:"entity,omitempty" tf:"entity,omitempty"`
 
-	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource.
+	// The key for the partition where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PartitionKey *string `json:"partitionKey,omitempty" tf:"partition_key,omitempty"`
 
-	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource.
+	// The key for the row where the entity will be inserted/merged. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
-	// Specifies the storage account in which to create the storage table entity. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Reference to a Account in storage to populate storageAccountName.
-	// +kubebuilder:validation:Optional
-	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
-
-	// Selector for a Account in storage to populate storageAccountName.
-	// +kubebuilder:validation:Optional
-	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
-
-	// The name of the storage table in which to create the storage table entity. Changing this forces a new resource to be created.
+	// The Storage Share ID in which this file will be placed into. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Table
-	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",false)
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	StorageTableID *string `json:"storageTableId,omitempty" tf:"storage_table_id,omitempty"`
+
+	// Reference to a Table in storage to populate storageTableId.
+	// +kubebuilder:validation:Optional
+	StorageTableIDRef *v1.Reference `json:"storageTableIdRef,omitempty" tf:"-"`
+
+	// Selector for a Table in storage to populate storageTableId.
+	// +kubebuilder:validation:Optional
+	StorageTableIDSelector *v1.Selector `json:"storageTableIdSelector,omitempty" tf:"-"`
+
 	// +kubebuilder:validation:Optional
 	TableName *string `json:"tableName,omitempty" tf:"table_name,omitempty"`
-
-	// Reference to a Table in storage to populate tableName.
-	// +kubebuilder:validation:Optional
-	TableNameRef *v1.Reference `json:"tableNameRef,omitempty" tf:"-"`
-
-	// Selector for a Table in storage to populate tableName.
-	// +kubebuilder:validation:Optional
-	TableNameSelector *v1.Selector `json:"tableNameSelector,omitempty" tf:"-"`
 }
 
 // TableEntitySpec defines the desired state of TableEntity

@@ -283,6 +283,11 @@ spec:
                       the Azure portal when accessing the Storage Account. The default
                       value is false
                     type: boolean
+                  dnsEndpointType:
+                    description: Specifies which DNS endpoint type to use. Possible
+                      values are Standard and AzureDnsZone. Defaults to Standard.
+                      Changing this forces a new resource to be created.
+                    type: string
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Storage Account should exist. Changing this forces a new
@@ -998,6 +1003,11 @@ spec:
                       the Azure portal when accessing the Storage Account. The default
                       value is false
                     type: boolean
+                  dnsEndpointType:
+                    description: Specifies which DNS endpoint type to use. Possible
+                      values are Standard and AzureDnsZone. Defaults to Standard.
+                      Changing this forces a new resource to be created.
+                    type: string
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Storage Account should exist. Changing this forces a new
@@ -1804,6 +1814,11 @@ spec:
                       the Azure portal when accessing the Storage Account. The default
                       value is false
                     type: boolean
+                  dnsEndpointType:
+                    description: Specifies which DNS endpoint type to use. Possible
+                      values are Standard and AzureDnsZone. Defaults to Standard.
+                      Changing this forces a new resource to be created.
+                    type: string
                   edgeZone:
                     description: Specifies the Edge Zone within the Azure Region where
                       this Storage Account should exist. Changing this forces a new

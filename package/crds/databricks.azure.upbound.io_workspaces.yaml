@@ -321,6 +321,10 @@ spec:
                       resource has to be created. Changing this forces a new resource
                       to be created.
                     type: string
+                  managedDiskCmkKeyVaultId:
+                    description: Resource ID of the Key Vault which contains the managed_disk_cmk_key_vault_key_id
+                      key.
+                    type: string
                   managedDiskCmkKeyVaultKeyId:
                     description: Customer managed encryption properties for the Databricks
                       Workspace managed disks.
@@ -410,6 +414,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  managedServicesCmkKeyVaultId:
+                    description: Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id
+                      key.
+                    type: string
                   managedServicesCmkKeyVaultKeyId:
                     description: Customer managed encryption properties for the Databricks
                       Workspace managed resources(e.g. Notebooks and Artifacts).
@@ -778,6 +786,10 @@ spec:
                       resource has to be created. Changing this forces a new resource
                       to be created.
                     type: string
+                  managedDiskCmkKeyVaultId:
+                    description: Resource ID of the Key Vault which contains the managed_disk_cmk_key_vault_key_id
+                      key.
+                    type: string
                   managedDiskCmkKeyVaultKeyId:
                     description: Customer managed encryption properties for the Databricks
                       Workspace managed disks.
@@ -867,6 +879,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  managedServicesCmkKeyVaultId:
+                    description: Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id
+                      key.
+                    type: string
                   managedServicesCmkKeyVaultKeyId:
                     description: Customer managed encryption properties for the Databricks
                       Workspace managed resources(e.g. Notebooks and Artifacts).
@@ -1178,6 +1194,10 @@ spec:
                       resource has to be created. Changing this forces a new resource
                       to be created.
                     type: string
+                  managedDiskCmkKeyVaultId:
+                    description: Resource ID of the Key Vault which contains the managed_disk_cmk_key_vault_key_id
+                      key.
+                    type: string
                   managedDiskCmkKeyVaultKeyId:
                     description: Customer managed encryption properties for the Databricks
                       Workspace managed disks.
@@ -1212,6 +1232,10 @@ spec:
                     description: The name of the resource group where Azure should
                       place the managed Databricks resources. Changing this forces
                       a new resource to be created.
+                    type: string
+                  managedServicesCmkKeyVaultId:
+                    description: Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id
+                      key.
                     type: string
                   managedServicesCmkKeyVaultKeyId:
                     description: Customer managed encryption properties for the Databricks

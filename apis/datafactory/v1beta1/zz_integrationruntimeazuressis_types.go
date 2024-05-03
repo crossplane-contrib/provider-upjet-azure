@@ -152,6 +152,35 @@ type ComponentParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 }
 
+type CopyComputeScaleInitParameters struct {
+
+	// Specifies the data integration unit number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256.
+	DataIntegrationUnit *float64 `json:"dataIntegrationUnit,omitempty" tf:"data_integration_unit,omitempty"`
+
+	// Specifies the time to live (in minutes) setting of integration runtime which will execute copy activity. Possible values are at least 5.
+	TimeToLive *float64 `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type CopyComputeScaleObservation struct {
+
+	// Specifies the data integration unit number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256.
+	DataIntegrationUnit *float64 `json:"dataIntegrationUnit,omitempty" tf:"data_integration_unit,omitempty"`
+
+	// Specifies the time to live (in minutes) setting of integration runtime which will execute copy activity. Possible values are at least 5.
+	TimeToLive *float64 `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type CopyComputeScaleParameters struct {
+
+	// Specifies the data integration unit number setting reserved for copy activity execution. Supported values are multiples of 4 in range 4-256.
+	// +kubebuilder:validation:Optional
+	DataIntegrationUnit *float64 `json:"dataIntegrationUnit,omitempty" tf:"data_integration_unit,omitempty"`
+
+	// Specifies the time to live (in minutes) setting of integration runtime which will execute copy activity. Possible values are at least 5.
+	// +kubebuilder:validation:Optional
+	TimeToLive *float64 `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
 type CustomSetupScriptInitParameters struct {
 
 	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
@@ -271,6 +300,9 @@ type IntegrationRuntimeAzureSSISInitParameters struct {
 	// A catalog_info block as defined below.
 	CatalogInfo []CatalogInfoInitParameters `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
 
+	// One copy_compute_scale block as defined below.
+	CopyComputeScale []CopyComputeScaleInitParameters `json:"copyComputeScale,omitempty" tf:"copy_compute_scale,omitempty"`
+
 	// The name of a Data Factory Credential that the SSIS integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
 	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
 
@@ -307,6 +339,9 @@ type IntegrationRuntimeAzureSSISInitParameters struct {
 	// One or more package_store block as defined below.
 	PackageStore []PackageStoreInitParameters `json:"packageStore,omitempty" tf:"package_store,omitempty"`
 
+	// One pipeline_external_compute_scale block as defined below.
+	PipelineExternalComputeScale []PipelineExternalComputeScaleInitParameters `json:"pipelineExternalComputeScale,omitempty" tf:"pipeline_external_compute_scale,omitempty"`
+
 	// A proxy block as defined below.
 	Proxy []ProxyInitParameters `json:"proxy,omitempty" tf:"proxy,omitempty"`
 
@@ -318,6 +353,9 @@ type IntegrationRuntimeAzureSSISObservation struct {
 
 	// A catalog_info block as defined below.
 	CatalogInfo []CatalogInfoObservation `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
+
+	// One copy_compute_scale block as defined below.
+	CopyComputeScale []CopyComputeScaleObservation `json:"copyComputeScale,omitempty" tf:"copy_compute_scale,omitempty"`
 
 	// The name of a Data Factory Credential that the SSIS integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
 	CredentialName *string `json:"credentialName,omitempty" tf:"credential_name,omitempty"`
@@ -361,6 +399,9 @@ type IntegrationRuntimeAzureSSISObservation struct {
 	// One or more package_store block as defined below.
 	PackageStore []PackageStoreObservation `json:"packageStore,omitempty" tf:"package_store,omitempty"`
 
+	// One pipeline_external_compute_scale block as defined below.
+	PipelineExternalComputeScale []PipelineExternalComputeScaleObservation `json:"pipelineExternalComputeScale,omitempty" tf:"pipeline_external_compute_scale,omitempty"`
+
 	// A proxy block as defined below.
 	Proxy []ProxyObservation `json:"proxy,omitempty" tf:"proxy,omitempty"`
 
@@ -373,6 +414,10 @@ type IntegrationRuntimeAzureSSISParameters struct {
 	// A catalog_info block as defined below.
 	// +kubebuilder:validation:Optional
 	CatalogInfo []CatalogInfoParameters `json:"catalogInfo,omitempty" tf:"catalog_info,omitempty"`
+
+	// One copy_compute_scale block as defined below.
+	// +kubebuilder:validation:Optional
+	CopyComputeScale []CopyComputeScaleParameters `json:"copyComputeScale,omitempty" tf:"copy_compute_scale,omitempty"`
 
 	// The name of a Data Factory Credential that the SSIS integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
 	// +kubebuilder:validation:Optional
@@ -435,6 +480,10 @@ type IntegrationRuntimeAzureSSISParameters struct {
 	// One or more package_store block as defined below.
 	// +kubebuilder:validation:Optional
 	PackageStore []PackageStoreParameters `json:"packageStore,omitempty" tf:"package_store,omitempty"`
+
+	// One pipeline_external_compute_scale block as defined below.
+	// +kubebuilder:validation:Optional
+	PipelineExternalComputeScale []PipelineExternalComputeScaleParameters `json:"pipelineExternalComputeScale,omitempty" tf:"pipeline_external_compute_scale,omitempty"`
 
 	// A proxy block as defined below.
 	// +kubebuilder:validation:Optional
@@ -576,6 +625,45 @@ type PackageStoreParameters struct {
 	// Name of the package store.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
+}
+
+type PipelineExternalComputeScaleInitParameters struct {
+
+	// Specifies the number of the external nodes, which should be greater than 0 and less than 11.
+	NumberOfExternalNodes *float64 `json:"numberOfExternalNodes,omitempty" tf:"number_of_external_nodes,omitempty"`
+
+	// Specifies the number of the pipeline nodes, which should be greater than 0 and less than 11.
+	NumberOfPipelineNodes *float64 `json:"numberOfPipelineNodes,omitempty" tf:"number_of_pipeline_nodes,omitempty"`
+
+	// Specifies the time to live (in minutes) setting of integration runtime which will execute copy activity. Possible values are at least 5.
+	TimeToLive *float64 `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type PipelineExternalComputeScaleObservation struct {
+
+	// Specifies the number of the external nodes, which should be greater than 0 and less than 11.
+	NumberOfExternalNodes *float64 `json:"numberOfExternalNodes,omitempty" tf:"number_of_external_nodes,omitempty"`
+
+	// Specifies the number of the pipeline nodes, which should be greater than 0 and less than 11.
+	NumberOfPipelineNodes *float64 `json:"numberOfPipelineNodes,omitempty" tf:"number_of_pipeline_nodes,omitempty"`
+
+	// Specifies the time to live (in minutes) setting of integration runtime which will execute copy activity. Possible values are at least 5.
+	TimeToLive *float64 `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
+}
+
+type PipelineExternalComputeScaleParameters struct {
+
+	// Specifies the number of the external nodes, which should be greater than 0 and less than 11.
+	// +kubebuilder:validation:Optional
+	NumberOfExternalNodes *float64 `json:"numberOfExternalNodes,omitempty" tf:"number_of_external_nodes,omitempty"`
+
+	// Specifies the number of the pipeline nodes, which should be greater than 0 and less than 11.
+	// +kubebuilder:validation:Optional
+	NumberOfPipelineNodes *float64 `json:"numberOfPipelineNodes,omitempty" tf:"number_of_pipeline_nodes,omitempty"`
+
+	// Specifies the time to live (in minutes) setting of integration runtime which will execute copy activity. Possible values are at least 5.
+	// +kubebuilder:validation:Optional
+	TimeToLive *float64 `json:"timeToLive,omitempty" tf:"time_to_live,omitempty"`
 }
 
 type ProxyInitParameters struct {

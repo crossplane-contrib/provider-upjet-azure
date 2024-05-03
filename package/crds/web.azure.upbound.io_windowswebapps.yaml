@@ -1297,7 +1297,7 @@ spec:
                               nodeVersion:
                                 description: The version of node to use when current_stack
                                   is set to node. Possible values are ~12, ~14, ~16,
-                                  and ~18.
+                                  ~18 and ~20.
                                 type: string
                               phpVersion:
                                 description: The version of PHP to use when current_stack
@@ -3008,7 +3008,7 @@ spec:
                               nodeVersion:
                                 description: The version of node to use when current_stack
                                   is set to node. Possible values are ~12, ~14, ~16,
-                                  and ~18.
+                                  ~18 and ~20.
                                 type: string
                               phpVersion:
                                 description: The version of PHP to use when current_stack
@@ -4879,7 +4879,7 @@ spec:
                               nodeVersion:
                                 description: The version of node to use when current_stack
                                   is set to node. Possible values are ~12, ~14, ~16,
-                                  and ~18.
+                                  ~18 and ~20.
                                 type: string
                               phpVersion:
                                 description: The version of PHP to use when current_stack

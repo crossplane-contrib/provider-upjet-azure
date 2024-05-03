@@ -178,7 +178,7 @@ type ContainerAppObservation struct {
 	RevisionMode *string `json:"revisionMode,omitempty" tf:"revision_mode,omitempty"`
 
 	// One or more secret block as detailed below.
-	Secret []SecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
+	Secret []SecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// A mapping of tags to assign to the Container App.
 	// +mapType=granular
@@ -1473,22 +1473,56 @@ type RegistryParameters struct {
 }
 
 type SecretInitParameters struct {
+
+	// The identity to use for accessing the Key Vault secret reference. This can either be the Resource ID of a User Assigned Identity, or System for the System Assigned Identity.
+	// The identity to use for accessing key vault reference.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The secret name.
+	// The secret name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SecretObservation struct {
+
+	// The identity to use for accessing the Key Vault secret reference. This can either be the Resource ID of a User Assigned Identity, or System for the System Assigned Identity.
+	// The identity to use for accessing key vault reference.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The secret name.
+	// The secret name.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SecretParameters struct {
 
-	// The Secret name.
-	// The Secret name.
-	// +kubebuilder:validation:Required
-	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
+	// The identity to use for accessing the Key Vault secret reference. This can either be the Resource ID of a User Assigned Identity, or System for the System Assigned Identity.
+	// The identity to use for accessing key vault reference.
+	// +kubebuilder:validation:Optional
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	// +kubebuilder:validation:Optional
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The secret name.
+	// The secret name.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
 
 	// The value for this secret.
 	// The value for this secret.
-	// +kubebuilder:validation:Required
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	// +kubebuilder:validation:Optional
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type StartupProbeHeaderInitParameters struct {

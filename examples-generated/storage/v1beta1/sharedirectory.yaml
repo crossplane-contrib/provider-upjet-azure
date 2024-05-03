@@ -9,10 +9,7 @@ metadata:
 spec:
   forProvider:
     name: example
-    shareNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    storageAccountNameSelector:
+    storageShareIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 
