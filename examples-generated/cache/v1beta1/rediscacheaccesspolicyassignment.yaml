@@ -1,0 +1,55 @@
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCacheAccessPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessPolicyName: Data Contributor
+    objectId: ${data.azurerm_client_config.test.object_id}
+    objectIdAlias: ServicePrincipal
+    redisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    enableNonSslPort: false
+    family: P
+    location: East US
+    redisConfiguration:
+    - maxmemoryDelta: 2
+      maxmemoryPolicy: allkeys-lru
+      maxmemoryReserved: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Premium
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US

@@ -10,6 +10,12 @@ package v1beta1
 func (tr *RedisCache) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *RedisCacheAccessPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *RedisCacheAccessPolicyAssignment) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *RedisEnterpriseCluster) Hub() {}
 
 // Hub marks this type as a conversion hub.

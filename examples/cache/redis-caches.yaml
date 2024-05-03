@@ -3,6 +3,43 @@
 # SPDX-License-Identifier: CC0-1.0
 
 apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCacheAccessPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    permissions: +@read +@connection +cluster|info
+    redisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cache.azure.upbound.io/v1beta1
+kind: RedisCacheAccessPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessPolicyName: Data Contributor
+    objectId: ${data.azurerm_client_config.test.object_id}
+    objectIdAlias: ServicePrincipal
+    redisCacheIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+
+apiVersion: cache.azure.upbound.io/v1beta1
 kind: RedisFirewallRule
 metadata:
   labels:
