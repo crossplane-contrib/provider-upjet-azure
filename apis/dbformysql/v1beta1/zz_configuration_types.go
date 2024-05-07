@@ -31,7 +31,7 @@ type ConfigurationInitParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the MySQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta2.Server
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
 	// Reference to a Server in dbformysql to populate serverName.
@@ -84,7 +84,7 @@ type ConfigurationParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the MySQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta2.Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 

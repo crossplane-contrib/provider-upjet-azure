@@ -7,9 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *HPCCache) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *HPCCacheAccessPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.

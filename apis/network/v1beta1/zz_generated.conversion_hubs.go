@@ -7,16 +7,16 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *ApplicationGateway) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ApplicationSecurityGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DNSARecord) Hub() {}
+func (tr *DDoSProtectionPlan) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *DNSAAAARecord) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *DNSARecord) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *DNSCAARecord) Hub() {}
@@ -40,31 +40,13 @@ func (tr *DNSSRVRecord) Hub() {}
 func (tr *DNSTXTRecord) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DNSZone) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ExpressRouteCircuit) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ExpressRouteCircuitAuthorization) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ExpressRouteCircuitConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ExpressRouteCircuitPeering) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ExpressRouteConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ExpressRouteGateway) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ExpressRoutePort) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Firewall) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *FirewallApplicationRuleCollection) Hub() {}
@@ -76,22 +58,10 @@ func (tr *FirewallNATRuleCollection) Hub() {}
 func (tr *FirewallNetworkRuleCollection) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *FirewallPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FirewallPolicyRuleCollectionGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *FrontDoor) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FrontdoorCustomHTTPSConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FrontdoorFirewallPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *FrontdoorRulesEngine) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *IPGroup) Hub() {}
@@ -121,7 +91,16 @@ func (tr *LoadBalancerProbe) Hub() {}
 func (tr *LoadBalancerRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LocalNetworkGateway) Hub() {}
+func (tr *ManagerManagementGroupConnection) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ManagerNetworkGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ManagerStaticMember) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ManagerSubscriptionConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NATGateway) Hub() {}
@@ -131,12 +110,6 @@ func (tr *NATGatewayPublicIPAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NATGatewayPublicIPPrefixAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ConnectionMonitor) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DDoSProtectionPlan) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NetworkInterface) Hub() {}
@@ -154,46 +127,10 @@ func (tr *NetworkInterfaceNatRuleAssociation) Hub() {}
 func (tr *NetworkInterfaceSecurityGroupAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Manager) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ManagerManagementGroupConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ManagerNetworkGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ManagerStaticMember) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ManagerSubscriptionConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PacketCapture) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Profile) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SecurityGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SecurityRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Watcher) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WatcherFlowLog) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PointToSiteVPNGateway) Hub() {}
+func (tr *PrivateDNSAAAARecord) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PrivateDNSARecord) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateDNSAAAARecord) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PrivateDNSCNAMERecord) Hub() {}
@@ -214,13 +151,7 @@ func (tr *PrivateDNSSRVRecord) Hub() {}
 func (tr *PrivateDNSTXTRecord) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *PrivateDNSZone) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *PrivateDNSZoneVirtualNetworkLink) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *PrivateEndpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *PrivateEndpointApplicationSecurityGroupAssociation) Hub() {}
@@ -253,7 +184,10 @@ func (tr *RouteServerBGPConnection) Hub() {}
 func (tr *RouteTable) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Subnet) Hub() {}
+func (tr *SecurityGroup) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *SecurityRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SubnetNATGatewayAssociation) Hub() {}
@@ -277,13 +211,7 @@ func (tr *TrafficManagerExternalEndpoint) Hub() {}
 func (tr *TrafficManagerNestedEndpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *TrafficManagerProfile) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VirtualHub) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VirtualHubConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VirtualHubIP) Hub() {}
@@ -298,34 +226,13 @@ func (tr *VirtualHubRouteTableRoute) Hub() {}
 func (tr *VirtualHubSecurityPartnerProvider) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *VirtualNetwork) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VirtualNetworkGateway) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VirtualNetworkGatewayConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VirtualNetworkPeering) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VirtualWAN) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *VPNGateway) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VPNGatewayConnection) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VPNServerConfiguration) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *VPNServerConfigurationPolicyGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *VPNSite) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WebApplicationFirewallPolicy) Hub() {}
+func (tr *Watcher) Hub() {}

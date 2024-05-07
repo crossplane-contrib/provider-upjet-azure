@@ -19,7 +19,7 @@ type SiteRecoveryNetworkMappingInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta2.Vault
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
 	// Reference to a Vault in recoveryservices to populate recoveryVaultName.
@@ -43,7 +43,7 @@ type SiteRecoveryNetworkMappingInitParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The id of the primary network. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SourceNetworkID *string `json:"sourceNetworkId,omitempty" tf:"source_network_id,omitempty"`
 
@@ -59,7 +59,7 @@ type SiteRecoveryNetworkMappingInitParameters struct {
 	SourceRecoveryFabricName *string `json:"sourceRecoveryFabricName,omitempty" tf:"source_recovery_fabric_name,omitempty"`
 
 	// The id of the recovery network. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	TargetNetworkID *string `json:"targetNetworkId,omitempty" tf:"target_network_id,omitempty"`
 
@@ -109,7 +109,7 @@ type SiteRecoveryNetworkMappingParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta2.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 
@@ -135,7 +135,7 @@ type SiteRecoveryNetworkMappingParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The id of the primary network. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceNetworkID *string `json:"sourceNetworkId,omitempty" tf:"source_network_id,omitempty"`
@@ -153,7 +153,7 @@ type SiteRecoveryNetworkMappingParameters struct {
 	SourceRecoveryFabricName *string `json:"sourceRecoveryFabricName,omitempty" tf:"source_recovery_fabric_name,omitempty"`
 
 	// The id of the recovery network. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetNetworkID *string `json:"targetNetworkId,omitempty" tf:"target_network_id,omitempty"`

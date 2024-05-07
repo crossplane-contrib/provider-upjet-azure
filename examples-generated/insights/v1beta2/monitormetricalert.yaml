@@ -1,0 +1,85 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorMetricAlert
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitormetricalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    action:
+    - actionGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: main
+    criteria:
+    - aggregation: Total
+      dimension:
+      - name: ApiName
+        operator: Include
+        values:
+        - '*'
+      metricName: Transactions
+      metricNamespace: Microsoft.Storage/storageAccounts
+      operator: GreaterThan
+      threshold: 50
+    description: Action will be triggered when Transactions count is greater than
+      50.
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scopesRefs:
+    - name: to_monitor
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitormetricalert
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: exampleact
+    webhookReceiver:
+    - name: callmyapi
+      serviceUri: http://example.com/alert
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitormetricalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitormetricalert
+  labels:
+    testing.upbound.io/example-name: to_monitor
+  name: to-monitor
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

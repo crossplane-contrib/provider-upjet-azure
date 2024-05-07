@@ -1,0 +1,71 @@
+apiVersion: healthcareapis.azure.upbound.io/v1beta2
+kind: HealthcareFHIRService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcarefhirservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessPolicyObjectIds:
+    - ${data.azurerm_client_config.current.object_id}
+    authentication:
+    - audience: https://tfexfhir.fhir.azurehealthcareapis.com
+      authority: https://login.microsoftonline.com/tenantId
+    configurationExportStorageAccountName: storage_account_name
+    containerRegistryLoginServerUrl:
+    - tfex-container_registry_login_server
+    cors:
+    - allowedHeaders:
+      - '*'
+      allowedMethods:
+      - GET
+      - DELETE
+      - PUT
+      allowedOrigins:
+      - https://tfex.com:123
+      - https://tfex1.com:3389
+      credentialsAllowed: true
+      maxAgeInSeconds: 3600
+    identity:
+    - type: SystemAssigned
+    kind: fhir-R4
+    location: east us
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcarefhirservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcarefhirservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

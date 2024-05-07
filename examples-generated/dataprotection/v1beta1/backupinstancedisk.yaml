@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: dataprotection.azure.upbound.io/v1beta1
+apiVersion: dataprotection.azure.upbound.io/v1beta2
 kind: BackupPolicyDisk
 metadata:
   annotations:
@@ -43,7 +43,7 @@ spec:
 
 ---
 
-apiVersion: dataprotection.azure.upbound.io/v1beta1
+apiVersion: dataprotection.azure.upbound.io/v1beta2
 kind: BackupVault
 metadata:
   annotations:
@@ -64,7 +64,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: ManagedDisk
 metadata:
   annotations:

@@ -34,7 +34,7 @@ type APIOperationTagObservation struct {
 type APIOperationTagParameters struct {
 
 	// The ID of the API Management API Operation. Changing this forces a new API Management API Operation Tag to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.APIOperation
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta2.APIOperation
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	APIOperationID *string `json:"apiOperationId,omitempty" tf:"api_operation_id,omitempty"`

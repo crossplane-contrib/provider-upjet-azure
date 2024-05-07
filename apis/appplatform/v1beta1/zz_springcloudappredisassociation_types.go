@@ -16,7 +16,7 @@ import (
 type SpringCloudAppRedisAssociationInitParameters struct {
 
 	// Specifies the Redis Cache access key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta2.RedisCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_access_key",true)
 	RedisAccessKey *string `json:"redisAccessKey,omitempty" tf:"redis_access_key,omitempty"`
 
@@ -29,7 +29,7 @@ type SpringCloudAppRedisAssociationInitParameters struct {
 	RedisAccessKeySelector *v1.Selector `json:"redisAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta2.RedisCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
 
@@ -66,7 +66,7 @@ type SpringCloudAppRedisAssociationObservation struct {
 type SpringCloudAppRedisAssociationParameters struct {
 
 	// Specifies the Redis Cache access key.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta2.RedisCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_access_key",true)
 	// +kubebuilder:validation:Optional
 	RedisAccessKey *string `json:"redisAccessKey,omitempty" tf:"redis_access_key,omitempty"`
@@ -80,7 +80,7 @@ type SpringCloudAppRedisAssociationParameters struct {
 	RedisAccessKeySelector *v1.Selector `json:"redisAccessKeySelector,omitempty" tf:"-"`
 
 	// Specifies the Redis Cache resource ID. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta2.RedisCache
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	RedisCacheID *string `json:"redisCacheId,omitempty" tf:"redis_cache_id,omitempty"`
@@ -98,7 +98,7 @@ type SpringCloudAppRedisAssociationParameters struct {
 	SSLEnabled *bool `json:"sslEnabled,omitempty" tf:"ssl_enabled,omitempty"`
 
 	// Specifies the Spring Cloud Application resource ID in which the Association is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`

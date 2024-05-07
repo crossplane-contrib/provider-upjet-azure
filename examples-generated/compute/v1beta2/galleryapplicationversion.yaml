@@ -1,0 +1,133 @@
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: GalleryApplicationVersion
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/galleryapplicationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    galleryApplicationIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    manageAction:
+    - install: '[install command]'
+      remove: '[remove command]'
+    name: 0.0.1
+    source:
+    - mediaLinkSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    targetRegion:
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      regionalReplicaCount: 1
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: GalleryApplication
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/galleryapplicationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    galleryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    supportedOsType: Linux
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/galleryapplicationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: SharedImageGallery
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/galleryapplicationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/galleryapplicationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Blob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/galleryapplicationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    sourceContent: '[scripts file content]'
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageContainerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: Block
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/galleryapplicationversion
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: blob
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

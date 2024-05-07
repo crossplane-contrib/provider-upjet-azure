@@ -1,0 +1,38 @@
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: WebPubsub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    identity:
+    - type: SystemAssigned
+    liveTrace:
+    - connectivityLogsEnabled: false
+      enabled: true
+      messagingLogsEnabled: true
+    location: West Europe
+    name: tfex-webpubsub
+    publicNetworkAccessEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard_S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us

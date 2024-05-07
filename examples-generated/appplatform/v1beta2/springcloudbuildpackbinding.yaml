@@ -1,0 +1,77 @@
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudBuildPackBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuildpackbinding
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    bindingType: ApplicationInsights
+    launch:
+    - properties:
+        abc: def
+        any-string: any-string
+        sampling-rate: "12.0"
+      secrets:
+        connection-string: XXXXXXXXXXXXXXXXX=XXXXXXXXXXXXX-XXXXXXXXXXXXXXXXXXX;XXXXXXXXXXXXXXXXX=XXXXXXXXXXXXXXXXXXX
+    springCloudBuilderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuildpackbinding
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudBuilder
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuildpackbinding
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    buildPackGroup:
+    - buildPackIds:
+      - tanzu-Build Packs/java-azure
+      name: mix
+    name: example
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    stack:
+    - id: io.Build Packs.stacks.bionic
+      version: base
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuildpackbinding
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

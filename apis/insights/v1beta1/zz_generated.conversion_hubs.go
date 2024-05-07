@@ -19,52 +19,19 @@ func (tr *ApplicationInsightsAPIKey) Hub() {}
 func (tr *ApplicationInsightsSmartDetectionRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ApplicationInsightsStandardWebTest) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ApplicationInsightsWebTest) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ApplicationInsightsWorkbook) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ApplicationInsightsWorkbookTemplate) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MonitorActionGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorActivityLogAlert) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorAutoscaleSetting) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MonitorDataCollectionEndpoint) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MonitorDataCollectionRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MonitorDataCollectionRuleAssociation) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorDiagnosticSetting) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorMetricAlert) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MonitorPrivateLinkScope) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MonitorPrivateLinkScopedService) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorScheduledQueryRulesAlert) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorScheduledQueryRulesAlertV2) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MonitorScheduledQueryRulesLog) Hub() {}

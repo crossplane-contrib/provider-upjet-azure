@@ -1,0 +1,113 @@
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: WebPubsubHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    anonymousConnectionsEnabled: true
+    eventHandler:
+    - systemEvents:
+      - connect
+      - connected
+      urlTemplate: https://test.com/api/{hub}/{event}
+      userEventPattern: '*'
+    - auth:
+      - managedIdentityIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      systemEvents:
+      - connected
+      urlTemplate: https://test.com/api/{hub}/{event}
+      userEventPattern: event1, event2
+    eventListener:
+    - eventhubNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test1
+      eventhubNamespaceNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      systemEventNameFilter:
+      - connected
+      userEventNameFilter:
+      - event1
+      - event2
+    - eventhubNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test1
+      eventhubNamespaceNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      systemEventNameFilter:
+      - connected
+      userEventNameFilter:
+      - '*'
+    - eventhubNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test1
+      eventhubNamespaceNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      systemEventNameFilter:
+      - connected
+      userEventNameFilter:
+      - event1
+    name: tfex_wpsh
+    webPubsubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us
+    name: tfex-uai
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: WebPubsub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    location: east us
+    name: tfex-webpubsub
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard_S1

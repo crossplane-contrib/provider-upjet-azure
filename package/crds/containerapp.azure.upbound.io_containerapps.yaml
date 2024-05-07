@@ -2876,3 +2876,2819 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: ContainerApp is the Schema for the ContainerApps API. Manages
+          a Container App.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ContainerAppSpec defines the desired state of ContainerApp
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  containerAppEnvironmentId:
+                    description: |-
+                      The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
+                      The ID of the Container App Environment to host this Container App.
+                    type: string
+                  containerAppEnvironmentIdRef:
+                    description: Reference to a Environment in containerapp to populate
+                      containerAppEnvironmentId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  containerAppEnvironmentIdSelector:
+                    description: Selector for a Environment in containerapp to populate
+                      containerAppEnvironmentId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  dapr:
+                    description: A dapr block as detailed below.
+                    properties:
+                      appId:
+                        description: |-
+                          The Dapr Application Identifier.
+                          The Dapr Application Identifier.
+                        type: string
+                      appPort:
+                        description: |-
+                          The port which the application is listening on. This is the same as the ingress port.
+                          The port which the application is listening on. This is the same as the `ingress` port.
+                        type: number
+                      appProtocol:
+                        description: |-
+                          The protocol for the app. Possible values include http and grpc. Defaults to http.
+                          The protocol for the app. Possible values include `http` and `grpc`. Defaults to `http`.
+                        type: string
+                    type: object
+                  identity:
+                    description: An identity block as detailed below.
+                    properties:
+                      identityIds:
+                        description: '- A list of one or more Resource IDs for User
+                          Assigned Managed identities to assign. Required when type
+                          is set to UserAssigned or SystemAssigned, UserAssigned.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: The type of managed identity to assign. Possible
+                          values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  ingress:
+                    description: An ingress block as detailed below.
+                    properties:
+                      allowInsecureConnections:
+                        description: |-
+                          Should this ingress allow insecure connections?
+                          Should this ingress allow insecure connections?
+                        type: boolean
+                      customDomain:
+                        description: One or more custom_domain block as detailed below.
+                        properties:
+                          certificateBindingType:
+                            description: |-
+                              The Binding type. Possible values include Disabled and SniEnabled. Defaults to Disabled.
+                              The Binding type. Possible values include `Disabled` and `SniEnabled`. Defaults to `Disabled`
+                            type: string
+                          certificateId:
+                            description: The ID of the Container App Environment Certificate.
+                            type: string
+                          name:
+                            description: |-
+                              The name of the Volume to be mounted in the container.
+                              The hostname of the Certificate. Must be the CN or a named SAN in the certificate.
+                            type: string
+                        type: object
+                      exposedPort:
+                        description: |-
+                          The exposed port on the container for the Ingress traffic.
+                          The exposed port on the container for the Ingress traffic.
+                        type: number
+                      externalEnabled:
+                        description: |-
+                          Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
+                          Is this an external Ingress.
+                        type: boolean
+                      ipSecurityRestriction:
+                        description: One or more ip_security_restriction blocks for
+                          IP-filtering rules as defined below.
+                        items:
+                          properties:
+                            action:
+                              description: |-
+                                The IP-filter action. Allow or Deny.
+                                The action. Allow or Deny.
+                              type: string
+                            description:
+                              description: |-
+                                Describe the IP restriction rule that is being sent to the container-app.
+                                Describe the IP restriction rule that is being sent to the container-app.
+                              type: string
+                            ipAddressRange:
+                              description: |-
+                                CIDR notation to match incoming IP address.
+                                CIDR notation to match incoming IP address.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                Name for the IP restriction rule.
+                              type: string
+                          type: object
+                        type: array
+                      targetPort:
+                        description: |-
+                          The target port on the container for the Ingress traffic.
+                          The target port on the container for the Ingress traffic.
+                        type: number
+                      trafficWeight:
+                        description: One or more traffic_weight blocks as detailed
+                          below.
+                        items:
+                          properties:
+                            label:
+                              description: |-
+                                The label to apply to the revision as a name prefix for routing traffic.
+                                The label to apply to the revision as a name prefix for routing traffic.
+                              type: string
+                            latestRevision:
+                              description: |-
+                                This traffic Weight applies to the latest stable Container Revision. At most only one traffic_weight block can have the latest_revision set to true.
+                                This traffic Weight relates to the latest stable Container Revision.
+                              type: boolean
+                            percentage:
+                              description: |-
+                                The percentage of traffic which should be sent this revision.
+                                The percentage of traffic to send to this revision.
+                              type: number
+                            revisionSuffix:
+                              description: |-
+                                The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                                The suffix string to append to the revision. This must be unique for the Container App's lifetime. A default hash created by the service will be used if this value is omitted.
+                              type: string
+                          type: object
+                        type: array
+                      transport:
+                        description: |-
+                          The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+                          The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
+                        type: string
+                    type: object
+                  registry:
+                    description: A registry block as detailed below.
+                    items:
+                      properties:
+                        identity:
+                          description: |-
+                            Resource ID for the User Assigned Managed identity to use when pulling from the Container Registry.
+                            ID of the System or User Managed Identity used to pull images from the Container Registry
+                          type: string
+                        passwordSecretName:
+                          description: |-
+                            The name of the Secret Reference containing the password value for this user on the Container Registry, username must also be supplied.
+                            The name of the Secret Reference containing the password value for this user on the Container Registry.
+                          type: string
+                        server:
+                          description: |-
+                            The hostname for the Container Registry.
+                            The hostname for the Container Registry.
+                          type: string
+                        username:
+                          description: |-
+                            The username to use for this Container Registry, password_secret_name must also be supplied..
+                            The username to use for this Container Registry.
+                          type: string
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the resource group in which the Container
+                      App Environment is to be created. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  revisionMode:
+                    description: The revisions operational mode for the Container
+                      App. Possible values include Single and Multiple. In Single
+                      mode, a single revision is in operation at any given time. In
+                      Multiple mode, more than one revision can be active at a time
+                      and can be configured with load distribution via the traffic_weight
+                      block in the ingress configuration.
+                    type: string
+                  secret:
+                    description: One or more secret block as detailed below.
+                    items:
+                      properties:
+                        nameSecretRef:
+                          description: |-
+                            The Secret name.
+                            The Secret name.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        valueSecretRef:
+                          description: |-
+                            The value for this secret.
+                            The value for this secret.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - nameSecretRef
+                      - valueSecretRef
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Container App.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  template:
+                    description: A template block as detailed below.
+                    properties:
+                      azureQueueScaleRule:
+                        description: One or more azure_queue_scale_rule blocks as
+                          defined below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                            queueLength:
+                              description: The value of the length of the queue to
+                                trigger scaling actions.
+                              type: number
+                            queueName:
+                              description: The name of the Azure Queue
+                              type: string
+                          type: object
+                        type: array
+                      container:
+                        description: One or more container blocks as detailed below.
+                        items:
+                          properties:
+                            args:
+                              description: |-
+                                A list of extra arguments to pass to the container.
+                                A list of args to pass to the container.
+                              items:
+                                type: string
+                              type: array
+                            command:
+                              description: |-
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                              items:
+                                type: string
+                              type: array
+                            cpu:
+                              description: |-
+                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                              type: number
+                            env:
+                              description: One or more env blocks as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the environment variable for the container.
+                                    type: string
+                                  secretName:
+                                    description: |-
+                                      The name of the secret that contains the value for this environment variable.
+                                      The name of the secret that contains the value for this environment variable.
+                                    type: string
+                                  value:
+                                    description: |-
+                                      The value for this secret.
+                                      The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                    type: string
+                                type: object
+                              type: array
+                            image:
+                              description: |-
+                                The image to use to create the container.
+                                The image to use to create the container.
+                              type: string
+                            livenessProbe:
+                              description: A liveness_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  initialDelay:
+                                    description: |-
+                                      The time in seconds to wait after the container has started before the probe is started.
+                                      The time in seconds to wait after the container has started before the probe is started.
+                                    type: number
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            memory:
+                              description: |-
+                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the container.
+                              type: string
+                            readinessProbe:
+                              description: A readiness_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  successCountThreshold:
+                                    description: |-
+                                      The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            startupProbe:
+                              description: A startup_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            volumeMounts:
+                              description: A volume_mounts block as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the Volume to be mounted in the container.
+                                    type: string
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The path in the container at which to mount this volume.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
+                      customScaleRule:
+                        description: One or more custom_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            customRuleType:
+                              description: 'The Custom rule type. Possible values
+                                include: activemq, artemis-queue, kafka, pulsar, aws-cloudwatch,
+                                aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream,
+                                aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer,
+                                azure-eventhub, azure-log-analytics, azure-monitor,
+                                azure-pipelines, azure-servicebus, azure-queue, cassandra,
+                                cpu, cron, datadog, elasticsearch, external, external-push,
+                                gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                openstack-swift, postgresql, predictkube, prometheus,
+                                rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams,
+                                redis-cluster-streams, redis-sentinel-streams, selenium-grid,solace-event-queue,
+                                and github-runner.'
+                              type: string
+                            metadata:
+                              additionalProperties:
+                                type: string
+                              description: '- A map of string key-value pairs to configure
+                                the Custom Scale Rule.'
+                              type: object
+                              x-kubernetes-map-type: granular
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      httpScaleRule:
+                        description: One or more http_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            concurrentRequests:
+                              description: '- The number of concurrent requests to
+                                trigger scaling.'
+                              type: string
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      initContainer:
+                        description: The definition of an init container that is part
+                          of the group as documented in the init_container block below.
+                        items:
+                          properties:
+                            args:
+                              description: |-
+                                A list of extra arguments to pass to the container.
+                                A list of args to pass to the container.
+                              items:
+                                type: string
+                              type: array
+                            command:
+                              description: |-
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                              items:
+                                type: string
+                              type: array
+                            cpu:
+                              description: |-
+                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                              type: number
+                            env:
+                              description: One or more env blocks as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the environment variable for the container.
+                                    type: string
+                                  secretName:
+                                    description: |-
+                                      The name of the secret that contains the value for this environment variable.
+                                      The name of the secret that contains the value for this environment variable.
+                                    type: string
+                                  value:
+                                    description: |-
+                                      The value for this secret.
+                                      The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                    type: string
+                                type: object
+                              type: array
+                            image:
+                              description: |-
+                                The image to use to create the container.
+                                The image to use to create the container.
+                              type: string
+                            memory:
+                              description: |-
+                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the container.
+                              type: string
+                            volumeMounts:
+                              description: A volume_mounts block as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the Volume to be mounted in the container.
+                                    type: string
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The path in the container at which to mount this volume.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
+                      maxReplicas:
+                        description: |-
+                          The maximum number of replicas for this container.
+                          The maximum number of replicas for this container.
+                        type: number
+                      minReplicas:
+                        description: |-
+                          The minimum number of replicas for this container.
+                          The minimum number of replicas for this container.
+                        type: number
+                      revisionSuffix:
+                        description: |-
+                          The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                          The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                        type: string
+                      tcpScaleRule:
+                        description: One or more tcp_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            concurrentRequests:
+                              description: '- The number of concurrent requests to
+                                trigger scaling.'
+                              type: string
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      volume:
+                        description: A volume block as detailed below.
+                        items:
+                          properties:
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the volume.
+                              type: string
+                            storageName:
+                              description: |-
+                                The name of the AzureFile storage.
+                                The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
+                              type: string
+                            storageType:
+                              description: |-
+                                The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                  workloadProfileName:
+                    description: The name of the Workload Profile in the Container
+                      App Environment to place this Container App.
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  containerAppEnvironmentId:
+                    description: |-
+                      The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
+                      The ID of the Container App Environment to host this Container App.
+                    type: string
+                  containerAppEnvironmentIdRef:
+                    description: Reference to a Environment in containerapp to populate
+                      containerAppEnvironmentId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  containerAppEnvironmentIdSelector:
+                    description: Selector for a Environment in containerapp to populate
+                      containerAppEnvironmentId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  dapr:
+                    description: A dapr block as detailed below.
+                    properties:
+                      appId:
+                        description: |-
+                          The Dapr Application Identifier.
+                          The Dapr Application Identifier.
+                        type: string
+                      appPort:
+                        description: |-
+                          The port which the application is listening on. This is the same as the ingress port.
+                          The port which the application is listening on. This is the same as the `ingress` port.
+                        type: number
+                      appProtocol:
+                        description: |-
+                          The protocol for the app. Possible values include http and grpc. Defaults to http.
+                          The protocol for the app. Possible values include `http` and `grpc`. Defaults to `http`.
+                        type: string
+                    type: object
+                  identity:
+                    description: An identity block as detailed below.
+                    properties:
+                      identityIds:
+                        description: '- A list of one or more Resource IDs for User
+                          Assigned Managed identities to assign. Required when type
+                          is set to UserAssigned or SystemAssigned, UserAssigned.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: The type of managed identity to assign. Possible
+                          values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  ingress:
+                    description: An ingress block as detailed below.
+                    properties:
+                      allowInsecureConnections:
+                        description: |-
+                          Should this ingress allow insecure connections?
+                          Should this ingress allow insecure connections?
+                        type: boolean
+                      customDomain:
+                        description: One or more custom_domain block as detailed below.
+                        properties:
+                          certificateBindingType:
+                            description: |-
+                              The Binding type. Possible values include Disabled and SniEnabled. Defaults to Disabled.
+                              The Binding type. Possible values include `Disabled` and `SniEnabled`. Defaults to `Disabled`
+                            type: string
+                          certificateId:
+                            description: The ID of the Container App Environment Certificate.
+                            type: string
+                          name:
+                            description: |-
+                              The name of the Volume to be mounted in the container.
+                              The hostname of the Certificate. Must be the CN or a named SAN in the certificate.
+                            type: string
+                        type: object
+                      exposedPort:
+                        description: |-
+                          The exposed port on the container for the Ingress traffic.
+                          The exposed port on the container for the Ingress traffic.
+                        type: number
+                      externalEnabled:
+                        description: |-
+                          Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
+                          Is this an external Ingress.
+                        type: boolean
+                      ipSecurityRestriction:
+                        description: One or more ip_security_restriction blocks for
+                          IP-filtering rules as defined below.
+                        items:
+                          properties:
+                            action:
+                              description: |-
+                                The IP-filter action. Allow or Deny.
+                                The action. Allow or Deny.
+                              type: string
+                            description:
+                              description: |-
+                                Describe the IP restriction rule that is being sent to the container-app.
+                                Describe the IP restriction rule that is being sent to the container-app.
+                              type: string
+                            ipAddressRange:
+                              description: |-
+                                CIDR notation to match incoming IP address.
+                                CIDR notation to match incoming IP address.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                Name for the IP restriction rule.
+                              type: string
+                          type: object
+                        type: array
+                      targetPort:
+                        description: |-
+                          The target port on the container for the Ingress traffic.
+                          The target port on the container for the Ingress traffic.
+                        type: number
+                      trafficWeight:
+                        description: One or more traffic_weight blocks as detailed
+                          below.
+                        items:
+                          properties:
+                            label:
+                              description: |-
+                                The label to apply to the revision as a name prefix for routing traffic.
+                                The label to apply to the revision as a name prefix for routing traffic.
+                              type: string
+                            latestRevision:
+                              description: |-
+                                This traffic Weight applies to the latest stable Container Revision. At most only one traffic_weight block can have the latest_revision set to true.
+                                This traffic Weight relates to the latest stable Container Revision.
+                              type: boolean
+                            percentage:
+                              description: |-
+                                The percentage of traffic which should be sent this revision.
+                                The percentage of traffic to send to this revision.
+                              type: number
+                            revisionSuffix:
+                              description: |-
+                                The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                                The suffix string to append to the revision. This must be unique for the Container App's lifetime. A default hash created by the service will be used if this value is omitted.
+                              type: string
+                          type: object
+                        type: array
+                      transport:
+                        description: |-
+                          The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+                          The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
+                        type: string
+                    type: object
+                  registry:
+                    description: A registry block as detailed below.
+                    items:
+                      properties:
+                        identity:
+                          description: |-
+                            Resource ID for the User Assigned Managed identity to use when pulling from the Container Registry.
+                            ID of the System or User Managed Identity used to pull images from the Container Registry
+                          type: string
+                        passwordSecretName:
+                          description: |-
+                            The name of the Secret Reference containing the password value for this user on the Container Registry, username must also be supplied.
+                            The name of the Secret Reference containing the password value for this user on the Container Registry.
+                          type: string
+                        server:
+                          description: |-
+                            The hostname for the Container Registry.
+                            The hostname for the Container Registry.
+                          type: string
+                        username:
+                          description: |-
+                            The username to use for this Container Registry, password_secret_name must also be supplied..
+                            The username to use for this Container Registry.
+                          type: string
+                      type: object
+                    type: array
+                  revisionMode:
+                    description: The revisions operational mode for the Container
+                      App. Possible values include Single and Multiple. In Single
+                      mode, a single revision is in operation at any given time. In
+                      Multiple mode, more than one revision can be active at a time
+                      and can be configured with load distribution via the traffic_weight
+                      block in the ingress configuration.
+                    type: string
+                  secret:
+                    description: One or more secret block as detailed below.
+                    items:
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Container App.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  template:
+                    description: A template block as detailed below.
+                    properties:
+                      azureQueueScaleRule:
+                        description: One or more azure_queue_scale_rule blocks as
+                          defined below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                            queueLength:
+                              description: The value of the length of the queue to
+                                trigger scaling actions.
+                              type: number
+                            queueName:
+                              description: The name of the Azure Queue
+                              type: string
+                          type: object
+                        type: array
+                      container:
+                        description: One or more container blocks as detailed below.
+                        items:
+                          properties:
+                            args:
+                              description: |-
+                                A list of extra arguments to pass to the container.
+                                A list of args to pass to the container.
+                              items:
+                                type: string
+                              type: array
+                            command:
+                              description: |-
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                              items:
+                                type: string
+                              type: array
+                            cpu:
+                              description: |-
+                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                              type: number
+                            env:
+                              description: One or more env blocks as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the environment variable for the container.
+                                    type: string
+                                  secretName:
+                                    description: |-
+                                      The name of the secret that contains the value for this environment variable.
+                                      The name of the secret that contains the value for this environment variable.
+                                    type: string
+                                  value:
+                                    description: |-
+                                      The value for this secret.
+                                      The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                    type: string
+                                type: object
+                              type: array
+                            image:
+                              description: |-
+                                The image to use to create the container.
+                                The image to use to create the container.
+                              type: string
+                            livenessProbe:
+                              description: A liveness_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  initialDelay:
+                                    description: |-
+                                      The time in seconds to wait after the container has started before the probe is started.
+                                      The time in seconds to wait after the container has started before the probe is started.
+                                    type: number
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            memory:
+                              description: |-
+                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the container.
+                              type: string
+                            readinessProbe:
+                              description: A readiness_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  successCountThreshold:
+                                    description: |-
+                                      The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            startupProbe:
+                              description: A startup_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            volumeMounts:
+                              description: A volume_mounts block as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the Volume to be mounted in the container.
+                                    type: string
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The path in the container at which to mount this volume.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
+                      customScaleRule:
+                        description: One or more custom_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            customRuleType:
+                              description: 'The Custom rule type. Possible values
+                                include: activemq, artemis-queue, kafka, pulsar, aws-cloudwatch,
+                                aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream,
+                                aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer,
+                                azure-eventhub, azure-log-analytics, azure-monitor,
+                                azure-pipelines, azure-servicebus, azure-queue, cassandra,
+                                cpu, cron, datadog, elasticsearch, external, external-push,
+                                gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                openstack-swift, postgresql, predictkube, prometheus,
+                                rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams,
+                                redis-cluster-streams, redis-sentinel-streams, selenium-grid,solace-event-queue,
+                                and github-runner.'
+                              type: string
+                            metadata:
+                              additionalProperties:
+                                type: string
+                              description: '- A map of string key-value pairs to configure
+                                the Custom Scale Rule.'
+                              type: object
+                              x-kubernetes-map-type: granular
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      httpScaleRule:
+                        description: One or more http_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            concurrentRequests:
+                              description: '- The number of concurrent requests to
+                                trigger scaling.'
+                              type: string
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      initContainer:
+                        description: The definition of an init container that is part
+                          of the group as documented in the init_container block below.
+                        items:
+                          properties:
+                            args:
+                              description: |-
+                                A list of extra arguments to pass to the container.
+                                A list of args to pass to the container.
+                              items:
+                                type: string
+                              type: array
+                            command:
+                              description: |-
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                              items:
+                                type: string
+                              type: array
+                            cpu:
+                              description: |-
+                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                              type: number
+                            env:
+                              description: One or more env blocks as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the environment variable for the container.
+                                    type: string
+                                  secretName:
+                                    description: |-
+                                      The name of the secret that contains the value for this environment variable.
+                                      The name of the secret that contains the value for this environment variable.
+                                    type: string
+                                  value:
+                                    description: |-
+                                      The value for this secret.
+                                      The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                    type: string
+                                type: object
+                              type: array
+                            image:
+                              description: |-
+                                The image to use to create the container.
+                                The image to use to create the container.
+                              type: string
+                            memory:
+                              description: |-
+                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the container.
+                              type: string
+                            volumeMounts:
+                              description: A volume_mounts block as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the Volume to be mounted in the container.
+                                    type: string
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The path in the container at which to mount this volume.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
+                      maxReplicas:
+                        description: |-
+                          The maximum number of replicas for this container.
+                          The maximum number of replicas for this container.
+                        type: number
+                      minReplicas:
+                        description: |-
+                          The minimum number of replicas for this container.
+                          The minimum number of replicas for this container.
+                        type: number
+                      revisionSuffix:
+                        description: |-
+                          The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                          The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                        type: string
+                      tcpScaleRule:
+                        description: One or more tcp_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            concurrentRequests:
+                              description: '- The number of concurrent requests to
+                                trigger scaling.'
+                              type: string
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      volume:
+                        description: A volume block as detailed below.
+                        items:
+                          properties:
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the volume.
+                              type: string
+                            storageName:
+                              description: |-
+                                The name of the AzureFile storage.
+                                The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
+                              type: string
+                            storageType:
+                              description: |-
+                                The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                  workloadProfileName:
+                    description: The name of the Workload Profile in the Container
+                      App Environment to place this Container App.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.revisionMode is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.revisionMode)
+                || (has(self.initProvider) && has(self.initProvider.revisionMode))'
+            - message: spec.forProvider.template is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.template)
+                || (has(self.initProvider) && has(self.initProvider.template))'
+          status:
+            description: ContainerAppStatus defines the observed state of ContainerApp.
+            properties:
+              atProvider:
+                properties:
+                  containerAppEnvironmentId:
+                    description: |-
+                      The ID of the Container App Environment within which this Container App should exist. Changing this forces a new resource to be created.
+                      The ID of the Container App Environment to host this Container App.
+                    type: string
+                  dapr:
+                    description: A dapr block as detailed below.
+                    properties:
+                      appId:
+                        description: |-
+                          The Dapr Application Identifier.
+                          The Dapr Application Identifier.
+                        type: string
+                      appPort:
+                        description: |-
+                          The port which the application is listening on. This is the same as the ingress port.
+                          The port which the application is listening on. This is the same as the `ingress` port.
+                        type: number
+                      appProtocol:
+                        description: |-
+                          The protocol for the app. Possible values include http and grpc. Defaults to http.
+                          The protocol for the app. Possible values include `http` and `grpc`. Defaults to `http`.
+                        type: string
+                    type: object
+                  id:
+                    description: The ID of the Container App.
+                    type: string
+                  identity:
+                    description: An identity block as detailed below.
+                    properties:
+                      identityIds:
+                        description: '- A list of one or more Resource IDs for User
+                          Assigned Managed identities to assign. Required when type
+                          is set to UserAssigned or SystemAssigned, UserAssigned.'
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The ID of the Container App.
+                        type: string
+                      tenantId:
+                        description: The ID of the Container App.
+                        type: string
+                      type:
+                        description: The type of managed identity to assign. Possible
+                          values are SystemAssigned, UserAssigned, and SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  ingress:
+                    description: An ingress block as detailed below.
+                    properties:
+                      allowInsecureConnections:
+                        description: |-
+                          Should this ingress allow insecure connections?
+                          Should this ingress allow insecure connections?
+                        type: boolean
+                      customDomain:
+                        description: One or more custom_domain block as detailed below.
+                        properties:
+                          certificateBindingType:
+                            description: |-
+                              The Binding type. Possible values include Disabled and SniEnabled. Defaults to Disabled.
+                              The Binding type. Possible values include `Disabled` and `SniEnabled`. Defaults to `Disabled`
+                            type: string
+                          certificateId:
+                            description: The ID of the Container App Environment Certificate.
+                            type: string
+                          name:
+                            description: |-
+                              The name of the Volume to be mounted in the container.
+                              The hostname of the Certificate. Must be the CN or a named SAN in the certificate.
+                            type: string
+                        type: object
+                      exposedPort:
+                        description: |-
+                          The exposed port on the container for the Ingress traffic.
+                          The exposed port on the container for the Ingress traffic.
+                        type: number
+                      externalEnabled:
+                        description: |-
+                          Are connections to this Ingress from outside the Container App Environment enabled? Defaults to false.
+                          Is this an external Ingress.
+                        type: boolean
+                      fqdn:
+                        description: |-
+                          The FQDN of the ingress.
+                          The FQDN of the ingress.
+                        type: string
+                      ipSecurityRestriction:
+                        description: One or more ip_security_restriction blocks for
+                          IP-filtering rules as defined below.
+                        items:
+                          properties:
+                            action:
+                              description: |-
+                                The IP-filter action. Allow or Deny.
+                                The action. Allow or Deny.
+                              type: string
+                            description:
+                              description: |-
+                                Describe the IP restriction rule that is being sent to the container-app.
+                                Describe the IP restriction rule that is being sent to the container-app.
+                              type: string
+                            ipAddressRange:
+                              description: |-
+                                CIDR notation to match incoming IP address.
+                                CIDR notation to match incoming IP address.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                Name for the IP restriction rule.
+                              type: string
+                          type: object
+                        type: array
+                      targetPort:
+                        description: |-
+                          The target port on the container for the Ingress traffic.
+                          The target port on the container for the Ingress traffic.
+                        type: number
+                      trafficWeight:
+                        description: One or more traffic_weight blocks as detailed
+                          below.
+                        items:
+                          properties:
+                            label:
+                              description: |-
+                                The label to apply to the revision as a name prefix for routing traffic.
+                                The label to apply to the revision as a name prefix for routing traffic.
+                              type: string
+                            latestRevision:
+                              description: |-
+                                This traffic Weight applies to the latest stable Container Revision. At most only one traffic_weight block can have the latest_revision set to true.
+                                This traffic Weight relates to the latest stable Container Revision.
+                              type: boolean
+                            percentage:
+                              description: |-
+                                The percentage of traffic which should be sent this revision.
+                                The percentage of traffic to send to this revision.
+                              type: number
+                            revisionSuffix:
+                              description: |-
+                                The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                                The suffix string to append to the revision. This must be unique for the Container App's lifetime. A default hash created by the service will be used if this value is omitted.
+                              type: string
+                          type: object
+                        type: array
+                      transport:
+                        description: |-
+                          The transport method for the Ingress. Possible values are auto, http, http2 and tcp. Defaults to auto.
+                          The transport method for the Ingress. Possible values include `auto`, `http`, and `http2`, `tcp`. Defaults to `auto`
+                        type: string
+                    type: object
+                  latestRevisionFqdn:
+                    description: |-
+                      The FQDN of the Latest Revision of the Container App.
+                      The FQDN of the Latest Revision of the Container App.
+                    type: string
+                  latestRevisionName:
+                    description: |-
+                      The name of the latest Container Revision.
+                      The name of the latest Container Revision.
+                    type: string
+                  location:
+                    description: The location this Container App is deployed in. This
+                      is the same as the Environment in which it is deployed.
+                    type: string
+                  outboundIpAddresses:
+                    description: A list of the Public IP Addresses which the Container
+                      App uses for outbound network access.
+                    items:
+                      type: string
+                    type: array
+                  registry:
+                    description: A registry block as detailed below.
+                    items:
+                      properties:
+                        identity:
+                          description: |-
+                            Resource ID for the User Assigned Managed identity to use when pulling from the Container Registry.
+                            ID of the System or User Managed Identity used to pull images from the Container Registry
+                          type: string
+                        passwordSecretName:
+                          description: |-
+                            The name of the Secret Reference containing the password value for this user on the Container Registry, username must also be supplied.
+                            The name of the Secret Reference containing the password value for this user on the Container Registry.
+                          type: string
+                        server:
+                          description: |-
+                            The hostname for the Container Registry.
+                            The hostname for the Container Registry.
+                          type: string
+                        username:
+                          description: |-
+                            The username to use for this Container Registry, password_secret_name must also be supplied..
+                            The username to use for this Container Registry.
+                          type: string
+                      type: object
+                    type: array
+                  resourceGroupName:
+                    description: The name of the resource group in which the Container
+                      App Environment is to be created. Changing this forces a new
+                      resource to be created.
+                    type: string
+                  revisionMode:
+                    description: The revisions operational mode for the Container
+                      App. Possible values include Single and Multiple. In Single
+                      mode, a single revision is in operation at any given time. In
+                      Multiple mode, more than one revision can be active at a time
+                      and can be configured with load distribution via the traffic_weight
+                      block in the ingress configuration.
+                    type: string
+                  secret:
+                    description: One or more secret block as detailed below.
+                    items:
+                      properties:
+                        nameSecretRef:
+                          description: |-
+                            The Secret name.
+                            The Secret name.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        valueSecretRef:
+                          description: |-
+                            The value for this secret.
+                            The value for this secret.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - nameSecretRef
+                      - valueSecretRef
+                      type: object
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the Container App.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  template:
+                    description: A template block as detailed below.
+                    properties:
+                      azureQueueScaleRule:
+                        description: One or more azure_queue_scale_rule blocks as
+                          defined below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                            queueLength:
+                              description: The value of the length of the queue to
+                                trigger scaling actions.
+                              type: number
+                            queueName:
+                              description: The name of the Azure Queue
+                              type: string
+                          type: object
+                        type: array
+                      container:
+                        description: One or more container blocks as detailed below.
+                        items:
+                          properties:
+                            args:
+                              description: |-
+                                A list of extra arguments to pass to the container.
+                                A list of args to pass to the container.
+                              items:
+                                type: string
+                              type: array
+                            command:
+                              description: |-
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                              items:
+                                type: string
+                              type: array
+                            cpu:
+                              description: |-
+                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                              type: number
+                            env:
+                              description: One or more env blocks as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the environment variable for the container.
+                                    type: string
+                                  secretName:
+                                    description: |-
+                                      The name of the secret that contains the value for this environment variable.
+                                      The name of the secret that contains the value for this environment variable.
+                                    type: string
+                                  value:
+                                    description: |-
+                                      The value for this secret.
+                                      The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                    type: string
+                                type: object
+                              type: array
+                            ephemeralStorage:
+                              description: |-
+                                The amount of ephemeral storage available to the Container App.
+                                The amount of ephemeral storage available to the Container App.
+                              type: string
+                            image:
+                              description: |-
+                                The image to use to create the container.
+                                The image to use to create the container.
+                              type: string
+                            livenessProbe:
+                              description: A liveness_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  initialDelay:
+                                    description: |-
+                                      The time in seconds to wait after the container has started before the probe is started.
+                                      The time in seconds to wait after the container has started before the probe is started.
+                                    type: number
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  terminationGracePeriodSeconds:
+                                    description: |-
+                                      The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+                                      The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            memory:
+                              description: |-
+                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the container.
+                              type: string
+                            readinessProbe:
+                              description: A readiness_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  successCountThreshold:
+                                    description: |-
+                                      The number of consecutive successful responses required to consider this probe as successful. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive successful responses required to consider this probe as successful. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            startupProbe:
+                              description: A startup_probe block as detailed below.
+                              items:
+                                properties:
+                                  failureCountThreshold:
+                                    description: |-
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between 1 and 10. Defaults to 3.
+                                      The number of consecutive failures required to consider this probe as failed. Possible values are between `1` and `10`. Defaults to `3`.
+                                    type: number
+                                  header:
+                                    description: A header block as detailed below.
+                                    items:
+                                      properties:
+                                        name:
+                                          description: |-
+                                            The name of the Volume to be mounted in the container.
+                                            The HTTP Header Name.
+                                          type: string
+                                        value:
+                                          description: |-
+                                            The value for this secret.
+                                            The HTTP Header value.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  host:
+                                    description: |-
+                                      The value for the host header which should be sent with this probe. If unspecified, the IP Address of the Pod is used as the host header. Setting a value for Host in headers can be used to override this for HTTP and HTTPS type probes.
+                                      The probe hostname. Defaults to the pod IP address. Setting a value for `Host` in `headers` can be used to override this for `http` and `https` type probes.
+                                    type: string
+                                  intervalSeconds:
+                                    description: |-
+                                      How often, in seconds, the probe should run. Possible values are between 1 and 240. Defaults to 10
+                                      How often, in seconds, the probe should run. Possible values are between `1` and `240`. Defaults to `10`
+                                    type: number
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The URI to use with the `host` for http type probes. Not valid for `TCP` type probes. Defaults to `/`.
+                                    type: string
+                                  port:
+                                    description: |-
+                                      The port number on which to connect. Possible values are between 1 and 65535.
+                                      The port number on which to connect. Possible values are between `1` and `65535`.
+                                    type: number
+                                  terminationGracePeriodSeconds:
+                                    description: |-
+                                      The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+                                      The time in seconds after the container is sent the termination signal before the process if forcibly killed.
+                                    type: number
+                                  timeout:
+                                    description: |-
+                                      Time in seconds after which the probe times out. Possible values are in the range 1 - 240. Defaults to 1.
+                                      Time in seconds after which the probe times out. Possible values are between `1` an `240`. Defaults to `1`.
+                                    type: number
+                                  transport:
+                                    description: |-
+                                      Type of probe. Possible values are TCP, HTTP, and HTTPS.
+                                      Type of probe. Possible values are `TCP`, `HTTP`, and `HTTPS`.
+                                    type: string
+                                type: object
+                              type: array
+                            volumeMounts:
+                              description: A volume_mounts block as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the Volume to be mounted in the container.
+                                    type: string
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The path in the container at which to mount this volume.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
+                      customScaleRule:
+                        description: One or more custom_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            customRuleType:
+                              description: 'The Custom rule type. Possible values
+                                include: activemq, artemis-queue, kafka, pulsar, aws-cloudwatch,
+                                aws-dynamodb, aws-dynamodb-streams, aws-kinesis-stream,
+                                aws-sqs-queue, azure-app-insights, azure-blob, azure-data-explorer,
+                                azure-eventhub, azure-log-analytics, azure-monitor,
+                                azure-pipelines, azure-servicebus, azure-queue, cassandra,
+                                cpu, cron, datadog, elasticsearch, external, external-push,
+                                gcp-stackdriver, gcp-storage, gcp-pubsub, graphite,
+                                http, huawei-cloudeye, ibmmq, influxdb, kubernetes-workload,
+                                liiklus, memory, metrics-api, mongodb, mssql, mysql,
+                                nats-jetstream, stan, tcp, new-relic, openstack-metric,
+                                openstack-swift, postgresql, predictkube, prometheus,
+                                rabbitmq, redis, redis-cluster, redis-sentinel, redis-streams,
+                                redis-cluster-streams, redis-sentinel-streams, selenium-grid,solace-event-queue,
+                                and github-runner.'
+                              type: string
+                            metadata:
+                              additionalProperties:
+                                type: string
+                              description: '- A map of string key-value pairs to configure
+                                the Custom Scale Rule.'
+                              type: object
+                              x-kubernetes-map-type: granular
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      httpScaleRule:
+                        description: One or more http_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            concurrentRequests:
+                              description: '- The number of concurrent requests to
+                                trigger scaling.'
+                              type: string
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      initContainer:
+                        description: The definition of an init container that is part
+                          of the group as documented in the init_container block below.
+                        items:
+                          properties:
+                            args:
+                              description: |-
+                                A list of extra arguments to pass to the container.
+                                A list of args to pass to the container.
+                              items:
+                                type: string
+                              type: array
+                            command:
+                              description: |-
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                                A command to pass to the container to override the default. This is provided as a list of command line elements without spaces.
+                              items:
+                                type: string
+                              type: array
+                            cpu:
+                              description: |-
+                                The amount of vCPU to allocate to the container. Possible values include 0.25, 0.5, 0.75, 1.0, 1.25, 1.5, 1.75, and 2.0. When there's a workload profile specified, there's no such constraint.
+                                The amount of vCPU to allocate to the container. Possible values include `0.25`, `0.5`, `0.75`, `1.0`, `1.25`, `1.5`, `1.75`, and `2.0`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.0` / `2.0` or `0.5` / `1.0`. When there's a workload profile specified, there's no such constraint.
+                              type: number
+                            env:
+                              description: One or more env blocks as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the environment variable for the container.
+                                    type: string
+                                  secretName:
+                                    description: |-
+                                      The name of the secret that contains the value for this environment variable.
+                                      The name of the secret that contains the value for this environment variable.
+                                    type: string
+                                  value:
+                                    description: |-
+                                      The value for this secret.
+                                      The value for this environment variable. **NOTE:** This value is ignored if `secret_name` is used
+                                    type: string
+                                type: object
+                              type: array
+                            ephemeralStorage:
+                              description: |-
+                                The amount of ephemeral storage available to the Container App.
+                                The amount of ephemeral storage available to the Container App.
+                              type: string
+                            image:
+                              description: |-
+                                The image to use to create the container.
+                                The image to use to create the container.
+                              type: string
+                            memory:
+                              description: |-
+                                The amount of memory to allocate to the container. Possible values are 0.5Gi, 1Gi, 1.5Gi, 2Gi, 2.5Gi, 3Gi, 3.5Gi and 4Gi. When there's a workload profile specified, there's no such constraint.
+                                The amount of memory to allocate to the container. Possible values include `0.5Gi`, `1.0Gi`, `1.5Gi`, `2.0Gi`, `2.5Gi`, `3.0Gi`, `3.5Gi`, and `4.0Gi`. **NOTE:** `cpu` and `memory` must be specified in `0.25'/'0.5Gi` combination increments. e.g. `1.25` / `2.5Gi` or `0.75` / `1.5Gi`. When there's a workload profile specified, there's no such constraint.
+                              type: string
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the container.
+                              type: string
+                            volumeMounts:
+                              description: A volume_mounts block as detailed below.
+                              items:
+                                properties:
+                                  name:
+                                    description: |-
+                                      The name of the Volume to be mounted in the container.
+                                      The name of the Volume to be mounted in the container.
+                                    type: string
+                                  path:
+                                    description: |-
+                                      The path in the container at which to mount this volume.
+                                      The path in the container at which to mount this volume.
+                                    type: string
+                                type: object
+                              type: array
+                          type: object
+                        type: array
+                      maxReplicas:
+                        description: |-
+                          The maximum number of replicas for this container.
+                          The maximum number of replicas for this container.
+                        type: number
+                      minReplicas:
+                        description: |-
+                          The minimum number of replicas for this container.
+                          The minimum number of replicas for this container.
+                        type: number
+                      revisionSuffix:
+                        description: |-
+                          The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                          The suffix for the revision. This value must be unique for the lifetime of the Resource. If omitted the service will use a hash function to create one.
+                        type: string
+                      tcpScaleRule:
+                        description: One or more tcp_scale_rule blocks as defined
+                          below.
+                        items:
+                          properties:
+                            authentication:
+                              description: Zero or more authentication blocks as defined
+                                below.
+                              items:
+                                properties:
+                                  secretName:
+                                    description: The name of the secret that contains
+                                      the value for this environment variable.
+                                    type: string
+                                  triggerParameter:
+                                    description: The Trigger Parameter name to use
+                                      the supply the value retrieved from the secret_name.
+                                    type: string
+                                type: object
+                              type: array
+                            concurrentRequests:
+                              description: '- The number of concurrent requests to
+                                trigger scaling.'
+                              type: string
+                            name:
+                              description: The name of the Volume to be mounted in
+                                the container.
+                              type: string
+                          type: object
+                        type: array
+                      volume:
+                        description: A volume block as detailed below.
+                        items:
+                          properties:
+                            name:
+                              description: |-
+                                The name of the Volume to be mounted in the container.
+                                The name of the volume.
+                              type: string
+                            storageName:
+                              description: |-
+                                The name of the AzureFile storage.
+                                The name of the `AzureFile` storage. Required when `storage_type` is `AzureFile`
+                              type: string
+                            storageType:
+                              description: |-
+                                The type of storage volume. Possible values are AzureFile, EmptyDir and Secret. Defaults to EmptyDir.
+                                The type of storage volume. Possible values include `AzureFile` and `EmptyDir`. Defaults to `EmptyDir`.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                  workloadProfileName:
+                    description: The name of the Workload Profile in the Container
+                      App Environment to place this Container App.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

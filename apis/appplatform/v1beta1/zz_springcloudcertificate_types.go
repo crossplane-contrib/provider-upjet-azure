@@ -22,7 +22,7 @@ type SpringCloudCertificateInitParameters struct {
 	ExcludePrivateKey *bool `json:"excludePrivateKey,omitempty" tf:"exclude_private_key,omitempty"`
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
 
@@ -70,7 +70,7 @@ type SpringCloudCertificateParameters struct {
 	ExcludePrivateKey *bool `json:"excludePrivateKey,omitempty" tf:"exclude_private_key,omitempty"`
 
 	// Specifies the ID of the Key Vault Certificate resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Certificate
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta2.Certificate
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultCertificateID *string `json:"keyVaultCertificateId,omitempty" tf:"key_vault_certificate_id,omitempty"`
@@ -97,7 +97,7 @@ type SpringCloudCertificateParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the Spring Cloud Service resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudService
 	// +kubebuilder:validation:Optional
 	ServiceName *string `json:"serviceName,omitempty" tf:"service_name,omitempty"`
 

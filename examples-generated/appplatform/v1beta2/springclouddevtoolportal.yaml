@@ -1,0 +1,57 @@
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudDevToolPortal
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springclouddevtoolportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationAcceleratorEnabled: true
+    applicationLiveViewEnabled: true
+    name: default
+    publicNetworkAccessEnabled: true
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sso:
+    - clientId: example id
+      clientSecret: example secret
+      metadataUrl: https://login.microsoftonline.com/${data.azurerm_client_config.current.tenant_id}/v2.0/.well-known/openid-configuration
+      scope:
+      - openid
+      - profile
+      - email
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springclouddevtoolportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springclouddevtoolportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

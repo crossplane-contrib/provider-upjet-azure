@@ -1638,3 +1638,1485 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: MonitorAlertProcessingRuleActionGroup is the Schema for the MonitorAlertProcessingRuleActionGroups
+          API. Manages an Alert Processing Rule which apply action group.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: MonitorAlertProcessingRuleActionGroupSpec defines the desired
+              state of MonitorAlertProcessingRuleActionGroup
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  addActionGroupIds:
+                    description: Specifies a list of Action Group IDs.
+                    items:
+                      type: string
+                    type: array
+                  addActionGroupIdsRefs:
+                    description: References to MonitorActionGroup in insights to populate
+                      addActionGroupIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  addActionGroupIdsSelector:
+                    description: Selector for a list of MonitorActionGroup in insights
+                      to populate addActionGroupIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  condition:
+                    description: A condition block as defined below.
+                    properties:
+                      alertContext:
+                        description: A alert_context block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      alertRuleId:
+                        description: A alert_rule_id block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      alertRuleName:
+                        description: A alert_rule_name block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      description:
+                        description: A description block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      monitorCondition:
+                        description: A monitor_condition block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      monitorService:
+                        description: A monitor_service block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      severity:
+                        description: A severity block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      signalType:
+                        description: A signal_type block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResource:
+                        description: A target_resource block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResourceGroup:
+                        description: A target_resource_group block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResourceType:
+                        description: A target_resource_type block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  description:
+                    description: Specifies a description for the Alert Processing
+                      Rule.
+                    type: string
+                  enabled:
+                    description: Should the Alert Processing Rule be enabled? Defaults
+                      to true.
+                    type: boolean
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Alert Processing
+                      Rule should exist. Changing this forces a new Alert Processing
+                      Rule to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  schedule:
+                    description: A schedule block as defined below.
+                    properties:
+                      effectiveFrom:
+                        description: Specifies the Alert Processing Rule effective
+                          start time (Y-m-d'T'H:M:S).
+                        type: string
+                      effectiveUntil:
+                        description: Specifies the Alert Processing Rule effective
+                          end time (Y-m-d'T'H:M:S).
+                        type: string
+                      recurrence:
+                        description: A recurrence block as defined above.
+                        properties:
+                          daily:
+                            description: One or more daily blocks as defined above.
+                            items:
+                              properties:
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                          monthly:
+                            description: One or more monthly blocks as defined above.
+                            items:
+                              properties:
+                                daysOfMonth:
+                                  description: Specifies a list of dayOfMonth to recurrence.
+                                    Possible values are integers between 1 - 31.
+                                  items:
+                                    type: number
+                                  type: array
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                          weekly:
+                            description: One or more weekly blocks as defined below.
+                            items:
+                              properties:
+                                daysOfWeek:
+                                  description: Specifies a list of dayOfWeek to recurrence.
+                                    Possible values are Sunday, Monday, Tuesday, Wednesday,
+                                    Thursday, Friday, and Saturday.
+                                  items:
+                                    type: string
+                                  type: array
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      timeZone:
+                        description: The time zone (e.g. Pacific Standard time, Eastern
+                          Standard Time). Defaults to UTC. possible values are defined
+                          here.
+                        type: string
+                    type: object
+                  scopes:
+                    description: A list of resource IDs which will be the target of
+                      alert processing rule.
+                    items:
+                      type: string
+                    type: array
+                  scopesRefs:
+                    description: References to ResourceGroup in azure to populate
+                      scopes.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  scopesSelector:
+                    description: Selector for a list of ResourceGroup in azure to
+                      populate scopes.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Alert Processing Rule.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  addActionGroupIds:
+                    description: Specifies a list of Action Group IDs.
+                    items:
+                      type: string
+                    type: array
+                  addActionGroupIdsRefs:
+                    description: References to MonitorActionGroup in insights to populate
+                      addActionGroupIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  addActionGroupIdsSelector:
+                    description: Selector for a list of MonitorActionGroup in insights
+                      to populate addActionGroupIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  condition:
+                    description: A condition block as defined below.
+                    properties:
+                      alertContext:
+                        description: A alert_context block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      alertRuleId:
+                        description: A alert_rule_id block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      alertRuleName:
+                        description: A alert_rule_name block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      description:
+                        description: A description block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      monitorCondition:
+                        description: A monitor_condition block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      monitorService:
+                        description: A monitor_service block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      severity:
+                        description: A severity block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      signalType:
+                        description: A signal_type block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResource:
+                        description: A target_resource block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResourceGroup:
+                        description: A target_resource_group block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResourceType:
+                        description: A target_resource_type block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  description:
+                    description: Specifies a description for the Alert Processing
+                      Rule.
+                    type: string
+                  enabled:
+                    description: Should the Alert Processing Rule be enabled? Defaults
+                      to true.
+                    type: boolean
+                  schedule:
+                    description: A schedule block as defined below.
+                    properties:
+                      effectiveFrom:
+                        description: Specifies the Alert Processing Rule effective
+                          start time (Y-m-d'T'H:M:S).
+                        type: string
+                      effectiveUntil:
+                        description: Specifies the Alert Processing Rule effective
+                          end time (Y-m-d'T'H:M:S).
+                        type: string
+                      recurrence:
+                        description: A recurrence block as defined above.
+                        properties:
+                          daily:
+                            description: One or more daily blocks as defined above.
+                            items:
+                              properties:
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                          monthly:
+                            description: One or more monthly blocks as defined above.
+                            items:
+                              properties:
+                                daysOfMonth:
+                                  description: Specifies a list of dayOfMonth to recurrence.
+                                    Possible values are integers between 1 - 31.
+                                  items:
+                                    type: number
+                                  type: array
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                          weekly:
+                            description: One or more weekly blocks as defined below.
+                            items:
+                              properties:
+                                daysOfWeek:
+                                  description: Specifies a list of dayOfWeek to recurrence.
+                                    Possible values are Sunday, Monday, Tuesday, Wednesday,
+                                    Thursday, Friday, and Saturday.
+                                  items:
+                                    type: string
+                                  type: array
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      timeZone:
+                        description: The time zone (e.g. Pacific Standard time, Eastern
+                          Standard Time). Defaults to UTC. possible values are defined
+                          here.
+                        type: string
+                    type: object
+                  scopes:
+                    description: A list of resource IDs which will be the target of
+                      alert processing rule.
+                    items:
+                      type: string
+                    type: array
+                  scopesRefs:
+                    description: References to ResourceGroup in azure to populate
+                      scopes.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  scopesSelector:
+                    description: Selector for a list of ResourceGroup in azure to
+                      populate scopes.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Alert Processing Rule.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+          status:
+            description: MonitorAlertProcessingRuleActionGroupStatus defines the observed
+              state of MonitorAlertProcessingRuleActionGroup.
+            properties:
+              atProvider:
+                properties:
+                  addActionGroupIds:
+                    description: Specifies a list of Action Group IDs.
+                    items:
+                      type: string
+                    type: array
+                  condition:
+                    description: A condition block as defined below.
+                    properties:
+                      alertContext:
+                        description: A alert_context block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      alertRuleId:
+                        description: A alert_rule_id block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      alertRuleName:
+                        description: A alert_rule_name block as defined above.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      description:
+                        description: A description block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      monitorCondition:
+                        description: A monitor_condition block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      monitorService:
+                        description: A monitor_service block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      severity:
+                        description: A severity block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      signalType:
+                        description: A signal_type block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResource:
+                        description: A target_resource block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResourceGroup:
+                        description: A target_resource_group block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      targetResourceType:
+                        description: A target_resource_type block as defined below.
+                        properties:
+                          operator:
+                            description: The operator for a given condition. Possible
+                              values are Equals, NotEquals, Contains, and DoesNotContain.
+                            type: string
+                          values:
+                            description: A list of values to match for a given condition.
+                              The values should be valid resource types. (e.g. Microsoft.Compute/VirtualMachines)
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  description:
+                    description: Specifies a description for the Alert Processing
+                      Rule.
+                    type: string
+                  enabled:
+                    description: Should the Alert Processing Rule be enabled? Defaults
+                      to true.
+                    type: boolean
+                  id:
+                    description: The ID of the Alert Processing Rule.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Alert Processing
+                      Rule should exist. Changing this forces a new Alert Processing
+                      Rule to be created.
+                    type: string
+                  schedule:
+                    description: A schedule block as defined below.
+                    properties:
+                      effectiveFrom:
+                        description: Specifies the Alert Processing Rule effective
+                          start time (Y-m-d'T'H:M:S).
+                        type: string
+                      effectiveUntil:
+                        description: Specifies the Alert Processing Rule effective
+                          end time (Y-m-d'T'H:M:S).
+                        type: string
+                      recurrence:
+                        description: A recurrence block as defined above.
+                        properties:
+                          daily:
+                            description: One or more daily blocks as defined above.
+                            items:
+                              properties:
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                          monthly:
+                            description: One or more monthly blocks as defined above.
+                            items:
+                              properties:
+                                daysOfMonth:
+                                  description: Specifies a list of dayOfMonth to recurrence.
+                                    Possible values are integers between 1 - 31.
+                                  items:
+                                    type: number
+                                  type: array
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                          weekly:
+                            description: One or more weekly blocks as defined below.
+                            items:
+                              properties:
+                                daysOfWeek:
+                                  description: Specifies a list of dayOfWeek to recurrence.
+                                    Possible values are Sunday, Monday, Tuesday, Wednesday,
+                                    Thursday, Friday, and Saturday.
+                                  items:
+                                    type: string
+                                  type: array
+                                endTime:
+                                  description: Specifies the recurrence end time (H:M:S).
+                                  type: string
+                                startTime:
+                                  description: Specifies the recurrence start time
+                                    (H:M:S).
+                                  type: string
+                              type: object
+                            type: array
+                        type: object
+                      timeZone:
+                        description: The time zone (e.g. Pacific Standard time, Eastern
+                          Standard Time). Defaults to UTC. possible values are defined
+                          here.
+                        type: string
+                    type: object
+                  scopes:
+                    description: A list of resource IDs which will be the target of
+                      alert processing rule.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Alert Processing Rule.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

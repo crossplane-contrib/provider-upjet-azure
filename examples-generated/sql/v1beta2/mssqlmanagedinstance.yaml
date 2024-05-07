@@ -1,0 +1,385 @@
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLManagedInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    licenseType: BasePrice
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    vcores: 4
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: allow_health_probe_inbound
+  name: allow-health-probe-inbound
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Inbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 300
+    protocol: '*'
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: AzureLoadBalancer
+    sourcePortRange: '*'
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: allow_management_inbound
+  name: allow-management-inbound
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRanges:
+    - "9000"
+    - "9003"
+    - "1438"
+    - "1440"
+    - "1452"
+    direction: Inbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 106
+    protocol: Tcp
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: allow_management_outbound
+  name: allow-management-outbound
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRanges:
+    - "80"
+    - "443"
+    - "12000"
+    direction: Outbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 102
+    protocol: Tcp
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: allow_misubnet_inbound
+  name: allow-misubnet-inbound
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Inbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 200
+    protocol: '*'
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: 10.0.0.0/24
+    sourcePortRange: '*'
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: allow_misubnet_outbound
+  name: allow-misubnet-outbound
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Outbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 200
+    protocol: '*'
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: 10.0.0.0/24
+    sourcePortRange: '*'
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: allow_tds_inbound
+  name: allow-tds-inbound
+spec:
+  forProvider:
+    access: Allow
+    destinationAddressPrefix: '*'
+    destinationPortRange: "1433"
+    direction: Inbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 1000
+    protocol: Tcp
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: VirtualNetwork
+    sourcePortRange: '*'
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: deny_all_inbound
+  name: deny-all-inbound
+spec:
+  forProvider:
+    access: Deny
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Inbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 4096
+    protocol: '*'
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: deny_all_outbound
+  name: deny-all-outbound
+spec:
+  forProvider:
+    access: Deny
+    destinationAddressPrefix: '*'
+    destinationPortRange: '*'
+    direction: Outbound
+    networkSecurityGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 4096
+    protocol: '*'
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sourceAddressPrefix: '*'
+    sourcePortRange: '*'
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    disableBgpRoutePropagation: false
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.0/24
+    delegation:
+    - name: managedinstancedelegation
+      serviceDelegation:
+      - actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
+        - Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action
+        name: Microsoft.Sql/managedInstances
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    networkSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    routeTableIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

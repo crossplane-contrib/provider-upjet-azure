@@ -44,7 +44,7 @@ func (mg *AuthorizationRule) ResolveReferences( // ResolveReferences of this Aut
 	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("notificationhubs.azure.upbound.io", "v1beta1", "NotificationHub", "NotificationHubList")
+		m, l, err = apisresolver.GetManagedResource("notificationhubs.azure.upbound.io", "v1beta2", "NotificationHub", "NotificationHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

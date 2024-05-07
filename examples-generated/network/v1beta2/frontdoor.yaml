@@ -1,0 +1,55 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: FrontDoor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/frontdoor
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backendPool:
+    - backend:
+      - address: www.bing.com
+        hostHeader: www.bing.com
+        httpPort: 80
+        httpsPort: 443
+      healthProbeName: exampleHealthProbeSetting1
+      loadBalancingName: exampleLoadBalancingSettings1
+      name: exampleBackendBing
+    backendPoolHealthProbe:
+    - name: exampleHealthProbeSetting1
+    backendPoolLoadBalancing:
+    - name: exampleLoadBalancingSettings1
+    frontendEndpoint:
+    - hostName: example-FrontDoor.azurefd.net
+      name: exampleFrontendEndpoint1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    routingRule:
+    - acceptedProtocols:
+      - Http
+      - Https
+      forwardingConfiguration:
+      - backendPoolName: exampleBackendBing
+        forwardingProtocol: MatchRequest
+      frontendEndpoints:
+      - exampleFrontendEndpoint1
+      name: exampleRoutingRule1
+      patternsToMatch:
+      - /*
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/frontdoor
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

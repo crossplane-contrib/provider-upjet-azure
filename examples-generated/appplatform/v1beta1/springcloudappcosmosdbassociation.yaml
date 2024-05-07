@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.upbound.io/v1beta1
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -59,7 +59,7 @@ spec:
 
 ---
 
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudApp
 metadata:
   annotations:
@@ -78,7 +78,7 @@ spec:
 
 ---
 
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudService
 metadata:
   annotations:

@@ -16,7 +16,7 @@ import (
 type ObjectReplicationInitParameters struct {
 
 	// The ID of the destination storage account. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
 
@@ -32,7 +32,7 @@ type ObjectReplicationInitParameters struct {
 	Rules []ObjectReplicationRulesInitParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`
 
@@ -69,7 +69,7 @@ type ObjectReplicationObservation struct {
 type ObjectReplicationParameters struct {
 
 	// The ID of the destination storage account. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationStorageAccountID *string `json:"destinationStorageAccountId,omitempty" tf:"destination_storage_account_id,omitempty"`
@@ -87,7 +87,7 @@ type ObjectReplicationParameters struct {
 	Rules []ObjectReplicationRulesParameters `json:"rules,omitempty" tf:"rules,omitempty"`
 
 	// The ID of the source storage account. Changing this forces a new Storage Object Replication to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceStorageAccountID *string `json:"sourceStorageAccountId,omitempty" tf:"source_storage_account_id,omitempty"`

@@ -49,7 +49,7 @@ type AppTriggerHTTPRequestObservation struct {
 type AppTriggerHTTPRequestParameters struct {
 
 	// Specifies the ID of the Logic App Workflow. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta1.AppWorkflow
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logic/v1beta2.AppWorkflow
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogicAppID *string `json:"logicAppId,omitempty" tf:"logic_app_id,omitempty"`

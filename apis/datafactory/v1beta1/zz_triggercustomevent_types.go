@@ -29,7 +29,7 @@ type TriggerCustomEventInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of Event Grid Topic in which event will be listened. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventgrid/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventgrid/v1beta2.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	EventGridTopicID *string `json:"eventgridTopicId,omitempty" tf:"eventgrid_topic_id,omitempty"`
 
@@ -109,7 +109,7 @@ type TriggerCustomEventParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The ID of Data Factory in which to associate the Trigger with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta2.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -127,7 +127,7 @@ type TriggerCustomEventParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The ID of Event Grid Topic in which event will be listened. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventgrid/v1beta1.Topic
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventgrid/v1beta2.Topic
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventGridTopicID *string `json:"eventgridTopicId,omitempty" tf:"eventgrid_topic_id,omitempty"`

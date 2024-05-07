@@ -88,7 +88,7 @@ type SQLPoolWorkloadGroupParameters struct {
 	QueryExecutionTimeoutInSeconds *float64 `json:"queryExecutionTimeoutInSeconds,omitempty" tf:"query_execution_timeout_in_seconds,omitempty"`
 
 	// The ID of the Synapse SQL Pool. Changing this forces a new Synapse SQL Pool Workload Group to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.SQLPool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta2.SQLPool
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SQLPoolID *string `json:"sqlPoolId,omitempty" tf:"sql_pool_id,omitempty"`

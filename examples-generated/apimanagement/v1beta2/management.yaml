@@ -1,0 +1,31 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/management
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/management
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

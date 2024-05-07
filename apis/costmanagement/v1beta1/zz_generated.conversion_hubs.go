@@ -8,9 +8,3 @@ package v1beta1
 
 // Hub marks this type as a conversion hub.
 func (tr *CostAnomalyAlert) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ResourceGroupCostManagementExport) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SubscriptionCostManagementExport) Hub() {}

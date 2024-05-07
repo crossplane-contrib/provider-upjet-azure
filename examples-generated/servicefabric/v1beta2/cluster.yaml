@@ -1,0 +1,39 @@
+apiVersion: servicefabric.azure.upbound.io/v1beta2
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicefabric/v1beta2/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterCodeVersion: 7.1.456.959
+    location: West Europe
+    managementEndpoint: https://example:80
+    nodeType:
+    - clientEndpointPort: 2020
+      httpEndpointPort: 80
+      instanceCount: 3
+      isPrimary: true
+      name: first
+    reliabilityLevel: Bronze
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    upgradeMode: Manual
+    vmImage: Windows
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicefabric/v1beta2/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

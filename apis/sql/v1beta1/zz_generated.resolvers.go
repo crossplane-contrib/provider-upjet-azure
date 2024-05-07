@@ -97,7 +97,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLDatabase", "MSSQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -116,7 +116,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -135,7 +135,7 @@ func (mg *MSSQLDatabaseExtendedAuditingPolicy) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -185,7 +185,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServerVulnerabilityAssessment", "MSSQLServerVulnerabilityAssessmentList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServerVulnerabilityAssessment", "MSSQLServerVulnerabilityAssessmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -223,7 +223,7 @@ func (mg *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) ResolveReferences(ct
 	mg.Spec.InitProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServerVulnerabilityAssessment", "MSSQLServerVulnerabilityAssessmentList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServerVulnerabilityAssessment", "MSSQLServerVulnerabilityAssessmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -417,7 +417,7 @@ func (mg *MSSQLFirewallRule) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServer", "MSSQLServerList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServer", "MSSQLServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -448,7 +448,7 @@ func (mg *MSSQLJobAgent) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLDatabase", "MSSQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -467,7 +467,7 @@ func (mg *MSSQLJobAgent) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.DatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLDatabase", "MSSQLDatabaseList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLDatabase", "MSSQLDatabaseList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1070,7 +1070,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1089,7 +1089,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 	mg.Spec.ForProvider.BlobStorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.BlobStorageEndpointRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServer", "MSSQLServerList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServer", "MSSQLServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1108,7 +1108,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) ResolveReferences(ctx conte
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1177,7 +1177,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1196,7 +1196,7 @@ func (mg *MSSQLServerSecurityAlertPolicy) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.StorageEndpoint = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageEndpointRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1365,7 +1365,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.ServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1384,7 +1384,7 @@ func (mg *MSSQLVirtualNetworkRule) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

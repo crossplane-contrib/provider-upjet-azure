@@ -29,7 +29,7 @@ type DataSetSnowflakeInitParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceSnowflake
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta2.LinkedServiceSnowflake
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 
 	// Reference to a LinkedServiceSnowflake in datafactory to populate linkedServiceName.
@@ -104,7 +104,7 @@ type DataSetSnowflakeParameters struct {
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
 	// The Data Factory ID in which to associate the Linked Service with. Changing this forces a new resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.Factory
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta2.Factory
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataFactoryID *string `json:"dataFactoryId,omitempty" tf:"data_factory_id,omitempty"`
@@ -126,7 +126,7 @@ type DataSetSnowflakeParameters struct {
 	Folder *string `json:"folder,omitempty" tf:"folder,omitempty"`
 
 	// The Data Factory Linked Service name in which to associate the Dataset with.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta1.LinkedServiceSnowflake
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datafactory/v1beta2.LinkedServiceSnowflake
 	// +kubebuilder:validation:Optional
 	LinkedServiceName *string `json:"linkedServiceName,omitempty" tf:"linked_service_name,omitempty"`
 

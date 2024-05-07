@@ -16,7 +16,7 @@ import (
 type BackupInstancePostgreSQLInitParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupPolicyPostgreSQL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta2.BackupPolicyPostgreSQL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
 
@@ -82,7 +82,7 @@ type BackupInstancePostgreSQLObservation struct {
 type BackupInstancePostgreSQLParameters struct {
 
 	// The ID of the Backup Policy.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupPolicyPostgreSQL
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta2.BackupPolicyPostgreSQL
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	BackupPolicyID *string `json:"backupPolicyId,omitempty" tf:"backup_policy_id,omitempty"`
@@ -128,7 +128,7 @@ type BackupInstancePostgreSQLParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Backup Vault within which the PostgreSQL Backup Instance should exist. Changing this forces a new Backup Instance PostgreSQL to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta2.BackupVault
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`

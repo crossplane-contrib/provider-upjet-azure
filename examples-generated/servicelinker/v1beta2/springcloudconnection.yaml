@@ -1,0 +1,156 @@
+apiVersion: servicelinker.azure.upbound.io/v1beta2
+kind: SpringCloudConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authentication:
+    - type: systemAssignedIdentity
+    name: example-serviceconnector
+    springCloudIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+      maxIntervalInSeconds: 10
+      maxStalenessPrefix: 200
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: GlobalDocumentDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: SQLContainer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionKeyPath: /definition
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: SQLDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    throughput: 400
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudJavaDeployment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    springCloudAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicelinker/v1beta2/springcloudconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

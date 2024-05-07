@@ -1,0 +1,76 @@
+apiVersion: containerapp.azure.upbound.io/v1beta2
+kind: ContainerApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta2/containerapp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAppEnvironmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    revisionMode: Single
+    template:
+    - container:
+      - cpu: 0.25
+        image: mcr.microsoft.com/azuredocs/containerapps-helloworld:latest
+        memory: 0.5Gi
+        name: examplecontainerapp
+
+---
+
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta2/containerapp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta2/containerapp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInDays: 30
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta2/containerapp
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

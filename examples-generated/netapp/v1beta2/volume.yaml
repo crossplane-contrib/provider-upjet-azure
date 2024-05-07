@@ -1,0 +1,146 @@
+apiVersion: netapp.azure.upbound.io/v1beta2
+kind: Volume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    createFromSnapshotResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dataProtectionReplication:
+    - endpointType: dst
+      remoteVolumeLocation: West Europe
+      remoteVolumeResourceIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      replicationFrequency: 10minutes
+    dataProtectionSnapshotPolicy:
+    - snapshotPolicyIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West Europe
+    networkFeatures: Basic
+    poolNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    protocols:
+    - NFSv4.1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    securityStyle: unix
+    serviceLevel: Premium
+    snapshotDirectoryVisible: false
+    storageQuotaInGb: 100
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    volumePath: my-unique-file-path
+    zone: "1"
+
+---
+
+apiVersion: netapp.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: netapp.azure.upbound.io/v1beta1
+kind: Pool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceLevel: Premium
+    sizeInTb: 4
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    delegation:
+    - name: netapp
+      serviceDelegation:
+      - actions:
+        - Microsoft.Network/networkinterfaces/*
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        name: Microsoft.Netapp/volumes
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

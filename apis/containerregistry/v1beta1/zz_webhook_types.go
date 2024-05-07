@@ -27,7 +27,7 @@ type WebhookInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta2.Registry
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 
 	// Reference to a Registry in containerregistry to populate registryName.
@@ -105,7 +105,7 @@ type WebhookParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The Name of Container registry this Webhook belongs to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta2.Registry
 	// +kubebuilder:validation:Optional
 	RegistryName *string `json:"registryName,omitempty" tf:"registry_name,omitempty"`
 

@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: devices.azure.upbound.io/v1beta1
+apiVersion: devices.azure.upbound.io/v1beta2
 kind: IOTHub
 metadata:
   annotations:

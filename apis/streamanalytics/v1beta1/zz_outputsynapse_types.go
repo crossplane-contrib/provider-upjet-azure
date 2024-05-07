@@ -25,7 +25,7 @@ type OutputSynapseInitParameters struct {
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("sql_administrator_login",false)
 	User *string `json:"user,omitempty" tf:"user,omitempty"`
 
@@ -107,7 +107,7 @@ type OutputSynapseParameters struct {
 	Table *string `json:"table,omitempty" tf:"table,omitempty"`
 
 	// The user name that will be used to connect to the Azure SQL database. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("sql_administrator_login",false)
 	// +kubebuilder:validation:Optional
 	User *string `json:"user,omitempty" tf:"user,omitempty"`

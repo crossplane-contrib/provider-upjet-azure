@@ -1,0 +1,72 @@
+apiVersion: netapp.azure.upbound.io/v1beta2
+kind: SnapshotPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/snapshotpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dailySchedule:
+    - hour: 20
+      minute: 15
+      snapshotsToKeep: 2
+    enabled: true
+    hourlySchedule:
+    - minute: 15
+      snapshotsToKeep: 4
+    location: West Europe
+    monthlySchedule:
+    - daysOfMonth:
+      - 1
+      - 15
+      - 20
+      - 30
+      hour: 5
+      minute: 45
+      snapshotsToKeep: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    weeklySchedule:
+    - daysOfWeek:
+      - Monday
+      - Friday
+      hour: 23
+      minute: 0
+      snapshotsToKeep: 1
+
+---
+
+apiVersion: netapp.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/snapshotpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/snapshotpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US

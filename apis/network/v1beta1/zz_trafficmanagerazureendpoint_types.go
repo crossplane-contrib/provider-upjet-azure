@@ -135,7 +135,7 @@ type TrafficManagerAzureEndpointParameters struct {
 	Priority *float64 `json:"priority,omitempty" tf:"priority,omitempty"`
 
 	// The ID of the Traffic Manager Profile that this Azure Endpoint should be created within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.TrafficManagerProfile
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.TrafficManagerProfile
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ProfileID *string `json:"profileId,omitempty" tf:"profile_id,omitempty"`

@@ -84,7 +84,7 @@ type LogAnalyticsDataSourceWindowsPerformanceCounterParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the Log Analytics Workspace where the Log Analytics Windows Performance Counter DataSource should exist. Changing this forces a new Log Analytics Windows Performance Counter DataSource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
 	// +kubebuilder:validation:Optional
 	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 

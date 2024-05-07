@@ -1,0 +1,77 @@
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiMetadata:
+    - description: example description
+      documentationUrl: https://www.example.com/docs
+      serverUrl: https://wwww.example.com
+      title: example title
+      version: "1.0"
+    cors:
+    - allowedHeaders:
+      - '*'
+      allowedMethods:
+      - PUT
+      allowedOrigins:
+      - example.com
+      credentialsAllowed: false
+      exposedHeaders:
+      - x-example-header
+      maxAgeSeconds: 86400
+    httpsOnly: false
+    instanceCount: 2
+    localResponseCachePerInstance:
+    - size: 100MB
+      timeToLive: 30s
+    publicNetworkAccessEnabled: true
+    quota:
+    - cpu: "1"
+      memory: 2Gi
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sso:
+    - clientId: example id
+      clientSecret: example secret
+      issuerUri: https://www.test.com/issueToken
+      scope:
+      - read
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

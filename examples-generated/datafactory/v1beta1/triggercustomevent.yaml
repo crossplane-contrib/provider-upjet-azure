@@ -36,7 +36,7 @@ spec:
 
 ---
 
-apiVersion: datafactory.azure.upbound.io/v1beta1
+apiVersion: datafactory.azure.upbound.io/v1beta2
 kind: Factory
 metadata:
   annotations:
@@ -69,7 +69,7 @@ spec:
 
 ---
 
-apiVersion: eventgrid.azure.upbound.io/v1beta1
+apiVersion: eventgrid.azure.upbound.io/v1beta2
 kind: Topic
 metadata:
   annotations:

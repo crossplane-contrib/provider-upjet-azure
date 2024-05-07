@@ -1,0 +1,101 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    armRoleReceiver:
+    - name: armroleaction
+      roleId: de139f84-1756-47ae-9be6-808fbbe84772
+      useCommonAlertSchema: true
+    automationRunbookReceiver:
+    - automationAccountId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-runbooks/providers/Microsoft.Automation/automationAccounts/aaa001
+      isGlobalRunbook: true
+      name: action_name_1
+      runbookName: my runbook
+      serviceUri: https://s13events.azure-automation.net/webhooks?token=randomtoken
+      useCommonAlertSchema: true
+      webhookResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-runbooks/providers/Microsoft.Automation/automationAccounts/aaa001/webHooks/webhook_alert
+    azureAppPushReceiver:
+    - emailAddress: admin@contoso.com
+      name: pushtoadmin
+    azureFunctionReceiver:
+    - functionAppResourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-funcapp/providers/Microsoft.Web/sites/funcapp
+      functionName: myfunc
+      httpTriggerUrl: https://example.com/trigger
+      name: funcaction
+      useCommonAlertSchema: true
+    emailReceiver:
+    - emailAddress: admin@contoso.com
+      name: sendtoadmin
+    - emailAddress: devops@contoso.com
+      name: sendtodevops
+      useCommonAlertSchema: true
+    eventHubReceiver:
+    - eventHubName: eventhub1
+      eventHubNamespace: eventhubnamespace
+      name: sendtoeventhub
+      subscriptionId: 00000000-0000-0000-0000-000000000000
+      useCommonAlertSchema: false
+    itsmReceiver:
+    - connectionId: 53de6956-42b4-41ba-be3c-b154cdf17b13
+      name: createorupdateticket
+      region: southcentralus
+      ticketConfiguration: '{"PayloadRevision":0,"WorkItemType":"Incident","UseTemplate":false,"WorkItemData":"{}","CreateOneWIPerCI":false}'
+      workspaceId: ${data.azurerm_client_config.current.subscription_id}|${azurerm_log_analytics_workspace.example.workspace_id}
+    logicAppReceiver:
+    - callbackUrl: https://logicapptriggerurl/...
+      name: logicappaction
+      resourceId: /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg-logicapp/providers/Microsoft.Logic/workflows/logicapp
+      useCommonAlertSchema: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: p0action
+    smsReceiver:
+    - countryCode: "1"
+      name: oncallmsg
+      phoneNumber: "1231231234"
+    voiceReceiver:
+    - countryCode: "86"
+      name: remotesupport
+      phoneNumber: "13888888888"
+    webhookReceiver:
+    - name: callmyapiaswell
+      serviceUri: http://example.com/alert
+      useCommonAlertSchema: true
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractiongroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

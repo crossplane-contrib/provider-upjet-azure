@@ -1,0 +1,58 @@
+apiVersion: logz.azure.upbound.io/v1beta2
+kind: SubAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logz/v1beta2/subaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    logzMonitorIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    user:
+    - email: user@example.com
+      firstName: ${azurerm_logz_monitor.example.user[0].first_name}
+      lastName: ${azurerm_logz_monitor.example.user[0].last_name}
+      phoneNumber: ${azurerm_logz_monitor.example.user[0].phone_number}
+
+---
+
+apiVersion: logz.azure.upbound.io/v1beta2
+kind: Monitor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logz/v1beta2/subaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    plan:
+    - billingCycle: MONTHLY
+      effectiveDate: "2022-06-06T00:00:00Z"
+      usageType: COMMITTED
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    user:
+    - email: user@example.com
+      firstName: Example
+      lastName: User
+      phoneNumber: "+12313803556"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: logz/v1beta2/subaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

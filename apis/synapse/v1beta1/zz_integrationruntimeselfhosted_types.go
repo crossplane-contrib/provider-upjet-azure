@@ -44,7 +44,7 @@ type IntegrationRuntimeSelfHostedParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// The Synapse Workspace ID in which to associate the Integration Runtime with. Changing this forces a new Synapse Self-hosted Integration Runtime to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`

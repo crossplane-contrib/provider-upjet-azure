@@ -40,7 +40,7 @@ type SQLDedicatedGatewayObservation struct {
 type SQLDedicatedGatewayParameters struct {
 
 	// The resource ID of the CosmosDB Account. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CosmosDBAccountID *string `json:"cosmosdbAccountId,omitempty" tf:"cosmosdb_account_id,omitempty"`

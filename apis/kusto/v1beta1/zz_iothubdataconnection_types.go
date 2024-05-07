@@ -16,7 +16,7 @@ import (
 type IOTHubDataConnectionInitParameters struct {
 
 	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta2.Cluster
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
 	// Reference to a Cluster in kusto to populate clusterName.
@@ -62,7 +62,7 @@ type IOTHubDataConnectionInitParameters struct {
 	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
 
 	// Specifies the resource id of the IotHub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`
 
@@ -160,7 +160,7 @@ type IOTHubDataConnectionObservation struct {
 type IOTHubDataConnectionParameters struct {
 
 	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -212,7 +212,7 @@ type IOTHubDataConnectionParameters struct {
 	EventSystemProperties []*string `json:"eventSystemProperties,omitempty" tf:"event_system_properties,omitempty"`
 
 	// Specifies the resource id of the IotHub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	IOTHubID *string `json:"iothubId,omitempty" tf:"iothub_id,omitempty"`

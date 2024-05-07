@@ -1,0 +1,154 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: APIDiagnostic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/apidiagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    alwaysLogErrors: true
+    apiManagementLoggerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    apiNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    backendRequest:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - accept
+      - origin
+    backendResponse:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - content-length
+      - origin
+    frontendRequest:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - accept
+      - origin
+    frontendResponse:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - content-length
+      - origin
+    httpCorrelationProtocol: W3C
+    logClientIp: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    samplingPercentage: 5
+    verbosity: verbose
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/apidiagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: API
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/apidiagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    displayName: Example API
+    import:
+    - contentFormat: swagger-link-json
+      contentValue: http://conferenceapi.azurewebsites.net/?format=json
+    path: example
+    protocols:
+    - https
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    revision: "1"
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: Logger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/apidiagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    applicationInsights:
+    - instrumentationKeySecretRef:
+        key: attribute.instrumentation_key
+        name: example-application-insights
+        namespace: upbound-system
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/apidiagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/apidiagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

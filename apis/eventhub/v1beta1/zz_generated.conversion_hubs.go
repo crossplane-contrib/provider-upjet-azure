@@ -7,16 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *EventHub) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *AuthorizationRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ConsumerGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *EventHubNamespace) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NamespaceAuthorizationRule) Hub() {}

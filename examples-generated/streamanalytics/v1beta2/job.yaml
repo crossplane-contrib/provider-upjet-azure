@@ -1,0 +1,41 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingUnits: 3
+    tags:
+      environment: Example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -52,7 +52,7 @@ type EmailTemplateObservation struct {
 type EmailTemplateParameters struct {
 
 	// The name of the API Management Service in which the Email Template should exist. Changing this forces a new API Management Email Template to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta2.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 

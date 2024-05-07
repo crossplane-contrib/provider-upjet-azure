@@ -134,7 +134,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.InfrastructureSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.InfrastructureSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -210,7 +210,7 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.InfrastructureSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.InfrastructureSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("operationalinsights.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

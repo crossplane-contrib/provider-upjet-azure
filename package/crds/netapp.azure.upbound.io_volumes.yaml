@@ -1726,3 +1726,1688 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: Volume is the Schema for the Volumes API. Manages a NetApp Volume.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: VolumeSpec defines the desired state of Volume
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  accountName:
+                    description: The name of the NetApp account in which the NetApp
+                      Pool should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  accountNameRef:
+                    description: Reference to a Account to populate accountName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  accountNameSelector:
+                    description: Selector for a Account to populate accountName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  azureVmwareDataStoreEnabled:
+                    description: Is the NetApp Volume enabled for Azure VMware Solution
+                      (AVS) datastore purpose. Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
+                  createFromSnapshotResourceId:
+                    description: 'Creates volume from snapshot. Following properties
+                      must be the same as the original volume where the snapshot was
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
+                      account_name and pool_name. Changing this forces a new resource
+                      to be created.'
+                    type: string
+                  createFromSnapshotResourceIdRef:
+                    description: Reference to a Snapshot to populate createFromSnapshotResourceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  createFromSnapshotResourceIdSelector:
+                    description: Selector for a Snapshot to populate createFromSnapshotResourceId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  dataProtectionReplication:
+                    description: A data_protection_replication block as defined below.
+                      Changing this forces a new resource to be created.
+                    properties:
+                      endpointType:
+                        description: The endpoint type, default value is dst for destination.
+                        type: string
+                      remoteVolumeLocation:
+                        description: Location of the primary volume. Changing this
+                          forces a new resource to be created.
+                        type: string
+                      remoteVolumeResourceId:
+                        description: Resource ID of the primary volume.
+                        type: string
+                      remoteVolumeResourceIdRef:
+                        description: Reference to a Volume to populate remoteVolumeResourceId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      remoteVolumeResourceIdSelector:
+                        description: Selector for a Volume to populate remoteVolumeResourceId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      replicationFrequency:
+                        description: Replication frequency, supported values are '10minutes',
+                          'hourly', 'daily', values are case sensitive.
+                        type: string
+                    type: object
+                  dataProtectionSnapshotPolicy:
+                    description: A data_protection_snapshot_policy block as defined
+                      below.
+                    properties:
+                      snapshotPolicyId:
+                        description: Resource ID of the snapshot policy to apply to
+                          the volume.
+                        type: string
+                      snapshotPolicyIdRef:
+                        description: Reference to a SnapshotPolicy to populate snapshotPolicyId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      snapshotPolicyIdSelector:
+                        description: Selector for a SnapshotPolicy to populate snapshotPolicyId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  encryptionKeySource:
+                    description: The encryption key source, it can be Microsoft.NetApp
+                      for platform managed keys or Microsoft.KeyVault for customer-managed
+                      keys. This is required with key_vault_private_endpoint_id. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  exportPolicyRule:
+                    description: One or more export_policy_rule block defined below.
+                    items:
+                      properties:
+                        allowedClients:
+                          description: A list of allowed clients IPv4 addresses.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        protocolsEnabled:
+                          description: 'A list of allowed protocols. Valid values
+                            include CIFS, NFSv3, or NFSv4.1. Only one value is supported
+                            at this time. This replaces the previous arguments: cifs_enabled,
+                            nfsv3_enabled and nfsv4_enabled.'
+                          items:
+                            type: string
+                          type: array
+                        rootAccessEnabled:
+                          description: Is root access permitted to this volume?
+                          type: boolean
+                        ruleIndex:
+                          description: The index number of the rule.
+                          type: number
+                        unixReadOnly:
+                          description: Is the file system on unix read only?
+                          type: boolean
+                        unixReadWrite:
+                          description: Is the file system on unix read and write?
+                          type: boolean
+                      type: object
+                    type: array
+                  keyVaultPrivateEndpointId:
+                    description: The Private Endpoint ID for Key Vault, which is required
+                      when using customer-managed keys. This is required with encryption_key_source.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  networkFeatures:
+                    description: Indicates which network feature to use, accepted
+                      values are Basic or Standard, it defaults to Basic if not defined.
+                      This is a feature in public preview and for more information
+                      about it and how to register, please refer to Configure network
+                      features for an Azure NetApp Files volume.
+                    type: string
+                  poolName:
+                    description: The name of the NetApp pool in which the NetApp Volume
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  poolNameRef:
+                    description: Reference to a Pool to populate poolName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  poolNameSelector:
+                    description: Selector for a Pool to populate poolName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  protocols:
+                    description: The target volume protocol expressed as a list. Supported
+                      single value include CIFS, NFSv3, or NFSv4.1. If argument is
+                      not defined it will default to NFSv3. Changing this forces a
+                      new resource to be created and data will be lost. Dual protocol
+                      scenario is supported for CIFS and NFSv3, for more information,
+                      please refer to Create a dual-protocol volume for Azure NetApp
+                      Files document.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  resourceGroupName:
+                    description: The name of the resource group where the NetApp Volume
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  securityStyle:
+                    description: Volume security style, accepted values are unix or
+                      ntfs. If not provided, single-protocol volume is created defaulting
+                      to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
+                      to ntfs. In a dual-protocol volume, if not provided, its value
+                      will be ntfs. Changing this forces a new resource to be created.
+                    type: string
+                  serviceLevel:
+                    description: The target performance of the file system. Valid
+                      values include Premium, Standard, or Ultra. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  smbAccessBasedEnumerationEnabled:
+                    description: Limits enumeration of files and folders (that is,
+                      listing the contents) in SMB only to users with allowed access
+                      on the share. For instance, if a user doesn't have access to
+                      read a file or folder in a share with access-based enumeration
+                      enabled, then the file or folder doesn't show up in directory
+                      listings. Defaults to false. For more information, please refer
+                      to Understand NAS share permissions in Azure NetApp Files
+                    type: boolean
+                  smbNonBrowsableEnabled:
+                    description: Limits clients from browsing for an SMB share by
+                      hiding the share from view in Windows Explorer or when listing
+                      shares in "net view." Only end users that know the absolute
+                      paths to the share are able to find the share. Defaults to false.
+                      For more information, please refer to Understand NAS share permissions
+                      in Azure NetApp Files
+                    type: boolean
+                  snapshotDirectoryVisible:
+                    description: Specifies whether the .snapshot (NFS clients) or
+                      ~snapshot (SMB clients) path of a volume is visible, default
+                      value is true.
+                    type: boolean
+                  storageQuotaInGb:
+                    description: The maximum Storage Quota allowed for a file system
+                      in Gigabytes.
+                    type: number
+                  subnetId:
+                    description: The ID of the Subnet the NetApp Volume resides in,
+                      which must have the Microsoft.NetApp/volumes delegation. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  subnetIdRef:
+                    description: Reference to a Subnet in network to populate subnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  subnetIdSelector:
+                    description: Selector for a Subnet in network to populate subnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  throughputInMibps:
+                    description: Throughput of this volume in Mibps.
+                    type: number
+                  volumePath:
+                    description: A unique file path for the volume. Used when creating
+                      mount targets. Changing this forces a new resource to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which the Volume
+                      should be located. Possible values are 1, 2 and 3. Changing
+                      this forces a new resource to be created. This feature is currently
+                      in preview, for more information on how to enable it, please
+                      refer to Manage availability zone volume placement for Azure
+                      NetApp Files.
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  azureVmwareDataStoreEnabled:
+                    description: Is the NetApp Volume enabled for Azure VMware Solution
+                      (AVS) datastore purpose. Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
+                  createFromSnapshotResourceId:
+                    description: 'Creates volume from snapshot. Following properties
+                      must be the same as the original volume where the snapshot was
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
+                      account_name and pool_name. Changing this forces a new resource
+                      to be created.'
+                    type: string
+                  createFromSnapshotResourceIdRef:
+                    description: Reference to a Snapshot to populate createFromSnapshotResourceId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  createFromSnapshotResourceIdSelector:
+                    description: Selector for a Snapshot to populate createFromSnapshotResourceId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  dataProtectionReplication:
+                    description: A data_protection_replication block as defined below.
+                      Changing this forces a new resource to be created.
+                    properties:
+                      endpointType:
+                        description: The endpoint type, default value is dst for destination.
+                        type: string
+                      remoteVolumeLocation:
+                        description: Location of the primary volume. Changing this
+                          forces a new resource to be created.
+                        type: string
+                      remoteVolumeResourceId:
+                        description: Resource ID of the primary volume.
+                        type: string
+                      remoteVolumeResourceIdRef:
+                        description: Reference to a Volume to populate remoteVolumeResourceId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      remoteVolumeResourceIdSelector:
+                        description: Selector for a Volume to populate remoteVolumeResourceId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      replicationFrequency:
+                        description: Replication frequency, supported values are '10minutes',
+                          'hourly', 'daily', values are case sensitive.
+                        type: string
+                    type: object
+                  dataProtectionSnapshotPolicy:
+                    description: A data_protection_snapshot_policy block as defined
+                      below.
+                    properties:
+                      snapshotPolicyId:
+                        description: Resource ID of the snapshot policy to apply to
+                          the volume.
+                        type: string
+                      snapshotPolicyIdRef:
+                        description: Reference to a SnapshotPolicy to populate snapshotPolicyId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      snapshotPolicyIdSelector:
+                        description: Selector for a SnapshotPolicy to populate snapshotPolicyId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  encryptionKeySource:
+                    description: The encryption key source, it can be Microsoft.NetApp
+                      for platform managed keys or Microsoft.KeyVault for customer-managed
+                      keys. This is required with key_vault_private_endpoint_id. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  exportPolicyRule:
+                    description: One or more export_policy_rule block defined below.
+                    items:
+                      properties:
+                        allowedClients:
+                          description: A list of allowed clients IPv4 addresses.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        protocolsEnabled:
+                          description: 'A list of allowed protocols. Valid values
+                            include CIFS, NFSv3, or NFSv4.1. Only one value is supported
+                            at this time. This replaces the previous arguments: cifs_enabled,
+                            nfsv3_enabled and nfsv4_enabled.'
+                          items:
+                            type: string
+                          type: array
+                        rootAccessEnabled:
+                          description: Is root access permitted to this volume?
+                          type: boolean
+                        ruleIndex:
+                          description: The index number of the rule.
+                          type: number
+                        unixReadOnly:
+                          description: Is the file system on unix read only?
+                          type: boolean
+                        unixReadWrite:
+                          description: Is the file system on unix read and write?
+                          type: boolean
+                      type: object
+                    type: array
+                  keyVaultPrivateEndpointId:
+                    description: The Private Endpoint ID for Key Vault, which is required
+                      when using customer-managed keys. This is required with encryption_key_source.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  networkFeatures:
+                    description: Indicates which network feature to use, accepted
+                      values are Basic or Standard, it defaults to Basic if not defined.
+                      This is a feature in public preview and for more information
+                      about it and how to register, please refer to Configure network
+                      features for an Azure NetApp Files volume.
+                    type: string
+                  protocols:
+                    description: The target volume protocol expressed as a list. Supported
+                      single value include CIFS, NFSv3, or NFSv4.1. If argument is
+                      not defined it will default to NFSv3. Changing this forces a
+                      new resource to be created and data will be lost. Dual protocol
+                      scenario is supported for CIFS and NFSv3, for more information,
+                      please refer to Create a dual-protocol volume for Azure NetApp
+                      Files document.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  securityStyle:
+                    description: Volume security style, accepted values are unix or
+                      ntfs. If not provided, single-protocol volume is created defaulting
+                      to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
+                      to ntfs. In a dual-protocol volume, if not provided, its value
+                      will be ntfs. Changing this forces a new resource to be created.
+                    type: string
+                  serviceLevel:
+                    description: The target performance of the file system. Valid
+                      values include Premium, Standard, or Ultra. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  smbAccessBasedEnumerationEnabled:
+                    description: Limits enumeration of files and folders (that is,
+                      listing the contents) in SMB only to users with allowed access
+                      on the share. For instance, if a user doesn't have access to
+                      read a file or folder in a share with access-based enumeration
+                      enabled, then the file or folder doesn't show up in directory
+                      listings. Defaults to false. For more information, please refer
+                      to Understand NAS share permissions in Azure NetApp Files
+                    type: boolean
+                  smbNonBrowsableEnabled:
+                    description: Limits clients from browsing for an SMB share by
+                      hiding the share from view in Windows Explorer or when listing
+                      shares in "net view." Only end users that know the absolute
+                      paths to the share are able to find the share. Defaults to false.
+                      For more information, please refer to Understand NAS share permissions
+                      in Azure NetApp Files
+                    type: boolean
+                  snapshotDirectoryVisible:
+                    description: Specifies whether the .snapshot (NFS clients) or
+                      ~snapshot (SMB clients) path of a volume is visible, default
+                      value is true.
+                    type: boolean
+                  storageQuotaInGb:
+                    description: The maximum Storage Quota allowed for a file system
+                      in Gigabytes.
+                    type: number
+                  subnetId:
+                    description: The ID of the Subnet the NetApp Volume resides in,
+                      which must have the Microsoft.NetApp/volumes delegation. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  subnetIdRef:
+                    description: Reference to a Subnet in network to populate subnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  subnetIdSelector:
+                    description: Selector for a Subnet in network to populate subnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  throughputInMibps:
+                    description: Throughput of this volume in Mibps.
+                    type: number
+                  volumePath:
+                    description: A unique file path for the volume. Used when creating
+                      mount targets. Changing this forces a new resource to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which the Volume
+                      should be located. Possible values are 1, 2 and 3. Changing
+                      this forces a new resource to be created. This feature is currently
+                      in preview, for more information on how to enable it, please
+                      refer to Manage availability zone volume placement for Azure
+                      NetApp Files.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.serviceLevel is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.serviceLevel)
+                || (has(self.initProvider) && has(self.initProvider.serviceLevel))'
+            - message: spec.forProvider.storageQuotaInGb is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.storageQuotaInGb)
+                || (has(self.initProvider) && has(self.initProvider.storageQuotaInGb))'
+            - message: spec.forProvider.volumePath is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.volumePath)
+                || (has(self.initProvider) && has(self.initProvider.volumePath))'
+          status:
+            description: VolumeStatus defines the observed state of Volume.
+            properties:
+              atProvider:
+                properties:
+                  accountName:
+                    description: The name of the NetApp account in which the NetApp
+                      Pool should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  azureVmwareDataStoreEnabled:
+                    description: Is the NetApp Volume enabled for Azure VMware Solution
+                      (AVS) datastore purpose. Defaults to false. Changing this forces
+                      a new resource to be created.
+                    type: boolean
+                  createFromSnapshotResourceId:
+                    description: 'Creates volume from snapshot. Following properties
+                      must be the same as the original volume where the snapshot was
+                      taken from: protocols, subnet_id, location, service_level, resource_group_name,
+                      account_name and pool_name. Changing this forces a new resource
+                      to be created.'
+                    type: string
+                  dataProtectionReplication:
+                    description: A data_protection_replication block as defined below.
+                      Changing this forces a new resource to be created.
+                    properties:
+                      endpointType:
+                        description: The endpoint type, default value is dst for destination.
+                        type: string
+                      remoteVolumeLocation:
+                        description: Location of the primary volume. Changing this
+                          forces a new resource to be created.
+                        type: string
+                      remoteVolumeResourceId:
+                        description: Resource ID of the primary volume.
+                        type: string
+                      replicationFrequency:
+                        description: Replication frequency, supported values are '10minutes',
+                          'hourly', 'daily', values are case sensitive.
+                        type: string
+                    type: object
+                  dataProtectionSnapshotPolicy:
+                    description: A data_protection_snapshot_policy block as defined
+                      below.
+                    properties:
+                      snapshotPolicyId:
+                        description: Resource ID of the snapshot policy to apply to
+                          the volume.
+                        type: string
+                    type: object
+                  encryptionKeySource:
+                    description: The encryption key source, it can be Microsoft.NetApp
+                      for platform managed keys or Microsoft.KeyVault for customer-managed
+                      keys. This is required with key_vault_private_endpoint_id. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  exportPolicyRule:
+                    description: One or more export_policy_rule block defined below.
+                    items:
+                      properties:
+                        allowedClients:
+                          description: A list of allowed clients IPv4 addresses.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        protocolsEnabled:
+                          description: 'A list of allowed protocols. Valid values
+                            include CIFS, NFSv3, or NFSv4.1. Only one value is supported
+                            at this time. This replaces the previous arguments: cifs_enabled,
+                            nfsv3_enabled and nfsv4_enabled.'
+                          items:
+                            type: string
+                          type: array
+                        rootAccessEnabled:
+                          description: Is root access permitted to this volume?
+                          type: boolean
+                        ruleIndex:
+                          description: The index number of the rule.
+                          type: number
+                        unixReadOnly:
+                          description: Is the file system on unix read only?
+                          type: boolean
+                        unixReadWrite:
+                          description: Is the file system on unix read and write?
+                          type: boolean
+                      type: object
+                    type: array
+                  id:
+                    description: The ID of the NetApp Volume.
+                    type: string
+                  keyVaultPrivateEndpointId:
+                    description: The Private Endpoint ID for Key Vault, which is required
+                      when using customer-managed keys. This is required with encryption_key_source.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  mountIpAddresses:
+                    description: A list of IPv4 Addresses which should be used to
+                      mount the volume.
+                    items:
+                      type: string
+                    type: array
+                  networkFeatures:
+                    description: Indicates which network feature to use, accepted
+                      values are Basic or Standard, it defaults to Basic if not defined.
+                      This is a feature in public preview and for more information
+                      about it and how to register, please refer to Configure network
+                      features for an Azure NetApp Files volume.
+                    type: string
+                  poolName:
+                    description: The name of the NetApp pool in which the NetApp Volume
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  protocols:
+                    description: The target volume protocol expressed as a list. Supported
+                      single value include CIFS, NFSv3, or NFSv4.1. If argument is
+                      not defined it will default to NFSv3. Changing this forces a
+                      new resource to be created and data will be lost. Dual protocol
+                      scenario is supported for CIFS and NFSv3, for more information,
+                      please refer to Create a dual-protocol volume for Azure NetApp
+                      Files document.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  resourceGroupName:
+                    description: The name of the resource group where the NetApp Volume
+                      should be created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  securityStyle:
+                    description: Volume security style, accepted values are unix or
+                      ntfs. If not provided, single-protocol volume is created defaulting
+                      to unix if it is NFSv3 or NFSv4.1 volume, if CIFS, it will default
+                      to ntfs. In a dual-protocol volume, if not provided, its value
+                      will be ntfs. Changing this forces a new resource to be created.
+                    type: string
+                  serviceLevel:
+                    description: The target performance of the file system. Valid
+                      values include Premium, Standard, or Ultra. Changing this forces
+                      a new resource to be created.
+                    type: string
+                  smbAccessBasedEnumerationEnabled:
+                    description: Limits enumeration of files and folders (that is,
+                      listing the contents) in SMB only to users with allowed access
+                      on the share. For instance, if a user doesn't have access to
+                      read a file or folder in a share with access-based enumeration
+                      enabled, then the file or folder doesn't show up in directory
+                      listings. Defaults to false. For more information, please refer
+                      to Understand NAS share permissions in Azure NetApp Files
+                    type: boolean
+                  smbNonBrowsableEnabled:
+                    description: Limits clients from browsing for an SMB share by
+                      hiding the share from view in Windows Explorer or when listing
+                      shares in "net view." Only end users that know the absolute
+                      paths to the share are able to find the share. Defaults to false.
+                      For more information, please refer to Understand NAS share permissions
+                      in Azure NetApp Files
+                    type: boolean
+                  snapshotDirectoryVisible:
+                    description: Specifies whether the .snapshot (NFS clients) or
+                      ~snapshot (SMB clients) path of a volume is visible, default
+                      value is true.
+                    type: boolean
+                  storageQuotaInGb:
+                    description: The maximum Storage Quota allowed for a file system
+                      in Gigabytes.
+                    type: number
+                  subnetId:
+                    description: The ID of the Subnet the NetApp Volume resides in,
+                      which must have the Microsoft.NetApp/volumes delegation. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  throughputInMibps:
+                    description: Throughput of this volume in Mibps.
+                    type: number
+                  volumePath:
+                    description: A unique file path for the volume. Used when creating
+                      mount targets. Changing this forces a new resource to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which the Volume
+                      should be located. Possible values are 1, 2 and 3. Changing
+                      this forces a new resource to be created. This feature is currently
+                      in preview, for more information on how to enable it, please
+                      refer to Manage availability zone volume placement for Azure
+                      NetApp Files.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

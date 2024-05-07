@@ -149,7 +149,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta2", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -168,7 +168,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -187,7 +187,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta1", "Service", "ServiceList")
+		m, l, err = apisresolver.GetManagedResource("signalrservice.azure.upbound.io", "v1beta2", "Service", "ServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -206,7 +206,7 @@ func (mg *SignalrSharedPrivateLinkResource) ResolveReferences(ctx context.Contex
 	mg.Spec.InitProvider.SignalrServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SignalrServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Vault", "VaultList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Vault", "VaultList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

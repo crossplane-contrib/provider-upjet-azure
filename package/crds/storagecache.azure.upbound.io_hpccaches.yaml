@@ -1247,3 +1247,1183 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: HPCCache is the Schema for the HPCCaches API. Manages a HPC Cache.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: HPCCacheSpec defines the desired state of HPCCache
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  automaticallyRotateKeyToLatestEnabled:
+                    description: Specifies whether the HPC Cache automatically rotates
+                      Encryption Key to the latest version.
+                    type: boolean
+                  cacheSizeInGb:
+                    description: The size of the HPC Cache, in GB. Possible values
+                      are 3072, 6144, 12288, 21623, 24576, 43246, 49152 and 86491.
+                      Changing this forces a new resource to be created.
+                    type: number
+                  defaultAccessPolicy:
+                    description: A default_access_policy block as defined below.
+                    properties:
+                      accessRule:
+                        description: One or more access_rule blocks (up to three)
+                          as defined above.
+                        items:
+                          properties:
+                            access:
+                              description: 'The access level for this rule. Possible
+                                values are: rw, ro, no.'
+                              type: string
+                            anonymousGid:
+                              description: The anonymous GID used when root_squash_enabled
+                                is true.
+                              type: number
+                            anonymousUid:
+                              description: The anonymous UID used when root_squash_enabled
+                                is true.
+                              type: number
+                            filter:
+                              description: 'The filter applied to the scope for this
+                                rule. The filter''s format depends on its scope: default
+                                scope matches all clients and has no filter value;
+                                network scope takes a CIDR format; host takes an IP
+                                address or fully qualified domain name. If a client
+                                does not match any filter rule and there is no default
+                                rule, access is denied.'
+                              type: string
+                            rootSquashEnabled:
+                              description: Whether to enable root squash?
+                              type: boolean
+                            scope:
+                              description: 'The scope of this rule. The scope and
+                                (potentially) the filter determine which clients match
+                                the rule. Possible values are: default, network, host.'
+                              type: string
+                            submountAccessEnabled:
+                              description: Whether allow access to subdirectories
+                                under the root export?
+                              type: boolean
+                            suidEnabled:
+                              description: Whether SUID is allowed?
+                              type: boolean
+                          type: object
+                        type: array
+                    type: object
+                  directoryActiveDirectory:
+                    description: A directory_active_directory block as defined below.
+                    properties:
+                      cacheNetbiosName:
+                        description: The NetBIOS name to assign to the HPC Cache when
+                          it joins the Active Directory domain as a server.
+                        type: string
+                      dnsPrimaryIp:
+                        description: The primary DNS IP address used to resolve the
+                          Active Directory domain controller's FQDN.
+                        type: string
+                      dnsSecondaryIp:
+                        description: The secondary DNS IP address used to resolve
+                          the Active Directory domain controller's FQDN.
+                        type: string
+                      domainName:
+                        description: The fully qualified domain name of the Active
+                          Directory domain controller.
+                        type: string
+                      domainNetbiosName:
+                        description: The Active Directory domain's NetBIOS name.
+                        type: string
+                      passwordSecretRef:
+                        description: The password of the Active Directory domain administrator.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      username:
+                        description: The username of the Active Directory domain administrator.
+                        type: string
+                    required:
+                    - passwordSecretRef
+                    type: object
+                  directoryFlatFile:
+                    description: A directory_flat_file block as defined below.
+                    properties:
+                      groupFileUri:
+                        description: The URI of the file containing group information
+                          (/etc/group file format in Unix-like OS).
+                        type: string
+                      passwordFileUri:
+                        description: The URI of the file containing user information
+                          (/etc/passwd file format in Unix-like OS).
+                        type: string
+                    type: object
+                  directoryLdap:
+                    description: A directory_ldap block as defined below.
+                    properties:
+                      baseDn:
+                        description: The base distinguished name (DN) for the LDAP
+                          domain.
+                        type: string
+                      bind:
+                        description: A bind block as defined above.
+                        properties:
+                          dn:
+                            description: The Bind Distinguished Name (DN) identity
+                              to be used in the secure LDAP connection.
+                            type: string
+                          passwordSecretRef:
+                            description: The password of the Active Directory domain
+                              administrator.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                        required:
+                        - passwordSecretRef
+                        type: object
+                      certificateValidationUri:
+                        description: The URI of the CA certificate to validate the
+                          LDAP secure connection.
+                        type: string
+                      downloadCertificateAutomatically:
+                        description: Whether the certificate should be automatically
+                          downloaded. This can be set to true only when certificate_validation_uri
+                          is provided.
+                        type: boolean
+                      encrypted:
+                        description: Whether the LDAP connection should be encrypted?
+                        type: boolean
+                      server:
+                        description: The FQDN or IP address of the LDAP server.
+                        type: string
+                    type: object
+                  dns:
+                    description: A dns block as defined below.
+                    properties:
+                      searchDomain:
+                        description: The DNS search domain for the HPC Cache.
+                        type: string
+                      servers:
+                        description: A list of DNS servers for the HPC Cache. At most
+                          three IP(s) are allowed to set.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  identity:
+                    description: An identity block as defined below. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this HPC Cache. Changing this forces
+                          a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this HPC Cache. Possible values
+                          are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+                          (to enable both). Changing this forces a new resource to
+                          be created.
+                        type: string
+                    type: object
+                  keyVaultKeyId:
+                    description: The ID of the Key Vault Key which should be used
+                      to encrypt the data in this HPC Cache.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure Region where the HPC
+                      Cache should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  mtu:
+                    description: The IPv4 maximum transmission unit configured for
+                      the subnet of the HPC Cache. Possible values range from 576
+                      - 1500. Defaults to 1500.
+                    type: number
+                  ntpServer:
+                    description: The NTP server IP Address or FQDN for the HPC Cache.
+                      Defaults to time.windows.com.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the HPC Cache. Changing this forces a new resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  skuName:
+                    description: The SKU of HPC Cache to use. Possible values are
+                      (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly)
+                      - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  subnetId:
+                    description: The ID of the Subnet for the HPC Cache. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  subnetIdRef:
+                    description: Reference to a Subnet in network to populate subnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  subnetIdSelector:
+                    description: Selector for a Subnet in network to populate subnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the HPC Cache.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  automaticallyRotateKeyToLatestEnabled:
+                    description: Specifies whether the HPC Cache automatically rotates
+                      Encryption Key to the latest version.
+                    type: boolean
+                  cacheSizeInGb:
+                    description: The size of the HPC Cache, in GB. Possible values
+                      are 3072, 6144, 12288, 21623, 24576, 43246, 49152 and 86491.
+                      Changing this forces a new resource to be created.
+                    type: number
+                  defaultAccessPolicy:
+                    description: A default_access_policy block as defined below.
+                    properties:
+                      accessRule:
+                        description: One or more access_rule blocks (up to three)
+                          as defined above.
+                        items:
+                          properties:
+                            access:
+                              description: 'The access level for this rule. Possible
+                                values are: rw, ro, no.'
+                              type: string
+                            anonymousGid:
+                              description: The anonymous GID used when root_squash_enabled
+                                is true.
+                              type: number
+                            anonymousUid:
+                              description: The anonymous UID used when root_squash_enabled
+                                is true.
+                              type: number
+                            filter:
+                              description: 'The filter applied to the scope for this
+                                rule. The filter''s format depends on its scope: default
+                                scope matches all clients and has no filter value;
+                                network scope takes a CIDR format; host takes an IP
+                                address or fully qualified domain name. If a client
+                                does not match any filter rule and there is no default
+                                rule, access is denied.'
+                              type: string
+                            rootSquashEnabled:
+                              description: Whether to enable root squash?
+                              type: boolean
+                            scope:
+                              description: 'The scope of this rule. The scope and
+                                (potentially) the filter determine which clients match
+                                the rule. Possible values are: default, network, host.'
+                              type: string
+                            submountAccessEnabled:
+                              description: Whether allow access to subdirectories
+                                under the root export?
+                              type: boolean
+                            suidEnabled:
+                              description: Whether SUID is allowed?
+                              type: boolean
+                          type: object
+                        type: array
+                    type: object
+                  directoryActiveDirectory:
+                    description: A directory_active_directory block as defined below.
+                    properties:
+                      cacheNetbiosName:
+                        description: The NetBIOS name to assign to the HPC Cache when
+                          it joins the Active Directory domain as a server.
+                        type: string
+                      dnsPrimaryIp:
+                        description: The primary DNS IP address used to resolve the
+                          Active Directory domain controller's FQDN.
+                        type: string
+                      dnsSecondaryIp:
+                        description: The secondary DNS IP address used to resolve
+                          the Active Directory domain controller's FQDN.
+                        type: string
+                      domainName:
+                        description: The fully qualified domain name of the Active
+                          Directory domain controller.
+                        type: string
+                      domainNetbiosName:
+                        description: The Active Directory domain's NetBIOS name.
+                        type: string
+                      username:
+                        description: The username of the Active Directory domain administrator.
+                        type: string
+                    type: object
+                  directoryFlatFile:
+                    description: A directory_flat_file block as defined below.
+                    properties:
+                      groupFileUri:
+                        description: The URI of the file containing group information
+                          (/etc/group file format in Unix-like OS).
+                        type: string
+                      passwordFileUri:
+                        description: The URI of the file containing user information
+                          (/etc/passwd file format in Unix-like OS).
+                        type: string
+                    type: object
+                  directoryLdap:
+                    description: A directory_ldap block as defined below.
+                    properties:
+                      baseDn:
+                        description: The base distinguished name (DN) for the LDAP
+                          domain.
+                        type: string
+                      bind:
+                        description: A bind block as defined above.
+                        properties:
+                          dn:
+                            description: The Bind Distinguished Name (DN) identity
+                              to be used in the secure LDAP connection.
+                            type: string
+                        type: object
+                      certificateValidationUri:
+                        description: The URI of the CA certificate to validate the
+                          LDAP secure connection.
+                        type: string
+                      downloadCertificateAutomatically:
+                        description: Whether the certificate should be automatically
+                          downloaded. This can be set to true only when certificate_validation_uri
+                          is provided.
+                        type: boolean
+                      encrypted:
+                        description: Whether the LDAP connection should be encrypted?
+                        type: boolean
+                      server:
+                        description: The FQDN or IP address of the LDAP server.
+                        type: string
+                    type: object
+                  dns:
+                    description: A dns block as defined below.
+                    properties:
+                      searchDomain:
+                        description: The DNS search domain for the HPC Cache.
+                        type: string
+                      servers:
+                        description: A list of DNS servers for the HPC Cache. At most
+                          three IP(s) are allowed to set.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  identity:
+                    description: An identity block as defined below. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this HPC Cache. Changing this forces
+                          a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this HPC Cache. Possible values
+                          are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+                          (to enable both). Changing this forces a new resource to
+                          be created.
+                        type: string
+                    type: object
+                  keyVaultKeyId:
+                    description: The ID of the Key Vault Key which should be used
+                      to encrypt the data in this HPC Cache.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure Region where the HPC
+                      Cache should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  mtu:
+                    description: The IPv4 maximum transmission unit configured for
+                      the subnet of the HPC Cache. Possible values range from 576
+                      - 1500. Defaults to 1500.
+                    type: number
+                  ntpServer:
+                    description: The NTP server IP Address or FQDN for the HPC Cache.
+                      Defaults to time.windows.com.
+                    type: string
+                  skuName:
+                    description: The SKU of HPC Cache to use. Possible values are
+                      (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly)
+                      - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  subnetId:
+                    description: The ID of the Subnet for the HPC Cache. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  subnetIdRef:
+                    description: Reference to a Subnet in network to populate subnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  subnetIdSelector:
+                    description: Selector for a Subnet in network to populate subnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the HPC Cache.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.cacheSizeInGb is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.cacheSizeInGb)
+                || (has(self.initProvider) && has(self.initProvider.cacheSizeInGb))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.skuName is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || (has(self.initProvider) && has(self.initProvider.skuName))'
+          status:
+            description: HPCCacheStatus defines the observed state of HPCCache.
+            properties:
+              atProvider:
+                properties:
+                  automaticallyRotateKeyToLatestEnabled:
+                    description: Specifies whether the HPC Cache automatically rotates
+                      Encryption Key to the latest version.
+                    type: boolean
+                  cacheSizeInGb:
+                    description: The size of the HPC Cache, in GB. Possible values
+                      are 3072, 6144, 12288, 21623, 24576, 43246, 49152 and 86491.
+                      Changing this forces a new resource to be created.
+                    type: number
+                  defaultAccessPolicy:
+                    description: A default_access_policy block as defined below.
+                    properties:
+                      accessRule:
+                        description: One or more access_rule blocks (up to three)
+                          as defined above.
+                        items:
+                          properties:
+                            access:
+                              description: 'The access level for this rule. Possible
+                                values are: rw, ro, no.'
+                              type: string
+                            anonymousGid:
+                              description: The anonymous GID used when root_squash_enabled
+                                is true.
+                              type: number
+                            anonymousUid:
+                              description: The anonymous UID used when root_squash_enabled
+                                is true.
+                              type: number
+                            filter:
+                              description: 'The filter applied to the scope for this
+                                rule. The filter''s format depends on its scope: default
+                                scope matches all clients and has no filter value;
+                                network scope takes a CIDR format; host takes an IP
+                                address or fully qualified domain name. If a client
+                                does not match any filter rule and there is no default
+                                rule, access is denied.'
+                              type: string
+                            rootSquashEnabled:
+                              description: Whether to enable root squash?
+                              type: boolean
+                            scope:
+                              description: 'The scope of this rule. The scope and
+                                (potentially) the filter determine which clients match
+                                the rule. Possible values are: default, network, host.'
+                              type: string
+                            submountAccessEnabled:
+                              description: Whether allow access to subdirectories
+                                under the root export?
+                              type: boolean
+                            suidEnabled:
+                              description: Whether SUID is allowed?
+                              type: boolean
+                          type: object
+                        type: array
+                    type: object
+                  directoryActiveDirectory:
+                    description: A directory_active_directory block as defined below.
+                    properties:
+                      cacheNetbiosName:
+                        description: The NetBIOS name to assign to the HPC Cache when
+                          it joins the Active Directory domain as a server.
+                        type: string
+                      dnsPrimaryIp:
+                        description: The primary DNS IP address used to resolve the
+                          Active Directory domain controller's FQDN.
+                        type: string
+                      dnsSecondaryIp:
+                        description: The secondary DNS IP address used to resolve
+                          the Active Directory domain controller's FQDN.
+                        type: string
+                      domainName:
+                        description: The fully qualified domain name of the Active
+                          Directory domain controller.
+                        type: string
+                      domainNetbiosName:
+                        description: The Active Directory domain's NetBIOS name.
+                        type: string
+                      username:
+                        description: The username of the Active Directory domain administrator.
+                        type: string
+                    type: object
+                  directoryFlatFile:
+                    description: A directory_flat_file block as defined below.
+                    properties:
+                      groupFileUri:
+                        description: The URI of the file containing group information
+                          (/etc/group file format in Unix-like OS).
+                        type: string
+                      passwordFileUri:
+                        description: The URI of the file containing user information
+                          (/etc/passwd file format in Unix-like OS).
+                        type: string
+                    type: object
+                  directoryLdap:
+                    description: A directory_ldap block as defined below.
+                    properties:
+                      baseDn:
+                        description: The base distinguished name (DN) for the LDAP
+                          domain.
+                        type: string
+                      bind:
+                        description: A bind block as defined above.
+                        properties:
+                          dn:
+                            description: The Bind Distinguished Name (DN) identity
+                              to be used in the secure LDAP connection.
+                            type: string
+                        type: object
+                      certificateValidationUri:
+                        description: The URI of the CA certificate to validate the
+                          LDAP secure connection.
+                        type: string
+                      downloadCertificateAutomatically:
+                        description: Whether the certificate should be automatically
+                          downloaded. This can be set to true only when certificate_validation_uri
+                          is provided.
+                        type: boolean
+                      encrypted:
+                        description: Whether the LDAP connection should be encrypted?
+                        type: boolean
+                      server:
+                        description: The FQDN or IP address of the LDAP server.
+                        type: string
+                    type: object
+                  dns:
+                    description: A dns block as defined below.
+                    properties:
+                      searchDomain:
+                        description: The DNS search domain for the HPC Cache.
+                        type: string
+                      servers:
+                        description: A list of DNS servers for the HPC Cache. At most
+                          three IP(s) are allowed to set.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  id:
+                    description: The id of the HPC Cache.
+                    type: string
+                  identity:
+                    description: An identity block as defined below. Changing this
+                      forces a new resource to be created.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this HPC Cache. Changing this forces
+                          a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The Principal ID associated with this Managed
+                          Service Identity.
+                        type: string
+                      tenantId:
+                        description: The Tenant ID associated with this Managed Service
+                          Identity.
+                        type: string
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this HPC Cache. Possible values
+                          are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned
+                          (to enable both). Changing this forces a new resource to
+                          be created.
+                        type: string
+                    type: object
+                  keyVaultKeyId:
+                    description: The ID of the Key Vault Key which should be used
+                      to encrypt the data in this HPC Cache.
+                    type: string
+                  location:
+                    description: Specifies the supported Azure Region where the HPC
+                      Cache should be created. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  mountAddresses:
+                    description: A list of IP Addresses where the HPC Cache can be
+                      mounted.
+                    items:
+                      type: string
+                    type: array
+                  mtu:
+                    description: The IPv4 maximum transmission unit configured for
+                      the subnet of the HPC Cache. Possible values range from 576
+                      - 1500. Defaults to 1500.
+                    type: number
+                  ntpServer:
+                    description: The NTP server IP Address or FQDN for the HPC Cache.
+                      Defaults to time.windows.com.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group in which to create
+                      the HPC Cache. Changing this forces a new resource to be created.
+                    type: string
+                  skuName:
+                    description: The SKU of HPC Cache to use. Possible values are
+                      (ReadWrite) - Standard_2G, Standard_4G Standard_8G or (ReadOnly)
+                      - Standard_L4_5G, Standard_L9G, and Standard_L16G. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  subnetId:
+                    description: The ID of the Subnet for the HPC Cache. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the HPC Cache.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

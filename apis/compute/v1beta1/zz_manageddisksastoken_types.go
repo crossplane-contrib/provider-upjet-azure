@@ -22,7 +22,7 @@ type ManagedDiskSASTokenInitParameters struct {
 	DurationInSeconds *float64 `json:"durationInSeconds,omitempty" tf:"duration_in_seconds,omitempty"`
 
 	// The ID of an existing Managed Disk which should be exported. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta2.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`
 
@@ -61,7 +61,7 @@ type ManagedDiskSASTokenParameters struct {
 	DurationInSeconds *float64 `json:"durationInSeconds,omitempty" tf:"duration_in_seconds,omitempty"`
 
 	// The ID of an existing Managed Disk which should be exported. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta1.ManagedDisk
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/compute/v1beta2.ManagedDisk
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedDiskID *string `json:"managedDiskId,omitempty" tf:"managed_disk_id,omitempty"`

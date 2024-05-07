@@ -28,7 +28,7 @@ type ResourcePolicyRemediationInitParameters struct {
 	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
 
 	// The ID of the Policy Assignment that should be remediated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourceGroupPolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.ResourceGroupPolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 
@@ -53,7 +53,7 @@ type ResourcePolicyRemediationInitParameters struct {
 	ResourceDiscoveryMode *string `json:"resourceDiscoveryMode,omitempty" tf:"resource_discovery_mode,omitempty"`
 
 	// The Resource ID at which the Policy Remediation should be applied. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -121,7 +121,7 @@ type ResourcePolicyRemediationParameters struct {
 	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
 
 	// The ID of the Policy Assignment that should be remediated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourceGroupPolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.ResourceGroupPolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
@@ -151,7 +151,7 @@ type ResourcePolicyRemediationParameters struct {
 	ResourceDiscoveryMode *string `json:"resourceDiscoveryMode,omitempty" tf:"resource_discovery_mode,omitempty"`
 
 	// The Resource ID at which the Policy Remediation should be applied. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`

@@ -25,7 +25,7 @@ spec:
 
 ---
 
-apiVersion: kusto.azure.upbound.io/v1beta1
+apiVersion: kusto.azure.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:
@@ -59,7 +59,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

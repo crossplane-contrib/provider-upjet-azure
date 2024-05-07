@@ -47,7 +47,7 @@ type SiteRecoveryProtectionContainerParameters struct {
 	RecoveryFabricNameSelector *v1.Selector `json:"recoveryFabricNameSelector,omitempty" tf:"-"`
 
 	// The name of the vault that should be updated. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/recoveryservices/v1beta2.Vault
 	// +kubebuilder:validation:Optional
 	RecoveryVaultName *string `json:"recoveryVaultName,omitempty" tf:"recovery_vault_name,omitempty"`
 

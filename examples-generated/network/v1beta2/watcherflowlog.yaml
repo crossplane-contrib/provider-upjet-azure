@@ -1,0 +1,123 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: WatcherFlowLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    enabled: true
+    networkSecurityGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    networkWatcherNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionPolicy:
+    - days: 7
+      enabled: true
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    trafficAnalytics:
+    - enabled: true
+      intervalInMinutes: 10
+      workspaceIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+      workspaceRegion: West Europe
+      workspaceResourceIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: test
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: PerGB2018
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    enableHttpsTrafficOnly: true
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

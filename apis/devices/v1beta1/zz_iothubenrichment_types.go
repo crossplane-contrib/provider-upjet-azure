@@ -19,7 +19,7 @@ type IOTHubEnrichmentInitParameters struct {
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
 	// Reference to a IOTHub in devices to populate iothubName.
@@ -77,7 +77,7 @@ type IOTHubEnrichmentParameters struct {
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 

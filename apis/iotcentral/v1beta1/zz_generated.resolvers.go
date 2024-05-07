@@ -76,7 +76,7 @@ func (mg *ApplicationNetworkRuleSet) ResolveReferences(ctx context.Context, c cl
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("iotcentral.azure.upbound.io", "v1beta1", "Application", "ApplicationList")
+		m, l, err = apisresolver.GetManagedResource("iotcentral.azure.upbound.io", "v1beta2", "Application", "ApplicationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -95,7 +95,7 @@ func (mg *ApplicationNetworkRuleSet) ResolveReferences(ctx context.Context, c cl
 	mg.Spec.ForProvider.IotcentralApplicationID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IotcentralApplicationIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("iotcentral.azure.upbound.io", "v1beta1", "Application", "ApplicationList")
+		m, l, err = apisresolver.GetManagedResource("iotcentral.azure.upbound.io", "v1beta2", "Application", "ApplicationList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

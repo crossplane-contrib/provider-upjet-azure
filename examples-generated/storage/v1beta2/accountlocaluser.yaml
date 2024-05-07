@@ -1,0 +1,80 @@
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: AccountLocalUser
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta2/accountlocaluser
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    homeDirectory: example_path
+    permissionScope:
+    - permissions:
+      - create: true
+        read: true
+      resourceNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      service: blob
+    sshAuthorizedKey:
+    - description: key1
+      key: ${local.first_public_key}
+    - description: key2
+      key: ${local.second_public_key}
+    sshKeyEnabled: true
+    sshPasswordEnabled: true
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta2/accountlocaluser
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: WestEurope
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta2/accountlocaluser
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: true
+    location: WestEurope
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta2/accountlocaluser
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

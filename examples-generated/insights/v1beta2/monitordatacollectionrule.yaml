@@ -1,0 +1,291 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorDataCollectionRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataCollectionEndpointIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dataFlow:
+    - destinations:
+      - example-destination-metrics
+      streams:
+      - Microsoft-InsightsMetrics
+    - destinations:
+      - example-destination-log
+      streams:
+      - Microsoft-InsightsMetrics
+      - Microsoft-Syslog
+      - Microsoft-Perf
+    - destinations:
+      - example-destination-log
+      outputStream: Microsoft-Syslog
+      streams:
+      - Custom-MyTableRawData
+      transformKql: source | project TimeGenerated = Time, Computer, Message = AdditionalContext
+    dataSources:
+    - extension:
+      - extensionJson: |-
+          ${jsonencode({
+                  a = 1
+                  b = "hello"
+                })}
+        extensionName: example-extension-name
+        inputDataSources:
+        - example-datasource-wineventlog
+        name: example-datasource-extension
+        streams:
+        - Microsoft-WindowsEvent
+      iisLog:
+      - logDirectories:
+        - C:\Logs\W3SVC1
+        name: example-datasource-iis
+        streams:
+        - Microsoft-W3CIISLog
+      logFile:
+      - filePatterns:
+        - C:\JavaLogs\*.log
+        format: text
+        name: example-datasource-logfile
+        settings:
+        - text:
+          - recordStartTimestampFormat: ISO 8601
+        streams:
+        - Custom-MyTableRawData
+      performanceCounter:
+      - counterSpecifiers:
+        - Processor(*)\% Processor Time
+        name: example-datasource-perfcounter
+        samplingFrequencyInSeconds: 60
+        streams:
+        - Microsoft-Perf
+        - Microsoft-InsightsMetrics
+      syslog:
+      - facilityNames:
+        - '*'
+        logLevels:
+        - '*'
+        name: example-datasource-syslog
+        streams:
+        - Microsoft-Syslog
+      windowsEventLog:
+      - name: example-datasource-wineventlog
+        streams:
+        - Microsoft-WindowsEvent
+        xPathQueries:
+        - '*![System/Level=1]'
+    description: data collection rule example
+    destinations:
+    - azureMonitorMetrics:
+      - name: example-destination-metrics
+      eventHub:
+      - eventHubIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        name: example-destination-eventhub
+      logAnalytics:
+      - name: example-destination-log
+        workspaceResourceIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      storageBlob:
+      - containerNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        name: example-destination-storage
+        storageAccountIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+    identity:
+    - identityIds:
+      - ${azurerm_user_assigned_identity.example.id}
+      type: UserAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamDeclaration:
+    - column:
+      - name: Time
+        type: datetime
+      - name: Computer
+        type: string
+      - name: AdditionalContext
+        type: string
+      streamName: Custom-MyTableRawData
+    tags:
+      foo: bar
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta2
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta2
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: operationsmanagement.azure.upbound.io/v1beta2
+kind: LogAnalyticsSolution
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    plan:
+    - product: OMSGallery/WindowsEventForwarding
+      publisher: Microsoft
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    solutionName: WindowsEventForwarding
+    workspaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: MonitorDataCollectionEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitordatacollectionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-uai
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

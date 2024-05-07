@@ -7,19 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *HealthcareDICOMService) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *HealthcareFHIRService) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *HealthcareMedtechService) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *HealthcareMedtechServiceFHIRDestination) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *HealthcareService) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *HealthcareWorkspace) Hub() {}

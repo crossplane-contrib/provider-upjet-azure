@@ -147,7 +147,7 @@ func (mg *FrontdoorCustomDomainAssociation) ResolveReferences(ctx context.Contex
 	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -185,7 +185,7 @@ func (mg *FrontdoorCustomDomainAssociation) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.CdnFrontdoorRouteIds = reference.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.CdnFrontdoorRouteIdsRefs = mrsp.ResolvedReferences
 	{
-		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta1", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
+		m, l, err = apisresolver.GetManagedResource("cdn.azure.upbound.io", "v1beta2", "FrontdoorCustomDomain", "FrontdoorCustomDomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

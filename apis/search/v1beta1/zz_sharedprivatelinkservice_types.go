@@ -22,7 +22,7 @@ type SharedPrivateLinkServiceInitParameters struct {
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// Specify the ID of the Shared Private Link Enabled Remote Resource which this Azure Search Private Endpoint should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
@@ -63,7 +63,7 @@ type SharedPrivateLinkServiceParameters struct {
 	RequestMessage *string `json:"requestMessage,omitempty" tf:"request_message,omitempty"`
 
 	// Specify the id of the Azure Search Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/search/v1beta1.Service
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/search/v1beta2.Service
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SearchServiceID *string `json:"searchServiceId,omitempty" tf:"search_service_id,omitempty"`
@@ -81,7 +81,7 @@ type SharedPrivateLinkServiceParameters struct {
 	SubresourceName *string `json:"subresourceName,omitempty" tf:"subresource_name,omitempty"`
 
 	// Specify the ID of the Shared Private Link Enabled Remote Resource which this Azure Search Private Endpoint should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`

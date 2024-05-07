@@ -1,0 +1,17 @@
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: GremlinDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta2/gremlindatabase
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_cosmosdb_account
+    throughput: 400

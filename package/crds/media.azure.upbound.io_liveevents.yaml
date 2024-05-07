@@ -1075,3 +1075,1031 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: LiveEvent is the Schema for the LiveEvents API. Manages a Live
+          Event.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: LiveEventSpec defines the desired state of LiveEvent
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  autoStartEnabled:
+                    description: The flag indicates if the resource should be automatically
+                      started on creation. Changing this forces a new resource to
+                      be created.
+                    type: boolean
+                  crossSiteAccessPolicy:
+                    description: A cross_site_access_policy block as defined below.
+                    properties:
+                      clientAccessPolicy:
+                        description: The content of clientaccesspolicy.xml used by
+                          Silverlight.
+                        type: string
+                      crossDomainPolicy:
+                        description: The content of the Cross Domain Policy (crossdomain.xml).
+                        type: string
+                    type: object
+                  description:
+                    description: A description for the live event.
+                    type: string
+                  encoding:
+                    description: A encoding block as defined below.
+                    properties:
+                      keyFrameInterval:
+                        description: Use an ISO 8601 time value between 0.5 to 20
+                          seconds to specify the output fragment length for the video
+                          and audio tracks of an encoding live event. For example,
+                          use PT2S to indicate 2 seconds. For the video track it also
+                          defines the key frame interval, or the length of a GoP (group
+                          of pictures). The value cannot be set for pass-through live
+                          events. Defaults to PT2S.
+                        type: string
+                      presetName:
+                        description: The optional encoding preset name, used when
+                          type is not None. If the type is set to Standard, then the
+                          default preset name is Default720p. Else if the type is
+                          set to Premium1080p, Changing this forces a new resource
+                          to be created.
+                        type: string
+                      stretchMode:
+                        description: Specifies how the input video will be resized
+                          to fit the desired output resolution(s). Allowed values
+                          are None, AutoFit or AutoSize. Default is None.
+                        type: string
+                      type:
+                        description: Live event type. Possible values are None, Premium1080p,
+                          PassthroughBasic, PassthroughStandard and Standard. When
+                          set to None, the service simply passes through the incoming
+                          video and audio layer(s) to the output. When type is set
+                          to Standard or Premium1080p, a live encoder transcodes the
+                          incoming stream into multiple bitrates or layers. Defaults
+                          to None. Changing this forces a new resource to be created.
+                        type: string
+                    type: object
+                  hostnamePrefix:
+                    description: When use_static_hostname is set to true, the hostname_prefix
+                      specifies the first part of the hostname assigned to the live
+                      event preview and ingest endpoints. The final hostname would
+                      be a combination of this prefix, the media service account name
+                      and a short code for the Azure Media Services data center.
+                    type: string
+                  input:
+                    description: A input block as defined below.
+                    properties:
+                      accessToken:
+                        description: A UUID in string form to uniquely identify the
+                          stream. If omitted, the service will generate a unique value.
+                          Changing this forces a new value to be created.
+                        type: string
+                      ipAccessControlAllow:
+                        description: One or more ip_access_control_allow blocks as
+                          defined below.
+                        items:
+                          properties:
+                            address:
+                              description: The IP address or CIDR range.
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Live Event. Changing this forces a new Live Event
+                                to be created.
+                              type: string
+                            subnetPrefixLength:
+                              description: The subnet mask prefix length (see CIDR
+                                notation).
+                              type: number
+                          type: object
+                        type: array
+                      keyFrameIntervalDuration:
+                        description: ISO 8601 time duration of the key frame interval
+                          duration of the input. This value sets the EXT-X-TARGETDURATION
+                          property in the HLS output. For example, use PT2S to indicate
+                          2 seconds. This field cannot be set when type is set to
+                          Encoding.
+                        type: string
+                      streamingProtocol:
+                        description: The input protocol for the live event. Allowed
+                          values are FragmentedMP4 and RTMP. Changing this forces
+                          a new resource to be created.
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the Live Event should exist.
+                      Changing this forces a new Live Event to be created.
+                    type: string
+                  mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Live Event to be created.
+                    type: string
+                  mediaServicesAccountNameRef:
+                    description: Reference to a ServicesAccount to populate mediaServicesAccountName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  mediaServicesAccountNameSelector:
+                    description: Selector for a ServicesAccount to populate mediaServicesAccountName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  preview:
+                    description: A preview block as defined below.
+                    properties:
+                      alternativeMediaId:
+                        description: An alternative media identifier associated with
+                          the streaming locator created for the preview. The identifier
+                          can be used in the CustomLicenseAcquisitionUrlTemplate or
+                          the CustomKeyAcquisitionUrlTemplate of the Streaming Policy
+                          specified in the streaming_policy_name field.
+                        type: string
+                      ipAccessControlAllow:
+                        description: One or more ip_access_control_allow blocks as
+                          defined above.
+                        items:
+                          properties:
+                            address:
+                              description: The IP address or CIDR range.
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Live Event. Changing this forces a new Live Event
+                                to be created.
+                              type: string
+                            subnetPrefixLength:
+                              description: The subnet mask prefix length (see CIDR
+                                notation).
+                              type: number
+                          type: object
+                        type: array
+                      previewLocator:
+                        description: The identifier of the preview locator in GUID
+                          format. Specifying this at creation time allows the caller
+                          to know the preview locator url before the event is created.
+                          If omitted, the service will generate a random identifier.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      streamingPolicyName:
+                        description: The name of streaming policy used for the live
+                          event preview. Changing this forces a new resource to be
+                          created.
+                        type: string
+                    type: object
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Live Event
+                      should exist. Changing this forces a new Live Event to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  streamOptions:
+                    description: A list of options to use for the LiveEvent. Possible
+                      values are Default, LowLatency, LowLatencyV2. Please see more
+                      at this document. Changing this forces a new resource to be
+                      created.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Live Event.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  transcriptionLanguages:
+                    description: 'Specifies a list of languages (locale) to be used
+                      for speech-to-text transcription – it should match the spoken
+                      language in the audio track. The value should be in BCP-47 format
+                      (e.g: en-US). See the Microsoft Documentation for more information
+                      about the live transcription feature and the list of supported
+                      languages.'
+                    items:
+                      type: string
+                    type: array
+                  useStaticHostname:
+                    description: Specifies whether a static hostname would be assigned
+                      to the live event preview and ingest endpoints. Changing this
+                      forces a new Live Event to be created.
+                    type: boolean
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  autoStartEnabled:
+                    description: The flag indicates if the resource should be automatically
+                      started on creation. Changing this forces a new resource to
+                      be created.
+                    type: boolean
+                  crossSiteAccessPolicy:
+                    description: A cross_site_access_policy block as defined below.
+                    properties:
+                      clientAccessPolicy:
+                        description: The content of clientaccesspolicy.xml used by
+                          Silverlight.
+                        type: string
+                      crossDomainPolicy:
+                        description: The content of the Cross Domain Policy (crossdomain.xml).
+                        type: string
+                    type: object
+                  description:
+                    description: A description for the live event.
+                    type: string
+                  encoding:
+                    description: A encoding block as defined below.
+                    properties:
+                      keyFrameInterval:
+                        description: Use an ISO 8601 time value between 0.5 to 20
+                          seconds to specify the output fragment length for the video
+                          and audio tracks of an encoding live event. For example,
+                          use PT2S to indicate 2 seconds. For the video track it also
+                          defines the key frame interval, or the length of a GoP (group
+                          of pictures). The value cannot be set for pass-through live
+                          events. Defaults to PT2S.
+                        type: string
+                      presetName:
+                        description: The optional encoding preset name, used when
+                          type is not None. If the type is set to Standard, then the
+                          default preset name is Default720p. Else if the type is
+                          set to Premium1080p, Changing this forces a new resource
+                          to be created.
+                        type: string
+                      stretchMode:
+                        description: Specifies how the input video will be resized
+                          to fit the desired output resolution(s). Allowed values
+                          are None, AutoFit or AutoSize. Default is None.
+                        type: string
+                      type:
+                        description: Live event type. Possible values are None, Premium1080p,
+                          PassthroughBasic, PassthroughStandard and Standard. When
+                          set to None, the service simply passes through the incoming
+                          video and audio layer(s) to the output. When type is set
+                          to Standard or Premium1080p, a live encoder transcodes the
+                          incoming stream into multiple bitrates or layers. Defaults
+                          to None. Changing this forces a new resource to be created.
+                        type: string
+                    type: object
+                  hostnamePrefix:
+                    description: When use_static_hostname is set to true, the hostname_prefix
+                      specifies the first part of the hostname assigned to the live
+                      event preview and ingest endpoints. The final hostname would
+                      be a combination of this prefix, the media service account name
+                      and a short code for the Azure Media Services data center.
+                    type: string
+                  input:
+                    description: A input block as defined below.
+                    properties:
+                      accessToken:
+                        description: A UUID in string form to uniquely identify the
+                          stream. If omitted, the service will generate a unique value.
+                          Changing this forces a new value to be created.
+                        type: string
+                      ipAccessControlAllow:
+                        description: One or more ip_access_control_allow blocks as
+                          defined below.
+                        items:
+                          properties:
+                            address:
+                              description: The IP address or CIDR range.
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Live Event. Changing this forces a new Live Event
+                                to be created.
+                              type: string
+                            subnetPrefixLength:
+                              description: The subnet mask prefix length (see CIDR
+                                notation).
+                              type: number
+                          type: object
+                        type: array
+                      keyFrameIntervalDuration:
+                        description: ISO 8601 time duration of the key frame interval
+                          duration of the input. This value sets the EXT-X-TARGETDURATION
+                          property in the HLS output. For example, use PT2S to indicate
+                          2 seconds. This field cannot be set when type is set to
+                          Encoding.
+                        type: string
+                      streamingProtocol:
+                        description: The input protocol for the live event. Allowed
+                          values are FragmentedMP4 and RTMP. Changing this forces
+                          a new resource to be created.
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the Live Event should exist.
+                      Changing this forces a new Live Event to be created.
+                    type: string
+                  preview:
+                    description: A preview block as defined below.
+                    properties:
+                      alternativeMediaId:
+                        description: An alternative media identifier associated with
+                          the streaming locator created for the preview. The identifier
+                          can be used in the CustomLicenseAcquisitionUrlTemplate or
+                          the CustomKeyAcquisitionUrlTemplate of the Streaming Policy
+                          specified in the streaming_policy_name field.
+                        type: string
+                      ipAccessControlAllow:
+                        description: One or more ip_access_control_allow blocks as
+                          defined above.
+                        items:
+                          properties:
+                            address:
+                              description: The IP address or CIDR range.
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Live Event. Changing this forces a new Live Event
+                                to be created.
+                              type: string
+                            subnetPrefixLength:
+                              description: The subnet mask prefix length (see CIDR
+                                notation).
+                              type: number
+                          type: object
+                        type: array
+                      previewLocator:
+                        description: The identifier of the preview locator in GUID
+                          format. Specifying this at creation time allows the caller
+                          to know the preview locator url before the event is created.
+                          If omitted, the service will generate a random identifier.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      streamingPolicyName:
+                        description: The name of streaming policy used for the live
+                          event preview. Changing this forces a new resource to be
+                          created.
+                        type: string
+                    type: object
+                  streamOptions:
+                    description: A list of options to use for the LiveEvent. Possible
+                      values are Default, LowLatency, LowLatencyV2. Please see more
+                      at this document. Changing this forces a new resource to be
+                      created.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Live Event.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  transcriptionLanguages:
+                    description: 'Specifies a list of languages (locale) to be used
+                      for speech-to-text transcription – it should match the spoken
+                      language in the audio track. The value should be in BCP-47 format
+                      (e.g: en-US). See the Microsoft Documentation for more information
+                      about the live transcription feature and the list of supported
+                      languages.'
+                    items:
+                      type: string
+                    type: array
+                  useStaticHostname:
+                    description: Specifies whether a static hostname would be assigned
+                      to the live event preview and ingest endpoints. Changing this
+                      forces a new Live Event to be created.
+                    type: boolean
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.input is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.input)
+                || (has(self.initProvider) && has(self.initProvider.input))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+          status:
+            description: LiveEventStatus defines the observed state of LiveEvent.
+            properties:
+              atProvider:
+                properties:
+                  autoStartEnabled:
+                    description: The flag indicates if the resource should be automatically
+                      started on creation. Changing this forces a new resource to
+                      be created.
+                    type: boolean
+                  crossSiteAccessPolicy:
+                    description: A cross_site_access_policy block as defined below.
+                    properties:
+                      clientAccessPolicy:
+                        description: The content of clientaccesspolicy.xml used by
+                          Silverlight.
+                        type: string
+                      crossDomainPolicy:
+                        description: The content of the Cross Domain Policy (crossdomain.xml).
+                        type: string
+                    type: object
+                  description:
+                    description: A description for the live event.
+                    type: string
+                  encoding:
+                    description: A encoding block as defined below.
+                    properties:
+                      keyFrameInterval:
+                        description: Use an ISO 8601 time value between 0.5 to 20
+                          seconds to specify the output fragment length for the video
+                          and audio tracks of an encoding live event. For example,
+                          use PT2S to indicate 2 seconds. For the video track it also
+                          defines the key frame interval, or the length of a GoP (group
+                          of pictures). The value cannot be set for pass-through live
+                          events. Defaults to PT2S.
+                        type: string
+                      presetName:
+                        description: The optional encoding preset name, used when
+                          type is not None. If the type is set to Standard, then the
+                          default preset name is Default720p. Else if the type is
+                          set to Premium1080p, Changing this forces a new resource
+                          to be created.
+                        type: string
+                      stretchMode:
+                        description: Specifies how the input video will be resized
+                          to fit the desired output resolution(s). Allowed values
+                          are None, AutoFit or AutoSize. Default is None.
+                        type: string
+                      type:
+                        description: Live event type. Possible values are None, Premium1080p,
+                          PassthroughBasic, PassthroughStandard and Standard. When
+                          set to None, the service simply passes through the incoming
+                          video and audio layer(s) to the output. When type is set
+                          to Standard or Premium1080p, a live encoder transcodes the
+                          incoming stream into multiple bitrates or layers. Defaults
+                          to None. Changing this forces a new resource to be created.
+                        type: string
+                    type: object
+                  hostnamePrefix:
+                    description: When use_static_hostname is set to true, the hostname_prefix
+                      specifies the first part of the hostname assigned to the live
+                      event preview and ingest endpoints. The final hostname would
+                      be a combination of this prefix, the media service account name
+                      and a short code for the Azure Media Services data center.
+                    type: string
+                  id:
+                    description: The ID of the Live Event.
+                    type: string
+                  input:
+                    description: A input block as defined below.
+                    properties:
+                      accessToken:
+                        description: A UUID in string form to uniquely identify the
+                          stream. If omitted, the service will generate a unique value.
+                          Changing this forces a new value to be created.
+                        type: string
+                      endpoint:
+                        items:
+                          properties:
+                            protocol:
+                              type: string
+                            url:
+                              type: string
+                          type: object
+                        type: array
+                      ipAccessControlAllow:
+                        description: One or more ip_access_control_allow blocks as
+                          defined below.
+                        items:
+                          properties:
+                            address:
+                              description: The IP address or CIDR range.
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Live Event. Changing this forces a new Live Event
+                                to be created.
+                              type: string
+                            subnetPrefixLength:
+                              description: The subnet mask prefix length (see CIDR
+                                notation).
+                              type: number
+                          type: object
+                        type: array
+                      keyFrameIntervalDuration:
+                        description: ISO 8601 time duration of the key frame interval
+                          duration of the input. This value sets the EXT-X-TARGETDURATION
+                          property in the HLS output. For example, use PT2S to indicate
+                          2 seconds. This field cannot be set when type is set to
+                          Encoding.
+                        type: string
+                      streamingProtocol:
+                        description: The input protocol for the live event. Allowed
+                          values are FragmentedMP4 and RTMP. Changing this forces
+                          a new resource to be created.
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the Live Event should exist.
+                      Changing this forces a new Live Event to be created.
+                    type: string
+                  mediaServicesAccountName:
+                    description: The Media Services account name. Changing this forces
+                      a new Live Event to be created.
+                    type: string
+                  preview:
+                    description: A preview block as defined below.
+                    properties:
+                      alternativeMediaId:
+                        description: An alternative media identifier associated with
+                          the streaming locator created for the preview. The identifier
+                          can be used in the CustomLicenseAcquisitionUrlTemplate or
+                          the CustomKeyAcquisitionUrlTemplate of the Streaming Policy
+                          specified in the streaming_policy_name field.
+                        type: string
+                      endpoint:
+                        items:
+                          properties:
+                            protocol:
+                              type: string
+                            url:
+                              type: string
+                          type: object
+                        type: array
+                      ipAccessControlAllow:
+                        description: One or more ip_access_control_allow blocks as
+                          defined above.
+                        items:
+                          properties:
+                            address:
+                              description: The IP address or CIDR range.
+                              type: string
+                            name:
+                              description: The name which should be used for this
+                                Live Event. Changing this forces a new Live Event
+                                to be created.
+                              type: string
+                            subnetPrefixLength:
+                              description: The subnet mask prefix length (see CIDR
+                                notation).
+                              type: number
+                          type: object
+                        type: array
+                      previewLocator:
+                        description: The identifier of the preview locator in GUID
+                          format. Specifying this at creation time allows the caller
+                          to know the preview locator url before the event is created.
+                          If omitted, the service will generate a random identifier.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      streamingPolicyName:
+                        description: The name of streaming policy used for the live
+                          event preview. Changing this forces a new resource to be
+                          created.
+                        type: string
+                    type: object
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Live Event
+                      should exist. Changing this forces a new Live Event to be created.
+                    type: string
+                  streamOptions:
+                    description: A list of options to use for the LiveEvent. Possible
+                      values are Default, LowLatency, LowLatencyV2. Please see more
+                      at this document. Changing this forces a new resource to be
+                      created.
+                    items:
+                      type: string
+                    type: array
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Live Event.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  transcriptionLanguages:
+                    description: 'Specifies a list of languages (locale) to be used
+                      for speech-to-text transcription – it should match the spoken
+                      language in the audio track. The value should be in BCP-47 format
+                      (e.g: en-US). See the Microsoft Documentation for more information
+                      about the live transcription feature and the list of supported
+                      languages.'
+                    items:
+                      type: string
+                    type: array
+                  useStaticHostname:
+                    description: Specifies whether a static hostname would be assigned
+                      to the live event preview and ingest endpoints. Changing this
+                      forces a new Live Event to be created.
+                    type: boolean
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

@@ -13,9 +13,6 @@ func (tr *EventSourceEventHub) Hub() {}
 func (tr *EventSourceIOTHub) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *Gen2Environment) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ReferenceDataSet) Hub() {}
 
 // Hub marks this type as a conversion hub.

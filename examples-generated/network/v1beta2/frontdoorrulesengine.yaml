@@ -1,0 +1,95 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: FrontdoorRulesEngine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/frontdoorrulesengine
+  labels:
+    testing.upbound.io/example-name: example_rules_engine
+  name: example-rules-engine
+spec:
+  forProvider:
+    frontdoorNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    rule:
+    - action:
+      - responseHeader:
+        - headerActionType: Append
+          headerName: X-TEST-HEADER
+          value: Append Header Rule
+      name: debuggingoutput
+      priority: 1
+    - action:
+      - responseHeader:
+        - headerActionType: Overwrite
+          headerName: Access-Control-Allow-Origin
+          value: '*'
+        - headerActionType: Overwrite
+          headerName: Access-Control-Allow-Credentials
+          value: "true"
+      matchCondition:
+      - operator: Equal
+        value:
+        - GET
+        - POST
+        variable: RequestMethod
+      name: overwriteorigin
+      priority: 2
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: FrontDoor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/frontdoorrulesengine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backendPool:
+    - backend:
+      - address: www.bing.com
+        hostHeader: www.bing.com
+        httpPort: 80
+        httpsPort: 443
+      healthProbeName: exampleHealthProbeSetting1
+      loadBalancingName: exampleLoadBalancingSettings1
+      name: exampleBackendBing
+    backendPoolHealthProbe:
+    - name: exampleHealthProbeSetting1
+    backendPoolLoadBalancing:
+    - name: exampleLoadBalancingSettings1
+    frontendEndpoint:
+    - hostName: example-FrontDoor.azurefd.net
+      name: exampleFrontendEndpoint1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    routingRule:
+    - acceptedProtocols:
+      - Http
+      - Https
+      frontendEndpoints:
+      - exampleFrontendEndpoint1
+      name: exampleRoutingRule1
+      patternsToMatch:
+      - /*
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/frontdoorrulesengine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

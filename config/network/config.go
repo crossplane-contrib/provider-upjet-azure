@@ -24,6 +24,10 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_public_ip",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+
+		r.OverrideFieldNames["IPConfigurationInitParameters"] = "NetworkInterfaceIPConfigurationInitParameters"
+		r.OverrideFieldNames["IPConfigurationParameters"] = "NetworkInterfaceIPConfigurationParameters"
+		r.OverrideFieldNames["IPConfigurationObservation"] = "NetworkInterfaceIPConfigurationObservation"
 	})
 
 	p.AddResourceConfigurator("azurerm_lb", func(r *config.Resource) {
@@ -33,6 +37,9 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_public_ip",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.OverrideFieldNames["FrontendIPConfigurationParameters"] = "LoadBalancerFrontendIPConfigurationParameters"
+		r.OverrideFieldNames["FrontendIPConfigurationInitParameters"] = "LoadBalancerFrontendIPConfigurationInitParameters"
+		r.OverrideFieldNames["FrontendIPConfigurationObservation"] = "LoadBalancerFrontendIPConfigurationObservation"
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool", func(r *config.Resource) {
@@ -81,6 +88,10 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_lb",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+
+		r.OverrideFieldNames["FrontendIPConfigurationInitParameters"] = "LoadBalancerOutboundRuleFrontendIPConfigurationInitParameters"
+		r.OverrideFieldNames["FrontendIPConfigurationParameters"] = "LoadBalancerOutboundRuleFrontendIPConfigurationParameters"
+		r.OverrideFieldNames["FrontendIPConfigurationObservation"] = "LoadBalancerOutboundRuleFrontendIPConfigurationObservation"
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_probe", func(r *config.Resource) {
@@ -528,6 +539,14 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
+		r.OverrideFieldNames["VirtualHubParameters"] = "VirtualHubParameters_2"
+		r.OverrideFieldNames["VirtualHubInitParameters"] = "VirtualHubInitParameters_2"
+		r.OverrideFieldNames["VirtualHubObservation"] = "VirtualHubObservation_2"
+
+		r.OverrideFieldNames["RouteInitParameters"] = "VirtualHubRouteInitParameters"
+		r.OverrideFieldNames["RouteParameters"] = "VirtualHubRouteParameters"
+		r.OverrideFieldNames["RouteObservation"] = "VirtualHubRouteObservation"
+
 	})
 
 	p.AddResourceConfigurator("azurerm_frontdoor", func(r *config.Resource) {
@@ -574,6 +593,18 @@ func Configure(p *config.Provider) {
 		r.Kind = "SubnetServiceEndpointStoragePolicy"
 	})
 
+	p.AddResourceConfigurator("azurerm_route_table", func(r *config.Resource) {
+		r.OverrideFieldNames["RouteInitParameters"] = "RouteTableRouteInitParameters"
+		r.OverrideFieldNames["RouteParameters"] = "RouteTableRouteParameters"
+		r.OverrideFieldNames["RouteObservation"] = "RouteTableRouteObservation"
+	})
+
+	p.AddResourceConfigurator("azurerm_virtual_hub_route_table", func(r *config.Resource) {
+		r.OverrideFieldNames["RouteInitParameters"] = "VirtualHubRouteTableRouteInitParameters"
+		r.OverrideFieldNames["RouteParameters"] = "VirtualHubRouteTableRouteParameters"
+		r.OverrideFieldNames["RouteObservation"] = "VirtualHubRouteTableRouteObservation"
+	})
+
 	p.AddResourceConfigurator("azurerm_subnet_route_table_association", func(r *config.Resource) {
 		r.Kind = "SubnetRouteTableAssociation"
 		r.References["subnet_id"] = config.Reference{
@@ -607,5 +638,41 @@ func Configure(p *config.Provider) {
 			}
 			return diff, nil
 		}
+	})
+
+	p.AddResourceConfigurator("azurerm_frontdoor_firewall_policy", func(r *config.Resource) {
+		r.OverrideFieldNames["ExclusionParameters"] = "ManagedRuleExclusionParameters"
+		r.OverrideFieldNames["ExclusionInitParameters"] = "ManagedRuleExclusionInitParameters"
+		r.OverrideFieldNames["ExclusionObservation"] = "ManagedRuleExclusionObservation"
+	})
+
+	p.AddResourceConfigurator("azurerm_route", func(r *config.Resource) {
+		r.OverrideFieldNames["RouteParameters"] = "RouteParameters_2"
+		r.OverrideFieldNames["RouteInitParameters"] = "RouteInitParameters_2"
+		r.OverrideFieldNames["RouteObservation"] = "RouteObservation_2"
+	})
+
+	p.AddResourceConfigurator("azurerm_route_map", func(r *config.Resource) {
+		r.OverrideFieldNames["ActionParameters"] = "RuleActionParameters"
+		r.OverrideFieldNames["ActionInitParameters"] = "RuleActionInitParameters"
+		r.OverrideFieldNames["ActionObservation"] = "RuleActionObservation"
+	})
+
+	p.AddResourceConfigurator("azurerm_traffic_manager_azure_endpoint", func(r *config.Resource) {
+		r.OverrideFieldNames["SubnetParameters"] = "TrafficManagerAzureEndpointSubnetParameters"
+		r.OverrideFieldNames["SubnetInitParameters"] = "TrafficManagerAzureEndpointSubnetInitParameters"
+		r.OverrideFieldNames["SubnetObservation"] = "TrafficManagerAzureEndpointSubnetObservation"
+	})
+
+	p.AddResourceConfigurator("azurerm_traffic_manager_external_endpoint", func(r *config.Resource) {
+		r.OverrideFieldNames["SubnetInitParameters"] = "TrafficManagerExternalEndpointSubnetInitParameters"
+		r.OverrideFieldNames["SubnetParameters"] = "TrafficManagerExternalEndpointSubnetParameters"
+		r.OverrideFieldNames["SubnetObservation"] = "TrafficManagerExternalEndpointSubnetObservation"
+	})
+
+	p.AddResourceConfigurator("azurerm_traffic_manager_nested_endpoint", func(r *config.Resource) {
+		r.OverrideFieldNames["SubnetInitParameters"] = "TrafficManagerNestedEndpointSubnetInitParameters"
+		r.OverrideFieldNames["SubnetParameters"] = "TrafficManagerNestedEndpointSubnetParameters"
+		r.OverrideFieldNames["SubnetObservation"] = "TrafficManagerNestedEndpointSubnetObservation"
 	})
 }

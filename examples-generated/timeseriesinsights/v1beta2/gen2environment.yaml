@@ -1,0 +1,59 @@
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta2
+kind: Gen2Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta2/gen2environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    idProperties:
+    - id
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: L1
+    storage:
+    - keySecretRef:
+        key: attribute.primary_access_key
+        name: example-storage-account
+        namespace: upbound-system
+      nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: storage
+    warmStoreDataRetentionTime: P30D
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta2/gen2environment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: timeseriesinsights/v1beta2/gen2environment
+  labels:
+    testing.upbound.io/example-name: storage
+  name: storage
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

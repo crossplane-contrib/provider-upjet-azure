@@ -13,12 +13,6 @@ func (tr *ManagementLock) Hub() {}
 func (tr *PolicyDefinition) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ResourceGroupPolicyAssignment) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ResourcePolicyAssignment) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *ResourcePolicyExemption) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -26,9 +20,6 @@ func (tr *RoleAssignment) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *RoleDefinition) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SubscriptionPolicyAssignment) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SubscriptionPolicyExemption) Hub() {}

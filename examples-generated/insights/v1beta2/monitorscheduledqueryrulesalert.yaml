@@ -1,0 +1,86 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorScheduledQueryRulesAlert
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    action:
+    - actionGroupRefs: []
+      customWebhookPayload: '{}'
+      emailSubject: Email Header
+    dataSourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Alert when total results cross threshold
+    enabled: true
+    frequency: 5
+    location: West Europe
+    name: example
+    query: |
+      requests
+        | where tolong(resultCode) >= 500
+        | summarize count() by bin(timestamp, 5m)
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    severity: 1
+    tags:
+      foo: bar
+    timeWindow: 30
+    trigger:
+    - operator: GreaterThan
+      threshold: 3
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

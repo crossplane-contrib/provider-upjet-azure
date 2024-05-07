@@ -46,7 +46,7 @@ func (mg *ActiveDirectoryAdministrator) ResolveReferences( // ResolveReferences 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -84,7 +84,7 @@ func (mg *ActiveDirectoryAdministrator) ResolveReferences( // ResolveReferences 
 	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -134,7 +134,7 @@ func (mg *Configuration) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -172,7 +172,7 @@ func (mg *Configuration) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -222,7 +222,7 @@ func (mg *Database) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -272,7 +272,7 @@ func (mg *FirewallRule) ResolveReferences(ctx context.Context, c client.Reader) 
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -610,7 +610,7 @@ func (mg *VirtualNetworkRule) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -629,7 +629,7 @@ func (mg *VirtualNetworkRule) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.ServerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -648,7 +648,7 @@ func (mg *VirtualNetworkRule) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

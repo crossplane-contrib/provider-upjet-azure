@@ -1,0 +1,76 @@
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: Logger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/logger
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    applicationInsights:
+    - instrumentationKeySecretRef:
+        key: attribute.instrumentation_key
+        name: example-application-insights
+        namespace: upbound-system
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: apimanagement.azure.upbound.io/v1beta2
+kind: Management
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/logger
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/logger
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: other
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta2/logger
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

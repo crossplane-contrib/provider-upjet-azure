@@ -45,7 +45,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 	mg.Spec.ForProvider.ConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConsumerGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("timeseriesinsights.azure.upbound.io", "v1beta1", "Gen2Environment", "Gen2EnvironmentList")
+		m, l, err = apisresolver.GetManagedResource("timeseriesinsights.azure.upbound.io", "v1beta2", "Gen2Environment", "Gen2EnvironmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -64,7 +64,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 	mg.Spec.ForProvider.EnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EnvironmentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -83,7 +83,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 	mg.Spec.ForProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventHubNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -102,7 +102,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 	mg.Spec.ForProvider.EventSourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventSourceResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -159,7 +159,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 	mg.Spec.InitProvider.ConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ConsumerGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -178,7 +178,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 	mg.Spec.InitProvider.EventHubName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventHubNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHub", "EventHubList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHub", "EventHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -197,7 +197,7 @@ func (mg *EventSourceEventHub) ResolveReferences( // ResolveReferences of this E
 	mg.Spec.InitProvider.EventSourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventSourceResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -266,7 +266,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ConsumerGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("timeseriesinsights.azure.upbound.io", "v1beta1", "Gen2Environment", "Gen2EnvironmentList")
+		m, l, err = apisresolver.GetManagedResource("timeseriesinsights.azure.upbound.io", "v1beta2", "Gen2Environment", "Gen2EnvironmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -285,7 +285,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.EnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EnvironmentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -304,7 +304,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.EventSourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.EventSourceResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -342,7 +342,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.InitProvider.ConsumerGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ConsumerGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -361,7 +361,7 @@ func (mg *EventSourceIOTHub) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.InitProvider.EventSourceResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.EventSourceResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

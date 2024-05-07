@@ -1986,3 +1986,1905 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: Management is the Schema for the Managements API. Manages an
+          API Management Service.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: ManagementSpec defines the desired state of Management
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  additionalLocation:
+                    description: One or more additional_location blocks as defined
+                      below.
+                    items:
+                      properties:
+                        capacity:
+                          description: The number of compute units in this region.
+                            Defaults to the capacity of the main region.
+                          type: number
+                        gatewayDisabled:
+                          description: Only valid for an Api Management service deployed
+                            in multiple locations. This can be used to disable the
+                            gateway in this additional location.
+                          type: boolean
+                        location:
+                          description: The name of the Azure Region in which the API
+                            Management Service should be expanded to.
+                          type: string
+                        publicIpAddressId:
+                          description: ID of a standard SKU IPv4 Public IP.
+                          type: string
+                        virtualNetworkConfiguration:
+                          description: A virtual_network_configuration block as defined
+                            below. Required when virtual_network_type is External
+                            or Internal.
+                          properties:
+                            subnetId:
+                              description: The id of the subnet that will be used
+                                for the API Management.
+                              type: string
+                            subnetIdRef:
+                              description: Reference to a Subnet in network to populate
+                                subnetId.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            subnetIdSelector:
+                              description: Selector for a Subnet in network to populate
+                                subnetId.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
+                        zones:
+                          description: A list of availability zones. Changing this
+                            forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  certificate:
+                    description: One or more certificate blocks (up to 10) as defined
+                      below.
+                    items:
+                      properties:
+                        certificatePasswordSecretRef:
+                          description: The password for the certificate.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        encodedCertificateSecretRef:
+                          description: The Base64 Encoded PFX or Base64 Encoded X.509
+                            Certificate.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        storeName:
+                          description: The name of the Certificate Store where this
+                            certificate should be stored. Possible values are CertificateAuthority
+                            and Root.
+                          type: string
+                      required:
+                      - encodedCertificateSecretRef
+                      type: object
+                    type: array
+                  clientCertificateEnabled:
+                    description: Enforce a client certificate to be presented on each
+                      request to the gateway? This is only supported when SKU type
+                      is Consumption.
+                    type: boolean
+                  delegation:
+                    description: A delegation block as defined below.
+                    properties:
+                      subscriptionsEnabled:
+                        description: Should subscription requests be delegated to
+                          an external url? Defaults to false.
+                        type: boolean
+                      url:
+                        description: The delegation URL.
+                        type: string
+                      userRegistrationEnabled:
+                        description: Should user registration requests be delegated
+                          to an external url? Defaults to false.
+                        type: boolean
+                      validationKeySecretRef:
+                        description: A base64-encoded validation key to validate,
+                          that a request is coming from Azure API Management.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    type: object
+                  gatewayDisabled:
+                    description: Disable the gateway in main region? This is only
+                      supported when additional_location is set.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this API Management Service.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this API Management Service.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure location where the API Management Service
+                      exists. Changing this forces a new resource to be created.
+                    type: string
+                  minApiVersion:
+                    description: The version which the control plane API calls to
+                      API Management service are limited with version equal to or
+                      newer than.
+                    type: string
+                  notificationSenderEmail:
+                    description: Email address from which the notification will be
+                      sent.
+                    type: string
+                  policy:
+                    description: A policy block as defined below.
+                    items:
+                      properties:
+                        xmlContent:
+                          description: The XML Content for this Policy.
+                          type: string
+                        xmlLink:
+                          description: A link to an API Management Policy XML Document,
+                            which must be publicly available.
+                          type: string
+                      type: object
+                    type: array
+                  protocols:
+                    description: A protocols block as defined below.
+                    properties:
+                      enableHttp2:
+                        description: Should HTTP/2 be supported by the API Management
+                          Service? Defaults to false.
+                        type: boolean
+                    type: object
+                  publicIpAddressId:
+                    description: ID of a standard SKU IPv4 Public IP.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Is public access to the service allowed? Defaults
+                      to true.
+                    type: boolean
+                  publisherEmail:
+                    description: The email of publisher/company.
+                    type: string
+                  publisherName:
+                    description: The name of publisher/company.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group in which the API Management
+                      Service should be exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  security:
+                    description: A security block as defined below.
+                    properties:
+                      enableBackendSsl30:
+                        description: Should SSL 3.0 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableBackendTls10:
+                        description: Should TLS 1.0 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableBackendTls11:
+                        description: Should TLS 1.1 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendSsl30:
+                        description: Should SSL 3.0 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendTls10:
+                        description: Should TLS 1.0 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendTls11:
+                        description: Should TLS 1.1 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheRsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheRsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128CbcSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_CBC_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128GcmSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_GCM_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256CbcSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_CBC_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256GcmSha384CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_GCM_SHA384 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tripleDesCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
+                          be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
+                        type: boolean
+                    type: object
+                  signIn:
+                    description: A sign_in block as defined below.
+                    properties:
+                      enabled:
+                        description: Should anonymous users be redirected to the sign
+                          in page?
+                        type: boolean
+                    type: object
+                  signUp:
+                    description: A sign_up block as defined below.
+                    properties:
+                      enabled:
+                        description: Can users sign up on the development portal?
+                        type: boolean
+                      termsOfService:
+                        description: A terms_of_service block as defined below.
+                        properties:
+                          consentRequired:
+                            description: Should the user be asked for consent during
+                              sign up?
+                            type: boolean
+                          enabled:
+                            description: Should Terms of Service be displayed during
+                              sign up?.
+                            type: boolean
+                          text:
+                            description: The Terms of Service which users are required
+                              to agree to in order to sign up.
+                            type: string
+                        type: object
+                    type: object
+                  skuName:
+                    description: 'sku_name is a string consisting of two parts separated
+                      by an underscore(_). The first part is the name, valid values
+                      include: Consumption, Developer, Basic, Standard and Premium.
+                      The second part is the capacity (e.g. the number of deployed
+                      units of the sku), which must be a positive integer (e.g. Developer_1).'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags assigned to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tenantAccess:
+                    description: A tenant_access block as defined below.
+                    properties:
+                      enabled:
+                        description: Should the access to the management API be enabled?
+                        type: boolean
+                    type: object
+                  virtualNetworkConfiguration:
+                    description: A virtual_network_configuration block as defined
+                      below. Required when virtual_network_type is External or Internal.
+                    properties:
+                      subnetId:
+                        description: The id of the subnet that will be used for the
+                          API Management.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  virtualNetworkType:
+                    description: 'The type of virtual network you want to use, valid
+                      values include: None, External, Internal. Defaults to None.'
+                    type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      API Management service should be located.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  additionalLocation:
+                    description: One or more additional_location blocks as defined
+                      below.
+                    items:
+                      properties:
+                        capacity:
+                          description: The number of compute units in this region.
+                            Defaults to the capacity of the main region.
+                          type: number
+                        gatewayDisabled:
+                          description: Only valid for an Api Management service deployed
+                            in multiple locations. This can be used to disable the
+                            gateway in this additional location.
+                          type: boolean
+                        location:
+                          description: The name of the Azure Region in which the API
+                            Management Service should be expanded to.
+                          type: string
+                        publicIpAddressId:
+                          description: ID of a standard SKU IPv4 Public IP.
+                          type: string
+                        virtualNetworkConfiguration:
+                          description: A virtual_network_configuration block as defined
+                            below. Required when virtual_network_type is External
+                            or Internal.
+                          properties:
+                            subnetId:
+                              description: The id of the subnet that will be used
+                                for the API Management.
+                              type: string
+                            subnetIdRef:
+                              description: Reference to a Subnet in network to populate
+                                subnetId.
+                              properties:
+                                name:
+                                  description: Name of the referenced object.
+                                  type: string
+                                policy:
+                                  description: Policies for referencing.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              required:
+                              - name
+                              type: object
+                            subnetIdSelector:
+                              description: Selector for a Subnet in network to populate
+                                subnetId.
+                              properties:
+                                matchControllerRef:
+                                  description: |-
+                                    MatchControllerRef ensures an object with the same controller reference
+                                    as the selecting object is selected.
+                                  type: boolean
+                                matchLabels:
+                                  additionalProperties:
+                                    type: string
+                                  description: MatchLabels ensures an object with
+                                    matching labels is selected.
+                                  type: object
+                                policy:
+                                  description: Policies for selection.
+                                  properties:
+                                    resolution:
+                                      default: Required
+                                      description: |-
+                                        Resolution specifies whether resolution of this reference is required.
+                                        The default is 'Required', which means the reconcile will fail if the
+                                        reference cannot be resolved. 'Optional' means this reference will be
+                                        a no-op if it cannot be resolved.
+                                      enum:
+                                      - Required
+                                      - Optional
+                                      type: string
+                                    resolve:
+                                      description: |-
+                                        Resolve specifies when this reference should be resolved. The default
+                                        is 'IfNotPresent', which will attempt to resolve the reference only when
+                                        the corresponding field is not present. Use 'Always' to resolve the
+                                        reference on every reconcile.
+                                      enum:
+                                      - Always
+                                      - IfNotPresent
+                                      type: string
+                                  type: object
+                              type: object
+                          type: object
+                        zones:
+                          description: A list of availability zones. Changing this
+                            forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  certificate:
+                    description: One or more certificate blocks (up to 10) as defined
+                      below.
+                    items:
+                      properties:
+                        storeName:
+                          description: The name of the Certificate Store where this
+                            certificate should be stored. Possible values are CertificateAuthority
+                            and Root.
+                          type: string
+                      type: object
+                    type: array
+                  clientCertificateEnabled:
+                    description: Enforce a client certificate to be presented on each
+                      request to the gateway? This is only supported when SKU type
+                      is Consumption.
+                    type: boolean
+                  delegation:
+                    description: A delegation block as defined below.
+                    properties:
+                      subscriptionsEnabled:
+                        description: Should subscription requests be delegated to
+                          an external url? Defaults to false.
+                        type: boolean
+                      url:
+                        description: The delegation URL.
+                        type: string
+                      userRegistrationEnabled:
+                        description: Should user registration requests be delegated
+                          to an external url? Defaults to false.
+                        type: boolean
+                    type: object
+                  gatewayDisabled:
+                    description: Disable the gateway in main region? This is only
+                      supported when additional_location is set.
+                    type: boolean
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this API Management Service.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this API Management Service.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure location where the API Management Service
+                      exists. Changing this forces a new resource to be created.
+                    type: string
+                  minApiVersion:
+                    description: The version which the control plane API calls to
+                      API Management service are limited with version equal to or
+                      newer than.
+                    type: string
+                  notificationSenderEmail:
+                    description: Email address from which the notification will be
+                      sent.
+                    type: string
+                  policy:
+                    description: A policy block as defined below.
+                    items:
+                      properties:
+                        xmlContent:
+                          description: The XML Content for this Policy.
+                          type: string
+                        xmlLink:
+                          description: A link to an API Management Policy XML Document,
+                            which must be publicly available.
+                          type: string
+                      type: object
+                    type: array
+                  protocols:
+                    description: A protocols block as defined below.
+                    properties:
+                      enableHttp2:
+                        description: Should HTTP/2 be supported by the API Management
+                          Service? Defaults to false.
+                        type: boolean
+                    type: object
+                  publicIpAddressId:
+                    description: ID of a standard SKU IPv4 Public IP.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Is public access to the service allowed? Defaults
+                      to true.
+                    type: boolean
+                  publisherEmail:
+                    description: The email of publisher/company.
+                    type: string
+                  publisherName:
+                    description: The name of publisher/company.
+                    type: string
+                  security:
+                    description: A security block as defined below.
+                    properties:
+                      enableBackendSsl30:
+                        description: Should SSL 3.0 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableBackendTls10:
+                        description: Should TLS 1.0 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableBackendTls11:
+                        description: Should TLS 1.1 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendSsl30:
+                        description: Should SSL 3.0 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendTls10:
+                        description: Should TLS 1.0 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendTls11:
+                        description: Should TLS 1.1 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheRsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheRsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128CbcSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_CBC_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128GcmSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_GCM_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256CbcSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_CBC_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256GcmSha384CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_GCM_SHA384 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tripleDesCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
+                          be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
+                        type: boolean
+                    type: object
+                  signIn:
+                    description: A sign_in block as defined below.
+                    properties:
+                      enabled:
+                        description: Should anonymous users be redirected to the sign
+                          in page?
+                        type: boolean
+                    type: object
+                  signUp:
+                    description: A sign_up block as defined below.
+                    properties:
+                      enabled:
+                        description: Can users sign up on the development portal?
+                        type: boolean
+                      termsOfService:
+                        description: A terms_of_service block as defined below.
+                        properties:
+                          consentRequired:
+                            description: Should the user be asked for consent during
+                              sign up?
+                            type: boolean
+                          enabled:
+                            description: Should Terms of Service be displayed during
+                              sign up?.
+                            type: boolean
+                          text:
+                            description: The Terms of Service which users are required
+                              to agree to in order to sign up.
+                            type: string
+                        type: object
+                    type: object
+                  skuName:
+                    description: 'sku_name is a string consisting of two parts separated
+                      by an underscore(_). The first part is the name, valid values
+                      include: Consumption, Developer, Basic, Standard and Premium.
+                      The second part is the capacity (e.g. the number of deployed
+                      units of the sku), which must be a positive integer (e.g. Developer_1).'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags assigned to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tenantAccess:
+                    description: A tenant_access block as defined below.
+                    properties:
+                      enabled:
+                        description: Should the access to the management API be enabled?
+                        type: boolean
+                    type: object
+                  virtualNetworkConfiguration:
+                    description: A virtual_network_configuration block as defined
+                      below. Required when virtual_network_type is External or Internal.
+                    properties:
+                      subnetId:
+                        description: The id of the subnet that will be used for the
+                          API Management.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  virtualNetworkType:
+                    description: 'The type of virtual network you want to use, valid
+                      values include: None, External, Internal. Defaults to None.'
+                    type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      API Management service should be located.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.publisherEmail is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.publisherEmail)
+                || (has(self.initProvider) && has(self.initProvider.publisherEmail))'
+            - message: spec.forProvider.publisherName is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.publisherName)
+                || (has(self.initProvider) && has(self.initProvider.publisherName))'
+            - message: spec.forProvider.skuName is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.skuName)
+                || (has(self.initProvider) && has(self.initProvider.skuName))'
+          status:
+            description: ManagementStatus defines the observed state of Management.
+            properties:
+              atProvider:
+                properties:
+                  additionalLocation:
+                    description: One or more additional_location blocks as defined
+                      below.
+                    items:
+                      properties:
+                        capacity:
+                          description: The number of compute units in this region.
+                            Defaults to the capacity of the main region.
+                          type: number
+                        gatewayDisabled:
+                          description: Only valid for an Api Management service deployed
+                            in multiple locations. This can be used to disable the
+                            gateway in this additional location.
+                          type: boolean
+                        gatewayRegionalUrl:
+                          description: The URL of the Regional Gateway for the API
+                            Management Service in the specified region.
+                          type: string
+                        location:
+                          description: The name of the Azure Region in which the API
+                            Management Service should be expanded to.
+                          type: string
+                        privateIpAddresses:
+                          description: The Private IP addresses of the API Management
+                            Service. Available only when the API Manager instance
+                            is using Virtual Network mode.
+                          items:
+                            type: string
+                          type: array
+                        publicIpAddressId:
+                          description: ID of a standard SKU IPv4 Public IP.
+                          type: string
+                        publicIpAddresses:
+                          description: Public Static Load Balanced IP addresses of
+                            the API Management service in the additional location.
+                            Available only for Basic, Standard and Premium SKU.
+                          items:
+                            type: string
+                          type: array
+                        virtualNetworkConfiguration:
+                          description: A virtual_network_configuration block as defined
+                            below. Required when virtual_network_type is External
+                            or Internal.
+                          properties:
+                            subnetId:
+                              description: The id of the subnet that will be used
+                                for the API Management.
+                              type: string
+                          type: object
+                        zones:
+                          description: A list of availability zones. Changing this
+                            forces a new resource to be created.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  certificate:
+                    description: One or more certificate blocks (up to 10) as defined
+                      below.
+                    items:
+                      properties:
+                        expiry:
+                          description: 'The expiration date of the certificate in
+                            RFC3339 format: 2000-01-02T03:04:05Z.'
+                          type: string
+                        storeName:
+                          description: The name of the Certificate Store where this
+                            certificate should be stored. Possible values are CertificateAuthority
+                            and Root.
+                          type: string
+                        subject:
+                          description: The subject of the certificate.
+                          type: string
+                        thumbprint:
+                          description: The thumbprint of the certificate.
+                          type: string
+                      type: object
+                    type: array
+                  clientCertificateEnabled:
+                    description: Enforce a client certificate to be presented on each
+                      request to the gateway? This is only supported when SKU type
+                      is Consumption.
+                    type: boolean
+                  delegation:
+                    description: A delegation block as defined below.
+                    properties:
+                      subscriptionsEnabled:
+                        description: Should subscription requests be delegated to
+                          an external url? Defaults to false.
+                        type: boolean
+                      url:
+                        description: The delegation URL.
+                        type: string
+                      userRegistrationEnabled:
+                        description: Should user registration requests be delegated
+                          to an external url? Defaults to false.
+                        type: boolean
+                    type: object
+                  developerPortalUrl:
+                    description: The URL for the Developer Portal associated with
+                      this API Management service.
+                    type: string
+                  gatewayDisabled:
+                    description: Disable the gateway in main region? This is only
+                      supported when additional_location is set.
+                    type: boolean
+                  gatewayRegionalUrl:
+                    description: The Region URL for the Gateway of the API Management
+                      Service.
+                    type: string
+                  gatewayUrl:
+                    description: The URL of the Gateway for the API Management Service.
+                    type: string
+                  hostnameConfiguration:
+                    description: A hostname_configuration block as defined below.
+                    properties:
+                      developerPortal:
+                        description: One or more developer_portal blocks as documented
+                          below.
+                        items:
+                          properties:
+                            certificateSource:
+                              description: The source of the certificate.
+                              type: string
+                            certificateStatus:
+                              description: The status of the certificate.
+                              type: string
+                            expiry:
+                              description: 'The expiration date of the certificate
+                                in RFC3339 format: 2000-01-02T03:04:05Z.'
+                              type: string
+                            hostName:
+                              description: The Hostname to use for the Management
+                                API.
+                              type: string
+                            keyVaultId:
+                              description: The ID of the Key Vault Secret containing
+                                the SSL Certificate, which must be should be of the
+                                type application/x-pkcs12.
+                              type: string
+                            negotiateClientCertificate:
+                              description: Should Client Certificate Negotiation be
+                                enabled for this Hostname? Defaults to false.
+                              type: boolean
+                            sslKeyvaultIdentityClientId:
+                              description: System or User Assigned Managed identity
+                                clientId as generated by Azure AD, which has GET access
+                                to the keyVault containing the SSL certificate.
+                              type: string
+                            subject:
+                              description: The subject of the certificate.
+                              type: string
+                            thumbprint:
+                              description: The thumbprint of the certificate.
+                              type: string
+                          type: object
+                        type: array
+                      management:
+                        description: One or more management blocks as documented below.
+                        items:
+                          properties:
+                            certificateSource:
+                              description: The source of the certificate.
+                              type: string
+                            certificateStatus:
+                              description: The status of the certificate.
+                              type: string
+                            expiry:
+                              description: 'The expiration date of the certificate
+                                in RFC3339 format: 2000-01-02T03:04:05Z.'
+                              type: string
+                            hostName:
+                              description: The Hostname to use for the Management
+                                API.
+                              type: string
+                            keyVaultId:
+                              description: The ID of the Key Vault Secret containing
+                                the SSL Certificate, which must be should be of the
+                                type application/x-pkcs12.
+                              type: string
+                            negotiateClientCertificate:
+                              description: Should Client Certificate Negotiation be
+                                enabled for this Hostname? Defaults to false.
+                              type: boolean
+                            sslKeyvaultIdentityClientId:
+                              description: System or User Assigned Managed identity
+                                clientId as generated by Azure AD, which has GET access
+                                to the keyVault containing the SSL certificate.
+                              type: string
+                            subject:
+                              description: The subject of the certificate.
+                              type: string
+                            thumbprint:
+                              description: The thumbprint of the certificate.
+                              type: string
+                          type: object
+                        type: array
+                      portal:
+                        description: One or more portal blocks as documented below.
+                        items:
+                          properties:
+                            certificateSource:
+                              description: The source of the certificate.
+                              type: string
+                            certificateStatus:
+                              description: The status of the certificate.
+                              type: string
+                            expiry:
+                              description: 'The expiration date of the certificate
+                                in RFC3339 format: 2000-01-02T03:04:05Z.'
+                              type: string
+                            hostName:
+                              description: The Hostname to use for the Management
+                                API.
+                              type: string
+                            keyVaultId:
+                              description: The ID of the Key Vault Secret containing
+                                the SSL Certificate, which must be should be of the
+                                type application/x-pkcs12.
+                              type: string
+                            negotiateClientCertificate:
+                              description: Should Client Certificate Negotiation be
+                                enabled for this Hostname? Defaults to false.
+                              type: boolean
+                            sslKeyvaultIdentityClientId:
+                              description: System or User Assigned Managed identity
+                                clientId as generated by Azure AD, which has GET access
+                                to the keyVault containing the SSL certificate.
+                              type: string
+                            subject:
+                              description: The subject of the certificate.
+                              type: string
+                            thumbprint:
+                              description: The thumbprint of the certificate.
+                              type: string
+                          type: object
+                        type: array
+                      proxy:
+                        description: One or more proxy blocks as documented below.
+                        items:
+                          properties:
+                            certificateSource:
+                              description: The source of the certificate.
+                              type: string
+                            certificateStatus:
+                              description: The status of the certificate.
+                              type: string
+                            defaultSslBinding:
+                              description: Is the certificate associated with this
+                                Hostname the Default SSL Certificate? This is used
+                                when an SNI header isn't specified by a client. Defaults
+                                to false.
+                              type: boolean
+                            expiry:
+                              description: 'The expiration date of the certificate
+                                in RFC3339 format: 2000-01-02T03:04:05Z.'
+                              type: string
+                            hostName:
+                              description: The Hostname to use for the Management
+                                API.
+                              type: string
+                            keyVaultId:
+                              description: The ID of the Key Vault Secret containing
+                                the SSL Certificate, which must be should be of the
+                                type application/x-pkcs12.
+                              type: string
+                            negotiateClientCertificate:
+                              description: Should Client Certificate Negotiation be
+                                enabled for this Hostname? Defaults to false.
+                              type: boolean
+                            sslKeyvaultIdentityClientId:
+                              description: System or User Assigned Managed identity
+                                clientId as generated by Azure AD, which has GET access
+                                to the keyVault containing the SSL certificate.
+                              type: string
+                            subject:
+                              description: The subject of the certificate.
+                              type: string
+                            thumbprint:
+                              description: The thumbprint of the certificate.
+                              type: string
+                          type: object
+                        type: array
+                      scm:
+                        description: One or more scm blocks as documented below.
+                        items:
+                          properties:
+                            certificateSource:
+                              description: The source of the certificate.
+                              type: string
+                            certificateStatus:
+                              description: The status of the certificate.
+                              type: string
+                            expiry:
+                              description: 'The expiration date of the certificate
+                                in RFC3339 format: 2000-01-02T03:04:05Z.'
+                              type: string
+                            hostName:
+                              description: The Hostname to use for the Management
+                                API.
+                              type: string
+                            keyVaultId:
+                              description: The ID of the Key Vault Secret containing
+                                the SSL Certificate, which must be should be of the
+                                type application/x-pkcs12.
+                              type: string
+                            negotiateClientCertificate:
+                              description: Should Client Certificate Negotiation be
+                                enabled for this Hostname? Defaults to false.
+                              type: boolean
+                            sslKeyvaultIdentityClientId:
+                              description: System or User Assigned Managed identity
+                                clientId as generated by Azure AD, which has GET access
+                                to the keyVault containing the SSL certificate.
+                              type: string
+                            subject:
+                              description: The subject of the certificate.
+                              type: string
+                            thumbprint:
+                              description: The thumbprint of the certificate.
+                              type: string
+                          type: object
+                        type: array
+                    type: object
+                  id:
+                    description: The ID of the API Management Service.
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this API Management Service.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The Principal ID associated with this Managed
+                          Service Identity.
+                        type: string
+                      tenantId:
+                        description: The Tenant ID associated with this Managed Service
+                          Identity.
+                        type: string
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this API Management Service.
+                          Possible values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure location where the API Management Service
+                      exists. Changing this forces a new resource to be created.
+                    type: string
+                  managementApiUrl:
+                    description: The URL for the Management API associated with this
+                      API Management service.
+                    type: string
+                  minApiVersion:
+                    description: The version which the control plane API calls to
+                      API Management service are limited with version equal to or
+                      newer than.
+                    type: string
+                  notificationSenderEmail:
+                    description: Email address from which the notification will be
+                      sent.
+                    type: string
+                  policy:
+                    description: A policy block as defined below.
+                    items:
+                      properties:
+                        xmlContent:
+                          description: The XML Content for this Policy.
+                          type: string
+                        xmlLink:
+                          description: A link to an API Management Policy XML Document,
+                            which must be publicly available.
+                          type: string
+                      type: object
+                    type: array
+                  portalUrl:
+                    description: The URL for the Publisher Portal associated with
+                      this API Management service.
+                    type: string
+                  privateIpAddresses:
+                    description: The Private IP addresses of the API Management Service.
+                    items:
+                      type: string
+                    type: array
+                  protocols:
+                    description: A protocols block as defined below.
+                    properties:
+                      enableHttp2:
+                        description: Should HTTP/2 be supported by the API Management
+                          Service? Defaults to false.
+                        type: boolean
+                    type: object
+                  publicIpAddressId:
+                    description: ID of a standard SKU IPv4 Public IP.
+                    type: string
+                  publicIpAddresses:
+                    description: The Public IP addresses of the API Management Service.
+                    items:
+                      type: string
+                    type: array
+                  publicNetworkAccessEnabled:
+                    description: Is public access to the service allowed? Defaults
+                      to true.
+                    type: boolean
+                  publisherEmail:
+                    description: The email of publisher/company.
+                    type: string
+                  publisherName:
+                    description: The name of publisher/company.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group in which the API Management
+                      Service should be exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  scmUrl:
+                    description: The URL for the SCM (Source Code Management) Endpoint
+                      associated with this API Management service.
+                    type: string
+                  security:
+                    description: A security block as defined below.
+                    properties:
+                      enableBackendSsl30:
+                        description: Should SSL 3.0 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableBackendTls10:
+                        description: Should TLS 1.0 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableBackendTls11:
+                        description: Should TLS 1.1 be enabled on the backend of the
+                          gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendSsl30:
+                        description: Should SSL 3.0 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendTls10:
+                        description: Should TLS 1.0 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      enableFrontendTls11:
+                        description: Should TLS 1.1 be enabled on the frontend of
+                          the gateway? Defaults to false.
+                        type: boolean
+                      tlsEcdheEcdsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheEcdsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheRsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsEcdheRsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA
+                          cipher be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128CbcSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_CBC_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128CbcShaCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_CBC_SHA cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes128GcmSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_128_GCM_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256CbcSha256CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_CBC_SHA256 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256CbcShaCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_CBC_SHA cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tlsRsaWithAes256GcmSha384CiphersEnabled:
+                        description: Should the TLS_RSA_WITH_AES_256_GCM_SHA384 cipher
+                          be enabled? Defaults to false.
+                        type: boolean
+                      tripleDesCiphersEnabled:
+                        description: Should the TLS_RSA_WITH_3DES_EDE_CBC_SHA cipher
+                          be enabled for alL TLS versions (1.0, 1.1 and 1.2)?
+                        type: boolean
+                    type: object
+                  signIn:
+                    description: A sign_in block as defined below.
+                    properties:
+                      enabled:
+                        description: Should anonymous users be redirected to the sign
+                          in page?
+                        type: boolean
+                    type: object
+                  signUp:
+                    description: A sign_up block as defined below.
+                    properties:
+                      enabled:
+                        description: Can users sign up on the development portal?
+                        type: boolean
+                      termsOfService:
+                        description: A terms_of_service block as defined below.
+                        properties:
+                          consentRequired:
+                            description: Should the user be asked for consent during
+                              sign up?
+                            type: boolean
+                          enabled:
+                            description: Should Terms of Service be displayed during
+                              sign up?.
+                            type: boolean
+                          text:
+                            description: The Terms of Service which users are required
+                              to agree to in order to sign up.
+                            type: string
+                        type: object
+                    type: object
+                  skuName:
+                    description: 'sku_name is a string consisting of two parts separated
+                      by an underscore(_). The first part is the name, valid values
+                      include: Consumption, Developer, Basic, Standard and Premium.
+                      The second part is the capacity (e.g. the number of deployed
+                      units of the sku), which must be a positive integer (e.g. Developer_1).'
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags assigned to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tenantAccess:
+                    description: A tenant_access block as defined below.
+                    properties:
+                      enabled:
+                        description: Should the access to the management API be enabled?
+                        type: boolean
+                      tenantId:
+                        description: The identifier for the tenant access information
+                          contract.
+                        type: string
+                    type: object
+                  virtualNetworkConfiguration:
+                    description: A virtual_network_configuration block as defined
+                      below. Required when virtual_network_type is External or Internal.
+                    properties:
+                      subnetId:
+                        description: The id of the subnet that will be used for the
+                          API Management.
+                        type: string
+                    type: object
+                  virtualNetworkType:
+                    description: 'The type of virtual network you want to use, valid
+                      values include: None, External, Internal. Defaults to None.'
+                    type: string
+                  zones:
+                    description: Specifies a list of Availability Zones in which this
+                      API Management service should be located.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

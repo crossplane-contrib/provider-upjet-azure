@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: authorization.azure.upbound.io/v1beta1
+apiVersion: authorization.azure.upbound.io/v1beta2
 kind: ResourcePolicyAssignment
 metadata:
   annotations:
@@ -54,7 +54,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

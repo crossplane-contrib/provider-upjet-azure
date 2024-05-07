@@ -1,0 +1,87 @@
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: ManagementPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta2/managementpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    rule:
+    - actions:
+      - baseBlob:
+        - deleteAfterDaysSinceModificationGreaterThan: 100
+          tierToArchiveAfterDaysSinceModificationGreaterThan: 50
+          tierToCoolAfterDaysSinceModificationGreaterThan: 10
+        snapshot:
+        - deleteAfterDaysSinceCreationGreaterThan: 30
+      enabled: true
+      filters:
+      - blobTypes:
+        - blockBlob
+        matchBlobIndexTag:
+        - name: tag1
+          operation: ==
+          value: val1
+        prefixMatch:
+        - container1/prefix1
+      name: rule1
+    - actions:
+      - baseBlob:
+        - deleteAfterDaysSinceModificationGreaterThan: 101
+          tierToArchiveAfterDaysSinceModificationGreaterThan: 51
+          tierToCoolAfterDaysSinceModificationGreaterThan: 11
+        snapshot:
+        - changeTierToArchiveAfterDaysSinceCreation: 90
+          changeTierToCoolAfterDaysSinceCreation: 23
+          deleteAfterDaysSinceCreationGreaterThan: 31
+        version:
+        - changeTierToArchiveAfterDaysSinceCreation: 9
+          changeTierToCoolAfterDaysSinceCreation: 90
+          deleteAfterDaysSinceCreation: 3
+      enabled: false
+      filters:
+      - blobTypes:
+        - blockBlob
+        prefixMatch:
+        - container2/prefix1
+        - container2/prefix2
+      name: rule2
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta2/managementpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: storage/v1beta2/managementpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountKind: BlobStorage
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

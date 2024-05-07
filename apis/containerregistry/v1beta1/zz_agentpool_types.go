@@ -73,7 +73,7 @@ type AgentPoolObservation struct {
 type AgentPoolParameters struct {
 
 	// Name of Azure Container Registry to create an Agent Pool for. Changing this forces a new Azure Container Registry Agent Pool to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.Registry
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta2.Registry
 	// +kubebuilder:validation:Optional
 	ContainerRegistryName *string `json:"containerRegistryName,omitempty" tf:"container_registry_name,omitempty"`
 

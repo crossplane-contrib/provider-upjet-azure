@@ -211,7 +211,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -230,7 +230,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -249,7 +249,7 @@ func (mg *WorkspaceCustomerManagedKey) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -280,7 +280,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -299,7 +299,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.KeyVaultKeyID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KeyVaultKeyIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta1", "Workspace", "WorkspaceList")
+		m, l, err = apisresolver.GetManagedResource("databricks.azure.upbound.io", "v1beta2", "Workspace", "WorkspaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -318,7 +318,7 @@ func (mg *WorkspaceRootDbfsCustomerManagedKey) ResolveReferences(ctx context.Con
 	mg.Spec.ForProvider.WorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.WorkspaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Key", "KeyList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Key", "KeyList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -7,37 +7,16 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Factory) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *CustomDataSet) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DataFlow) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DataSetAzureBlob) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DataSetBinary) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *DataSetCosmosDBSQLAPI) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DataSetDelimitedText) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DataSetHTTP) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *DataSetJSON) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DataSetMySQL) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DataSetParquet) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *DataSetPostgreSQL) Hub() {}
@@ -52,34 +31,10 @@ func (tr *DataSetSQLServerTable) Hub() {}
 func (tr *IntegrationRuntimeAzure) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *IntegrationRuntimeAzureSSIS) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *IntegrationRuntimeManaged) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *IntegrationRuntimeSelfHosted) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinkedCustomService) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureBlobStorage) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureDatabricks) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureFileStorage) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureFunction) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinkedServiceAzureSearch) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceAzureSQLDatabase) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LinkedServiceAzureTableStorage) Hub() {}
@@ -103,25 +58,10 @@ func (tr *LinkedServiceKusto) Hub() {}
 func (tr *LinkedServiceMySQL) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinkedServiceOData) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceOdbc) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LinkedServicePostgreSQL) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LinkedServiceSFTP) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceSnowflake) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceSQLServer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LinkedServiceSynapse) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LinkedServiceWeb) Hub() {}
@@ -137,6 +77,3 @@ func (tr *TriggerBlobEvent) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *TriggerCustomEvent) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *TriggerSchedule) Hub() {}

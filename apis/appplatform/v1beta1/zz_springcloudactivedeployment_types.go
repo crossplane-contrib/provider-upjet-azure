@@ -16,7 +16,7 @@ import (
 type SpringCloudActiveDeploymentInitParameters struct {
 
 	// Specifies the name of Spring Cloud Deployment which is going to be active.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudJavaDeployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudJavaDeployment
 	DeploymentName *string `json:"deploymentName,omitempty" tf:"deployment_name,omitempty"`
 
 	// Reference to a SpringCloudJavaDeployment in appplatform to populate deploymentName.
@@ -28,7 +28,7 @@ type SpringCloudActiveDeploymentInitParameters struct {
 	DeploymentNameSelector *v1.Selector `json:"deploymentNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the Spring Cloud Application. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`
 
@@ -56,7 +56,7 @@ type SpringCloudActiveDeploymentObservation struct {
 type SpringCloudActiveDeploymentParameters struct {
 
 	// Specifies the name of Spring Cloud Deployment which is going to be active.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudJavaDeployment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudJavaDeployment
 	// +kubebuilder:validation:Optional
 	DeploymentName *string `json:"deploymentName,omitempty" tf:"deployment_name,omitempty"`
 
@@ -69,7 +69,7 @@ type SpringCloudActiveDeploymentParameters struct {
 	DeploymentNameSelector *v1.Selector `json:"deploymentNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the Spring Cloud Application. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SpringCloudAppID *string `json:"springCloudAppId,omitempty" tf:"spring_cloud_app_id,omitempty"`

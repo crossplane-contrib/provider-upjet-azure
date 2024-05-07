@@ -58,7 +58,7 @@ func (mg *DomainTopic) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.upbound.io", "v1beta1", "Domain", "DomainList")
+		m, l, err = apisresolver.GetManagedResource("eventgrid.azure.upbound.io", "v1beta2", "Domain", "DomainList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

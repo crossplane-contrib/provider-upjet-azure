@@ -17,7 +17,7 @@ type FunctionAppHybridConnectionInitParameters struct {
 
 	// The ID of the Function App for this Hybrid Connection. Changing this forces a new resource to be created.
 	// The ID of the Function App for this Hybrid Connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta2.WindowsFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 
@@ -102,7 +102,7 @@ type FunctionAppHybridConnectionParameters struct {
 
 	// The ID of the Function App for this Hybrid Connection. Changing this forces a new resource to be created.
 	// The ID of the Function App for this Hybrid Connection.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta2.WindowsFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`

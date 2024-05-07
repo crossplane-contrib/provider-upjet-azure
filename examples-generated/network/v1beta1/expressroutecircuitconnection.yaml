@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: ExpressRouteCircuit
 metadata:
   annotations:
@@ -44,7 +44,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: ExpressRouteCircuit
 metadata:
   annotations:
@@ -66,7 +66,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: ExpressRouteCircuitPeering
 metadata:
   annotations:
@@ -93,7 +93,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: ExpressRouteCircuitPeering
 metadata:
   annotations:
@@ -120,7 +120,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: ExpressRoutePort
 metadata:
   annotations:
@@ -140,7 +140,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: ExpressRoutePort
 metadata:
   annotations:

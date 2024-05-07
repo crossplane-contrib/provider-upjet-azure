@@ -12,8 +12,9 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -27,7 +28,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences( // ResolveReferences of
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -77,7 +78,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.AliasAuthorizationRuleID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AliasAuthorizationRuleIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -96,7 +97,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.PartnerNamespaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PartnerNamespaceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -134,7 +135,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	mg.Spec.InitProvider.AliasAuthorizationRuleID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AliasAuthorizationRuleIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -165,7 +166,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -186,7 +187,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkRules); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -206,7 +207,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -226,7 +227,7 @@ func (mg *NamespaceNetworkRuleSet) ResolveReferences(ctx context.Context, c clie
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRules); i3++ {
 		{
-			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -258,7 +259,7 @@ func (mg *Queue) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -460,7 +461,7 @@ func (mg *Topic) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta1", "ServiceBusNamespace", "ServiceBusNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("servicebus.azure.upbound.io", "v1beta2", "ServiceBusNamespace", "ServiceBusNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

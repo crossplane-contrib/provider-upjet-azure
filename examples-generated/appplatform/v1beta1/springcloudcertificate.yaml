@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -40,7 +40,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Certificate
 metadata:
   annotations:
@@ -96,7 +96,7 @@ spec:
 
 ---
 
-apiVersion: appplatform.azure.upbound.io/v1beta1
+apiVersion: appplatform.azure.upbound.io/v1beta2
 kind: SpringCloudService
 metadata:
   annotations:

@@ -1,0 +1,28 @@
+apiVersion: web.azure.upbound.io/v1beta2
+kind: StaticSite
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/staticsite
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta2/staticsite
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

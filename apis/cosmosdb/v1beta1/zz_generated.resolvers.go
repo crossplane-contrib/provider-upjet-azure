@@ -171,7 +171,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "CassandraCluster", "CassandraClusterList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "CassandraCluster", "CassandraClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -190,7 +190,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.CassandraClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CassandraClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -209,7 +209,7 @@ func (mg *CassandraDatacenter) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.DelegatedManagementSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DelegatedManagementSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -678,7 +678,7 @@ func (mg *SQLDedicatedGateway) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -740,7 +740,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -797,7 +797,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RoleDefinitionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -816,7 +816,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -873,7 +873,7 @@ func (mg *SQLRoleAssignment) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.InitProvider.RoleDefinitionID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RoleDefinitionIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -904,7 +904,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -942,7 +942,7 @@ func (mg *SQLRoleDefinition) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

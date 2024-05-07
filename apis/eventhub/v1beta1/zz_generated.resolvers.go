@@ -293,7 +293,7 @@ func (mg *NamespaceAuthorizationRule) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -343,7 +343,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -362,7 +362,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.NamespaceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.NamespaceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -400,7 +400,7 @@ func (mg *NamespaceDisasterRecoveryConfig) ResolveReferences(ctx context.Context
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -431,7 +431,7 @@ func (mg *NamespaceSchemaGroup) ResolveReferences(ctx context.Context, c client.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta1", "EventHubNamespace", "EventHubNamespaceList")
+		m, l, err = apisresolver.GetManagedResource("eventhub.azure.upbound.io", "v1beta2", "EventHubNamespace", "EventHubNamespaceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

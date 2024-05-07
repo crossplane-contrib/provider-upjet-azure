@@ -24,7 +24,7 @@ spec:
 
 ---
 
-apiVersion: logz.azure.upbound.io/v1beta1
+apiVersion: logz.azure.upbound.io/v1beta2
 kind: Monitor
 metadata:
   annotations:

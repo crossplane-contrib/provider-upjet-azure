@@ -53,7 +53,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: TrafficManagerProfile
 metadata:
   annotations:
@@ -77,7 +77,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: TrafficManagerProfile
 metadata:
   annotations:

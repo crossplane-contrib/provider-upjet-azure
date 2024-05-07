@@ -1,0 +1,35 @@
+apiVersion: cache.azure.upbound.io/v1beta2
+kind: RedisCache
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta2/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 2
+    enableNonSslPort: false
+    family: C
+    location: West Europe
+    minimumTlsVersion: "1.2"
+    redisConfiguration:
+    - {}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cache/v1beta2/rediscache
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

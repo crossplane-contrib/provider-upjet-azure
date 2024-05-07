@@ -1,0 +1,65 @@
+apiVersion: resources.azure.upbound.io/v1beta2
+kind: ResourceDeploymentScriptAzurePowerShell
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resources/v1beta2/resourcedeploymentscriptazurepowershell
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cleanupPreference: OnSuccess
+    commandLine: -name "John Dole"
+    forceUpdateTag: "1"
+    identity:
+    - identityIdsRefs:
+      - name: example
+      type: UserAssigned
+    location: West Europe
+    name: example-rdsaps
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInterval: P1D
+    scriptContent: |2
+                param([string] $name)
+                  $output = 'Hello {0}.' -f $name
+                  Write-Output $output
+                  $DeploymentScriptOutputs = @{}
+                  $DeploymentScriptOutputs['text'] = $output
+    tags:
+      key: value
+    timeout: PT30M
+    version: "8.3"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resources/v1beta2/resourcedeploymentscriptazurepowershell
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  annotations:
+    meta.upbound.io/example-id: resources/v1beta2/resourcedeploymentscriptazurepowershell
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: example-uai
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

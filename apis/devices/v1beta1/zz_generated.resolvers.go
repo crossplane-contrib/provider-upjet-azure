@@ -58,7 +58,7 @@ func (mg *IOTHubCertificate) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -258,7 +258,7 @@ func (mg *IOTHubDPSSharedAccessPolicy) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHubDPS", "IOTHubDPSList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHubDPS", "IOTHubDPSList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -308,7 +308,7 @@ func (mg *IOTHubEndpointEventHub) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -377,7 +377,7 @@ func (mg *IOTHubEndpointServiceBusQueue) ResolveReferences(ctx context.Context, 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -446,7 +446,7 @@ func (mg *IOTHubEndpointServiceBusTopic) ResolveReferences(ctx context.Context, 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -534,7 +534,7 @@ func (mg *IOTHubEndpointStorageContainer) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.ContainerName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ContainerNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -622,7 +622,7 @@ func (mg *IOTHubEnrichment) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -660,7 +660,7 @@ func (mg *IOTHubEnrichment) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -799,7 +799,7 @@ func (mg *IOTHubRoute) ResolveReferences(ctx context.Context, c client.Reader) e
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -849,7 +849,7 @@ func (mg *IOTHubSharedAccessPolicy) ResolveReferences(ctx context.Context, c cli
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHub", "IOTHubList")
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

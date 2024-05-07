@@ -54,7 +54,7 @@ type NamespaceAuthorizationRuleParameters struct {
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Specifies the ID of the ServiceBus Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta2.ServiceBusNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`

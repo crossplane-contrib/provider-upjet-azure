@@ -16,7 +16,7 @@ import (
 type HybridRunBookWorkerGroupInitParameters struct {
 
 	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta2.Account
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 
 	// Reference to a Account in automation to populate automationAccountName.
@@ -67,7 +67,7 @@ type HybridRunBookWorkerGroupObservation struct {
 type HybridRunBookWorkerGroupParameters struct {
 
 	// The name of the Automation Account in which the Runbook Worker Group is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 

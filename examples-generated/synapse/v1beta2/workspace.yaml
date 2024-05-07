@@ -1,0 +1,81 @@
+apiVersion: synapse.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/workspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    aadAdmin:
+    - login: AzureAD Admin
+      objectId: 00000000-0000-0000-0000-000000000000
+      tenantId: 00000000-0000-0000-0000-000000000000
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sqlAdministratorLogin: sqladminuser
+    sqlAdministratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Env: production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/workspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/workspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountKind: StorageV2
+    accountReplicationType: LRS
+    accountTier: Standard
+    isHnsEnabled: "true"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/workspace
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

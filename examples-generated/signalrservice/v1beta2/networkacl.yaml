@@ -1,0 +1,124 @@
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: NetworkACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/networkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultAction: Deny
+    privateEndpoint:
+    - allowedRequestTypes:
+      - ServerConnection
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    publicNetwork:
+    - allowedRequestTypes:
+      - ClientConnection
+    signalrServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/networkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    privateServiceConnection:
+    - isManualConnection: false
+      name: psc-sig-test
+      privateConnectionResourceId: ${azurerm_signalr_service.example.id}
+      subresourceNames:
+      - signalr
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/networkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/networkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: Standard_S1
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/networkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.5.2.0/24
+    enforcePrivateLinkEndpointNetworkPolicies: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/networkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.5.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

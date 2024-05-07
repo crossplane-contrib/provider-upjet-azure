@@ -26,7 +26,7 @@ func (mg *AppActionCustom) ResolveReferences( // ResolveReferences of this AppAc
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta1", "AppWorkflow", "AppWorkflowList")
+		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta2", "AppWorkflow", "AppWorkflowList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -57,7 +57,7 @@ func (mg *AppActionHTTP) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta1", "AppWorkflow", "AppWorkflowList")
+		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta2", "AppWorkflow", "AppWorkflowList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -376,7 +376,7 @@ func (mg *AppTriggerCustom) ResolveReferences(ctx context.Context, c client.Read
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta1", "AppWorkflow", "AppWorkflowList")
+		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta2", "AppWorkflow", "AppWorkflowList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -407,7 +407,7 @@ func (mg *AppTriggerHTTPRequest) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta1", "AppWorkflow", "AppWorkflowList")
+		m, l, err = apisresolver.GetManagedResource("logic.azure.upbound.io", "v1beta2", "AppWorkflow", "AppWorkflowList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -1,0 +1,32 @@
+apiVersion: databricks.azure.upbound.io/v1beta2
+kind: AccessConnector
+metadata:
+  annotations:
+    meta.upbound.io/example-id: databricks/v1beta2/accessconnector
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: databricks/v1beta2/accessconnector
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

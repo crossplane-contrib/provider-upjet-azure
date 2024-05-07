@@ -16,7 +16,7 @@ import (
 type SubAccountTagRuleInitParameters struct {
 
 	// The ID of the Logz Sub Account. Changing this forces a new Logz Sub Account Tag Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logz/v1beta1.SubAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logz/v1beta2.SubAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	LogzSubAccountID *string `json:"logzSubAccountId,omitempty" tf:"logz_sub_account_id,omitempty"`
 
@@ -65,7 +65,7 @@ type SubAccountTagRuleObservation struct {
 type SubAccountTagRuleParameters struct {
 
 	// The ID of the Logz Sub Account. Changing this forces a new Logz Sub Account Tag Rule to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logz/v1beta1.SubAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/logz/v1beta2.SubAccount
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LogzSubAccountID *string `json:"logzSubAccountId,omitempty" tf:"logz_sub_account_id,omitempty"`

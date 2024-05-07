@@ -1,0 +1,74 @@
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: DataSetBinary
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/datasetbinary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sftpServerLocation:
+    - filename: '**'
+      path: /test/
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/datasetbinary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceSFTP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/datasetbinary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    authenticationType: Basic
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    host: http://www.bing.com
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    port: 22
+    username: foo
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/datasetbinary
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

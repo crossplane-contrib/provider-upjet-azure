@@ -1,0 +1,60 @@
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    configServerGitSetting:
+    - label: config
+      searchPaths:
+      - dir1
+      - dir2
+      uri: https://github.com/Azure-Samples/piggymetrics
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: S0
+    tags:
+      Env: staging
+    trace:
+    - connectionStringSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      sampleRate: 10
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

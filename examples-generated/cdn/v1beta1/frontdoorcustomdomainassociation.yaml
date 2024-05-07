@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorCustomDomain
 metadata:
   annotations:
@@ -55,7 +55,7 @@ spec:
 
 ---
 
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorOrigin
 metadata:
   annotations:
@@ -83,7 +83,7 @@ spec:
 
 ---
 
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorOriginGroup
 metadata:
   annotations:
@@ -127,7 +127,7 @@ spec:
 
 ---
 
-apiVersion: cdn.azure.upbound.io/v1beta1
+apiVersion: cdn.azure.upbound.io/v1beta2
 kind: FrontdoorRoute
 metadata:
   annotations:
@@ -177,7 +177,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: DNSZone
 metadata:
   annotations:

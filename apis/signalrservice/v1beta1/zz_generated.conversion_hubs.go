@@ -7,19 +7,4 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Service) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *NetworkACL) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SignalrSharedPrivateLinkResource) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WebPubsub) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WebPubsubHub) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WebPubsubNetworkACL) Hub() {}

@@ -28,7 +28,7 @@ func (mg *AppActiveSlot) ResolveReferences( // ResolveReferences of this AppActi
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsWebAppSlot", "WindowsWebAppSlotList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsWebAppSlot", "WindowsWebAppSlotList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -47,7 +47,7 @@ func (mg *AppActiveSlot) ResolveReferences( // ResolveReferences of this AppActi
 	mg.Spec.ForProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SlotIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsWebAppSlot", "WindowsWebAppSlotList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsWebAppSlot", "WindowsWebAppSlotList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -97,7 +97,7 @@ func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RelayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsWebApp", "WindowsWebAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsWebApp", "WindowsWebAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -135,7 +135,7 @@ func (mg *AppHybridConnection) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RelayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsWebApp", "WindowsWebAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsWebApp", "WindowsWebAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -415,7 +415,7 @@ func (mg *FunctionAppActiveSlot) ResolveReferences(ctx context.Context, c client
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsFunctionAppSlot", "WindowsFunctionAppSlotList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsFunctionAppSlot", "WindowsFunctionAppSlotList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -434,7 +434,7 @@ func (mg *FunctionAppActiveSlot) ResolveReferences(ctx context.Context, c client
 	mg.Spec.ForProvider.SlotID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SlotIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsFunctionAppSlot", "WindowsFunctionAppSlotList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsFunctionAppSlot", "WindowsFunctionAppSlotList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -465,7 +465,7 @@ func (mg *FunctionAppFunction) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "LinuxFunctionApp", "LinuxFunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "LinuxFunctionApp", "LinuxFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -484,7 +484,7 @@ func (mg *FunctionAppFunction) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.FunctionAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FunctionAppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "LinuxFunctionApp", "LinuxFunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "LinuxFunctionApp", "LinuxFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -515,7 +515,7 @@ func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsFunctionApp", "WindowsFunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsFunctionApp", "WindowsFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -553,7 +553,7 @@ func (mg *FunctionAppHybridConnection) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.RelayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RelayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta1", "WindowsFunctionApp", "WindowsFunctionAppList")
+		m, l, err = apisresolver.GetManagedResource("web.azure.upbound.io", "v1beta2", "WindowsFunctionApp", "WindowsFunctionAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

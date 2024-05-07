@@ -1,0 +1,45 @@
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: LinkedServiceOData
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceodata
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    url: https://services.odata.org/v4/TripPinServiceRW/People
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceodata
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceodata
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

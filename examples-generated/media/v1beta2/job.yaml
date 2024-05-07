@@ -1,0 +1,149 @@
+apiVersion: media.azure.upbound.io/v1beta2
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: My Job description
+    inputAsset:
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: input
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    outputAsset:
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: output
+    priority: Normal
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    transformNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta1
+kind: Asset
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: input
+  name: input
+spec:
+  forProvider:
+    description: Input Asset description
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta1
+kind: Asset
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: output
+  name: output
+spec:
+  forProvider:
+    description: Output Asset description
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: ServicesAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccount:
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      isPrimary: true
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: Transform
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: My transform description
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    output:
+    - builtinPreset:
+      - presetName: AACGoodQualityAudio
+      onErrorAction: ContinueJob
+      relativePriority: Normal
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/job
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -28,7 +28,7 @@ type EventSourceEventHubInitParameters struct {
 	ConsumerGroupNameSelector *v1.Selector `json:"consumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the EventHub which will be associated with this resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHub
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
 	// Reference to a EventHub in eventhub to populate eventhubName.
@@ -40,7 +40,7 @@ type EventSourceEventHubInitParameters struct {
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the resource id where events will be coming from.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	EventSourceResourceID *string `json:"eventSourceResourceId,omitempty" tf:"event_source_resource_id,omitempty"`
 
@@ -56,7 +56,7 @@ type EventSourceEventHubInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the EventHub Namespace name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHubNamespace
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
 	// Reference to a EventHubNamespace in eventhub to populate namespaceName.
@@ -137,7 +137,7 @@ type EventSourceEventHubParameters struct {
 	ConsumerGroupNameSelector *v1.Selector `json:"consumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the id of the IoT Time Series Insights Environment that the Event Source should be associated with. Changing this forces a new resource to created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/timeseriesinsights/v1beta1.Gen2Environment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/timeseriesinsights/v1beta2.Gen2Environment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EnvironmentID *string `json:"environmentId,omitempty" tf:"environment_id,omitempty"`
@@ -151,7 +151,7 @@ type EventSourceEventHubParameters struct {
 	EnvironmentIDSelector *v1.Selector `json:"environmentIdSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the EventHub which will be associated with this resource.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
@@ -164,7 +164,7 @@ type EventSourceEventHubParameters struct {
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
 	// Specifies the resource id where events will be coming from.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventSourceResourceID *string `json:"eventSourceResourceId,omitempty" tf:"event_source_resource_id,omitempty"`
@@ -182,7 +182,7 @@ type EventSourceEventHubParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the EventHub Namespace name.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHubNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 

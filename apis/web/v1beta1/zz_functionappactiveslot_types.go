@@ -21,7 +21,7 @@ type FunctionAppActiveSlotInitParameters struct {
 
 	// The ID of the Slot to swap with Production.
 	// The ID of the Slot to swap with `Production`.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsFunctionAppSlot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta2.WindowsFunctionAppSlot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	SlotID *string `json:"slotId,omitempty" tf:"slot_id,omitempty"`
 
@@ -61,7 +61,7 @@ type FunctionAppActiveSlotParameters struct {
 
 	// The ID of the Slot to swap with Production.
 	// The ID of the Slot to swap with `Production`.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.WindowsFunctionAppSlot
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta2.WindowsFunctionAppSlot
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SlotID *string `json:"slotId,omitempty" tf:"slot_id,omitempty"`

@@ -1150,3 +1150,1120 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: VPNGatewayConnection is the Schema for the VPNGatewayConnections
+          API. Manages a VPN Gateway Connection.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: VPNGatewayConnectionSpec defines the desired state of VPNGatewayConnection
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  internetSecurityEnabled:
+                    description: Whether Internet Security is enabled for this VPN
+                      Connection. Defaults to false.
+                    type: boolean
+                  remoteVpnSiteId:
+                    description: The ID of the remote VPN Site, which will connect
+                      to the VPN Gateway. Changing this forces a new VPN Gateway Connection
+                      to be created.
+                    type: string
+                  remoteVpnSiteIdRef:
+                    description: Reference to a VPNSite in network to populate remoteVpnSiteId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  remoteVpnSiteIdSelector:
+                    description: Selector for a VPNSite in network to populate remoteVpnSiteId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  routing:
+                    description: A routing block as defined below. If this is not
+                      specified, there will be a default route table created implicitly.
+                    properties:
+                      associatedRouteTable:
+                        description: The ID of the Route Table associated with this
+                          VPN Connection.
+                        type: string
+                      inboundRouteMapId:
+                        description: The resource ID of the Route Map associated with
+                          this Routing Configuration for inbound learned routes.
+                        type: string
+                      outboundRouteMapId:
+                        description: The resource ID of the Route Map associated with
+                          this Routing Configuration for outbound advertised routes.
+                        type: string
+                      propagatedRouteTable:
+                        description: A propagated_route_table block as defined below.
+                        properties:
+                          labels:
+                            description: A list of labels to assign to this route
+                              table.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          routeTableIds:
+                            description: A list of Route Table IDs to associated with
+                              this VPN Gateway Connection.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  trafficSelectorPolicy:
+                    description: One or more traffic_selector_policy blocks as defined
+                      below.
+                    items:
+                      properties:
+                        localAddressRanges:
+                          description: A list of local address spaces in CIDR format
+                            for this VPN Gateway Connection.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        remoteAddressRanges:
+                          description: A list of remote address spaces in CIDR format
+                            for this VPN Gateway Connection.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  vpnGatewayId:
+                    description: The ID of the VPN Gateway that this VPN Gateway Connection
+                      belongs to. Changing this forces a new VPN Gateway Connection
+                      to be created.
+                    type: string
+                  vpnGatewayIdRef:
+                    description: Reference to a VPNGateway in network to populate
+                      vpnGatewayId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  vpnGatewayIdSelector:
+                    description: Selector for a VPNGateway in network to populate
+                      vpnGatewayId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  vpnLink:
+                    description: One or more vpn_link blocks as defined below.
+                    items:
+                      properties:
+                        bandwidthMbps:
+                          description: The expected connection bandwidth in MBPS.
+                            Defaults to 10.
+                          type: number
+                        bgpEnabled:
+                          description: Should the BGP be enabled? Defaults to false.
+                            Changing this forces a new VPN Gateway Connection to be
+                            created.
+                          type: boolean
+                        connectionMode:
+                          description: The connection mode of this VPN Link. Possible
+                            values are Default, InitiatorOnly and ResponderOnly. Defaults
+                            to Default.
+                          type: string
+                        customBgpAddress:
+                          description: One or more custom_bgp_address blocks as defined
+                            below.
+                          items:
+                            properties:
+                              ipAddress:
+                                description: The custom bgp ip address which belongs
+                                  to the IP Configuration.
+                                type: string
+                              ipConfigurationId:
+                                description: The ID of the IP Configuration which
+                                  belongs to the VPN Gateway.
+                                type: string
+                            type: object
+                          type: array
+                        egressNatRuleIds:
+                          description: A list of the egress NAT Rule Ids.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        ingressNatRuleIds:
+                          description: A list of the ingress NAT Rule Ids.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        ipsecPolicy:
+                          description: One or more ipsec_policy blocks as defined
+                            above.
+                          items:
+                            properties:
+                              dhGroup:
+                                description: The DH Group used in IKE Phase 1 for
+                                  initial SA. Possible values are None, DHGroup1,
+                                  DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256,
+                                  ECP384.
+                                type: string
+                              encryptionAlgorithm:
+                                description: The IPSec encryption algorithm (IKE phase
+                                  1). Possible values are AES128, AES192, AES256,
+                                  DES, DES3, GCMAES128, GCMAES192, GCMAES256, None.
+                                type: string
+                              ikeEncryptionAlgorithm:
+                                description: The IKE encryption algorithm (IKE phase
+                                  2). Possible values are DES, DES3, AES128, AES192,
+                                  AES256, GCMAES128, GCMAES256.
+                                type: string
+                              ikeIntegrityAlgorithm:
+                                description: The IKE integrity algorithm (IKE phase
+                                  2). Possible values are MD5, SHA1, SHA256, SHA384,
+                                  GCMAES128, GCMAES256.
+                                type: string
+                              integrityAlgorithm:
+                                description: The IPSec integrity algorithm (IKE phase
+                                  1). Possible values are MD5, SHA1, SHA256, GCMAES128,
+                                  GCMAES192, GCMAES256.
+                                type: string
+                              pfsGroup:
+                                description: The Pfs Group used in IKE Phase 2 for
+                                  the new child SA. Possible values are None, PFS1,
+                                  PFS2, PFS14, PFS24, PFS2048, PFSMM, ECP256, ECP384.
+                                type: string
+                              saDataSizeKb:
+                                description: The IPSec Security Association (also
+                                  called Quick Mode or Phase 2 SA) payload size in
+                                  KB for the site to site VPN tunnel.
+                                type: number
+                              saLifetimeSec:
+                                description: The IPSec Security Association (also
+                                  called Quick Mode or Phase 2 SA) lifetime in seconds
+                                  for the site to site VPN tunnel.
+                                type: number
+                            type: object
+                          type: array
+                        localAzureIpAddressEnabled:
+                          description: Whether to use local Azure IP to initiate connection?
+                            Defaults to false.
+                          type: boolean
+                        name:
+                          description: The name which should be used for this VPN
+                            Link Connection.
+                          type: string
+                        policyBasedTrafficSelectorEnabled:
+                          description: Whether to enable policy-based traffic selectors?
+                            Defaults to false.
+                          type: boolean
+                        protocol:
+                          description: The protocol used for this VPN Link Connection.
+                            Possible values are IKEv1 and IKEv2. Defaults to IKEv2.
+                          type: string
+                        ratelimitEnabled:
+                          description: Should the rate limit be enabled? Defaults
+                            to false.
+                          type: boolean
+                        routeWeight:
+                          description: Routing weight for this VPN Link Connection.
+                            Defaults to 0.
+                          type: number
+                        sharedKey:
+                          description: SharedKey for this VPN Link Connection.
+                          type: string
+                        vpnSiteLinkId:
+                          description: The ID of the connected VPN Site Link. Changing
+                            this forces a new VPN Gateway Connection to be created.
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  internetSecurityEnabled:
+                    description: Whether Internet Security is enabled for this VPN
+                      Connection. Defaults to false.
+                    type: boolean
+                  remoteVpnSiteId:
+                    description: The ID of the remote VPN Site, which will connect
+                      to the VPN Gateway. Changing this forces a new VPN Gateway Connection
+                      to be created.
+                    type: string
+                  remoteVpnSiteIdRef:
+                    description: Reference to a VPNSite in network to populate remoteVpnSiteId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  remoteVpnSiteIdSelector:
+                    description: Selector for a VPNSite in network to populate remoteVpnSiteId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  routing:
+                    description: A routing block as defined below. If this is not
+                      specified, there will be a default route table created implicitly.
+                    properties:
+                      associatedRouteTable:
+                        description: The ID of the Route Table associated with this
+                          VPN Connection.
+                        type: string
+                      inboundRouteMapId:
+                        description: The resource ID of the Route Map associated with
+                          this Routing Configuration for inbound learned routes.
+                        type: string
+                      outboundRouteMapId:
+                        description: The resource ID of the Route Map associated with
+                          this Routing Configuration for outbound advertised routes.
+                        type: string
+                      propagatedRouteTable:
+                        description: A propagated_route_table block as defined below.
+                        properties:
+                          labels:
+                            description: A list of labels to assign to this route
+                              table.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          routeTableIds:
+                            description: A list of Route Table IDs to associated with
+                              this VPN Gateway Connection.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  trafficSelectorPolicy:
+                    description: One or more traffic_selector_policy blocks as defined
+                      below.
+                    items:
+                      properties:
+                        localAddressRanges:
+                          description: A list of local address spaces in CIDR format
+                            for this VPN Gateway Connection.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        remoteAddressRanges:
+                          description: A list of remote address spaces in CIDR format
+                            for this VPN Gateway Connection.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  vpnLink:
+                    description: One or more vpn_link blocks as defined below.
+                    items:
+                      properties:
+                        bandwidthMbps:
+                          description: The expected connection bandwidth in MBPS.
+                            Defaults to 10.
+                          type: number
+                        bgpEnabled:
+                          description: Should the BGP be enabled? Defaults to false.
+                            Changing this forces a new VPN Gateway Connection to be
+                            created.
+                          type: boolean
+                        connectionMode:
+                          description: The connection mode of this VPN Link. Possible
+                            values are Default, InitiatorOnly and ResponderOnly. Defaults
+                            to Default.
+                          type: string
+                        customBgpAddress:
+                          description: One or more custom_bgp_address blocks as defined
+                            below.
+                          items:
+                            properties:
+                              ipAddress:
+                                description: The custom bgp ip address which belongs
+                                  to the IP Configuration.
+                                type: string
+                              ipConfigurationId:
+                                description: The ID of the IP Configuration which
+                                  belongs to the VPN Gateway.
+                                type: string
+                            type: object
+                          type: array
+                        egressNatRuleIds:
+                          description: A list of the egress NAT Rule Ids.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        ingressNatRuleIds:
+                          description: A list of the ingress NAT Rule Ids.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        ipsecPolicy:
+                          description: One or more ipsec_policy blocks as defined
+                            above.
+                          items:
+                            properties:
+                              dhGroup:
+                                description: The DH Group used in IKE Phase 1 for
+                                  initial SA. Possible values are None, DHGroup1,
+                                  DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256,
+                                  ECP384.
+                                type: string
+                              encryptionAlgorithm:
+                                description: The IPSec encryption algorithm (IKE phase
+                                  1). Possible values are AES128, AES192, AES256,
+                                  DES, DES3, GCMAES128, GCMAES192, GCMAES256, None.
+                                type: string
+                              ikeEncryptionAlgorithm:
+                                description: The IKE encryption algorithm (IKE phase
+                                  2). Possible values are DES, DES3, AES128, AES192,
+                                  AES256, GCMAES128, GCMAES256.
+                                type: string
+                              ikeIntegrityAlgorithm:
+                                description: The IKE integrity algorithm (IKE phase
+                                  2). Possible values are MD5, SHA1, SHA256, SHA384,
+                                  GCMAES128, GCMAES256.
+                                type: string
+                              integrityAlgorithm:
+                                description: The IPSec integrity algorithm (IKE phase
+                                  1). Possible values are MD5, SHA1, SHA256, GCMAES128,
+                                  GCMAES192, GCMAES256.
+                                type: string
+                              pfsGroup:
+                                description: The Pfs Group used in IKE Phase 2 for
+                                  the new child SA. Possible values are None, PFS1,
+                                  PFS2, PFS14, PFS24, PFS2048, PFSMM, ECP256, ECP384.
+                                type: string
+                              saDataSizeKb:
+                                description: The IPSec Security Association (also
+                                  called Quick Mode or Phase 2 SA) payload size in
+                                  KB for the site to site VPN tunnel.
+                                type: number
+                              saLifetimeSec:
+                                description: The IPSec Security Association (also
+                                  called Quick Mode or Phase 2 SA) lifetime in seconds
+                                  for the site to site VPN tunnel.
+                                type: number
+                            type: object
+                          type: array
+                        localAzureIpAddressEnabled:
+                          description: Whether to use local Azure IP to initiate connection?
+                            Defaults to false.
+                          type: boolean
+                        name:
+                          description: The name which should be used for this VPN
+                            Link Connection.
+                          type: string
+                        policyBasedTrafficSelectorEnabled:
+                          description: Whether to enable policy-based traffic selectors?
+                            Defaults to false.
+                          type: boolean
+                        protocol:
+                          description: The protocol used for this VPN Link Connection.
+                            Possible values are IKEv1 and IKEv2. Defaults to IKEv2.
+                          type: string
+                        ratelimitEnabled:
+                          description: Should the rate limit be enabled? Defaults
+                            to false.
+                          type: boolean
+                        routeWeight:
+                          description: Routing weight for this VPN Link Connection.
+                            Defaults to 0.
+                          type: number
+                        sharedKey:
+                          description: SharedKey for this VPN Link Connection.
+                          type: string
+                        vpnSiteLinkId:
+                          description: The ID of the connected VPN Site Link. Changing
+                            this forces a new VPN Gateway Connection to be created.
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.vpnLink is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.vpnLink)
+                || (has(self.initProvider) && has(self.initProvider.vpnLink))'
+          status:
+            description: VPNGatewayConnectionStatus defines the observed state of
+              VPNGatewayConnection.
+            properties:
+              atProvider:
+                properties:
+                  id:
+                    description: The ID of the VPN Gateway Connection.
+                    type: string
+                  internetSecurityEnabled:
+                    description: Whether Internet Security is enabled for this VPN
+                      Connection. Defaults to false.
+                    type: boolean
+                  remoteVpnSiteId:
+                    description: The ID of the remote VPN Site, which will connect
+                      to the VPN Gateway. Changing this forces a new VPN Gateway Connection
+                      to be created.
+                    type: string
+                  routing:
+                    description: A routing block as defined below. If this is not
+                      specified, there will be a default route table created implicitly.
+                    properties:
+                      associatedRouteTable:
+                        description: The ID of the Route Table associated with this
+                          VPN Connection.
+                        type: string
+                      inboundRouteMapId:
+                        description: The resource ID of the Route Map associated with
+                          this Routing Configuration for inbound learned routes.
+                        type: string
+                      outboundRouteMapId:
+                        description: The resource ID of the Route Map associated with
+                          this Routing Configuration for outbound advertised routes.
+                        type: string
+                      propagatedRouteTable:
+                        description: A propagated_route_table block as defined below.
+                        properties:
+                          labels:
+                            description: A list of labels to assign to this route
+                              table.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          routeTableIds:
+                            description: A list of Route Table IDs to associated with
+                              this VPN Gateway Connection.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                    type: object
+                  trafficSelectorPolicy:
+                    description: One or more traffic_selector_policy blocks as defined
+                      below.
+                    items:
+                      properties:
+                        localAddressRanges:
+                          description: A list of local address spaces in CIDR format
+                            for this VPN Gateway Connection.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        remoteAddressRanges:
+                          description: A list of remote address spaces in CIDR format
+                            for this VPN Gateway Connection.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  vpnGatewayId:
+                    description: The ID of the VPN Gateway that this VPN Gateway Connection
+                      belongs to. Changing this forces a new VPN Gateway Connection
+                      to be created.
+                    type: string
+                  vpnLink:
+                    description: One or more vpn_link blocks as defined below.
+                    items:
+                      properties:
+                        bandwidthMbps:
+                          description: The expected connection bandwidth in MBPS.
+                            Defaults to 10.
+                          type: number
+                        bgpEnabled:
+                          description: Should the BGP be enabled? Defaults to false.
+                            Changing this forces a new VPN Gateway Connection to be
+                            created.
+                          type: boolean
+                        connectionMode:
+                          description: The connection mode of this VPN Link. Possible
+                            values are Default, InitiatorOnly and ResponderOnly. Defaults
+                            to Default.
+                          type: string
+                        customBgpAddress:
+                          description: One or more custom_bgp_address blocks as defined
+                            below.
+                          items:
+                            properties:
+                              ipAddress:
+                                description: The custom bgp ip address which belongs
+                                  to the IP Configuration.
+                                type: string
+                              ipConfigurationId:
+                                description: The ID of the IP Configuration which
+                                  belongs to the VPN Gateway.
+                                type: string
+                            type: object
+                          type: array
+                        egressNatRuleIds:
+                          description: A list of the egress NAT Rule Ids.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        ingressNatRuleIds:
+                          description: A list of the ingress NAT Rule Ids.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        ipsecPolicy:
+                          description: One or more ipsec_policy blocks as defined
+                            above.
+                          items:
+                            properties:
+                              dhGroup:
+                                description: The DH Group used in IKE Phase 1 for
+                                  initial SA. Possible values are None, DHGroup1,
+                                  DHGroup2, DHGroup14, DHGroup24, DHGroup2048, ECP256,
+                                  ECP384.
+                                type: string
+                              encryptionAlgorithm:
+                                description: The IPSec encryption algorithm (IKE phase
+                                  1). Possible values are AES128, AES192, AES256,
+                                  DES, DES3, GCMAES128, GCMAES192, GCMAES256, None.
+                                type: string
+                              ikeEncryptionAlgorithm:
+                                description: The IKE encryption algorithm (IKE phase
+                                  2). Possible values are DES, DES3, AES128, AES192,
+                                  AES256, GCMAES128, GCMAES256.
+                                type: string
+                              ikeIntegrityAlgorithm:
+                                description: The IKE integrity algorithm (IKE phase
+                                  2). Possible values are MD5, SHA1, SHA256, SHA384,
+                                  GCMAES128, GCMAES256.
+                                type: string
+                              integrityAlgorithm:
+                                description: The IPSec integrity algorithm (IKE phase
+                                  1). Possible values are MD5, SHA1, SHA256, GCMAES128,
+                                  GCMAES192, GCMAES256.
+                                type: string
+                              pfsGroup:
+                                description: The Pfs Group used in IKE Phase 2 for
+                                  the new child SA. Possible values are None, PFS1,
+                                  PFS2, PFS14, PFS24, PFS2048, PFSMM, ECP256, ECP384.
+                                type: string
+                              saDataSizeKb:
+                                description: The IPSec Security Association (also
+                                  called Quick Mode or Phase 2 SA) payload size in
+                                  KB for the site to site VPN tunnel.
+                                type: number
+                              saLifetimeSec:
+                                description: The IPSec Security Association (also
+                                  called Quick Mode or Phase 2 SA) lifetime in seconds
+                                  for the site to site VPN tunnel.
+                                type: number
+                            type: object
+                          type: array
+                        localAzureIpAddressEnabled:
+                          description: Whether to use local Azure IP to initiate connection?
+                            Defaults to false.
+                          type: boolean
+                        name:
+                          description: The name which should be used for this VPN
+                            Link Connection.
+                          type: string
+                        policyBasedTrafficSelectorEnabled:
+                          description: Whether to enable policy-based traffic selectors?
+                            Defaults to false.
+                          type: boolean
+                        protocol:
+                          description: The protocol used for this VPN Link Connection.
+                            Possible values are IKEv1 and IKEv2. Defaults to IKEv2.
+                          type: string
+                        ratelimitEnabled:
+                          description: Should the rate limit be enabled? Defaults
+                            to false.
+                          type: boolean
+                        routeWeight:
+                          description: Routing weight for this VPN Link Connection.
+                            Defaults to 0.
+                          type: number
+                        sharedKey:
+                          description: SharedKey for this VPN Link Connection.
+                          type: string
+                        vpnSiteLinkId:
+                          description: The ID of the connected VPN Site Link. Changing
+                            this forces a new VPN Gateway Connection to be created.
+                          type: string
+                      type: object
+                    type: array
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

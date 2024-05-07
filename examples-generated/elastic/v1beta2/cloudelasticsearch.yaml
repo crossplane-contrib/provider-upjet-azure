@@ -1,0 +1,30 @@
+apiVersion: elastic.azure.upbound.io/v1beta2
+kind: CloudElasticsearch
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastic/v1beta2/cloudelasticsearch
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    elasticCloudEmailAddress: user@example.com
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: test
+    skuName: ess-consumption-2024_Monthly
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: elastic/v1beta2/cloudelasticsearch
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    location: West Europe

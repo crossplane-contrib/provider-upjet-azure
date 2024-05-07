@@ -1,0 +1,83 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
+kind: ReferenceInputBlob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/referenceinputblob
+  labels:
+    testing.upbound.io/example-name: test
+  name: test
+spec:
+  forProvider:
+    dateFormat: yyyy/MM/dd
+    name: blob-reference-input
+    pathPattern: some-random-pattern
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+    serialization:
+    - encoding: UTF8
+      type: Json
+    storageAccountKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageContainerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+    timeFormat: HH
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/referenceinputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/referenceinputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/referenceinputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -34,7 +34,7 @@ type ActiveDirectoryAdministratorInitParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the MySQL Server on which to set the administrator. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta2.Server
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
 	// Reference to a Server in dbformysql to populate serverName.
@@ -94,7 +94,7 @@ type ActiveDirectoryAdministratorParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the MySQL Server on which to set the administrator. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta1.Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta2.Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 

@@ -1,0 +1,65 @@
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: Subscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    maxDeliveryCount: 1
+    topicIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+    tags:
+      source: terraform
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscription
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enablePartitioning: true
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

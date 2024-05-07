@@ -1,0 +1,114 @@
+apiVersion: media.azure.upbound.io/v1beta2
+kind: AssetFilter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/assetfilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    assetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    firstQualityBitrate: 128000
+    presentationTimeRange:
+    - endInUnits: 15
+      forceEnd: false
+      liveBackoffInUnits: 0
+      presentationWindowInUnits: 90
+      startInUnits: 0
+      unitTimescaleInMiliseconds: 1000
+    trackSelection:
+    - condition:
+      - operation: Equal
+        property: Type
+        value: Audio
+      - operation: NotEqual
+        property: Language
+        value: en
+      - operation: NotEqual
+        property: FourCC
+        value: EC-3
+    - condition:
+      - operation: Equal
+        property: Type
+        value: Video
+      - operation: Equal
+        property: Bitrate
+        value: 3000000-5000000
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta1
+kind: Asset
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/assetfilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    description: Asset description
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: ServicesAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/assetfilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccount:
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      isPrimary: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/assetfilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/assetfilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

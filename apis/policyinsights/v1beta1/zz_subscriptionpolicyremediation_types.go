@@ -25,7 +25,7 @@ type SubscriptionPolicyRemediationInitParameters struct {
 	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
 
 	// The ID of the Policy Assignment that should be remediated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.SubscriptionPolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.SubscriptionPolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 
@@ -101,7 +101,7 @@ type SubscriptionPolicyRemediationParameters struct {
 	ParallelDeployments *float64 `json:"parallelDeployments,omitempty" tf:"parallel_deployments,omitempty"`
 
 	// The ID of the Policy Assignment that should be remediated.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.SubscriptionPolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.SubscriptionPolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`

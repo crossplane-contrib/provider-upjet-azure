@@ -1,0 +1,66 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
+kind: StreamInputIOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputiothub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    endpoint: messages/events
+    eventhubConsumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    iothubNamespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-iothub-input
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+    serialization:
+    - encoding: UTF8
+      type: Json
+    sharedAccessPolicyKeySecretRef:
+      key: attribute.shared_access_policy[0].primary_key
+      name: example-iothub
+      namespace: upbound-system
+    sharedAccessPolicyName: iothubowner
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta2
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputiothub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: S1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputiothub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

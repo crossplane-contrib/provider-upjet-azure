@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: sql.azure.upbound.io/v1beta1
+apiVersion: sql.azure.upbound.io/v1beta2
 kind: MSSQLDatabase
 metadata:
   annotations:
@@ -39,7 +39,7 @@ spec:
 
 ---
 
-apiVersion: sql.azure.upbound.io/v1beta1
+apiVersion: sql.azure.upbound.io/v1beta2
 kind: MSSQLServer
 metadata:
   annotations:
@@ -76,7 +76,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

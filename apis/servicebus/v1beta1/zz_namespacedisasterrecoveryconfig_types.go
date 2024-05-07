@@ -29,7 +29,7 @@ type NamespaceDisasterRecoveryConfigInitParameters struct {
 	AliasAuthorizationRuleIDSelector *v1.Selector `json:"aliasAuthorizationRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Service Bus Namespace to replicate to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta2.ServiceBusNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
 
@@ -74,7 +74,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 	AliasAuthorizationRuleIDSelector *v1.Selector `json:"aliasAuthorizationRuleIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Service Bus Namespace to replicate to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta2.ServiceBusNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PartnerNamespaceID *string `json:"partnerNamespaceId,omitempty" tf:"partner_namespace_id,omitempty"`
@@ -88,7 +88,7 @@ type NamespaceDisasterRecoveryConfigParameters struct {
 	PartnerNamespaceIDSelector *v1.Selector `json:"partnerNamespaceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the primary Service Bus Namespace to replicate. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta1.ServiceBusNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/servicebus/v1beta2.ServiceBusNamespace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrimaryNamespaceID *string `json:"primaryNamespaceId,omitempty" tf:"primary_namespace_id,omitempty"`

@@ -214,7 +214,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -233,7 +233,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -252,7 +252,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.ResourceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -271,7 +271,7 @@ func (mg *ResourcePolicyExemption) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.InitProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "ResourcePolicyAssignment", "ResourcePolicyAssignmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -402,7 +402,7 @@ func (mg *SubscriptionPolicyExemption) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "SubscriptionPolicyAssignment", "SubscriptionPolicyAssignmentList")
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "SubscriptionPolicyAssignment", "SubscriptionPolicyAssignmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -421,7 +421,7 @@ func (mg *SubscriptionPolicyExemption) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.PolicyAssignmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.PolicyAssignmentIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta1", "SubscriptionPolicyAssignment", "SubscriptionPolicyAssignmentList")
+		m, l, err = apisresolver.GetManagedResource("authorization.azure.upbound.io", "v1beta2", "SubscriptionPolicyAssignment", "SubscriptionPolicyAssignmentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

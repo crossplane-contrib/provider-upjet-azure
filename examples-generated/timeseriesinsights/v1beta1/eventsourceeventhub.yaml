@@ -34,7 +34,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -102,7 +102,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHubNamespace
 metadata:
   annotations:
@@ -120,7 +120,7 @@ spec:
 
 ---
 
-apiVersion: timeseriesinsights.azure.upbound.io/v1beta1
+apiVersion: timeseriesinsights.azure.upbound.io/v1beta2
 kind: Gen2Environment
 metadata:
   annotations:
@@ -162,7 +162,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

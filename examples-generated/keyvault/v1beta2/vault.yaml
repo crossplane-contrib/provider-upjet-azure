@@ -1,0 +1,33 @@
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta2/vault
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enabledForDiskEncryption: true
+    location: West Europe
+    purgeProtectionEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: standard
+    softDeleteRetentionDays: 7
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: keyvault/v1beta2/vault
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

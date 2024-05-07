@@ -98,7 +98,7 @@ func (mg *SpringCloudAPIPortalCustomDomain) ResolveReferences(ctx context.Contex
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudAPIPortal", "SpringCloudAPIPortalList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudAPIPortal", "SpringCloudAPIPortalList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -117,7 +117,7 @@ func (mg *SpringCloudAPIPortalCustomDomain) ResolveReferences(ctx context.Contex
 	mg.Spec.ForProvider.SpringCloudAPIPortalID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAPIPortalIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudAPIPortal", "SpringCloudAPIPortalList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudAPIPortal", "SpringCloudAPIPortalList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -148,7 +148,7 @@ func (mg *SpringCloudAccelerator) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -167,7 +167,7 @@ func (mg *SpringCloudAccelerator) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -198,7 +198,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -217,7 +217,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.DeploymentName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DeploymentNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudApp", "SpringCloudAppList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -236,7 +236,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudJavaDeployment", "SpringCloudJavaDeploymentList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -255,7 +255,7 @@ func (mg *SpringCloudActiveDeployment) ResolveReferences(ctx context.Context, c 
 	mg.Spec.InitProvider.DeploymentName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DeploymentNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudApp", "SpringCloudAppList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -336,7 +336,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -355,7 +355,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.CosmosDBAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CosmosDBAccessKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -374,7 +374,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.CosmosDBAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.CosmosDBAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudApp", "SpringCloudAppList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -393,7 +393,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -412,7 +412,7 @@ func (mg *SpringCloudAppCosmosDBAssociation) ResolveReferences(ctx context.Conte
 	mg.Spec.InitProvider.CosmosDBAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.CosmosDBAccessKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -462,7 +462,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -481,7 +481,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.MySQLServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MySQLServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudApp", "SpringCloudAppList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -500,7 +500,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -538,7 +538,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.InitProvider.DatabaseName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DatabaseNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -557,7 +557,7 @@ func (mg *SpringCloudAppMySQLAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.InitProvider.MySQLServerID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.MySQLServerIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta1", "Server", "ServerList")
+		m, l, err = apisresolver.GetManagedResource("dbformysql.azure.upbound.io", "v1beta2", "Server", "ServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -588,7 +588,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -607,7 +607,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.RedisAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisAccessKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -626,7 +626,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudApp", "SpringCloudAppList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -645,7 +645,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -664,7 +664,7 @@ func (mg *SpringCloudAppRedisAssociation) ResolveReferences(ctx context.Context,
 	mg.Spec.InitProvider.RedisAccessKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.RedisAccessKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -807,7 +807,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -845,7 +845,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -864,7 +864,7 @@ func (mg *SpringCloudCertificate) ResolveReferences(ctx context.Context, c clien
 	mg.Spec.ForProvider.ServiceName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServiceNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta1", "Certificate", "CertificateList")
+		m, l, err = apisresolver.GetManagedResource("keyvault.azure.upbound.io", "v1beta2", "Certificate", "CertificateList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -895,7 +895,7 @@ func (mg *SpringCloudConfigurationService) ResolveReferences(ctx context.Context
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -957,7 +957,7 @@ func (mg *SpringCloudCustomDomain) ResolveReferences(ctx context.Context, c clie
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudApp", "SpringCloudAppList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -976,7 +976,7 @@ func (mg *SpringCloudCustomDomain) ResolveReferences(ctx context.Context, c clie
 	mg.Spec.ForProvider.SpringCloudAppID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudAppIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudApp", "SpringCloudAppList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudApp", "SpringCloudAppList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1119,7 +1119,7 @@ func (mg *SpringCloudGatewayCustomDomain) ResolveReferences(ctx context.Context,
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudGateway", "SpringCloudGatewayList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudGateway", "SpringCloudGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1138,7 +1138,7 @@ func (mg *SpringCloudGatewayCustomDomain) ResolveReferences(ctx context.Context,
 	mg.Spec.ForProvider.SpringCloudGatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudGatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudGateway", "SpringCloudGatewayList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudGateway", "SpringCloudGatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1358,7 +1358,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1377,7 +1377,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.SpringCloudServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SpringCloudServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1396,7 +1396,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.StorageAccountKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1415,7 +1415,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.ForProvider.StorageAccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StorageAccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1434,7 +1434,7 @@ func (mg *SpringCloudStorage) ResolveReferences(ctx context.Context, c client.Re
 	mg.Spec.InitProvider.StorageAccountKey = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.StorageAccountKeyRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

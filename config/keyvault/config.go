@@ -64,6 +64,9 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_key_vault",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+		r.OverrideFieldNames["AccessPolicyParameters"] = "AccessPolicyParameters_2"
+		r.OverrideFieldNames["AccessPolicyInitParameters"] = "AccessPolicyInitParameters_2"
+		r.OverrideFieldNames["AccessPolicyObservation"] = "AccessPolicyObservation_2"
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_storage_account_sas_token_definition", func(r *config.Resource) {
@@ -71,5 +74,11 @@ func Configure(p *config.Provider) {
 			TerraformName: "azurerm_key_vault_managed_storage_account",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
+	})
+
+	p.AddResourceConfigurator("azurerm_key_vault_certificate_contacts", func(r *config.Resource) {
+		r.OverrideFieldNames["ContactParameters"] = "CertificateContactsContactParameters"
+		r.OverrideFieldNames["ContactInitParameters"] = "CertificateContactsContactInitParameters"
+		r.OverrideFieldNames["ContactObservation"] = "CertificateContactsContactObservation"
 	})
 }

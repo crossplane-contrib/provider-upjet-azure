@@ -1647,3 +1647,1590 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: Account is the Schema for the Accounts API. Manages a CosmosDB
+          (formally DocumentDB) Account.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: AccountSpec defines the desired state of Account
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  accessKeyMetadataWritesEnabled:
+                    description: Is write operations on metadata resources (databases,
+                      containers, throughput) via account keys enabled? Defaults to
+                      true.
+                    type: boolean
+                  analyticalStorage:
+                    description: An analytical_storage block as defined below.
+                    properties:
+                      schemaType:
+                        description: The schema type of the Analytical Storage for
+                          this Cosmos DB account. Possible values are FullFidelity
+                          and WellDefined.
+                        type: string
+                    type: object
+                  analyticalStorageEnabled:
+                    description: Enable Analytical Storage option for this Cosmos
+                      DB account. Defaults to false. Enabling and then disabling analytical
+                      storage forces a new resource to be created.
+                    type: boolean
+                  backup:
+                    description: A backup block as defined below.
+                    properties:
+                      intervalInMinutes:
+                        description: The interval in minutes between two backups.
+                          Possible values are between 60 and 1440. Defaults to 240.
+                        type: number
+                      retentionInHours:
+                        description: The time in hours that each backup is retained.
+                          Possible values are between 8 and 720. Defaults to 8.
+                        type: number
+                      storageRedundancy:
+                        description: The storage redundancy is used to indicate the
+                          type of backup residency. Possible values are Geo, Local
+                          and Zone. Defaults to Geo.
+                        type: string
+                      tier:
+                        description: The continuous backup tier. Possible values are
+                          Continuous7Days and Continuous30Days.
+                        type: string
+                      type:
+                        description: The type of the backup. Possible values are Continuous
+                          and Periodic.
+                        type: string
+                    type: object
+                  capabilities:
+                    description: The capabilities which should be enabled for this
+                      Cosmos DB account. Value is a capabilities block as defined
+                      below.
+                    items:
+                      properties:
+                        name:
+                          description: The capability to enable - Possible values
+                            are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,
+                            EnableAggregationPipeline, EnableCassandra, EnableGremlin,
+                            EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites,
+                            EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
+                            EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+                          type: string
+                      type: object
+                    type: array
+                  capacity:
+                    description: A capacity block as defined below.
+                    properties:
+                      totalThroughputLimit:
+                        description: The total throughput limit imposed on this Cosmos
+                          DB account (RU/s). Possible values are at least -1. -1 means
+                          no limit.
+                        type: number
+                    type: object
+                  consistencyPolicy:
+                    description: Specifies one consistency_policy block as defined
+                      below, used to define the consistency policy for this CosmosDB
+                      account.
+                    properties:
+                      consistencyLevel:
+                        description: The Consistency Level to use for this CosmosDB
+                          Account - can be either BoundedStaleness, Eventual, Session,
+                          Strong or ConsistentPrefix.
+                        type: string
+                      maxIntervalInSeconds:
+                        description: When used with the Bounded Staleness consistency
+                          level, this value represents the time amount of staleness
+                          (in seconds) tolerated. The accepted range for this value
+                          is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level
+                          is set to BoundedStaleness.
+                        type: number
+                      maxStalenessPrefix:
+                        description: When used with the Bounded Staleness consistency
+                          level, this value represents the number of stale requests
+                          tolerated. The accepted range for this value is 10 – 2147483647.
+                          Defaults to 100. Required when consistency_level is set
+                          to BoundedStaleness.
+                        type: number
+                    type: object
+                  corsRule:
+                    description: A cors_rule block as defined below.
+                    properties:
+                      allowedHeaders:
+                        description: A list of headers that are allowed to be a part
+                          of the cross-origin request.
+                        items:
+                          type: string
+                        type: array
+                      allowedMethods:
+                        description: A list of HTTP headers that are allowed to be
+                          executed by the origin. Valid options are DELETE, GET, HEAD,
+                          MERGE, POST, OPTIONS, PUT or PATCH.
+                        items:
+                          type: string
+                        type: array
+                      allowedOrigins:
+                        description: A list of origin domains that will be allowed
+                          by CORS.
+                        items:
+                          type: string
+                        type: array
+                      exposedHeaders:
+                        description: A list of response headers that are exposed to
+                          CORS clients.
+                        items:
+                          type: string
+                        type: array
+                      maxAgeInSeconds:
+                        description: The number of seconds the client should cache
+                          a preflight response. Possible values are between 1 and
+                          2147483647.
+                        type: number
+                    type: object
+                  createMode:
+                    description: The creation mode for the CosmosDB Account. Possible
+                      values are Default and Restore. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  defaultIdentityType:
+                    description: The default identity for accessing Key Vault. Possible
+                      values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+                      Defaults to FirstPartyIdentity.
+                    type: string
+                  enableAutomaticFailover:
+                    description: Enable automatic failover for this Cosmos DB account.
+                    type: boolean
+                  enableFreeTier:
+                    description: Enable the Free Tier pricing option for this Cosmos
+                      DB account. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
+                  enableMultipleWriteLocations:
+                    description: Enable multiple write locations for this Cosmos DB
+                      account.
+                    type: boolean
+                  geoLocation:
+                    description: Specifies a geo_location resource, used to define
+                      where data should be replicated with the failover_priority 0
+                      specifying the primary location. Value is a geo_location block
+                      as defined below.
+                    items:
+                      properties:
+                        failoverPriority:
+                          description: The failover priority of the region. A failover
+                            priority of 0 indicates a write region. The maximum value
+                            for a failover priority = (total number of regions - 1).
+                            Failover priority values must be unique for each of the
+                            regions in which the database account exists. Changing
+                            this causes the location to be re-provisioned and cannot
+                            be changed for the location with failover priority 0.
+                          type: number
+                        location:
+                          description: The name of the Azure region to host replicated
+                            data.
+                          type: string
+                        zoneRedundant:
+                          description: Should zone redundancy be enabled for this
+                            region? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Cosmos Account.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: The Type of Managed Identity assigned to this
+                          Cosmos account. Possible values are SystemAssigned, UserAssigned
+                          and SystemAssigned, UserAssigned.
+                        type: string
+                    type: object
+                  ipRangeFilter:
+                    description: 'CosmosDB Firewall Support: This value specifies
+                      the set of IP addresses or IP address ranges in CIDR form to
+                      be included as the allowed list of client IPs for a given database
+                      account. IP addresses/ranges must be comma separated and must
+                      not contain any spaces.'
+                    type: string
+                  isVirtualNetworkFilterEnabled:
+                    description: Enables virtual network filtering for this Cosmos
+                      DB account.
+                    type: boolean
+                  keyVaultKeyId:
+                    description: A versionless Key Vault Key ID for CMK encryption.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  kind:
+                    description: Specifies the Kind of CosmosDB to create - possible
+                      values are GlobalDocumentDB, MongoDB and Parse. Defaults to
+                      GlobalDocumentDB. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  localAuthenticationDisabled:
+                    description: Disable local authentication and ensure only MSI
+                      and AAD can be used exclusively for authentication. Defaults
+                      to false. Can be set only when using the SQL API.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimalTlsVersion:
+                    description: 'Specifies the minimal TLS version for the CosmosDB
+                      account. Possible values are: Tls, Tls11, and Tls12. Defaults
+                      to Tls12.'
+                    type: string
+                  mongoServerVersion:
+                    description: The Server Version of a MongoDB account. Possible
+                      values are 4.2, 4.0, 3.6, and 3.2.
+                    type: string
+                  networkAclBypassForAzureServices:
+                    description: If Azure services can bypass ACLs. Defaults to false.
+                    type: boolean
+                  networkAclBypassIds:
+                    description: The list of resource Ids for Network Acl Bypass for
+                      this Cosmos DB account.
+                    items:
+                      type: string
+                    type: array
+                  offerType:
+                    description: Specifies the Offer Type to use for this CosmosDB
+                      Account; currently, this can only be set to Standard.
+                    type: string
+                  partitionMergeEnabled:
+                    description: Is partition merge on the Cosmos DB account enabled?
+                      Defaults to false.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this CosmosDB account. Defaults to true.
+                    type: boolean
+                  resourceGroupName:
+                    description: The name of the resource group in which the CosmosDB
+                      Account is created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  restore:
+                    description: A restore block as defined below.
+                    properties:
+                      database:
+                        description: A database block as defined below. Changing this
+                          forces a new resource to be created.
+                        items:
+                          properties:
+                            collectionNames:
+                              description: A list of the collection names for the
+                                restore request. Changing this forces a new resource
+                                to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: Specifies the name of the CosmosDB Account.
+                                Changing this forces a new resource to be created.
+                              type: string
+                          type: object
+                        type: array
+                      gremlinDatabase:
+                        description: One or more gremlin_database blocks as defined
+                          below. Changing this forces a new resource to be created.
+                        items:
+                          properties:
+                            graphNames:
+                              description: A list of the Graph names for the restore
+                                request. Changing this forces a new resource to be
+                                created.
+                              items:
+                                type: string
+                              type: array
+                            name:
+                              description: Specifies the name of the CosmosDB Account.
+                                Changing this forces a new resource to be created.
+                              type: string
+                          type: object
+                        type: array
+                      restoreTimestampInUtc:
+                        description: The creation time of the database or the collection
+                          (Datetime Format RFC 3339). Changing this forces a new resource
+                          to be created.
+                        type: string
+                      sourceCosmosdbAccountId:
+                        description: The resource ID of the restorable database account
+                          from which the restore has to be initiated. The example
+                          is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      sourceCosmosdbAccountIdRef:
+                        description: Reference to a Account in cosmosdb to populate
+                          sourceCosmosdbAccountId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      sourceCosmosdbAccountIdSelector:
+                        description: Selector for a Account in cosmosdb to populate
+                          sourceCosmosdbAccountId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      tablesToRestore:
+                        description: A list of specific tables available for restore.
+                          Changing this forces a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  virtualNetworkRule:
+                    description: Specifies a virtual_network_rule block as defined
+                      below, used to define which subnets are allowed to access this
+                      CosmosDB account.
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the virtual network subnet.
+                          type: string
+                        ignoreMissingVnetServiceEndpoint:
+                          description: If set to true, the specified subnet will be
+                            added as a virtual network rule even if its CosmosDB service
+                            endpoint is not active. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  accessKeyMetadataWritesEnabled:
+                    description: Is write operations on metadata resources (databases,
+                      containers, throughput) via account keys enabled? Defaults to
+                      true.
+                    type: boolean
+                  analyticalStorage:
+                    description: An analytical_storage block as defined below.
+                    properties:
+                      schemaType:
+                        description: The schema type of the Analytical Storage for
+                          this Cosmos DB account. Possible values are FullFidelity
+                          and WellDefined.
+                        type: string
+                    type: object
+                  analyticalStorageEnabled:
+                    description: Enable Analytical Storage option for this Cosmos
+                      DB account. Defaults to false. Enabling and then disabling analytical
+                      storage forces a new resource to be created.
+                    type: boolean
+                  backup:
+                    description: A backup block as defined below.
+                    properties:
+                      intervalInMinutes:
+                        description: The interval in minutes between two backups.
+                          Possible values are between 60 and 1440. Defaults to 240.
+                        type: number
+                      retentionInHours:
+                        description: The time in hours that each backup is retained.
+                          Possible values are between 8 and 720. Defaults to 8.
+                        type: number
+                      storageRedundancy:
+                        description: The storage redundancy is used to indicate the
+                          type of backup residency. Possible values are Geo, Local
+                          and Zone. Defaults to Geo.
+                        type: string
+                      tier:
+                        description: The continuous backup tier. Possible values are
+                          Continuous7Days and Continuous30Days.
+                        type: string
+                      type:
+                        description: The type of the backup. Possible values are Continuous
+                          and Periodic.
+                        type: string
+                    type: object
+                  capabilities:
+                    description: The capabilities which should be enabled for this
+                      Cosmos DB account. Value is a capabilities block as defined
+                      below.
+                    items:
+                      properties:
+                        name:
+                          description: The capability to enable - Possible values
+                            are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,
+                            EnableAggregationPipeline, EnableCassandra, EnableGremlin,
+                            EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites,
+                            EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
+                            EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+                          type: string
+                      type: object
+                    type: array
+                  capacity:
+                    description: A capacity block as defined below.
+                    properties:
+                      totalThroughputLimit:
+                        description: The total throughput limit imposed on this Cosmos
+                          DB account (RU/s). Possible values are at least -1. -1 means
+                          no limit.
+                        type: number
+                    type: object
+                  consistencyPolicy:
+                    description: Specifies one consistency_policy block as defined
+                      below, used to define the consistency policy for this CosmosDB
+                      account.
+                    properties:
+                      consistencyLevel:
+                        description: The Consistency Level to use for this CosmosDB
+                          Account - can be either BoundedStaleness, Eventual, Session,
+                          Strong or ConsistentPrefix.
+                        type: string
+                      maxIntervalInSeconds:
+                        description: When used with the Bounded Staleness consistency
+                          level, this value represents the time amount of staleness
+                          (in seconds) tolerated. The accepted range for this value
+                          is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level
+                          is set to BoundedStaleness.
+                        type: number
+                      maxStalenessPrefix:
+                        description: When used with the Bounded Staleness consistency
+                          level, this value represents the number of stale requests
+                          tolerated. The accepted range for this value is 10 – 2147483647.
+                          Defaults to 100. Required when consistency_level is set
+                          to BoundedStaleness.
+                        type: number
+                    type: object
+                  corsRule:
+                    description: A cors_rule block as defined below.
+                    properties:
+                      allowedHeaders:
+                        description: A list of headers that are allowed to be a part
+                          of the cross-origin request.
+                        items:
+                          type: string
+                        type: array
+                      allowedMethods:
+                        description: A list of HTTP headers that are allowed to be
+                          executed by the origin. Valid options are DELETE, GET, HEAD,
+                          MERGE, POST, OPTIONS, PUT or PATCH.
+                        items:
+                          type: string
+                        type: array
+                      allowedOrigins:
+                        description: A list of origin domains that will be allowed
+                          by CORS.
+                        items:
+                          type: string
+                        type: array
+                      exposedHeaders:
+                        description: A list of response headers that are exposed to
+                          CORS clients.
+                        items:
+                          type: string
+                        type: array
+                      maxAgeInSeconds:
+                        description: The number of seconds the client should cache
+                          a preflight response. Possible values are between 1 and
+                          2147483647.
+                        type: number
+                    type: object
+                  createMode:
+                    description: The creation mode for the CosmosDB Account. Possible
+                      values are Default and Restore. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  defaultIdentityType:
+                    description: The default identity for accessing Key Vault. Possible
+                      values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+                      Defaults to FirstPartyIdentity.
+                    type: string
+                  enableAutomaticFailover:
+                    description: Enable automatic failover for this Cosmos DB account.
+                    type: boolean
+                  enableFreeTier:
+                    description: Enable the Free Tier pricing option for this Cosmos
+                      DB account. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
+                  enableMultipleWriteLocations:
+                    description: Enable multiple write locations for this Cosmos DB
+                      account.
+                    type: boolean
+                  geoLocation:
+                    description: Specifies a geo_location resource, used to define
+                      where data should be replicated with the failover_priority 0
+                      specifying the primary location. Value is a geo_location block
+                      as defined below.
+                    items:
+                      properties:
+                        failoverPriority:
+                          description: The failover priority of the region. A failover
+                            priority of 0 indicates a write region. The maximum value
+                            for a failover priority = (total number of regions - 1).
+                            Failover priority values must be unique for each of the
+                            regions in which the database account exists. Changing
+                            this causes the location to be re-provisioned and cannot
+                            be changed for the location with failover priority 0.
+                          type: number
+                        location:
+                          description: The name of the Azure region to host replicated
+                            data.
+                          type: string
+                        zoneRedundant:
+                          description: Should zone redundancy be enabled for this
+                            region? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Cosmos Account.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: The Type of Managed Identity assigned to this
+                          Cosmos account. Possible values are SystemAssigned, UserAssigned
+                          and SystemAssigned, UserAssigned.
+                        type: string
+                    type: object
+                  ipRangeFilter:
+                    description: 'CosmosDB Firewall Support: This value specifies
+                      the set of IP addresses or IP address ranges in CIDR form to
+                      be included as the allowed list of client IPs for a given database
+                      account. IP addresses/ranges must be comma separated and must
+                      not contain any spaces.'
+                    type: string
+                  isVirtualNetworkFilterEnabled:
+                    description: Enables virtual network filtering for this Cosmos
+                      DB account.
+                    type: boolean
+                  keyVaultKeyId:
+                    description: A versionless Key Vault Key ID for CMK encryption.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  kind:
+                    description: Specifies the Kind of CosmosDB to create - possible
+                      values are GlobalDocumentDB, MongoDB and Parse. Defaults to
+                      GlobalDocumentDB. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  localAuthenticationDisabled:
+                    description: Disable local authentication and ensure only MSI
+                      and AAD can be used exclusively for authentication. Defaults
+                      to false. Can be set only when using the SQL API.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimalTlsVersion:
+                    description: 'Specifies the minimal TLS version for the CosmosDB
+                      account. Possible values are: Tls, Tls11, and Tls12. Defaults
+                      to Tls12.'
+                    type: string
+                  mongoServerVersion:
+                    description: The Server Version of a MongoDB account. Possible
+                      values are 4.2, 4.0, 3.6, and 3.2.
+                    type: string
+                  networkAclBypassForAzureServices:
+                    description: If Azure services can bypass ACLs. Defaults to false.
+                    type: boolean
+                  networkAclBypassIds:
+                    description: The list of resource Ids for Network Acl Bypass for
+                      this Cosmos DB account.
+                    items:
+                      type: string
+                    type: array
+                  offerType:
+                    description: Specifies the Offer Type to use for this CosmosDB
+                      Account; currently, this can only be set to Standard.
+                    type: string
+                  partitionMergeEnabled:
+                    description: Is partition merge on the Cosmos DB account enabled?
+                      Defaults to false.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this CosmosDB account. Defaults to true.
+                    type: boolean
+                  restore:
+                    description: A restore block as defined below.
+                    properties:
+                      database:
+                        description: A database block as defined below. Changing this
+                          forces a new resource to be created.
+                        items:
+                          properties:
+                            collectionNames:
+                              description: A list of the collection names for the
+                                restore request. Changing this forces a new resource
+                                to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: Specifies the name of the CosmosDB Account.
+                                Changing this forces a new resource to be created.
+                              type: string
+                          type: object
+                        type: array
+                      gremlinDatabase:
+                        description: One or more gremlin_database blocks as defined
+                          below. Changing this forces a new resource to be created.
+                        items:
+                          properties:
+                            graphNames:
+                              description: A list of the Graph names for the restore
+                                request. Changing this forces a new resource to be
+                                created.
+                              items:
+                                type: string
+                              type: array
+                            name:
+                              description: Specifies the name of the CosmosDB Account.
+                                Changing this forces a new resource to be created.
+                              type: string
+                          type: object
+                        type: array
+                      restoreTimestampInUtc:
+                        description: The creation time of the database or the collection
+                          (Datetime Format RFC 3339). Changing this forces a new resource
+                          to be created.
+                        type: string
+                      sourceCosmosdbAccountId:
+                        description: The resource ID of the restorable database account
+                          from which the restore has to be initiated. The example
+                          is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      sourceCosmosdbAccountIdRef:
+                        description: Reference to a Account in cosmosdb to populate
+                          sourceCosmosdbAccountId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      sourceCosmosdbAccountIdSelector:
+                        description: Selector for a Account in cosmosdb to populate
+                          sourceCosmosdbAccountId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                      tablesToRestore:
+                        description: A list of specific tables available for restore.
+                          Changing this forces a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  virtualNetworkRule:
+                    description: Specifies a virtual_network_rule block as defined
+                      below, used to define which subnets are allowed to access this
+                      CosmosDB account.
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the virtual network subnet.
+                          type: string
+                        ignoreMissingVnetServiceEndpoint:
+                          description: If set to true, the specified subnet will be
+                            added as a virtual network rule even if its CosmosDB service
+                            endpoint is not active. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.consistencyPolicy is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.consistencyPolicy)
+                || (has(self.initProvider) && has(self.initProvider.consistencyPolicy))'
+            - message: spec.forProvider.geoLocation is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.geoLocation)
+                || (has(self.initProvider) && has(self.initProvider.geoLocation))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.offerType is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.offerType)
+                || (has(self.initProvider) && has(self.initProvider.offerType))'
+          status:
+            description: AccountStatus defines the observed state of Account.
+            properties:
+              atProvider:
+                properties:
+                  accessKeyMetadataWritesEnabled:
+                    description: Is write operations on metadata resources (databases,
+                      containers, throughput) via account keys enabled? Defaults to
+                      true.
+                    type: boolean
+                  analyticalStorage:
+                    description: An analytical_storage block as defined below.
+                    properties:
+                      schemaType:
+                        description: The schema type of the Analytical Storage for
+                          this Cosmos DB account. Possible values are FullFidelity
+                          and WellDefined.
+                        type: string
+                    type: object
+                  analyticalStorageEnabled:
+                    description: Enable Analytical Storage option for this Cosmos
+                      DB account. Defaults to false. Enabling and then disabling analytical
+                      storage forces a new resource to be created.
+                    type: boolean
+                  backup:
+                    description: A backup block as defined below.
+                    properties:
+                      intervalInMinutes:
+                        description: The interval in minutes between two backups.
+                          Possible values are between 60 and 1440. Defaults to 240.
+                        type: number
+                      retentionInHours:
+                        description: The time in hours that each backup is retained.
+                          Possible values are between 8 and 720. Defaults to 8.
+                        type: number
+                      storageRedundancy:
+                        description: The storage redundancy is used to indicate the
+                          type of backup residency. Possible values are Geo, Local
+                          and Zone. Defaults to Geo.
+                        type: string
+                      tier:
+                        description: The continuous backup tier. Possible values are
+                          Continuous7Days and Continuous30Days.
+                        type: string
+                      type:
+                        description: The type of the backup. Possible values are Continuous
+                          and Periodic.
+                        type: string
+                    type: object
+                  capabilities:
+                    description: The capabilities which should be enabled for this
+                      Cosmos DB account. Value is a capabilities block as defined
+                      below.
+                    items:
+                      properties:
+                        name:
+                          description: The capability to enable - Possible values
+                            are AllowSelfServeUpgradeToMongo36, DisableRateLimitingResponses,
+                            EnableAggregationPipeline, EnableCassandra, EnableGremlin,
+                            EnableMongo, EnableMongo16MBDocumentSupport, EnableMongoRetryableWrites,
+                            EnableMongoRoleBasedAccessControl, EnablePartialUniqueIndex,
+                            EnableServerless, EnableTable, EnableTtlOnCustomPath,
+                            EnableUniqueCompoundNestedDocs, MongoDBv3.4 and mongoEnableDocLevelTTL.
+                          type: string
+                      type: object
+                    type: array
+                  capacity:
+                    description: A capacity block as defined below.
+                    properties:
+                      totalThroughputLimit:
+                        description: The total throughput limit imposed on this Cosmos
+                          DB account (RU/s). Possible values are at least -1. -1 means
+                          no limit.
+                        type: number
+                    type: object
+                  consistencyPolicy:
+                    description: Specifies one consistency_policy block as defined
+                      below, used to define the consistency policy for this CosmosDB
+                      account.
+                    properties:
+                      consistencyLevel:
+                        description: The Consistency Level to use for this CosmosDB
+                          Account - can be either BoundedStaleness, Eventual, Session,
+                          Strong or ConsistentPrefix.
+                        type: string
+                      maxIntervalInSeconds:
+                        description: When used with the Bounded Staleness consistency
+                          level, this value represents the time amount of staleness
+                          (in seconds) tolerated. The accepted range for this value
+                          is 5 - 86400 (1 day). Defaults to 5. Required when consistency_level
+                          is set to BoundedStaleness.
+                        type: number
+                      maxStalenessPrefix:
+                        description: When used with the Bounded Staleness consistency
+                          level, this value represents the number of stale requests
+                          tolerated. The accepted range for this value is 10 – 2147483647.
+                          Defaults to 100. Required when consistency_level is set
+                          to BoundedStaleness.
+                        type: number
+                    type: object
+                  corsRule:
+                    description: A cors_rule block as defined below.
+                    properties:
+                      allowedHeaders:
+                        description: A list of headers that are allowed to be a part
+                          of the cross-origin request.
+                        items:
+                          type: string
+                        type: array
+                      allowedMethods:
+                        description: A list of HTTP headers that are allowed to be
+                          executed by the origin. Valid options are DELETE, GET, HEAD,
+                          MERGE, POST, OPTIONS, PUT or PATCH.
+                        items:
+                          type: string
+                        type: array
+                      allowedOrigins:
+                        description: A list of origin domains that will be allowed
+                          by CORS.
+                        items:
+                          type: string
+                        type: array
+                      exposedHeaders:
+                        description: A list of response headers that are exposed to
+                          CORS clients.
+                        items:
+                          type: string
+                        type: array
+                      maxAgeInSeconds:
+                        description: The number of seconds the client should cache
+                          a preflight response. Possible values are between 1 and
+                          2147483647.
+                        type: number
+                    type: object
+                  createMode:
+                    description: The creation mode for the CosmosDB Account. Possible
+                      values are Default and Restore. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  defaultIdentityType:
+                    description: The default identity for accessing Key Vault. Possible
+                      values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity.
+                      Defaults to FirstPartyIdentity.
+                    type: string
+                  enableAutomaticFailover:
+                    description: Enable automatic failover for this Cosmos DB account.
+                    type: boolean
+                  enableFreeTier:
+                    description: Enable the Free Tier pricing option for this Cosmos
+                      DB account. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
+                  enableMultipleWriteLocations:
+                    description: Enable multiple write locations for this Cosmos DB
+                      account.
+                    type: boolean
+                  endpoint:
+                    description: The endpoint used to connect to the CosmosDB account.
+                    type: string
+                  geoLocation:
+                    description: Specifies a geo_location resource, used to define
+                      where data should be replicated with the failover_priority 0
+                      specifying the primary location. Value is a geo_location block
+                      as defined below.
+                    items:
+                      properties:
+                        failoverPriority:
+                          description: The failover priority of the region. A failover
+                            priority of 0 indicates a write region. The maximum value
+                            for a failover priority = (total number of regions - 1).
+                            Failover priority values must be unique for each of the
+                            regions in which the database account exists. Changing
+                            this causes the location to be re-provisioned and cannot
+                            be changed for the location with failover priority 0.
+                          type: number
+                        id:
+                          description: The ID of the virtual network subnet.
+                          type: string
+                        location:
+                          description: The name of the Azure region to host replicated
+                            data.
+                          type: string
+                        zoneRedundant:
+                          description: Should zone redundancy be enabled for this
+                            region? Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  id:
+                    description: The CosmosDB Account ID.
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Cosmos Account.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The Principal ID associated with this Managed
+                          Service Identity.
+                        type: string
+                      tenantId:
+                        description: The Tenant ID associated with this Managed Service
+                          Identity.
+                        type: string
+                      type:
+                        description: The Type of Managed Identity assigned to this
+                          Cosmos account. Possible values are SystemAssigned, UserAssigned
+                          and SystemAssigned, UserAssigned.
+                        type: string
+                    type: object
+                  ipRangeFilter:
+                    description: 'CosmosDB Firewall Support: This value specifies
+                      the set of IP addresses or IP address ranges in CIDR form to
+                      be included as the allowed list of client IPs for a given database
+                      account. IP addresses/ranges must be comma separated and must
+                      not contain any spaces.'
+                    type: string
+                  isVirtualNetworkFilterEnabled:
+                    description: Enables virtual network filtering for this Cosmos
+                      DB account.
+                    type: boolean
+                  keyVaultKeyId:
+                    description: A versionless Key Vault Key ID for CMK encryption.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  kind:
+                    description: Specifies the Kind of CosmosDB to create - possible
+                      values are GlobalDocumentDB, MongoDB and Parse. Defaults to
+                      GlobalDocumentDB. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  localAuthenticationDisabled:
+                    description: Disable local authentication and ensure only MSI
+                      and AAD can be used exclusively for authentication. Defaults
+                      to false. Can be set only when using the SQL API.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  minimalTlsVersion:
+                    description: 'Specifies the minimal TLS version for the CosmosDB
+                      account. Possible values are: Tls, Tls11, and Tls12. Defaults
+                      to Tls12.'
+                    type: string
+                  mongoServerVersion:
+                    description: The Server Version of a MongoDB account. Possible
+                      values are 4.2, 4.0, 3.6, and 3.2.
+                    type: string
+                  networkAclBypassForAzureServices:
+                    description: If Azure services can bypass ACLs. Defaults to false.
+                    type: boolean
+                  networkAclBypassIds:
+                    description: The list of resource Ids for Network Acl Bypass for
+                      this Cosmos DB account.
+                    items:
+                      type: string
+                    type: array
+                  offerType:
+                    description: Specifies the Offer Type to use for this CosmosDB
+                      Account; currently, this can only be set to Standard.
+                    type: string
+                  partitionMergeEnabled:
+                    description: Is partition merge on the Cosmos DB account enabled?
+                      Defaults to false.
+                    type: boolean
+                  publicNetworkAccessEnabled:
+                    description: Whether or not public network access is allowed for
+                      this CosmosDB account. Defaults to true.
+                    type: boolean
+                  readEndpoints:
+                    description: A list of read endpoints available for this CosmosDB
+                      account.
+                    items:
+                      type: string
+                    type: array
+                  resourceGroupName:
+                    description: The name of the resource group in which the CosmosDB
+                      Account is created. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  restore:
+                    description: A restore block as defined below.
+                    properties:
+                      database:
+                        description: A database block as defined below. Changing this
+                          forces a new resource to be created.
+                        items:
+                          properties:
+                            collectionNames:
+                              description: A list of the collection names for the
+                                restore request. Changing this forces a new resource
+                                to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: Specifies the name of the CosmosDB Account.
+                                Changing this forces a new resource to be created.
+                              type: string
+                          type: object
+                        type: array
+                      gremlinDatabase:
+                        description: One or more gremlin_database blocks as defined
+                          below. Changing this forces a new resource to be created.
+                        items:
+                          properties:
+                            graphNames:
+                              description: A list of the Graph names for the restore
+                                request. Changing this forces a new resource to be
+                                created.
+                              items:
+                                type: string
+                              type: array
+                            name:
+                              description: Specifies the name of the CosmosDB Account.
+                                Changing this forces a new resource to be created.
+                              type: string
+                          type: object
+                        type: array
+                      restoreTimestampInUtc:
+                        description: The creation time of the database or the collection
+                          (Datetime Format RFC 3339). Changing this forces a new resource
+                          to be created.
+                        type: string
+                      sourceCosmosdbAccountId:
+                        description: The resource ID of the restorable database account
+                          from which the restore has to be initiated. The example
+                          is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      tablesToRestore:
+                        description: A list of specific tables available for restore.
+                          Changing this forces a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  virtualNetworkRule:
+                    description: Specifies a virtual_network_rule block as defined
+                      below, used to define which subnets are allowed to access this
+                      CosmosDB account.
+                    items:
+                      properties:
+                        id:
+                          description: The ID of the virtual network subnet.
+                          type: string
+                        ignoreMissingVnetServiceEndpoint:
+                          description: If set to true, the specified subnet will be
+                            added as a virtual network rule even if its CosmosDB service
+                            endpoint is not active. Defaults to false.
+                          type: boolean
+                      type: object
+                    type: array
+                  writeEndpoints:
+                    description: A list of write endpoints available for this CosmosDB
+                      account.
+                    items:
+                      type: string
+                    type: array
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

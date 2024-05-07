@@ -1,0 +1,65 @@
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: TriggerSchedule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/triggerschedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    frequency: Day
+    interval: 5
+    pipelineNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/triggerschedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Pipeline
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/triggerschedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/triggerschedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

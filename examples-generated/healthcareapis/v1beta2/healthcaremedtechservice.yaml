@@ -1,0 +1,78 @@
+apiVersion: healthcareapis.azure.upbound.io/v1beta2
+kind: HealthcareMedtechService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcaremedtechservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    deviceMappingJson: |-
+      ${jsonencode({
+          "templateType" : "CollectionContent",
+          "template" : [
+            {
+              "templateType" : "JsonPathContent",
+              "template" : {
+                "typeName" : "heartrate",
+                "typeMatchExpression" : "$..[?(@heartrate)]",
+                "deviceIdExpression" : "$.deviceid",
+                "timestampExpression" : "$.measurementdatetime",
+                "values" : [
+                  {
+                    "required" : "true",
+                    "valueExpression" : "$.heartrate",
+                    "valueName" : "hr"
+                  }
+                ]
+              }
+            }
+          ]
+        })}
+    eventhubConsumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNamespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    identity:
+    - type: SystemAssigned
+    location: east us
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcaremedtechservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcaremedtechservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us

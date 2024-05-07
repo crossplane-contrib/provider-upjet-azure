@@ -23,6 +23,7 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/resource"
 	"github.com/crossplane/crossplane-runtime/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
+	"github.com/crossplane/upjet/pkg/controller/conversion"
 	"gopkg.in/alecthomas/kingpin.v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
@@ -211,6 +212,7 @@ func main() {
 		})), "cannot create default store config")
 	}
 
+	kingpin.FatalIfError(conversion.RegisterConversions(o.Provider), "Cannot initialize the webhook conversion registry")
 	kingpin.FatalIfError(controller.Setup_solutions(mgr, o), "Cannot setup Azure controllers")
 	kingpin.FatalIfError(mgr.Start(ctrl.SetupSignalHandler()), "Cannot start controller manager")
 }

@@ -1,0 +1,59 @@
+apiVersion: devtestlab.azure.upbound.io/v1beta2
+kind: Schedule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/schedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    notificationSettings:
+    - {}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: Production
+    taskType: LabVmsStartupTask
+    timeZoneId: Pacific Standard Time
+    weeklyRecurrence:
+    - time: "1100"
+      weekDays:
+      - Monday
+      - Tuesday
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: Lab
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/schedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/schedule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

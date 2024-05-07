@@ -19,7 +19,7 @@ type ManagerSubscriptionConnectionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the ID of the Network Manager which the Subscription is connected to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Manager
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Manager
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`
 
@@ -60,7 +60,7 @@ type ManagerSubscriptionConnectionParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// Specifies the ID of the Network Manager which the Subscription is connected to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Manager
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Manager
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkManagerID *string `json:"networkManagerId,omitempty" tf:"network_manager_id,omitempty"`

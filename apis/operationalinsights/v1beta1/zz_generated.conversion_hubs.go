@@ -29,6 +29,3 @@ func (tr *LogAnalyticsQueryPackQuery) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *LogAnalyticsSavedSearch) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Workspace) Hub() {}

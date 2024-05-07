@@ -16,7 +16,7 @@ import (
 type HPCCacheNFSTargetInitParameters struct {
 
 	// The name HPC Cache, which the HPC Cache NFS Target will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta2.HPCCache
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
 
 	// Reference to a HPCCache in storagecache to populate cacheName.
@@ -73,7 +73,7 @@ type HPCCacheNFSTargetObservation struct {
 type HPCCacheNFSTargetParameters struct {
 
 	// The name HPC Cache, which the HPC Cache NFS Target will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta2.HPCCache
 	// +kubebuilder:validation:Optional
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
 

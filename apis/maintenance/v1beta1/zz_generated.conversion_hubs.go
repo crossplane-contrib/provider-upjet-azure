@@ -11,6 +11,3 @@ func (tr *MaintenanceAssignmentDedicatedHost) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MaintenanceAssignmentVirtualMachine) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MaintenanceConfiguration) Hub() {}
