@@ -52,15 +52,15 @@ type DatabaseObservation struct {
 type DatabaseParameters struct {
 
 	// Specifies the name of the Kusto Cluster this database will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
-	// Reference to a Cluster to populate clusterName.
+	// Reference to a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameRef *v1.Reference `json:"clusterNameRef,omitempty" tf:"-"`
 
-	// Selector for a Cluster to populate clusterName.
+	// Selector for a Cluster in kusto to populate clusterName.
 	// +kubebuilder:validation:Optional
 	ClusterNameSelector *v1.Selector `json:"clusterNameSelector,omitempty" tf:"-"`
 

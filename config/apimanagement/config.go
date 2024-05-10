@@ -24,73 +24,73 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_api_management_api_operation", func(r *config.Resource) {
 		r.References["api_name"] = config.Reference{
-			Type: "API",
+			TerraformName: "azurerm_api_management_api",
 		}
 		r.References["api_management_name"] = config.Reference{
-			Type: "Management",
+			TerraformName: "azurerm_api_management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_api_policy", func(r *config.Resource) {
 		r.References["api_name"] = config.Reference{
-			Type: "API",
+			TerraformName: "azurerm_api_management_api",
 		}
 		r.References["api_management_name"] = config.Reference{
-			Type: "Management",
+			TerraformName: "azurerm_api_management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_api_schema", func(r *config.Resource) {
 		r.References["api_name"] = config.Reference{
-			Type: "API",
+			TerraformName: "azurerm_api_management_api",
 		}
 		r.References["api_management_name"] = config.Reference{
-			Type: "Management",
+			TerraformName: "azurerm_api_management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_product_api", func(r *config.Resource) {
 		r.References["api_name"] = config.Reference{
-			Type: "API",
+			TerraformName: "azurerm_api_management_api",
 		}
 		r.References["product_id"] = config.Reference{
-			Type: "Product",
+			TerraformName: "azurerm_api_management_product",
 		}
 		r.References["api_management_name"] = config.Reference{
-			Type: "Management",
+			TerraformName: "azurerm_api_management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_product_policy", func(r *config.Resource) {
 		r.References["product_id"] = config.Reference{
-			Type: "Product",
+			TerraformName: "azurerm_api_management_product",
 		}
 		r.References["api_management_name"] = config.Reference{
-			Type: "Management",
+			TerraformName: "azurerm_api_management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_subscription", func(r *config.Resource) {
 		r.References["user_id"] = config.Reference{
-			Type:      "User",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_api_management_user",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["product_id"] = config.Reference{
-			Type:      "Product",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_api_management_product",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["api_management_name"] = config.Reference{
-			Type: "Management",
+			TerraformName: "azurerm_api_management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_authorization_server", func(r *config.Resource) {
 		r.References["api_management_name"] = config.Reference{
-			Type: "Management",
+			TerraformName: "azurerm_api_management",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_api_management_gateway_api", func(r *config.Resource) {
 		r.References["gateway_id"] = config.Reference{
-			Type:      "Gateway",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_api_management_gateway",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["api_id"] = config.Reference{
-			Type:      "API",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_api_management_api",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 
 		r.TerraformCustomDiff = apiIdCustomDiff

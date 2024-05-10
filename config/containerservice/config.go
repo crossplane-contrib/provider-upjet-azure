@@ -86,8 +86,8 @@ func Configure(p *config.Provider) {
 		r.Kind = "KubernetesClusterNodePool"
 		r.ShortGroup = "containerservice"
 		r.References["kubernetes_cluster_id"] = config.Reference{
-			Type:      "KubernetesCluster",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_kubernetes_cluster",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

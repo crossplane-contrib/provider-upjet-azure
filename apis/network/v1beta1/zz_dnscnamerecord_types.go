@@ -110,15 +110,15 @@ type DNSCNAMERecordParameters struct {
 	TargetResourceIDSelector *v1.Selector `json:"targetResourceIdSelector,omitempty" tf:"-"`
 
 	// Specifies the DNS Zone where the resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=DNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.DNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 
-	// Reference to a DNSZone to populate zoneName.
+	// Reference to a DNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
 	ZoneNameRef *v1.Reference `json:"zoneNameRef,omitempty" tf:"-"`
 
-	// Selector for a DNSZone to populate zoneName.
+	// Selector for a DNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }

@@ -14,46 +14,46 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_netapp_pool", func(r *config.Resource) {
 		r.References["account_name"] = config.Reference{
-			Type: "Account",
+			TerraformName: "azurerm_netapp_account",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_netapp_snapshot_policy", func(r *config.Resource) {
 		r.References["account_name"] = config.Reference{
-			Type: "Account",
+			TerraformName: "azurerm_netapp_account",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_netapp_snapshot", func(r *config.Resource) {
 		r.References["account_name"] = config.Reference{
-			Type: "Account",
+			TerraformName: "azurerm_netapp_account",
 		}
 		r.References["pool_name"] = config.Reference{
-			Type: "Pool",
+			TerraformName: "azurerm_netapp_pool",
 		}
 		r.References["volume_name"] = config.Reference{
-			Type: "Volume",
+			TerraformName: "azurerm_netapp_volume",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_netapp_volume", func(r *config.Resource) {
 		r.References["account_name"] = config.Reference{
-			Type: "Account",
+			TerraformName: "azurerm_netapp_account",
 		}
 		r.References["pool_name"] = config.Reference{
-			Type: "Pool",
+			TerraformName: "azurerm_netapp_pool",
 		}
 		r.References["data_protection_snapshot_policy.snapshot_policy_id"] = config.Reference{
-			Type:      "SnapshotPolicy",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_netapp_snapshot_policy",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["data_protection_replication.remote_volume_resource_id"] = config.Reference{
-			Type:      "Volume",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_netapp_volume",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["create_from_snapshot_resource_id"] = config.Reference{
-			Type:      "Snapshot",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_netapp_snapshot",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		delete(r.References, "data_protection_replication.remote_volume_location")
 	})

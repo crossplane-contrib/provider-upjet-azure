@@ -12,8 +12,8 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_subscription_cost_management_export", func(r *config.Resource) {
 		r.References["subscription_id"] = config.Reference{
-			Type:      "github.com/upbound/provider-azure/apis/azure/v1beta1.Subscription",
-			Extractor: "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
+			TerraformName: "azurerm_subscription",
+			Extractor:     "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
 		}
 	})
 }

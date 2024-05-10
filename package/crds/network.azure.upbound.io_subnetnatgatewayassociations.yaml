@@ -159,7 +159,7 @@ spec:
                       resource to be created.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in network to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -193,7 +193,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in network to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -331,7 +331,7 @@ spec:
                       resource to be created.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in network to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -365,7 +365,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in network to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-

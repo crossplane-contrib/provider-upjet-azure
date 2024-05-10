@@ -90,7 +90,8 @@ spec:
                       Connected Registry to be created.
                     type: string
                   containerRegistryIdRef:
-                    description: Reference to a Registry to populate containerRegistryId.
+                    description: Reference to a Registry in containerregistry to populate
+                      containerRegistryId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -124,7 +125,8 @@ spec:
                     - name
                     type: object
                   containerRegistryIdSelector:
-                    description: Selector for a Registry to populate containerRegistryId.
+                    description: Selector for a Registry in containerregistry to populate
+                      containerRegistryId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -217,7 +219,8 @@ spec:
                       a new Container Connected Registry to be created.
                     type: string
                   syncTokenIdRef:
-                    description: Reference to a Token to populate syncTokenId.
+                    description: Reference to a Token in containerregistry to populate
+                      syncTokenId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -251,7 +254,8 @@ spec:
                     - name
                     type: object
                   syncTokenIdSelector:
-                    description: Selector for a Token to populate syncTokenId.
+                    description: Selector for a Token in containerregistry to populate
+                      syncTokenId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -325,7 +329,8 @@ spec:
                       Connected Registry to be created.
                     type: string
                   containerRegistryIdRef:
-                    description: Reference to a Registry to populate containerRegistryId.
+                    description: Reference to a Registry in containerregistry to populate
+                      containerRegistryId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -359,7 +364,8 @@ spec:
                     - name
                     type: object
                   containerRegistryIdSelector:
-                    description: Selector for a Registry to populate containerRegistryId.
+                    description: Selector for a Registry in containerregistry to populate
+                      containerRegistryId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -452,7 +458,8 @@ spec:
                       a new Container Connected Registry to be created.
                     type: string
                   syncTokenIdRef:
-                    description: Reference to a Token to populate syncTokenId.
+                    description: Reference to a Token in containerregistry to populate
+                      syncTokenId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -486,7 +493,8 @@ spec:
                     - name
                     type: object
                   syncTokenIdSelector:
-                    description: Selector for a Token to populate syncTokenId.
+                    description: Selector for a Token in containerregistry to populate
+                      syncTokenId.
                     properties:
                       matchControllerRef:
                         description: |-

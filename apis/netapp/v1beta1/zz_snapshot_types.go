@@ -43,15 +43,15 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Reference to a Account to populate accountName.
+	// Reference to a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
-	// Selector for a Account to populate accountName.
+	// Selector for a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
@@ -60,15 +60,15 @@ type SnapshotParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the NetApp pool in which the NetApp Volume should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Pool
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Pool
 	// +kubebuilder:validation:Optional
 	PoolName *string `json:"poolName,omitempty" tf:"pool_name,omitempty"`
 
-	// Reference to a Pool to populate poolName.
+	// Reference to a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
 	PoolNameRef *v1.Reference `json:"poolNameRef,omitempty" tf:"-"`
 
-	// Selector for a Pool to populate poolName.
+	// Selector for a Pool in netapp to populate poolName.
 	// +kubebuilder:validation:Optional
 	PoolNameSelector *v1.Selector `json:"poolNameSelector,omitempty" tf:"-"`
 
@@ -86,15 +86,15 @@ type SnapshotParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Volume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Volume
 	// +kubebuilder:validation:Optional
 	VolumeName *string `json:"volumeName,omitempty" tf:"volume_name,omitempty"`
 
-	// Reference to a Volume to populate volumeName.
+	// Reference to a Volume in netapp to populate volumeName.
 	// +kubebuilder:validation:Optional
 	VolumeNameRef *v1.Reference `json:"volumeNameRef,omitempty" tf:"-"`
 
-	// Selector for a Volume to populate volumeName.
+	// Selector for a Volume in netapp to populate volumeName.
 	// +kubebuilder:validation:Optional
 	VolumeNameSelector *v1.Selector `json:"volumeNameSelector,omitempty" tf:"-"`
 }

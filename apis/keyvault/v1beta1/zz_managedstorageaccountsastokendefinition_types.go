@@ -57,16 +57,16 @@ type ManagedStorageAccountSASTokenDefinitionObservation struct {
 type ManagedStorageAccountSASTokenDefinitionParameters struct {
 
 	// The ID of the Managed Storage Account.
-	// +crossplane:generate:reference:type=ManagedStorageAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.ManagedStorageAccount
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedStorageAccountID *string `json:"managedStorageAccountId,omitempty" tf:"managed_storage_account_id,omitempty"`
 
-	// Reference to a ManagedStorageAccount to populate managedStorageAccountId.
+	// Reference to a ManagedStorageAccount in keyvault to populate managedStorageAccountId.
 	// +kubebuilder:validation:Optional
 	ManagedStorageAccountIDRef *v1.Reference `json:"managedStorageAccountIdRef,omitempty" tf:"-"`
 
-	// Selector for a ManagedStorageAccount to populate managedStorageAccountId.
+	// Selector for a ManagedStorageAccount in keyvault to populate managedStorageAccountId.
 	// +kubebuilder:validation:Optional
 	ManagedStorageAccountIDSelector *v1.Selector `json:"managedStorageAccountIdSelector,omitempty" tf:"-"`
 

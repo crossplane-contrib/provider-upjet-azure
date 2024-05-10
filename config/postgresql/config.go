@@ -40,46 +40,46 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_configuration", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "FlexibleServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_postgresql_flexible_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_database", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "Server",
+			TerraformName: "azurerm_postgresql_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_active_directory_administrator", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "Server",
+			TerraformName: "azurerm_postgresql_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_active_directory_administrator", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "FlexibleServer",
+			TerraformName: "azurerm_postgresql_flexible_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_database", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "FlexibleServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_postgresql_flexible_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_firewall_rule", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "Server",
+			TerraformName: "azurerm_postgresql_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_flexible_server_firewall_rule", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "FlexibleServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_postgresql_flexible_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -116,24 +116,24 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_postgresql_virtual_network_rule", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "Server",
+			TerraformName: "azurerm_postgresql_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_server_key", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "Server",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_postgresql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["key_vault_key_id"] = config.Reference{
-			Type:      rconfig.VaultKeyReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault_key",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_postgresql_configuration", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "Server",
+			TerraformName: "azurerm_postgresql_server",
 		}
 	})
 }

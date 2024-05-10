@@ -19,15 +19,15 @@ type TokenInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The ID of the Container Registry Scope Map associated with the token.
-	// +crossplane:generate:reference:type=ScopeMap
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.ScopeMap
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ScopeMapID *string `json:"scopeMapId,omitempty" tf:"scope_map_id,omitempty"`
 
-	// Reference to a ScopeMap to populate scopeMapId.
+	// Reference to a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
 	ScopeMapIDRef *v1.Reference `json:"scopeMapIdRef,omitempty" tf:"-"`
 
-	// Selector for a ScopeMap to populate scopeMapId.
+	// Selector for a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
 	ScopeMapIDSelector *v1.Selector `json:"scopeMapIdSelector,omitempty" tf:"-"`
 }
@@ -83,16 +83,16 @@ type TokenParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Container Registry Scope Map associated with the token.
-	// +crossplane:generate:reference:type=ScopeMap
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerregistry/v1beta1.ScopeMap
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ScopeMapID *string `json:"scopeMapId,omitempty" tf:"scope_map_id,omitempty"`
 
-	// Reference to a ScopeMap to populate scopeMapId.
+	// Reference to a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
 	ScopeMapIDRef *v1.Reference `json:"scopeMapIdRef,omitempty" tf:"-"`
 
-	// Selector for a ScopeMap to populate scopeMapId.
+	// Selector for a ScopeMap in containerregistry to populate scopeMapId.
 	// +kubebuilder:validation:Optional
 	ScopeMapIDSelector *v1.Selector `json:"scopeMapIdSelector,omitempty" tf:"-"`
 }

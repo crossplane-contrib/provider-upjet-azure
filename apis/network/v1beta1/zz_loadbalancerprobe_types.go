@@ -71,16 +71,16 @@ type LoadBalancerProbeParameters struct {
 	IntervalInSeconds *float64 `json:"intervalInSeconds,omitempty" tf:"interval_in_seconds,omitempty"`
 
 	// The ID of the LoadBalancer in which to create the Probe. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=LoadBalancer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.LoadBalancer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LoadbalancerID *string `json:"loadbalancerId,omitempty" tf:"loadbalancer_id,omitempty"`
 
-	// Reference to a LoadBalancer to populate loadbalancerId.
+	// Reference to a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDRef *v1.Reference `json:"loadbalancerIdRef,omitempty" tf:"-"`
 
-	// Selector for a LoadBalancer to populate loadbalancerId.
+	// Selector for a LoadBalancer in network to populate loadbalancerId.
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 

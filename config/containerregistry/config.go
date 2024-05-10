@@ -21,19 +21,19 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_container_registry_token", func(r *config.Resource) {
 		r.References["scope_map_id"] = config.Reference{
-			Type:      "ScopeMap",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_container_registry_scope_map",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_container_connected_registry", func(r *config.Resource) {
 		r.References["container_registry_id"] = config.Reference{
-			Type:      "Registry",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_container_registry",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["sync_token_id"] = config.Reference{
-			Type:      "Token",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_container_registry_token",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "container_registry_id")
 	})

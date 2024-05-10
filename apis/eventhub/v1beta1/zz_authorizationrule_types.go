@@ -52,15 +52,15 @@ type AuthorizationRuleObservation struct {
 type AuthorizationRuleParameters struct {
 
 	// Specifies the name of the EventHub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
 	// +kubebuilder:validation:Optional
 	EventHubName *string `json:"eventhubName,omitempty" tf:"eventhub_name,omitempty"`
 
-	// Reference to a EventHub to populate eventhubName.
+	// Reference to a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
 	EventHubNameRef *v1.Reference `json:"eventhubNameRef,omitempty" tf:"-"`
 
-	// Selector for a EventHub to populate eventhubName.
+	// Selector for a EventHub in eventhub to populate eventhubName.
 	// +kubebuilder:validation:Optional
 	EventHubNameSelector *v1.Selector `json:"eventhubNameSelector,omitempty" tf:"-"`
 
@@ -73,15 +73,15 @@ type AuthorizationRuleParameters struct {
 	Manage *bool `json:"manage,omitempty" tf:"manage,omitempty"`
 
 	// Specifies the name of the grandparent EventHub Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHubNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
-	// Reference to a EventHubNamespace to populate namespaceName.
+	// Reference to a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
 	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
 
-	// Selector for a EventHubNamespace to populate namespaceName.
+	// Selector for a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 

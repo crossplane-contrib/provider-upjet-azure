@@ -31,16 +31,16 @@ type MSSQLServerDNSAliasObservation struct {
 type MSSQLServerDNSAliasParameters struct {
 
 	// The ID of the mssql server. Changing this forces a new MSSQL Server DNS Alias to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLServer
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MSSQLServerID *string `json:"mssqlServerId,omitempty" tf:"mssql_server_id,omitempty"`
 
-	// Reference to a MSSQLServer to populate mssqlServerId.
+	// Reference to a MSSQLServer in sql to populate mssqlServerId.
 	// +kubebuilder:validation:Optional
 	MSSQLServerIDRef *v1.Reference `json:"mssqlServerIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLServer to populate mssqlServerId.
+	// Selector for a MSSQLServer in sql to populate mssqlServerId.
 	// +kubebuilder:validation:Optional
 	MSSQLServerIDSelector *v1.Selector `json:"mssqlServerIdSelector,omitempty" tf:"-"`
 }

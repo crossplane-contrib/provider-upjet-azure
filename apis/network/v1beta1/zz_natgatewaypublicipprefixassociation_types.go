@@ -16,28 +16,28 @@ import (
 type NATGatewayPublicIPPrefixAssociationInitParameters struct {
 
 	// The ID of the NAT Gateway. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=NATGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.NATGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
 
-	// Reference to a NATGateway to populate natGatewayId.
+	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a NATGateway to populate natGatewayId.
+	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Public IP Prefix which this NAT Gateway which should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=PublicIPPrefix
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIPPrefix
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
-	// Reference to a PublicIPPrefix to populate publicIpPrefixId.
+	// Reference to a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixIDRef *v1.Reference `json:"publicIpPrefixIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicIPPrefix to populate publicIpPrefixId.
+	// Selector for a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixIDSelector *v1.Selector `json:"publicIpPrefixIdSelector,omitempty" tf:"-"`
 }
@@ -55,30 +55,30 @@ type NATGatewayPublicIPPrefixAssociationObservation struct {
 type NATGatewayPublicIPPrefixAssociationParameters struct {
 
 	// The ID of the NAT Gateway. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=NATGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.NATGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NATGatewayID *string `json:"natGatewayId,omitempty" tf:"nat_gateway_id,omitempty"`
 
-	// Reference to a NATGateway to populate natGatewayId.
+	// Reference to a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDRef *v1.Reference `json:"natGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a NATGateway to populate natGatewayId.
+	// Selector for a NATGateway in network to populate natGatewayId.
 	// +kubebuilder:validation:Optional
 	NATGatewayIDSelector *v1.Selector `json:"natGatewayIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Public IP Prefix which this NAT Gateway which should be connected to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=PublicIPPrefix
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIPPrefix
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
-	// Reference to a PublicIPPrefix to populate publicIpPrefixId.
+	// Reference to a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixIDRef *v1.Reference `json:"publicIpPrefixIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicIPPrefix to populate publicIpPrefixId.
+	// Selector for a PublicIPPrefix in network to populate publicIpPrefixId.
 	// +kubebuilder:validation:Optional
 	PublicIPPrefixIDSelector *v1.Selector `json:"publicIpPrefixIdSelector,omitempty" tf:"-"`
 }

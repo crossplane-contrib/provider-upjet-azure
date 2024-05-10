@@ -276,7 +276,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   streamAnalyticsJobNameRef:
-                    description: Reference to a Job to populate streamAnalyticsJobName.
+                    description: Reference to a Job in streamanalytics to populate
+                      streamAnalyticsJobName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -310,7 +311,8 @@ spec:
                     - name
                     type: object
                   streamAnalyticsJobNameSelector:
-                    description: Selector for a Job to populate streamAnalyticsJobName.
+                    description: Selector for a Job in streamanalytics to populate
+                      streamAnalyticsJobName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -630,7 +632,8 @@ spec:
                       forces a new resource to be created.
                     type: string
                   streamAnalyticsJobNameRef:
-                    description: Reference to a Job to populate streamAnalyticsJobName.
+                    description: Reference to a Job in streamanalytics to populate
+                      streamAnalyticsJobName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -664,7 +667,8 @@ spec:
                     - name
                     type: object
                   streamAnalyticsJobNameSelector:
-                    description: Selector for a Job to populate streamAnalyticsJobName.
+                    description: Selector for a Job in streamanalytics to populate
+                      streamAnalyticsJobName.
                     properties:
                       matchControllerRef:
                         description: |-

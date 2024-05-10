@@ -78,7 +78,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   eventhubNameRef:
-                    description: Reference to a EventHub to populate eventhubName.
+                    description: Reference to a EventHub in eventhub to populate eventhubName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   eventhubNameSelector:
-                    description: Selector for a EventHub to populate eventhubName.
+                    description: Selector for a EventHub in eventhub to populate eventhubName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -165,7 +165,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   namespaceNameRef:
-                    description: Reference to a EventHubNamespace to populate namespaceName.
+                    description: Reference to a EventHubNamespace in eventhub to populate
+                      namespaceName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -199,7 +200,8 @@ spec:
                     - name
                     type: object
                   namespaceNameSelector:
-                    description: Selector for a EventHubNamespace to populate namespaceName.
+                    description: Selector for a EventHubNamespace in eventhub to populate
+                      namespaceName.
                     properties:
                       matchControllerRef:
                         description: |-

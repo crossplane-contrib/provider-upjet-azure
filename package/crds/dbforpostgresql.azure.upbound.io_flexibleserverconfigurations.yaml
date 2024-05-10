@@ -86,7 +86,8 @@ spec:
                       Flexible Server Configuration resource.
                     type: string
                   serverIdRef:
-                    description: Reference to a FlexibleServer to populate serverId.
+                    description: Reference to a FlexibleServer in dbforpostgresql
+                      to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +121,8 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a FlexibleServer to populate serverId.
+                    description: Selector for a FlexibleServer in dbforpostgresql
+                      to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -188,7 +190,8 @@ spec:
                       Flexible Server Configuration resource.
                     type: string
                   serverIdRef:
-                    description: Reference to a FlexibleServer to populate serverId.
+                    description: Reference to a FlexibleServer in dbforpostgresql
+                      to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -222,7 +225,8 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a FlexibleServer to populate serverId.
+                    description: Selector for a FlexibleServer in dbforpostgresql
+                      to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-

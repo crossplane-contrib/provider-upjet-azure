@@ -80,15 +80,15 @@ type PrivateDNSTXTRecordParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the Private DNS Zone where the resource exists. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PrivateDNSZone
 	// +kubebuilder:validation:Optional
 	ZoneName *string `json:"zoneName,omitempty" tf:"zone_name,omitempty"`
 
-	// Reference to a PrivateDNSZone to populate zoneName.
+	// Reference to a PrivateDNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
 	ZoneNameRef *v1.Reference `json:"zoneNameRef,omitempty" tf:"-"`
 
-	// Selector for a PrivateDNSZone to populate zoneName.
+	// Selector for a PrivateDNSZone in network to populate zoneName.
 	// +kubebuilder:validation:Optional
 	ZoneNameSelector *v1.Selector `json:"zoneNameSelector,omitempty" tf:"-"`
 }

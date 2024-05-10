@@ -22,14 +22,14 @@ type IOTHubFallbackRouteInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
-	// +crossplane:generate:reference:type=IOTHubEndpointStorageContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubEndpointStorageContainer
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
-	// References to IOTHubEndpointStorageContainer to populate endpointNames.
+	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
 	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
 
-	// Selector for a list of IOTHubEndpointStorageContainer to populate endpointNames.
+	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
 	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
@@ -72,28 +72,28 @@ type IOTHubFallbackRouteParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The endpoints to which messages that satisfy the condition are routed. Currently only 1 endpoint is allowed.
-	// +crossplane:generate:reference:type=IOTHubEndpointStorageContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubEndpointStorageContainer
 	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
 
-	// References to IOTHubEndpointStorageContainer to populate endpointNames.
+	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
 	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
 
-	// Selector for a list of IOTHubEndpointStorageContainer to populate endpointNames.
+	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
 	// +kubebuilder:validation:Optional
 	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The name of the IoTHub to which this Fallback Route belongs. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
-	// Reference to a IOTHub to populate iothubName.
+	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
 	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
-	// Selector for a IOTHub to populate iothubName.
+	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 

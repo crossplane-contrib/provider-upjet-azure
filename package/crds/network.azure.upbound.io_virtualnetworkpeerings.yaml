@@ -91,7 +91,8 @@ spec:
                       network. Changing this forces a new resource to be created.
                     type: string
                   remoteVirtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate remoteVirtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      remoteVirtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -125,7 +126,8 @@ spec:
                     - name
                     type: object
                   remoteVirtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate remoteVirtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      remoteVirtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -267,7 +269,8 @@ spec:
                       a new resource to be created.
                     type: string
                   virtualNetworkNameRef:
-                    description: Reference to a VirtualNetwork to populate virtualNetworkName.
+                    description: Reference to a VirtualNetwork in network to populate
+                      virtualNetworkName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -301,7 +304,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkNameSelector:
-                    description: Selector for a VirtualNetwork to populate virtualNetworkName.
+                    description: Selector for a VirtualNetwork in network to populate
+                      virtualNetworkName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -371,7 +375,8 @@ spec:
                       network. Changing this forces a new resource to be created.
                     type: string
                   remoteVirtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate remoteVirtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      remoteVirtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -405,7 +410,8 @@ spec:
                     - name
                     type: object
                   remoteVirtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate remoteVirtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      remoteVirtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -19,60 +19,60 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_data_share", func(r *config.Resource) {
 		r.Kind = "DataShare"
 		r.References["account_id"] = config.Reference{
-			Type:      "Account",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_data_share_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_data_share_dataset_blob_storage", func(r *config.Resource) {
 		r.References["data_share_id"] = config.Reference{
-			Type:      "DataShare",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_data_share",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["container_name"] = config.Reference{
-			Type: rconfig.APISPackagePath + "/storage/v1beta1.Container",
+			TerraformName: "azurerm_storage_container",
 		}
 		r.References["storage_account.name"] = config.Reference{
-			Type: rconfig.APISPackagePath + "/storage/v1beta1.Account",
+			TerraformName: "azurerm_storage_account",
 		}
 		r.References["storage_account.resource_group_name"] = config.Reference{
-			Type: rconfig.APISPackagePath + "/azure/v1beta1.ResourceGroup",
+			TerraformName: "azurerm_resource_group",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_data_share_dataset_data_lake_gen2", func(r *config.Resource) {
 		r.References["share_id"] = config.Reference{
-			Type:      "DataShare",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_data_share",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["storage_account_id"] = config.Reference{
-			Type:      rconfig.StorageAccountReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["file_system_name"] = config.Reference{
-			Type: rconfig.APISPackagePath + "/storage/v1beta1.DataLakeGen2FileSystem",
+			TerraformName: "azurerm_storage_data_lake_gen2_filesystem",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_data_share_dataset_kusto_cluster", func(r *config.Resource) {
 		r.References["share_id"] = config.Reference{
-			Type:      "DataShare",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_data_share",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["kusto_cluster_id"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/kusto/v1beta1.Cluster",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_kusto_cluster",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_data_share_dataset_kusto_database", func(r *config.Resource) {
 		r.References["share_id"] = config.Reference{
-			Type:      "DataShare",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_data_share",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["kusto_database_id"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/kusto/v1beta1.Database",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_kusto_database",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

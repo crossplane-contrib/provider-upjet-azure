@@ -15,23 +15,23 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_storage_blob", func(r *config.Resource) {
 		r.References["storage_account_name"] = config.Reference{
-			Type: "Account",
+			TerraformName: "azurerm_storage_account",
 		}
 		r.References["storage_container_name"] = config.Reference{
-			Type: "Container",
+			TerraformName: "azurerm_storage_container",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_container", func(r *config.Resource) {
 		r.References["storage_account_name"] = config.Reference{
-			Type: "Account",
+			TerraformName: "azurerm_storage_account",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_storage_data_lake_gen2_filesystem", func(r *config.Resource) {
 		r.References["storage_account_id"] = config.Reference{
-			Type:      "Account",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 

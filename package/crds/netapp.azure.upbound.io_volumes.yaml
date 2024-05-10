@@ -78,7 +78,7 @@ spec:
                       to be created.
                     type: string
                   accountNameRef:
-                    description: Reference to a Account to populate accountName.
+                    description: Reference to a Account in netapp to populate accountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   accountNameSelector:
-                    description: Selector for a Account to populate accountName.
+                    description: Selector for a Account in netapp to populate accountName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -164,7 +164,7 @@ spec:
                       to be created.'
                     type: string
                   createFromSnapshotResourceIdRef:
-                    description: Reference to a Snapshot to populate createFromSnapshotResourceId.
+                    description: Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -198,7 +198,7 @@ spec:
                     - name
                     type: object
                   createFromSnapshotResourceIdSelector:
-                    description: Selector for a Snapshot to populate createFromSnapshotResourceId.
+                    description: Selector for a Snapshot in netapp to populate createFromSnapshotResourceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -254,7 +254,8 @@ spec:
                           description: Resource ID of the primary volume.
                           type: string
                         remoteVolumeResourceIdRef:
-                          description: Reference to a Volume to populate remoteVolumeResourceId.
+                          description: Reference to a Volume in netapp to populate
+                            remoteVolumeResourceId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -288,7 +289,8 @@ spec:
                           - name
                           type: object
                         remoteVolumeResourceIdSelector:
-                          description: Selector for a Volume to populate remoteVolumeResourceId.
+                          description: Selector for a Volume in netapp to populate
+                            remoteVolumeResourceId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -343,7 +345,8 @@ spec:
                             to the volume.
                           type: string
                         snapshotPolicyIdRef:
-                          description: Reference to a SnapshotPolicy to populate snapshotPolicyId.
+                          description: Reference to a SnapshotPolicy in netapp to
+                            populate snapshotPolicyId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -377,7 +380,8 @@ spec:
                           - name
                           type: object
                         snapshotPolicyIdSelector:
-                          description: Selector for a SnapshotPolicy to populate snapshotPolicyId.
+                          description: Selector for a SnapshotPolicy in netapp to
+                            populate snapshotPolicyId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -478,7 +482,7 @@ spec:
                       created.
                     type: string
                   poolNameRef:
-                    description: Reference to a Pool to populate poolName.
+                    description: Reference to a Pool in netapp to populate poolName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -512,7 +516,7 @@ spec:
                     - name
                     type: object
                   poolNameSelector:
-                    description: Selector for a Pool to populate poolName.
+                    description: Selector for a Pool in netapp to populate poolName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -809,7 +813,7 @@ spec:
                       to be created.'
                     type: string
                   createFromSnapshotResourceIdRef:
-                    description: Reference to a Snapshot to populate createFromSnapshotResourceId.
+                    description: Reference to a Snapshot in netapp to populate createFromSnapshotResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -843,7 +847,7 @@ spec:
                     - name
                     type: object
                   createFromSnapshotResourceIdSelector:
-                    description: Selector for a Snapshot to populate createFromSnapshotResourceId.
+                    description: Selector for a Snapshot in netapp to populate createFromSnapshotResourceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -899,7 +903,8 @@ spec:
                           description: Resource ID of the primary volume.
                           type: string
                         remoteVolumeResourceIdRef:
-                          description: Reference to a Volume to populate remoteVolumeResourceId.
+                          description: Reference to a Volume in netapp to populate
+                            remoteVolumeResourceId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -933,7 +938,8 @@ spec:
                           - name
                           type: object
                         remoteVolumeResourceIdSelector:
-                          description: Selector for a Volume to populate remoteVolumeResourceId.
+                          description: Selector for a Volume in netapp to populate
+                            remoteVolumeResourceId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -988,7 +994,8 @@ spec:
                             to the volume.
                           type: string
                         snapshotPolicyIdRef:
-                          description: Reference to a SnapshotPolicy to populate snapshotPolicyId.
+                          description: Reference to a SnapshotPolicy in netapp to
+                            populate snapshotPolicyId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1022,7 +1029,8 @@ spec:
                           - name
                           type: object
                         snapshotPolicyIdSelector:
-                          description: Selector for a SnapshotPolicy to populate snapshotPolicyId.
+                          description: Selector for a SnapshotPolicy in netapp to
+                            populate snapshotPolicyId.
                           properties:
                             matchControllerRef:
                               description: |-

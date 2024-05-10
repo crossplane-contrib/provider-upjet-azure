@@ -14,28 +14,28 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_healthcare_medtech_service", func(r *config.Resource) {
 		r.References["workspace_id"] = config.Reference{
-			Type:      "HealthcareWorkspace",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_healthcare_workspace",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["eventhub_namespace_name"] = config.Reference{
-			Type: rconfig.APISPackagePath + "/eventhub/v1beta1.EventHubNamespace",
+			TerraformName: "azurerm_eventhub_namespace",
 		}
 		r.References["eventhub_name"] = config.Reference{
-			Type: rconfig.APISPackagePath + "/eventhub/v1beta1.EventHub",
+			TerraformName: "azurerm_eventhub",
 		}
 		r.References["eventhub_consumer_group_name"] = config.Reference{
-			Type: rconfig.APISPackagePath + "/eventhub/v1beta1.ConsumerGroup",
+			TerraformName: "azurerm_eventhub_consumer_group",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_healthcare_medtech_service_fhir_destination", func(r *config.Resource) {
 		r.References["medtech_service_id"] = config.Reference{
-			Type:      "HealthcareMedtechService",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_healthcare_medtech_service",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["destination_fhir_service_id"] = config.Reference{
-			Type:      "HealthcareFHIRService",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_healthcare_fhir_service",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

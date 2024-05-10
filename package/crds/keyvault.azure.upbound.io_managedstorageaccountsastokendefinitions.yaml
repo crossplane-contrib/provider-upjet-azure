@@ -79,8 +79,8 @@ spec:
                     description: The ID of the Managed Storage Account.
                     type: string
                   managedStorageAccountIdRef:
-                    description: Reference to a ManagedStorageAccount to populate
-                      managedStorageAccountId.
+                    description: Reference to a ManagedStorageAccount in keyvault
+                      to populate managedStorageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -114,8 +114,8 @@ spec:
                     - name
                     type: object
                   managedStorageAccountIdSelector:
-                    description: Selector for a ManagedStorageAccount to populate
-                      managedStorageAccountId.
+                    description: Selector for a ManagedStorageAccount in keyvault
+                      to populate managedStorageAccountId.
                     properties:
                       matchControllerRef:
                         description: |-

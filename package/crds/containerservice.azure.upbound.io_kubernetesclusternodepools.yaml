@@ -181,7 +181,8 @@ spec:
                       created.
                     type: string
                   kubernetesClusterIdRef:
-                    description: Reference to a KubernetesCluster to populate kubernetesClusterId.
+                    description: Reference to a KubernetesCluster in containerservice
+                      to populate kubernetesClusterId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -215,7 +216,8 @@ spec:
                     - name
                     type: object
                   kubernetesClusterIdSelector:
-                    description: Selector for a KubernetesCluster to populate kubernetesClusterId.
+                    description: Selector for a KubernetesCluster in containerservice
+                      to populate kubernetesClusterId.
                     properties:
                       matchControllerRef:
                         description: |-

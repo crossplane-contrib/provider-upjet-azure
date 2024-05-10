@@ -7,8 +7,6 @@ package devices
 import (
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/hashicorp/terraform-plugin-sdk/v2/helper/schema"
-
-	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures iothub group
@@ -32,46 +30,46 @@ func Configure(p *config.Provider) {
 
 		r.Kind = "IOTHub"
 		r.References["endpoint.container_name"] = config.Reference{
-			Type: rconfig.ContainerReferencePath,
+			TerraformName: "azurerm_storage_container",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_consumer_group", func(r *config.Resource) {
 		r.References["iothub_name"] = config.Reference{
-			Type: "IOTHub",
+			TerraformName: "azurerm_iothub",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps_certificate", func(r *config.Resource) {
 		r.References["iot_dps_name"] = config.Reference{
-			Type: "IOTHubDPS",
+			TerraformName: "azurerm_iothub_dps",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_dps_shared_access_policy", func(r *config.Resource) {
 		r.References["iot_dps_name"] = config.Reference{
-			Type: "IOTHubDPS",
+			TerraformName: "azurerm_iothub_dps",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_shared_access_policy", func(r *config.Resource) {
 		r.References["iot_dps_name"] = config.Reference{
-			Type: "IOTHubDPS",
+			TerraformName: "azurerm_iothub_dps",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_endpoint_storage_container", func(r *config.Resource) {
 		r.References["container_name"] = config.Reference{
-			Type: rconfig.ContainerReferencePath,
+			TerraformName: "azurerm_storage_container",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_iothub_fallback_route", func(r *config.Resource) {
 		r.References["iothub_name"] = config.Reference{
-			Type: "IOTHub",
+			TerraformName: "azurerm_iothub",
 		}
 		r.References["endpoint_names"] = config.Reference{
-			Type: "IOTHubEndpointStorageContainer",
+			TerraformName: "azurerm_iothub_endpoint_storage_container",
 		}
 	})
 

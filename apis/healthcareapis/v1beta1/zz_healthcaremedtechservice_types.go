@@ -193,16 +193,16 @@ type HealthcareMedtechServiceParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// Specifies the id of the Healthcare Workspace where the Healthcare Med Tech Service should exist. Changing this forces a new Healthcare Med Tech Service to be created.
-	// +crossplane:generate:reference:type=HealthcareWorkspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta1.HealthcareWorkspace
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
-	// Reference to a HealthcareWorkspace to populate workspaceId.
+	// Reference to a HealthcareWorkspace in healthcareapis to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a HealthcareWorkspace to populate workspaceId.
+	// Selector for a HealthcareWorkspace in healthcareapis to populate workspaceId.
 	// +kubebuilder:validation:Optional
 	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
 }

@@ -60,15 +60,15 @@ type ContainerParameters struct {
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
 
 	// The name of the Storage Account where the Container should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Reference to a Account to populate storageAccountName.
+	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
-	// Selector for a Account to populate storageAccountName.
+	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 }

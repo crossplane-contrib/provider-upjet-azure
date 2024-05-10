@@ -79,7 +79,7 @@ spec:
                       Gateway API to be created.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apimanagement to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +113,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apimanagement to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -157,7 +157,8 @@ spec:
                       this forces a new API Management Gateway API to be created.
                     type: string
                   gatewayIdRef:
-                    description: Reference to a Gateway to populate gatewayId.
+                    description: Reference to a Gateway in apimanagement to populate
+                      gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -191,7 +192,8 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a Gateway to populate gatewayId.
+                    description: Selector for a Gateway in apimanagement to populate
+                      gatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -250,7 +252,7 @@ spec:
                       Gateway API to be created.
                     type: string
                   apiIdRef:
-                    description: Reference to a API to populate apiId.
+                    description: Reference to a API in apimanagement to populate apiId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -284,7 +286,7 @@ spec:
                     - name
                     type: object
                   apiIdSelector:
-                    description: Selector for a API to populate apiId.
+                    description: Selector for a API in apimanagement to populate apiId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -328,7 +330,8 @@ spec:
                       this forces a new API Management Gateway API to be created.
                     type: string
                   gatewayIdRef:
-                    description: Reference to a Gateway to populate gatewayId.
+                    description: Reference to a Gateway in apimanagement to populate
+                      gatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -362,7 +365,8 @@ spec:
                     - name
                     type: object
                   gatewayIdSelector:
-                    description: Selector for a Gateway to populate gatewayId.
+                    description: Selector for a Gateway in apimanagement to populate
+                      gatewayId.
                     properties:
                       matchControllerRef:
                         description: |-

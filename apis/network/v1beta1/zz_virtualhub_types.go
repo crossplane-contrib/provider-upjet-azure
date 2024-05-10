@@ -38,15 +38,15 @@ type VirtualHubInitParameters_2 struct {
 	VirtualRouterAutoScaleMinCapacity *float64 `json:"virtualRouterAutoScaleMinCapacity,omitempty" tf:"virtual_router_auto_scale_min_capacity,omitempty"`
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualWAN
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualWAN
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 
-	// Reference to a VirtualWAN to populate virtualWanId.
+	// Reference to a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
 	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualWAN to populate virtualWanId.
+	// Selector for a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
 	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }
@@ -139,16 +139,16 @@ type VirtualHubParameters_2 struct {
 	VirtualRouterAutoScaleMinCapacity *float64 `json:"virtualRouterAutoScaleMinCapacity,omitempty" tf:"virtual_router_auto_scale_min_capacity,omitempty"`
 
 	// The ID of a Virtual WAN within which the Virtual Hub should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualWAN
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualWAN
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualWanID *string `json:"virtualWanId,omitempty" tf:"virtual_wan_id,omitempty"`
 
-	// Reference to a VirtualWAN to populate virtualWanId.
+	// Reference to a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
 	VirtualWanIDRef *v1.Reference `json:"virtualWanIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualWAN to populate virtualWanId.
+	// Selector for a VirtualWAN in network to populate virtualWanId.
 	// +kubebuilder:validation:Optional
 	VirtualWanIDSelector *v1.Selector `json:"virtualWanIdSelector,omitempty" tf:"-"`
 }

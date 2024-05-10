@@ -86,7 +86,8 @@ spec:
                       a new resource to be created.
                     type: string
                   natRuleIdRef:
-                    description: Reference to a LoadBalancerNatRule to populate natRuleId.
+                    description: Reference to a LoadBalancerNatRule in network to
+                      populate natRuleId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +121,8 @@ spec:
                     - name
                     type: object
                   natRuleIdSelector:
-                    description: Selector for a LoadBalancerNatRule to populate natRuleId.
+                    description: Selector for a LoadBalancerNatRule in network to
+                      populate natRuleId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -164,7 +166,8 @@ spec:
                       a new resource to be created.
                     type: string
                   networkInterfaceIdRef:
-                    description: Reference to a NetworkInterface to populate networkInterfaceId.
+                    description: Reference to a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -198,7 +201,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: Selector for a NetworkInterface to populate networkInterfaceId.
+                    description: Selector for a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -262,7 +266,8 @@ spec:
                       a new resource to be created.
                     type: string
                   natRuleIdRef:
-                    description: Reference to a LoadBalancerNatRule to populate natRuleId.
+                    description: Reference to a LoadBalancerNatRule in network to
+                      populate natRuleId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -296,7 +301,8 @@ spec:
                     - name
                     type: object
                   natRuleIdSelector:
-                    description: Selector for a LoadBalancerNatRule to populate natRuleId.
+                    description: Selector for a LoadBalancerNatRule in network to
+                      populate natRuleId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -340,7 +346,8 @@ spec:
                       a new resource to be created.
                     type: string
                   networkInterfaceIdRef:
-                    description: Reference to a NetworkInterface to populate networkInterfaceId.
+                    description: Reference to a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -374,7 +381,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: Selector for a NetworkInterface to populate networkInterfaceId.
+                    description: Selector for a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: |-

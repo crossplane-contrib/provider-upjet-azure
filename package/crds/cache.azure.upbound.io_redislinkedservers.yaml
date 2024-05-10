@@ -78,7 +78,7 @@ spec:
                       a new Redis to be created.
                     type: string
                   linkedRedisCacheIdRef:
-                    description: Reference to a RedisCache to populate linkedRedisCacheId.
+                    description: Reference to a RedisCache in cache to populate linkedRedisCacheId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   linkedRedisCacheIdSelector:
-                    description: Selector for a RedisCache to populate linkedRedisCacheId.
+                    description: Selector for a RedisCache in cache to populate linkedRedisCacheId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -245,7 +245,7 @@ spec:
                       forces a new Redis to be created. (eg The primary role)
                     type: string
                   targetRedisCacheNameRef:
-                    description: Reference to a RedisCache to populate targetRedisCacheName.
+                    description: Reference to a RedisCache in cache to populate targetRedisCacheName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -279,7 +279,7 @@ spec:
                     - name
                     type: object
                   targetRedisCacheNameSelector:
-                    description: Selector for a RedisCache to populate targetRedisCacheName.
+                    description: Selector for a RedisCache in cache to populate targetRedisCacheName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -337,7 +337,7 @@ spec:
                       a new Redis to be created.
                     type: string
                   linkedRedisCacheIdRef:
-                    description: Reference to a RedisCache to populate linkedRedisCacheId.
+                    description: Reference to a RedisCache in cache to populate linkedRedisCacheId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -371,7 +371,7 @@ spec:
                     - name
                     type: object
                   linkedRedisCacheIdSelector:
-                    description: Selector for a RedisCache to populate linkedRedisCacheId.
+                    description: Selector for a RedisCache in cache to populate linkedRedisCacheId.
                     properties:
                       matchControllerRef:
                         description: |-

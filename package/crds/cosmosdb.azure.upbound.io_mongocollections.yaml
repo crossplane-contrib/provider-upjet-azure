@@ -79,7 +79,7 @@ spec:
                       to be created.
                     type: string
                   accountNameRef:
-                    description: Reference to a Account to populate accountName.
+                    description: Reference to a Account in cosmosdb to populate accountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +113,7 @@ spec:
                     - name
                     type: object
                   accountNameSelector:
-                    description: Selector for a Account to populate accountName.
+                    description: Selector for a Account in cosmosdb to populate accountName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -176,7 +176,8 @@ spec:
                       a new resource to be created.
                     type: string
                   databaseNameRef:
-                    description: Reference to a MongoDatabase to populate databaseName.
+                    description: Reference to a MongoDatabase in cosmosdb to populate
+                      databaseName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -210,7 +211,8 @@ spec:
                     - name
                     type: object
                   databaseNameSelector:
-                    description: Selector for a MongoDatabase to populate databaseName.
+                    description: Selector for a MongoDatabase in cosmosdb to populate
+                      databaseName.
                     properties:
                       matchControllerRef:
                         description: |-

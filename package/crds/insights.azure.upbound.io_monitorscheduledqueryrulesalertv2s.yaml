@@ -296,7 +296,8 @@ spec:
                       type: string
                     type: array
                   scopesRefs:
-                    description: References to ApplicationInsights to populate scopes.
+                    description: References to ApplicationInsights in insights to
+                      populate scopes.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -333,8 +334,8 @@ spec:
                       type: object
                     type: array
                   scopesSelector:
-                    description: Selector for a list of ApplicationInsights to populate
-                      scopes.
+                    description: Selector for a list of ApplicationInsights in insights
+                      to populate scopes.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -565,7 +566,8 @@ spec:
                       type: string
                     type: array
                   scopesRefs:
-                    description: References to ApplicationInsights to populate scopes.
+                    description: References to ApplicationInsights in insights to
+                      populate scopes.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -602,8 +604,8 @@ spec:
                       type: object
                     type: array
                   scopesSelector:
-                    description: Selector for a list of ApplicationInsights to populate
-                      scopes.
+                    description: Selector for a list of ApplicationInsights in insights
+                      to populate scopes.
                     properties:
                       matchControllerRef:
                         description: |-

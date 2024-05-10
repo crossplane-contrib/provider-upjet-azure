@@ -60,15 +60,15 @@ type FirewallRuleParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the name of the MariaDB Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformariadb/v1beta1.Server
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Reference to a Server to populate serverName.
+	// Reference to a Server in dbformariadb to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Selector for a Server to populate serverName.
+	// Selector for a Server in dbformariadb to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 

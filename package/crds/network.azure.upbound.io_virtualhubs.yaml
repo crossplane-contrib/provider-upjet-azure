@@ -203,7 +203,8 @@ spec:
                       be created.
                     type: string
                   virtualWanIdRef:
-                    description: Reference to a VirtualWAN to populate virtualWanId.
+                    description: Reference to a VirtualWAN in network to populate
+                      virtualWanId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -237,7 +238,8 @@ spec:
                     - name
                     type: object
                   virtualWanIdSelector:
-                    description: Selector for a VirtualWAN to populate virtualWanId.
+                    description: Selector for a VirtualWAN in network to populate
+                      virtualWanId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -339,7 +341,8 @@ spec:
                       be created.
                     type: string
                   virtualWanIdRef:
-                    description: Reference to a VirtualWAN to populate virtualWanId.
+                    description: Reference to a VirtualWAN in network to populate
+                      virtualWanId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -373,7 +376,8 @@ spec:
                     - name
                     type: object
                   virtualWanIdSelector:
-                    description: Selector for a VirtualWAN to populate virtualWanId.
+                    description: Selector for a VirtualWAN in network to populate
+                      virtualWanId.
                     properties:
                       matchControllerRef:
                         description: |-

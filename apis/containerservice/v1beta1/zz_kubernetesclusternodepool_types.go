@@ -547,16 +547,16 @@ type KubernetesClusterNodePoolParameters struct {
 	KubeletDiskType *string `json:"kubeletDiskType,omitempty" tf:"kubelet_disk_type,omitempty"`
 
 	// The ID of the Kubernetes Cluster where this Node Pool should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=KubernetesCluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/containerservice/v1beta1.KubernetesCluster
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KubernetesClusterID *string `json:"kubernetesClusterId,omitempty" tf:"kubernetes_cluster_id,omitempty"`
 
-	// Reference to a KubernetesCluster to populate kubernetesClusterId.
+	// Reference to a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
 	KubernetesClusterIDRef *v1.Reference `json:"kubernetesClusterIdRef,omitempty" tf:"-"`
 
-	// Selector for a KubernetesCluster to populate kubernetesClusterId.
+	// Selector for a KubernetesCluster in containerservice to populate kubernetesClusterId.
 	// +kubebuilder:validation:Optional
 	KubernetesClusterIDSelector *v1.Selector `json:"kubernetesClusterIdSelector,omitempty" tf:"-"`
 

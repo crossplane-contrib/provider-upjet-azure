@@ -84,7 +84,7 @@ spec:
                       resource to be created.
                     type: string
                   azureFirewallNameRef:
-                    description: Reference to a Firewall to populate azureFirewallName.
+                    description: Reference to a Firewall in network to populate azureFirewallName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,7 +118,7 @@ spec:
                     - name
                     type: object
                   azureFirewallNameSelector:
-                    description: Selector for a Firewall to populate azureFirewallName.
+                    description: Selector for a Firewall in network to populate azureFirewallName.
                     properties:
                       matchControllerRef:
                         description: |-

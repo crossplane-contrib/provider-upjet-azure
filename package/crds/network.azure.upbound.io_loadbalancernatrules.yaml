@@ -197,7 +197,8 @@ spec:
                       NAT Rule. Changing this forces a new resource to be created.
                     type: string
                   loadbalancerIdRef:
-                    description: Reference to a LoadBalancer to populate loadbalancerId.
+                    description: Reference to a LoadBalancer in network to populate
+                      loadbalancerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -231,7 +232,8 @@ spec:
                     - name
                     type: object
                   loadbalancerIdSelector:
-                    description: Selector for a LoadBalancer to populate loadbalancerId.
+                    description: Selector for a LoadBalancer in network to populate
+                      loadbalancerId.
                     properties:
                       matchControllerRef:
                         description: |-

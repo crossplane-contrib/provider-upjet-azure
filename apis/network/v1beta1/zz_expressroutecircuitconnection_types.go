@@ -22,15 +22,15 @@ type ExpressRouteCircuitConnectionInitParameters struct {
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
-	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PeerPeeringID *string `json:"peerPeeringId,omitempty" tf:"peer_peering_id,omitempty"`
 
-	// Reference to a ExpressRouteCircuitPeering to populate peerPeeringId.
+	// Reference to a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
 	PeerPeeringIDRef *v1.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
 
-	// Selector for a ExpressRouteCircuitPeering to populate peerPeeringId.
+	// Selector for a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
 	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 }
@@ -68,30 +68,30 @@ type ExpressRouteCircuitConnectionParameters struct {
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
-	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerPeeringID *string `json:"peerPeeringId,omitempty" tf:"peer_peering_id,omitempty"`
 
-	// Reference to a ExpressRouteCircuitPeering to populate peerPeeringId.
+	// Reference to a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
 	PeerPeeringIDRef *v1.Reference `json:"peerPeeringIdRef,omitempty" tf:"-"`
 
-	// Selector for a ExpressRouteCircuitPeering to populate peerPeeringId.
+	// Selector for a ExpressRouteCircuitPeering in network to populate peerPeeringId.
 	// +kubebuilder:validation:Optional
 	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Express Route Circuit Private Peering that this Express Route Circuit Connection connects with. Changing this forces a new Express Route Circuit Connection to be created.
-	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeeringID *string `json:"peeringId,omitempty" tf:"peering_id,omitempty"`
 
-	// Reference to a ExpressRouteCircuitPeering to populate peeringId.
+	// Reference to a ExpressRouteCircuitPeering in network to populate peeringId.
 	// +kubebuilder:validation:Optional
 	PeeringIDRef *v1.Reference `json:"peeringIdRef,omitempty" tf:"-"`
 
-	// Selector for a ExpressRouteCircuitPeering to populate peeringId.
+	// Selector for a ExpressRouteCircuitPeering in network to populate peeringId.
 	// +kubebuilder:validation:Optional
 	PeeringIDSelector *v1.Selector `json:"peeringIdSelector,omitempty" tf:"-"`
 }

@@ -79,7 +79,8 @@ spec:
                       new resource to be created.
                     type: string
                   natGatewayIdRef:
-                    description: Reference to a NATGateway to populate natGatewayId.
+                    description: Reference to a NATGateway in network to populate
+                      natGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +114,8 @@ spec:
                     - name
                     type: object
                   natGatewayIdSelector:
-                    description: Selector for a NATGateway to populate natGatewayId.
+                    description: Selector for a NATGateway in network to populate
+                      natGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -158,7 +160,8 @@ spec:
                       to be created.
                     type: string
                   publicIpPrefixIdRef:
-                    description: Reference to a PublicIPPrefix to populate publicIpPrefixId.
+                    description: Reference to a PublicIPPrefix in network to populate
+                      publicIpPrefixId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -192,7 +195,8 @@ spec:
                     - name
                     type: object
                   publicIpPrefixIdSelector:
-                    description: Selector for a PublicIPPrefix to populate publicIpPrefixId.
+                    description: Selector for a PublicIPPrefix in network to populate
+                      publicIpPrefixId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -250,7 +254,8 @@ spec:
                       new resource to be created.
                     type: string
                   natGatewayIdRef:
-                    description: Reference to a NATGateway to populate natGatewayId.
+                    description: Reference to a NATGateway in network to populate
+                      natGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -284,7 +289,8 @@ spec:
                     - name
                     type: object
                   natGatewayIdSelector:
-                    description: Selector for a NATGateway to populate natGatewayId.
+                    description: Selector for a NATGateway in network to populate
+                      natGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -329,7 +335,8 @@ spec:
                       to be created.
                     type: string
                   publicIpPrefixIdRef:
-                    description: Reference to a PublicIPPrefix to populate publicIpPrefixId.
+                    description: Reference to a PublicIPPrefix in network to populate
+                      publicIpPrefixId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -363,7 +370,8 @@ spec:
                     - name
                     type: object
                   publicIpPrefixIdSelector:
-                    description: Selector for a PublicIPPrefix to populate publicIpPrefixId.
+                    description: Selector for a PublicIPPrefix in network to populate
+                      publicIpPrefixId.
                     properties:
                       matchControllerRef:
                         description: |-

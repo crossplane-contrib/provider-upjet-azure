@@ -79,7 +79,8 @@ spec:
                       a new resource to be created.
                     type: string
                   apiManagementNameRef:
-                    description: Reference to a Management to populate apiManagementName.
+                    description: Reference to a Management in apimanagement to populate
+                      apiManagementName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +114,8 @@ spec:
                     - name
                     type: object
                   apiManagementNameSelector:
-                    description: Selector for a Management to populate apiManagementName.
+                    description: Selector for a Management in apimanagement to populate
+                      apiManagementName.
                     properties:
                       matchControllerRef:
                         description: |-

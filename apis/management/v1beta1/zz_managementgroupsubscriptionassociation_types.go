@@ -16,15 +16,15 @@ import (
 type ManagementGroupSubscriptionAssociationInitParameters struct {
 
 	// The ID of the Management Group to associate the Subscription with. Changing this forces a new Management to be created.
-	// +crossplane:generate:reference:type=ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
-	// Reference to a ManagementGroup to populate managementGroupId.
+	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
 	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a ManagementGroup to populate managementGroupId.
+	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
 	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 
@@ -57,16 +57,16 @@ type ManagementGroupSubscriptionAssociationObservation struct {
 type ManagementGroupSubscriptionAssociationParameters struct {
 
 	// The ID of the Management Group to associate the Subscription with. Changing this forces a new Management to be created.
-	// +crossplane:generate:reference:type=ManagementGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagementGroupID *string `json:"managementGroupId,omitempty" tf:"management_group_id,omitempty"`
 
-	// Reference to a ManagementGroup to populate managementGroupId.
+	// Reference to a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
 	ManagementGroupIDRef *v1.Reference `json:"managementGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a ManagementGroup to populate managementGroupId.
+	// Selector for a ManagementGroup in management to populate managementGroupId.
 	// +kubebuilder:validation:Optional
 	ManagementGroupIDSelector *v1.Selector `json:"managementGroupIdSelector,omitempty" tf:"-"`
 

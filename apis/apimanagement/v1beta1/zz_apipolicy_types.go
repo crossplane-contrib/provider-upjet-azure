@@ -46,28 +46,28 @@ type APIPolicyObservation struct {
 type APIPolicyParameters struct {
 
 	// The name of the API Management Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
-	// Reference to a Management to populate apiManagementName.
+	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
 	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
-	// Selector for a Management to populate apiManagementName.
+	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 
 	// The ID of the API Management API within the API Management Service. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=API
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.API
 	// +kubebuilder:validation:Optional
 	APIName *string `json:"apiName,omitempty" tf:"api_name,omitempty"`
 
-	// Reference to a API to populate apiName.
+	// Reference to a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
 	APINameRef *v1.Reference `json:"apiNameRef,omitempty" tf:"-"`
 
-	// Selector for a API to populate apiName.
+	// Selector for a API in apimanagement to populate apiName.
 	// +kubebuilder:validation:Optional
 	APINameSelector *v1.Selector `json:"apiNameSelector,omitempty" tf:"-"`
 

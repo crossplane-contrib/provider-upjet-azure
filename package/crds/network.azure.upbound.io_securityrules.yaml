@@ -128,7 +128,8 @@ spec:
                       be created.
                     type: string
                   networkSecurityGroupNameRef:
-                    description: Reference to a SecurityGroup to populate networkSecurityGroupName.
+                    description: Reference to a SecurityGroup in network to populate
+                      networkSecurityGroupName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -162,7 +163,8 @@ spec:
                     - name
                     type: object
                   networkSecurityGroupNameSelector:
-                    description: Selector for a SecurityGroup to populate networkSecurityGroupName.
+                    description: Selector for a SecurityGroup in network to populate
+                      networkSecurityGroupName.
                     properties:
                       matchControllerRef:
                         description: |-

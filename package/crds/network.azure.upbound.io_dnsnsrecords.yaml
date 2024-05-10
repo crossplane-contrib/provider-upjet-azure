@@ -173,7 +173,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
-                    description: Reference to a DNSZone to populate zoneName.
+                    description: Reference to a DNSZone in network to populate zoneName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -207,7 +207,7 @@ spec:
                     - name
                     type: object
                   zoneNameSelector:
-                    description: Selector for a DNSZone to populate zoneName.
+                    description: Selector for a DNSZone in network to populate zoneName.
                     properties:
                       matchControllerRef:
                         description: |-

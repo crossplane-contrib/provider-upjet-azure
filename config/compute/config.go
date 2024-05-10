@@ -15,8 +15,8 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_linux_virtual_machine", func(r *config.Resource) {
 		r.References["network_interface_ids"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/network/v1beta1.NetworkInterface",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_interface",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"platform_fault_domain",
@@ -45,8 +45,8 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_windows_virtual_machine", func(r *config.Resource) {
 		r.References["network_interface_ids"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/network/v1beta1.NetworkInterface",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_interface",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"platform_fault_domain",

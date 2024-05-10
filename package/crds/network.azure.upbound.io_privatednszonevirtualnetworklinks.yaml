@@ -79,7 +79,8 @@ spec:
                       dot). Changing this forces a new resource to be created.
                     type: string
                   privateDnsZoneNameRef:
-                    description: Reference to a PrivateDNSZone to populate privateDnsZoneName.
+                    description: Reference to a PrivateDNSZone in network to populate
+                      privateDnsZoneName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +114,8 @@ spec:
                     - name
                     type: object
                   privateDnsZoneNameSelector:
-                    description: Selector for a PrivateDNSZone to populate privateDnsZoneName.
+                    description: Selector for a PrivateDNSZone in network to populate
+                      privateDnsZoneName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -248,7 +250,8 @@ spec:
                       to the DNS Zone. Changing this forces a new resource to be created.
                     type: string
                   virtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate virtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -282,7 +285,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate virtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -351,7 +355,8 @@ spec:
                       to the DNS Zone. Changing this forces a new resource to be created.
                     type: string
                   virtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate virtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -385,7 +390,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate virtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-

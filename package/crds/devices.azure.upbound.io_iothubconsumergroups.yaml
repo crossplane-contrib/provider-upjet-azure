@@ -82,7 +82,7 @@ spec:
                       resource to be created.
                     type: string
                   iothubNameRef:
-                    description: Reference to a IOTHub to populate iothubName.
+                    description: Reference to a IOTHub in devices to populate iothubName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +116,7 @@ spec:
                     - name
                     type: object
                   iothubNameSelector:
-                    description: Selector for a IOTHub to populate iothubName.
+                    description: Selector for a IOTHub in devices to populate iothubName.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -168,7 +168,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   serverNameRef:
-                    description: Reference to a FlexibleServer to populate serverName.
+                    description: Reference to a FlexibleServer in dbformysql to populate
+                      serverName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -202,7 +203,8 @@ spec:
                     - name
                     type: object
                   serverNameSelector:
-                    description: Selector for a FlexibleServer to populate serverName.
+                    description: Selector for a FlexibleServer in dbformysql to populate
+                      serverName.
                     properties:
                       matchControllerRef:
                         description: |-

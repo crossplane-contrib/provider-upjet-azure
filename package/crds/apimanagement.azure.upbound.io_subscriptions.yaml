@@ -87,7 +87,8 @@ spec:
                       to be created.
                     type: string
                   apiManagementNameRef:
-                    description: Reference to a Management to populate apiManagementName.
+                    description: Reference to a Management in apimanagement to populate
+                      apiManagementName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -121,7 +122,8 @@ spec:
                     - name
                     type: object
                   apiManagementNameSelector:
-                    description: Selector for a Management to populate apiManagementName.
+                    description: Selector for a Management in apimanagement to populate
+                      apiManagementName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -183,7 +185,8 @@ spec:
                       created.
                     type: string
                   productIdRef:
-                    description: Reference to a Product to populate productId.
+                    description: Reference to a Product in apimanagement to populate
+                      productId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -217,7 +220,8 @@ spec:
                     - name
                     type: object
                   productIdSelector:
-                    description: Selector for a Product to populate productId.
+                    description: Selector for a Product in apimanagement to populate
+                      productId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -368,7 +372,8 @@ spec:
                       Subscription. Changing this forces a new resource to be created.
                     type: string
                   userIdRef:
-                    description: Reference to a User to populate userId.
+                    description: Reference to a User in apimanagement to populate
+                      userId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -402,7 +407,8 @@ spec:
                     - name
                     type: object
                   userIdSelector:
-                    description: Selector for a User to populate userId.
+                    description: Selector for a User in apimanagement to populate
+                      userId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -469,7 +475,8 @@ spec:
                       created.
                     type: string
                   productIdRef:
-                    description: Reference to a Product to populate productId.
+                    description: Reference to a Product in apimanagement to populate
+                      productId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -503,7 +510,8 @@ spec:
                     - name
                     type: object
                   productIdSelector:
-                    description: Selector for a Product to populate productId.
+                    description: Selector for a Product in apimanagement to populate
+                      productId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -557,7 +565,8 @@ spec:
                       Subscription. Changing this forces a new resource to be created.
                     type: string
                   userIdRef:
-                    description: Reference to a User to populate userId.
+                    description: Reference to a User in apimanagement to populate
+                      userId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -591,7 +600,8 @@ spec:
                     - name
                     type: object
                   userIdSelector:
-                    description: Selector for a User to populate userId.
+                    description: Selector for a User in apimanagement to populate
+                      userId.
                     properties:
                       matchControllerRef:
                         description: |-

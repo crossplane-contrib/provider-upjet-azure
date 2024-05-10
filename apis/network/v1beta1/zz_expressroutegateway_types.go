@@ -29,15 +29,15 @@ type ExpressRouteGatewayInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of a Virtual HUB within which the ExpressRoute gateway should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 
-	// Reference to a VirtualHub to populate virtualHubId.
+	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualHub to populate virtualHubId.
+	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
@@ -100,16 +100,16 @@ type ExpressRouteGatewayParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of a Virtual HUB within which the ExpressRoute gateway should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 
-	// Reference to a VirtualHub to populate virtualHubId.
+	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualHub to populate virtualHubId.
+	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }

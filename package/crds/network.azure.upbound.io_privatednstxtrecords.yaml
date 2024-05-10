@@ -177,7 +177,8 @@ spec:
                       exists. Changing this forces a new resource to be created.
                     type: string
                   zoneNameRef:
-                    description: Reference to a PrivateDNSZone to populate zoneName.
+                    description: Reference to a PrivateDNSZone in network to populate
+                      zoneName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -211,7 +212,8 @@ spec:
                     - name
                     type: object
                   zoneNameSelector:
-                    description: Selector for a PrivateDNSZone to populate zoneName.
+                    description: Selector for a PrivateDNSZone in network to populate
+                      zoneName.
                     properties:
                       matchControllerRef:
                         description: |-

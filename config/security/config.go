@@ -6,8 +6,6 @@ package security
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
-
-	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures security group
@@ -25,8 +23,8 @@ func Configure(p *config.Provider) {
 		r.Kind = "IOTSecuritySolution"
 
 		r.References["iothub_ids"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/devices/v1beta1.IOTHub",
-			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
+			TerraformName: "azurerm_iothub",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
 		}
 	})
 }

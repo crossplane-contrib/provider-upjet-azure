@@ -81,8 +81,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   backendAddressPoolIdRef:
-                    description: Reference to a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Reference to a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,8 +116,8 @@ spec:
                     - name
                     type: object
                   backendAddressPoolIdSelector:
-                    description: Selector for a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Selector for a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -166,7 +166,8 @@ spec:
                       a new resource to be created.
                     type: string
                   networkInterfaceIdRef:
-                    description: Reference to a NetworkInterface to populate networkInterfaceId.
+                    description: Reference to a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -200,7 +201,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: Selector for a NetworkInterface to populate networkInterfaceId.
+                    description: Selector for a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -259,8 +261,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   backendAddressPoolIdRef:
-                    description: Reference to a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Reference to a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -294,8 +296,8 @@ spec:
                     - name
                     type: object
                   backendAddressPoolIdSelector:
-                    description: Selector for a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Selector for a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -344,7 +346,8 @@ spec:
                       a new resource to be created.
                     type: string
                   networkInterfaceIdRef:
-                    description: Reference to a NetworkInterface to populate networkInterfaceId.
+                    description: Reference to a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -378,7 +381,8 @@ spec:
                     - name
                     type: object
                   networkInterfaceIdSelector:
-                    description: Selector for a NetworkInterface to populate networkInterfaceId.
+                    description: Selector for a NetworkInterface in network to populate
+                      networkInterfaceId.
                     properties:
                       matchControllerRef:
                         description: |-

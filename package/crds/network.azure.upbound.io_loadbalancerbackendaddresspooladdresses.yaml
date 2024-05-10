@@ -84,8 +84,8 @@ spec:
                       forces a new Backend Address Pool Address to be created.
                     type: string
                   backendAddressPoolIdRef:
-                    description: Reference to a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Reference to a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -119,8 +119,8 @@ spec:
                     - name
                     type: object
                   backendAddressPoolIdSelector:
-                    description: Selector for a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Selector for a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -169,7 +169,8 @@ spec:
                       For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
                     type: string
                   virtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate virtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -203,7 +204,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate virtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -271,7 +273,8 @@ spec:
                       For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
                     type: string
                   virtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate virtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -305,7 +308,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate virtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      virtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-

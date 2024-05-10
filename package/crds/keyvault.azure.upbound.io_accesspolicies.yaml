@@ -98,7 +98,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   keyVaultIdRef:
-                    description: Reference to a Vault to populate keyVaultId.
+                    description: Reference to a Vault in keyvault to populate keyVaultId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -132,7 +132,7 @@ spec:
                     - name
                     type: object
                   keyVaultIdSelector:
-                    description: Selector for a Vault to populate keyVaultId.
+                    description: Selector for a Vault in keyvault to populate keyVaultId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -237,7 +237,7 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   keyVaultIdRef:
-                    description: Reference to a Vault to populate keyVaultId.
+                    description: Reference to a Vault in keyvault to populate keyVaultId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -271,7 +271,7 @@ spec:
                     - name
                     type: object
                   keyVaultIdSelector:
-                    description: Selector for a Vault to populate keyVaultId.
+                    description: Selector for a Vault in keyvault to populate keyVaultId.
                     properties:
                       matchControllerRef:
                         description: |-
