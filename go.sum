@@ -356,8 +356,8 @@ github.com/tombuildsstuff/giovanni v0.20.0 h1:IM/I/iNWMXnPYwcSq8uxV7TKDlv7Nejq0b
 github.com/tombuildsstuff/giovanni v0.20.0/go.mod h1:66KVLYma2whJhEdxPSPL3GQHkulhK+C5CluKfHGfPF4=
 github.com/tombuildsstuff/kermit v0.20240122.1123108 h1:icQaxsv/ANv/KC4Sr0V1trrWA/XIL+3QAVBDpiSTgj8=
 github.com/tombuildsstuff/kermit v0.20240122.1123108/go.mod h1:T3YBVFhRV4qA7SbnRaNE6eapIMpKDA9rG/V7Ocsjlno=
-github.com/ulucinar/upbound-upjet v0.0.0-20240422072143-9a463d567f9c h1:H+IioE227HCCHC9Fz/HRGMv/nSL1pDkOIu9krrTrsng=
-github.com/ulucinar/upbound-upjet v0.0.0-20240422072143-9a463d567f9c/go.mod h1:0bHLtnejZ9bDeyXuBb9MSOQLvKo3+aoTeUBO8N0dGSA=
+github.com/ulucinar/upbound-upjet v0.0.0-20240510150048-94634891cc5a h1:KNFeHy6dvZvY8ZS+OqYI216nJamQNh5Kem1h3KM0pXQ=
+github.com/ulucinar/upbound-upjet v0.0.0-20240510150048-94634891cc5a/go.mod h1:3pDVtCgyBc5f2Zx4K5HEPxxhjndmOc5CHCJNpIivK/g=
 github.com/upbound/terraform-provider-azurerm v0.0.0-20240311113236-25a51734d3da h1:Rj/LhOVcK8IOSIBYk7L6LZpuOHsXkkit+JrV4nNmi9o=
 github.com/upbound/terraform-provider-azurerm v0.0.0-20240311113236-25a51734d3da/go.mod h1:GCUoUr4wIRHz+ZYmDI3Y1oE0M64rqJcr3oY60wwJdVc=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
