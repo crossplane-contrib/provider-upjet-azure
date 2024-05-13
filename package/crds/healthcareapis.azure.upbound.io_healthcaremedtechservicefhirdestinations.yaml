@@ -84,8 +84,8 @@ spec:
                       Med Tech Service Fhir Destination.
                     type: string
                   destinationFhirServiceIdRef:
-                    description: Reference to a HealthcareFHIRService to populate
-                      destinationFhirServiceId.
+                    description: Reference to a HealthcareFHIRService in healthcareapis
+                      to populate destinationFhirServiceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -119,8 +119,8 @@ spec:
                     - name
                     type: object
                   destinationFhirServiceIdSelector:
-                    description: Selector for a HealthcareFHIRService to populate
-                      destinationFhirServiceId.
+                    description: Selector for a HealthcareFHIRService in healthcareapis
+                      to populate destinationFhirServiceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -177,8 +177,8 @@ spec:
                       Fhir Destination to be created.
                     type: string
                   medtechServiceIdRef:
-                    description: Reference to a HealthcareMedtechService to populate
-                      medtechServiceId.
+                    description: Reference to a HealthcareMedtechService in healthcareapis
+                      to populate medtechServiceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -212,8 +212,8 @@ spec:
                     - name
                     type: object
                   medtechServiceIdSelector:
-                    description: Selector for a HealthcareMedtechService to populate
-                      medtechServiceId.
+                    description: Selector for a HealthcareMedtechService in healthcareapis
+                      to populate medtechServiceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -275,8 +275,8 @@ spec:
                       Med Tech Service Fhir Destination.
                     type: string
                   destinationFhirServiceIdRef:
-                    description: Reference to a HealthcareFHIRService to populate
-                      destinationFhirServiceId.
+                    description: Reference to a HealthcareFHIRService in healthcareapis
+                      to populate destinationFhirServiceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -310,8 +310,8 @@ spec:
                     - name
                     type: object
                   destinationFhirServiceIdSelector:
-                    description: Selector for a HealthcareFHIRService to populate
-                      destinationFhirServiceId.
+                    description: Selector for a HealthcareFHIRService in healthcareapis
+                      to populate destinationFhirServiceId.
                     properties:
                       matchControllerRef:
                         description: |-

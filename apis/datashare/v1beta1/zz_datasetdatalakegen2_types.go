@@ -95,16 +95,16 @@ type DataSetDataLakeGen2Parameters struct {
 	FolderPath *string `json:"folderPath,omitempty" tf:"folder_path,omitempty"`
 
 	// The resource ID of the Data Share where this Data Share Data Lake Gen2 Dataset should be created. Changing this forces a new Data Share Data Lake Gen2 Dataset to be created.
-	// +crossplane:generate:reference:type=DataShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datashare/v1beta1.DataShare
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`
 
-	// Reference to a DataShare to populate shareId.
+	// Reference to a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
 	ShareIDRef *v1.Reference `json:"shareIdRef,omitempty" tf:"-"`
 
-	// Selector for a DataShare to populate shareId.
+	// Selector for a DataShare in datashare to populate shareId.
 	// +kubebuilder:validation:Optional
 	ShareIDSelector *v1.Selector `json:"shareIdSelector,omitempty" tf:"-"`
 

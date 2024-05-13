@@ -234,16 +234,16 @@ type FirewallPolicyRuleCollectionGroupParameters struct {
 	ApplicationRuleCollection []ApplicationRuleCollectionParameters `json:"applicationRuleCollection,omitempty" tf:"application_rule_collection,omitempty"`
 
 	// The ID of the Firewall Policy where the Firewall Policy Rule Collection Group should exist. Changing this forces a new Firewall Policy Rule Collection Group to be created.
-	// +crossplane:generate:reference:type=FirewallPolicy
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.FirewallPolicy
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FirewallPolicyID *string `json:"firewallPolicyId,omitempty" tf:"firewall_policy_id,omitempty"`
 
-	// Reference to a FirewallPolicy to populate firewallPolicyId.
+	// Reference to a FirewallPolicy in network to populate firewallPolicyId.
 	// +kubebuilder:validation:Optional
 	FirewallPolicyIDRef *v1.Reference `json:"firewallPolicyIdRef,omitempty" tf:"-"`
 
-	// Selector for a FirewallPolicy to populate firewallPolicyId.
+	// Selector for a FirewallPolicy in network to populate firewallPolicyId.
 	// +kubebuilder:validation:Optional
 	FirewallPolicyIDSelector *v1.Selector `json:"firewallPolicyIdSelector,omitempty" tf:"-"`
 

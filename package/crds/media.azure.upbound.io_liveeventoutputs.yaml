@@ -86,7 +86,7 @@ spec:
                       this forces a new Live Output to be created.
                     type: string
                   assetNameRef:
-                    description: Reference to a Asset to populate assetName.
+                    description: Reference to a Asset in media to populate assetName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -120,7 +120,7 @@ spec:
                     - name
                     type: object
                   assetNameSelector:
-                    description: Selector for a Asset to populate assetName.
+                    description: Selector for a Asset in media to populate assetName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -174,7 +174,7 @@ spec:
                       new Live Output to be created.
                     type: string
                   liveEventIdRef:
-                    description: Reference to a LiveEvent to populate liveEventId.
+                    description: Reference to a LiveEvent in media to populate liveEventId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -208,7 +208,7 @@ spec:
                     - name
                     type: object
                   liveEventIdSelector:
-                    description: Selector for a LiveEvent to populate liveEventId.
+                    description: Selector for a LiveEvent in media to populate liveEventId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -294,7 +294,7 @@ spec:
                       this forces a new Live Output to be created.
                     type: string
                   assetNameRef:
-                    description: Reference to a Asset to populate assetName.
+                    description: Reference to a Asset in media to populate assetName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -328,7 +328,7 @@ spec:
                     - name
                     type: object
                   assetNameSelector:
-                    description: Selector for a Asset to populate assetName.
+                    description: Selector for a Asset in media to populate assetName.
                     properties:
                       matchControllerRef:
                         description: |-

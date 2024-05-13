@@ -243,7 +243,8 @@ spec:
                       with the token.
                     type: string
                   scopeMapIdRef:
-                    description: Reference to a ScopeMap to populate scopeMapId.
+                    description: Reference to a ScopeMap in containerregistry to populate
+                      scopeMapId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -277,7 +278,8 @@ spec:
                     - name
                     type: object
                   scopeMapIdSelector:
-                    description: Selector for a ScopeMap to populate scopeMapId.
+                    description: Selector for a ScopeMap in containerregistry to populate
+                      scopeMapId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -339,7 +341,8 @@ spec:
                       with the token.
                     type: string
                   scopeMapIdRef:
-                    description: Reference to a ScopeMap to populate scopeMapId.
+                    description: Reference to a ScopeMap in containerregistry to populate
+                      scopeMapId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -373,7 +376,8 @@ spec:
                     - name
                     type: object
                   scopeMapIdSelector:
-                    description: Selector for a ScopeMap to populate scopeMapId.
+                    description: Selector for a ScopeMap in containerregistry to populate
+                      scopeMapId.
                     properties:
                       matchControllerRef:
                         description: |-

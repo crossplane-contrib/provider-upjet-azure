@@ -14,21 +14,21 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_data_protection_backup_policy_blob_storage", func(r *config.Resource) {
 		r.References["vault_id"] = config.Reference{
-			Type:      "BackupVault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_data_protection_backup_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_data_protection_backup_policy_disk", func(r *config.Resource) {
 		r.References["vault_id"] = config.Reference{
-			Type:      "BackupVault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_data_protection_backup_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_data_protection_backup_policy_postgresql", func(r *config.Resource) {
 		r.References["vault_name"] = config.Reference{
-			Type: "BackupVault",
+			TerraformName: "azurerm_data_protection_backup_vault",
 		}
 	})
 }

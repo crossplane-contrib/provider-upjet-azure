@@ -85,7 +85,8 @@ spec:
                       Backup Policy Blob Storage to be created.
                     type: string
                   vaultIdRef:
-                    description: Reference to a BackupVault to populate vaultId.
+                    description: Reference to a BackupVault in dataprotection to populate
+                      vaultId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -119,7 +120,8 @@ spec:
                     - name
                     type: object
                   vaultIdSelector:
-                    description: Selector for a BackupVault to populate vaultId.
+                    description: Selector for a BackupVault in dataprotection to populate
+                      vaultId.
                     properties:
                       matchControllerRef:
                         description: |-

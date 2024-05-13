@@ -163,7 +163,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   serverNameRef:
-                    description: Reference to a Server to populate serverName.
+                    description: Reference to a Server in dbforpostgresql to populate
+                      serverName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -197,7 +198,8 @@ spec:
                     - name
                     type: object
                   serverNameSelector:
-                    description: Selector for a Server to populate serverName.
+                    description: Selector for a Server in dbforpostgresql to populate
+                      serverName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -345,7 +347,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   serverNameRef:
-                    description: Reference to a Server to populate serverName.
+                    description: Reference to a Server in dbforpostgresql to populate
+                      serverName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -379,7 +382,8 @@ spec:
                     - name
                     type: object
                   serverNameSelector:
-                    description: Selector for a Server to populate serverName.
+                    description: Selector for a Server in dbforpostgresql to populate
+                      serverName.
                     properties:
                       matchControllerRef:
                         description: |-

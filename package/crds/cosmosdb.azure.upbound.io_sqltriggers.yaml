@@ -82,7 +82,8 @@ spec:
                       be created.
                     type: string
                   containerIdRef:
-                    description: Reference to a SQLContainer to populate containerId.
+                    description: Reference to a SQLContainer in cosmosdb to populate
+                      containerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +117,8 @@ spec:
                     - name
                     type: object
                   containerIdSelector:
-                    description: Selector for a SQLContainer to populate containerId.
+                    description: Selector for a SQLContainer in cosmosdb to populate
+                      containerId.
                     properties:
                       matchControllerRef:
                         description: |-

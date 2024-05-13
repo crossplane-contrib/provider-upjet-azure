@@ -31,15 +31,15 @@ type LoadBalancerFrontendIPConfigurationInitParameters struct {
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
 	// The ID of a Public IP Address which should be associated with the Load Balancer.
-	// +crossplane:generate:reference:type=PublicIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
-	// Reference to a PublicIP to populate publicIpAddressId.
+	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicIP to populate publicIpAddressId.
+	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
@@ -47,15 +47,15 @@ type LoadBalancerFrontendIPConfigurationInitParameters struct {
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
 	// The ID of the Subnet which should be associated with the IP Configuration.
-	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet to populate subnetId.
+	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet to populate subnetId.
+	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
@@ -133,16 +133,16 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	PrivateIPAddressVersion *string `json:"privateIpAddressVersion,omitempty" tf:"private_ip_address_version,omitempty"`
 
 	// The ID of a Public IP Address which should be associated with the Load Balancer.
-	// +crossplane:generate:reference:type=PublicIP
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PublicIPAddressID *string `json:"publicIpAddressId,omitempty" tf:"public_ip_address_id,omitempty"`
 
-	// Reference to a PublicIP to populate publicIpAddressId.
+	// Reference to a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDRef *v1.Reference `json:"publicIpAddressIdRef,omitempty" tf:"-"`
 
-	// Selector for a PublicIP to populate publicIpAddressId.
+	// Selector for a PublicIP in network to populate publicIpAddressId.
 	// +kubebuilder:validation:Optional
 	PublicIPAddressIDSelector *v1.Selector `json:"publicIpAddressIdSelector,omitempty" tf:"-"`
 
@@ -151,16 +151,16 @@ type LoadBalancerFrontendIPConfigurationParameters struct {
 	PublicIPPrefixID *string `json:"publicIpPrefixId,omitempty" tf:"public_ip_prefix_id,omitempty"`
 
 	// The ID of the Subnet which should be associated with the IP Configuration.
-	// +crossplane:generate:reference:type=Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Reference to a Subnet to populate subnetId.
+	// Reference to a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
 
-	// Selector for a Subnet to populate subnetId.
+	// Selector for a Subnet in network to populate subnetId.
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 

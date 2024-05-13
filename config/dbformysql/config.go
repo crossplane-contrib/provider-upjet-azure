@@ -24,26 +24,26 @@ const (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_mysql_flexible_server", func(r *config.Resource) {
 		r.References["private_dns_zone_id"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/network/v1beta1.PrivateDNSZone",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mysql_flexible_database", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "FlexibleServer",
+			TerraformName: "azurerm_mysql_flexible_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mysql_flexible_server_configuration", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "FlexibleServer",
+			TerraformName: "azurerm_mysql_flexible_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mysql_flexible_server_firewall_rule", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "FlexibleServer",
+			TerraformName: "azurerm_mysql_flexible_server",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_mysql_server", func(r *config.Resource) {

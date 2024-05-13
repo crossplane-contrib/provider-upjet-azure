@@ -25,15 +25,15 @@ type AccessPolicyInitParameters_2 struct {
 	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
 
 	// Specifies the id of the Key Vault resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
-	// Reference to a Vault to populate keyVaultId.
+	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
-	// Selector for a Vault to populate keyVaultId.
+	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 
@@ -95,16 +95,16 @@ type AccessPolicyParameters_2 struct {
 	KeyPermissions []*string `json:"keyPermissions,omitempty" tf:"key_permissions,omitempty"`
 
 	// Specifies the id of the Key Vault resource. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
-	// Reference to a Vault to populate keyVaultId.
+	// Reference to a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDRef *v1.Reference `json:"keyVaultIdRef,omitempty" tf:"-"`
 
-	// Selector for a Vault to populate keyVaultId.
+	// Selector for a Vault in keyvault to populate keyVaultId.
 	// +kubebuilder:validation:Optional
 	KeyVaultIDSelector *v1.Selector `json:"keyVaultIdSelector,omitempty" tf:"-"`
 

@@ -69,15 +69,15 @@ type PoolObservation struct {
 type PoolParameters struct {
 
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Reference to a Account to populate accountName.
+	// Reference to a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
-	// Selector for a Account to populate accountName.
+	// Selector for a Account in netapp to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 

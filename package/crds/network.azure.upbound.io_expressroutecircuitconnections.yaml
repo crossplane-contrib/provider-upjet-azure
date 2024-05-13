@@ -107,8 +107,8 @@ spec:
                       to be created.
                     type: string
                   peerPeeringIdRef:
-                    description: Reference to a ExpressRouteCircuitPeering to populate
-                      peerPeeringId.
+                    description: Reference to a ExpressRouteCircuitPeering in network
+                      to populate peerPeeringId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -142,8 +142,8 @@ spec:
                     - name
                     type: object
                   peerPeeringIdSelector:
-                    description: Selector for a ExpressRouteCircuitPeering to populate
-                      peerPeeringId.
+                    description: Selector for a ExpressRouteCircuitPeering in network
+                      to populate peerPeeringId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -188,8 +188,8 @@ spec:
                       this forces a new Express Route Circuit Connection to be created.
                     type: string
                   peeringIdRef:
-                    description: Reference to a ExpressRouteCircuitPeering to populate
-                      peeringId.
+                    description: Reference to a ExpressRouteCircuitPeering in network
+                      to populate peeringId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -223,8 +223,8 @@ spec:
                     - name
                     type: object
                   peeringIdSelector:
-                    description: Selector for a ExpressRouteCircuitPeering to populate
-                      peeringId.
+                    description: Selector for a ExpressRouteCircuitPeering in network
+                      to populate peeringId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -292,8 +292,8 @@ spec:
                       to be created.
                     type: string
                   peerPeeringIdRef:
-                    description: Reference to a ExpressRouteCircuitPeering to populate
-                      peerPeeringId.
+                    description: Reference to a ExpressRouteCircuitPeering in network
+                      to populate peerPeeringId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -327,8 +327,8 @@ spec:
                     - name
                     type: object
                   peerPeeringIdSelector:
-                    description: Selector for a ExpressRouteCircuitPeering to populate
-                      peerPeeringId.
+                    description: Selector for a ExpressRouteCircuitPeering in network
+                      to populate peerPeeringId.
                     properties:
                       matchControllerRef:
                         description: |-

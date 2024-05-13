@@ -17,22 +17,22 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_cdn_frontdoor_route", func(r *config.Resource) {
 		r.References["cdn_frontdoor_origin_ids"] = config.Reference{
-			Type:      "github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorOrigin",
-			Extractor: "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
+			TerraformName: "azurerm_cdn_frontdoor_origin",
+			Extractor:     "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
 		}
 		r.References["cdn_frontdoor_rule_set_ids"] = config.Reference{
-			Type:      "github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorRuleSet",
-			Extractor: "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
+			TerraformName: "azurerm_cdn_frontdoor_rule_set",
+			Extractor:     "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
 		}
 		r.References["cdn_frontdoor_custom_domain_ids"] = config.Reference{
-			Type:      "github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorCustomDomain",
-			Extractor: "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
+			TerraformName: "azurerm_cdn_frontdoor_custom_domain",
+			Extractor:     "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_cdn_frontdoor_custom_domain_association", func(r *config.Resource) {
 		r.References["cdn_frontdoor_route_ids"] = config.Reference{
-			Type:      "github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorRoute",
-			Extractor: "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
+			TerraformName: "azurerm_cdn_frontdoor_route",
+			Extractor:     "github.com/crossplane/upjet/pkg/resource.ExtractResourceID()",
 		}
 	})
 	p.AddResourceConfigurator("azurerm_cdn_frontdoor_firewall_policy", func(r *config.Resource) {

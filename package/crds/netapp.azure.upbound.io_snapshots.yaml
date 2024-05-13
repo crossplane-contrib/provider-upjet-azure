@@ -79,7 +79,7 @@ spec:
                       to be created.
                     type: string
                   accountNameRef:
-                    description: Reference to a Account to populate accountName.
+                    description: Reference to a Account in netapp to populate accountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +113,7 @@ spec:
                     - name
                     type: object
                   accountNameSelector:
-                    description: Selector for a Account to populate accountName.
+                    description: Selector for a Account in netapp to populate accountName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -162,7 +162,7 @@ spec:
                       created.
                     type: string
                   poolNameRef:
-                    description: Reference to a Pool to populate poolName.
+                    description: Reference to a Pool in netapp to populate poolName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -196,7 +196,7 @@ spec:
                     - name
                     type: object
                   poolNameSelector:
-                    description: Selector for a Pool to populate poolName.
+                    description: Selector for a Pool in netapp to populate poolName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -322,7 +322,7 @@ spec:
                       to be created.
                     type: string
                   volumeNameRef:
-                    description: Reference to a Volume to populate volumeName.
+                    description: Reference to a Volume in netapp to populate volumeName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -356,7 +356,7 @@ spec:
                     - name
                     type: object
                   volumeNameSelector:
-                    description: Selector for a Volume to populate volumeName.
+                    description: Selector for a Volume in netapp to populate volumeName.
                     properties:
                       matchControllerRef:
                         description: |-

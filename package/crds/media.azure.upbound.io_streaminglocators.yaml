@@ -82,7 +82,7 @@ spec:
                       Locator to be created.
                     type: string
                   assetNameRef:
-                    description: Reference to a Asset to populate assetName.
+                    description: Reference to a Asset in media to populate assetName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -116,7 +116,7 @@ spec:
                     - name
                     type: object
                   assetNameSelector:
-                    description: Selector for a Asset to populate assetName.
+                    description: Selector for a Asset in media to populate assetName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -205,7 +205,8 @@ spec:
                       a new Streaming Locator to be created.
                     type: string
                   mediaServicesAccountNameRef:
-                    description: Reference to a ServicesAccount to populate mediaServicesAccountName.
+                    description: Reference to a ServicesAccount in media to populate
+                      mediaServicesAccountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -239,7 +240,8 @@ spec:
                     - name
                     type: object
                   mediaServicesAccountNameSelector:
-                    description: Selector for a ServicesAccount to populate mediaServicesAccountName.
+                    description: Selector for a ServicesAccount in media to populate
+                      mediaServicesAccountName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -399,7 +401,7 @@ spec:
                       Locator to be created.
                     type: string
                   assetNameRef:
-                    description: Reference to a Asset to populate assetName.
+                    description: Reference to a Asset in media to populate assetName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -433,7 +435,7 @@ spec:
                     - name
                     type: object
                   assetNameSelector:
-                    description: Selector for a Asset to populate assetName.
+                    description: Selector for a Asset in media to populate assetName.
                     properties:
                       matchControllerRef:
                         description: |-

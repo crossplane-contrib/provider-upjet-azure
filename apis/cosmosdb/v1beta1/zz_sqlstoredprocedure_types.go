@@ -43,15 +43,15 @@ type SQLStoredProcedureObservation struct {
 type SQLStoredProcedureParameters struct {
 
 	// The name of the Cosmos DB Account to create the stored procedure within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
-	// Reference to a Account to populate accountName.
+	// Reference to a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameRef *v1.Reference `json:"accountNameRef,omitempty" tf:"-"`
 
-	// Selector for a Account to populate accountName.
+	// Selector for a Account in cosmosdb to populate accountName.
 	// +kubebuilder:validation:Optional
 	AccountNameSelector *v1.Selector `json:"accountNameSelector,omitempty" tf:"-"`
 
@@ -60,28 +60,28 @@ type SQLStoredProcedureParameters struct {
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
 	// The name of the Cosmos DB SQL Container to create the stored procedure within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=SQLContainer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.SQLContainer
 	// +kubebuilder:validation:Optional
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`
 
-	// Reference to a SQLContainer to populate containerName.
+	// Reference to a SQLContainer in cosmosdb to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameRef *v1.Reference `json:"containerNameRef,omitempty" tf:"-"`
 
-	// Selector for a SQLContainer to populate containerName.
+	// Selector for a SQLContainer in cosmosdb to populate containerName.
 	// +kubebuilder:validation:Optional
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The name of the Cosmos DB SQL Database to create the stored procedure within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=SQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.SQLDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Reference to a SQLDatabase to populate databaseName.
+	// Reference to a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
-	// Selector for a SQLDatabase to populate databaseName.
+	// Selector for a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 

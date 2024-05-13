@@ -83,8 +83,8 @@ spec:
                       is randomly load balanced across IPs in the backend IPs.
                     type: string
                   backendAddressPoolIdRef:
-                    description: Reference to a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Reference to a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -118,8 +118,8 @@ spec:
                     - name
                     type: object
                   backendAddressPoolIdSelector:
-                    description: Selector for a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Selector for a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -182,7 +182,8 @@ spec:
                       Outbound Rule. Changing this forces a new resource to be created.
                     type: string
                   loadbalancerIdRef:
-                    description: Reference to a LoadBalancer to populate loadbalancerId.
+                    description: Reference to a LoadBalancer in network to populate
+                      loadbalancerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -216,7 +217,8 @@ spec:
                     - name
                     type: object
                   loadbalancerIdSelector:
-                    description: Selector for a LoadBalancer to populate loadbalancerId.
+                    description: Selector for a LoadBalancer in network to populate
+                      loadbalancerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -282,8 +284,8 @@ spec:
                       is randomly load balanced across IPs in the backend IPs.
                     type: string
                   backendAddressPoolIdRef:
-                    description: Reference to a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Reference to a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -317,8 +319,8 @@ spec:
                     - name
                     type: object
                   backendAddressPoolIdSelector:
-                    description: Selector for a LoadBalancerBackendAddressPool to
-                      populate backendAddressPoolId.
+                    description: Selector for a LoadBalancerBackendAddressPool in
+                      network to populate backendAddressPoolId.
                     properties:
                       matchControllerRef:
                         description: |-

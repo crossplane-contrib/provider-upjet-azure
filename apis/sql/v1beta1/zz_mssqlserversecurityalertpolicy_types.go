@@ -112,15 +112,15 @@ type MSSQLServerSecurityAlertPolicyParameters struct {
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
 	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta1.MSSQLServer
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Reference to a MSSQLServer to populate serverName.
+	// Reference to a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLServer to populate serverName.
+	// Selector for a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 

@@ -168,15 +168,15 @@ type SecurityRuleParameters_2 struct {
 	Direction *string `json:"direction,omitempty" tf:"direction,omitempty"`
 
 	// The name of the Network Security Group that we want to attach the rule to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.SecurityGroup
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupName *string `json:"networkSecurityGroupName,omitempty" tf:"network_security_group_name,omitempty"`
 
-	// Reference to a SecurityGroup to populate networkSecurityGroupName.
+	// Reference to a SecurityGroup in network to populate networkSecurityGroupName.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupNameRef *v1.Reference `json:"networkSecurityGroupNameRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate networkSecurityGroupName.
+	// Selector for a SecurityGroup in network to populate networkSecurityGroupName.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupNameSelector *v1.Selector `json:"networkSecurityGroupNameSelector,omitempty" tf:"-"`
 

@@ -730,15 +730,15 @@ type RestoreInitParameters struct {
 	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc,omitempty" tf:"restore_timestamp_in_utc,omitempty"`
 
 	// The resource ID of the restorable database account from which the restore has to be initiated. The example is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	SourceCosmosDBAccountID *string `json:"sourceCosmosdbAccountId,omitempty" tf:"source_cosmosdb_account_id,omitempty"`
 
-	// Reference to a Account to populate sourceCosmosdbAccountId.
+	// Reference to a Account in cosmosdb to populate sourceCosmosdbAccountId.
 	// +kubebuilder:validation:Optional
 	SourceCosmosDBAccountIDRef *v1.Reference `json:"sourceCosmosdbAccountIdRef,omitempty" tf:"-"`
 
-	// Selector for a Account to populate sourceCosmosdbAccountId.
+	// Selector for a Account in cosmosdb to populate sourceCosmosdbAccountId.
 	// +kubebuilder:validation:Optional
 	SourceCosmosDBAccountIDSelector *v1.Selector `json:"sourceCosmosdbAccountIdSelector,omitempty" tf:"-"`
 
@@ -779,16 +779,16 @@ type RestoreParameters struct {
 	RestoreTimestampInUtc *string `json:"restoreTimestampInUtc" tf:"restore_timestamp_in_utc,omitempty"`
 
 	// The resource ID of the restorable database account from which the restore has to be initiated. The example is /subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/restorableDatabaseAccounts/{restorableDatabaseAccountName}. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SourceCosmosDBAccountID *string `json:"sourceCosmosdbAccountId,omitempty" tf:"source_cosmosdb_account_id,omitempty"`
 
-	// Reference to a Account to populate sourceCosmosdbAccountId.
+	// Reference to a Account in cosmosdb to populate sourceCosmosdbAccountId.
 	// +kubebuilder:validation:Optional
 	SourceCosmosDBAccountIDRef *v1.Reference `json:"sourceCosmosdbAccountIdRef,omitempty" tf:"-"`
 
-	// Selector for a Account to populate sourceCosmosdbAccountId.
+	// Selector for a Account in cosmosdb to populate sourceCosmosdbAccountId.
 	// +kubebuilder:validation:Optional
 	SourceCosmosDBAccountIDSelector *v1.Selector `json:"sourceCosmosdbAccountIdSelector,omitempty" tf:"-"`
 

@@ -80,7 +80,8 @@ spec:
                       with. Changing this forces a new Management to be created.
                     type: string
                   managementGroupIdRef:
-                    description: Reference to a ManagementGroup to populate managementGroupId.
+                    description: Reference to a ManagementGroup in management to populate
+                      managementGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -114,7 +115,8 @@ spec:
                     - name
                     type: object
                   managementGroupIdSelector:
-                    description: Selector for a ManagementGroup to populate managementGroupId.
+                    description: Selector for a ManagementGroup in management to populate
+                      managementGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -253,7 +255,8 @@ spec:
                       with. Changing this forces a new Management to be created.
                     type: string
                   managementGroupIdRef:
-                    description: Reference to a ManagementGroup to populate managementGroupId.
+                    description: Reference to a ManagementGroup in management to populate
+                      managementGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -287,7 +290,8 @@ spec:
                     - name
                     type: object
                   managementGroupIdSelector:
-                    description: Selector for a ManagementGroup to populate managementGroupId.
+                    description: Selector for a ManagementGroup in management to populate
+                      managementGroupId.
                     properties:
                       matchControllerRef:
                         description: |-

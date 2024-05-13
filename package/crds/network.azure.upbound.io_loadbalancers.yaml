@@ -109,7 +109,8 @@ spec:
                             be associated with the Load Balancer.
                           type: string
                         publicIpAddressIdRef:
-                          description: Reference to a PublicIP to populate publicIpAddressId.
+                          description: Reference to a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -143,7 +144,8 @@ spec:
                           - name
                           type: object
                         publicIpAddressIdSelector:
-                          description: Selector for a PublicIP to populate publicIpAddressId.
+                          description: Selector for a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -192,7 +194,8 @@ spec:
                             with the IP Configuration.
                           type: string
                         subnetIdRef:
-                          description: Reference to a Subnet to populate subnetId.
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -226,7 +229,8 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: Selector for a Subnet to populate subnetId.
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -426,7 +430,8 @@ spec:
                             be associated with the Load Balancer.
                           type: string
                         publicIpAddressIdRef:
-                          description: Reference to a PublicIP to populate publicIpAddressId.
+                          description: Reference to a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -460,7 +465,8 @@ spec:
                           - name
                           type: object
                         publicIpAddressIdSelector:
-                          description: Selector for a PublicIP to populate publicIpAddressId.
+                          description: Selector for a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -509,7 +515,8 @@ spec:
                             with the IP Configuration.
                           type: string
                         subnetIdRef:
-                          description: Reference to a Subnet to populate subnetId.
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -543,7 +550,8 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: Selector for a Subnet to populate subnetId.
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
                           properties:
                             matchControllerRef:
                               description: |-

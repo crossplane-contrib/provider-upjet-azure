@@ -88,8 +88,8 @@ spec:
                       type: string
                     type: array
                   endpointNamesRefs:
-                    description: References to IOTHubEndpointStorageContainer to populate
-                      endpointNames.
+                    description: References to IOTHubEndpointStorageContainer in devices
+                      to populate endpointNames.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -127,7 +127,7 @@ spec:
                     type: array
                   endpointNamesSelector:
                     description: Selector for a list of IOTHubEndpointStorageContainer
-                      to populate endpointNames.
+                      in devices to populate endpointNames.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -171,7 +171,7 @@ spec:
                       belongs. Changing this forces a new resource to be created.
                     type: string
                   iothubNameRef:
-                    description: Reference to a IOTHub to populate iothubName.
+                    description: Reference to a IOTHub in devices to populate iothubName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -205,7 +205,7 @@ spec:
                     - name
                     type: object
                   iothubNameSelector:
-                    description: Selector for a IOTHub to populate iothubName.
+                    description: Selector for a IOTHub in devices to populate iothubName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -360,8 +360,8 @@ spec:
                       type: string
                     type: array
                   endpointNamesRefs:
-                    description: References to IOTHubEndpointStorageContainer to populate
-                      endpointNames.
+                    description: References to IOTHubEndpointStorageContainer in devices
+                      to populate endpointNames.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -399,7 +399,7 @@ spec:
                     type: array
                   endpointNamesSelector:
                     description: Selector for a list of IOTHubEndpointStorageContainer
-                      to populate endpointNames.
+                      in devices to populate endpointNames.
                     properties:
                       matchControllerRef:
                         description: |-

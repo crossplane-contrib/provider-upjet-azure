@@ -38,16 +38,16 @@ type BackupPolicyBlobStorageParameters struct {
 	RetentionDuration *string `json:"retentionDuration,omitempty" tf:"retention_duration,omitempty"`
 
 	// The ID of the Backup Vault within which the Backup Policy Blob Storage should exist. Changing this forces a new Backup Policy Blob Storage to be created.
-	// +crossplane:generate:reference:type=BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta1.BackupVault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VaultID *string `json:"vaultId,omitempty" tf:"vault_id,omitempty"`
 
-	// Reference to a BackupVault to populate vaultId.
+	// Reference to a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
 	VaultIDRef *v1.Reference `json:"vaultIdRef,omitempty" tf:"-"`
 
-	// Selector for a BackupVault to populate vaultId.
+	// Selector for a BackupVault in dataprotection to populate vaultId.
 	// +kubebuilder:validation:Optional
 	VaultIDSelector *v1.Selector `json:"vaultIdSelector,omitempty" tf:"-"`
 }

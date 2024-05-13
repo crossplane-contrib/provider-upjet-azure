@@ -143,28 +143,28 @@ type BlobParameters struct {
 	SourceURI *string `json:"sourceUri,omitempty" tf:"source_uri,omitempty"`
 
 	// Specifies the storage account in which to create the storage container. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Reference to a Account to populate storageAccountName.
+	// Reference to a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameRef *v1.Reference `json:"storageAccountNameRef,omitempty" tf:"-"`
 
-	// Selector for a Account to populate storageAccountName.
+	// Selector for a Account in storage to populate storageAccountName.
 	// +kubebuilder:validation:Optional
 	StorageAccountNameSelector *v1.Selector `json:"storageAccountNameSelector,omitempty" tf:"-"`
 
 	// The name of the storage container in which this blob should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Container
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	// +kubebuilder:validation:Optional
 	StorageContainerName *string `json:"storageContainerName,omitempty" tf:"storage_container_name,omitempty"`
 
-	// Reference to a Container to populate storageContainerName.
+	// Reference to a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
 	StorageContainerNameRef *v1.Reference `json:"storageContainerNameRef,omitempty" tf:"-"`
 
-	// Selector for a Container to populate storageContainerName.
+	// Selector for a Container in storage to populate storageContainerName.
 	// +kubebuilder:validation:Optional
 	StorageContainerNameSelector *v1.Selector `json:"storageContainerNameSelector,omitempty" tf:"-"`
 

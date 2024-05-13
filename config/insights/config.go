@@ -14,40 +14,40 @@ import (
 func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_monitor_metric_alert", func(r *config.Resource) {
 		r.References["scopes"] = config.Reference{
-			Type:      rconfig.StorageAccountReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["action.action_group_id"] = config.Reference{
-			Type:      "MonitorActionGroup",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_monitor_action_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_monitor_private_link_scoped_service", func(r *config.Resource) {
 		r.References["scope_name"] = config.Reference{
-			Type: "MonitorPrivateLinkScope",
+			TerraformName: "azurerm_monitor_private_link_scope",
 		}
 		r.References["linked_resource_id"] = config.Reference{
-			Type:      "ApplicationInsights",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_application_insights",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 	p.AddResourceConfigurator("azurerm_monitor_activity_log_alert", func(r *config.Resource) {
 		r.References["scopes"] = config.Reference{
-			Type:      "github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_resource_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 	p.AddResourceConfigurator("azurerm_monitor_scheduled_query_rules_alert", func(r *config.Resource) {
 		r.References["action.action_group"] = config.Reference{
-			Type:      "MonitorActionGroup",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_monitor_action_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 	p.AddResourceConfigurator("azurerm_monitor_scheduled_query_rules_alert_v2", func(r *config.Resource) {
 		r.References["scopes"] = config.Reference{
-			Type:      "ApplicationInsights",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_application_insights",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 	p.AddResourceConfigurator("azurerm_monitor_diagnostic_setting", func(r *config.Resource) {

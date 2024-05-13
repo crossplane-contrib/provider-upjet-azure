@@ -158,7 +158,8 @@ spec:
                       forces a new Data Share Kusto Cluster Dataset to be created.
                     type: string
                   shareIdRef:
-                    description: Reference to a DataShare to populate shareId.
+                    description: Reference to a DataShare in datashare to populate
+                      shareId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -192,7 +193,8 @@ spec:
                     - name
                     type: object
                   shareIdSelector:
-                    description: Selector for a DataShare to populate shareId.
+                    description: Selector for a DataShare in datashare to populate
+                      shareId.
                     properties:
                       matchControllerRef:
                         description: |-

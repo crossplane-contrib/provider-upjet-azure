@@ -51,80 +51,80 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_mssql_server_transparent_data_encryption", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "MSSQLServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["key_vault_key_id"] = config.Reference{
-			Type:      rconfig.VaultKeyReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault_key",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_virtual_network_rule", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "MSSQLServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_managed_instance", func(r *config.Resource) {
 		r.References["dns_zone_partner_id"] = config.Reference{
-			Type:      "MSSQLManagedInstance",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_managed_instance",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_managed_database", func(r *config.Resource) {
 		r.References["managed_instance_id"] = config.Reference{
-			Type:      "MSSQLManagedInstance",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_managed_instance",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_managed_instance_active_directory_administrator", func(r *config.Resource) {
 		r.References["managed_instance_id"] = config.Reference{
-			Type:      "MSSQLManagedInstance",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_managed_instance",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_failover_group", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "MSSQLServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["partner_server.id"] = config.Reference{
-			Type:      "MSSQLServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["databases"] = config.Reference{
-			Type:      "MSSQLDatabase",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_database",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_managed_instance_failover_group", func(r *config.Resource) {
 		r.References["managed_instance_id"] = config.Reference{
-			Type:      "MSSQLManagedInstance",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_managed_instance",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["partner_managed_instance_id"] = config.Reference{
-			Type:      "MSSQLManagedInstance",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_managed_instance",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_managed_instance_vulnerability_assessment", func(r *config.Resource) {
 		r.References["managed_instance_id"] = config.Reference{
-			Type:      "MSSQLManagedInstance",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_managed_instance",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_database", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "MSSQLServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"maintenance_configuration_name", "elastic_pool_id"},
@@ -133,21 +133,21 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_mssql_outbound_firewall_rule", func(r *config.Resource) {
 		r.References["server_id"] = config.Reference{
-			Type:      "MSSQLServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_server_dns_alias", func(r *config.Resource) {
 		r.References["mssql_server_id"] = config.Reference{
-			Type:      "MSSQLServer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_mssql_server",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_server_security_alert_policy", func(r *config.Resource) {
 		r.References["server_name"] = config.Reference{
-			Type: "MSSQLServer",
+			TerraformName: "azurerm_mssql_server",
 		}
 	})
 
@@ -156,13 +156,13 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"max_size_bytes"},
 		}
 		r.References["server_name"] = config.Reference{
-			Type: "MSSQLServer",
+			TerraformName: "azurerm_mssql_server",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_mssql_database_vulnerability_assessment_rule_baseline", func(r *config.Resource) {
 		r.References["database_name"] = config.Reference{
-			Type: "MSSQLDatabase",
+			TerraformName: "azurerm_mssql_database",
 		}
 	})
 }

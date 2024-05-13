@@ -78,14 +78,14 @@ type StreamingLocatorInitParameters struct {
 	AlternativeMediaID *string `json:"alternativeMediaId,omitempty" tf:"alternative_media_id,omitempty"`
 
 	// Asset Name. Changing this forces a new Streaming Locator to be created.
-	// +crossplane:generate:reference:type=Asset
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.Asset
 	AssetName *string `json:"assetName,omitempty" tf:"asset_name,omitempty"`
 
-	// Reference to a Asset to populate assetName.
+	// Reference to a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameRef *v1.Reference `json:"assetNameRef,omitempty" tf:"-"`
 
-	// Selector for a Asset to populate assetName.
+	// Selector for a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
 
@@ -157,15 +157,15 @@ type StreamingLocatorParameters struct {
 	AlternativeMediaID *string `json:"alternativeMediaId,omitempty" tf:"alternative_media_id,omitempty"`
 
 	// Asset Name. Changing this forces a new Streaming Locator to be created.
-	// +crossplane:generate:reference:type=Asset
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.Asset
 	// +kubebuilder:validation:Optional
 	AssetName *string `json:"assetName,omitempty" tf:"asset_name,omitempty"`
 
-	// Reference to a Asset to populate assetName.
+	// Reference to a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameRef *v1.Reference `json:"assetNameRef,omitempty" tf:"-"`
 
-	// Selector for a Asset to populate assetName.
+	// Selector for a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
 
@@ -186,15 +186,15 @@ type StreamingLocatorParameters struct {
 	FilterNames []*string `json:"filterNames,omitempty" tf:"filter_names,omitempty"`
 
 	// The Media Services account name. Changing this forces a new Streaming Locator to be created.
-	// +crossplane:generate:reference:type=ServicesAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.ServicesAccount
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
 
-	// Reference to a ServicesAccount to populate mediaServicesAccountName.
+	// Reference to a ServicesAccount in media to populate mediaServicesAccountName.
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountNameRef *v1.Reference `json:"mediaServicesAccountNameRef,omitempty" tf:"-"`
 
-	// Selector for a ServicesAccount to populate mediaServicesAccountName.
+	// Selector for a ServicesAccount in media to populate mediaServicesAccountName.
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountNameSelector *v1.Selector `json:"mediaServicesAccountNameSelector,omitempty" tf:"-"`
 

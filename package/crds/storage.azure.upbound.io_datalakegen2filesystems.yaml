@@ -121,7 +121,7 @@ spec:
                       a new resource to be created.
                     type: string
                   storageAccountIdRef:
-                    description: Reference to a Account to populate storageAccountId.
+                    description: Reference to a Account in storage to populate storageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -155,7 +155,7 @@ spec:
                     - name
                     type: object
                   storageAccountIdSelector:
-                    description: Selector for a Account to populate storageAccountId.
+                    description: Selector for a Account in storage to populate storageAccountId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -256,7 +256,7 @@ spec:
                       a new resource to be created.
                     type: string
                   storageAccountIdRef:
-                    description: Reference to a Account to populate storageAccountId.
+                    description: Reference to a Account in storage to populate storageAccountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -290,7 +290,7 @@ spec:
                     - name
                     type: object
                   storageAccountIdSelector:
-                    description: Selector for a Account to populate storageAccountId.
+                    description: Selector for a Account in storage to populate storageAccountId.
                     properties:
                       matchControllerRef:
                         description: |-

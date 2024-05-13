@@ -19,15 +19,15 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_key_vault_secret", func(r *config.Resource) {
 		r.References["key_vault_id"] = config.Reference{
-			Type:      "Vault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_key", func(r *config.Resource) {
 		r.References["key_vault_id"] = config.Reference{
-			Type:      "Vault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"rotation_policy"},
@@ -36,40 +36,40 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_key_vault_certificate", func(r *config.Resource) {
 		r.References["key_vault_id"] = config.Reference{
-			Type:      "Vault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_certificate_issuer", func(r *config.Resource) {
 		r.References["key_vault_id"] = config.Reference{
-			Type:      "Vault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_storage_account", func(r *config.Resource) {
 		r.References["key_vault_id"] = config.Reference{
-			Type:      "Vault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["storage_account_id"] = config.Reference{
-			Type:      rconfig.StorageAccountReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_access_policy", func(r *config.Resource) {
 		r.References["key_vault_id"] = config.Reference{
-			Type:      "Vault",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_key_vault_managed_storage_account_sas_token_definition", func(r *config.Resource) {
 		r.References["managed_storage_account_id"] = config.Reference{
-			Type:      "ManagedStorageAccount",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault_managed_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }

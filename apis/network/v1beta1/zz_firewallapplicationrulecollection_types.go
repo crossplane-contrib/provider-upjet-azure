@@ -52,15 +52,15 @@ type FirewallApplicationRuleCollectionParameters struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Specifies the name of the Firewall in which the Application Rule Collection should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Firewall
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Firewall
 	// +kubebuilder:validation:Optional
 	AzureFirewallName *string `json:"azureFirewallName,omitempty" tf:"azure_firewall_name,omitempty"`
 
-	// Reference to a Firewall to populate azureFirewallName.
+	// Reference to a Firewall in network to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
 	AzureFirewallNameRef *v1.Reference `json:"azureFirewallNameRef,omitempty" tf:"-"`
 
-	// Selector for a Firewall to populate azureFirewallName.
+	// Selector for a Firewall in network to populate azureFirewallName.
 	// +kubebuilder:validation:Optional
 	AzureFirewallNameSelector *v1.Selector `json:"azureFirewallNameSelector,omitempty" tf:"-"`
 

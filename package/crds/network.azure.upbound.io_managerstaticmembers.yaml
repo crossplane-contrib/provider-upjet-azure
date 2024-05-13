@@ -159,7 +159,8 @@ spec:
                       Manager Static Member to be created.
                     type: string
                   targetVirtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate targetVirtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      targetVirtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -193,7 +194,8 @@ spec:
                     - name
                     type: object
                   targetVirtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate targetVirtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      targetVirtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -252,7 +254,8 @@ spec:
                       Manager Static Member to be created.
                     type: string
                   targetVirtualNetworkIdRef:
-                    description: Reference to a VirtualNetwork to populate targetVirtualNetworkId.
+                    description: Reference to a VirtualNetwork in network to populate
+                      targetVirtualNetworkId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -286,7 +289,8 @@ spec:
                     - name
                     type: object
                   targetVirtualNetworkIdSelector:
-                    description: Selector for a VirtualNetwork to populate targetVirtualNetworkId.
+                    description: Selector for a VirtualNetwork in network to populate
+                      targetVirtualNetworkId.
                     properties:
                       matchControllerRef:
                         description: |-

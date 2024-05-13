@@ -135,7 +135,8 @@ spec:
                       this forces a new resource to be created.
                     type: string
                   namespaceNameRef:
-                    description: Reference to a EventHubNamespace to populate namespaceName.
+                    description: Reference to a EventHubNamespace in eventhub to populate
+                      namespaceName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -169,7 +170,8 @@ spec:
                     - name
                     type: object
                   namespaceNameSelector:
-                    description: Selector for a EventHubNamespace to populate namespaceName.
+                    description: Selector for a EventHubNamespace in eventhub to populate
+                      namespaceName.
                     properties:
                       matchControllerRef:
                         description: |-

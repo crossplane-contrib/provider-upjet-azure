@@ -16,14 +16,14 @@ import (
 type IOTHubDPSCertificateInitParameters struct {
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=IOTHubDPS
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubDPS
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
 
-	// Reference to a IOTHubDPS to populate iotDpsName.
+	// Reference to a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
 	IOTDPSNameRef *v1.Reference `json:"iotDpsNameRef,omitempty" tf:"-"`
 
-	// Selector for a IOTHubDPS to populate iotDpsName.
+	// Selector for a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
 	IOTDPSNameSelector *v1.Selector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 
@@ -53,15 +53,15 @@ type IOTHubDPSCertificateParameters struct {
 	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
 
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=IOTHubDPS
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubDPS
 	// +kubebuilder:validation:Optional
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`
 
-	// Reference to a IOTHubDPS to populate iotDpsName.
+	// Reference to a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
 	IOTDPSNameRef *v1.Reference `json:"iotDpsNameRef,omitempty" tf:"-"`
 
-	// Selector for a IOTHubDPS to populate iotDpsName.
+	// Selector for a IOTHubDPS in devices to populate iotDpsName.
 	// +kubebuilder:validation:Optional
 	IOTDPSNameSelector *v1.Selector `json:"iotDpsNameSelector,omitempty" tf:"-"`
 

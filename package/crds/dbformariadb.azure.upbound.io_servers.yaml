@@ -115,7 +115,8 @@ spec:
                       server ID to use.
                     type: string
                   creationSourceServerIdRef:
-                    description: Reference to a Server to populate creationSourceServerId.
+                    description: Reference to a Server in dbformariadb to populate
+                      creationSourceServerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -149,7 +150,8 @@ spec:
                     - name
                     type: object
                   creationSourceServerIdSelector:
-                    description: Selector for a Server to populate creationSourceServerId.
+                    description: Selector for a Server in dbformariadb to populate
+                      creationSourceServerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -367,7 +369,8 @@ spec:
                       server ID to use.
                     type: string
                   creationSourceServerIdRef:
-                    description: Reference to a Server to populate creationSourceServerId.
+                    description: Reference to a Server in dbformariadb to populate
+                      creationSourceServerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -401,7 +404,8 @@ spec:
                     - name
                     type: object
                   creationSourceServerIdSelector:
-                    description: Selector for a Server to populate creationSourceServerId.
+                    description: Selector for a Server in dbformariadb to populate
+                      creationSourceServerId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -472,7 +472,8 @@ spec:
                             Changing this forces a new resource to be created.
                           type: string
                         sourceCosmosdbAccountIdRef:
-                          description: Reference to a Account to populate sourceCosmosdbAccountId.
+                          description: Reference to a Account in cosmosdb to populate
+                            sourceCosmosdbAccountId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -506,7 +507,8 @@ spec:
                           - name
                           type: object
                         sourceCosmosdbAccountIdSelector:
-                          description: Selector for a Account to populate sourceCosmosdbAccountId.
+                          description: Selector for a Account in cosmosdb to populate
+                            sourceCosmosdbAccountId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -907,7 +909,8 @@ spec:
                             Changing this forces a new resource to be created.
                           type: string
                         sourceCosmosdbAccountIdRef:
-                          description: Reference to a Account to populate sourceCosmosdbAccountId.
+                          description: Reference to a Account in cosmosdb to populate
+                            sourceCosmosdbAccountId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -941,7 +944,8 @@ spec:
                           - name
                           type: object
                         sourceCosmosdbAccountIdSelector:
-                          description: Selector for a Account to populate sourceCosmosdbAccountId.
+                          description: Selector for a Account in cosmosdb to populate
+                            sourceCosmosdbAccountId.
                           properties:
                             matchControllerRef:
                               description: |-

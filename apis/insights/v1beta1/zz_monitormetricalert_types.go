@@ -242,15 +242,15 @@ type DynamicCriteriaParameters struct {
 type MonitorMetricAlertActionInitParameters struct {
 
 	// The ID of the Action Group can be sourced from the
-	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
-	// Reference to a MonitorActionGroup to populate actionGroupId.
+	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a MonitorActionGroup to populate actionGroupId.
+	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
@@ -272,16 +272,16 @@ type MonitorMetricAlertActionObservation struct {
 type MonitorMetricAlertActionParameters struct {
 
 	// The ID of the Action Group can be sourced from the
-	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
-	// Reference to a MonitorActionGroup to populate actionGroupId.
+	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a MonitorActionGroup to populate actionGroupId.
+	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 

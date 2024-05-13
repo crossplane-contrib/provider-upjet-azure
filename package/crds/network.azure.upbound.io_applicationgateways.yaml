@@ -273,7 +273,8 @@ spec:
                             addresses for details.
                           type: string
                         publicIpAddressIdRef:
-                          description: Reference to a PublicIP to populate publicIpAddressId.
+                          description: Reference to a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -307,7 +308,8 @@ spec:
                           - name
                           type: object
                         publicIpAddressIdSelector:
-                          description: Selector for a PublicIP to populate publicIpAddressId.
+                          description: Selector for a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -350,7 +352,8 @@ spec:
                           description: The ID of the Subnet.
                           type: string
                         subnetIdRef:
-                          description: Reference to a Subnet to populate subnetId.
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -384,7 +387,8 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: Selector for a Subnet to populate subnetId.
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -656,7 +660,8 @@ spec:
                                   configuration should connect to.
                                 type: string
                               subnetIdRef:
-                                description: Reference to a Subnet to populate subnetId.
+                                description: Reference to a Subnet in network to populate
+                                  subnetId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -690,7 +695,8 @@ spec:
                                 - name
                                 type: object
                               subnetIdSelector:
-                                description: Selector for a Subnet to populate subnetId.
+                                description: Selector for a Subnet in network to populate
+                                  subnetId.
                                 properties:
                                   matchControllerRef:
                                     description: |-
@@ -1694,7 +1700,8 @@ spec:
                             addresses for details.
                           type: string
                         publicIpAddressIdRef:
-                          description: Reference to a PublicIP to populate publicIpAddressId.
+                          description: Reference to a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1728,7 +1735,8 @@ spec:
                           - name
                           type: object
                         publicIpAddressIdSelector:
-                          description: Selector for a PublicIP to populate publicIpAddressId.
+                          description: Selector for a PublicIP in network to populate
+                            publicIpAddressId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -1771,7 +1779,8 @@ spec:
                           description: The ID of the Subnet.
                           type: string
                         subnetIdRef:
-                          description: Reference to a Subnet to populate subnetId.
+                          description: Reference to a Subnet in network to populate
+                            subnetId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1805,7 +1814,8 @@ spec:
                           - name
                           type: object
                         subnetIdSelector:
-                          description: Selector for a Subnet to populate subnetId.
+                          description: Selector for a Subnet in network to populate
+                            subnetId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -2077,7 +2087,8 @@ spec:
                                   configuration should connect to.
                                 type: string
                               subnetIdRef:
-                                description: Reference to a Subnet to populate subnetId.
+                                description: Reference to a Subnet in network to populate
+                                  subnetId.
                                 properties:
                                   name:
                                     description: Name of the referenced object.
@@ -2111,7 +2122,8 @@ spec:
                                 - name
                                 type: object
                               subnetIdSelector:
-                                description: Selector for a Subnet to populate subnetId.
+                                description: Selector for a Subnet in network to populate
+                                  subnetId.
                                 properties:
                                   matchControllerRef:
                                     description: |-

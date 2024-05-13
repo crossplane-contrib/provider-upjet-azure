@@ -90,7 +90,7 @@ spec:
                       created.
                     type: string
                   storageAccountNameRef:
-                    description: Reference to a Account to populate storageAccountName.
+                    description: Reference to a Account in storage to populate storageAccountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -124,7 +124,7 @@ spec:
                     - name
                     type: object
                   storageAccountNameSelector:
-                    description: Selector for a Account to populate storageAccountName.
+                    description: Selector for a Account in storage to populate storageAccountName.
                     properties:
                       matchControllerRef:
                         description: |-

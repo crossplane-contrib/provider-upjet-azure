@@ -179,7 +179,8 @@ spec:
                       to be created.
                     type: string
                   virtualHubIdRef:
-                    description: Reference to a VirtualHub to populate virtualHubId.
+                    description: Reference to a VirtualHub in network to populate
+                      virtualHubId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -213,7 +214,8 @@ spec:
                     - name
                     type: object
                   virtualHubIdSelector:
-                    description: Selector for a VirtualHub to populate virtualHubId.
+                    description: Selector for a VirtualHub in network to populate
+                      virtualHubId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -291,7 +293,8 @@ spec:
                       to be created.
                     type: string
                   virtualHubIdRef:
-                    description: Reference to a VirtualHub to populate virtualHubId.
+                    description: Reference to a VirtualHub in network to populate
+                      virtualHubId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -325,7 +328,8 @@ spec:
                     - name
                     type: object
                   virtualHubIdSelector:
-                    description: Selector for a VirtualHub to populate virtualHubId.
+                    description: Selector for a VirtualHub in network to populate
+                      virtualHubId.
                     properties:
                       matchControllerRef:
                         description: |-

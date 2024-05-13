@@ -290,8 +290,8 @@ spec:
                       subscription. Changing this forces a new resource to be created.
                     type: string
                   peerVirtualNetworkGatewayIdRef:
-                    description: Reference to a VirtualNetworkGateway to populate
-                      peerVirtualNetworkGatewayId.
+                    description: Reference to a VirtualNetworkGateway in network to
+                      populate peerVirtualNetworkGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -325,8 +325,8 @@ spec:
                     - name
                     type: object
                   peerVirtualNetworkGatewayIdSelector:
-                    description: Selector for a VirtualNetworkGateway to populate
-                      peerVirtualNetworkGatewayId.
+                    description: Selector for a VirtualNetworkGateway in network to
+                      populate peerVirtualNetworkGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -509,8 +509,8 @@ spec:
                       to be created.
                     type: string
                   virtualNetworkGatewayIdRef:
-                    description: Reference to a VirtualNetworkGateway to populate
-                      virtualNetworkGatewayId.
+                    description: Reference to a VirtualNetworkGateway in network to
+                      populate virtualNetworkGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -544,8 +544,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkGatewayIdSelector:
-                    description: Selector for a VirtualNetworkGateway to populate
-                      virtualNetworkGatewayId.
+                    description: Selector for a VirtualNetworkGateway in network to
+                      populate virtualNetworkGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -795,8 +795,8 @@ spec:
                       subscription. Changing this forces a new resource to be created.
                     type: string
                   peerVirtualNetworkGatewayIdRef:
-                    description: Reference to a VirtualNetworkGateway to populate
-                      peerVirtualNetworkGatewayId.
+                    description: Reference to a VirtualNetworkGateway in network to
+                      populate peerVirtualNetworkGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -830,8 +830,8 @@ spec:
                     - name
                     type: object
                   peerVirtualNetworkGatewayIdSelector:
-                    description: Selector for a VirtualNetworkGateway to populate
-                      peerVirtualNetworkGatewayId.
+                    description: Selector for a VirtualNetworkGateway in network to
+                      populate peerVirtualNetworkGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -916,8 +916,8 @@ spec:
                       to be created.
                     type: string
                   virtualNetworkGatewayIdRef:
-                    description: Reference to a VirtualNetworkGateway to populate
-                      virtualNetworkGatewayId.
+                    description: Reference to a VirtualNetworkGateway in network to
+                      populate virtualNetworkGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -951,8 +951,8 @@ spec:
                     - name
                     type: object
                   virtualNetworkGatewayIdSelector:
-                    description: Selector for a VirtualNetworkGateway to populate
-                      virtualNetworkGatewayId.
+                    description: Selector for a VirtualNetworkGateway in network to
+                      populate virtualNetworkGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-

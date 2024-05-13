@@ -38,15 +38,15 @@ type IOTHubConsumerGroupParameters struct {
 	EventHubEndpointName *string `json:"eventhubEndpointName" tf:"eventhub_endpoint_name,omitempty"`
 
 	// The name of the IoT Hub. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 
-	// Reference to a IOTHub to populate iothubName.
+	// Reference to a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
 	IOTHubNameRef *v1.Reference `json:"iothubNameRef,omitempty" tf:"-"`
 
-	// Selector for a IOTHub to populate iothubName.
+	// Selector for a IOTHub in devices to populate iothubName.
 	// +kubebuilder:validation:Optional
 	IOTHubNameSelector *v1.Selector `json:"iothubNameSelector,omitempty" tf:"-"`
 

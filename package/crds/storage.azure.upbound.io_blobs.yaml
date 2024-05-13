@@ -131,7 +131,7 @@ spec:
                       be created.
                     type: string
                   storageAccountNameRef:
-                    description: Reference to a Account to populate storageAccountName.
+                    description: Reference to a Account in storage to populate storageAccountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -165,7 +165,7 @@ spec:
                     - name
                     type: object
                   storageAccountNameSelector:
-                    description: Selector for a Account to populate storageAccountName.
+                    description: Selector for a Account in storage to populate storageAccountName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -210,7 +210,7 @@ spec:
                       created.
                     type: string
                   storageContainerNameRef:
-                    description: Reference to a Container to populate storageContainerName.
+                    description: Reference to a Container in storage to populate storageContainerName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -244,7 +244,7 @@ spec:
                     - name
                     type: object
                   storageContainerNameSelector:
-                    description: Selector for a Container to populate storageContainerName.
+                    description: Selector for a Container in storage to populate storageContainerName.
                     properties:
                       matchControllerRef:
                         description: |-

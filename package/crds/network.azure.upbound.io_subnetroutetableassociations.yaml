@@ -79,7 +79,8 @@ spec:
                       with the Subnet. Changing this forces a new resource to be created.
                     type: string
                   routeTableIdRef:
-                    description: Reference to a RouteTable to populate routeTableId.
+                    description: Reference to a RouteTable in network to populate
+                      routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -113,7 +114,8 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: Selector for a RouteTable to populate routeTableId.
+                    description: Selector for a RouteTable in network to populate
+                      routeTableId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -157,7 +159,7 @@ spec:
                       resource to be created.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in network to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -191,7 +193,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in network to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -249,7 +251,8 @@ spec:
                       with the Subnet. Changing this forces a new resource to be created.
                     type: string
                   routeTableIdRef:
-                    description: Reference to a RouteTable to populate routeTableId.
+                    description: Reference to a RouteTable in network to populate
+                      routeTableId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -283,7 +286,8 @@ spec:
                     - name
                     type: object
                   routeTableIdSelector:
-                    description: Selector for a RouteTable to populate routeTableId.
+                    description: Selector for a RouteTable in network to populate
+                      routeTableId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -327,7 +331,7 @@ spec:
                       resource to be created.
                     type: string
                   subnetIdRef:
-                    description: Reference to a Subnet to populate subnetId.
+                    description: Reference to a Subnet in network to populate subnetId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -361,7 +365,7 @@ spec:
                     - name
                     type: object
                   subnetIdSelector:
-                    description: Selector for a Subnet to populate subnetId.
+                    description: Selector for a Subnet in network to populate subnetId.
                     properties:
                       matchControllerRef:
                         description: |-

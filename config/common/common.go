@@ -27,10 +27,6 @@ import (
 )
 
 const (
-	// ErrFmtNoAttribute is an error string for not-found attributes
-	ErrFmtNoAttribute = `"attribute not found: %s`
-	// ErrFmtUnexpectedType is an error string for attribute map values of unexpected type
-	ErrFmtUnexpectedType = `unexpected type for attribute %s: Expecting a string`
 	// ErrGetPasswordSecret is an error string for failing to get password secret
 	ErrGetPasswordSecret = "cannot get password secret"
 	// VersionV1Beta1 is used for resources that meet the v1beta1 criteria
@@ -48,7 +44,7 @@ const (
 type refSpecification struct {
 	group          string
 	attributeRegex string
-	packagePath    string
+	tfName         string
 }
 
 // In the regular expressions used when determining the references, we can observe many rules that have common strings.
@@ -57,26 +53,26 @@ type refSpecification struct {
 // rules first will be possible. Since there is no fixed index for key-value pairs in maps, it is not possible to place
 // rules from specific to general. Therefore, array is used here.
 var referenceRules = []refSpecification{
-	{wildcardGroup, "resource_group$", rconfig.GetDefaultVersionedPath("azure", "ResourceGroup")},
-	{wildcardGroup, "subnet$", rconfig.GetDefaultVersionedPath("network", "Subnet")},
-	{"cosmosdb", "account$", rconfig.GetDefaultVersionedPath("cosmosdb", "Account")},
-	{"dbformariadb", "server$", rconfig.GetDefaultVersionedPath("dbformariadb", "Server")},
-	{"network", "loadbalancer$", rconfig.GetDefaultVersionedPath("network", "LoadBalancer")},
+	{wildcardGroup, "resource_group$", "azurerm_resource_group"},
+	{wildcardGroup, "subnet$", "azurerm_subnet"},
+	{"cosmosdb", "account$", "azurerm_cosmosdb_account"},
+	{"dbformariadb", "server$", "azurerm_mariadb_server"},
+	{"network", "loadbalancer$", "azurerm_lb"},
 }
 
 // AddCommonReferences adds some common reference fields.
 // This is a part of resource generation pipeline.
 func AddCommonReferences(r *tjconfig.Resource) error {
 	delete(r.References, "location")
-	return addCommonReferences(r.References, r.TerraformResource, r.ShortGroup, r.Version, []string{})
+	return addCommonReferences(r.References, r.TerraformResource, r.ShortGroup, []string{})
 }
 
-func addCommonReferences(references tjconfig.References, resource *schema.Resource, shortGroup, version string, nestedFieldNames []string) error {
+func addCommonReferences(references tjconfig.References, resource *schema.Resource, shortGroup string, nestedFieldNames []string) error {
 	for fieldName, s := range resource.Schema {
 		if s.Elem != nil {
 			e, ok := s.Elem.(*schema.Resource)
 			if ok {
-				if err := addCommonReferences(references, e, shortGroup, version, append(nestedFieldNames, fieldName)); err != nil {
+				if err := addCommonReferences(references, e, shortGroup, append(nestedFieldNames, fieldName)); err != nil {
 					return err
 				}
 				continue
@@ -88,19 +84,18 @@ func addCommonReferences(references tjconfig.References, resource *schema.Resour
 		if referenceKind == "" {
 			continue
 		}
-		referenceType, err := searchReference(shortGroup, referenceNameWithoutKind)
+		refTFName, err := searchReference(shortGroup, referenceNameWithoutKind)
 		if err != nil {
 			return err
 		}
-		if referenceType == "" {
+		if refTFName == "" {
 			continue
 		}
 		if references == nil {
 			references = make(map[string]tjconfig.Reference)
 		}
 		if _, ok := references[referenceName]; !ok {
-			referenceType = prepareReferenceType(shortGroup, version, referenceType)
-			addReference(references, referenceKind, referenceName, referenceType)
+			addReference(references, referenceKind, referenceName, refTFName)
 		}
 	}
 	return nil
@@ -124,32 +119,22 @@ func searchReference(shortGroup, fieldName string) (string, error) {
 			return "", err
 		}
 		if r.MatchString(fieldName) {
-			return rule.packagePath, nil
+			return rule.tfName, nil
 		}
 	}
 	return "", nil
 }
 
-func prepareReferenceType(shortGroup, version, referenceType string) string {
-	p := strings.Split(referenceType, "/")
-	if shortGroup == p[1] && strings.Split(p[2], ".")[0] == version {
-		referenceType = strings.Split(p[2], ".")[1]
-	} else {
-		referenceType = rconfig.APISPackagePath + referenceType
-	}
-	return referenceType
-}
-
-func addReference(references tjconfig.References, referenceKind, referenceName, referenceType string) {
+func addReference(references tjconfig.References, referenceKind, referenceName, refTFName string) {
 	switch referenceKind {
 	case nameReferenceKind:
 		references[referenceName] = tjconfig.Reference{
-			Type: referenceType,
+			TerraformName: refTFName,
 		}
 	case idReferenceKind:
 		references[referenceName] = tjconfig.Reference{
-			Type:      referenceType,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: refTFName,
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	}
 }

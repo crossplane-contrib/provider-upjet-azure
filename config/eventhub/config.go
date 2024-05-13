@@ -19,25 +19,25 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_eventhub", func(r *config.Resource) {
 		r.References["namespace_name"] = config.Reference{
-			Type: "EventHubNamespace",
+			TerraformName: "azurerm_eventhub_namespace",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub_consumer_group", func(r *config.Resource) {
 		r.References["namespace_name"] = config.Reference{
-			Type: "EventHubNamespace",
+			TerraformName: "azurerm_eventhub_namespace",
 		}
 		r.References["eventhub_name"] = config.Reference{
-			Type: "EventHub",
+			TerraformName: "azurerm_eventhub",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub_authorization_rule", func(r *config.Resource) {
 		r.References["namespace_name"] = config.Reference{
-			Type: "EventHubNamespace",
+			TerraformName: "azurerm_eventhub_namespace",
 		}
 		r.References["eventhub_name"] = config.Reference{
-			Type: "EventHub",
+			TerraformName: "azurerm_eventhub",
 		}
 	})
 }

@@ -30,94 +30,94 @@ func Configure(p *config.Provider) {
 		r.Kind = "LoadBalancer"
 
 		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
-			Type:      "PublicIP",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_public_ip",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool", func(r *config.Resource) {
 		r.Kind = "LoadBalancerBackendAddressPool"
 		r.References["loadbalancer_id"] = config.Reference{
-			Type:      "LoadBalancer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_backend_address_pool_address", func(r *config.Resource) {
 		r.Kind = "LoadBalancerBackendAddressPoolAddress"
 		r.References["backend_address_pool_id"] = config.Reference{
-			Type:      "LoadBalancerBackendAddressPool",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb_backend_address_pool",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["virtual_network_id"] = config.Reference{
-			Type:      "VirtualNetwork",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_nat_pool", func(r *config.Resource) {
 		r.Kind = "LoadBalancerNatPool"
 		r.References["loadbalancer_id"] = config.Reference{
-			Type:      "LoadBalancer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_nat_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerNatRule"
 		r.References["loadbalancer_id"] = config.Reference{
-			Type:      "LoadBalancer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_outbound_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerOutboundRule"
 		r.References["backend_address_pool_id"] = config.Reference{
-			Type:      "LoadBalancerBackendAddressPool",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb_backend_address_pool",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["loadbalancer_id"] = config.Reference{
-			Type:      "LoadBalancer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_probe", func(r *config.Resource) {
 		r.Kind = "LoadBalancerProbe"
 		r.References["loadbalancer_id"] = config.Reference{
-			Type:      "LoadBalancer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_lb_rule", func(r *config.Resource) {
 		r.Kind = "LoadBalancerRule"
 		r.References["loadbalancer_id"] = config.Reference{
-			Type:      "LoadBalancer",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_association", func(r *config.Resource) {
 		r.References["nat_gateway_id"] = config.Reference{
-			Type:      "NATGateway",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_nat_gateway",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["public_ip_address_id"] = config.Reference{
-			Type:      "PublicIP",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_public_ip",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_nat_gateway_public_ip_prefix_association", func(r *config.Resource) {
 		r.References["nat_gateway_id"] = config.Reference{
-			Type:      "NATGateway",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_nat_gateway",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["public_ip_prefix_id"] = config.Reference{
-			Type:      "PublicIPPrefix",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_public_ip_prefix",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -127,15 +127,15 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_watcher_flow_log", func(r *config.Resource) {
 		r.References["network_watcher_name"] = config.Reference{
-			Type: "Watcher",
+			TerraformName: "azurerm_network_watcher",
 		}
 		r.References["network_security_group_id"] = config.Reference{
-			Type:      "SecurityGroup",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_security_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["storage_account_id"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		delete(r.References, "traffic_analytics.workspace_region")
 	})
@@ -143,8 +143,8 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_network_connection_monitor", func(r *config.Resource) {
 		r.Kind = "ConnectionMonitor"
 		r.References["network_watcher_id"] = config.Reference{
-			Type:      "Watcher",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_watcher",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -154,55 +154,55 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_security_rule", func(r *config.Resource) {
 		r.References["network_security_group_name"] = config.Reference{
-			Type: "SecurityGroup",
+			TerraformName: "azurerm_network_security_group",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_network_interface_application_security_group_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceApplicationSecurityGroupAssociation"
 		r.References["network_interface_id"] = config.Reference{
-			Type:      "NetworkInterface",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_interface",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["application_security_group_id"] = config.Reference{
-			Type:      "ApplicationSecurityGroup",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_application_security_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_network_interface_backend_address_pool_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceBackendAddressPoolAssociation"
 		r.References["network_interface_id"] = config.Reference{
-			Type:      "NetworkInterface",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_interface",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["backend_address_pool_id"] = config.Reference{
-			Type:      "LoadBalancerBackendAddressPool",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb_backend_address_pool",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_network_interface_nat_rule_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceNatRuleAssociation"
 		r.References["network_interface_id"] = config.Reference{
-			Type:      "NetworkInterface",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_interface",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["nat_rule_id"] = config.Reference{
-			Type:      "LoadBalancerNatRule",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_lb_nat_rule",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_network_interface_security_group_association", func(r *config.Resource) {
 		r.Kind = "NetworkInterfaceSecurityGroupAssociation"
 		r.References["network_interface_id"] = config.Reference{
-			Type:      "NetworkInterface",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_interface",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["network_security_group_id"] = config.Reference{
-			Type:      "SecurityGroup",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_security_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -217,265 +217,265 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGateway"
 		r.References["ip_configuration.subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_subnet",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_virtual_network_peering", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkPeering"
 		r.References["virtual_network_name"] = config.Reference{
-			Type: "VirtualNetwork",
+			TerraformName: "azurerm_virtual_network",
 		}
 		r.References["remote_virtual_network_id"] = config.Reference{
-			Type:      "VirtualNetwork",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_network_profile", func(r *config.Resource) {
 		r.References["container_network_interface.ip_configuration.subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_subnet",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_a_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_aaaa_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_cname_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_mx_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_ptr_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_srv_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_txt_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_dns_zone_virtual_network_link", func(r *config.Resource) {
 		r.References["private_dns_zone_name"] = config.Reference{
-			Type: "PrivateDNSZone",
+			TerraformName: "azurerm_private_dns_zone",
 		}
 		r.References["virtual_network_id"] = config.Reference{
-			Type:      "VirtualNetwork",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_a_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_aaaa_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_caa_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_cname_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_mx_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_ns_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_ptr_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_srv_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_dns_txt_record", func(r *config.Resource) {
 		r.References["zone_name"] = config.Reference{
-			Type: "DNSZone",
+			TerraformName: "azurerm_dns_zone",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_link_service", func(r *config.Resource) {
 		r.References["nat_ip_configuration.subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_subnet",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_private_endpoint", func(r *config.Resource) {
 		r.References["private_dns_zone_group.private_dns_zone_ids"] = config.Reference{
-			Type:      "PrivateDNSZone",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_private_dns_zone",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		delete(r.References, "private_service_connection.private_connection_resource_id")
 	})
 
 	p.AddResourceConfigurator("azurerm_network_packet_capture", func(r *config.Resource) {
 		r.References["network_watcher_name"] = config.Reference{
-			Type: "Watcher",
+			TerraformName: "azurerm_network_watcher",
 		}
 		r.References["storage_location.storage_account_id"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/storage/v1beta1.Account",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_storage_account",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_point_to_site_vpn_gateway", func(r *config.Resource) {
 		r.References["virtual_hub_id"] = config.Reference{
-			Type:      "VirtualHub",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_hub",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["vpn_server_configuration_id"] = config.Reference{
-			Type:      "VPNServerConfiguration",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_vpn_server_configuration",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_express_route_circuit_authorization", func(r *config.Resource) {
 		r.References["express_route_circuit_name"] = config.Reference{
-			Type: "ExpressRouteCircuit",
+			TerraformName: "azurerm_express_route_circuit",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_express_route_circuit_peering", func(r *config.Resource) {
 		r.References["express_route_circuit_name"] = config.Reference{
-			Type: "ExpressRouteCircuit",
+			TerraformName: "azurerm_express_route_circuit",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_express_route_circuit_connection", func(r *config.Resource) {
 		r.References["peering_id"] = config.Reference{
-			Type:      "ExpressRouteCircuitPeering",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_express_route_circuit_peering",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["peer_peering_id"] = config.Reference{
-			Type:      "ExpressRouteCircuitPeering",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_express_route_circuit_peering",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_express_route_gateway", func(r *config.Resource) {
 		r.References["virtual_hub_id"] = config.Reference{
-			Type:      "VirtualHub",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_hub",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_express_route_connection", func(r *config.Resource) {
 		r.References["express_route_gateway_id"] = config.Reference{
-			Type:      "ExpressRouteGateway",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_express_route_gateway",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["express_route_circuit_peering_id"] = config.Reference{
-			Type:      "ExpressRouteCircuitPeering",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_express_route_circuit_peering",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_firewall", func(r *config.Resource) {
 		r.References["ip_configuration.subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_subnet",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["ip_configuration.public_ip_address_id"] = config.Reference{
-			Type:      "PublicIP",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_public_ip",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_firewall_application_rule_collection", func(r *config.Resource) {
 		r.References["azure_firewall_name"] = config.Reference{
-			Type: "Firewall",
+			TerraformName: "azurerm_firewall",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_firewall_nat_rule_collection", func(r *config.Resource) {
 		r.References["azure_firewall_name"] = config.Reference{
-			Type: "Firewall",
+			TerraformName: "azurerm_firewall",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_firewall_network_rule_collection", func(r *config.Resource) {
 		r.References["azure_firewall_name"] = config.Reference{
-			Type: "Firewall",
+			TerraformName: "azurerm_firewall",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_firewall_policy_rule_collection_group", func(r *config.Resource) {
 		r.References["firewall_policy_id"] = config.Reference{
-			Type:      "FirewallPolicy",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_firewall_policy",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_frontdoor_custom_https_configuration", func(r *config.Resource) {
 		r.References["custom_https_configuration.azure_key_vault_certificate_vault_id"] = config.Reference{
-			Type:      rconfig.VaultKeyReferencePath,
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_key_vault_key",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_frontdoor_rules_engine", func(r *config.Resource) {
 		r.References["frontdoor_name"] = config.Reference{
-			Type: "FrontDoor",
+			TerraformName: "azurerm_frontdoor",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_application_gateway", func(r *config.Resource) {
 		r.References["frontend_ip_configuration.public_ip_address_id"] = config.Reference{
-			Type:      "PublicIP",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_public_ip",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -500,12 +500,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_virtual_network_gateway_connection", func(r *config.Resource) {
 		r.Kind = "VirtualNetworkGatewayConnection"
 		r.References["virtual_network_gateway_id"] = config.Reference{
-			Type:      "VirtualNetworkGateway",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_network_gateway",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["peer_virtual_network_gateway_id"] = config.Reference{
-			Type:      "VirtualNetworkGateway",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_network_gateway",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -524,8 +524,8 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_virtual_hub", func(r *config.Resource) {
 		r.References["virtual_wan_id"] = config.Reference{
-			Type:      "VirtualWAN",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_wan",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.UseAsync = true
 	})
@@ -540,27 +540,27 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"address_prefix"},
 		}
 		r.References["virtual_network_name"] = config.Reference{
-			Type: "VirtualNetwork",
+			TerraformName: "azurerm_virtual_network",
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_nat_gateway_association", func(r *config.Resource) {
 		r.Kind = "SubnetNATGatewayAssociation"
 		r.References["subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_subnet",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
 	p.AddResourceConfigurator("azurerm_subnet_network_security_group_association", func(r *config.Resource) {
 		r.Kind = "SubnetNetworkSecurityGroupAssociation"
 		r.References["subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_subnet",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["network_security_group_id"] = config.Reference{
-			Type:      "SecurityGroup",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_network_security_group",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -577,12 +577,12 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_subnet_route_table_association", func(r *config.Resource) {
 		r.Kind = "SubnetRouteTableAssociation"
 		r.References["subnet_id"] = config.Reference{
-			Type:      "Subnet",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_subnet",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 		r.References["route_table_id"] = config.Reference{
-			Type:      "RouteTable",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_route_table",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 
@@ -595,8 +595,8 @@ func Configure(p *config.Provider) {
 
 	p.AddResourceConfigurator("azurerm_network_manager_static_member", func(r *config.Resource) {
 		r.References["target_virtual_network_id"] = config.Reference{
-			Type:      "VirtualNetwork",
-			Extractor: rconfig.ExtractResourceIDFuncPath,
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 

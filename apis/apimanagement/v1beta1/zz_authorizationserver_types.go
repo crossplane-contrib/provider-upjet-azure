@@ -123,15 +123,15 @@ type AuthorizationServerObservation struct {
 type AuthorizationServerParameters struct {
 
 	// The name of the API Management Service in which this Authorization Server should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Management
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Management
 	// +kubebuilder:validation:Optional
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
 
-	// Reference to a Management to populate apiManagementName.
+	// Reference to a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
 	APIManagementNameRef *v1.Reference `json:"apiManagementNameRef,omitempty" tf:"-"`
 
-	// Selector for a Management to populate apiManagementName.
+	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
 

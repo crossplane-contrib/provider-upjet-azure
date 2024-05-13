@@ -78,7 +78,7 @@ spec:
                       a new MSSQL Server DNS Alias to be created.
                     type: string
                   mssqlServerIdRef:
-                    description: Reference to a MSSQLServer to populate mssqlServerId.
+                    description: Reference to a MSSQLServer in sql to populate mssqlServerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -112,7 +112,7 @@ spec:
                     - name
                     type: object
                   mssqlServerIdSelector:
-                    description: Selector for a MSSQLServer to populate mssqlServerId.
+                    description: Selector for a MSSQLServer in sql to populate mssqlServerId.
                     properties:
                       matchControllerRef:
                         description: |-

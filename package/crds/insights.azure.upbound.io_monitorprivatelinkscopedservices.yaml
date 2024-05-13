@@ -81,7 +81,8 @@ spec:
                       to be created.
                     type: string
                   linkedResourceIdRef:
-                    description: Reference to a ApplicationInsights to populate linkedResourceId.
+                    description: Reference to a ApplicationInsights in insights to
+                      populate linkedResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -115,7 +116,8 @@ spec:
                     - name
                     type: object
                   linkedResourceIdSelector:
-                    description: Selector for a ApplicationInsights to populate linkedResourceId.
+                    description: Selector for a ApplicationInsights in insights to
+                      populate linkedResourceId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -240,8 +242,8 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   scopeNameRef:
-                    description: Reference to a MonitorPrivateLinkScope to populate
-                      scopeName.
+                    description: Reference to a MonitorPrivateLinkScope in insights
+                      to populate scopeName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -275,8 +277,8 @@ spec:
                     - name
                     type: object
                   scopeNameSelector:
-                    description: Selector for a MonitorPrivateLinkScope to populate
-                      scopeName.
+                    description: Selector for a MonitorPrivateLinkScope in insights
+                      to populate scopeName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -336,7 +338,8 @@ spec:
                       to be created.
                     type: string
                   linkedResourceIdRef:
-                    description: Reference to a ApplicationInsights to populate linkedResourceId.
+                    description: Reference to a ApplicationInsights in insights to
+                      populate linkedResourceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -370,7 +373,8 @@ spec:
                     - name
                     type: object
                   linkedResourceIdSelector:
-                    description: Selector for a ApplicationInsights to populate linkedResourceId.
+                    description: Selector for a ApplicationInsights in insights to
+                      populate linkedResourceId.
                     properties:
                       matchControllerRef:
                         description: |-

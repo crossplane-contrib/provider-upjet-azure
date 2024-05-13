@@ -28,15 +28,15 @@ type ServerInitParameters struct {
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// For creation modes other than Default, the source server ID to use.
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformariadb/v1beta1.Server
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	CreationSourceServerID *string `json:"creationSourceServerId,omitempty" tf:"creation_source_server_id,omitempty"`
 
-	// Reference to a Server to populate creationSourceServerId.
+	// Reference to a Server in dbformariadb to populate creationSourceServerId.
 	// +kubebuilder:validation:Optional
 	CreationSourceServerIDRef *v1.Reference `json:"creationSourceServerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server to populate creationSourceServerId.
+	// Selector for a Server in dbformariadb to populate creationSourceServerId.
 	// +kubebuilder:validation:Optional
 	CreationSourceServerIDSelector *v1.Selector `json:"creationSourceServerIdSelector,omitempty" tf:"-"`
 
@@ -153,16 +153,16 @@ type ServerParameters struct {
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// For creation modes other than Default, the source server ID to use.
-	// +crossplane:generate:reference:type=Server
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformariadb/v1beta1.Server
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CreationSourceServerID *string `json:"creationSourceServerId,omitempty" tf:"creation_source_server_id,omitempty"`
 
-	// Reference to a Server to populate creationSourceServerId.
+	// Reference to a Server in dbformariadb to populate creationSourceServerId.
 	// +kubebuilder:validation:Optional
 	CreationSourceServerIDRef *v1.Reference `json:"creationSourceServerIdRef,omitempty" tf:"-"`
 
-	// Selector for a Server to populate creationSourceServerId.
+	// Selector for a Server in dbformariadb to populate creationSourceServerId.
 	// +kubebuilder:validation:Optional
 	CreationSourceServerIDSelector *v1.Selector `json:"creationSourceServerIdSelector,omitempty" tf:"-"`
 

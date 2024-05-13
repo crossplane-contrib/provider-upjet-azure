@@ -19,14 +19,14 @@ type LiveEventOutputInitParameters struct {
 	ArchiveWindowDuration *string `json:"archiveWindowDuration,omitempty" tf:"archive_window_duration,omitempty"`
 
 	// The asset that the live output will write to. Changing this forces a new Live Output to be created.
-	// +crossplane:generate:reference:type=Asset
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.Asset
 	AssetName *string `json:"assetName,omitempty" tf:"asset_name,omitempty"`
 
-	// Reference to a Asset to populate assetName.
+	// Reference to a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameRef *v1.Reference `json:"assetNameRef,omitempty" tf:"-"`
 
-	// Selector for a Asset to populate assetName.
+	// Selector for a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
 
@@ -83,15 +83,15 @@ type LiveEventOutputParameters struct {
 	ArchiveWindowDuration *string `json:"archiveWindowDuration,omitempty" tf:"archive_window_duration,omitempty"`
 
 	// The asset that the live output will write to. Changing this forces a new Live Output to be created.
-	// +crossplane:generate:reference:type=Asset
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.Asset
 	// +kubebuilder:validation:Optional
 	AssetName *string `json:"assetName,omitempty" tf:"asset_name,omitempty"`
 
-	// Reference to a Asset to populate assetName.
+	// Reference to a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameRef *v1.Reference `json:"assetNameRef,omitempty" tf:"-"`
 
-	// Selector for a Asset to populate assetName.
+	// Selector for a Asset in media to populate assetName.
 	// +kubebuilder:validation:Optional
 	AssetNameSelector *v1.Selector `json:"assetNameSelector,omitempty" tf:"-"`
 
@@ -104,16 +104,16 @@ type LiveEventOutputParameters struct {
 	HlsFragmentsPerTSSegment *float64 `json:"hlsFragmentsPerTsSegment,omitempty" tf:"hls_fragments_per_ts_segment,omitempty"`
 
 	// The id of the live event. Changing this forces a new Live Output to be created.
-	// +crossplane:generate:reference:type=LiveEvent
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.LiveEvent
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LiveEventID *string `json:"liveEventId,omitempty" tf:"live_event_id,omitempty"`
 
-	// Reference to a LiveEvent to populate liveEventId.
+	// Reference to a LiveEvent in media to populate liveEventId.
 	// +kubebuilder:validation:Optional
 	LiveEventIDRef *v1.Reference `json:"liveEventIdRef,omitempty" tf:"-"`
 
-	// Selector for a LiveEvent to populate liveEventId.
+	// Selector for a LiveEvent in media to populate liveEventId.
 	// +kubebuilder:validation:Optional
 	LiveEventIDSelector *v1.Selector `json:"liveEventIdSelector,omitempty" tf:"-"`
 

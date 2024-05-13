@@ -6,8 +6,6 @@ package logic
 
 import (
 	"github.com/crossplane/upjet/pkg/config"
-
-	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
 // Configure configures logic group
@@ -16,8 +14,8 @@ func Configure(p *config.Provider) {
 		r.Kind = "IntegrationServiceEnvironment"
 
 		r.References["virtual_network_subnet_ids"] = config.Reference{
-			Type:      rconfig.APISPackagePath + "/network/v1beta1.Subnet",
-			Extractor: `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
+			TerraformName: "azurerm_subnet",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
 		}
 	})
 }

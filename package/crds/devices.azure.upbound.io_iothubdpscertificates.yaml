@@ -97,7 +97,7 @@ spec:
                       new resource to be created.
                     type: string
                   iotDpsNameRef:
-                    description: Reference to a IOTHubDPS to populate iotDpsName.
+                    description: Reference to a IOTHubDPS in devices to populate iotDpsName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -131,7 +131,7 @@ spec:
                     - name
                     type: object
                   iotDpsNameSelector:
-                    description: Selector for a IOTHubDPS to populate iotDpsName.
+                    description: Selector for a IOTHubDPS in devices to populate iotDpsName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -276,7 +276,7 @@ spec:
                       new resource to be created.
                     type: string
                   iotDpsNameRef:
-                    description: Reference to a IOTHubDPS to populate iotDpsName.
+                    description: Reference to a IOTHubDPS in devices to populate iotDpsName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -310,7 +310,7 @@ spec:
                     - name
                     type: object
                   iotDpsNameSelector:
-                    description: Selector for a IOTHubDPS to populate iotDpsName.
+                    description: Selector for a IOTHubDPS in devices to populate iotDpsName.
                     properties:
                       matchControllerRef:
                         description: |-

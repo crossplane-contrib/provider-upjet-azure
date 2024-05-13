@@ -86,8 +86,8 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         actionGroupRefs:
-                          description: References to MonitorActionGroup to populate
-                            actionGroup.
+                          description: References to MonitorActionGroup in insights
+                            to populate actionGroup.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -124,8 +124,8 @@ spec:
                             type: object
                           type: array
                         actionGroupSelector:
-                          description: Selector for a list of MonitorActionGroup to
-                            populate actionGroup.
+                          description: Selector for a list of MonitorActionGroup in
+                            insights to populate actionGroup.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -458,8 +458,8 @@ spec:
                           type: array
                           x-kubernetes-list-type: set
                         actionGroupRefs:
-                          description: References to MonitorActionGroup to populate
-                            actionGroup.
+                          description: References to MonitorActionGroup in insights
+                            to populate actionGroup.
                           items:
                             description: A Reference to a named object.
                             properties:
@@ -496,8 +496,8 @@ spec:
                             type: object
                           type: array
                         actionGroupSelector:
-                          description: Selector for a list of MonitorActionGroup to
-                            populate actionGroup.
+                          description: Selector for a list of MonitorActionGroup in
+                            insights to populate actionGroup.
                           properties:
                             matchControllerRef:
                               description: |-
