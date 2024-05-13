@@ -99,7 +99,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 
 	if mg.Spec.ForProvider.StorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
@@ -160,7 +160,7 @@ func (mg *DataSetBlobStorage) ResolveReferences(ctx context.Context, c client.Re
 
 	if mg.Spec.InitProvider.StorageAccount != nil {
 		{
-			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}

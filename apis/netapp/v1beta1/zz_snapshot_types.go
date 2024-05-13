@@ -43,7 +43,7 @@ type SnapshotObservation struct {
 type SnapshotParameters struct {
 
 	// The name of the NetApp account in which the NetApp Pool should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -86,7 +86,7 @@ type SnapshotParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the NetApp volume in which the NetApp Snapshot should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta1.Volume
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/netapp/v1beta2.Volume
 	// +kubebuilder:validation:Optional
 	VolumeName *string `json:"volumeName,omitempty" tf:"volume_name,omitempty"`
 

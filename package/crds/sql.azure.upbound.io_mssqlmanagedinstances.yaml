@@ -1165,7 +1165,8 @@ spec:
                       Setting this after creation forces a new resource to be created.
                     type: string
                   dnsZonePartnerIdRef:
-                    description: Reference to a MSSQLManagedInstance to populate dnsZonePartnerId.
+                    description: Reference to a MSSQLManagedInstance in sql to populate
+                      dnsZonePartnerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1199,7 +1200,8 @@ spec:
                     - name
                     type: object
                   dnsZonePartnerIdSelector:
-                    description: Selector for a MSSQLManagedInstance to populate dnsZonePartnerId.
+                    description: Selector for a MSSQLManagedInstance in sql to populate
+                      dnsZonePartnerId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1507,7 +1509,8 @@ spec:
                       Setting this after creation forces a new resource to be created.
                     type: string
                   dnsZonePartnerIdRef:
-                    description: Reference to a MSSQLManagedInstance to populate dnsZonePartnerId.
+                    description: Reference to a MSSQLManagedInstance in sql to populate
+                      dnsZonePartnerId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1541,7 +1544,8 @@ spec:
                     - name
                     type: object
                   dnsZonePartnerIdSelector:
-                    description: Selector for a MSSQLManagedInstance to populate dnsZonePartnerId.
+                    description: Selector for a MSSQLManagedInstance in sql to populate
+                      dnsZonePartnerId.
                     properties:
                       matchControllerRef:
                         description: |-

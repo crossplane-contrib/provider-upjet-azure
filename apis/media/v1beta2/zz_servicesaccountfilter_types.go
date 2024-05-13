@@ -53,15 +53,15 @@ type ServicesAccountFilterParameters struct {
 	FirstQualityBitrate *float64 `json:"firstQualityBitrate,omitempty" tf:"first_quality_bitrate,omitempty"`
 
 	// The Media Services account name. Changing this forces a new Account Filter to be created.
-	// +crossplane:generate:reference:type=ServicesAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta2.ServicesAccount
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
 
-	// Reference to a ServicesAccount to populate mediaServicesAccountName.
+	// Reference to a ServicesAccount in media to populate mediaServicesAccountName.
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountNameRef *v1.Reference `json:"mediaServicesAccountNameRef,omitempty" tf:"-"`
 
-	// Selector for a ServicesAccount to populate mediaServicesAccountName.
+	// Selector for a ServicesAccount in media to populate mediaServicesAccountName.
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountNameSelector *v1.Selector `json:"mediaServicesAccountNameSelector,omitempty" tf:"-"`
 

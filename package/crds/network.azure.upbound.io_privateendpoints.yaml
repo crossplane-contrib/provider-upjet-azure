@@ -1241,7 +1241,8 @@ spec:
                           type: string
                         type: array
                       privateDnsZoneIdsRefs:
-                        description: References to PrivateDNSZone to populate privateDnsZoneIds.
+                        description: References to PrivateDNSZone in network to populate
+                          privateDnsZoneIds.
                         items:
                           description: A Reference to a named object.
                           properties:
@@ -1278,8 +1279,8 @@ spec:
                           type: object
                         type: array
                       privateDnsZoneIdsSelector:
-                        description: Selector for a list of PrivateDNSZone to populate
-                          privateDnsZoneIds.
+                        description: Selector for a list of PrivateDNSZone in network
+                          to populate privateDnsZoneIds.
                         properties:
                           matchControllerRef:
                             description: |-
@@ -1593,7 +1594,8 @@ spec:
                           type: string
                         type: array
                       privateDnsZoneIdsRefs:
-                        description: References to PrivateDNSZone to populate privateDnsZoneIds.
+                        description: References to PrivateDNSZone in network to populate
+                          privateDnsZoneIds.
                         items:
                           description: A Reference to a named object.
                           properties:
@@ -1630,8 +1632,8 @@ spec:
                           type: object
                         type: array
                       privateDnsZoneIdsSelector:
-                        description: Selector for a list of PrivateDNSZone to populate
-                          privateDnsZoneIds.
+                        description: Selector for a list of PrivateDNSZone in network
+                          to populate privateDnsZoneIds.
                         properties:
                           matchControllerRef:
                             description: |-

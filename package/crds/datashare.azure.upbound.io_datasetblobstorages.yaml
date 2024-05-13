@@ -1122,7 +1122,8 @@ spec:
                       a new Data Share Blob Storage Dataset to be created.
                     type: string
                   dataShareIdRef:
-                    description: Reference to a DataShare to populate dataShareId.
+                    description: Reference to a DataShare in datashare to populate
+                      dataShareId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1156,7 +1157,8 @@ spec:
                     - name
                     type: object
                   dataShareIdSelector:
-                    description: Selector for a DataShare to populate dataShareId.
+                    description: Selector for a DataShare in datashare to populate
+                      dataShareId.
                     properties:
                       matchControllerRef:
                         description: |-

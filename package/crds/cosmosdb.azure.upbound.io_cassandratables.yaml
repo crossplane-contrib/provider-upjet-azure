@@ -690,7 +690,8 @@ spec:
                       created.
                     type: string
                   cassandraKeyspaceIdRef:
-                    description: Reference to a CassandraKeySpace to populate cassandraKeyspaceId.
+                    description: Reference to a CassandraKeySpace in cosmosdb to populate
+                      cassandraKeyspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -724,7 +725,8 @@ spec:
                     - name
                     type: object
                   cassandraKeyspaceIdSelector:
-                    description: Selector for a CassandraKeySpace to populate cassandraKeyspaceId.
+                    description: Selector for a CassandraKeySpace in cosmosdb to populate
+                      cassandraKeyspaceId.
                     properties:
                       matchControllerRef:
                         description: |-

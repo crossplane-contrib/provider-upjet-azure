@@ -150,15 +150,15 @@ type WatcherFlowLogInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate networkSecurityGroupId.
+	// Reference to a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate networkSecurityGroupId.
+	// Selector for a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
@@ -166,7 +166,7 @@ type WatcherFlowLogInitParameters struct {
 	RetentionPolicy *RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the Storage Account where flow logs are stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -237,29 +237,29 @@ type WatcherFlowLogParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Network Security Group for which to enable flow logs for. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=SecurityGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.SecurityGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupID *string `json:"networkSecurityGroupId,omitempty" tf:"network_security_group_id,omitempty"`
 
-	// Reference to a SecurityGroup to populate networkSecurityGroupId.
+	// Reference to a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDRef *v1.Reference `json:"networkSecurityGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a SecurityGroup to populate networkSecurityGroupId.
+	// Selector for a SecurityGroup in network to populate networkSecurityGroupId.
 	// +kubebuilder:validation:Optional
 	NetworkSecurityGroupIDSelector *v1.Selector `json:"networkSecurityGroupIdSelector,omitempty" tf:"-"`
 
 	// The name of the Network Watcher. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Watcher
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Watcher
 	// +kubebuilder:validation:Optional
 	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
 
-	// Reference to a Watcher to populate networkWatcherName.
+	// Reference to a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameRef *v1.Reference `json:"networkWatcherNameRef,omitempty" tf:"-"`
 
-	// Selector for a Watcher to populate networkWatcherName.
+	// Selector for a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameSelector *v1.Selector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
@@ -281,7 +281,7 @@ type WatcherFlowLogParameters struct {
 	RetentionPolicy *RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The ID of the Storage Account where flow logs are stored.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

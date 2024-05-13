@@ -185,15 +185,15 @@ type EventHubParameters struct {
 	MessageRetention *float64 `json:"messageRetention,omitempty" tf:"message_retention,omitempty"`
 
 	// Specifies the name of the EventHub Namespace. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=EventHubNamespace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHubNamespace
 	// +kubebuilder:validation:Optional
 	NamespaceName *string `json:"namespaceName,omitempty" tf:"namespace_name,omitempty"`
 
-	// Reference to a EventHubNamespace to populate namespaceName.
+	// Reference to a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
 	NamespaceNameRef *v1.Reference `json:"namespaceNameRef,omitempty" tf:"-"`
 
-	// Selector for a EventHubNamespace to populate namespaceName.
+	// Selector for a EventHubNamespace in eventhub to populate namespaceName.
 	// +kubebuilder:validation:Optional
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 

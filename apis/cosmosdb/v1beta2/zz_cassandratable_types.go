@@ -85,16 +85,16 @@ type CassandraTableParameters struct {
 	AutoscaleSettings *CassandraTableAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// The ID of the Cosmos DB Cassandra Keyspace to create the table within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=CassandraKeySpace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.CassandraKeySpace
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CassandraKeySpaceID *string `json:"cassandraKeyspaceId,omitempty" tf:"cassandra_keyspace_id,omitempty"`
 
-	// Reference to a CassandraKeySpace to populate cassandraKeyspaceId.
+	// Reference to a CassandraKeySpace in cosmosdb to populate cassandraKeyspaceId.
 	// +kubebuilder:validation:Optional
 	CassandraKeySpaceIDRef *v1.Reference `json:"cassandraKeyspaceIdRef,omitempty" tf:"-"`
 
-	// Selector for a CassandraKeySpace to populate cassandraKeyspaceId.
+	// Selector for a CassandraKeySpace in cosmosdb to populate cassandraKeyspaceId.
 	// +kubebuilder:validation:Optional
 	CassandraKeySpaceIDSelector *v1.Selector `json:"cassandraKeyspaceIdSelector,omitempty" tf:"-"`
 

@@ -19,7 +19,7 @@ type ActionGroupInitParameters struct {
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// Specifies the action group ids.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +listType=set
 	Ids []*string `json:"ids,omitempty" tf:"ids,omitempty"`
@@ -56,7 +56,7 @@ type ActionGroupParameters struct {
 	EmailSubject *string `json:"emailSubject,omitempty" tf:"email_subject,omitempty"`
 
 	// Specifies the action group ids.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

@@ -142,15 +142,15 @@ type PacketCaptureParameters struct {
 	MaximumCaptureDuration *float64 `json:"maximumCaptureDuration,omitempty" tf:"maximum_capture_duration,omitempty"`
 
 	// The name of the Network Watcher. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Watcher
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Watcher
 	// +kubebuilder:validation:Optional
 	NetworkWatcherName *string `json:"networkWatcherName,omitempty" tf:"network_watcher_name,omitempty"`
 
-	// Reference to a Watcher to populate networkWatcherName.
+	// Reference to a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameRef *v1.Reference `json:"networkWatcherNameRef,omitempty" tf:"-"`
 
-	// Selector for a Watcher to populate networkWatcherName.
+	// Selector for a Watcher in network to populate networkWatcherName.
 	// +kubebuilder:validation:Optional
 	NetworkWatcherNameSelector *v1.Selector `json:"networkWatcherNameSelector,omitempty" tf:"-"`
 
@@ -182,7 +182,7 @@ type StorageLocationInitParameters struct {
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
 	// The ID of the storage account to save the packet capture session
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -214,7 +214,7 @@ type StorageLocationParameters struct {
 	FilePath *string `json:"filePath,omitempty" tf:"file_path,omitempty"`
 
 	// The ID of the storage account to save the packet capture session
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

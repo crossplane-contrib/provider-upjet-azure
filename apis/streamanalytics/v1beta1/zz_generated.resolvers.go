@@ -607,7 +607,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServer", "MSSQLServerList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServer", "MSSQLServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -626,7 +626,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.ForProvider.Server = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ServerRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta1", "Job", "JobList")
+		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -683,7 +683,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta1", "MSSQLServer", "MSSQLServerList")
+		m, l, err = apisresolver.GetManagedResource("sql.azure.upbound.io", "v1beta2", "MSSQLServer", "MSSQLServerList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -702,7 +702,7 @@ func (mg *OutputMSSQL) ResolveReferences(ctx context.Context, c client.Reader) e
 	mg.Spec.InitProvider.Server = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ServerRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta1", "Job", "JobList")
+		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -752,7 +752,7 @@ func (mg *OutputPowerBI) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta1", "Job", "JobList")
+		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -771,7 +771,7 @@ func (mg *OutputPowerBI) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.StreamAnalyticsJobID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.StreamAnalyticsJobIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta1", "Job", "JobList")
+		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1149,7 +1149,7 @@ func (mg *OutputSynapse) ResolveReferences(ctx context.Context, c client.Reader)
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta1", "Job", "JobList")
+		m, l, err = apisresolver.GetManagedResource("streamanalytics.azure.upbound.io", "v1beta2", "Job", "JobList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

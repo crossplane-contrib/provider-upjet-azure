@@ -246,7 +246,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -284,7 +284,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -303,7 +303,7 @@ func (mg *RedisLinkedServer) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.TargetRedisCacheName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetRedisCacheNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta1", "RedisCache", "RedisCacheList")
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

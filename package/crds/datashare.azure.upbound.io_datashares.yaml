@@ -556,7 +556,7 @@ spec:
                       created.
                     type: string
                   accountIdRef:
-                    description: Reference to a Account to populate accountId.
+                    description: Reference to a Account in datashare to populate accountId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -590,7 +590,7 @@ spec:
                     - name
                     type: object
                   accountIdSelector:
-                    description: Selector for a Account to populate accountId.
+                    description: Selector for a Account in datashare to populate accountId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -50,7 +50,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -73,7 +73,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -96,7 +96,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -140,7 +140,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -163,7 +163,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -186,7 +186,7 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -262,7 +262,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -285,7 +285,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -308,7 +308,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -352,7 +352,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -375,7 +375,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -398,7 +398,7 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -474,7 +474,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -497,7 +497,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -520,7 +520,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -564,7 +564,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -587,7 +587,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -610,7 +610,7 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -686,7 +686,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -709,7 +709,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.KafkaManagementNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -732,7 +732,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -755,7 +755,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -799,7 +799,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -822,7 +822,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.KafkaManagementNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -845,7 +845,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -868,7 +868,7 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -944,7 +944,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -967,7 +967,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -990,7 +990,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.ForProvider.Roles != nil {
 		if mg.Spec.ForProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1034,7 +1034,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.HeadNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1057,7 +1057,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.WorkerNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -1080,7 +1080,7 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 	if mg.Spec.InitProvider.Roles != nil {
 		if mg.Spec.InitProvider.Roles.ZookeeperNode != nil {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}

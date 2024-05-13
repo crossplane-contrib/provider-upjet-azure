@@ -22,7 +22,7 @@ type ExpressRouteCircuitConnectionInitParameters struct {
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PeerPeeringID *string `json:"peerPeeringId,omitempty" tf:"peer_peering_id,omitempty"`
 
@@ -68,7 +68,7 @@ type ExpressRouteCircuitConnectionParameters struct {
 	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
 
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerPeeringID *string `json:"peerPeeringId,omitempty" tf:"peer_peering_id,omitempty"`
@@ -82,7 +82,7 @@ type ExpressRouteCircuitConnectionParameters struct {
 	PeerPeeringIDSelector *v1.Selector `json:"peerPeeringIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Express Route Circuit Private Peering that this Express Route Circuit Connection connects with. Changing this forces a new Express Route Circuit Connection to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeeringID *string `json:"peeringId,omitempty" tf:"peering_id,omitempty"`

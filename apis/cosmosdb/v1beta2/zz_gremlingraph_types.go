@@ -165,7 +165,7 @@ type GremlinGraphObservation struct {
 type GremlinGraphParameters struct {
 
 	// The name of the CosmosDB Account to create the Gremlin Graph within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -190,15 +190,15 @@ type GremlinGraphParameters struct {
 	ConflictResolutionPolicy *ConflictResolutionPolicyParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
 
 	// The name of the Cosmos DB Graph Database in which the Cosmos DB Gremlin Graph is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=GremlinDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.GremlinDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Reference to a GremlinDatabase to populate databaseName.
+	// Reference to a GremlinDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
-	// Selector for a GremlinDatabase to populate databaseName.
+	// Selector for a GremlinDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 

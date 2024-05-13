@@ -268,7 +268,7 @@ type ServicesAccountParameters struct {
 type StorageAccountInitParameters struct {
 
 	// Specifies the ID of the Storage Account that will be associated with the Media Services instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -331,7 +331,7 @@ type StorageAccountObservation struct {
 type StorageAccountParameters struct {
 
 	// Specifies the ID of the Storage Account that will be associated with the Media Services instance.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`

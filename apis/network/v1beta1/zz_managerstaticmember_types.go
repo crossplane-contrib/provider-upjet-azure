@@ -16,7 +16,7 @@ import (
 type ManagerStaticMemberInitParameters struct {
 
 	// Specifies the Resource ID of the Virtual Network using as the Static Member. Changing this forces a new Network Manager Static Member to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	TargetVirtualNetworkID *string `json:"targetVirtualNetworkId,omitempty" tf:"target_virtual_network_id,omitempty"`
 
@@ -61,7 +61,7 @@ type ManagerStaticMemberParameters struct {
 	NetworkGroupIDSelector *v1.Selector `json:"networkGroupIdSelector,omitempty" tf:"-"`
 
 	// Specifies the Resource ID of the Virtual Network using as the Static Member. Changing this forces a new Network Manager Static Member to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	TargetVirtualNetworkID *string `json:"targetVirtualNetworkId,omitempty" tf:"target_virtual_network_id,omitempty"`

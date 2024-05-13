@@ -221,7 +221,7 @@ type IntegrationRuntimeManagedParameters struct {
 type IntegrationRuntimeManagedVnetIntegrationInitParameters struct {
 
 	// Name of the subnet to which the nodes of the Managed Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetName.
@@ -248,7 +248,7 @@ type IntegrationRuntimeManagedVnetIntegrationObservation struct {
 type IntegrationRuntimeManagedVnetIntegrationParameters struct {
 
 	// Name of the subnet to which the nodes of the Managed Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
 

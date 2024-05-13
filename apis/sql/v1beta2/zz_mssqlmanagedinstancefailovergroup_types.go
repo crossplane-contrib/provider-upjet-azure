@@ -16,28 +16,28 @@ import (
 type MSSQLManagedInstanceFailoverGroupInitParameters struct {
 
 	// The ID of the Azure SQL Managed Instance which will be replicated using a Managed Instance Failover Group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate managedInstanceId.
+	// Reference to a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLManagedInstance to populate managedInstanceId.
+	// Selector for a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure SQL Managed Instance which will be replicated to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PartnerManagedInstanceID *string `json:"partnerManagedInstanceId,omitempty" tf:"partner_managed_instance_id,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate partnerManagedInstanceId.
+	// Reference to a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceIDRef *v1.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLManagedInstance to populate partnerManagedInstanceId.
+	// Selector for a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 
@@ -82,30 +82,30 @@ type MSSQLManagedInstanceFailoverGroupParameters struct {
 	Location *string `json:"location" tf:"location,omitempty"`
 
 	// The ID of the Azure SQL Managed Instance which will be replicated using a Managed Instance Failover Group. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate managedInstanceId.
+	// Reference to a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLManagedInstance to populate managedInstanceId.
+	// Selector for a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Azure SQL Managed Instance which will be replicated to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceID *string `json:"partnerManagedInstanceId,omitempty" tf:"partner_managed_instance_id,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate partnerManagedInstanceId.
+	// Reference to a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceIDRef *v1.Reference `json:"partnerManagedInstanceIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLManagedInstance to populate partnerManagedInstanceId.
+	// Selector for a MSSQLManagedInstance in sql to populate partnerManagedInstanceId.
 	// +kubebuilder:validation:Optional
 	PartnerManagedInstanceIDSelector *v1.Selector `json:"partnerManagedInstanceIdSelector,omitempty" tf:"-"`
 

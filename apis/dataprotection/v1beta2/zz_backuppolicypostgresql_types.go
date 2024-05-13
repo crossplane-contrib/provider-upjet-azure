@@ -84,15 +84,15 @@ type BackupPolicyPostgreSQLParameters struct {
 	TimeZone *string `json:"timeZone,omitempty" tf:"time_zone,omitempty"`
 
 	// The name of the Backup Vault where the Backup Policy PostgreSQL should exist. Changing this forces a new Backup Policy PostgreSQL to be created.
-	// +crossplane:generate:reference:type=BackupVault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dataprotection/v1beta2.BackupVault
 	// +kubebuilder:validation:Optional
 	VaultName *string `json:"vaultName,omitempty" tf:"vault_name,omitempty"`
 
-	// Reference to a BackupVault to populate vaultName.
+	// Reference to a BackupVault in dataprotection to populate vaultName.
 	// +kubebuilder:validation:Optional
 	VaultNameRef *v1.Reference `json:"vaultNameRef,omitempty" tf:"-"`
 
-	// Selector for a BackupVault to populate vaultName.
+	// Selector for a BackupVault in dataprotection to populate vaultName.
 	// +kubebuilder:validation:Optional
 	VaultNameSelector *v1.Selector `json:"vaultNameSelector,omitempty" tf:"-"`
 }

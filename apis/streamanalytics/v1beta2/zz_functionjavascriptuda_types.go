@@ -25,15 +25,15 @@ type FunctionJavascriptUdaInitParameters struct {
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/streamanalytics/v1beta2.Job
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
 
-	// Reference to a Job to populate streamAnalyticsJobId.
+	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobIDRef *v1.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
-	// Selector for a Job to populate streamAnalyticsJobId.
+	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }
@@ -71,16 +71,16 @@ type FunctionJavascriptUdaParameters struct {
 	Script *string `json:"script,omitempty" tf:"script,omitempty"`
 
 	// The resource ID of the Stream Analytics Job where this Function should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=Job
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/streamanalytics/v1beta2.Job
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobID *string `json:"streamAnalyticsJobId,omitempty" tf:"stream_analytics_job_id,omitempty"`
 
-	// Reference to a Job to populate streamAnalyticsJobId.
+	// Reference to a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobIDRef *v1.Reference `json:"streamAnalyticsJobIdRef,omitempty" tf:"-"`
 
-	// Selector for a Job to populate streamAnalyticsJobId.
+	// Selector for a Job in streamanalytics to populate streamAnalyticsJobId.
 	// +kubebuilder:validation:Optional
 	StreamAnalyticsJobIDSelector *v1.Selector `json:"streamAnalyticsJobIdSelector,omitempty" tf:"-"`
 }

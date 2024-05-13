@@ -235,15 +235,15 @@ type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 	QueryTimeRangeOverride *string `json:"queryTimeRangeOverride,omitempty" tf:"query_time_range_override,omitempty"`
 
 	// Specifies the list of resource IDs that this scheduled query rule is scoped to. Changing this forces a new resource to be created. Currently, the API supports exactly 1 resource ID in the scopes list.
-	// +crossplane:generate:reference:type=ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
-	// References to ApplicationInsights to populate scopes.
+	// References to ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
 	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
 
-	// Selector for a list of ApplicationInsights to populate scopes.
+	// Selector for a list of ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
 	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
 
@@ -393,16 +393,16 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the list of resource IDs that this scheduled query rule is scoped to. Changing this forces a new resource to be created. Currently, the API supports exactly 1 resource ID in the scopes list.
-	// +crossplane:generate:reference:type=ApplicationInsights
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
 
-	// References to ApplicationInsights to populate scopes.
+	// References to ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
 	ScopesRefs []v1.Reference `json:"scopesRefs,omitempty" tf:"-"`
 
-	// Selector for a list of ApplicationInsights to populate scopes.
+	// Selector for a list of ApplicationInsights in insights to populate scopes.
 	// +kubebuilder:validation:Optional
 	ScopesSelector *v1.Selector `json:"scopesSelector,omitempty" tf:"-"`
 

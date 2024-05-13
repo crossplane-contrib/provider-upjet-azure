@@ -19,7 +19,7 @@ type SpringCloudAPIPortalInitParameters struct {
 	APITryOutEnabled *bool `json:"apiTryOutEnabled,omitempty" tf:"api_try_out_enabled,omitempty"`
 
 	// Specifies a list of Spring Cloud Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	GatewayIds []*string `json:"gatewayIds,omitempty" tf:"gateway_ids,omitempty"`
@@ -83,7 +83,7 @@ type SpringCloudAPIPortalParameters struct {
 	APITryOutEnabled *bool `json:"apiTryOutEnabled,omitempty" tf:"api_try_out_enabled,omitempty"`
 
 	// Specifies a list of Spring Cloud Gateway.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta1.SpringCloudGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/appplatform/v1beta2.SpringCloudGateway
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

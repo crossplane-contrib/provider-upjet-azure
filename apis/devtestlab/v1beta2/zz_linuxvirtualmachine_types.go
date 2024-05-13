@@ -121,7 +121,7 @@ type LinuxVirtualMachineInitParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// The name of a Subnet within the Dev Test Virtual Network where this machine should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	LabSubnetName *string `json:"labSubnetName,omitempty" tf:"lab_subnet_name,omitempty"`
 
 	// Reference to a Subnet in network to populate labSubnetName.
@@ -276,7 +276,7 @@ type LinuxVirtualMachineParameters struct {
 	LabNameSelector *v1.Selector `json:"labNameSelector,omitempty" tf:"-"`
 
 	// The name of a Subnet within the Dev Test Virtual Network where this machine should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +kubebuilder:validation:Optional
 	LabSubnetName *string `json:"labSubnetName,omitempty" tf:"lab_subnet_name,omitempty"`
 

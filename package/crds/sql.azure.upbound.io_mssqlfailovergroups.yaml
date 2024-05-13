@@ -929,7 +929,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   databasesRefs:
-                    description: References to MSSQLDatabase to populate databases.
+                    description: References to MSSQLDatabase in sql to populate databases.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -966,7 +966,7 @@ spec:
                       type: object
                     type: array
                   databasesSelector:
-                    description: Selector for a list of MSSQLDatabase to populate
+                    description: Selector for a list of MSSQLDatabase in sql to populate
                       databases.
                     properties:
                       matchControllerRef:
@@ -1015,7 +1015,8 @@ spec:
                             the failover group.
                           type: string
                         idRef:
-                          description: Reference to a MSSQLServer to populate id.
+                          description: Reference to a MSSQLServer in sql to populate
+                            id.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1049,7 +1050,8 @@ spec:
                           - name
                           type: object
                         idSelector:
-                          description: Selector for a MSSQLServer to populate id.
+                          description: Selector for a MSSQLServer in sql to populate
+                            id.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -1115,7 +1117,7 @@ spec:
                       created.
                     type: string
                   serverIdRef:
-                    description: Reference to a MSSQLServer to populate serverId.
+                    description: Reference to a MSSQLServer in sql to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1149,7 +1151,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a MSSQLServer to populate serverId.
+                    description: Selector for a MSSQLServer in sql to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1216,7 +1218,7 @@ spec:
                     type: array
                     x-kubernetes-list-type: set
                   databasesRefs:
-                    description: References to MSSQLDatabase to populate databases.
+                    description: References to MSSQLDatabase in sql to populate databases.
                     items:
                       description: A Reference to a named object.
                       properties:
@@ -1253,7 +1255,7 @@ spec:
                       type: object
                     type: array
                   databasesSelector:
-                    description: Selector for a list of MSSQLDatabase to populate
+                    description: Selector for a list of MSSQLDatabase in sql to populate
                       databases.
                     properties:
                       matchControllerRef:
@@ -1302,7 +1304,8 @@ spec:
                             the failover group.
                           type: string
                         idRef:
-                          description: Reference to a MSSQLServer to populate id.
+                          description: Reference to a MSSQLServer in sql to populate
+                            id.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1336,7 +1339,8 @@ spec:
                           - name
                           type: object
                         idSelector:
-                          description: Selector for a MSSQLServer to populate id.
+                          description: Selector for a MSSQLServer in sql to populate
+                            id.
                           properties:
                             matchControllerRef:
                               description: |-

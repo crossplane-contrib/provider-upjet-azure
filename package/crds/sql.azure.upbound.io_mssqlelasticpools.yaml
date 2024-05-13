@@ -985,7 +985,7 @@ spec:
                       elastic pool. Changing this forces a new resource to be created.
                     type: string
                   serverNameRef:
-                    description: Reference to a MSSQLServer to populate serverName.
+                    description: Reference to a MSSQLServer in sql to populate serverName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1019,7 +1019,7 @@ spec:
                     - name
                     type: object
                   serverNameSelector:
-                    description: Selector for a MSSQLServer to populate serverName.
+                    description: Selector for a MSSQLServer in sql to populate serverName.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -22,15 +22,15 @@ type ExpressRouteConnectionInitParameters struct {
 	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty" tf:"enable_internet_security,omitempty"`
 
 	// The ID of the Express Route Circuit Peering that this Express Route Connection connects with. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ExpressRouteCircuitPeeringID *string `json:"expressRouteCircuitPeeringId,omitempty" tf:"express_route_circuit_peering_id,omitempty"`
 
-	// Reference to a ExpressRouteCircuitPeering to populate expressRouteCircuitPeeringId.
+	// Reference to a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringIDRef *v1.Reference `json:"expressRouteCircuitPeeringIdRef,omitempty" tf:"-"`
 
-	// Selector for a ExpressRouteCircuitPeering to populate expressRouteCircuitPeeringId.
+	// Selector for a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringIDSelector *v1.Selector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
 
@@ -82,16 +82,16 @@ type ExpressRouteConnectionParameters struct {
 	EnableInternetSecurity *bool `json:"enableInternetSecurity,omitempty" tf:"enable_internet_security,omitempty"`
 
 	// The ID of the Express Route Circuit Peering that this Express Route Connection connects with. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=ExpressRouteCircuitPeering
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringID *string `json:"expressRouteCircuitPeeringId,omitempty" tf:"express_route_circuit_peering_id,omitempty"`
 
-	// Reference to a ExpressRouteCircuitPeering to populate expressRouteCircuitPeeringId.
+	// Reference to a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringIDRef *v1.Reference `json:"expressRouteCircuitPeeringIdRef,omitempty" tf:"-"`
 
-	// Selector for a ExpressRouteCircuitPeering to populate expressRouteCircuitPeeringId.
+	// Selector for a ExpressRouteCircuitPeering in network to populate expressRouteCircuitPeeringId.
 	// +kubebuilder:validation:Optional
 	ExpressRouteCircuitPeeringIDSelector *v1.Selector `json:"expressRouteCircuitPeeringIdSelector,omitempty" tf:"-"`
 
@@ -100,16 +100,16 @@ type ExpressRouteConnectionParameters struct {
 	ExpressRouteGatewayBypassEnabled *bool `json:"expressRouteGatewayBypassEnabled,omitempty" tf:"express_route_gateway_bypass_enabled,omitempty"`
 
 	// The ID of the Express Route Gateway that this Express Route Connection connects with. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=ExpressRouteGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.ExpressRouteGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ExpressRouteGatewayID *string `json:"expressRouteGatewayId,omitempty" tf:"express_route_gateway_id,omitempty"`
 
-	// Reference to a ExpressRouteGateway to populate expressRouteGatewayId.
+	// Reference to a ExpressRouteGateway in network to populate expressRouteGatewayId.
 	// +kubebuilder:validation:Optional
 	ExpressRouteGatewayIDRef *v1.Reference `json:"expressRouteGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a ExpressRouteGateway to populate expressRouteGatewayId.
+	// Selector for a ExpressRouteGateway in network to populate expressRouteGatewayId.
 	// +kubebuilder:validation:Optional
 	ExpressRouteGatewayIDSelector *v1.Selector `json:"expressRouteGatewayIdSelector,omitempty" tf:"-"`
 

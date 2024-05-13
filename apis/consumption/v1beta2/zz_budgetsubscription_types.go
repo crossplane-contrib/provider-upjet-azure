@@ -228,7 +228,7 @@ type BudgetSubscriptionNotificationInitParameters struct {
 	ContactEmails []*string `json:"contactEmails,omitempty" tf:"contact_emails,omitempty"`
 
 	// Specifies a list of Action Group IDs to send the budget notification to when the threshold is exceeded.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ContactGroups []*string `json:"contactGroups,omitempty" tf:"contact_groups,omitempty"`
 
@@ -287,7 +287,7 @@ type BudgetSubscriptionNotificationParameters struct {
 	ContactEmails []*string `json:"contactEmails,omitempty" tf:"contact_emails,omitempty"`
 
 	// Specifies a list of Action Group IDs to send the budget notification to when the threshold is exceeded.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContactGroups []*string `json:"contactGroups,omitempty" tf:"contact_groups,omitempty"`

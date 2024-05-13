@@ -70,15 +70,15 @@ type PrivateDNSZoneGroupInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
-	// +crossplane:generate:reference:type=PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.PrivateDNSZone
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PrivateDNSZoneIds []*string `json:"privateDnsZoneIds,omitempty" tf:"private_dns_zone_ids,omitempty"`
 
-	// References to PrivateDNSZone to populate privateDnsZoneIds.
+	// References to PrivateDNSZone in network to populate privateDnsZoneIds.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIdsRefs []v1.Reference `json:"privateDnsZoneIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of PrivateDNSZone to populate privateDnsZoneIds.
+	// Selector for a list of PrivateDNSZone in network to populate privateDnsZoneIds.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIdsSelector *v1.Selector `json:"privateDnsZoneIdsSelector,omitempty" tf:"-"`
 }
@@ -102,16 +102,16 @@ type PrivateDNSZoneGroupParameters struct {
 	Name *string `json:"name" tf:"name,omitempty"`
 
 	// Specifies the list of Private DNS Zones to include within the private_dns_zone_group.
-	// +crossplane:generate:reference:type=PrivateDNSZone
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.PrivateDNSZone
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIds []*string `json:"privateDnsZoneIds,omitempty" tf:"private_dns_zone_ids,omitempty"`
 
-	// References to PrivateDNSZone to populate privateDnsZoneIds.
+	// References to PrivateDNSZone in network to populate privateDnsZoneIds.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIdsRefs []v1.Reference `json:"privateDnsZoneIdsRefs,omitempty" tf:"-"`
 
-	// Selector for a list of PrivateDNSZone to populate privateDnsZoneIds.
+	// Selector for a list of PrivateDNSZone in network to populate privateDnsZoneIds.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIdsSelector *v1.Selector `json:"privateDnsZoneIdsSelector,omitempty" tf:"-"`
 }

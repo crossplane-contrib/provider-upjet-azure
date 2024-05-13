@@ -16,16 +16,16 @@ import (
 type MonitorScheduledQueryRulesAlertActionInitParameters struct {
 
 	// List of action group reference resource IDs.
-	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +listType=set
 	ActionGroup []*string `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
 
-	// References to MonitorActionGroup to populate actionGroup.
+	// References to MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
 	ActionGroupRefs []v1.Reference `json:"actionGroupRefs,omitempty" tf:"-"`
 
-	// Selector for a list of MonitorActionGroup to populate actionGroup.
+	// Selector for a list of MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
 	ActionGroupSelector *v1.Selector `json:"actionGroupSelector,omitempty" tf:"-"`
 
@@ -52,17 +52,17 @@ type MonitorScheduledQueryRulesAlertActionObservation struct {
 type MonitorScheduledQueryRulesAlertActionParameters struct {
 
 	// List of action group reference resource IDs.
-	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	ActionGroup []*string `json:"actionGroup,omitempty" tf:"action_group,omitempty"`
 
-	// References to MonitorActionGroup to populate actionGroup.
+	// References to MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
 	ActionGroupRefs []v1.Reference `json:"actionGroupRefs,omitempty" tf:"-"`
 
-	// Selector for a list of MonitorActionGroup to populate actionGroup.
+	// Selector for a list of MonitorActionGroup in insights to populate actionGroup.
 	// +kubebuilder:validation:Optional
 	ActionGroupSelector *v1.Selector `json:"actionGroupSelector,omitempty" tf:"-"`
 

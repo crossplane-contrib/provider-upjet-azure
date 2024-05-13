@@ -373,7 +373,7 @@ func (mg *APIPolicy) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Management", "ManagementList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -392,7 +392,7 @@ func (mg *APIPolicy) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.APIManagementName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIManagementNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "API", "APIList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "API", "APIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -473,7 +473,7 @@ func (mg *APISchema) ResolveReferences(ctx context.Context, c client.Reader) err
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Management", "ManagementList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -492,7 +492,7 @@ func (mg *APISchema) ResolveReferences(ctx context.Context, c client.Reader) err
 	mg.Spec.ForProvider.APIManagementName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIManagementNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "API", "APIList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "API", "APIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -623,7 +623,7 @@ func (mg *AuthorizationServer) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Management", "ManagementList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1115,7 +1115,7 @@ func (mg *GatewayAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "API", "APIList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "API", "APIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1134,7 +1134,7 @@ func (mg *GatewayAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Gateway", "GatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1153,7 +1153,7 @@ func (mg *GatewayAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.GatewayID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.GatewayIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "API", "APIList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "API", "APIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -1172,7 +1172,7 @@ func (mg *GatewayAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.InitProvider.APIID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.APIIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Gateway", "GatewayList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Gateway", "GatewayList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2163,7 +2163,7 @@ func (mg *ProductAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Management", "ManagementList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2182,7 +2182,7 @@ func (mg *ProductAPI) ResolveReferences(ctx context.Context, c client.Reader) er
 	mg.Spec.ForProvider.APIManagementName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.APIManagementNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "API", "APIList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "API", "APIList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2251,7 +2251,7 @@ func (mg *ProductPolicy) ResolveReferences(ctx context.Context, c client.Reader)
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Management", "ManagementList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -2553,7 +2553,7 @@ func (mg *Subscription) ResolveReferences(ctx context.Context, c client.Reader) 
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta1", "Management", "ManagementList")
+		m, l, err = apisresolver.GetManagedResource("apimanagement.azure.upbound.io", "v1beta2", "Management", "ManagementList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -31,7 +31,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 	if mg.Spec.ForProvider.NetworkRuleSet != nil {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRuleSet.NetworkRules); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -73,7 +73,7 @@ func (mg *ServiceBusNamespace) ResolveReferences( // ResolveReferences of this S
 	if mg.Spec.InitProvider.NetworkRuleSet != nil {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRuleSet.NetworkRules); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}

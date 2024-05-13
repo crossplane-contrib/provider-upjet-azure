@@ -64,7 +64,7 @@ type DataSetKustoDatabaseParameters struct {
 	KustoDatabaseIDSelector *v1.Selector `json:"kustoDatabaseIdSelector,omitempty" tf:"-"`
 
 	// The resource ID of the Data Share where this Data Share Kusto Database Dataset should be created. Changing this forces a new Data Share Kusto Database Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datashare/v1beta1.DataShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datashare/v1beta2.DataShare
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ShareID *string `json:"shareId,omitempty" tf:"share_id,omitempty"`

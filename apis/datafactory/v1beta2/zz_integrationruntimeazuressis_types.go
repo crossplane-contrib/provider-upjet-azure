@@ -230,7 +230,7 @@ type ExpressCustomSetupParameters struct {
 type ExpressVnetIntegrationInitParameters struct {
 
 	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -252,7 +252,7 @@ type ExpressVnetIntegrationObservation struct {
 type ExpressVnetIntegrationParameters struct {
 
 	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -623,7 +623,7 @@ type VnetIntegrationInitParameters struct {
 	PublicIps []*string `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
 	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
@@ -636,7 +636,7 @@ type VnetIntegrationInitParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Name of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
 
 	// Reference to a Subnet in network to populate subnetName.
@@ -673,7 +673,7 @@ type VnetIntegrationParameters struct {
 	PublicIps []*string `json:"publicIps,omitempty" tf:"public_ips,omitempty"`
 
 	// id of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -687,7 +687,7 @@ type VnetIntegrationParameters struct {
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
 	// Name of the subnet to which the nodes of the Azure-SSIS Integration Runtime will be added.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +kubebuilder:validation:Optional
 	SubnetName *string `json:"subnetName,omitempty" tf:"subnet_name,omitempty"`
 

@@ -2021,7 +2021,8 @@ spec:
                       a new Streaming Policy to be created.
                     type: string
                   mediaServicesAccountNameRef:
-                    description: Reference to a ServicesAccount to populate mediaServicesAccountName.
+                    description: Reference to a ServicesAccount in media to populate
+                      mediaServicesAccountName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -2055,7 +2056,8 @@ spec:
                     - name
                     type: object
                   mediaServicesAccountNameSelector:
-                    description: Selector for a ServicesAccount to populate mediaServicesAccountName.
+                    description: Selector for a ServicesAccount in media to populate
+                      mediaServicesAccountName.
                     properties:
                       matchControllerRef:
                         description: |-

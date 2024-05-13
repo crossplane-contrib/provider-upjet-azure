@@ -182,15 +182,15 @@ type SubnetParameters struct {
 	ServiceEndpoints []*string `json:"serviceEndpoints,omitempty" tf:"service_endpoints,omitempty"`
 
 	// The name of the virtual network to which to attach the subnet. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualNetwork
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +kubebuilder:validation:Optional
 	VirtualNetworkName *string `json:"virtualNetworkName,omitempty" tf:"virtual_network_name,omitempty"`
 
-	// Reference to a VirtualNetwork to populate virtualNetworkName.
+	// Reference to a VirtualNetwork in network to populate virtualNetworkName.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkNameRef *v1.Reference `json:"virtualNetworkNameRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualNetwork to populate virtualNetworkName.
+	// Selector for a VirtualNetwork in network to populate virtualNetworkName.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkNameSelector *v1.Selector `json:"virtualNetworkNameSelector,omitempty" tf:"-"`
 }

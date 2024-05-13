@@ -1163,7 +1163,8 @@ spec:
                       a new resource to be created.
                     type: string
                   databaseNameRef:
-                    description: Reference to a GremlinDatabase to populate databaseName.
+                    description: Reference to a GremlinDatabase in cosmosdb to populate
+                      databaseName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1197,7 +1198,8 @@ spec:
                     - name
                     type: object
                   databaseNameSelector:
-                    description: Selector for a GremlinDatabase to populate databaseName.
+                    description: Selector for a GremlinDatabase in cosmosdb to populate
+                      databaseName.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -367,7 +367,7 @@ type MonitorAlertProcessingRuleActionGroupConditionTargetResourceTypeParameters 
 type MonitorAlertProcessingRuleActionGroupInitParameters struct {
 
 	// Specifies a list of Action Group IDs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	AddActionGroupIds []*string `json:"addActionGroupIds,omitempty" tf:"add_action_group_ids,omitempty"`
 
@@ -443,7 +443,7 @@ type MonitorAlertProcessingRuleActionGroupObservation struct {
 type MonitorAlertProcessingRuleActionGroupParameters struct {
 
 	// Specifies a list of Action Group IDs.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	AddActionGroupIds []*string `json:"addActionGroupIds,omitempty" tf:"add_action_group_ids,omitempty"`

@@ -1730,7 +1730,7 @@ spec:
                       database. Changing this forces a new resource to be created.
                     type: string
                   serverIdRef:
-                    description: Reference to a MSSQLServer to populate serverId.
+                    description: Reference to a MSSQLServer in sql to populate serverId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1764,7 +1764,7 @@ spec:
                     - name
                     type: object
                   serverIdSelector:
-                    description: Selector for a MSSQLServer to populate serverId.
+                    description: Selector for a MSSQLServer in sql to populate serverId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -123,7 +123,7 @@ type LabServicePlanInitParameters struct {
 	DefaultConnection *DefaultConnectionInitParameters `json:"defaultConnection,omitempty" tf:"default_connection,omitempty"`
 
 	// The resource ID of the Subnet for the Lab Service Plan network profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	DefaultNetworkSubnetID *string `json:"defaultNetworkSubnetId,omitempty" tf:"default_network_subnet_id,omitempty"`
 
@@ -198,7 +198,7 @@ type LabServicePlanParameters struct {
 	DefaultConnection *DefaultConnectionParameters `json:"defaultConnection,omitempty" tf:"default_connection,omitempty"`
 
 	// The resource ID of the Subnet for the Lab Service Plan network profile.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.Subnet
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DefaultNetworkSubnetID *string `json:"defaultNetworkSubnetId,omitempty" tf:"default_network_subnet_id,omitempty"`

@@ -109,16 +109,16 @@ type MSSQLManagedDatabaseParameters struct {
 	LongTermRetentionPolicy *MSSQLManagedDatabaseLongTermRetentionPolicyParameters `json:"longTermRetentionPolicy,omitempty" tf:"long_term_retention_policy,omitempty"`
 
 	// The ID of the Azure SQL Managed Instance on which to create this Managed Database. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ManagedInstanceID *string `json:"managedInstanceId,omitempty" tf:"managed_instance_id,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate managedInstanceId.
+	// Reference to a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDRef *v1.Reference `json:"managedInstanceIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLManagedInstance to populate managedInstanceId.
+	// Selector for a MSSQLManagedInstance in sql to populate managedInstanceId.
 	// +kubebuilder:validation:Optional
 	ManagedInstanceIDSelector *v1.Selector `json:"managedInstanceIdSelector,omitempty" tf:"-"`
 

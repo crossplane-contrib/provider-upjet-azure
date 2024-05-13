@@ -1371,8 +1371,8 @@ spec:
                             the
                           type: string
                         actionGroupIdRef:
-                          description: Reference to a MonitorActionGroup to populate
-                            actionGroupId.
+                          description: Reference to a MonitorActionGroup in insights
+                            to populate actionGroupId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1406,8 +1406,8 @@ spec:
                           - name
                           type: object
                         actionGroupIdSelector:
-                          description: Selector for a MonitorActionGroup to populate
-                            actionGroupId.
+                          description: Selector for a MonitorActionGroup in insights
+                            to populate actionGroupId.
                           properties:
                             matchControllerRef:
                               description: |-
@@ -1812,8 +1812,8 @@ spec:
                             the
                           type: string
                         actionGroupIdRef:
-                          description: Reference to a MonitorActionGroup to populate
-                            actionGroupId.
+                          description: Reference to a MonitorActionGroup in insights
+                            to populate actionGroupId.
                           properties:
                             name:
                               description: Name of the referenced object.
@@ -1847,8 +1847,8 @@ spec:
                           - name
                           type: object
                         actionGroupIdSelector:
-                          description: Selector for a MonitorActionGroup to populate
-                            actionGroupId.
+                          description: Selector for a MonitorActionGroup in insights
+                            to populate actionGroupId.
                           properties:
                             matchControllerRef:
                               description: |-

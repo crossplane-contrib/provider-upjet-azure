@@ -121,7 +121,7 @@ type MongoCollectionObservation struct {
 type MongoCollectionParameters struct {
 
 	// The name of the Cosmos DB Account in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -142,15 +142,15 @@ type MongoCollectionParameters struct {
 	AutoscaleSettings *MongoCollectionAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// The name of the Cosmos DB Mongo Database in which the Cosmos DB Mongo Collection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MongoDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.MongoDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Reference to a MongoDatabase to populate databaseName.
+	// Reference to a MongoDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
-	// Selector for a MongoDatabase to populate databaseName.
+	// Selector for a MongoDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 

@@ -1232,7 +1232,7 @@ spec:
                       a new resource to be created.
                     type: string
                   networkWatcherIdRef:
-                    description: Reference to a Watcher to populate networkWatcherId.
+                    description: Reference to a Watcher in network to populate networkWatcherId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1266,7 +1266,7 @@ spec:
                     - name
                     type: object
                   networkWatcherIdSelector:
-                    description: Selector for a Watcher to populate networkWatcherId.
+                    description: Selector for a Watcher in network to populate networkWatcherId.
                     properties:
                       matchControllerRef:
                         description: |-

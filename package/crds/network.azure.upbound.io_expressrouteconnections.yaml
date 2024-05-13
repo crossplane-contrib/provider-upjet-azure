@@ -813,8 +813,8 @@ spec:
                       a new resource to be created.
                     type: string
                   expressRouteCircuitPeeringIdRef:
-                    description: Reference to a ExpressRouteCircuitPeering to populate
-                      expressRouteCircuitPeeringId.
+                    description: Reference to a ExpressRouteCircuitPeering in network
+                      to populate expressRouteCircuitPeeringId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -848,8 +848,8 @@ spec:
                     - name
                     type: object
                   expressRouteCircuitPeeringIdSelector:
-                    description: Selector for a ExpressRouteCircuitPeering to populate
-                      expressRouteCircuitPeeringId.
+                    description: Selector for a ExpressRouteCircuitPeering in network
+                      to populate expressRouteCircuitPeeringId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -898,7 +898,8 @@ spec:
                       to be created.
                     type: string
                   expressRouteGatewayIdRef:
-                    description: Reference to a ExpressRouteGateway to populate expressRouteGatewayId.
+                    description: Reference to a ExpressRouteGateway in network to
+                      populate expressRouteGatewayId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -932,7 +933,8 @@ spec:
                     - name
                     type: object
                   expressRouteGatewayIdSelector:
-                    description: Selector for a ExpressRouteGateway to populate expressRouteGatewayId.
+                    description: Selector for a ExpressRouteGateway in network to
+                      populate expressRouteGatewayId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1038,8 +1040,8 @@ spec:
                       a new resource to be created.
                     type: string
                   expressRouteCircuitPeeringIdRef:
-                    description: Reference to a ExpressRouteCircuitPeering to populate
-                      expressRouteCircuitPeeringId.
+                    description: Reference to a ExpressRouteCircuitPeering in network
+                      to populate expressRouteCircuitPeeringId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1073,8 +1075,8 @@ spec:
                     - name
                     type: object
                   expressRouteCircuitPeeringIdSelector:
-                    description: Selector for a ExpressRouteCircuitPeering to populate
-                      expressRouteCircuitPeeringId.
+                    description: Selector for a ExpressRouteCircuitPeering in network
+                      to populate expressRouteCircuitPeeringId.
                     properties:
                       matchControllerRef:
                         description: |-

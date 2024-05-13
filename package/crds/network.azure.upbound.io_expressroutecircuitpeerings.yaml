@@ -885,7 +885,8 @@ spec:
                       created.
                     type: string
                   expressRouteCircuitNameRef:
-                    description: Reference to a ExpressRouteCircuit to populate expressRouteCircuitName.
+                    description: Reference to a ExpressRouteCircuit in network to
+                      populate expressRouteCircuitName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -919,7 +920,8 @@ spec:
                     - name
                     type: object
                   expressRouteCircuitNameSelector:
-                    description: Selector for a ExpressRouteCircuit to populate expressRouteCircuitName.
+                    description: Selector for a ExpressRouteCircuit in network to
+                      populate expressRouteCircuitName.
                     properties:
                       matchControllerRef:
                         description: |-

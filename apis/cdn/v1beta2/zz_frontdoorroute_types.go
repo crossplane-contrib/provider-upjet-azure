@@ -68,7 +68,7 @@ type FrontdoorRouteInitParameters struct {
 	Cache *CacheInitParameters `json:"cache,omitempty" tf:"cache,omitempty"`
 
 	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta2.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	CdnFrontdoorCustomDomainIds []*string `json:"cdnFrontdoorCustomDomainIds,omitempty" tf:"cdn_frontdoor_custom_domain_ids,omitempty"`
@@ -95,7 +95,7 @@ type FrontdoorRouteInitParameters struct {
 	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more Front Door Origin resource IDs that this Front Door Route will link to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorOrigin
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta2.FrontdoorOrigin
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	CdnFrontdoorOriginIds []*string `json:"cdnFrontdoorOriginIds,omitempty" tf:"cdn_frontdoor_origin_ids,omitempty"`
 
@@ -199,7 +199,7 @@ type FrontdoorRouteParameters struct {
 	Cache *CacheParameters `json:"cache,omitempty" tf:"cache,omitempty"`
 
 	// The IDs of the Front Door Custom Domains which are associated with this Front Door Route.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorCustomDomain
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta2.FrontdoorCustomDomain
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
@@ -242,7 +242,7 @@ type FrontdoorRouteParameters struct {
 	CdnFrontdoorOriginGroupIDSelector *v1.Selector `json:"cdnFrontdoorOriginGroupIdSelector,omitempty" tf:"-"`
 
 	// One or more Front Door Origin resource IDs that this Front Door Route will link to.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta1.FrontdoorOrigin
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cdn/v1beta2.FrontdoorOrigin
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	CdnFrontdoorOriginIds []*string `json:"cdnFrontdoorOriginIds,omitempty" tf:"cdn_frontdoor_origin_ids,omitempty"`

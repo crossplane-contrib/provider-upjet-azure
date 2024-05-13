@@ -84,28 +84,28 @@ type PointToSiteVPNGatewayInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the VPN Server Configuration which this Point-to-Site VPN Gateway should use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VPNServerConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VPNServerConfiguration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	VPNServerConfigurationID *string `json:"vpnServerConfigurationId,omitempty" tf:"vpn_server_configuration_id,omitempty"`
 
-	// Reference to a VPNServerConfiguration to populate vpnServerConfigurationId.
+	// Reference to a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationIDRef *v1.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPNServerConfiguration to populate vpnServerConfigurationId.
+	// Selector for a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationIDSelector *v1.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Hub where this Point-to-Site VPN Gateway should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 
-	// Reference to a VirtualHub to populate virtualHubId.
+	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualHub to populate virtualHubId.
+	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }
@@ -185,30 +185,30 @@ type PointToSiteVPNGatewayParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// The ID of the VPN Server Configuration which this Point-to-Site VPN Gateway should use. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VPNServerConfiguration
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VPNServerConfiguration
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationID *string `json:"vpnServerConfigurationId,omitempty" tf:"vpn_server_configuration_id,omitempty"`
 
-	// Reference to a VPNServerConfiguration to populate vpnServerConfigurationId.
+	// Reference to a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationIDRef *v1.Reference `json:"vpnServerConfigurationIdRef,omitempty" tf:"-"`
 
-	// Selector for a VPNServerConfiguration to populate vpnServerConfigurationId.
+	// Selector for a VPNServerConfiguration in network to populate vpnServerConfigurationId.
 	// +kubebuilder:validation:Optional
 	VPNServerConfigurationIDSelector *v1.Selector `json:"vpnServerConfigurationIdSelector,omitempty" tf:"-"`
 
 	// The ID of the Virtual Hub where this Point-to-Site VPN Gateway should exist. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.VirtualHub
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualHubID *string `json:"virtualHubId,omitempty" tf:"virtual_hub_id,omitempty"`
 
-	// Reference to a VirtualHub to populate virtualHubId.
+	// Reference to a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDRef *v1.Reference `json:"virtualHubIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualHub to populate virtualHubId.
+	// Selector for a VirtualHub in network to populate virtualHubId.
 	// +kubebuilder:validation:Optional
 	VirtualHubIDSelector *v1.Selector `json:"virtualHubIdSelector,omitempty" tf:"-"`
 }

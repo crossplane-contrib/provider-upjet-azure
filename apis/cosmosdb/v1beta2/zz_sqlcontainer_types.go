@@ -314,7 +314,7 @@ type SQLContainerObservation struct {
 type SQLContainerParameters struct {
 
 	// The name of the Cosmos DB Account to create the container within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -339,15 +339,15 @@ type SQLContainerParameters struct {
 	ConflictResolutionPolicy *SQLContainerConflictResolutionPolicyParameters `json:"conflictResolutionPolicy,omitempty" tf:"conflict_resolution_policy,omitempty"`
 
 	// The name of the Cosmos DB SQL Database to create the container within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=SQLDatabase
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.SQLDatabase
 	// +kubebuilder:validation:Optional
 	DatabaseName *string `json:"databaseName,omitempty" tf:"database_name,omitempty"`
 
-	// Reference to a SQLDatabase to populate databaseName.
+	// Reference to a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameRef *v1.Reference `json:"databaseNameRef,omitempty" tf:"-"`
 
-	// Selector for a SQLDatabase to populate databaseName.
+	// Selector for a SQLDatabase in cosmosdb to populate databaseName.
 	// +kubebuilder:validation:Optional
 	DatabaseNameSelector *v1.Selector `json:"databaseNameSelector,omitempty" tf:"-"`
 

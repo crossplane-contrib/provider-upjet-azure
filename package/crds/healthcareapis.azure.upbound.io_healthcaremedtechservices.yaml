@@ -1344,7 +1344,8 @@ spec:
                       forces a new Healthcare Med Tech Service to be created.
                     type: string
                   workspaceIdRef:
-                    description: Reference to a HealthcareWorkspace to populate workspaceId.
+                    description: Reference to a HealthcareWorkspace in healthcareapis
+                      to populate workspaceId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1378,7 +1379,8 @@ spec:
                     - name
                     type: object
                   workspaceIdSelector:
-                    description: Selector for a HealthcareWorkspace to populate workspaceId.
+                    description: Selector for a HealthcareWorkspace in healthcareapis
+                      to populate workspaceId.
                     properties:
                       matchControllerRef:
                         description: |-

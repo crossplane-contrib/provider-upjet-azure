@@ -46,7 +46,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 	mg.Spec.ForProvider.DelegatedSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DelegatedSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -103,7 +103,7 @@ func (mg *FlexibleServer) ResolveReferences( // ResolveReferences of this Flexib
 	mg.Spec.InitProvider.DelegatedSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DelegatedSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSZone", "PrivateDNSZoneList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "PrivateDNSZone", "PrivateDNSZoneList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

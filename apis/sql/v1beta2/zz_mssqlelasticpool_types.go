@@ -134,15 +134,15 @@ type MSSQLElasticPoolParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// The name of the SQL Server on which to create the elastic pool. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLServer
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLServer
 	// +kubebuilder:validation:Optional
 	ServerName *string `json:"serverName,omitempty" tf:"server_name,omitempty"`
 
-	// Reference to a MSSQLServer to populate serverName.
+	// Reference to a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameRef *v1.Reference `json:"serverNameRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLServer to populate serverName.
+	// Selector for a MSSQLServer in sql to populate serverName.
 	// +kubebuilder:validation:Optional
 	ServerNameSelector *v1.Selector `json:"serverNameSelector,omitempty" tf:"-"`
 

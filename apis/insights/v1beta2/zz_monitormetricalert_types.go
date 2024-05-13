@@ -242,15 +242,15 @@ type DynamicCriteriaParameters struct {
 type MonitorMetricAlertActionInitParameters struct {
 
 	// The ID of the Action Group can be sourced from the
-	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
-	// Reference to a MonitorActionGroup to populate actionGroupId.
+	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a MonitorActionGroup to populate actionGroupId.
+	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
@@ -272,16 +272,16 @@ type MonitorMetricAlertActionObservation struct {
 type MonitorMetricAlertActionParameters struct {
 
 	// The ID of the Action Group can be sourced from the
-	// +crossplane:generate:reference:type=MonitorActionGroup
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroupID *string `json:"actionGroupId,omitempty" tf:"action_group_id,omitempty"`
 
-	// Reference to a MonitorActionGroup to populate actionGroupId.
+	// Reference to a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDRef *v1.Reference `json:"actionGroupIdRef,omitempty" tf:"-"`
 
-	// Selector for a MonitorActionGroup to populate actionGroupId.
+	// Selector for a MonitorActionGroup in insights to populate actionGroupId.
 	// +kubebuilder:validation:Optional
 	ActionGroupIDSelector *v1.Selector `json:"actionGroupIdSelector,omitempty" tf:"-"`
 
@@ -397,7 +397,7 @@ type MonitorMetricAlertInitParameters struct {
 	Frequency *string `json:"frequency,omitempty" tf:"frequency,omitempty"`
 
 	// A set of strings of resource IDs at which the metric criteria should be applied.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +listType=set
 	Scopes []*string `json:"scopes,omitempty" tf:"scopes,omitempty"`
@@ -532,7 +532,7 @@ type MonitorMetricAlertParameters struct {
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
 	// A set of strings of resource IDs at which the metric criteria should be applied.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set

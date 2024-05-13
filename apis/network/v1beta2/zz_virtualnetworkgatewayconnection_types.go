@@ -130,15 +130,15 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the peer virtual network gateway when creating a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or in a different subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualNetworkGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	PeerVirtualNetworkGatewayID *string `json:"peerVirtualNetworkGatewayId,omitempty" tf:"peer_virtual_network_gateway_id,omitempty"`
 
-	// Reference to a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
+	// Reference to a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDRef *v1.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
+	// Selector for a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
@@ -161,15 +161,15 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	UsePolicyBasedTrafficSelectors *bool `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
 
 	// The ID of the Virtual Network Gateway in which the connection will be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualNetworkGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	VirtualNetworkGatewayID *string `json:"virtualNetworkGatewayId,omitempty" tf:"virtual_network_gateway_id,omitempty"`
 
-	// Reference to a VirtualNetworkGateway to populate virtualNetworkGatewayId.
+	// Reference to a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayIDRef *v1.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualNetworkGateway to populate virtualNetworkGatewayId.
+	// Selector for a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayIDSelector *v1.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 }
@@ -424,16 +424,16 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the peer virtual network gateway when creating a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or in a different subscription. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualNetworkGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayID *string `json:"peerVirtualNetworkGatewayId,omitempty" tf:"peer_virtual_network_gateway_id,omitempty"`
 
-	// Reference to a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
+	// Reference to a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDRef *v1.Reference `json:"peerVirtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualNetworkGateway to populate peerVirtualNetworkGatewayId.
+	// Selector for a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
@@ -478,16 +478,16 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	UsePolicyBasedTrafficSelectors *bool `json:"usePolicyBasedTrafficSelectors,omitempty" tf:"use_policy_based_traffic_selectors,omitempty"`
 
 	// The ID of the Virtual Network Gateway in which the connection will be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=VirtualNetworkGateway
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetworkGateway
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayID *string `json:"virtualNetworkGatewayId,omitempty" tf:"virtual_network_gateway_id,omitempty"`
 
-	// Reference to a VirtualNetworkGateway to populate virtualNetworkGatewayId.
+	// Reference to a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayIDRef *v1.Reference `json:"virtualNetworkGatewayIdRef,omitempty" tf:"-"`
 
-	// Selector for a VirtualNetworkGateway to populate virtualNetworkGatewayId.
+	// Selector for a VirtualNetworkGateway in network to populate virtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkGatewayIDSelector *v1.Selector `json:"virtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 }

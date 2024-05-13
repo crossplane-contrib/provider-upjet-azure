@@ -999,7 +999,8 @@ spec:
                       PostgreSQL to be created.
                     type: string
                   vaultNameRef:
-                    description: Reference to a BackupVault to populate vaultName.
+                    description: Reference to a BackupVault in dataprotection to populate
+                      vaultName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1033,7 +1034,8 @@ spec:
                     - name
                     type: object
                   vaultNameSelector:
-                    description: Selector for a BackupVault to populate vaultName.
+                    description: Selector for a BackupVault in dataprotection to populate
+                      vaultName.
                     properties:
                       matchControllerRef:
                         description: |-

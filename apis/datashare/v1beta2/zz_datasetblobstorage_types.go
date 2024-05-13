@@ -77,16 +77,16 @@ type DataSetBlobStorageParameters struct {
 	ContainerNameSelector *v1.Selector `json:"containerNameSelector,omitempty" tf:"-"`
 
 	// The ID of the Data Share in which this Data Share Blob Storage Dataset should be created. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=DataShare
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/datashare/v1beta2.DataShare
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DataShareID *string `json:"dataShareId,omitempty" tf:"data_share_id,omitempty"`
 
-	// Reference to a DataShare to populate dataShareId.
+	// Reference to a DataShare in datashare to populate dataShareId.
 	// +kubebuilder:validation:Optional
 	DataShareIDRef *v1.Reference `json:"dataShareIdRef,omitempty" tf:"-"`
 
-	// Selector for a DataShare to populate dataShareId.
+	// Selector for a DataShare in datashare to populate dataShareId.
 	// +kubebuilder:validation:Optional
 	DataShareIDSelector *v1.Selector `json:"dataShareIdSelector,omitempty" tf:"-"`
 
@@ -106,7 +106,7 @@ type DataSetBlobStorageParameters struct {
 type StorageAccountInitParameters struct {
 
 	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Reference to a Account in storage to populate name.
@@ -148,7 +148,7 @@ type StorageAccountObservation struct {
 type StorageAccountParameters struct {
 
 	// The name of the storage account to be shared with the receiver. Changing this forces a new Data Share Blob Storage Dataset to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

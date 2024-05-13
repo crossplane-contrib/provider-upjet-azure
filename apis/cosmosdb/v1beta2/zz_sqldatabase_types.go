@@ -62,7 +62,7 @@ type SQLDatabaseObservation struct {
 type SQLDatabaseParameters struct {
 
 	// The name of the Cosmos DB SQL Database to create the table within. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cosmosdb/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 

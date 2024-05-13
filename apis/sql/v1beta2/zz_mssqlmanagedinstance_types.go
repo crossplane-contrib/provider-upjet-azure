@@ -60,15 +60,15 @@ type MSSQLManagedInstanceInitParameters struct {
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate dnsZonePartnerId.
+	// Reference to a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDRef *v1.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLManagedInstance to populate dnsZonePartnerId.
+	// Selector for a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 
@@ -214,16 +214,16 @@ type MSSQLManagedInstanceParameters struct {
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 
 	// The ID of the SQL Managed Instance which will share the DNS zone. This is a prerequisite for creating an azurerm_sql_managed_instance_failover_group. Setting this after creation forces a new resource to be created.
-	// +crossplane:generate:reference:type=MSSQLManagedInstance
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLManagedInstance
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerID *string `json:"dnsZonePartnerId,omitempty" tf:"dns_zone_partner_id,omitempty"`
 
-	// Reference to a MSSQLManagedInstance to populate dnsZonePartnerId.
+	// Reference to a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDRef *v1.Reference `json:"dnsZonePartnerIdRef,omitempty" tf:"-"`
 
-	// Selector for a MSSQLManagedInstance to populate dnsZonePartnerId.
+	// Selector for a MSSQLManagedInstance in sql to populate dnsZonePartnerId.
 	// +kubebuilder:validation:Optional
 	DNSZonePartnerIDSelector *v1.Selector `json:"dnsZonePartnerIdSelector,omitempty" tf:"-"`
 

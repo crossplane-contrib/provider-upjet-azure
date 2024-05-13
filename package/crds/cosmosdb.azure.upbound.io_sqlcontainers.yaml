@@ -1204,7 +1204,8 @@ spec:
                       be created.
                     type: string
                   databaseNameRef:
-                    description: Reference to a SQLDatabase to populate databaseName.
+                    description: Reference to a SQLDatabase in cosmosdb to populate
+                      databaseName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1238,7 +1239,8 @@ spec:
                     - name
                     type: object
                   databaseNameSelector:
-                    description: Selector for a SQLDatabase to populate databaseName.
+                    description: Selector for a SQLDatabase in cosmosdb to populate
+                      databaseName.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -1361,7 +1361,8 @@ spec:
                       be created.
                     type: string
                   networkSecurityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate networkSecurityGroupId.
+                    description: Reference to a SecurityGroup in network to populate
+                      networkSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1395,7 +1396,8 @@ spec:
                     - name
                     type: object
                   networkSecurityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate networkSecurityGroupId.
+                    description: Selector for a SecurityGroup in network to populate
+                      networkSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1439,7 +1441,7 @@ spec:
                       a new resource to be created.
                     type: string
                   networkWatcherNameRef:
-                    description: Reference to a Watcher to populate networkWatcherName.
+                    description: Reference to a Watcher in network to populate networkWatcherName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1473,7 +1475,7 @@ spec:
                     - name
                     type: object
                   networkWatcherNameSelector:
-                    description: Selector for a Watcher to populate networkWatcherName.
+                    description: Selector for a Watcher in network to populate networkWatcherName.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -1892,7 +1894,8 @@ spec:
                       be created.
                     type: string
                   networkSecurityGroupIdRef:
-                    description: Reference to a SecurityGroup to populate networkSecurityGroupId.
+                    description: Reference to a SecurityGroup in network to populate
+                      networkSecurityGroupId.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -1926,7 +1929,8 @@ spec:
                     - name
                     type: object
                   networkSecurityGroupIdSelector:
-                    description: Selector for a SecurityGroup to populate networkSecurityGroupId.
+                    description: Selector for a SecurityGroup in network to populate
+                      networkSecurityGroupId.
                     properties:
                       matchControllerRef:
                         description: |-

@@ -80,7 +80,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkRulesets); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
@@ -122,7 +122,7 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRulesets); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule); i4++ {
 			{
-				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}

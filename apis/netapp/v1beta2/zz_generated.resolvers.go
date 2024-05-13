@@ -128,7 +128,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta2", "Snapshot", "SnapshotList")
+		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta1", "Snapshot", "SnapshotList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -190,7 +190,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 
 	}
 	{
-		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta2", "Pool", "PoolList")
+		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta1", "Pool", "PoolList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -246,7 +246,7 @@ func (mg *Volume) ResolveReferences(ctx context.Context, c client.Reader) error 
 	mg.Spec.ForProvider.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta2", "Snapshot", "SnapshotList")
+		m, l, err = apisresolver.GetManagedResource("netapp.azure.upbound.io", "v1beta1", "Snapshot", "SnapshotList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

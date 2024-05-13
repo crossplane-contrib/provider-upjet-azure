@@ -841,7 +841,7 @@ spec:
                       forces a new resource to be created.
                     type: string
                   frontdoorNameRef:
-                    description: Reference to a FrontDoor to populate frontdoorName.
+                    description: Reference to a FrontDoor in network to populate frontdoorName.
                     properties:
                       name:
                         description: Name of the referenced object.
@@ -875,7 +875,7 @@ spec:
                     - name
                     type: object
                   frontdoorNameSelector:
-                    description: Selector for a FrontDoor to populate frontdoorName.
+                    description: Selector for a FrontDoor in network to populate frontdoorName.
                     properties:
                       matchControllerRef:
                         description: |-

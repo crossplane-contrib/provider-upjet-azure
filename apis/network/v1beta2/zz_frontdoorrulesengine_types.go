@@ -77,15 +77,15 @@ type FrontdoorRulesEngineParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The name of the Front Door instance. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=FrontDoor
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.FrontDoor
 	// +kubebuilder:validation:Optional
 	FrontdoorName *string `json:"frontdoorName,omitempty" tf:"frontdoor_name,omitempty"`
 
-	// Reference to a FrontDoor to populate frontdoorName.
+	// Reference to a FrontDoor in network to populate frontdoorName.
 	// +kubebuilder:validation:Optional
 	FrontdoorNameRef *v1.Reference `json:"frontdoorNameRef,omitempty" tf:"-"`
 
-	// Selector for a FrontDoor to populate frontdoorName.
+	// Selector for a FrontDoor in network to populate frontdoorName.
 	// +kubebuilder:validation:Optional
 	FrontdoorNameSelector *v1.Selector `json:"frontdoorNameSelector,omitempty" tf:"-"`
 
