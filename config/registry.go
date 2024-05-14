@@ -193,6 +193,7 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 			continue
 		}
 		r.Version = "v1beta2"
+		r.PreviousVersions = []string{"v1beta1"}
 		// we would like to set the storage version to v1beta1 to facilitate
 		// downgrades.
 		r.SetCRDStorageVersion("v1beta1")

@@ -16,10 +16,4 @@ func Configure(p *config.Provider) {
 		// https://github.com/kubernetes/kubernetes/pull/108382
 		r.Kind = "ServiceBusNamespace"
 	})
-
-	p.AddResourceConfigurator("azurerm_servicebus_namespace_network_rule_set", func(r *config.Resource) {
-		r.OverrideFieldNames["NetworkRulesParameters"] = "NamespaceNetworkRuleSetNetworkRulesParameters"
-		r.OverrideFieldNames["NetworkRulesInitParameters"] = "NamespaceNetworkRuleSetNetworkRulesInitParameters"
-		r.OverrideFieldNames["NetworkRulesObservation"] = "NamespaceNetworkRuleSetNetworkRulesObservation"
-	})
 }

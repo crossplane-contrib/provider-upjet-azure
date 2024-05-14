@@ -169,4 +169,4 @@ replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/te
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
 
-replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20240510150048-94634891cc5a
+replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20240514111512-b5622a10e14d

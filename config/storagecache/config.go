@@ -13,10 +13,4 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_hpc_cache_nfs_target", func(r *config.Resource) {
 		delete(r.References, "target_host_name")
 	})
-
-	p.AddResourceConfigurator("azurerm_hpc_cache_access_policy", func(r *config.Resource) {
-		r.OverrideFieldNames["AccessRuleParameters"] = "HPCCacheAccessPolicyAccessRuleParameters"
-		r.OverrideFieldNames["AccessRuleInitParameters"] = "HPCCacheAccessPolicyAccessRuleInitParameters"
-		r.OverrideFieldNames["AccessRuleObservation"] = "HPCCacheAccessPolicyAccessRuleObservation"
-	})
 }
