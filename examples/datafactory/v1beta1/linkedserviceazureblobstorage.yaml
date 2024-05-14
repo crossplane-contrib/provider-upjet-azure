@@ -1,0 +1,86 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: LinkedServiceAzureBlobStorage
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The resource require account connecton string to be specified."
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazureblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: lsabsexample
+spec:
+  forProvider:
+    connectionStringSecretRef:
+      key: primary_connection_string
+      name: example-secret
+      namespace: upbound-system
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-blob-storage.sh
+type: Opaque
+stringData:
+  primary_connection_string: DefaultEndpointsProtocol=https;AccountName=lsabsexample;AccountKey=a5zs3v5FCnopLrBjP8eLpdQ1HyY3EO42GjdLixC6q289pxcoQCnn22lOicAJYGb+StUvndFe4JmQ+AStY6pi0w==;EndpointSuffix=core.windows.net
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta1
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazureblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: lsabsexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazureblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: lsabsexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceazureblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: lsabsexample
+spec:
+  forProvider:
+    accountKind: BlobStorage
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

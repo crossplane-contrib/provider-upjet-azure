@@ -1,0 +1,157 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: StreamInputEventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: ehubexample
+spec:
+  forProvider:
+    name: ehubexample
+    eventhubConsumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serialization:
+    - encoding: UTF8
+      type: Json
+    servicebusNamespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedAccessPolicyKeySecretRef:
+      key: default_primary_key
+      name: example-eventhub-namespace
+      namespace: upbound-system
+    sharedAccessPolicyName: RootManageSharedAccessKey
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-eventhub-namespace
+  namespace: upbound-system
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-srteam-hub.sh
+type: Opaque
+data:
+  default_primary_key: key1
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: ehubexample
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: ConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: ehubexample
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: ehubexample
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: ehubexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-job
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]

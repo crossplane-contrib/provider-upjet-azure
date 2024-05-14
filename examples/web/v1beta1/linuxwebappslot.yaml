@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: LinuxWebAppSlot
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: lnxappslotexample
+  name: lnxappslotexample
+spec:
+  forProvider:
+    name: lnxappslotexample
+    appServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-lwa
+    siteConfig:
+    - {}
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: LinuxWebApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: linuxwebappslot-lwa
+  name: linuxwebappslot-lwa
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-rg
+    servicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-sp
+    siteConfig:
+    - {}
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: linuxwebappslot-rg
+  name: linuxwebappslot-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: ServicePlan
+metadata:
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-linux-app.sh
+    meta.upbound.io/example-id: web/v1beta1/linuxwebappslot
+  labels:
+    testing.upbound.io/example-name: linuxwebappslot-sp
+  name: linuxwebappslot-sp
+spec:
+  forProvider:
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linuxwebappslot-rg
+    skuName: P1v2

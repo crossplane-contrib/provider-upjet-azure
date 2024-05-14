@@ -1,0 +1,136 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: OutputServiceBusQueue
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Long-running resource."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: queueexample
+spec:
+  forProvider:
+    name: blob-storage-output
+    queueNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serialization:
+    - format: Array
+      type: Json
+      encoding: UTF8
+    servicebusNamespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedAccessPolicyKeySecretRef:
+      key: default_primary_key
+      name: example-servicebus-namespace
+      namespace: upbound-system
+    sharedAccessPolicyName: RootManageSharedAccessKey
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-servicebus-namespace
+  namespace: upbound-system
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-queue.sh
+type: Opaque
+data:
+  default_primary_key: key1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: queueexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: sbqueueexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Premium
+    capacity: 1
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: queueexample
+spec:
+  forProvider:
+    maxMessageSizeInKilobytes: 1024
+    enablePartitioning: false
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent is a long-running resource and has manual-intervention annotation."
+    meta.upbound.io/example-id: streamanalytics/v1beta1/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-job
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]

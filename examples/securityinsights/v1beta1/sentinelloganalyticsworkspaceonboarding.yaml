@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: securityinsights.azure.upbound.io/v1beta1
+kind: SentinelLogAnalyticsWorkspaceOnboarding
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelloganalyticsworkspaceonboarding
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    customerManagedKeyEnabled: false
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    workspaceName: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta1
+kind: Workspace
+metadata:
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-securityinsights.sh
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelloganalyticsworkspaceonboarding
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: securityinsights/v1beta1/sentinelloganalyticsworkspaceonboarding
+  labels:
+    testing.upbound.io/example-name: example
+  name: exampleworkspaceonboarding
+spec:
+  forProvider:
+    location: West Europe
