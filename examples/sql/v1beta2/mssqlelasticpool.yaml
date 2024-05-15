@@ -1,0 +1,79 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLElasticPool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlelasticpool
+  labels:
+    testing.upbound.io/example-name: examplemssqlelasticpool
+  name: examplemssqlelasticpool
+spec:
+  forProvider:
+    location: West Europe
+    maxSizeGb: 5
+    perDatabaseSettings:
+      maxCapacity: 4
+      minCapacity: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqlelasticpool-rg
+    serverNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqlelasticpoolsrv
+    sku:
+      capacity: 4
+      family: Gen5
+      name: GP_Gen5
+      tier: GeneralPurpose
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta1/mssqlelasticpool
+  labels:
+    testing.upbound.io/example-name: mssqlelasticpool-rg
+  name: mssqlelasticpool-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlelasticpool
+    uptest.upbound.io/timeout: "3600"
+  labels:
+    testing.upbound.io/example-name: mssqlelasticpoolsrv
+  name: mssqlelasticpoolsrv
+spec:
+  forProvider:
+    administratorLogin: 4dm1n157r470r
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mssqlelasticpool-rg
+    version: "12.0"
+
+---
+
+apiVersion: v1
+data:
+  example-key: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

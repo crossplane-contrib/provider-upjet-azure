@@ -1,0 +1,69 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Profile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/profile
+  name: example
+spec:
+  forProvider:
+    containerNetworkInterface:
+      ipConfiguration:
+      - name: exampleipconfig
+        subnetIdRef:
+          name: example-subnet-for-network-profile
+      name: examplecnic
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkprofile-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: networkprofile-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/profile
+  name: example-vn-for-network-profile
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    dnsServers:
+    - 10.0.0.4
+    - 10.0.0.5
+    location: West Europe
+    resourceGroupNameRef:
+      name: networkprofile-rg
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/profile
+  name: example-subnet-for-network-profile
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    resourceGroupNameRef:
+      name: networkprofile-rg
+    virtualNetworkNameRef:
+      name: example-vn-for-network-profile

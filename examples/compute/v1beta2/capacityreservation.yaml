@@ -1,0 +1,51 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: CapacityReservation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/capacityreservation
+  labels:
+    testing.upbound.io/example-name: examplecapacityreserv
+  name: examplecapacityreserv
+spec:
+  forProvider:
+    capacityReservationGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: capacityreserv-cg
+    sku:
+      capacity: 1
+      name: Standard_D2s_v3
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: CapacityReservationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/capacityreservation
+  labels:
+    testing.upbound.io/example-name: capacityreserv-cg
+  name: capacityreserv-cg
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: capacityreserv-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/capacityreservation
+  labels:
+    testing.upbound.io/example-name: capacityreserv-rg
+  name: capacityreserv-rg
+spec:
+  forProvider:
+    location: West Europe

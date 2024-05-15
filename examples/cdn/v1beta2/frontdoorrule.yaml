@@ -1,0 +1,193 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    actions:
+      routeConfigurationOverrideAction:
+        cacheBehavior: OverrideIfOriginMissing
+        cacheDuration: 365.23:59:59
+        cdnFrontdoorOriginGroupIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+        compressionEnabled: true
+        forwardingProtocol: HttpsOnly
+        queryStringCachingBehavior: IncludeSpecifiedQueryStrings
+        queryStringParameters:
+        - foo
+        - clientIp={client_ip}
+      urlRedirectAction:
+        destinationFragment: UrlRedirect
+        destinationHostname: contoso.com
+        destinationPath: /exampleredirection
+        queryString: clientIp={client_ip}
+        redirectProtocol: MatchRequest
+        redirectType: PermanentRedirect
+    behaviorOnMatch: Continue
+    cdnFrontdoorRuleSetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    conditions:
+      hostNameCondition:
+      - matchValues:
+        - www.contoso.com
+        - images.contoso.com
+        - video.contoso.com
+        negateCondition: false
+        operator: Equal
+        transforms:
+        - Lowercase
+        - Trim
+      isDeviceCondition:
+      - matchValues:
+        - Mobile
+        negateCondition: false
+        operator: Equal
+      postArgsCondition:
+      - matchValues:
+        - J
+        - K
+        operator: BeginsWith
+        postArgsName: customerName
+        transforms:
+        - Uppercase
+      requestMethodCondition:
+      - matchValues:
+        - DELETE
+        negateCondition: false
+        operator: Equal
+      urlFilenameCondition:
+      - matchValues:
+        - media.mp4
+        negateCondition: false
+        operator: Equal
+        transforms:
+        - Lowercase
+        - RemoveNulls
+        - Trim
+    order: 1
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      endpoint: contoso.com
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorOrigin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorOriginGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    certificateNameCheckEnabled: false
+    enabled: true
+    hostName: contoso.com
+    httpPort: 80
+    httpsPort: 443
+    originHostHeader: www.contoso.com
+    priority: 1
+    weight: 500
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorOriginGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    healthProbe:
+      intervalInSeconds: 240
+      path: /healthProbe
+      protocol: Https
+      requestType: GET
+    loadBalancing:
+      additionalLatencyInMilliseconds: 0
+      sampleSize: 16
+      successfulSamplesRequired: 3
+    restoreTrafficTimeToHealedOrNewEndpointInMinutes: 10
+    sessionAffinityEnabled: true
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgfrontdoorrule
+    skuName: Standard_AzureFrontDoor
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorRuleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoorrule
+  labels:
+    testing.upbound.io/example-name: rgfrontdoorrule
+  name: rgfrontdoorrule
+spec:
+  forProvider:
+    location: West Europe

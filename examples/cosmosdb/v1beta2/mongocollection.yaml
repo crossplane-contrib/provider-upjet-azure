@@ -1,0 +1,77 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: MongoCollection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta2/mongocollection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mongo
+    databaseNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    defaultTtlSeconds: 777
+    index:
+    - keys:
+      - _id
+      unique: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg1
+    shardKey: uniqueKey
+    throughput: 400
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: MongoDatabase
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta2/mongocollection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: mongo
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg1
+
+---
+
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta2/mongocollection
+  labels:
+    testing.upbound.io/example-name: mongo
+  name: example-cosmosdb-mongo-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    capabilities:
+    - name: EnableMongo
+    - name: MongoDBv3.4
+    - name: mongoEnableDocLevelTTL
+    consistencyPolicy:
+      consistencyLevel: Strong
+    geoLocation:
+    - failoverPriority: 0
+      location: West Europe
+    kind: MongoDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg1
