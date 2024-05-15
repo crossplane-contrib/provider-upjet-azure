@@ -201,6 +201,7 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 			conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
 			conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
 			conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
+		r.TerraformConversions = append(r.TerraformConversions, ujconfig.NewTFSingletonConversion())
 		pc.Resources[name] = r
 	}
 }
