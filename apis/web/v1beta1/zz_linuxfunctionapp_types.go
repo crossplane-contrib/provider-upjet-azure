@@ -2348,7 +2348,7 @@ type LinuxFunctionAppSiteConfigInitParameters struct {
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
 	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
+	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022“
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// Should Scale Monitoring of the Functions Runtime be enabled?
@@ -2483,7 +2483,7 @@ type LinuxFunctionAppSiteConfigObservation struct {
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
 	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
+	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022“
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// Should Scale Monitoring of the Functions Runtime be enabled?
@@ -2647,7 +2647,7 @@ type LinuxFunctionAppSiteConfigParameters struct {
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
 	// The Remote Debugging Version. Possible values include VS2017, VS2019, and VS2022.
-	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022``
+	// The Remote Debugging Version. Possible values include `VS2017`, `VS2019`, and `VS2022“
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
