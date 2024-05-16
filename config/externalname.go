@@ -231,6 +231,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_machine_extension": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_machine_id }}/extensions/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Compute/virtualMachines/machine1/dataDisks/disk1
 	"azurerm_virtual_machine_data_disk_attachment": config.IdentifierFromProvider,
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/mygroup1/providers/Microsoft.Compute/virtualMachines/vm1/runCommands/rc1
+	"azurerm_virtual_machine_run_command": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_machine_id }}/runCommands/{{ .external_name }}"),
 
 	// cdn
 	//

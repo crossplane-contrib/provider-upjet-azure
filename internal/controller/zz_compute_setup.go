@@ -30,6 +30,7 @@ import (
 	sshpublickey "github.com/upbound/provider-azure/internal/controller/compute/sshpublickey"
 	virtualmachinedatadiskattachment "github.com/upbound/provider-azure/internal/controller/compute/virtualmachinedatadiskattachment"
 	virtualmachineextension "github.com/upbound/provider-azure/internal/controller/compute/virtualmachineextension"
+	virtualmachineruncommand "github.com/upbound/provider-azure/internal/controller/compute/virtualmachineruncommand"
 	windowsvirtualmachine "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachine"
 	windowsvirtualmachinescaleset "github.com/upbound/provider-azure/internal/controller/compute/windowsvirtualmachinescaleset"
 )
@@ -59,6 +60,7 @@ func Setup_compute(mgr ctrl.Manager, o controller.Options) error {
 		sshpublickey.Setup,
 		virtualmachinedatadiskattachment.Setup,
 		virtualmachineextension.Setup,
+		virtualmachineruncommand.Setup,
 		windowsvirtualmachine.Setup,
 		windowsvirtualmachinescaleset.Setup,
 	} {

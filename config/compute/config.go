@@ -74,6 +74,12 @@ func Configure(p *config.Provider) {
 		r.Kind = "VirtualMachineExtension"
 		r.ShortGroup = "compute"
 	})
+	p.AddResourceConfigurator("azurerm_virtual_machine_run_command", func(r *config.Resource) {
+		r.References["virtual_machine_id"] = config.Reference{
+			TerraformName: "azurerm_linux_virtual_machine",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 	p.AddResourceConfigurator("azurerm_virtual_machine_data_disk_attachment", func(r *config.Resource) {
 		r.References["virtual_machine_id"] = config.Reference{
 			TerraformName: "azurerm_linux_virtual_machine",
