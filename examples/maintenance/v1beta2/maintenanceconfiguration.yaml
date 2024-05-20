@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: maintenance.azure.upbound.io/v1beta2
+kind: MaintenanceConfiguration
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta2/maintenanceconfiguration
+    upjet.upbound.io/manual-intervention: Unstable resource.
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgmaintenanceconfiguration
+    scope: SQLDB
+    tags:
+      Env: prod
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: maintenance/v1beta1/maintenanceconfiguration
+    upjet.upbound.io/manual-intervention: Unstable resource.
+  labels:
+    testing.upbound.io/example-name: rgmaintenanceconfiguration
+  name: rgmaintenanceconfiguration
+spec:
+  forProvider:
+    location: West Europe

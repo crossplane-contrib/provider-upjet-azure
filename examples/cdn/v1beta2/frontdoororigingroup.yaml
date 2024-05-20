@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorOriginGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigingroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    healthProbe:
+      intervalInSeconds: 240
+      path: /healthProbe
+      protocol: Https
+      requestType: HEAD
+    loadBalancing:
+      additionalLatencyInMilliseconds: 0
+      sampleSize: 16
+      successfulSamplesRequired: 3
+    restoreTrafficTimeToHealedOrNewEndpointInMinutes: 10
+    sessionAffinityEnabled: true
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigingroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgfrontdoororigingroup
+    skuName: Standard_AzureFrontDoor
+    tags:
+      environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/frontdoororigingroup
+  labels:
+    testing.upbound.io/example-name: rgfrontdoororigingroup
+  name: rgfrontdoororigingroup
+spec:
+  forProvider:
+    location: West Europe

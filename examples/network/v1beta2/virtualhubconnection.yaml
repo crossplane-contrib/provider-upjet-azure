@@ -1,0 +1,93 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualHubConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualhubconnection
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: examplehubconn
+  name: examplehubconn
+spec:
+  forProvider:
+    remoteVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubconnection-vn
+    virtualHubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubconnection-vhub
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/virtualhubconnection
+  labels:
+    testing.upbound.io/example-name: virtualhubconnection-rg
+  name: virtualhubconnection-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualhubconnection
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: virtualhubconnection-vhub
+  name: virtualhubconnection-vhub
+spec:
+  forProvider:
+    addressPrefix: 10.0.1.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubconnection-rg
+    virtualWanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubconnection-vwan
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualhubconnection
+  labels:
+    testing.upbound.io/example-name: virtualhubconnection-vn
+  name: virtualhubconnection-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 172.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubconnection-rg
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualWAN
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualhubconnection
+  labels:
+    testing.upbound.io/example-name: virtualhubconnection-vwan
+  name: virtualhubconnection-vwan
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualhubconnection-rg

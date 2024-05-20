@@ -1,0 +1,38 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: RouteFilter
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/routefilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: routefex
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    rule:
+      access: Allow
+      communities:
+      - 12076:52004
+      name: rule
+      ruleType: Community
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/routefilter
+  labels:
+    testing.upbound.io/example-name: example
+  name: routefex
+spec:
+  forProvider:
+    location: West Europe

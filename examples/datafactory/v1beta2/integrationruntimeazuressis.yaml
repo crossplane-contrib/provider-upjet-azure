@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: IntegrationRuntimeAzureSSIS
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/integrationruntimeazuressis
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: integrationruntimeazuressis-datafactory
+    location: West Europe
+    nodeSize: Standard_D8_v3
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/integrationruntimeazuressis
+  labels:
+    testing.upbound.io/example-name: integrationruntimeazuressis-datafactory
+  name: integrationruntimeazuressis-datafactory
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: integrationruntimeazuressis-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/integrationruntimeazuressis
+  labels:
+    testing.upbound.io/example-name: integrationruntimeazuressis-rg
+  name: integrationruntimeazuressis-rg
+spec:
+  forProvider:
+    location: West Europe

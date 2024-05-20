@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: authorization.azure.upbound.io/v1beta2
+kind: SubscriptionPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/subscriptionpolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionId: ${data.azurerm_client_config.current.subscription_resource_id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/subscriptionpolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: somename
+    mode: All
+    policyRule: "\t{\n    \"if\": {\n      \"not\": {\n        \"field\": \"location\",\n
+      \       \"equals\": \"westeurope\"\n      }\n    },\n    \"then\": {\n      \"effect\":
+      \"Deny\"\n    }\n  }\n"
+    policyType: Custom

@@ -1,0 +1,88 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: SubscriptionRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscriptionrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    filterType: SqlFilter
+    sqlFilter: colour = 'red'
+    subscriptionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subscriptionrule-subscription
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta1/subscriptionrule
+  labels:
+    testing.upbound.io/example-name: subscriptionrule-rg
+  name: subscriptionrule-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscriptionrule
+  labels:
+    testing.upbound.io/example-name: subscriptionrule-namespace
+  name: subscriptionrule-namespace
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subscriptionrule-rg
+    sku: Premium
+    tags:
+      source: terraform
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: Subscription
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscriptionrule
+  labels:
+    testing.upbound.io/example-name: subscriptionrule-subscription
+  name: subscriptionrule-subscription
+spec:
+  forProvider:
+    maxDeliveryCount: 1
+    topicIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subscriptionrule-topic
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: Topic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: servicebus/v1beta2/subscriptionrule
+  labels:
+    testing.upbound.io/example-name: subscriptionrule-topic
+  name: subscriptionrule-topic
+spec:
+  forProvider:
+    maxMessageSizeInKilobytes: 1024
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: subscriptionrule-namespace

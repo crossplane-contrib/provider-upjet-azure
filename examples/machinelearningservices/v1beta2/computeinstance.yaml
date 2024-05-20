@@ -1,0 +1,209 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: machinelearningservices.azure.upbound.io/v1beta2
+kind: ComputeInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+    uptest.upbound.io/timeout: "2400"
+  labels:
+    testing.upbound.io/example-name: exampleci0001
+  name: exampleci0001
+spec:
+  forProvider:
+    authorizationType: personal
+    description: foo
+    location: West Europe
+    machineLearningWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleworkspace001
+    subnetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      foo: bar
+    virtualMachineSize: STANDARD_DS11_V2
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: exampleinsights
+  name: exampleinsights
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01
+
+---
+
+apiVersion: alertsmanagement.azure.upbound.io/v1beta2
+kind: MonitorSmartDetectorAlertRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    actionGroup:
+      idsRefs:
+      - name: example
+    detectorType: FailureAnomaliesDetector
+    frequency: PT1M
+    name: myrule
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01
+    scopeResourceIdsRefs:
+    - name: exampleinsights
+    severity: Sev3
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01
+    shortName: examplegroup
+
+---
+
+apiVersion: keyvault.azure.upbound.io/v1beta2
+kind: Vault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: examplevaultcomp01
+  name: examplevaultcomp01
+spec:
+  forProvider:
+    location: West Europe
+    purgeProtectionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01
+    skuName: standard
+    tenantId: ${data.azurerm_client_config.current.tenant_id}
+
+---
+
+apiVersion: machinelearningservices.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: exampleworkspace001
+  name: exampleworkspace001
+spec:
+  forProvider:
+    applicationInsightsIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: exampleinsights
+    identity:
+      type: SystemAssigned
+    keyVaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: examplevaultcomp01
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example0001
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta1/computeinstance
+  labels:
+    testing.upbound.io/example-name: rgcomputeinstance01
+  name: rgcomputeinstance01
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: example0001
+  name: example0001
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.1.0.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: virtualnetwork001
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: machinelearningservices/v1beta2/computeinstance
+  labels:
+    testing.upbound.io/example-name: virtualnetwork001
+  name: virtualnetwork001
+spec:
+  forProvider:
+    addressSpace:
+    - 10.1.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgcomputeinstance01

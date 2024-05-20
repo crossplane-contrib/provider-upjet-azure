@@ -1,0 +1,174 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: sql.azure.upbound.io/v1beta2
+kind: MSSQLManagedInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+    upjet.upbound.io/manual-intervention: Creation takes 4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example-sql
+spec:
+  forProvider:
+    administratorLogin: mradministrator
+    administratorLoginPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: upbound-system
+    identity:
+      type: SystemAssigned
+    licenseType: BasePrice
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    skuName: GP_Gen5
+    storageSizeInGb: 32
+    subnetIdRef:
+      name: example-subnet
+    vcores: 4
+
+---
+
+apiVersion: v1
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: Creation takes of MSSQLManagedInstance takes
+      4 hours, see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example-sql-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+    upjet.upbound.io/manual-intervention: Creation MSSQLManagedInstance takes 4 hours,
+      see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    dnsServers:
+    - 10.0.0.4
+    - 10.0.0.5
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+    upjet.upbound.io/manual-intervention: Creation MSSQLManagedInstance takes 4 hours,
+      see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example-subnet
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.0/24
+    delegation:
+    - name: managedinstancedelegation
+      serviceDelegation:
+        actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        - Microsoft.Network/virtualNetworks/subnets/prepareNetworkPolicies/action
+        - Microsoft.Network/virtualNetworks/subnets/unprepareNetworkPolicies/action
+        name: Microsoft.Sql/managedInstances
+    resourceGroupNameRef:
+      name: example-sql-rg
+    virtualNetworkNameRef:
+      name: example-vn
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+    upjet.upbound.io/manual-intervention: Creation MSSQLManagedInstance takes 4 hours,
+      see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    tags:
+      environment: Production
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetNetworkSecurityGroupAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+    upjet.upbound.io/manual-intervention: Creation MSSQLManagedInstance takes 4 hours,
+      see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example
+spec:
+  forProvider:
+    networkSecurityGroupIdRef:
+      name: example
+    subnetIdRef:
+      name: example-subnet
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: RouteTable
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+    upjet.upbound.io/manual-intervention: Creation MSSQLManagedInstance takes 4 hours,
+      see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example
+spec:
+  forProvider:
+    disableBgpRoutePropagation: false
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-sql-rg
+    tags:
+      environment: Production
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SubnetRouteTableAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: sql/v1beta2/mssqlmanagedinstance
+    upjet.upbound.io/manual-intervention: Creation MSSQLManagedInstance takes 4 hours,
+      see https://docs.microsoft.com/en-us/azure/azure-sql/managed-instance/management-operations-overview?view=azuresql#duration
+  name: example
+spec:
+  forProvider:
+    routeTableIdRef:
+      name: example
+    subnetIdRef:
+      name: example-subnet

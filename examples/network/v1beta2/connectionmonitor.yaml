@@ -1,0 +1,98 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: ConnectionMonitor
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/connectionmonitor
+  name: example
+spec:
+  forProvider:
+    endpoint:
+    - name: source
+      targetResourceId: /subscriptions/038f2b7c-3265-43b8-8624-c9ad5da610a8/resourceGroups/norway-watcher-rg/providers/Microsoft.Network/virtualNetworks/example-vn-for-connection-monitor
+      targetResourceType: AzureVNet
+    - address: terraform.io
+      name: destination
+    location: Norway East
+    networkWatcherIdRef:
+      name: norway-watcher
+    notes: examplenote
+    testConfiguration:
+    - name: tcpName
+      protocol: Tcp
+      tcpConfiguration:
+        port: 80
+      testFrequencyInSeconds: 60
+    testGroup:
+    - destinationEndpoints:
+      - destination
+      name: exampletg
+      sourceEndpoints:
+      - source
+      testConfigurationNames:
+      - tcpName
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/connectionmonitor
+  name: example-vn-for-connection-monitor
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    dnsServers:
+    - 10.0.0.4
+    - 10.0.0.5
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/connectionmonitor
+  name: example-subnet-for-connection-monitor
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.0/24
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    virtualNetworkNameRef:
+      name: example-vn-for-connection-monitor
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/connectionmonitor
+  name: norway-watcher
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: norway-watcher-rg
+spec:
+  forProvider:
+    location: Norway East
+    tags:
+      provisioner: crossplane

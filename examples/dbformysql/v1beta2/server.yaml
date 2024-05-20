@@ -1,0 +1,63 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: dbformysql.azure.upbound.io/v1beta2
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta2/server
+  name: example-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    autoGrowEnabled: true
+    backupRetentionDays: 7
+    geoRedundantBackupEnabled: false
+    infrastructureEncryptionEnabled: false
+    location: West Europe
+    publicNetworkAccessEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-dbformysql-server
+    skuName: GP_Gen5_2
+    sslEnforcementEnabled: true
+    sslMinimalTlsVersionEnforced: TLS1_2
+    storageMb: 5120
+    version: "5.7"
+  writeConnectionSecretToRef:
+    name: server-creds
+    namespace: upbound-system
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/server
+  labels:
+    testing.upbound.io/example-name: example-dbformysql-server
+  name: resource-group-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta1/server
+  labels:
+    testing.upbound.io/example-name: example-secret
+  name: example-secret
+  namespace: upbound-system
+stringData:
+  example-key: Upbound123!-${Rand.RFC1123Subdomain}
+type: Opaque

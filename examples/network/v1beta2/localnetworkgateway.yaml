@@ -1,0 +1,30 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: LocalNetworkGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/localnetworkgateway
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    gatewayAddress: 12.13.14.15
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-local-network-gw
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: example-local-network-gw
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane

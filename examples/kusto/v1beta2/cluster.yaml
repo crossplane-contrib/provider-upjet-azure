@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: kusto.azure.upbound.io/v1beta2
+kind: Cluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta2/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: examplekustocluster
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+      capacity: 2
+      name: Standard_D13_v2
+    tags:
+      Environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: kusto/v1beta1/cluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: my-kusto-rg
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane

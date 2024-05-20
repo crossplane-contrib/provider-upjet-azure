@@ -1,0 +1,58 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudBuilder
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuilder
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: scbexample
+spec:
+  forProvider:
+    buildPackGroup:
+    - buildPackIds:
+      - tanzu-buildpacks/java-azure
+      name: mix
+    name: scbexample
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    stack:
+      id: io.buildpacks.stacks.bionic
+      version: base
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudbuilder
+  labels:
+    testing.upbound.io/example-name: example
+  name: scbexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuilder
+  labels:
+    testing.upbound.io/example-name: example
+  name: scbexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

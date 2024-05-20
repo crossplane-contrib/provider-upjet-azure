@@ -1,0 +1,50 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: Service
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/service
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    connectivityLogsEnabled: true
+    cors:
+    - allowedOrigins:
+      - http://www.example.com
+    location: West Europe
+    messagingLogsEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-signalrservice
+    serviceMode: Serverless
+    sku:
+      capacity: 1
+      name: Free_F1
+    upstreamEndpoint:
+    - categoryPattern:
+      - connections
+      - messages
+      eventPattern:
+      - '*'
+      hubPattern:
+      - hub1
+      urlTemplate: http://foo.com
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta1/service
+  labels:
+    testing.upbound.io/example-name: rg-signalrservice
+  name: rg-signalrservice
+spec:
+  forProvider:
+    location: West Europe

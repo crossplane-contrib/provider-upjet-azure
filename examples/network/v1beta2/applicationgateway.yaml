@@ -1,0 +1,151 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: ApplicationGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: network
+  name: example
+spec:
+  forProvider:
+    backendAddressPool:
+    - name: example
+    backendHttpSettings:
+    - cookieBasedAffinity: Disabled
+      name: example
+      path: /path1/
+      port: 80
+      protocol: Http
+      requestTimeout: 60
+    frontendIpConfiguration:
+    - name: example
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    frontendPort:
+    - name: example
+      port: 80
+    gatewayIpConfiguration:
+    - name: my-gateway-ip-configuration
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: frontend
+    httpListener:
+    - frontendIpConfigurationName: example
+      frontendPortName: example
+      name: example
+      protocol: Http
+    location: West Europe
+    requestRoutingRule:
+    - backendAddressPoolName: example
+      backendHttpSettingsName: example
+      httpListenerName: example
+      name: example
+      priority: 9
+      ruleType: Basic
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+      capacity: 2
+      name: Standard_v2
+      tier: Standard_v2
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: backend
+  name: backend
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.254.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: frontend
+  name: frontend
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.254.0.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.254.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/applicationgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

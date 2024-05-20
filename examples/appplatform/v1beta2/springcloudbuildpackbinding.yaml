@@ -1,0 +1,75 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudBuildPackBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuildpackbinding
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: scbpbexample
+spec:
+  forProvider:
+    bindingType: ApplicationInsights
+    springCloudBuilderIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudbuildpackbinding
+  labels:
+    testing.upbound.io/example-name: example
+  name: scbpbexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudBuilder
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuildpackbinding
+  labels:
+    testing.upbound.io/example-name: example
+  name: scbpbexample
+spec:
+  forProvider:
+    buildPackGroup:
+    - buildPackIds:
+      - tanzu-buildpacks/java-azure
+      name: mix
+    name: example
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    stack:
+      id: io.buildpacks.stacks.bionic
+      version: base
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springcloudbuildpackbinding
+  labels:
+    testing.upbound.io/example-name: example
+  name: scbpbexample
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

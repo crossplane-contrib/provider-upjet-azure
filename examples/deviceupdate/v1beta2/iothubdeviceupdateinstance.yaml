@@ -1,0 +1,94 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: deviceupdate.azure.upbound.io/v1beta2
+kind: IOTHubDeviceUpdateInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: iothduiex
+spec:
+  forProvider:
+    deviceUpdateAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    diagnosticEnabled: true
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta2
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: iothduiex
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+      capacity: 1
+      name: S1
+
+---
+
+apiVersion: deviceupdate.azure.upbound.io/v1beta2
+kind: IOTHubDeviceUpdateAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: iothduiex
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta1/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: iothduiex
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: iothduiex
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

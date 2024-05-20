@@ -1,0 +1,132 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: dbformysql.azure.upbound.io/v1beta2
+kind: FlexibleServer
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta2/flexibleserver
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-upbound
+spec:
+  forProvider:
+    administratorLogin: psqladmin
+    administratorPasswordSecretRef:
+      key: password
+      name: example-secret
+      namespace: upbound-system
+    backupRetentionDays: 7
+    delegatedSubnetIdRef:
+      name: example-subnet-dbformysql
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+    skuName: GP_Standard_D2ds_v4
+  writeConnectionSecretToRef:
+    name: example-connection-flexiblemysqlserver
+    namespace: upbound-system
+
+---
+
+apiVersion: v1
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-rg-dbformysql
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta2/flexibleserver
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-vn-dbformysql
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    dnsServers:
+    - 10.0.0.4
+    - 10.0.0.5
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta2/flexibleserver
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-subnet-dbformysql
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.0/24
+    delegation:
+    - name: dbformysqldelegation
+      serviceDelegation:
+        actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        name: Microsoft.DBforMySQL/flexibleServers
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+    virtualNetworkNameRef:
+      name: example-vn-dbformysql
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSZone
+metadata:
+  annotations:
+    crossplane.io/external-name: example-upbound.mysql.database.azure.com
+    meta.upbound.io/example-id: dbformysql/v1beta2/flexibleserver
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-upbound
+spec:
+  forProvider:
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSZoneVirtualNetworkLink
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dbformysql/v1beta2/flexibleserver
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-upbound
+spec:
+  forProvider:
+    privateDnsZoneNameRef:
+      name: example-upbound
+    resourceGroupNameRef:
+      name: example-rg-dbformysql
+    virtualNetworkIdRef:
+      name: example-vn-dbformysql

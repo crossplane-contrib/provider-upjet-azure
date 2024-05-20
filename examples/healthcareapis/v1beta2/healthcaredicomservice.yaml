@@ -1,0 +1,53 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: healthcareapis.azure.upbound.io/v1beta2
+kind: HealthcareDICOMService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcaredicomservice
+  labels:
+    testing.upbound.io/example-name: healthcaredicomservice
+  name: healthcaredicomservice
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    tags:
+      environment: None
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: healthcareservice
+
+---
+
+apiVersion: healthcareapis.azure.upbound.io/v1beta1
+kind: HealthcareWorkspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcaredicomservice
+  labels:
+    testing.upbound.io/example-name: healthcareservice
+  name: healthcareservice
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rghealthcaredicomservice
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta1/healthcaredicomservice
+  labels:
+    testing.upbound.io/example-name: rghealthcaredicomservice
+  name: rghealthcaredicomservice
+spec:
+  forProvider:
+    location: West Europe

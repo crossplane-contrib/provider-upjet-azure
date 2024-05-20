@@ -1,0 +1,133 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: ContentKeyPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/contentkeypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contentkeypolicyservacc
+    policyOption:
+    - name: playReady
+      openRestrictionEnabled: true
+      playreadyConfigurationLicense:
+      - allowTestDevices: true
+        beginDate: "2017-10-16T18:22:53Z"
+        contentKeyLocationFromHeaderEnabled: true
+        contentType: UltraVioletDownload
+        licenseType: Persistent
+        playRight:
+          allowPassingVideoContentToUnknownOutput: NotAllowed
+          analogVideoOpl: 150
+          compressedDigitalAudioOpl: 150
+          digitalVideoOnlyContentRestriction: false
+          imageConstraintForAnalogComponentVideoRestriction: false
+          imageConstraintForAnalogComputerMonitorRestriction: false
+          scmsRestriction: 2
+          uncompressedDigitalAudioOpl: 100
+          uncompressedDigitalVideoOpl: 100
+    - clearKeyConfigurationEnabled: true
+      name: clearKey
+      tokenRestriction:
+        audience: urn:audience
+        issuer: urn:issuer
+        primarySymmetricTokenKeySecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        tokenType: Swt
+    - name: widevine
+      openRestrictionEnabled: true
+      widevineConfigurationTemplate: |-
+        ${jsonencode({
+              "allowed_track_types" : "SD_HD",
+              "content_key_specs" : [{
+                "track_type" : "SD",
+                "security_level" : 1,
+                "required_output_protection" : {
+                  "hdcp" : "HDCP_V2"
+                },
+              }],
+              "policy_overrides" : {
+                "can_play" : true,
+                "can_persist" : true,
+                "can_renew" : false,
+              },
+            })}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contentkeypolicy-rg
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: ServicesAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/contentkeypolicy
+  labels:
+    testing.upbound.io/example-name: contentkeypolicyservacc
+  name: contentkeypolicyservacc
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contentkeypolicy-rg
+    storageAccount:
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: contentkeypolicyacc
+      isPrimary: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta1/contentkeypolicy
+  labels:
+    testing.upbound.io/example-name: contentkeypolicy-rg
+  name: contentkeypolicy-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/contentkeypolicy
+  labels:
+    testing.upbound.io/example-name: contentkeypolicyacc
+  name: contentkeypolicyacc
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: contentkeypolicy-rg
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+stringData:
+  example-key: dXBib3VuZHJvY2tz
+type: Opaque

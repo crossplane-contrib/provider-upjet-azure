@@ -1,0 +1,19 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: SharedImageGallery
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/sharedimagegallery
+  name: example
+spec:
+  forProvider:
+    description: Shared images and things.
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-compute
+    tags:
+      Hello: There
+      World: Example

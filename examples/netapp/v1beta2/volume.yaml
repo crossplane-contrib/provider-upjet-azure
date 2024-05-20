@@ -1,0 +1,72 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: netapp.azure.upbound.io/v1beta2
+kind: Volume
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example
+spec:
+  forProvider:
+    accountNameRef:
+      name: example
+    dataProtectionSnapshotPolicy:
+      snapshotPolicyIdRef:
+        name: example
+    location: West Europe
+    poolNameRef:
+      name: example
+    resourceGroupNameRef:
+      name: example-rg-netapp
+    securityStyle: Unix
+    serviceLevel: Premium
+    snapshotDirectoryVisible: false
+    storageQuotaInGb: 100
+    subnetIdRef:
+      name: example-subnet
+    volumePath: my-unique-file-path
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-netapp
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/volume
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-subnet
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.0/24
+    delegation:
+    - name: dbformysqldelegation
+      serviceDelegation:
+        actions:
+        - Microsoft.Network/networkinterfaces/*
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        name: Microsoft.Netapp/volumes
+    resourceGroupNameRef:
+      name: example-rg-netapp
+    virtualNetworkNameRef:
+      name: example-vn

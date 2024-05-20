@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: fluidrelay.azure.upbound.io/v1beta2
+kind: Server
+metadata:
+  annotations:
+    meta.upbound.io/example-id: fluidrelay/v1beta2/server
+  labels:
+    testing.upbound.io/example-name: fluidrelayserverexample
+  name: fluidrelayserverexample
+spec:
+  forProvider:
+    location: West Europe
+    name: fluidrelayserverexample
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: fluidrelayserver-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: fluidrelay/v1beta1/server
+  labels:
+    testing.upbound.io/example-name: fluidrelayserver-rg
+  name: fluidrelayserver-rg
+spec:
+  forProvider:
+    location: West Europe

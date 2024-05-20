@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: LinkedServiceOdbc
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceodbc
+  labels:
+    testing.upbound.io/example-name: anonymous
+  name: anonymous
+spec:
+  forProvider:
+    connectionString: Driver={SQL Server};Server=test;Database=test;Uid=test;Pwd=test;
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: serviceodbc-factory
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceodbc
+  labels:
+    testing.upbound.io/example-name: serviceodbc-factory
+  name: serviceodbc-factory
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: serviceodbc-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedserviceodbc
+  labels:
+    testing.upbound.io/example-name: serviceodbc-rg
+  name: serviceodbc-rg
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,57 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: ApplicationInsightsStandardWebTest
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/applicationinsightsstandardwebtest
+  labels:
+    testing.upbound.io/example-name: exampleappinsightwebtest
+  name: exampleappinsightwebtest
+spec:
+  forProvider:
+    applicationInsightsIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appinsightwebtest-ai
+    geoLocations:
+    - us-va-ash-azr
+    location: West Europe
+    request:
+      url: http://www.example.com
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appinsightwebtest-rg
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/applicationinsightsstandardwebtest
+  labels:
+    testing.upbound.io/example-name: appinsightwebtest-ai
+  name: appinsightwebtest-ai
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: appinsightwebtest-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta1/applicationinsightsstandardwebtest
+  labels:
+    testing.upbound.io/example-name: appinsightwebtest-rg
+  name: appinsightwebtest-rg
+spec:
+  forProvider:
+    location: West Europe

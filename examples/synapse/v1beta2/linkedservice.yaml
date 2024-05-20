@@ -1,0 +1,137 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: synapse.azure.upbound.io/v1beta2
+kind: LinkedService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/linkedservice
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention
+      for connectionString
+  labels:
+    testing.upbound.io/example-name: example
+  name: linkedservice
+spec:
+  forProvider:
+    integrationRuntime:
+      nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: integrationruntime-label
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservice-ws-label
+    type: AzureBlobStorage
+    typePropertiesJson: |
+      {
+        "connectionString": "DefaultEndpointsProtocol=https;AccountName=linkedserviceaccounta;AccountKey=pSdrpZkn9ezkh7Mjkcnj66tTGN38FwJzB/s6zAx7WFwH6Ru0EyTxQUwDbPWdF2vS1rBXX6/YyQtE+AStEl/5Aw==;EndpointSuffix=core.windows.net"
+      }
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta1/linkedservice
+  labels:
+    testing.upbound.io/example-name: linkedservice-rg-label
+  name: linkedservice-rg
+spec:
+  forProvider:
+    location: West India
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/linkedservice
+  labels:
+    testing.upbound.io/example-name: account-label
+  name: linkedserviceaccounta
+spec:
+  forProvider:
+    accountKind: BlobStorage
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West India
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservice-rg-label
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: DataLakeGen2FileSystem
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/linkedservice
+  labels:
+    testing.upbound.io/example-name: file-system-label
+  name: file-system
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: account-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: FirewallRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/linkedservice
+  labels:
+    testing.upbound.io/example-name: firewallrule-label
+  name: firewallrule
+spec:
+  forProvider:
+    endIpAddress: 255.255.255.255
+    startIpAddress: 0.0.0.0
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservice-ws-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta1
+kind: IntegrationRuntimeAzure
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/linkedservice
+  labels:
+    testing.upbound.io/example-name: integrationruntime-label
+  name: integrationruntime
+spec:
+  forProvider:
+    location: West Europe
+    synapseWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservice-ws-label
+
+---
+
+apiVersion: synapse.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: synapse/v1beta2/linkedservice
+  labels:
+    testing.upbound.io/example-name: linkedservice-ws-label
+  name: linkedservice-ws
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    managedVirtualNetworkEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: linkedservice-rg-label
+    sqlAdministratorLogin: sqladminuser
+    storageDataLakeGen2FilesystemIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: file-system-label

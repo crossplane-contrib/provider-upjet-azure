@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: ExpressRouteCircuit
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/expressroutecircuit
+  name: example
+spec:
+  forProvider:
+    bandwidthInMbps: 50
+    location: West Europe
+    peeringLocation: Silicon Valley
+    resourceGroupNameRef:
+      name: example
+    serviceProviderName: Equinix
+    sku:
+      family: MeteredData
+      tier: Standard
+    tags:
+      environment: Production
