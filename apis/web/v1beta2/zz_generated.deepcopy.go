@@ -9163,10 +9163,8 @@ func (in *IPRestrictionInitParameters) DeepCopyInto(out *IPRestrictionInitParame
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]HeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(HeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -9225,10 +9223,8 @@ func (in *IPRestrictionObservation) DeepCopyInto(out *IPRestrictionObservation) 
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]HeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(HeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -9277,10 +9273,8 @@ func (in *IPRestrictionParameters) DeepCopyInto(out *IPRestrictionParameters) {
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]HeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(HeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -11371,10 +11365,8 @@ func (in *LinuxFunctionAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(ou
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]SiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -11438,10 +11430,8 @@ func (in *LinuxFunctionAppSiteConfigIPRestrictionObservation) DeepCopyInto(out *
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]SiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -11495,10 +11485,8 @@ func (in *LinuxFunctionAppSiteConfigIPRestrictionParameters) DeepCopyInto(out *L
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]SiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -12334,10 +12322,8 @@ func (in *LinuxFunctionAppSiteConfigScmIPRestrictionInitParameters) DeepCopyInto
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -12401,10 +12387,8 @@ func (in *LinuxFunctionAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(ou
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -12458,10 +12442,8 @@ func (in *LinuxFunctionAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(out
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -15076,10 +15058,8 @@ func (in *LinuxFunctionAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyInt
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -15143,10 +15123,8 @@ func (in *LinuxFunctionAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto(o
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -15200,10 +15178,8 @@ func (in *LinuxFunctionAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(ou
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSlotSiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -16054,10 +16030,8 @@ func (in *LinuxFunctionAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCopy
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -16121,10 +16095,8 @@ func (in *LinuxFunctionAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyInt
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -16178,10 +16150,8 @@ func (in *LinuxFunctionAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyInto
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -20946,10 +20916,8 @@ func (in *LinuxWebAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(out *Li
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -21013,10 +20981,8 @@ func (in *LinuxWebAppSiteConfigIPRestrictionObservation) DeepCopyInto(out *Linux
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -21070,10 +21036,8 @@ func (in *LinuxWebAppSiteConfigIPRestrictionParameters) DeepCopyInto(out *LinuxW
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -21869,10 +21833,8 @@ func (in *LinuxWebAppSiteConfigScmIPRestrictionInitParameters) DeepCopyInto(out 
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -21936,10 +21898,8 @@ func (in *LinuxWebAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(out *Li
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -21993,10 +21953,8 @@ func (in *LinuxWebAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(out *Lin
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -26671,10 +26629,8 @@ func (in *LinuxWebAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyInto(out
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSlotSiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -26738,10 +26694,8 @@ func (in *LinuxWebAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto(out *L
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSlotSiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -26795,10 +26749,8 @@ func (in *LinuxWebAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(out *Li
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSlotSiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSlotSiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -27609,10 +27561,8 @@ func (in *LinuxWebAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCopyInto(
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -27676,10 +27626,8 @@ func (in *LinuxWebAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyInto(out
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -27733,10 +27681,8 @@ func (in *LinuxWebAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyInto(out 
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(LinuxWebAppSlotSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -29594,10 +29540,8 @@ func (in *ScmIPRestrictionInitParameters) DeepCopyInto(out *ScmIPRestrictionInit
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]ScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -29656,10 +29600,8 @@ func (in *ScmIPRestrictionObservation) DeepCopyInto(out *ScmIPRestrictionObserva
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]ScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -29708,10 +29650,8 @@ func (in *ScmIPRestrictionParameters) DeepCopyInto(out *ScmIPRestrictionParamete
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]ScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(ScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -30877,10 +30817,8 @@ func (in *SiteConfigIPRestrictionInitParameters) DeepCopyInto(out *SiteConfigIPR
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]IPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -30939,10 +30877,8 @@ func (in *SiteConfigIPRestrictionObservation) DeepCopyInto(out *SiteConfigIPRest
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]IPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -30991,10 +30927,8 @@ func (in *SiteConfigIPRestrictionParameters) DeepCopyInto(out *SiteConfigIPRestr
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]IPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(IPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -31602,10 +31536,8 @@ func (in *SiteConfigScmIPRestrictionInitParameters) DeepCopyInto(out *SiteConfig
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]SiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -31664,10 +31596,8 @@ func (in *SiteConfigScmIPRestrictionObservation) DeepCopyInto(out *SiteConfigScm
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]SiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -31716,10 +31646,8 @@ func (in *SiteConfigScmIPRestrictionParameters) DeepCopyInto(out *SiteConfigScmI
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]SiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -38372,10 +38300,8 @@ func (in *WindowsFunctionAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -38439,10 +38365,8 @@ func (in *WindowsFunctionAppSiteConfigIPRestrictionObservation) DeepCopyInto(out
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -38496,10 +38420,8 @@ func (in *WindowsFunctionAppSiteConfigIPRestrictionParameters) DeepCopyInto(out 
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -39305,10 +39227,8 @@ func (in *WindowsFunctionAppSiteConfigScmIPRestrictionInitParameters) DeepCopyIn
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -39372,10 +39292,8 @@ func (in *WindowsFunctionAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -39429,10 +39347,8 @@ func (in *WindowsFunctionAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(o
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -43991,10 +43907,8 @@ func (in *WindowsFunctionAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyI
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -44058,10 +43972,8 @@ func (in *WindowsFunctionAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -44115,10 +44027,8 @@ func (in *WindowsFunctionAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -44939,10 +44849,8 @@ func (in *WindowsFunctionAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCo
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -45006,10 +44914,8 @@ func (in *WindowsFunctionAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyI
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -45063,10 +44969,8 @@ func (in *WindowsFunctionAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyIn
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -50514,10 +50418,8 @@ func (in *WindowsWebAppSiteConfigIPRestrictionInitParameters) DeepCopyInto(out *
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -50581,10 +50483,8 @@ func (in *WindowsWebAppSiteConfigIPRestrictionObservation) DeepCopyInto(out *Win
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -50638,10 +50538,8 @@ func (in *WindowsWebAppSiteConfigIPRestrictionParameters) DeepCopyInto(out *Wind
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -51463,10 +51361,8 @@ func (in *WindowsWebAppSiteConfigScmIPRestrictionInitParameters) DeepCopyInto(ou
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -51530,10 +51426,8 @@ func (in *WindowsWebAppSiteConfigScmIPRestrictionObservation) DeepCopyInto(out *
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -51587,10 +51481,8 @@ func (in *WindowsWebAppSiteConfigScmIPRestrictionParameters) DeepCopyInto(out *W
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -56931,10 +56823,8 @@ func (in *WindowsWebAppSlotSiteConfigIPRestrictionInitParameters) DeepCopyInto(o
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSlotSiteConfigIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSlotSiteConfigIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -56998,10 +56888,8 @@ func (in *WindowsWebAppSlotSiteConfigIPRestrictionObservation) DeepCopyInto(out 
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSlotSiteConfigIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSlotSiteConfigIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -57055,10 +56943,8 @@ func (in *WindowsWebAppSlotSiteConfigIPRestrictionParameters) DeepCopyInto(out *
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSlotSiteConfigIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSlotSiteConfigIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -57890,10 +57776,8 @@ func (in *WindowsWebAppSlotSiteConfigScmIPRestrictionInitParameters) DeepCopyInt
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -57957,10 +57841,8 @@ func (in *WindowsWebAppSlotSiteConfigScmIPRestrictionObservation) DeepCopyInto(o
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress
@@ -58014,10 +57896,8 @@ func (in *WindowsWebAppSlotSiteConfigScmIPRestrictionParameters) DeepCopyInto(ou
 	}
 	if in.Headers != nil {
 		in, out := &in.Headers, &out.Headers
-		*out = make([]WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(WindowsWebAppSlotSiteConfigScmIPRestrictionHeadersParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IPAddress != nil {
 		in, out := &in.IPAddress, &out.IPAddress

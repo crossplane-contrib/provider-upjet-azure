@@ -2280,17 +2280,15 @@ spec:
                     type: string
                   policy:
                     description: A policy block as defined below.
-                    items:
-                      properties:
-                        xmlContent:
-                          description: The XML Content for this Policy.
-                          type: string
-                        xmlLink:
-                          description: A link to an API Management Policy XML Document,
-                            which must be publicly available.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      xmlContent:
+                        description: The XML Content for this Policy.
+                        type: string
+                      xmlLink:
+                        description: A link to an API Management Policy XML Document,
+                          which must be publicly available.
+                        type: string
+                    type: object
                   protocols:
                     description: A protocols block as defined below.
                     properties:
@@ -2810,17 +2808,15 @@ spec:
                     type: string
                   policy:
                     description: A policy block as defined below.
-                    items:
-                      properties:
-                        xmlContent:
-                          description: The XML Content for this Policy.
-                          type: string
-                        xmlLink:
-                          description: A link to an API Management Policy XML Document,
-                            which must be publicly available.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      xmlContent:
+                        description: The XML Content for this Policy.
+                        type: string
+                      xmlLink:
+                        description: A link to an API Management Policy XML Document,
+                          which must be publicly available.
+                        type: string
+                    type: object
                   protocols:
                     description: A protocols block as defined below.
                     properties:
@@ -3624,17 +3620,15 @@ spec:
                     type: string
                   policy:
                     description: A policy block as defined below.
-                    items:
-                      properties:
-                        xmlContent:
-                          description: The XML Content for this Policy.
-                          type: string
-                        xmlLink:
-                          description: A link to an API Management Policy XML Document,
-                            which must be publicly available.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      xmlContent:
+                        description: The XML Content for this Policy.
+                        type: string
+                      xmlLink:
+                        description: A link to an API Management Policy XML Document,
+                          which must be publicly available.
+                        type: string
+                    type: object
                   portalUrl:
                     description: The URL for the Publisher Portal associated with
                       this API Management service.

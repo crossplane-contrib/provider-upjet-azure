@@ -337,7 +337,7 @@ type ManagementInitParameters struct {
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
 	// A policy block as defined below.
-	Policy []PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
+	Policy *PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A protocols block as defined below.
 	Protocols *ProtocolsInitParameters `json:"protocols,omitempty" tf:"protocols,omitempty"`
@@ -432,7 +432,7 @@ type ManagementObservation struct {
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
 	// A policy block as defined below.
-	Policy []PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
+	Policy *PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The URL for the Publisher Portal associated with this API Management service.
 	PortalURL *string `json:"portalUrl,omitempty" tf:"portal_url,omitempty"`
@@ -534,7 +534,7 @@ type ManagementParameters struct {
 
 	// A policy block as defined below.
 	// +kubebuilder:validation:Optional
-	Policy []PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
+	Policy *PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A protocols block as defined below.
 	// +kubebuilder:validation:Optional

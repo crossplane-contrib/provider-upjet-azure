@@ -28,47 +28,47 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.Encryption); i3++ {
+	if mg.Spec.ForProvider.Encryption != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption[i3].IdentityClientID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Encryption.IdentityClientID),
 				Extract:      resource.ExtractParamPath("client_id", true),
-				Reference:    mg.Spec.ForProvider.Encryption[i3].IdentityClientIDRef,
-				Selector:     mg.Spec.ForProvider.Encryption[i3].IdentityClientIDSelector,
+				Reference:    mg.Spec.ForProvider.Encryption.IdentityClientIDRef,
+				Selector:     mg.Spec.ForProvider.Encryption.IdentityClientIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption[i3].IdentityClientID")
+			return errors.Wrap(err, "mg.Spec.ForProvider.Encryption.IdentityClientID")
 		}
-		mg.Spec.ForProvider.Encryption[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.ForProvider.Encryption[i3].IdentityClientIDRef = rsp.ResolvedReference
+		mg.Spec.ForProvider.Encryption.IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Encryption.IdentityClientIDRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkRuleSet); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork); i4++ {
+	if mg.Spec.ForProvider.NetworkRuleSet != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
-					Reference:    mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDRef,
-					Selector:     mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDSelector,
+					Reference:    mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef,
+					Selector:     mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID")
+				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
 	}
@@ -91,47 +91,47 @@ func (mg *Registry) ResolveReferences(ctx context.Context, c client.Reader) erro
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.Encryption); i3++ {
+	if mg.Spec.InitProvider.Encryption != nil {
 		{
 			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
 			if err != nil {
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption[i3].IdentityClientID),
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Encryption.IdentityClientID),
 				Extract:      resource.ExtractParamPath("client_id", true),
-				Reference:    mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef,
-				Selector:     mg.Spec.InitProvider.Encryption[i3].IdentityClientIDSelector,
+				Reference:    mg.Spec.InitProvider.Encryption.IdentityClientIDRef,
+				Selector:     mg.Spec.InitProvider.Encryption.IdentityClientIDSelector,
 				To:           reference.To{List: l, Managed: m},
 			})
 		}
 		if err != nil {
-			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption[i3].IdentityClientID")
+			return errors.Wrap(err, "mg.Spec.InitProvider.Encryption.IdentityClientID")
 		}
-		mg.Spec.InitProvider.Encryption[i3].IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
-		mg.Spec.InitProvider.Encryption[i3].IdentityClientIDRef = rsp.ResolvedReference
+		mg.Spec.InitProvider.Encryption.IdentityClientID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Encryption.IdentityClientIDRef = rsp.ResolvedReference
 
 	}
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRuleSet); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork); i4++ {
+	if mg.Spec.InitProvider.NetworkRuleSet != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
-					Reference:    mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDRef,
-					Selector:     mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDSelector,
+					Reference:    mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef,
+					Selector:     mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID")
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.NetworkRuleSet[i3].VirtualNetwork[i4].SubnetIDRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRuleSet.VirtualNetwork[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
 	}

@@ -239,7 +239,7 @@ type RegistryInitParameters struct {
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
 
 	// An encryption block as documented below.
-	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.
 	ExportPolicyEnabled *bool `json:"exportPolicyEnabled,omitempty" tf:"export_policy_enabled,omitempty"`
@@ -257,7 +257,7 @@ type RegistryInitParameters struct {
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
 	// A network_rule_set block as documented below.
-	NetworkRuleSet []NetworkRuleSetInitParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
+	NetworkRuleSet *NetworkRuleSetInitParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
 
 	// Whether public network access is allowed for the container registry. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -266,7 +266,7 @@ type RegistryInitParameters struct {
 	QuarantinePolicyEnabled *bool `json:"quarantinePolicyEnabled,omitempty" tf:"quarantine_policy_enabled,omitempty"`
 
 	// A retention_policy block as documented below.
-	RetentionPolicy []RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	RetentionPolicy *RetentionPolicyInitParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -276,7 +276,7 @@ type RegistryInitParameters struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trust_policy block as documented below.
-	TrustPolicy []TrustPolicyInitParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
+	TrustPolicy *TrustPolicyInitParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
@@ -297,7 +297,7 @@ type RegistryObservation struct {
 	DataEndpointEnabled *bool `json:"dataEndpointEnabled,omitempty" tf:"data_endpoint_enabled,omitempty"`
 
 	// An encryption block as documented below.
-	Encryption []EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.
 	ExportPolicyEnabled *bool `json:"exportPolicyEnabled,omitempty" tf:"export_policy_enabled,omitempty"`
@@ -321,7 +321,7 @@ type RegistryObservation struct {
 	NetworkRuleBypassOption *string `json:"networkRuleBypassOption,omitempty" tf:"network_rule_bypass_option,omitempty"`
 
 	// A network_rule_set block as documented below.
-	NetworkRuleSet []NetworkRuleSetObservation `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
+	NetworkRuleSet *NetworkRuleSetObservation `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
 
 	// Whether public network access is allowed for the container registry. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -333,7 +333,7 @@ type RegistryObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// A retention_policy block as documented below.
-	RetentionPolicy []RetentionPolicyObservation `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	RetentionPolicy *RetentionPolicyObservation `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
@@ -343,7 +343,7 @@ type RegistryObservation struct {
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
 	// A trust_policy block as documented below.
-	TrustPolicy []TrustPolicyObservation `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
+	TrustPolicy *TrustPolicyObservation `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	ZoneRedundancyEnabled *bool `json:"zoneRedundancyEnabled,omitempty" tf:"zone_redundancy_enabled,omitempty"`
@@ -365,7 +365,7 @@ type RegistryParameters struct {
 
 	// An encryption block as documented below.
 	// +kubebuilder:validation:Optional
-	Encryption []EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+	Encryption *EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
 
 	// Boolean value that indicates whether export policy is enabled. Defaults to true. In order to set it to false, make sure the public_network_access_enabled is also set to false.
 	// +kubebuilder:validation:Optional
@@ -389,7 +389,7 @@ type RegistryParameters struct {
 
 	// A network_rule_set block as documented below.
 	// +kubebuilder:validation:Optional
-	NetworkRuleSet []NetworkRuleSetParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
+	NetworkRuleSet *NetworkRuleSetParameters `json:"networkRuleSet,omitempty" tf:"network_rule_set,omitempty"`
 
 	// Whether public network access is allowed for the container registry. Defaults to true.
 	// +kubebuilder:validation:Optional
@@ -414,7 +414,7 @@ type RegistryParameters struct {
 
 	// A retention_policy block as documented below.
 	// +kubebuilder:validation:Optional
-	RetentionPolicy []RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
+	RetentionPolicy *RetentionPolicyParameters `json:"retentionPolicy,omitempty" tf:"retention_policy,omitempty"`
 
 	// The SKU name of the container registry. Possible values are Basic, Standard and Premium.
 	// +kubebuilder:validation:Optional
@@ -427,7 +427,7 @@ type RegistryParameters struct {
 
 	// A trust_policy block as documented below.
 	// +kubebuilder:validation:Optional
-	TrustPolicy []TrustPolicyParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
+	TrustPolicy *TrustPolicyParameters `json:"trustPolicy,omitempty" tf:"trust_policy,omitempty"`
 
 	// Whether zone redundancy is enabled for this Container Registry? Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional

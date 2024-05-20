@@ -77,26 +77,26 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 
-	for i3 := 0; i3 < len(mg.Spec.ForProvider.NetworkRulesets); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule); i4++ {
+	if mg.Spec.ForProvider.NetworkRulesets != nil {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
-					Reference:    mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDRef,
-					Selector:     mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDSelector,
+					Reference:    mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef,
+					Selector:     mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID")
+				return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID")
 			}
-			mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.ForProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDRef = rsp.ResolvedReference
+			mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
 	}
@@ -119,26 +119,26 @@ func (mg *EventHubNamespace) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
-	for i3 := 0; i3 < len(mg.Spec.InitProvider.NetworkRulesets); i3++ {
-		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule); i4++ {
+	if mg.Spec.InitProvider.NetworkRulesets != nil {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule); i4++ {
 			{
 				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 				if err != nil {
 					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 				}
 				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID),
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID),
 					Extract:      rconfig.ExtractResourceID(),
-					Reference:    mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDRef,
-					Selector:     mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDSelector,
+					Reference:    mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef,
+					Selector:     mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDSelector,
 					To:           reference.To{List: l, Managed: m},
 				})
 			}
 			if err != nil {
-				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID")
+				return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID")
 			}
-			mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
-			mg.Spec.InitProvider.NetworkRulesets[i3].VirtualNetworkRule[i4].SubnetIDRef = rsp.ResolvedReference
+			mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.NetworkRulesets.VirtualNetworkRule[i4].SubnetIDRef = rsp.ResolvedReference
 
 		}
 	}

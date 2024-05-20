@@ -64,6 +64,9 @@ func (tr *PrivateEndpoint) Hub() {}
 func (tr *Profile) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *RouteFilter) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *Subnet) Hub() {}
 
 // Hub marks this type as a conversion hub.

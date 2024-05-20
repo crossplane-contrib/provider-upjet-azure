@@ -708,10 +708,8 @@ func (in *RegistryInitParameters) DeepCopyInto(out *RegistryInitParameters) {
 	}
 	if in.Encryption != nil {
 		in, out := &in.Encryption, &out.Encryption
-		*out = make([]EncryptionInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ExportPolicyEnabled != nil {
 		in, out := &in.ExportPolicyEnabled, &out.ExportPolicyEnabled
@@ -742,10 +740,8 @@ func (in *RegistryInitParameters) DeepCopyInto(out *RegistryInitParameters) {
 	}
 	if in.NetworkRuleSet != nil {
 		in, out := &in.NetworkRuleSet, &out.NetworkRuleSet
-		*out = make([]NetworkRuleSetInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkRuleSetInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
@@ -759,10 +755,8 @@ func (in *RegistryInitParameters) DeepCopyInto(out *RegistryInitParameters) {
 	}
 	if in.RetentionPolicy != nil {
 		in, out := &in.RetentionPolicy, &out.RetentionPolicy
-		*out = make([]RetentionPolicyInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(RetentionPolicyInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
@@ -787,10 +781,8 @@ func (in *RegistryInitParameters) DeepCopyInto(out *RegistryInitParameters) {
 	}
 	if in.TrustPolicy != nil {
 		in, out := &in.TrustPolicy, &out.TrustPolicy
-		*out = make([]TrustPolicyInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TrustPolicyInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneRedundancyEnabled != nil {
 		in, out := &in.ZoneRedundancyEnabled, &out.ZoneRedundancyEnabled
@@ -866,10 +858,8 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 	}
 	if in.Encryption != nil {
 		in, out := &in.Encryption, &out.Encryption
-		*out = make([]EncryptionObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ExportPolicyEnabled != nil {
 		in, out := &in.ExportPolicyEnabled, &out.ExportPolicyEnabled
@@ -910,10 +900,8 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 	}
 	if in.NetworkRuleSet != nil {
 		in, out := &in.NetworkRuleSet, &out.NetworkRuleSet
-		*out = make([]NetworkRuleSetObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkRuleSetObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
@@ -932,10 +920,8 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 	}
 	if in.RetentionPolicy != nil {
 		in, out := &in.RetentionPolicy, &out.RetentionPolicy
-		*out = make([]RetentionPolicyObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(RetentionPolicyObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
@@ -960,10 +946,8 @@ func (in *RegistryObservation) DeepCopyInto(out *RegistryObservation) {
 	}
 	if in.TrustPolicy != nil {
 		in, out := &in.TrustPolicy, &out.TrustPolicy
-		*out = make([]TrustPolicyObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TrustPolicyObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneRedundancyEnabled != nil {
 		in, out := &in.ZoneRedundancyEnabled, &out.ZoneRedundancyEnabled
@@ -1002,10 +986,8 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 	}
 	if in.Encryption != nil {
 		in, out := &in.Encryption, &out.Encryption
-		*out = make([]EncryptionParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(EncryptionParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ExportPolicyEnabled != nil {
 		in, out := &in.ExportPolicyEnabled, &out.ExportPolicyEnabled
@@ -1036,10 +1018,8 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 	}
 	if in.NetworkRuleSet != nil {
 		in, out := &in.NetworkRuleSet, &out.NetworkRuleSet
-		*out = make([]NetworkRuleSetParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkRuleSetParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
@@ -1068,10 +1048,8 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 	}
 	if in.RetentionPolicy != nil {
 		in, out := &in.RetentionPolicy, &out.RetentionPolicy
-		*out = make([]RetentionPolicyParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(RetentionPolicyParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
@@ -1096,10 +1074,8 @@ func (in *RegistryParameters) DeepCopyInto(out *RegistryParameters) {
 	}
 	if in.TrustPolicy != nil {
 		in, out := &in.TrustPolicy, &out.TrustPolicy
-		*out = make([]TrustPolicyParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(TrustPolicyParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.ZoneRedundancyEnabled != nil {
 		in, out := &in.ZoneRedundancyEnabled, &out.ZoneRedundancyEnabled

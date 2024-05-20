@@ -7519,10 +7519,8 @@ func (in *ManagementInitParameters) DeepCopyInto(out *ManagementInitParameters) 
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
-		*out = make([]PolicyInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PolicyInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Protocols != nil {
 		in, out := &in.Protocols, &out.Protocols
@@ -7739,10 +7737,8 @@ func (in *ManagementObservation) DeepCopyInto(out *ManagementObservation) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
-		*out = make([]PolicyObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PolicyObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PortalURL != nil {
 		in, out := &in.PortalURL, &out.PortalURL
@@ -7934,10 +7930,8 @@ func (in *ManagementParameters) DeepCopyInto(out *ManagementParameters) {
 	}
 	if in.Policy != nil {
 		in, out := &in.Policy, &out.Policy
-		*out = make([]PolicyParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(PolicyParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Protocols != nil {
 		in, out := &in.Protocols, &out.Protocols

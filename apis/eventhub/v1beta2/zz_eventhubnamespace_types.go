@@ -40,7 +40,7 @@ type EventHubNamespaceInitParameters struct {
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// A network_rulesets block as defined below.
-	NetworkRulesets []NetworkRulesetsInitParameters `json:"networkRulesets,omitempty" tf:"network_rulesets,omitempty"`
+	NetworkRulesets *NetworkRulesetsInitParameters `json:"networkRulesets,omitempty" tf:"network_rulesets,omitempty"`
 
 	// Is public network access enabled for the EventHub Namespace? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -86,7 +86,7 @@ type EventHubNamespaceObservation struct {
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
 	// A network_rulesets block as defined below.
-	NetworkRulesets []NetworkRulesetsObservation `json:"networkRulesets,omitempty" tf:"network_rulesets,omitempty"`
+	NetworkRulesets *NetworkRulesetsObservation `json:"networkRulesets,omitempty" tf:"network_rulesets,omitempty"`
 
 	// Is public network access enabled for the EventHub Namespace? Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
@@ -141,7 +141,7 @@ type EventHubNamespaceParameters struct {
 
 	// A network_rulesets block as defined below.
 	// +kubebuilder:validation:Optional
-	NetworkRulesets []NetworkRulesetsParameters `json:"networkRulesets,omitempty" tf:"network_rulesets,omitempty"`
+	NetworkRulesets *NetworkRulesetsParameters `json:"networkRulesets,omitempty" tf:"network_rulesets,omitempty"`
 
 	// Is public network access enabled for the EventHub Namespace? Defaults to true.
 	// +kubebuilder:validation:Optional

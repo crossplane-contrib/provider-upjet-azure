@@ -6612,36 +6612,34 @@ spec:
                               type: string
                             headers:
                               description: A headers block as defined above.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: Specifies a list of Azure Front Door
-                                      IDs.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xFdHealthProbe:
-                                    description: Specifies if a Front Door Health
-                                      Probe should be expected. The only possible
-                                      value is 1.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedFor:
-                                    description: Specifies a list of addresses for
-                                      which matching should be applied. Omitting this
-                                      value means allow any.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedHost:
-                                    description: Specifies a list of Hosts for which
-                                      matching should be applied.
-                                    items:
-                                      type: string
-                                    type: array
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: Specifies a list of Azure Front Door
+                                    IDs.
+                                  items:
+                                    type: string
+                                  type: array
+                                xFdHealthProbe:
+                                  description: Specifies if a Front Door Health Probe
+                                    should be expected. The only possible value is
+                                    1.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedFor:
+                                  description: Specifies a list of addresses for which
+                                    matching should be applied. Omitting this value
+                                    means allow any.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedHost:
+                                  description: Specifies a list of Hosts for which
+                                    matching should be applied.
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
                             ipAddress:
                               description: |-
                                 The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
@@ -6802,36 +6800,34 @@ spec:
                               type: string
                             headers:
                               description: A headers block as defined above.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: Specifies a list of Azure Front Door
-                                      IDs.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xFdHealthProbe:
-                                    description: Specifies if a Front Door Health
-                                      Probe should be expected. The only possible
-                                      value is 1.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedFor:
-                                    description: Specifies a list of addresses for
-                                      which matching should be applied. Omitting this
-                                      value means allow any.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedHost:
-                                    description: Specifies a list of Hosts for which
-                                      matching should be applied.
-                                    items:
-                                      type: string
-                                    type: array
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: Specifies a list of Azure Front Door
+                                    IDs.
+                                  items:
+                                    type: string
+                                  type: array
+                                xFdHealthProbe:
+                                  description: Specifies if a Front Door Health Probe
+                                    should be expected. The only possible value is
+                                    1.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedFor:
+                                  description: Specifies a list of addresses for which
+                                    matching should be applied. Omitting this value
+                                    means allow any.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedHost:
+                                  description: Specifies a list of Hosts for which
+                                    matching should be applied.
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
                             ipAddress:
                               description: |-
                                 The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
@@ -8291,36 +8287,34 @@ spec:
                               type: string
                             headers:
                               description: A headers block as defined above.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: Specifies a list of Azure Front Door
-                                      IDs.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xFdHealthProbe:
-                                    description: Specifies if a Front Door Health
-                                      Probe should be expected. The only possible
-                                      value is 1.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedFor:
-                                    description: Specifies a list of addresses for
-                                      which matching should be applied. Omitting this
-                                      value means allow any.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedHost:
-                                    description: Specifies a list of Hosts for which
-                                      matching should be applied.
-                                    items:
-                                      type: string
-                                    type: array
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: Specifies a list of Azure Front Door
+                                    IDs.
+                                  items:
+                                    type: string
+                                  type: array
+                                xFdHealthProbe:
+                                  description: Specifies if a Front Door Health Probe
+                                    should be expected. The only possible value is
+                                    1.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedFor:
+                                  description: Specifies a list of addresses for which
+                                    matching should be applied. Omitting this value
+                                    means allow any.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedHost:
+                                  description: Specifies a list of Hosts for which
+                                    matching should be applied.
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
                             ipAddress:
                               description: |-
                                 The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
@@ -8481,36 +8475,34 @@ spec:
                               type: string
                             headers:
                               description: A headers block as defined above.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: Specifies a list of Azure Front Door
-                                      IDs.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xFdHealthProbe:
-                                    description: Specifies if a Front Door Health
-                                      Probe should be expected. The only possible
-                                      value is 1.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedFor:
-                                    description: Specifies a list of addresses for
-                                      which matching should be applied. Omitting this
-                                      value means allow any.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedHost:
-                                    description: Specifies a list of Hosts for which
-                                      matching should be applied.
-                                    items:
-                                      type: string
-                                    type: array
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: Specifies a list of Azure Front Door
+                                    IDs.
+                                  items:
+                                    type: string
+                                  type: array
+                                xFdHealthProbe:
+                                  description: Specifies if a Front Door Health Probe
+                                    should be expected. The only possible value is
+                                    1.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedFor:
+                                  description: Specifies a list of addresses for which
+                                    matching should be applied. Omitting this value
+                                    means allow any.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedHost:
+                                  description: Specifies a list of Hosts for which
+                                    matching should be applied.
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
                             ipAddress:
                               description: |-
                                 The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
@@ -10041,36 +10033,34 @@ spec:
                               type: string
                             headers:
                               description: A headers block as defined above.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: Specifies a list of Azure Front Door
-                                      IDs.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xFdHealthProbe:
-                                    description: Specifies if a Front Door Health
-                                      Probe should be expected. The only possible
-                                      value is 1.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedFor:
-                                    description: Specifies a list of addresses for
-                                      which matching should be applied. Omitting this
-                                      value means allow any.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedHost:
-                                    description: Specifies a list of Hosts for which
-                                      matching should be applied.
-                                    items:
-                                      type: string
-                                    type: array
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: Specifies a list of Azure Front Door
+                                    IDs.
+                                  items:
+                                    type: string
+                                  type: array
+                                xFdHealthProbe:
+                                  description: Specifies if a Front Door Health Probe
+                                    should be expected. The only possible value is
+                                    1.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedFor:
+                                  description: Specifies a list of addresses for which
+                                    matching should be applied. Omitting this value
+                                    means allow any.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedHost:
+                                  description: Specifies a list of Hosts for which
+                                    matching should be applied.
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
                             ipAddress:
                               description: |-
                                 The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
@@ -10158,36 +10148,34 @@ spec:
                               type: string
                             headers:
                               description: A headers block as defined above.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: Specifies a list of Azure Front Door
-                                      IDs.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xFdHealthProbe:
-                                    description: Specifies if a Front Door Health
-                                      Probe should be expected. The only possible
-                                      value is 1.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedFor:
-                                    description: Specifies a list of addresses for
-                                      which matching should be applied. Omitting this
-                                      value means allow any.
-                                    items:
-                                      type: string
-                                    type: array
-                                  xForwardedHost:
-                                    description: Specifies a list of Hosts for which
-                                      matching should be applied.
-                                    items:
-                                      type: string
-                                    type: array
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: Specifies a list of Azure Front Door
+                                    IDs.
+                                  items:
+                                    type: string
+                                  type: array
+                                xFdHealthProbe:
+                                  description: Specifies if a Front Door Health Probe
+                                    should be expected. The only possible value is
+                                    1.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedFor:
+                                  description: Specifies a list of addresses for which
+                                    matching should be applied. Omitting this value
+                                    means allow any.
+                                  items:
+                                    type: string
+                                  type: array
+                                xForwardedHost:
+                                  description: Specifies a list of Hosts for which
+                                    matching should be applied.
+                                  items:
+                                    type: string
+                                  type: array
+                              type: object
                             ipAddress:
                               description: |-
                                 The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32

@@ -419,10 +419,8 @@ func (in *EventHubNamespaceInitParameters) DeepCopyInto(out *EventHubNamespaceIn
 	}
 	if in.NetworkRulesets != nil {
 		in, out := &in.NetworkRulesets, &out.NetworkRulesets
-		*out = make([]NetworkRulesetsInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkRulesetsInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
@@ -549,10 +547,8 @@ func (in *EventHubNamespaceObservation) DeepCopyInto(out *EventHubNamespaceObser
 	}
 	if in.NetworkRulesets != nil {
 		in, out := &in.NetworkRulesets, &out.NetworkRulesets
-		*out = make([]NetworkRulesetsObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkRulesetsObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
@@ -647,10 +643,8 @@ func (in *EventHubNamespaceParameters) DeepCopyInto(out *EventHubNamespaceParame
 	}
 	if in.NetworkRulesets != nil {
 		in, out := &in.NetworkRulesets, &out.NetworkRulesets
-		*out = make([]NetworkRulesetsParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(NetworkRulesetsParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.PublicNetworkAccessEnabled != nil {
 		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
