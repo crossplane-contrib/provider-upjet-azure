@@ -331,6 +331,10 @@ spec:
                       to be created.
                     type: string
                 type: object
+                required:
+                  - skuName
+                  - sslEnforcementEnabled
+                  - version
               initProvider:
                 description: |-
                   THIS IS A BETA FIELD. It will be honored
