@@ -197,11 +197,11 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 		// we would like to set the storage version to v1beta1 to facilitate
 		// downgrades.
 		r.SetCRDStorageVersion("v1beta1")
+		r.ControllerReconcileVersion = "v1beta1"
 		r.Conversions = []conversion.Conversion{
 			conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
 			conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
 			conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
-		r.TerraformConversions = append(r.TerraformConversions, ujconfig.NewTFSingletonConversion())
 		pc.Resources[name] = r
 	}
 }

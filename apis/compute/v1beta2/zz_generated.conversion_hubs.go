@@ -43,6 +43,9 @@ func (tr *Snapshot) Hub() {}
 func (tr *VirtualMachineExtension) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *VirtualMachineRunCommand) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *WindowsVirtualMachine) Hub() {}
 
 // Hub marks this type as a conversion hub.

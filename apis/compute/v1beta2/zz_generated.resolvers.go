@@ -761,6 +761,156 @@ func (mg *VirtualMachineExtension) ResolveReferences(ctx context.Context, c clie
 	return nil
 }
 
+// ResolveReferences of this VirtualMachineRunCommand.
+func (mg *VirtualMachineRunCommand) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ErrorBlobURI),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ErrorBlobURIRef,
+			Selector:     mg.Spec.ForProvider.ErrorBlobURISelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ErrorBlobURI")
+	}
+	mg.Spec.ForProvider.ErrorBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ErrorBlobURIRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.OutputBlobURI),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.OutputBlobURIRef,
+			Selector:     mg.Spec.ForProvider.OutputBlobURISelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.OutputBlobURI")
+	}
+	mg.Spec.ForProvider.OutputBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.OutputBlobURIRef = rsp.ResolvedReference
+
+	if mg.Spec.ForProvider.Source != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Source.ScriptURI),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.Source.ScriptURIRef,
+				Selector:     mg.Spec.ForProvider.Source.ScriptURISelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Source.ScriptURI")
+		}
+		mg.Spec.ForProvider.Source.ScriptURI = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Source.ScriptURIRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachine", "LinuxVirtualMachineList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VirtualMachineID),
+			Extract:      rconfig.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.VirtualMachineIDRef,
+			Selector:     mg.Spec.ForProvider.VirtualMachineIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VirtualMachineID")
+	}
+	mg.Spec.ForProvider.VirtualMachineID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VirtualMachineIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ErrorBlobURI),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ErrorBlobURIRef,
+			Selector:     mg.Spec.InitProvider.ErrorBlobURISelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ErrorBlobURI")
+	}
+	mg.Spec.InitProvider.ErrorBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ErrorBlobURIRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.OutputBlobURI),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.OutputBlobURIRef,
+			Selector:     mg.Spec.InitProvider.OutputBlobURISelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.OutputBlobURI")
+	}
+	mg.Spec.InitProvider.OutputBlobURI = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.OutputBlobURIRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.Source != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Blob", "BlobList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Source.ScriptURI),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.Source.ScriptURIRef,
+				Selector:     mg.Spec.InitProvider.Source.ScriptURISelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Source.ScriptURI")
+		}
+		mg.Spec.InitProvider.Source.ScriptURI = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Source.ScriptURIRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this WindowsVirtualMachine.
 func (mg *WindowsVirtualMachine) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
