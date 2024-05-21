@@ -12,7 +12,7 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["aad_admin"].MaxItems = 1
 		r.TerraformResource.Schema["sql_aad_admin"].MaxItems = 1
 
-		r.AddSingletonListConversion("aad_admin", "aad_admin")
-		r.AddSingletonListConversion("sql_aad_admin", "sql_aad_admin")
+		r.AddSingletonListConversion("aad_admin", "aadAdmin")
+		r.AddSingletonListConversion("sql_aad_admin", "sqlAadAdmin")
 	})
 }

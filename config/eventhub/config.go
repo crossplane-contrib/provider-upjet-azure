@@ -18,7 +18,7 @@ func Configure(p *config.Provider) {
 
 		r.TerraformResource.Schema["network_rulesets"].MaxItems = 1
 
-		r.AddSingletonListConversion("network_rulesets", "network_rulesets")
+		r.AddSingletonListConversion("network_rulesets", "networkRulesets")
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub", func(r *config.Resource) {

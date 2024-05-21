@@ -23,10 +23,10 @@ func Configure(p *config.Provider) {
 		r.TerraformResource.Schema["encryption"].MaxItems = 1
 		r.TerraformResource.Schema["network_rule_set"].MaxItems = 1
 
-		r.AddSingletonListConversion("retention_policy", "retention_policy")
-		r.AddSingletonListConversion("trust_policy", "trust_policy")
+		r.AddSingletonListConversion("retention_policy", "retentionPolicy")
+		r.AddSingletonListConversion("trust_policy", "trustPolicy")
 		r.AddSingletonListConversion("encryption", "encryption")
-		r.AddSingletonListConversion("network_rule_set", "network_rule_set")
+		r.AddSingletonListConversion("network_rule_set", "networkRuleSet")
 	})
 
 	p.AddResourceConfigurator("azurerm_container_registry_token", func(r *config.Resource) {
