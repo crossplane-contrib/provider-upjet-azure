@@ -5,9 +5,11 @@
 package network
 
 import (
+	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
 	"github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/config/conversion"
-	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
+
 	"github.com/upbound/provider-azure/apis/rconfig"
 )
 
