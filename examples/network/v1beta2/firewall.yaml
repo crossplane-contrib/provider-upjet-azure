@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Firewall
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/firewall
+  name: example
+spec:
+  forProvider:
+    ipConfiguration:
+    - name: configuration
+      publicIpAddressIdRef:
+        name: example
+      subnetIdRef:
+        name: example
+    location: West Europe
+    resourceGroupNameRef:
+      name: example
+    skuName: AZFW_VNet
+    skuTier: Standard

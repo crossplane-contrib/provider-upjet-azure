@@ -1,0 +1,87 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: WatcherFlowLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  name: example
+spec:
+  forProvider:
+    enabled: true
+    networkSecurityGroupIdRef:
+      name: example
+    networkWatcherNameRef:
+      name: norway-watcher
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    retentionPolicy:
+      days: 7
+      enabled: true
+    storageAccountIdRef:
+      name: saflow2762022
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Watcher
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  name: norway-watcher
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  name: norway-watcher-rg
+spec:
+  forProvider:
+    location: Norway East
+    tags:
+      provisioner: crossplane
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: SecurityGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  name: example
+spec:
+  forProvider:
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    tags:
+      environment: Production
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/watcherflowlog
+  name: saflow2762022
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: Norway East
+    resourceGroupNameRef:
+      name: norway-watcher-rg
+    tags:
+      provisioner: crossplane
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system

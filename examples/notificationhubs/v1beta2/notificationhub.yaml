@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: notificationhubs.azure.upbound.io/v1beta2
+kind: NotificationHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta2/notificationhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example2
+spec:
+  forProvider:
+    location: West Europe
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: notificationhubs.azure.upbound.io/v1beta1
+kind: NotificationHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta2/notificationhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: hubnamesapce
+spec:
+  forProvider:
+    location: West Europe
+    namespaceType: Messaging
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Free
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: notificationhubs/v1beta1/notificationhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-notificationhubs-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

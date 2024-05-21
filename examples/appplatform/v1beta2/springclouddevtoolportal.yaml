@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudDevToolPortal
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springclouddevtoolportal
+    uptest.upbound.io/timeout: "7200"
+  labels:
+    testing.upbound.io/example-name: example
+  name: default
+spec:
+  forProvider:
+    applicationAcceleratorEnabled: true
+    applicationLiveViewEnabled: true
+    name: default
+    publicNetworkAccessEnabled: true
+    springCloudServiceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sso:
+      clientId: example id
+      clientSecret: example secret
+      metadataUrl: https://www.example.com/metadata
+      scope:
+      - openid
+      - profile
+      - email
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springclouddevtoolportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: scdtpex
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta2
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta2/springclouddevtoolportal
+  labels:
+    testing.upbound.io/example-name: example
+  name: scdtpex
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: E0

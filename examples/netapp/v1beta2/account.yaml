@@ -1,0 +1,54 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: netapp.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: netapp/v1beta2/account
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example
+spec:
+  forProvider:
+    activeDirectory:
+      dnsServers:
+      - 1.2.3.4
+      domain: westcentralus.com
+      organizationalUnit: OU=FirstLevel
+      passwordSecretRef:
+        key: password
+        name: example-secret
+        namespace: upbound-system
+      smbServerName: SMBSERVER
+      username: aduser
+    location: West Europe
+    resourceGroupNameRef:
+      name: example-rg-netapp
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-rg-netapp
+spec:
+  forProvider:
+    location: West Europe
+    tags:
+      provisioner: crossplane
+
+---
+
+apiVersion: v1
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw==
+kind: Secret
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: This resource requires manual intervention.
+  name: example-secret
+  namespace: upbound-system
+type: Opaque

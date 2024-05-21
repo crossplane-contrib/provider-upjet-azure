@@ -1,0 +1,85 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: LinkedCustomService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedcustomservice
+    upjet.upbound.io/manual-intervention: The resource require account connecton string
+      to be specified.
+  labels:
+    testing.upbound.io/example-name: example
+  name: lcsexample
+spec:
+  forProvider:
+    annotations:
+    - test1
+    - test2
+    - test3
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: test description
+    parameters:
+      Env: Test
+      foo: bar
+    type: AzureBlobStorage
+    typePropertiesJson: |
+      {
+        "connectionString":"DefaultEndpointsProtocol=https;AccountName=lcsexample;AccountKey=ilKVGNigu62P5tNQpxgsbXGtsXbZzjLVR1LZZ0mkVZY0Mr+nDmXgIqG8BvCS3Ki9Xx82K3Z9dx0a+ASt8+qLSg==;EndpointSuffix=core.windows.net"
+      }
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedcustomservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: lcsexample
+spec:
+  forProvider:
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta1/linkedcustomservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: lcsexample
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedcustomservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: lcsexample
+spec:
+  forProvider:
+    accountKind: BlobStorage
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
