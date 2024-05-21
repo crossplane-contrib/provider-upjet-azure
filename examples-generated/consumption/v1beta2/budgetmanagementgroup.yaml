@@ -1,0 +1,71 @@
+apiVersion: consumption.azure.upbound.io/v1beta2
+kind: BudgetManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: consumption/v1beta2/budgetmanagementgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    amount: 1000
+    filter:
+    - dimension:
+      - name: ResourceGroupName
+        values:
+        - ${azurerm_resource_group.example.name}
+      tag:
+      - name: foo
+        values:
+        - bar
+        - baz
+    managementGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example
+    notification:
+    - contactEmails:
+      - foo@example.com
+      - bar@example.com
+      enabled: true
+      operator: EqualTo
+      threshold: 90
+    - contactEmails:
+      - foo@example.com
+      - bar@example.com
+      enabled: false
+      operator: GreaterThan
+      threshold: 100
+      thresholdType: Forecasted
+    timeGrain: Monthly
+    timePeriod:
+    - endDate: "2022-07-01T00:00:00Z"
+      startDate: "2022-06-01T00:00:00Z"
+
+---
+
+apiVersion: management.azure.upbound.io/v1beta1
+kind: ManagementGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: consumption/v1beta2/budgetmanagementgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: consumption/v1beta2/budgetmanagementgroup
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: eastus

@@ -19,7 +19,7 @@ type HPCCacheBlobTargetInitParameters struct {
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name HPC Cache, which the HPC Cache Blob Target will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta2.HPCCache
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
 
 	// Reference to a HPCCache in storagecache to populate cacheName.
@@ -75,7 +75,7 @@ type HPCCacheBlobTargetParameters struct {
 	AccessPolicyName *string `json:"accessPolicyName,omitempty" tf:"access_policy_name,omitempty"`
 
 	// The name HPC Cache, which the HPC Cache Blob Target will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta1.HPCCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storagecache/v1beta2.HPCCache
 	// +kubebuilder:validation:Optional
 	CacheName *string `json:"cacheName,omitempty" tf:"cache_name,omitempty"`
 

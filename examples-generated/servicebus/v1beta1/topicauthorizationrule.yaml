@@ -31,7 +31,7 @@ spec:
 
 ---
 
-apiVersion: servicebus.azure.upbound.io/v1beta1
+apiVersion: servicebus.azure.upbound.io/v1beta2
 kind: ServiceBusNamespace
 metadata:
   annotations:

@@ -89,7 +89,7 @@ func (mg *SubAccountTagRule) ResolveReferences(ctx context.Context, c client.Rea
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("logz.azure.upbound.io", "v1beta1", "SubAccount", "SubAccountList")
+		m, l, err = apisresolver.GetManagedResource("logz.azure.upbound.io", "v1beta2", "SubAccount", "SubAccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -108,7 +108,7 @@ func (mg *SubAccountTagRule) ResolveReferences(ctx context.Context, c client.Rea
 	mg.Spec.ForProvider.LogzSubAccountID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.LogzSubAccountIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("logz.azure.upbound.io", "v1beta1", "SubAccount", "SubAccountList")
+		m, l, err = apisresolver.GetManagedResource("logz.azure.upbound.io", "v1beta2", "SubAccount", "SubAccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -139,7 +139,7 @@ func (mg *TagRule) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("logz.azure.upbound.io", "v1beta1", "Monitor", "MonitorList")
+		m, l, err = apisresolver.GetManagedResource("logz.azure.upbound.io", "v1beta2", "Monitor", "MonitorList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

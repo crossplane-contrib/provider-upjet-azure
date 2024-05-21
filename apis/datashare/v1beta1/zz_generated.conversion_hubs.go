@@ -7,15 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *DataShare) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Account) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *DataSetBlobStorage) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *DataSetDataLakeGen2) Hub() {}
 
 // Hub marks this type as a conversion hub.

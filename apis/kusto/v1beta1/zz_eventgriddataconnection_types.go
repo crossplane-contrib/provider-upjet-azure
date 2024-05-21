@@ -40,7 +40,7 @@ type EventGridDataConnectionInitParameters struct {
 	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
 
@@ -65,7 +65,7 @@ type EventGridDataConnectionInitParameters struct {
 	SkipFirstRecord *bool `json:"skipFirstRecord,omitempty" tf:"skip_first_record,omitempty"`
 
 	// Specifies the resource id of the Storage Account this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
 
@@ -139,7 +139,7 @@ type EventGridDataConnectionParameters struct {
 	BlobStorageEventType *string `json:"blobStorageEventType,omitempty" tf:"blob_storage_event_type,omitempty"`
 
 	// Specifies the name of the Kusto Cluster this data connection will be added to. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta1.Cluster
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/kusto/v1beta2.Cluster
 	// +kubebuilder:validation:Optional
 	ClusterName *string `json:"clusterName,omitempty" tf:"cluster_name,omitempty"`
 
@@ -190,7 +190,7 @@ type EventGridDataConnectionParameters struct {
 	EventHubConsumerGroupNameSelector *v1.Selector `json:"eventhubConsumerGroupNameSelector,omitempty" tf:"-"`
 
 	// Specifies the resource id of the Event Hub this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta1.EventHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/eventhub/v1beta2.EventHub
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	EventHubID *string `json:"eventhubId,omitempty" tf:"eventhub_id,omitempty"`
@@ -233,7 +233,7 @@ type EventGridDataConnectionParameters struct {
 	SkipFirstRecord *bool `json:"skipFirstRecord,omitempty" tf:"skip_first_record,omitempty"`
 
 	// Specifies the resource id of the Storage Account this data connection will use for ingestion. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`

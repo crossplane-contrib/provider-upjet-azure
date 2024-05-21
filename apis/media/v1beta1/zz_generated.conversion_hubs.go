@@ -10,34 +10,7 @@ package v1beta1
 func (tr *Asset) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AssetFilter) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ContentKeyPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Job) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *LiveEvent) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *LiveEventOutput) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *ServicesAccount) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ServicesAccountFilter) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StreamingEndpoint) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *StreamingLocator) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *StreamingPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Transform) Hub() {}

@@ -7,16 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Account) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Pool) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Snapshot) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SnapshotPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Volume) Hub() {}

@@ -7,22 +7,7 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *GlobalVMShutdownSchedule) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Lab) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *LinuxVirtualMachine) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Policy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Schedule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *VirtualNetwork) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *WindowsVirtualMachine) Hub() {}

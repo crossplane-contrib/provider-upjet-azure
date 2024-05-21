@@ -1,0 +1,47 @@
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: CapacityReservation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/capacityreservation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacityReservationGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 1
+      name: Standard_D2s_v3
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta1
+kind: CapacityReservationGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/capacityreservation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/capacityreservation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

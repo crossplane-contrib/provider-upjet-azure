@@ -1,0 +1,59 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/endpoint
+  labels:
+    testing.upbound.io/example-name: endpointlabel
+  name: endpointnm
+spec:
+  forProvider:
+    location: West Europe
+    origin:
+    - hostName: www.contoso.com
+      name: example
+    profileNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: profilelabel
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgroupnamelabel
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: Profile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/endpoint
+  labels:
+    testing.upbound.io/example-name: profilelabel
+  name: profilename
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rgroupnamelabel
+    sku: Standard_Verizon
+    tags:
+      cost_center: MSFT
+      environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta1/endpoint
+  labels:
+    testing.upbound.io/example-name: rgroupnamelabel
+  name: r-group-test-name
+spec:
+  forProvider:
+    location: West Europe

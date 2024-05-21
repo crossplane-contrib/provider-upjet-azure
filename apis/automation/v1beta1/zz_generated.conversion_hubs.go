@@ -7,9 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Account) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *Connection) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -23,15 +20,6 @@ func (tr *Credential) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *HybridRunBookWorkerGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Module) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *RunBook) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Schedule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *VariableBool) Hub() {}

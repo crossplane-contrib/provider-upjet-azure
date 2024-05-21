@@ -1,0 +1,31 @@
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: OrchestratedVirtualMachineScaleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/orchestratedvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    platformFaultDomainCount: 1
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    zones:
+    - "1"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/orchestratedvirtualmachinescaleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

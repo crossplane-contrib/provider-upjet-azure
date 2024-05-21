@@ -1,0 +1,118 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: hdinsight.azure.upbound.io/v1beta1
+kind: HadoopCluster
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "3600"
+    meta.upbound.io/example-id: hdinsight/v1beta1/hadoopcluster
+  labels:
+    testing.upbound.io/example-name: example001
+  name: example001
+spec:
+  forProvider:
+    clusterVersion: "4.0"
+    componentVersion:
+    - hadoop: "3.1"
+    gateway:
+    - passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      username: acctestusrgw
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rghadoopcluster
+    roles:
+    - headNode:
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        username: acctestusrvm
+        vmSize: Standard_D3_V2
+      workerNode:
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        targetInstanceCount: 3
+        username: acctestusrvm
+        vmSize: Standard_D4_V2
+      zookeeperNode:
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        username: acctestusrvm
+        vmSize: Standard_D3_V2
+    storageAccount:
+    - isDefault: true
+      storageAccountKeySecretRef:
+        key: attribute.primary_access_key
+        name: example-storage-account
+        namespace: upbound-system
+      storageContainerIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    tier: Standard
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: hdinsight/v1beta1/hadoopcluster
+  labels:
+    testing.upbound.io/example-name: rghadoopcluster
+  name: rghadoopcluster
+spec:
+  forProvider:
+    location: West Europe
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: hdinsight/v1beta1/hadoopcluster
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-hadoopcluster.sh
+  labels:
+    testing.upbound.io/example-name: example0001
+  name: example0001
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rghadoopcluster
+  writeConnectionSecretToRef:
+    name: example-storage-account
+    namespace: upbound-system
+---
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: hdinsight/v1beta1/hadoopcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example0001
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: VGVyckFmb3JtMTIzIQ==

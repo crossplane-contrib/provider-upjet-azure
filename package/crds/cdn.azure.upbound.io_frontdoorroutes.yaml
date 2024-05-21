@@ -1337,3 +1337,1316 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: FrontdoorRoute is the Schema for the FrontdoorRoutes API. Manages
+          a Front Door (standard/premium) Route.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FrontdoorRouteSpec defines the desired state of FrontdoorRoute
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  cache:
+                    description: A cache block as defined below.
+                    properties:
+                      compressionEnabled:
+                        description: Is content compression enabled? Possible values
+                          are true or false. Defaults to false.
+                        type: boolean
+                      contentTypesToCompress:
+                        description: A list of one or more Content types (formerly
+                          known as MIME types) to compress. Possible values include
+                          application/eot, application/font, application/font-sfnt,
+                          application/javascript, application/json, application/opentype,
+                          application/otf, application/pkcs7-mime, application/truetype,
+                          application/ttf, application/vnd.ms-fontobject, application/xhtml+xml,
+                          application/xml, application/xml+rss, application/x-font-opentype,
+                          application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi,
+                          application/x-mpegurl, application/x-opentype, application/x-otf,
+                          application/x-perl, application/x-ttf, application/x-javascript,
+                          font/eot, font/ttf, font/otf, font/opentype, image/svg+xml,
+                          text/css, text/csv, text/html, text/javascript, text/js,
+                          text/plain, text/richtext, text/tab-separated-values, text/xml,
+                          text/x-script, text/x-component or text/x-java-source.
+                        items:
+                          type: string
+                        type: array
+                      queryStringCachingBehavior:
+                        description: Defines how the Front Door Route will cache requests
+                          that include query strings. Possible values include IgnoreQueryString,
+                          IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings
+                          or UseQueryString. Defaults to IgnoreQueryString.
+                        type: string
+                      queryStrings:
+                        description: Query strings to include or ignore.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  cdnFrontdoorCustomDomainIds:
+                    description: The IDs of the Front Door Custom Domains which are
+                      associated with this Front Door Route.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  cdnFrontdoorCustomDomainIdsRefs:
+                    description: References to FrontdoorCustomDomain in cdn to populate
+                      cdnFrontdoorCustomDomainIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  cdnFrontdoorCustomDomainIdsSelector:
+                    description: Selector for a list of FrontdoorCustomDomain in cdn
+                      to populate cdnFrontdoorCustomDomainIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  cdnFrontdoorEndpointId:
+                    description: The resource ID of the Front Door Endpoint where
+                      this Front Door Route should exist. Changing this forces a new
+                      Front Door Route to be created.
+                    type: string
+                  cdnFrontdoorEndpointIdRef:
+                    description: Reference to a FrontdoorEndpoint in cdn to populate
+                      cdnFrontdoorEndpointId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  cdnFrontdoorEndpointIdSelector:
+                    description: Selector for a FrontdoorEndpoint in cdn to populate
+                      cdnFrontdoorEndpointId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  cdnFrontdoorOriginGroupId:
+                    description: The resource ID of the Front Door Origin Group where
+                      this Front Door Route should be created.
+                    type: string
+                  cdnFrontdoorOriginGroupIdRef:
+                    description: Reference to a FrontdoorOriginGroup in cdn to populate
+                      cdnFrontdoorOriginGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  cdnFrontdoorOriginGroupIdSelector:
+                    description: Selector for a FrontdoorOriginGroup in cdn to populate
+                      cdnFrontdoorOriginGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  cdnFrontdoorOriginIds:
+                    description: One or more Front Door Origin resource IDs that this
+                      Front Door Route will link to.
+                    items:
+                      type: string
+                    type: array
+                  cdnFrontdoorOriginIdsRefs:
+                    description: References to FrontdoorOrigin in cdn to populate
+                      cdnFrontdoorOriginIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  cdnFrontdoorOriginIdsSelector:
+                    description: Selector for a list of FrontdoorOrigin in cdn to
+                      populate cdnFrontdoorOriginIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  cdnFrontdoorOriginPath:
+                    description: A directory path on the Front Door Origin that can
+                      be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
+                    type: string
+                  cdnFrontdoorRuleSetIds:
+                    description: A list of the Front Door Rule Set IDs which should
+                      be assigned to this Front Door Route.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  cdnFrontdoorRuleSetIdsRefs:
+                    description: References to FrontdoorRuleSet in cdn to populate
+                      cdnFrontdoorRuleSetIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  cdnFrontdoorRuleSetIdsSelector:
+                    description: Selector for a list of FrontdoorRuleSet in cdn to
+                      populate cdnFrontdoorRuleSetIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  enabled:
+                    description: Is this Front Door Route enabled? Possible values
+                      are true or false. Defaults to true.
+                    type: boolean
+                  forwardingProtocol:
+                    description: The Protocol that will be use when forwarding traffic
+                      to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+                      Defaults to MatchRequest.
+                    type: string
+                  httpsRedirectEnabled:
+                    description: Automatically redirect HTTP traffic to HTTPS traffic?
+                      Possible values are true or false. Defaults to true.
+                    type: boolean
+                  linkToDefaultDomain:
+                    description: Should this Front Door Route be linked to the default
+                      endpoint? Possible values include true or false. Defaults to
+                      true.
+                    type: boolean
+                  patternsToMatch:
+                    description: The route patterns of the rule.
+                    items:
+                      type: string
+                    type: array
+                  supportedProtocols:
+                    description: One or more Protocols supported by this Front Door
+                      Route. Possible values are Http or Https.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  cache:
+                    description: A cache block as defined below.
+                    properties:
+                      compressionEnabled:
+                        description: Is content compression enabled? Possible values
+                          are true or false. Defaults to false.
+                        type: boolean
+                      contentTypesToCompress:
+                        description: A list of one or more Content types (formerly
+                          known as MIME types) to compress. Possible values include
+                          application/eot, application/font, application/font-sfnt,
+                          application/javascript, application/json, application/opentype,
+                          application/otf, application/pkcs7-mime, application/truetype,
+                          application/ttf, application/vnd.ms-fontobject, application/xhtml+xml,
+                          application/xml, application/xml+rss, application/x-font-opentype,
+                          application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi,
+                          application/x-mpegurl, application/x-opentype, application/x-otf,
+                          application/x-perl, application/x-ttf, application/x-javascript,
+                          font/eot, font/ttf, font/otf, font/opentype, image/svg+xml,
+                          text/css, text/csv, text/html, text/javascript, text/js,
+                          text/plain, text/richtext, text/tab-separated-values, text/xml,
+                          text/x-script, text/x-component or text/x-java-source.
+                        items:
+                          type: string
+                        type: array
+                      queryStringCachingBehavior:
+                        description: Defines how the Front Door Route will cache requests
+                          that include query strings. Possible values include IgnoreQueryString,
+                          IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings
+                          or UseQueryString. Defaults to IgnoreQueryString.
+                        type: string
+                      queryStrings:
+                        description: Query strings to include or ignore.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  cdnFrontdoorCustomDomainIds:
+                    description: The IDs of the Front Door Custom Domains which are
+                      associated with this Front Door Route.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  cdnFrontdoorCustomDomainIdsRefs:
+                    description: References to FrontdoorCustomDomain in cdn to populate
+                      cdnFrontdoorCustomDomainIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  cdnFrontdoorCustomDomainIdsSelector:
+                    description: Selector for a list of FrontdoorCustomDomain in cdn
+                      to populate cdnFrontdoorCustomDomainIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  cdnFrontdoorOriginGroupId:
+                    description: The resource ID of the Front Door Origin Group where
+                      this Front Door Route should be created.
+                    type: string
+                  cdnFrontdoorOriginGroupIdRef:
+                    description: Reference to a FrontdoorOriginGroup in cdn to populate
+                      cdnFrontdoorOriginGroupId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  cdnFrontdoorOriginGroupIdSelector:
+                    description: Selector for a FrontdoorOriginGroup in cdn to populate
+                      cdnFrontdoorOriginGroupId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  cdnFrontdoorOriginIds:
+                    description: One or more Front Door Origin resource IDs that this
+                      Front Door Route will link to.
+                    items:
+                      type: string
+                    type: array
+                  cdnFrontdoorOriginIdsRefs:
+                    description: References to FrontdoorOrigin in cdn to populate
+                      cdnFrontdoorOriginIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  cdnFrontdoorOriginIdsSelector:
+                    description: Selector for a list of FrontdoorOrigin in cdn to
+                      populate cdnFrontdoorOriginIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  cdnFrontdoorOriginPath:
+                    description: A directory path on the Front Door Origin that can
+                      be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
+                    type: string
+                  cdnFrontdoorRuleSetIds:
+                    description: A list of the Front Door Rule Set IDs which should
+                      be assigned to this Front Door Route.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  cdnFrontdoorRuleSetIdsRefs:
+                    description: References to FrontdoorRuleSet in cdn to populate
+                      cdnFrontdoorRuleSetIds.
+                    items:
+                      description: A Reference to a named object.
+                      properties:
+                        name:
+                          description: Name of the referenced object.
+                          type: string
+                        policy:
+                          description: Policies for referencing.
+                          properties:
+                            resolution:
+                              default: Required
+                              description: |-
+                                Resolution specifies whether resolution of this reference is required.
+                                The default is 'Required', which means the reconcile will fail if the
+                                reference cannot be resolved. 'Optional' means this reference will be
+                                a no-op if it cannot be resolved.
+                              enum:
+                              - Required
+                              - Optional
+                              type: string
+                            resolve:
+                              description: |-
+                                Resolve specifies when this reference should be resolved. The default
+                                is 'IfNotPresent', which will attempt to resolve the reference only when
+                                the corresponding field is not present. Use 'Always' to resolve the
+                                reference on every reconcile.
+                              enum:
+                              - Always
+                              - IfNotPresent
+                              type: string
+                          type: object
+                      required:
+                      - name
+                      type: object
+                    type: array
+                  cdnFrontdoorRuleSetIdsSelector:
+                    description: Selector for a list of FrontdoorRuleSet in cdn to
+                      populate cdnFrontdoorRuleSetIds.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  enabled:
+                    description: Is this Front Door Route enabled? Possible values
+                      are true or false. Defaults to true.
+                    type: boolean
+                  forwardingProtocol:
+                    description: The Protocol that will be use when forwarding traffic
+                      to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+                      Defaults to MatchRequest.
+                    type: string
+                  httpsRedirectEnabled:
+                    description: Automatically redirect HTTP traffic to HTTPS traffic?
+                      Possible values are true or false. Defaults to true.
+                    type: boolean
+                  linkToDefaultDomain:
+                    description: Should this Front Door Route be linked to the default
+                      endpoint? Possible values include true or false. Defaults to
+                      true.
+                    type: boolean
+                  patternsToMatch:
+                    description: The route patterns of the rule.
+                    items:
+                      type: string
+                    type: array
+                  supportedProtocols:
+                    description: One or more Protocols supported by this Front Door
+                      Route. Possible values are Http or Https.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.patternsToMatch is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.patternsToMatch)
+                || (has(self.initProvider) && has(self.initProvider.patternsToMatch))'
+            - message: spec.forProvider.supportedProtocols is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.supportedProtocols)
+                || (has(self.initProvider) && has(self.initProvider.supportedProtocols))'
+          status:
+            description: FrontdoorRouteStatus defines the observed state of FrontdoorRoute.
+            properties:
+              atProvider:
+                properties:
+                  cache:
+                    description: A cache block as defined below.
+                    properties:
+                      compressionEnabled:
+                        description: Is content compression enabled? Possible values
+                          are true or false. Defaults to false.
+                        type: boolean
+                      contentTypesToCompress:
+                        description: A list of one or more Content types (formerly
+                          known as MIME types) to compress. Possible values include
+                          application/eot, application/font, application/font-sfnt,
+                          application/javascript, application/json, application/opentype,
+                          application/otf, application/pkcs7-mime, application/truetype,
+                          application/ttf, application/vnd.ms-fontobject, application/xhtml+xml,
+                          application/xml, application/xml+rss, application/x-font-opentype,
+                          application/x-font-truetype, application/x-font-ttf, application/x-httpd-cgi,
+                          application/x-mpegurl, application/x-opentype, application/x-otf,
+                          application/x-perl, application/x-ttf, application/x-javascript,
+                          font/eot, font/ttf, font/otf, font/opentype, image/svg+xml,
+                          text/css, text/csv, text/html, text/javascript, text/js,
+                          text/plain, text/richtext, text/tab-separated-values, text/xml,
+                          text/x-script, text/x-component or text/x-java-source.
+                        items:
+                          type: string
+                        type: array
+                      queryStringCachingBehavior:
+                        description: Defines how the Front Door Route will cache requests
+                          that include query strings. Possible values include IgnoreQueryString,
+                          IgnoreSpecifiedQueryStrings, IncludeSpecifiedQueryStrings
+                          or UseQueryString. Defaults to IgnoreQueryString.
+                        type: string
+                      queryStrings:
+                        description: Query strings to include or ignore.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  cdnFrontdoorCustomDomainIds:
+                    description: The IDs of the Front Door Custom Domains which are
+                      associated with this Front Door Route.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  cdnFrontdoorEndpointId:
+                    description: The resource ID of the Front Door Endpoint where
+                      this Front Door Route should exist. Changing this forces a new
+                      Front Door Route to be created.
+                    type: string
+                  cdnFrontdoorOriginGroupId:
+                    description: The resource ID of the Front Door Origin Group where
+                      this Front Door Route should be created.
+                    type: string
+                  cdnFrontdoorOriginIds:
+                    description: One or more Front Door Origin resource IDs that this
+                      Front Door Route will link to.
+                    items:
+                      type: string
+                    type: array
+                  cdnFrontdoorOriginPath:
+                    description: A directory path on the Front Door Origin that can
+                      be used to retrieve content (e.g. contoso.cloudapp.net/originpath).
+                    type: string
+                  cdnFrontdoorRuleSetIds:
+                    description: A list of the Front Door Rule Set IDs which should
+                      be assigned to this Front Door Route.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  enabled:
+                    description: Is this Front Door Route enabled? Possible values
+                      are true or false. Defaults to true.
+                    type: boolean
+                  forwardingProtocol:
+                    description: The Protocol that will be use when forwarding traffic
+                      to backends. Possible values are HttpOnly, HttpsOnly or MatchRequest.
+                      Defaults to MatchRequest.
+                    type: string
+                  httpsRedirectEnabled:
+                    description: Automatically redirect HTTP traffic to HTTPS traffic?
+                      Possible values are true or false. Defaults to true.
+                    type: boolean
+                  id:
+                    description: The ID of the Front Door Route.
+                    type: string
+                  linkToDefaultDomain:
+                    description: Should this Front Door Route be linked to the default
+                      endpoint? Possible values include true or false. Defaults to
+                      true.
+                    type: boolean
+                  patternsToMatch:
+                    description: The route patterns of the rule.
+                    items:
+                      type: string
+                    type: array
+                  supportedProtocols:
+                    description: One or more Protocols supported by this Front Door
+                      Route. Possible values are Http or Https.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

@@ -1190,3 +1190,1133 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: FirewallPolicy is the Schema for the FirewallPolicys API. Manages
+          a Firewall Policy.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FirewallPolicySpec defines the desired state of FirewallPolicy
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  autoLearnPrivateRangesEnabled:
+                    description: Whether enable auto learn private ip range.
+                    type: boolean
+                  basePolicyId:
+                    description: The ID of the base Firewall Policy.
+                    type: string
+                  dns:
+                    description: A dns block as defined below.
+                    properties:
+                      proxyEnabled:
+                        description: Whether to enable DNS proxy on Firewalls attached
+                          to this Firewall Policy? Defaults to false.
+                        type: boolean
+                      servers:
+                        description: A list of custom DNS servers' IP addresses.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  explicitProxy:
+                    description: A explicit_proxy block as defined below.
+                    properties:
+                      enablePacFile:
+                        description: Whether the pac file port and url need to be
+                          provided.
+                        type: boolean
+                      enabled:
+                        description: Whether the explicit proxy is enabled for this
+                          Firewall Policy.
+                        type: boolean
+                      httpPort:
+                        description: The port number for explicit http protocol.
+                        type: number
+                      httpsPort:
+                        description: The port number for explicit proxy https protocol.
+                        type: number
+                      pacFile:
+                        description: Specifies a SAS URL for PAC file.
+                        type: string
+                      pacFilePort:
+                        description: Specifies a port number for firewall to serve
+                          PAC file.
+                        type: number
+                    type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Firewall Policy.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Firewall Policy. Only
+                          possible value is UserAssigned.
+                        type: string
+                    type: object
+                  insights:
+                    description: An insights block as defined below.
+                    properties:
+                      defaultLogAnalyticsWorkspaceId:
+                        description: The ID of the default Log Analytics Workspace
+                          that the Firewalls associated with this Firewall Policy
+                          will send their logs to, when there is no location matches
+                          in the log_analytics_workspace.
+                        type: string
+                      enabled:
+                        description: Whether the insights functionality is enabled
+                          for this Firewall Policy.
+                        type: boolean
+                      logAnalyticsWorkspace:
+                        description: A list of log_analytics_workspace block as defined
+                          below.
+                        items:
+                          properties:
+                            firewallLocation:
+                              description: The location of the Firewalls, that when
+                                matches this Log Analytics Workspace will be used
+                                to consume their logs.
+                              type: string
+                            id:
+                              description: 12-digit number (id) which identifies your
+                                signature.
+                              type: string
+                          type: object
+                        type: array
+                      retentionInDays:
+                        description: The log retention period in days.
+                        type: number
+                    type: object
+                  intrusionDetection:
+                    description: A intrusion_detection block as defined below.
+                    properties:
+                      mode:
+                        description: 'In which mode you want to run intrusion detection:
+                          Off, Alert or Deny.'
+                        type: string
+                      privateRanges:
+                        description: A list of Private IP address ranges to identify
+                          traffic direction. By default, only ranges defined by IANA
+                          RFC 1918 are considered private IP addresses.
+                        items:
+                          type: string
+                        type: array
+                      signatureOverrides:
+                        description: One or more signature_overrides blocks as defined
+                          below.
+                        items:
+                          properties:
+                            id:
+                              description: 12-digit number (id) which identifies your
+                                signature.
+                              type: string
+                            state:
+                              description: state can be any of Off, Alert or Deny.
+                              type: string
+                          type: object
+                        type: array
+                      trafficBypass:
+                        description: One or more traffic_bypass blocks as defined
+                          below.
+                        items:
+                          properties:
+                            description:
+                              description: The description for this bypass traffic
+                                setting.
+                              type: string
+                            destinationAddresses:
+                              description: Specifies a list of destination IP addresses
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            destinationIpGroups:
+                              description: Specifies a list of destination IP groups
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            destinationPorts:
+                              description: Specifies a list of destination IP ports
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: The name which should be used for this
+                                bypass traffic setting.
+                              type: string
+                            protocol:
+                              description: The protocols any of ANY, TCP, ICMP, UDP
+                                that shall be bypassed by intrusion detection.
+                              type: string
+                            sourceAddresses:
+                              description: Specifies a list of source addresses that
+                                shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            sourceIpGroups:
+                              description: Specifies a list of source IP groups that
+                                shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                    type: object
+                  location:
+                    description: The Azure Region where the Firewall Policy should
+                      exist. Changing this forces a new Firewall Policy to be created.
+                    type: string
+                  privateIpRanges:
+                    description: A list of private IP ranges to which traffic will
+                      not be SNAT.
+                    items:
+                      type: string
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Firewall
+                      Policy should exist. Changing this forces a new Firewall Policy
+                      to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  sku:
+                    description: The SKU Tier of the Firewall Policy. Possible values
+                      are Standard, Premium and Basic. Changing this forces a new
+                      Firewall Policy to be created.
+                    type: string
+                  sqlRedirectAllowed:
+                    description: Whether SQL Redirect traffic filtering is allowed.
+                      Enabling this flag requires no rule using ports between 11000-11999.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Firewall Policy.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  threatIntelligenceAllowlist:
+                    description: A threat_intelligence_allowlist block as defined
+                      below.
+                    properties:
+                      fqdns:
+                        description: A list of FQDNs that will be skipped for threat
+                          detection.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      ipAddresses:
+                        description: A list of IP addresses or CIDR ranges that will
+                          be skipped for threat detection.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  threatIntelligenceMode:
+                    description: The operation mode for Threat Intelligence. Possible
+                      values are Alert, Deny and Off. Defaults to Alert.
+                    type: string
+                  tlsCertificate:
+                    description: A tls_certificate block as defined below.
+                    properties:
+                      keyVaultSecretId:
+                        description: The ID of the Key Vault, where the secret or
+                          certificate is stored.
+                        type: string
+                      name:
+                        description: The name of the certificate.
+                        type: string
+                    type: object
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  autoLearnPrivateRangesEnabled:
+                    description: Whether enable auto learn private ip range.
+                    type: boolean
+                  basePolicyId:
+                    description: The ID of the base Firewall Policy.
+                    type: string
+                  dns:
+                    description: A dns block as defined below.
+                    properties:
+                      proxyEnabled:
+                        description: Whether to enable DNS proxy on Firewalls attached
+                          to this Firewall Policy? Defaults to false.
+                        type: boolean
+                      servers:
+                        description: A list of custom DNS servers' IP addresses.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  explicitProxy:
+                    description: A explicit_proxy block as defined below.
+                    properties:
+                      enablePacFile:
+                        description: Whether the pac file port and url need to be
+                          provided.
+                        type: boolean
+                      enabled:
+                        description: Whether the explicit proxy is enabled for this
+                          Firewall Policy.
+                        type: boolean
+                      httpPort:
+                        description: The port number for explicit http protocol.
+                        type: number
+                      httpsPort:
+                        description: The port number for explicit proxy https protocol.
+                        type: number
+                      pacFile:
+                        description: Specifies a SAS URL for PAC file.
+                        type: string
+                      pacFilePort:
+                        description: Specifies a port number for firewall to serve
+                          PAC file.
+                        type: number
+                    type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Firewall Policy.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Firewall Policy. Only
+                          possible value is UserAssigned.
+                        type: string
+                    type: object
+                  insights:
+                    description: An insights block as defined below.
+                    properties:
+                      defaultLogAnalyticsWorkspaceId:
+                        description: The ID of the default Log Analytics Workspace
+                          that the Firewalls associated with this Firewall Policy
+                          will send their logs to, when there is no location matches
+                          in the log_analytics_workspace.
+                        type: string
+                      enabled:
+                        description: Whether the insights functionality is enabled
+                          for this Firewall Policy.
+                        type: boolean
+                      logAnalyticsWorkspace:
+                        description: A list of log_analytics_workspace block as defined
+                          below.
+                        items:
+                          properties:
+                            firewallLocation:
+                              description: The location of the Firewalls, that when
+                                matches this Log Analytics Workspace will be used
+                                to consume their logs.
+                              type: string
+                            id:
+                              description: 12-digit number (id) which identifies your
+                                signature.
+                              type: string
+                          type: object
+                        type: array
+                      retentionInDays:
+                        description: The log retention period in days.
+                        type: number
+                    type: object
+                  intrusionDetection:
+                    description: A intrusion_detection block as defined below.
+                    properties:
+                      mode:
+                        description: 'In which mode you want to run intrusion detection:
+                          Off, Alert or Deny.'
+                        type: string
+                      privateRanges:
+                        description: A list of Private IP address ranges to identify
+                          traffic direction. By default, only ranges defined by IANA
+                          RFC 1918 are considered private IP addresses.
+                        items:
+                          type: string
+                        type: array
+                      signatureOverrides:
+                        description: One or more signature_overrides blocks as defined
+                          below.
+                        items:
+                          properties:
+                            id:
+                              description: 12-digit number (id) which identifies your
+                                signature.
+                              type: string
+                            state:
+                              description: state can be any of Off, Alert or Deny.
+                              type: string
+                          type: object
+                        type: array
+                      trafficBypass:
+                        description: One or more traffic_bypass blocks as defined
+                          below.
+                        items:
+                          properties:
+                            description:
+                              description: The description for this bypass traffic
+                                setting.
+                              type: string
+                            destinationAddresses:
+                              description: Specifies a list of destination IP addresses
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            destinationIpGroups:
+                              description: Specifies a list of destination IP groups
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            destinationPorts:
+                              description: Specifies a list of destination IP ports
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: The name which should be used for this
+                                bypass traffic setting.
+                              type: string
+                            protocol:
+                              description: The protocols any of ANY, TCP, ICMP, UDP
+                                that shall be bypassed by intrusion detection.
+                              type: string
+                            sourceAddresses:
+                              description: Specifies a list of source addresses that
+                                shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            sourceIpGroups:
+                              description: Specifies a list of source IP groups that
+                                shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                    type: object
+                  location:
+                    description: The Azure Region where the Firewall Policy should
+                      exist. Changing this forces a new Firewall Policy to be created.
+                    type: string
+                  privateIpRanges:
+                    description: A list of private IP ranges to which traffic will
+                      not be SNAT.
+                    items:
+                      type: string
+                    type: array
+                  sku:
+                    description: The SKU Tier of the Firewall Policy. Possible values
+                      are Standard, Premium and Basic. Changing this forces a new
+                      Firewall Policy to be created.
+                    type: string
+                  sqlRedirectAllowed:
+                    description: Whether SQL Redirect traffic filtering is allowed.
+                      Enabling this flag requires no rule using ports between 11000-11999.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Firewall Policy.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  threatIntelligenceAllowlist:
+                    description: A threat_intelligence_allowlist block as defined
+                      below.
+                    properties:
+                      fqdns:
+                        description: A list of FQDNs that will be skipped for threat
+                          detection.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      ipAddresses:
+                        description: A list of IP addresses or CIDR ranges that will
+                          be skipped for threat detection.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  threatIntelligenceMode:
+                    description: The operation mode for Threat Intelligence. Possible
+                      values are Alert, Deny and Off. Defaults to Alert.
+                    type: string
+                  tlsCertificate:
+                    description: A tls_certificate block as defined below.
+                    properties:
+                      keyVaultSecretId:
+                        description: The ID of the Key Vault, where the secret or
+                          certificate is stored.
+                        type: string
+                      name:
+                        description: The name of the certificate.
+                        type: string
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+          status:
+            description: FirewallPolicyStatus defines the observed state of FirewallPolicy.
+            properties:
+              atProvider:
+                properties:
+                  autoLearnPrivateRangesEnabled:
+                    description: Whether enable auto learn private ip range.
+                    type: boolean
+                  basePolicyId:
+                    description: The ID of the base Firewall Policy.
+                    type: string
+                  childPolicies:
+                    description: A list of reference to child Firewall Policies of
+                      this Firewall Policy.
+                    items:
+                      type: string
+                    type: array
+                  dns:
+                    description: A dns block as defined below.
+                    properties:
+                      proxyEnabled:
+                        description: Whether to enable DNS proxy on Firewalls attached
+                          to this Firewall Policy? Defaults to false.
+                        type: boolean
+                      servers:
+                        description: A list of custom DNS servers' IP addresses.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  explicitProxy:
+                    description: A explicit_proxy block as defined below.
+                    properties:
+                      enablePacFile:
+                        description: Whether the pac file port and url need to be
+                          provided.
+                        type: boolean
+                      enabled:
+                        description: Whether the explicit proxy is enabled for this
+                          Firewall Policy.
+                        type: boolean
+                      httpPort:
+                        description: The port number for explicit http protocol.
+                        type: number
+                      httpsPort:
+                        description: The port number for explicit proxy https protocol.
+                        type: number
+                      pacFile:
+                        description: Specifies a SAS URL for PAC file.
+                        type: string
+                      pacFilePort:
+                        description: Specifies a port number for firewall to serve
+                          PAC file.
+                        type: number
+                    type: object
+                  firewalls:
+                    description: A list of references to Azure Firewalls that this
+                      Firewall Policy is associated with.
+                    items:
+                      type: string
+                    type: array
+                  id:
+                    description: The ID of the Firewall Policy.
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: Specifies a list of User Assigned Managed Identity
+                          IDs to be assigned to this Firewall Policy.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The ID of the Firewall Policy.
+                        type: string
+                      tenantId:
+                        description: The ID of the Firewall Policy.
+                        type: string
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Firewall Policy. Only
+                          possible value is UserAssigned.
+                        type: string
+                    type: object
+                  insights:
+                    description: An insights block as defined below.
+                    properties:
+                      defaultLogAnalyticsWorkspaceId:
+                        description: The ID of the default Log Analytics Workspace
+                          that the Firewalls associated with this Firewall Policy
+                          will send their logs to, when there is no location matches
+                          in the log_analytics_workspace.
+                        type: string
+                      enabled:
+                        description: Whether the insights functionality is enabled
+                          for this Firewall Policy.
+                        type: boolean
+                      logAnalyticsWorkspace:
+                        description: A list of log_analytics_workspace block as defined
+                          below.
+                        items:
+                          properties:
+                            firewallLocation:
+                              description: The location of the Firewalls, that when
+                                matches this Log Analytics Workspace will be used
+                                to consume their logs.
+                              type: string
+                            id:
+                              description: 12-digit number (id) which identifies your
+                                signature.
+                              type: string
+                          type: object
+                        type: array
+                      retentionInDays:
+                        description: The log retention period in days.
+                        type: number
+                    type: object
+                  intrusionDetection:
+                    description: A intrusion_detection block as defined below.
+                    properties:
+                      mode:
+                        description: 'In which mode you want to run intrusion detection:
+                          Off, Alert or Deny.'
+                        type: string
+                      privateRanges:
+                        description: A list of Private IP address ranges to identify
+                          traffic direction. By default, only ranges defined by IANA
+                          RFC 1918 are considered private IP addresses.
+                        items:
+                          type: string
+                        type: array
+                      signatureOverrides:
+                        description: One or more signature_overrides blocks as defined
+                          below.
+                        items:
+                          properties:
+                            id:
+                              description: 12-digit number (id) which identifies your
+                                signature.
+                              type: string
+                            state:
+                              description: state can be any of Off, Alert or Deny.
+                              type: string
+                          type: object
+                        type: array
+                      trafficBypass:
+                        description: One or more traffic_bypass blocks as defined
+                          below.
+                        items:
+                          properties:
+                            description:
+                              description: The description for this bypass traffic
+                                setting.
+                              type: string
+                            destinationAddresses:
+                              description: Specifies a list of destination IP addresses
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            destinationIpGroups:
+                              description: Specifies a list of destination IP groups
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            destinationPorts:
+                              description: Specifies a list of destination IP ports
+                                that shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            name:
+                              description: The name which should be used for this
+                                bypass traffic setting.
+                              type: string
+                            protocol:
+                              description: The protocols any of ANY, TCP, ICMP, UDP
+                                that shall be bypassed by intrusion detection.
+                              type: string
+                            sourceAddresses:
+                              description: Specifies a list of source addresses that
+                                shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            sourceIpGroups:
+                              description: Specifies a list of source IP groups that
+                                shall be bypassed by intrusion detection.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                    type: object
+                  location:
+                    description: The Azure Region where the Firewall Policy should
+                      exist. Changing this forces a new Firewall Policy to be created.
+                    type: string
+                  privateIpRanges:
+                    description: A list of private IP ranges to which traffic will
+                      not be SNAT.
+                    items:
+                      type: string
+                    type: array
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Firewall
+                      Policy should exist. Changing this forces a new Firewall Policy
+                      to be created.
+                    type: string
+                  ruleCollectionGroups:
+                    description: A list of references to Firewall Policy Rule Collection
+                      Groups that belongs to this Firewall Policy.
+                    items:
+                      type: string
+                    type: array
+                  sku:
+                    description: The SKU Tier of the Firewall Policy. Possible values
+                      are Standard, Premium and Basic. Changing this forces a new
+                      Firewall Policy to be created.
+                    type: string
+                  sqlRedirectAllowed:
+                    description: Whether SQL Redirect traffic filtering is allowed.
+                      Enabling this flag requires no rule using ports between 11000-11999.
+                    type: boolean
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Firewall Policy.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  threatIntelligenceAllowlist:
+                    description: A threat_intelligence_allowlist block as defined
+                      below.
+                    properties:
+                      fqdns:
+                        description: A list of FQDNs that will be skipped for threat
+                          detection.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      ipAddresses:
+                        description: A list of IP addresses or CIDR ranges that will
+                          be skipped for threat detection.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                    type: object
+                  threatIntelligenceMode:
+                    description: The operation mode for Threat Intelligence. Possible
+                      values are Alert, Deny and Off. Defaults to Alert.
+                    type: string
+                  tlsCertificate:
+                    description: A tls_certificate block as defined below.
+                    properties:
+                      keyVaultSecretId:
+                        description: The ID of the Key Vault, where the secret or
+                          certificate is stored.
+                        type: string
+                      name:
+                        description: The name of the certificate.
+                        type: string
+                    type: object
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

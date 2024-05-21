@@ -13,13 +13,7 @@ func (tr *SpringCloudAccelerator) Hub() {}
 func (tr *SpringCloudActiveDeployment) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SpringCloudAPIPortal) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SpringCloudAPIPortalCustomDomain) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpringCloudApp) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SpringCloudAppCosmosDBAssociation) Hub() {}
@@ -31,43 +25,16 @@ func (tr *SpringCloudAppMySQLAssociation) Hub() {}
 func (tr *SpringCloudAppRedisAssociation) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SpringCloudBuildDeployment) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpringCloudBuildPackBinding) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpringCloudBuilder) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SpringCloudCertificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SpringCloudConfigurationService) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SpringCloudContainerDeployment) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SpringCloudCustomDomain) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *SpringCloudCustomizedAccelerator) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpringCloudDevToolPortal) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpringCloudGateway) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SpringCloudGatewayCustomDomain) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpringCloudJavaDeployment) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SpringCloudService) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SpringCloudStorage) Hub() {}

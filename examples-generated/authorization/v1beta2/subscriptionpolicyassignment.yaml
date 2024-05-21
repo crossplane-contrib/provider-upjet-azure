@@ -1,0 +1,42 @@
+apiVersion: authorization.azure.upbound.io/v1beta2
+kind: SubscriptionPolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/subscriptionpolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subscriptionId: ${data.azurerm_subscription.current.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/subscriptionpolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: Allowed resource types
+    mode: All
+    policyRule: |2
+       {
+          "if": {
+            "not": {
+              "field": "location",
+              "equals": "westeurope"
+            }
+          },
+          "then": {
+            "effect": "Deny"
+          }
+        }
+    policyType: Custom

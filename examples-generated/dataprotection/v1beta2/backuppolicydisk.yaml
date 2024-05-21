@@ -1,0 +1,61 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta2
+kind: BackupPolicyDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta2/backuppolicydisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2021-05-19T06:33:16+00:00/PT4H
+    defaultRetentionDuration: P7D
+    retentionRule:
+    - criteria:
+      - absoluteCriteria: FirstOfDay
+      duration: P7D
+      name: Daily
+      priority: 25
+    - criteria:
+      - absoluteCriteria: FirstOfWeek
+      duration: P7D
+      name: Weekly
+      priority: 20
+    timeZone: W. Europe Standard Time
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta2
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta2/backuppolicydisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    datastoreType: VaultStore
+    location: West Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta2/backuppolicydisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

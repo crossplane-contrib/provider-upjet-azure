@@ -1,0 +1,124 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: ApplicationGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: network
+  name: network
+spec:
+  forProvider:
+    backendAddressPool:
+    - name: ${local.backend_address_pool_name}
+    backendHttpSettings:
+    - cookieBasedAffinity: Disabled
+      name: ${local.http_setting_name}
+      path: /path1/
+      port: 80
+      protocol: Http
+      requestTimeout: 60
+    frontendIpConfiguration:
+    - name: ${local.frontend_ip_configuration_name}
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    frontendPort:
+    - name: ${local.frontend_port_name}
+      port: 80
+    gatewayIpConfiguration:
+    - name: my-gateway-ip-configuration
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    httpListener:
+    - frontendIpConfigurationName: ${local.frontend_ip_configuration_name}
+      frontendPortName: ${local.frontend_port_name}
+      name: ${local.listener_name}
+      protocol: Http
+    location: West Europe
+    requestRoutingRule:
+    - backendAddressPoolName: ${local.backend_address_pool_name}
+      backendHttpSettingsName: ${local.http_setting_name}
+      httpListenerName: ${local.listener_name}
+      name: ${local.request_routing_rule_name}
+      priority: 9
+      ruleType: Basic
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: 2
+      name: Standard_v2
+      tier: Standard_v2
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Dynamic
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.254.0.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/applicationgateway
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.254.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

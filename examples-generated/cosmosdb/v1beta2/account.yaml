@@ -1,0 +1,45 @@
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta2/account
+  labels:
+    testing.upbound.io/example-name: db
+  name: db
+spec:
+  forProvider:
+    capabilities:
+    - name: EnableAggregationPipeline
+    - name: mongoEnableDocLevelTTL
+    - name: MongoDBv3.4
+    - name: EnableMongo
+    consistencyPolicy:
+    - consistencyLevel: BoundedStaleness
+      maxIntervalInSeconds: 300
+      maxStalenessPrefix: 100000
+    enableAutomaticFailover: true
+    geoLocation:
+    - failoverPriority: 1
+      location: eastus
+    - failoverPriority: 0
+      location: westus
+    kind: MongoDB
+    location: West Europe
+    offerType: Standard
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta2/account
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

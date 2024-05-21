@@ -71,7 +71,7 @@ type CertificateIssuerInitParameters struct {
 	Admin []AdminInitParameters `json:"admin,omitempty" tf:"admin,omitempty"`
 
 	// The ID of the Key Vault in which to create the Certificate Issuer. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
 
@@ -122,7 +122,7 @@ type CertificateIssuerParameters struct {
 	Admin []AdminParameters `json:"admin,omitempty" tf:"admin,omitempty"`
 
 	// The ID of the Key Vault in which to create the Certificate Issuer. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta1.Vault
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta2.Vault
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`

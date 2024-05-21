@@ -10,22 +10,10 @@ package v1beta1
 func (tr *BackupContainerStorageAccount) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *BackupPolicyFileShare) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BackupPolicyVM) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BackupPolicyVMWorkload) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *BackupProtectedFileShare) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *BackupProtectedVM) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Vault) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SiteRecoveryFabric) Hub() {}
@@ -35,9 +23,6 @@ func (tr *SiteRecoveryNetworkMapping) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SiteRecoveryProtectionContainer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SiteRecoveryProtectionContainerMapping) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SiteRecoveryReplicationPolicy) Hub() {}

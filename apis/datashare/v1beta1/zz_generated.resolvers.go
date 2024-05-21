@@ -232,7 +232,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.FileSystemNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta2", "DataShare", "DataShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -251,7 +251,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -289,7 +289,7 @@ func (mg *DataSetDataLakeGen2) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.InitProvider.FileSystemName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.FileSystemNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Account", "AccountList")
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -320,7 +320,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -339,7 +339,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.KustoClusterID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoClusterIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta2", "DataShare", "DataShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -358,7 +358,7 @@ func (mg *DataSetKustoCluster) ResolveReferences(ctx context.Context, c client.R
 	mg.Spec.ForProvider.ShareID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ShareIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta1", "Cluster", "ClusterList")
+		m, l, err = apisresolver.GetManagedResource("kusto.azure.upbound.io", "v1beta2", "Cluster", "ClusterList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -408,7 +408,7 @@ func (mg *DataSetKustoDatabase) ResolveReferences(ctx context.Context, c client.
 	mg.Spec.ForProvider.KustoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.KustoDatabaseIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta1", "DataShare", "DataShareList")
+		m, l, err = apisresolver.GetManagedResource("datashare.azure.upbound.io", "v1beta2", "DataShare", "DataShareList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

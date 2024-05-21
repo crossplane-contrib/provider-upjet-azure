@@ -1,0 +1,97 @@
+apiVersion: deviceupdate.azure.upbound.io/v1beta2
+kind: IOTHubDeviceUpdateInstance
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    deviceUpdateAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    diagnosticEnabled: true
+    diagnosticStorageAccount:
+    - connectionStringSecretRef:
+        key: attribute.primary_connection_string
+        name: example-storage-account
+        namespace: upbound-system
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    iothubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+
+---
+
+apiVersion: devices.azure.upbound.io/v1beta2
+kind: IOTHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku:
+    - capacity: "1"
+      name: S1
+
+---
+
+apiVersion: deviceupdate.azure.upbound.io/v1beta2
+kind: IOTHubDeviceUpdateAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateinstance
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

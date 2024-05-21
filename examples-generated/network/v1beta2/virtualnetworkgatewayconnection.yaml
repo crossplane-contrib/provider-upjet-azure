@@ -1,0 +1,147 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetworkGatewayConnection
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: onpremise
+  name: onpremise
+spec:
+  forProvider:
+    localNetworkGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: onpremise
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedKeySecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    type: IPsec
+    virtualNetworkGatewayIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: LocalNetworkGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: onpremise
+  name: onpremise
+spec:
+  forProvider:
+    addressSpace:
+    - 10.1.1.0/24
+    gatewayAddress: 168.62.225.23
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    allocationMethod: Dynamic
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West US
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.1.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetworkGateway
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/virtualnetworkgatewayconnection
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    activeActive: false
+    enableBgp: false
+    ipConfiguration:
+    - privateIpAddressAllocation: Dynamic
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Basic
+    type: Vpn
+    vpnType: RouteBased

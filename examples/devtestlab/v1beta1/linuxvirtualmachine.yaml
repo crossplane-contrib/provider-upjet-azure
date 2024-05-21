@@ -1,0 +1,113 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: LinuxVirtualMachine
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "Long running resource. Time to time updating status takes too long."
+    meta.upbound.io/example-id: devtestlab/v1beta1/linuxvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: stlvmex
+spec:
+  forProvider:
+    name: stlvmex
+    galleryImageReference:
+    - offer: UbuntuServer
+      publisher: Canonical
+      sku: 18.04-LTS
+      version: latest
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labSubnetName: stlvmexSubnet
+    labVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    notes: Some notes about this Virtual Machine.
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: Standard_F2
+    storageType: Standard
+    username: exampleuser99
+    passwordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: Lab
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: devtestlab/v1beta1/linuxvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: stlvmex
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Sydney: Australia
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: devtestlab/v1beta1/linuxvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: stlvmex
+spec:
+  forProvider:
+    name: stlvmex
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnet:
+    - useInVirtualMachineCreation: Allow
+      usePublicIpAddress: Allow
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    upjet.upbound.io/manual-intervention: "The dependent resource needs a manual patching and is thus skipped."
+    meta.upbound.io/example-id: devtestlab/v1beta1/linuxvirtualmachine
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-network.sh
+  labels:
+    testing.upbound.io/example-name: example
+  name: stlvmex
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,71 @@
+apiVersion: alertsmanagement.azure.upbound.io/v1beta2
+kind: MonitorSmartDetectorAlertRule
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitorsmartdetectoralertrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    actionGroup:
+    - idsRefs:
+      - name: example
+    detectorType: FailureAnomaliesDetector
+    frequency: PT1M
+    name: example-smart-detector-alert-rule
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scopeResourceIdsRefs:
+    - name: example
+    severity: Sev0
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitorsmartdetectoralertrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitorsmartdetectoralertrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitorsmartdetectoralertrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -42,7 +42,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHubNamespace
 metadata:
   annotations:

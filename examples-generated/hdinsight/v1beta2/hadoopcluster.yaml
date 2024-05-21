@@ -1,0 +1,106 @@
+apiVersion: hdinsight.azure.upbound.io/v1beta2
+kind: HadoopCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: hdinsight/v1beta2/hadoopcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    clusterVersion: "3.6"
+    componentVersion:
+    - hadoop: "2.7"
+    gateway:
+    - passwordSecretRef:
+        key: example-key
+        name: example-secret
+        namespace: upbound-system
+      username: acctestusrgw
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roles:
+    - headNode:
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        username: acctestusrvm
+        vmSize: Standard_D3_V2
+      workerNode:
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        targetInstanceCount: 3
+        username: acctestusrvm
+        vmSize: Standard_D4_V2
+      zookeeperNode:
+      - passwordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        username: acctestusrvm
+        vmSize: Standard_D3_V2
+    storageAccount:
+    - isDefault: true
+      storageAccountKeySecretRef:
+        key: attribute.primary_access_key
+        name: example-storage-account
+        namespace: upbound-system
+      storageContainerIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    tier: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: hdinsight/v1beta2/hadoopcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: hdinsight/v1beta2/hadoopcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: hdinsight/v1beta2/hadoopcluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

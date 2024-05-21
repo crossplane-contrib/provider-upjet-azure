@@ -1,0 +1,52 @@
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: Endpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/endpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    origin:
+    - hostName: www.contoso.com
+      name: example
+    profileNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: Profile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/endpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard_Verizon
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/endpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

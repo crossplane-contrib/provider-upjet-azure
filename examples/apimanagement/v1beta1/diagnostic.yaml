@@ -1,0 +1,128 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Diagnostic
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/diagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: applicationinsights
+spec:
+  forProvider:
+    alwaysLogErrors: true
+    apiManagementLoggerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    backendRequest:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - accept
+      - origin
+    backendResponse:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - content-length
+      - origin
+    frontendRequest:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - accept
+      - origin
+    frontendResponse:
+    - bodyBytes: 32
+      headersToLog:
+      - content-type
+      - content-length
+      - origin
+    httpCorrelationProtocol: W3C
+    logClientIp: true
+    samplingPercentage: 5
+    verbosity: verbose
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Logger
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/diagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiManagementNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    applicationInsights:
+    - instrumentationKeySecretRef:
+        key: attribute.instrumentation_key
+        name: example-application-insights
+        namespace: upbound-system
+---
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-logger.sh
+    meta.upbound.io/example-id: apimanagement/v1beta1/diagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  writeConnectionSecretToRef:
+    namespace: upbound-system
+    name: example-application-insights
+  forProvider:
+    applicationType: other
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+---
+apiVersion: apimanagement.azure.upbound.io/v1beta1
+kind: Management
+metadata:
+  annotations:
+    uptest.upbound.io/timeout: "7200"
+    meta.upbound.io/example-id: apimanagement/v1beta1/diagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-management-example
+spec:
+  forProvider:
+    location: West Europe
+    publisherEmail: company@terraform.io
+    publisherName: My Company
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Developer_1
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: apimanagement/v1beta1/diagnostic
+  labels:
+    testing.upbound.io/example-name: example
+  name: uptest-resourcegroup-example
+spec:
+  forProvider:
+    location: West Europe

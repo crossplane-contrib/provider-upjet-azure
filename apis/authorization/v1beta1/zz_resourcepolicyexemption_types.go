@@ -34,7 +34,7 @@ type ResourcePolicyExemptionInitParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourcePolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.ResourcePolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
 
@@ -50,7 +50,7 @@ type ResourcePolicyExemptionInitParameters struct {
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
 
 	// The Resource ID where the Policy Exemption should be applied. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourcePolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.ResourcePolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_id",false)
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`
 
@@ -123,7 +123,7 @@ type ResourcePolicyExemptionParameters struct {
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// The ID of the Policy Assignment to be exempted at the specified Scope. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourcePolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.ResourcePolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	PolicyAssignmentID *string `json:"policyAssignmentId,omitempty" tf:"policy_assignment_id,omitempty"`
@@ -141,7 +141,7 @@ type ResourcePolicyExemptionParameters struct {
 	PolicyDefinitionReferenceIds []*string `json:"policyDefinitionReferenceIds,omitempty" tf:"policy_definition_reference_ids,omitempty"`
 
 	// The Resource ID where the Policy Exemption should be applied. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta1.ResourcePolicyAssignment
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/authorization/v1beta2.ResourcePolicyAssignment
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("resource_id",false)
 	// +kubebuilder:validation:Optional
 	ResourceID *string `json:"resourceId,omitempty" tf:"resource_id,omitempty"`

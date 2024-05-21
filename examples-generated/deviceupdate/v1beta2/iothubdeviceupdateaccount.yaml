@@ -1,0 +1,32 @@
+apiVersion: deviceupdate.azure.upbound.io/v1beta2
+kind: IOTHubDeviceUpdateAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: deviceupdate/v1beta2/iothubdeviceupdateaccount
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US

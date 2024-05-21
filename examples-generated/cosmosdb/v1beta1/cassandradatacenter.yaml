@@ -22,7 +22,7 @@ spec:
 
 ---
 
-apiVersion: cosmosdb.azure.upbound.io/v1beta1
+apiVersion: cosmosdb.azure.upbound.io/v1beta2
 kind: CassandraCluster
 metadata:
   annotations:
@@ -76,7 +76,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -97,7 +97,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

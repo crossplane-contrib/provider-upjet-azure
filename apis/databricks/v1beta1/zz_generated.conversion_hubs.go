@@ -7,12 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *AccessConnector) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Workspace) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *WorkspaceCustomerManagedKey) Hub() {}
 
 // Hub marks this type as a conversion hub.

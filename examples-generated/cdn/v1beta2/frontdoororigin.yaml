@@ -1,0 +1,74 @@
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorOrigin
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorOriginGroupIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    certificateNameCheckEnabled: false
+    enabled: true
+    hostNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    httpPort: 80
+    httpsPort: 443
+    originHostHeaderSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    priority: 1
+    weight: 1
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorOriginGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    loadBalancing:
+    - {}
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Premium_AzureFrontDoor
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoororigin
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

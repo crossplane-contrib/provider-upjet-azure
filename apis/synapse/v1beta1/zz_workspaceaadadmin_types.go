@@ -52,7 +52,7 @@ type WorkspaceAADAdminParameters struct {
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
 	// The ID of the Synapse Workspace where the Azure AD Administrator should be configured.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta1.Workspace
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/synapse/v1beta2.Workspace
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	SynapseWorkspaceID *string `json:"synapseWorkspaceId,omitempty" tf:"synapse_workspace_id,omitempty"`

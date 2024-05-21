@@ -29,7 +29,7 @@ func (mg *Asset) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta1", "ServicesAccount", "ServicesAccountList")
+		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta2", "ServicesAccount", "ServicesAccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -383,7 +383,7 @@ func (mg *LiveEventOutput) ResolveReferences(ctx context.Context, c client.Reade
 	mg.Spec.ForProvider.AssetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AssetNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta1", "LiveEvent", "LiveEventList")
+		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta2", "LiveEvent", "LiveEventList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -626,7 +626,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 	mg.Spec.ForProvider.AssetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AssetNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta1", "ServicesAccount", "ServicesAccountList")
+		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta2", "ServicesAccount", "ServicesAccountList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

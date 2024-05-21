@@ -17,7 +17,7 @@ spec:
 
 ---
 
-apiVersion: databricks.azure.upbound.io/v1beta1
+apiVersion: databricks.azure.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:
@@ -116,7 +116,7 @@ spec:
 
 ---
 
-apiVersion: keyvault.azure.upbound.io/v1beta1
+apiVersion: keyvault.azure.upbound.io/v1beta2
 kind: Key
 metadata:
   annotations:

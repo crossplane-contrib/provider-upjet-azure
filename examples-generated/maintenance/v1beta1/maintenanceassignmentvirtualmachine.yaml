@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: compute.azure.upbound.io/v1beta1
+apiVersion: compute.azure.upbound.io/v1beta2
 kind: LinuxVirtualMachine
 metadata:
   annotations:
@@ -50,7 +50,7 @@ spec:
 
 ---
 
-apiVersion: maintenance.azure.upbound.io/v1beta1
+apiVersion: maintenance.azure.upbound.io/v1beta2
 kind: MaintenanceConfiguration
 metadata:
   annotations:
@@ -105,7 +105,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -126,7 +126,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

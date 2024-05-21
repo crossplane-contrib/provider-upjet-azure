@@ -1,0 +1,131 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudAppMySQLAssociation
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+    uptest.upbound.io/timeout: "1800" # 30 min timeout
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    databaseName: mydb
+    mysqlServerIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    passwordSecretRef:
+      key: password
+      name: example-mysql-server
+      namespace: upbound-system
+    springCloudAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    usernameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dbformysql.azure.upbound.io/v1beta1
+kind: Server
+metadata:
+  annotations:
+    crossplane.io/external-name: ${Rand.RFC1123Subdomain}
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-server
+spec:
+  forProvider:
+    administratorLogin: mysqladminun
+    administratorLoginPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: B_Gen5_2
+    sslEnforcementEnabled: true
+    sslMinimalTlsVersionEnforced: TLS1_2
+    storageMb: 5120
+    version: "5.7"
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: spring-group
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-app
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serviceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: appplatform.azure.upbound.io/v1beta1
+kind: SpringCloudService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: appplatform/v1beta1/springcloudappmysqlassociation
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-service
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: v1
+data:
+  example-key: dXBiMHVuZHIwY2s1ITMxMzM3Cg==
+kind: Secret
+metadata:
+  name: example-secret
+  namespace: upbound-system
+type: Opaque
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-mysql-server
+  namespace: upbound-system
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-mysql-assiciation.sh
+type: Opaque
+data:
+  password: dGVzdFBhc3N3b3JkITEyMw==

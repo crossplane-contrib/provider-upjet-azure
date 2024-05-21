@@ -186,7 +186,7 @@ type StreamingLocatorParameters struct {
 	FilterNames []*string `json:"filterNames,omitempty" tf:"filter_names,omitempty"`
 
 	// The Media Services account name. Changing this forces a new Streaming Locator to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.ServicesAccount
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta2.ServicesAccount
 	// +kubebuilder:validation:Optional
 	MediaServicesAccountName *string `json:"mediaServicesAccountName,omitempty" tf:"media_services_account_name,omitempty"`
 

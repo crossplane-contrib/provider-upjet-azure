@@ -1,0 +1,43 @@
+apiVersion: alertsmanagement.azure.upbound.io/v1beta2
+kind: MonitorActionRuleSuppression
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitoractionrulesuppression
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scope:
+    - resourceIds:
+      - ${azurerm_resource_group.example.id}
+      type: ResourceGroup
+    suppression:
+    - recurrenceType: Weekly
+      schedule:
+      - endDateUtc: "2019-01-03T15:02:07Z"
+        recurrenceWeekly:
+        - Sunday
+        - Monday
+        - Friday
+        - Saturday
+        startDateUtc: "2019-01-01T01:02:03Z"
+    tags:
+      foo: bar
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: alertsmanagement/v1beta2/monitoractionrulesuppression
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

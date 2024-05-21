@@ -1,0 +1,160 @@
+apiVersion: guestconfiguration.azure.upbound.io/v1beta2
+kind: PolicyVirtualMachineConfigurationAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta2/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    configuration:
+    - assignmentType: ApplyAndMonitor
+      parameter:
+      - name: Minimum Password Length;ExpectedValue
+        value: "16"
+      - name: Minimum Password Age;ExpectedValue
+        value: "0"
+      - name: Maximum Password Age;ExpectedValue
+        value: 30,45
+      - name: Enforce Password History;ExpectedValue
+        value: "10"
+      - name: Password Must Meet Complexity Requirements;ExpectedValue
+        value: "1"
+      version: 1.*
+    location: West Europe
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: NetworkInterface
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta2/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    ipConfiguration:
+    - name: internal
+      privateIpAddressAllocation: Dynamic
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta2/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta2/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: VirtualMachineExtension
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta2/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    autoUpgradeMinorVersion: "true"
+    publisher: Microsoft.GuestConfiguration
+    type: ConfigurationforWindows
+    typeHandlerVersion: "1.29"
+    virtualMachineIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta2/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: WindowsVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: guestconfiguration/v1beta2/policyvirtualmachineconfigurationassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminPasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    adminUsername: adminuser
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    networkInterfaceIdsRefs:
+    - name: example
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: Standard_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: Standard_F2
+    sourceImageReference:
+    - offer: WindowsServer
+      publisher: MicrosoftWindowsServer
+      sku: 2019-Datacenter
+      version: latest

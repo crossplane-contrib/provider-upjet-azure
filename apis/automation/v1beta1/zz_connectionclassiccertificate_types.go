@@ -55,7 +55,7 @@ type ConnectionClassicCertificateObservation struct {
 type ConnectionClassicCertificateParameters struct {
 
 	// The name of the automation account in which the Connection is created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta1.Account
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/automation/v1beta2.Account
 	// +kubebuilder:validation:Optional
 	AutomationAccountName *string `json:"automationAccountName,omitempty" tf:"automation_account_name,omitempty"`
 

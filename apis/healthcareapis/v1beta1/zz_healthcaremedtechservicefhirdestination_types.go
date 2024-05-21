@@ -19,7 +19,7 @@ type HealthcareMedtechServiceFHIRDestinationInitParameters struct {
 	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson,omitempty" tf:"destination_fhir_mapping_json,omitempty"`
 
 	// Specifies the destination fhir service id of the Med Tech Service Fhir Destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta1.HealthcareFHIRService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta2.HealthcareFHIRService
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	DestinationFHIRServiceID *string `json:"destinationFhirServiceId,omitempty" tf:"destination_fhir_service_id,omitempty"`
 
@@ -66,7 +66,7 @@ type HealthcareMedtechServiceFHIRDestinationParameters struct {
 	DestinationFHIRMappingJSON *string `json:"destinationFhirMappingJson,omitempty" tf:"destination_fhir_mapping_json,omitempty"`
 
 	// Specifies the destination fhir service id of the Med Tech Service Fhir Destination.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta1.HealthcareFHIRService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta2.HealthcareFHIRService
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	DestinationFHIRServiceID *string `json:"destinationFhirServiceId,omitempty" tf:"destination_fhir_service_id,omitempty"`
@@ -88,7 +88,7 @@ type HealthcareMedtechServiceFHIRDestinationParameters struct {
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Specifies the name of the Healthcare Med Tech Service where the Healthcare Med Tech Service Fhir Destination should exist. Changing this forces a new Healthcare Med Tech Service Fhir Destination to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta1.HealthcareMedtechService
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/healthcareapis/v1beta2.HealthcareMedtechService
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	MedtechServiceID *string `json:"medtechServiceId,omitempty" tf:"medtech_service_id,omitempty"`

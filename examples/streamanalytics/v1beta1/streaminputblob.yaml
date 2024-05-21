@@ -1,0 +1,130 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: StreamInputBlob
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: snputblob
+spec:
+  forProvider:
+    name: snputblob
+    dateFormat: yyyy/MM/dd
+    pathPattern: some-random-pattern
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    serialization:
+    - encoding: UTF8
+      type: Json
+    storageAccountKeySecretRef:
+      key: primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageContainerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    timeFormat: HH
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: snputblob
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: snputblob
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: snputblob
+spec:
+  forProvider:
+    containerAccessType: private
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-storage-account
+  namespace: upbound-system
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-stream.sh
+type: Opaque
+data:
+  primary_access_key: key1
+
+---
+
+apiVersion: streamanalytics.azure.upbound.io/v1beta1
+kind: Job
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta1/streaminputblob
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-job
+spec:
+  forProvider:
+    compatibilityLevel: "1.2"
+    dataLocale: en-GB
+    eventsLateArrivalMaxDelayInSeconds: 60
+    eventsOutOfOrderMaxDelayInSeconds: 50
+    eventsOutOfOrderPolicy: Adjust
+    location: West Europe
+    outputErrorPolicy: Drop
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    streamingUnits: 3
+    tags:
+      environment: example
+    transformationQuery: |2
+          SELECT *
+          INTO [YourOutputAlias]
+          FROM [YourInputAlias]

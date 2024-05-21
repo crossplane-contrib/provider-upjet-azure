@@ -19,9 +19,6 @@ func (tr *Database) Hub() {}
 func (tr *FirewallRule) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *FlexibleServer) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *FlexibleServerActiveDirectoryAdministrator) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -32,9 +29,6 @@ func (tr *FlexibleServerDatabase) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *FlexibleServerFirewallRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Server) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ServerKey) Hub() {}

@@ -1,0 +1,127 @@
+apiVersion: datashare.azure.upbound.io/v1beta2
+kind: DataSetBlobStorage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dataShareIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    filePath: myfile.txt
+    storageAccount:
+    - nameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      resourceGroupNameSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      subscriptionId: 00000000-0000-0000-0000-000000000000
+
+---
+
+apiVersion: datashare.azure.upbound.io/v1beta2
+kind: DataShare
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kind: CopyBased
+
+---
+
+apiVersion: datashare.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    principalId: ${data.azuread_service_principal.example.object_id}
+    roleDefinitionName: Storage Blob Data Reader
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: RAGRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datashare/v1beta2/datasetblobstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAccessType: container
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

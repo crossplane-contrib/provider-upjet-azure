@@ -1,0 +1,74 @@
+apiVersion: costmanagement.azure.upbound.io/v1beta2
+kind: SubscriptionCostManagementExport
+metadata:
+  annotations:
+    meta.upbound.io/example-id: costmanagement/v1beta2/subscriptioncostmanagementexport
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    exportDataOptions:
+    - timeFrame: WeekToDate
+      type: Usage
+    exportDataStorageLocation:
+    - containerIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      rootFolderPath: /root/updated
+    name: example
+    recurrencePeriodEndDate: "2020-09-18T00:00:00Z"
+    recurrencePeriodStartDate: "2020-08-18T00:00:00Z"
+    recurrenceType: Monthly
+    subscriptionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_subscription
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: costmanagement/v1beta2/subscriptioncostmanagementexport
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: costmanagement/v1beta2/subscriptioncostmanagementexport
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Container
+metadata:
+  annotations:
+    meta.upbound.io/example-id: costmanagement/v1beta2/subscriptioncostmanagementexport
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

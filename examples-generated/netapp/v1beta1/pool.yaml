@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: netapp.azure.upbound.io/v1beta1
+apiVersion: netapp.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

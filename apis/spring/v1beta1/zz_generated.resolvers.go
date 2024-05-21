@@ -26,7 +26,7 @@ func (mg *CloudApplicationLiveView) ResolveReferences( // ResolveReferences of t
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta1", "SpringCloudService", "SpringCloudServiceList")
+		m, l, err = apisresolver.GetManagedResource("appplatform.azure.upbound.io", "v1beta2", "SpringCloudService", "SpringCloudServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

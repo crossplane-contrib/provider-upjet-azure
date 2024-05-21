@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: notificationhubs.azure.upbound.io/v1beta1
+apiVersion: notificationhubs.azure.upbound.io/v1beta2
 kind: NotificationHub
 metadata:
   annotations:

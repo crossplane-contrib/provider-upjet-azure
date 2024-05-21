@@ -2703,3 +2703,2607 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: Endpoint is the Schema for the Endpoints API. Manages a CDN Endpoint.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: EndpointSpec defines the desired state of Endpoint
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  contentTypesToCompress:
+                    description: An array of strings that indicates a content types
+                      on which compression will be applied. The value for the elements
+                      should be MIME types.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  deliveryRule:
+                    description: Rules for the rules engine. An endpoint can contain
+                      up until 4 of those rules that consist of conditions and actions.
+                      A delivery_rule blocks as defined below.
+                    items:
+                      properties:
+                        cacheExpirationAction:
+                          description: A cache_expiration_action block as defined
+                            above.
+                          properties:
+                            behavior:
+                              description: The behavior of the cache key for query
+                                strings. Valid values are Exclude, ExcludeAll, Include
+                                and IncludeAll.
+                              type: string
+                            duration:
+                              description: 'Duration of the cache. Only allowed when
+                                behavior is set to Override or SetIfMissing. Format:
+                                [d.]hh:mm:ss'
+                              type: string
+                          type: object
+                        cacheKeyQueryStringAction:
+                          description: A cache_key_query_string_action block as defined
+                            above.
+                          properties:
+                            behavior:
+                              description: The behavior of the cache key for query
+                                strings. Valid values are Exclude, ExcludeAll, Include
+                                and IncludeAll.
+                              type: string
+                            parameters:
+                              description: Comma separated list of parameter values.
+                              type: string
+                          type: object
+                        cookiesCondition:
+                          description: A cookies_condition block as defined above.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        deviceCondition:
+                          description: A device_condition block as defined below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        httpVersionCondition:
+                          description: A http_version_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                            type: object
+                          type: array
+                        modifyRequestHeaderAction:
+                          description: A modify_request_header_action block as defined
+                            below.
+                          items:
+                            properties:
+                              action:
+                                description: Action to be executed on a header value.
+                                  Valid values are Append, Delete and Overwrite.
+                                type: string
+                              name:
+                                description: The name of the origin. This is an arbitrary
+                                  value. However, this value needs to be unique under
+                                  the endpoint. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              value:
+                                description: The value of the header. Only needed
+                                  when action is set to Append or overwrite.
+                                type: string
+                            type: object
+                          type: array
+                        modifyResponseHeaderAction:
+                          description: A modify_response_header_action block as defined
+                            below.
+                          items:
+                            properties:
+                              action:
+                                description: Action to be executed on a header value.
+                                  Valid values are Append, Delete and Overwrite.
+                                type: string
+                              name:
+                                description: The name of the origin. This is an arbitrary
+                                  value. However, this value needs to be unique under
+                                  the endpoint. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              value:
+                                description: The value of the header. Only needed
+                                  when action is set to Append or overwrite.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The Name which should be used for this Delivery
+                            Rule.
+                          type: string
+                        order:
+                          description: The order used for this rule. The order values
+                            should be sequential and begin at 1.
+                          type: number
+                        postArgCondition:
+                          description: A post_arg_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        queryStringCondition:
+                          description: A query_string_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        remoteAddressCondition:
+                          description: A remote_address_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                            type: object
+                          type: array
+                        requestBodyCondition:
+                          description: A request_body_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        requestHeaderCondition:
+                          description: A request_header_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        requestMethodCondition:
+                          description: A request_method_condition block as defined
+                            below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        requestSchemeCondition:
+                          description: A request_scheme_condition block as defined
+                            below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        requestUriCondition:
+                          description: A request_uri_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlFileExtensionCondition:
+                          description: A url_file_extension_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlFileNameCondition:
+                          description: A url_file_name_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlPathCondition:
+                          description: A url_path_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlRedirectAction:
+                          description: A url_redirect_action block as defined below.
+                          properties:
+                            fragment:
+                              description: 'Specifies the fragment part of the URL.
+                                This value must not start with a #.'
+                              type: string
+                            hostname:
+                              description: Specifies the hostname part of the URL.
+                              type: string
+                            path:
+                              description: Specifies the path part of the URL. This
+                                value must begin with a /.
+                              type: string
+                            protocol:
+                              description: Specifies the protocol part of the URL.
+                                Valid values are MatchRequest, Http and Https. Defaults
+                                to MatchRequest.
+                              type: string
+                            queryString:
+                              description: Specifies the query string part of the
+                                URL. This value must not start with a ? or & and must
+                                be in <key>=<value> format separated by &.
+                              type: string
+                            redirectType:
+                              description: Type of the redirect. Valid values are
+                                Found, Moved, PermanentRedirect and TemporaryRedirect.
+                              type: string
+                          type: object
+                        urlRewriteAction:
+                          description: A url_rewrite_action block as defined below.
+                          properties:
+                            destination:
+                              description: This value must start with a / and can't
+                                be longer than 260 characters.
+                              type: string
+                            preserveUnmatchedPath:
+                              description: Whether preserve an unmatched path. Defaults
+                                to true.
+                              type: boolean
+                            sourcePattern:
+                              description: This value must start with a / and can't
+                                be longer than 260 characters.
+                              type: string
+                          type: object
+                      type: object
+                    type: array
+                  geoFilter:
+                    description: A set of Geo Filters for this CDN Endpoint. Each
+                      geo_filter block supports fields documented below.
+                    items:
+                      properties:
+                        action:
+                          description: The Action of the Geo Filter. Possible values
+                            include Allow and Block.
+                          type: string
+                        countryCodes:
+                          description: A List of two letter country codes (e.g. US,
+                            GB) to be associated with this Geo Filter.
+                          items:
+                            type: string
+                          type: array
+                        relativePath:
+                          description: The relative path applicable to geo filter.
+                          type: string
+                      type: object
+                    type: array
+                  globalDeliveryRule:
+                    description: Actions that are valid for all resources regardless
+                      of any conditions. A global_delivery_rule block as defined below.
+                    properties:
+                      cacheExpirationAction:
+                        description: A cache_expiration_action block as defined above.
+                        properties:
+                          behavior:
+                            description: The behavior of the cache key for query strings.
+                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            type: string
+                          duration:
+                            description: 'Duration of the cache. Only allowed when
+                              behavior is set to Override or SetIfMissing. Format:
+                              [d.]hh:mm:ss'
+                            type: string
+                        type: object
+                      cacheKeyQueryStringAction:
+                        description: A cache_key_query_string_action block as defined
+                          above.
+                        properties:
+                          behavior:
+                            description: The behavior of the cache key for query strings.
+                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            type: string
+                          parameters:
+                            description: Comma separated list of parameter values.
+                            type: string
+                        type: object
+                      modifyRequestHeaderAction:
+                        description: A modify_request_header_action block as defined
+                          below.
+                        items:
+                          properties:
+                            action:
+                              description: Action to be executed on a header value.
+                                Valid values are Append, Delete and Overwrite.
+                              type: string
+                            name:
+                              description: The name of the origin. This is an arbitrary
+                                value. However, this value needs to be unique under
+                                the endpoint. Changing this forces a new resource
+                                to be created.
+                              type: string
+                            value:
+                              description: The value of the header. Only needed when
+                                action is set to Append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      modifyResponseHeaderAction:
+                        description: A modify_response_header_action block as defined
+                          below.
+                        items:
+                          properties:
+                            action:
+                              description: Action to be executed on a header value.
+                                Valid values are Append, Delete and Overwrite.
+                              type: string
+                            name:
+                              description: The name of the origin. This is an arbitrary
+                                value. However, this value needs to be unique under
+                                the endpoint. Changing this forces a new resource
+                                to be created.
+                              type: string
+                            value:
+                              description: The value of the header. Only needed when
+                                action is set to Append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      urlRedirectAction:
+                        description: A url_redirect_action block as defined below.
+                        properties:
+                          fragment:
+                            description: 'Specifies the fragment part of the URL.
+                              This value must not start with a #.'
+                            type: string
+                          hostname:
+                            description: Specifies the hostname part of the URL.
+                            type: string
+                          path:
+                            description: Specifies the path part of the URL. This
+                              value must begin with a /.
+                            type: string
+                          protocol:
+                            description: Specifies the protocol part of the URL. Valid
+                              values are MatchRequest, Http and Https. Defaults to
+                              MatchRequest.
+                            type: string
+                          queryString:
+                            description: Specifies the query string part of the URL.
+                              This value must not start with a ? or & and must be
+                              in <key>=<value> format separated by &.
+                            type: string
+                          redirectType:
+                            description: Type of the redirect. Valid values are Found,
+                              Moved, PermanentRedirect and TemporaryRedirect.
+                            type: string
+                        type: object
+                      urlRewriteAction:
+                        description: A url_rewrite_action block as defined below.
+                        properties:
+                          destination:
+                            description: This value must start with a / and can't
+                              be longer than 260 characters.
+                            type: string
+                          preserveUnmatchedPath:
+                            description: Whether preserve an unmatched path. Defaults
+                              to true.
+                            type: boolean
+                          sourcePattern:
+                            description: This value must start with a / and can't
+                              be longer than 260 characters.
+                            type: string
+                        type: object
+                    type: object
+                  isCompressionEnabled:
+                    description: Indicates whether compression is to be enabled.
+                    type: boolean
+                  isHttpAllowed:
+                    description: Specifies if http allowed. Defaults to true.
+                    type: boolean
+                  isHttpsAllowed:
+                    description: Specifies if https allowed. Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  optimizationType:
+                    description: What types of optimization should this CDN Endpoint
+                      optimize for? Possible values include DynamicSiteAcceleration,
+                      GeneralMediaStreaming, GeneralWebDelivery, LargeFileDownload
+                      and VideoOnDemandMediaStreaming.
+                    type: string
+                  origin:
+                    description: The set of origins of the CDN endpoint. When multiple
+                      origins exist, the first origin will be used as primary and
+                      rest will be used as failover options. Each origin block supports
+                      fields documented below. Changing this forces a new resource
+                      to be created.
+                    items:
+                      properties:
+                        hostName:
+                          description: A string that determines the hostname/IP address
+                            of the origin server. This string can be a domain name,
+                            Storage Account endpoint, Web App endpoint, IPv4 address
+                            or IPv6 address. Changing this forces a new resource to
+                            be created.
+                          type: string
+                        httpPort:
+                          description: The HTTP port of the origin. Defaults to 80.
+                            Changing this forces a new resource to be created.
+                          type: number
+                        httpsPort:
+                          description: The HTTPS port of the origin. Defaults to 443.
+                            Changing this forces a new resource to be created.
+                          type: number
+                        name:
+                          description: The name of the origin. This is an arbitrary
+                            value. However, this value needs to be unique under the
+                            endpoint. Changing this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  originHostHeader:
+                    description: The host header CDN provider will send along with
+                      content requests to origins.
+                    type: string
+                  originPath:
+                    description: The path used at for origin requests.
+                    type: string
+                  probePath:
+                    description: the path to a file hosted on the origin which helps
+                      accelerate delivery of the dynamic content and calculate the
+                      most optimal routes for the CDN. This is relative to the origin_path.
+                    type: string
+                  profileName:
+                    description: The CDN Profile to which to attach the CDN Endpoint.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  profileNameRef:
+                    description: Reference to a Profile in cdn to populate profileName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  profileNameSelector:
+                    description: Selector for a Profile in cdn to populate profileName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  querystringCachingBehaviour:
+                    description: Sets query string caching behavior. Allowed values
+                      are IgnoreQueryString, BypassCaching and UseQueryString. NotSet
+                      value can be used for Premium Verizon CDN profile. Defaults
+                      to IgnoreQueryString.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the CDN Endpoint. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  contentTypesToCompress:
+                    description: An array of strings that indicates a content types
+                      on which compression will be applied. The value for the elements
+                      should be MIME types.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  deliveryRule:
+                    description: Rules for the rules engine. An endpoint can contain
+                      up until 4 of those rules that consist of conditions and actions.
+                      A delivery_rule blocks as defined below.
+                    items:
+                      properties:
+                        cacheExpirationAction:
+                          description: A cache_expiration_action block as defined
+                            above.
+                          properties:
+                            behavior:
+                              description: The behavior of the cache key for query
+                                strings. Valid values are Exclude, ExcludeAll, Include
+                                and IncludeAll.
+                              type: string
+                            duration:
+                              description: 'Duration of the cache. Only allowed when
+                                behavior is set to Override or SetIfMissing. Format:
+                                [d.]hh:mm:ss'
+                              type: string
+                          type: object
+                        cacheKeyQueryStringAction:
+                          description: A cache_key_query_string_action block as defined
+                            above.
+                          properties:
+                            behavior:
+                              description: The behavior of the cache key for query
+                                strings. Valid values are Exclude, ExcludeAll, Include
+                                and IncludeAll.
+                              type: string
+                            parameters:
+                              description: Comma separated list of parameter values.
+                              type: string
+                          type: object
+                        cookiesCondition:
+                          description: A cookies_condition block as defined above.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        deviceCondition:
+                          description: A device_condition block as defined below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        httpVersionCondition:
+                          description: A http_version_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                            type: object
+                          type: array
+                        modifyRequestHeaderAction:
+                          description: A modify_request_header_action block as defined
+                            below.
+                          items:
+                            properties:
+                              action:
+                                description: Action to be executed on a header value.
+                                  Valid values are Append, Delete and Overwrite.
+                                type: string
+                              name:
+                                description: The name of the origin. This is an arbitrary
+                                  value. However, this value needs to be unique under
+                                  the endpoint. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              value:
+                                description: The value of the header. Only needed
+                                  when action is set to Append or overwrite.
+                                type: string
+                            type: object
+                          type: array
+                        modifyResponseHeaderAction:
+                          description: A modify_response_header_action block as defined
+                            below.
+                          items:
+                            properties:
+                              action:
+                                description: Action to be executed on a header value.
+                                  Valid values are Append, Delete and Overwrite.
+                                type: string
+                              name:
+                                description: The name of the origin. This is an arbitrary
+                                  value. However, this value needs to be unique under
+                                  the endpoint. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              value:
+                                description: The value of the header. Only needed
+                                  when action is set to Append or overwrite.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The Name which should be used for this Delivery
+                            Rule.
+                          type: string
+                        order:
+                          description: The order used for this rule. The order values
+                            should be sequential and begin at 1.
+                          type: number
+                        postArgCondition:
+                          description: A post_arg_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        queryStringCondition:
+                          description: A query_string_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        remoteAddressCondition:
+                          description: A remote_address_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                            type: object
+                          type: array
+                        requestBodyCondition:
+                          description: A request_body_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        requestHeaderCondition:
+                          description: A request_header_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        requestMethodCondition:
+                          description: A request_method_condition block as defined
+                            below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        requestSchemeCondition:
+                          description: A request_scheme_condition block as defined
+                            below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        requestUriCondition:
+                          description: A request_uri_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlFileExtensionCondition:
+                          description: A url_file_extension_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlFileNameCondition:
+                          description: A url_file_name_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlPathCondition:
+                          description: A url_path_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlRedirectAction:
+                          description: A url_redirect_action block as defined below.
+                          properties:
+                            fragment:
+                              description: 'Specifies the fragment part of the URL.
+                                This value must not start with a #.'
+                              type: string
+                            hostname:
+                              description: Specifies the hostname part of the URL.
+                              type: string
+                            path:
+                              description: Specifies the path part of the URL. This
+                                value must begin with a /.
+                              type: string
+                            protocol:
+                              description: Specifies the protocol part of the URL.
+                                Valid values are MatchRequest, Http and Https. Defaults
+                                to MatchRequest.
+                              type: string
+                            queryString:
+                              description: Specifies the query string part of the
+                                URL. This value must not start with a ? or & and must
+                                be in <key>=<value> format separated by &.
+                              type: string
+                            redirectType:
+                              description: Type of the redirect. Valid values are
+                                Found, Moved, PermanentRedirect and TemporaryRedirect.
+                              type: string
+                          type: object
+                        urlRewriteAction:
+                          description: A url_rewrite_action block as defined below.
+                          properties:
+                            destination:
+                              description: This value must start with a / and can't
+                                be longer than 260 characters.
+                              type: string
+                            preserveUnmatchedPath:
+                              description: Whether preserve an unmatched path. Defaults
+                                to true.
+                              type: boolean
+                            sourcePattern:
+                              description: This value must start with a / and can't
+                                be longer than 260 characters.
+                              type: string
+                          type: object
+                      type: object
+                    type: array
+                  geoFilter:
+                    description: A set of Geo Filters for this CDN Endpoint. Each
+                      geo_filter block supports fields documented below.
+                    items:
+                      properties:
+                        action:
+                          description: The Action of the Geo Filter. Possible values
+                            include Allow and Block.
+                          type: string
+                        countryCodes:
+                          description: A List of two letter country codes (e.g. US,
+                            GB) to be associated with this Geo Filter.
+                          items:
+                            type: string
+                          type: array
+                        relativePath:
+                          description: The relative path applicable to geo filter.
+                          type: string
+                      type: object
+                    type: array
+                  globalDeliveryRule:
+                    description: Actions that are valid for all resources regardless
+                      of any conditions. A global_delivery_rule block as defined below.
+                    properties:
+                      cacheExpirationAction:
+                        description: A cache_expiration_action block as defined above.
+                        properties:
+                          behavior:
+                            description: The behavior of the cache key for query strings.
+                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            type: string
+                          duration:
+                            description: 'Duration of the cache. Only allowed when
+                              behavior is set to Override or SetIfMissing. Format:
+                              [d.]hh:mm:ss'
+                            type: string
+                        type: object
+                      cacheKeyQueryStringAction:
+                        description: A cache_key_query_string_action block as defined
+                          above.
+                        properties:
+                          behavior:
+                            description: The behavior of the cache key for query strings.
+                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            type: string
+                          parameters:
+                            description: Comma separated list of parameter values.
+                            type: string
+                        type: object
+                      modifyRequestHeaderAction:
+                        description: A modify_request_header_action block as defined
+                          below.
+                        items:
+                          properties:
+                            action:
+                              description: Action to be executed on a header value.
+                                Valid values are Append, Delete and Overwrite.
+                              type: string
+                            name:
+                              description: The name of the origin. This is an arbitrary
+                                value. However, this value needs to be unique under
+                                the endpoint. Changing this forces a new resource
+                                to be created.
+                              type: string
+                            value:
+                              description: The value of the header. Only needed when
+                                action is set to Append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      modifyResponseHeaderAction:
+                        description: A modify_response_header_action block as defined
+                          below.
+                        items:
+                          properties:
+                            action:
+                              description: Action to be executed on a header value.
+                                Valid values are Append, Delete and Overwrite.
+                              type: string
+                            name:
+                              description: The name of the origin. This is an arbitrary
+                                value. However, this value needs to be unique under
+                                the endpoint. Changing this forces a new resource
+                                to be created.
+                              type: string
+                            value:
+                              description: The value of the header. Only needed when
+                                action is set to Append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      urlRedirectAction:
+                        description: A url_redirect_action block as defined below.
+                        properties:
+                          fragment:
+                            description: 'Specifies the fragment part of the URL.
+                              This value must not start with a #.'
+                            type: string
+                          hostname:
+                            description: Specifies the hostname part of the URL.
+                            type: string
+                          path:
+                            description: Specifies the path part of the URL. This
+                              value must begin with a /.
+                            type: string
+                          protocol:
+                            description: Specifies the protocol part of the URL. Valid
+                              values are MatchRequest, Http and Https. Defaults to
+                              MatchRequest.
+                            type: string
+                          queryString:
+                            description: Specifies the query string part of the URL.
+                              This value must not start with a ? or & and must be
+                              in <key>=<value> format separated by &.
+                            type: string
+                          redirectType:
+                            description: Type of the redirect. Valid values are Found,
+                              Moved, PermanentRedirect and TemporaryRedirect.
+                            type: string
+                        type: object
+                      urlRewriteAction:
+                        description: A url_rewrite_action block as defined below.
+                        properties:
+                          destination:
+                            description: This value must start with a / and can't
+                              be longer than 260 characters.
+                            type: string
+                          preserveUnmatchedPath:
+                            description: Whether preserve an unmatched path. Defaults
+                              to true.
+                            type: boolean
+                          sourcePattern:
+                            description: This value must start with a / and can't
+                              be longer than 260 characters.
+                            type: string
+                        type: object
+                    type: object
+                  isCompressionEnabled:
+                    description: Indicates whether compression is to be enabled.
+                    type: boolean
+                  isHttpAllowed:
+                    description: Specifies if http allowed. Defaults to true.
+                    type: boolean
+                  isHttpsAllowed:
+                    description: Specifies if https allowed. Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  optimizationType:
+                    description: What types of optimization should this CDN Endpoint
+                      optimize for? Possible values include DynamicSiteAcceleration,
+                      GeneralMediaStreaming, GeneralWebDelivery, LargeFileDownload
+                      and VideoOnDemandMediaStreaming.
+                    type: string
+                  origin:
+                    description: The set of origins of the CDN endpoint. When multiple
+                      origins exist, the first origin will be used as primary and
+                      rest will be used as failover options. Each origin block supports
+                      fields documented below. Changing this forces a new resource
+                      to be created.
+                    items:
+                      properties:
+                        hostName:
+                          description: A string that determines the hostname/IP address
+                            of the origin server. This string can be a domain name,
+                            Storage Account endpoint, Web App endpoint, IPv4 address
+                            or IPv6 address. Changing this forces a new resource to
+                            be created.
+                          type: string
+                        httpPort:
+                          description: The HTTP port of the origin. Defaults to 80.
+                            Changing this forces a new resource to be created.
+                          type: number
+                        httpsPort:
+                          description: The HTTPS port of the origin. Defaults to 443.
+                            Changing this forces a new resource to be created.
+                          type: number
+                        name:
+                          description: The name of the origin. This is an arbitrary
+                            value. However, this value needs to be unique under the
+                            endpoint. Changing this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  originHostHeader:
+                    description: The host header CDN provider will send along with
+                      content requests to origins.
+                    type: string
+                  originPath:
+                    description: The path used at for origin requests.
+                    type: string
+                  probePath:
+                    description: the path to a file hosted on the origin which helps
+                      accelerate delivery of the dynamic content and calculate the
+                      most optimal routes for the CDN. This is relative to the origin_path.
+                    type: string
+                  querystringCachingBehaviour:
+                    description: Sets query string caching behavior. Allowed values
+                      are IgnoreQueryString, BypassCaching and UseQueryString. NotSet
+                      value can be used for Premium Verizon CDN profile. Defaults
+                      to IgnoreQueryString.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.origin is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.origin)
+                || (has(self.initProvider) && has(self.initProvider.origin))'
+          status:
+            description: EndpointStatus defines the observed state of Endpoint.
+            properties:
+              atProvider:
+                properties:
+                  contentTypesToCompress:
+                    description: An array of strings that indicates a content types
+                      on which compression will be applied. The value for the elements
+                      should be MIME types.
+                    items:
+                      type: string
+                    type: array
+                    x-kubernetes-list-type: set
+                  deliveryRule:
+                    description: Rules for the rules engine. An endpoint can contain
+                      up until 4 of those rules that consist of conditions and actions.
+                      A delivery_rule blocks as defined below.
+                    items:
+                      properties:
+                        cacheExpirationAction:
+                          description: A cache_expiration_action block as defined
+                            above.
+                          properties:
+                            behavior:
+                              description: The behavior of the cache key for query
+                                strings. Valid values are Exclude, ExcludeAll, Include
+                                and IncludeAll.
+                              type: string
+                            duration:
+                              description: 'Duration of the cache. Only allowed when
+                                behavior is set to Override or SetIfMissing. Format:
+                                [d.]hh:mm:ss'
+                              type: string
+                          type: object
+                        cacheKeyQueryStringAction:
+                          description: A cache_key_query_string_action block as defined
+                            above.
+                          properties:
+                            behavior:
+                              description: The behavior of the cache key for query
+                                strings. Valid values are Exclude, ExcludeAll, Include
+                                and IncludeAll.
+                              type: string
+                            parameters:
+                              description: Comma separated list of parameter values.
+                              type: string
+                          type: object
+                        cookiesCondition:
+                          description: A cookies_condition block as defined above.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        deviceCondition:
+                          description: A device_condition block as defined below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        httpVersionCondition:
+                          description: A http_version_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                            type: object
+                          type: array
+                        modifyRequestHeaderAction:
+                          description: A modify_request_header_action block as defined
+                            below.
+                          items:
+                            properties:
+                              action:
+                                description: Action to be executed on a header value.
+                                  Valid values are Append, Delete and Overwrite.
+                                type: string
+                              name:
+                                description: The name of the origin. This is an arbitrary
+                                  value. However, this value needs to be unique under
+                                  the endpoint. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              value:
+                                description: The value of the header. Only needed
+                                  when action is set to Append or overwrite.
+                                type: string
+                            type: object
+                          type: array
+                        modifyResponseHeaderAction:
+                          description: A modify_response_header_action block as defined
+                            below.
+                          items:
+                            properties:
+                              action:
+                                description: Action to be executed on a header value.
+                                  Valid values are Append, Delete and Overwrite.
+                                type: string
+                              name:
+                                description: The name of the origin. This is an arbitrary
+                                  value. However, this value needs to be unique under
+                                  the endpoint. Changing this forces a new resource
+                                  to be created.
+                                type: string
+                              value:
+                                description: The value of the header. Only needed
+                                  when action is set to Append or overwrite.
+                                type: string
+                            type: object
+                          type: array
+                        name:
+                          description: The Name which should be used for this Delivery
+                            Rule.
+                          type: string
+                        order:
+                          description: The order used for this rule. The order values
+                            should be sequential and begin at 1.
+                          type: number
+                        postArgCondition:
+                          description: A post_arg_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        queryStringCondition:
+                          description: A query_string_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        remoteAddressCondition:
+                          description: A remote_address_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                            type: object
+                          type: array
+                        requestBodyCondition:
+                          description: A request_body_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        requestHeaderCondition:
+                          description: A request_header_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              selector:
+                                description: Header name.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        requestMethodCondition:
+                          description: A request_method_condition block as defined
+                            below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        requestSchemeCondition:
+                          description: A request_scheme_condition block as defined
+                            below.
+                          properties:
+                            matchValues:
+                              description: List of string values. This is required
+                                if operator is not Any.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: Defaults to false.
+                              type: boolean
+                            operator:
+                              description: Valid values are Any, BeginsWith, Contains,
+                                EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                LessThan, LessThanOrEqual, RegEx and Wildcard.
+                              type: string
+                          type: object
+                        requestUriCondition:
+                          description: A request_uri_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlFileExtensionCondition:
+                          description: A url_file_extension_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlFileNameCondition:
+                          description: A url_file_name_condition block as defined
+                            below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlPathCondition:
+                          description: A url_path_condition block as defined below.
+                          items:
+                            properties:
+                              matchValues:
+                                description: List of string values. This is required
+                                  if operator is not Any.
+                                items:
+                                  type: string
+                                type: array
+                                x-kubernetes-list-type: set
+                              negateCondition:
+                                description: Defaults to false.
+                                type: boolean
+                              operator:
+                                description: Valid values are Any, BeginsWith, Contains,
+                                  EndsWith, Equal, GreaterThan, GreaterThanOrEqual,
+                                  LessThan, LessThanOrEqual, RegEx and Wildcard.
+                                type: string
+                              transforms:
+                                description: A list of transforms. Valid values are
+                                  Lowercase and Uppercase.
+                                items:
+                                  type: string
+                                type: array
+                            type: object
+                          type: array
+                        urlRedirectAction:
+                          description: A url_redirect_action block as defined below.
+                          properties:
+                            fragment:
+                              description: 'Specifies the fragment part of the URL.
+                                This value must not start with a #.'
+                              type: string
+                            hostname:
+                              description: Specifies the hostname part of the URL.
+                              type: string
+                            path:
+                              description: Specifies the path part of the URL. This
+                                value must begin with a /.
+                              type: string
+                            protocol:
+                              description: Specifies the protocol part of the URL.
+                                Valid values are MatchRequest, Http and Https. Defaults
+                                to MatchRequest.
+                              type: string
+                            queryString:
+                              description: Specifies the query string part of the
+                                URL. This value must not start with a ? or & and must
+                                be in <key>=<value> format separated by &.
+                              type: string
+                            redirectType:
+                              description: Type of the redirect. Valid values are
+                                Found, Moved, PermanentRedirect and TemporaryRedirect.
+                              type: string
+                          type: object
+                        urlRewriteAction:
+                          description: A url_rewrite_action block as defined below.
+                          properties:
+                            destination:
+                              description: This value must start with a / and can't
+                                be longer than 260 characters.
+                              type: string
+                            preserveUnmatchedPath:
+                              description: Whether preserve an unmatched path. Defaults
+                                to true.
+                              type: boolean
+                            sourcePattern:
+                              description: This value must start with a / and can't
+                                be longer than 260 characters.
+                              type: string
+                          type: object
+                      type: object
+                    type: array
+                  fqdn:
+                    description: The Fully Qualified Domain Name of the CDN Endpoint.
+                    type: string
+                  geoFilter:
+                    description: A set of Geo Filters for this CDN Endpoint. Each
+                      geo_filter block supports fields documented below.
+                    items:
+                      properties:
+                        action:
+                          description: The Action of the Geo Filter. Possible values
+                            include Allow and Block.
+                          type: string
+                        countryCodes:
+                          description: A List of two letter country codes (e.g. US,
+                            GB) to be associated with this Geo Filter.
+                          items:
+                            type: string
+                          type: array
+                        relativePath:
+                          description: The relative path applicable to geo filter.
+                          type: string
+                      type: object
+                    type: array
+                  globalDeliveryRule:
+                    description: Actions that are valid for all resources regardless
+                      of any conditions. A global_delivery_rule block as defined below.
+                    properties:
+                      cacheExpirationAction:
+                        description: A cache_expiration_action block as defined above.
+                        properties:
+                          behavior:
+                            description: The behavior of the cache key for query strings.
+                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            type: string
+                          duration:
+                            description: 'Duration of the cache. Only allowed when
+                              behavior is set to Override or SetIfMissing. Format:
+                              [d.]hh:mm:ss'
+                            type: string
+                        type: object
+                      cacheKeyQueryStringAction:
+                        description: A cache_key_query_string_action block as defined
+                          above.
+                        properties:
+                          behavior:
+                            description: The behavior of the cache key for query strings.
+                              Valid values are Exclude, ExcludeAll, Include and IncludeAll.
+                            type: string
+                          parameters:
+                            description: Comma separated list of parameter values.
+                            type: string
+                        type: object
+                      modifyRequestHeaderAction:
+                        description: A modify_request_header_action block as defined
+                          below.
+                        items:
+                          properties:
+                            action:
+                              description: Action to be executed on a header value.
+                                Valid values are Append, Delete and Overwrite.
+                              type: string
+                            name:
+                              description: The name of the origin. This is an arbitrary
+                                value. However, this value needs to be unique under
+                                the endpoint. Changing this forces a new resource
+                                to be created.
+                              type: string
+                            value:
+                              description: The value of the header. Only needed when
+                                action is set to Append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      modifyResponseHeaderAction:
+                        description: A modify_response_header_action block as defined
+                          below.
+                        items:
+                          properties:
+                            action:
+                              description: Action to be executed on a header value.
+                                Valid values are Append, Delete and Overwrite.
+                              type: string
+                            name:
+                              description: The name of the origin. This is an arbitrary
+                                value. However, this value needs to be unique under
+                                the endpoint. Changing this forces a new resource
+                                to be created.
+                              type: string
+                            value:
+                              description: The value of the header. Only needed when
+                                action is set to Append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      urlRedirectAction:
+                        description: A url_redirect_action block as defined below.
+                        properties:
+                          fragment:
+                            description: 'Specifies the fragment part of the URL.
+                              This value must not start with a #.'
+                            type: string
+                          hostname:
+                            description: Specifies the hostname part of the URL.
+                            type: string
+                          path:
+                            description: Specifies the path part of the URL. This
+                              value must begin with a /.
+                            type: string
+                          protocol:
+                            description: Specifies the protocol part of the URL. Valid
+                              values are MatchRequest, Http and Https. Defaults to
+                              MatchRequest.
+                            type: string
+                          queryString:
+                            description: Specifies the query string part of the URL.
+                              This value must not start with a ? or & and must be
+                              in <key>=<value> format separated by &.
+                            type: string
+                          redirectType:
+                            description: Type of the redirect. Valid values are Found,
+                              Moved, PermanentRedirect and TemporaryRedirect.
+                            type: string
+                        type: object
+                      urlRewriteAction:
+                        description: A url_rewrite_action block as defined below.
+                        properties:
+                          destination:
+                            description: This value must start with a / and can't
+                              be longer than 260 characters.
+                            type: string
+                          preserveUnmatchedPath:
+                            description: Whether preserve an unmatched path. Defaults
+                              to true.
+                            type: boolean
+                          sourcePattern:
+                            description: This value must start with a / and can't
+                              be longer than 260 characters.
+                            type: string
+                        type: object
+                    type: object
+                  id:
+                    description: The ID of the CDN Endpoint.
+                    type: string
+                  isCompressionEnabled:
+                    description: Indicates whether compression is to be enabled.
+                    type: boolean
+                  isHttpAllowed:
+                    description: Specifies if http allowed. Defaults to true.
+                    type: boolean
+                  isHttpsAllowed:
+                    description: Specifies if https allowed. Defaults to true.
+                    type: boolean
+                  location:
+                    description: Specifies the supported Azure location where the
+                      resource exists. Changing this forces a new resource to be created.
+                    type: string
+                  optimizationType:
+                    description: What types of optimization should this CDN Endpoint
+                      optimize for? Possible values include DynamicSiteAcceleration,
+                      GeneralMediaStreaming, GeneralWebDelivery, LargeFileDownload
+                      and VideoOnDemandMediaStreaming.
+                    type: string
+                  origin:
+                    description: The set of origins of the CDN endpoint. When multiple
+                      origins exist, the first origin will be used as primary and
+                      rest will be used as failover options. Each origin block supports
+                      fields documented below. Changing this forces a new resource
+                      to be created.
+                    items:
+                      properties:
+                        hostName:
+                          description: A string that determines the hostname/IP address
+                            of the origin server. This string can be a domain name,
+                            Storage Account endpoint, Web App endpoint, IPv4 address
+                            or IPv6 address. Changing this forces a new resource to
+                            be created.
+                          type: string
+                        httpPort:
+                          description: The HTTP port of the origin. Defaults to 80.
+                            Changing this forces a new resource to be created.
+                          type: number
+                        httpsPort:
+                          description: The HTTPS port of the origin. Defaults to 443.
+                            Changing this forces a new resource to be created.
+                          type: number
+                        name:
+                          description: The name of the origin. This is an arbitrary
+                            value. However, this value needs to be unique under the
+                            endpoint. Changing this forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  originHostHeader:
+                    description: The host header CDN provider will send along with
+                      content requests to origins.
+                    type: string
+                  originPath:
+                    description: The path used at for origin requests.
+                    type: string
+                  probePath:
+                    description: the path to a file hosted on the origin which helps
+                      accelerate delivery of the dynamic content and calculate the
+                      most optimal routes for the CDN. This is relative to the origin_path.
+                    type: string
+                  profileName:
+                    description: The CDN Profile to which to attach the CDN Endpoint.
+                      Changing this forces a new resource to be created.
+                    type: string
+                  querystringCachingBehaviour:
+                    description: Sets query string caching behavior. Allowed values
+                      are IgnoreQueryString, BypassCaching and UseQueryString. NotSet
+                      value can be used for Premium Verizon CDN profile. Defaults
+                      to IgnoreQueryString.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the resource group in which to create
+                      the CDN Endpoint. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags to assign to the resource.
+                    type: object
+                    x-kubernetes-map-type: granular
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

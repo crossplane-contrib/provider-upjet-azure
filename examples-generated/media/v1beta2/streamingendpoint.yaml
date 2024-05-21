@@ -1,0 +1,73 @@
+apiVersion: media.azure.upbound.io/v1beta2
+kind: StreamingEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scaleUnits: 2
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: ServicesAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccount:
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      isPrimary: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

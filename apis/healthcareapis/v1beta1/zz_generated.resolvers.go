@@ -272,7 +272,7 @@ func (mg *HealthcareMedtechServiceFHIRDestination) ResolveReferences(ctx context
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta1", "HealthcareFHIRService", "HealthcareFHIRServiceList")
+		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta2", "HealthcareFHIRService", "HealthcareFHIRServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -291,7 +291,7 @@ func (mg *HealthcareMedtechServiceFHIRDestination) ResolveReferences(ctx context
 	mg.Spec.ForProvider.DestinationFHIRServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DestinationFHIRServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta1", "HealthcareMedtechService", "HealthcareMedtechServiceList")
+		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta2", "HealthcareMedtechService", "HealthcareMedtechServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -310,7 +310,7 @@ func (mg *HealthcareMedtechServiceFHIRDestination) ResolveReferences(ctx context
 	mg.Spec.ForProvider.MedtechServiceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.MedtechServiceIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta1", "HealthcareFHIRService", "HealthcareFHIRServiceList")
+		m, l, err = apisresolver.GetManagedResource("healthcareapis.azure.upbound.io", "v1beta2", "HealthcareFHIRService", "HealthcareFHIRServiceList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

@@ -1,0 +1,67 @@
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorCustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    hostName: contoso.fabrikam.com
+    tls:
+    - certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_AzureFrontDoor
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: DNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorcustomdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

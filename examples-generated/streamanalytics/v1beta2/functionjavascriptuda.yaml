@@ -1,0 +1,31 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
+kind: FunctionJavascriptUda
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/functionjavascriptuda
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    input:
+    - type: bigint
+    output:
+    - type: bigint
+    script: |
+      function main() {
+          this.init = function () {
+              this.state = 0;
+          }
+
+          this.accumulate = function (value, timestamp) {
+              this.state += value;
+          }
+
+          this.computeResult = function () {
+              return this.state;
+          }
+      }
+    streamAnalyticsJobIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job

@@ -59,7 +59,7 @@ type IOTHubSharedAccessPolicyParameters struct {
 	DeviceConnect *bool `json:"deviceConnect,omitempty" tf:"device_connect,omitempty"`
 
 	// The name of the IoTHub to which this Shared Access Policy belongs. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
 	// +kubebuilder:validation:Optional
 	IOTHubName *string `json:"iothubName,omitempty" tf:"iothub_name,omitempty"`
 

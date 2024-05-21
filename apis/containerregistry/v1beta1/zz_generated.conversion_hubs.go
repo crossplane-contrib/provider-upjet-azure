@@ -7,22 +7,16 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *ContainerConnectedRegistry) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Registry) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *AgentPool) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *ContainerConnectedRegistry) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ScopeMap) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Token) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *TokenPassword) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Webhook) Hub() {}

@@ -1,0 +1,110 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
+kind: StreamInputEventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventhubConsumerGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: eventhub-stream-input
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+    serialization:
+    - encoding: UTF8
+      type: Json
+    servicebusNamespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedAccessPolicyKeySecretRef:
+      key: attribute.default_primary_key
+      name: example-eventhub-namespace
+      namespace: upbound-system
+    sharedAccessPolicyName: RootManageSharedAccessKey
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta2
+kind: EventHub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    messageRetention: 1
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    partitionCount: 2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta1
+kind: ConsumerGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    eventhubNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    namespaceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: eventhub.azure.upbound.io/v1beta2
+kind: EventHubNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/streaminputeventhub
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

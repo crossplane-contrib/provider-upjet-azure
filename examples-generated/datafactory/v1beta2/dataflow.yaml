@@ -1,0 +1,156 @@
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: DataFlow
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/dataflow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    script: "source(\n  allowSchemaDrift: true, \n  validateSchema: false, \n  limit:
+      100, \n  ignoreNoFilesFound: false, \n  documentForm: 'documentPerLine') ~>
+      source1 \nsource1 sink(\n  allowSchemaDrift: true, \n  validateSchema: false,
+      \n  skipDuplicateMapInputs: true, \n  skipDuplicateMapOutputs: true) ~> sink1\n"
+    sink:
+    - dataset:
+      - nameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example2
+      flowlet:
+      - name: ${azurerm_data_factory_flowlet_data_flow.example2.name}
+        parameters:
+          Key1: value1
+      name: sink1
+    source:
+    - dataset:
+      - nameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example1
+      flowlet:
+      - name: ${azurerm_data_factory_flowlet_data_flow.example1.name}
+        parameters:
+          Key1: value1
+      name: source1
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/dataflow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: DataSetJSON
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/dataflow
+  labels:
+    testing.upbound.io/example-name: example1
+  name: example1
+spec:
+  forProvider:
+    azureBlobStorageLocation:
+    - container: container
+      filename: foo.txt
+      path: foo/bar/
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    encoding: UTF-8
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: DataSetJSON
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/dataflow
+  labels:
+    testing.upbound.io/example-name: example2
+  name: example2
+spec:
+  forProvider:
+    azureBlobStorageLocation:
+    - container: container
+      filename: bar.txt
+      path: foo/bar/
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    encoding: UTF-8
+    linkedServiceNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: LinkedCustomService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/dataflow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    type: AzureBlobStorage
+    typePropertiesJson: |
+      {
+        "connectionString": "${azurerm_storage_account.example.primary_connection_string}"
+      }
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/dataflow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/dataflow
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -21,7 +21,7 @@ spec:
 
 ---
 
-apiVersion: datashare.azure.upbound.io/v1beta1
+apiVersion: datashare.azure.upbound.io/v1beta2
 kind: DataShare
 metadata:
   annotations:
@@ -38,7 +38,7 @@ spec:
 
 ---
 
-apiVersion: datashare.azure.upbound.io/v1beta1
+apiVersion: datashare.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -87,7 +87,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

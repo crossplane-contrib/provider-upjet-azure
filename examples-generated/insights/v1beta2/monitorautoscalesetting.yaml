@@ -1,0 +1,168 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorAutoscaleSetting
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorautoscalesetting
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    name: myAutoscaleSetting
+    notification:
+    - email:
+      - customEmails:
+        - admin@contoso.com
+        sendToSubscriptionAdministrator: true
+        sendToSubscriptionCoAdministrator: true
+    predictive:
+    - lookAheadTime: PT5M
+      scaleMode: Enabled
+    profile:
+    - capacity:
+      - default: 1
+        maximum: 10
+        minimum: 1
+      name: defaultProfile
+      rule:
+      - metricTrigger:
+        - dimensions:
+          - name: AppName
+            operator: Equals
+            values:
+            - App1
+          metricName: Percentage CPU
+          metricNamespace: microsoft.compute/virtualmachinescalesets
+          metricResourceIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+          operator: GreaterThan
+          statistic: Average
+          threshold: 75
+          timeAggregation: Average
+          timeGrain: PT1M
+          timeWindow: PT5M
+        scaleAction:
+        - cooldown: PT1M
+          direction: Increase
+          type: ChangeCount
+          value: "1"
+      - metricTrigger:
+        - metricName: Percentage CPU
+          metricResourceIdSelector:
+            matchLabels:
+              testing.upbound.io/example-name: example
+          operator: LessThan
+          statistic: Average
+          threshold: 25
+          timeAggregation: Average
+          timeGrain: PT1M
+          timeWindow: PT5M
+        scaleAction:
+        - cooldown: PT1M
+          direction: Decrease
+          type: ChangeCount
+          value: "1"
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    targetResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: LinuxVirtualMachineScaleSet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorautoscalesetting
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    adminSshKey:
+    - publicKey: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDCsTcryUl51Q2VSEHqDRNmceUFo55ZtcIwxl2QITbN1RREti5ml/VTytC0yeBOvnZA4x4CFpdw/lCDPk0yrH9Ei5vVkXmOrExdTlT3qI7YaAzj1tUVlBd4S6LX1F7y6VLActvdHuDDuXZXzCDd/97420jrDfWZqJMlUK/EmCE5ParCeHIRIvmBxcEnGfFIsw8xQZl0HphxWOtJil8qsUWSdMyCiJYYQpMoMliO99X40AUc4/AlsyPyT5ddbKk08YrZ+rKDVHF7o29rh4vi5MmHkVgVQHKiKybWlHq+b71gIAUQk9wrJxD+dqt4igrmDSpIjfjwnd+l5UIn5fJSO5DYV4YT/4hwK7OKmuo7OFHD0WyY5YnkYEMtFgzemnRBdE8ulcT60DQpVgRMXFWHvhyCWy0L6sgj1QWDZlLpvsIvNfHsyhKFMG1frLnMt/nP0+YCcfg+v1JYeCKjeoJxB8DWcRBsjzItY0CGmzP8UYZiYKl/2u+2TgFS5r7NWH11bxoUzjKdaa1NLw+ieA8GlBFfCbfWe6YVB9ggUte4VtYFMZGxOjS2bAiYtfgTKFJv+XqORAwExG6+G2eDxIDyo80/OA9IG7Xv/jwQr7D6KDjDuULFcN/iTxuttoKrHeYz1hf5ZQlBdllwJHYx6fK2g8kha6r2JIQKocvsAXiiONqSfw==
+        hello@world.com
+      username: myadmin
+    adminUsername: myadmin
+    instances: 2
+    location: West Europe
+    networkInterface:
+    - ipConfiguration:
+      - name: TestIPConfiguration
+        primary: true
+        subnetIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      name: TestNetworkProfile
+      primary: true
+    osDisk:
+    - caching: ReadWrite
+      storageAccountType: StandardSSD_LRS
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard_F2
+    sourceImageReference:
+    - offer: 0001-com-ubuntu-server-jammy
+      publisher: Canonical
+      sku: 22_04-lts
+      version: latest
+    upgradeMode: Manual
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorautoscalesetting
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorautoscalesetting
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.2.0/24
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorautoscalesetting
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

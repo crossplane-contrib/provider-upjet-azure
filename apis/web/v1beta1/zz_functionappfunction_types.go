@@ -63,7 +63,7 @@ type FunctionAppFunctionInitParameters struct {
 
 	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
 	// The ID of the Function App in which this function should reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.LinuxFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta2.LinuxFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`
 
@@ -167,7 +167,7 @@ type FunctionAppFunctionParameters struct {
 
 	// The ID of the Function App in which this function should reside. Changing this forces a new resource to be created.
 	// The ID of the Function App in which this function should reside.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta1.LinuxFunctionApp
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/web/v1beta2.LinuxFunctionApp
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	FunctionAppID *string `json:"functionAppId,omitempty" tf:"function_app_id,omitempty"`

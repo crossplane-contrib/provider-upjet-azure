@@ -1247,3 +1247,1202 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: FlexibleServer is the Schema for the FlexibleServers API. Manages
+          a MySQL Flexible Server.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FlexibleServerSpec defines the desired state of FlexibleServer
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  administratorLogin:
+                    description: The Administrator login for the MySQL Flexible Server.
+                      Required when create_mode is Default. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  administratorPasswordSecretRef:
+                    description: The Password associated with the administrator_login
+                      for the MySQL Flexible Server. Required when create_mode is
+                      Default.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  backupRetentionDays:
+                    description: The backup retention days for the MySQL Flexible
+                      Server. Possible values are between 1 and 35 days. Defaults
+                      to 7.
+                    type: number
+                  createMode:
+                    description: The creation mode which can be used to restore or
+                      replicate existing servers. Possible values are Default, PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    properties:
+                      geoBackupKeyVaultKeyId:
+                        description: The ID of the geo backup Key Vault Key. It can't
+                          cross region and need Customer Managed Key in same region
+                          as geo backup.
+                        type: string
+                      geoBackupUserAssignedIdentityId:
+                        description: The geo backup user managed identity id for a
+                          Customer Managed Key. Should be added with identity_ids.
+                          It can't cross region and need identity in same region as
+                          geo backup.
+                        type: string
+                      keyVaultKeyId:
+                        description: The ID of the Key Vault Key.
+                        type: string
+                      primaryUserAssignedIdentityId:
+                        description: Specifies the primary user managed identity id
+                          for a Customer Managed Key. Should be added with identity_ids.
+                        type: string
+                    type: object
+                  delegatedSubnetId:
+                    description: The ID of the virtual network subnet to create the
+                      MySQL Flexible Server. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  delegatedSubnetIdRef:
+                    description: Reference to a Subnet in network to populate delegatedSubnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  delegatedSubnetIdSelector:
+                    description: Selector for a Subnet in network to populate delegatedSubnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  geoRedundantBackupEnabled:
+                    description: Should geo redundant backup enabled? Defaults to
+                      false. Changing this forces a new MySQL Flexible Server to be
+                      created.
+                    type: boolean
+                  highAvailability:
+                    description: A high_availability block as defined below.
+                    properties:
+                      mode:
+                        description: The high availability mode for the MySQL Flexible
+                          Server. Possibles values are SameZone and ZoneRedundant.
+                        type: string
+                      standbyAvailabilityZone:
+                        description: Specifies the Availability Zone in which the
+                          standby Flexible Server should be located. Possible values
+                          are 1, 2 and 3.
+                        type: string
+                    type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this MySQL Flexible Server.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this MySQL Flexible Server.
+                          The only possible value is UserAssigned.
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the MySQL Flexible Server
+                      should exist. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  maintenanceWindow:
+                    description: A maintenance_window block as defined below.
+                    properties:
+                      dayOfWeek:
+                        description: The day of week for maintenance window. Defaults
+                          to 0.
+                        type: number
+                      startHour:
+                        description: The start hour for maintenance window. Defaults
+                          to 0.
+                        type: number
+                      startMinute:
+                        description: The start minute for maintenance window. Defaults
+                          to 0.
+                        type: number
+                    type: object
+                  pointInTimeRestoreTimeInUtc:
+                    description: The point in time to restore from creation_source_server_id
+                      when create_mode is PointInTimeRestore. Changing this forces
+                      a new MySQL Flexible Server to be created.
+                    type: string
+                  privateDnsZoneId:
+                    description: The ID of the private DNS zone to create the MySQL
+                      Flexible Server. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  privateDnsZoneIdRef:
+                    description: Reference to a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  privateDnsZoneIdSelector:
+                    description: Selector for a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  replicationRole:
+                    description: The replication role. Possible value is None.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the MySQL Flexible
+                      Server should exist. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  skuName:
+                    description: The SKU Name for the MySQL Flexible Server.
+                    type: string
+                  sourceServerId:
+                    description: The resource ID of the source MySQL Flexible Server
+                      to be restored. Required when create_mode is PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  storage:
+                    description: A storage block as defined below.
+                    properties:
+                      autoGrowEnabled:
+                        description: Should Storage Auto Grow be enabled? Defaults
+                          to true.
+                        type: boolean
+                      ioScalingEnabled:
+                        description: Should IOPS be scaled automatically? If true,
+                          iops can not be set. Defaults to false.
+                        type: boolean
+                      iops:
+                        description: The storage IOPS for the MySQL Flexible Server.
+                          Possible values are between 360 and 20000.
+                        type: number
+                      sizeGb:
+                        description: The max storage allowed for the MySQL Flexible
+                          Server. Possible values are between 20 and 16384.
+                        type: number
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      MySQL Flexible Server.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  version:
+                    description: The version of the MySQL Flexible Server to use.
+                      Possible values are 5.7, and 8.0.21. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which this MySQL
+                      Flexible Server should be located. Possible values are 1, 2
+                      and 3.
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  administratorLogin:
+                    description: The Administrator login for the MySQL Flexible Server.
+                      Required when create_mode is Default. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  backupRetentionDays:
+                    description: The backup retention days for the MySQL Flexible
+                      Server. Possible values are between 1 and 35 days. Defaults
+                      to 7.
+                    type: number
+                  createMode:
+                    description: The creation mode which can be used to restore or
+                      replicate existing servers. Possible values are Default, PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    properties:
+                      geoBackupKeyVaultKeyId:
+                        description: The ID of the geo backup Key Vault Key. It can't
+                          cross region and need Customer Managed Key in same region
+                          as geo backup.
+                        type: string
+                      geoBackupUserAssignedIdentityId:
+                        description: The geo backup user managed identity id for a
+                          Customer Managed Key. Should be added with identity_ids.
+                          It can't cross region and need identity in same region as
+                          geo backup.
+                        type: string
+                      keyVaultKeyId:
+                        description: The ID of the Key Vault Key.
+                        type: string
+                      primaryUserAssignedIdentityId:
+                        description: Specifies the primary user managed identity id
+                          for a Customer Managed Key. Should be added with identity_ids.
+                        type: string
+                    type: object
+                  delegatedSubnetId:
+                    description: The ID of the virtual network subnet to create the
+                      MySQL Flexible Server. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  delegatedSubnetIdRef:
+                    description: Reference to a Subnet in network to populate delegatedSubnetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  delegatedSubnetIdSelector:
+                    description: Selector for a Subnet in network to populate delegatedSubnetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  geoRedundantBackupEnabled:
+                    description: Should geo redundant backup enabled? Defaults to
+                      false. Changing this forces a new MySQL Flexible Server to be
+                      created.
+                    type: boolean
+                  highAvailability:
+                    description: A high_availability block as defined below.
+                    properties:
+                      mode:
+                        description: The high availability mode for the MySQL Flexible
+                          Server. Possibles values are SameZone and ZoneRedundant.
+                        type: string
+                      standbyAvailabilityZone:
+                        description: Specifies the Availability Zone in which the
+                          standby Flexible Server should be located. Possible values
+                          are 1, 2 and 3.
+                        type: string
+                    type: object
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this MySQL Flexible Server.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this MySQL Flexible Server.
+                          The only possible value is UserAssigned.
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the MySQL Flexible Server
+                      should exist. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  maintenanceWindow:
+                    description: A maintenance_window block as defined below.
+                    properties:
+                      dayOfWeek:
+                        description: The day of week for maintenance window. Defaults
+                          to 0.
+                        type: number
+                      startHour:
+                        description: The start hour for maintenance window. Defaults
+                          to 0.
+                        type: number
+                      startMinute:
+                        description: The start minute for maintenance window. Defaults
+                          to 0.
+                        type: number
+                    type: object
+                  pointInTimeRestoreTimeInUtc:
+                    description: The point in time to restore from creation_source_server_id
+                      when create_mode is PointInTimeRestore. Changing this forces
+                      a new MySQL Flexible Server to be created.
+                    type: string
+                  privateDnsZoneId:
+                    description: The ID of the private DNS zone to create the MySQL
+                      Flexible Server. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  privateDnsZoneIdRef:
+                    description: Reference to a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  privateDnsZoneIdSelector:
+                    description: Selector for a PrivateDNSZone in network to populate
+                      privateDnsZoneId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  replicationRole:
+                    description: The replication role. Possible value is None.
+                    type: string
+                  skuName:
+                    description: The SKU Name for the MySQL Flexible Server.
+                    type: string
+                  sourceServerId:
+                    description: The resource ID of the source MySQL Flexible Server
+                      to be restored. Required when create_mode is PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  storage:
+                    description: A storage block as defined below.
+                    properties:
+                      autoGrowEnabled:
+                        description: Should Storage Auto Grow be enabled? Defaults
+                          to true.
+                        type: boolean
+                      ioScalingEnabled:
+                        description: Should IOPS be scaled automatically? If true,
+                          iops can not be set. Defaults to false.
+                        type: boolean
+                      iops:
+                        description: The storage IOPS for the MySQL Flexible Server.
+                          Possible values are between 360 and 20000.
+                        type: number
+                      sizeGb:
+                        description: The max storage allowed for the MySQL Flexible
+                          Server. Possible values are between 20 and 16384.
+                        type: number
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      MySQL Flexible Server.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  version:
+                    description: The version of the MySQL Flexible Server to use.
+                      Possible values are 5.7, and 8.0.21. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which this MySQL
+                      Flexible Server should be located. Possible values are 1, 2
+                      and 3.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+          status:
+            description: FlexibleServerStatus defines the observed state of FlexibleServer.
+            properties:
+              atProvider:
+                properties:
+                  administratorLogin:
+                    description: The Administrator login for the MySQL Flexible Server.
+                      Required when create_mode is Default. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  backupRetentionDays:
+                    description: The backup retention days for the MySQL Flexible
+                      Server. Possible values are between 1 and 35 days. Defaults
+                      to 7.
+                    type: number
+                  createMode:
+                    description: The creation mode which can be used to restore or
+                      replicate existing servers. Possible values are Default, PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  customerManagedKey:
+                    description: A customer_managed_key block as defined below.
+                    properties:
+                      geoBackupKeyVaultKeyId:
+                        description: The ID of the geo backup Key Vault Key. It can't
+                          cross region and need Customer Managed Key in same region
+                          as geo backup.
+                        type: string
+                      geoBackupUserAssignedIdentityId:
+                        description: The geo backup user managed identity id for a
+                          Customer Managed Key. Should be added with identity_ids.
+                          It can't cross region and need identity in same region as
+                          geo backup.
+                        type: string
+                      keyVaultKeyId:
+                        description: The ID of the Key Vault Key.
+                        type: string
+                      primaryUserAssignedIdentityId:
+                        description: Specifies the primary user managed identity id
+                          for a Customer Managed Key. Should be added with identity_ids.
+                        type: string
+                    type: object
+                  delegatedSubnetId:
+                    description: The ID of the virtual network subnet to create the
+                      MySQL Flexible Server. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  fqdn:
+                    description: The fully qualified domain name of the MySQL Flexible
+                      Server.
+                    type: string
+                  geoRedundantBackupEnabled:
+                    description: Should geo redundant backup enabled? Defaults to
+                      false. Changing this forces a new MySQL Flexible Server to be
+                      created.
+                    type: boolean
+                  highAvailability:
+                    description: A high_availability block as defined below.
+                    properties:
+                      mode:
+                        description: The high availability mode for the MySQL Flexible
+                          Server. Possibles values are SameZone and ZoneRedundant.
+                        type: string
+                      standbyAvailabilityZone:
+                        description: Specifies the Availability Zone in which the
+                          standby Flexible Server should be located. Possible values
+                          are 1, 2 and 3.
+                        type: string
+                    type: object
+                  id:
+                    description: The ID of the MySQL Flexible Server.
+                    type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this MySQL Flexible Server.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this MySQL Flexible Server.
+                          The only possible value is UserAssigned.
+                        type: string
+                    type: object
+                  location:
+                    description: The Azure Region where the MySQL Flexible Server
+                      should exist. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  maintenanceWindow:
+                    description: A maintenance_window block as defined below.
+                    properties:
+                      dayOfWeek:
+                        description: The day of week for maintenance window. Defaults
+                          to 0.
+                        type: number
+                      startHour:
+                        description: The start hour for maintenance window. Defaults
+                          to 0.
+                        type: number
+                      startMinute:
+                        description: The start minute for maintenance window. Defaults
+                          to 0.
+                        type: number
+                    type: object
+                  pointInTimeRestoreTimeInUtc:
+                    description: The point in time to restore from creation_source_server_id
+                      when create_mode is PointInTimeRestore. Changing this forces
+                      a new MySQL Flexible Server to be created.
+                    type: string
+                  privateDnsZoneId:
+                    description: The ID of the private DNS zone to create the MySQL
+                      Flexible Server. Changing this forces a new MySQL Flexible Server
+                      to be created.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Is the public network access enabled?
+                    type: boolean
+                  replicaCapacity:
+                    description: The maximum number of replicas that a primary MySQL
+                      Flexible Server can have.
+                    type: number
+                  replicationRole:
+                    description: The replication role. Possible value is None.
+                    type: string
+                  resourceGroupName:
+                    description: The name of the Resource Group where the MySQL Flexible
+                      Server should exist. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  skuName:
+                    description: The SKU Name for the MySQL Flexible Server.
+                    type: string
+                  sourceServerId:
+                    description: The resource ID of the source MySQL Flexible Server
+                      to be restored. Required when create_mode is PointInTimeRestore,
+                      GeoRestore, and Replica. Changing this forces a new MySQL Flexible
+                      Server to be created.
+                    type: string
+                  storage:
+                    description: A storage block as defined below.
+                    properties:
+                      autoGrowEnabled:
+                        description: Should Storage Auto Grow be enabled? Defaults
+                          to true.
+                        type: boolean
+                      ioScalingEnabled:
+                        description: Should IOPS be scaled automatically? If true,
+                          iops can not be set. Defaults to false.
+                        type: boolean
+                      iops:
+                        description: The storage IOPS for the MySQL Flexible Server.
+                          Possible values are between 360 and 20000.
+                        type: number
+                      sizeGb:
+                        description: The max storage allowed for the MySQL Flexible
+                          Server. Possible values are between 20 and 16384.
+                        type: number
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      MySQL Flexible Server.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  version:
+                    description: The version of the MySQL Flexible Server to use.
+                      Possible values are 5.7, and 8.0.21. Changing this forces a
+                      new MySQL Flexible Server to be created.
+                    type: string
+                  zone:
+                    description: Specifies the Availability Zone in which this MySQL
+                      Flexible Server should be located. Possible values are 1, 2
+                      and 3.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

@@ -1,0 +1,134 @@
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorSecurityPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    securityPolicies:
+    - firewall:
+      - association:
+        - domain:
+          - cdnFrontdoorDomainIdSelector:
+              matchLabels:
+                testing.upbound.io/example-name: example
+          patternsToMatch:
+          - /*
+        cdnFrontdoorFirewallPolicyIdSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta2
+kind: FrontdoorCustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    cdnFrontdoorProfileIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    dnsZoneIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    hostName: contoso.fabrikam.com
+    tls:
+    - certificateType: ManagedCertificate
+      minimumTlsVersion: TLS12
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorFirewallPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    customBlockResponseBody: PGh0bWw+CjxoZWFkZXI+PHRpdGxlPkhlbGxvPC90aXRsZT48L2hlYWRlcj4KPGJvZHk+CkhlbGxvIHdvcmxkCjwvYm9keT4KPC9odG1sPg==
+    customBlockResponseStatusCode: 403
+    customRule:
+    - action: Block
+      enabled: true
+      matchCondition:
+      - matchValues:
+        - 192.168.1.0/24
+        - 10.0.1.0/24
+        matchVariable: RemoteAddr
+        negationCondition: false
+        operator: IPMatch
+      name: Rule1
+      priority: 1
+      rateLimitDurationInMinutes: 1
+      rateLimitThreshold: 10
+      type: MatchRule
+    enabled: true
+    mode: Prevention
+    redirectUrl: https://www.contoso.com
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: cdn.azure.upbound.io/v1beta1
+kind: FrontdoorProfile
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    skuName: Standard_AzureFrontDoor
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: DNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cdn/v1beta2/frontdoorsecuritypolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

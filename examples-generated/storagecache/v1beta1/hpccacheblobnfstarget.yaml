@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: storagecache.azure.upbound.io/v1beta1
+apiVersion: storagecache.azure.upbound.io/v1beta2
 kind: HPCCache
 metadata:
   annotations:
@@ -166,7 +166,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -193,7 +193,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: Subnet
 metadata:
   annotations:
@@ -216,7 +216,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta1
+apiVersion: network.azure.upbound.io/v1beta2
 kind: VirtualNetwork
 metadata:
   annotations:

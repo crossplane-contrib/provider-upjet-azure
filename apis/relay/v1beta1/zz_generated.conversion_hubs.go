@@ -7,13 +7,13 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
+func (tr *EventRelayNamespace) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *HybridConnection) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *HybridConnectionAuthorizationRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *EventRelayNamespace) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *NamespaceAuthorizationRule) Hub() {}

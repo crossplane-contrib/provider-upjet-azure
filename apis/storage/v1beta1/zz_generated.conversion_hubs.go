@@ -7,19 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Account) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *AccountLocalUser) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *AccountNetworkRules) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Blob) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *BlobInventoryPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *Container) Hub() {}
@@ -32,9 +23,6 @@ func (tr *DataLakeGen2Path) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *EncryptionScope) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ManagementPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ObjectReplication) Hub() {}

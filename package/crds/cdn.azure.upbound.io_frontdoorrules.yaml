@@ -3081,3 +3081,2952 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: FrontdoorRule is the Schema for the FrontdoorRules API. Manages
+          a Front Door (standard/premium) Rule.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: FrontdoorRuleSpec defines the desired state of FrontdoorRule
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  actions:
+                    description: An actions block as defined below.
+                    properties:
+                      requestHeaderAction:
+                        description: A request_header_action block as defined below.
+                        items:
+                          properties:
+                            headerAction:
+                              description: The action to be taken on the specified
+                                header_name. Possible values include Append, Overwrite
+                                or Delete.
+                              type: string
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            value:
+                              description: The value to append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      responseHeaderAction:
+                        description: A response_header_action block as defined below.
+                        items:
+                          properties:
+                            headerAction:
+                              description: The action to be taken on the specified
+                                header_name. Possible values include Append, Overwrite
+                                or Delete.
+                              type: string
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            value:
+                              description: The value to append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      routeConfigurationOverrideAction:
+                        description: A route_configuration_override_action block as
+                          defined below.
+                        properties:
+                          cacheBehavior:
+                            description: HonorOrigin the Front Door will always honor
+                              origin response header directive. If the origin directive
+                              is missing, Front Door will cache contents anywhere
+                              from 1 to 3 days. OverrideAlways the TTL value returned
+                              from your Front Door Origin is overwritten with the
+                              value specified in the action. This behavior will only
+                              be applied if the response is cacheable. OverrideIfOriginMissing
+                              if no TTL value gets returned from your Front Door Origin,
+                              the rule sets the TTL to the value specified in the
+                              action. This behavior will only be applied if the response
+                              is cacheable. Disabled the Front Door will not cache
+                              the response contents, irrespective of Front Door Origin
+                              response directives. Possible values include HonorOrigin,
+                              OverrideAlways, OverrideIfOriginMissing or Disabled.
+                            type: string
+                          cacheDuration:
+                            description: When Cache behavior is set to Override or
+                              SetIfMissing, this field specifies the cache duration
+                              to use. The maximum duration is 366 days specified in
+                              the d.HH:MM:SS format(e.g. 365.23:59:59). If the desired
+                              maximum cache duration is less than 1 day then the maximum
+                              cache duration should be specified in the HH:MM:SS format(e.g.
+                              23:59:59).
+                            type: string
+                          cdnFrontdoorOriginGroupId:
+                            description: The Front Door Origin Group resource ID that
+                              the request should be routed to. This overrides the
+                              configuration specified in the Front Door Endpoint route.
+                            type: string
+                          cdnFrontdoorOriginGroupIdRef:
+                            description: Reference to a FrontdoorOriginGroup in cdn
+                              to populate cdnFrontdoorOriginGroupId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          cdnFrontdoorOriginGroupIdSelector:
+                            description: Selector for a FrontdoorOriginGroup in cdn
+                              to populate cdnFrontdoorOriginGroupId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          compressionEnabled:
+                            description: Should the Front Door dynamically compress
+                              the content? Possible values include true or false.
+                            type: boolean
+                          forwardingProtocol:
+                            description: The forwarding protocol the request will
+                              be redirected as. This overrides the configuration specified
+                              in the route to be associated with. Possible values
+                              include MatchRequest, HttpOnly or HttpsOnly.
+                            type: string
+                          queryStringCachingBehavior:
+                            description: IncludeSpecifiedQueryStrings query strings
+                              specified in the query_string_parameters field get included
+                              when the cache key gets generated. UseQueryString cache
+                              every unique URL, each unique URL will have its own
+                              cache key. IgnoreSpecifiedQueryStrings query strings
+                              specified in the query_string_parameters field get excluded
+                              when the cache key gets generated. IgnoreQueryString
+                              query strings aren't considered when the cache key gets
+                              generated. Possible values include IgnoreQueryString,
+                              UseQueryString, IgnoreSpecifiedQueryStrings or IncludeSpecifiedQueryStrings.
+                            type: string
+                          queryStringParameters:
+                            description: A list of query string parameter names.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      urlRedirectAction:
+                        description: A url_redirect_action block as defined below.
+                          You may not have a url_redirect_action and a url_rewrite_action
+                          defined in the same actions block.
+                        properties:
+                          destinationFragment:
+                            description: The fragment to use in the redirect. The
+                              value must be a string between 0 and 1024 characters
+                              in length, leave blank to preserve the incoming fragment.
+                              Defaults to "".
+                            type: string
+                          destinationHostname:
+                            description: The host name you want the request to be
+                              redirected to. The value must be a string between 0
+                              and 2048 characters in length, leave blank to preserve
+                              the incoming host.
+                            type: string
+                          destinationPath:
+                            description: The path to use in the redirect. The value
+                              must be a string and include the leading /, leave blank
+                              to preserve the incoming path. Defaults to "".
+                            type: string
+                          queryString:
+                            description: The query string used in the redirect URL.
+                              The value must be in the <key>=<value> or <key>={action_server_variable}
+                              format and must not include the leading ?, leave blank
+                              to preserve the incoming query string. Maximum allowed
+                              length for this field is 2048 characters. Defaults to
+                              "".
+                            type: string
+                          redirectProtocol:
+                            description: The protocol the request will be redirected
+                              as. Possible values include MatchRequest, Http or Https.
+                              Defaults to MatchRequest.
+                            type: string
+                          redirectType:
+                            description: The response type to return to the requestor.
+                              Possible values include Moved, Found , TemporaryRedirect
+                              or PermanentRedirect.
+                            type: string
+                        type: object
+                      urlRewriteAction:
+                        description: A url_rewrite_action block as defined below.
+                          You may not have a url_rewrite_action and a url_redirect_action
+                          defined in the same actions block.
+                        properties:
+                          destination:
+                            description: The destination path to use in the rewrite.
+                              The destination path overwrites the source pattern.
+                            type: string
+                          preserveUnmatchedPath:
+                            description: Append the remaining path after the source
+                              pattern to the new destination path? Possible values
+                              true or false. Defaults to false.
+                            type: boolean
+                          sourcePattern:
+                            description: The source pattern in the URL path to replace.
+                              This uses prefix-based matching. For example, to match
+                              all URL paths use a forward slash "/" as the source
+                              pattern value.
+                            type: string
+                        type: object
+                    type: object
+                  behaviorOnMatch:
+                    description: If this rule is a match should the rules engine continue
+                      processing the remaining rules or stop? Possible values are
+                      Continue and Stop. Defaults to Continue.
+                    type: string
+                  cdnFrontdoorRuleSetId:
+                    description: The resource ID of the Front Door Rule Set for this
+                      Front Door Rule. Changing this forces a new Front Door Rule
+                      to be created.
+                    type: string
+                  cdnFrontdoorRuleSetIdRef:
+                    description: Reference to a FrontdoorRuleSet in cdn to populate
+                      cdnFrontdoorRuleSetId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  cdnFrontdoorRuleSetIdSelector:
+                    description: Selector for a FrontdoorRuleSet in cdn to populate
+                      cdnFrontdoorRuleSetId.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  conditions:
+                    description: A conditions block as defined below.
+                    properties:
+                      clientPortCondition:
+                        description: A client_port_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      cookiesCondition:
+                        description: A cookies_condition block as defined below.
+                        items:
+                          properties:
+                            cookieName:
+                              description: A string value representing the name of
+                                the cookie.
+                              type: string
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      hostNameCondition:
+                        description: A host_name_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      httpVersionCondition:
+                        description: A http_version_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      isDeviceCondition:
+                        description: A is_device_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      postArgsCondition:
+                        description: A post_args_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            postArgsName:
+                              description: A string value representing the name of
+                                the POST argument.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      queryStringCondition:
+                        description: A query_string_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      remoteAddressCondition:
+                        description: A remote_address_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestBodyCondition:
+                        description: A request_body_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      requestHeaderCondition:
+                        description: A request_header_condition block as defined below.
+                        items:
+                          properties:
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      requestMethodCondition:
+                        description: A request_method_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestSchemeCondition:
+                        description: A request_scheme_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestUriCondition:
+                        description: A request_uri_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      serverPortCondition:
+                        description: A server_port_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      socketAddressCondition:
+                        description: A socket_address_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      sslProtocolCondition:
+                        description: A ssl_protocol_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      urlFileExtensionCondition:
+                        description: A url_file_extension_condition block as defined
+                          below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      urlFilenameCondition:
+                        description: A url_filename_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      urlPathCondition:
+                        description: A url_path_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                    type: object
+                  order:
+                    description: The order in which the rules will be applied for
+                      the Front Door Endpoint. The order value should be sequential
+                      and begin at 1(e.g. 1, 2, 3...). A Front Door Rule with a lesser
+                      order value will be applied before a rule with a greater order
+                      value.
+                    type: number
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  actions:
+                    description: An actions block as defined below.
+                    properties:
+                      requestHeaderAction:
+                        description: A request_header_action block as defined below.
+                        items:
+                          properties:
+                            headerAction:
+                              description: The action to be taken on the specified
+                                header_name. Possible values include Append, Overwrite
+                                or Delete.
+                              type: string
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            value:
+                              description: The value to append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      responseHeaderAction:
+                        description: A response_header_action block as defined below.
+                        items:
+                          properties:
+                            headerAction:
+                              description: The action to be taken on the specified
+                                header_name. Possible values include Append, Overwrite
+                                or Delete.
+                              type: string
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            value:
+                              description: The value to append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      routeConfigurationOverrideAction:
+                        description: A route_configuration_override_action block as
+                          defined below.
+                        properties:
+                          cacheBehavior:
+                            description: HonorOrigin the Front Door will always honor
+                              origin response header directive. If the origin directive
+                              is missing, Front Door will cache contents anywhere
+                              from 1 to 3 days. OverrideAlways the TTL value returned
+                              from your Front Door Origin is overwritten with the
+                              value specified in the action. This behavior will only
+                              be applied if the response is cacheable. OverrideIfOriginMissing
+                              if no TTL value gets returned from your Front Door Origin,
+                              the rule sets the TTL to the value specified in the
+                              action. This behavior will only be applied if the response
+                              is cacheable. Disabled the Front Door will not cache
+                              the response contents, irrespective of Front Door Origin
+                              response directives. Possible values include HonorOrigin,
+                              OverrideAlways, OverrideIfOriginMissing or Disabled.
+                            type: string
+                          cacheDuration:
+                            description: When Cache behavior is set to Override or
+                              SetIfMissing, this field specifies the cache duration
+                              to use. The maximum duration is 366 days specified in
+                              the d.HH:MM:SS format(e.g. 365.23:59:59). If the desired
+                              maximum cache duration is less than 1 day then the maximum
+                              cache duration should be specified in the HH:MM:SS format(e.g.
+                              23:59:59).
+                            type: string
+                          cdnFrontdoorOriginGroupId:
+                            description: The Front Door Origin Group resource ID that
+                              the request should be routed to. This overrides the
+                              configuration specified in the Front Door Endpoint route.
+                            type: string
+                          cdnFrontdoorOriginGroupIdRef:
+                            description: Reference to a FrontdoorOriginGroup in cdn
+                              to populate cdnFrontdoorOriginGroupId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          cdnFrontdoorOriginGroupIdSelector:
+                            description: Selector for a FrontdoorOriginGroup in cdn
+                              to populate cdnFrontdoorOriginGroupId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          compressionEnabled:
+                            description: Should the Front Door dynamically compress
+                              the content? Possible values include true or false.
+                            type: boolean
+                          forwardingProtocol:
+                            description: The forwarding protocol the request will
+                              be redirected as. This overrides the configuration specified
+                              in the route to be associated with. Possible values
+                              include MatchRequest, HttpOnly or HttpsOnly.
+                            type: string
+                          queryStringCachingBehavior:
+                            description: IncludeSpecifiedQueryStrings query strings
+                              specified in the query_string_parameters field get included
+                              when the cache key gets generated. UseQueryString cache
+                              every unique URL, each unique URL will have its own
+                              cache key. IgnoreSpecifiedQueryStrings query strings
+                              specified in the query_string_parameters field get excluded
+                              when the cache key gets generated. IgnoreQueryString
+                              query strings aren't considered when the cache key gets
+                              generated. Possible values include IgnoreQueryString,
+                              UseQueryString, IgnoreSpecifiedQueryStrings or IncludeSpecifiedQueryStrings.
+                            type: string
+                          queryStringParameters:
+                            description: A list of query string parameter names.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      urlRedirectAction:
+                        description: A url_redirect_action block as defined below.
+                          You may not have a url_redirect_action and a url_rewrite_action
+                          defined in the same actions block.
+                        properties:
+                          destinationFragment:
+                            description: The fragment to use in the redirect. The
+                              value must be a string between 0 and 1024 characters
+                              in length, leave blank to preserve the incoming fragment.
+                              Defaults to "".
+                            type: string
+                          destinationHostname:
+                            description: The host name you want the request to be
+                              redirected to. The value must be a string between 0
+                              and 2048 characters in length, leave blank to preserve
+                              the incoming host.
+                            type: string
+                          destinationPath:
+                            description: The path to use in the redirect. The value
+                              must be a string and include the leading /, leave blank
+                              to preserve the incoming path. Defaults to "".
+                            type: string
+                          queryString:
+                            description: The query string used in the redirect URL.
+                              The value must be in the <key>=<value> or <key>={action_server_variable}
+                              format and must not include the leading ?, leave blank
+                              to preserve the incoming query string. Maximum allowed
+                              length for this field is 2048 characters. Defaults to
+                              "".
+                            type: string
+                          redirectProtocol:
+                            description: The protocol the request will be redirected
+                              as. Possible values include MatchRequest, Http or Https.
+                              Defaults to MatchRequest.
+                            type: string
+                          redirectType:
+                            description: The response type to return to the requestor.
+                              Possible values include Moved, Found , TemporaryRedirect
+                              or PermanentRedirect.
+                            type: string
+                        type: object
+                      urlRewriteAction:
+                        description: A url_rewrite_action block as defined below.
+                          You may not have a url_rewrite_action and a url_redirect_action
+                          defined in the same actions block.
+                        properties:
+                          destination:
+                            description: The destination path to use in the rewrite.
+                              The destination path overwrites the source pattern.
+                            type: string
+                          preserveUnmatchedPath:
+                            description: Append the remaining path after the source
+                              pattern to the new destination path? Possible values
+                              true or false. Defaults to false.
+                            type: boolean
+                          sourcePattern:
+                            description: The source pattern in the URL path to replace.
+                              This uses prefix-based matching. For example, to match
+                              all URL paths use a forward slash "/" as the source
+                              pattern value.
+                            type: string
+                        type: object
+                    type: object
+                  behaviorOnMatch:
+                    description: If this rule is a match should the rules engine continue
+                      processing the remaining rules or stop? Possible values are
+                      Continue and Stop. Defaults to Continue.
+                    type: string
+                  conditions:
+                    description: A conditions block as defined below.
+                    properties:
+                      clientPortCondition:
+                        description: A client_port_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      cookiesCondition:
+                        description: A cookies_condition block as defined below.
+                        items:
+                          properties:
+                            cookieName:
+                              description: A string value representing the name of
+                                the cookie.
+                              type: string
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      hostNameCondition:
+                        description: A host_name_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      httpVersionCondition:
+                        description: A http_version_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      isDeviceCondition:
+                        description: A is_device_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      postArgsCondition:
+                        description: A post_args_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            postArgsName:
+                              description: A string value representing the name of
+                                the POST argument.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      queryStringCondition:
+                        description: A query_string_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      remoteAddressCondition:
+                        description: A remote_address_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestBodyCondition:
+                        description: A request_body_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      requestHeaderCondition:
+                        description: A request_header_condition block as defined below.
+                        items:
+                          properties:
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      requestMethodCondition:
+                        description: A request_method_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestSchemeCondition:
+                        description: A request_scheme_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestUriCondition:
+                        description: A request_uri_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      serverPortCondition:
+                        description: A server_port_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      socketAddressCondition:
+                        description: A socket_address_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      sslProtocolCondition:
+                        description: A ssl_protocol_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      urlFileExtensionCondition:
+                        description: A url_file_extension_condition block as defined
+                          below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      urlFilenameCondition:
+                        description: A url_filename_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      urlPathCondition:
+                        description: A url_path_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                    type: object
+                  order:
+                    description: The order in which the rules will be applied for
+                      the Front Door Endpoint. The order value should be sequential
+                      and begin at 1(e.g. 1, 2, 3...). A Front Door Rule with a lesser
+                      order value will be applied before a rule with a greater order
+                      value.
+                    type: number
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.actions is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.actions)
+                || (has(self.initProvider) && has(self.initProvider.actions))'
+            - message: spec.forProvider.order is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.order)
+                || (has(self.initProvider) && has(self.initProvider.order))'
+          status:
+            description: FrontdoorRuleStatus defines the observed state of FrontdoorRule.
+            properties:
+              atProvider:
+                properties:
+                  actions:
+                    description: An actions block as defined below.
+                    properties:
+                      requestHeaderAction:
+                        description: A request_header_action block as defined below.
+                        items:
+                          properties:
+                            headerAction:
+                              description: The action to be taken on the specified
+                                header_name. Possible values include Append, Overwrite
+                                or Delete.
+                              type: string
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            value:
+                              description: The value to append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      responseHeaderAction:
+                        description: A response_header_action block as defined below.
+                        items:
+                          properties:
+                            headerAction:
+                              description: The action to be taken on the specified
+                                header_name. Possible values include Append, Overwrite
+                                or Delete.
+                              type: string
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            value:
+                              description: The value to append or overwrite.
+                              type: string
+                          type: object
+                        type: array
+                      routeConfigurationOverrideAction:
+                        description: A route_configuration_override_action block as
+                          defined below.
+                        properties:
+                          cacheBehavior:
+                            description: HonorOrigin the Front Door will always honor
+                              origin response header directive. If the origin directive
+                              is missing, Front Door will cache contents anywhere
+                              from 1 to 3 days. OverrideAlways the TTL value returned
+                              from your Front Door Origin is overwritten with the
+                              value specified in the action. This behavior will only
+                              be applied if the response is cacheable. OverrideIfOriginMissing
+                              if no TTL value gets returned from your Front Door Origin,
+                              the rule sets the TTL to the value specified in the
+                              action. This behavior will only be applied if the response
+                              is cacheable. Disabled the Front Door will not cache
+                              the response contents, irrespective of Front Door Origin
+                              response directives. Possible values include HonorOrigin,
+                              OverrideAlways, OverrideIfOriginMissing or Disabled.
+                            type: string
+                          cacheDuration:
+                            description: When Cache behavior is set to Override or
+                              SetIfMissing, this field specifies the cache duration
+                              to use. The maximum duration is 366 days specified in
+                              the d.HH:MM:SS format(e.g. 365.23:59:59). If the desired
+                              maximum cache duration is less than 1 day then the maximum
+                              cache duration should be specified in the HH:MM:SS format(e.g.
+                              23:59:59).
+                            type: string
+                          cdnFrontdoorOriginGroupId:
+                            description: The Front Door Origin Group resource ID that
+                              the request should be routed to. This overrides the
+                              configuration specified in the Front Door Endpoint route.
+                            type: string
+                          compressionEnabled:
+                            description: Should the Front Door dynamically compress
+                              the content? Possible values include true or false.
+                            type: boolean
+                          forwardingProtocol:
+                            description: The forwarding protocol the request will
+                              be redirected as. This overrides the configuration specified
+                              in the route to be associated with. Possible values
+                              include MatchRequest, HttpOnly or HttpsOnly.
+                            type: string
+                          queryStringCachingBehavior:
+                            description: IncludeSpecifiedQueryStrings query strings
+                              specified in the query_string_parameters field get included
+                              when the cache key gets generated. UseQueryString cache
+                              every unique URL, each unique URL will have its own
+                              cache key. IgnoreSpecifiedQueryStrings query strings
+                              specified in the query_string_parameters field get excluded
+                              when the cache key gets generated. IgnoreQueryString
+                              query strings aren't considered when the cache key gets
+                              generated. Possible values include IgnoreQueryString,
+                              UseQueryString, IgnoreSpecifiedQueryStrings or IncludeSpecifiedQueryStrings.
+                            type: string
+                          queryStringParameters:
+                            description: A list of query string parameter names.
+                            items:
+                              type: string
+                            type: array
+                        type: object
+                      urlRedirectAction:
+                        description: A url_redirect_action block as defined below.
+                          You may not have a url_redirect_action and a url_rewrite_action
+                          defined in the same actions block.
+                        properties:
+                          destinationFragment:
+                            description: The fragment to use in the redirect. The
+                              value must be a string between 0 and 1024 characters
+                              in length, leave blank to preserve the incoming fragment.
+                              Defaults to "".
+                            type: string
+                          destinationHostname:
+                            description: The host name you want the request to be
+                              redirected to. The value must be a string between 0
+                              and 2048 characters in length, leave blank to preserve
+                              the incoming host.
+                            type: string
+                          destinationPath:
+                            description: The path to use in the redirect. The value
+                              must be a string and include the leading /, leave blank
+                              to preserve the incoming path. Defaults to "".
+                            type: string
+                          queryString:
+                            description: The query string used in the redirect URL.
+                              The value must be in the <key>=<value> or <key>={action_server_variable}
+                              format and must not include the leading ?, leave blank
+                              to preserve the incoming query string. Maximum allowed
+                              length for this field is 2048 characters. Defaults to
+                              "".
+                            type: string
+                          redirectProtocol:
+                            description: The protocol the request will be redirected
+                              as. Possible values include MatchRequest, Http or Https.
+                              Defaults to MatchRequest.
+                            type: string
+                          redirectType:
+                            description: The response type to return to the requestor.
+                              Possible values include Moved, Found , TemporaryRedirect
+                              or PermanentRedirect.
+                            type: string
+                        type: object
+                      urlRewriteAction:
+                        description: A url_rewrite_action block as defined below.
+                          You may not have a url_rewrite_action and a url_redirect_action
+                          defined in the same actions block.
+                        properties:
+                          destination:
+                            description: The destination path to use in the rewrite.
+                              The destination path overwrites the source pattern.
+                            type: string
+                          preserveUnmatchedPath:
+                            description: Append the remaining path after the source
+                              pattern to the new destination path? Possible values
+                              true or false. Defaults to false.
+                            type: boolean
+                          sourcePattern:
+                            description: The source pattern in the URL path to replace.
+                              This uses prefix-based matching. For example, to match
+                              all URL paths use a forward slash "/" as the source
+                              pattern value.
+                            type: string
+                        type: object
+                    type: object
+                  behaviorOnMatch:
+                    description: If this rule is a match should the rules engine continue
+                      processing the remaining rules or stop? Possible values are
+                      Continue and Stop. Defaults to Continue.
+                    type: string
+                  cdnFrontdoorRuleSetId:
+                    description: The resource ID of the Front Door Rule Set for this
+                      Front Door Rule. Changing this forces a new Front Door Rule
+                      to be created.
+                    type: string
+                  cdnFrontdoorRuleSetName:
+                    description: The name of the Front Door Rule Set containing this
+                      Front Door Rule.
+                    type: string
+                  conditions:
+                    description: A conditions block as defined below.
+                    properties:
+                      clientPortCondition:
+                        description: A client_port_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      cookiesCondition:
+                        description: A cookies_condition block as defined below.
+                        items:
+                          properties:
+                            cookieName:
+                              description: A string value representing the name of
+                                the cookie.
+                              type: string
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      hostNameCondition:
+                        description: A host_name_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      httpVersionCondition:
+                        description: A http_version_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      isDeviceCondition:
+                        description: A is_device_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      postArgsCondition:
+                        description: A post_args_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            postArgsName:
+                              description: A string value representing the name of
+                                the POST argument.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      queryStringCondition:
+                        description: A query_string_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      remoteAddressCondition:
+                        description: A remote_address_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestBodyCondition:
+                        description: A request_body_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      requestHeaderCondition:
+                        description: A request_header_condition block as defined below.
+                        items:
+                          properties:
+                            headerName:
+                              description: The name of the header to modify.
+                              type: string
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      requestMethodCondition:
+                        description: A request_method_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestSchemeCondition:
+                        description: A request_scheme_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      requestUriCondition:
+                        description: A request_uri_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      serverPortCondition:
+                        description: A server_port_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      socketAddressCondition:
+                        description: A socket_address_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      sslProtocolCondition:
+                        description: A ssl_protocol_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                          type: object
+                        type: array
+                      urlFileExtensionCondition:
+                        description: A url_file_extension_condition block as defined
+                          below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      urlFilenameCondition:
+                        description: A url_filename_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                      urlPathCondition:
+                        description: A url_path_condition block as defined below.
+                        items:
+                          properties:
+                            matchValues:
+                              description: One or more string or integer values(e.g.
+                                "1") representing the value of the request path to
+                                match. Don't include the leading slash (/). If multiple
+                                values are specified, they're evaluated using OR logic.
+                              items:
+                                type: string
+                              type: array
+                            negateCondition:
+                              description: If true operator becomes the opposite of
+                                its value. Possible values true or false. Defaults
+                                to false. Details can be found in the Condition Operator
+                                List below.
+                              type: boolean
+                            operator:
+                              description: A Conditional operator. Possible values
+                                include Any, Equal, Contains, BeginsWith, EndsWith,
+                                LessThan, LessThanOrEqual, GreaterThan, GreaterThanOrEqual
+                                or RegEx. Details can be found in the Condition Operator
+                                List below.
+                              type: string
+                            transforms:
+                              description: A Conditional operator. Possible values
+                                include Lowercase, RemoveNulls, Trim, Uppercase, UrlDecode
+                                or UrlEncode. Details can be found in the Condition
+                                Transform List below.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        type: array
+                    type: object
+                  id:
+                    description: The ID of the Front Door Rule.
+                    type: string
+                  order:
+                    description: The order in which the rules will be applied for
+                      the Front Door Endpoint. The order value should be sequential
+                      and begin at 1(e.g. 1, 2, 3...). A Front Door Rule with a lesser
+                      order value will be applied before a rule with a greater order
+                      value.
+                    type: number
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

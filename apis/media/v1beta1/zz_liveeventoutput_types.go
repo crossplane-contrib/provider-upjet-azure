@@ -104,7 +104,7 @@ type LiveEventOutputParameters struct {
 	HlsFragmentsPerTSSegment *float64 `json:"hlsFragmentsPerTsSegment,omitempty" tf:"hls_fragments_per_ts_segment,omitempty"`
 
 	// The id of the live event. Changing this forces a new Live Output to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta1.LiveEvent
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta2.LiveEvent
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	LiveEventID *string `json:"liveEventId,omitempty" tf:"live_event_id,omitempty"`

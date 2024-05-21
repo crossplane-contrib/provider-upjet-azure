@@ -7,12 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Monitor) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *SubAccount) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *SubAccountTagRule) Hub() {}
 
 // Hub marks this type as a conversion hub.

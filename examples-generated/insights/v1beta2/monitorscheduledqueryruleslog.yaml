@@ -1,0 +1,114 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorScheduledQueryRulesLog
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    criteria:
+    - dimension:
+      - name: Computer
+        operator: Include
+        values:
+        - targetVM
+      metricName: Average_% Idle Time
+    dataSourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: Scheduled query rule LogToMetric example
+    enabled: true
+    location: West Europe
+    name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      foo: bar
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInDays: 30
+    sku: PerGB2018
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: exampleact
+    webhookReceiver:
+    - name: callmyapi
+      serviceUri: http://example.com/alert
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorMetricAlert
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    action:
+    - actionGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    criteria:
+    - aggregation: Average
+      metricName: UsedCapacity
+      metricNamespace: Microsoft.OperationalInsights/workspaces
+      operator: LessThan
+      threshold: 10
+    description: Action will be triggered when Average_% Idle Time metric is less
+      than 10.
+    frequency: PT1M
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scopesRefs:
+    - name: example
+    windowSize: PT5M
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryruleslog
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

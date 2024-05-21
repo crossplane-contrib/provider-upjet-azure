@@ -1,0 +1,61 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: SharedImage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/sharedimage
+  labels:
+    testing.upbound.io/example-name: examplesharedimage
+  name: examplesharedimage
+spec:
+  forProvider:
+    galleryNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sharedimageig
+    identifier:
+      offer: OfferName
+      publisher: PublisherName
+      sku: ExampleSku
+    location: West Europe
+    osType: Linux
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sharedimage-rg
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta1/sharedimage
+  labels:
+    testing.upbound.io/example-name: sharedimage-rg
+  name: sharedimage-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: SharedImageGallery
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/sharedimage
+  labels:
+    testing.upbound.io/example-name: sharedimageig
+  name: sharedimageig
+spec:
+  forProvider:
+    description: Shared images and things.
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: sharedimage-rg
+    tags:
+      Hello: There
+      World: Example

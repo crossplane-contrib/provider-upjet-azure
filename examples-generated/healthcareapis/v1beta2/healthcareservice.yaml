@@ -1,0 +1,36 @@
+apiVersion: healthcareapis.azure.upbound.io/v1beta2
+kind: HealthcareService
+metadata:
+  annotations:
+    meta.upbound.io/example-id: healthcareapis/v1beta2/healthcareservice
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessPolicyObjectIds: ${data.azurerm_client_config.current.object_id}
+    authenticationConfiguration:
+    - audience: https://azurehealthcareapis.com/
+      authority: https://login.microsoftonline.com/$%7Bdata.azurerm_client_config.current.tenant_id%7D
+      smartProxyEnabled: "true"
+    corsConfiguration:
+    - allowCredentials: "true"
+      allowedHeaders:
+      - x-tempo-*
+      - x-tempo2-*
+      allowedMethods:
+      - GET
+      - PUT
+      allowedOrigins:
+      - http://www.example.com
+      - http://www.example2.com
+      maxAgeInSeconds: "500"
+    cosmosdbThroughput: "2000"
+    kind: fhir-R4
+    location: westus2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      environment: testenv
+      purpose: AcceptanceTests

@@ -1,0 +1,85 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: WebApplicationFirewallPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/webapplicationfirewallpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    customRules:
+    - action: Block
+      matchConditions:
+      - matchValues:
+        - 192.168.1.0/24
+        - 10.0.0.0/24
+        matchVariables:
+        - variableName: RemoteAddr
+        negationCondition: false
+        operator: IPMatch
+      name: Rule1
+      priority: 1
+      ruleType: MatchRule
+    - action: Block
+      matchConditions:
+      - matchValues:
+        - 192.168.1.0/24
+        matchVariables:
+        - variableName: RemoteAddr
+        negationCondition: false
+        operator: IPMatch
+      - matchValues:
+        - Windows
+        matchVariables:
+        - selector: UserAgent
+          variableName: RequestHeaders
+        negationCondition: false
+        operator: Contains
+      name: Rule2
+      priority: 2
+      ruleType: MatchRule
+    location: West Europe
+    managedRules:
+    - exclusion:
+      - matchVariable: RequestHeaderNames
+        selector: x-company-secret-header
+        selectorMatchOperator: Equals
+      - matchVariable: RequestCookieNames
+        selector: too-tasty
+        selectorMatchOperator: EndsWith
+      managedRuleSet:
+      - ruleGroupOverride:
+        - rule:
+          - action: Log
+            enabled: true
+            id: "920300"
+          - action: Block
+            enabled: true
+            id: "920440"
+          ruleGroupName: REQUEST-920-PROTOCOL-ENFORCEMENT
+        type: OWASP
+        version: "3.2"
+    policySettings:
+    - enabled: true
+      fileUploadLimitInMb: 100
+      maxRequestBodySizeInKb: 128
+      mode: Prevention
+      requestBodyCheck: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/webapplicationfirewallpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

@@ -1,0 +1,137 @@
+apiVersion: media.azure.upbound.io/v1beta2
+kind: StreamingPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    commonEncryptionCbcs:
+    - drmFairplay:
+      - allowPersistentLicense: true
+        customLicenseAcquisitionUrlTemplate: https://contoso.com/{AssetAlternativeId}/fairplay/{ContentKeyId}
+      enabledProtocols:
+      - dash: true
+        download: false
+        hls: false
+        smoothStreaming: false
+    commonEncryptionCenc:
+    - clearTrack:
+      - condition:
+        - operation: Equal
+          property: FourCC
+          value: hev2
+      defaultContentKey:
+      - label: aesDefaultKey
+        policyNameSelector:
+          matchLabels:
+            testing.upbound.io/example-name: example
+      drmPlayready:
+      - customAttributes: PlayReady CustomAttributes
+        customLicenseAcquisitionUrlTemplate: https://contoso.com/{AssetAlternativeId}/playready/{ContentKeyId}
+      drmWidevineCustomLicenseAcquisitionUrlTemplate: https://contoso.com/{AssetAlternativeId}/widevine/{ContentKeyId}
+      enabledProtocols:
+      - dash: true
+        download: false
+        hls: false
+        smoothStreaming: false
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: ContentKeyPolicy
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    mediaServicesAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    policyOption:
+    - fairplayConfiguration:
+      - askSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        pfxPasswordSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        pfxSecretRef:
+          key: example-key
+          name: example-secret
+          namespace: upbound-system
+        rentalAndLeaseKeyType: PersistentUnlimited
+        rentalDurationSeconds: 2249
+      name: fairPlay
+      openRestrictionEnabled: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: media.azure.upbound.io/v1beta2
+kind: ServicesAccount
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccount:
+    - idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+      isPrimary: true
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: media/v1beta2/streamingpolicy
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

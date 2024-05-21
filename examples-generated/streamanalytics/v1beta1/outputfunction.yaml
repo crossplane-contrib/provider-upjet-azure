@@ -25,7 +25,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta1
+apiVersion: web.azure.upbound.io/v1beta2
 kind: AppServicePlan
 metadata:
   annotations:
@@ -47,7 +47,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta1
+apiVersion: web.azure.upbound.io/v1beta2
 kind: FunctionApp
 metadata:
   annotations:
@@ -91,7 +91,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:
@@ -110,7 +110,7 @@ spec:
 
 ---
 
-apiVersion: streamanalytics.azure.upbound.io/v1beta1
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
 kind: Job
 metadata:
   annotations:

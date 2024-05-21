@@ -1,0 +1,33 @@
+apiVersion: compute.azure.upbound.io/v1beta2
+kind: ManagedDisk
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/manageddisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    createOption: Empty
+    diskSizeGb: "1"
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    storageAccountType: Standard_LRS
+    tags:
+      environment: staging
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: compute/v1beta2/manageddisk
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

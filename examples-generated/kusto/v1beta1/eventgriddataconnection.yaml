@@ -33,7 +33,7 @@ spec:
 
 ---
 
-apiVersion: eventgrid.azure.upbound.io/v1beta1
+apiVersion: eventgrid.azure.upbound.io/v1beta2
 kind: EventSubscription
 metadata:
   annotations:
@@ -58,7 +58,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHub
 metadata:
   annotations:
@@ -101,7 +101,7 @@ spec:
 
 ---
 
-apiVersion: eventhub.azure.upbound.io/v1beta1
+apiVersion: eventhub.azure.upbound.io/v1beta2
 kind: EventHubNamespace
 metadata:
   annotations:
@@ -119,7 +119,7 @@ spec:
 
 ---
 
-apiVersion: kusto.azure.upbound.io/v1beta1
+apiVersion: kusto.azure.upbound.io/v1beta2
 kind: Cluster
 metadata:
   annotations:
@@ -175,7 +175,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

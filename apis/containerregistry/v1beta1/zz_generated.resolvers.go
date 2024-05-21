@@ -27,7 +27,7 @@ func (mg *AgentPool) ResolveReferences( // ResolveReferences of this AgentPool.
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -65,7 +65,7 @@ func (mg *AgentPool) ResolveReferences( // ResolveReferences of this AgentPool.
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -84,7 +84,7 @@ func (mg *AgentPool) ResolveReferences( // ResolveReferences of this AgentPool.
 	mg.Spec.ForProvider.VirtualNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.VirtualNetworkSubnetIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -115,7 +115,7 @@ func (mg *ContainerConnectedRegistry) ResolveReferences(ctx context.Context, c c
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -153,7 +153,7 @@ func (mg *ContainerConnectedRegistry) ResolveReferences(ctx context.Context, c c
 	mg.Spec.ForProvider.SyncTokenID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SyncTokenIDRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -323,7 +323,7 @@ func (mg *ScopeMap) ResolveReferences(ctx context.Context, c client.Reader) erro
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -373,7 +373,7 @@ func (mg *Token) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -511,7 +511,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	var rsp reference.ResolutionResponse
 	var err error
 	{
-		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
@@ -549,7 +549,7 @@ func (mg *Webhook) ResolveReferences(ctx context.Context, c client.Reader) error
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
-		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta1", "Registry", "RegistryList")
+		m, l, err = apisresolver.GetManagedResource("containerregistry.azure.upbound.io", "v1beta2", "Registry", "RegistryList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}

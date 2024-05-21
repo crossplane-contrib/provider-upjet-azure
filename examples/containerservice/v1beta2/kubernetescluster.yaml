@@ -1,0 +1,62 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: containerservice.azure.upbound.io/v1beta2
+kind: KubernetesClusterNodePool
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerservice/v1beta2/kubernetesclusternodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    kubernetesClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    nodeCount: 1
+    tags:
+      Environment: Production
+    vmSize: Standard_DS2_v2
+
+---
+
+apiVersion: containerservice.azure.upbound.io/v1beta2
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerservice/v1beta2/kubernetesclusternodepool
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    apiServerAccessProfile:
+      authorizedIpRanges:
+      - 192.168.1.0/24
+    defaultNodePool:
+      name: default
+      nodeCount: 1
+      vmSize: Standard_D2_v2
+    dnsPrefix: exampleaks1
+    identity:
+      type: SystemAssigned
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-containerservice
+    tags:
+      Environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-containerservice
+  name: example-containerservice-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe

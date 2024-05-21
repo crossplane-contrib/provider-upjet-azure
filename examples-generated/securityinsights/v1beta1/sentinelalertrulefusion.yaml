@@ -16,7 +16,7 @@ spec:
 
 ---
 
-apiVersion: operationsmanagement.azure.upbound.io/v1beta1
+apiVersion: operationsmanagement.azure.upbound.io/v1beta2
 kind: LogAnalyticsSolution
 metadata:
   annotations:
@@ -43,7 +43,7 @@ spec:
 
 ---
 
-apiVersion: operationalinsights.azure.upbound.io/v1beta1
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
 kind: Workspace
 metadata:
   annotations:

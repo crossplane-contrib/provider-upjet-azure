@@ -1,0 +1,125 @@
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: WebPubsubNetworkACL
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    defaultAction: Allow
+    privateEndpoint:
+    - deniedRequestTypes:
+      - RESTAPI
+      - ClientConnection
+      idSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    publicNetwork:
+    - deniedRequestTypes:
+      - ClientConnection
+    webPubsubIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us
+    privateServiceConnection:
+    - isManualConnection: false
+      name: psc-sig-test
+      privateConnectionResourceId: ${azurerm_web_pubsub.example.id}
+      subresourceNames:
+      - webpubsub
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: east us
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.5.2.0/24
+    enforcePrivateLinkEndpointNetworkPolicies: true
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.5.0.0/16
+    location: east us
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: signalrservice.azure.upbound.io/v1beta2
+kind: WebPubsub
+metadata:
+  annotations:
+    meta.upbound.io/example-id: signalrservice/v1beta2/webpubsubnetworkacl
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    capacity: 1
+    location: east us
+    name: tfex-webpubsub
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard_S1

@@ -1215,3 +1215,1137 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: LabServiceLab is the Schema for the LabServiceLabs API. Manages
+          a Lab Service Lab.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: LabServiceLabSpec defines the desired state of LabServiceLab
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  autoShutdown:
+                    description: An auto_shutdown block as defined below.
+                    properties:
+                      disconnectDelay:
+                        description: The amount of time a VM will stay running after
+                          a user disconnects if this behavior is enabled. This value
+                          must be formatted as an ISO 8601 string.
+                        type: string
+                      idleDelay:
+                        description: The amount of time a VM will idle before it is
+                          shutdown if this behavior is enabled. This value must be
+                          formatted as an ISO 8601 string.
+                        type: string
+                      noConnectDelay:
+                        description: The amount of time a VM will stay running before
+                          it is shutdown if no connection is made and this behavior
+                          is enabled. This value must be formatted as an ISO 8601
+                          string.
+                        type: string
+                      shutdownOnIdle:
+                        description: A VM will get shutdown when it has idled for
+                          a period of time. Possible values are LowUsage and UserAbsence.
+                        type: string
+                    type: object
+                  connectionSetting:
+                    description: A connection_setting block as defined below.
+                    properties:
+                      clientRdpAccess:
+                        description: The enabled access level for Client Access over
+                          RDP. Possible value is Public.
+                        type: string
+                      clientSshAccess:
+                        description: The enabled access level for Client Access over
+                          SSH. Possible value is Public.
+                        type: string
+                    type: object
+                  description:
+                    description: The description of the Lab Service Lab.
+                    type: string
+                  labPlanId:
+                    description: The resource ID of the Lab Plan that is used during
+                      resource creation to provide defaults and acts as a permission
+                      container when creating a Lab Service Lab via labs.azure.com.
+                    type: string
+                  location:
+                    description: The Azure Region where the Lab Service Lab should
+                      exist. Changing this forces a new resource to be created.
+                    type: string
+                  network:
+                    description: A network block as defined below.
+                    properties:
+                      subnetId:
+                        description: The resource ID of the Subnet for the network
+                          profile of the Lab Service Lab.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Lab Service
+                      Lab should exist. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  roster:
+                    description: A roster block as defined below.
+                    properties:
+                      activeDirectoryGroupId:
+                        description: The AAD group ID which this Lab Service Lab roster
+                          is populated from.
+                        type: string
+                      lmsInstance:
+                        description: The base URI identifying the lms instance.
+                        type: string
+                      ltiClientId:
+                        description: The unique id of the Azure Lab Service tool in
+                          the lms.
+                        type: string
+                      ltiContextId:
+                        description: The unique context identifier for the Lab Service
+                          Lab in the lms.
+                        type: string
+                      ltiRosterEndpoint:
+                        description: The URI of the names and roles service endpoint
+                          on the lms for the class attached to this Lab Service Lab.
+                        type: string
+                    type: object
+                  security:
+                    description: A security block as defined below.
+                    properties:
+                      openAccessEnabled:
+                        description: Is open access enabled to allow any user or only
+                          specified users to register to a Lab Service Lab?
+                        type: boolean
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Lab Service Lab.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  title:
+                    description: The title of the Lab Service Lab.
+                    type: string
+                  virtualMachine:
+                    description: A virtual_machine block as defined below.
+                    properties:
+                      additionalCapabilityGpuDriversInstalled:
+                        description: Is flagged to pre-install dedicated GPU drivers?
+                          Defaults to false. Changing this forces a new resource to
+                          be created.
+                        type: boolean
+                      adminUser:
+                        description: An admin_user block as defined below.
+                        properties:
+                          passwordSecretRef:
+                            description: The password for the user.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          username:
+                            description: The username to use when signing in to Lab
+                              Service Lab VMs.
+                            type: string
+                        required:
+                        - passwordSecretRef
+                        type: object
+                      createOption:
+                        description: The create option to indicate what Lab Service
+                          Lab VMs are created from. Possible values are Image and
+                          TemplateVM. Defaults to Image. Changing this forces a new
+                          resource to be created.
+                        type: string
+                      imageReference:
+                        description: An image_reference block as defined below.
+                        properties:
+                          id:
+                            description: The resource ID of the image. Changing this
+                              forces a new resource to be created.
+                            type: string
+                          offer:
+                            description: The image offer if applicable. Changing this
+                              forces a new resource to be created.
+                            type: string
+                          publisher:
+                            description: The image publisher. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          sku:
+                            description: A sku block as defined below.
+                            type: string
+                          version:
+                            description: The image version specified on creation.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      nonAdminUser:
+                        description: A non_admin_user block as defined below.
+                        properties:
+                          passwordSecretRef:
+                            description: The password for the user.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          username:
+                            description: The username to use when signing in to Lab
+                              Service Lab VMs.
+                            type: string
+                        required:
+                        - passwordSecretRef
+                        type: object
+                      sharedPasswordEnabled:
+                        description: Is the shared password enabled with the same
+                          password for all user VMs? Defaults to false. Changing this
+                          forces a new resource to be created.
+                        type: boolean
+                      sku:
+                        description: A sku block as defined below.
+                        properties:
+                          capacity:
+                            description: The capacity for the SKU. Possible values
+                              are between 0 and 400.
+                            type: number
+                          name:
+                            description: The name of the SKU. Changing this forces
+                              a new resource to be created.
+                            type: string
+                        type: object
+                      usageQuota:
+                        description: The initial quota allocated to each Lab Service
+                          Lab user. Defaults to PT0S. This value must be formatted
+                          as an ISO 8601 string.
+                        type: string
+                    type: object
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  autoShutdown:
+                    description: An auto_shutdown block as defined below.
+                    properties:
+                      disconnectDelay:
+                        description: The amount of time a VM will stay running after
+                          a user disconnects if this behavior is enabled. This value
+                          must be formatted as an ISO 8601 string.
+                        type: string
+                      idleDelay:
+                        description: The amount of time a VM will idle before it is
+                          shutdown if this behavior is enabled. This value must be
+                          formatted as an ISO 8601 string.
+                        type: string
+                      noConnectDelay:
+                        description: The amount of time a VM will stay running before
+                          it is shutdown if no connection is made and this behavior
+                          is enabled. This value must be formatted as an ISO 8601
+                          string.
+                        type: string
+                      shutdownOnIdle:
+                        description: A VM will get shutdown when it has idled for
+                          a period of time. Possible values are LowUsage and UserAbsence.
+                        type: string
+                    type: object
+                  connectionSetting:
+                    description: A connection_setting block as defined below.
+                    properties:
+                      clientRdpAccess:
+                        description: The enabled access level for Client Access over
+                          RDP. Possible value is Public.
+                        type: string
+                      clientSshAccess:
+                        description: The enabled access level for Client Access over
+                          SSH. Possible value is Public.
+                        type: string
+                    type: object
+                  description:
+                    description: The description of the Lab Service Lab.
+                    type: string
+                  labPlanId:
+                    description: The resource ID of the Lab Plan that is used during
+                      resource creation to provide defaults and acts as a permission
+                      container when creating a Lab Service Lab via labs.azure.com.
+                    type: string
+                  location:
+                    description: The Azure Region where the Lab Service Lab should
+                      exist. Changing this forces a new resource to be created.
+                    type: string
+                  network:
+                    description: A network block as defined below.
+                    properties:
+                      subnetId:
+                        description: The resource ID of the Subnet for the network
+                          profile of the Lab Service Lab.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
+                  roster:
+                    description: A roster block as defined below.
+                    properties:
+                      activeDirectoryGroupId:
+                        description: The AAD group ID which this Lab Service Lab roster
+                          is populated from.
+                        type: string
+                      lmsInstance:
+                        description: The base URI identifying the lms instance.
+                        type: string
+                      ltiClientId:
+                        description: The unique id of the Azure Lab Service tool in
+                          the lms.
+                        type: string
+                      ltiContextId:
+                        description: The unique context identifier for the Lab Service
+                          Lab in the lms.
+                        type: string
+                      ltiRosterEndpoint:
+                        description: The URI of the names and roles service endpoint
+                          on the lms for the class attached to this Lab Service Lab.
+                        type: string
+                    type: object
+                  security:
+                    description: A security block as defined below.
+                    properties:
+                      openAccessEnabled:
+                        description: Is open access enabled to allow any user or only
+                          specified users to register to a Lab Service Lab?
+                        type: boolean
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Lab Service Lab.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  title:
+                    description: The title of the Lab Service Lab.
+                    type: string
+                  virtualMachine:
+                    description: A virtual_machine block as defined below.
+                    properties:
+                      additionalCapabilityGpuDriversInstalled:
+                        description: Is flagged to pre-install dedicated GPU drivers?
+                          Defaults to false. Changing this forces a new resource to
+                          be created.
+                        type: boolean
+                      adminUser:
+                        description: An admin_user block as defined below.
+                        properties:
+                          username:
+                            description: The username to use when signing in to Lab
+                              Service Lab VMs.
+                            type: string
+                        type: object
+                      createOption:
+                        description: The create option to indicate what Lab Service
+                          Lab VMs are created from. Possible values are Image and
+                          TemplateVM. Defaults to Image. Changing this forces a new
+                          resource to be created.
+                        type: string
+                      imageReference:
+                        description: An image_reference block as defined below.
+                        properties:
+                          id:
+                            description: The resource ID of the image. Changing this
+                              forces a new resource to be created.
+                            type: string
+                          offer:
+                            description: The image offer if applicable. Changing this
+                              forces a new resource to be created.
+                            type: string
+                          publisher:
+                            description: The image publisher. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          sku:
+                            description: A sku block as defined below.
+                            type: string
+                          version:
+                            description: The image version specified on creation.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      nonAdminUser:
+                        description: A non_admin_user block as defined below.
+                        properties:
+                          username:
+                            description: The username to use when signing in to Lab
+                              Service Lab VMs.
+                            type: string
+                        type: object
+                      sharedPasswordEnabled:
+                        description: Is the shared password enabled with the same
+                          password for all user VMs? Defaults to false. Changing this
+                          forces a new resource to be created.
+                        type: boolean
+                      sku:
+                        description: A sku block as defined below.
+                        properties:
+                          capacity:
+                            description: The capacity for the SKU. Possible values
+                              are between 0 and 400.
+                            type: number
+                          name:
+                            description: The name of the SKU. Changing this forces
+                              a new resource to be created.
+                            type: string
+                        type: object
+                      usageQuota:
+                        description: The initial quota allocated to each Lab Service
+                          Lab user. Defaults to PT0S. This value must be formatted
+                          as an ISO 8601 string.
+                        type: string
+                    type: object
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.connectionSetting is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.connectionSetting)
+                || (has(self.initProvider) && has(self.initProvider.connectionSetting))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.security is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.security)
+                || (has(self.initProvider) && has(self.initProvider.security))'
+            - message: spec.forProvider.title is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.title)
+                || (has(self.initProvider) && has(self.initProvider.title))'
+            - message: spec.forProvider.virtualMachine is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.virtualMachine)
+                || (has(self.initProvider) && has(self.initProvider.virtualMachine))'
+          status:
+            description: LabServiceLabStatus defines the observed state of LabServiceLab.
+            properties:
+              atProvider:
+                properties:
+                  autoShutdown:
+                    description: An auto_shutdown block as defined below.
+                    properties:
+                      disconnectDelay:
+                        description: The amount of time a VM will stay running after
+                          a user disconnects if this behavior is enabled. This value
+                          must be formatted as an ISO 8601 string.
+                        type: string
+                      idleDelay:
+                        description: The amount of time a VM will idle before it is
+                          shutdown if this behavior is enabled. This value must be
+                          formatted as an ISO 8601 string.
+                        type: string
+                      noConnectDelay:
+                        description: The amount of time a VM will stay running before
+                          it is shutdown if no connection is made and this behavior
+                          is enabled. This value must be formatted as an ISO 8601
+                          string.
+                        type: string
+                      shutdownOnIdle:
+                        description: A VM will get shutdown when it has idled for
+                          a period of time. Possible values are LowUsage and UserAbsence.
+                        type: string
+                    type: object
+                  connectionSetting:
+                    description: A connection_setting block as defined below.
+                    properties:
+                      clientRdpAccess:
+                        description: The enabled access level for Client Access over
+                          RDP. Possible value is Public.
+                        type: string
+                      clientSshAccess:
+                        description: The enabled access level for Client Access over
+                          SSH. Possible value is Public.
+                        type: string
+                    type: object
+                  description:
+                    description: The description of the Lab Service Lab.
+                    type: string
+                  id:
+                    description: The ID of the Lab Service Lab.
+                    type: string
+                  labPlanId:
+                    description: The resource ID of the Lab Plan that is used during
+                      resource creation to provide defaults and acts as a permission
+                      container when creating a Lab Service Lab via labs.azure.com.
+                    type: string
+                  location:
+                    description: The Azure Region where the Lab Service Lab should
+                      exist. Changing this forces a new resource to be created.
+                    type: string
+                  network:
+                    description: A network block as defined below.
+                    properties:
+                      loadBalancerId:
+                        description: The resource ID of the Load Balancer for the
+                          network profile of the Lab Service Lab.
+                        type: string
+                      publicIpId:
+                        description: The resource ID of the Public IP for the network
+                          profile of the Lab Service Lab.
+                        type: string
+                      subnetId:
+                        description: The resource ID of the Subnet for the network
+                          profile of the Lab Service Lab.
+                        type: string
+                    type: object
+                  resourceGroupName:
+                    description: The name of the Resource Group where the Lab Service
+                      Lab should exist. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  roster:
+                    description: A roster block as defined below.
+                    properties:
+                      activeDirectoryGroupId:
+                        description: The AAD group ID which this Lab Service Lab roster
+                          is populated from.
+                        type: string
+                      lmsInstance:
+                        description: The base URI identifying the lms instance.
+                        type: string
+                      ltiClientId:
+                        description: The unique id of the Azure Lab Service tool in
+                          the lms.
+                        type: string
+                      ltiContextId:
+                        description: The unique context identifier for the Lab Service
+                          Lab in the lms.
+                        type: string
+                      ltiRosterEndpoint:
+                        description: The URI of the names and roles service endpoint
+                          on the lms for the class attached to this Lab Service Lab.
+                        type: string
+                    type: object
+                  security:
+                    description: A security block as defined below.
+                    properties:
+                      openAccessEnabled:
+                        description: Is open access enabled to allow any user or only
+                          specified users to register to a Lab Service Lab?
+                        type: boolean
+                      registrationCode:
+                        description: The registration code for the Lab Service Lab.
+                        type: string
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A mapping of tags which should be assigned to the
+                      Lab Service Lab.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  title:
+                    description: The title of the Lab Service Lab.
+                    type: string
+                  virtualMachine:
+                    description: A virtual_machine block as defined below.
+                    properties:
+                      additionalCapabilityGpuDriversInstalled:
+                        description: Is flagged to pre-install dedicated GPU drivers?
+                          Defaults to false. Changing this forces a new resource to
+                          be created.
+                        type: boolean
+                      adminUser:
+                        description: An admin_user block as defined below.
+                        properties:
+                          username:
+                            description: The username to use when signing in to Lab
+                              Service Lab VMs.
+                            type: string
+                        type: object
+                      createOption:
+                        description: The create option to indicate what Lab Service
+                          Lab VMs are created from. Possible values are Image and
+                          TemplateVM. Defaults to Image. Changing this forces a new
+                          resource to be created.
+                        type: string
+                      imageReference:
+                        description: An image_reference block as defined below.
+                        properties:
+                          id:
+                            description: The resource ID of the image. Changing this
+                              forces a new resource to be created.
+                            type: string
+                          offer:
+                            description: The image offer if applicable. Changing this
+                              forces a new resource to be created.
+                            type: string
+                          publisher:
+                            description: The image publisher. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          sku:
+                            description: A sku block as defined below.
+                            type: string
+                          version:
+                            description: The image version specified on creation.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      nonAdminUser:
+                        description: A non_admin_user block as defined below.
+                        properties:
+                          username:
+                            description: The username to use when signing in to Lab
+                              Service Lab VMs.
+                            type: string
+                        type: object
+                      sharedPasswordEnabled:
+                        description: Is the shared password enabled with the same
+                          password for all user VMs? Defaults to false. Changing this
+                          forces a new resource to be created.
+                        type: boolean
+                      sku:
+                        description: A sku block as defined below.
+                        properties:
+                          capacity:
+                            description: The capacity for the SKU. Possible values
+                              are between 0 and 400.
+                            type: number
+                          name:
+                            description: The name of the SKU. Changing this forces
+                              a new resource to be created.
+                            type: string
+                        type: object
+                      usageQuota:
+                        description: The initial quota allocated to each Lab Service
+                          Lab user. Defaults to PT0S. This value must be formatted
+                          as an ISO 8601 string.
+                        type: string
+                    type: object
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

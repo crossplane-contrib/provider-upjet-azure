@@ -1,0 +1,82 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActivityLogAlert
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    action:
+    - actionGroupIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: main
+      webhookProperties:
+        from: terraform
+    criteria:
+    - category: Recommendation
+      operationName: Microsoft.Storage/storageAccounts/write
+      resourceIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: to_monitor
+    description: This alert will monitor a specific storage account updates.
+    name: example-activitylogalert
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scopesRefs:
+    - name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: main
+  name: main
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: p0action
+    webhookReceiver:
+    - name: callmyapi
+      serviceUri: http://example.com/alert
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitoractivitylogalert
+  labels:
+    testing.upbound.io/example-name: to_monitor
+  name: to-monitor
+spec:
+  forProvider:
+    accountReplicationType: GRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

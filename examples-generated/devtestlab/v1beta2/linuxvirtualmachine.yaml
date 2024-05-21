@@ -1,0 +1,90 @@
+apiVersion: devtestlab.azure.upbound.io/v1beta2
+kind: LinuxVirtualMachine
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/linuxvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    galleryImageReference:
+    - offer: 0001-com-ubuntu-server-jammy
+      publisher: Canonical
+      sku: 22_04-lts
+      version: latest
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labSubnetNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    labVirtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: West Europe
+    name: example-vm03
+    notes: Some notes about this Virtual Machine.
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    size: Standard_DS2
+    sshKey: ${file("~/.ssh/id_rsa.pub")}
+    storageType: Premium
+    username: exampleuser99
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta1
+kind: Lab
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/linuxvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      Sydney: Australia
+
+---
+
+apiVersion: devtestlab.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/linuxvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    labNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    name: example-network
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    subnet:
+    - useInVirtualMachineCreation: Allow
+      usePublicIpAddress: Allow
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: devtestlab/v1beta2/linuxvirtualmachine
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

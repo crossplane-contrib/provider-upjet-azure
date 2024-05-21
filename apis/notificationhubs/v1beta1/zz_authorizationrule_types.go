@@ -79,7 +79,7 @@ type AuthorizationRuleParameters struct {
 	NamespaceNameSelector *v1.Selector `json:"namespaceNameSelector,omitempty" tf:"-"`
 
 	// The name of the Notification Hub for which the Authorization Rule should be created. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/notificationhubs/v1beta1.NotificationHub
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/notificationhubs/v1beta2.NotificationHub
 	// +kubebuilder:validation:Optional
 	NotificationHubName *string `json:"notificationHubName,omitempty" tf:"notification_hub_name,omitempty"`
 

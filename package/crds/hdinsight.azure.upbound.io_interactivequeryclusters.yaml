@@ -3007,3 +3007,2809 @@ spec:
     storage: true
     subresources:
       status: {}
+  - additionalPrinterColumns:
+    - jsonPath: .status.conditions[?(@.type=='Synced')].status
+      name: SYNCED
+      type: string
+    - jsonPath: .status.conditions[?(@.type=='Ready')].status
+      name: READY
+      type: string
+    - jsonPath: .metadata.annotations.crossplane\.io/external-name
+      name: EXTERNAL-NAME
+      type: string
+    - jsonPath: .metadata.creationTimestamp
+      name: AGE
+      type: date
+    name: v1beta2
+    schema:
+      openAPIV3Schema:
+        description: InteractiveQueryCluster is the Schema for the InteractiveQueryClusters
+          API. Manages a HDInsight Interactive Query Cluster.
+        properties:
+          apiVersion:
+            description: |-
+              APIVersion defines the versioned schema of this representation of an object.
+              Servers should convert recognized schemas to the latest internal value, and
+              may reject unrecognized values.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources
+            type: string
+          kind:
+            description: |-
+              Kind is a string value representing the REST resource this object represents.
+              Servers may infer this from the endpoint the client submits requests to.
+              Cannot be updated.
+              In CamelCase.
+              More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds
+            type: string
+          metadata:
+            type: object
+          spec:
+            description: InteractiveQueryClusterSpec defines the desired state of
+              InteractiveQueryCluster
+            properties:
+              deletionPolicy:
+                default: Delete
+                description: |-
+                  DeletionPolicy specifies what will happen to the underlying external
+                  when this managed resource is deleted - either "Delete" or "Orphan" the
+                  external resource.
+                  This field is planned to be deprecated in favor of the ManagementPolicies
+                  field in a future release. Currently, both could be set independently and
+                  non-default values would be honored if the feature flag is enabled.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                enum:
+                - Orphan
+                - Delete
+                type: string
+              forProvider:
+                properties:
+                  clusterVersion:
+                    description: Specifies the Version of HDInsights which should
+                      be used for this Cluster. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  componentVersion:
+                    description: A component_version block as defined below.
+                    properties:
+                      interactiveHive:
+                        description: The version of Interactive Query which should
+                          be used for this HDInsight Interactive Query Cluster. Changing
+                          this forces a new resource to be created.
+                        type: string
+                    type: object
+                  computeIsolation:
+                    description: A compute_isolation block as defined below.
+                    properties:
+                      computeIsolationEnabled:
+                        description: This field indicates whether enable compute isolation
+                          or not. Possible values are true or false.
+                        type: boolean
+                      hostSku:
+                        description: The name of the host SKU.
+                        type: string
+                    type: object
+                  diskEncryption:
+                    description: A disk_encryption block as defined below.
+                    items:
+                      properties:
+                        encryptionAlgorithm:
+                          description: This is an algorithm identifier for encryption.
+                            Possible values are RSA1_5, RSA-OAEP, RSA-OAEP-256.
+                          type: string
+                        encryptionAtHostEnabled:
+                          description: This is indicator to show whether resource
+                            disk encryption is enabled.
+                          type: boolean
+                        keyVaultKeyId:
+                          description: The ID of the key vault key.
+                          type: string
+                        keyVaultManagedIdentityId:
+                          description: This is the resource ID of Managed Identity
+                            used to access the key vault.
+                          type: string
+                      type: object
+                    type: array
+                  encryptionInTransitEnabled:
+                    description: Whether encryption in transit is enabled for this
+                      Cluster. Changing this forces a new resource to be created.
+                    type: boolean
+                  extension:
+                    description: An extension block as defined below.
+                    properties:
+                      logAnalyticsWorkspaceId:
+                        description: The workspace ID of the log analytics extension.
+                        type: string
+                      primaryKeySecretRef:
+                        description: The workspace key of the log analytics extension.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - primaryKeySecretRef
+                    type: object
+                  gateway:
+                    description: A gateway block as defined below.
+                    properties:
+                      passwordSecretRef:
+                        description: The password used for the Ambari Portal.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      username:
+                        description: The username used for the Ambari Portal. Changing
+                          this forces a new resource to be created.
+                        type: string
+                    required:
+                    - passwordSecretRef
+                    type: object
+                  location:
+                    description: Specifies the Azure Region which this HDInsight Interactive
+                      Query Cluster should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  metastores:
+                    description: A metastores block as defined below.
+                    properties:
+                      ambari:
+                        description: An ambari block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          passwordSecretRef:
+                            description: The Password associated with the local administrator
+                              for the Zookeeper Nodes. Changing this forces a new
+                              resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        required:
+                        - passwordSecretRef
+                        type: object
+                      hive:
+                        description: A hive block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          passwordSecretRef:
+                            description: The Password associated with the local administrator
+                              for the Zookeeper Nodes. Changing this forces a new
+                              resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        required:
+                        - passwordSecretRef
+                        type: object
+                      oozie:
+                        description: An oozie block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          passwordSecretRef:
+                            description: The Password associated with the local administrator
+                              for the Zookeeper Nodes. Changing this forces a new
+                              resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        required:
+                        - passwordSecretRef
+                        type: object
+                    type: object
+                  monitor:
+                    description: A monitor block as defined below.
+                    properties:
+                      logAnalyticsWorkspaceId:
+                        description: The Operations Management Suite (OMS) workspace
+                          ID.
+                        type: string
+                      primaryKeySecretRef:
+                        description: The Operations Management Suite (OMS) workspace
+                          key.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - primaryKeySecretRef
+                    type: object
+                  network:
+                    description: A network block as defined below.
+                    properties:
+                      connectionDirection:
+                        description: The direction of the resource provider connection.
+                          Possible values include Inbound or Outbound. Defaults to
+                          Inbound. Changing this forces a new resource to be created.
+                        type: string
+                      privateLinkEnabled:
+                        description: Is the private link enabled? Possible values
+                          include true or false. Defaults to false. Changing this
+                          forces a new resource to be created.
+                        type: boolean
+                    type: object
+                  resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      this HDInsight Interactive Query Cluster should exist. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  resourceGroupNameRef:
+                    description: Reference to a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  resourceGroupNameSelector:
+                    description: Selector for a ResourceGroup in azure to populate
+                      resourceGroupName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  roles:
+                    description: A roles block as defined below.
+                    properties:
+                      headNode:
+                        description: A head_node block as defined above.
+                        properties:
+                          passwordSecretRef:
+                            description: The Password associated with the local administrator
+                              for the Zookeeper Nodes. Changing this forces a new
+                              resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          subnetIdRef:
+                            description: Reference to a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          subnetIdSelector:
+                            description: Selector for a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      workerNode:
+                        description: A worker_node block as defined below.
+                        properties:
+                          autoscale:
+                            description: A autoscale block as defined below.
+                            properties:
+                              capacity:
+                                properties:
+                                  maxInstanceCount:
+                                    type: number
+                                  minInstanceCount:
+                                    type: number
+                                type: object
+                              recurrence:
+                                description: A recurrence block as defined below.
+                                properties:
+                                  schedule:
+                                    description: A list of schedule blocks as defined
+                                      below.
+                                    items:
+                                      properties:
+                                        days:
+                                          description: The days of the week to perform
+                                            autoscale. Possible values are Monday,
+                                            Tuesday, Wednesday, Thursday, Friday,
+                                            Saturday and Sunday.
+                                          items:
+                                            type: string
+                                          type: array
+                                        targetInstanceCount:
+                                          description: The number of instances which
+                                            should be run for the Worker Nodes.
+                                          type: number
+                                        time:
+                                          description: The time of day to perform
+                                            the autoscale in 24hour format.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  timezone:
+                                    description: The time zone for the autoscale schedule
+                                      times.
+                                    type: string
+                                type: object
+                            type: object
+                          passwordSecretRef:
+                            description: The Password associated with the local administrator
+                              for the Zookeeper Nodes. Changing this forces a new
+                              resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          subnetIdRef:
+                            description: Reference to a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          subnetIdSelector:
+                            description: Selector for a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          targetInstanceCount:
+                            description: The number of instances which should be run
+                              for the Worker Nodes.
+                            type: number
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      zookeeperNode:
+                        description: A zookeeper_node block as defined below.
+                        properties:
+                          passwordSecretRef:
+                            description: The Password associated with the local administrator
+                              for the Zookeeper Nodes. Changing this forces a new
+                              resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          subnetIdRef:
+                            description: Reference to a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          subnetIdSelector:
+                            description: Selector for a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                    type: object
+                  securityProfile:
+                    description: A security_profile block as defined below. Changing
+                      this forces a new resource to be created.
+                    properties:
+                      aaddsResourceId:
+                        description: The resource ID of the Azure Active Directory
+                          Domain Service. Changing this forces a new resource to be
+                          created.
+                        type: string
+                      clusterUsersGroupDns:
+                        description: A list of the distinguished names for the cluster
+                          user groups. Changing this forces a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      domainName:
+                        description: The name of the Azure Active Directory Domain.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      domainUserPasswordSecretRef:
+                        description: The user password of the Azure Active Directory
+                          Domain. Changing this forces a new resource to be created.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      domainUsername:
+                        description: The username of the Azure Active Directory Domain.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      ldapsUrls:
+                        description: A list of the LDAPS URLs to communicate with
+                          the Azure Active Directory. Changing this forces a new resource
+                          to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      msiResourceId:
+                        description: The User Assigned Identity for the HDInsight
+                          Cluster. Changing this forces a new resource to be created.
+                        type: string
+                    required:
+                    - domainUserPasswordSecretRef
+                    type: object
+                  storageAccount:
+                    description: One or more storage_account block as defined below.
+                    items:
+                      properties:
+                        isDefault:
+                          description: Is this the Default Storage Account for the
+                            HDInsight Hadoop Cluster? Changing this forces a new resource
+                            to be created.
+                          type: boolean
+                        storageAccountKeySecretRef:
+                          description: The Access Key which should be used to connect
+                            to the Storage Account. Changing this forces a new resource
+                            to be created.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        storageContainerId:
+                          description: The ID of the Storage Container. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        storageContainerIdRef:
+                          description: Reference to a Container in storage to populate
+                            storageContainerId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        storageContainerIdSelector:
+                          description: Selector for a Container in storage to populate
+                            storageContainerId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        storageResourceId:
+                          description: The ID of the Storage Account. Changing this
+                            forces a new resource to be created.
+                          type: string
+                      required:
+                      - storageAccountKeySecretRef
+                      type: object
+                    type: array
+                  storageAccountGen2:
+                    description: A storage_account_gen2 block as defined below.
+                    properties:
+                      filesystemId:
+                        description: The ID of the Gen2 Filesystem. Changing this
+                          forces a new resource to be created.
+                        type: string
+                      isDefault:
+                        description: Is this the Default Storage Account for the HDInsight
+                          Hadoop Cluster? Changing this forces a new resource to be
+                          created.
+                        type: boolean
+                      managedIdentityResourceId:
+                        description: The ID of Managed Identity to use for accessing
+                          the Gen2 filesystem. Changing this forces a new resource
+                          to be created.
+                        type: string
+                      storageResourceId:
+                        description: The ID of the Storage Account. Changing this
+                          forces a new resource to be created.
+                        type: string
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A map of Tags which should be assigned to this HDInsight
+                      Interactive Query Cluster.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tier:
+                    description: Specifies the Tier which should be used for this
+                      HDInsight Interactive Query Cluster. Possible values are Standard
+                      or Premium. Changing this forces a new resource to be created.
+                    type: string
+                  tlsMinVersion:
+                    description: The minimal supported TLS version. Possible values
+                      are 1.0, 1.1 or 1.2. Changing this forces a new resource to
+                      be created.
+                    type: string
+                type: object
+              initProvider:
+                description: |-
+                  THIS IS A BETA FIELD. It will be honored
+                  unless the Management Policies feature flag is disabled.
+                  InitProvider holds the same fields as ForProvider, with the exception
+                  of Identifier and other resource reference fields. The fields that are
+                  in InitProvider are merged into ForProvider when the resource is created.
+                  The same fields are also added to the terraform ignore_changes hook, to
+                  avoid updating them after creation. This is useful for fields that are
+                  required on creation, but we do not desire to update them after creation,
+                  for example because of an external controller is managing them, like an
+                  autoscaler.
+                properties:
+                  clusterVersion:
+                    description: Specifies the Version of HDInsights which should
+                      be used for this Cluster. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  componentVersion:
+                    description: A component_version block as defined below.
+                    properties:
+                      interactiveHive:
+                        description: The version of Interactive Query which should
+                          be used for this HDInsight Interactive Query Cluster. Changing
+                          this forces a new resource to be created.
+                        type: string
+                    type: object
+                  computeIsolation:
+                    description: A compute_isolation block as defined below.
+                    properties:
+                      computeIsolationEnabled:
+                        description: This field indicates whether enable compute isolation
+                          or not. Possible values are true or false.
+                        type: boolean
+                      hostSku:
+                        description: The name of the host SKU.
+                        type: string
+                    type: object
+                  diskEncryption:
+                    description: A disk_encryption block as defined below.
+                    items:
+                      properties:
+                        encryptionAlgorithm:
+                          description: This is an algorithm identifier for encryption.
+                            Possible values are RSA1_5, RSA-OAEP, RSA-OAEP-256.
+                          type: string
+                        encryptionAtHostEnabled:
+                          description: This is indicator to show whether resource
+                            disk encryption is enabled.
+                          type: boolean
+                        keyVaultKeyId:
+                          description: The ID of the key vault key.
+                          type: string
+                        keyVaultManagedIdentityId:
+                          description: This is the resource ID of Managed Identity
+                            used to access the key vault.
+                          type: string
+                      type: object
+                    type: array
+                  encryptionInTransitEnabled:
+                    description: Whether encryption in transit is enabled for this
+                      Cluster. Changing this forces a new resource to be created.
+                    type: boolean
+                  extension:
+                    description: An extension block as defined below.
+                    properties:
+                      logAnalyticsWorkspaceId:
+                        description: The workspace ID of the log analytics extension.
+                        type: string
+                    type: object
+                  gateway:
+                    description: A gateway block as defined below.
+                    properties:
+                      username:
+                        description: The username used for the Ambari Portal. Changing
+                          this forces a new resource to be created.
+                        type: string
+                    type: object
+                  location:
+                    description: Specifies the Azure Region which this HDInsight Interactive
+                      Query Cluster should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  metastores:
+                    description: A metastores block as defined below.
+                    properties:
+                      ambari:
+                        description: An ambari block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        type: object
+                      hive:
+                        description: A hive block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        type: object
+                      oozie:
+                        description: An oozie block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        type: object
+                    type: object
+                  monitor:
+                    description: A monitor block as defined below.
+                    properties:
+                      logAnalyticsWorkspaceId:
+                        description: The Operations Management Suite (OMS) workspace
+                          ID.
+                        type: string
+                    type: object
+                  network:
+                    description: A network block as defined below.
+                    properties:
+                      connectionDirection:
+                        description: The direction of the resource provider connection.
+                          Possible values include Inbound or Outbound. Defaults to
+                          Inbound. Changing this forces a new resource to be created.
+                        type: string
+                      privateLinkEnabled:
+                        description: Is the private link enabled? Possible values
+                          include true or false. Defaults to false. Changing this
+                          forces a new resource to be created.
+                        type: boolean
+                    type: object
+                  roles:
+                    description: A roles block as defined below.
+                    properties:
+                      headNode:
+                        description: A head_node block as defined above.
+                        properties:
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          subnetIdRef:
+                            description: Reference to a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          subnetIdSelector:
+                            description: Selector for a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      workerNode:
+                        description: A worker_node block as defined below.
+                        properties:
+                          autoscale:
+                            description: A autoscale block as defined below.
+                            properties:
+                              capacity:
+                                properties:
+                                  maxInstanceCount:
+                                    type: number
+                                  minInstanceCount:
+                                    type: number
+                                type: object
+                              recurrence:
+                                description: A recurrence block as defined below.
+                                properties:
+                                  schedule:
+                                    description: A list of schedule blocks as defined
+                                      below.
+                                    items:
+                                      properties:
+                                        days:
+                                          description: The days of the week to perform
+                                            autoscale. Possible values are Monday,
+                                            Tuesday, Wednesday, Thursday, Friday,
+                                            Saturday and Sunday.
+                                          items:
+                                            type: string
+                                          type: array
+                                        targetInstanceCount:
+                                          description: The number of instances which
+                                            should be run for the Worker Nodes.
+                                          type: number
+                                        time:
+                                          description: The time of day to perform
+                                            the autoscale in 24hour format.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  timezone:
+                                    description: The time zone for the autoscale schedule
+                                      times.
+                                    type: string
+                                type: object
+                            type: object
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          subnetIdRef:
+                            description: Reference to a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          subnetIdSelector:
+                            description: Selector for a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          targetInstanceCount:
+                            description: The number of instances which should be run
+                              for the Worker Nodes.
+                            type: number
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      zookeeperNode:
+                        description: A zookeeper_node block as defined below.
+                        properties:
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          subnetIdRef:
+                            description: Reference to a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              name:
+                                description: Name of the referenced object.
+                                type: string
+                              policy:
+                                description: Policies for referencing.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            required:
+                            - name
+                            type: object
+                          subnetIdSelector:
+                            description: Selector for a Subnet in network to populate
+                              subnetId.
+                            properties:
+                              matchControllerRef:
+                                description: |-
+                                  MatchControllerRef ensures an object with the same controller reference
+                                  as the selecting object is selected.
+                                type: boolean
+                              matchLabels:
+                                additionalProperties:
+                                  type: string
+                                description: MatchLabels ensures an object with matching
+                                  labels is selected.
+                                type: object
+                              policy:
+                                description: Policies for selection.
+                                properties:
+                                  resolution:
+                                    default: Required
+                                    description: |-
+                                      Resolution specifies whether resolution of this reference is required.
+                                      The default is 'Required', which means the reconcile will fail if the
+                                      reference cannot be resolved. 'Optional' means this reference will be
+                                      a no-op if it cannot be resolved.
+                                    enum:
+                                    - Required
+                                    - Optional
+                                    type: string
+                                  resolve:
+                                    description: |-
+                                      Resolve specifies when this reference should be resolved. The default
+                                      is 'IfNotPresent', which will attempt to resolve the reference only when
+                                      the corresponding field is not present. Use 'Always' to resolve the
+                                      reference on every reconcile.
+                                    enum:
+                                    - Always
+                                    - IfNotPresent
+                                    type: string
+                                type: object
+                            type: object
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                    type: object
+                  securityProfile:
+                    description: A security_profile block as defined below. Changing
+                      this forces a new resource to be created.
+                    properties:
+                      aaddsResourceId:
+                        description: The resource ID of the Azure Active Directory
+                          Domain Service. Changing this forces a new resource to be
+                          created.
+                        type: string
+                      clusterUsersGroupDns:
+                        description: A list of the distinguished names for the cluster
+                          user groups. Changing this forces a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      domainName:
+                        description: The name of the Azure Active Directory Domain.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      domainUsername:
+                        description: The username of the Azure Active Directory Domain.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      ldapsUrls:
+                        description: A list of the LDAPS URLs to communicate with
+                          the Azure Active Directory. Changing this forces a new resource
+                          to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      msiResourceId:
+                        description: The User Assigned Identity for the HDInsight
+                          Cluster. Changing this forces a new resource to be created.
+                        type: string
+                    type: object
+                  storageAccount:
+                    description: One or more storage_account block as defined below.
+                    items:
+                      properties:
+                        isDefault:
+                          description: Is this the Default Storage Account for the
+                            HDInsight Hadoop Cluster? Changing this forces a new resource
+                            to be created.
+                          type: boolean
+                        storageContainerId:
+                          description: The ID of the Storage Container. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        storageContainerIdRef:
+                          description: Reference to a Container in storage to populate
+                            storageContainerId.
+                          properties:
+                            name:
+                              description: Name of the referenced object.
+                              type: string
+                            policy:
+                              description: Policies for referencing.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          required:
+                          - name
+                          type: object
+                        storageContainerIdSelector:
+                          description: Selector for a Container in storage to populate
+                            storageContainerId.
+                          properties:
+                            matchControllerRef:
+                              description: |-
+                                MatchControllerRef ensures an object with the same controller reference
+                                as the selecting object is selected.
+                              type: boolean
+                            matchLabels:
+                              additionalProperties:
+                                type: string
+                              description: MatchLabels ensures an object with matching
+                                labels is selected.
+                              type: object
+                            policy:
+                              description: Policies for selection.
+                              properties:
+                                resolution:
+                                  default: Required
+                                  description: |-
+                                    Resolution specifies whether resolution of this reference is required.
+                                    The default is 'Required', which means the reconcile will fail if the
+                                    reference cannot be resolved. 'Optional' means this reference will be
+                                    a no-op if it cannot be resolved.
+                                  enum:
+                                  - Required
+                                  - Optional
+                                  type: string
+                                resolve:
+                                  description: |-
+                                    Resolve specifies when this reference should be resolved. The default
+                                    is 'IfNotPresent', which will attempt to resolve the reference only when
+                                    the corresponding field is not present. Use 'Always' to resolve the
+                                    reference on every reconcile.
+                                  enum:
+                                  - Always
+                                  - IfNotPresent
+                                  type: string
+                              type: object
+                          type: object
+                        storageResourceId:
+                          description: The ID of the Storage Account. Changing this
+                            forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  storageAccountGen2:
+                    description: A storage_account_gen2 block as defined below.
+                    properties:
+                      filesystemId:
+                        description: The ID of the Gen2 Filesystem. Changing this
+                          forces a new resource to be created.
+                        type: string
+                      isDefault:
+                        description: Is this the Default Storage Account for the HDInsight
+                          Hadoop Cluster? Changing this forces a new resource to be
+                          created.
+                        type: boolean
+                      managedIdentityResourceId:
+                        description: The ID of Managed Identity to use for accessing
+                          the Gen2 filesystem. Changing this forces a new resource
+                          to be created.
+                        type: string
+                      storageResourceId:
+                        description: The ID of the Storage Account. Changing this
+                          forces a new resource to be created.
+                        type: string
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A map of Tags which should be assigned to this HDInsight
+                      Interactive Query Cluster.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tier:
+                    description: Specifies the Tier which should be used for this
+                      HDInsight Interactive Query Cluster. Possible values are Standard
+                      or Premium. Changing this forces a new resource to be created.
+                    type: string
+                  tlsMinVersion:
+                    description: The minimal supported TLS version. Possible values
+                      are 1.0, 1.1 or 1.2. Changing this forces a new resource to
+                      be created.
+                    type: string
+                type: object
+              managementPolicies:
+                default:
+                - '*'
+                description: |-
+                  THIS IS A BETA FIELD. It is on by default but can be opted out
+                  through a Crossplane feature flag.
+                  ManagementPolicies specify the array of actions Crossplane is allowed to
+                  take on the managed and external resources.
+                  This field is planned to replace the DeletionPolicy field in a future
+                  release. Currently, both could be set independently and non-default
+                  values would be honored if the feature flag is enabled. If both are
+                  custom, the DeletionPolicy field will be ignored.
+                  See the design doc for more information: https://github.com/crossplane/crossplane/blob/499895a25d1a1a0ba1604944ef98ac7a1a71f197/design/design-doc-observe-only-resources.md?plain=1#L223
+                  and this one: https://github.com/crossplane/crossplane/blob/444267e84783136daa93568b364a5f01228cacbe/design/one-pager-ignore-changes.md
+                items:
+                  description: |-
+                    A ManagementAction represents an action that the Crossplane controllers
+                    can take on an external resource.
+                  enum:
+                  - Observe
+                  - Create
+                  - Update
+                  - Delete
+                  - LateInitialize
+                  - '*'
+                  type: string
+                type: array
+              providerConfigRef:
+                default:
+                  name: default
+                description: |-
+                  ProviderConfigReference specifies how the provider that will be used to
+                  create, observe, update, and delete this managed resource should be
+                  configured.
+                properties:
+                  name:
+                    description: Name of the referenced object.
+                    type: string
+                  policy:
+                    description: Policies for referencing.
+                    properties:
+                      resolution:
+                        default: Required
+                        description: |-
+                          Resolution specifies whether resolution of this reference is required.
+                          The default is 'Required', which means the reconcile will fail if the
+                          reference cannot be resolved. 'Optional' means this reference will be
+                          a no-op if it cannot be resolved.
+                        enum:
+                        - Required
+                        - Optional
+                        type: string
+                      resolve:
+                        description: |-
+                          Resolve specifies when this reference should be resolved. The default
+                          is 'IfNotPresent', which will attempt to resolve the reference only when
+                          the corresponding field is not present. Use 'Always' to resolve the
+                          reference on every reconcile.
+                        enum:
+                        - Always
+                        - IfNotPresent
+                        type: string
+                    type: object
+                required:
+                - name
+                type: object
+              publishConnectionDetailsTo:
+                description: |-
+                  PublishConnectionDetailsTo specifies the connection secret config which
+                  contains a name, metadata and a reference to secret store config to
+                  which any connection details for this managed resource should be written.
+                  Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                properties:
+                  configRef:
+                    default:
+                      name: default
+                    description: |-
+                      SecretStoreConfigRef specifies which secret store config should be used
+                      for this ConnectionSecret.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  metadata:
+                    description: Metadata is the metadata for connection secret.
+                    properties:
+                      annotations:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Annotations are the annotations to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.annotations".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      labels:
+                        additionalProperties:
+                          type: string
+                        description: |-
+                          Labels are the labels/tags to be added to connection secret.
+                          - For Kubernetes secrets, this will be used as "metadata.labels".
+                          - It is up to Secret Store implementation for others store types.
+                        type: object
+                      type:
+                        description: |-
+                          Type is the SecretType for the connection secret.
+                          - Only valid for Kubernetes Secret Stores.
+                        type: string
+                    type: object
+                  name:
+                    description: Name is the name of the connection secret.
+                    type: string
+                required:
+                - name
+                type: object
+              writeConnectionSecretToRef:
+                description: |-
+                  WriteConnectionSecretToReference specifies the namespace and name of a
+                  Secret to which any connection details for this managed resource should
+                  be written. Connection details frequently include the endpoint, username,
+                  and password required to connect to the managed resource.
+                  This field is planned to be replaced in a future release in favor of
+                  PublishConnectionDetailsTo. Currently, both could be set independently
+                  and connection details would be published to both without affecting
+                  each other.
+                properties:
+                  name:
+                    description: Name of the secret.
+                    type: string
+                  namespace:
+                    description: Namespace of the secret.
+                    type: string
+                required:
+                - name
+                - namespace
+                type: object
+            required:
+            - forProvider
+            type: object
+            x-kubernetes-validations:
+            - message: spec.forProvider.clusterVersion is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.clusterVersion)
+                || (has(self.initProvider) && has(self.initProvider.clusterVersion))'
+            - message: spec.forProvider.componentVersion is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.componentVersion)
+                || (has(self.initProvider) && has(self.initProvider.componentVersion))'
+            - message: spec.forProvider.gateway is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.gateway)
+                || (has(self.initProvider) && has(self.initProvider.gateway))'
+            - message: spec.forProvider.location is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
+                || (has(self.initProvider) && has(self.initProvider.location))'
+            - message: spec.forProvider.roles is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.roles)
+                || (has(self.initProvider) && has(self.initProvider.roles))'
+            - message: spec.forProvider.tier is a required parameter
+              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
+                || ''Update'' in self.managementPolicies) || has(self.forProvider.tier)
+                || (has(self.initProvider) && has(self.initProvider.tier))'
+          status:
+            description: InteractiveQueryClusterStatus defines the observed state
+              of InteractiveQueryCluster.
+            properties:
+              atProvider:
+                properties:
+                  clusterVersion:
+                    description: Specifies the Version of HDInsights which should
+                      be used for this Cluster. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  componentVersion:
+                    description: A component_version block as defined below.
+                    properties:
+                      interactiveHive:
+                        description: The version of Interactive Query which should
+                          be used for this HDInsight Interactive Query Cluster. Changing
+                          this forces a new resource to be created.
+                        type: string
+                    type: object
+                  computeIsolation:
+                    description: A compute_isolation block as defined below.
+                    properties:
+                      computeIsolationEnabled:
+                        description: This field indicates whether enable compute isolation
+                          or not. Possible values are true or false.
+                        type: boolean
+                      hostSku:
+                        description: The name of the host SKU.
+                        type: string
+                    type: object
+                  diskEncryption:
+                    description: A disk_encryption block as defined below.
+                    items:
+                      properties:
+                        encryptionAlgorithm:
+                          description: This is an algorithm identifier for encryption.
+                            Possible values are RSA1_5, RSA-OAEP, RSA-OAEP-256.
+                          type: string
+                        encryptionAtHostEnabled:
+                          description: This is indicator to show whether resource
+                            disk encryption is enabled.
+                          type: boolean
+                        keyVaultKeyId:
+                          description: The ID of the key vault key.
+                          type: string
+                        keyVaultManagedIdentityId:
+                          description: This is the resource ID of Managed Identity
+                            used to access the key vault.
+                          type: string
+                      type: object
+                    type: array
+                  encryptionInTransitEnabled:
+                    description: Whether encryption in transit is enabled for this
+                      Cluster. Changing this forces a new resource to be created.
+                    type: boolean
+                  extension:
+                    description: An extension block as defined below.
+                    properties:
+                      logAnalyticsWorkspaceId:
+                        description: The workspace ID of the log analytics extension.
+                        type: string
+                    type: object
+                  gateway:
+                    description: A gateway block as defined below.
+                    properties:
+                      username:
+                        description: The username used for the Ambari Portal. Changing
+                          this forces a new resource to be created.
+                        type: string
+                    type: object
+                  httpsEndpoint:
+                    description: The HTTPS Connectivity Endpoint for this HDInsight
+                      Interactive Query Cluster.
+                    type: string
+                  id:
+                    description: The ID of the HDInsight Interactive Query Cluster.
+                    type: string
+                  location:
+                    description: Specifies the Azure Region which this HDInsight Interactive
+                      Query Cluster should exist. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  metastores:
+                    description: A metastores block as defined below.
+                    properties:
+                      ambari:
+                        description: An ambari block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        type: object
+                      hive:
+                        description: A hive block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        type: object
+                      oozie:
+                        description: An oozie block as defined below.
+                        properties:
+                          databaseName:
+                            description: The external Oozie metastore's existing SQL
+                              database. Changing this forces a new resource to be
+                              created.
+                            type: string
+                          server:
+                            description: The fully-qualified domain name (FQDN) of
+                              the SQL server to use for the external Oozie metastore.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                        type: object
+                    type: object
+                  monitor:
+                    description: A monitor block as defined below.
+                    properties:
+                      logAnalyticsWorkspaceId:
+                        description: The Operations Management Suite (OMS) workspace
+                          ID.
+                        type: string
+                    type: object
+                  network:
+                    description: A network block as defined below.
+                    properties:
+                      connectionDirection:
+                        description: The direction of the resource provider connection.
+                          Possible values include Inbound or Outbound. Defaults to
+                          Inbound. Changing this forces a new resource to be created.
+                        type: string
+                      privateLinkEnabled:
+                        description: Is the private link enabled? Possible values
+                          include true or false. Defaults to false. Changing this
+                          forces a new resource to be created.
+                        type: boolean
+                    type: object
+                  resourceGroupName:
+                    description: Specifies the name of the Resource Group in which
+                      this HDInsight Interactive Query Cluster should exist. Changing
+                      this forces a new resource to be created.
+                    type: string
+                  roles:
+                    description: A roles block as defined below.
+                    properties:
+                      headNode:
+                        description: A head_node block as defined above.
+                        properties:
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      workerNode:
+                        description: A worker_node block as defined below.
+                        properties:
+                          autoscale:
+                            description: A autoscale block as defined below.
+                            properties:
+                              capacity:
+                                properties:
+                                  maxInstanceCount:
+                                    type: number
+                                  minInstanceCount:
+                                    type: number
+                                type: object
+                              recurrence:
+                                description: A recurrence block as defined below.
+                                properties:
+                                  schedule:
+                                    description: A list of schedule blocks as defined
+                                      below.
+                                    items:
+                                      properties:
+                                        days:
+                                          description: The days of the week to perform
+                                            autoscale. Possible values are Monday,
+                                            Tuesday, Wednesday, Thursday, Friday,
+                                            Saturday and Sunday.
+                                          items:
+                                            type: string
+                                          type: array
+                                        targetInstanceCount:
+                                          description: The number of instances which
+                                            should be run for the Worker Nodes.
+                                          type: number
+                                        time:
+                                          description: The time of day to perform
+                                            the autoscale in 24hour format.
+                                          type: string
+                                      type: object
+                                    type: array
+                                  timezone:
+                                    description: The time zone for the autoscale schedule
+                                      times.
+                                    type: string
+                                type: object
+                            type: object
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          targetInstanceCount:
+                            description: The number of instances which should be run
+                              for the Worker Nodes.
+                            type: number
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                      zookeeperNode:
+                        description: A zookeeper_node block as defined below.
+                        properties:
+                          scriptActions:
+                            description: The script action which will run on the cluster.
+                              One or more script_actions blocks as defined above.
+                            items:
+                              properties:
+                                name:
+                                  description: The name of the script action.
+                                  type: string
+                                parameters:
+                                  description: The parameters for the script provided.
+                                  type: string
+                                uri:
+                                  description: The URI to the script.
+                                  type: string
+                              type: object
+                            type: array
+                          sshKeys:
+                            description: A list of SSH Keys which should be used for
+                              the local administrator on the Zookeeper Nodes. Changing
+                              this forces a new resource to be created.
+                            items:
+                              type: string
+                            type: array
+                            x-kubernetes-list-type: set
+                          subnetId:
+                            description: The ID of the Subnet within the Virtual Network
+                              where the Zookeeper Nodes should be provisioned within.
+                              Changing this forces a new resource to be created.
+                            type: string
+                          username:
+                            description: The Username of the local administrator for
+                              the Zookeeper Nodes. Changing this forces a new resource
+                              to be created.
+                            type: string
+                          virtualNetworkId:
+                            description: The ID of the Virtual Network where the Zookeeper
+                              Nodes should be provisioned within. Changing this forces
+                              a new resource to be created.
+                            type: string
+                          vmSize:
+                            description: The Size of the Virtual Machine which should
+                              be used as the Zookeeper Nodes. Possible values are
+                              ExtraSmall, Small, Medium, Large, ExtraLarge, A5, A6,
+                              A7, A8, A9, A10, A11, Standard_A1_V2, Standard_A2_V2,
+                              Standard_A2m_V2, Standard_A3, Standard_A4_V2, Standard_A4m_V2,
+                              Standard_A8_V2, Standard_A8m_V2, Standard_D1, Standard_D2,
+                              Standard_D3, Standard_D4, Standard_D11, Standard_D12,
+                              Standard_D13, Standard_D14, Standard_D1_V2, Standard_D2_V2,
+                              Standard_D3_V2, Standard_D4_V2, Standard_D5_V2, Standard_D11_V2,
+                              Standard_D12_V2, Standard_D13_V2, Standard_D14_V2, Standard_DS1_V2,
+                              Standard_DS2_V2, Standard_DS3_V2, Standard_DS4_V2, Standard_DS5_V2,
+                              Standard_DS11_V2, Standard_DS12_V2, Standard_DS13_V2,
+                              Standard_DS14_V2, Standard_E2_V3, Standard_E4_V3, Standard_E8_V3,
+                              Standard_E16_V3, Standard_E20_V3, Standard_E32_V3, Standard_E64_V3,
+                              Standard_E64i_V3, Standard_E2s_V3, Standard_E4s_V3,
+                              Standard_E8s_V3, Standard_E16s_V3, Standard_E20s_V3,
+                              Standard_E32s_V3, Standard_E64s_V3, Standard_E64is_V3,
+                              Standard_D2a_V4, Standard_D4a_V4, Standard_D8a_V4, Standard_D16a_V4,
+                              Standard_D32a_V4, Standard_D48a_V4, Standard_D64a_V4,
+                              Standard_D96a_V4, Standard_E2a_V4, Standard_E4a_V4,
+                              Standard_E8a_V4, Standard_E16a_V4, Standard_E20a_V4,
+                              Standard_E32a_V4, Standard_E48a_V4, Standard_E64a_V4,
+                              Standard_E96a_V4, Standard_G1, Standard_G2, Standard_G3,
+                              Standard_G4, Standard_G5, Standard_F2s_V2, Standard_F4s_V2,
+                              Standard_F8s_V2, Standard_F16s_V2, Standard_F32s_V2,
+                              Standard_F64s_V2, Standard_F72s_V2, Standard_GS1, Standard_GS2,
+                              Standard_GS3, Standard_GS4, Standard_GS5 and Standard_NC24.
+                              Changing this forces a new resource to be created.
+                            type: string
+                        type: object
+                    type: object
+                  securityProfile:
+                    description: A security_profile block as defined below. Changing
+                      this forces a new resource to be created.
+                    properties:
+                      aaddsResourceId:
+                        description: The resource ID of the Azure Active Directory
+                          Domain Service. Changing this forces a new resource to be
+                          created.
+                        type: string
+                      clusterUsersGroupDns:
+                        description: A list of the distinguished names for the cluster
+                          user groups. Changing this forces a new resource to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      domainName:
+                        description: The name of the Azure Active Directory Domain.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      domainUsername:
+                        description: The username of the Azure Active Directory Domain.
+                          Changing this forces a new resource to be created.
+                        type: string
+                      ldapsUrls:
+                        description: A list of the LDAPS URLs to communicate with
+                          the Azure Active Directory. Changing this forces a new resource
+                          to be created.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      msiResourceId:
+                        description: The User Assigned Identity for the HDInsight
+                          Cluster. Changing this forces a new resource to be created.
+                        type: string
+                    type: object
+                  sshEndpoint:
+                    description: The SSH Connectivity Endpoint for this HDInsight
+                      Interactive Query Cluster.
+                    type: string
+                  storageAccount:
+                    description: One or more storage_account block as defined below.
+                    items:
+                      properties:
+                        isDefault:
+                          description: Is this the Default Storage Account for the
+                            HDInsight Hadoop Cluster? Changing this forces a new resource
+                            to be created.
+                          type: boolean
+                        storageContainerId:
+                          description: The ID of the Storage Container. Changing this
+                            forces a new resource to be created.
+                          type: string
+                        storageResourceId:
+                          description: The ID of the Storage Account. Changing this
+                            forces a new resource to be created.
+                          type: string
+                      type: object
+                    type: array
+                  storageAccountGen2:
+                    description: A storage_account_gen2 block as defined below.
+                    properties:
+                      filesystemId:
+                        description: The ID of the Gen2 Filesystem. Changing this
+                          forces a new resource to be created.
+                        type: string
+                      isDefault:
+                        description: Is this the Default Storage Account for the HDInsight
+                          Hadoop Cluster? Changing this forces a new resource to be
+                          created.
+                        type: boolean
+                      managedIdentityResourceId:
+                        description: The ID of Managed Identity to use for accessing
+                          the Gen2 filesystem. Changing this forces a new resource
+                          to be created.
+                        type: string
+                      storageResourceId:
+                        description: The ID of the Storage Account. Changing this
+                          forces a new resource to be created.
+                        type: string
+                    type: object
+                  tags:
+                    additionalProperties:
+                      type: string
+                    description: A map of Tags which should be assigned to this HDInsight
+                      Interactive Query Cluster.
+                    type: object
+                    x-kubernetes-map-type: granular
+                  tier:
+                    description: Specifies the Tier which should be used for this
+                      HDInsight Interactive Query Cluster. Possible values are Standard
+                      or Premium. Changing this forces a new resource to be created.
+                    type: string
+                  tlsMinVersion:
+                    description: The minimal supported TLS version. Possible values
+                      are 1.0, 1.1 or 1.2. Changing this forces a new resource to
+                      be created.
+                    type: string
+                type: object
+              conditions:
+                description: Conditions of the resource.
+                items:
+                  description: A Condition that may apply to a resource.
+                  properties:
+                    lastTransitionTime:
+                      description: |-
+                        LastTransitionTime is the last time this condition transitioned from one
+                        status to another.
+                      format: date-time
+                      type: string
+                    message:
+                      description: |-
+                        A Message containing details about this condition's last transition from
+                        one status to another, if any.
+                      type: string
+                    observedGeneration:
+                      description: |-
+                        ObservedGeneration represents the .metadata.generation that the condition was set based upon.
+                        For instance, if .metadata.generation is currently 12, but the .status.conditions[x].observedGeneration is 9, the condition is out of date
+                        with respect to the current state of the instance.
+                      format: int64
+                      type: integer
+                    reason:
+                      description: A Reason for this condition's last transition from
+                        one status to another.
+                      type: string
+                    status:
+                      description: Status of this condition; is it currently True,
+                        False, or Unknown?
+                      type: string
+                    type:
+                      description: |-
+                        Type of this condition. At most one of each condition type may apply to
+                        a resource at any point in time.
+                      type: string
+                  required:
+                  - lastTransitionTime
+                  - reason
+                  - status
+                  - type
+                  type: object
+                type: array
+                x-kubernetes-list-map-keys:
+                - type
+                x-kubernetes-list-type: map
+              observedGeneration:
+                description: |-
+                  ObservedGeneration is the latest metadata.generation
+                  which resulted in either a ready state, or stalled due to error
+                  it can not recover from without human intervention.
+                format: int64
+                type: integer
+            type: object
+        required:
+        - spec
+        type: object
+    served: true
+    storage: false
+    subresources:
+      status: {}

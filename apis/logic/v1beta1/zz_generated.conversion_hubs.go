@@ -7,9 +7,6 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *IntegrationServiceEnvironment) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *AppActionCustom) Hub() {}
 
 // Hub marks this type as a conversion hub.
@@ -17,9 +14,6 @@ func (tr *AppActionHTTP) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *AppIntegrationAccount) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *AppIntegrationAccountBatchConfiguration) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *AppIntegrationAccountPartner) Hub() {}
@@ -37,7 +31,4 @@ func (tr *AppTriggerCustom) Hub() {}
 func (tr *AppTriggerHTTPRequest) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *AppTriggerRecurrence) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *AppWorkflow) Hub() {}
+func (tr *IntegrationServiceEnvironment) Hub() {}

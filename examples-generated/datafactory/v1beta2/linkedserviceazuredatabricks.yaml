@@ -1,0 +1,88 @@
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: LinkedServiceAzureDatabricks
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: msi_linked
+  name: msi-linked
+spec:
+  forProvider:
+    adbDomain: https://${azurerm_databricks_workspace.example.workspace_url}
+    dataFactoryIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    description: ADB Linked Service via MSI
+    msiWorkSpaceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    newClusterConfig:
+    - clusterVersion: 5.5.x-gpu-scala2.11
+      customTags:
+        custom_tag1: sct_value_1
+        custom_tag2: sct_value_2
+      driverNodeType: Standard_NC12
+      initScripts:
+      - init.sh
+      - init2.sh
+      logDestination: dbfs:/logs
+      maxNumberOfWorkers: 5
+      minNumberOfWorkers: 1
+      nodeType: Standard_NC12
+      sparkConfig:
+        config1: value1
+        config2: value2
+      sparkEnvironmentVariables:
+        envVar1: value1
+        envVar2: value2
+
+---
+
+apiVersion: datafactory.azure.upbound.io/v1beta2
+kind: Factory
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    identity:
+    - type: SystemAssigned
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: databricks.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: datafactory/v1beta2/linkedserviceazuredatabricks
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: East US

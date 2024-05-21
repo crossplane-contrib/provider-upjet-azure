@@ -7,19 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *MSSQLDatabase) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MSSQLDatabaseExtendedAuditingPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MSSQLDatabaseVulnerabilityAssessmentRuleBaseline) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLElasticPool) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLFailoverGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MSSQLFirewallRule) Hub() {}
@@ -31,25 +22,10 @@ func (tr *MSSQLJobAgent) Hub() {}
 func (tr *MSSQLJobCredential) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MSSQLManagedDatabase) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLManagedInstance) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MSSQLManagedInstanceActiveDirectoryAdministrator) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *MSSQLManagedInstanceFailoverGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLManagedInstanceVulnerabilityAssessment) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *MSSQLOutboundFirewallRule) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLServer) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MSSQLServerDNSAlias) Hub() {}
@@ -62,9 +38,6 @@ func (tr *MSSQLServerSecurityAlertPolicy) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MSSQLServerTransparentDataEncryption) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *MSSQLServerVulnerabilityAssessment) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *MSSQLVirtualNetworkRule) Hub() {}

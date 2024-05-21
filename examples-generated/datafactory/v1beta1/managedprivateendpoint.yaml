@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: datafactory.azure.upbound.io/v1beta1
+apiVersion: datafactory.azure.upbound.io/v1beta2
 kind: Factory
 metadata:
   annotations:
@@ -51,7 +51,7 @@ spec:
 
 ---
 
-apiVersion: storage.azure.upbound.io/v1beta1
+apiVersion: storage.azure.upbound.io/v1beta2
 kind: Account
 metadata:
   annotations:

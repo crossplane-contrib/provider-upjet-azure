@@ -90,7 +90,7 @@ spec:
 
 ---
 
-apiVersion: web.azure.upbound.io/v1beta1
+apiVersion: web.azure.upbound.io/v1beta2
 kind: WindowsWebApp
 metadata:
   annotations:

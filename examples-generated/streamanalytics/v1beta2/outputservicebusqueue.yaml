@@ -1,0 +1,80 @@
+apiVersion: streamanalytics.azure.upbound.io/v1beta2
+kind: OutputServiceBusQueue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: blob-storage-output
+    queueNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+    serialization:
+    - format: Array
+      type: Csv
+    servicebusNamespaceSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sharedAccessPolicyKeySecretRef:
+      key: attribute.default_primary_key
+      name: example-servicebus-namespace
+      namespace: upbound-system
+    sharedAccessPolicyName: RootManageSharedAccessKey
+    streamAnalyticsJobNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: azurerm_stream_analytics_job
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta2
+kind: ServiceBusNamespace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    sku: Standard
+
+---
+
+apiVersion: servicebus.azure.upbound.io/v1beta1
+kind: Queue
+metadata:
+  annotations:
+    meta.upbound.io/example-id: streamanalytics/v1beta2/outputservicebusqueue
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    enablePartitioning: true
+    namespaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

@@ -1,0 +1,27 @@
+apiVersion: network.azure.upbound.io/v1beta2
+kind: PrivateDNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privatednszone
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta2/privatednszone
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

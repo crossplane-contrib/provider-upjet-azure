@@ -47,7 +47,7 @@ type RedisFirewallRuleParameters struct {
 	EndIP *string `json:"endIp,omitempty" tf:"end_ip,omitempty"`
 
 	// The name of the Redis Cache. Changing this forces a new resource to be created.
-	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta1.RedisCache
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/cache/v1beta2.RedisCache
 	// +kubebuilder:validation:Optional
 	RedisCacheName *string `json:"redisCacheName,omitempty" tf:"redis_cache_name,omitempty"`
 

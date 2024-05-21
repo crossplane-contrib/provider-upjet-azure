@@ -18,7 +18,7 @@ spec:
 
 ---
 
-apiVersion: containerregistry.azure.upbound.io/v1beta1
+apiVersion: containerregistry.azure.upbound.io/v1beta2
 kind: Registry
 metadata:
   annotations:

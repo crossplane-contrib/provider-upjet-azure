@@ -7,25 +7,13 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *Vault) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *AccessPolicy) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Certificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *CertificateContacts) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *CertificateIssuer) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *Key) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *ManagedHardwareSecurityModule) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *ManagedStorageAccount) Hub() {}

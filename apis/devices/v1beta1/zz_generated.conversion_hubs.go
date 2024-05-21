@@ -7,16 +7,10 @@
 package v1beta1
 
 // Hub marks this type as a conversion hub.
-func (tr *IOTHub) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *IOTHubCertificate) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *IOTHubConsumerGroup) Hub() {}
-
-// Hub marks this type as a conversion hub.
-func (tr *IOTHubDPS) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *IOTHubDPSCertificate) Hub() {}

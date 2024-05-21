@@ -23,7 +23,7 @@ spec:
 
 ---
 
-apiVersion: apimanagement.azure.upbound.io/v1beta1
+apiVersion: apimanagement.azure.upbound.io/v1beta2
 kind: Management
 metadata:
   annotations:
@@ -43,7 +43,7 @@ spec:
 
 ---
 
-apiVersion: cache.azure.upbound.io/v1beta1
+apiVersion: cache.azure.upbound.io/v1beta2
 kind: RedisCache
 metadata:
   annotations:

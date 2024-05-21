@@ -1,0 +1,101 @@
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorScheduledQueryRulesAlertV2
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalertv2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    action:
+    - actionGroups:
+      - ${azurerm_monitor_action_group.example.id}
+      customProperties:
+        key: value
+        key2: value2
+    autoMitigationEnabled: true
+    criteria:
+    - dimension:
+      - name: client_CountryOrRegion
+        operator: Exclude
+        values:
+        - "123"
+      failingPeriods:
+      - minimumFailingPeriodsToTriggerAlert: 1
+        numberOfEvaluationPeriods: 1
+      metricMeasureColumn: CountByCountry
+      operator: LessThan
+      query: |
+        requests
+          | summarize CountByCountry=count() by client_CountryOrRegion
+      resourceIdColumn: client_CountryOrRegion
+      threshold: 17.5
+      timeAggregationMethod: Maximum
+    description: example sqr
+    displayName: example-sqr
+    enabled: true
+    evaluationFrequency: PT10M
+    location: West Europe
+    queryTimeRangeOverride: PT1H
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    scopesRefs:
+    - name: example
+    severity: 4
+    skipQueryValidation: true
+    tags:
+      key: value
+      key2: value2
+    windowDuration: PT10M
+    workspaceAlertsStorageEnabled: false
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta1
+kind: ApplicationInsights
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalertv2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    applicationType: web
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: insights.azure.upbound.io/v1beta2
+kind: MonitorActionGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalertv2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shortName: test mag
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: insights/v1beta2/monitorscheduledqueryrulesalertv2
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

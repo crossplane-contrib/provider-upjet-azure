@@ -1,0 +1,43 @@
+apiVersion: authorization.azure.upbound.io/v1beta2
+kind: ResourcePolicyAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/resourcepolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    name: example-policy-assignment
+    policyDefinitionIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceId: ${data.azurerm_virtual_network.example.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: PolicyDefinition
+metadata:
+  annotations:
+    meta.upbound.io/example-id: authorization/v1beta2/resourcepolicyassignment
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    displayName: my-policy-definition
+    mode: All
+    policyRule: |2
+       {
+          "if": {
+            "not": {
+              "field": "location",
+              "equals": "westeurope"
+            }
+          },
+          "then": {
+            "effect": "Deny"
+          }
+        }
+    policyType: Custom

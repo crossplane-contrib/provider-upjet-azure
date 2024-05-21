@@ -1,0 +1,96 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: CC0-1.0
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: FunctionApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapp
+  labels:
+    testing.upbound.io/example-name: funcappxmpl
+  name: funcappxmpl
+spec:
+  forProvider:
+    name: fncappxmpl
+    appServicePlanIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: functionapp-sp
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: functionapp-rg
+    storageAccountAccessKeySecretRef:
+      key: example-key
+      name: example-name
+      namespace: upbound-system
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: funcnappstorage
+    siteConfig: 
+    - {}
+
+---
+
+apiVersion: web.azure.upbound.io/v1beta1
+kind: AppServicePlan
+metadata:
+  annotations:
+    uptest.upbound.io/pre-delete-hook: ../testhooks/delete-function-app.sh
+    meta.upbound.io/example-id: web/v1beta1/functionapp
+  labels:
+    testing.upbound.io/example-name: functionapp-sp
+  name: functionapp-sp
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: functionapp-rg
+    sku:
+    - size: S1
+      tier: Standard
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapp
+  labels:
+    testing.upbound.io/example-name: functionapp-rg
+  name: functionapp-rg
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: web/v1beta1/functionapp
+  labels:
+    testing.upbound.io/example-name: funcnappstorage
+  name: funcnappstorage
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: functionapp-rg
+
+--- 
+
+apiVersion: v1
+kind: Secret
+metadata:
+  name: example-name
+  namespace: upbound-system
+type: Opaque
+data:
+  example-key: dGVzdFBhc3N3b3JkMTIzIQ==

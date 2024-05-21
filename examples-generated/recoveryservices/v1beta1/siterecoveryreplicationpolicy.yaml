@@ -19,7 +19,7 @@ spec:
 
 ---
 
-apiVersion: recoveryservices.azure.upbound.io/v1beta1
+apiVersion: recoveryservices.azure.upbound.io/v1beta2
 kind: Vault
 metadata:
   annotations:

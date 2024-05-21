@@ -20,7 +20,7 @@ spec:
 
 ---
 
-apiVersion: dbformysql.azure.upbound.io/v1beta1
+apiVersion: dbformysql.azure.upbound.io/v1beta2
 kind: Server
 metadata:
   annotations:
