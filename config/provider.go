@@ -53,6 +53,7 @@ import (
 	"github.com/upbound/provider-azure/config/storagecache"
 	"github.com/upbound/provider-azure/config/storagesync"
 	"github.com/upbound/provider-azure/config/streamanalytics"
+	"github.com/upbound/provider-azure/config/synapse"
 	"github.com/upbound/provider-azure/config/web"
 )
 
@@ -106,4 +107,5 @@ func init() {
 	ProviderConfiguration.AddConfig(orbital.Configure)
 	ProviderConfiguration.AddConfig(appplatform.Configure)
 	ProviderConfiguration.AddConfig(databricks.Configure)
+	ProviderConfiguration.AddConfig(synapse.Configure)
 }

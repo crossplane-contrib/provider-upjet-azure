@@ -1679,22 +1679,20 @@ spec:
                 properties:
                   aadAdmin:
                     description: An aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      login:
+                        description: The login name of the Azure AD Administrator
+                          of this Synapse Workspace.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this Synapse Workspace.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this Synapse Workspace.
+                        type: string
+                    type: object
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     properties:
@@ -2127,22 +2125,20 @@ spec:
                     type: object
                   sqlAadAdmin:
                     description: An sql_aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      login:
+                        description: The login name of the Azure AD Administrator
+                          of this Synapse Workspace SQL.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this Synapse Workspace SQL.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this Synapse Workspace SQL.
+                        type: string
+                    type: object
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
@@ -2274,22 +2270,20 @@ spec:
                 properties:
                   aadAdmin:
                     description: An aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      login:
+                        description: The login name of the Azure AD Administrator
+                          of this Synapse Workspace.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this Synapse Workspace.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this Synapse Workspace.
+                        type: string
+                    type: object
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     properties:
@@ -2641,22 +2635,20 @@ spec:
                     type: string
                   sqlAadAdmin:
                     description: An sql_aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      login:
+                        description: The login name of the Azure AD Administrator
+                          of this Synapse Workspace SQL.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this Synapse Workspace SQL.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this Synapse Workspace SQL.
+                        type: string
+                    type: object
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is
@@ -2933,22 +2925,20 @@ spec:
                 properties:
                   aadAdmin:
                     description: An aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      login:
+                        description: The login name of the Azure AD Administrator
+                          of this Synapse Workspace.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this Synapse Workspace.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this Synapse Workspace.
+                        type: string
+                    type: object
                   azureDevopsRepo:
                     description: An azure_devops_repo block as defined below.
                     properties:
@@ -3099,22 +3089,20 @@ spec:
                     type: string
                   sqlAadAdmin:
                     description: An sql_aad_admin block as defined below.
-                    items:
-                      properties:
-                        login:
-                          description: The login name of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        objectId:
-                          description: The object id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                        tenantId:
-                          description: The tenant id of the Azure AD Administrator
-                            of this Synapse Workspace SQL.
-                          type: string
-                      type: object
-                    type: array
+                    properties:
+                      login:
+                        description: The login name of the Azure AD Administrator
+                          of this Synapse Workspace SQL.
+                        type: string
+                      objectId:
+                        description: The object id of the Azure AD Administrator of
+                          this Synapse Workspace SQL.
+                        type: string
+                      tenantId:
+                        description: The tenant id of the Azure AD Administrator of
+                          this Synapse Workspace SQL.
+                        type: string
+                    type: object
                   sqlAdministratorLogin:
                     description: Specifies The login name of the SQL administrator.
                       Changing this forces a new resource to be created. If this is

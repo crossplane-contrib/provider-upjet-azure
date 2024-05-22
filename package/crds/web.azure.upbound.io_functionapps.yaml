@@ -3357,38 +3357,36 @@ spec:
                             headers:
                               description: The headers block for this specific scm_ip_restriction
                                 as defined below.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: A list of allowed Azure FrontDoor
-                                      IDs in UUID notation with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xFdHealthProbe:
-                                    description: A list to allow the Azure FrontDoor
-                                      health probe header. Only allowed value is "1".
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedFor:
-                                    description: A list of allowed 'X-Forwarded-For'
-                                      IPs in CIDR notation with a maximum of 8
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedHost:
-                                    description: A list of allowed 'X-Forwarded-Host'
-                                      domains with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: A list of allowed Azure FrontDoor IDs
+                                    in UUID notation with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xFdHealthProbe:
+                                  description: A list to allow the Azure FrontDoor
+                                    health probe header. Only allowed value is "1".
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedFor:
+                                  description: A list of allowed 'X-Forwarded-For'
+                                    IPs in CIDR notation with a maximum of 8
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedHost:
+                                  description: A list of allowed 'X-Forwarded-Host'
+                                    domains with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
                             ipAddress:
                               description: The IP Address used for this IP Restriction
                                 in CIDR notation.
@@ -3520,38 +3518,36 @@ spec:
                             headers:
                               description: The headers block for this specific scm_ip_restriction
                                 as defined below.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: A list of allowed Azure FrontDoor
-                                      IDs in UUID notation with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xFdHealthProbe:
-                                    description: A list to allow the Azure FrontDoor
-                                      health probe header. Only allowed value is "1".
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedFor:
-                                    description: A list of allowed 'X-Forwarded-For'
-                                      IPs in CIDR notation with a maximum of 8
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedHost:
-                                    description: A list of allowed 'X-Forwarded-Host'
-                                      domains with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: A list of allowed Azure FrontDoor IDs
+                                    in UUID notation with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xFdHealthProbe:
+                                  description: A list to allow the Azure FrontDoor
+                                    health probe header. Only allowed value is "1".
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedFor:
+                                  description: A list of allowed 'X-Forwarded-For'
+                                    IPs in CIDR notation with a maximum of 8
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedHost:
+                                  description: A list of allowed 'X-Forwarded-Host'
+                                    domains with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
                             ipAddress:
                               description: The IP Address used for this IP Restriction
                                 in CIDR notation.
@@ -4239,38 +4235,36 @@ spec:
                             headers:
                               description: The headers block for this specific scm_ip_restriction
                                 as defined below.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: A list of allowed Azure FrontDoor
-                                      IDs in UUID notation with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xFdHealthProbe:
-                                    description: A list to allow the Azure FrontDoor
-                                      health probe header. Only allowed value is "1".
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedFor:
-                                    description: A list of allowed 'X-Forwarded-For'
-                                      IPs in CIDR notation with a maximum of 8
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedHost:
-                                    description: A list of allowed 'X-Forwarded-Host'
-                                      domains with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: A list of allowed Azure FrontDoor IDs
+                                    in UUID notation with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xFdHealthProbe:
+                                  description: A list to allow the Azure FrontDoor
+                                    health probe header. Only allowed value is "1".
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedFor:
+                                  description: A list of allowed 'X-Forwarded-For'
+                                    IPs in CIDR notation with a maximum of 8
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedHost:
+                                  description: A list of allowed 'X-Forwarded-Host'
+                                    domains with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
                             ipAddress:
                               description: The IP Address used for this IP Restriction
                                 in CIDR notation.
@@ -4402,38 +4396,36 @@ spec:
                             headers:
                               description: The headers block for this specific scm_ip_restriction
                                 as defined below.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: A list of allowed Azure FrontDoor
-                                      IDs in UUID notation with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xFdHealthProbe:
-                                    description: A list to allow the Azure FrontDoor
-                                      health probe header. Only allowed value is "1".
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedFor:
-                                    description: A list of allowed 'X-Forwarded-For'
-                                      IPs in CIDR notation with a maximum of 8
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedHost:
-                                    description: A list of allowed 'X-Forwarded-Host'
-                                      domains with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: A list of allowed Azure FrontDoor IDs
+                                    in UUID notation with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xFdHealthProbe:
+                                  description: A list to allow the Azure FrontDoor
+                                    health probe header. Only allowed value is "1".
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedFor:
+                                  description: A list of allowed 'X-Forwarded-For'
+                                    IPs in CIDR notation with a maximum of 8
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedHost:
+                                  description: A list of allowed 'X-Forwarded-Host'
+                                    domains with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
                             ipAddress:
                               description: The IP Address used for this IP Restriction
                                 in CIDR notation.
@@ -5154,38 +5146,36 @@ spec:
                             headers:
                               description: The headers block for this specific scm_ip_restriction
                                 as defined below.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: A list of allowed Azure FrontDoor
-                                      IDs in UUID notation with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xFdHealthProbe:
-                                    description: A list to allow the Azure FrontDoor
-                                      health probe header. Only allowed value is "1".
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedFor:
-                                    description: A list of allowed 'X-Forwarded-For'
-                                      IPs in CIDR notation with a maximum of 8
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedHost:
-                                    description: A list of allowed 'X-Forwarded-Host'
-                                      domains with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: A list of allowed Azure FrontDoor IDs
+                                    in UUID notation with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xFdHealthProbe:
+                                  description: A list to allow the Azure FrontDoor
+                                    health probe header. Only allowed value is "1".
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedFor:
+                                  description: A list of allowed 'X-Forwarded-For'
+                                    IPs in CIDR notation with a maximum of 8
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedHost:
+                                  description: A list of allowed 'X-Forwarded-Host'
+                                    domains with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
                             ipAddress:
                               description: The IP Address used for this IP Restriction
                                 in CIDR notation.
@@ -5241,38 +5231,36 @@ spec:
                             headers:
                               description: The headers block for this specific scm_ip_restriction
                                 as defined below.
-                              items:
-                                properties:
-                                  xAzureFdid:
-                                    description: A list of allowed Azure FrontDoor
-                                      IDs in UUID notation with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xFdHealthProbe:
-                                    description: A list to allow the Azure FrontDoor
-                                      health probe header. Only allowed value is "1".
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedFor:
-                                    description: A list of allowed 'X-Forwarded-For'
-                                      IPs in CIDR notation with a maximum of 8
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                  xForwardedHost:
-                                    description: A list of allowed 'X-Forwarded-Host'
-                                      domains with a maximum of 8.
-                                    items:
-                                      type: string
-                                    type: array
-                                    x-kubernetes-list-type: set
-                                type: object
-                              type: array
+                              properties:
+                                xAzureFdid:
+                                  description: A list of allowed Azure FrontDoor IDs
+                                    in UUID notation with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xFdHealthProbe:
+                                  description: A list to allow the Azure FrontDoor
+                                    health probe header. Only allowed value is "1".
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedFor:
+                                  description: A list of allowed 'X-Forwarded-For'
+                                    IPs in CIDR notation with a maximum of 8
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                                xForwardedHost:
+                                  description: A list of allowed 'X-Forwarded-Host'
+                                    domains with a maximum of 8.
+                                  items:
+                                    type: string
+                                  type: array
+                                  x-kubernetes-list-type: set
+                              type: object
                             ipAddress:
                               description: The IP Address used for this IP Restriction
                                 in CIDR notation.

@@ -692,7 +692,7 @@ type IPRestrictionInitParameters struct {
 	Action *string `json:"action,omitempty" tf:"action"`
 
 	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers []HeadersInitParameters `json:"headers,omitempty" tf:"headers"`
+	Headers *HeadersInitParameters `json:"headers,omitempty" tf:"headers"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
@@ -726,7 +726,7 @@ type IPRestrictionObservation struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers []HeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *HeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
@@ -752,7 +752,7 @@ type IPRestrictionParameters struct {
 
 	// The headers block for this specific scm_ip_restriction as defined below.
 	// +kubebuilder:validation:Optional
-	Headers []HeadersParameters `json:"headers,omitempty" tf:"headers"`
+	Headers *HeadersParameters `json:"headers,omitempty" tf:"headers"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
 	// +kubebuilder:validation:Optional
@@ -923,7 +923,7 @@ type ScmIPRestrictionInitParameters struct {
 	Action *string `json:"action,omitempty" tf:"action"`
 
 	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers []ScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
+	Headers *ScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address"`
@@ -957,7 +957,7 @@ type ScmIPRestrictionObservation struct {
 	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// The headers block for this specific scm_ip_restriction as defined below.
-	Headers []ScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *ScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
@@ -983,7 +983,7 @@ type ScmIPRestrictionParameters struct {
 
 	// The headers block for this specific scm_ip_restriction as defined below.
 	// +kubebuilder:validation:Optional
-	Headers []ScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
+	Headers *ScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers"`
 
 	// The IP Address used for this IP Restriction in CIDR notation.
 	// +kubebuilder:validation:Optional

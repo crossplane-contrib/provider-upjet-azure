@@ -2139,7 +2139,7 @@ type LinuxFunctionAppSiteConfigIPRestrictionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers []SiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *SiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2183,7 +2183,7 @@ type LinuxFunctionAppSiteConfigIPRestrictionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers []SiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *SiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2220,7 +2220,7 @@ type LinuxFunctionAppSiteConfigIPRestrictionParameters struct {
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
-	Headers []SiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *SiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2755,7 +2755,7 @@ type LinuxFunctionAppSiteConfigScmIPRestrictionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers []LinuxFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *LinuxFunctionAppSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2799,7 +2799,7 @@ type LinuxFunctionAppSiteConfigScmIPRestrictionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A headers block as defined above.
-	Headers []LinuxFunctionAppSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *LinuxFunctionAppSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2836,7 +2836,7 @@ type LinuxFunctionAppSiteConfigScmIPRestrictionParameters struct {
 
 	// A headers block as defined above.
 	// +kubebuilder:validation:Optional
-	Headers []LinuxFunctionAppSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *LinuxFunctionAppSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`

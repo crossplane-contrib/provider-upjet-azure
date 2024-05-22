@@ -169,9 +169,6 @@ func (tr *PublicIPPrefix) Hub() {}
 func (tr *Route) Hub() {}
 
 // Hub marks this type as a conversion hub.
-func (tr *RouteFilter) Hub() {}
-
-// Hub marks this type as a conversion hub.
 func (tr *RouteMap) Hub() {}
 
 // Hub marks this type as a conversion hub.

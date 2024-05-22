@@ -2361,7 +2361,7 @@ type WindowsFunctionAppSlotSiteConfigIPRestrictionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
-	Headers []WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2405,7 +2405,7 @@ type WindowsFunctionAppSlotSiteConfigIPRestrictionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
-	Headers []WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2442,7 +2442,7 @@ type WindowsFunctionAppSlotSiteConfigIPRestrictionParameters struct {
 
 	// a headers block as detailed below.
 	// +kubebuilder:validation:Optional
-	Headers []WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *WindowsFunctionAppSlotSiteConfigIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -2963,7 +2963,7 @@ type WindowsFunctionAppSlotSiteConfigScmIPRestrictionInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
-	Headers []WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersInitParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -3007,7 +3007,7 @@ type WindowsFunctionAppSlotSiteConfigScmIPRestrictionObservation struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// a headers block as detailed below.
-	Headers []WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersObservation `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`
@@ -3044,7 +3044,7 @@ type WindowsFunctionAppSlotSiteConfigScmIPRestrictionParameters struct {
 
 	// a headers block as detailed below.
 	// +kubebuilder:validation:Optional
-	Headers []WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
+	Headers *WindowsFunctionAppSlotSiteConfigScmIPRestrictionHeadersParameters `json:"headers,omitempty" tf:"headers,omitempty"`
 
 	// The CIDR notation of the IP or IP Range to match. For example: 10.0.0.0/24 or 192.168.10.1/32
 	// The CIDR notation of the IP or IP Range to match. For example: `10.0.0.0/24` or `192.168.10.1/32` or `fe80::/64` or `13.107.6.152/31,13.107.128.0/22`

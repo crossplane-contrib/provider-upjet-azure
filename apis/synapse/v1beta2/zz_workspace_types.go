@@ -339,7 +339,7 @@ type SQLAADAdminParameters struct {
 type WorkspaceInitParameters struct {
 
 	// An aad_admin block as defined below.
-	AADAdmin []AADAdminInitParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
+	AADAdmin *AADAdminInitParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo *AzureDevopsRepoInitParameters `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
@@ -400,7 +400,7 @@ type WorkspaceInitParameters struct {
 	PurviewID *string `json:"purviewId,omitempty" tf:"purview_id,omitempty"`
 
 	// An sql_aad_admin block as defined below.
-	SQLAADAdmin []SQLAADAdminInitParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
+	SQLAADAdmin *SQLAADAdminInitParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
 
 	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
 	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
@@ -429,7 +429,7 @@ type WorkspaceInitParameters struct {
 type WorkspaceObservation struct {
 
 	// An aad_admin block as defined below.
-	AADAdmin []AADAdminObservation `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
+	AADAdmin *AADAdminObservation `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	AzureDevopsRepo *AzureDevopsRepoObservation `json:"azureDevopsRepo,omitempty" tf:"azure_devops_repo,omitempty"`
@@ -481,7 +481,7 @@ type WorkspaceObservation struct {
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
 	// An sql_aad_admin block as defined below.
-	SQLAADAdmin []SQLAADAdminObservation `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
+	SQLAADAdmin *SQLAADAdminObservation `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
 
 	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
 	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
@@ -501,7 +501,7 @@ type WorkspaceParameters struct {
 
 	// An aad_admin block as defined below.
 	// +kubebuilder:validation:Optional
-	AADAdmin []AADAdminParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
+	AADAdmin *AADAdminParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
 	// +kubebuilder:validation:Optional
@@ -589,7 +589,7 @@ type WorkspaceParameters struct {
 
 	// An sql_aad_admin block as defined below.
 	// +kubebuilder:validation:Optional
-	SQLAADAdmin []SQLAADAdminParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
+	SQLAADAdmin *SQLAADAdminParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
 
 	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
 	// +kubebuilder:validation:Optional

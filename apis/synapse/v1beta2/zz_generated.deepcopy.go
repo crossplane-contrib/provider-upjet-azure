@@ -2456,10 +2456,8 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 	*out = *in
 	if in.AADAdmin != nil {
 		in, out := &in.AADAdmin, &out.AADAdmin
-		*out = make([]AADAdminInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AADAdminInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AzureDevopsRepo != nil {
 		in, out := &in.AzureDevopsRepo, &out.AzureDevopsRepo
@@ -2554,10 +2552,8 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 	}
 	if in.SQLAADAdmin != nil {
 		in, out := &in.SQLAADAdmin, &out.SQLAADAdmin
-		*out = make([]SQLAADAdminInitParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SQLAADAdminInitParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SQLAdministratorLogin != nil {
 		in, out := &in.SQLAdministratorLogin, &out.SQLAdministratorLogin
@@ -2649,10 +2645,8 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 	*out = *in
 	if in.AADAdmin != nil {
 		in, out := &in.AADAdmin, &out.AADAdmin
-		*out = make([]AADAdminObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AADAdminObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AzureDevopsRepo != nil {
 		in, out := &in.AzureDevopsRepo, &out.AzureDevopsRepo
@@ -2753,10 +2747,8 @@ func (in *WorkspaceObservation) DeepCopyInto(out *WorkspaceObservation) {
 	}
 	if in.SQLAADAdmin != nil {
 		in, out := &in.SQLAADAdmin, &out.SQLAADAdmin
-		*out = make([]SQLAADAdminObservation, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SQLAADAdminObservation)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SQLAdministratorLogin != nil {
 		in, out := &in.SQLAdministratorLogin, &out.SQLAdministratorLogin
@@ -2806,10 +2798,8 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	*out = *in
 	if in.AADAdmin != nil {
 		in, out := &in.AADAdmin, &out.AADAdmin
-		*out = make([]AADAdminParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(AADAdminParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.AzureDevopsRepo != nil {
 		in, out := &in.AzureDevopsRepo, &out.AzureDevopsRepo
@@ -2919,10 +2909,8 @@ func (in *WorkspaceParameters) DeepCopyInto(out *WorkspaceParameters) {
 	}
 	if in.SQLAADAdmin != nil {
 		in, out := &in.SQLAADAdmin, &out.SQLAADAdmin
-		*out = make([]SQLAADAdminParameters, len(*in))
-		for i := range *in {
-			(*in)[i].DeepCopyInto(&(*out)[i])
-		}
+		*out = new(SQLAADAdminParameters)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.SQLAdministratorLogin != nil {
 		in, out := &in.SQLAdministratorLogin, &out.SQLAdministratorLogin

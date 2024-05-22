@@ -21,6 +21,10 @@ func Configure(p *config.Provider) {
 		r.Kind = "Management"
 		// Mutually exclusive with azurerm_api_management_custom_domain
 		config.MoveToStatus(r.TerraformResource, "hostname_configuration")
+
+		r.TerraformResource.Schema["policy"].MaxItems = 1
+
+		r.AddSingletonListConversion("policy", "policy")
 	})
 	p.AddResourceConfigurator("azurerm_api_management_api_operation", func(r *config.Resource) {
 		r.References["api_name"] = config.Reference{
