@@ -20,4 +20,20 @@ func Configure(p *config.Provider) {
 	p.AddResourceConfigurator("azurerm_resource_group_policy_assignment", func(r *config.Resource) {
 		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "resource_group_id")
 	})
+	p.AddResourceConfigurator("azurerm_pim_active_role_assignment", func(r *config.Resource) {
+		r.PreviousVersions = nil
+		r.Version = "v1beta1"
+		r.Conversions = nil
+		r.TerraformConversions = []config.TerraformConversion{
+			config.NewTFSingletonConversion(),
+		}
+	})
+	p.AddResourceConfigurator("azurerm_pim_eligible_role_assignment", func(r *config.Resource) {
+		r.PreviousVersions = nil
+		r.Version = "v1beta1"
+		r.Conversions = nil
+		r.TerraformConversions = []config.TerraformConversion{
+			config.NewTFSingletonConversion(),
+		}
+	})
 }

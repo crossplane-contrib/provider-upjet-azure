@@ -10,6 +10,12 @@ package v1beta1
 func (tr *ManagementLock) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *PimActiveRoleAssignment) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *PimEligibleRoleAssignment) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *PolicyDefinition) Hub() {}
 
 // Hub marks this type as a conversion hub.

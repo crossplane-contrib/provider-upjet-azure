@@ -16,6 +16,24 @@ func (l *ManagementLockList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this PimActiveRoleAssignmentList.
+func (l *PimActiveRoleAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this PimEligibleRoleAssignmentList.
+func (l *PimEligibleRoleAssignmentList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this PolicyDefinitionList.
 func (l *PolicyDefinitionList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
