@@ -9889,6 +9889,11 @@ func (in *ExpressRouteCircuitConnectionInitParameters) DeepCopyInto(out *Express
 		*out = new(string)
 		**out = **in
 	}
+	if in.AuthorizationKeySecretRef != nil {
+		in, out := &in.AuthorizationKeySecretRef, &out.AuthorizationKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.PeerPeeringID != nil {
 		in, out := &in.PeerPeeringID, &out.PeerPeeringID
 		*out = new(string)

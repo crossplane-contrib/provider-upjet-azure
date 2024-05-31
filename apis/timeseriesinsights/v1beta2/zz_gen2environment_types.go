@@ -109,6 +109,9 @@ type Gen2EnvironmentParameters struct {
 
 type StorageInitParameters struct {
 
+	// Access key of storage account for Azure IoT Time Series Insights Gen2 Environment
+	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
+
 	// Name of storage account for Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
@@ -131,7 +134,7 @@ type StorageObservation struct {
 type StorageParameters struct {
 
 	// Access key of storage account for Azure IoT Time Series Insights Gen2 Environment
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Name of storage account for Azure IoT Time Series Insights Gen2 Environment. Changing this forces a new resource to be created.

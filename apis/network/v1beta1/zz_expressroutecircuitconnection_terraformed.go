@@ -21,7 +21,7 @@ func (mg *ExpressRouteCircuitConnection) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ExpressRouteCircuitConnection
 func (tr *ExpressRouteCircuitConnection) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"authorization_key": "spec.forProvider.authorizationKeySecretRef"}
+	return map[string]string{"authorization_key": "authorizationKeySecretRef"}
 }
 
 // GetObservation of this ExpressRouteCircuitConnection

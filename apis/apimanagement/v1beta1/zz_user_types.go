@@ -30,6 +30,9 @@ type UserInitParameters struct {
 	// A note about this user.
 	Note *string `json:"note,omitempty" tf:"note,omitempty"`
 
+	// The password associated with this user.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The state of this user. Possible values are active, blocked and pending.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 }

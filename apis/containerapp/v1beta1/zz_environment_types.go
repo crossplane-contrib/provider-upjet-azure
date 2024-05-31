@@ -15,6 +15,10 @@ import (
 
 type EnvironmentInitParameters struct {
 
+	// Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
+	// Application Insights connection string used by Dapr to export Service to Service communication telemetry.
+	DaprApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"daprApplicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.
 	// Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. **Note:** Only valid if a `workload_profile` is specified. If `infrastructure_subnet_id` is specified, this resource group will be created in the same subscription as `infrastructure_subnet_id`.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

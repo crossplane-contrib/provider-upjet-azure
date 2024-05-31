@@ -663,6 +663,10 @@ type BackupInitParameters struct {
 
 	// A schedule block as defined below.
 	Schedule *ScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The SAS URL to the container.
+	// The SAS URL to the container.
+	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
 type BackupObservation struct {
@@ -697,7 +701,7 @@ type BackupParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
@@ -809,9 +813,17 @@ type DockerInitParameters struct {
 	// The image tag of the image to use.
 	ImageTag *string `json:"imageTag,omitempty" tf:"image_tag,omitempty"`
 
+	// The password for the account to use to connect to the registry.
+	// The password for the account to use to connect to the registry.
+	RegistryPasswordSecretRef *v1.SecretKeySelector `json:"registryPasswordSecretRef,omitempty" tf:"-"`
+
 	// The URL of the docker registry.
 	// The URL of the docker registry.
 	RegistryURL *string `json:"registryUrl,omitempty" tf:"registry_url,omitempty"`
+
+	// The username to use for connections to the registry.
+	// The username to use for connections to the registry.
+	RegistryUsernameSecretRef *v1.SecretKeySelector `json:"registryUsernameSecretRef,omitempty" tf:"-"`
 }
 
 type DockerObservation struct {
@@ -923,6 +935,10 @@ type GithubInitParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The ID of the GitHub app used for login.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
@@ -1090,6 +1106,10 @@ type LinuxFunctionAppAuthSettingsActiveDirectoryInitParameters struct {
 	// The ID of the Client to use to authenticate with Azure Active Directory.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
@@ -1138,6 +1158,10 @@ type LinuxFunctionAppAuthSettingsFacebookInitParameters struct {
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	AppSecretSecretRef *v1.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
@@ -1191,6 +1215,10 @@ type LinuxFunctionAppAuthSettingsGoogleInitParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
@@ -1302,6 +1330,10 @@ type LinuxFunctionAppAuthSettingsMicrosoftInitParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
@@ -1487,6 +1519,10 @@ type LinuxFunctionAppAuthSettingsTwitterInitParameters struct {
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
 
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	ConsumerSecretSecretRef *v1.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
+
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
 	ConsumerSecretSettingName *string `json:"consumerSecretSettingName,omitempty" tf:"consumer_secret_setting_name,omitempty"`
@@ -1530,6 +1566,10 @@ type LinuxFunctionAppConnectionStringInitParameters struct {
 	// Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type LinuxFunctionAppConnectionStringObservation struct {
@@ -1557,7 +1597,7 @@ type LinuxFunctionAppConnectionStringParameters struct {
 
 	// The connection string value.
 	// The connection string value.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -1708,6 +1748,10 @@ type LinuxFunctionAppInitParameters struct {
 
 	// One or more storage_account blocks as defined below.
 	StorageAccount []StorageAccountInitParameters `json:"storageAccount,omitempty" tf:"storage_account,omitempty"`
+
+	// The access key which will be used to access the backend storage account for the Function App. Conflicts with storage_uses_managed_identity.
+	// The access key which will be used to access the storage account for the Function App.
+	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
 
 	// The backend storage account name which will be used by this Function App.
 	// The backend storage account name which will be used by this Function App.
@@ -2282,6 +2326,14 @@ type LinuxFunctionAppSiteConfigInitParameters struct {
 
 	// An app_service_logs block as defined above.
 	AppServiceLogs *AppServiceLogsInitParameters `json:"appServiceLogs,omitempty" tf:"app_service_logs,omitempty"`
+
+	// The Connection String for linking the Linux Function App to Application Insights.
+	// The Connection String for linking the Linux Function App to Application Insights.
+	ApplicationInsightsConnectionStringSecretRef *v1.SecretKeySelector `json:"applicationInsightsConnectionStringSecretRef,omitempty" tf:"-"`
+
+	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
+	// The Instrumentation Key for connecting the Linux Function App to Application Insights.
+	ApplicationInsightsKeySecretRef *v1.SecretKeySelector `json:"applicationInsightsKeySecretRef,omitempty" tf:"-"`
 
 	// An application_stack block as defined above.
 	ApplicationStack *ApplicationStackInitParameters `json:"applicationStack,omitempty" tf:"application_stack,omitempty"`
@@ -3259,6 +3311,9 @@ type StickySettingsParameters struct {
 
 type StorageAccountInitParameters struct {
 
+	// The Access key for the storage account.
+	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+
 	// The Name of the Storage Account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -3296,7 +3351,7 @@ type StorageAccountObservation struct {
 type StorageAccountParameters struct {
 
 	// The Access key for the storage account.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.

@@ -79,6 +79,9 @@ type EventSourceEventHubInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SharedAccessKeyNameSelector *v1.Selector `json:"sharedAccessKeyNameSelector,omitempty" tf:"-"`
 
+	// Specifies the value of the Shared Access Policy key that grants the Time Series Insights service read access to the EventHub.
+	SharedAccessKeySecretRef v1.SecretKeySelector `json:"sharedAccessKeySecretRef" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

@@ -40,6 +40,9 @@ type SpringCloudAppMySQLAssociationInitParameters struct {
 	// +kubebuilder:validation:Optional
 	MySQLServerIDSelector *v1.Selector `json:"mysqlServerIdSelector,omitempty" tf:"-"`
 
+	// Specifies the password which should be used when connecting to the MySQL Database from the Spring Cloud App.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// Specifies the username which should be used when connecting to the MySQL Database from the Spring Cloud App.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/dbformysql/v1beta2.Server
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("administrator_login",false)

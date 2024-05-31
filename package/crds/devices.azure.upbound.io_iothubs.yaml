@@ -1350,8 +1350,6 @@ spec:
                           8601 timespan duration. This value must be between 1 minute
                           and 24 hours. Defaults to PT1H.
                         type: string
-                    required:
-                    - connectionStringSecretRef
                     type: object
                   identity:
                     description: An identity block as defined below.
@@ -1587,6 +1585,24 @@ spec:
                           account. Possible values are keyBased and identityBased.
                           Defaults to keyBased.
                         type: string
+                      connectionStringSecretRef:
+                        description: The connection string for the Azure Storage account
+                          to which files are uploaded.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       containerName:
                         description: The name of the root container where the files
                           should be uploaded to. The container need not exist but
@@ -1621,6 +1637,8 @@ spec:
                           8601 timespan duration. This value must be between 1 minute
                           and 24 hours. Defaults to PT1H.
                         type: string
+                    required:
+                    - connectionStringSecretRef
                     type: object
                   identity:
                     description: An identity block as defined below.

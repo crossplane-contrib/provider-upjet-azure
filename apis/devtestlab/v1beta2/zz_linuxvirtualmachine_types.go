@@ -154,6 +154,9 @@ type LinuxVirtualMachineInitParameters struct {
 	// Any notes about the Virtual Machine.
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
+	// The Password associated with the username used to login to this Virtual Machine. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The name of the resource group in which the Dev Test Lab resource exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

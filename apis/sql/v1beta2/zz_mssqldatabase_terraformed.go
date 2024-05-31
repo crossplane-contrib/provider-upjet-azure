@@ -21,7 +21,7 @@ func (mg *MSSQLDatabase) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this MSSQLDatabase
 func (tr *MSSQLDatabase) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"import[*].administrator_login_password": "spec.forProvider.import[*].administratorLoginPasswordSecretRef", "import[*].storage_key": "spec.forProvider.import[*].storageKeySecretRef", "threat_detection_policy[*].storage_account_access_key": "spec.forProvider.threatDetectionPolicy[*].storageAccountAccessKeySecretRef"}
+	return map[string]string{"import[*].administrator_login_password": "import[*].administratorLoginPasswordSecretRef", "import[*].storage_key": "import[*].storageKeySecretRef", "threat_detection_policy[*].storage_account_access_key": "threatDetectionPolicy[*].storageAccountAccessKeySecretRef"}
 }
 
 // GetObservation of this MSSQLDatabase

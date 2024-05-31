@@ -21,7 +21,7 @@ func (mg *Backend) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Backend
 func (tr *Backend) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"proxy[*].password": "spec.forProvider.proxy[*].passwordSecretRef"}
+	return map[string]string{"proxy[*].password": "proxy[*].passwordSecretRef"}
 }
 
 // GetObservation of this Backend

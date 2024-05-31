@@ -15,6 +15,9 @@ import (
 
 type OutputFunctionInitParameters struct {
 
+	// The API key for the Function.
+	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
+
 	// The maximum number of events in each batch that's sent to the function. Defaults to 100.
 	BatchMaxCount *float64 `json:"batchMaxCount,omitempty" tf:"batch_max_count,omitempty"`
 

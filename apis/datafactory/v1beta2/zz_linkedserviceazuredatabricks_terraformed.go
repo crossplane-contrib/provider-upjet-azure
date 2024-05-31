@@ -21,7 +21,7 @@ func (mg *LinkedServiceAzureDatabricks) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceAzureDatabricks
 func (tr *LinkedServiceAzureDatabricks) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"access_token": "spec.forProvider.accessTokenSecretRef"}
+	return map[string]string{"access_token": "accessTokenSecretRef"}
 }
 
 // GetObservation of this LinkedServiceAzureDatabricks

@@ -21,7 +21,7 @@ func (mg *SourceControlToken) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SourceControlToken
 func (tr *SourceControlToken) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"token": "spec.forProvider.tokenSecretRef", "token_secret": "spec.forProvider.tokenSecretSecretRef"}
+	return map[string]string{"token": "tokenSecretRef", "token_secret": "tokenSecretSecretRef"}
 }
 
 // GetObservation of this SourceControlToken

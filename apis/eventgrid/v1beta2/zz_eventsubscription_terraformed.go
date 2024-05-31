@@ -21,7 +21,7 @@ func (mg *EventSubscription) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this EventSubscription
 func (tr *EventSubscription) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"delivery_property[*].value": "spec.forProvider.deliveryProperty[*].valueSecretRef"}
+	return map[string]string{"delivery_property[*].value": "deliveryProperty[*].valueSecretRef"}
 }
 
 // GetObservation of this EventSubscription

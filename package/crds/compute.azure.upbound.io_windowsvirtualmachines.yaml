@@ -2136,8 +2136,6 @@ spec:
                             applies. Possible values are AutoLogon and FirstLogonCommands.
                             Changing this forces a new resource to be created.
                           type: string
-                      required:
-                      - contentSecretRef
                       type: object
                     type: array
                   adminPasswordSecretRef:
@@ -2779,13 +2777,53 @@ spec:
                       defined below. Changing this forces a new resource to be created.
                     items:
                       properties:
+                        contentSecretRef:
+                          description: The XML formatted content that is added to
+                            the unattend.xml file for the specified path and component.
+                            Changing this forces a new resource to be created.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         setting:
                           description: The name of the setting to which the content
                             applies. Possible values are AutoLogon and FirstLogonCommands.
                             Changing this forces a new resource to be created.
                           type: string
+                      required:
+                      - contentSecretRef
                       type: object
                     type: array
+                  adminPasswordSecretRef:
+                    description: The Password which should be used for the local-administrator
+                      on this Virtual Machine. Changing this forces a new resource
+                      to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   adminUsername:
                     description: The username of the local administrator used for
                       the Virtual Machine. Changing this forces a new resource to
@@ -2825,6 +2863,25 @@ spec:
                       computer_name, then you must specify computer_name. Changing
                       this forces a new resource to be created.
                     type: string
+                  customDataSecretRef:
+                    description: The Base64-Encoded Custom Data which should be used
+                      for this Virtual Machine. Changing this forces a new resource
+                      to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   dedicatedHostGroupId:
                     description: The ID of a Dedicated Host Group that this Windows
                       Virtual Machine should be run within. Conflicts with dedicated_host_id.
@@ -3278,6 +3335,8 @@ spec:
                       this Windows Virtual Machine should be located. Changing this
                       forces a new Windows Virtual Machine to be created.'
                     type: string
+                required:
+                - adminPasswordSecretRef
                 type: object
               managementPolicies:
                 default:

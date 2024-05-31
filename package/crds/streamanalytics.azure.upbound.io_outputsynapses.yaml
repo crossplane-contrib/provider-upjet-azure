@@ -360,6 +360,24 @@ spec:
                     description: The name of the Azure SQL database. Changing this
                       forces a new resource to be created.
                     type: string
+                  passwordSecretRef:
+                    description: The password that will be used to connect to the
+                      Azure SQL database.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   server:
                     description: The name of the SQL server containing the Azure SQL
                       database. Changing this forces a new resource to be created.
@@ -447,6 +465,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:

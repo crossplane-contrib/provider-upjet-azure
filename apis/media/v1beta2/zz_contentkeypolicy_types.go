@@ -14,6 +14,18 @@ import (
 )
 
 type AlternateKeyInitParameters struct {
+
+	// The RSA parameter exponent.
+	RsaTokenKeyExponentSecretRef *v1.SecretKeySelector `json:"rsaTokenKeyExponentSecretRef,omitempty" tf:"-"`
+
+	// The RSA parameter modulus.
+	RsaTokenKeyModulusSecretRef *v1.SecretKeySelector `json:"rsaTokenKeyModulusSecretRef,omitempty" tf:"-"`
+
+	// The key value of the key. Specifies a symmetric key for token validation.
+	SymmetricTokenKeySecretRef *v1.SecretKeySelector `json:"symmetricTokenKeySecretRef,omitempty" tf:"-"`
+
+	// The raw data field of a certificate in PKCS 12 format (X509Certificate2 in .NET). Specifies a certificate for token validation.
+	X509TokenKeyRawSecretRef *v1.SecretKeySelector `json:"x509TokenKeyRawSecretRef,omitempty" tf:"-"`
 }
 
 type AlternateKeyObservation struct {
@@ -133,8 +145,17 @@ type ExplicitAnalogTelevisionOutputRestrictionParameters struct {
 
 type FairplayConfigurationInitParameters struct {
 
+	// The key that must be used as FairPlay Application Secret key.
+	AskSecretRef *v1.SecretKeySelector `json:"askSecretRef,omitempty" tf:"-"`
+
 	// A offline_rental_configuration block as defined below.
 	OfflineRentalConfiguration *OfflineRentalConfigurationInitParameters `json:"offlineRentalConfiguration,omitempty" tf:"offline_rental_configuration,omitempty"`
+
+	// The password encrypting FairPlay certificate in PKCS 12 (pfx) format.
+	PfxPasswordSecretRef *v1.SecretKeySelector `json:"pfxPasswordSecretRef,omitempty" tf:"-"`
+
+	// The Base64 representation of FairPlay certificate in PKCS 12 (pfx) format (including private key).
+	PfxSecretRef *v1.SecretKeySelector `json:"pfxSecretRef,omitempty" tf:"-"`
 
 	// The rental and lease key type. Supported values are DualExpiry, PersistentLimited, PersistentUnlimited or Undefined.
 	RentalAndLeaseKeyType *string `json:"rentalAndLeaseKeyType,omitempty" tf:"rental_and_lease_key_type,omitempty"`
@@ -370,6 +391,9 @@ type PlayreadyConfigurationLicenseInitParameters struct {
 	// The expiration date of license.
 	ExpirationDate *string `json:"expirationDate,omitempty" tf:"expiration_date,omitempty"`
 
+	// The grace period of license.
+	GracePeriodSecretRef *v1.SecretKeySelector `json:"gracePeriodSecretRef,omitempty" tf:"-"`
+
 	// The license type. Supported values are NonPersistent or Persistent.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
@@ -604,6 +628,18 @@ type TokenRestrictionInitParameters struct {
 
 	// The OpenID connect discovery document.
 	OpenIDConnectDiscoveryDocument *string `json:"openIdConnectDiscoveryDocument,omitempty" tf:"open_id_connect_discovery_document,omitempty"`
+
+	// The RSA parameter exponent.
+	PrimaryRsaTokenKeyExponentSecretRef *v1.SecretKeySelector `json:"primaryRsaTokenKeyExponentSecretRef,omitempty" tf:"-"`
+
+	// The RSA parameter modulus.
+	PrimaryRsaTokenKeyModulusSecretRef *v1.SecretKeySelector `json:"primaryRsaTokenKeyModulusSecretRef,omitempty" tf:"-"`
+
+	// The key value of the key. Specifies a symmetric key for token validation.
+	PrimarySymmetricTokenKeySecretRef *v1.SecretKeySelector `json:"primarySymmetricTokenKeySecretRef,omitempty" tf:"-"`
+
+	// The raw data field of a certificate in PKCS 12 format (X509Certificate2 in .NET). Specifies a certificate for token validation.
+	PrimaryX509TokenKeyRawSecretRef *v1.SecretKeySelector `json:"primaryX509TokenKeyRawSecretRef,omitempty" tf:"-"`
 
 	// One or more required_claim blocks as defined above.
 	RequiredClaim []RequiredClaimInitParameters `json:"requiredClaim,omitempty" tf:"required_claim,omitempty"`

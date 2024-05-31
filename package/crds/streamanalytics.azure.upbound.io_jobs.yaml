@@ -887,8 +887,6 @@ spec:
                             The only supported value is ConnectionString. Defaults
                             to ConnectionString.
                           type: string
-                      required:
-                      - accountKeySecretRef
                       type: object
                     type: array
                   location:
@@ -1076,6 +1074,23 @@ spec:
                       block as defined below.
                     items:
                       properties:
+                        accountKeySecretRef:
+                          description: The account key for the Azure storage account.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         accountName:
                           description: The name of the Azure storage account.
                           type: string
@@ -1084,6 +1099,8 @@ spec:
                             The only supported value is ConnectionString. Defaults
                             to ConnectionString.
                           type: string
+                      required:
+                      - accountKeySecretRef
                       type: object
                     type: array
                   location:

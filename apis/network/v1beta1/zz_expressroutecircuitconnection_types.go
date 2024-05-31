@@ -21,6 +21,9 @@ type ExpressRouteCircuitConnectionInitParameters struct {
 	// The IPv6 address space from which to allocate customer addresses for global reach.
 	AddressPrefixIPv6 *string `json:"addressPrefixIpv6,omitempty" tf:"address_prefix_ipv6,omitempty"`
 
+	// The authorization key which is associated with the Express Route Circuit Connection.
+	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+
 	// The ID of the peered Express Route Circuit Private Peering. Changing this forces a new Express Route Circuit Connection to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.ExpressRouteCircuitPeering
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()

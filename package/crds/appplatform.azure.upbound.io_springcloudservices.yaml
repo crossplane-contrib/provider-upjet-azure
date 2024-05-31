@@ -1946,8 +1946,6 @@ spec:
                               repository server, required when the Git repository
                               server supports HTTP Basic Authentication.
                             type: string
-                        required:
-                        - passwordSecretRef
                         type: object
                       label:
                         description: The default label of the Git repository, should
@@ -1984,8 +1982,6 @@ spec:
                                     the Git repository server, required when the Git
                                     repository server supports HTTP Basic Authentication.
                                   type: string
-                              required:
-                              - passwordSecretRef
                               type: object
                             label:
                               description: The default label of the Git repository,
@@ -2061,8 +2057,6 @@ spec:
                                     instance will fail to start if the host_key does
                                     not match. Defaults to true.
                                   type: boolean
-                              required:
-                              - privateKeySecretRef
                               type: object
                             uri:
                               description: The URI of the Git repository that's used
@@ -2127,8 +2121,6 @@ spec:
                               will fail to start if the host_key does not match. Defaults
                               to true.
                             type: boolean
-                        required:
-                        - privateKeySecretRef
                         type: object
                       uri:
                         description: The URI of the default Git repository used as
@@ -2169,8 +2161,6 @@ spec:
                         username:
                           description: Specifies the username of the container registry.
                           type: string
-                      required:
-                      - passwordSecretRef
                       type: object
                     type: array
                   defaultBuildService:
@@ -2630,11 +2620,32 @@ spec:
                       httpBasicAuth:
                         description: A http_basic_auth block as defined below.
                         properties:
+                          passwordSecretRef:
+                            description: The password used to access the Git repository
+                              server, required when the Git repository server supports
+                              HTTP Basic Authentication.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           username:
                             description: The username that's used to access the Git
                               repository server, required when the Git repository
                               server supports HTTP Basic Authentication.
                             type: string
+                        required:
+                        - passwordSecretRef
                         type: object
                       label:
                         description: The default label of the Git repository, should
@@ -2647,11 +2658,32 @@ spec:
                             httpBasicAuth:
                               description: A http_basic_auth block as defined below.
                               properties:
+                                passwordSecretRef:
+                                  description: The password used to access the Git
+                                    repository server, required when the Git repository
+                                    server supports HTTP Basic Authentication.
+                                  properties:
+                                    key:
+                                      description: The key to select.
+                                      type: string
+                                    name:
+                                      description: Name of the secret.
+                                      type: string
+                                    namespace:
+                                      description: Namespace of the secret.
+                                      type: string
+                                  required:
+                                  - key
+                                  - name
+                                  - namespace
+                                  type: object
                                 username:
                                   description: The username that's used to access
                                     the Git repository server, required when the Git
                                     repository server supports HTTP Basic Authentication.
                                   type: string
+                              required:
+                              - passwordSecretRef
                               type: object
                             label:
                               description: The default label of the Git repository,
@@ -2684,11 +2716,51 @@ spec:
                                     or ecdsa-sha2-nistp521. Required only if host-key
                                     exists.
                                   type: string
+                                hostKeySecretRef:
+                                  description: The host key of the Git repository
+                                    server, should not include the algorithm prefix
+                                    as covered by host-key-algorithm.
+                                  properties:
+                                    key:
+                                      description: The key to select.
+                                      type: string
+                                    name:
+                                      description: Name of the secret.
+                                      type: string
+                                    namespace:
+                                      description: Namespace of the secret.
+                                      type: string
+                                  required:
+                                  - key
+                                  - name
+                                  - namespace
+                                  type: object
+                                privateKeySecretRef:
+                                  description: The SSH private key to access the Git
+                                    repository, required when the URI starts with
+                                    git@ or ssh://.
+                                  properties:
+                                    key:
+                                      description: The key to select.
+                                      type: string
+                                    name:
+                                      description: Name of the secret.
+                                      type: string
+                                    namespace:
+                                      description: Namespace of the secret.
+                                      type: string
+                                  required:
+                                  - key
+                                  - name
+                                  - namespace
+                                  type: object
                                 strictHostKeyCheckingEnabled:
                                   description: Indicates whether the Config Server
                                     instance will fail to start if the host_key does
                                     not match. Defaults to true.
                                   type: boolean
+                              required:
+                              - privateKeySecretRef
                               type: object
                             uri:
                               description: The URI of the Git repository that's used
@@ -2711,11 +2783,50 @@ spec:
                               ssh-rsa, ecdsa-sha2-nistp256, ecdsa-sha2-nistp384, or
                               ecdsa-sha2-nistp521. Required only if host-key exists.
                             type: string
+                          hostKeySecretRef:
+                            description: The host key of the Git repository server,
+                              should not include the algorithm prefix as covered by
+                              host-key-algorithm.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          privateKeySecretRef:
+                            description: The SSH private key to access the Git repository,
+                              required when the URI starts with git@ or ssh://.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           strictHostKeyCheckingEnabled:
                             description: Indicates whether the Config Server instance
                               will fail to start if the host_key does not match. Defaults
                               to true.
                             type: boolean
+                        required:
+                        - privateKeySecretRef
                         type: object
                       uri:
                         description: The URI of the default Git repository used as
@@ -2732,6 +2843,23 @@ spec:
                         name:
                           description: Specifies the name of the container registry.
                           type: string
+                        passwordSecretRef:
+                          description: Specifies the password of the container registry.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         server:
                           description: Specifies the login server of the container
                             registry.
@@ -2739,6 +2867,8 @@ spec:
                         username:
                           description: Specifies the username of the container registry.
                           type: string
+                      required:
+                      - passwordSecretRef
                       type: object
                     type: array
                   defaultBuildService:

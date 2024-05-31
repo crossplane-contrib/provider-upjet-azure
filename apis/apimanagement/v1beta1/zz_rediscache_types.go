@@ -18,6 +18,9 @@ type RedisCacheInitParameters struct {
 	// The location where to use cache from. Possible values are default and valid Azure regions. Defaults to default.
 	CacheLocation *string `json:"cacheLocation,omitempty" tf:"cache_location,omitempty"`
 
+	// The connection string to the Cache for Redis.
+	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+
 	// The description of the API Management Redis Cache.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

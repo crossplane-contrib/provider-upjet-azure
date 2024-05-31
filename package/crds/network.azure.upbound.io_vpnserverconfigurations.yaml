@@ -1107,8 +1107,6 @@ spec:
                               - name
                               - namespace
                               type: object
-                          required:
-                          - secretSecretRef
                           type: object
                         type: array
                       serverRootCertificate:
@@ -1357,6 +1355,26 @@ spec:
                               description: The Score of the Radius Server determines
                                 the priority of the server. Ranges from 1 to 30.
                               type: number
+                            secretSecretRef:
+                              description: The Secret used to communicate with the
+                                Radius Server.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
+                          required:
+                          - secretSecretRef
                           type: object
                         type: array
                       serverRootCertificate:

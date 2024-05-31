@@ -79,6 +79,12 @@ type BotChannelLineParameters struct {
 }
 
 type LineChannelInitParameters struct {
+
+	// The access token which is used to call the Line Channel API.
+	AccessTokenSecretRef v1.SecretKeySelector `json:"accessTokenSecretRef" tf:"-"`
+
+	// The secret which is used to access the Line Channel.
+	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 
 type LineChannelObservation struct {
@@ -87,11 +93,11 @@ type LineChannelObservation struct {
 type LineChannelParameters struct {
 
 	// The access token which is used to call the Line Channel API.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AccessTokenSecretRef v1.SecretKeySelector `json:"accessTokenSecretRef" tf:"-"`
 
 	// The secret which is used to access the Line Channel.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 

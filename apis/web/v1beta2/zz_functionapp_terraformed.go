@@ -21,7 +21,7 @@ func (mg *FunctionApp) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this FunctionApp
 func (tr *FunctionApp) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "spec.forProvider.authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "spec.forProvider.authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].google[*].client_secret": "spec.forProvider.authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "spec.forProvider.authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "spec.forProvider.authSettings[*].twitter[*].consumerSecretSecretRef", "connection_string[*].value": "spec.forProvider.connectionString[*].valueSecretRef", "storage_account_access_key": "spec.forProvider.storageAccountAccessKeySecretRef"}
+	return map[string]string{"auth_settings[*].active_directory[*].client_secret": "authSettings[*].activeDirectory[*].clientSecretSecretRef", "auth_settings[*].facebook[*].app_secret": "authSettings[*].facebook[*].appSecretSecretRef", "auth_settings[*].google[*].client_secret": "authSettings[*].google[*].clientSecretSecretRef", "auth_settings[*].microsoft[*].client_secret": "authSettings[*].microsoft[*].clientSecretSecretRef", "auth_settings[*].twitter[*].consumer_secret": "authSettings[*].twitter[*].consumerSecretSecretRef", "connection_string[*].value": "connectionString[*].valueSecretRef", "storage_account_access_key": "storageAccountAccessKeySecretRef"}
 }
 
 // GetObservation of this FunctionApp

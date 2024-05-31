@@ -21,7 +21,7 @@ func (mg *LabServiceLab) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LabServiceLab
 func (tr *LabServiceLab) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"virtual_machine[*].admin_user[*].password": "spec.forProvider.virtualMachine[*].adminUser[*].passwordSecretRef", "virtual_machine[*].non_admin_user[*].password": "spec.forProvider.virtualMachine[*].nonAdminUser[*].passwordSecretRef"}
+	return map[string]string{"virtual_machine[*].admin_user[*].password": "virtualMachine[*].adminUser[*].passwordSecretRef", "virtual_machine[*].non_admin_user[*].password": "virtualMachine[*].nonAdminUser[*].passwordSecretRef"}
 }
 
 // GetObservation of this LabServiceLab

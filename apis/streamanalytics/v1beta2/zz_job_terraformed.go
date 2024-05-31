@@ -21,7 +21,7 @@ func (mg *Job) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Job
 func (tr *Job) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"job_storage_account[*].account_key": "spec.forProvider.jobStorageAccount[*].accountKeySecretRef"}
+	return map[string]string{"job_storage_account[*].account_key": "jobStorageAccount[*].accountKeySecretRef"}
 }
 
 // GetObservation of this Job

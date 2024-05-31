@@ -291,6 +291,40 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  clientIdSecretRef:
+                    description: The Client ID used for the Client Application.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  clientSecretSecretRef:
+                    description: The Client Secret used for the Client Application.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   description:
                     description: A description of this OpenID Connect Provider.
                     type: string
@@ -300,6 +334,9 @@ spec:
                   metadataEndpoint:
                     description: The URI of the Metadata endpoint.
                     type: string
+                required:
+                - clientIdSecretRef
+                - clientSecretSecretRef
                 type: object
               managementPolicies:
                 default:

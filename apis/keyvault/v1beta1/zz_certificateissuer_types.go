@@ -86,6 +86,9 @@ type CertificateIssuerInitParameters struct {
 	// The ID of the organization as provided to the issuer.
 	OrgID *string `json:"orgId,omitempty" tf:"org_id,omitempty"`
 
+	// The password associated with the account and organization ID at the third-party Certificate Issuer. If not specified, will not overwrite any previous value.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The name of the third-party Certificate Issuer. Possible values are: DigiCert, GlobalSign, OneCertV2-PrivateCA, OneCertV2-PublicCA and SslAdminV2.
 	ProviderName *string `json:"providerName,omitempty" tf:"provider_name,omitempty"`
 }

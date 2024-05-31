@@ -21,7 +21,7 @@ func (mg *FlexibleServer) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this FlexibleServer
 func (tr *FlexibleServer) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"administrator_password": "spec.forProvider.administratorPasswordSecretRef"}
+	return map[string]string{"administrator_password": "administratorPasswordSecretRef"}
 }
 
 // GetObservation of this FlexibleServer

@@ -27,6 +27,9 @@ type VirtualMachineExtensionInitParameters struct {
 	// A protected_settings_from_key_vault block as defined below.
 	ProtectedSettingsFromKeyVault *VirtualMachineExtensionProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
+	// The protected_settings passed to the extension, like settings, these are specified as a JSON object in a string.
+	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+
 	// Specifies the collection of extension names after which this extension needs to be provisioned.
 	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
 

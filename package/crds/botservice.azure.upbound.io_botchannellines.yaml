@@ -193,9 +193,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - accessTokenSecretRef
-                      - secretSecretRef
                       type: object
                     type: array
                   location:
@@ -300,6 +297,46 @@ spec:
                   lineChannel:
                     description: One or more line_channel blocks as defined below.
                     items:
+                      properties:
+                        accessTokenSecretRef:
+                          description: The access token which is used to call the
+                            Line Channel API.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        secretSecretRef:
+                          description: The secret which is used to access the Line
+                            Channel.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - accessTokenSecretRef
+                      - secretSecretRef
                       type: object
                     type: array
                   location:
@@ -535,9 +572,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - accessTokenSecretRef
-                      - secretSecretRef
                       type: object
                     type: array
                   location:

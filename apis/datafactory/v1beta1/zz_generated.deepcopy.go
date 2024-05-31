@@ -14720,6 +14720,7 @@ func (in *LinkedServiceAzureTableStorageInitParameters) DeepCopyInto(out *Linked
 			}
 		}
 	}
+	out.ConnectionStringSecretRef = in.ConnectionStringSecretRef
 	if in.Description != nil {
 		in, out := &in.Description, &out.Description
 		*out = new(string)
@@ -15022,6 +15023,11 @@ func (in *LinkedServiceCosmosDBInitParameters) DeepCopyInto(out *LinkedServiceCo
 		*out = new(string)
 		**out = **in
 	}
+	if in.AccountKeySecretRef != nil {
+		in, out := &in.AccountKeySecretRef, &out.AccountKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.AdditionalProperties != nil {
 		in, out := &in.AdditionalProperties, &out.AdditionalProperties
 		*out = make(map[string]*string, len(*in))
@@ -15048,6 +15054,11 @@ func (in *LinkedServiceCosmosDBInitParameters) DeepCopyInto(out *LinkedServiceCo
 				**out = **in
 			}
 		}
+	}
+	if in.ConnectionStringSecretRef != nil {
+		in, out := &in.ConnectionStringSecretRef, &out.ConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.Database != nil {
 		in, out := &in.Database, &out.Database
@@ -15180,6 +15191,11 @@ func (in *LinkedServiceCosmosDBMongoapiInitParameters) DeepCopyInto(out *LinkedS
 				**out = **in
 			}
 		}
+	}
+	if in.ConnectionStringSecretRef != nil {
+		in, out := &in.ConnectionStringSecretRef, &out.ConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.Database != nil {
 		in, out := &in.Database, &out.Database
@@ -16641,6 +16657,11 @@ func (in *LinkedServiceKustoInitParameters) DeepCopyInto(out *LinkedServiceKusto
 	if in.ServicePrincipalID != nil {
 		in, out := &in.ServicePrincipalID, &out.ServicePrincipalID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ServicePrincipalKeySecretRef != nil {
+		in, out := &in.ServicePrincipalKeySecretRef, &out.ServicePrincipalKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.Tenant != nil {
@@ -18603,6 +18624,7 @@ func (in *LinkedServiceSFTPInitParameters) DeepCopyInto(out *LinkedServiceSFTPIn
 			(*out)[key] = outVal
 		}
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.Port != nil {
 		in, out := &in.Port, &out.Port
 		*out = new(float64)
@@ -20479,6 +20501,11 @@ func (in *LinkedServiceWebInitParameters) DeepCopyInto(out *LinkedServiceWebInit
 			}
 			(*out)[key] = outVal
 		}
+	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.URL != nil {
 		in, out := &in.URL, &out.URL

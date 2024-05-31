@@ -382,6 +382,24 @@ spec:
                     description: The name of the output column that contains the row
                       key.
                     type: string
+                  storageAccountKeySecretRef:
+                    description: The Access Key which should be used to connect to
+                      this Storage Account.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageAccountName:
                     description: The name of the Storage Account.
                     type: string
@@ -537,6 +555,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - storageAccountKeySecretRef
                 type: object
               managementPolicies:
                 default:

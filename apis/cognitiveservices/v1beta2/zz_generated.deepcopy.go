@@ -48,6 +48,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.CustomQuestionAnsweringSearchServiceKeySecretRef != nil {
+		in, out := &in.CustomQuestionAnsweringSearchServiceKeySecretRef, &out.CustomQuestionAnsweringSearchServiceKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.CustomSubdomainName != nil {
 		in, out := &in.CustomSubdomainName, &out.CustomSubdomainName
 		*out = new(string)

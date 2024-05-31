@@ -1823,8 +1823,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - sasTokenSecretRef
                     type: object
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
@@ -2363,6 +2361,23 @@ spec:
                       administratorLogin:
                         description: Administrator login name for the SQL Server.
                         type: string
+                      administratorPasswordSecretRef:
+                        description: Administrator login password for the SQL Server.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       dualStandbyPairName:
                         description: The dual standby Azure-SSIS Integration Runtime
                           pair with SSISDB failover.
@@ -2407,6 +2422,27 @@ spec:
                           startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
                           for more information.
                         type: string
+                      sasTokenSecretRef:
+                        description: A container SAS token that gives access to the
+                          files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
+                          for more information.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - sasTokenSecretRef
                     type: object
                   description:
                     description: Integration runtime description.
@@ -2446,6 +2482,23 @@ spec:
                                     Key Vault.
                                   type: string
                               type: object
+                            passwordSecretRef:
+                              description: The password for the target device.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
                             targetName:
                               description: The target computer or domain name.
                               type: string
@@ -2481,6 +2534,23 @@ spec:
                                   description: Specifies the secret version in Azure
                                     Key Vault.
                                   type: string
+                              type: object
+                            licenseSecretRef:
+                              description: The license used for the Component.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
                               type: object
                             name:
                               description: Name of the package store.

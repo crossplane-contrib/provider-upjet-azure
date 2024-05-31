@@ -292,6 +292,8 @@ type SpringCloudGatewayInitParameters struct {
 	// A quota block as defined below.
 	Quota *SpringCloudGatewayQuotaInitParameters `json:"quota,omitempty" tf:"quota,omitempty"`
 
+	SensitiveEnvironmentVariables map[string]*string `json:"sensitiveEnvironmentVariablesSecretRef,omitempty" tf:"-"`
+
 	// A sso block as defined below.
 	Sso *SpringCloudGatewaySsoInitParameters `json:"sso,omitempty" tf:"sso,omitempty"`
 }

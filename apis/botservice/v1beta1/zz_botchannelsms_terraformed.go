@@ -21,7 +21,7 @@ func (mg *BotChannelSMS) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this BotChannelSMS
 func (tr *BotChannelSMS) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"sms_channel_auth_token": "spec.forProvider.smsChannelAuthTokenSecretRef"}
+	return map[string]string{"sms_channel_auth_token": "smsChannelAuthTokenSecretRef"}
 }
 
 // GetObservation of this BotChannelSMS

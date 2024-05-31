@@ -21,7 +21,7 @@ func (mg *ExpressRouteCircuitPeering) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ExpressRouteCircuitPeering
 func (tr *ExpressRouteCircuitPeering) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"shared_key": "spec.forProvider.sharedKeySecretRef"}
+	return map[string]string{"shared_key": "sharedKeySecretRef"}
 }
 
 // GetObservation of this ExpressRouteCircuitPeering

@@ -21,7 +21,7 @@ func (mg *OutputBlob) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OutputBlob
 func (tr *OutputBlob) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"storage_account_key": "spec.forProvider.storageAccountKeySecretRef"}
+	return map[string]string{"storage_account_key": "storageAccountKeySecretRef"}
 }
 
 // GetObservation of this OutputBlob

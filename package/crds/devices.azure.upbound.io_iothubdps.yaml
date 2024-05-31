@@ -801,8 +801,6 @@ spec:
                         location:
                           description: The location of the IoT hub.
                           type: string
-                      required:
-                      - connectionStringSecretRef
                       type: object
                     type: array
                   location:
@@ -969,9 +967,29 @@ spec:
                           description: Determines whether to apply allocation policies
                             to the IoT Hub. Defaults to true.
                           type: boolean
+                        connectionStringSecretRef:
+                          description: The connection string to connect to the IoT
+                            Hub.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         location:
                           description: The location of the IoT hub.
                           type: string
+                      required:
+                      - connectionStringSecretRef
                       type: object
                     type: array
                   location:

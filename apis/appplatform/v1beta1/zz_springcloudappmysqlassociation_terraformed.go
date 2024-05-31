@@ -21,7 +21,7 @@ func (mg *SpringCloudAppMySQLAssociation) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudAppMySQLAssociation
 func (tr *SpringCloudAppMySQLAssociation) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+	return map[string]string{"password": "passwordSecretRef"}
 }
 
 // GetObservation of this SpringCloudAppMySQLAssociation

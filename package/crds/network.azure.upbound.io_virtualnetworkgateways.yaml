@@ -2464,8 +2464,6 @@ spec:
                               - name
                               - namespace
                               type: object
-                          required:
-                          - secretSecretRef
                           type: object
                         type: array
                       radiusServerAddress:
@@ -2993,6 +2991,26 @@ spec:
                                 the priority of the server. Possible values are between
                                 1 and 30.
                               type: number
+                            secretSecretRef:
+                              description: The secret that is used to communicate
+                                with the Radius Server.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
+                          required:
+                          - secretSecretRef
                           type: object
                         type: array
                       radiusServerAddress:

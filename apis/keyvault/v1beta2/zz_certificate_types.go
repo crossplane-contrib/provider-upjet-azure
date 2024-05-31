@@ -60,6 +60,12 @@ type CertificateAttributeParameters struct {
 }
 
 type CertificateCertificateInitParameters struct {
+
+	// The base64-encoded certificate contents.
+	ContentsSecretRef v1.SecretKeySelector `json:"contentsSecretRef" tf:"-"`
+
+	// The password associated with the certificate.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
 type CertificateCertificateObservation struct {
@@ -68,7 +74,7 @@ type CertificateCertificateObservation struct {
 type CertificateCertificateParameters struct {
 
 	// The base64-encoded certificate contents.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ContentsSecretRef v1.SecretKeySelector `json:"contentsSecretRef" tf:"-"`
 
 	// The password associated with the certificate.

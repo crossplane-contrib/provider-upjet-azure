@@ -21,7 +21,7 @@ func (mg *IOTHubEndpointStorageContainer) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IOTHubEndpointStorageContainer
 func (tr *IOTHubEndpointStorageContainer) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef"}
+	return map[string]string{"connection_string": "connectionStringSecretRef"}
 }
 
 // GetObservation of this IOTHubEndpointStorageContainer

@@ -21,7 +21,7 @@ func (mg *OutputEventHub) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OutputEventHub
 func (tr *OutputEventHub) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"shared_access_policy_key": "spec.forProvider.sharedAccessPolicyKeySecretRef"}
+	return map[string]string{"shared_access_policy_key": "sharedAccessPolicyKeySecretRef"}
 }
 
 // GetObservation of this OutputEventHub

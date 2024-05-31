@@ -21,7 +21,7 @@ func (mg *LinuxVirtualMachine) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinuxVirtualMachine
 func (tr *LinuxVirtualMachine) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef"}
+	return map[string]string{"admin_password": "adminPasswordSecretRef", "custom_data": "customDataSecretRef"}
 }
 
 // GetObservation of this LinuxVirtualMachine

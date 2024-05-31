@@ -21,7 +21,7 @@ func (mg *Subscription) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Subscription
 func (tr *Subscription) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"primary_key": "spec.forProvider.primaryKeySecretRef", "secondary_key": "spec.forProvider.secondaryKeySecretRef"}
+	return map[string]string{"primary_key": "primaryKeySecretRef", "secondary_key": "secondaryKeySecretRef"}
 }
 
 // GetObservation of this Subscription

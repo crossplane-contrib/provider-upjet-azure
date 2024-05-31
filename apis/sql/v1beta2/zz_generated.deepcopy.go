@@ -259,6 +259,7 @@ func (in *ImportInitParameters) DeepCopyInto(out *ImportInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	out.AdministratorLoginPasswordSecretRef = in.AdministratorLoginPasswordSecretRef
 	if in.AuthenticationType != nil {
 		in, out := &in.AuthenticationType, &out.AuthenticationType
 		*out = new(string)
@@ -269,6 +270,7 @@ func (in *ImportInitParameters) DeepCopyInto(out *ImportInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	out.StorageKeySecretRef = in.StorageKeySecretRef
 	if in.StorageKeyType != nil {
 		in, out := &in.StorageKeyType, &out.StorageKeyType
 		*out = new(string)
@@ -2685,6 +2687,7 @@ func (in *MSSQLManagedInstanceInitParameters) DeepCopyInto(out *MSSQLManagedInst
 		*out = new(string)
 		**out = **in
 	}
+	out.AdministratorLoginPasswordSecretRef = in.AdministratorLoginPasswordSecretRef
 	if in.Collation != nil {
 		in, out := &in.Collation, &out.Collation
 		*out = new(string)
@@ -3203,9 +3206,19 @@ func (in *MSSQLManagedInstanceVulnerabilityAssessmentInitParameters) DeepCopyInt
 		*out = new(RecurringScansInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageContainerPath != nil {
 		in, out := &in.StorageContainerPath, &out.StorageContainerPath
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerSASKeySecretRef != nil {
+		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 }
@@ -3508,6 +3521,11 @@ func (in *MSSQLServerInitParameters) DeepCopyInto(out *MSSQLServerInitParameters
 	if in.AdministratorLogin != nil {
 		in, out := &in.AdministratorLogin, &out.AdministratorLogin
 		*out = new(string)
+		**out = **in
+	}
+	if in.AdministratorLoginPasswordSecretRef != nil {
+		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AzureadAdministrator != nil {
@@ -3963,9 +3981,19 @@ func (in *MSSQLServerVulnerabilityAssessmentInitParameters) DeepCopyInto(out *MS
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageContainerPath != nil {
 		in, out := &in.StorageContainerPath, &out.StorageContainerPath
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerSASKeySecretRef != nil {
+		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 }
@@ -4936,6 +4964,11 @@ func (in *ThreatDetectionPolicyInitParameters) DeepCopyInto(out *ThreatDetection
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {

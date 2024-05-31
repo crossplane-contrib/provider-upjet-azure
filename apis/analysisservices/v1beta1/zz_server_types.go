@@ -58,6 +58,9 @@ type ServerInitParameters struct {
 	// +listType=set
 	AdminUsers []*string `json:"adminUsers,omitempty" tf:"admin_users,omitempty"`
 
+	// URI and SAS token for a blob container to store backups.
+	BackupBlobContainerURISecretRef *v1.SecretKeySelector `json:"backupBlobContainerUriSecretRef,omitempty" tf:"-"`
+
 	// Indicates if the Power BI service is allowed to access or not.
 	EnablePowerBiService *bool `json:"enablePowerBiService,omitempty" tf:"enable_power_bi_service,omitempty"`
 

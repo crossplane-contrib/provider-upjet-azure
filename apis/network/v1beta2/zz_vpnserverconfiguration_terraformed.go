@@ -21,7 +21,7 @@ func (mg *VPNServerConfiguration) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this VPNServerConfiguration
 func (tr *VPNServerConfiguration) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"radius[*].server[*].secret": "spec.forProvider.radius[*].server[*].secretSecretRef"}
+	return map[string]string{"radius[*].server[*].secret": "radius[*].server[*].secretSecretRef"}
 }
 
 // GetObservation of this VPNServerConfiguration

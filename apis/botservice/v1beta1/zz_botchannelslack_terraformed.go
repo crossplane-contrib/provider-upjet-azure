@@ -21,7 +21,7 @@ func (mg *BotChannelSlack) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this BotChannelSlack
 func (tr *BotChannelSlack) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"client_secret": "spec.forProvider.clientSecretSecretRef", "signing_secret": "spec.forProvider.signingSecretSecretRef", "verification_token": "spec.forProvider.verificationTokenSecretRef"}
+	return map[string]string{"client_secret": "clientSecretSecretRef", "signing_secret": "signingSecretSecretRef", "verification_token": "verificationTokenSecretRef"}
 }
 
 // GetObservation of this BotChannelSlack

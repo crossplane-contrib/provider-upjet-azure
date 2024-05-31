@@ -15,6 +15,9 @@ import (
 
 type AdditionalUnattendContentInitParameters struct {
 
+	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
+	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
 	Setting *string `json:"setting,omitempty" tf:"setting,omitempty"`
 }
@@ -28,7 +31,7 @@ type AdditionalUnattendContentObservation struct {
 type AdditionalUnattendContentParameters struct {
 
 	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
@@ -174,6 +177,9 @@ type LinuxConfigurationAdminSSHKeyParameters struct {
 }
 
 type LinuxConfigurationInitParameters struct {
+
+	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// A admin_ssh_key block as documented below.
 	AdminSSHKey []LinuxConfigurationAdminSSHKeyInitParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
@@ -618,6 +624,9 @@ type OrchestratedVirtualMachineScaleSetExtensionInitParameters struct {
 	// A protected_settings_from_key_vault block as defined below.
 	ProtectedSettingsFromKeyVault *ExtensionProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
+	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+
 	// Specifies the Publisher of the Extension.
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 
@@ -832,6 +841,9 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 
 	// A termination_notification block as defined below.
 	TerminationNotification *OrchestratedVirtualMachineScaleSetTerminationNotificationInitParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
+
+	// The Base64-Encoded User Data which should be used for this Virtual Machine Scale Set.
+	UserDataBase64SecretRef *v1.SecretKeySelector `json:"userDataBase64SecretRef,omitempty" tf:"-"`
 
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
@@ -1390,6 +1402,9 @@ type OrchestratedVirtualMachineScaleSetTerminationNotificationParameters struct 
 
 type OsProfileInitParameters struct {
 
+	// The Base64-Encoded Custom Data which should be used for this Virtual Machine Scale Set.
+	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
+
 	// A linux_configuration block as documented below.
 	LinuxConfiguration *LinuxConfigurationInitParameters `json:"linuxConfiguration,omitempty" tf:"linux_configuration,omitempty"`
 
@@ -1484,6 +1499,9 @@ type WindowsConfigurationInitParameters struct {
 	// One or more additional_unattend_content blocks as defined below. Changing this forces a new resource to be created.
 	AdditionalUnattendContent []AdditionalUnattendContentInitParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
+	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+
 	// The username of the local administrator on each Virtual Machine Scale Set instance. Changing this forces a new resource to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
@@ -1558,7 +1576,7 @@ type WindowsConfigurationParameters struct {
 	AdditionalUnattendContent []AdditionalUnattendContentParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
 	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
 
 	// The username of the local administrator on each Virtual Machine Scale Set instance. Changing this forces a new resource to be created.

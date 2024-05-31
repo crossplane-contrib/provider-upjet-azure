@@ -1615,9 +1615,6 @@ spec:
                       storageUri:
                         description: Specifies the blob URI of the .bacpac file.
                         type: string
-                    required:
-                    - administratorLoginPasswordSecretRef
-                    - storageKeySecretRef
                     type: object
                   ledgerEnabled:
                     description: A boolean that specifies if this is a ledger database.
@@ -2055,6 +2052,23 @@ spec:
                       administratorLogin:
                         description: Specifies the name of the SQL administrator.
                         type: string
+                      administratorLoginPasswordSecretRef:
+                        description: Specifies the password of the SQL administrator.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       authenticationType:
                         description: Specifies the type of authentication used to
                           access the server. Valid values are SQL or ADPassword.
@@ -2065,6 +2079,23 @@ spec:
                           will be created for the storage account. Must match storage
                           account used for storage_uri parameter.
                         type: string
+                      storageKeySecretRef:
+                        description: Specifies the access key for the storage account.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       storageKeyType:
                         description: Specifies the type of access key for the storage
                           account. Valid values are StorageAccessKey or SharedAccessKey.
@@ -2072,6 +2103,9 @@ spec:
                       storageUri:
                         description: Specifies the blob URI of the .bacpac file.
                         type: string
+                    required:
+                    - administratorLoginPasswordSecretRef
+                    - storageKeySecretRef
                     type: object
                   ledgerEnabled:
                     description: A boolean that specifies if this is a ledger database.
@@ -2241,6 +2275,24 @@ spec:
                         description: The State of the Policy. Possible values are
                           Enabled or Disabled. Defaults to Disabled.
                         type: string
+                      storageAccountAccessKeySecretRef:
+                        description: Specifies the identifier key of the Threat Detection
+                          audit storage account. Required if state is Enabled.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       storageEndpoint:
                         description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
                           This blob storage will hold all Threat Detection audit logs.

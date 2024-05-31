@@ -21,6 +21,9 @@ type SubscriptionInitParameters struct {
 	// Determines whether tracing can be enabled. Defaults to true.
 	AllowTracing *bool `json:"allowTracing,omitempty" tf:"allow_tracing,omitempty"`
 
+	// The primary subscription key to use for the subscription.
+	PrimaryKeySecretRef *v1.SecretKeySelector `json:"primaryKeySecretRef,omitempty" tf:"-"`
+
 	// The ID of the Product which should be assigned to this Subscription. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta1.Product
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -33,6 +36,9 @@ type SubscriptionInitParameters struct {
 	// Selector for a Product in apimanagement to populate productId.
 	// +kubebuilder:validation:Optional
 	ProductIDSelector *v1.Selector `json:"productIdSelector,omitempty" tf:"-"`
+
+	// The secondary subscription key to use for the subscription.
+	SecondaryKeySecretRef *v1.SecretKeySelector `json:"secondaryKeySecretRef,omitempty" tf:"-"`
 
 	// The state of this Subscription. Possible values are active, cancelled, expired, rejected, submitted and suspended. Defaults to submitted.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`

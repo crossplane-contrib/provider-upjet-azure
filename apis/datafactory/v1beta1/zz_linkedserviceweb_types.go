@@ -35,6 +35,9 @@ type LinkedServiceWebInitParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// The password for Basic authentication. Required if authentication_type sets to Basic.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The URL of the web service endpoint (e.g. https://www.microsoft.com).
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 

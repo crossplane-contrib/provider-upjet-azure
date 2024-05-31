@@ -2616,6 +2616,25 @@ spec:
                           Machine? Defaults to false.
                         type: boolean
                     type: object
+                  adminPasswordSecretRef:
+                    description: The Password which should be used for the local-administrator
+                      on this Virtual Machine. Changing this forces a new resource
+                      to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   adminSshKey:
                     description: One or more admin_ssh_key blocks as defined below.
                       Changing this forces a new resource to be created.
@@ -2672,6 +2691,25 @@ spec:
                       computer_name, then you must specify computer_name. Changing
                       this forces a new resource to be created.
                     type: string
+                  customDataSecretRef:
+                    description: The Base64-Encoded Custom Data which should be used
+                      for this Virtual Machine. Changing this forces a new resource
+                      to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   dedicatedHostGroupId:
                     description: The ID of a Dedicated Host Group that this Linux
                       Virtual Machine should be run within. Conflicts with dedicated_host_id.

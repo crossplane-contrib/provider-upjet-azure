@@ -58,6 +58,9 @@ type EventSourceIOTHubInitParameters struct {
 	// Specifies the name of the Shared Access key that grants the Event Source access to the IotHub.
 	SharedAccessKeyName *string `json:"sharedAccessKeyName,omitempty" tf:"shared_access_key_name,omitempty"`
 
+	// Specifies the value of the Shared Access Policy key that grants the Time Series Insights service read access to the IotHub.
+	SharedAccessKeySecretRef v1.SecretKeySelector `json:"sharedAccessKeySecretRef" tf:"-"`
+
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`

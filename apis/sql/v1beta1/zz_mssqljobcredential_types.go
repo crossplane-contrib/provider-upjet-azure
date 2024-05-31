@@ -15,6 +15,9 @@ import (
 
 type MSSQLJobCredentialInitParameters struct {
 
+	// The password part of the credential.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The username part of the credential.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }

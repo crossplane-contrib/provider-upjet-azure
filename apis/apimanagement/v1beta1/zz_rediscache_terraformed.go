@@ -21,7 +21,7 @@ func (mg *RedisCache) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this RedisCache
 func (tr *RedisCache) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef"}
+	return map[string]string{"connection_string": "connectionStringSecretRef"}
 }
 
 // GetObservation of this RedisCache

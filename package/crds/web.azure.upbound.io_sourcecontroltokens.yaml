@@ -125,10 +125,46 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  tokenSecretRef:
+                    description: The Access Token.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  tokenSecretSecretRef:
+                    description: The Access Token Secret.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   type:
                     description: The Token type. Possible values include Bitbucket,
                       Dropbox, Github, and OneDrive.
                     type: string
+                required:
+                - tokenSecretRef
                 type: object
               managementPolicies:
                 default:

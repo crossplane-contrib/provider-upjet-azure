@@ -15,6 +15,9 @@ import (
 
 type DiagnosticStorageAccountInitParameters struct {
 
+	// Connection String of the Diagnostic Storage Account.
+	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+
 	// Resource ID of the Diagnostic Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -38,7 +41,7 @@ type DiagnosticStorageAccountObservation struct {
 type DiagnosticStorageAccountParameters struct {
 
 	// Connection String of the Diagnostic Storage Account.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
 
 	// Resource ID of the Diagnostic Storage Account.

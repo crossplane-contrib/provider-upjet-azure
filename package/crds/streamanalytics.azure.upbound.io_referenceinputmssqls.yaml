@@ -459,6 +459,23 @@ spec:
                     description: The query used to retrieve the reference data from
                       the MS SQL database.
                     type: string
+                  passwordSecretRef:
+                    description: The password to connect to the MS SQL database.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   refreshIntervalDuration:
                     description: The frequency in hh:mm:ss with which the reference
                       data should be retrieved from the MS SQL database e.g. 00:20:00
@@ -553,6 +570,8 @@ spec:
                   username:
                     description: The username to connect to the MS SQL database.
                     type: string
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:

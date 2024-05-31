@@ -21,7 +21,7 @@ func (mg *BotChannelsRegistration) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this BotChannelsRegistration
 func (tr *BotChannelsRegistration) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"developer_app_insights_api_key": "spec.forProvider.developerAppInsightsApiKeySecretRef"}
+	return map[string]string{"developer_app_insights_api_key": "developerAppInsightsApiKeySecretRef"}
 }
 
 // GetObservation of this BotChannelsRegistration

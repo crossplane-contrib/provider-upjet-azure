@@ -4242,8 +4242,6 @@ spec:
                           description: The Name of the Authentication Certificate
                             to use.
                           type: string
-                      required:
-                      - dataSecretRef
                       type: object
                     type: array
                   autoscaleConfiguration:
@@ -5418,8 +5416,6 @@ spec:
                           description: The name of the Trusted Client Certificate
                             that is unique within this Application Gateway.
                           type: string
-                      required:
-                      - dataSecretRef
                       type: object
                     type: array
                   trustedRootCertificate:
@@ -5647,10 +5643,30 @@ spec:
                       defined below.
                     items:
                       properties:
+                        dataSecretRef:
+                          description: The contents of the Authentication Certificate
+                            which should be used.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         name:
                           description: The Name of the Authentication Certificate
                             to use.
                           type: string
+                      required:
+                      - dataSecretRef
                       type: object
                     type: array
                   autoscaleConfiguration:
@@ -6551,6 +6567,24 @@ spec:
                     description: One or more ssl_certificate blocks as defined below.
                     items:
                       properties:
+                        dataSecretRef:
+                          description: The base64-encoded PFX certificate data. Required
+                            if key_vault_secret_id is not set.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         keyVaultSecretId:
                           description: The Secret ID of (base-64 encoded unencrypted
                             pfx) the Secret or Certificate object stored in Azure
@@ -6561,6 +6595,24 @@ spec:
                           description: The Name of the SSL certificate that is unique
                             within this Application Gateway
                           type: string
+                        passwordSecretRef:
+                          description: Password for the pfx file specified in data.
+                            Required if data is set.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   sslPolicy:
@@ -6687,10 +6739,29 @@ spec:
                       defined below.
                     items:
                       properties:
+                        dataSecretRef:
+                          description: The base-64 encoded certificate.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         name:
                           description: The name of the Trusted Client Certificate
                             that is unique within this Application Gateway.
                           type: string
+                      required:
+                      - dataSecretRef
                       type: object
                     type: array
                   trustedRootCertificate:
@@ -6698,6 +6769,25 @@ spec:
                       below.
                     items:
                       properties:
+                        dataSecretRef:
+                          description: The contents of the Trusted Root Certificate
+                            which should be used. Required if key_vault_secret_id
+                            is not set.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         keyVaultSecretId:
                           description: The Secret ID of (base-64 encoded unencrypted
                             pfx) Secret or Certificate object stored in Azure KeyVault.

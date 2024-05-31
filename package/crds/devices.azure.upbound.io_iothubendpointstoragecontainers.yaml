@@ -387,6 +387,25 @@ spec:
                       Value should be between 60 and 720 seconds. Default value is
                       300 seconds.
                     type: number
+                  connectionStringSecretRef:
+                    description: The connection string for the endpoint. This attribute
+                      can only be specified and is mandatory when authentication_type
+                      is keyBased.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   containerName:
                     description: The name of storage container in the storage account.
                     type: string

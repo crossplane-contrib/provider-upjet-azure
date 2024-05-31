@@ -14,6 +14,12 @@ import (
 )
 
 type ErrorBlobManagedIdentityInitParameters struct {
+
+	// The client ID of the managed identity.
+	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+
+	// The object ID of the managed identity.
+	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type ErrorBlobManagedIdentityObservation struct {
@@ -53,6 +59,12 @@ type InstanceViewParameters struct {
 }
 
 type OutputBlobManagedIdentityInitParameters struct {
+
+	// The client ID of the managed identity.
+	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+
+	// The object ID of the managed identity.
+	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type OutputBlobManagedIdentityObservation struct {
@@ -99,6 +111,12 @@ type ParameterParameters struct {
 }
 
 type ProtectedParameterInitParameters struct {
+
+	// The run parameter name.
+	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
+
+	// The run parameter value.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type ProtectedParameterObservation struct {
@@ -107,15 +125,21 @@ type ProtectedParameterObservation struct {
 type ProtectedParameterParameters struct {
 
 	// The run parameter name.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The run parameter value.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type ScriptURIManagedIdentityInitParameters struct {
+
+	// The client ID of the managed identity.
+	ClientIDSecretRef *v1.SecretKeySelector `json:"clientIdSecretRef,omitempty" tf:"-"`
+
+	// The object ID of the managed identity.
+	ObjectIDSecretRef *v1.SecretKeySelector `json:"objectIdSecretRef,omitempty" tf:"-"`
 }
 
 type ScriptURIManagedIdentityObservation struct {
@@ -174,6 +198,9 @@ type VirtualMachineRunCommandInitParameters struct {
 
 	// A list of protected_parameter blocks as defined below. The protected parameters used by the script.
 	ProtectedParameter []ProtectedParameterInitParameters `json:"protectedParameter,omitempty" tf:"protected_parameter,omitempty"`
+
+	// Specifies the user account password on the VM when executing the Virtual Machine Run Command.
+	RunAsPasswordSecretRef *v1.SecretKeySelector `json:"runAsPasswordSecretRef,omitempty" tf:"-"`
 
 	// Specifies the user account on the VM when executing the Virtual Machine Run Command.
 	RunAsUser *string `json:"runAsUser,omitempty" tf:"run_as_user,omitempty"`

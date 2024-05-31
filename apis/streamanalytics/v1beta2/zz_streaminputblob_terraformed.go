@@ -21,7 +21,7 @@ func (mg *StreamInputBlob) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this StreamInputBlob
 func (tr *StreamInputBlob) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"storage_account_key": "spec.forProvider.storageAccountKeySecretRef"}
+	return map[string]string{"storage_account_key": "storageAccountKeySecretRef"}
 }
 
 // GetObservation of this StreamInputBlob

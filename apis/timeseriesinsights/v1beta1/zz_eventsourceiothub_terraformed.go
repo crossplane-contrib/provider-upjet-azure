@@ -21,7 +21,7 @@ func (mg *EventSourceIOTHub) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this EventSourceIOTHub
 func (tr *EventSourceIOTHub) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"shared_access_key": "spec.forProvider.sharedAccessKeySecretRef"}
+	return map[string]string{"shared_access_key": "sharedAccessKeySecretRef"}
 }
 
 // GetObservation of this EventSourceIOTHub

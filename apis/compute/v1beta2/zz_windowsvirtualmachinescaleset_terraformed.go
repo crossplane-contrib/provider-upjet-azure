@@ -21,7 +21,7 @@ func (mg *WindowsVirtualMachineScaleSet) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this WindowsVirtualMachineScaleSet
 func (tr *WindowsVirtualMachineScaleSet) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"additional_unattend_content[*].content": "spec.forProvider.additionalUnattendContent[*].contentSecretRef", "admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef", "extension[*].protected_settings": "spec.forProvider.extension[*].protectedSettingsSecretRef"}
+	return map[string]string{"additional_unattend_content[*].content": "additionalUnattendContent[*].contentSecretRef", "admin_password": "adminPasswordSecretRef", "custom_data": "customDataSecretRef", "extension[*].protected_settings": "extension[*].protectedSettingsSecretRef"}
 }
 
 // GetObservation of this WindowsVirtualMachineScaleSet

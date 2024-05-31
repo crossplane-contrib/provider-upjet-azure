@@ -21,7 +21,7 @@ func (mg *ApplicationGateway) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ApplicationGateway
 func (tr *ApplicationGateway) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"authentication_certificate[*].data": "spec.forProvider.authenticationCertificate[*].dataSecretRef", "ssl_certificate[*].data": "spec.forProvider.sslCertificate[*].dataSecretRef", "ssl_certificate[*].password": "spec.forProvider.sslCertificate[*].passwordSecretRef", "trusted_client_certificate[*].data": "spec.forProvider.trustedClientCertificate[*].dataSecretRef", "trusted_root_certificate[*].data": "spec.forProvider.trustedRootCertificate[*].dataSecretRef"}
+	return map[string]string{"authentication_certificate[*].data": "authenticationCertificate[*].dataSecretRef", "ssl_certificate[*].data": "sslCertificate[*].dataSecretRef", "ssl_certificate[*].password": "sslCertificate[*].passwordSecretRef", "trusted_client_certificate[*].data": "trustedClientCertificate[*].dataSecretRef", "trusted_root_certificate[*].data": "trustedRootCertificate[*].dataSecretRef"}
 }
 
 // GetObservation of this ApplicationGateway

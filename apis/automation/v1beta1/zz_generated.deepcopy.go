@@ -1321,6 +1321,7 @@ func (in *CredentialInitParameters) DeepCopyInto(out *CredentialInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)
@@ -4939,6 +4940,11 @@ func (in *WebhookInitParameters) DeepCopyInto(out *WebhookInitParameters) {
 	if in.RunOnWorkerGroup != nil {
 		in, out := &in.RunOnWorkerGroup, &out.RunOnWorkerGroup
 		*out = new(string)
+		**out = **in
+	}
+	if in.URISecretRef != nil {
+		in, out := &in.URISecretRef, &out.URISecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 }

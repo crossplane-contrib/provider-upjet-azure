@@ -21,7 +21,7 @@ func (mg *LinuxVirtualMachineScaleSet) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinuxVirtualMachineScaleSet
 func (tr *LinuxVirtualMachineScaleSet) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef", "extension[*].protected_settings": "spec.forProvider.extension[*].protectedSettingsSecretRef"}
+	return map[string]string{"admin_password": "adminPasswordSecretRef", "custom_data": "customDataSecretRef", "extension[*].protected_settings": "extension[*].protectedSettingsSecretRef"}
 }
 
 // GetObservation of this LinuxVirtualMachineScaleSet

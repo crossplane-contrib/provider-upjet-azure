@@ -21,7 +21,7 @@ func (mg *ResourceDeploymentScriptAzurePowerShell) GetTerraformResourceType() st
 
 // GetConnectionDetailsMapping for this ResourceDeploymentScriptAzurePowerShell
 func (tr *ResourceDeploymentScriptAzurePowerShell) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"environment_variable[*].secure_value": "spec.forProvider.environmentVariable[*].secureValueSecretRef", "storage_account[*].key": "spec.forProvider.storageAccount[*].keySecretRef"}
+	return map[string]string{"environment_variable[*].secure_value": "environmentVariable[*].secureValueSecretRef", "storage_account[*].key": "storageAccount[*].keySecretRef"}
 }
 
 // GetObservation of this ResourceDeploymentScriptAzurePowerShell

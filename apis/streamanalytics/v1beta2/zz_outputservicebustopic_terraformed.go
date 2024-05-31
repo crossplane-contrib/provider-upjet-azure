@@ -21,7 +21,7 @@ func (mg *OutputServiceBusTopic) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OutputServiceBusTopic
 func (tr *OutputServiceBusTopic) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"shared_access_policy_key": "spec.forProvider.sharedAccessPolicyKeySecretRef"}
+	return map[string]string{"shared_access_policy_key": "sharedAccessPolicyKeySecretRef"}
 }
 
 // GetObservation of this OutputServiceBusTopic

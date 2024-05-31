@@ -57,6 +57,9 @@ type LinkedServiceAzureFunctionInitParameters struct {
 	// The integration runtime reference to associate with the Data Factory Linked Service.
 	IntegrationRuntimeName *string `json:"integrationRuntimeName,omitempty" tf:"integration_runtime_name,omitempty"`
 
+	// The system key of the Azure Function. Exactly one of either key or key_vault_key is required
+	KeySecretRef *v1.SecretKeySelector `json:"keySecretRef,omitempty" tf:"-"`
+
 	// A key_vault_key block as defined below. Use this Argument to store the system key of the Azure Function in an existing Key Vault. It needs an existing Key Vault Data Factory Linked Service. Exactly one of either key or key_vault_key is required.
 	KeyVaultKey *KeyVaultKeyInitParameters `json:"keyVaultKey,omitempty" tf:"key_vault_key,omitempty"`
 

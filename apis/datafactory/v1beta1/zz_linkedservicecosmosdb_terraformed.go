@@ -21,7 +21,7 @@ func (mg *LinkedServiceCosmosDB) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceCosmosDB
 func (tr *LinkedServiceCosmosDB) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"account_key": "spec.forProvider.accountKeySecretRef", "connection_string": "spec.forProvider.connectionStringSecretRef"}
+	return map[string]string{"account_key": "accountKeySecretRef", "connection_string": "connectionStringSecretRef"}
 }
 
 // GetObservation of this LinkedServiceCosmosDB

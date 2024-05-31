@@ -37,6 +37,9 @@ type EnvironmentVariableInitParameters struct {
 	// Specifies the name of the environment variable.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the value of the secure environment variable.
+	SecureValueSecretRef *v1.SecretKeySelector `json:"secureValueSecretRef,omitempty" tf:"-"`
+
 	// Specifies the value of the environment variable.
 	Value *string `json:"value,omitempty" tf:"value,omitempty"`
 }
@@ -325,6 +328,9 @@ type ResourceDeploymentScriptAzureCliParameters struct {
 
 type StorageAccountInitParameters struct {
 
+	// Specifies the storage account access key.
+	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
+
 	// Specifies the storage account name.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
@@ -338,7 +344,7 @@ type StorageAccountObservation struct {
 type StorageAccountParameters struct {
 
 	// Specifies the storage account access key.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	KeySecretRef v1.SecretKeySelector `json:"keySecretRef" tf:"-"`
 
 	// Specifies the storage account name.

@@ -21,7 +21,7 @@ func (mg *MSSQLServerMicrosoftSupportAuditingPolicy) GetTerraformResourceType() 
 
 // GetConnectionDetailsMapping for this MSSQLServerMicrosoftSupportAuditingPolicy
 func (tr *MSSQLServerMicrosoftSupportAuditingPolicy) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"storage_account_access_key": "spec.forProvider.storageAccountAccessKeySecretRef", "storage_account_subscription_id": "spec.forProvider.storageAccountSubscriptionIdSecretRef"}
+	return map[string]string{"storage_account_access_key": "storageAccountAccessKeySecretRef", "storage_account_subscription_id": "storageAccountSubscriptionIdSecretRef"}
 }
 
 // GetObservation of this MSSQLServerMicrosoftSupportAuditingPolicy

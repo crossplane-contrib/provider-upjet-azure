@@ -619,6 +619,42 @@ spec:
                     description: One or more developer_portal blocks as defined below.
                     items:
                       properties:
+                        certificatePasswordSecretRef:
+                          description: The password associated with the certificate
+                            provided above.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        certificateSecretRef:
+                          description: The Base64 Encoded Certificate. (Mutually exclusive
+                            with key_vault_id.)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         hostName:
                           description: The Hostname to use for the corresponding endpoint.
                           type: string
@@ -717,6 +753,42 @@ spec:
                     description: One or more gateway blocks as defined below.
                     items:
                       properties:
+                        certificatePasswordSecretRef:
+                          description: The password associated with the certificate
+                            provided above.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        certificateSecretRef:
+                          description: The Base64 Encoded Certificate. (Mutually exclusive
+                            with key_vault_id.)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         defaultSslBinding:
                           description: Is the certificate associated with this Hostname
                             the Default SSL Certificate? This is used when an SNI
@@ -820,6 +892,42 @@ spec:
                     description: One or more management blocks as defined below.
                     items:
                       properties:
+                        certificatePasswordSecretRef:
+                          description: The password associated with the certificate
+                            provided above.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        certificateSecretRef:
+                          description: The Base64 Encoded Certificate. (Mutually exclusive
+                            with key_vault_id.)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         hostName:
                           description: The Hostname to use for the API Proxy Endpoint.
                           type: string
@@ -842,6 +950,42 @@ spec:
                     description: One or more portal blocks as defined below.
                     items:
                       properties:
+                        certificatePasswordSecretRef:
+                          description: The password associated with the certificate
+                            provided above.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        certificateSecretRef:
+                          description: The Base64 Encoded Certificate. (Mutually exclusive
+                            with key_vault_id.)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         hostName:
                           description: The Hostname to use for the API Proxy Endpoint.
                           type: string
@@ -864,6 +1008,42 @@ spec:
                     description: One or more scm blocks as defined below.
                     items:
                       properties:
+                        certificatePasswordSecretRef:
+                          description: The password associated with the certificate
+                            provided above.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        certificateSecretRef:
+                          description: The Base64 Encoded Certificate. (Mutually exclusive
+                            with key_vault_id.)
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         hostName:
                           description: The Hostname to use for the API Proxy Endpoint.
                           type: string

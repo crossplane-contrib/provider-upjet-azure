@@ -18,6 +18,9 @@ type OutputSynapseInitParameters struct {
 	// The name of the Azure SQL database. Changing this forces a new resource to be created.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 
+	// The password that will be used to connect to the Azure SQL database.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The name of the SQL server containing the Azure SQL database. Changing this forces a new resource to be created.
 	Server *string `json:"server,omitempty" tf:"server,omitempty"`
 

@@ -2055,6 +2055,25 @@ spec:
                   notes:
                     description: Any notes about the Virtual Machine.
                     type: string
+                  passwordSecretRef:
+                    description: The Password associated with the username used to
+                      login to this Virtual Machine. Changing this forces a new resource
+                      to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   resourceGroupName:
                     description: The name of the resource group in which the Dev Test
                       Lab resource exists. Changing this forces a new resource to
@@ -2157,6 +2176,8 @@ spec:
                       on this Virtual Machine. Changing this forces a new resource
                       to be created.
                     type: string
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:

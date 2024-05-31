@@ -279,6 +279,9 @@ type ManagedClusterInitParameters struct {
 	// One or more node_type blocks as defined below.
 	NodeType []ManagedClusterNodeTypeInitParameters `json:"nodeType,omitempty" tf:"node_type,omitempty"`
 
+	// Administrator password for the VMs that will be created as part of this cluster.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// SKU for this cluster. Changing this forces a new resource to be created. Default is Basic, allowed values are either Basic or Standard.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

@@ -15,6 +15,9 @@ import (
 
 type IOTHubCertificateInitParameters struct {
 
+	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
+	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
+
 	// Is the certificate verified? Defaults to false.
 	IsVerified *bool `json:"isVerified,omitempty" tf:"is_verified,omitempty"`
 }

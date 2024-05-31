@@ -46,6 +46,9 @@ type CassandraClusterInitParameters struct {
 	// A list of TLS certificates that is used to authorize client connecting to the Cassandra Cluster.
 	ClientCertificatePems []*string `json:"clientCertificatePems,omitempty" tf:"client_certificate_pems,omitempty"`
 
+	// The initial admin password for this Cassandra Cluster. Changing this forces a new resource to be created.
+	DefaultAdminPasswordSecretRef v1.SecretKeySelector `json:"defaultAdminPasswordSecretRef" tf:"-"`
+
 	// The ID of the delegated management subnet for this Cassandra Cluster. Changing this forces a new Cassandra Cluster to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()

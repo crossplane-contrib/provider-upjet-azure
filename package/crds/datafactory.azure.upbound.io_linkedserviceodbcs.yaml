@@ -655,8 +655,6 @@ spec:
                         description: The username which can be used to authenticate
                           to the ODBC endpoint.
                         type: string
-                    required:
-                    - passwordSecretRef
                     type: object
                   connectionString:
                     description: The connection string in which to authenticate with
@@ -787,10 +785,30 @@ spec:
                   basicAuthentication:
                     description: A basic_authentication block as defined below.
                     properties:
+                      passwordSecretRef:
+                        description: The password associated with the username, which
+                          can be used to authenticate to the ODBC endpoint.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       username:
                         description: The username which can be used to authenticate
                           to the ODBC endpoint.
                         type: string
+                    required:
+                    - passwordSecretRef
                     type: object
                   connectionString:
                     description: The connection string in which to authenticate with

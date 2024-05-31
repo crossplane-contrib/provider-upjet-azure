@@ -15,6 +15,12 @@ import (
 
 type OpenIDConnectProviderInitParameters struct {
 
+	// The Client ID used for the Client Application.
+	ClientIDSecretRef v1.SecretKeySelector `json:"clientIdSecretRef" tf:"-"`
+
+	// The Client Secret used for the Client Application.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
 	// A description of this OpenID Connect Provider.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

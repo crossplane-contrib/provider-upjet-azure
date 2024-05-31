@@ -18,6 +18,9 @@ type IOTHubEndpointServiceBusTopicInitParameters struct {
 	// Type used to authenticate against the Service Bus Topic endpoint. Possible values are keyBased and identityBased. Defaults to keyBased.
 	AuthenticationType *string `json:"authenticationType,omitempty" tf:"authentication_type,omitempty"`
 
+	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
 	// URI of the Service Bus endpoint. This attribute can only be specified and is mandatory when authentication_type is identityBased.
 	EndpointURI *string `json:"endpointUri,omitempty" tf:"endpoint_uri,omitempty"`
 

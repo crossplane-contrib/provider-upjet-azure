@@ -686,6 +686,25 @@ spec:
                     description: Specifies the name of the Shared Access key that
                       grants the Event Source access to the IotHub.
                     type: string
+                  sharedAccessKeySecretRef:
+                    description: Specifies the value of the Shared Access Policy key
+                      that grants the Time Series Insights service read access to
+                      the IotHub.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   tags:
                     additionalProperties:
                       type: string
@@ -697,6 +716,8 @@ spec:
                       source's timestamp. This value defaults to the event creation
                       time.
                     type: string
+                required:
+                - sharedAccessKeySecretRef
                 type: object
               managementPolicies:
                 default:

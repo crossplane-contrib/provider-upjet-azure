@@ -1435,8 +1435,6 @@ spec:
                       name:
                         description: Specifies the storage account name.
                         type: string
-                    required:
-                    - keySecretRef
                     type: object
                   supportingScriptUris:
                     description: Supporting files for the external script. Changing
@@ -1506,6 +1504,24 @@ spec:
                         name:
                           description: Specifies the name of the environment variable.
                           type: string
+                        secureValueSecretRef:
+                          description: Specifies the value of the secure environment
+                            variable.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         value:
                           description: Specifies the value of the environment variable.
                           type: string
@@ -1729,9 +1745,28 @@ spec:
                     description: A storage_account block as defined below. Changing
                       this forces a new Resource Deployment Script to be created.
                     properties:
+                      keySecretRef:
+                        description: Specifies the storage account access key.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       name:
                         description: Specifies the storage account name.
                         type: string
+                    required:
+                    - keySecretRef
                     type: object
                   supportingScriptUris:
                     description: Supporting files for the external script. Changing

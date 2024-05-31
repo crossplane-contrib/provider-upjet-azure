@@ -21,7 +21,7 @@ func (mg *ReferenceInputBlob) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ReferenceInputBlob
 func (tr *ReferenceInputBlob) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"storage_account_key": "spec.forProvider.storageAccountKeySecretRef"}
+	return map[string]string{"storage_account_key": "storageAccountKeySecretRef"}
 }
 
 // GetObservation of this ReferenceInputBlob

@@ -401,6 +401,25 @@ spec:
                       the specific database server. Possible values are Disabled,
                       Enabled and New.
                     type: string
+                  storageAccountAccessKeySecretRef:
+                    description: Specifies the identifier key of the Threat Detection
+                      audit storage account. This is mandatory when you use storage_endpoint
+                      to specify a storage account blob endpoint.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageEndpoint:
                     description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
                       This blob storage will hold all Threat Detection audit logs.

@@ -18,6 +18,9 @@ type BotConnectionInitParameters struct {
 	// The Client ID that will be used to authenticate with the service provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The Client Secret that will be used to authenticate with the service provider.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 

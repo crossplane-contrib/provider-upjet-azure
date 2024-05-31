@@ -21,7 +21,7 @@ func (mg *LinkedServiceAzureBlobStorage) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceAzureBlobStorage
 func (tr *LinkedServiceAzureBlobStorage) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef", "sas_uri": "spec.forProvider.sasUriSecretRef", "service_endpoint": "spec.forProvider.serviceEndpointSecretRef"}
+	return map[string]string{"connection_string": "connectionStringSecretRef", "sas_uri": "sasUriSecretRef", "service_endpoint": "serviceEndpointSecretRef"}
 }
 
 // GetObservation of this LinkedServiceAzureBlobStorage

@@ -254,6 +254,24 @@ spec:
                   description:
                     description: The description of the Bot Channels Registration.
                     type: string
+                  developerAppInsightsApiKeySecretRef:
+                    description: The Application Insights API Key to associate with
+                      the Bot Channels Registration.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   developerAppInsightsApplicationId:
                     description: The Application Insights Application ID to associate
                       with the Bot Channels Registration.

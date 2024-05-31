@@ -1399,8 +1399,6 @@ spec:
                       username:
                         description: The username of the Active Directory domain administrator.
                         type: string
-                    required:
-                    - passwordSecretRef
                     type: object
                   directoryFlatFile:
                     description: A directory_flat_file block as defined below.
@@ -1446,8 +1444,6 @@ spec:
                             - name
                             - namespace
                             type: object
-                        required:
-                        - passwordSecretRef
                         type: object
                       certificateValidationUri:
                         description: The URI of the CA certificate to validate the
@@ -1778,9 +1774,28 @@ spec:
                       domainNetbiosName:
                         description: The Active Directory domain's NetBIOS name.
                         type: string
+                      passwordSecretRef:
+                        description: The password of the Active Directory domain administrator.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       username:
                         description: The username of the Active Directory domain administrator.
                         type: string
+                    required:
+                    - passwordSecretRef
                     type: object
                   directoryFlatFile:
                     description: A directory_flat_file block as defined below.
@@ -1808,6 +1823,26 @@ spec:
                             description: The Bind Distinguished Name (DN) identity
                               to be used in the secure LDAP connection.
                             type: string
+                          passwordSecretRef:
+                            description: The password of the Active Directory domain
+                              administrator.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                        required:
+                        - passwordSecretRef
                         type: object
                       certificateValidationUri:
                         description: The URI of the CA certificate to validate the

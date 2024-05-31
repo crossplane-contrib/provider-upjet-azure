@@ -3658,8 +3658,6 @@ spec:
                                     and FirstLogonCommands. Changing this forces a
                                     new resource to be created.
                                   type: string
-                              required:
-                              - contentSecretRef
                               type: object
                             type: array
                           adminPasswordSecretRef:
@@ -3771,8 +3769,6 @@ spec:
                                   type: string
                               type: object
                             type: array
-                        required:
-                        - adminPasswordSecretRef
                         type: object
                     type: object
                   plan:
@@ -4158,6 +4154,24 @@ spec:
                               description: The ID of the source Key Vault.
                               type: string
                           type: object
+                        protectedSettingsSecretRef:
+                          description: A JSON String which specifies Sensitive Settings
+                            (such as Passwords) for the Extension.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         publisher:
                           description: Specifies the Publisher of the Extension.
                           type: string
@@ -4494,9 +4508,46 @@ spec:
                   osProfile:
                     description: An os_profile block as defined below.
                     properties:
+                      customDataSecretRef:
+                        description: The Base64-Encoded Custom Data which should be
+                          used for this Virtual Machine Scale Set.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       linuxConfiguration:
                         description: A linux_configuration block as documented below.
                         properties:
+                          adminPasswordSecretRef:
+                            description: The Password which should be used for the
+                              local-administrator on this Virtual Machine. Changing
+                              this forces a new resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           adminSshKey:
                             description: A admin_ssh_key block as documented below.
                             items:
@@ -4579,14 +4630,55 @@ spec:
                               to be created.
                             items:
                               properties:
+                                contentSecretRef:
+                                  description: The XML formatted content that is added
+                                    to the unattend.xml file for the specified path
+                                    and component. Changing this forces a new resource
+                                    to be created.
+                                  properties:
+                                    key:
+                                      description: The key to select.
+                                      type: string
+                                    name:
+                                      description: Name of the secret.
+                                      type: string
+                                    namespace:
+                                      description: Namespace of the secret.
+                                      type: string
+                                  required:
+                                  - key
+                                  - name
+                                  - namespace
+                                  type: object
                                 setting:
                                   description: The name of the setting to which the
                                     content applies. Possible values are AutoLogon
                                     and FirstLogonCommands. Changing this forces a
                                     new resource to be created.
                                   type: string
+                              required:
+                              - contentSecretRef
                               type: object
                             type: array
+                          adminPasswordSecretRef:
+                            description: The Password which should be used for the
+                              local-administrator on this Virtual Machine. Changing
+                              this forces a new resource to be created.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           adminUsername:
                             description: The username of the local administrator on
                               each Virtual Machine Scale Set instance. Changing this
@@ -4677,6 +4769,8 @@ spec:
                                   type: string
                               type: object
                             type: array
+                        required:
+                        - adminPasswordSecretRef
                         type: object
                     type: object
                   plan:
@@ -4790,6 +4884,24 @@ spec:
                           server till the VM gets deleted. The time duration should
                           be specified in ISO 8601 format. Defaults to PT5M.
                         type: string
+                    type: object
+                  userDataBase64SecretRef:
+                    description: The Base64-Encoded User Data which should be used
+                      for this Virtual Machine Scale Set.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
                     type: object
                   zoneBalance:
                     description: Should the Virtual Machines in this Scale Set be

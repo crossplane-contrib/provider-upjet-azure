@@ -1217,8 +1217,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - contentsSecretRef
                     type: object
                   certificatePolicy:
                     description: A certificate_policy block as defined below. Changing
@@ -1457,6 +1455,43 @@ spec:
                     description: A certificate block as defined below, used to Import
                       an existing certificate. Changing this will create a new version
                       of the Key Vault Certificate.
+                    properties:
+                      contentsSecretRef:
+                        description: The base64-encoded certificate contents.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      passwordSecretRef:
+                        description: The password associated with the certificate.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - contentsSecretRef
                     type: object
                   certificatePolicy:
                     description: A certificate_policy block as defined below. Changing
@@ -1894,8 +1929,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - contentsSecretRef
                     type: object
                   certificateAttribute:
                     description: A certificate_attribute block as defined below.

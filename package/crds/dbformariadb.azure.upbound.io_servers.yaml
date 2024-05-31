@@ -348,6 +348,24 @@ spec:
                     description: The Administrator login for the MariaDB Server. Changing
                       this forces a new resource to be created.
                     type: string
+                  administratorLoginPasswordSecretRef:
+                    description: The Password associated with the administrator_login
+                      for the MariaDB Server.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   autoGrowEnabled:
                     description: Enable/Disable auto-growing of the storage. Storage
                       auto-grow prevents your server from running out of storage and

@@ -21,7 +21,7 @@ func (mg *WindowsVirtualMachine) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this WindowsVirtualMachine
 func (tr *WindowsVirtualMachine) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"additional_unattend_content[*].content": "spec.forProvider.additionalUnattendContent[*].contentSecretRef", "admin_password": "spec.forProvider.adminPasswordSecretRef", "custom_data": "spec.forProvider.customDataSecretRef"}
+	return map[string]string{"additional_unattend_content[*].content": "additionalUnattendContent[*].contentSecretRef", "admin_password": "adminPasswordSecretRef", "custom_data": "customDataSecretRef"}
 }
 
 // GetObservation of this WindowsVirtualMachine

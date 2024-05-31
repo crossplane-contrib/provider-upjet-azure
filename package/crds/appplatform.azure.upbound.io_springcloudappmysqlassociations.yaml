@@ -581,6 +581,24 @@ spec:
                             type: string
                         type: object
                     type: object
+                  passwordSecretRef:
+                    description: Specifies the password which should be used when
+                      connecting to the MySQL Database from the Spring Cloud App.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   username:
                     description: Specifies the username which should be used when
                       connecting to the MySQL Database from the Spring Cloud App.
@@ -659,6 +677,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - passwordSecretRef
                 type: object
               managementPolicies:
                 default:

@@ -2138,6 +2138,24 @@ spec:
                           description: A fairplay_configuration block as defined above.
                             Check license requirements here https://docs.microsoft.com/azure/media-services/latest/fairplay-license-overview.
                           properties:
+                            askSecretRef:
+                              description: The key that must be used as FairPlay Application
+                                Secret key.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
                             offlineRentalConfiguration:
                               description: A offline_rental_configuration block as
                                 defined below.
@@ -2148,6 +2166,42 @@ spec:
                                 storageDurationSeconds:
                                   description: Storage duration.
                                   type: number
+                              type: object
+                            pfxPasswordSecretRef:
+                              description: The password encrypting FairPlay certificate
+                                in PKCS 12 (pfx) format.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
+                            pfxSecretRef:
+                              description: The Base64 representation of FairPlay certificate
+                                in PKCS 12 (pfx) format (including private key).
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
                               type: object
                             rentalAndLeaseKeyType:
                               description: The rental and lease key type. Supported
@@ -2195,6 +2249,23 @@ spec:
                               expirationDate:
                                 description: The expiration date of license.
                                 type: string
+                              gracePeriodSecretRef:
+                                description: The grace period of license.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               licenseType:
                                 description: The license type. Supported values are
                                   NonPersistent or Persistent.
@@ -2302,6 +2373,78 @@ spec:
                               description: One or more alternate_key block as defined
                                 above.
                               items:
+                                properties:
+                                  rsaTokenKeyExponentSecretRef:
+                                    description: The RSA parameter exponent.
+                                    properties:
+                                      key:
+                                        description: The key to select.
+                                        type: string
+                                      name:
+                                        description: Name of the secret.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the secret.
+                                        type: string
+                                    required:
+                                    - key
+                                    - name
+                                    - namespace
+                                    type: object
+                                  rsaTokenKeyModulusSecretRef:
+                                    description: The RSA parameter modulus.
+                                    properties:
+                                      key:
+                                        description: The key to select.
+                                        type: string
+                                      name:
+                                        description: Name of the secret.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the secret.
+                                        type: string
+                                    required:
+                                    - key
+                                    - name
+                                    - namespace
+                                    type: object
+                                  symmetricTokenKeySecretRef:
+                                    description: The key value of the key. Specifies
+                                      a symmetric key for token validation.
+                                    properties:
+                                      key:
+                                        description: The key to select.
+                                        type: string
+                                      name:
+                                        description: Name of the secret.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the secret.
+                                        type: string
+                                    required:
+                                    - key
+                                    - name
+                                    - namespace
+                                    type: object
+                                  x509TokenKeyRawSecretRef:
+                                    description: The raw data field of a certificate
+                                      in PKCS 12 format (X509Certificate2 in .NET).
+                                      Specifies a certificate for token validation.
+                                    properties:
+                                      key:
+                                        description: The key to select.
+                                        type: string
+                                      name:
+                                        description: Name of the secret.
+                                        type: string
+                                      namespace:
+                                        description: Namespace of the secret.
+                                        type: string
+                                    required:
+                                    - key
+                                    - name
+                                    - namespace
+                                    type: object
                                 type: object
                               type: array
                             audience:
@@ -2313,6 +2456,77 @@ spec:
                             openIdConnectDiscoveryDocument:
                               description: The OpenID connect discovery document.
                               type: string
+                            primaryRsaTokenKeyExponentSecretRef:
+                              description: The RSA parameter exponent.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
+                            primaryRsaTokenKeyModulusSecretRef:
+                              description: The RSA parameter modulus.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
+                            primarySymmetricTokenKeySecretRef:
+                              description: The key value of the key. Specifies a symmetric
+                                key for token validation.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
+                            primaryX509TokenKeyRawSecretRef:
+                              description: The raw data field of a certificate in
+                                PKCS 12 format (X509Certificate2 in .NET). Specifies
+                                a certificate for token validation.
+                              properties:
+                                key:
+                                  description: The key to select.
+                                  type: string
+                                name:
+                                  description: Name of the secret.
+                                  type: string
+                                namespace:
+                                  description: Namespace of the secret.
+                                  type: string
+                              required:
+                              - key
+                              - name
+                              - namespace
+                              type: object
                             requiredClaim:
                               description: One or more required_claim blocks as defined
                                 above.

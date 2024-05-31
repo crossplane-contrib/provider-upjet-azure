@@ -393,6 +393,24 @@ spec:
                     description: The URI of page where Client/App Registration is
                       performed for this Authorization Server.
                     type: string
+                  clientSecretSecretRef:
+                    description: The Client/App Secret registered with this Authorization
+                      Server.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   defaultScope:
                     description: The Default Scope used when requesting an Access
                       Token, specified as a string containing space-delimited values.
@@ -412,6 +430,23 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  resourceOwnerPasswordSecretRef:
+                    description: The password associated with the Resource Owner.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   resourceOwnerUsername:
                     description: The username associated with the Resource Owner.
                     type: string

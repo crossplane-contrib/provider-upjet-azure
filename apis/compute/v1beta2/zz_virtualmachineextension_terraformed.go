@@ -21,7 +21,7 @@ func (mg *VirtualMachineExtension) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this VirtualMachineExtension
 func (tr *VirtualMachineExtension) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"protected_settings": "spec.forProvider.protectedSettingsSecretRef"}
+	return map[string]string{"protected_settings": "protectedSettingsSecretRef"}
 }
 
 // GetObservation of this VirtualMachineExtension

@@ -21,7 +21,7 @@ func (mg *OpenIDConnectProvider) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OpenIDConnectProvider
 func (tr *OpenIDConnectProvider) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"client_id": "spec.forProvider.clientIdSecretRef", "client_secret": "spec.forProvider.clientSecretSecretRef"}
+	return map[string]string{"client_id": "clientIdSecretRef", "client_secret": "clientSecretSecretRef"}
 }
 
 // GetObservation of this OpenIDConnectProvider

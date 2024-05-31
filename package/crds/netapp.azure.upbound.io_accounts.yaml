@@ -705,8 +705,6 @@ spec:
                       username:
                         description: The Username of Active Directory Domain Administrator.
                         type: string
-                    required:
-                    - passwordSecretRef
                     type: object
                   identity:
                     description: The identity block where it is used when customer
@@ -846,6 +844,23 @@ spec:
                         description: The Organizational Unit (OU) within the Active
                           Directory Domain.
                         type: string
+                      passwordSecretRef:
+                        description: The password associated with the username.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       smbServerName:
                         description: The NetBIOS name which should be used for the
                           NetApp SMB Server, which will be registered as a computer
@@ -854,6 +869,8 @@ spec:
                       username:
                         description: The Username of Active Directory Domain Administrator.
                         type: string
+                    required:
+                    - passwordSecretRef
                     type: object
                   identity:
                     description: The identity block where it is used when customer

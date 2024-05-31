@@ -21,7 +21,7 @@ func (mg *Gen2Environment) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Gen2Environment
 func (tr *Gen2Environment) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"storage[*].key": "spec.forProvider.storage[*].keySecretRef"}
+	return map[string]string{"storage[*].key": "storage[*].keySecretRef"}
 }
 
 // GetObservation of this Gen2Environment

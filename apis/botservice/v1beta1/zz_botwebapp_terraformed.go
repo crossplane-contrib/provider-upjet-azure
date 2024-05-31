@@ -21,7 +21,7 @@ func (mg *BotWebApp) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this BotWebApp
 func (tr *BotWebApp) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"developer_app_insights_api_key": "spec.forProvider.developerAppInsightsApiKeySecretRef", "luis_key": "spec.forProvider.luisKeySecretRef"}
+	return map[string]string{"developer_app_insights_api_key": "developerAppInsightsApiKeySecretRef", "luis_key": "luisKeySecretRef"}
 }
 
 // GetObservation of this BotWebApp

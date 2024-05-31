@@ -21,7 +21,7 @@ func (mg *SQLPoolSecurityAlertPolicy) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SQLPoolSecurityAlertPolicy
 func (tr *SQLPoolSecurityAlertPolicy) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"storage_account_access_key": "spec.forProvider.storageAccountAccessKeySecretRef"}
+	return map[string]string{"storage_account_access_key": "storageAccountAccessKeySecretRef"}
 }
 
 // GetObservation of this SQLPoolSecurityAlertPolicy
