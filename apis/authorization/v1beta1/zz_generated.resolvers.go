@@ -67,6 +67,106 @@ func (mg *ManagementLock) ResolveReferences( // ResolveReferences of this Manage
 	return nil
 }
 
+// ResolveReferences of this PimActiveRoleAssignment.
+func (mg *PimActiveRoleAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ScopeRef,
+			Selector:     mg.Spec.ForProvider.ScopeSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scope")
+	}
+	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ScopeRef,
+			Selector:     mg.Spec.InitProvider.ScopeSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scope")
+	}
+	mg.Spec.InitProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScopeRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this PimEligibleRoleAssignment.
+func (mg *PimEligibleRoleAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Scope),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ScopeRef,
+			Selector:     mg.Spec.ForProvider.ScopeSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.Scope")
+	}
+	mg.Spec.ForProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ScopeRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Scope),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ScopeRef,
+			Selector:     mg.Spec.InitProvider.ScopeSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.Scope")
+	}
+	mg.Spec.InitProvider.Scope = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ScopeRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this ResourceGroupPolicyAssignment.
 func (mg *ResourceGroupPolicyAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

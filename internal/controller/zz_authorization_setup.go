@@ -10,6 +10,8 @@ import (
 	"github.com/crossplane/upjet/pkg/controller"
 
 	managementlock "github.com/upbound/provider-azure/internal/controller/authorization/managementlock"
+	pimactiveroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimactiveroleassignment"
+	pimeligibleroleassignment "github.com/upbound/provider-azure/internal/controller/authorization/pimeligibleroleassignment"
 	policydefinition "github.com/upbound/provider-azure/internal/controller/authorization/policydefinition"
 	resourcegrouppolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcegrouppolicyassignment"
 	resourcepolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/resourcepolicyassignment"
@@ -25,6 +27,8 @@ import (
 func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		managementlock.Setup,
+		pimactiveroleassignment.Setup,
+		pimeligibleroleassignment.Setup,
 		policydefinition.Setup,
 		resourcegrouppolicyassignment.Setup,
 		resourcepolicyassignment.Setup,
