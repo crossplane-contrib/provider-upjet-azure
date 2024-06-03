@@ -8,7 +8,6 @@ import (
 	"github.com/hashicorp/terraform-plugin-sdk/v2/terraform"
 
 	"github.com/crossplane/upjet/pkg/config"
-	"github.com/crossplane/upjet/pkg/config/conversion"
 
 	"github.com/upbound/provider-azure/apis/rconfig"
 )
@@ -611,20 +610,5 @@ func Configure(p *config.Provider) {
 		}
 	})
 
-	p.AddResourceConfigurator("azurerm_route_filter", func(r *config.Resource) {
-		r.TerraformResource.Schema["rule"].MaxItems = 1
-
-		r.Version = "v1beta2"
-		r.PreviousVersions = []string{"v1beta1"}
-		// we would like to set the storage version to v1beta1 to facilitate
-		// downgrades.
-		r.SetCRDStorageVersion("v1beta1")
-		r.ControllerReconcileVersion = "v1beta1"
-		r.Conversions = []conversion.Conversion{
-			conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
-			conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
-			conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
-
-		r.AddSingletonListConversion("rule", "rule")
-	})
+	p.AddResourceConfigurator("azurerm_route_filter", func(r *config.Resource) {})
 }

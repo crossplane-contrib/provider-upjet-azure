@@ -15,10 +15,6 @@ func Configure(p *config.Provider) {
 		r.LateInitializer = config.LateInitializer{
 			IgnoredFields: []string{"network_rulesets"},
 		}
-
-		r.TerraformResource.Schema["network_rulesets"].MaxItems = 1
-
-		r.AddSingletonListConversion("network_rulesets", "networkRulesets")
 	})
 
 	p.AddResourceConfigurator("azurerm_eventhub", func(r *config.Resource) {
