@@ -32,6 +32,9 @@ type WorkspaceSecurityAlertPolicyInitParameters struct {
 	// Specifies the number of days to keep in the Threat Detection audit logs. Defaults to 0.
 	RetentionDays *float64 `json:"retentionDays,omitempty" tf:"retention_days,omitempty"`
 
+	// Specifies the identifier key of the Threat Detection audit storage account.
+	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("primary_blob_endpoint",true)

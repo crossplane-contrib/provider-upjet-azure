@@ -67,6 +67,9 @@ type WebhookInitParameters struct {
 
 	// Name of the hybrid worker group the Webhook job will run on.
 	RunOnWorkerGroup *string `json:"runOnWorkerGroup,omitempty" tf:"run_on_worker_group,omitempty"`
+
+	// URI to initiate the webhook. Can be generated using Generate URI API. By default, new URI is generated on each new resource creation. Changing this forces a new resource to be created.
+	URISecretRef *v1.SecretKeySelector `json:"uriSecretRef,omitempty" tf:"-"`
 }
 
 type WebhookObservation struct {

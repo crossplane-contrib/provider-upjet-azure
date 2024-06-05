@@ -2857,8 +2857,6 @@ spec:
                             items:
                               type: string
                             type: array
-                        required:
-                        - appSecretSecretRef
                         type: object
                       google:
                         description: A google block as defined below.
@@ -2891,8 +2889,6 @@ spec:
                             items:
                               type: string
                             type: array
-                        required:
-                        - clientSecretSecretRef
                         type: object
                       issuer:
                         description: Issuer URI. When using Azure Active Directory,
@@ -2929,8 +2925,6 @@ spec:
                             items:
                               type: string
                             type: array
-                        required:
-                        - clientSecretSecretRef
                         type: object
                       runtimeVersion:
                         description: The runtime version of the Authentication/Authorization
@@ -2971,8 +2965,6 @@ spec:
                             - name
                             - namespace
                             type: object
-                        required:
-                        - consumerSecretSecretRef
                         type: object
                       unauthenticatedClientAction:
                         description: The action to take when an unauthenticated client
@@ -3009,8 +3001,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - valueSecretRef
                       type: object
                     type: array
                   dailyMemoryTimeQuota:
@@ -3818,6 +3808,24 @@ spec:
                             description: The OAuth 2.0 client ID that was created
                               for the app used for authentication.
                             type: string
+                          clientSecretSecretRef:
+                            description: The OAuth 2.0 client secret that was created
+                              for the app used for authentication.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                         type: object
                       additionalLoginParams:
                         additionalProperties:
@@ -3847,12 +3855,32 @@ spec:
                           appId:
                             description: The App ID of the Facebook app used for login
                             type: string
+                          appSecretSecretRef:
+                            description: The App Secret of the Facebook app used for
+                              Facebook login.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           oauthScopes:
                             description: The OAuth 2.0 scopes that will be requested
                               as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
                             items:
                               type: string
                             type: array
+                        required:
+                        - appSecretSecretRef
                         type: object
                       google:
                         description: A google block as defined below.
@@ -3861,12 +3889,32 @@ spec:
                             description: The OAuth 2.0 client ID that was created
                               for the app used for authentication.
                             type: string
+                          clientSecretSecretRef:
+                            description: The OAuth 2.0 client secret that was created
+                              for the app used for authentication.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           oauthScopes:
                             description: The OAuth 2.0 scopes that will be requested
                               as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
                             items:
                               type: string
                             type: array
+                        required:
+                        - clientSecretSecretRef
                         type: object
                       issuer:
                         description: Issuer URI. When using Azure Active Directory,
@@ -3879,12 +3927,32 @@ spec:
                             description: The OAuth 2.0 client ID that was created
                               for the app used for authentication.
                             type: string
+                          clientSecretSecretRef:
+                            description: The OAuth 2.0 client secret that was created
+                              for the app used for authentication.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           oauthScopes:
                             description: The OAuth 2.0 scopes that will be requested
                               as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
                             items:
                               type: string
                             type: array
+                        required:
+                        - clientSecretSecretRef
                         type: object
                       runtimeVersion:
                         description: The runtime version of the Authentication/Authorization
@@ -3907,6 +3975,26 @@ spec:
                             description: The OAuth 1.0a consumer key of the Twitter
                               application used for sign-in.
                             type: string
+                          consumerSecretSecretRef:
+                            description: The OAuth 1.0a consumer secret of the Twitter
+                              application used for sign-in.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                        required:
+                        - consumerSecretSecretRef
                         type: object
                       unauthenticatedClientAction:
                         description: The action to take when an unauthenticated client
@@ -3926,6 +4014,25 @@ spec:
                             values are APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub,
                             PostgreSQL, RedisCache, ServiceBus, SQLAzure and SQLServer.
                           type: string
+                        valueSecretRef:
+                          description: The value for the Connection String.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - valueSecretRef
                       type: object
                     type: array
                   dailyMemoryTimeQuota:
@@ -4349,6 +4456,24 @@ spec:
                         description: Should WebSockets be enabled?
                         type: boolean
                     type: object
+                  storageAccountAccessKeySecretRef:
+                    description: The access key which will be used to access the backend
+                      storage account for the Function App.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageAccountName:
                     description: The backend storage account name which will be used
                       by the Function App (such as the dashboard, logs). Changing
@@ -4438,6 +4563,8 @@ spec:
                     description: The runtime version associated with the Function
                       App. Defaults to ~1.
                     type: string
+                required:
+                - storageAccountAccessKeySecretRef
                 type: object
               managementPolicies:
                 default:

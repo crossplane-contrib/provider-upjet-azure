@@ -1816,6 +1816,24 @@ spec:
                           streams. Possible values are Avro, Csv and Json.
                         type: string
                     type: object
+                  sharedAccessPolicyKeySecretRef:
+                    description: The shared access policy key for the specified shared
+                      access policy. Changing this forces a new resource to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   sharedAccessPolicyName:
                     description: The shared access policy name for the Event Hub,
                       Service Bus Queue, Service Bus Topic, etc.
@@ -1900,6 +1918,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - sharedAccessPolicyKeySecretRef
                 type: object
               managementPolicies:
                 default:

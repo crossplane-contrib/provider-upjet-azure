@@ -273,6 +273,23 @@ spec:
                     description: The location where to use cache from. Possible values
                       are default and valid Azure regions. Defaults to default.
                     type: string
+                  connectionStringSecretRef:
+                    description: The connection string to the Cache for Redis.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   description:
                     description: The description of the API Management Redis Cache.
                     type: string
@@ -353,6 +370,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - connectionStringSecretRef
                 type: object
               managementPolicies:
                 default:

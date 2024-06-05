@@ -72,6 +72,9 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 	// The connection string sent insecurely. Conflicts with connection_string, sas_uri and service_endpoint.
 	ConnectionStringInsecure *string `json:"connectionStringInsecure,omitempty" tf:"connection_string_insecure,omitempty"`
 
+	// The connection string. Conflicts with connection_string_insecure, sas_uri and service_endpoint.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
 	// The description for the Data Factory Linked Service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -84,6 +87,12 @@ type LinkedServiceAzureBlobStorageInitParameters struct {
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The SAS URI. Conflicts with connection_string_insecure, connection_string and service_endpoint.
+	SASURISecretRef *v1.SecretKeySelector `json:"sasuriSecretRef,omitempty" tf:"-"`
+
+	// The Service Endpoint. Conflicts with connection_string, connection_string_insecure and sas_uri.
+	ServiceEndpointSecretRef *v1.SecretKeySelector `json:"serviceEndpointSecretRef,omitempty" tf:"-"`
 
 	// The service principal id in which to authenticate against the Azure Blob Storage account.
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`

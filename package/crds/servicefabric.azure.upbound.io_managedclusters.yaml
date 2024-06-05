@@ -1709,6 +1709,24 @@ spec:
                           type: string
                       type: object
                     type: array
+                  passwordSecretRef:
+                    description: Administrator password for the VMs that will be created
+                      as part of this cluster.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   sku:
                     description: SKU for this cluster. Changing this forces a new
                       resource to be created. Default is Basic, allowed values are

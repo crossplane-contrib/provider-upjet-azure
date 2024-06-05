@@ -30,6 +30,9 @@ type OutputMSSQLInitParameters struct {
 	// The name of the Stream Output. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Password used together with username, to login to the Microsoft SQL Server. Required if authentication_mode is ConnectionString.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The name of the Resource Group where the Stream Analytics Job exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

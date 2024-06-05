@@ -178,6 +178,9 @@ type BackendParameters struct {
 
 type BackendProxyInitParameters struct {
 
+	// The password to connect to the proxy server.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The URL of the proxy server.
 	URL *string `json:"url,omitempty" tf:"url,omitempty"`
 

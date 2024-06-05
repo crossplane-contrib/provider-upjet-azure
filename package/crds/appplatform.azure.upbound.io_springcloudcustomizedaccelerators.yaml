@@ -814,8 +814,6 @@ spec:
                             description: Specifies the username of git repository
                               basic auth.
                             type: string
-                        required:
-                        - passwordSecretRef
                         type: object
                       branch:
                         description: Specifies the Git repository branch to be used.
@@ -884,8 +882,6 @@ spec:
                             - name
                             - namespace
                             type: object
-                        required:
-                        - privateKeySecretRef
                         type: object
                       url:
                         description: Specifies Git repository URL for the accelerator.
@@ -1016,10 +1012,30 @@ spec:
                           with git_repository[0].ssh_auth. Changing this forces a
                           new Spring Cloud Customized Accelerator to be created.
                         properties:
+                          passwordSecretRef:
+                            description: Specifies the password of git repository
+                              basic auth.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           username:
                             description: Specifies the username of git repository
                               basic auth.
                             type: string
+                        required:
+                        - passwordSecretRef
                         type: object
                       branch:
                         description: Specifies the Git repository branch to be used.
@@ -1052,6 +1068,44 @@ spec:
                             description: Specifies the SSH Key algorithm of git repository
                               basic auth.
                             type: string
+                          hostKeySecretRef:
+                            description: Specifies the Public SSH Key of git repository
+                              basic auth.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                          privateKeySecretRef:
+                            description: Specifies the Private SSH Key of git repository
+                              basic auth.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
+                        required:
+                        - privateKeySecretRef
                         type: object
                       url:
                         description: Specifies Git repository URL for the accelerator.

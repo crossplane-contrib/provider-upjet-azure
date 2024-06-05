@@ -320,6 +320,24 @@ spec:
                     description: Specifies the number of days to keep in the Threat
                       Detection audit logs. Defaults to 0.
                     type: number
+                  storageAccountAccessKeySecretRef:
+                    description: Specifies the identifier key of the Threat Detection
+                      audit storage account.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageEndpoint:
                     description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
                       This blob storage will hold all Threat Detection audit logs.

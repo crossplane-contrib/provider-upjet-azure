@@ -267,9 +267,29 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  certificateContentSecretRef:
+                    description: The Base-64 representation of the X509 leaf certificate
+                      .cer file or just a .pem file content.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   isVerified:
                     description: Is the certificate verified? Defaults to false.
                     type: boolean
+                required:
+                - certificateContentSecretRef
                 type: object
               managementPolicies:
                 default:

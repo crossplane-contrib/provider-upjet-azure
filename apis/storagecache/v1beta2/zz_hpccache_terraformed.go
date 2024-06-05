@@ -21,7 +21,7 @@ func (mg *HPCCache) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this HPCCache
 func (tr *HPCCache) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"directory_active_directory[*].password": "spec.forProvider.directoryActiveDirectory[*].passwordSecretRef", "directory_ldap[*].bind[*].password": "spec.forProvider.directoryLdap[*].bind[*].passwordSecretRef"}
+	return map[string]string{"directory_active_directory[*].password": "directoryActiveDirectory[*].passwordSecretRef", "directory_ldap[*].bind[*].password": "directoryLdap[*].bind[*].passwordSecretRef"}
 }
 
 // GetObservation of this HPCCache

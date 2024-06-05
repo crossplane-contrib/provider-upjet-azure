@@ -15,6 +15,9 @@ import (
 
 type AdminUserInitParameters struct {
 
+	// The password for the user.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The username to use when signing in to Lab Service Lab VMs.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -28,7 +31,7 @@ type AdminUserObservation struct {
 type AdminUserParameters struct {
 
 	// The password for the user.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username to use when signing in to Lab Service Lab VMs.
@@ -361,6 +364,9 @@ type NetworkParameters struct {
 
 type NonAdminUserInitParameters struct {
 
+	// The password for the user.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The username to use when signing in to Lab Service Lab VMs.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -374,7 +380,7 @@ type NonAdminUserObservation struct {
 type NonAdminUserParameters struct {
 
 	// The password for the user.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username to use when signing in to Lab Service Lab VMs.

@@ -1249,6 +1249,23 @@ spec:
                     description: A /30 subnet for the secondary link. Required when
                       config for IPv4.
                     type: string
+                  sharedKeySecretRef:
+                    description: The shared key. Can be a maximum of 25 characters.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   vlanId:
                     description: A valid VLAN ID to establish this peering on.
                     type: number

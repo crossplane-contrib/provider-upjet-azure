@@ -294,6 +294,7 @@ func (in *ActiveDirectoryInitParameters) DeepCopyInto(out *ActiveDirectoryInitPa
 		*out = new(string)
 		**out = **in
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.SMBServerName != nil {
 		in, out := &in.SMBServerName, &out.SMBServerName
 		*out = new(string)

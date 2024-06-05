@@ -159,6 +159,10 @@ type LinuxWebAppSlotAuthSettingsActiveDirectoryInitParameters struct {
 	// The ID of the Client to use to authenticate with Azure Active Directory.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The App Setting name that contains the client secret of the Client. Cannot be used with `client_secret`.
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
@@ -207,6 +211,10 @@ type LinuxWebAppSlotAuthSettingsFacebookInitParameters struct {
 	// The App ID of the Facebook app used for login.
 	// The App ID of the Facebook app used for login.
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
+
+	// The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+	// The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+	AppSecretSecretRef *v1.SecretKeySelector `json:"appSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the app_secret value used for Facebook Login.
 	// The app setting name that contains the `app_secret` value used for Facebook Login. Cannot be specified with `app_secret`.
@@ -261,6 +269,10 @@ type LinuxWebAppSlotAuthSettingsGithubInitParameters struct {
 	// The ID of the GitHub app used for login.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for GitHub Login. Cannot be specified with `client_secret`.
 	ClientSecretSettingName *string `json:"clientSecretSettingName,omitempty" tf:"client_secret_setting_name,omitempty"`
@@ -313,6 +325,10 @@ type LinuxWebAppSlotAuthSettingsGoogleInitParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OpenID Connect Client ID for the Google web application.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name that contains the `client_secret` value used for Google Login. Cannot be specified with `client_secret`.
@@ -424,6 +440,10 @@ type LinuxWebAppSlotAuthSettingsMicrosoftInitParameters struct {
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+	// The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
 	// The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret`.
@@ -608,6 +628,10 @@ type LinuxWebAppSlotAuthSettingsTwitterInitParameters struct {
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+	ConsumerSecretSecretRef *v1.SecretKeySelector `json:"consumerSecretSecretRef,omitempty" tf:"-"`
 
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
 	// The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret`.
@@ -1664,6 +1688,10 @@ type LinuxWebAppSlotBackupInitParameters struct {
 
 	// An schedule block as defined below.
 	Schedule *LinuxWebAppSlotBackupScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
+
+	// The SAS URL to the container.
+	// The SAS URL to the container.
+	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
 type LinuxWebAppSlotBackupObservation struct {
@@ -1698,7 +1726,7 @@ type LinuxWebAppSlotBackupParameters struct {
 
 	// The SAS URL to the container.
 	// The SAS URL to the container.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	StorageAccountURLSecretRef v1.SecretKeySelector `json:"storageAccountUrlSecretRef" tf:"-"`
 }
 
@@ -1788,6 +1816,10 @@ type LinuxWebAppSlotConnectionStringInitParameters struct {
 	// Type of database. Possible values include APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure, and SQLServer.
 	// Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The connection string value.
+	// The connection string value.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type LinuxWebAppSlotConnectionStringObservation struct {
@@ -1815,7 +1847,7 @@ type LinuxWebAppSlotConnectionStringParameters struct {
 
 	// The connection string value.
 	// The connection string value.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -2252,6 +2284,9 @@ type LinuxWebAppSlotSiteConfigApplicationStackInitParameters struct {
 	DockerImageName *string `json:"dockerImageName,omitempty" tf:"docker_image_name,omitempty"`
 
 	DockerImageTag *string `json:"dockerImageTag,omitempty" tf:"docker_image_tag,omitempty"`
+
+	// The User Name to use for authentication against the registry to pull the image.
+	DockerRegistryPasswordSecretRef *v1.SecretKeySelector `json:"dockerRegistryPasswordSecretRef,omitempty" tf:"-"`
 
 	// The URL of the container registry where the docker_image_name is located. e.g. https://index.docker.io or https://mcr.microsoft.com. This value is required with docker_image_name.
 	DockerRegistryURL *string `json:"dockerRegistryUrl,omitempty" tf:"docker_registry_url,omitempty"`
@@ -3145,6 +3180,9 @@ type LinuxWebAppSlotSiteCredentialParameters struct {
 
 type LinuxWebAppSlotStorageAccountInitParameters struct {
 
+	// The Access key for the storage account.
+	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
+
 	// The Name of the Storage Account.
 	AccountName *string `json:"accountName,omitempty" tf:"account_name,omitempty"`
 
@@ -3182,7 +3220,7 @@ type LinuxWebAppSlotStorageAccountObservation struct {
 type LinuxWebAppSlotStorageAccountParameters struct {
 
 	// The Access key for the storage account.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AccessKeySecretRef v1.SecretKeySelector `json:"accessKeySecretRef" tf:"-"`
 
 	// The Name of the Storage Account.
@@ -3239,6 +3277,9 @@ type LogsHTTPLogsAzureBlobStorageInitParameters struct {
 
 	// The retention period in days. A values of 0 means no retention.
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
+
+	// SAS url to an Azure blob container with read/write/list/delete permissions.
+	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 
 type LogsHTTPLogsAzureBlobStorageObservation struct {
@@ -3254,7 +3295,7 @@ type LogsHTTPLogsAzureBlobStorageParameters struct {
 	RetentionInDays *float64 `json:"retentionInDays,omitempty" tf:"retention_in_days,omitempty"`
 
 	// SAS url to an Azure blob container with read/write/list/delete permissions.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SASURLSecretRef v1.SecretKeySelector `json:"sasurlSecretRef" tf:"-"`
 }
 

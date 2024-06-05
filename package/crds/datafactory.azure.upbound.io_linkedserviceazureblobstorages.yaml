@@ -1484,6 +1484,24 @@ spec:
                     description: The connection string sent insecurely. Conflicts
                       with connection_string, sas_uri and service_endpoint.
                     type: string
+                  connectionStringSecretRef:
+                    description: The connection string. Conflicts with connection_string_insecure,
+                      sas_uri and service_endpoint.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   description:
                     description: The description for the Data Factory Linked Service.
                     type: string
@@ -1589,6 +1607,42 @@ spec:
                       Linked Service.
                     type: object
                     x-kubernetes-map-type: granular
+                  sasuriSecretRef:
+                    description: The SAS URI. Conflicts with connection_string_insecure,
+                      connection_string and service_endpoint.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  serviceEndpointSecretRef:
+                    description: The Service Endpoint. Conflicts with connection_string,
+                      connection_string_insecure and sas_uri.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   servicePrincipalId:
                     description: The service principal id in which to authenticate
                       against the Azure Blob Storage account.

@@ -30,6 +30,9 @@ type IdentityProviderGoogleInitParameters struct {
 	// Client Id for Google Sign-in.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// Client secret for Google Sign-in.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`

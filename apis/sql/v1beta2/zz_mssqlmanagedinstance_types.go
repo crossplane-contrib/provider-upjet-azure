@@ -56,6 +56,9 @@ type MSSQLManagedInstanceInitParameters struct {
 	// The administrator login name for the new SQL Managed Instance. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy
+	AdministratorLoginPasswordSecretRef v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef" tf:"-"`
+
 	// Specifies how the SQL Managed Instance will be collated. Default value is SQL_Latin1_General_CP1_CI_AS. Changing this forces a new resource to be created.
 	Collation *string `json:"collation,omitempty" tf:"collation,omitempty"`
 

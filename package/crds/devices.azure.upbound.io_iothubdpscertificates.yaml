@@ -270,6 +270,24 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  certificateContentSecretRef:
+                    description: The Base-64 representation of the X509 leaf certificate
+                      .cer file or just a .pem file content.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   iotDpsName:
                     description: The name of the IoT Device Provisioning Service that
                       this certificate will be attached to. Changing this forces a
@@ -354,6 +372,8 @@ spec:
                       state. Defaults to false. Changing this forces a new resource
                       to be created.
                     type: boolean
+                required:
+                - certificateContentSecretRef
                 type: object
               managementPolicies:
                 default:

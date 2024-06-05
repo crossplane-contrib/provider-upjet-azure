@@ -241,6 +241,24 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  developerAppInsightsApiKeySecretRef:
+                    description: The Application Insights API Key to associate with
+                      the Web App Bot.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   developerAppInsightsApplicationId:
                     description: The Application Insights Application ID to associate
                       with the Web App Bot.
@@ -266,6 +284,23 @@ spec:
                     items:
                       type: string
                     type: array
+                  luisKeySecretRef:
+                    description: The LUIS key to associate with the Web App Bot.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   microsoftAppId:
                     description: The Microsoft Application ID for the Web App Bot.
                       Changing this forces a new resource to be created.

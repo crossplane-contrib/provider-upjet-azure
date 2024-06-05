@@ -21,7 +21,7 @@ func (mg *VirtualNetworkGatewayConnection) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this VirtualNetworkGatewayConnection
 func (tr *VirtualNetworkGatewayConnection) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"authorization_key": "spec.forProvider.authorizationKeySecretRef", "shared_key": "spec.forProvider.sharedKeySecretRef"}
+	return map[string]string{"authorization_key": "authorizationKeySecretRef", "shared_key": "sharedKeySecretRef"}
 }
 
 // GetObservation of this VirtualNetworkGatewayConnection

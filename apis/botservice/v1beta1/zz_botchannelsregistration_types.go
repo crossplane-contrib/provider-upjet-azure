@@ -21,6 +21,9 @@ type BotChannelsRegistrationInitParameters struct {
 	// The description of the Bot Channels Registration.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The Application Insights API Key to associate with the Bot Channels Registration.
+	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
+
 	// The Application Insights Application ID to associate with the Bot Channels Registration.
 	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
 

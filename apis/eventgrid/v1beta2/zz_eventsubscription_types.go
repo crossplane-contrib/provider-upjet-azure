@@ -351,6 +351,9 @@ type DeliveryPropertyInitParameters struct {
 
 	// Either Static or Dynamic
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// If the type is Static, then provide the value to use
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type DeliveryPropertyObservation struct {

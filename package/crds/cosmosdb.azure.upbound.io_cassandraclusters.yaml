@@ -1095,6 +1095,24 @@ spec:
                     items:
                       type: string
                     type: array
+                  defaultAdminPasswordSecretRef:
+                    description: The initial admin password for this Cassandra Cluster.
+                      Changing this forces a new resource to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   delegatedManagementSubnetId:
                     description: The ID of the delegated management subnet for this
                       Cassandra Cluster. Changing this forces a new Cassandra Cluster
@@ -1219,6 +1237,8 @@ spec:
                       to run. Possible values are 3.11 and 4.0. Defaults to 3.11.
                       Changing this forces a new Cassandra Cluster to be created.
                     type: string
+                required:
+                - defaultAdminPasswordSecretRef
                 type: object
               managementPolicies:
                 default:

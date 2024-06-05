@@ -21,7 +21,7 @@ func (mg *IdentityProviderFacebook) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IdentityProviderFacebook
 func (tr *IdentityProviderFacebook) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"app_secret": "spec.forProvider.appSecretSecretRef"}
+	return map[string]string{"app_secret": "appSecretSecretRef"}
 }
 
 // GetObservation of this IdentityProviderFacebook

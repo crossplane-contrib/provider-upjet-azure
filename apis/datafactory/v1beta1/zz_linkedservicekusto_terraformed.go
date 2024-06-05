@@ -21,7 +21,7 @@ func (mg *LinkedServiceKusto) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceKusto
 func (tr *LinkedServiceKusto) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"service_principal_key": "spec.forProvider.servicePrincipalKeySecretRef"}
+	return map[string]string{"service_principal_key": "servicePrincipalKeySecretRef"}
 }
 
 // GetObservation of this LinkedServiceKusto

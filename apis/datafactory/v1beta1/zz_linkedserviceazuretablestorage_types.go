@@ -22,6 +22,9 @@ type LinkedServiceAzureTableStorageInitParameters struct {
 	// List of tags that can be used for describing the Data Factory Linked Service.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
+	// The connection string to an Azure Storage Account.
+	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+
 	// The description for the Data Factory Linked Service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 

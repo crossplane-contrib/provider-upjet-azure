@@ -6034,8 +6034,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - storageAccountUrlSecretRef
                     type: object
                   clientAffinityEnabled:
                     description: Should Client Affinity be enabled?
@@ -6087,8 +6085,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - valueSecretRef
                       type: object
                     type: array
                   enabled:
@@ -6194,8 +6190,6 @@ spec:
                                 - name
                                 - namespace
                                 type: object
-                            required:
-                            - sasurlSecretRef
                             type: object
                           fileSystem:
                             description: A file_system block as defined above.
@@ -7022,8 +7016,6 @@ spec:
                           description: The Azure Storage Type. Possible values include
                             AzureFiles and AzureBlob
                           type: string
-                      required:
-                      - accessKeySecretRef
                       type: object
                     type: array
                   tags:
@@ -7158,6 +7150,25 @@ spec:
                               The OAuth 2.0 client ID that was created for the app used for authentication.
                               The ID of the Client to use to authenticate with Azure Active Directory.
                             type: string
+                          clientSecretSecretRef:
+                            description: |-
+                              The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                              The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           clientSecretSettingName:
                             description: |-
                               The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -7197,6 +7208,25 @@ spec:
                               The App ID of the Facebook app used for login.
                               The App ID of the Facebook app used for login.
                             type: string
+                          appSecretSecretRef:
+                            description: |-
+                              The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+                              The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           appSecretSettingName:
                             description: |-
                               The app setting name that contains the app_secret value used for Facebook Login.
@@ -7218,6 +7248,25 @@ spec:
                               The OAuth 2.0 client ID that was created for the app used for authentication.
                               The ID of the GitHub app used for login.
                             type: string
+                          clientSecretSecretRef:
+                            description: |-
+                              The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                              The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           clientSecretSettingName:
                             description: |-
                               The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -7239,6 +7288,25 @@ spec:
                               The OAuth 2.0 client ID that was created for the app used for authentication.
                               The OpenID Connect Client ID for the Google web application.
                             type: string
+                          clientSecretSecretRef:
+                            description: |-
+                              The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                              The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           clientSecretSettingName:
                             description: |-
                               The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -7265,6 +7333,25 @@ spec:
                               The OAuth 2.0 client ID that was created for the app used for authentication.
                               The OAuth 2.0 client ID that was created for the app used for authentication.
                             type: string
+                          clientSecretSecretRef:
+                            description: |-
+                              The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                              The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           clientSecretSettingName:
                             description: |-
                               The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -7301,6 +7388,25 @@ spec:
                               The OAuth 1.0a consumer key of the Twitter application used for sign-in.
                               The OAuth 1.0a consumer key of the Twitter application used for sign-in.
                             type: string
+                          consumerSecretSecretRef:
+                            description: |-
+                              The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+                              The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           consumerSecretSettingName:
                             description: |-
                               The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
@@ -7735,6 +7841,27 @@ spec:
                               When the schedule should start working in RFC-3339 format.
                             type: string
                         type: object
+                      storageAccountUrlSecretRef:
+                        description: |-
+                          The SAS URL to the container.
+                          The SAS URL to the container.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - storageAccountUrlSecretRef
                     type: object
                   clientAffinityEnabled:
                     description: Should Client Affinity be enabled?
@@ -7767,6 +7894,27 @@ spec:
                             Type of database. Possible values include: MySQL, SQLServer, SQLAzure, Custom, NotificationHub, ServiceBus, EventHub, APIHub, DocDb, RedisCache, and PostgreSQL.
                             Type of database. Possible values include: `MySQL`, `SQLServer`, `SQLAzure`, `Custom`, `NotificationHub`, `ServiceBus`, `EventHub`, `APIHub`, `DocDb`, `RedisCache`, and `PostgreSQL`.
                           type: string
+                        valueSecretRef:
+                          description: |-
+                            The connection string value.
+                            The connection string value.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - valueSecretRef
                       type: object
                     type: array
                   enabled:
@@ -7854,6 +8002,26 @@ spec:
                                 description: The retention period in days. A value
                                   of 0 means no retention.
                                 type: number
+                              sasurlSecretRef:
+                                description: SAS url to an Azure blob container with
+                                  read/write/list/delete permissions.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
+                            required:
+                            - sasurlSecretRef
                             type: object
                           fileSystem:
                             description: A file_system block as defined above.
@@ -7980,6 +8148,24 @@ spec:
                             type: string
                           dockerImageTag:
                             type: string
+                          dockerRegistryPasswordSecretRef:
+                            description: The User Name to use for authentication against
+                              the registry to pull the image.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           dockerRegistryUrl:
                             description: The URL of the container registry where the
                               docker_image_name is located. e.g. https://index.docker.io
@@ -8546,6 +8732,23 @@ spec:
                     description: One or more storage_account blocks as defined below.
                     items:
                       properties:
+                        accessKeySecretRef:
+                          description: The Access key for the storage account.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         accountName:
                           description: The Name of the Storage Account.
                           type: string
@@ -8564,6 +8767,8 @@ spec:
                           description: The Azure Storage Type. Possible values include
                             AzureFiles and AzureBlob
                           type: string
+                      required:
+                      - accessKeySecretRef
                       type: object
                     type: array
                   tags:

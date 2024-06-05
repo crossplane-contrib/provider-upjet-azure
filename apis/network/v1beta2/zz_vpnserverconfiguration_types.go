@@ -185,6 +185,9 @@ type ServerInitParameters struct {
 
 	// The Score of the Radius Server determines the priority of the server. Ranges from 1 to 30.
 	Score *float64 `json:"score,omitempty" tf:"score,omitempty"`
+
+	// The Secret used to communicate with the Radius Server.
+	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 
 type ServerObservation struct {
@@ -207,7 +210,7 @@ type ServerParameters struct {
 	Score *float64 `json:"score" tf:"score,omitempty"`
 
 	// The Secret used to communicate with the Radius Server.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SecretSecretRef v1.SecretKeySelector `json:"secretSecretRef" tf:"-"`
 }
 

@@ -2654,6 +2654,25 @@ spec:
                       Changing this forces a new resource to be created. If this is
                       not provided aad_admin or customer_managed_key must be provided.
                     type: string
+                  sqlAdministratorLoginPasswordSecretRef:
+                    description: The Password associated with the sql_administrator_login
+                      for the SQL administrator. If this is not provided aad_admin
+                      or customer_managed_key must be provided.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   sqlIdentityControlEnabled:
                     description: Are pipelines (running as workspace's system assigned
                       identity) allowed to access SQL pools?

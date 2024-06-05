@@ -21,7 +21,7 @@ func (mg *MSSQLServer) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this MSSQLServer
 func (tr *MSSQLServer) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"administrator_login_password": "spec.forProvider.administratorLoginPasswordSecretRef"}
+	return map[string]string{"administrator_login_password": "administratorLoginPasswordSecretRef"}
 }
 
 // GetObservation of this MSSQLServer

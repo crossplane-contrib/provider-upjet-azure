@@ -1343,6 +1343,23 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  accessTokenSecretRef:
+                    description: Authenticate to ADB via an access token.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   adbDomain:
                     description: The domain URL of the databricks instance.
                     type: string

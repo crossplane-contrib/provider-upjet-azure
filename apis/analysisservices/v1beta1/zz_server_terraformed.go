@@ -21,7 +21,7 @@ func (mg *Server) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Server
 func (tr *Server) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"backup_blob_container_uri": "spec.forProvider.backupBlobContainerUriSecretRef"}
+	return map[string]string{"backup_blob_container_uri": "backupBlobContainerUriSecretRef"}
 }
 
 // GetObservation of this Server

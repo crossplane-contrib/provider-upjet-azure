@@ -21,7 +21,7 @@ func (mg *OutputFunction) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OutputFunction
 func (tr *OutputFunction) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"api_key": "spec.forProvider.apiKeySecretRef"}
+	return map[string]string{"api_key": "apiKeySecretRef"}
 }
 
 // GetObservation of this OutputFunction

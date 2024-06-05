@@ -106,6 +106,9 @@ type BindInitParameters struct {
 
 	// The Bind Distinguished Name (DN) identity to be used in the secure LDAP connection.
 	Dn *string `json:"dn,omitempty" tf:"dn,omitempty"`
+
+	// The password of the Active Directory domain administrator.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
 type BindObservation struct {
@@ -121,7 +124,7 @@ type BindParameters struct {
 	Dn *string `json:"dn" tf:"dn,omitempty"`
 
 	// The password of the Active Directory domain administrator.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 }
 
@@ -190,6 +193,9 @@ type DirectoryActiveDirectoryInitParameters struct {
 	// The Active Directory domain's NetBIOS name.
 	DomainNetbiosName *string `json:"domainNetbiosName,omitempty" tf:"domain_netbios_name,omitempty"`
 
+	// The password of the Active Directory domain administrator.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The username of the Active Directory domain administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -238,7 +244,7 @@ type DirectoryActiveDirectoryParameters struct {
 	DomainNetbiosName *string `json:"domainNetbiosName" tf:"domain_netbios_name,omitempty"`
 
 	// The password of the Active Directory domain administrator.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username of the Active Directory domain administrator.

@@ -21,7 +21,7 @@ func (mg *Account) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Account
 func (tr *Account) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"custom_question_answering_search_service_key": "spec.forProvider.customQuestionAnsweringSearchServiceKeySecretRef", "primary_access_key": "status.atProvider.primaryAccessKey", "secondary_access_key": "status.atProvider.secondaryAccessKey"}
+	return map[string]string{"custom_question_answering_search_service_key": "customQuestionAnsweringSearchServiceKeySecretRef", "primary_access_key": "status.atProvider.primaryAccessKey", "secondary_access_key": "status.atProvider.secondaryAccessKey"}
 }
 
 // GetObservation of this Account

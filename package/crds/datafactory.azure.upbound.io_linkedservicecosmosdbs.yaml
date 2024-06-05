@@ -243,6 +243,24 @@ spec:
                     description: The endpoint of the Azure CosmosDB account. Required
                       if connection_string is unspecified.
                     type: string
+                  accountKeySecretRef:
+                    description: The account key of the Azure Cosmos DB account. Required
+                      if connection_string is unspecified.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   additionalProperties:
                     additionalProperties:
                       type: string
@@ -256,6 +274,24 @@ spec:
                     items:
                       type: string
                     type: array
+                  connectionStringSecretRef:
+                    description: The connection string. Required if account_endpoint,
+                      account_key, and database are unspecified.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   database:
                     description: The name of the database. Required if connection_string
                       is unspecified.

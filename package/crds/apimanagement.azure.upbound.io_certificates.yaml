@@ -367,6 +367,24 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  dataSecretRef:
+                    description: The base-64 encoded certificate data, which must
+                      be a PFX file.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   keyVaultIdentityClientId:
                     description: The Client ID of the User Assigned Managed Identity
                       to use for retrieving certificate.
@@ -450,6 +468,23 @@ spec:
                             - IfNotPresent
                             type: string
                         type: object
+                    type: object
+                  passwordSecretRef:
+                    description: The password used for this certificate.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
                     type: object
                 type: object
               managementPolicies:

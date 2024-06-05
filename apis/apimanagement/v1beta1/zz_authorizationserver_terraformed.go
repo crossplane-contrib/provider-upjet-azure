@@ -21,7 +21,7 @@ func (mg *AuthorizationServer) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this AuthorizationServer
 func (tr *AuthorizationServer) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"client_secret": "spec.forProvider.clientSecretSecretRef", "resource_owner_password": "spec.forProvider.resourceOwnerPasswordSecretRef"}
+	return map[string]string{"client_secret": "clientSecretSecretRef", "resource_owner_password": "resourceOwnerPasswordSecretRef"}
 }
 
 // GetObservation of this AuthorizationServer

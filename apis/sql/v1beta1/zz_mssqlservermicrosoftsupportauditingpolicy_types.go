@@ -33,6 +33,12 @@ type MSSQLServerMicrosoftSupportAuditingPolicyInitParameters struct {
 
 	// Enable audit events to Azure Monitor? To enable server audit events to Azure Monitor, please enable its main database audit events to Azure Monitor. Defaults to true.
 	LogMonitoringEnabled *bool `json:"logMonitoringEnabled,omitempty" tf:"log_monitoring_enabled,omitempty"`
+
+	// The access key to use for the auditing storage account.
+	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+
+	// The ID of the Subscription containing the Storage Account.
+	StorageAccountSubscriptionIDSecretRef *v1.SecretKeySelector `json:"storageAccountSubscriptionIdSecretRef,omitempty" tf:"-"`
 }
 
 type MSSQLServerMicrosoftSupportAuditingPolicyObservation struct {

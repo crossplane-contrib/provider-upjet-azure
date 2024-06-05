@@ -21,7 +21,7 @@ func (mg *BotChannelLine) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this BotChannelLine
 func (tr *BotChannelLine) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"line_channel[*].access_token": "spec.forProvider.lineChannel[*].accessTokenSecretRef", "line_channel[*].secret": "spec.forProvider.lineChannel[*].secretSecretRef"}
+	return map[string]string{"line_channel[*].access_token": "lineChannel[*].accessTokenSecretRef", "line_channel[*].secret": "lineChannel[*].secretSecretRef"}
 }
 
 // GetObservation of this BotChannelLine

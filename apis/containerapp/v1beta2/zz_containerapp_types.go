@@ -1473,6 +1473,14 @@ type RegistryParameters struct {
 }
 
 type SecretInitParameters struct {
+
+	// The Secret name.
+	// The Secret name.
+	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
+
+	// The value for this secret.
+	// The value for this secret.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type SecretObservation struct {
@@ -1482,12 +1490,12 @@ type SecretParameters struct {
 
 	// The Secret name.
 	// The Secret name.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The value for this secret.
 	// The value for this secret.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 

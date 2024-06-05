@@ -564,6 +564,24 @@ spec:
                     description: The service principal id in which to authenticate
                       against the Kusto Database.
                     type: string
+                  servicePrincipalKeySecretRef:
+                    description: The service principal key in which to authenticate
+                      against the Kusto Database.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   tenant:
                     description: The service principal tenant id or name in which
                       to authenticate against the Kusto Database.

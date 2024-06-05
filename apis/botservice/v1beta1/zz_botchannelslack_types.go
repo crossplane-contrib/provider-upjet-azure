@@ -18,11 +18,20 @@ type BotChannelSlackInitParameters struct {
 	// The Client ID that will be used to authenticate with Slack.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The Client Secret that will be used to authenticate with Slack.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
 	// The Slack Landing Page URL.
 	LandingPageURL *string `json:"landingPageUrl,omitempty" tf:"landing_page_url,omitempty"`
 
 	// The supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The Signing Secret that will be used to sign the requests.
+	SigningSecretSecretRef *v1.SecretKeySelector `json:"signingSecretSecretRef,omitempty" tf:"-"`
+
+	// The Verification Token that will be used to authenticate with Slack.
+	VerificationTokenSecretRef v1.SecretKeySelector `json:"verificationTokenSecretRef" tf:"-"`
 }
 
 type BotChannelSlackObservation struct {

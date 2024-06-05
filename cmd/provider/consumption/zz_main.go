@@ -13,6 +13,7 @@ import (
 	"path/filepath"
 	"time"
 
+	"github.com/alecthomas/kingpin/v2"
 	xpv1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 	"github.com/crossplane/crossplane-runtime/pkg/certificates"
 	xpcontroller "github.com/crossplane/crossplane-runtime/pkg/controller"
@@ -24,7 +25,6 @@ import (
 	"github.com/crossplane/crossplane-runtime/pkg/statemetrics"
 	tjcontroller "github.com/crossplane/upjet/pkg/controller"
 	"github.com/crossplane/upjet/pkg/controller/conversion"
-	"gopkg.in/alecthomas/kingpin.v2"
 	kerrors "k8s.io/apimachinery/pkg/api/errors"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"

@@ -286,6 +286,24 @@ spec:
                     description: The IPv6 address space from which to allocate customer
                       addresses for global reach.
                     type: string
+                  authorizationKeySecretRef:
+                    description: The authorization key which is associated with the
+                      Express Route Circuit Connection.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   peerPeeringId:
                     description: The ID of the peered Express Route Circuit Private
                       Peering. Changing this forces a new Express Route Circuit Connection

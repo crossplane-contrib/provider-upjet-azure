@@ -36,6 +36,9 @@ type ExpressRouteCircuitPeeringInitParameters struct {
 	// A /30 subnet for the secondary link. Required when config for IPv4.
 	SecondaryPeerAddressPrefix *string `json:"secondaryPeerAddressPrefix,omitempty" tf:"secondary_peer_address_prefix,omitempty"`
 
+	// The shared key. Can be a maximum of 25 characters.
+	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
+
 	// A valid VLAN ID to establish this peering on.
 	VlanID *float64 `json:"vlanId,omitempty" tf:"vlan_id,omitempty"`
 }

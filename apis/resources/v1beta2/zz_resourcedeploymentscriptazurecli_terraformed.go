@@ -21,7 +21,7 @@ func (mg *ResourceDeploymentScriptAzureCli) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this ResourceDeploymentScriptAzureCli
 func (tr *ResourceDeploymentScriptAzureCli) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"environment_variable[*].secure_value": "spec.forProvider.environmentVariable[*].secureValueSecretRef", "storage_account[*].key": "spec.forProvider.storageAccount[*].keySecretRef"}
+	return map[string]string{"environment_variable[*].secure_value": "environmentVariable[*].secureValueSecretRef", "storage_account[*].key": "storageAccount[*].keySecretRef"}
 }
 
 // GetObservation of this ResourceDeploymentScriptAzureCli

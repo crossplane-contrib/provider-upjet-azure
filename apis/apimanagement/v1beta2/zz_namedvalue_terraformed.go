@@ -21,7 +21,7 @@ func (mg *NamedValue) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this NamedValue
 func (tr *NamedValue) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"value": "spec.forProvider.valueSecretRef"}
+	return map[string]string{"value": "valueSecretRef"}
 }
 
 // GetObservation of this NamedValue

@@ -793,6 +793,16 @@ func (in *RedisConfigurationInitParameters) DeepCopyInto(out *RedisConfiguration
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AofStorageConnectionString0SecretRef != nil {
+		in, out := &in.AofStorageConnectionString0SecretRef, &out.AofStorageConnectionString0SecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.AofStorageConnectionString1SecretRef != nil {
+		in, out := &in.AofStorageConnectionString1SecretRef, &out.AofStorageConnectionString1SecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.DataPersistenceAuthenticationMethod != nil {
 		in, out := &in.DataPersistenceAuthenticationMethod, &out.DataPersistenceAuthenticationMethod
 		*out = new(string)
@@ -841,6 +851,11 @@ func (in *RedisConfigurationInitParameters) DeepCopyInto(out *RedisConfiguration
 	if in.RdbBackupMaxSnapshotCount != nil {
 		in, out := &in.RdbBackupMaxSnapshotCount, &out.RdbBackupMaxSnapshotCount
 		*out = new(float64)
+		**out = **in
+	}
+	if in.RdbStorageConnectionStringSecretRef != nil {
+		in, out := &in.RdbStorageConnectionStringSecretRef, &out.RdbStorageConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageAccountSubscriptionID != nil {

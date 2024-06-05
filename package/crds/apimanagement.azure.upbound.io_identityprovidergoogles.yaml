@@ -352,6 +352,23 @@ spec:
                   clientId:
                     description: Client Id for Google Sign-in.
                     type: string
+                  clientSecretSecretRef:
+                    description: Client secret for Google Sign-in.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   resourceGroupName:
                     description: The Name of the Resource Group where the API Management
                       Service exists. Changing this forces a new resource to be created.
@@ -432,6 +449,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - clientSecretSecretRef
                 type: object
               managementPolicies:
                 default:

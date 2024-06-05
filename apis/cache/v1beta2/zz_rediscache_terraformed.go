@@ -21,7 +21,7 @@ func (mg *RedisCache) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this RedisCache
 func (tr *RedisCache) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"primary_access_key": "status.atProvider.primaryAccessKey", "primary_connection_string": "status.atProvider.primaryConnectionString", "redis_configuration[*].aof_storage_connection_string_0": "spec.forProvider.redisConfiguration[*].aofStorageConnectionString0SecretRef", "redis_configuration[*].aof_storage_connection_string_1": "spec.forProvider.redisConfiguration[*].aofStorageConnectionString1SecretRef", "redis_configuration[*].rdb_storage_connection_string": "spec.forProvider.redisConfiguration[*].rdbStorageConnectionStringSecretRef", "secondary_access_key": "status.atProvider.secondaryAccessKey", "secondary_connection_string": "status.atProvider.secondaryConnectionString"}
+	return map[string]string{"primary_access_key": "status.atProvider.primaryAccessKey", "primary_connection_string": "status.atProvider.primaryConnectionString", "redis_configuration[*].aof_storage_connection_string_0": "redisConfiguration[*].aofStorageConnectionString0SecretRef", "redis_configuration[*].aof_storage_connection_string_1": "redisConfiguration[*].aofStorageConnectionString1SecretRef", "redis_configuration[*].rdb_storage_connection_string": "redisConfiguration[*].rdbStorageConnectionStringSecretRef", "secondary_access_key": "status.atProvider.secondaryAccessKey", "secondary_connection_string": "status.atProvider.secondaryConnectionString"}
 }
 
 // GetObservation of this RedisCache

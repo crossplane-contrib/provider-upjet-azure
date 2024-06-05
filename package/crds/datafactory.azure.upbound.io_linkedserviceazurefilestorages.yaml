@@ -858,6 +858,23 @@ spec:
                     items:
                       type: string
                     type: array
+                  connectionStringSecretRef:
+                    description: The connection string.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   description:
                     description: The description for the Data Factory Linked Service.
                     type: string
@@ -893,9 +910,28 @@ spec:
                       Linked Service.
                     type: object
                     x-kubernetes-map-type: granular
+                  passwordSecretRef:
+                    description: The password to log in the server.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   userId:
                     description: The user ID to log in the server.
                     type: string
+                required:
+                - connectionStringSecretRef
                 type: object
               managementPolicies:
                 default:

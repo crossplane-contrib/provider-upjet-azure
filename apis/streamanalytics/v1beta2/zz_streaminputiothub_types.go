@@ -60,6 +60,9 @@ type StreamInputIOTHubInitParameters struct {
 	// A serialization block as defined below.
 	Serialization *StreamInputIOTHubSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
+	// The shared access policy key for the specified shared access policy. Changing this forces a new resource to be created.
+	SharedAccessPolicyKeySecretRef v1.SecretKeySelector `json:"sharedAccessPolicyKeySecretRef" tf:"-"`
+
 	// The shared access policy name for the Event Hub, Service Bus Queue, Service Bus Topic, etc.
 	SharedAccessPolicyName *string `json:"sharedAccessPolicyName,omitempty" tf:"shared_access_policy_name,omitempty"`
 

@@ -287,6 +287,25 @@ spec:
                     description: The account security identifier (SID) for the SMS
                       Channel.
                     type: string
+                  smsChannelAuthTokenSecretRef:
+                    description: The authorization token for the SMS Channel.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                required:
+                - smsChannelAuthTokenSecretRef
                 type: object
               managementPolicies:
                 default:

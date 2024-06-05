@@ -21,7 +21,7 @@ func (mg *CassandraCluster) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this CassandraCluster
 func (tr *CassandraCluster) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"default_admin_password": "spec.forProvider.defaultAdminPasswordSecretRef"}
+	return map[string]string{"default_admin_password": "defaultAdminPasswordSecretRef"}
 }
 
 // GetObservation of this CassandraCluster

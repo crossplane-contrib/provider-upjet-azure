@@ -21,6 +21,9 @@ type IdentityProviderAADInitParameters struct {
 	// Client Id of the Application in the AAD Identity Provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// Client secret of the Application in the AAD Identity Provider.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
+
 	// The AAD Tenant to use instead of Common when logging into Active Directory
 	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
 }

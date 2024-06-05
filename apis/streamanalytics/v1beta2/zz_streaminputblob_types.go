@@ -39,6 +39,9 @@ type StreamInputBlobInitParameters struct {
 	// A serialization block as defined below.
 	Serialization *StreamInputBlobSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
+	// The Access Key which should be used to connect to this Storage Account.
+	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

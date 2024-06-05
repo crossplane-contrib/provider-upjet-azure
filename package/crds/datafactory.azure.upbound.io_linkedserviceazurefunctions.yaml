@@ -814,6 +814,24 @@ spec:
                     description: The integration runtime reference to associate with
                       the Data Factory Linked Service.
                     type: string
+                  keySecretRef:
+                    description: The system key of the Azure Function. Exactly one
+                      of either key or key_vault_key is required
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   keyVaultKey:
                     description: A key_vault_key block as defined below. Use this
                       Argument to store the system key of the Azure Function in an

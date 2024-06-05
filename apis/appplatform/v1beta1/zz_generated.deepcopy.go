@@ -2663,6 +2663,11 @@ func (in *RepositoryInitParameters) DeepCopyInto(out *RepositoryInitParameters) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Patterns != nil {
 		in, out := &in.Patterns, &out.Patterns
 		*out = make([]*string, len(*in))
@@ -2673,6 +2678,11 @@ func (in *RepositoryInitParameters) DeepCopyInto(out *RepositoryInitParameters) 
 				**out = **in
 			}
 		}
+	}
+	if in.PrivateKeySecretRef != nil {
+		in, out := &in.PrivateKeySecretRef, &out.PrivateKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.SearchPaths != nil {
 		in, out := &in.SearchPaths, &out.SearchPaths
@@ -4540,6 +4550,7 @@ func (in *SpringCloudAppMySQLAssociationInitParameters) DeepCopyInto(out *Spring
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.Username != nil {
 		in, out := &in.Username, &out.Username
 		*out = new(string)

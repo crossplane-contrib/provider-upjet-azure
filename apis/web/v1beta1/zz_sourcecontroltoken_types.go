@@ -15,6 +15,12 @@ import (
 
 type SourceControlTokenInitParameters struct {
 
+	// The Access Token.
+	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
+
+	// The Access Token Secret.
+	TokenSecretSecretRef *v1.SecretKeySelector `json:"tokenSecretSecretRef,omitempty" tf:"-"`
+
 	// The Token type. Possible values include Bitbucket, Dropbox, Github, and OneDrive.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }

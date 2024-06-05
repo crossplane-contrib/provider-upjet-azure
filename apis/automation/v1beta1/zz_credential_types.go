@@ -18,6 +18,9 @@ type CredentialInitParameters struct {
 	// The description associated with this Automation Credential.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// The password associated with this Automation Credential.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The username associated with this Automation Credential.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }

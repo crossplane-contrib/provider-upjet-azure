@@ -18,6 +18,9 @@ type ExpressRouteCircuitInitParameters struct {
 	// Allow the circuit to interact with classic (RDFE) resources. Defaults to false.
 	AllowClassicOperations *bool `json:"allowClassicOperations,omitempty" tf:"allow_classic_operations,omitempty"`
 
+	// The authorization key. This can be used to set up an ExpressRoute Circuit with an ExpressRoute Port from another subscription.
+	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+
 	// The bandwidth in Gbps of the circuit being created on the Express Route Port.
 	BandwidthInGbps *float64 `json:"bandwidthInGbps,omitempty" tf:"bandwidth_in_gbps,omitempty"`
 

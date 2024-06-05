@@ -1556,8 +1556,6 @@ spec:
                             description: The username to use when signing in to Lab
                               Service Lab VMs.
                             type: string
-                        required:
-                        - passwordSecretRef
                         type: object
                       createOption:
                         description: The create option to indicate what Lab Service
@@ -1612,8 +1610,6 @@ spec:
                             description: The username to use when signing in to Lab
                               Service Lab VMs.
                             type: string
-                        required:
-                        - passwordSecretRef
                         type: object
                       sharedPasswordEnabled:
                         description: Is the shared password enabled with the same
@@ -1836,10 +1832,29 @@ spec:
                       adminUser:
                         description: An admin_user block as defined below.
                         properties:
+                          passwordSecretRef:
+                            description: The password for the user.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           username:
                             description: The username to use when signing in to Lab
                               Service Lab VMs.
                             type: string
+                        required:
+                        - passwordSecretRef
                         type: object
                       createOption:
                         description: The create option to indicate what Lab Service
@@ -1873,10 +1888,29 @@ spec:
                       nonAdminUser:
                         description: A non_admin_user block as defined below.
                         properties:
+                          passwordSecretRef:
+                            description: The password for the user.
+                            properties:
+                              key:
+                                description: The key to select.
+                                type: string
+                              name:
+                                description: Name of the secret.
+                                type: string
+                              namespace:
+                                description: Namespace of the secret.
+                                type: string
+                            required:
+                            - key
+                            - name
+                            - namespace
+                            type: object
                           username:
                             description: The username to use when signing in to Lab
                               Service Lab VMs.
                             type: string
+                        required:
+                        - passwordSecretRef
                         type: object
                       sharedPasswordEnabled:
                         description: Is the shared password enabled with the same

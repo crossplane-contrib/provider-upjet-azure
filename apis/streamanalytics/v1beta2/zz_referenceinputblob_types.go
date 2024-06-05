@@ -42,6 +42,9 @@ type ReferenceInputBlobInitParameters struct {
 	// A serialization block as defined below.
 	Serialization *ReferenceInputBlobSerializationInitParameters `json:"serialization,omitempty" tf:"serialization,omitempty"`
 
+	// The Access Key which should be used to connect to this Storage Account. Required if authentication_mode is ConnectionString.
+	StorageAccountKeySecretRef *v1.SecretKeySelector `json:"storageAccountKeySecretRef,omitempty" tf:"-"`
+
 	// The name of the Storage Account that has the blob container with reference data.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

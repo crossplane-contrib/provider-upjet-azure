@@ -21,7 +21,7 @@ func (mg *IOTHubDPSCertificate) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IOTHubDPSCertificate
 func (tr *IOTHubDPSCertificate) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"certificate_content": "spec.forProvider.certificateContentSecretRef"}
+	return map[string]string{"certificate_content": "certificateContentSecretRef"}
 }
 
 // GetObservation of this IOTHubDPSCertificate

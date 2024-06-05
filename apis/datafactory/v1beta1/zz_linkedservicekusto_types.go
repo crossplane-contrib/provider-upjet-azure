@@ -60,6 +60,9 @@ type LinkedServiceKustoInitParameters struct {
 	// The service principal id in which to authenticate against the Kusto Database.
 	ServicePrincipalID *string `json:"servicePrincipalId,omitempty" tf:"service_principal_id,omitempty"`
 
+	// The service principal key in which to authenticate against the Kusto Database.
+	ServicePrincipalKeySecretRef *v1.SecretKeySelector `json:"servicePrincipalKeySecretRef,omitempty" tf:"-"`
+
 	// The service principal tenant id or name in which to authenticate against the Kusto Database.
 	Tenant *string `json:"tenant,omitempty" tf:"tenant,omitempty"`
 

@@ -21,7 +21,7 @@ func (mg *Webhook) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Webhook
 func (tr *Webhook) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"uri": "spec.forProvider.uriSecretRef"}
+	return map[string]string{"uri": "uriSecretRef"}
 }
 
 // GetObservation of this Webhook

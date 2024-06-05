@@ -2560,6 +2560,11 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SQLAdministratorLoginPasswordSecretRef != nil {
+		in, out := &in.SQLAdministratorLoginPasswordSecretRef, &out.SQLAdministratorLoginPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.SQLIdentityControlEnabled != nil {
 		in, out := &in.SQLIdentityControlEnabled, &out.SQLIdentityControlEnabled
 		*out = new(bool)
@@ -3040,9 +3045,19 @@ func (in *WorkspaceVulnerabilityAssessmentInitParameters) DeepCopyInto(out *Work
 		*out = new(RecurringScansInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageContainerPath != nil {
 		in, out := &in.StorageContainerPath, &out.StorageContainerPath
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageContainerSASKeySecretRef != nil {
+		in, out := &in.StorageContainerSASKeySecretRef, &out.StorageContainerSASKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.WorkspaceSecurityAlertPolicyID != nil {

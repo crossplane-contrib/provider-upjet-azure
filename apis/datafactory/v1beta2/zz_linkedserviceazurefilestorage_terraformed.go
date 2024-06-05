@@ -21,7 +21,7 @@ func (mg *LinkedServiceAzureFileStorage) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceAzureFileStorage
 func (tr *LinkedServiceAzureFileStorage) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef", "password": "spec.forProvider.passwordSecretRef"}
+	return map[string]string{"connection_string": "connectionStringSecretRef", "password": "passwordSecretRef"}
 }
 
 // GetObservation of this LinkedServiceAzureFileStorage

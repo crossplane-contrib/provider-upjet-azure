@@ -21,6 +21,9 @@ type IOTHubEndpointStorageContainerInitParameters struct {
 	// Time interval at which blobs are written to storage. Value should be between 60 and 720 seconds. Default value is 300 seconds.
 	BatchFrequencyInSeconds *float64 `json:"batchFrequencyInSeconds,omitempty" tf:"batch_frequency_in_seconds,omitempty"`
 
+	// The connection string for the endpoint. This attribute can only be specified and is mandatory when authentication_type is keyBased.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
 	// The name of storage container in the storage account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta1.Container
 	ContainerName *string `json:"containerName,omitempty" tf:"container_name,omitempty"`

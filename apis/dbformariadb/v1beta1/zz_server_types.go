@@ -18,6 +18,9 @@ type ServerInitParameters struct {
 	// The Administrator login for the MariaDB Server. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// The Password associated with the administrator_login for the MariaDB Server.
+	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
 	// Enable/Disable auto-growing of the storage. Storage auto-grow prevents your server from running out of storage and becoming read-only. If storage auto grow is enabled, the storage automatically grows without impacting the workload. The default value if not explicitly specified is true. Defaults to true.
 	AutoGrowEnabled *bool `json:"autoGrowEnabled,omitempty" tf:"auto_grow_enabled,omitempty"`
 

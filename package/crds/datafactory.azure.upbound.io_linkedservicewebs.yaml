@@ -255,6 +255,24 @@ spec:
                       Linked Service.
                     type: object
                     x-kubernetes-map-type: granular
+                  passwordSecretRef:
+                    description: The password for Basic authentication. Required if
+                      authentication_type sets to Basic.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   url:
                     description: The URL of the web service endpoint (e.g. https://www.microsoft.com).
                     type: string

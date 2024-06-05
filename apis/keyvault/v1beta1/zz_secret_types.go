@@ -43,6 +43,9 @@ type SecretInitParameters struct {
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+
+	// Specifies the value of the Key Vault Secret. Changing this will create a new version of the Key Vault Secret.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type SecretObservation struct {

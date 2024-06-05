@@ -770,8 +770,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - tokenSecretRef
                     type: object
                   gcmCredential:
                     description: A gcm_credential block as defined below.
@@ -794,8 +792,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - apiKeySecretRef
                     type: object
                   location:
                     description: The Azure Region in which this Notification Hub Namespace
@@ -1001,9 +997,52 @@ spec:
                       teamId:
                         description: The ID of the team the Token.
                         type: string
+                      tokenSecretRef:
+                        description: The Push Token associated with the Apple Developer
+                          Account. This is the contents of the key downloaded from
+                          the Apple Developer Portal between the -----BEGIN PRIVATE
+                          KEY----- and -----END PRIVATE KEY----- blocks.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - tokenSecretRef
                     type: object
                   gcmCredential:
                     description: A gcm_credential block as defined below.
+                    properties:
+                      apiKeySecretRef:
+                        description: The API Key associated with the Google Cloud
+                          Messaging service.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - apiKeySecretRef
                     type: object
                   location:
                     description: The Azure Region in which this Notification Hub Namespace
@@ -1233,8 +1272,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - apiKeySecretRef
                     type: object
                   id:
                     description: The ID of the Notification Hub.

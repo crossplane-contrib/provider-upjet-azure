@@ -95,6 +95,9 @@ type ActiveDirectoryInitParameters struct {
 	// The Organizational Unit (OU) within the Active Directory Domain.
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
+	// The password associated with the username.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
 
@@ -135,7 +138,7 @@ type ActiveDirectoryParameters struct {
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
 	// The password associated with the username.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.

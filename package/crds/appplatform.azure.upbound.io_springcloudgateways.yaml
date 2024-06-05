@@ -1540,6 +1540,10 @@ spec:
                           4Gi, 5Gi, 6Gi, 7Gi, and 8Gi. Defaults to 2Gi if not specified.
                         type: string
                     type: object
+                  sensitiveEnvironmentVariablesSecretRef:
+                    additionalProperties:
+                      type: string
+                    type: object
                   sso:
                     description: A sso block as defined below.
                     properties:

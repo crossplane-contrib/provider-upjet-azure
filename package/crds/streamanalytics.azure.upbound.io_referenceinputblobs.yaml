@@ -1698,6 +1698,24 @@ spec:
                           data. Possible values are Avro, Csv and Json.
                         type: string
                     type: object
+                  storageAccountKeySecretRef:
+                    description: The Access Key which should be used to connect to
+                      this Storage Account. Required if authentication_mode is ConnectionString.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageAccountName:
                     description: The name of the Storage Account that has the blob
                       container with reference data.

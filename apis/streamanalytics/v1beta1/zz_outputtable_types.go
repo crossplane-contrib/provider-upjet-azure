@@ -27,6 +27,9 @@ type OutputTableInitParameters struct {
 	// The name of the output column that contains the row key.
 	RowKey *string `json:"rowKey,omitempty" tf:"row_key,omitempty"`
 
+	// The Access Key which should be used to connect to this Storage Account.
+	StorageAccountKeySecretRef v1.SecretKeySelector `json:"storageAccountKeySecretRef" tf:"-"`
+
 	// The name of the Storage Account.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`

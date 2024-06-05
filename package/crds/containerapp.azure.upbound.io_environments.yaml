@@ -472,6 +472,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  daprApplicationInsightsConnectionStringSecretRef:
+                    description: |-
+                      Application Insights connection string used by Dapr to export Service to Service communication telemetry. Changing this forces a new resource to be created.
+                      Application Insights connection string used by Dapr to export Service to Service communication telemetry.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   infrastructureResourceGroupName:
                     description: |-
                       Name of the platform-managed resource group created for the Managed Environment to host infrastructure resources. Changing this forces a new resource to be created.

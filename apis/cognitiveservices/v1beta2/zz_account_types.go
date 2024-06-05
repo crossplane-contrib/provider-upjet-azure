@@ -18,6 +18,9 @@ type AccountInitParameters struct {
 	// If kind is TextAnalytics this specifies the ID of the Search service.
 	CustomQuestionAnsweringSearchServiceID *string `json:"customQuestionAnsweringSearchServiceId,omitempty" tf:"custom_question_answering_search_service_id,omitempty"`
 
+	// If kind is TextAnalytics this specifies the key of the Search service.
+	CustomQuestionAnsweringSearchServiceKeySecretRef *v1.SecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
+
 	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. Changing this forces a new resource to be created.
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 

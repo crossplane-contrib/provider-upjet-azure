@@ -732,6 +732,11 @@ func (in *LinuxVirtualMachineInitParameters) DeepCopyInto(out *LinuxVirtualMachi
 		*out = new(string)
 		**out = **in
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -2467,6 +2472,7 @@ func (in *WindowsVirtualMachineInitParameters) DeepCopyInto(out *WindowsVirtualM
 		*out = new(string)
 		**out = **in
 	}
+	out.PasswordSecretRef = in.PasswordSecretRef
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)

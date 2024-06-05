@@ -1498,6 +1498,24 @@ spec:
                     description: The administrator login name for the new SQL Managed
                       Instance. Changing this forces a new resource to be created.
                     type: string
+                  administratorLoginPasswordSecretRef:
+                    description: The password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   collation:
                     description: Specifies how the SQL Managed Instance will be collated.
                       Default value is SQL_Latin1_General_CP1_CI_AS. Changing this
@@ -1743,6 +1761,8 @@ spec:
                     description: Specifies whether or not the SQL Managed Instance
                       is zone redundant. Defaults to false.
                     type: boolean
+                required:
+                - administratorLoginPasswordSecretRef
                 type: object
               managementPolicies:
                 default:

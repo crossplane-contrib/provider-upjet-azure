@@ -978,8 +978,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - instrumentationKeySecretRef
                     type: object
                   buffered:
                     description: Specifies whether records should be buffered in the
@@ -1201,6 +1199,27 @@ spec:
                   applicationInsights:
                     description: An application_insights block as documented below.
                       Changing this forces a new resource to be created.
+                    properties:
+                      instrumentationKeySecretRef:
+                        description: The instrumentation key used to push data to
+                          Application Insights.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - instrumentationKeySecretRef
                     type: object
                   buffered:
                     description: Specifies whether records should be buffered in the
@@ -1213,6 +1232,23 @@ spec:
                     description: An eventhub block as documented below. Changing this
                       forces a new resource to be created.
                     properties:
+                      connectionStringSecretRef:
+                        description: The connection string of an EventHub Namespace.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       endpointUri:
                         description: The endpoint address of an EventHub Namespace.
                           Required when client_id is set.
@@ -1507,8 +1543,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - instrumentationKeySecretRef
                     type: object
                   buffered:
                     description: Specifies whether records should be buffered in the

@@ -21,7 +21,7 @@ func (mg *MSSQLJobCredential) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this MSSQLJobCredential
 func (tr *MSSQLJobCredential) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+	return map[string]string{"password": "passwordSecretRef"}
 }
 
 // GetObservation of this MSSQLJobCredential

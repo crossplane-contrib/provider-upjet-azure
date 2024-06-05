@@ -123,6 +123,7 @@ func (in *EventSourceEventHubInitParameters) DeepCopyInto(out *EventSourceEventH
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	out.SharedAccessKeySecretRef = in.SharedAccessKeySecretRef
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))
@@ -516,6 +517,7 @@ func (in *EventSourceIOTHubInitParameters) DeepCopyInto(out *EventSourceIOTHubIn
 		*out = new(string)
 		**out = **in
 	}
+	out.SharedAccessKeySecretRef = in.SharedAccessKeySecretRef
 	if in.Tags != nil {
 		in, out := &in.Tags, &out.Tags
 		*out = make(map[string]*string, len(*in))

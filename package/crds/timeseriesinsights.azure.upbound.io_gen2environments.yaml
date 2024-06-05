@@ -975,8 +975,6 @@ spec:
                                 type: string
                             type: object
                         type: object
-                    required:
-                    - keySecretRef
                     type: object
                   tags:
                     additionalProperties:
@@ -1023,6 +1021,24 @@ spec:
                   storage:
                     description: A storage block as defined below.
                     properties:
+                      keySecretRef:
+                        description: Access key of storage account for Azure IoT Time
+                          Series Insights Gen2 Environment
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       name:
                         description: Name of storage account for Azure IoT Time Series
                           Insights Gen2 Environment. Changing this forces a new resource
@@ -1104,6 +1120,8 @@ spec:
                                 type: string
                             type: object
                         type: object
+                    required:
+                    - keySecretRef
                     type: object
                   tags:
                     additionalProperties:

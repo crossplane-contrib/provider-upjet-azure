@@ -1214,6 +1214,7 @@ func (in *CassandraClusterInitParameters) DeepCopyInto(out *CassandraClusterInit
 			}
 		}
 	}
+	out.DefaultAdminPasswordSecretRef = in.DefaultAdminPasswordSecretRef
 	if in.DelegatedManagementSubnetID != nil {
 		in, out := &in.DelegatedManagementSubnetID, &out.DelegatedManagementSubnetID
 		*out = new(string)

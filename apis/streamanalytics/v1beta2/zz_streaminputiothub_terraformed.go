@@ -21,7 +21,7 @@ func (mg *StreamInputIOTHub) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this StreamInputIOTHub
 func (tr *StreamInputIOTHub) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"shared_access_policy_key": "spec.forProvider.sharedAccessPolicyKeySecretRef"}
+	return map[string]string{"shared_access_policy_key": "sharedAccessPolicyKeySecretRef"}
 }
 
 // GetObservation of this StreamInputIOTHub

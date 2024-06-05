@@ -21,7 +21,7 @@ func (mg *IdentityProviderMicrosoft) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IdentityProviderMicrosoft
 func (tr *IdentityProviderMicrosoft) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"client_secret": "spec.forProvider.clientSecretSecretRef"}
+	return map[string]string{"client_secret": "clientSecretSecretRef"}
 }
 
 // GetObservation of this IdentityProviderMicrosoft

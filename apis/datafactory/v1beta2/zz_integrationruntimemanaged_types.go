@@ -18,6 +18,9 @@ type IntegrationRuntimeManagedCatalogInfoInitParameters struct {
 	// Administrator login name for the SQL Server.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// Administrator login password for the SQL Server.
+	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+
 	// Pricing tier for the database that will be created for the SSIS catalog. Valid values are: Basic, Standard, Premium and PremiumRS. Defaults to Basic.
 	PricingTier *string `json:"pricingTier,omitempty" tf:"pricing_tier,omitempty"`
 
@@ -60,6 +63,9 @@ type IntegrationRuntimeManagedCustomSetupScriptInitParameters struct {
 
 	// The blob endpoint for the container which contains a custom setup script that will be run on every node on startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
 	BlobContainerURI *string `json:"blobContainerUri,omitempty" tf:"blob_container_uri,omitempty"`
+
+	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
+	SASTokenSecretRef v1.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
 }
 
 type IntegrationRuntimeManagedCustomSetupScriptObservation struct {
@@ -75,7 +81,7 @@ type IntegrationRuntimeManagedCustomSetupScriptParameters struct {
 	BlobContainerURI *string `json:"blobContainerUri" tf:"blob_container_uri,omitempty"`
 
 	// A container SAS token that gives access to the files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup for more information.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	SASTokenSecretRef v1.SecretKeySelector `json:"sasTokenSecretRef" tf:"-"`
 }
 

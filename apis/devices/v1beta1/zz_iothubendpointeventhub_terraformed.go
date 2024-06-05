@@ -21,7 +21,7 @@ func (mg *IOTHubEndpointEventHub) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IOTHubEndpointEventHub
 func (tr *IOTHubEndpointEventHub) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef"}
+	return map[string]string{"connection_string": "connectionStringSecretRef"}
 }
 
 // GetObservation of this IOTHubEndpointEventHub

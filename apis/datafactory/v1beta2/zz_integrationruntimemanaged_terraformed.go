@@ -21,7 +21,7 @@ func (mg *IntegrationRuntimeManaged) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IntegrationRuntimeManaged
 func (tr *IntegrationRuntimeManaged) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"catalog_info[*].administrator_password": "spec.forProvider.catalogInfo[*].administratorPasswordSecretRef", "custom_setup_script[*].sas_token": "spec.forProvider.customSetupScript[*].sasTokenSecretRef"}
+	return map[string]string{"catalog_info[*].administrator_password": "catalogInfo[*].administratorPasswordSecretRef", "custom_setup_script[*].sas_token": "customSetupScript[*].sasTokenSecretRef"}
 }
 
 // GetObservation of this IntegrationRuntimeManaged

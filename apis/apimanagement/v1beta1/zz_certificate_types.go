@@ -15,6 +15,9 @@ import (
 
 type CertificateInitParameters_2 struct {
 
+	// The base-64 encoded certificate data, which must be a PFX file.
+	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+
 	// The Client ID of the User Assigned Managed Identity to use for retrieving certificate.
 	KeyVaultIdentityClientID *string `json:"keyVaultIdentityClientId,omitempty" tf:"key_vault_identity_client_id,omitempty"`
 
@@ -30,6 +33,9 @@ type CertificateInitParameters_2 struct {
 	// Selector for a Certificate in keyvault to populate keyVaultSecretId.
 	// +kubebuilder:validation:Optional
 	KeyVaultSecretIDSelector *v1.Selector `json:"keyVaultSecretIdSelector,omitempty" tf:"-"`
+
+	// The password used for this certificate.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
 type CertificateObservation_2 struct {

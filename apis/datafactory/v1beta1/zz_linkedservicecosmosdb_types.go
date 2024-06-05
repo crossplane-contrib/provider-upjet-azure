@@ -18,12 +18,18 @@ type LinkedServiceCosmosDBInitParameters struct {
 	// The endpoint of the Azure CosmosDB account. Required if connection_string is unspecified.
 	AccountEndpoint *string `json:"accountEndpoint,omitempty" tf:"account_endpoint,omitempty"`
 
+	// The account key of the Azure Cosmos DB account. Required if connection_string is unspecified.
+	AccountKeySecretRef *v1.SecretKeySelector `json:"accountKeySecretRef,omitempty" tf:"-"`
+
 	// A map of additional properties to associate with the Data Factory Linked Service.
 	// +mapType=granular
 	AdditionalProperties map[string]*string `json:"additionalProperties,omitempty" tf:"additional_properties,omitempty"`
 
 	// List of tags that can be used for describing the Data Factory Linked Service.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
+
+	// The connection string. Required if account_endpoint, account_key, and database are unspecified.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
 
 	// The name of the database. Required if connection_string is unspecified.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`

@@ -21,7 +21,7 @@ func (mg *IOTHubDPS) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IOTHubDPS
 func (tr *IOTHubDPS) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"linked_hub[*].connection_string": "spec.forProvider.linkedHub[*].connectionStringSecretRef"}
+	return map[string]string{"linked_hub[*].connection_string": "linkedHub[*].connectionStringSecretRef"}
 }
 
 // GetObservation of this IOTHubDPS

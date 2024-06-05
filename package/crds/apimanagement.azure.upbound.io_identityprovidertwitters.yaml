@@ -283,6 +283,23 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  apiKeySecretRef:
+                    description: App Consumer API key for Twitter.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   apiManagementName:
                     description: The Name of the API Management Service where this
                       Twitter Identity Provider should be created. Changing this forces
@@ -364,6 +381,23 @@ spec:
                             type: string
                         type: object
                     type: object
+                  apiSecretKeySecretRef:
+                    description: App Consumer API secret key for Twitter.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   resourceGroupName:
                     description: The Name of the Resource Group where the API Management
                       Service exists. Changing this forces a new resource to be created.
@@ -444,6 +478,9 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - apiKeySecretRef
+                - apiSecretKeySecretRef
                 type: object
               managementPolicies:
                 default:

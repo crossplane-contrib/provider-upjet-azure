@@ -15,6 +15,9 @@ import (
 
 type IdentityProviderTwitterInitParameters struct {
 
+	// App Consumer API key for Twitter.
+	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
+
 	// The Name of the API Management Service where this Twitter Identity Provider should be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/apimanagement/v1beta2.Management
 	APIManagementName *string `json:"apiManagementName,omitempty" tf:"api_management_name,omitempty"`
@@ -26,6 +29,9 @@ type IdentityProviderTwitterInitParameters struct {
 	// Selector for a Management in apimanagement to populate apiManagementName.
 	// +kubebuilder:validation:Optional
 	APIManagementNameSelector *v1.Selector `json:"apiManagementNameSelector,omitempty" tf:"-"`
+
+	// App Consumer API secret key for Twitter.
+	APISecretKeySecretRef v1.SecretKeySelector `json:"apiSecretKeySecretRef" tf:"-"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

@@ -21,7 +21,7 @@ func (mg *LinkedServiceAzureTableStorage) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceAzureTableStorage
 func (tr *LinkedServiceAzureTableStorage) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef"}
+	return map[string]string{"connection_string": "connectionStringSecretRef"}
 }
 
 // GetObservation of this LinkedServiceAzureTableStorage

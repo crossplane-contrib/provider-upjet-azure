@@ -20,6 +20,9 @@ type AuthSettingsActiveDirectoryInitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
 }
 
 type AuthSettingsActiveDirectoryObservation struct {
@@ -51,6 +54,9 @@ type AuthSettingsFacebookInitParameters struct {
 	// The App ID of the Facebook app used for login
 	AppID *string `json:"appId,omitempty" tf:"app_id,omitempty"`
 
+	// The App Secret of the Facebook app used for Facebook login.
+	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
+
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
 }
@@ -71,7 +77,7 @@ type AuthSettingsFacebookParameters struct {
 	AppID *string `json:"appId" tf:"app_id,omitempty"`
 
 	// The App Secret of the Facebook app used for Facebook login.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	AppSecretSecretRef v1.SecretKeySelector `json:"appSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
@@ -83,6 +89,9 @@ type AuthSettingsGoogleInitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
@@ -104,7 +113,7 @@ type AuthSettingsGoogleParameters struct {
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
@@ -116,6 +125,9 @@ type AuthSettingsMicrosoftInitParameters struct {
 
 	// The OAuth 2.0 client ID that was created for the app used for authentication.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// The OAuth 2.0 client secret that was created for the app used for authentication.
+	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
 	OauthScopes []*string `json:"oauthScopes,omitempty" tf:"oauth_scopes,omitempty"`
@@ -137,7 +149,7 @@ type AuthSettingsMicrosoftParameters struct {
 	ClientID *string `json:"clientId" tf:"client_id,omitempty"`
 
 	// The OAuth 2.0 client secret that was created for the app used for authentication.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
 	// The OAuth 2.0 scopes that will be requested as part of Microsoft Account authentication. https://msdn.microsoft.com/en-us/library/dn631845.aspx
@@ -149,6 +161,9 @@ type AuthSettingsTwitterInitParameters struct {
 
 	// The OAuth 1.0a consumer key of the Twitter application used for sign-in.
 	ConsumerKey *string `json:"consumerKey,omitempty" tf:"consumer_key,omitempty"`
+
+	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
+	ConsumerSecretSecretRef v1.SecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
 }
 
 type AuthSettingsTwitterObservation struct {
@@ -164,7 +179,7 @@ type AuthSettingsTwitterParameters struct {
 	ConsumerKey *string `json:"consumerKey" tf:"consumer_key,omitempty"`
 
 	// The OAuth 1.0a consumer secret of the Twitter application used for sign-in.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ConsumerSecretSecretRef v1.SecretKeySelector `json:"consumerSecretSecretRef" tf:"-"`
 }
 
@@ -327,6 +342,9 @@ type FunctionAppSlotConnectionStringInitParameters struct {
 
 	// The type of the Connection String. Possible values are APIHub, Custom, DocDb, EventHub, MySQL, NotificationHub, PostgreSQL, RedisCache, ServiceBus, SQLAzure and SQLServer.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+
+	// The value for the Connection String.
+	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
 type FunctionAppSlotConnectionStringObservation struct {
@@ -349,7 +367,7 @@ type FunctionAppSlotConnectionStringParameters struct {
 	Type *string `json:"type" tf:"type,omitempty"`
 
 	// The value for the Connection String.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
 }
 
@@ -439,6 +457,9 @@ type FunctionAppSlotInitParameters struct {
 
 	// A site_config object as defined below.
 	SiteConfig *FunctionAppSlotSiteConfigInitParameters `json:"siteConfig,omitempty" tf:"site_config,omitempty"`
+
+	// The access key which will be used to access the backend storage account for the Function App.
+	StorageAccountAccessKeySecretRef v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef" tf:"-"`
 
 	// The backend storage account name which will be used by the Function App (such as the dashboard, logs). Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account

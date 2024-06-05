@@ -26,6 +26,9 @@ type NamedValueInitParameters struct {
 
 	// A value_from_key_vault block as defined below.
 	ValueFromKeyVault *ValueFromKeyVaultInitParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
+
+	// The value of this API Management Named Value.
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type NamedValueObservation struct {

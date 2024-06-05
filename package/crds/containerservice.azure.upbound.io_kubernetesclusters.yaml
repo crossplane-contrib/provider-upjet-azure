@@ -7478,8 +7478,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - clientSecretSecretRef
                     type: object
                   skuTier:
                     description: The SKU Tier that should be used for this Kubernetes
@@ -7900,6 +7898,24 @@ spec:
                       serverAppId:
                         description: The Server ID of an Azure Active Directory Application.
                         type: string
+                      serverAppSecretSecretRef:
+                        description: The Server Secret of an Azure Active Directory
+                          Application.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       tenantId:
                         description: The Tenant ID used for Azure Active Directory
                           Application. If this isn't specified the Tenant ID of the
@@ -8548,6 +8564,24 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      trustedCaSecretRef:
+                        description: The base64 encoded alternative CA certificate
+                          content in PEM format.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                     type: object
                   identity:
                     description: An identity block as defined below. One of either
@@ -9243,6 +9277,25 @@ spec:
                       clientId:
                         description: The Client ID for the Service Principal.
                         type: string
+                      clientSecretSecretRef:
+                        description: The Client Secret for the Service Principal.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - clientSecretSecretRef
                     type: object
                   skuTier:
                     description: The SKU Tier that should be used for this Kubernetes
@@ -9294,6 +9347,24 @@ spec:
                   windowsProfile:
                     description: A windows_profile block as defined below.
                     properties:
+                      adminPasswordSecretRef:
+                        description: The Admin Password for Windows VMs. Length must
+                          be between 14 and 123 characters.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       adminUsername:
                         description: The Admin Username for Windows VMs. Changing
                           this forces a new resource to be created.

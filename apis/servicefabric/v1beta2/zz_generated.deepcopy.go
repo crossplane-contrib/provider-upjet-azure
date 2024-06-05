@@ -2248,6 +2248,11 @@ func (in *ManagedClusterInitParameters) DeepCopyInto(out *ManagedClusterInitPara
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Sku != nil {
 		in, out := &in.Sku, &out.Sku
 		*out = new(string)

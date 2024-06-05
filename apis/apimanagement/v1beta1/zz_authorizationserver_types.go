@@ -36,6 +36,9 @@ type AuthorizationServerInitParameters struct {
 	// The URI of page where Client/App Registration is performed for this Authorization Server.
 	ClientRegistrationEndpoint *string `json:"clientRegistrationEndpoint,omitempty" tf:"client_registration_endpoint,omitempty"`
 
+	// The Client/App Secret registered with this Authorization Server.
+	ClientSecretSecretRef *v1.SecretKeySelector `json:"clientSecretSecretRef,omitempty" tf:"-"`
+
 	// The Default Scope used when requesting an Access Token, specified as a string containing space-delimited values.
 	DefaultScope *string `json:"defaultScope,omitempty" tf:"default_scope,omitempty"`
 
@@ -48,6 +51,9 @@ type AuthorizationServerInitParameters struct {
 	// Form of Authorization Grants required when requesting an Access Token. Possible values are authorizationCode, clientCredentials, implicit and resourceOwnerPassword.
 	// +listType=set
 	GrantTypes []*string `json:"grantTypes,omitempty" tf:"grant_types,omitempty"`
+
+	// The password associated with the Resource Owner.
+	ResourceOwnerPasswordSecretRef *v1.SecretKeySelector `json:"resourceOwnerPasswordSecretRef,omitempty" tf:"-"`
 
 	// The username associated with the Resource Owner.
 	ResourceOwnerUsername *string `json:"resourceOwnerUsername,omitempty" tf:"resource_owner_username,omitempty"`

@@ -22,6 +22,9 @@ type LinkedServiceAzureFileStorageInitParameters struct {
 	// List of tags that can be used for describing the Data Factory Linked Service.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
+	// The connection string.
+	ConnectionStringSecretRef v1.SecretKeySelector `json:"connectionStringSecretRef" tf:"-"`
+
 	// The description for the Data Factory Linked Service.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
@@ -40,6 +43,9 @@ type LinkedServiceAzureFileStorageInitParameters struct {
 	// A map of parameters to associate with the Data Factory Linked Service.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+
+	// The password to log in the server.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// The user ID to log in the server.
 	UserID *string `json:"userId,omitempty" tf:"user_id,omitempty"`

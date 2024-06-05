@@ -21,7 +21,7 @@ func (mg *Workspace) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Workspace
 func (tr *Workspace) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"sql_administrator_login_password": "spec.forProvider.sqlAdministratorLoginPasswordSecretRef"}
+	return map[string]string{"sql_administrator_login_password": "sqlAdministratorLoginPasswordSecretRef"}
 }
 
 // GetObservation of this Workspace

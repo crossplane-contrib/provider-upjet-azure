@@ -144,6 +144,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 			}
 		}
 	}
+	if in.BackupBlobContainerURISecretRef != nil {
+		in, out := &in.BackupBlobContainerURISecretRef, &out.BackupBlobContainerURISecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.EnablePowerBiService != nil {
 		in, out := &in.EnablePowerBiService, &out.EnablePowerBiService
 		*out = new(bool)

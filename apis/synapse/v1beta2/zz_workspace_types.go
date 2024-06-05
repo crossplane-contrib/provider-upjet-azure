@@ -405,6 +405,9 @@ type WorkspaceInitParameters struct {
 	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
 	SQLAdministratorLogin *string `json:"sqlAdministratorLogin,omitempty" tf:"sql_administrator_login,omitempty"`
 
+	// The Password associated with the sql_administrator_login for the SQL administrator. If this is not provided aad_admin or customer_managed_key must be provided.
+	SQLAdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"sqlAdministratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
 	// Are pipelines (running as workspace's system assigned identity) allowed to access SQL pools?
 	SQLIdentityControlEnabled *bool `json:"sqlIdentityControlEnabled,omitempty" tf:"sql_identity_control_enabled,omitempty"`
 

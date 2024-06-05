@@ -21,7 +21,7 @@ func (mg *SpringCloudConnection) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudConnection
 func (tr *SpringCloudConnection) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"authentication[*].certificate": "spec.forProvider.authentication[*].certificateSecretRef", "authentication[*].secret": "spec.forProvider.authentication[*].secretSecretRef"}
+	return map[string]string{"authentication[*].certificate": "authentication[*].certificateSecretRef", "authentication[*].secret": "authentication[*].secretSecretRef"}
 }
 
 // GetObservation of this SpringCloudConnection

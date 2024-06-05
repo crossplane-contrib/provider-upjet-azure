@@ -41,6 +41,9 @@ type LinkedServiceSFTPInitParameters struct {
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Password to logon to the SFTP Server for Basic Authentication.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The TCP port number that the SFTP server uses to listen for client connection. Default value is 22.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 

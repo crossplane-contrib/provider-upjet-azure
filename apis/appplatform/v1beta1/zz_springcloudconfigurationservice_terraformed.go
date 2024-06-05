@@ -21,7 +21,7 @@ func (mg *SpringCloudConfigurationService) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudConfigurationService
 func (tr *SpringCloudConfigurationService) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"repository[*].password": "spec.forProvider.repository[*].passwordSecretRef", "repository[*].private_key": "spec.forProvider.repository[*].privateKeySecretRef"}
+	return map[string]string{"repository[*].password": "repository[*].passwordSecretRef", "repository[*].private_key": "repository[*].privateKeySecretRef"}
 }
 
 // GetObservation of this SpringCloudConfigurationService

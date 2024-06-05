@@ -2975,6 +2975,11 @@ func (in *SQLPoolExtendedAuditingPolicyInitParameters) DeepCopyInto(out *SQLPool
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageEndpoint != nil {
 		in, out := &in.StorageEndpoint, &out.StorageEndpoint
 		*out = new(string)
@@ -3520,6 +3525,11 @@ func (in *SQLPoolSecurityAlertPolicyInitParameters) DeepCopyInto(out *SQLPoolSec
 	if in.RetentionDays != nil {
 		in, out := &in.RetentionDays, &out.RetentionDays
 		*out = new(float64)
+		**out = **in
+	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {
@@ -5145,6 +5155,11 @@ func (in *WorkspaceExtendedAuditingPolicyInitParameters) DeepCopyInto(out *Works
 		*out = new(bool)
 		**out = **in
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageEndpoint != nil {
 		in, out := &in.StorageEndpoint, &out.StorageEndpoint
 		*out = new(string)
@@ -6193,6 +6208,11 @@ func (in *WorkspaceSecurityAlertPolicyInitParameters) DeepCopyInto(out *Workspac
 	if in.RetentionDays != nil {
 		in, out := &in.RetentionDays, &out.RetentionDays
 		*out = new(float64)
+		**out = **in
+	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {

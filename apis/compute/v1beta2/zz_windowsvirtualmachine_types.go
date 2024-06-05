@@ -34,6 +34,9 @@ type WindowsVirtualMachineAdditionalCapabilitiesParameters struct {
 
 type WindowsVirtualMachineAdditionalUnattendContentInitParameters struct {
 
+	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
+	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
+
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
 	Setting *string `json:"setting,omitempty" tf:"setting,omitempty"`
 }
@@ -47,7 +50,7 @@ type WindowsVirtualMachineAdditionalUnattendContentObservation struct {
 type WindowsVirtualMachineAdditionalUnattendContentParameters struct {
 
 	// The XML formatted content that is added to the unattend.xml file for the specified path and component. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	ContentSecretRef v1.SecretKeySelector `json:"contentSecretRef" tf:"-"`
 
 	// The name of the setting to which the content applies. Possible values are AutoLogon and FirstLogonCommands. Changing this forces a new resource to be created.
@@ -189,6 +192,9 @@ type WindowsVirtualMachineInitParameters struct {
 	// One or more additional_unattend_content blocks as defined below. Changing this forces a new resource to be created.
 	AdditionalUnattendContent []WindowsVirtualMachineAdditionalUnattendContentInitParameters `json:"additionalUnattendContent,omitempty" tf:"additional_unattend_content,omitempty"`
 
+	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	AdminPasswordSecretRef v1.SecretKeySelector `json:"adminPasswordSecretRef" tf:"-"`
+
 	// The username of the local administrator used for the Virtual Machine. Changing this forces a new resource to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`
 
@@ -209,6 +215,9 @@ type WindowsVirtualMachineInitParameters struct {
 
 	// Specifies the Hostname which should be used for this Virtual Machine. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name, then you must specify computer_name. Changing this forces a new resource to be created.
 	ComputerName *string `json:"computerName,omitempty" tf:"computer_name,omitempty"`
+
+	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
+	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Windows Virtual Machine should be run within. Conflicts with dedicated_host_id.
 	DedicatedHostGroupID *string `json:"dedicatedHostGroupId,omitempty" tf:"dedicated_host_group_id,omitempty"`

@@ -968,8 +968,6 @@ spec:
                         - name
                         - namespace
                         type: object
-                    required:
-                    - sasTokenSecretRef
                     type: object
                   dataFactoryId:
                     description: The Data Factory ID in which to associate the Linked
@@ -1190,6 +1188,23 @@ spec:
                       administratorLogin:
                         description: Administrator login name for the SQL Server.
                         type: string
+                      administratorPasswordSecretRef:
+                        description: Administrator login password for the SQL Server.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       pricingTier:
                         description: 'Pricing tier for the database that will be created
                           for the SSIS catalog. Valid values are: Basic, Standard,
@@ -1213,6 +1228,27 @@ spec:
                           startup. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
                           for more information.
                         type: string
+                      sasTokenSecretRef:
+                        description: A container SAS token that gives access to the
+                          files. See https://docs.microsoft.com/azure/data-factory/how-to-configure-azure-ssis-ir-custom-setup
+                          for more information.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                    required:
+                    - sasTokenSecretRef
                     type: object
                   description:
                     description: Integration runtime description.

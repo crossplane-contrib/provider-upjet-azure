@@ -316,6 +316,24 @@ spec:
                     description: The Client ID that will be used to authenticate with
                       Slack.
                     type: string
+                  clientSecretSecretRef:
+                    description: The Client Secret that will be used to authenticate
+                      with Slack.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   landingPageUrl:
                     description: The Slack Landing Page URL.
                     type: string
@@ -323,6 +341,45 @@ spec:
                     description: The supported Azure location where the resource exists.
                       Changing this forces a new resource to be created.
                     type: string
+                  signingSecretSecretRef:
+                    description: The Signing Secret that will be used to sign the
+                      requests.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                  verificationTokenSecretRef:
+                    description: The Verification Token that will be used to authenticate
+                      with Slack.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
+                required:
+                - clientSecretSecretRef
+                - verificationTokenSecretRef
                 type: object
               managementPolicies:
                 default:

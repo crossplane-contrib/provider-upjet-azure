@@ -15,6 +15,9 @@ import (
 
 type BotWebAppInitParameters struct {
 
+	// The Application Insights API Key to associate with the Web App Bot.
+	DeveloperAppInsightsAPIKeySecretRef *v1.SecretKeySelector `json:"developerAppInsightsApiKeySecretRef,omitempty" tf:"-"`
+
 	// The Application Insights Application ID to associate with the Web App Bot.
 	DeveloperAppInsightsApplicationID *string `json:"developerAppInsightsApplicationId,omitempty" tf:"developer_app_insights_application_id,omitempty"`
 
@@ -32,6 +35,9 @@ type BotWebAppInitParameters struct {
 
 	// A list of LUIS App IDs to associate with the Web App Bot.
 	LuisAppIds []*string `json:"luisAppIds,omitempty" tf:"luis_app_ids,omitempty"`
+
+	// The LUIS key to associate with the Web App Bot.
+	LuisKeySecretRef *v1.SecretKeySelector `json:"luisKeySecretRef,omitempty" tf:"-"`
 
 	// The Microsoft Application ID for the Web App Bot. Changing this forces a new resource to be created.
 	MicrosoftAppID *string `json:"microsoftAppId,omitempty" tf:"microsoft_app_id,omitempty"`

@@ -21,7 +21,7 @@ func (mg *LinkedServiceAzureFunction) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this LinkedServiceAzureFunction
 func (tr *LinkedServiceAzureFunction) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"key": "spec.forProvider.keySecretRef"}
+	return map[string]string{"key": "keySecretRef"}
 }
 
 // GetObservation of this LinkedServiceAzureFunction

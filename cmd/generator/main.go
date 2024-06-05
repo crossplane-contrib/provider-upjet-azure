@@ -13,9 +13,9 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/alecthomas/kingpin/v2"
 	ujconfig "github.com/crossplane/upjet/pkg/config"
 	"github.com/crossplane/upjet/pkg/pipeline"
-	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/upbound/provider-azure/config"
 )

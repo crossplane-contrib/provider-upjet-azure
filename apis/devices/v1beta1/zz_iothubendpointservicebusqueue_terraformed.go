@@ -21,7 +21,7 @@ func (mg *IOTHubEndpointServiceBusQueue) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this IOTHubEndpointServiceBusQueue
 func (tr *IOTHubEndpointServiceBusQueue) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"connection_string": "spec.forProvider.connectionStringSecretRef"}
+	return map[string]string{"connection_string": "connectionStringSecretRef"}
 }
 
 // GetObservation of this IOTHubEndpointServiceBusQueue

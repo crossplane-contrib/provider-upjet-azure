@@ -353,6 +353,23 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  apiKeySecretRef:
+                    description: The API key for the Function.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   batchMaxCount:
                     description: The maximum number of events in each batch that's
                       sent to the function. Defaults to 100.
@@ -521,6 +538,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - apiKeySecretRef
                 type: object
               managementPolicies:
                 default:

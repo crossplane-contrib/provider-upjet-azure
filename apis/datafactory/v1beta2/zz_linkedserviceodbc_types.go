@@ -15,6 +15,9 @@ import (
 
 type LinkedServiceOdbcBasicAuthenticationInitParameters struct {
 
+	// The password associated with the username, which can be used to authenticate to the ODBC endpoint.
+	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
+
 	// The username which can be used to authenticate to the ODBC endpoint.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
@@ -28,7 +31,7 @@ type LinkedServiceOdbcBasicAuthenticationObservation struct {
 type LinkedServiceOdbcBasicAuthenticationParameters struct {
 
 	// The password associated with the username, which can be used to authenticate to the ODBC endpoint.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	PasswordSecretRef v1.SecretKeySelector `json:"passwordSecretRef" tf:"-"`
 
 	// The username which can be used to authenticate to the ODBC endpoint.

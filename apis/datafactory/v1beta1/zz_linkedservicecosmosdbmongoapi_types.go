@@ -22,6 +22,9 @@ type LinkedServiceCosmosDBMongoapiInitParameters struct {
 	// List of tags that can be used for describing the Data Factory Linked Service.
 	Annotations []*string `json:"annotations,omitempty" tf:"annotations,omitempty"`
 
+	// The connection string.
+	ConnectionStringSecretRef *v1.SecretKeySelector `json:"connectionStringSecretRef,omitempty" tf:"-"`
+
 	// The name of the database.
 	Database *string `json:"database,omitempty" tf:"database,omitempty"`
 

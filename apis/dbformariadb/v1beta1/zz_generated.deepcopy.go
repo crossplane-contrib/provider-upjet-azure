@@ -720,6 +720,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorLoginPasswordSecretRef != nil {
+		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.AutoGrowEnabled != nil {
 		in, out := &in.AutoGrowEnabled, &out.AutoGrowEnabled
 		*out = new(bool)

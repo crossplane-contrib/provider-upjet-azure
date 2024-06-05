@@ -21,7 +21,7 @@ func (mg *OutputSynapse) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this OutputSynapse
 func (tr *OutputSynapse) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+	return map[string]string{"password": "passwordSecretRef"}
 }
 
 // GetObservation of this OutputSynapse

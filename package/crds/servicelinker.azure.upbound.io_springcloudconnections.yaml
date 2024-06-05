@@ -1218,6 +1218,24 @@ spec:
                     description: The authentication info. An authentication block
                       as defined below.
                     properties:
+                      certificateSecretRef:
+                        description: Service principal certificate for servicePrincipal
+                          auth. Should be specified when type is set to servicePrincipalCertificate.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       clientId:
                         description: Client ID for userAssignedIdentity or servicePrincipal
                           auth. Should be specified when type is set to servicePrincipalSecret
@@ -1235,6 +1253,25 @@ spec:
                           be specified when type is set to servicePrincipalSecret
                           or servicePrincipalCertificate.
                         type: string
+                      secretSecretRef:
+                        description: Password or account key for secret auth. secret
+                          and name should be either both specified or both not specified
+                          when type is set to secret.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
                       subscriptionId:
                         description: Subscription ID for userAssignedIdentity. subscription_id
                           and client_id should be either both specified or both not

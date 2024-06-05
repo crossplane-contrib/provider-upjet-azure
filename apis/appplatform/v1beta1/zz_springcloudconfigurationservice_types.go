@@ -30,9 +30,15 @@ type RepositoryInitParameters struct {
 	// Specifies the name which should be used for this repository.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// Specifies the password of git repository basic auth.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// Specifies the collection of patterns of the repository.
 	// +listType=set
 	Patterns []*string `json:"patterns,omitempty" tf:"patterns,omitempty"`
+
+	// Specifies the SSH private key of git repository.
+	PrivateKeySecretRef *v1.SecretKeySelector `json:"privateKeySecretRef,omitempty" tf:"-"`
 
 	// Specifies a list of searching path of the repository
 	// +listType=set

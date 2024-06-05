@@ -288,10 +288,30 @@ spec:
                     description: Client Id of the Application in the AAD Identity
                       Provider.
                     type: string
+                  clientSecretSecretRef:
+                    description: Client secret of the Application in the AAD Identity
+                      Provider.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   signinTenant:
                     description: The AAD Tenant to use instead of Common when logging
                       into Active Directory
                     type: string
+                required:
+                - clientSecretSecretRef
                 type: object
               managementPolicies:
                 default:

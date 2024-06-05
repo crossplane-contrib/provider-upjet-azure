@@ -26,6 +26,9 @@ type APNSCredentialInitParameters struct {
 
 	// The ID of the team the Token.
 	TeamID *string `json:"teamId,omitempty" tf:"team_id,omitempty"`
+
+	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
+	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 }
 
 type APNSCredentialObservation struct {
@@ -62,11 +65,14 @@ type APNSCredentialParameters struct {
 	TeamID *string `json:"teamId" tf:"team_id,omitempty"`
 
 	// The Push Token associated with the Apple Developer Account. This is the contents of the key downloaded from the Apple Developer Portal between the -----BEGIN PRIVATE KEY----- and -----END PRIVATE KEY----- blocks.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	TokenSecretRef v1.SecretKeySelector `json:"tokenSecretRef" tf:"-"`
 }
 
 type GCMCredentialInitParameters struct {
+
+	// The API Key associated with the Google Cloud Messaging service.
+	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 }
 
 type GCMCredentialObservation struct {
@@ -75,7 +81,7 @@ type GCMCredentialObservation struct {
 type GCMCredentialParameters struct {
 
 	// The API Key associated with the Google Cloud Messaging service.
-	// +kubebuilder:validation:Required
+	// +kubebuilder:validation:Optional
 	APIKeySecretRef v1.SecretKeySelector `json:"apiKeySecretRef" tf:"-"`
 }
 

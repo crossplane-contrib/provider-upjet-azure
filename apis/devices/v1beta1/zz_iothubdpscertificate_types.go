@@ -15,6 +15,9 @@ import (
 
 type IOTHubDPSCertificateInitParameters struct {
 
+	// The Base-64 representation of the X509 leaf certificate .cer file or just a .pem file content.
+	CertificateContentSecretRef v1.SecretKeySelector `json:"certificateContentSecretRef" tf:"-"`
+
 	// The name of the IoT Device Provisioning Service that this certificate will be attached to. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHubDPS
 	IOTDPSName *string `json:"iotDpsName,omitempty" tf:"iot_dps_name,omitempty"`

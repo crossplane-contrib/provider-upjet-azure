@@ -3305,9 +3305,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - nameSecretRef
-                      - valueSecretRef
                       type: object
                     type: array
                   tags:
@@ -4107,6 +4104,48 @@ spec:
                   secret:
                     description: One or more secret block as detailed below.
                     items:
+                      properties:
+                        nameSecretRef:
+                          description: |-
+                            The Secret name.
+                            The Secret name.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        valueSecretRef:
+                          description: |-
+                            The value for this secret.
+                            The value for this secret.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                      required:
+                      - nameSecretRef
+                      - valueSecretRef
                       type: object
                     type: array
                   tags:
@@ -5076,9 +5115,6 @@ spec:
                           - name
                           - namespace
                           type: object
-                      required:
-                      - nameSecretRef
-                      - valueSecretRef
                       type: object
                     type: array
                   tags:

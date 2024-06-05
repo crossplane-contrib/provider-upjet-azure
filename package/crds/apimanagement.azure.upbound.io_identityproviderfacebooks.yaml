@@ -353,6 +353,23 @@ spec:
                   appId:
                     description: App ID for Facebook.
                     type: string
+                  appSecretSecretRef:
+                    description: App Secret for Facebook.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   resourceGroupName:
                     description: The Name of the Resource Group where the API Management
                       Service exists. Changing this forces a new resource to be created.
@@ -433,6 +450,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                required:
+                - appSecretSecretRef
                 type: object
               managementPolicies:
                 default:

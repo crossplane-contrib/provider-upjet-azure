@@ -242,6 +242,23 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  backupBlobContainerUriSecretRef:
+                    description: URI and SAS token for a blob container to store backups.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   enablePowerBiService:
                     description: Indicates if the Power BI service is allowed to access
                       or not.

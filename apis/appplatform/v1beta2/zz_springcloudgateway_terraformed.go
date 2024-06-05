@@ -21,7 +21,7 @@ func (mg *SpringCloudGateway) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this SpringCloudGateway
 func (tr *SpringCloudGateway) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"sensitive_environment_variables": "spec.forProvider.sensitiveEnvironmentVariablesSecretRef"}
+	return map[string]string{"sensitive_environment_variables": "sensitiveEnvironmentVariablesSecretRef"}
 }
 
 // GetObservation of this SpringCloudGateway

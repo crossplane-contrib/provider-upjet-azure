@@ -21,7 +21,7 @@ func (mg *WindowsVirtualMachine) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this WindowsVirtualMachine
 func (tr *WindowsVirtualMachine) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"password": "spec.forProvider.passwordSecretRef"}
+	return map[string]string{"password": "passwordSecretRef"}
 }
 
 // GetObservation of this WindowsVirtualMachine

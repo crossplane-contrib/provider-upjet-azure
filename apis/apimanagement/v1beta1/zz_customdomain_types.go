@@ -15,6 +15,12 @@ import (
 
 type CustomDomainDeveloperPortalInitParameters struct {
 
+	// The password associated with the certificate provided above.
+	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+
+	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_id.)
+	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+
 	// The Hostname to use for the corresponding endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -118,6 +124,12 @@ type CustomDomainInitParameters struct {
 }
 
 type CustomDomainManagementInitParameters struct {
+
+	// The password associated with the certificate provided above.
+	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+
+	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_id.)
+	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// The Hostname to use for the API Proxy Endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
@@ -246,6 +258,12 @@ type CustomDomainParameters struct {
 
 type CustomDomainPortalInitParameters struct {
 
+	// The password associated with the certificate provided above.
+	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+
+	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_id.)
+	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+
 	// The Hostname to use for the API Proxy Endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -312,6 +330,12 @@ type CustomDomainPortalParameters struct {
 
 type CustomDomainScmInitParameters struct {
 
+	// The password associated with the certificate provided above.
+	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+
+	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_id.)
+	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
+
 	// The Hostname to use for the API Proxy Endpoint.
 	HostName *string `json:"hostName,omitempty" tf:"host_name,omitempty"`
 
@@ -377,6 +401,12 @@ type CustomDomainScmParameters struct {
 }
 
 type GatewayInitParameters struct {
+
+	// The password associated with the certificate provided above.
+	CertificatePasswordSecretRef *v1.SecretKeySelector `json:"certificatePasswordSecretRef,omitempty" tf:"-"`
+
+	// The Base64 Encoded Certificate. (Mutually exclusive with key_vault_id.)
+	CertificateSecretRef *v1.SecretKeySelector `json:"certificateSecretRef,omitempty" tf:"-"`
 
 	// Is the certificate associated with this Hostname the Default SSL Certificate? This is used when an SNI header isn't specified by a client. Defaults to false.
 	DefaultSSLBinding *bool `json:"defaultSslBinding,omitempty" tf:"default_ssl_binding,omitempty"`

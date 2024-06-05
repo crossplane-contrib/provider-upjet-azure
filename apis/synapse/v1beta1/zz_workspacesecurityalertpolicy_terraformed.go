@@ -21,7 +21,7 @@ func (mg *WorkspaceSecurityAlertPolicy) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this WorkspaceSecurityAlertPolicy
 func (tr *WorkspaceSecurityAlertPolicy) GetConnectionDetailsMapping() map[string]string {
-	return map[string]string{"storage_account_access_key": "spec.forProvider.storageAccountAccessKeySecretRef"}
+	return map[string]string{"storage_account_access_key": "storageAccountAccessKeySecretRef"}
 }
 
 // GetObservation of this WorkspaceSecurityAlertPolicy
