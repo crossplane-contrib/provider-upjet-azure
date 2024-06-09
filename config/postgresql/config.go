@@ -88,12 +88,19 @@ func Configure(p *config.Provider) {
 			IgnoredFields: []string{"ssl_enforcement", "storage_profile"},
 		}
 		r.Sensitive.AdditionalConnectionDetailsFn = func(attr map[string]interface{}) (map[string][]byte, error) {
-			return map[string][]byte{
-				xpv1.ResourceCredentialsSecretUserKey:     []byte(fmt.Sprintf("%s@%s", attr["administrator_login"], attr["name"])),
+			conn := map[string][]byte{
 				xpv1.ResourceCredentialsSecretEndpointKey: []byte(attr["fqdn"].(string)),
 				xpv1.ResourceCredentialsSecretPortKey:     []byte(strconv.Itoa(postgresqlServerPort)),
-				xpv1.ResourceCredentialsSecretPasswordKey: []byte(attr["administrator_password"].(string)),
-			}, nil
+			}
+			// administrator_login is optional and may not be available depending on the auth type.
+			if _, ok := attr["administrator_login"].(string); ok {
+				conn[xpv1.ResourceCredentialsSecretUserKey] = []byte(fmt.Sprintf("%s@%s", attr["administrator_login"].(string), attr["name"].(string)))
+			}
+			// administrator_password is optional and may not be available depending on the auth type.
+			if _, ok := attr["administrator_password"].(string); ok {
+				conn[xpv1.ResourceCredentialsSecretPasswordKey] = []byte(attr["administrator_password"].(string))
+			}
+			return conn, nil
 		}
 		desc, _ := comments.New("If true, the password will be auto-generated and"+
 			" stored in the Secret referenced by the administratorPasswordSecretRef field.",
