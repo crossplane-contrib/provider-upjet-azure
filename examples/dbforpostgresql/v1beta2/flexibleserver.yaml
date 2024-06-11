@@ -40,6 +40,7 @@ kind: PrivateDNSZone
 metadata:
   annotations:
     meta.upbound.io/example-id: dbforpostgresql/v1beta2/flexibleserver
+    crossplane.io/external-name: example-upbound.postgres.database.azure.com
   labels:
     testing.upbound.io/example-name: example
   name: example
