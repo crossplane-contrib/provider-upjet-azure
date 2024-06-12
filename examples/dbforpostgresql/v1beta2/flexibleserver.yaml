@@ -13,6 +13,7 @@ metadata:
 spec:
   forProvider:
     administratorLogin: psqladmin
+    autoGeneratePassword: true
     administratorPasswordSecretRef:
       key: example-key
       name: example-secret
@@ -30,8 +31,7 @@ spec:
     skuName: GP_Standard_D4s_v3
     storageMb: 32768
     storageTier: P30
-    version: "12"
-    zone: "1"
+    version: "16"
 
 ---
 
@@ -40,6 +40,7 @@ kind: PrivateDNSZone
 metadata:
   annotations:
     meta.upbound.io/example-id: dbforpostgresql/v1beta2/flexibleserver
+    crossplane.io/external-name: example-upbound.postgres.database.azure.com
   labels:
     testing.upbound.io/example-name: example
   name: example
