@@ -13,6 +13,7 @@ metadata:
 spec:
   forProvider:
     administratorLogin: psqladmin
+    autoGeneratePassword: true
     administratorPasswordSecretRef:
       key: example-key
       name: example-secret
