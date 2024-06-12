@@ -609,6 +609,4 @@ func Configure(p *config.Provider) {
 			return diff, nil
 		}
 	})
-
-	p.AddResourceConfigurator("azurerm_route_filter", func(r *config.Resource) {})
 }

@@ -11,7 +11,7 @@ require (
 	github.com/alecthomas/kingpin/v2 v2.4.0
 	github.com/crossplane/crossplane-runtime v1.16.0
 	github.com/crossplane/crossplane-tools v0.0.0-20240522174801-1ad3d4c87f21
-	github.com/crossplane/upjet v1.4.1-0.20240530140005-40733472e6d2
+	github.com/crossplane/upjet v1.4.1-0.20240612123927-37c7f4e91d57
 	github.com/google/go-cmp v0.6.0
 	github.com/hashicorp/terraform-json v0.17.1
 	github.com/hashicorp/terraform-plugin-sdk/v2 v2.30.0
@@ -168,5 +168,3 @@ require (
 replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20240311113236-25a51734d3da
 
 replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
-
-replace github.com/crossplane/upjet => github.com/ulucinar/upbound-upjet v0.0.0-20240530235240-f4f87bab8535
