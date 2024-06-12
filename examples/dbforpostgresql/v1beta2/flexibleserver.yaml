@@ -31,8 +31,7 @@ spec:
     skuName: GP_Standard_D4s_v3
     storageMb: 32768
     storageTier: P30
-    version: "12"
-    zone: "1"
+    version: "16 "
 
 ---
 
