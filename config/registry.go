@@ -7,6 +7,7 @@ package config
 import (
 	"context"
 	_ "embed"
+	"strings"
 
 	"github.com/crossplane/upjet/pkg/config"
 	ujconfig "github.com/crossplane/upjet/pkg/config"
@@ -34,6 +35,27 @@ var (
 
 	//go:embed provider-metadata.yaml
 	providerMetadata []byte
+
+	// oldSingletonListAPIs is a newline-delimited list of Terraform resource
+	// names with converted singleton list APIs with at least CRD API version
+	// containing the old singleton list API. This is to prevent the API
+	// conversion for the newly added resources whose CRD APIs will already
+	// use embedded objects instead of the singleton lists and thus, will
+	// not possess a CRD API version with the singleton list. Thus, for
+	// the newly added resources (resources added after the singleton lists
+	// have been converted), we do not need the CRD API conversion
+	// functions that convert between singleton lists and embedded objects,
+	// but we need only the Terraform conversion functions.
+	// This list is immutable and represents the set of resources with the
+	// already generated CRD API versions with now converted singleton lists.
+	// Because new resources should never have singleton lists in their
+	// generated APIs, there should be no need to add them to this list.
+	// However, bugs might result in exceptions in the future.
+	// Please see:
+	// https://github.com/crossplane-contrib/provider-upjet-azure/pull/733
+	// for more context on singleton list to embedded object conversions.
+	//go:embed old-singleton-list-apis.txt
+	oldSingletonListAPIs string
 )
 
 // These resources cannot be generated because of their suffixes colliding with
@@ -195,6 +217,12 @@ func GetProvider(ctx context.Context, generationProvider bool) (*ujconfig.Provid
 }
 
 func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
+	l := strings.Split(strings.TrimSpace(oldSingletonListAPIs), "\n")
+	oldSLAPIs := make(map[string]struct{}, len(l))
+	for _, n := range l {
+		oldSLAPIs[n] = struct{}{}
+	}
+
 	for name, r := range pc.Resources {
 		r := r
 		// nothing to do if no singleton list has been converted to
@@ -202,16 +230,29 @@ func bumpVersionsWithEmbeddedLists(pc *ujconfig.Provider) {
 		if len(r.CRDListConversionPaths()) == 0 {
 			continue
 		}
-		r.Version = "v1beta2"
-		r.PreviousVersions = []string{"v1beta1"}
-		// we would like to set the storage version to v1beta1 to facilitate
-		// downgrades.
-		r.SetCRDStorageVersion("v1beta1")
-		r.ControllerReconcileVersion = "v1beta1"
-		r.Conversions = []conversion.Conversion{
-			conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
-			conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
-			conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
+
+		if _, ok := oldSLAPIs[name]; ok {
+			r.Version = "v1beta2"
+			r.PreviousVersions = []string{"v1beta1"}
+			// we would like to set the storage version to v1beta1 to facilitate
+			// downgrades.
+			r.SetCRDStorageVersion("v1beta1")
+			// because the controller reconciles on the API version with the singleton list API,
+			// no need for a Terraform conversion.
+			r.ControllerReconcileVersion = "v1beta1"
+			r.Conversions = []conversion.Conversion{
+				conversion.NewIdentityConversionExpandPaths(conversion.AllVersions, conversion.AllVersions, conversion.DefaultPathPrefixes(), r.CRDListConversionPaths()...),
+				conversion.NewSingletonListConversion("v1beta1", "v1beta2", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToEmbeddedObject),
+				conversion.NewSingletonListConversion("v1beta2", "v1beta1", conversion.DefaultPathPrefixes(), r.CRDListConversionPaths(), conversion.ToSingletonList)}
+		} else {
+			// the controller will be reconciling on the CRD API version
+			// with the converted API (with embedded objects in place of
+			// singleton lists), so we need the appropriate Terraform
+			// converter in this case.
+			r.TerraformConversions = []config.TerraformConversion{
+				config.NewTFSingletonConversion(),
+			}
+		}
 		pc.Resources[name] = r
 	}
 }
