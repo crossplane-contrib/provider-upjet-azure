@@ -440,6 +440,7 @@ import (
 	volume "github.com/upbound/provider-azure/internal/controller/netapp/volume"
 	applicationgateway "github.com/upbound/provider-azure/internal/controller/network/applicationgateway"
 	applicationsecuritygroup "github.com/upbound/provider-azure/internal/controller/network/applicationsecuritygroup"
+	bastionhost "github.com/upbound/provider-azure/internal/controller/network/bastionhost"
 	connectionmonitor "github.com/upbound/provider-azure/internal/controller/network/connectionmonitor"
 	ddosprotectionplan "github.com/upbound/provider-azure/internal/controller/network/ddosprotectionplan"
 	dnsaaaarecord "github.com/upbound/provider-azure/internal/controller/network/dnsaaaarecord"
@@ -1174,6 +1175,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		volume.Setup,
 		applicationgateway.Setup,
 		applicationsecuritygroup.Setup,
+		bastionhost.Setup,
 		connectionmonitor.Setup,
 		ddosprotectionplan.Setup,
 		dnsaaaarecord.Setup,

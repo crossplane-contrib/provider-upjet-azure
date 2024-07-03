@@ -254,6 +254,122 @@ func (mg *ApplicationSecurityGroup) ResolveReferences(ctx context.Context, c cli
 	return nil
 }
 
+// ResolveReferences of this BastionHost.
+func (mg *BastionHost) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+
+	if mg.Spec.ForProvider.IPConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPConfiguration.PublicIPAddressID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.IPConfiguration.PublicIPAddressIDRef,
+				Selector:     mg.Spec.ForProvider.IPConfiguration.PublicIPAddressIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.IPConfiguration.PublicIPAddressID")
+		}
+		mg.Spec.ForProvider.IPConfiguration.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.IPConfiguration.PublicIPAddressIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.IPConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPConfiguration.SubnetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.ForProvider.IPConfiguration.SubnetIDRef,
+				Selector:     mg.Spec.ForProvider.IPConfiguration.SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.IPConfiguration.SubnetID")
+		}
+		mg.Spec.ForProvider.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
+
+	}
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.IPConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPConfiguration.PublicIPAddressID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.IPConfiguration.PublicIPAddressIDRef,
+				Selector:     mg.Spec.InitProvider.IPConfiguration.PublicIPAddressIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.IPConfiguration.PublicIPAddressID")
+		}
+		mg.Spec.InitProvider.IPConfiguration.PublicIPAddressID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IPConfiguration.PublicIPAddressIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.IPConfiguration != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPConfiguration.SubnetID),
+				Extract:      resource.ExtractResourceID(),
+				Reference:    mg.Spec.InitProvider.IPConfiguration.SubnetIDRef,
+				Selector:     mg.Spec.InitProvider.IPConfiguration.SubnetIDSelector,
+				To:           reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.IPConfiguration.SubnetID")
+		}
+		mg.Spec.InitProvider.IPConfiguration.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.IPConfiguration.SubnetIDRef = rsp.ResolvedReference
+
+	}
+
+	return nil
+}
+
 // ResolveReferences of this ConnectionMonitor.
 func (mg *ConnectionMonitor) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

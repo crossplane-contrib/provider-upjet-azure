@@ -1,0 +1,88 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: BastionHost
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/bastionhost
+  labels:
+    testing.upbound.io/example-name: example-bastion
+  name: examplebastion
+spec:
+  forProvider:
+    ipConfiguration:
+      name: configuration
+      publicIpAddressIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example-bastion
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example-bastion
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bastion
+---
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PublicIP
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/bastionhost
+  labels:
+    testing.upbound.io/example-name: example-bastion
+  name: example-bastion-pi
+spec:
+  forProvider:
+    allocationMethod: Static
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bastion
+    sku: Standard
+---
+apiVersion: network.azure.upbound.io/v1beta2
+kind: Subnet
+metadata:
+  annotations:
+    crossplane.io/external-name: AzureBastionSubnet
+    meta.upbound.io/example-id: network/v1beta1/bastionhost
+  labels:
+    testing.upbound.io/example-name: example-bastion
+  name: example-bastion-s
+spec:
+  forProvider:
+    addressPrefixes:
+    - 192.168.1.224/27
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bastion
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bastion
+---
+apiVersion: network.azure.upbound.io/v1beta2
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/bastionhost
+  labels:
+    testing.upbound.io/example-name: example-bastion
+  name: example-bastion-vn
+spec:
+  forProvider:
+    addressSpace:
+    - 192.168.1.0/24
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-bastion
+---
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/bastionhost
+  labels:
+    testing.upbound.io/example-name: example-bastion
+  name: example-bastion-rg
+spec:
+  forProvider:
+    location: West Europe

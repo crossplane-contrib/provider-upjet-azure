@@ -10,6 +10,9 @@ package v1beta1
 func (tr *ApplicationSecurityGroup) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *BastionHost) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *DDoSProtectionPlan) Hub() {}
 
 // Hub marks this type as a conversion hub.
