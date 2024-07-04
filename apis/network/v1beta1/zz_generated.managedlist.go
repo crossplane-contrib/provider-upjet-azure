@@ -25,6 +25,15 @@ func (l *ApplicationSecurityGroupList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this BastionHostList.
+func (l *BastionHostList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this ConnectionMonitorList.
 func (l *ConnectionMonitorList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
