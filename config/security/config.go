@@ -27,4 +27,9 @@ func Configure(p *config.Provider) {
 			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("id",true)`,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_security_center_storage_defender", func(r *config.Resource) {
+		r.Kind = "StorageDefender"
+		r.ShortGroup = "security"
+	})
 }

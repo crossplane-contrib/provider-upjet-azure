@@ -21,6 +21,7 @@ import (
 	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
 	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
 	securitycenterworkspace "github.com/upbound/provider-azure/internal/controller/security/securitycenterworkspace"
+	storagedefender "github.com/upbound/provider-azure/internal/controller/security/storagedefender"
 )
 
 // Setup_security creates all controllers with the supplied logger and adds them to
@@ -39,6 +40,7 @@ func Setup_security(mgr ctrl.Manager, o controller.Options) error {
 		securitycentersetting.Setup,
 		securitycentersubscriptionpricing.Setup,
 		securitycenterworkspace.Setup,
+		storagedefender.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
