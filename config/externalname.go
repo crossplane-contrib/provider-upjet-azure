@@ -1255,7 +1255,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// The contact can be imported using the resource id
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Security/workspaceSettings/default
 	"azurerm_security_center_workspace": config.TemplatedStringAsIdentifier("", "/subscriptions/{{ .setup.configuration.subscription_id }}/providers/Microsoft.Security/workspaceSettings/default"),
-
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Storage/storageAccounts/<account_name>
+	"azurerm_security_center_storage_defender": config.IdentifierFromProvider,
+	
 	// servicebus
 	//
 	// ServiceBus Namespace authorization rules can be imported using the resource id

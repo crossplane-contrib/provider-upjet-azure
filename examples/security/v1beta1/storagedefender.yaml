@@ -1,0 +1,46 @@
+apiVersion: security.azure.upbound.io/v1beta1
+kind: StorageDefender
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/storagedefender
+  labels:
+    testing.upbound.io/example-name: example-storagedefender
+  name: example-storagedefender
+spec:
+  forProvider:
+    storageAccountIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: upboundstoragedef
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/storagedefender
+  labels:
+    testing.upbound.io/example-name: rg-storagedefender
+  name: rg-storagedefender
+spec:
+  forProvider:
+    location: westus2
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: security/v1beta1/storagedefender
+  labels:
+    testing.upbound.io/example-name: upboundstoragedef
+  name: upboundstoragedef
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: westus2
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: rg-storagedefender

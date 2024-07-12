@@ -602,6 +602,7 @@ import (
 	securitycentersetting "github.com/upbound/provider-azure/internal/controller/security/securitycentersetting"
 	securitycentersubscriptionpricing "github.com/upbound/provider-azure/internal/controller/security/securitycentersubscriptionpricing"
 	securitycenterworkspace "github.com/upbound/provider-azure/internal/controller/security/securitycenterworkspace"
+	storagedefender "github.com/upbound/provider-azure/internal/controller/security/storagedefender"
 	sentinelalertrulefusion "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelalertrulefusion"
 	sentinelalertrulemachinelearningbehavioranalytics "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelalertrulemachinelearningbehavioranalytics"
 	sentinelalertrulemssecurityincident "github.com/upbound/provider-azure/internal/controller/securityinsights/sentinelalertrulemssecurityincident"
@@ -1337,6 +1338,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		securitycentersetting.Setup,
 		securitycentersubscriptionpricing.Setup,
 		securitycenterworkspace.Setup,
+		storagedefender.Setup,
 		sentinelalertrulefusion.Setup,
 		sentinelalertrulemachinelearningbehavioranalytics.Setup,
 		sentinelalertrulemssecurityincident.Setup,

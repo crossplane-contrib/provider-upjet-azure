@@ -32,3 +32,6 @@ func (tr *SecurityCenterSubscriptionPricing) Hub() {}
 
 // Hub marks this type as a conversion hub.
 func (tr *SecurityCenterWorkspace) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *StorageDefender) Hub() {}
