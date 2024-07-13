@@ -22,7 +22,7 @@ permissions:
 env:
   SUPPORTED_RELEASES_NUMBER: '1'
   # comma separated list of images, without tag
-  IMAGES: "xpkg.upbound.io/upbound/provider-azure"
+  IMAGES: "xpkg.upbound.io/upbound/provider-family-azure"
 
 jobs:
   setup-vars:
