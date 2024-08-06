@@ -205,6 +205,9 @@ func oidcAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
 	ps.Configuration[keyClientID] = *pc.Spec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
+	if pc.Spec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
+	}
 	return nil
 
 }
@@ -224,6 +227,9 @@ func upboundAuth(pc *v1beta1.ProviderConfig, ps *terraform.Setup) error {
 	ps.Configuration[keyTenantID] = *pc.Spec.TenantID
 	ps.Configuration[keyClientID] = *pc.Spec.ClientID
 	ps.Configuration[keyUseOIDC] = "true"
+	if pc.Spec.Environment != nil {
+		ps.Configuration[keyEnvironment] = *pc.Spec.Environment
+	}
 	return nil
 
 }
