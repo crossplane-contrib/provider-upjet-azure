@@ -41,7 +41,9 @@ spec:
       vmSize: Standard_D2_v2
     dnsPrefix: exampleaks1
     identity:
-      type: SystemAssigned
+      identityIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: exmple-managedidentity
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -57,6 +59,18 @@ metadata:
   labels:
     testing.upbound.io/example-name: example-containerservice
   name: example-containerservice-${Rand.RFC1123Subdomain}
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  labels:
+    testing.upbound.io/example-name: exmple-managedidentity
+  name: example-managedidentity-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe

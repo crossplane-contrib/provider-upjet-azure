@@ -90,4 +90,11 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_kubernetes_cluster", func(r *config.Resource) {
+		r.References["identity.identity_ids"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }
