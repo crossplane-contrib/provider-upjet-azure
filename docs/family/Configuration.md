@@ -3,10 +3,9 @@ title: Configuration
 weight: 2
 ---
 
-# Azure official provider-family documentation
-Upbound supports and maintains the Upbound Azure official provider-family.
+# Configuration
 
-## Install the provider-family-azure
+## Install the provider-family-azure provider
 ### Prerequisites
 #### Upbound Up command-line
 The Upbound Up command-line simplifies configuration and management of Upbound
