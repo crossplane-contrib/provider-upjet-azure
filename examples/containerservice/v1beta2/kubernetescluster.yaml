@@ -70,7 +70,8 @@ kind: UserAssignedIdentity
 metadata:
   labels:
     testing.upbound.io/example-name: exmple-managedidentity
-  name: example-managedidentity-${Rand.RFC1123Subdomain}
+  name: example-managedidentity
 spec:
   forProvider:
     location: West Europe
+    name: exmple-managidentity
