@@ -80,6 +80,11 @@ func Configure(p *config.Provider) {
 			return nil, nil
 		}
 		r.MetaResource.ArgumentDocs["api_server_authorized_ip_ranges"] = "Deprecated in favor of `spec.forProvider.apiServerAccessProfile[0].authorizedIpRanges`"
+
+		r.References["identity.identity_ids"] = config.Reference{
+			TerraformName: "azurerm_user_assigned_identity",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_kubernetes_cluster_node_pool", func(r *config.Resource) {
@@ -87,13 +92,6 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = "containerservice"
 		r.References["kubernetes_cluster_id"] = config.Reference{
 			TerraformName: "azurerm_kubernetes_cluster",
-			Extractor:     rconfig.ExtractResourceIDFuncPath,
-		}
-	})
-
-	p.AddResourceConfigurator("azurerm_kubernetes_cluster", func(r *config.Resource) {
-		r.References["identity.identity_ids"] = config.Reference{
-			TerraformName: "azurerm_user_assigned_identity",
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
