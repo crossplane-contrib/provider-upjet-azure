@@ -21,6 +21,7 @@ spec:
       vmSize: Standard_D2_v2
     dnsPrefix: exampleaks1
     identity:
+      type: UserAssigned
       identityIdsSelector:
         matchLabels:
           testing.upbound.io/example-name: exmple-managedidentity
