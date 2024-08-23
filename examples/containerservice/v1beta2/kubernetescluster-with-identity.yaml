@@ -54,7 +54,7 @@ metadata:
 spec:
   forProvider:
     location: West Europe
-    name: exmple-managidentity
+    name: exmple-managedidentity
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-containerservice
