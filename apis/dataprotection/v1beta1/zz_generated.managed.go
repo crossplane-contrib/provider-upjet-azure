@@ -307,6 +307,66 @@ func (mg *BackupPolicyDisk) SetWriteConnectionSecretToReference(r *xpv1.SecretRe
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this BackupPolicyPostgreSQL.
 func (mg *BackupPolicyPostgreSQL) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
