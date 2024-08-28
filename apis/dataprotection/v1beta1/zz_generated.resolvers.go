@@ -478,6 +478,56 @@ func (mg *BackupPolicyDisk) ResolveReferences(ctx context.Context, c client.Read
 	return nil
 }
 
+// ResolveReferences of this BackupPolicyKubernetesCluster.
+func (mg *BackupPolicyKubernetesCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("dataprotection.azure.upbound.io", "v1beta2", "BackupVault", "BackupVaultList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.VaultName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.VaultNameRef,
+			Selector:     mg.Spec.ForProvider.VaultNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.VaultName")
+	}
+	mg.Spec.ForProvider.VaultName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.VaultNameRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this BackupPolicyPostgreSQL.
 func (mg *BackupPolicyPostgreSQL) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
