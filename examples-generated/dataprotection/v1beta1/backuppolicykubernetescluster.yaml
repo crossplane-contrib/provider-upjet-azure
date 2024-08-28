@@ -8,18 +8,22 @@ metadata:
   name: example
 spec:
   forProvider:
-    defaultRetentionRule:
-      lifeCycle:
-      - dataStoreType: OperationalStore
-        duration: P14D
     backupRepeatingTimeIntervals:
-    - R/2021-05-23T02:35:00+00:00/P1W
+    - R/2021-05-23T02:30:00+00:00/P1W
+    default_retention_duration: P4M
+    defaultRetentionRule:
+    - lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P7D
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
     retentionRule:
     - criteria:
-        absoluteCriteria: FirstOfDay
+      - absoluteCriteria: FirstOfDay
+      lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P84D
       name: Daily
       priority: 25
     timeZone: India Standard Time
