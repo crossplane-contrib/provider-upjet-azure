@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicykubernetescluster
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-bpkc
 spec:
   forProvider:
     defaultRetentionRule:
@@ -36,7 +36,7 @@ metadata:
     meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicykubernetescluster
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-bv-bpkc
 spec:
   forProvider:
     datastoreType: VaultStore
@@ -55,7 +55,7 @@ metadata:
     meta.upbound.io/example-id: dataprotection/v1beta1/backuppolicykubernetescluster
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-rg-bpkc
 spec:
   forProvider:
     location: West Europe
