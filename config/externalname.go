@@ -397,6 +397,7 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 
 	// containerservice
 	"azurerm_kubernetes_cluster":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.ContainerService/managedClusters/{{ .external_name }}"),
+	"azurerm_kubernetes_cluster_extension": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cluster_id }}/providers/Microsoft.KubernetesConfiguration/extensions/{{ .external_name }}"),
 	"azurerm_kubernetes_cluster_node_pool": config.TemplatedStringAsIdentifier("name", "{{ .parameters.kubernetes_cluster_id }}/agentPools/{{ .external_name }}"),
 
 	// containerregistry
