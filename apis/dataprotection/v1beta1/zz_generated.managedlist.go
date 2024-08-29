@@ -52,6 +52,15 @@ func (l *BackupPolicyDiskList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this BackupPolicyKubernetesClusterList.
+func (l *BackupPolicyKubernetesClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this BackupPolicyPostgreSQLList.
 func (l *BackupPolicyPostgreSQLList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))

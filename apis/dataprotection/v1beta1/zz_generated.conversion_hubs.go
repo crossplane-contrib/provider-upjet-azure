@@ -19,4 +19,7 @@ func (tr *BackupInstancePostgreSQL) Hub() {}
 func (tr *BackupPolicyBlobStorage) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *BackupPolicyKubernetesCluster) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *ResourceGuard) Hub() {}
