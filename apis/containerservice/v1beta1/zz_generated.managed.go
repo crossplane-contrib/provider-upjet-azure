@@ -67,6 +67,66 @@ func (mg *KubernetesCluster) SetWriteConnectionSecretToReference(r *xpv1.SecretR
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

@@ -177,6 +177,7 @@ import (
 	tokenpassword "github.com/upbound/provider-azure/internal/controller/containerregistry/tokenpassword"
 	webhookcontainerregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/webhook"
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetescluster"
+	kubernetesclusterextension "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusterextension"
 	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
 	kubernetesfleetmanager "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesfleetmanager"
 	accountcosmosdb "github.com/upbound/provider-azure/internal/controller/cosmosdb/account"
@@ -914,6 +915,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tokenpassword.Setup,
 		webhookcontainerregistry.Setup,
 		kubernetescluster.Setup,
+		kubernetesclusterextension.Setup,
 		kubernetesclusternodepool.Setup,
 		kubernetesfleetmanager.Setup,
 		accountcosmosdb.Setup,
