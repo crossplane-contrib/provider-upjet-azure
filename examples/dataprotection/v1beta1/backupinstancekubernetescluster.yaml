@@ -1,0 +1,147 @@
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupInstanceKubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-bikc
+spec:
+  forProvider:
+    backupDatasourceParameters:
+      clusterScopedResourcesEnabled: true
+      excludedNamespaces:
+      - test-excluded-namespaces
+      excludedResourceTypes:
+      - exvolumesnapshotcontents.snapshot.storage.k8s.io
+      includedNamespaces:
+      - test-included-namespaces
+      includedResourceTypes:
+      - involumesnapshotcontents.snapshot.storage.k8s.io
+      labelSelectors:
+      - kubernetes.io/metadata.name:test
+      volumeSnapshotEnabled: true
+    backupPolicyIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    kubernetesClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    location: North Europe
+    snapshotResourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: snap
+    vaultIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta1
+kind: BackupPolicyKubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-bikc-bpkc
+spec:
+  forProvider:
+    backupRepeatingTimeIntervals:
+    - R/2023-05-23T02:30:00+00:00/P1W
+    defaultRetentionRule:
+      lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P14D
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionRule:
+    - criteria:
+        absoluteCriteria: FirstOfDay
+      lifeCycle:
+      - dataStoreType: OperationalStore
+        duration: P84D
+      name: Daily
+      priority: 25
+    vaultNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: dataprotection.azure.upbound.io/v1beta2
+kind: BackupVault
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-bikc-bv
+spec:
+  forProvider:
+    softDelete: "Off"
+    datastoreType: VaultStore
+    identity:
+      type: SystemAssigned
+    location: North Europe
+    redundancy: LocallyRedundant
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerservice.azure.upbound.io/v1beta1
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-bikc-kc
+spec:
+  forProvider:
+    defaultNodePool:
+    - enableHostEncryption: false
+      name: default
+      nodeCount: 1
+      vmSize: Standard_DS2_v2
+      upgradeSettings:
+      - maxSurge: '10%'
+    dnsPrefix: dns
+    identity:
+    - type: SystemAssigned
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-bikc-rg
+spec:
+  forProvider:
+    location: North Europe
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: snap
+  name: snap-bikc-rg
+spec:
+  forProvider:
+    location: North Europe

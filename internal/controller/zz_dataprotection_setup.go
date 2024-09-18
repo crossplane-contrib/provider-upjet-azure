@@ -11,6 +11,7 @@ import (
 
 	backupinstanceblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstanceblobstorage"
 	backupinstancedisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancedisk"
+	backupinstancekubernetescluster "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancekubernetescluster"
 	backupinstancepostgresql "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancepostgresql"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backuppolicydisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicydisk"
@@ -26,6 +27,7 @@ func Setup_dataprotection(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		backupinstanceblobstorage.Setup,
 		backupinstancedisk.Setup,
+		backupinstancekubernetescluster.Setup,
 		backupinstancepostgresql.Setup,
 		backuppolicyblobstorage.Setup,
 		backuppolicydisk.Setup,

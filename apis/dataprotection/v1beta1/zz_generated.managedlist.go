@@ -25,6 +25,15 @@ func (l *BackupInstanceDiskList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this BackupInstanceKubernetesClusterList.
+func (l *BackupInstanceKubernetesClusterList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this BackupInstancePostgreSQLList.
 func (l *BackupInstancePostgreSQLList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
