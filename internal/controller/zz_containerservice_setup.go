@@ -10,6 +10,7 @@ import (
 	"github.com/crossplane/upjet/pkg/controller"
 
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetescluster"
+	kubernetesclusterextension "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusterextension"
 	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
 	kubernetesfleetmanager "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesfleetmanager"
 )
@@ -19,6 +20,7 @@ import (
 func Setup_containerservice(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		kubernetescluster.Setup,
+		kubernetesclusterextension.Setup,
 		kubernetesclusternodepool.Setup,
 		kubernetesfleetmanager.Setup,
 	} {
