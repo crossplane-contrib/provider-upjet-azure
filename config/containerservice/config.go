@@ -90,4 +90,13 @@ func Configure(p *config.Provider) {
 			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
+
+	p.AddResourceConfigurator("azurerm_kubernetes_cluster_extension", func(r *config.Resource) {
+		r.Kind = "KubernetesClusterExtension"
+		r.ShortGroup = "containerservice"
+		r.References["kubernetes_cluster_id"] = config.Reference{
+			TerraformName: "azurerm_kubernetes_cluster",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+	})
 }

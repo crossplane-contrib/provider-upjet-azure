@@ -297,6 +297,37 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 	return nil
 }
 
+// ResolveReferences of this KubernetesClusterExtension.
+func (mg *KubernetesClusterExtension) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("containerservice.azure.upbound.io", "v1beta2", "KubernetesCluster", "KubernetesClusterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ClusterID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ClusterIDRef,
+			Selector:     mg.Spec.ForProvider.ClusterIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ClusterID")
+	}
+	mg.Spec.ForProvider.ClusterID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ClusterIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this KubernetesClusterNodePool.
 func (mg *KubernetesClusterNodePool) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed

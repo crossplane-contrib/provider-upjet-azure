@@ -177,6 +177,7 @@ import (
 	tokenpassword "github.com/upbound/provider-azure/internal/controller/containerregistry/tokenpassword"
 	webhookcontainerregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/webhook"
 	kubernetescluster "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetescluster"
+	kubernetesclusterextension "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusterextension"
 	kubernetesclusternodepool "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesclusternodepool"
 	kubernetesfleetmanager "github.com/upbound/provider-azure/internal/controller/containerservice/kubernetesfleetmanager"
 	accountcosmosdb "github.com/upbound/provider-azure/internal/controller/cosmosdb/account"
@@ -255,6 +256,7 @@ import (
 	databasemigrationservice "github.com/upbound/provider-azure/internal/controller/datamigration/databasemigrationservice"
 	backupinstanceblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstanceblobstorage"
 	backupinstancedisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancedisk"
+	backupinstancekubernetescluster "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancekubernetescluster"
 	backupinstancepostgresql "github.com/upbound/provider-azure/internal/controller/dataprotection/backupinstancepostgresql"
 	backuppolicyblobstorage "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicyblobstorage"
 	backuppolicydisk "github.com/upbound/provider-azure/internal/controller/dataprotection/backuppolicydisk"
@@ -915,6 +917,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		tokenpassword.Setup,
 		webhookcontainerregistry.Setup,
 		kubernetescluster.Setup,
+		kubernetesclusterextension.Setup,
 		kubernetesclusternodepool.Setup,
 		kubernetesfleetmanager.Setup,
 		accountcosmosdb.Setup,
@@ -993,6 +996,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		databasemigrationservice.Setup,
 		backupinstanceblobstorage.Setup,
 		backupinstancedisk.Setup,
+		backupinstancekubernetescluster.Setup,
 		backupinstancepostgresql.Setup,
 		backuppolicyblobstorage.Setup,
 		backuppolicydisk.Setup,
