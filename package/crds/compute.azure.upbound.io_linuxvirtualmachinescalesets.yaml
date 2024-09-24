@@ -3410,8 +3410,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -3431,8 +3432,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         packageReferenceId:
                           description: The ID of the Linux Virtual Machine Scale Set.
@@ -3919,6 +3921,13 @@ spec:
                           This check will happen after each batch is upgraded. If
                           this percentage is ever exceeded, the rolling update aborts.
                         type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
                       pauseTimeBetweenBatches:
                         description: The wait time between completing the update for
                           all virtual machines in one batch and starting the next
@@ -4400,8 +4409,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -4421,8 +4431,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         packageReferenceId:
                           description: The ID of the Linux Virtual Machine Scale Set.
@@ -4828,6 +4839,13 @@ spec:
                           This check will happen after each batch is upgraded. If
                           this percentage is ever exceeded, the rolling update aborts.
                         type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
                       pauseTimeBetweenBatches:
                         description: The wait time between completing the update for
                           all virtual machines in one batch and starting the next
@@ -5435,8 +5453,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -5456,8 +5475,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         packageReferenceId:
                           description: The ID of the Linux Virtual Machine Scale Set.
@@ -5803,6 +5823,13 @@ spec:
                           This check will happen after each batch is upgraded. If
                           this percentage is ever exceeded, the rolling update aborts.
                         type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
                       pauseTimeBetweenBatches:
                         description: The wait time between completing the update for
                           all virtual machines in one batch and starting the next

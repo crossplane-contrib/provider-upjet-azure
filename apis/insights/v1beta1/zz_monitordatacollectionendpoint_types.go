@@ -43,6 +43,9 @@ type MonitorDataCollectionEndpointObservation struct {
 	// The ID of the Data Collection Endpoint.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The immutable ID of the Data Collection Endpoint.
+	ImmutableID *string `json:"immutableId,omitempty" tf:"immutable_id,omitempty"`
+
 	// The kind of the Data Collection Endpoint. Possible values are Linux and Windows.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
 

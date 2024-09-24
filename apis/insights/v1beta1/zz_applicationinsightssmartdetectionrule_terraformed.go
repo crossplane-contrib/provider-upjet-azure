@@ -125,5 +125,5 @@ func (tr *ApplicationInsightsSmartDetectionRule) LateInitialize(attrs []byte) (b
 
 // GetTerraformSchemaVersion returns the associated Terraform schema version
 func (tr *ApplicationInsightsSmartDetectionRule) GetTerraformSchemaVersion() int {
-	return 1
+	return 2
 }

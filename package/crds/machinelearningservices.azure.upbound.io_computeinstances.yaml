@@ -963,8 +963,7 @@ spec:
                     type: boolean
                   location:
                     description: The Azure Region where the Machine Learning Compute
-                      Instance should exist. Changing this forces a new Machine Learning
-                      Compute Instance to be created.
+                      Instance should exist.
                     type: string
                   machineLearningWorkspaceId:
                     description: The ID of the Machine Learning Workspace. Changing
@@ -1217,8 +1216,7 @@ spec:
                     type: boolean
                   location:
                     description: The Azure Region where the Machine Learning Compute
-                      Instance should exist. Changing this forces a new Machine Learning
-                      Compute Instance to be created.
+                      Instance should exist.
                     type: string
                   nodePublicIpEnabled:
                     description: Whether the compute instance will have a public ip.
@@ -1497,10 +1495,6 @@ spec:
             - forProvider
             type: object
             x-kubernetes-validations:
-            - message: spec.forProvider.location is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.location)
-                || (has(self.initProvider) && has(self.initProvider.location))'
             - message: spec.forProvider.virtualMachineSize is a required parameter
               rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
                 || ''Update'' in self.managementPolicies) || has(self.forProvider.virtualMachineSize)
@@ -1572,8 +1566,7 @@ spec:
                     type: boolean
                   location:
                     description: The Azure Region where the Machine Learning Compute
-                      Instance should exist. Changing this forces a new Machine Learning
-                      Compute Instance to be created.
+                      Instance should exist.
                     type: string
                   machineLearningWorkspaceId:
                     description: The ID of the Machine Learning Workspace. Changing

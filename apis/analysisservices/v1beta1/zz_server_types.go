@@ -73,6 +73,8 @@ type ServerInitParameters struct {
 	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	PowerBiServiceEnabled *bool `json:"powerBiServiceEnabled,omitempty" tf:"power_bi_service_enabled,omitempty"`
+
 	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
@@ -117,6 +119,8 @@ type ServerObservation struct {
 	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	PowerBiServiceEnabled *bool `json:"powerBiServiceEnabled,omitempty" tf:"power_bi_service_enabled,omitempty"`
+
 	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
 	QuerypoolConnectionMode *string `json:"querypoolConnectionMode,omitempty" tf:"querypool_connection_mode,omitempty"`
 
@@ -160,6 +164,9 @@ type ServerParameters struct {
 	// The name of the Analysis Services Server. Only lowercase Alphanumeric characters allowed, starting with a letter. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	PowerBiServiceEnabled *bool `json:"powerBiServiceEnabled,omitempty" tf:"power_bi_service_enabled,omitempty"`
 
 	// Controls how the read-write server is used in the query pool. If this value is set to All then read-write servers are also used for queries. Otherwise with ReadOnly these servers do not participate in query operations.
 	// +kubebuilder:validation:Optional

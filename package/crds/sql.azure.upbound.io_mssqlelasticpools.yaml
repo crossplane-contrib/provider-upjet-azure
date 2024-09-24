@@ -847,7 +847,9 @@ spec:
                 properties:
                   enclaveType:
                     description: Specifies the type of enclave to be used by the elastic
-                      pool. Possible value VBS.
+                      pool. When enclave_type is not specified (e.g., the default)
+                      enclaves are not enabled on the elastic pool.  Possible values
+                      are Default or VBS.
                     type: string
                   licenseType:
                     description: Specifies the license type applied to this database.
@@ -878,7 +880,9 @@ spec:
                       SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1,
                       SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1,
                       SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1,
-                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
+                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2, SQL_SouthAfricaNorth_DB_1,
+                      SQL_SouthAfricaNorth_DB_2, SQL_WestUS3_DB_1, SQL_WestUS3_DB_2.
+                      Defaults to SQL_Default.
                     type: string
                   maxSizeBytes:
                     description: The max data size of the elastic pool in bytes. Conflicts
@@ -1074,7 +1078,7 @@ spec:
                           The name of the SKU, will be either vCore based or DTU based.
                           Possible DTU based values are BasicPool, StandardPool, PremiumPool
                           while possible vCore based values are GP_Gen4, GP_Gen5,
-                          GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
+                          GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, HS_PRMS, or HS_Gen5.
                         type: string
                       tier:
                         description: 'The tier of the particular SKU. Possible values
@@ -1110,7 +1114,9 @@ spec:
                 properties:
                   enclaveType:
                     description: Specifies the type of enclave to be used by the elastic
-                      pool. Possible value VBS.
+                      pool. When enclave_type is not specified (e.g., the default)
+                      enclaves are not enabled on the elastic pool.  Possible values
+                      are Default or VBS.
                     type: string
                   licenseType:
                     description: Specifies the license type applied to this database.
@@ -1141,7 +1147,9 @@ spec:
                       SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1,
                       SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1,
                       SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1,
-                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
+                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2, SQL_SouthAfricaNorth_DB_1,
+                      SQL_SouthAfricaNorth_DB_2, SQL_WestUS3_DB_1, SQL_WestUS3_DB_2.
+                      Defaults to SQL_Default.
                     type: string
                   maxSizeBytes:
                     description: The max data size of the elastic pool in bytes. Conflicts
@@ -1177,7 +1185,7 @@ spec:
                           The name of the SKU, will be either vCore based or DTU based.
                           Possible DTU based values are BasicPool, StandardPool, PremiumPool
                           while possible vCore based values are GP_Gen4, GP_Gen5,
-                          GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
+                          GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, HS_PRMS, or HS_Gen5.
                         type: string
                       tier:
                         description: 'The tier of the particular SKU. Possible values
@@ -1385,7 +1393,9 @@ spec:
                 properties:
                   enclaveType:
                     description: Specifies the type of enclave to be used by the elastic
-                      pool. Possible value VBS.
+                      pool. When enclave_type is not specified (e.g., the default)
+                      enclaves are not enabled on the elastic pool.  Possible values
+                      are Default or VBS.
                     type: string
                   id:
                     description: The ID of the MS SQL Elastic Pool.
@@ -1419,7 +1429,9 @@ spec:
                       SQL_WestUS_DB_2, SQL_WestCentralUS_DB_1, SQL_FranceSouth_DB_1,
                       SQL_WestCentralUS_DB_2, SQL_FranceSouth_DB_2, SQL_SwitzerlandNorth_DB_1,
                       SQL_SwitzerlandNorth_DB_2, SQL_BrazilSoutheast_DB_1, SQL_UAENorth_DB_1,
-                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2. Defaults to SQL_Default.
+                      SQL_BrazilSoutheast_DB_2, SQL_UAENorth_DB_2, SQL_SouthAfricaNorth_DB_1,
+                      SQL_SouthAfricaNorth_DB_2, SQL_WestUS3_DB_1, SQL_WestUS3_DB_2.
+                      Defaults to SQL_Default.
                     type: string
                   maxSizeBytes:
                     description: The max data size of the elastic pool in bytes. Conflicts
@@ -1465,7 +1477,7 @@ spec:
                           The name of the SKU, will be either vCore based or DTU based.
                           Possible DTU based values are BasicPool, StandardPool, PremiumPool
                           while possible vCore based values are GP_Gen4, GP_Gen5,
-                          GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, or HS_Gen5.
+                          GP_Fsv2, GP_DC, BC_Gen4, BC_Gen5, BC_DC, HS_PRMS, or HS_Gen5.
                         type: string
                       tier:
                         description: 'The tier of the particular SKU. Possible values

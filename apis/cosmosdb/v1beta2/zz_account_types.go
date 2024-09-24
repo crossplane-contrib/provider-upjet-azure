@@ -24,6 +24,9 @@ type AccountInitParameters struct {
 	// Enable Analytical Storage option for this Cosmos DB account. Defaults to false. Enabling and then disabling analytical storage forces a new resource to be created.
 	AnalyticalStorageEnabled *bool `json:"analyticalStorageEnabled,omitempty" tf:"analytical_storage_enabled,omitempty"`
 
+	// Enable automatic failover for this Cosmos DB account.
+	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
+
 	// A backup block as defined below.
 	Backup *BackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
@@ -45,14 +48,14 @@ type AccountInitParameters struct {
 	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity. Defaults to FirstPartyIdentity.
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
-	// Enable automatic failover for this Cosmos DB account.
 	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
 
-	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
 	EnableFreeTier *bool `json:"enableFreeTier,omitempty" tf:"enable_free_tier,omitempty"`
 
-	// Enable multiple write locations for this Cosmos DB account.
 	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
+
+	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
+	FreeTierEnabled *bool `json:"freeTierEnabled,omitempty" tf:"free_tier_enabled,omitempty"`
 
 	// Specifies a geo_location resource, used to define where data should be replicated with the failover_priority 0 specifying the primary location. Value is a geo_location block as defined below.
 	GeoLocation []GeoLocationInitParameters `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
@@ -83,6 +86,9 @@ type AccountInitParameters struct {
 
 	// The Server Version of a MongoDB account. Possible values are 4.2, 4.0, 3.6, and 3.2.
 	MongoServerVersion *string `json:"mongoServerVersion,omitempty" tf:"mongo_server_version,omitempty"`
+
+	// Enable multiple write locations for this Cosmos DB account.
+	MultipleWriteLocationsEnabled *bool `json:"multipleWriteLocationsEnabled,omitempty" tf:"multiple_write_locations_enabled,omitempty"`
 
 	// If Azure services can bypass ACLs. Defaults to false.
 	NetworkACLBypassForAzureServices *bool `json:"networkAclBypassForAzureServices,omitempty" tf:"network_acl_bypass_for_azure_services,omitempty"`
@@ -121,6 +127,9 @@ type AccountObservation struct {
 	// Enable Analytical Storage option for this Cosmos DB account. Defaults to false. Enabling and then disabling analytical storage forces a new resource to be created.
 	AnalyticalStorageEnabled *bool `json:"analyticalStorageEnabled,omitempty" tf:"analytical_storage_enabled,omitempty"`
 
+	// Enable automatic failover for this Cosmos DB account.
+	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
+
 	// A backup block as defined below.
 	Backup *BackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
 
@@ -142,17 +151,17 @@ type AccountObservation struct {
 	// The default identity for accessing Key Vault. Possible values are FirstPartyIdentity, SystemAssignedIdentity or UserAssignedIdentity. Defaults to FirstPartyIdentity.
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
-	// Enable automatic failover for this Cosmos DB account.
 	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
 
-	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
 	EnableFreeTier *bool `json:"enableFreeTier,omitempty" tf:"enable_free_tier,omitempty"`
 
-	// Enable multiple write locations for this Cosmos DB account.
 	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
 
 	// The endpoint used to connect to the CosmosDB account.
 	Endpoint *string `json:"endpoint,omitempty" tf:"endpoint,omitempty"`
+
+	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
+	FreeTierEnabled *bool `json:"freeTierEnabled,omitempty" tf:"free_tier_enabled,omitempty"`
 
 	// Specifies a geo_location resource, used to define where data should be replicated with the failover_priority 0 specifying the primary location. Value is a geo_location block as defined below.
 	GeoLocation []GeoLocationObservation `json:"geoLocation,omitempty" tf:"geo_location,omitempty"`
@@ -186,6 +195,9 @@ type AccountObservation struct {
 
 	// The Server Version of a MongoDB account. Possible values are 4.2, 4.0, 3.6, and 3.2.
 	MongoServerVersion *string `json:"mongoServerVersion,omitempty" tf:"mongo_server_version,omitempty"`
+
+	// Enable multiple write locations for this Cosmos DB account.
+	MultipleWriteLocationsEnabled *bool `json:"multipleWriteLocationsEnabled,omitempty" tf:"multiple_write_locations_enabled,omitempty"`
 
 	// If Azure services can bypass ACLs. Defaults to false.
 	NetworkACLBypassForAzureServices *bool `json:"networkAclBypassForAzureServices,omitempty" tf:"network_acl_bypass_for_azure_services,omitempty"`
@@ -236,6 +248,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageEnabled *bool `json:"analyticalStorageEnabled,omitempty" tf:"analytical_storage_enabled,omitempty"`
 
+	// Enable automatic failover for this Cosmos DB account.
+	// +kubebuilder:validation:Optional
+	AutomaticFailoverEnabled *bool `json:"automaticFailoverEnabled,omitempty" tf:"automatic_failover_enabled,omitempty"`
+
 	// A backup block as defined below.
 	// +kubebuilder:validation:Optional
 	Backup *BackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
@@ -264,17 +280,18 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	DefaultIdentityType *string `json:"defaultIdentityType,omitempty" tf:"default_identity_type,omitempty"`
 
-	// Enable automatic failover for this Cosmos DB account.
 	// +kubebuilder:validation:Optional
 	EnableAutomaticFailover *bool `json:"enableAutomaticFailover,omitempty" tf:"enable_automatic_failover,omitempty"`
 
-	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnableFreeTier *bool `json:"enableFreeTier,omitempty" tf:"enable_free_tier,omitempty"`
 
-	// Enable multiple write locations for this Cosmos DB account.
 	// +kubebuilder:validation:Optional
 	EnableMultipleWriteLocations *bool `json:"enableMultipleWriteLocations,omitempty" tf:"enable_multiple_write_locations,omitempty"`
+
+	// Enable the Free Tier pricing option for this Cosmos DB account. Defaults to false. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	FreeTierEnabled *bool `json:"freeTierEnabled,omitempty" tf:"free_tier_enabled,omitempty"`
 
 	// Specifies a geo_location resource, used to define where data should be replicated with the failover_priority 0 specifying the primary location. Value is a geo_location block as defined below.
 	// +kubebuilder:validation:Optional
@@ -315,6 +332,10 @@ type AccountParameters struct {
 	// The Server Version of a MongoDB account. Possible values are 4.2, 4.0, 3.6, and 3.2.
 	// +kubebuilder:validation:Optional
 	MongoServerVersion *string `json:"mongoServerVersion,omitempty" tf:"mongo_server_version,omitempty"`
+
+	// Enable multiple write locations for this Cosmos DB account.
+	// +kubebuilder:validation:Optional
+	MultipleWriteLocationsEnabled *bool `json:"multipleWriteLocationsEnabled,omitempty" tf:"multiple_write_locations_enabled,omitempty"`
 
 	// If Azure services can bypass ACLs. Defaults to false.
 	// +kubebuilder:validation:Optional

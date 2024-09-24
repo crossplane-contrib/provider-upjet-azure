@@ -5236,7 +5236,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -5896,13 +5896,13 @@ spec:
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
                               The version of Node to use. Possible values include `12`, `14`, `16` and `18`
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The PowerShell Core version to use. Possible values are 7, and 7.2.
-                              The PowerShell Core version to use. Possible values are `7`, and `7.2`
+                              The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
+                              The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
                             type: string
                           useCustomRuntime:
                             description: |-
@@ -6320,7 +6320,7 @@ spec:
                       use32BitWorker:
                         description: |-
                           Should the Windows Web App use a 32-bit worker. Defaults to true.
-                          Should the Windows Web App use a 32-bit worker.
+                          Should the Windows Function App use a 32-bit worker.
                         type: boolean
                       vnetRouteAllEnabled:
                         description: |-
@@ -6958,7 +6958,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -7541,13 +7541,13 @@ spec:
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
                               The version of Node to use. Possible values include `12`, `14`, `16` and `18`
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The PowerShell Core version to use. Possible values are 7, and 7.2.
-                              The PowerShell Core version to use. Possible values are `7`, and `7.2`
+                              The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
+                              The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
                             type: string
                           useCustomRuntime:
                             description: |-
@@ -7965,7 +7965,7 @@ spec:
                       use32BitWorker:
                         description: |-
                           Should the Windows Web App use a 32-bit worker. Defaults to true.
-                          Should the Windows Web App use a 32-bit worker.
+                          Should the Windows Function App use a 32-bit worker.
                         type: boolean
                       vnetRouteAllEnabled:
                         description: |-
@@ -8656,7 +8656,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -9254,13 +9254,13 @@ spec:
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+                              The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
                               The version of Node to use. Possible values include `12`, `14`, `16` and `18`
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The PowerShell Core version to use. Possible values are 7, and 7.2.
-                              The PowerShell Core version to use. Possible values are `7`, and `7.2`
+                              The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
+                              The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
                             type: string
                           useCustomRuntime:
                             description: |-
@@ -9536,7 +9536,7 @@ spec:
                       use32BitWorker:
                         description: |-
                           Should the Windows Web App use a 32-bit worker. Defaults to true.
-                          Should the Windows Web App use a 32-bit worker.
+                          Should the Windows Function App use a 32-bit worker.
                         type: boolean
                       vnetRouteAllEnabled:
                         description: |-

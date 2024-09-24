@@ -12,10 +12,7 @@ spec:
       example: example
     partitionKey: examplepartition
     rowKey: examplerow
-    storageAccountNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    tableNameSelector:
+    storageTableIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 

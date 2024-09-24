@@ -9,6 +9,8 @@ metadata:
 spec:
   forProvider:
     clientId: ${data.azuread_application.example.application_id}
+    identity:
+    - type: SystemAssigned
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

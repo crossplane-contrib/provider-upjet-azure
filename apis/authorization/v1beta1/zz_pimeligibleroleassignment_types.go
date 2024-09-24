@@ -15,24 +15,24 @@ import (
 
 type PimEligibleRoleAssignmentInitParameters struct {
 
-	// The justification of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The justification of the eligible role assignment.
+	// The justification of the role assignment. Changing this forces a new resource to be created.
+	// The justification for this eligible role assignment
 	Justification *string `json:"justification,omitempty" tf:"justification,omitempty"`
 
-	// The principal id. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The principal id.
+	// Object ID of the principal for this eligible role assignment. Changing this forces a new resource to be created.
+	// Object ID of the principal for this eligible role assignment
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The role definition id. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The role definition id.
+	// The role definition ID for this eligible role assignment. Changing this forces a new resource to be created.
+	// Role definition ID for this eligible role assignment
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
-	// A schedule block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The schedule details of this eligible role assignment.
+	// A schedule block as defined below. Changing this forces a new resource to be created.
+	// The schedule details for this eligible role assignment
 	Schedule *PimEligibleRoleAssignmentScheduleInitParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The scope. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The scope.
+	// The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
+	// Scope for this eligible role assignment, should be a valid resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
@@ -45,69 +45,69 @@ type PimEligibleRoleAssignmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
 
-	// A ticket block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// Ticket details relating to the assignment.
+	// A ticket block as defined below. Changing this forces a new resource to be created.
+	// Ticket details relating to the eligible assignment
 	Ticket *PimEligibleRoleAssignmentTicketInitParameters `json:"ticket,omitempty" tf:"ticket,omitempty"`
 }
 
 type PimEligibleRoleAssignmentObservation struct {
 
-	// The ID of the Pim Eligible Role Assignment.
+	// The ID of the PIM Eligible Role Assignment.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// The justification of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The justification of the eligible role assignment.
+	// The justification of the role assignment. Changing this forces a new resource to be created.
+	// The justification for this eligible role assignment
 	Justification *string `json:"justification,omitempty" tf:"justification,omitempty"`
 
-	// The principal id. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The principal id.
+	// Object ID of the principal for this eligible role assignment. Changing this forces a new resource to be created.
+	// Object ID of the principal for this eligible role assignment
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The type of principal.
-	// The type of principal.
+	// Type of principal to which the role will be assigned.
+	// Type of principal to which the role will be assigned
 	PrincipalType *string `json:"principalType,omitempty" tf:"principal_type,omitempty"`
 
-	// The role definition id. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The role definition id.
+	// The role definition ID for this eligible role assignment. Changing this forces a new resource to be created.
+	// Role definition ID for this eligible role assignment
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
-	// A schedule block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The schedule details of this eligible role assignment.
+	// A schedule block as defined below. Changing this forces a new resource to be created.
+	// The schedule details for this eligible role assignment
 	Schedule *PimEligibleRoleAssignmentScheduleObservation `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The scope. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The scope.
+	// The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
+	// Scope for this eligible role assignment, should be a valid resource ID
 	Scope *string `json:"scope,omitempty" tf:"scope,omitempty"`
 
-	// A ticket block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// Ticket details relating to the assignment.
+	// A ticket block as defined below. Changing this forces a new resource to be created.
+	// Ticket details relating to the eligible assignment
 	Ticket *PimEligibleRoleAssignmentTicketObservation `json:"ticket,omitempty" tf:"ticket,omitempty"`
 }
 
 type PimEligibleRoleAssignmentParameters struct {
 
-	// The justification of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The justification of the eligible role assignment.
+	// The justification of the role assignment. Changing this forces a new resource to be created.
+	// The justification for this eligible role assignment
 	// +kubebuilder:validation:Optional
 	Justification *string `json:"justification,omitempty" tf:"justification,omitempty"`
 
-	// The principal id. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The principal id.
+	// Object ID of the principal for this eligible role assignment. Changing this forces a new resource to be created.
+	// Object ID of the principal for this eligible role assignment
 	// +kubebuilder:validation:Optional
 	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
 
-	// The role definition id. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The role definition id.
+	// The role definition ID for this eligible role assignment. Changing this forces a new resource to be created.
+	// Role definition ID for this eligible role assignment
 	// +kubebuilder:validation:Optional
 	RoleDefinitionID *string `json:"roleDefinitionId,omitempty" tf:"role_definition_id,omitempty"`
 
-	// A schedule block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The schedule details of this eligible role assignment.
+	// A schedule block as defined below. Changing this forces a new resource to be created.
+	// The schedule details for this eligible role assignment
 	// +kubebuilder:validation:Optional
 	Schedule *PimEligibleRoleAssignmentScheduleParameters `json:"schedule,omitempty" tf:"schedule,omitempty"`
 
-	// The scope. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The scope.
+	// The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
+	// Scope for this eligible role assignment, should be a valid resource ID
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/management/v1beta1.ManagementGroup
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -121,123 +121,123 @@ type PimEligibleRoleAssignmentParameters struct {
 	// +kubebuilder:validation:Optional
 	ScopeSelector *v1.Selector `json:"scopeSelector,omitempty" tf:"-"`
 
-	// A ticket block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// Ticket details relating to the assignment.
+	// A ticket block as defined below. Changing this forces a new resource to be created.
+	// Ticket details relating to the eligible assignment
 	// +kubebuilder:validation:Optional
 	Ticket *PimEligibleRoleAssignmentTicketParameters `json:"ticket,omitempty" tf:"ticket,omitempty"`
 }
 
 type PimEligibleRoleAssignmentScheduleInitParameters struct {
 
-	// A expiration block as defined above.
+	// An expiration block as defined above.
 	Expiration *ScheduleExpirationInitParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// The start date time of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The start date time.
+	// The start date/time of the role assignment. Changing this forces a new resource to be created.
+	// The start date/time
 	StartDateTime *string `json:"startDateTime,omitempty" tf:"start_date_time,omitempty"`
 }
 
 type PimEligibleRoleAssignmentScheduleObservation struct {
 
-	// A expiration block as defined above.
+	// An expiration block as defined above.
 	Expiration *ScheduleExpirationObservation `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// The start date time of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The start date time.
+	// The start date/time of the role assignment. Changing this forces a new resource to be created.
+	// The start date/time
 	StartDateTime *string `json:"startDateTime,omitempty" tf:"start_date_time,omitempty"`
 }
 
 type PimEligibleRoleAssignmentScheduleParameters struct {
 
-	// A expiration block as defined above.
+	// An expiration block as defined above.
 	// +kubebuilder:validation:Optional
 	Expiration *ScheduleExpirationParameters `json:"expiration,omitempty" tf:"expiration,omitempty"`
 
-	// The start date time of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The start date time.
+	// The start date/time of the role assignment. Changing this forces a new resource to be created.
+	// The start date/time
 	// +kubebuilder:validation:Optional
 	StartDateTime *string `json:"startDateTime,omitempty" tf:"start_date_time,omitempty"`
 }
 
 type PimEligibleRoleAssignmentTicketInitParameters struct {
 
-	// The ticket number.
-	// The ticket number.
+	// User-supplied ticket number to be included with the request. Changing this forces a new resource to be created.
+	// User-supplied ticket number to be included with the request
 	Number *string `json:"number,omitempty" tf:"number,omitempty"`
 
-	// The ticket system.
-	// The ticket system.
+	// User-supplied ticket system name to be included with the request. Changing this forces a new resource to be created.
+	// User-supplied ticket system name to be included with the request
 	System *string `json:"system,omitempty" tf:"system,omitempty"`
 }
 
 type PimEligibleRoleAssignmentTicketObservation struct {
 
-	// The ticket number.
-	// The ticket number.
+	// User-supplied ticket number to be included with the request. Changing this forces a new resource to be created.
+	// User-supplied ticket number to be included with the request
 	Number *string `json:"number,omitempty" tf:"number,omitempty"`
 
-	// The ticket system.
-	// The ticket system.
+	// User-supplied ticket system name to be included with the request. Changing this forces a new resource to be created.
+	// User-supplied ticket system name to be included with the request
 	System *string `json:"system,omitempty" tf:"system,omitempty"`
 }
 
 type PimEligibleRoleAssignmentTicketParameters struct {
 
-	// The ticket number.
-	// The ticket number.
+	// User-supplied ticket number to be included with the request. Changing this forces a new resource to be created.
+	// User-supplied ticket number to be included with the request
 	// +kubebuilder:validation:Optional
 	Number *string `json:"number,omitempty" tf:"number,omitempty"`
 
-	// The ticket system.
-	// The ticket system.
+	// User-supplied ticket system name to be included with the request. Changing this forces a new resource to be created.
+	// User-supplied ticket system name to be included with the request
 	// +kubebuilder:validation:Optional
 	System *string `json:"system,omitempty" tf:"system,omitempty"`
 }
 
 type ScheduleExpirationInitParameters struct {
 
-	// The duration of the role assignment in days. Conflicts with schedule[0].expiration[0].duration_hours,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The duration of the assignment in days.
+	// The duration of the role assignment in days. Changing this forces a new resource to be created.
+	// The duration of the eligible role assignment in days
 	DurationDays *float64 `json:"durationDays,omitempty" tf:"duration_days,omitempty"`
 
-	// The duration of the role assignment in hours. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The duration of the assignment in hours.
+	// The duration of the role assignment in hours. Changing this forces a new resource to be created.
+	// The duration of the eligible role assignment in hours
 	DurationHours *float64 `json:"durationHours,omitempty" tf:"duration_hours,omitempty"`
 
-	// The end date time of the role assignment. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].duration_hours Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The end date time of the assignment.
+	// The end date/time of the role assignment. Changing this forces a new resource to be created.
+	// The end date/time of the eligible role assignment
 	EndDateTime *string `json:"endDateTime,omitempty" tf:"end_date_time,omitempty"`
 }
 
 type ScheduleExpirationObservation struct {
 
-	// The duration of the role assignment in days. Conflicts with schedule[0].expiration[0].duration_hours,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The duration of the assignment in days.
+	// The duration of the role assignment in days. Changing this forces a new resource to be created.
+	// The duration of the eligible role assignment in days
 	DurationDays *float64 `json:"durationDays,omitempty" tf:"duration_days,omitempty"`
 
-	// The duration of the role assignment in hours. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The duration of the assignment in hours.
+	// The duration of the role assignment in hours. Changing this forces a new resource to be created.
+	// The duration of the eligible role assignment in hours
 	DurationHours *float64 `json:"durationHours,omitempty" tf:"duration_hours,omitempty"`
 
-	// The end date time of the role assignment. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].duration_hours Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The end date time of the assignment.
+	// The end date/time of the role assignment. Changing this forces a new resource to be created.
+	// The end date/time of the eligible role assignment
 	EndDateTime *string `json:"endDateTime,omitempty" tf:"end_date_time,omitempty"`
 }
 
 type ScheduleExpirationParameters struct {
 
-	// The duration of the role assignment in days. Conflicts with schedule[0].expiration[0].duration_hours,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The duration of the assignment in days.
+	// The duration of the role assignment in days. Changing this forces a new resource to be created.
+	// The duration of the eligible role assignment in days
 	// +kubebuilder:validation:Optional
 	DurationDays *float64 `json:"durationDays,omitempty" tf:"duration_days,omitempty"`
 
-	// The duration of the role assignment in hours. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The duration of the assignment in hours.
+	// The duration of the role assignment in hours. Changing this forces a new resource to be created.
+	// The duration of the eligible role assignment in hours
 	// +kubebuilder:validation:Optional
 	DurationHours *float64 `json:"durationHours,omitempty" tf:"duration_hours,omitempty"`
 
-	// The end date time of the role assignment. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].duration_hours Changing this forces a new Pim Eligible Role Assignment to be created.
-	// The end date time of the assignment.
+	// The end date/time of the role assignment. Changing this forces a new resource to be created.
+	// The end date/time of the eligible role assignment
 	// +kubebuilder:validation:Optional
 	EndDateTime *string `json:"endDateTime,omitempty" tf:"end_date_time,omitempty"`
 }
@@ -269,7 +269,7 @@ type PimEligibleRoleAssignmentStatus struct {
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
 
-// PimEligibleRoleAssignment is the Schema for the PimEligibleRoleAssignments API. Manages a Pim Eligible Role Assignment.
+// PimEligibleRoleAssignment is the Schema for the PimEligibleRoleAssignments API. Manages a PIM Eligible Role Assignment.
 // +kubebuilder:printcolumn:name="SYNCED",type="string",JSONPath=".status.conditions[?(@.type=='Synced')].status"
 // +kubebuilder:printcolumn:name="READY",type="string",JSONPath=".status.conditions[?(@.type=='Ready')].status"
 // +kubebuilder:printcolumn:name="EXTERNAL-NAME",type="string",JSONPath=".metadata.annotations.crossplane\\.io/external-name"

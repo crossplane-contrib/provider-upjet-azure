@@ -27,7 +27,7 @@ type AppTriggerHTTPRequestInitParameters struct {
 
 type AppTriggerHTTPRequestObservation struct {
 
-	// The URL for the workflow trigger
+	// The URL of the Trigger within the Logic App Workflow. For use with certain resources like monitor_action_group and security_center_automation.
 	CallbackURL *string `json:"callbackUrl,omitempty" tf:"callback_url,omitempty"`
 
 	// The ID of the HTTP Request Trigger within the Logic App Workflow.

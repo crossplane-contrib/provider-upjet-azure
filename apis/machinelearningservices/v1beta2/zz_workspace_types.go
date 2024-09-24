@@ -170,6 +170,55 @@ type ManagedNetworkParameters struct {
 	IsolationMode *string `json:"isolationMode,omitempty" tf:"isolation_mode,omitempty"`
 }
 
+type ServerlessComputeInitParameters struct {
+
+	// Should serverless compute nodes deployed in a custom Virtual Network have public IP addresses enabled for a workspace with private endpoint? Defaults to false.
+	PublicIPEnabled *bool `json:"publicIpEnabled,omitempty" tf:"public_ip_enabled,omitempty"`
+
+	// The ID of an existing Virtual Network Subnet in which the serverless compute nodes should be deployed to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type ServerlessComputeObservation struct {
+
+	// Should serverless compute nodes deployed in a custom Virtual Network have public IP addresses enabled for a workspace with private endpoint? Defaults to false.
+	PublicIPEnabled *bool `json:"publicIpEnabled,omitempty" tf:"public_ip_enabled,omitempty"`
+
+	// The ID of an existing Virtual Network Subnet in which the serverless compute nodes should be deployed to.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type ServerlessComputeParameters struct {
+
+	// Should serverless compute nodes deployed in a custom Virtual Network have public IP addresses enabled for a workspace with private endpoint? Defaults to false.
+	// +kubebuilder:validation:Optional
+	PublicIPEnabled *bool `json:"publicIpEnabled,omitempty" tf:"public_ip_enabled,omitempty"`
+
+	// The ID of an existing Virtual Network Subnet in which the serverless compute nodes should be deployed to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
 type WorkspaceIdentityInitParameters struct {
 
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Machine Learning Workspace.
@@ -288,6 +337,9 @@ type WorkspaceInitParameters struct {
 	// Enable public access when this Machine Learning Workspace is behind VNet.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
+	// A serverless_compute block as defined below.
+	ServerlessCompute *ServerlessComputeInitParameters `json:"serverlessCompute,omitempty" tf:"serverless_compute,omitempty"`
+
 	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
@@ -370,6 +422,9 @@ type WorkspaceObservation struct {
 
 	// Specifies the name of the Resource Group in which the Machine Learning Workspace should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// A serverless_compute block as defined below.
+	ServerlessCompute *ServerlessComputeObservation `json:"serverlessCompute,omitempty" tf:"serverless_compute,omitempty"`
 
 	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
@@ -496,6 +551,10 @@ type WorkspaceParameters struct {
 	// Selector for a ResourceGroup in azure to populate resourceGroupName.
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
+
+	// A serverless_compute block as defined below.
+	// +kubebuilder:validation:Optional
+	ServerlessCompute *ServerlessComputeParameters `json:"serverlessCompute,omitempty" tf:"serverless_compute,omitempty"`
 
 	// SKU/edition of the Machine Learning Workspace, possible values are Free, Basic, Standard and Premium. Defaults to Basic.
 	// +kubebuilder:validation:Optional

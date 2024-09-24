@@ -838,7 +838,8 @@ spec:
                       type: string
                     type: array
                   valueFromKeyVault:
-                    description: A value_from_key_vault block as defined below.
+                    description: A value_from_key_vault block as defined below. If
+                      specified, secret must also be set to true.
                     properties:
                       identityClientId:
                         description: The client ID of User Assigned Identity, for
@@ -896,7 +897,8 @@ spec:
                       type: string
                     type: array
                   valueFromKeyVault:
-                    description: A value_from_key_vault block as defined below.
+                    description: A value_from_key_vault block as defined below. If
+                      specified, secret must also be set to true.
                     properties:
                       identityClientId:
                         description: The client ID of User Assigned Identity, for
@@ -1131,7 +1133,8 @@ spec:
                       type: string
                     type: array
                   valueFromKeyVault:
-                    description: A value_from_key_vault block as defined below.
+                    description: A value_from_key_vault block as defined below. If
+                      specified, secret must also be set to true.
                     properties:
                       identityClientId:
                         description: The client ID of User Assigned Identity, for

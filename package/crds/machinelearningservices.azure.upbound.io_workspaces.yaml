@@ -2593,6 +2593,96 @@ spec:
                             type: string
                         type: object
                     type: object
+                  serverlessCompute:
+                    description: A serverless_compute block as defined below.
+                    properties:
+                      publicIpEnabled:
+                        description: Should serverless compute nodes deployed in a
+                          custom Virtual Network have public IP addresses enabled
+                          for a workspace with private endpoint? Defaults to false.
+                        type: boolean
+                      subnetId:
+                        description: The ID of an existing Virtual Network Subnet
+                          in which the serverless compute nodes should be deployed
+                          to.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
                       values are Free, Basic, Standard and Premium. Defaults to Basic.
@@ -3259,6 +3349,96 @@ spec:
                     description: Enable public access when this Machine Learning Workspace
                       is behind VNet.
                     type: boolean
+                  serverlessCompute:
+                    description: A serverless_compute block as defined below.
+                    properties:
+                      publicIpEnabled:
+                        description: Should serverless compute nodes deployed in a
+                          custom Virtual Network have public IP addresses enabled
+                          for a workspace with private endpoint? Defaults to false.
+                        type: boolean
+                      subnetId:
+                        description: The ID of an existing Virtual Network Subnet
+                          in which the serverless compute nodes should be deployed
+                          to.
+                        type: string
+                      subnetIdRef:
+                        description: Reference to a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          name:
+                            description: Name of the referenced object.
+                            type: string
+                          policy:
+                            description: Policies for referencing.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        required:
+                        - name
+                        type: object
+                      subnetIdSelector:
+                        description: Selector for a Subnet in network to populate
+                          subnetId.
+                        properties:
+                          matchControllerRef:
+                            description: |-
+                              MatchControllerRef ensures an object with the same controller reference
+                              as the selecting object is selected.
+                            type: boolean
+                          matchLabels:
+                            additionalProperties:
+                              type: string
+                            description: MatchLabels ensures an object with matching
+                              labels is selected.
+                            type: object
+                          policy:
+                            description: Policies for selection.
+                            properties:
+                              resolution:
+                                default: Required
+                                description: |-
+                                  Resolution specifies whether resolution of this reference is required.
+                                  The default is 'Required', which means the reconcile will fail if the
+                                  reference cannot be resolved. 'Optional' means this reference will be
+                                  a no-op if it cannot be resolved.
+                                enum:
+                                - Required
+                                - Optional
+                                type: string
+                              resolve:
+                                description: |-
+                                  Resolve specifies when this reference should be resolved. The default
+                                  is 'IfNotPresent', which will attempt to resolve the reference only when
+                                  the corresponding field is not present. Use 'Always' to resolve the
+                                  reference on every reconcile.
+                                enum:
+                                - Always
+                                - IfNotPresent
+                                type: string
+                            type: object
+                        type: object
+                    type: object
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
                       values are Free, Basic, Standard and Premium. Defaults to Basic.
@@ -3661,6 +3841,20 @@ spec:
                       the Machine Learning Workspace should exist. Changing this forces
                       a new resource to be created.
                     type: string
+                  serverlessCompute:
+                    description: A serverless_compute block as defined below.
+                    properties:
+                      publicIpEnabled:
+                        description: Should serverless compute nodes deployed in a
+                          custom Virtual Network have public IP addresses enabled
+                          for a workspace with private endpoint? Defaults to false.
+                        type: boolean
+                      subnetId:
+                        description: The ID of an existing Virtual Network Subnet
+                          in which the serverless compute nodes should be deployed
+                          to.
+                        type: string
+                    type: object
                   skuName:
                     description: SKU/edition of the Machine Learning Workspace, possible
                       values are Free, Basic, Standard and Premium. Defaults to Basic.

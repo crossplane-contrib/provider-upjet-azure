@@ -14,40 +14,35 @@ import (
 )
 
 type AADAdminInitParameters struct {
-
-	// The login name of the Azure AD Administrator of this Synapse Workspace.
 	Login *string `json:"login,omitempty" tf:"login"`
 
-	// The object id of the Azure AD Administrator of this Synapse Workspace.
+	// The ID of the synapse Workspace.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
 
-	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
 }
 
 type AADAdminObservation struct {
-
-	// The login name of the Azure AD Administrator of this Synapse Workspace.
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// The object id of the Azure AD Administrator of this Synapse Workspace.
+	// The ID of the synapse Workspace.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type AADAdminParameters struct {
 
-	// The login name of the Azure AD Administrator of this Synapse Workspace.
 	// +kubebuilder:validation:Optional
 	Login *string `json:"login,omitempty" tf:"login"`
 
-	// The object id of the Azure AD Administrator of this Synapse Workspace.
+	// The ID of the synapse Workspace.
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
 
-	// The tenant id of the Azure AD Administrator of this Synapse Workspace.
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
 }
@@ -298,47 +293,40 @@ type IdentityParameters struct {
 }
 
 type SQLAADAdminInitParameters struct {
-
-	// The login name of the Azure AD Administrator of this Synapse Workspace SQL.
 	Login *string `json:"login,omitempty" tf:"login"`
 
-	// The object id of the Azure AD Administrator of this Synapse Workspace SQL.
+	// The ID of the synapse Workspace.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
 
-	// The tenant id of the Azure AD Administrator of this Synapse Workspace SQL.
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
 }
 
 type SQLAADAdminObservation struct {
-
-	// The login name of the Azure AD Administrator of this Synapse Workspace SQL.
 	Login *string `json:"login,omitempty" tf:"login,omitempty"`
 
-	// The object id of the Azure AD Administrator of this Synapse Workspace SQL.
+	// The ID of the synapse Workspace.
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id,omitempty"`
 
-	// The tenant id of the Azure AD Administrator of this Synapse Workspace SQL.
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
 type SQLAADAdminParameters struct {
 
-	// The login name of the Azure AD Administrator of this Synapse Workspace SQL.
 	// +kubebuilder:validation:Optional
 	Login *string `json:"login,omitempty" tf:"login"`
 
-	// The object id of the Azure AD Administrator of this Synapse Workspace SQL.
+	// The ID of the synapse Workspace.
 	// +kubebuilder:validation:Optional
 	ObjectID *string `json:"objectId,omitempty" tf:"object_id"`
 
-	// The tenant id of the Azure AD Administrator of this Synapse Workspace SQL.
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this Synapse Workspace.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id"`
 }
 
 type WorkspaceInitParameters struct {
-
-	// An aad_admin block as defined below.
 	AADAdmin *AADAdminInitParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
@@ -399,7 +387,6 @@ type WorkspaceInitParameters struct {
 	// The ID of purview account.
 	PurviewID *string `json:"purviewId,omitempty" tf:"purview_id,omitempty"`
 
-	// An sql_aad_admin block as defined below.
 	SQLAADAdmin *SQLAADAdminInitParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
 
 	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
@@ -430,8 +417,6 @@ type WorkspaceInitParameters struct {
 }
 
 type WorkspaceObservation struct {
-
-	// An aad_admin block as defined below.
 	AADAdmin *AADAdminObservation `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
 	// An azure_devops_repo block as defined below.
@@ -483,7 +468,6 @@ type WorkspaceObservation struct {
 	// Specifies the name of the Resource Group where the synapse Workspace should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// An sql_aad_admin block as defined below.
 	SQLAADAdmin *SQLAADAdminObservation `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
 
 	// Specifies The login name of the SQL administrator. Changing this forces a new resource to be created. If this is not provided aad_admin or customer_managed_key must be provided.
@@ -502,7 +486,6 @@ type WorkspaceObservation struct {
 
 type WorkspaceParameters struct {
 
-	// An aad_admin block as defined below.
 	// +kubebuilder:validation:Optional
 	AADAdmin *AADAdminParameters `json:"aadAdmin,omitempty" tf:"aad_admin,omitempty"`
 
@@ -590,7 +573,6 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// An sql_aad_admin block as defined below.
 	// +kubebuilder:validation:Optional
 	SQLAADAdmin *SQLAADAdminParameters `json:"sqlAadAdmin,omitempty" tf:"sql_aad_admin,omitempty"`
 

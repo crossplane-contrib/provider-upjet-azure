@@ -1218,8 +1218,9 @@ spec:
                           type: string
                         targetResourceType:
                           description: The endpoint type of the Network Connection
-                            Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet,
-                            ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+                            Monitor. Possible values are AzureArcVM, AzureSubnet,
+                            AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine
+                            and MMAWorkspaceNetwork.
                           type: string
                       type: object
                     type: array
@@ -1526,8 +1527,9 @@ spec:
                           type: string
                         targetResourceType:
                           description: The endpoint type of the Network Connection
-                            Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet,
-                            ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+                            Monitor. Possible values are AzureArcVM, AzureSubnet,
+                            AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine
+                            and MMAWorkspaceNetwork.
                           type: string
                       type: object
                     type: array
@@ -1932,8 +1934,9 @@ spec:
                           type: string
                         targetResourceType:
                           description: The endpoint type of the Network Connection
-                            Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet,
-                            ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+                            Monitor. Possible values are AzureArcVM, AzureSubnet,
+                            AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine
+                            and MMAWorkspaceNetwork.
                           type: string
                       type: object
                     type: array

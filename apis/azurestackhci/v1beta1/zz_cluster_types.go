@@ -18,8 +18,11 @@ type ClusterInitParameters struct {
 	// The ID of the Automanage Configuration assigned to the Azure Stack HCI Cluster.
 	AutomanageConfigurationID *string `json:"automanageConfigurationId,omitempty" tf:"automanage_configuration_id,omitempty"`
 
-	// The Client ID of the Azure Active Directory which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
+	// The Client ID of the Azure Active Directory Application which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// An identity block as defined below.
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Azure Stack HCI Cluster should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -37,17 +40,29 @@ type ClusterObservation struct {
 	// The ID of the Automanage Configuration assigned to the Azure Stack HCI Cluster.
 	AutomanageConfigurationID *string `json:"automanageConfigurationId,omitempty" tf:"automanage_configuration_id,omitempty"`
 
-	// The Client ID of the Azure Active Directory which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
+	// The Client ID of the Azure Active Directory Application which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
-	// The ID of the Azure Stack HCI Cluster.
+	// An immutable UUID for the Azure Stack HCI Cluster.
+	CloudID *string `json:"cloudId,omitempty" tf:"cloud_id,omitempty"`
+
+	// The resource ID of the Azure Stack HCI Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity block as defined below.
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Azure Stack HCI Cluster should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group where the Azure Stack HCI Cluster should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
+
+	// The object ID of the Resource Provider Service Principal.
+	ResourceProviderObjectID *string `json:"resourceProviderObjectId,omitempty" tf:"resource_provider_object_id,omitempty"`
+
+	// The region specific Data Path Endpoint of the Azure Stack HCI Cluster.
+	ServiceEndpoint *string `json:"serviceEndpoint,omitempty" tf:"service_endpoint,omitempty"`
 
 	// A mapping of tags which should be assigned to the Azure Stack HCI Cluster.
 	// +mapType=granular
@@ -63,9 +78,13 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	AutomanageConfigurationID *string `json:"automanageConfigurationId,omitempty" tf:"automanage_configuration_id,omitempty"`
 
-	// The Client ID of the Azure Active Directory which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
+	// The Client ID of the Azure Active Directory Application which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Azure Stack HCI Cluster should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -92,6 +111,31 @@ type ClusterParameters struct {
 	// The Tenant ID of the Azure Active Directory which is used by the Azure Stack HCI Cluster. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// Specifies the type of Managed Service Identity that should be configured on the Azure Stack HCI Cluster. Possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on the Azure Stack HCI Cluster. Possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// Specifies the type of Managed Service Identity that should be configured on the Azure Stack HCI Cluster. Possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // ClusterSpec defines the desired state of Cluster
@@ -130,7 +174,6 @@ type ClusterStatus struct {
 type Cluster struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.clientId) || (has(self.initProvider) && has(self.initProvider.clientId))",message="spec.forProvider.clientId is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   ClusterSpec   `json:"spec"`
 	Status ClusterStatus `json:"status,omitempty"`

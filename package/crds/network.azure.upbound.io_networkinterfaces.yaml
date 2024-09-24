@@ -73,6 +73,10 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  acceleratedNetworkingEnabled:
+                    description: Should Accelerated Networking be enabled? Defaults
+                      to false.
+                    type: boolean
                   auxiliaryMode:
                     description: Specifies the auxiliary mode used to enable network
                       high-performance feature on Network Virtual Appliances (NVAs).
@@ -98,11 +102,8 @@ spec:
                       new Network Interface to be created.
                     type: string
                   enableAcceleratedNetworking:
-                    description: Should Accelerated Networking be enabled? Defaults
-                      to false.
                     type: boolean
                   enableIpForwarding:
-                    description: Should IP Forwarding be enabled? Defaults to false.
                     type: boolean
                   internalDnsNameLabel:
                     description: The (relative) DNS Name used for internal communications
@@ -297,6 +298,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                  ipForwardingEnabled:
+                    description: Should IP Forwarding be enabled? Defaults to false.
+                    type: boolean
                   location:
                     description: The location where the Network Interface should exist.
                       Changing this forces a new resource to be created.
@@ -402,6 +406,10 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  acceleratedNetworkingEnabled:
+                    description: Should Accelerated Networking be enabled? Defaults
+                      to false.
+                    type: boolean
                   auxiliaryMode:
                     description: Specifies the auxiliary mode used to enable network
                       high-performance feature on Network Virtual Appliances (NVAs).
@@ -427,11 +435,8 @@ spec:
                       new Network Interface to be created.
                     type: string
                   enableAcceleratedNetworking:
-                    description: Should Accelerated Networking be enabled? Defaults
-                      to false.
                     type: boolean
                   enableIpForwarding:
-                    description: Should IP Forwarding be enabled? Defaults to false.
                     type: boolean
                   internalDnsNameLabel:
                     description: The (relative) DNS Name used for internal communications
@@ -626,6 +631,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                  ipForwardingEnabled:
+                    description: Should IP Forwarding be enabled? Defaults to false.
+                    type: boolean
                   location:
                     description: The location where the Network Interface should exist.
                       Changing this forces a new resource to be created.
@@ -818,6 +826,10 @@ spec:
             properties:
               atProvider:
                 properties:
+                  acceleratedNetworkingEnabled:
+                    description: Should Accelerated Networking be enabled? Defaults
+                      to false.
+                    type: boolean
                   appliedDnsServers:
                     description: If the Virtual Machine using this Network Interface
                       is part of an Availability Set, then this list will have the
@@ -851,11 +863,8 @@ spec:
                       new Network Interface to be created.
                     type: string
                   enableAcceleratedNetworking:
-                    description: Should Accelerated Networking be enabled? Defaults
-                      to false.
                     type: boolean
                   enableIpForwarding:
-                    description: Should IP Forwarding be enabled? Defaults to false.
                     type: boolean
                   id:
                     description: The ID of the Network Interface.
@@ -907,6 +916,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                  ipForwardingEnabled:
+                    description: Should IP Forwarding be enabled? Defaults to false.
+                    type: boolean
                   location:
                     description: The location where the Network Interface should exist.
                       Changing this forces a new resource to be created.

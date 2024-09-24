@@ -136,49 +136,52 @@ type DraftParameters struct {
 
 type JobScheduleInitParameters struct {
 
-	// The Automation Runbook ID.
+	// The UUID of automation runbook job schedule ID.
 	JobScheduleID *string `json:"jobScheduleId,omitempty" tf:"job_schedule_id"`
 
-	// A list of parameters block as defined below.
+	// A map of key/value pairs corresponding to the arguments that can be passed to the Runbook.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters"`
 
+	// Name of a Hybrid Worker Group the Runbook will be executed on.
 	RunOn *string `json:"runOn,omitempty" tf:"run_on"`
 
-	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
+	// The name of the Schedule.
 	ScheduleName *string `json:"scheduleName,omitempty" tf:"schedule_name"`
 }
 
 type JobScheduleObservation struct {
 
-	// The Automation Runbook ID.
+	// The UUID of automation runbook job schedule ID.
 	JobScheduleID *string `json:"jobScheduleId,omitempty" tf:"job_schedule_id,omitempty"`
 
-	// A list of parameters block as defined below.
+	// A map of key/value pairs corresponding to the arguments that can be passed to the Runbook.
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters,omitempty"`
 
+	// Name of a Hybrid Worker Group the Runbook will be executed on.
 	RunOn *string `json:"runOn,omitempty" tf:"run_on,omitempty"`
 
-	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
+	// The name of the Schedule.
 	ScheduleName *string `json:"scheduleName,omitempty" tf:"schedule_name,omitempty"`
 }
 
 type JobScheduleParameters struct {
 
-	// The Automation Runbook ID.
+	// The UUID of automation runbook job schedule ID.
 	// +kubebuilder:validation:Optional
 	JobScheduleID *string `json:"jobScheduleId,omitempty" tf:"job_schedule_id"`
 
-	// A list of parameters block as defined below.
+	// A map of key/value pairs corresponding to the arguments that can be passed to the Runbook.
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Parameters map[string]*string `json:"parameters,omitempty" tf:"parameters"`
 
+	// Name of a Hybrid Worker Group the Runbook will be executed on.
 	// +kubebuilder:validation:Optional
 	RunOn *string `json:"runOn,omitempty" tf:"run_on"`
 
-	// Specifies the name of the Runbook. Changing this forces a new resource to be created.
+	// The name of the Schedule.
 	// +kubebuilder:validation:Optional
 	ScheduleName *string `json:"scheduleName,omitempty" tf:"schedule_name"`
 }
@@ -330,9 +333,10 @@ type RunBookInitParameters struct {
 	// A description for this credential.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A draft block as defined below .
+	// A draft block as defined below.
 	Draft *DraftInitParameters `json:"draft,omitempty" tf:"draft,omitempty"`
 
+	// One or more job_schedule block as defined below.
 	JobSchedule []JobScheduleInitParameters `json:"jobSchedule,omitempty" tf:"job_schedule,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -384,12 +388,13 @@ type RunBookObservation struct {
 	// A description for this credential.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A draft block as defined below .
+	// A draft block as defined below.
 	Draft *DraftObservation `json:"draft,omitempty" tf:"draft,omitempty"`
 
 	// The Automation Runbook ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// One or more job_schedule block as defined below.
 	JobSchedule []JobScheduleObservation `json:"jobSchedule,omitempty" tf:"job_schedule,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
@@ -444,10 +449,11 @@ type RunBookParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// A draft block as defined below .
+	// A draft block as defined below.
 	// +kubebuilder:validation:Optional
 	Draft *DraftParameters `json:"draft,omitempty" tf:"draft,omitempty"`
 
+	// One or more job_schedule block as defined below.
 	// +kubebuilder:validation:Optional
 	JobSchedule []JobScheduleParameters `json:"jobSchedule,omitempty" tf:"job_schedule,omitempty"`
 

@@ -5991,19 +5991,19 @@ spec:
                           enabled?
                         type: boolean
                       clientAppId:
-                        description: The Client ID of an Azure Active Directory Application.
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
                       managed:
                         description: Is the Azure Active Directory integration Managed,
                           meaning that Azure will create/manage the Service Principal
-                          used for integration.
+                          used for integration. Defaults to false.
                         type: boolean
                       serverAppId:
-                        description: The Server ID of an Azure Active Directory Application.
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
                       serverAppSecretSecretRef:
-                        description: The Server Secret of an Azure Active Directory
-                          Application.
+                        description: A SecretKeySelector is a reference to a secret
+                          key in an arbitrary namespace.
                         properties:
                           key:
                             description: The key to select.
@@ -6038,6 +6038,13 @@ spec:
                         description: Should the SGX quote helper be enabled?
                         type: boolean
                     type: object
+                  costAnalysisEnabled:
+                    description: Should cost analysis be enabled for this Kubernetes
+                      Cluster? Defaults to false. The sku_tier must be set to Standard
+                      or Premium to enable this feature. Enabling this will add Kubernetes
+                      Namespace and Deployment details to the Cost Analysis views
+                      in the Azure portal.
+                    type: boolean
                   customCaTrustCertificatesBase64:
                     description: A list of up to 10 base64 encoded CAs that will be
                       added to the trust store on nodes with the custom_ca_trust_enabled
@@ -6518,11 +6525,24 @@ spec:
                       upgradeSettings:
                         description: A upgrade_settings block as documented below.
                         properties:
+                          drainTimeoutInMinutes:
+                            description: The amount of time in minutes to wait on
+                              eviction of pods and graceful termination per node.
+                              This eviction wait time honors pod disruption budgets
+                              for upgrades. If this time is exceeded, the upgrade
+                              fails. Unsetting this after configuring it will force
+                              a new resource to be created.
+                            type: number
                           maxSurge:
                             description: The maximum number or percentage of nodes
                               which will be added to the Node Pool size during an
                               upgrade.
                             type: string
+                          nodeSoakDurationInMinutes:
+                            description: The amount of time in minutes to wait after
+                              draining a node and before reimaging and moving on to
+                              next node. Defaults to 0.
+                            type: number
                         type: object
                       vmSize:
                         description: The size of the Virtual Machine, such as Standard_DS2_v2.
@@ -6944,7 +6964,7 @@ spec:
                     properties:
                       dayOfMonth:
                         description: The day of the month for the maintenance run.
-                          Required in combination with RelativeMonthly frequency.
+                          Required in combination with AbsoluteMonthly frequency.
                           Value between 0 and 31 (inclusive).
                         type: number
                       dayOfWeek:
@@ -7001,7 +7021,7 @@ spec:
                     properties:
                       dayOfMonth:
                         description: The day of the month for the maintenance run.
-                          Required in combination with RelativeMonthly frequency.
+                          Required in combination with AbsoluteMonthly frequency.
                           Value between 0 and 31 (inclusive).
                         type: number
                       dayOfWeek:
@@ -7090,9 +7110,6 @@ spec:
                           to be created.
                         type: string
                       ebpfDataPlane:
-                        description: Specifies the eBPF data plane used for building
-                          the Kubernetes network. Possible value is cilium. Disabling
-                          this forces a new resource to be created.
                         type: string
                       ipVersions:
                         description: Specifies a list of IP versions the Kubernetes
@@ -7169,6 +7186,12 @@ spec:
                               inclusive.
                             type: number
                         type: object
+                      networkDataPlane:
+                        description: Specifies the data plane used for building the
+                          Kubernetes network. Possible values are azure and cilium.
+                          Defaults to azure. Disabling this forces a new resource
+                          to be created.
+                        type: string
                       networkMode:
                         description: Network mode to be used with Azure CNI. Possible
                           values are bridge and transparent. Changing this forces
@@ -7189,6 +7212,21 @@ spec:
                           between pods. Currently supported values are calico, azure
                           and cilium.
                         type: string
+                      outboundIpAddressIds:
+                        description: The ID of the Public IP Addresses which should
+                          be used for outbound communication for the cluster load
+                          balancer.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      outboundIpPrefixIds:
+                        description: The ID of the outbound Public IP Address Prefixes
+                          which should be used for the cluster load balancer.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                       outboundType:
                         description: The outbound (egress) routing method which should
                           be used for this Kubernetes Cluster. Possible values are
@@ -7199,8 +7237,9 @@ spec:
                         type: string
                       podCidr:
                         description: The CIDR to use for pod IP addresses. This field
-                          can only be set when network_plugin is set to kubenet. Changing
-                          this forces a new resource to be created.
+                          can only be set when network_plugin is set to kubenet or
+                          network_plugin_mode is set to overlay. Changing this forces
+                          a new resource to be created.
                         type: string
                       podCidrs:
                         description: A list of CIDRs to use for pod IP addresses.
@@ -7520,11 +7559,16 @@ spec:
                     description: A web_app_routing block as defined below.
                     properties:
                       dnsZoneId:
-                        description: Specifies the ID of the DNS Zone in which DNS
-                          entries are created for applications deployed to the cluster
-                          when Web App Routing is enabled. For Bring-Your-Own DNS
-                          zones this property should be set to an empty string "".
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
+                      dnsZoneIds:
+                        description: Specifies the list of the DNS Zone IDs in which
+                          DNS entries are created for applications deployed to the
+                          cluster when Web App Routing is enabled. If not using Bring-Your-Own
+                          DNS zones this property should be set to an empty list.
+                        items:
+                          type: string
+                        type: array
                     type: object
                   windowsProfile:
                     description: A windows_profile block as defined below.
@@ -7888,19 +7932,19 @@ spec:
                           enabled?
                         type: boolean
                       clientAppId:
-                        description: The Client ID of an Azure Active Directory Application.
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
                       managed:
                         description: Is the Azure Active Directory integration Managed,
                           meaning that Azure will create/manage the Service Principal
-                          used for integration.
+                          used for integration. Defaults to false.
                         type: boolean
                       serverAppId:
-                        description: The Server ID of an Azure Active Directory Application.
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
                       serverAppSecretSecretRef:
-                        description: The Server Secret of an Azure Active Directory
-                          Application.
+                        description: A SecretKeySelector is a reference to a secret
+                          key in an arbitrary namespace.
                         properties:
                           key:
                             description: The key to select.
@@ -7935,6 +7979,13 @@ spec:
                         description: Should the SGX quote helper be enabled?
                         type: boolean
                     type: object
+                  costAnalysisEnabled:
+                    description: Should cost analysis be enabled for this Kubernetes
+                      Cluster? Defaults to false. The sku_tier must be set to Standard
+                      or Premium to enable this feature. Enabling this will add Kubernetes
+                      Namespace and Deployment details to the Cost Analysis views
+                      in the Azure portal.
+                    type: boolean
                   customCaTrustCertificatesBase64:
                     description: A list of up to 10 base64 encoded CAs that will be
                       added to the trust store on nodes with the custom_ca_trust_enabled
@@ -8415,11 +8466,24 @@ spec:
                       upgradeSettings:
                         description: A upgrade_settings block as documented below.
                         properties:
+                          drainTimeoutInMinutes:
+                            description: The amount of time in minutes to wait on
+                              eviction of pods and graceful termination per node.
+                              This eviction wait time honors pod disruption budgets
+                              for upgrades. If this time is exceeded, the upgrade
+                              fails. Unsetting this after configuring it will force
+                              a new resource to be created.
+                            type: number
                           maxSurge:
                             description: The maximum number or percentage of nodes
                               which will be added to the Node Pool size during an
                               upgrade.
                             type: string
+                          nodeSoakDurationInMinutes:
+                            description: The amount of time in minutes to wait after
+                              draining a node and before reimaging and moving on to
+                              next node. Defaults to 0.
+                            type: number
                         type: object
                       vmSize:
                         description: The size of the Virtual Machine, such as Standard_DS2_v2.
@@ -8841,7 +8905,7 @@ spec:
                     properties:
                       dayOfMonth:
                         description: The day of the month for the maintenance run.
-                          Required in combination with RelativeMonthly frequency.
+                          Required in combination with AbsoluteMonthly frequency.
                           Value between 0 and 31 (inclusive).
                         type: number
                       dayOfWeek:
@@ -8898,7 +8962,7 @@ spec:
                     properties:
                       dayOfMonth:
                         description: The day of the month for the maintenance run.
-                          Required in combination with RelativeMonthly frequency.
+                          Required in combination with AbsoluteMonthly frequency.
                           Value between 0 and 31 (inclusive).
                         type: number
                       dayOfWeek:
@@ -8987,9 +9051,6 @@ spec:
                           to be created.
                         type: string
                       ebpfDataPlane:
-                        description: Specifies the eBPF data plane used for building
-                          the Kubernetes network. Possible value is cilium. Disabling
-                          this forces a new resource to be created.
                         type: string
                       ipVersions:
                         description: Specifies a list of IP versions the Kubernetes
@@ -9066,6 +9127,12 @@ spec:
                               inclusive.
                             type: number
                         type: object
+                      networkDataPlane:
+                        description: Specifies the data plane used for building the
+                          Kubernetes network. Possible values are azure and cilium.
+                          Defaults to azure. Disabling this forces a new resource
+                          to be created.
+                        type: string
                       networkMode:
                         description: Network mode to be used with Azure CNI. Possible
                           values are bridge and transparent. Changing this forces
@@ -9086,6 +9153,21 @@ spec:
                           between pods. Currently supported values are calico, azure
                           and cilium.
                         type: string
+                      outboundIpAddressIds:
+                        description: The ID of the Public IP Addresses which should
+                          be used for outbound communication for the cluster load
+                          balancer.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      outboundIpPrefixIds:
+                        description: The ID of the outbound Public IP Address Prefixes
+                          which should be used for the cluster load balancer.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                       outboundType:
                         description: The outbound (egress) routing method which should
                           be used for this Kubernetes Cluster. Possible values are
@@ -9096,8 +9178,9 @@ spec:
                         type: string
                       podCidr:
                         description: The CIDR to use for pod IP addresses. This field
-                          can only be set when network_plugin is set to kubenet. Changing
-                          this forces a new resource to be created.
+                          can only be set when network_plugin is set to kubenet or
+                          network_plugin_mode is set to overlay. Changing this forces
+                          a new resource to be created.
                         type: string
                       podCidrs:
                         description: A list of CIDRs to use for pod IP addresses.
@@ -9338,11 +9421,16 @@ spec:
                     description: A web_app_routing block as defined below.
                     properties:
                       dnsZoneId:
-                        description: Specifies the ID of the DNS Zone in which DNS
-                          entries are created for applications deployed to the cluster
-                          when Web App Routing is enabled. For Bring-Your-Own DNS
-                          zones this property should be set to an empty string "".
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
+                      dnsZoneIds:
+                        description: Specifies the list of the DNS Zone IDs in which
+                          DNS entries are created for applications deployed to the
+                          cluster when Web App Routing is enabled. If not using Bring-Your-Own
+                          DNS zones this property should be set to an empty list.
+                        items:
+                          type: string
+                        type: array
                     type: object
                   windowsProfile:
                     description: A windows_profile block as defined below.
@@ -9741,15 +9829,15 @@ spec:
                           enabled?
                         type: boolean
                       clientAppId:
-                        description: The Client ID of an Azure Active Directory Application.
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
                       managed:
                         description: Is the Azure Active Directory integration Managed,
                           meaning that Azure will create/manage the Service Principal
-                          used for integration.
+                          used for integration. Defaults to false.
                         type: boolean
                       serverAppId:
-                        description: The Server ID of an Azure Active Directory Application.
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
                       tenantId:
                         description: The Tenant ID used for Azure Active Directory
@@ -9770,6 +9858,13 @@ spec:
                         description: Should the SGX quote helper be enabled?
                         type: boolean
                     type: object
+                  costAnalysisEnabled:
+                    description: Should cost analysis be enabled for this Kubernetes
+                      Cluster? Defaults to false. The sku_tier must be set to Standard
+                      or Premium to enable this feature. Enabling this will add Kubernetes
+                      Namespace and Deployment details to the Cost Analysis views
+                      in the Azure portal.
+                    type: boolean
                   currentKubernetesVersion:
                     description: The current version running on the Azure Kubernetes
                       Managed Cluster.
@@ -10178,11 +10273,24 @@ spec:
                       upgradeSettings:
                         description: A upgrade_settings block as documented below.
                         properties:
+                          drainTimeoutInMinutes:
+                            description: The amount of time in minutes to wait on
+                              eviction of pods and graceful termination per node.
+                              This eviction wait time honors pod disruption budgets
+                              for upgrades. If this time is exceeded, the upgrade
+                              fails. Unsetting this after configuring it will force
+                              a new resource to be created.
+                            type: number
                           maxSurge:
                             description: The maximum number or percentage of nodes
                               which will be added to the Node Pool size during an
                               upgrade.
                             type: string
+                          nodeSoakDurationInMinutes:
+                            description: The amount of time in minutes to wait after
+                              draining a node and before reimaging and moving on to
+                              next node. Defaults to 0.
+                            type: number
                         type: object
                       vmSize:
                         description: The size of the Virtual Machine, such as Standard_DS2_v2.
@@ -10494,7 +10602,7 @@ spec:
                     properties:
                       dayOfMonth:
                         description: The day of the month for the maintenance run.
-                          Required in combination with RelativeMonthly frequency.
+                          Required in combination with AbsoluteMonthly frequency.
                           Value between 0 and 31 (inclusive).
                         type: number
                       dayOfWeek:
@@ -10551,7 +10659,7 @@ spec:
                     properties:
                       dayOfMonth:
                         description: The day of the month for the maintenance run.
-                          Required in combination with RelativeMonthly frequency.
+                          Required in combination with AbsoluteMonthly frequency.
                           Value between 0 and 31 (inclusive).
                         type: number
                       dayOfWeek:
@@ -10640,9 +10748,6 @@ spec:
                           to be created.
                         type: string
                       ebpfDataPlane:
-                        description: Specifies the eBPF data plane used for building
-                          the Kubernetes network. Possible value is cilium. Disabling
-                          this forces a new resource to be created.
                         type: string
                       ipVersions:
                         description: Specifies a list of IP versions the Kubernetes
@@ -10733,6 +10838,12 @@ spec:
                               inclusive.
                             type: number
                         type: object
+                      networkDataPlane:
+                        description: Specifies the data plane used for building the
+                          Kubernetes network. Possible values are azure and cilium.
+                          Defaults to azure. Disabling this forces a new resource
+                          to be created.
+                        type: string
                       networkMode:
                         description: Network mode to be used with Azure CNI. Possible
                           values are bridge and transparent. Changing this forces
@@ -10753,6 +10864,21 @@ spec:
                           between pods. Currently supported values are calico, azure
                           and cilium.
                         type: string
+                      outboundIpAddressIds:
+                        description: The ID of the Public IP Addresses which should
+                          be used for outbound communication for the cluster load
+                          balancer.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      outboundIpPrefixIds:
+                        description: The ID of the outbound Public IP Address Prefixes
+                          which should be used for the cluster load balancer.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
                       outboundType:
                         description: The outbound (egress) routing method which should
                           be used for this Kubernetes Cluster. Possible values are
@@ -10763,8 +10889,9 @@ spec:
                         type: string
                       podCidr:
                         description: The CIDR to use for pod IP addresses. This field
-                          can only be set when network_plugin is set to kubenet. Changing
-                          this forces a new resource to be created.
+                          can only be set when network_plugin is set to kubenet or
+                          network_plugin_mode is set to overlay. Changing this forces
+                          a new resource to be created.
                         type: string
                       podCidrs:
                         description: A list of CIDRs to use for pod IP addresses.
@@ -10951,11 +11078,16 @@ spec:
                     description: A web_app_routing block as defined below.
                     properties:
                       dnsZoneId:
-                        description: Specifies the ID of the DNS Zone in which DNS
-                          entries are created for applications deployed to the cluster
-                          when Web App Routing is enabled. For Bring-Your-Own DNS
-                          zones this property should be set to an empty string "".
+                        description: The Kubernetes Managed Cluster ID.
                         type: string
+                      dnsZoneIds:
+                        description: Specifies the list of the DNS Zone IDs in which
+                          DNS entries are created for applications deployed to the
+                          cluster when Web App Routing is enabled. If not using Bring-Your-Own
+                          DNS zones this property should be set to an empty list.
+                        items:
+                          type: string
+                        type: array
                       webAppRoutingIdentity:
                         description: A web_app_routing_identity block is exported.
                           The exported attributes are defined below.
@@ -11013,14 +11145,12 @@ spec:
                           for workloads.
                         type: boolean
                       verticalPodAutoscalerControlledValues:
-                        description: Which resources values should be controlled.
                         type: string
                       verticalPodAutoscalerEnabled:
                         description: Specifies whether Vertical Pod Autoscaler should
                           be enabled.
                         type: boolean
                       verticalPodAutoscalerUpdateMode:
-                        description: How the autoscaler applies changes to pod resources.
                         type: string
                     type: object
                   workloadIdentityEnabled:

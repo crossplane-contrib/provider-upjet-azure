@@ -164,9 +164,8 @@ spec:
                       this Backend Address Pool.
                     type: string
                   virtualNetworkId:
-                    description: |-
-                      The ID of the Virtual Network within which the Backend Address Pool should exist.
-                      For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
+                    description: The ID of the Virtual Network within which the Backend
+                      Address Pool should exist.
                     type: string
                   virtualNetworkIdRef:
                     description: Reference to a VirtualNetwork in network to populate
@@ -268,9 +267,8 @@ spec:
                       this Backend Address Pool.
                     type: string
                   virtualNetworkId:
-                    description: |-
-                      The ID of the Virtual Network within which the Backend Address Pool should exist.
-                      For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
+                    description: The ID of the Virtual Network within which the Backend
+                      Address Pool should exist.
                     type: string
                   virtualNetworkIdRef:
                     description: Reference to a VirtualNetwork in network to populate
@@ -558,9 +556,8 @@ spec:
                       this Backend Address Pool.
                     type: string
                   virtualNetworkId:
-                    description: |-
-                      The ID of the Virtual Network within which the Backend Address Pool should exist.
-                      For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
+                    description: The ID of the Virtual Network within which the Backend
+                      Address Pool should exist.
                     type: string
                 type: object
               conditions:

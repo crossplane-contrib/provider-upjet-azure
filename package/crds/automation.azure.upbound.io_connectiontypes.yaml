@@ -678,7 +678,7 @@ spec:
                       type: object
                     type: array
                   id:
-                    description: The the Automation Connection Type ID.
+                    description: The Automation Connection Type ID.
                     type: string
                   isGlobal:
                     description: Whether the connection type is global. Changing this

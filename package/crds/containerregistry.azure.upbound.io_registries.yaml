@@ -1332,7 +1332,7 @@ spec:
                     description: An encryption block as documented below.
                     properties:
                       enabled:
-                        description: Boolean value that indicates whether encryption
+                        description: Boolean value that indicates whether the policy
                           is enabled.
                         type: boolean
                       identityClientId:
@@ -1742,7 +1742,7 @@ spec:
                     description: An encryption block as documented below.
                     properties:
                       enabled:
-                        description: Boolean value that indicates whether encryption
+                        description: Boolean value that indicates whether the policy
                           is enabled.
                         type: boolean
                       identityClientId:
@@ -2243,7 +2243,7 @@ spec:
                     description: An encryption block as documented below.
                     properties:
                       enabled:
-                        description: Boolean value that indicates whether encryption
+                        description: Boolean value that indicates whether the policy
                           is enabled.
                         type: boolean
                       identityClientId:

@@ -24,6 +24,9 @@ type AppTriggerCustomObservation struct {
 	// Specifies the JSON Blob defining the Body of this Custom Trigger.
 	Body *string `json:"body,omitempty" tf:"body,omitempty"`
 
+	// The URL of the Trigger within the Logic App Workflow. For use with certain resources like monitor_action_group and security_center_automation.
+	CallbackURL *string `json:"callbackUrl,omitempty" tf:"callback_url,omitempty"`
+
 	// The ID of the Trigger within the Logic App Workflow.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 

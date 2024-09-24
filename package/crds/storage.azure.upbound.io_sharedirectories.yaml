@@ -85,8 +85,9 @@ spec:
                       to be created.
                     type: string
                   shareName:
-                    description: The name of the File Share where this Directory should
-                      be created. Changing this forces a new resource to be created.
+                    description: The name (or path) of the Directory that should be
+                      created within this File Share. Changing this forces a new resource
+                      to be created.
                     type: string
                   shareNameRef:
                     description: Reference to a Share in storage to populate shareName.
@@ -163,9 +164,9 @@ spec:
                         type: object
                     type: object
                   storageAccountName:
-                    description: The name of the Storage Account within which the
-                      File Share is located. Changing this forces a new resource to
-                      be created.
+                    description: The name (or path) of the Directory that should be
+                      created within this File Share. Changing this forces a new resource
+                      to be created.
                     type: string
                   storageAccountNameRef:
                     description: Reference to a Account in storage to populate storageAccountName.
@@ -203,6 +204,84 @@ spec:
                     type: object
                   storageAccountNameSelector:
                     description: Selector for a Account in storage to populate storageAccountName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  storageShareId:
+                    description: The Storage Share ID in which this file will be placed
+                      into. Changing this forces a new resource to be created.
+                    type: string
+                  storageShareIdRef:
+                    description: Reference to a Share in storage to populate storageShareId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  storageShareIdSelector:
+                    description: Selector for a Share in storage to populate storageShareId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -267,8 +346,9 @@ spec:
                       to be created.
                     type: string
                   shareName:
-                    description: The name of the File Share where this Directory should
-                      be created. Changing this forces a new resource to be created.
+                    description: The name (or path) of the Directory that should be
+                      created within this File Share. Changing this forces a new resource
+                      to be created.
                     type: string
                   shareNameRef:
                     description: Reference to a Share in storage to populate shareName.
@@ -345,9 +425,9 @@ spec:
                         type: object
                     type: object
                   storageAccountName:
-                    description: The name of the Storage Account within which the
-                      File Share is located. Changing this forces a new resource to
-                      be created.
+                    description: The name (or path) of the Directory that should be
+                      created within this File Share. Changing this forces a new resource
+                      to be created.
                     type: string
                   storageAccountNameRef:
                     description: Reference to a Account in storage to populate storageAccountName.
@@ -385,6 +465,84 @@ spec:
                     type: object
                   storageAccountNameSelector:
                     description: Selector for a Account in storage to populate storageAccountName.
+                    properties:
+                      matchControllerRef:
+                        description: |-
+                          MatchControllerRef ensures an object with the same controller reference
+                          as the selecting object is selected.
+                        type: boolean
+                      matchLabels:
+                        additionalProperties:
+                          type: string
+                        description: MatchLabels ensures an object with matching labels
+                          is selected.
+                        type: object
+                      policy:
+                        description: Policies for selection.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    type: object
+                  storageShareId:
+                    description: The Storage Share ID in which this file will be placed
+                      into. Changing this forces a new resource to be created.
+                    type: string
+                  storageShareIdRef:
+                    description: Reference to a Share in storage to populate storageShareId.
+                    properties:
+                      name:
+                        description: Name of the referenced object.
+                        type: string
+                      policy:
+                        description: Policies for referencing.
+                        properties:
+                          resolution:
+                            default: Required
+                            description: |-
+                              Resolution specifies whether resolution of this reference is required.
+                              The default is 'Required', which means the reconcile will fail if the
+                              reference cannot be resolved. 'Optional' means this reference will be
+                              a no-op if it cannot be resolved.
+                            enum:
+                            - Required
+                            - Optional
+                            type: string
+                          resolve:
+                            description: |-
+                              Resolve specifies when this reference should be resolved. The default
+                              is 'IfNotPresent', which will attempt to resolve the reference only when
+                              the corresponding field is not present. Use 'Always' to resolve the
+                              reference on every reconcile.
+                            enum:
+                            - Always
+                            - IfNotPresent
+                            type: string
+                        type: object
+                    required:
+                    - name
+                    type: object
+                  storageShareIdSelector:
+                    description: Selector for a Share in storage to populate storageShareId.
                     properties:
                       matchControllerRef:
                         description: |-
@@ -616,13 +774,18 @@ spec:
                       to be created.
                     type: string
                   shareName:
-                    description: The name of the File Share where this Directory should
-                      be created. Changing this forces a new resource to be created.
+                    description: The name (or path) of the Directory that should be
+                      created within this File Share. Changing this forces a new resource
+                      to be created.
                     type: string
                   storageAccountName:
-                    description: The name of the Storage Account within which the
-                      File Share is located. Changing this forces a new resource to
-                      be created.
+                    description: The name (or path) of the Directory that should be
+                      created within this File Share. Changing this forces a new resource
+                      to be created.
+                    type: string
+                  storageShareId:
+                    description: The Storage Share ID in which this file will be placed
+                      into. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

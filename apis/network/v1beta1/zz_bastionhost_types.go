@@ -106,6 +106,9 @@ type BastionHostInitParameters struct {
 	// Is IP Connect feature enabled for the Bastion Host. Defaults to false.
 	IPConnectEnabled *bool `json:"ipConnectEnabled,omitempty" tf:"ip_connect_enabled,omitempty"`
 
+	// Is Kerberos authentication feature enabled for the Bastion Host. Defaults to false.
+	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Review Azure Bastion Host FAQ for supported locations.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -115,7 +118,7 @@ type BastionHostInitParameters struct {
 	// Is Shareable Link feature enabled for the Bastion Host. Defaults to false.
 	ShareableLinkEnabled *bool `json:"shareableLinkEnabled,omitempty" tf:"shareable_link_enabled,omitempty"`
 
-	// The SKU of the Bastion Host. Accepted values are Basic and Standard. Defaults to Basic.
+	// The SKU of the Bastion Host. Accepted values are Developer, Basic and Standard. Defaults to Basic.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -124,6 +127,9 @@ type BastionHostInitParameters struct {
 
 	// Is Tunneling feature enabled for the Bastion Host. Defaults to false.
 	TunnelingEnabled *bool `json:"tunnelingEnabled,omitempty" tf:"tunneling_enabled,omitempty"`
+
+	// The ID of the Virtual Network for the Developer Bastion Host. Changing this forces a new resource to be created.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type BastionHostObservation struct {
@@ -146,6 +152,9 @@ type BastionHostObservation struct {
 	// Is IP Connect feature enabled for the Bastion Host. Defaults to false.
 	IPConnectEnabled *bool `json:"ipConnectEnabled,omitempty" tf:"ip_connect_enabled,omitempty"`
 
+	// Is Kerberos authentication feature enabled for the Bastion Host. Defaults to false.
+	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
+
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Review Azure Bastion Host FAQ for supported locations.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -158,7 +167,7 @@ type BastionHostObservation struct {
 	// Is Shareable Link feature enabled for the Bastion Host. Defaults to false.
 	ShareableLinkEnabled *bool `json:"shareableLinkEnabled,omitempty" tf:"shareable_link_enabled,omitempty"`
 
-	// The SKU of the Bastion Host. Accepted values are Basic and Standard. Defaults to Basic.
+	// The SKU of the Bastion Host. Accepted values are Developer, Basic and Standard. Defaults to Basic.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// A mapping of tags to assign to the resource.
@@ -167,6 +176,9 @@ type BastionHostObservation struct {
 
 	// Is Tunneling feature enabled for the Bastion Host. Defaults to false.
 	TunnelingEnabled *bool `json:"tunnelingEnabled,omitempty" tf:"tunneling_enabled,omitempty"`
+
+	// The ID of the Virtual Network for the Developer Bastion Host. Changing this forces a new resource to be created.
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 type BastionHostParameters struct {
@@ -186,6 +198,10 @@ type BastionHostParameters struct {
 	// Is IP Connect feature enabled for the Bastion Host. Defaults to false.
 	// +kubebuilder:validation:Optional
 	IPConnectEnabled *bool `json:"ipConnectEnabled,omitempty" tf:"ip_connect_enabled,omitempty"`
+
+	// Is Kerberos authentication feature enabled for the Bastion Host. Defaults to false.
+	// +kubebuilder:validation:Optional
+	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created. Review Azure Bastion Host FAQ for supported locations.
 	// +kubebuilder:validation:Optional
@@ -212,7 +228,7 @@ type BastionHostParameters struct {
 	// +kubebuilder:validation:Optional
 	ShareableLinkEnabled *bool `json:"shareableLinkEnabled,omitempty" tf:"shareable_link_enabled,omitempty"`
 
-	// The SKU of the Bastion Host. Accepted values are Basic and Standard. Defaults to Basic.
+	// The SKU of the Bastion Host. Accepted values are Developer, Basic and Standard. Defaults to Basic.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
@@ -224,6 +240,10 @@ type BastionHostParameters struct {
 	// Is Tunneling feature enabled for the Bastion Host. Defaults to false.
 	// +kubebuilder:validation:Optional
 	TunnelingEnabled *bool `json:"tunnelingEnabled,omitempty" tf:"tunneling_enabled,omitempty"`
+
+	// The ID of the Virtual Network for the Developer Bastion Host. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
 // BastionHostSpec defines the desired state of BastionHost
@@ -262,7 +282,6 @@ type BastionHostStatus struct {
 type BastionHost struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.ipConfiguration) || (has(self.initProvider) && has(self.initProvider.ipConfiguration))",message="spec.forProvider.ipConfiguration is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   BastionHostSpec   `json:"spec"`
 	Status BastionHostStatus `json:"status,omitempty"`

@@ -8,6 +8,8 @@ metadata:
   name: example
 spec:
   forProvider:
+    ingestionAccessMode: PrivateOnly
+    queryAccessMode: Open
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

@@ -3955,7 +3955,7 @@ spec:
                       enabled:
                         description: Should the termination notification be enabled
                           on this Virtual Machine Scale Set? Possible values true
-                          or false
+                          or false.
                         type: boolean
                       timeout:
                         description: Length of time (in minutes, between 5 and 15)
@@ -4876,7 +4876,7 @@ spec:
                       enabled:
                         description: Should the termination notification be enabled
                           on this Virtual Machine Scale Set? Possible values true
-                          or false
+                          or false.
                         type: boolean
                       timeout:
                         description: Length of time (in minutes, between 5 and 15)
@@ -5800,7 +5800,7 @@ spec:
                       enabled:
                         description: Should the termination notification be enabled
                           on this Virtual Machine Scale Set? Possible values true
-                          or false
+                          or false.
                         type: boolean
                       timeout:
                         description: Length of time (in minutes, between 5 and 15)

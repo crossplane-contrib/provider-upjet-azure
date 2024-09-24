@@ -574,7 +574,7 @@ type WindowsFunctionAppAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -626,7 +626,7 @@ type WindowsFunctionAppAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -688,7 +688,7 @@ type WindowsFunctionAppAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
@@ -2268,12 +2268,12 @@ type WindowsFunctionAppSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use. Possible values are `1.8`, `11` and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include ~12, ~14, ~16 and ~18.
+	// The version of Node to run. Possible values include ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to run. Possible values are 7, and 7.2.
-	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	// The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+	// The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
 	// Should the Windows Function App use a custom runtime?
@@ -2295,12 +2295,12 @@ type WindowsFunctionAppSiteConfigApplicationStackObservation struct {
 	// The version of Java to use. Possible values are `1.8`, `11` and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include ~12, ~14, ~16 and ~18.
+	// The version of Node to run. Possible values include ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to run. Possible values are 7, and 7.2.
-	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	// The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+	// The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
 	// Should the Windows Function App use a custom runtime?
@@ -2324,13 +2324,13 @@ type WindowsFunctionAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to run. Possible values include ~12, ~14, ~16 and ~18.
+	// The version of Node to run. Possible values include ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to run. Possible values are 7, and 7.2.
-	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	// The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+	// The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
 	// +kubebuilder:validation:Optional
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
@@ -2614,7 +2614,7 @@ type WindowsFunctionAppSiteConfigInitParameters struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to be checked for this Windows Function App health.
@@ -2738,7 +2738,7 @@ type WindowsFunctionAppSiteConfigObservation struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to be checked for this Windows Function App health.
@@ -2885,7 +2885,7 @@ type WindowsFunctionAppSiteConfigParameters struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	// +kubebuilder:validation:Optional
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 

@@ -125,6 +125,8 @@ spec:
                       Alphanumeric characters allowed, starting with a letter. Changing
                       this forces a new resource to be created.
                     type: string
+                  powerBiServiceEnabled:
+                    type: boolean
                   querypoolConnectionMode:
                     description: Controls how the read-write server is used in the
                       query pool. If this value is set to All then read-write servers
@@ -288,6 +290,8 @@ spec:
                       Alphanumeric characters allowed, starting with a letter. Changing
                       this forces a new resource to be created.
                     type: string
+                  powerBiServiceEnabled:
+                    type: boolean
                   querypoolConnectionMode:
                     description: Controls how the read-write server is used in the
                       query pool. If this value is set to All then read-write servers
@@ -609,6 +613,8 @@ spec:
                       Alphanumeric characters allowed, starting with a letter. Changing
                       this forces a new resource to be created.
                     type: string
+                  powerBiServiceEnabled:
+                    type: boolean
                   querypoolConnectionMode:
                     description: Controls how the read-write server is used in the
                       query pool. If this value is set to All then read-write servers

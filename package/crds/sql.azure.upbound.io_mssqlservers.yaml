@@ -1631,7 +1631,9 @@ spec:
                     type: boolean
                   primaryUserAssignedIdentityId:
                     description: Specifies the primary user managed identity id. Required
-                      if type is UserAssigned and should be combined with identity_ids.
+                      if type within the identity block is set to either SystemAssigned,
+                      UserAssigned or UserAssigned and should be set at same time
+                      as setting identity_ids.
                     type: string
                   primaryUserAssignedIdentityIdRef:
                     description: Reference to a UserAssignedIdentity in managedidentity
@@ -2136,7 +2138,9 @@ spec:
                     type: boolean
                   primaryUserAssignedIdentityId:
                     description: Specifies the primary user managed identity id. Required
-                      if type is UserAssigned and should be combined with identity_ids.
+                      if type within the identity block is set to either SystemAssigned,
+                      UserAssigned or UserAssigned and should be set at same time
+                      as setting identity_ids.
                     type: string
                   primaryUserAssignedIdentityIdRef:
                     description: Reference to a UserAssignedIdentity in managedidentity
@@ -2571,7 +2575,9 @@ spec:
                     type: boolean
                   primaryUserAssignedIdentityId:
                     description: Specifies the primary user managed identity id. Required
-                      if type is UserAssigned and should be combined with identity_ids.
+                      if type within the identity block is set to either SystemAssigned,
+                      UserAssigned or UserAssigned and should be set at same time
+                      as setting identity_ids.
                     type: string
                   publicNetworkAccessEnabled:
                     description: Whether public network access is allowed for this

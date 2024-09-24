@@ -1373,7 +1373,7 @@ type OrchestratedVirtualMachineScaleSetSourceImageReferenceParameters struct {
 
 type OrchestratedVirtualMachineScaleSetTerminationNotificationInitParameters struct {
 
-	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false
+	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
@@ -1382,7 +1382,7 @@ type OrchestratedVirtualMachineScaleSetTerminationNotificationInitParameters str
 
 type OrchestratedVirtualMachineScaleSetTerminationNotificationObservation struct {
 
-	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false
+	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// Length of time (in minutes, between 5 and 15) a notification to be sent to the VM on the instance metadata server till the VM gets deleted. The time duration should be specified in ISO 8601 format. Defaults to PT5M.
@@ -1391,7 +1391,7 @@ type OrchestratedVirtualMachineScaleSetTerminationNotificationObservation struct
 
 type OrchestratedVirtualMachineScaleSetTerminationNotificationParameters struct {
 
-	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false
+	// Should the termination notification be enabled on this Virtual Machine Scale Set? Possible values true or false.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled" tf:"enabled,omitempty"`
 

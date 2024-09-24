@@ -15,6 +15,9 @@ import (
 
 type LoadBalancerBackendAddressPoolInitParameters struct {
 
+	// The backend address synchronous mode for the Backend Address Pool. Possible values are Automatic and Manual. This is required with virtual_network_id. Changing this forces a new resource to be created.
+	SynchronousMode *string `json:"synchronousMode,omitempty" tf:"synchronous_mode,omitempty"`
+
 	// One or more tunnel_interface blocks as defined below.
 	TunnelInterface []TunnelInterfaceInitParameters `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
 
@@ -42,6 +45,9 @@ type LoadBalancerBackendAddressPoolObservation struct {
 	// An array of the Load Balancing Outbound Rules associated with this Backend Address Pool.
 	OutboundRules []*string `json:"outboundRules,omitempty" tf:"outbound_rules,omitempty"`
 
+	// The backend address synchronous mode for the Backend Address Pool. Possible values are Automatic and Manual. This is required with virtual_network_id. Changing this forces a new resource to be created.
+	SynchronousMode *string `json:"synchronousMode,omitempty" tf:"synchronous_mode,omitempty"`
+
 	// One or more tunnel_interface blocks as defined below.
 	TunnelInterface []TunnelInterfaceObservation `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
 
@@ -65,6 +71,10 @@ type LoadBalancerBackendAddressPoolParameters struct {
 	// +kubebuilder:validation:Optional
 	LoadbalancerIDSelector *v1.Selector `json:"loadbalancerIdSelector,omitempty" tf:"-"`
 
+	// The backend address synchronous mode for the Backend Address Pool. Possible values are Automatic and Manual. This is required with virtual_network_id. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	SynchronousMode *string `json:"synchronousMode,omitempty" tf:"synchronous_mode,omitempty"`
+
 	// One or more tunnel_interface blocks as defined below.
 	// +kubebuilder:validation:Optional
 	TunnelInterface []TunnelInterfaceParameters `json:"tunnelInterface,omitempty" tf:"tunnel_interface,omitempty"`
@@ -76,49 +86,49 @@ type LoadBalancerBackendAddressPoolParameters struct {
 
 type TunnelInterfaceInitParameters struct {
 
-	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
+	// The unique identifier of this Gateway Load Balancer Tunnel Interface.
 	Identifier *float64 `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
-	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
+	// The port number that this Gateway Load Balancer Tunnel Interface listens to.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
+	// The protocol used for this Gateway Load Balancer Tunnel Interface. Possible values are None, Native and VXLAN.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
+	// The traffic type of this Gateway Load Balancer Tunnel Interface. Possible values are None, Internal and External.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TunnelInterfaceObservation struct {
 
-	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
+	// The unique identifier of this Gateway Load Balancer Tunnel Interface.
 	Identifier *float64 `json:"identifier,omitempty" tf:"identifier,omitempty"`
 
-	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
+	// The port number that this Gateway Load Balancer Tunnel Interface listens to.
 	Port *float64 `json:"port,omitempty" tf:"port,omitempty"`
 
-	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
+	// The protocol used for this Gateway Load Balancer Tunnel Interface. Possible values are None, Native and VXLAN.
 	Protocol *string `json:"protocol,omitempty" tf:"protocol,omitempty"`
 
-	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
+	// The traffic type of this Gateway Load Balancer Tunnel Interface. Possible values are None, Internal and External.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
 type TunnelInterfaceParameters struct {
 
-	// The unique identifier of this Gateway Lodbalancer Tunnel Interface.
+	// The unique identifier of this Gateway Load Balancer Tunnel Interface.
 	// +kubebuilder:validation:Optional
 	Identifier *float64 `json:"identifier" tf:"identifier,omitempty"`
 
-	// The port number that this Gateway Lodbalancer Tunnel Interface listens to.
+	// The port number that this Gateway Load Balancer Tunnel Interface listens to.
 	// +kubebuilder:validation:Optional
 	Port *float64 `json:"port" tf:"port,omitempty"`
 
-	// The protocol used for this Gateway Lodbalancer Tunnel Interface. Possible values are None, Native and VXLAN.
+	// The protocol used for this Gateway Load Balancer Tunnel Interface. Possible values are None, Native and VXLAN.
 	// +kubebuilder:validation:Optional
 	Protocol *string `json:"protocol" tf:"protocol,omitempty"`
 
-	// The traffic type of this Gateway Lodbalancer Tunnel Interface. Possible values are None, Internal and External.
+	// The traffic type of this Gateway Load Balancer Tunnel Interface. Possible values are None, Internal and External.
 	// +kubebuilder:validation:Optional
 	Type *string `json:"type" tf:"type,omitempty"`
 }

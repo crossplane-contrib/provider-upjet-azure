@@ -1351,9 +1351,11 @@ spec:
                       requestMessage:
                         description: A message passed to the owner of the remote resource
                           when the private endpoint attempts to establish the connection
-                          to the remote resource. The request message can be a maximum
-                          of 140 characters in length. Only valid if is_manual_connection
-                          is set to true.
+                          to the remote resource. The provider allows a maximum request
+                          message length of 140 characters, however the request message
+                          maximum length is dependent on the service the private endpoint
+                          is connected to. Only valid if is_manual_connection is set
+                          to true.
                         type: string
                       subresourceNames:
                         description: A list of subresource names which the Private
@@ -1704,9 +1706,11 @@ spec:
                       requestMessage:
                         description: A message passed to the owner of the remote resource
                           when the private endpoint attempts to establish the connection
-                          to the remote resource. The request message can be a maximum
-                          of 140 characters in length. Only valid if is_manual_connection
-                          is set to true.
+                          to the remote resource. The provider allows a maximum request
+                          message length of 140 characters, however the request message
+                          maximum length is dependent on the service the private endpoint
+                          is connected to. Only valid if is_manual_connection is set
+                          to true.
                         type: string
                       subresourceNames:
                         description: A list of subresource names which the Private
@@ -2149,9 +2153,11 @@ spec:
                       requestMessage:
                         description: A message passed to the owner of the remote resource
                           when the private endpoint attempts to establish the connection
-                          to the remote resource. The request message can be a maximum
-                          of 140 characters in length. Only valid if is_manual_connection
-                          is set to true.
+                          to the remote resource. The provider allows a maximum request
+                          message length of 140 characters, however the request message
+                          maximum length is dependent on the service the private endpoint
+                          is connected to. Only valid if is_manual_connection is set
+                          to true.
                         type: string
                       subresourceNames:
                         description: A list of subresource names which the Private

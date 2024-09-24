@@ -37,6 +37,9 @@ type StorageSyncObservation struct {
 	// The Azure Region where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// A list of registered servers owned by this Storage Sync.
+	RegisteredServers []*string `json:"registeredServers,omitempty" tf:"registered_servers,omitempty"`
+
 	// The name of the Resource Group where the Storage Sync should exist. Changing this forces a new Storage Sync to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 

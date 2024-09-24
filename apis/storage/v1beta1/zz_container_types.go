@@ -18,6 +18,12 @@ type ContainerInitParameters struct {
 	// The Access Level configured for this Container. Possible values are blob, container or private. Defaults to private.
 	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
 
+	// The default encryption scope to use for blobs uploaded to this container. Changing this forces a new resource to be created.
+	DefaultEncryptionScope *string `json:"defaultEncryptionScope,omitempty" tf:"default_encryption_scope,omitempty"`
+
+	// Whether to allow blobs to override the default encryption scope for this container. Can only be set when specifying default_encryption_scope. Defaults to true. Changing this forces a new resource to be created.
+	EncryptionScopeOverrideEnabled *bool `json:"encryptionScopeOverrideEnabled,omitempty" tf:"encryption_scope_override_enabled,omitempty"`
+
 	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
@@ -27,6 +33,12 @@ type ContainerObservation struct {
 
 	// The Access Level configured for this Container. Possible values are blob, container or private. Defaults to private.
 	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
+
+	// The default encryption scope to use for blobs uploaded to this container. Changing this forces a new resource to be created.
+	DefaultEncryptionScope *string `json:"defaultEncryptionScope,omitempty" tf:"default_encryption_scope,omitempty"`
+
+	// Whether to allow blobs to override the default encryption scope for this container. Can only be set when specifying default_encryption_scope. Defaults to true. Changing this forces a new resource to be created.
+	EncryptionScopeOverrideEnabled *bool `json:"encryptionScopeOverrideEnabled,omitempty" tf:"encryption_scope_override_enabled,omitempty"`
 
 	// Is there an Immutability Policy configured on this Storage Container?
 	HasImmutabilityPolicy *bool `json:"hasImmutabilityPolicy,omitempty" tf:"has_immutability_policy,omitempty"`
@@ -53,6 +65,14 @@ type ContainerParameters struct {
 	// The Access Level configured for this Container. Possible values are blob, container or private. Defaults to private.
 	// +kubebuilder:validation:Optional
 	ContainerAccessType *string `json:"containerAccessType,omitempty" tf:"container_access_type,omitempty"`
+
+	// The default encryption scope to use for blobs uploaded to this container. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DefaultEncryptionScope *string `json:"defaultEncryptionScope,omitempty" tf:"default_encryption_scope,omitempty"`
+
+	// Whether to allow blobs to override the default encryption scope for this container. Can only be set when specifying default_encryption_scope. Defaults to true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	EncryptionScopeOverrideEnabled *bool `json:"encryptionScopeOverrideEnabled,omitempty" tf:"encryption_scope_override_enabled,omitempty"`
 
 	// A mapping of MetaData for this Container. All metadata keys should be lowercase.
 	// +kubebuilder:validation:Optional

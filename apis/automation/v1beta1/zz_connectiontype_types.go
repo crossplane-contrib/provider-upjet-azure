@@ -57,7 +57,7 @@ type ConnectionTypeObservation struct {
 	// One or more field blocks as defined below. Changing this forces a new Automation to be created.
 	Field []FieldObservation `json:"field,omitempty" tf:"field,omitempty"`
 
-	// The the Automation Connection Type ID.
+	// The Automation Connection Type ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// Whether the connection type is global. Changing this forces a new Automation to be created.

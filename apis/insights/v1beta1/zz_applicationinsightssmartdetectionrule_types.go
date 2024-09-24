@@ -35,7 +35,7 @@ type ApplicationInsightsSmartDetectionRuleInitParameters struct {
 	// Is the Application Insights Smart Detection Rule enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected and Abnormal rise in daily data volume, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
+	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Potential memory leak detected, Potential security issue detected, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Do emails get sent to subscription owners? Defaults to true.
@@ -57,7 +57,7 @@ type ApplicationInsightsSmartDetectionRuleObservation struct {
 	// The ID of the Application Insights Smart Detection Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected and Abnormal rise in daily data volume, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
+	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Potential memory leak detected, Potential security issue detected, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
 	// Do emails get sent to subscription owners? Defaults to true.
@@ -89,7 +89,7 @@ type ApplicationInsightsSmartDetectionRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
-	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected and Abnormal rise in daily data volume, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Potential memory leak detected, Potential security issue detected, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
+	// Specifies the name of the Application Insights Smart Detection Rule. Valid values include Slow page load time, Slow server response time, Potential memory leak detected, Potential security issue detected, Long dependency duration, Degradation in server response time, Degradation in dependency duration, Degradation in trace severity ratio, Abnormal rise in exception volume, Abnormal rise in daily data volume. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 

@@ -86,8 +86,11 @@ type AutoHealSettingTriggerInitParameters struct {
 	// A requests block as defined above.
 	Requests *TriggerRequestsInitParameters `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	SlowRequest *TriggerSlowRequestInitParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	SlowRequestWithPath []TriggerSlowRequestWithPathInitParameters `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	StatusCode []TriggerStatusCodeInitParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -98,8 +101,11 @@ type AutoHealSettingTriggerObservation struct {
 	// A requests block as defined above.
 	Requests *TriggerRequestsObservation `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	SlowRequest *TriggerSlowRequestObservation `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	SlowRequestWithPath []TriggerSlowRequestWithPathObservation `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	StatusCode []TriggerStatusCodeObservation `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -111,9 +117,13 @@ type AutoHealSettingTriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	Requests *TriggerRequestsParameters `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	// +kubebuilder:validation:Optional
 	SlowRequest *TriggerSlowRequestParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	// +kubebuilder:validation:Optional
+	SlowRequestWithPath []TriggerSlowRequestWithPathParameters `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -710,7 +720,7 @@ type LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -762,7 +772,7 @@ type LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -824,7 +834,7 @@ type LinuxWebAppSlotAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
@@ -2684,7 +2694,7 @@ type LinuxWebAppSlotSiteConfigInitParameters struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to the Health Check.
@@ -2788,7 +2798,7 @@ type LinuxWebAppSlotSiteConfigObservation struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
 	// The path to the Health Check.
@@ -2906,7 +2916,7 @@ type LinuxWebAppSlotSiteConfigParameters struct {
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
 	// +kubebuilder:validation:Optional
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
 
@@ -3417,6 +3427,55 @@ type TriggerSlowRequestObservation struct {
 }
 
 type TriggerSlowRequestParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	// +kubebuilder:validation:Optional
+	Count *float64 `json:"count" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	// +kubebuilder:validation:Optional
+	Interval *string `json:"interval" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	// +kubebuilder:validation:Optional
+	TimeTaken *string `json:"timeTaken" tf:"time_taken,omitempty"`
+}
+
+type TriggerSlowRequestWithPathInitParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
+}
+
+type TriggerSlowRequestWithPathObservation struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
+}
+
+type TriggerSlowRequestWithPathParameters struct {
 
 	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
 	// +kubebuilder:validation:Optional

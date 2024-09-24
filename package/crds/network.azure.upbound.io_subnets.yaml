@@ -864,6 +864,10 @@ spec:
                     items:
                       type: string
                     type: array
+                  defaultOutboundAccessEnabled:
+                    description: Enable default outbound access to the internet for
+                      the subnet. Defaults to true.
+                    type: boolean
                   delegation:
                     description: One or more delegation blocks as defined below.
                     items:
@@ -918,8 +922,8 @@ spec:
                                 Microsoft.Sql/servers, Microsoft.StoragePool/diskPools,
                                 Microsoft.StreamAnalytics/streamingJobs, Microsoft.Synapse/workspaces,
                                 Microsoft.Web/hostingEnvironments, Microsoft.Web/serverFarms,
-                                NGINX.NGINXPLUS/nginxDeployments, PaloAltoNetworks.Cloudngfw/firewalls
-                                and Qumulo.Storage/fileSystems.
+                                NGINX.NGINXPLUS/nginxDeployments, PaloAltoNetworks.Cloudngfw/firewalls,
+                                Qumulo.Storage/fileSystems, and Oracle.Database/networkAttachments.
                               type: string
                           type: object
                       type: object
@@ -928,11 +932,13 @@ spec:
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
                     type: boolean
-                  privateEndpointNetworkPoliciesEnabled:
+                  privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
-                      endpoint on the subnet. Setting this to true will Enable the
-                      policy and setting this to false will Disable the policy. Defaults
-                      to true.
+                      endpoint on the subnet. Possible values are Disabled, Enabled,
+                      NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults
+                      to Disabled.
+                    type: string
+                  privateEndpointNetworkPoliciesEnabled:
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -942,7 +948,9 @@ spec:
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the subnet. Changing this forces a new resource to be created.
+                      the subnet. This must be the resource group that the virtual
+                      network resides in. Changing this forces a new resource to be
+                      created.
                     type: string
                   resourceGroupNameRef:
                     description: Reference to a ResourceGroup in azure to populate
@@ -1136,6 +1144,10 @@ spec:
                     items:
                       type: string
                     type: array
+                  defaultOutboundAccessEnabled:
+                    description: Enable default outbound access to the internet for
+                      the subnet. Defaults to true.
+                    type: boolean
                   delegation:
                     description: One or more delegation blocks as defined below.
                     items:
@@ -1190,8 +1202,8 @@ spec:
                                 Microsoft.Sql/servers, Microsoft.StoragePool/diskPools,
                                 Microsoft.StreamAnalytics/streamingJobs, Microsoft.Synapse/workspaces,
                                 Microsoft.Web/hostingEnvironments, Microsoft.Web/serverFarms,
-                                NGINX.NGINXPLUS/nginxDeployments, PaloAltoNetworks.Cloudngfw/firewalls
-                                and Qumulo.Storage/fileSystems.
+                                NGINX.NGINXPLUS/nginxDeployments, PaloAltoNetworks.Cloudngfw/firewalls,
+                                Qumulo.Storage/fileSystems, and Oracle.Database/networkAttachments.
                               type: string
                           type: object
                       type: object
@@ -1200,11 +1212,13 @@ spec:
                     type: boolean
                   enforcePrivateLinkServiceNetworkPolicies:
                     type: boolean
-                  privateEndpointNetworkPoliciesEnabled:
+                  privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
-                      endpoint on the subnet. Setting this to true will Enable the
-                      policy and setting this to false will Disable the policy. Defaults
-                      to true.
+                      endpoint on the subnet. Possible values are Disabled, Enabled,
+                      NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults
+                      to Disabled.
+                    type: string
+                  privateEndpointNetworkPoliciesEnabled:
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -1412,6 +1426,10 @@ spec:
                     items:
                       type: string
                     type: array
+                  defaultOutboundAccessEnabled:
+                    description: Enable default outbound access to the internet for
+                      the subnet. Defaults to true.
+                    type: boolean
                   delegation:
                     description: One or more delegation blocks as defined below.
                     items:
@@ -1466,8 +1484,8 @@ spec:
                                 Microsoft.Sql/servers, Microsoft.StoragePool/diskPools,
                                 Microsoft.StreamAnalytics/streamingJobs, Microsoft.Synapse/workspaces,
                                 Microsoft.Web/hostingEnvironments, Microsoft.Web/serverFarms,
-                                NGINX.NGINXPLUS/nginxDeployments, PaloAltoNetworks.Cloudngfw/firewalls
-                                and Qumulo.Storage/fileSystems.
+                                NGINX.NGINXPLUS/nginxDeployments, PaloAltoNetworks.Cloudngfw/firewalls,
+                                Qumulo.Storage/fileSystems, and Oracle.Database/networkAttachments.
                               type: string
                           type: object
                       type: object
@@ -1479,11 +1497,13 @@ spec:
                   id:
                     description: The subnet ID.
                     type: string
-                  privateEndpointNetworkPoliciesEnabled:
+                  privateEndpointNetworkPolicies:
                     description: Enable or Disable network policies for the private
-                      endpoint on the subnet. Setting this to true will Enable the
-                      policy and setting this to false will Disable the policy. Defaults
-                      to true.
+                      endpoint on the subnet. Possible values are Disabled, Enabled,
+                      NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults
+                      to Disabled.
+                    type: string
+                  privateEndpointNetworkPoliciesEnabled:
                     type: boolean
                   privateLinkServiceNetworkPoliciesEnabled:
                     description: Enable or Disable network policies for the private
@@ -1493,7 +1513,9 @@ spec:
                     type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
-                      the subnet. Changing this forces a new resource to be created.
+                      the subnet. This must be the resource group that the virtual
+                      network resides in. Changing this forces a new resource to be
+                      created.
                     type: string
                   serviceEndpointPolicyIds:
                     description: The list of IDs of Service Endpoint Policies to associate

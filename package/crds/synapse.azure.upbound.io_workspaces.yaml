@@ -1678,19 +1678,15 @@ spec:
               forProvider:
                 properties:
                   aadAdmin:
-                    description: An aad_admin block as defined below.
                     properties:
                       login:
-                        description: The login name of the Azure AD Administrator
-                          of this Synapse Workspace.
                         type: string
                       objectId:
-                        description: The object id of the Azure AD Administrator of
-                          this Synapse Workspace.
+                        description: The ID of the synapse Workspace.
                         type: string
                       tenantId:
-                        description: The tenant id of the Azure AD Administrator of
-                          this Synapse Workspace.
+                        description: The Tenant ID for the Service Principal associated
+                          with the Managed Service Identity of this Synapse Workspace.
                         type: string
                     type: object
                   azureDevopsRepo:
@@ -2124,19 +2120,15 @@ spec:
                         type: object
                     type: object
                   sqlAadAdmin:
-                    description: An sql_aad_admin block as defined below.
                     properties:
                       login:
-                        description: The login name of the Azure AD Administrator
-                          of this Synapse Workspace SQL.
                         type: string
                       objectId:
-                        description: The object id of the Azure AD Administrator of
-                          this Synapse Workspace SQL.
+                        description: The ID of the synapse Workspace.
                         type: string
                       tenantId:
-                        description: The tenant id of the Azure AD Administrator of
-                          this Synapse Workspace SQL.
+                        description: The Tenant ID for the Service Principal associated
+                          with the Managed Service Identity of this Synapse Workspace.
                         type: string
                     type: object
                   sqlAdministratorLogin:
@@ -2269,19 +2261,15 @@ spec:
                   autoscaler.
                 properties:
                   aadAdmin:
-                    description: An aad_admin block as defined below.
                     properties:
                       login:
-                        description: The login name of the Azure AD Administrator
-                          of this Synapse Workspace.
                         type: string
                       objectId:
-                        description: The object id of the Azure AD Administrator of
-                          this Synapse Workspace.
+                        description: The ID of the synapse Workspace.
                         type: string
                       tenantId:
-                        description: The tenant id of the Azure AD Administrator of
-                          this Synapse Workspace.
+                        description: The Tenant ID for the Service Principal associated
+                          with the Managed Service Identity of this Synapse Workspace.
                         type: string
                     type: object
                   azureDevopsRepo:
@@ -2634,19 +2622,15 @@ spec:
                     description: The ID of purview account.
                     type: string
                   sqlAadAdmin:
-                    description: An sql_aad_admin block as defined below.
                     properties:
                       login:
-                        description: The login name of the Azure AD Administrator
-                          of this Synapse Workspace SQL.
                         type: string
                       objectId:
-                        description: The object id of the Azure AD Administrator of
-                          this Synapse Workspace SQL.
+                        description: The ID of the synapse Workspace.
                         type: string
                       tenantId:
-                        description: The tenant id of the Azure AD Administrator of
-                          this Synapse Workspace SQL.
+                        description: The Tenant ID for the Service Principal associated
+                          with the Managed Service Identity of this Synapse Workspace.
                         type: string
                     type: object
                   sqlAdministratorLogin:
@@ -2943,19 +2927,15 @@ spec:
               atProvider:
                 properties:
                   aadAdmin:
-                    description: An aad_admin block as defined below.
                     properties:
                       login:
-                        description: The login name of the Azure AD Administrator
-                          of this Synapse Workspace.
                         type: string
                       objectId:
-                        description: The object id of the Azure AD Administrator of
-                          this Synapse Workspace.
+                        description: The ID of the synapse Workspace.
                         type: string
                       tenantId:
-                        description: The tenant id of the Azure AD Administrator of
-                          this Synapse Workspace.
+                        description: The Tenant ID for the Service Principal associated
+                          with the Managed Service Identity of this Synapse Workspace.
                         type: string
                     type: object
                   azureDevopsRepo:
@@ -3107,19 +3087,15 @@ spec:
                       to be created.
                     type: string
                   sqlAadAdmin:
-                    description: An sql_aad_admin block as defined below.
                     properties:
                       login:
-                        description: The login name of the Azure AD Administrator
-                          of this Synapse Workspace SQL.
                         type: string
                       objectId:
-                        description: The object id of the Azure AD Administrator of
-                          this Synapse Workspace SQL.
+                        description: The ID of the synapse Workspace.
                         type: string
                       tenantId:
-                        description: The tenant id of the Azure AD Administrator of
-                          this Synapse Workspace SQL.
+                        description: The Tenant ID for the Service Principal associated
+                          with the Managed Service Identity of this Synapse Workspace.
                         type: string
                     type: object
                   sqlAdministratorLogin:

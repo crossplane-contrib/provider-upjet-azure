@@ -574,7 +574,7 @@ type WindowsFunctionAppSlotAuthSettingsV2ActiveDirectoryV2InitParameters struct 
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -626,7 +626,7 @@ type WindowsFunctionAppSlotAuthSettingsV2ActiveDirectoryV2Observation struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -688,7 +688,7 @@ type WindowsFunctionAppSlotAuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
@@ -2222,12 +2222,12 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use. Possible values are `1.8`, `11` and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The PowerShell Core version to use. Possible values are 7, and 7.2.
-	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	// The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
+	// The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
 	// Does the Function App use a custom Application Stack?
@@ -2249,12 +2249,12 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackObservation struct {
 	// The version of Java to use. Possible values are `1.8`, `11` and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The PowerShell Core version to use. Possible values are 7, and 7.2.
-	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	// The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
+	// The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
 	// Does the Function App use a custom Application Stack?
@@ -2278,13 +2278,13 @@ type WindowsFunctionAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values are ~12, ~14, ~16 and ~18.
+	// The version of Node to use. Possible values are ~12, ~14, ~16, ~18 and ~20.
 	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The PowerShell Core version to use. Possible values are 7, and 7.2.
-	// The PowerShell Core version to use. Possible values are `7`, and `7.2`
+	// The PowerShell Core version to use. Possible values are 7, 7.2, and 7.4.
+	// The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
 	// +kubebuilder:validation:Optional
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
@@ -2631,7 +2631,7 @@ type WindowsFunctionAppSlotSiteConfigInitParameters struct {
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Windows Web App use a 32-bit worker. Defaults to true.
-	// Should the Windows Web App use a 32-bit worker.
+	// Should the Windows Function App use a 32-bit worker.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// Should all outbound traffic to have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
@@ -2762,7 +2762,7 @@ type WindowsFunctionAppSlotSiteConfigObservation struct {
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Windows Web App use a 32-bit worker. Defaults to true.
-	// Should the Windows Web App use a 32-bit worker.
+	// Should the Windows Function App use a 32-bit worker.
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 
 	// Should all outbound traffic to have NAT Gateways, Network Security Groups and User Defined Routes applied? Defaults to false.
@@ -2927,7 +2927,7 @@ type WindowsFunctionAppSlotSiteConfigParameters struct {
 	ScmUseMainIPRestriction *bool `json:"scmUseMainIpRestriction,omitempty" tf:"scm_use_main_ip_restriction,omitempty"`
 
 	// Should the Windows Web App use a 32-bit worker. Defaults to true.
-	// Should the Windows Web App use a 32-bit worker.
+	// Should the Windows Function App use a 32-bit worker.
 	// +kubebuilder:validation:Optional
 	Use32BitWorker *bool `json:"use32BitWorker,omitempty" tf:"use_32_bit_worker,omitempty"`
 

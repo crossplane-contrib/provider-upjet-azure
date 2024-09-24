@@ -56,7 +56,7 @@ type WebPubsubInitParameters struct {
 	// Whether to enable AAD auth? Defaults to true.
 	AADAuthEnabled *bool `json:"aadAuthEnabled,omitempty" tf:"aad_auth_enabled,omitempty"`
 
-	// Specifies the number of units associated with this Web PubSub resource. Valid values are: Free: 1, Standard: 1, 2, 5, 10, 20, 50, 100.
+	// Specifies the number of units associated with this Web PubSub resource. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 and 1000.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// An identity block as defined below.
@@ -89,7 +89,7 @@ type WebPubsubInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
+	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, Premium_P1 and Premium_P2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Whether to request client certificate during TLS handshake? Defaults to false.
@@ -154,7 +154,7 @@ type WebPubsubObservation struct {
 	// Whether to enable AAD auth? Defaults to true.
 	AADAuthEnabled *bool `json:"aadAuthEnabled,omitempty" tf:"aad_auth_enabled,omitempty"`
 
-	// Specifies the number of units associated with this Web PubSub resource. Valid values are: Free: 1, Standard: 1, 2, 5, 10, 20, 50, 100.
+	// Specifies the number of units associated with this Web PubSub resource. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 and 1000.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// The publicly accessible IP of the Web PubSub service.
@@ -193,7 +193,7 @@ type WebPubsubObservation struct {
 	// The publicly accessible port of the Web PubSub service which is designed for customer server side use.
 	ServerPort *float64 `json:"serverPort,omitempty" tf:"server_port,omitempty"`
 
-	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
+	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, Premium_P1 and Premium_P2.
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 
 	// Whether to request client certificate during TLS handshake? Defaults to false.
@@ -212,7 +212,7 @@ type WebPubsubParameters struct {
 	// +kubebuilder:validation:Optional
 	AADAuthEnabled *bool `json:"aadAuthEnabled,omitempty" tf:"aad_auth_enabled,omitempty"`
 
-	// Specifies the number of units associated with this Web PubSub resource. Valid values are: Free: 1, Standard: 1, 2, 5, 10, 20, 50, 100.
+	// Specifies the number of units associated with this Web PubSub resource. Valid values are 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900 and 1000.
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
@@ -253,7 +253,7 @@ type WebPubsubParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, and Premium_P1.
+	// Specifies which SKU to use. Possible values are Free_F1, Standard_S1, Premium_P1 and Premium_P2.
 	// +kubebuilder:validation:Optional
 	Sku *string `json:"sku,omitempty" tf:"sku,omitempty"`
 

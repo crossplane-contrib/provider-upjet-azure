@@ -15,17 +15,27 @@ import (
 
 type WindowsVirtualMachineAdditionalCapabilitiesInitParameters struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type WindowsVirtualMachineAdditionalCapabilitiesObservation struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type WindowsVirtualMachineAdditionalCapabilitiesParameters struct {
+
+	// Whether to enable the hibernation capability or not.
+	// +kubebuilder:validation:Optional
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
 
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -85,7 +95,7 @@ type WindowsVirtualMachineGalleryApplicationInitParameters struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
@@ -106,7 +116,7 @@ type WindowsVirtualMachineGalleryApplicationObservation struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
@@ -129,7 +139,7 @@ type WindowsVirtualMachineGalleryApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -249,7 +259,7 @@ type WindowsVirtualMachineInitParameters struct {
 	// Should the VM be patched without requiring a reboot? Possible values are true or false. Defaults to false. For more information about hot patching please see the product documentation.
 	HotpatchingEnabled *bool `json:"hotpatchingEnabled,omitempty" tf:"hotpatching_enabled,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	Identity *WindowsVirtualMachineIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the type of on-premise license (also known as Azure Hybrid Use Benefit) which should be used for this Virtual Machine. Possible values are None, Windows_Client and Windows_Server.
@@ -410,7 +420,7 @@ type WindowsVirtualMachineObservation struct {
 	// The ID of the Windows Virtual Machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	Identity *WindowsVirtualMachineIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the type of on-premise license (also known as Azure Hybrid Use Benefit) which should be used for this Virtual Machine. Possible values are None, Windows_Client and Windows_Server.
@@ -750,7 +760,7 @@ type WindowsVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	HotpatchingEnabled *bool `json:"hotpatchingEnabled,omitempty" tf:"hotpatching_enabled,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	// +kubebuilder:validation:Optional
 	Identity *WindowsVirtualMachineIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 

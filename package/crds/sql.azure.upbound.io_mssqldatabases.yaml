@@ -1534,8 +1534,10 @@ spec:
                       database.
                     type: string
                   enclaveType:
-                    description: Specifies the type of enclave to be used by the database.
-                      Possible value VBS.
+                    description: Specifies the type of enclave to be used by the elastic
+                      pool. When enclave_type is not specified (e.g., the default)
+                      enclaves are not enabled on the database.  Possible values are
+                      Default or VBS.
                     type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
@@ -1721,6 +1723,11 @@ spec:
                   sampleName:
                     description: Specifies the name of the sample schema to apply
                       when creating this database. Possible value is AdventureWorksLT.
+                    type: string
+                  secondaryType:
+                    description: How do you want your replica to be made? Valid values
+                      include Geo and Named. Defaults to Geo. Changing this forces
+                      a new resource to be created.
                     type: string
                   serverId:
                     description: The id of the MS SQL Server on which to create the
@@ -2022,8 +2029,10 @@ spec:
                       database.
                     type: string
                   enclaveType:
-                    description: Specifies the type of enclave to be used by the database.
-                      Possible value VBS.
+                    description: Specifies the type of enclave to be used by the elastic
+                      pool. When enclave_type is not specified (e.g., the default)
+                      enclaves are not enabled on the database.  Possible values are
+                      Default or VBS.
                     type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
@@ -2212,6 +2221,11 @@ spec:
                   sampleName:
                     description: Specifies the name of the sample schema to apply
                       when creating this database. Possible value is AdventureWorksLT.
+                    type: string
+                  secondaryType:
+                    description: How do you want your replica to be made? Valid values
+                      include Geo and Named. Defaults to Geo. Changing this forces
+                      a new resource to be created.
                     type: string
                   shortTermRetentionPolicy:
                     description: A short_term_retention_policy block as defined below.
@@ -2594,8 +2608,10 @@ spec:
                       database.
                     type: string
                   enclaveType:
-                    description: Specifies the type of enclave to be used by the database.
-                      Possible value VBS.
+                    description: Specifies the type of enclave to be used by the elastic
+                      pool. When enclave_type is not specified (e.g., the default)
+                      enclaves are not enabled on the database.  Possible values are
+                      Default or VBS.
                     type: string
                   geoBackupEnabled:
                     description: A boolean that specifies if the Geo Backup Policy
@@ -2750,6 +2766,11 @@ spec:
                   sampleName:
                     description: Specifies the name of the sample schema to apply
                       when creating this database. Possible value is AdventureWorksLT.
+                    type: string
+                  secondaryType:
+                    description: How do you want your replica to be made? Valid values
+                      include Geo and Named. Defaults to Geo. Changing this forces
+                      a new resource to be created.
                     type: string
                   serverId:
                     description: The id of the MS SQL Server on which to create the

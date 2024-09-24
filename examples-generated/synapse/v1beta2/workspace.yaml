@@ -8,10 +8,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    aadAdmin:
-    - login: AzureAD Admin
-      objectId: 00000000-0000-0000-0000-000000000000
-      tenantId: 00000000-0000-0000-0000-000000000000
     identity:
     - type: SystemAssigned
     location: West Europe

@@ -5637,7 +5637,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -6319,8 +6319,7 @@ spec:
                                     type: string
                                 type: object
                               slowRequest:
-                                description: One or more slow_request blocks as defined
-                                  above.
+                                description: A slow_request block as defined above.
                                 properties:
                                   count:
                                     description: The number of occurrences of the
@@ -6339,6 +6338,29 @@ spec:
                                       as a Slow Request in hh:mm:ss.
                                     type: string
                                 type: object
+                              slowRequestWithPath:
+                                description: One or more slow_request_with_path blocks
+                                  as defined above.
+                                items:
+                                  properties:
+                                    count:
+                                      description: The number of occurrences of the
+                                        defined status_code in the specified interval
+                                        on which to trigger this rule.
+                                      type: number
+                                    interval:
+                                      description: The time interval in the form hh:mm:ss.
+                                      type: string
+                                    path:
+                                      description: The path to which this rule status
+                                        code applies.
+                                      type: string
+                                    timeTaken:
+                                      description: The threshold of time passed to
+                                        qualify as a Slow Request in hh:mm:ss.
+                                      type: string
+                                  type: object
+                                type: array
                               statusCode:
                                 description: One or more status_code blocks as defined
                                   above.
@@ -6416,7 +6438,7 @@ spec:
                       healthCheckEvictionTimeInMin:
                         description: |-
                           The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
                         type: number
                       healthCheckPath:
                         description: The path to the Health Check.
@@ -7375,7 +7397,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -8063,8 +8085,7 @@ spec:
                                     type: string
                                 type: object
                               slowRequest:
-                                description: One or more slow_request blocks as defined
-                                  above.
+                                description: A slow_request block as defined above.
                                 properties:
                                   count:
                                     description: The number of occurrences of the
@@ -8083,6 +8104,29 @@ spec:
                                       as a Slow Request in hh:mm:ss.
                                     type: string
                                 type: object
+                              slowRequestWithPath:
+                                description: One or more slow_request_with_path blocks
+                                  as defined above.
+                                items:
+                                  properties:
+                                    count:
+                                      description: The number of occurrences of the
+                                        defined status_code in the specified interval
+                                        on which to trigger this rule.
+                                      type: number
+                                    interval:
+                                      description: The time interval in the form hh:mm:ss.
+                                      type: string
+                                    path:
+                                      description: The path to which this rule status
+                                        code applies.
+                                      type: string
+                                    timeTaken:
+                                      description: The threshold of time passed to
+                                        qualify as a Slow Request in hh:mm:ss.
+                                      type: string
+                                  type: object
+                                type: array
                               statusCode:
                                 description: One or more status_code blocks as defined
                                   above.
@@ -8160,7 +8204,7 @@ spec:
                       healthCheckEvictionTimeInMin:
                         description: |-
                           The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
                         type: number
                       healthCheckPath:
                         description: The path to the Health Check.
@@ -9107,7 +9151,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -9795,8 +9839,7 @@ spec:
                                     type: string
                                 type: object
                               slowRequest:
-                                description: One or more slow_request blocks as defined
-                                  above.
+                                description: A slow_request block as defined above.
                                 properties:
                                   count:
                                     description: The number of occurrences of the
@@ -9815,6 +9858,29 @@ spec:
                                       as a Slow Request in hh:mm:ss.
                                     type: string
                                 type: object
+                              slowRequestWithPath:
+                                description: One or more slow_request_with_path blocks
+                                  as defined above.
+                                items:
+                                  properties:
+                                    count:
+                                      description: The number of occurrences of the
+                                        defined status_code in the specified interval
+                                        on which to trigger this rule.
+                                      type: number
+                                    interval:
+                                      description: The time interval in the form hh:mm:ss.
+                                      type: string
+                                    path:
+                                      description: The path to which this rule status
+                                        code applies.
+                                      type: string
+                                    timeTaken:
+                                      description: The threshold of time passed to
+                                        qualify as a Slow Request in hh:mm:ss.
+                                      type: string
+                                  type: object
+                                type: array
                               statusCode:
                                 description: One or more status_code blocks as defined
                                   above.
@@ -9896,7 +9962,7 @@ spec:
                       healthCheckEvictionTimeInMin:
                         description: |-
                           The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
                         type: number
                       healthCheckPath:
                         description: The path to the Health Check.

@@ -24,7 +24,7 @@ type NamedValueInitParameters struct {
 	// A list of tags to be applied to the API Management Named Value.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A value_from_key_vault block as defined below.
+	// A value_from_key_vault block as defined below. If specified, secret must also be set to true.
 	ValueFromKeyVault *ValueFromKeyVaultInitParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
 
 	// The value of this API Management Named Value.
@@ -51,7 +51,7 @@ type NamedValueObservation struct {
 	// A list of tags to be applied to the API Management Named Value.
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A value_from_key_vault block as defined below.
+	// A value_from_key_vault block as defined below. If specified, secret must also be set to true.
 	ValueFromKeyVault *ValueFromKeyVaultObservation `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
 }
 
@@ -95,7 +95,7 @@ type NamedValueParameters struct {
 	// +kubebuilder:validation:Optional
 	Tags []*string `json:"tags,omitempty" tf:"tags,omitempty"`
 
-	// A value_from_key_vault block as defined below.
+	// A value_from_key_vault block as defined below. If specified, secret must also be set to true.
 	// +kubebuilder:validation:Optional
 	ValueFromKeyVault *ValueFromKeyVaultParameters `json:"valueFromKeyVault,omitempty" tf:"value_from_key_vault,omitempty"`
 

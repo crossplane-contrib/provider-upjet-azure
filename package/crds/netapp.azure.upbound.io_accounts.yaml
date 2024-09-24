@@ -667,6 +667,11 @@ spec:
                   activeDirectory:
                     description: A active_directory block as defined below.
                     properties:
+                      aesEncryptionEnabled:
+                        description: |-
+                          If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
+                          If enabled, AES encryption will be enabled for SMB communication.
+                        type: boolean
                       dnsServers:
                         description: A list of DNS server IP addresses for the Active
                           Directory domain. Only allows IPv4 address.
@@ -676,9 +681,35 @@ spec:
                       domain:
                         description: The name of the Active Directory domain.
                         type: string
+                      kerberosAdName:
+                        description: |-
+                          Name of the active directory machine.
+                          Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
+                        type: string
+                      kerberosKdcIp:
+                        description: |-
+                          kdc server IP addresses for the active directory machine.
+                          IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
+                        type: string
+                      ldapOverTlsEnabled:
+                        description: |-
+                          Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
+                          Specifies whether or not the LDAP traffic needs to be secured via TLS.
+                        type: boolean
+                      ldapSigningEnabled:
+                        description: |-
+                          Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
+                          Specifies whether or not the LDAP traffic needs to be signed.
+                        type: boolean
+                      localNfsUsersWithLdapAllowed:
+                        description: |-
+                          If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes. Defaults to false.
+                          If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
+                        type: boolean
                       organizationalUnit:
-                        description: The Organizational Unit (OU) within the Active
-                          Directory Domain.
+                        description: |-
+                          The Organizational Unit (OU) within Active Directory where machines will be created. If blank, defaults to CN=Computers.
+                          The Organizational Unit (OU) within the Windows Active Directory where machines will be created. If blank, defaults to 'CN=Computers'
                         type: string
                       passwordSecretRef:
                         description: The password associated with the username.
@@ -697,6 +728,30 @@ spec:
                         - name
                         - namespace
                         type: object
+                      serverRootCaCertificateSecretRef:
+                        description: |-
+                          When LDAP over SSL/TLS is enabled, the LDAP client is required to have a base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes. Required if ldap_over_tls_enabled is set to true.
+                          When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      siteName:
+                        description: |-
+                          The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to Default-First-Site-Name.
+                          The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to 'Default-First-Site-Name'
+                        type: string
                       smbServerName:
                         description: The NetBIOS name which should be used for the
                           NetApp SMB Server, which will be registered as a computer
@@ -831,6 +886,11 @@ spec:
                   activeDirectory:
                     description: A active_directory block as defined below.
                     properties:
+                      aesEncryptionEnabled:
+                        description: |-
+                          If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
+                          If enabled, AES encryption will be enabled for SMB communication.
+                        type: boolean
                       dnsServers:
                         description: A list of DNS server IP addresses for the Active
                           Directory domain. Only allows IPv4 address.
@@ -840,9 +900,35 @@ spec:
                       domain:
                         description: The name of the Active Directory domain.
                         type: string
+                      kerberosAdName:
+                        description: |-
+                          Name of the active directory machine.
+                          Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
+                        type: string
+                      kerberosKdcIp:
+                        description: |-
+                          kdc server IP addresses for the active directory machine.
+                          IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
+                        type: string
+                      ldapOverTlsEnabled:
+                        description: |-
+                          Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
+                          Specifies whether or not the LDAP traffic needs to be secured via TLS.
+                        type: boolean
+                      ldapSigningEnabled:
+                        description: |-
+                          Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
+                          Specifies whether or not the LDAP traffic needs to be signed.
+                        type: boolean
+                      localNfsUsersWithLdapAllowed:
+                        description: |-
+                          If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes. Defaults to false.
+                          If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
+                        type: boolean
                       organizationalUnit:
-                        description: The Organizational Unit (OU) within the Active
-                          Directory Domain.
+                        description: |-
+                          The Organizational Unit (OU) within Active Directory where machines will be created. If blank, defaults to CN=Computers.
+                          The Organizational Unit (OU) within the Windows Active Directory where machines will be created. If blank, defaults to 'CN=Computers'
                         type: string
                       passwordSecretRef:
                         description: The password associated with the username.
@@ -861,6 +947,30 @@ spec:
                         - name
                         - namespace
                         type: object
+                      serverRootCaCertificateSecretRef:
+                        description: |-
+                          When LDAP over SSL/TLS is enabled, the LDAP client is required to have a base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes. Required if ldap_over_tls_enabled is set to true.
+                          When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
+                        properties:
+                          key:
+                            description: The key to select.
+                            type: string
+                          name:
+                            description: Name of the secret.
+                            type: string
+                          namespace:
+                            description: Namespace of the secret.
+                            type: string
+                        required:
+                        - key
+                        - name
+                        - namespace
+                        type: object
+                      siteName:
+                        description: |-
+                          The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to Default-First-Site-Name.
+                          The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to 'Default-First-Site-Name'
+                        type: string
                       smbServerName:
                         description: The NetBIOS name which should be used for the
                           NetApp SMB Server, which will be registered as a computer
@@ -1080,6 +1190,11 @@ spec:
                   activeDirectory:
                     description: A active_directory block as defined below.
                     properties:
+                      aesEncryptionEnabled:
+                        description: |-
+                          If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
+                          If enabled, AES encryption will be enabled for SMB communication.
+                        type: boolean
                       dnsServers:
                         description: A list of DNS server IP addresses for the Active
                           Directory domain. Only allows IPv4 address.
@@ -1089,9 +1204,40 @@ spec:
                       domain:
                         description: The name of the Active Directory domain.
                         type: string
+                      kerberosAdName:
+                        description: |-
+                          Name of the active directory machine.
+                          Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
+                        type: string
+                      kerberosKdcIp:
+                        description: |-
+                          kdc server IP addresses for the active directory machine.
+                          IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
+                        type: string
+                      ldapOverTlsEnabled:
+                        description: |-
+                          Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
+                          Specifies whether or not the LDAP traffic needs to be secured via TLS.
+                        type: boolean
+                      ldapSigningEnabled:
+                        description: |-
+                          Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
+                          Specifies whether or not the LDAP traffic needs to be signed.
+                        type: boolean
+                      localNfsUsersWithLdapAllowed:
+                        description: |-
+                          If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes. Defaults to false.
+                          If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
+                        type: boolean
                       organizationalUnit:
-                        description: The Organizational Unit (OU) within the Active
-                          Directory Domain.
+                        description: |-
+                          The Organizational Unit (OU) within Active Directory where machines will be created. If blank, defaults to CN=Computers.
+                          The Organizational Unit (OU) within the Windows Active Directory where machines will be created. If blank, defaults to 'CN=Computers'
+                        type: string
+                      siteName:
+                        description: |-
+                          The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to Default-First-Site-Name.
+                          The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to 'Default-First-Site-Name'
                         type: string
                       smbServerName:
                         description: The NetBIOS name which should be used for the

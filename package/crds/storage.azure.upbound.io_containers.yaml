@@ -77,6 +77,17 @@ spec:
                     description: The Access Level configured for this Container. Possible
                       values are blob, container or private. Defaults to private.
                     type: string
+                  defaultEncryptionScope:
+                    description: The default encryption scope to use for blobs uploaded
+                      to this container. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  encryptionScopeOverrideEnabled:
+                    description: Whether to allow blobs to override the default encryption
+                      scope for this container. Can only be set when specifying default_encryption_scope.
+                      Defaults to true. Changing this forces a new resource to be
+                      created.
+                    type: boolean
                   metadata:
                     additionalProperties:
                       type: string
@@ -181,6 +192,17 @@ spec:
                     description: The Access Level configured for this Container. Possible
                       values are blob, container or private. Defaults to private.
                     type: string
+                  defaultEncryptionScope:
+                    description: The default encryption scope to use for blobs uploaded
+                      to this container. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  encryptionScopeOverrideEnabled:
+                    description: Whether to allow blobs to override the default encryption
+                      scope for this container. Can only be set when specifying default_encryption_scope.
+                      Defaults to true. Changing this forces a new resource to be
+                      created.
+                    type: boolean
                   metadata:
                     additionalProperties:
                       type: string
@@ -365,6 +387,17 @@ spec:
                     description: The Access Level configured for this Container. Possible
                       values are blob, container or private. Defaults to private.
                     type: string
+                  defaultEncryptionScope:
+                    description: The default encryption scope to use for blobs uploaded
+                      to this container. Changing this forces a new resource to be
+                      created.
+                    type: string
+                  encryptionScopeOverrideEnabled:
+                    description: Whether to allow blobs to override the default encryption
+                      scope for this container. Can only be set when specifying default_encryption_scope.
+                      Defaults to true. Changing this forces a new resource to be
+                      created.
+                    type: boolean
                   hasImmutabilityPolicy:
                     description: Is there an Immutability Policy configured on this
                       Storage Container?

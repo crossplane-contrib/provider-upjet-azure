@@ -387,6 +387,12 @@ spec:
                     description: The Azure Region where the Storage Sync should exist.
                       Changing this forces a new Storage Sync to be created.
                     type: string
+                  registeredServers:
+                    description: A list of registered servers owned by this Storage
+                      Sync.
+                    items:
+                      type: string
+                    type: array
                   resourceGroupName:
                     description: The name of the Resource Group where the Storage
                       Sync should exist. Changing this forces a new Storage Sync to

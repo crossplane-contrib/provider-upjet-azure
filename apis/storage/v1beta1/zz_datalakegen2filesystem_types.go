@@ -67,6 +67,9 @@ type DataLakeGen2FileSystemInitParameters struct {
 	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
 	Ace []AceInitParameters `json:"ace,omitempty" tf:"ace,omitempty"`
 
+	// The default encryption scope to use for this filesystem. Changing this forces a new resource to be created.
+	DefaultEncryptionScope *string `json:"defaultEncryptionScope,omitempty" tf:"default_encryption_scope,omitempty"`
+
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group of the root path (i.e. /). Possible values also include $superuser.
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
@@ -96,6 +99,9 @@ type DataLakeGen2FileSystemObservation struct {
 	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
 	Ace []AceObservation `json:"ace,omitempty" tf:"ace,omitempty"`
 
+	// The default encryption scope to use for this filesystem. Changing this forces a new resource to be created.
+	DefaultEncryptionScope *string `json:"defaultEncryptionScope,omitempty" tf:"default_encryption_scope,omitempty"`
+
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group of the root path (i.e. /). Possible values also include $superuser.
 	Group *string `json:"group,omitempty" tf:"group,omitempty"`
 
@@ -118,6 +124,10 @@ type DataLakeGen2FileSystemParameters struct {
 	// One or more ace blocks as defined below to specify the entries for the ACL for the path.
 	// +kubebuilder:validation:Optional
 	Ace []AceParameters `json:"ace,omitempty" tf:"ace,omitempty"`
+
+	// The default encryption scope to use for this filesystem. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DefaultEncryptionScope *string `json:"defaultEncryptionScope,omitempty" tf:"default_encryption_scope,omitempty"`
 
 	// Specifies the Object ID of the Azure Active Directory Group to make the owning group of the root path (i.e. /). Possible values also include $superuser.
 	// +kubebuilder:validation:Optional

@@ -30,6 +30,9 @@ type MSSQLServerTransparentDataEncryptionInitParameters struct {
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+
+	// The ID of the MSSQL encryption protector
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 }
 
 type MSSQLServerTransparentDataEncryptionObservation struct {
@@ -42,6 +45,9 @@ type MSSQLServerTransparentDataEncryptionObservation struct {
 
 	// To use customer managed keys from Azure Key Vault, provide the AKV Key ID. To use service managed keys, omit this field.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the MSSQL encryption protector
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
@@ -66,6 +72,10 @@ type MSSQLServerTransparentDataEncryptionParameters struct {
 	// Selector for a Key in keyvault to populate keyVaultKeyId.
 	// +kubebuilder:validation:Optional
 	KeyVaultKeyIDSelector *v1.Selector `json:"keyVaultKeyIdSelector,omitempty" tf:"-"`
+
+	// The ID of the MSSQL encryption protector
+	// +kubebuilder:validation:Optional
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the name of the MS SQL Server. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLServer

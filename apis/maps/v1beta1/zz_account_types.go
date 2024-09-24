@@ -15,8 +15,20 @@ import (
 
 type AccountInitParameters struct {
 
+	// - A cors block as defined below
+	Cors *CorsInitParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// One or more data_store blocks as defined below.
+	DataStore []DataStoreInitParameters `json:"dataStore,omitempty" tf:"data_store,omitempty"`
+
+	// An identity block as defined below.
+	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
 	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
+	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created. Defaults to global.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The SKU of the Azure Maps Account. Possible values are S0, S1 and G2. Changing this forces a new resource to be created.
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
@@ -28,11 +40,23 @@ type AccountInitParameters struct {
 
 type AccountObservation struct {
 
+	// - A cors block as defined below
+	Cors *CorsObservation `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// One or more data_store blocks as defined below.
+	DataStore []DataStoreObservation `json:"dataStore,omitempty" tf:"data_store,omitempty"`
+
 	// The ID of the Azure Maps Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
 	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
+	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created. Defaults to global.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which the Azure Maps Account should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -50,9 +74,25 @@ type AccountObservation struct {
 
 type AccountParameters struct {
 
+	// - A cors block as defined below
+	// +kubebuilder:validation:Optional
+	Cors *CorsParameters `json:"cors,omitempty" tf:"cors,omitempty"`
+
+	// One or more data_store blocks as defined below.
+	// +kubebuilder:validation:Optional
+	DataStore []DataStoreParameters `json:"dataStore,omitempty" tf:"data_store,omitempty"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
 	// Is local authentication enabled for this Azure Maps Account? When false, all authentication to the Azure Maps data-plane REST API is disabled, except Azure AD authentication. Defaults to true.
 	// +kubebuilder:validation:Optional
 	LocalAuthenticationEnabled *bool `json:"localAuthenticationEnabled,omitempty" tf:"local_authentication_enabled,omitempty"`
+
+	// The Location in which the Azure Maps Account should be provisioned. Changing this forces a new resource to be created. Defaults to global.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the Resource Group in which the Azure Maps Account should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
@@ -75,6 +115,92 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
+}
+
+type CorsInitParameters struct {
+
+	// A list of origins that should be allowed to make cross-origin calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+}
+
+type CorsObservation struct {
+
+	// A list of origins that should be allowed to make cross-origin calls.
+	AllowedOrigins []*string `json:"allowedOrigins,omitempty" tf:"allowed_origins,omitempty"`
+}
+
+type CorsParameters struct {
+
+	// A list of origins that should be allowed to make cross-origin calls.
+	// +kubebuilder:validation:Optional
+	AllowedOrigins []*string `json:"allowedOrigins" tf:"allowed_origins,omitempty"`
+}
+
+type DataStoreInitParameters struct {
+
+	// The ID of the Storage Account that should be linked to this Azure Maps Account.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// The name given to the linked Storage Account.
+	UniqueName *string `json:"uniqueName,omitempty" tf:"unique_name,omitempty"`
+}
+
+type DataStoreObservation struct {
+
+	// The ID of the Storage Account that should be linked to this Azure Maps Account.
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// The name given to the linked Storage Account.
+	UniqueName *string `json:"uniqueName,omitempty" tf:"unique_name,omitempty"`
+}
+
+type DataStoreParameters struct {
+
+	// The ID of the Storage Account that should be linked to this Azure Maps Account.
+	// +kubebuilder:validation:Optional
+	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
+
+	// The name given to the linked Storage Account.
+	// +kubebuilder:validation:Optional
+	UniqueName *string `json:"uniqueName" tf:"unique_name,omitempty"`
+}
+
+type IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Azure Maps Account.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Azure Maps Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Azure Maps Account.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID associated with this Managed Service Identity.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID associated with this Managed Service Identity.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Azure Maps Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Azure Maps Account.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Azure Maps Account. Possible values are SystemAssigned, UserAssigned, SystemAssigned, UserAssigned (to enable both).
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
 }
 
 // AccountSpec defines the desired state of Account

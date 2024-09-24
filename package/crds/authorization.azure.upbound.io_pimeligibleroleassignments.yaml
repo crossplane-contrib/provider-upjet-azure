@@ -35,7 +35,7 @@ spec:
     schema:
       openAPIV3Schema:
         description: PimEligibleRoleAssignment is the Schema for the PimEligibleRoleAssignments
-          API. Manages a Pim Eligible Role Assignment.
+          API. Manages a PIM Eligible Role Assignment.
         properties:
           apiVersion:
             description: |-
@@ -76,53 +76,53 @@ spec:
                 properties:
                   justification:
                     description: |-
-                      The justification of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The justification of the eligible role assignment.
+                      The justification of the role assignment. Changing this forces a new resource to be created.
+                      The justification for this eligible role assignment
                     type: string
                   principalId:
                     description: |-
-                      The principal id. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The principal id.
+                      Object ID of the principal for this eligible role assignment. Changing this forces a new resource to be created.
+                      Object ID of the principal for this eligible role assignment
                     type: string
                   roleDefinitionId:
                     description: |-
-                      The role definition id. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The role definition id.
+                      The role definition ID for this eligible role assignment. Changing this forces a new resource to be created.
+                      Role definition ID for this eligible role assignment
                     type: string
                   schedule:
                     description: |-
-                      A schedule block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The schedule details of this eligible role assignment.
+                      A schedule block as defined below. Changing this forces a new resource to be created.
+                      The schedule details for this eligible role assignment
                     properties:
                       expiration:
-                        description: A expiration block as defined above.
+                        description: An expiration block as defined above.
                         properties:
                           durationDays:
                             description: |-
-                              The duration of the role assignment in days. Conflicts with schedule[0].expiration[0].duration_hours,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The duration of the assignment in days.
+                              The duration of the role assignment in days. Changing this forces a new resource to be created.
+                              The duration of the eligible role assignment in days
                             type: number
                           durationHours:
                             description: |-
-                              The duration of the role assignment in hours. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The duration of the assignment in hours.
+                              The duration of the role assignment in hours. Changing this forces a new resource to be created.
+                              The duration of the eligible role assignment in hours
                             type: number
                           endDateTime:
                             description: |-
-                              The end date time of the role assignment. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].duration_hours Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The end date time of the assignment.
+                              The end date/time of the role assignment. Changing this forces a new resource to be created.
+                              The end date/time of the eligible role assignment
                             type: string
                         type: object
                       startDateTime:
                         description: |-
-                          The start date time of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-                          The start date time.
+                          The start date/time of the role assignment. Changing this forces a new resource to be created.
+                          The start date/time
                         type: string
                     type: object
                   scope:
                     description: |-
-                      The scope. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The scope.
+                      The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
+                      Scope for this eligible role assignment, should be a valid resource ID
                     type: string
                   scopeRef:
                     description: Reference to a ManagementGroup in management to populate
@@ -202,18 +202,18 @@ spec:
                     type: object
                   ticket:
                     description: |-
-                      A ticket block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      Ticket details relating to the assignment.
+                      A ticket block as defined below. Changing this forces a new resource to be created.
+                      Ticket details relating to the eligible assignment
                     properties:
                       number:
                         description: |-
-                          The ticket number.
-                          The ticket number.
+                          User-supplied ticket number to be included with the request. Changing this forces a new resource to be created.
+                          User-supplied ticket number to be included with the request
                         type: string
                       system:
                         description: |-
-                          The ticket system.
-                          The ticket system.
+                          User-supplied ticket system name to be included with the request. Changing this forces a new resource to be created.
+                          User-supplied ticket system name to be included with the request
                         type: string
                     type: object
                 type: object
@@ -232,53 +232,53 @@ spec:
                 properties:
                   justification:
                     description: |-
-                      The justification of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The justification of the eligible role assignment.
+                      The justification of the role assignment. Changing this forces a new resource to be created.
+                      The justification for this eligible role assignment
                     type: string
                   principalId:
                     description: |-
-                      The principal id. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The principal id.
+                      Object ID of the principal for this eligible role assignment. Changing this forces a new resource to be created.
+                      Object ID of the principal for this eligible role assignment
                     type: string
                   roleDefinitionId:
                     description: |-
-                      The role definition id. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The role definition id.
+                      The role definition ID for this eligible role assignment. Changing this forces a new resource to be created.
+                      Role definition ID for this eligible role assignment
                     type: string
                   schedule:
                     description: |-
-                      A schedule block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The schedule details of this eligible role assignment.
+                      A schedule block as defined below. Changing this forces a new resource to be created.
+                      The schedule details for this eligible role assignment
                     properties:
                       expiration:
-                        description: A expiration block as defined above.
+                        description: An expiration block as defined above.
                         properties:
                           durationDays:
                             description: |-
-                              The duration of the role assignment in days. Conflicts with schedule[0].expiration[0].duration_hours,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The duration of the assignment in days.
+                              The duration of the role assignment in days. Changing this forces a new resource to be created.
+                              The duration of the eligible role assignment in days
                             type: number
                           durationHours:
                             description: |-
-                              The duration of the role assignment in hours. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The duration of the assignment in hours.
+                              The duration of the role assignment in hours. Changing this forces a new resource to be created.
+                              The duration of the eligible role assignment in hours
                             type: number
                           endDateTime:
                             description: |-
-                              The end date time of the role assignment. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].duration_hours Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The end date time of the assignment.
+                              The end date/time of the role assignment. Changing this forces a new resource to be created.
+                              The end date/time of the eligible role assignment
                             type: string
                         type: object
                       startDateTime:
                         description: |-
-                          The start date time of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-                          The start date time.
+                          The start date/time of the role assignment. Changing this forces a new resource to be created.
+                          The start date/time
                         type: string
                     type: object
                   scope:
                     description: |-
-                      The scope. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The scope.
+                      The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
+                      Scope for this eligible role assignment, should be a valid resource ID
                     type: string
                   scopeRef:
                     description: Reference to a ManagementGroup in management to populate
@@ -358,18 +358,18 @@ spec:
                     type: object
                   ticket:
                     description: |-
-                      A ticket block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      Ticket details relating to the assignment.
+                      A ticket block as defined below. Changing this forces a new resource to be created.
+                      Ticket details relating to the eligible assignment
                     properties:
                       number:
                         description: |-
-                          The ticket number.
-                          The ticket number.
+                          User-supplied ticket number to be included with the request. Changing this forces a new resource to be created.
+                          User-supplied ticket number to be included with the request
                         type: string
                       system:
                         description: |-
-                          The ticket system.
-                          The ticket system.
+                          User-supplied ticket system name to be included with the request. Changing this forces a new resource to be created.
+                          User-supplied ticket system name to be included with the request
                         type: string
                     type: object
                 type: object
@@ -556,77 +556,77 @@ spec:
               atProvider:
                 properties:
                   id:
-                    description: The ID of the Pim Eligible Role Assignment.
+                    description: The ID of the PIM Eligible Role Assignment.
                     type: string
                   justification:
                     description: |-
-                      The justification of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The justification of the eligible role assignment.
+                      The justification of the role assignment. Changing this forces a new resource to be created.
+                      The justification for this eligible role assignment
                     type: string
                   principalId:
                     description: |-
-                      The principal id. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The principal id.
+                      Object ID of the principal for this eligible role assignment. Changing this forces a new resource to be created.
+                      Object ID of the principal for this eligible role assignment
                     type: string
                   principalType:
                     description: |-
-                      The type of principal.
-                      The type of principal.
+                      Type of principal to which the role will be assigned.
+                      Type of principal to which the role will be assigned
                     type: string
                   roleDefinitionId:
                     description: |-
-                      The role definition id. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The role definition id.
+                      The role definition ID for this eligible role assignment. Changing this forces a new resource to be created.
+                      Role definition ID for this eligible role assignment
                     type: string
                   schedule:
                     description: |-
-                      A schedule block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The schedule details of this eligible role assignment.
+                      A schedule block as defined below. Changing this forces a new resource to be created.
+                      The schedule details for this eligible role assignment
                     properties:
                       expiration:
-                        description: A expiration block as defined above.
+                        description: An expiration block as defined above.
                         properties:
                           durationDays:
                             description: |-
-                              The duration of the role assignment in days. Conflicts with schedule[0].expiration[0].duration_hours,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The duration of the assignment in days.
+                              The duration of the role assignment in days. Changing this forces a new resource to be created.
+                              The duration of the eligible role assignment in days
                             type: number
                           durationHours:
                             description: |-
-                              The duration of the role assignment in hours. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].end_date_time Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The duration of the assignment in hours.
+                              The duration of the role assignment in hours. Changing this forces a new resource to be created.
+                              The duration of the eligible role assignment in hours
                             type: number
                           endDateTime:
                             description: |-
-                              The end date time of the role assignment. Conflicts with schedule[0].expiration[0].duration_days,schedule[0].expiration[0].duration_hours Changing this forces a new Pim Eligible Role Assignment to be created.
-                              The end date time of the assignment.
+                              The end date/time of the role assignment. Changing this forces a new resource to be created.
+                              The end date/time of the eligible role assignment
                             type: string
                         type: object
                       startDateTime:
                         description: |-
-                          The start date time of the role assignment. Changing this forces a new Pim Eligible Role Assignment to be created.
-                          The start date time.
+                          The start date/time of the role assignment. Changing this forces a new resource to be created.
+                          The start date/time
                         type: string
                     type: object
                   scope:
                     description: |-
-                      The scope. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      The scope.
+                      The scope for this eligible role assignment, should be a valid resource ID. Changing this forces a new resource to be created.
+                      Scope for this eligible role assignment, should be a valid resource ID
                     type: string
                   ticket:
                     description: |-
-                      A ticket block as defined below. Changing this forces a new Pim Eligible Role Assignment to be created.
-                      Ticket details relating to the assignment.
+                      A ticket block as defined below. Changing this forces a new resource to be created.
+                      Ticket details relating to the eligible assignment
                     properties:
                       number:
                         description: |-
-                          The ticket number.
-                          The ticket number.
+                          User-supplied ticket number to be included with the request. Changing this forces a new resource to be created.
+                          User-supplied ticket number to be included with the request
                         type: string
                       system:
                         description: |-
-                          The ticket system.
-                          The ticket system.
+                          User-supplied ticket system name to be included with the request. Changing this forces a new resource to be created.
+                          User-supplied ticket system name to be included with the request
                         type: string
                     type: object
                 type: object
