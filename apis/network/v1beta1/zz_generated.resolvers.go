@@ -3979,7 +3979,7 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IPConfigurations[i3].SubnetID),
-				Extract:      rconfig.ExtractResourceID(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.IPConfigurations[i3].SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.IPConfigurations[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -3999,7 +3999,7 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateDNSResolverID),
-			Extract:      rconfig.ExtractResourceID(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.PrivateDNSResolverIDRef,
 			Selector:     mg.Spec.ForProvider.PrivateDNSResolverIDSelector,
 			To:           reference.To{List: l, Managed: m},
@@ -4019,7 +4019,7 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IPConfigurations[i3].SubnetID),
-				Extract:      rconfig.ExtractResourceID(),
+				Extract:      resource.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.IPConfigurations[i3].SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.IPConfigurations[i3].SubnetIDSelector,
 				To:           reference.To{List: l, Managed: m},
@@ -4039,7 +4039,7 @@ func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Conte
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateDNSResolverID),
-			Extract:      rconfig.ExtractResourceID(),
+			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.PrivateDNSResolverIDRef,
 			Selector:     mg.Spec.InitProvider.PrivateDNSResolverIDSelector,
 			To:           reference.To{List: l, Managed: m},
