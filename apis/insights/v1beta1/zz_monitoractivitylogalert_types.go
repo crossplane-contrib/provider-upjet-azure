@@ -328,6 +328,9 @@ type MonitorActivityLogAlertInitParameters struct {
 	// Should this Activity Log Alert be enabled? Defaults to true.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
+	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created. Defaults to global.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// The name of the activity log alert. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -379,6 +382,9 @@ type MonitorActivityLogAlertObservation struct {
 	// The ID of the activity log alert.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created. Defaults to global.
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
 	// The name of the activity log alert. Changing this forces a new resource to be created.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
@@ -411,6 +417,10 @@ type MonitorActivityLogAlertParameters struct {
 	// Should this Activity Log Alert be enabled? Defaults to true.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
+
+	// The Azure Region where the activity log alert rule should exist. Changing this forces a new resource to be created. Defaults to global.
+	// +kubebuilder:validation:Optional
+	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The name of the activity log alert. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

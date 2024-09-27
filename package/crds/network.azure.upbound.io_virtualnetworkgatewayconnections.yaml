@@ -365,6 +365,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  privateLinkFastPathEnabled:
+                    description: Bypass the Express Route gateway when accessing private-links.
+                      When enabled express_route_gateway_bypass must be set to true.
+                      Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the connection Changing this forces a new resource to be created.
@@ -870,6 +875,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  privateLinkFastPathEnabled:
+                    description: Bypass the Express Route gateway when accessing private-links.
+                      When enabled express_route_gateway_bypass must be set to true.
+                      Defaults to false.
+                    type: boolean
                   routingWeight:
                     description: The routing weight. Defaults to 10.
                     type: number
@@ -1297,6 +1307,11 @@ spec:
                       peer Virtual Network Gateway can be in the same or in a different
                       subscription. Changing this forces a new resource to be created.
                     type: string
+                  privateLinkFastPathEnabled:
+                    description: Bypass the Express Route gateway when accessing private-links.
+                      When enabled express_route_gateway_bypass must be set to true.
+                      Defaults to false.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the connection Changing this forces a new resource to be created.

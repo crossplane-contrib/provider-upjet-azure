@@ -77,6 +77,10 @@ spec:
                     description: A additional_capabilities block as defined below.
                     items:
                       properties:
+                        hibernationEnabled:
+                          description: Whether to enable the hibernation capability
+                            or not.
+                          type: boolean
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
@@ -764,6 +768,10 @@ spec:
                     description: A additional_capabilities block as defined below.
                     items:
                       properties:
+                        hibernationEnabled:
+                          description: Whether to enable the hibernation capability
+                            or not.
+                          type: boolean
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
@@ -1491,6 +1499,10 @@ spec:
                     description: A additional_capabilities block as defined below.
                     items:
                       properties:
+                        hibernationEnabled:
+                          description: Whether to enable the hibernation capability
+                            or not.
+                          type: boolean
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on

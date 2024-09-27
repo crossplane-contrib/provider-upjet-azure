@@ -390,6 +390,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccessEnabled:
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
+                    type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
                       Server. Possible value is None.
@@ -821,6 +825,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccessEnabled:
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
+                    type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
                       Server. Possible value is None.

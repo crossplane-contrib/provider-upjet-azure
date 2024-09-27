@@ -91,6 +91,55 @@ type AutoHealSettingTriggerSlowRequestParameters struct {
 	TimeTaken *string `json:"timeTaken" tf:"time_taken,omitempty"`
 }
 
+type AutoHealSettingTriggerSlowRequestWithPathInitParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
+}
+
+type AutoHealSettingTriggerSlowRequestWithPathObservation struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
+}
+
+type AutoHealSettingTriggerSlowRequestWithPathParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	// +kubebuilder:validation:Optional
+	Count *float64 `json:"count" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	// +kubebuilder:validation:Optional
+	Interval *string `json:"interval" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	// +kubebuilder:validation:Optional
+	TimeTaken *string `json:"timeTaken" tf:"time_taken,omitempty"`
+}
+
 type AutoHealSettingTriggerStatusCodeInitParameters struct {
 
 	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
@@ -187,6 +236,45 @@ type CustomActionParameters struct {
 	// The parameters to pass to the specified executable.
 	// +kubebuilder:validation:Optional
 	Parameters *string `json:"parameters,omitempty" tf:"parameters,omitempty"`
+}
+
+type HandlerMappingInitParameters struct {
+
+	// Specifies the command-line arguments to be passed to the script processor.
+	Arguments *string `json:"arguments,omitempty" tf:"arguments,omitempty"`
+
+	// Specifies which extension to be handled by the specified FastCGI application.
+	Extension *string `json:"extension,omitempty" tf:"extension,omitempty"`
+
+	// Specifies the absolute path to the FastCGI application.
+	ScriptProcessorPath *string `json:"scriptProcessorPath,omitempty" tf:"script_processor_path,omitempty"`
+}
+
+type HandlerMappingObservation struct {
+
+	// Specifies the command-line arguments to be passed to the script processor.
+	Arguments *string `json:"arguments,omitempty" tf:"arguments,omitempty"`
+
+	// Specifies which extension to be handled by the specified FastCGI application.
+	Extension *string `json:"extension,omitempty" tf:"extension,omitempty"`
+
+	// Specifies the absolute path to the FastCGI application.
+	ScriptProcessorPath *string `json:"scriptProcessorPath,omitempty" tf:"script_processor_path,omitempty"`
+}
+
+type HandlerMappingParameters struct {
+
+	// Specifies the command-line arguments to be passed to the script processor.
+	// +kubebuilder:validation:Optional
+	Arguments *string `json:"arguments,omitempty" tf:"arguments,omitempty"`
+
+	// Specifies which extension to be handled by the specified FastCGI application.
+	// +kubebuilder:validation:Optional
+	Extension *string `json:"extension" tf:"extension,omitempty"`
+
+	// Specifies the absolute path to the FastCGI application.
+	// +kubebuilder:validation:Optional
+	ScriptProcessorPath *string `json:"scriptProcessorPath" tf:"script_processor_path,omitempty"`
 }
 
 type LogsApplicationLogsAzureBlobStorageInitParameters struct {
@@ -304,8 +392,11 @@ type SiteConfigAutoHealSettingTriggerInitParameters struct {
 	// A requests block as defined above.
 	Requests []AutoHealSettingTriggerRequestsInitParameters `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	SlowRequest []AutoHealSettingTriggerSlowRequestInitParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	SlowRequestWithPath []AutoHealSettingTriggerSlowRequestWithPathInitParameters `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	StatusCode []AutoHealSettingTriggerStatusCodeInitParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -319,8 +410,11 @@ type SiteConfigAutoHealSettingTriggerObservation struct {
 	// A requests block as defined above.
 	Requests []AutoHealSettingTriggerRequestsObservation `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	SlowRequest []AutoHealSettingTriggerSlowRequestObservation `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	SlowRequestWithPath []AutoHealSettingTriggerSlowRequestWithPathObservation `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	StatusCode []AutoHealSettingTriggerStatusCodeObservation `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -336,9 +430,13 @@ type SiteConfigAutoHealSettingTriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	Requests []AutoHealSettingTriggerRequestsParameters `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	// +kubebuilder:validation:Optional
 	SlowRequest []AutoHealSettingTriggerSlowRequestParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	// +kubebuilder:validation:Optional
+	SlowRequestWithPath []AutoHealSettingTriggerSlowRequestWithPathParameters `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -3083,6 +3181,9 @@ type WindowsWebAppSiteConfigInitParameters struct {
 	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled. Defaults to Disabled.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
 
+	// One or more handler_mapping blocks as defined below.
+	HandlerMapping []HandlerMappingInitParameters `json:"handlerMapping,omitempty" tf:"handler_mapping,omitempty"`
+
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
 	HealthCheckEvictionTimeInMin *float64 `json:"healthCheckEvictionTimeInMin,omitempty" tf:"health_check_eviction_time_in_min,omitempty"`
@@ -3186,6 +3287,9 @@ type WindowsWebAppSiteConfigObservation struct {
 
 	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled. Defaults to Disabled.
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
+
+	// One or more handler_mapping blocks as defined below.
+	HandlerMapping []HandlerMappingObservation `json:"handlerMapping,omitempty" tf:"handler_mapping,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
@@ -3305,6 +3409,10 @@ type WindowsWebAppSiteConfigParameters struct {
 	// The State of FTP / FTPS service. Possible values include: AllAllowed, FtpsOnly, Disabled. Defaults to Disabled.
 	// +kubebuilder:validation:Optional
 	FtpsState *string `json:"ftpsState,omitempty" tf:"ftps_state,omitempty"`
+
+	// One or more handler_mapping blocks as defined below.
+	// +kubebuilder:validation:Optional
+	HandlerMapping []HandlerMappingParameters `json:"handlerMapping,omitempty" tf:"handler_mapping,omitempty"`
 
 	// The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
 	// The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`

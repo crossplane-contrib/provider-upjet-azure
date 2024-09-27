@@ -1395,6 +1395,9 @@ type KubernetesClusterInitParameters struct {
 	// A confidential_computing block as defined below. For more details please the documentation
 	ConfidentialComputing []ConfidentialComputingInitParameters `json:"confidentialComputing,omitempty" tf:"confidential_computing,omitempty"`
 
+	// Should cost analysis be enabled for this Kubernetes Cluster? Defaults to false. The sku_tier must be set to Standard or Premium to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal.
+	CostAnalysisEnabled *bool `json:"costAnalysisEnabled,omitempty" tf:"cost_analysis_enabled,omitempty"`
+
 	// A list of up to 10 base64 encoded CAs that will be added to the trust store on nodes with the custom_ca_trust_enabled feature enabled.
 	CustomCATrustCertificatesBase64 []*string `json:"customCaTrustCertificatesBase64,omitempty" tf:"custom_ca_trust_certificates_base64,omitempty"`
 
@@ -1573,6 +1576,9 @@ type KubernetesClusterObservation struct {
 
 	// A confidential_computing block as defined below. For more details please the documentation
 	ConfidentialComputing []ConfidentialComputingObservation `json:"confidentialComputing,omitempty" tf:"confidential_computing,omitempty"`
+
+	// Should cost analysis be enabled for this Kubernetes Cluster? Defaults to false. The sku_tier must be set to Standard or Premium to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal.
+	CostAnalysisEnabled *bool `json:"costAnalysisEnabled,omitempty" tf:"cost_analysis_enabled,omitempty"`
 
 	// The current version running on the Azure Kubernetes Managed Cluster.
 	CurrentKubernetesVersion *string `json:"currentKubernetesVersion,omitempty" tf:"current_kubernetes_version,omitempty"`
@@ -1777,6 +1783,10 @@ type KubernetesClusterParameters struct {
 	// A confidential_computing block as defined below. For more details please the documentation
 	// +kubebuilder:validation:Optional
 	ConfidentialComputing []ConfidentialComputingParameters `json:"confidentialComputing,omitempty" tf:"confidential_computing,omitempty"`
+
+	// Should cost analysis be enabled for this Kubernetes Cluster? Defaults to false. The sku_tier must be set to Standard or Premium to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal.
+	// +kubebuilder:validation:Optional
+	CostAnalysisEnabled *bool `json:"costAnalysisEnabled,omitempty" tf:"cost_analysis_enabled,omitempty"`
 
 	// A list of up to 10 base64 encoded CAs that will be added to the trust store on nodes with the custom_ca_trust_enabled feature enabled.
 	// +kubebuilder:validation:Optional
@@ -2559,6 +2569,9 @@ type NetworkProfileInitParameters struct {
 	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway. Changing this forces a new resource to be created.
 	NATGatewayProfile []NATGatewayProfileInitParameters `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 
+	// Specifies the data plane used for building the Kubernetes network. Possible values are azure and cilium. Defaults to azure. Disabling this forces a new resource to be created.
+	NetworkDataPlane *string `json:"networkDataPlane,omitempty" tf:"network_data_plane,omitempty"`
+
 	// Network mode to be used with Azure CNI. Possible values are bridge and transparent. Changing this forces a new resource to be created.
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
@@ -2570,6 +2583,14 @@ type NetworkProfileInitParameters struct {
 
 	// Sets up network policy to be used with Azure CNI. Network policy allows us to control the traffic flow between pods. Currently supported values are calico, azure and cilium.
 	NetworkPolicy *string `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
+
+	// The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.
+	// +listType=set
+	OutboundIPAddressIds []*string `json:"outboundIpAddressIds,omitempty" tf:"outbound_ip_address_ids,omitempty"`
+
+	// The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.
+	// +listType=set
+	OutboundIPPrefixIds []*string `json:"outboundIpPrefixIds,omitempty" tf:"outbound_ip_prefix_ids,omitempty"`
 
 	// The outbound (egress) routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer, userDefinedRouting, managedNATGateway and userAssignedNATGateway. Defaults to loadBalancer. More information on supported migration paths for outbound_type can be found in this documentation.
 	OutboundType *string `json:"outboundType,omitempty" tf:"outbound_type,omitempty"`
@@ -2610,6 +2631,9 @@ type NetworkProfileObservation struct {
 	// A nat_gateway_profile block as defined below. This can only be specified when load_balancer_sku is set to standard and outbound_type is set to managedNATGateway or userAssignedNATGateway. Changing this forces a new resource to be created.
 	NATGatewayProfile []NATGatewayProfileObservation `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 
+	// Specifies the data plane used for building the Kubernetes network. Possible values are azure and cilium. Defaults to azure. Disabling this forces a new resource to be created.
+	NetworkDataPlane *string `json:"networkDataPlane,omitempty" tf:"network_data_plane,omitempty"`
+
 	// Network mode to be used with Azure CNI. Possible values are bridge and transparent. Changing this forces a new resource to be created.
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
 
@@ -2621,6 +2645,14 @@ type NetworkProfileObservation struct {
 
 	// Sets up network policy to be used with Azure CNI. Network policy allows us to control the traffic flow between pods. Currently supported values are calico, azure and cilium.
 	NetworkPolicy *string `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
+
+	// The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.
+	// +listType=set
+	OutboundIPAddressIds []*string `json:"outboundIpAddressIds,omitempty" tf:"outbound_ip_address_ids,omitempty"`
+
+	// The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.
+	// +listType=set
+	OutboundIPPrefixIds []*string `json:"outboundIpPrefixIds,omitempty" tf:"outbound_ip_prefix_ids,omitempty"`
 
 	// The outbound (egress) routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer, userDefinedRouting, managedNATGateway and userAssignedNATGateway. Defaults to loadBalancer. More information on supported migration paths for outbound_type can be found in this documentation.
 	OutboundType *string `json:"outboundType,omitempty" tf:"outbound_type,omitempty"`
@@ -2668,6 +2700,10 @@ type NetworkProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	NATGatewayProfile []NATGatewayProfileParameters `json:"natGatewayProfile,omitempty" tf:"nat_gateway_profile,omitempty"`
 
+	// Specifies the data plane used for building the Kubernetes network. Possible values are azure and cilium. Defaults to azure. Disabling this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	NetworkDataPlane *string `json:"networkDataPlane,omitempty" tf:"network_data_plane,omitempty"`
+
 	// Network mode to be used with Azure CNI. Possible values are bridge and transparent. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NetworkMode *string `json:"networkMode,omitempty" tf:"network_mode,omitempty"`
@@ -2683,6 +2719,16 @@ type NetworkProfileParameters struct {
 	// Sets up network policy to be used with Azure CNI. Network policy allows us to control the traffic flow between pods. Currently supported values are calico, azure and cilium.
 	// +kubebuilder:validation:Optional
 	NetworkPolicy *string `json:"networkPolicy,omitempty" tf:"network_policy,omitempty"`
+
+	// The ID of the Public IP Addresses which should be used for outbound communication for the cluster load balancer.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	OutboundIPAddressIds []*string `json:"outboundIpAddressIds,omitempty" tf:"outbound_ip_address_ids,omitempty"`
+
+	// The ID of the outbound Public IP Address Prefixes which should be used for the cluster load balancer.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	OutboundIPPrefixIds []*string `json:"outboundIpPrefixIds,omitempty" tf:"outbound_ip_prefix_ids,omitempty"`
 
 	// The outbound (egress) routing method which should be used for this Kubernetes Cluster. Possible values are loadBalancer, userDefinedRouting, managedNATGateway and userAssignedNATGateway. Defaults to loadBalancer. More information on supported migration paths for outbound_type can be found in this documentation.
 	// +kubebuilder:validation:Optional
@@ -3285,21 +3331,41 @@ type SysctlConfigParameters struct {
 
 type UpgradeSettingsInitParameters struct {
 
+	// The amount of time in minutes to wait on eviction of pods and graceful termination per node. This eviction wait time honors pod disruption budgets for upgrades. If this time is exceeded, the upgrade fails. Unsetting this after configuring it will force a new resource to be created.
+	DrainTimeoutInMinutes *float64 `json:"drainTimeoutInMinutes,omitempty" tf:"drain_timeout_in_minutes,omitempty"`
+
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
 type UpgradeSettingsObservation struct {
 
+	// The amount of time in minutes to wait on eviction of pods and graceful termination per node. This eviction wait time honors pod disruption budgets for upgrades. If this time is exceeded, the upgrade fails. Unsetting this after configuring it will force a new resource to be created.
+	DrainTimeoutInMinutes *float64 `json:"drainTimeoutInMinutes,omitempty" tf:"drain_timeout_in_minutes,omitempty"`
+
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
 type UpgradeSettingsParameters struct {
 
+	// The amount of time in minutes to wait on eviction of pods and graceful termination per node. This eviction wait time honors pod disruption budgets for upgrades. If this time is exceeded, the upgrade fails. Unsetting this after configuring it will force a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DrainTimeoutInMinutes *float64 `json:"drainTimeoutInMinutes,omitempty" tf:"drain_timeout_in_minutes,omitempty"`
+
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	// +kubebuilder:validation:Optional
 	MaxSurge *string `json:"maxSurge" tf:"max_surge,omitempty"`
+
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
 type WebAppRoutingIdentityInitParameters struct {
@@ -3322,14 +3388,20 @@ type WebAppRoutingIdentityParameters struct {
 
 type WebAppRoutingInitParameters struct {
 
-	// Specifies the ID of the DNS Zone in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. For Bring-Your-Own DNS zones this property should be set to an empty string "".
+	// The Kubernetes Managed Cluster ID.
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// Specifies the list of the DNS Zone IDs in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. If not using Bring-Your-Own DNS zones this property should be set to an empty list.
+	DNSZoneIds []*string `json:"dnsZoneIds,omitempty" tf:"dns_zone_ids,omitempty"`
 }
 
 type WebAppRoutingObservation struct {
 
-	// Specifies the ID of the DNS Zone in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. For Bring-Your-Own DNS zones this property should be set to an empty string "".
+	// The Kubernetes Managed Cluster ID.
 	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// Specifies the list of the DNS Zone IDs in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. If not using Bring-Your-Own DNS zones this property should be set to an empty list.
+	DNSZoneIds []*string `json:"dnsZoneIds,omitempty" tf:"dns_zone_ids,omitempty"`
 
 	// A web_app_routing_identity block is exported. The exported attributes are defined below.
 	WebAppRoutingIdentity []WebAppRoutingIdentityObservation `json:"webAppRoutingIdentity,omitempty" tf:"web_app_routing_identity,omitempty"`
@@ -3337,9 +3409,13 @@ type WebAppRoutingObservation struct {
 
 type WebAppRoutingParameters struct {
 
-	// Specifies the ID of the DNS Zone in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. For Bring-Your-Own DNS zones this property should be set to an empty string "".
+	// The Kubernetes Managed Cluster ID.
 	// +kubebuilder:validation:Optional
-	DNSZoneID *string `json:"dnsZoneId" tf:"dns_zone_id,omitempty"`
+	DNSZoneID *string `json:"dnsZoneId,omitempty" tf:"dns_zone_id,omitempty"`
+
+	// Specifies the list of the DNS Zone IDs in which DNS entries are created for applications deployed to the cluster when Web App Routing is enabled. If not using Bring-Your-Own DNS zones this property should be set to an empty list.
+	// +kubebuilder:validation:Optional
+	DNSZoneIds []*string `json:"dnsZoneIds,omitempty" tf:"dns_zone_ids,omitempty"`
 }
 
 type WindowsProfileInitParameters struct {

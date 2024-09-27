@@ -419,6 +419,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  costAnalysisEnabled:
+                    description: Should cost analysis be enabled for this Kubernetes
+                      Cluster? Defaults to false. The sku_tier must be set to Standard
+                      or Premium to enable this feature. Enabling this will add Kubernetes
+                      Namespace and Deployment details to the Cost Analysis views
+                      in the Azure portal.
+                    type: boolean
                   customCaTrustCertificatesBase64:
                     description: A list of up to 10 base64 encoded CAs that will be
                       added to the trust store on nodes with the custom_ca_trust_enabled
@@ -913,11 +920,24 @@ spec:
                           description: A upgrade_settings block as documented below.
                           items:
                             properties:
+                              drainTimeoutInMinutes:
+                                description: The amount of time in minutes to wait
+                                  on eviction of pods and graceful termination per
+                                  node. This eviction wait time honors pod disruption
+                                  budgets for upgrades. If this time is exceeded,
+                                  the upgrade fails. Unsetting this after configuring
+                                  it will force a new resource to be created.
+                                type: number
                               maxSurge:
                                 description: The maximum number or percentage of nodes
                                   which will be added to the Node Pool size during
                                   an upgrade.
                                 type: string
+                              nodeSoakDurationInMinutes:
+                                description: The amount of time in minutes to wait
+                                  after draining a node and before reimaging and moving
+                                  on to next node. Defaults to 0.
+                                type: number
                             type: object
                           type: array
                         vmSize:
@@ -1605,6 +1625,12 @@ spec:
                                 type: number
                             type: object
                           type: array
+                        networkDataPlane:
+                          description: Specifies the data plane used for building
+                            the Kubernetes network. Possible values are azure and
+                            cilium. Defaults to azure. Disabling this forces a new
+                            resource to be created.
+                          type: string
                         networkMode:
                           description: Network mode to be used with Azure CNI. Possible
                             values are bridge and transparent. Changing this forces
@@ -1625,6 +1651,21 @@ spec:
                             between pods. Currently supported values are calico, azure
                             and cilium.
                           type: string
+                        outboundIpAddressIds:
+                          description: The ID of the Public IP Addresses which should
+                            be used for outbound communication for the cluster load
+                            balancer.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        outboundIpPrefixIds:
+                          description: The ID of the outbound Public IP Address Prefixes
+                            which should be used for the cluster load balancer.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         outboundType:
                           description: The outbound (egress) routing method which
                             should be used for this Kubernetes Cluster. Possible values
@@ -1971,11 +2012,17 @@ spec:
                     items:
                       properties:
                         dnsZoneId:
-                          description: Specifies the ID of the DNS Zone in which DNS
-                            entries are created for applications deployed to the cluster
-                            when Web App Routing is enabled. For Bring-Your-Own DNS
-                            zones this property should be set to an empty string "".
+                          description: The Kubernetes Managed Cluster ID.
                           type: string
+                        dnsZoneIds:
+                          description: Specifies the list of the DNS Zone IDs in which
+                            DNS entries are created for applications deployed to the
+                            cluster when Web App Routing is enabled. If not using
+                            Bring-Your-Own DNS zones this property should be set to
+                            an empty list.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   windowsProfile:
@@ -2388,6 +2435,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  costAnalysisEnabled:
+                    description: Should cost analysis be enabled for this Kubernetes
+                      Cluster? Defaults to false. The sku_tier must be set to Standard
+                      or Premium to enable this feature. Enabling this will add Kubernetes
+                      Namespace and Deployment details to the Cost Analysis views
+                      in the Azure portal.
+                    type: boolean
                   customCaTrustCertificatesBase64:
                     description: A list of up to 10 base64 encoded CAs that will be
                       added to the trust store on nodes with the custom_ca_trust_enabled
@@ -2882,11 +2936,24 @@ spec:
                           description: A upgrade_settings block as documented below.
                           items:
                             properties:
+                              drainTimeoutInMinutes:
+                                description: The amount of time in minutes to wait
+                                  on eviction of pods and graceful termination per
+                                  node. This eviction wait time honors pod disruption
+                                  budgets for upgrades. If this time is exceeded,
+                                  the upgrade fails. Unsetting this after configuring
+                                  it will force a new resource to be created.
+                                type: number
                               maxSurge:
                                 description: The maximum number or percentage of nodes
                                   which will be added to the Node Pool size during
                                   an upgrade.
                                 type: string
+                              nodeSoakDurationInMinutes:
+                                description: The amount of time in minutes to wait
+                                  after draining a node and before reimaging and moving
+                                  on to next node. Defaults to 0.
+                                type: number
                             type: object
                           type: array
                         vmSize:
@@ -3556,6 +3623,12 @@ spec:
                                 type: number
                             type: object
                           type: array
+                        networkDataPlane:
+                          description: Specifies the data plane used for building
+                            the Kubernetes network. Possible values are azure and
+                            cilium. Defaults to azure. Disabling this forces a new
+                            resource to be created.
+                          type: string
                         networkMode:
                           description: Network mode to be used with Azure CNI. Possible
                             values are bridge and transparent. Changing this forces
@@ -3576,6 +3649,21 @@ spec:
                             between pods. Currently supported values are calico, azure
                             and cilium.
                           type: string
+                        outboundIpAddressIds:
+                          description: The ID of the Public IP Addresses which should
+                            be used for outbound communication for the cluster load
+                            balancer.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        outboundIpPrefixIds:
+                          description: The ID of the outbound Public IP Address Prefixes
+                            which should be used for the cluster load balancer.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         outboundType:
                           description: The outbound (egress) routing method which
                             should be used for this Kubernetes Cluster. Possible values
@@ -3822,11 +3910,17 @@ spec:
                     items:
                       properties:
                         dnsZoneId:
-                          description: Specifies the ID of the DNS Zone in which DNS
-                            entries are created for applications deployed to the cluster
-                            when Web App Routing is enabled. For Bring-Your-Own DNS
-                            zones this property should be set to an empty string "".
+                          description: The Kubernetes Managed Cluster ID.
                           type: string
+                        dnsZoneIds:
+                          description: Specifies the list of the DNS Zone IDs in which
+                            DNS entries are created for applications deployed to the
+                            cluster when Web App Routing is enabled. If not using
+                            Bring-Your-Own DNS zones this property should be set to
+                            an empty list.
+                          items:
+                            type: string
+                          type: array
                       type: object
                     type: array
                   windowsProfile:
@@ -4256,6 +4350,13 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  costAnalysisEnabled:
+                    description: Should cost analysis be enabled for this Kubernetes
+                      Cluster? Defaults to false. The sku_tier must be set to Standard
+                      or Premium to enable this feature. Enabling this will add Kubernetes
+                      Namespace and Deployment details to the Cost Analysis views
+                      in the Azure portal.
+                    type: boolean
                   currentKubernetesVersion:
                     description: The current version running on the Azure Kubernetes
                       Managed Cluster.
@@ -4678,11 +4779,24 @@ spec:
                           description: A upgrade_settings block as documented below.
                           items:
                             properties:
+                              drainTimeoutInMinutes:
+                                description: The amount of time in minutes to wait
+                                  on eviction of pods and graceful termination per
+                                  node. This eviction wait time honors pod disruption
+                                  budgets for upgrades. If this time is exceeded,
+                                  the upgrade fails. Unsetting this after configuring
+                                  it will force a new resource to be created.
+                                type: number
                               maxSurge:
                                 description: The maximum number or percentage of nodes
                                   which will be added to the Node Pool size during
                                   an upgrade.
                                 type: string
+                              nodeSoakDurationInMinutes:
+                                description: The amount of time in minutes to wait
+                                  after draining a node and before reimaging and moving
+                                  on to next node. Defaults to 0.
+                                type: number
                             type: object
                           type: array
                         vmSize:
@@ -5274,6 +5388,12 @@ spec:
                                 type: number
                             type: object
                           type: array
+                        networkDataPlane:
+                          description: Specifies the data plane used for building
+                            the Kubernetes network. Possible values are azure and
+                            cilium. Defaults to azure. Disabling this forces a new
+                            resource to be created.
+                          type: string
                         networkMode:
                           description: Network mode to be used with Azure CNI. Possible
                             values are bridge and transparent. Changing this forces
@@ -5294,6 +5414,21 @@ spec:
                             between pods. Currently supported values are calico, azure
                             and cilium.
                           type: string
+                        outboundIpAddressIds:
+                          description: The ID of the Public IP Addresses which should
+                            be used for outbound communication for the cluster load
+                            balancer.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        outboundIpPrefixIds:
+                          description: The ID of the outbound Public IP Address Prefixes
+                            which should be used for the cluster load balancer.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
                         outboundType:
                           description: The outbound (egress) routing method which
                             should be used for this Kubernetes Cluster. Possible values
@@ -5505,11 +5640,17 @@ spec:
                     items:
                       properties:
                         dnsZoneId:
-                          description: Specifies the ID of the DNS Zone in which DNS
-                            entries are created for applications deployed to the cluster
-                            when Web App Routing is enabled. For Bring-Your-Own DNS
-                            zones this property should be set to an empty string "".
+                          description: The Kubernetes Managed Cluster ID.
                           type: string
+                        dnsZoneIds:
+                          description: Specifies the list of the DNS Zone IDs in which
+                            DNS entries are created for applications deployed to the
+                            cluster when Web App Routing is enabled. If not using
+                            Bring-Your-Own DNS zones this property should be set to
+                            an empty list.
+                          items:
+                            type: string
+                          type: array
                         webAppRoutingIdentity:
                           description: A web_app_routing_identity block is exported.
                             The exported attributes are defined below.

@@ -13,6 +13,45 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type ArchivedRestorePointInitParameters struct {
+
+	// The number of days/weeks/months/years to retain backups in current tier before tiering.
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The retention duration type. Possible values are Days, Weeks, Months and Years.
+	DurationType *string `json:"durationType,omitempty" tf:"duration_type,omitempty"`
+
+	// The tiering mode to control automatic tiering of recovery points. Possible values are TierAfter and TierRecommended.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type ArchivedRestorePointObservation struct {
+
+	// The number of days/weeks/months/years to retain backups in current tier before tiering.
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The retention duration type. Possible values are Days, Weeks, Months and Years.
+	DurationType *string `json:"durationType,omitempty" tf:"duration_type,omitempty"`
+
+	// The tiering mode to control automatic tiering of recovery points. Possible values are TierAfter and TierRecommended.
+	Mode *string `json:"mode,omitempty" tf:"mode,omitempty"`
+}
+
+type ArchivedRestorePointParameters struct {
+
+	// The number of days/weeks/months/years to retain backups in current tier before tiering.
+	// +kubebuilder:validation:Optional
+	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
+
+	// The retention duration type. Possible values are Days, Weeks, Months and Years.
+	// +kubebuilder:validation:Optional
+	DurationType *string `json:"durationType,omitempty" tf:"duration_type,omitempty"`
+
+	// The tiering mode to control automatic tiering of recovery points. Possible values are TierAfter and TierRecommended.
+	// +kubebuilder:validation:Optional
+	Mode *string `json:"mode" tf:"mode,omitempty"`
+}
+
 type BackupPolicyVMBackupInitParameters struct {
 
 	// Sets the backup frequency. Possible values are Hourly, Daily and Weekly.
@@ -101,6 +140,9 @@ type BackupPolicyVMInitParameters struct {
 	// Configures the policy yearly retention as documented in the retention_yearly block below.
 	RetentionYearly []BackupPolicyVMRetentionYearlyInitParameters `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty"`
 
+	// A tiering_policy block as defined below.
+	TieringPolicy []TieringPolicyInitParameters `json:"tieringPolicy,omitempty" tf:"tiering_policy,omitempty"`
+
 	// Specifies the timezone. the possible values are defined here. Defaults to UTC
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
 }
@@ -139,6 +181,9 @@ type BackupPolicyVMObservation struct {
 
 	// Configures the policy yearly retention as documented in the retention_yearly block below.
 	RetentionYearly []BackupPolicyVMRetentionYearlyObservation `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty"`
+
+	// A tiering_policy block as defined below.
+	TieringPolicy []TieringPolicyObservation `json:"tieringPolicy,omitempty" tf:"tiering_policy,omitempty"`
 
 	// Specifies the timezone. the possible values are defined here. Defaults to UTC
 	Timezone *string `json:"timezone,omitempty" tf:"timezone,omitempty"`
@@ -203,6 +248,10 @@ type BackupPolicyVMParameters struct {
 	// Configures the policy yearly retention as documented in the retention_yearly block below.
 	// +kubebuilder:validation:Optional
 	RetentionYearly []BackupPolicyVMRetentionYearlyParameters `json:"retentionYearly,omitempty" tf:"retention_yearly,omitempty"`
+
+	// A tiering_policy block as defined below.
+	// +kubebuilder:validation:Optional
+	TieringPolicy []TieringPolicyParameters `json:"tieringPolicy,omitempty" tf:"tiering_policy,omitempty"`
 
 	// Specifies the timezone. the possible values are defined here. Defaults to UTC
 	// +kubebuilder:validation:Optional
@@ -436,6 +485,25 @@ type InstantRestoreResourceGroupParameters struct {
 	// The suffix for the instant_restore_resource_group name.
 	// +kubebuilder:validation:Optional
 	Suffix *string `json:"suffix,omitempty" tf:"suffix,omitempty"`
+}
+
+type TieringPolicyInitParameters struct {
+
+	// An archived_restore_point block as defined below.
+	ArchivedRestorePoint []ArchivedRestorePointInitParameters `json:"archivedRestorePoint,omitempty" tf:"archived_restore_point,omitempty"`
+}
+
+type TieringPolicyObservation struct {
+
+	// An archived_restore_point block as defined below.
+	ArchivedRestorePoint []ArchivedRestorePointObservation `json:"archivedRestorePoint,omitempty" tf:"archived_restore_point,omitempty"`
+}
+
+type TieringPolicyParameters struct {
+
+	// An archived_restore_point block as defined below.
+	// +kubebuilder:validation:Optional
+	ArchivedRestorePoint []ArchivedRestorePointParameters `json:"archivedRestorePoint" tf:"archived_restore_point,omitempty"`
 }
 
 // BackupPolicyVMSpec defines the desired state of BackupPolicyVM

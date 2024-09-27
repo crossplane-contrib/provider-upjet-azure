@@ -927,6 +927,13 @@ spec:
                             If this percentage is ever exceeded, the rolling update
                             aborts.
                           type: number
+                        maximumSurgeInstancesEnabled:
+                          description: Create new virtual machines to upgrade the
+                            scale set, rather than updating the existing virtual machines.
+                            Existing virtual machines will be deleted once the new
+                            virtual machines are created for each batch. Possible
+                            values are true or false.
+                          type: boolean
                         pauseTimeBetweenBatches:
                           description: The wait time between completing the update
                             for all virtual machines in one batch and starting the
@@ -1853,6 +1860,13 @@ spec:
                             If this percentage is ever exceeded, the rolling update
                             aborts.
                           type: number
+                        maximumSurgeInstancesEnabled:
+                          description: Create new virtual machines to upgrade the
+                            scale set, rather than updating the existing virtual machines.
+                            Existing virtual machines will be deleted once the new
+                            virtual machines are created for each batch. Possible
+                            values are true or false.
+                          type: boolean
                         pauseTimeBetweenBatches:
                           description: The wait time between completing the update
                             for all virtual machines in one batch and starting the
@@ -2907,6 +2921,13 @@ spec:
                             If this percentage is ever exceeded, the rolling update
                             aborts.
                           type: number
+                        maximumSurgeInstancesEnabled:
+                          description: Create new virtual machines to upgrade the
+                            scale set, rather than updating the existing virtual machines.
+                            Existing virtual machines will be deleted once the new
+                            virtual machines are created for each batch. Possible
+                            values are true or false.
+                          type: boolean
                         pauseTimeBetweenBatches:
                           description: The wait time between completing the update
                             for all virtual machines in one batch and starting the

@@ -1345,8 +1345,32 @@ spec:
                                         type: object
                                       type: array
                                     slowRequest:
-                                      description: One or more slow_request blocks
-                                        as defined above.
+                                      description: A slow_request blocks as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          count:
+                                            description: The number of occurrences
+                                              of the defined status_code in the specified
+                                              interval on which to trigger this rule.
+                                            type: number
+                                          interval:
+                                            description: The time interval in the
+                                              form hh:mm:ss.
+                                            type: string
+                                          path:
+                                            description: The path to which this rule
+                                              status code applies.
+                                            type: string
+                                          timeTaken:
+                                            description: The threshold of time passed
+                                              to qualify as a Slow Request in hh:mm:ss.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    slowRequestWithPath:
+                                      description: One or more slow_request_with_path
+                                        blocks as defined above.
                                       items:
                                         properties:
                                           count:
@@ -2987,8 +3011,32 @@ spec:
                                         type: object
                                       type: array
                                     slowRequest:
-                                      description: One or more slow_request blocks
-                                        as defined above.
+                                      description: A slow_request blocks as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          count:
+                                            description: The number of occurrences
+                                              of the defined status_code in the specified
+                                              interval on which to trigger this rule.
+                                            type: number
+                                          interval:
+                                            description: The time interval in the
+                                              form hh:mm:ss.
+                                            type: string
+                                          path:
+                                            description: The path to which this rule
+                                              status code applies.
+                                            type: string
+                                          timeTaken:
+                                            description: The threshold of time passed
+                                              to qualify as a Slow Request in hh:mm:ss.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    slowRequestWithPath:
+                                      description: One or more slow_request_with_path
+                                        blocks as defined above.
                                       items:
                                         properties:
                                           count:
@@ -4789,8 +4837,32 @@ spec:
                                         type: object
                                       type: array
                                     slowRequest:
-                                      description: One or more slow_request blocks
-                                        as defined above.
+                                      description: A slow_request blocks as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          count:
+                                            description: The number of occurrences
+                                              of the defined status_code in the specified
+                                              interval on which to trigger this rule.
+                                            type: number
+                                          interval:
+                                            description: The time interval in the
+                                              form hh:mm:ss.
+                                            type: string
+                                          path:
+                                            description: The path to which this rule
+                                              status code applies.
+                                            type: string
+                                          timeTaken:
+                                            description: The threshold of time passed
+                                              to qualify as a Slow Request in hh:mm:ss.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    slowRequestWithPath:
+                                      description: One or more slow_request_with_path
+                                        blocks as defined above.
                                       items:
                                         properties:
                                           count:

@@ -298,6 +298,11 @@ spec:
                     description: Specifies the name of the sample schema to apply
                       when creating this database. Possible value is AdventureWorksLT.
                     type: string
+                  secondaryType:
+                    description: How do you want your replica to be made? Valid values
+                      include Geo and Named. Defaults to Geo. Changing this forces
+                      a new resource to be created.
+                    type: string
                   serverId:
                     description: The id of the MS SQL Server on which to create the
                       database. Changing this forces a new resource to be created.
@@ -762,6 +767,11 @@ spec:
                   sampleName:
                     description: Specifies the name of the sample schema to apply
                       when creating this database. Possible value is AdventureWorksLT.
+                    type: string
+                  secondaryType:
+                    description: How do you want your replica to be made? Valid values
+                      include Geo and Named. Defaults to Geo. Changing this forces
+                      a new resource to be created.
                     type: string
                   shortTermRetentionPolicy:
                     description: A short_term_retention_policy block as defined below.
@@ -1292,6 +1302,11 @@ spec:
                   sampleName:
                     description: Specifies the name of the sample schema to apply
                       when creating this database. Possible value is AdventureWorksLT.
+                    type: string
+                  secondaryType:
+                    description: How do you want your replica to be made? Valid values
+                      include Geo and Named. Defaults to Geo. Changing this forces
+                      a new resource to be created.
                     type: string
                   serverId:
                     description: The id of the MS SQL Server on which to create the

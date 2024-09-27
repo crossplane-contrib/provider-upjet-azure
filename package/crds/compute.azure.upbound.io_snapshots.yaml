@@ -77,6 +77,11 @@ spec:
                     description: Indicates how the snapshot is to be created. Possible
                       values are Copy or Import.
                     type: string
+                  diskAccessId:
+                    description: Specifies the ID of the Disk Access which should
+                      be used for this Snapshot. This is used in conjunction with
+                      setting network_access_policy to AllowPrivate.
+                    type: string
                   diskSizeGb:
                     description: The size of the Snapshotted Disk in GB.
                     type: number
@@ -126,6 +131,14 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  networkAccessPolicy:
+                    description: Policy for accessing the disk via network. Possible
+                      values are AllowAll, AllowPrivate, or DenyAll. Defaults to AllowAll.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Policy for controlling export on the disk. Possible
+                      values are true or false. Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the Snapshot. Changing this forces a new resource to be created.
@@ -321,6 +334,11 @@ spec:
                     description: Indicates how the snapshot is to be created. Possible
                       values are Copy or Import.
                     type: string
+                  diskAccessId:
+                    description: Specifies the ID of the Disk Access which should
+                      be used for this Snapshot. This is used in conjunction with
+                      setting network_access_policy to AllowPrivate.
+                    type: string
                   diskSizeGb:
                     description: The size of the Snapshotted Disk in GB.
                     type: number
@@ -370,6 +388,14 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  networkAccessPolicy:
+                    description: Policy for accessing the disk via network. Possible
+                      values are AllowAll, AllowPrivate, or DenyAll. Defaults to AllowAll.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Policy for controlling export on the disk. Possible
+                      values are true or false. Defaults to true.
+                    type: boolean
                   sourceResourceId:
                     description: Specifies a reference to an existing snapshot, when
                       create_option is Copy. Changing this forces a new resource to
@@ -653,6 +679,11 @@ spec:
                     description: Indicates how the snapshot is to be created. Possible
                       values are Copy or Import.
                     type: string
+                  diskAccessId:
+                    description: Specifies the ID of the Disk Access which should
+                      be used for this Snapshot. This is used in conjunction with
+                      setting network_access_policy to AllowPrivate.
+                    type: string
                   diskSizeGb:
                     description: The size of the Snapshotted Disk in GB.
                     type: number
@@ -705,6 +736,14 @@ spec:
                     description: Specifies the supported Azure location where the
                       resource exists. Changing this forces a new resource to be created.
                     type: string
+                  networkAccessPolicy:
+                    description: Policy for accessing the disk via network. Possible
+                      values are AllowAll, AllowPrivate, or DenyAll. Defaults to AllowAll.
+                    type: string
+                  publicNetworkAccessEnabled:
+                    description: Policy for controlling export on the disk. Possible
+                      values are true or false. Defaults to true.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which to create
                       the Snapshot. Changing this forces a new resource to be created.

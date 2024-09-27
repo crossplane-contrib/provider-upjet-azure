@@ -77,6 +77,33 @@ spec:
                     description: Description of the resource. Changing this forces
                       a new Load Test to be created.
                     type: string
+                  encryption:
+                    description: An encryption block as defined below. Changing this
+                      forces a new Load Test to be created.
+                    properties:
+                      identity:
+                        description: An identity block as defined below. Changing
+                          this forces a new Load Test to be created.
+                        properties:
+                          identityId:
+                            description: The User Assigned Identity ID that should
+                              be assigned to this Load Test Encryption. Changing this
+                              forces a new Load Test to be created.
+                            type: string
+                          type:
+                            description: Specifies the type of Managed Identity that
+                              should be assigned to this Load Test. Possible values
+                              are SystemAssigned, SystemAssigned, UserAssigned and
+                              UserAssigned.
+                            type: string
+                        type: object
+                      keyUrl:
+                        description: The URI specifying the Key vault and key to be
+                          used to encrypt data in this resource. The URI should include
+                          the key version. Changing this forces a new Load Test to
+                          be created.
+                        type: string
+                    type: object
                   identity:
                     description: An identity block as defined below. Specifies the
                       Managed Identity which should be assigned to this Load Test.
@@ -206,6 +233,37 @@ spec:
                     description: Description of the resource. Changing this forces
                       a new Load Test to be created.
                     type: string
+                  encryption:
+                    description: An encryption block as defined below. Changing this
+                      forces a new Load Test to be created.
+                    items:
+                      properties:
+                        identity:
+                          description: An identity block as defined below. Changing
+                            this forces a new Load Test to be created.
+                          items:
+                            properties:
+                              identityId:
+                                description: The User Assigned Identity ID that should
+                                  be assigned to this Load Test Encryption. Changing
+                                  this forces a new Load Test to be created.
+                                type: string
+                              type:
+                                description: Specifies the type of Managed Identity
+                                  that should be assigned to this Load Test. Possible
+                                  values are SystemAssigned, SystemAssigned, UserAssigned
+                                  and UserAssigned.
+                                type: string
+                            type: object
+                          type: array
+                        keyUrl:
+                          description: The URI specifying the Key vault and key to
+                            be used to encrypt data in this resource. The URI should
+                            include the key version. Changing this forces a new Load
+                            Test to be created.
+                          type: string
+                      type: object
+                    type: array
                   identity:
                     description: An identity block as defined below. Specifies the
                       Managed Identity which should be assigned to this Load Test.
@@ -421,6 +479,33 @@ spec:
                     description: Description of the resource. Changing this forces
                       a new Load Test to be created.
                     type: string
+                  encryption:
+                    description: An encryption block as defined below. Changing this
+                      forces a new Load Test to be created.
+                    properties:
+                      identity:
+                        description: An identity block as defined below. Changing
+                          this forces a new Load Test to be created.
+                        properties:
+                          identityId:
+                            description: The User Assigned Identity ID that should
+                              be assigned to this Load Test Encryption. Changing this
+                              forces a new Load Test to be created.
+                            type: string
+                          type:
+                            description: Specifies the type of Managed Identity that
+                              should be assigned to this Load Test. Possible values
+                              are SystemAssigned, SystemAssigned, UserAssigned and
+                              UserAssigned.
+                            type: string
+                        type: object
+                      keyUrl:
+                        description: The URI specifying the Key vault and key to be
+                          used to encrypt data in this resource. The URI should include
+                          the key version. Changing this forces a new Load Test to
+                          be created.
+                        type: string
+                    type: object
                   id:
                     description: The ID of the Load Test.
                     type: string

@@ -405,6 +405,32 @@ spec:
                           x-kubernetes-list-type: set
                       type: object
                     type: array
+                  tieringPolicy:
+                    description: A tiering_policy block as defined below.
+                    items:
+                      properties:
+                        archivedRestorePoint:
+                          description: An archived_restore_point block as defined
+                            below.
+                          items:
+                            properties:
+                              duration:
+                                description: The number of days/weeks/months/years
+                                  to retain backups in current tier before tiering.
+                                type: number
+                              durationType:
+                                description: The retention duration type. Possible
+                                  values are Days, Weeks, Months and Years.
+                                type: string
+                              mode:
+                                description: The tiering mode to control automatic
+                                  tiering of recovery points. Possible values are
+                                  TierAfter and TierRecommended.
+                                type: string
+                            type: object
+                          type: array
+                      type: object
+                    type: array
                   timezone:
                     description: Specifies the timezone. the possible values are defined
                       here. Defaults to UTC
@@ -593,6 +619,32 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  tieringPolicy:
+                    description: A tiering_policy block as defined below.
+                    items:
+                      properties:
+                        archivedRestorePoint:
+                          description: An archived_restore_point block as defined
+                            below.
+                          items:
+                            properties:
+                              duration:
+                                description: The number of days/weeks/months/years
+                                  to retain backups in current tier before tiering.
+                                type: number
+                              durationType:
+                                description: The retention duration type. Possible
+                                  values are Days, Weeks, Months and Years.
+                                type: string
+                              mode:
+                                description: The tiering mode to control automatic
+                                  tiering of recovery points. Possible values are
+                                  TierAfter and TierRecommended.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   timezone:
@@ -958,6 +1010,32 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                      type: object
+                    type: array
+                  tieringPolicy:
+                    description: A tiering_policy block as defined below.
+                    items:
+                      properties:
+                        archivedRestorePoint:
+                          description: An archived_restore_point block as defined
+                            below.
+                          items:
+                            properties:
+                              duration:
+                                description: The number of days/weeks/months/years
+                                  to retain backups in current tier before tiering.
+                                type: number
+                              durationType:
+                                description: The retention duration type. Possible
+                                  values are Days, Weeks, Months and Years.
+                                type: string
+                              mode:
+                                description: The tiering mode to control automatic
+                                  tiering of recovery points. Possible values are
+                                  TierAfter and TierRecommended.
+                                type: string
+                            type: object
+                          type: array
                       type: object
                     type: array
                   timezone:

@@ -216,11 +216,17 @@ type StorageAccountIdentityParameters struct {
 
 type WorkspaceInitParameters struct {
 
+	// Access Connector ID to use when default storage account firewall is enabled.
+	AccessConnectorID *string `json:"accessConnectorId,omitempty" tf:"access_connector_id,omitempty"`
+
 	// A custom_parameters block as documented below.
 	CustomParameters []CustomParametersInitParameters `json:"customParameters,omitempty" tf:"custom_parameters,omitempty"`
 
 	// Is the workspace enabled for customer managed key encryption? If true this enables the Managed Identity for the managed storage account. Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
+
+	// Disallow public access to default storage account. Defaults to false.
+	DefaultStorageFirewallEnabled *bool `json:"defaultStorageFirewallEnabled,omitempty" tf:"default_storage_firewall_enabled,omitempty"`
 
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
@@ -230,6 +236,9 @@ type WorkspaceInitParameters struct {
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Resource ID of the Key Vault which contains the managed_disk_cmk_key_vault_key_id key.
+	ManagedDiskCmkKeyVaultID *string `json:"managedDiskCmkKeyVaultId,omitempty" tf:"managed_disk_cmk_key_vault_id,omitempty"`
 
 	// Customer managed encryption properties for the Databricks Workspace managed disks.
 	ManagedDiskCmkKeyVaultKeyID *string `json:"managedDiskCmkKeyVaultKeyId,omitempty" tf:"managed_disk_cmk_key_vault_key_id,omitempty"`
@@ -248,6 +257,9 @@ type WorkspaceInitParameters struct {
 	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
 	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+
+	// Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id key.
+	ManagedServicesCmkKeyVaultID *string `json:"managedServicesCmkKeyVaultId,omitempty" tf:"managed_services_cmk_key_vault_id,omitempty"`
 
 	// Customer managed encryption properties for the Databricks Workspace managed resources(e.g. Notebooks and Artifacts).
 	ManagedServicesCmkKeyVaultKeyID *string `json:"managedServicesCmkKeyVaultKeyId,omitempty" tf:"managed_services_cmk_key_vault_key_id,omitempty"`
@@ -268,11 +280,17 @@ type WorkspaceInitParameters struct {
 
 type WorkspaceObservation struct {
 
+	// Access Connector ID to use when default storage account firewall is enabled.
+	AccessConnectorID *string `json:"accessConnectorId,omitempty" tf:"access_connector_id,omitempty"`
+
 	// A custom_parameters block as documented below.
 	CustomParameters []CustomParametersObservation `json:"customParameters,omitempty" tf:"custom_parameters,omitempty"`
 
 	// Is the workspace enabled for customer managed key encryption? If true this enables the Managed Identity for the managed storage account. Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
+
+	// Disallow public access to default storage account. Defaults to false.
+	DefaultStorageFirewallEnabled *bool `json:"defaultStorageFirewallEnabled,omitempty" tf:"default_storage_firewall_enabled,omitempty"`
 
 	// The ID of Managed Disk Encryption Set created by the Databricks Workspace.
 	DiskEncryptionSetID *string `json:"diskEncryptionSetId,omitempty" tf:"disk_encryption_set_id,omitempty"`
@@ -289,6 +307,9 @@ type WorkspaceObservation struct {
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Resource ID of the Key Vault which contains the managed_disk_cmk_key_vault_key_id key.
+	ManagedDiskCmkKeyVaultID *string `json:"managedDiskCmkKeyVaultId,omitempty" tf:"managed_disk_cmk_key_vault_id,omitempty"`
+
 	// Customer managed encryption properties for the Databricks Workspace managed disks.
 	ManagedDiskCmkKeyVaultKeyID *string `json:"managedDiskCmkKeyVaultKeyId,omitempty" tf:"managed_disk_cmk_key_vault_key_id,omitempty"`
 
@@ -303,6 +324,9 @@ type WorkspaceObservation struct {
 
 	// The name of the resource group where Azure should place the managed Databricks resources. Changing this forces a new resource to be created.
 	ManagedResourceGroupName *string `json:"managedResourceGroupName,omitempty" tf:"managed_resource_group_name,omitempty"`
+
+	// Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id key.
+	ManagedServicesCmkKeyVaultID *string `json:"managedServicesCmkKeyVaultId,omitempty" tf:"managed_services_cmk_key_vault_id,omitempty"`
 
 	// Customer managed encryption properties for the Databricks Workspace managed resources(e.g. Notebooks and Artifacts).
 	ManagedServicesCmkKeyVaultKeyID *string `json:"managedServicesCmkKeyVaultKeyId,omitempty" tf:"managed_services_cmk_key_vault_key_id,omitempty"`
@@ -335,6 +359,10 @@ type WorkspaceObservation struct {
 
 type WorkspaceParameters struct {
 
+	// Access Connector ID to use when default storage account firewall is enabled.
+	// +kubebuilder:validation:Optional
+	AccessConnectorID *string `json:"accessConnectorId,omitempty" tf:"access_connector_id,omitempty"`
+
 	// A custom_parameters block as documented below.
 	// +kubebuilder:validation:Optional
 	CustomParameters []CustomParametersParameters `json:"customParameters,omitempty" tf:"custom_parameters,omitempty"`
@@ -342,6 +370,10 @@ type WorkspaceParameters struct {
 	// Is the workspace enabled for customer managed key encryption? If true this enables the Managed Identity for the managed storage account. Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
+
+	// Disallow public access to default storage account. Defaults to false.
+	// +kubebuilder:validation:Optional
+	DefaultStorageFirewallEnabled *bool `json:"defaultStorageFirewallEnabled,omitempty" tf:"default_storage_firewall_enabled,omitempty"`
 
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -354,6 +386,10 @@ type WorkspaceParameters struct {
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Resource ID of the Key Vault which contains the managed_disk_cmk_key_vault_key_id key.
+	// +kubebuilder:validation:Optional
+	ManagedDiskCmkKeyVaultID *string `json:"managedDiskCmkKeyVaultId,omitempty" tf:"managed_disk_cmk_key_vault_id,omitempty"`
 
 	// Customer managed encryption properties for the Databricks Workspace managed disks.
 	// +kubebuilder:validation:Optional
@@ -375,6 +411,10 @@ type WorkspaceParameters struct {
 	// Selector for a ResourceGroup in azure to populate managedResourceGroupName.
 	// +kubebuilder:validation:Optional
 	ManagedResourceGroupNameSelector *v1.Selector `json:"managedResourceGroupNameSelector,omitempty" tf:"-"`
+
+	// Resource ID of the Key Vault which contains the managed_services_cmk_key_vault_key_id key.
+	// +kubebuilder:validation:Optional
+	ManagedServicesCmkKeyVaultID *string `json:"managedServicesCmkKeyVaultId,omitempty" tf:"managed_services_cmk_key_vault_id,omitempty"`
 
 	// Customer managed encryption properties for the Databricks Workspace managed resources(e.g. Notebooks and Artifacts).
 	// +kubebuilder:validation:Optional

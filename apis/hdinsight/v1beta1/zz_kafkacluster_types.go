@@ -191,6 +191,9 @@ type KafkaClusterInitParameters struct {
 	// A network block as defined below.
 	Network []KafkaClusterNetworkInitParameters `json:"network,omitempty" tf:"network,omitempty"`
 
+	// A private_link_configuration block as defined below.
+	PrivateLinkConfiguration []KafkaClusterPrivateLinkConfigurationInitParameters `json:"privateLinkConfiguration,omitempty" tf:"private_link_configuration,omitempty"`
+
 	// A rest_proxy block as defined below.
 	RestProxy []RestProxyInitParameters `json:"restProxy,omitempty" tf:"rest_proxy,omitempty"`
 
@@ -481,6 +484,9 @@ type KafkaClusterObservation struct {
 	// A network block as defined below.
 	Network []KafkaClusterNetworkObservation `json:"network,omitempty" tf:"network,omitempty"`
 
+	// A private_link_configuration block as defined below.
+	PrivateLinkConfiguration []KafkaClusterPrivateLinkConfigurationObservation `json:"privateLinkConfiguration,omitempty" tf:"private_link_configuration,omitempty"`
+
 	// Specifies the name of the Resource Group in which this HDInsight Kafka Cluster should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -559,6 +565,10 @@ type KafkaClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Network []KafkaClusterNetworkParameters `json:"network,omitempty" tf:"network,omitempty"`
 
+	// A private_link_configuration block as defined below.
+	// +kubebuilder:validation:Optional
+	PrivateLinkConfiguration []KafkaClusterPrivateLinkConfigurationParameters `json:"privateLinkConfiguration,omitempty" tf:"private_link_configuration,omitempty"`
+
 	// Specifies the name of the Resource Group in which this HDInsight Kafka Cluster should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -604,6 +614,121 @@ type KafkaClusterParameters struct {
 	// Specifies the Tier which should be used for this HDInsight Kafka Cluster. Possible values are Standard or Premium. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
+}
+
+type KafkaClusterPrivateLinkConfigurationIPConfigurationInitParameters struct {
+
+	// The name of the script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether this IP configuration is primary.
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The private IP address of the IP configuration.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The private IP allocation method. The only possible value now is Dynamic.
+	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type KafkaClusterPrivateLinkConfigurationIPConfigurationObservation struct {
+
+	// The name of the script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether this IP configuration is primary.
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The private IP address of the IP configuration.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The private IP allocation method. The only possible value now is Dynamic.
+	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type KafkaClusterPrivateLinkConfigurationIPConfigurationParameters struct {
+
+	// The name of the script action.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Indicates whether this IP configuration is primary.
+	// +kubebuilder:validation:Optional
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The private IP address of the IP configuration.
+	// +kubebuilder:validation:Optional
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The private IP allocation method. The only possible value now is Dynamic.
+	// +kubebuilder:validation:Optional
+	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type KafkaClusterPrivateLinkConfigurationInitParameters struct {
+
+	// The ID of the private link service group.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	IPConfiguration []KafkaClusterPrivateLinkConfigurationIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The name of the private link configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type KafkaClusterPrivateLinkConfigurationObservation struct {
+
+	// The ID of the private link service group.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	IPConfiguration []KafkaClusterPrivateLinkConfigurationIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The name of the private link configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type KafkaClusterPrivateLinkConfigurationParameters struct {
+
+	// The ID of the private link service group.
+	// +kubebuilder:validation:Optional
+	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IPConfiguration []KafkaClusterPrivateLinkConfigurationIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
+
+	// The name of the private link configuration.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
 }
 
 type KafkaClusterRolesHeadNodeInitParameters struct {

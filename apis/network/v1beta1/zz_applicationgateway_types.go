@@ -1300,6 +1300,12 @@ type IdentityObservation struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// The ID of the Application Gateway.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the Application Gateway.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -1309,7 +1315,7 @@ type IdentityParameters struct {
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Application Gateway.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional

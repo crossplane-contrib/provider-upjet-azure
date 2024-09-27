@@ -991,6 +991,11 @@ func (in *MSSQLDatabaseInitParameters) DeepCopyInto(out *MSSQLDatabaseInitParame
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecondaryType != nil {
+		in, out := &in.SecondaryType, &out.SecondaryType
+		*out = new(string)
+		**out = **in
+	}
 	if in.ShortTermRetentionPolicy != nil {
 		in, out := &in.ShortTermRetentionPolicy, &out.ShortTermRetentionPolicy
 		*out = make([]ShortTermRetentionPolicyInitParameters, len(*in))
@@ -1234,6 +1239,11 @@ func (in *MSSQLDatabaseObservation) DeepCopyInto(out *MSSQLDatabaseObservation) 
 		*out = new(string)
 		**out = **in
 	}
+	if in.SecondaryType != nil {
+		in, out := &in.SecondaryType, &out.SecondaryType
+		*out = new(string)
+		**out = **in
+	}
 	if in.ServerID != nil {
 		in, out := &in.ServerID, &out.ServerID
 		*out = new(string)
@@ -1432,6 +1442,11 @@ func (in *MSSQLDatabaseParameters) DeepCopyInto(out *MSSQLDatabaseParameters) {
 	}
 	if in.SampleName != nil {
 		in, out := &in.SampleName, &out.SampleName
+		*out = new(string)
+		**out = **in
+	}
+	if in.SecondaryType != nil {
+		in, out := &in.SecondaryType, &out.SecondaryType
 		*out = new(string)
 		**out = **in
 	}

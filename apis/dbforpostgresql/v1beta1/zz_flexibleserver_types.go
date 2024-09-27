@@ -165,6 +165,9 @@ type FlexibleServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
+	// Specifies whether this PostgreSQL Flexible Server is publicly accessible. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
 	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
@@ -360,6 +363,10 @@ type FlexibleServerParameters struct {
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether this PostgreSQL Flexible Server is publicly accessible. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
 	// +kubebuilder:validation:Optional

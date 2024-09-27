@@ -15,17 +15,27 @@ import (
 
 type AdditionalCapabilitiesInitParameters struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type AdditionalCapabilitiesObservation struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type AdditionalCapabilitiesParameters struct {
+
+	// Whether to enable the hibernation capability or not.
+	// +kubebuilder:validation:Optional
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
 
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	// +kubebuilder:validation:Optional

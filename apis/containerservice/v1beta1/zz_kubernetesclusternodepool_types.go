@@ -706,21 +706,41 @@ type KubernetesClusterNodePoolParameters struct {
 
 type KubernetesClusterNodePoolUpgradeSettingsInitParameters struct {
 
+	// The amount of time in minutes to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. Unsetting this after configuring it will force a new resource to be created.
+	DrainTimeoutInMinutes *float64 `json:"drainTimeoutInMinutes,omitempty" tf:"drain_timeout_in_minutes,omitempty"`
+
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
 type KubernetesClusterNodePoolUpgradeSettingsObservation struct {
 
+	// The amount of time in minutes to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. Unsetting this after configuring it will force a new resource to be created.
+	DrainTimeoutInMinutes *float64 `json:"drainTimeoutInMinutes,omitempty" tf:"drain_timeout_in_minutes,omitempty"`
+
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	MaxSurge *string `json:"maxSurge,omitempty" tf:"max_surge,omitempty"`
+
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
 type KubernetesClusterNodePoolUpgradeSettingsParameters struct {
 
+	// The amount of time in minutes to wait on eviction of pods and graceful termination per node. This eviction wait time honors waiting on pod disruption budgets. If this time is exceeded, the upgrade fails. Unsetting this after configuring it will force a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DrainTimeoutInMinutes *float64 `json:"drainTimeoutInMinutes,omitempty" tf:"drain_timeout_in_minutes,omitempty"`
+
 	// The maximum number or percentage of nodes which will be added to the Node Pool size during an upgrade.
 	// +kubebuilder:validation:Optional
 	MaxSurge *string `json:"maxSurge" tf:"max_surge,omitempty"`
+
+	// The amount of time in minutes to wait after draining a node and before reimaging and moving on to next node. Defaults to 0.
+	// +kubebuilder:validation:Optional
+	NodeSoakDurationInMinutes *float64 `json:"nodeSoakDurationInMinutes,omitempty" tf:"node_soak_duration_in_minutes,omitempty"`
 }
 
 type KubernetesClusterNodePoolWindowsProfileInitParameters struct {

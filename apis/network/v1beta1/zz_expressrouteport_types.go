@@ -29,6 +29,12 @@ type ExpressRoutePortIdentityObservation struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// The ID of the Express Route Port.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the Express Route Port.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
 	// Specifies the type of Managed Service Identity that should be configured on this Express Route Port. Only possible value is UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -38,7 +44,7 @@ type ExpressRoutePortIdentityParameters struct {
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Express Route Port.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Express Route Port. Only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional

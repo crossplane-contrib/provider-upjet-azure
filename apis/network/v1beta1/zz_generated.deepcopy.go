@@ -11397,6 +11397,11 @@ func (in *ExpressRouteConnectionInitParameters) DeepCopyInto(out *ExpressRouteCo
 		*out = new(bool)
 		**out = **in
 	}
+	if in.PrivateLinkFastPathEnabled != nil {
+		in, out := &in.PrivateLinkFastPathEnabled, &out.PrivateLinkFastPathEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Routing != nil {
 		in, out := &in.Routing, &out.Routing
 		*out = make([]RoutingInitParameters, len(*in))
@@ -11486,6 +11491,11 @@ func (in *ExpressRouteConnectionObservation) DeepCopyInto(out *ExpressRouteConne
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrivateLinkFastPathEnabled != nil {
+		in, out := &in.PrivateLinkFastPathEnabled, &out.PrivateLinkFastPathEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Routing != nil {
 		in, out := &in.Routing, &out.Routing
 		*out = make([]RoutingObservation, len(*in))
@@ -11557,6 +11567,11 @@ func (in *ExpressRouteConnectionParameters) DeepCopyInto(out *ExpressRouteConnec
 		in, out := &in.ExpressRouteGatewayIDSelector, &out.ExpressRouteGatewayIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PrivateLinkFastPathEnabled != nil {
+		in, out := &in.PrivateLinkFastPathEnabled, &out.PrivateLinkFastPathEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Routing != nil {
 		in, out := &in.Routing, &out.Routing
@@ -11980,6 +11995,16 @@ func (in *ExpressRoutePortIdentityObservation) DeepCopyInto(out *ExpressRoutePor
 				**out = **in
 			}
 		}
+	}
+	if in.PrincipalID != nil {
+		in, out := &in.PrincipalID, &out.PrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.TenantID != nil {
+		in, out := &in.TenantID, &out.TenantID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -18583,6 +18608,16 @@ func (in *IdentityObservation) DeepCopyInto(out *IdentityObservation) {
 				**out = **in
 			}
 		}
+	}
+	if in.PrincipalID != nil {
+		in, out := &in.PrincipalID, &out.PrincipalID
+		*out = new(string)
+		**out = **in
+	}
+	if in.TenantID != nil {
+		in, out := &in.TenantID, &out.TenantID
+		*out = new(string)
+		**out = **in
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -45448,6 +45483,11 @@ func (in *SubnetInitParameters) DeepCopyInto(out *SubnetInitParameters) {
 			}
 		}
 	}
+	if in.DefaultOutboundAccessEnabled != nil {
+		in, out := &in.DefaultOutboundAccessEnabled, &out.DefaultOutboundAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Delegation != nil {
 		in, out := &in.Delegation, &out.Delegation
 		*out = make([]DelegationInitParameters, len(*in))
@@ -45463,6 +45503,11 @@ func (in *SubnetInitParameters) DeepCopyInto(out *SubnetInitParameters) {
 	if in.EnforcePrivateLinkServiceNetworkPolicies != nil {
 		in, out := &in.EnforcePrivateLinkServiceNetworkPolicies, &out.EnforcePrivateLinkServiceNetworkPolicies
 		*out = new(bool)
+		**out = **in
+	}
+	if in.PrivateEndpointNetworkPolicies != nil {
+		in, out := &in.PrivateEndpointNetworkPolicies, &out.PrivateEndpointNetworkPolicies
+		*out = new(string)
 		**out = **in
 	}
 	if in.PrivateEndpointNetworkPoliciesEnabled != nil {
@@ -45983,6 +46028,11 @@ func (in *SubnetObservation) DeepCopyInto(out *SubnetObservation) {
 			}
 		}
 	}
+	if in.DefaultOutboundAccessEnabled != nil {
+		in, out := &in.DefaultOutboundAccessEnabled, &out.DefaultOutboundAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Delegation != nil {
 		in, out := &in.Delegation, &out.Delegation
 		*out = make([]DelegationObservation, len(*in))
@@ -46002,6 +46052,11 @@ func (in *SubnetObservation) DeepCopyInto(out *SubnetObservation) {
 	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
+		*out = new(string)
+		**out = **in
+	}
+	if in.PrivateEndpointNetworkPolicies != nil {
+		in, out := &in.PrivateEndpointNetworkPolicies, &out.PrivateEndpointNetworkPolicies
 		*out = new(string)
 		**out = **in
 	}
@@ -46073,6 +46128,11 @@ func (in *SubnetParameters) DeepCopyInto(out *SubnetParameters) {
 			}
 		}
 	}
+	if in.DefaultOutboundAccessEnabled != nil {
+		in, out := &in.DefaultOutboundAccessEnabled, &out.DefaultOutboundAccessEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Delegation != nil {
 		in, out := &in.Delegation, &out.Delegation
 		*out = make([]DelegationParameters, len(*in))
@@ -46088,6 +46148,11 @@ func (in *SubnetParameters) DeepCopyInto(out *SubnetParameters) {
 	if in.EnforcePrivateLinkServiceNetworkPolicies != nil {
 		in, out := &in.EnforcePrivateLinkServiceNetworkPolicies, &out.EnforcePrivateLinkServiceNetworkPolicies
 		*out = new(bool)
+		**out = **in
+	}
+	if in.PrivateEndpointNetworkPolicies != nil {
+		in, out := &in.PrivateEndpointNetworkPolicies, &out.PrivateEndpointNetworkPolicies
+		*out = new(string)
 		**out = **in
 	}
 	if in.PrivateEndpointNetworkPoliciesEnabled != nil {
@@ -55930,6 +55995,11 @@ func (in *VirtualNetworkGatewayConnectionInitParameters) DeepCopyInto(out *Virtu
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.PrivateLinkFastPathEnabled != nil {
+		in, out := &in.PrivateLinkFastPathEnabled, &out.PrivateLinkFastPathEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.RoutingWeight != nil {
 		in, out := &in.RoutingWeight, &out.RoutingWeight
 		*out = new(float64)
@@ -56286,6 +56356,11 @@ func (in *VirtualNetworkGatewayConnectionObservation) DeepCopyInto(out *VirtualN
 		*out = new(string)
 		**out = **in
 	}
+	if in.PrivateLinkFastPathEnabled != nil {
+		in, out := &in.PrivateLinkFastPathEnabled, &out.PrivateLinkFastPathEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
 		*out = new(string)
@@ -56459,6 +56534,11 @@ func (in *VirtualNetworkGatewayConnectionParameters) DeepCopyInto(out *VirtualNe
 		in, out := &in.PeerVirtualNetworkGatewayIDSelector, &out.PeerVirtualNetworkGatewayIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PrivateLinkFastPathEnabled != nil {
+		in, out := &in.PrivateLinkFastPathEnabled, &out.PrivateLinkFastPathEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName

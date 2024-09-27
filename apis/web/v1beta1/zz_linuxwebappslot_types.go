@@ -86,8 +86,11 @@ type AutoHealSettingTriggerInitParameters struct {
 	// A requests block as defined above.
 	Requests []TriggerRequestsInitParameters `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	SlowRequest []TriggerSlowRequestInitParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	SlowRequestWithPath []TriggerSlowRequestWithPathInitParameters `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	StatusCode []TriggerStatusCodeInitParameters `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -98,8 +101,11 @@ type AutoHealSettingTriggerObservation struct {
 	// A requests block as defined above.
 	Requests []TriggerRequestsObservation `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	SlowRequest []TriggerSlowRequestObservation `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	SlowRequestWithPath []TriggerSlowRequestWithPathObservation `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	StatusCode []TriggerStatusCodeObservation `json:"statusCode,omitempty" tf:"status_code,omitempty"`
@@ -111,9 +117,13 @@ type AutoHealSettingTriggerParameters struct {
 	// +kubebuilder:validation:Optional
 	Requests []TriggerRequestsParameters `json:"requests,omitempty" tf:"requests,omitempty"`
 
-	// One or more slow_request blocks as defined above.
+	// A slow_request block as defined above.
 	// +kubebuilder:validation:Optional
 	SlowRequest []TriggerSlowRequestParameters `json:"slowRequest,omitempty" tf:"slow_request,omitempty"`
+
+	// One or more slow_request_with_path blocks as defined above.
+	// +kubebuilder:validation:Optional
+	SlowRequestWithPath []TriggerSlowRequestWithPathParameters `json:"slowRequestWithPath,omitempty" tf:"slow_request_with_path,omitempty"`
 
 	// One or more status_code blocks as defined above.
 	// +kubebuilder:validation:Optional
@@ -3376,6 +3386,55 @@ type TriggerSlowRequestObservation struct {
 }
 
 type TriggerSlowRequestParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	// +kubebuilder:validation:Optional
+	Count *float64 `json:"count" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	// +kubebuilder:validation:Optional
+	Interval *string `json:"interval" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	// +kubebuilder:validation:Optional
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	// +kubebuilder:validation:Optional
+	TimeTaken *string `json:"timeTaken" tf:"time_taken,omitempty"`
+}
+
+type TriggerSlowRequestWithPathInitParameters struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
+}
+
+type TriggerSlowRequestWithPathObservation struct {
+
+	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
+	Count *float64 `json:"count,omitempty" tf:"count,omitempty"`
+
+	// The time interval in the form hh:mm:ss.
+	Interval *string `json:"interval,omitempty" tf:"interval,omitempty"`
+
+	// The path to which this rule status code applies.
+	Path *string `json:"path,omitempty" tf:"path,omitempty"`
+
+	// The threshold of time passed to qualify as a Slow Request in hh:mm:ss.
+	TimeTaken *string `json:"timeTaken,omitempty" tf:"time_taken,omitempty"`
+}
+
+type TriggerSlowRequestWithPathParameters struct {
 
 	// The number of occurrences of the defined status_code in the specified interval on which to trigger this rule.
 	// +kubebuilder:validation:Optional

@@ -94,6 +94,9 @@ spec:
                       DB account. Defaults to false. Enabling and then disabling analytical
                       storage forces a new resource to be created.
                     type: boolean
+                  automaticFailoverEnabled:
+                    description: Enable automatic failover for this Cosmos DB account.
+                    type: boolean
                   backup:
                     description: A backup block as defined below.
                     items:
@@ -234,6 +237,11 @@ spec:
                     description: Enable multiple write locations for this Cosmos DB
                       account.
                     type: boolean
+                  freeTierEnabled:
+                    description: Enable the Free Tier pricing option for this Cosmos
+                      DB account. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                   geoLocation:
                     description: Specifies a geo_location resource, used to define
                       where data should be replicated with the failover_priority 0
@@ -317,6 +325,10 @@ spec:
                     description: The Server Version of a MongoDB account. Possible
                       values are 4.2, 4.0, 3.6, and 3.2.
                     type: string
+                  multipleWriteLocationsEnabled:
+                    description: Enable multiple write locations for this Cosmos DB
+                      account.
+                    type: boolean
                   networkAclBypassForAzureServices:
                     description: If Azure services can bypass ACLs. Defaults to false.
                     type: boolean
@@ -612,6 +624,9 @@ spec:
                       DB account. Defaults to false. Enabling and then disabling analytical
                       storage forces a new resource to be created.
                     type: boolean
+                  automaticFailoverEnabled:
+                    description: Enable automatic failover for this Cosmos DB account.
+                    type: boolean
                   backup:
                     description: A backup block as defined below.
                     items:
@@ -752,6 +767,11 @@ spec:
                     description: Enable multiple write locations for this Cosmos DB
                       account.
                     type: boolean
+                  freeTierEnabled:
+                    description: Enable the Free Tier pricing option for this Cosmos
+                      DB account. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                   geoLocation:
                     description: Specifies a geo_location resource, used to define
                       where data should be replicated with the failover_priority 0
@@ -835,6 +855,10 @@ spec:
                     description: The Server Version of a MongoDB account. Possible
                       values are 4.2, 4.0, 3.6, and 3.2.
                     type: string
+                  multipleWriteLocationsEnabled:
+                    description: Enable multiple write locations for this Cosmos DB
+                      account.
+                    type: boolean
                   networkAclBypassForAzureServices:
                     description: If Azure services can bypass ACLs. Defaults to false.
                     type: boolean
@@ -1225,6 +1249,9 @@ spec:
                       DB account. Defaults to false. Enabling and then disabling analytical
                       storage forces a new resource to be created.
                     type: boolean
+                  automaticFailoverEnabled:
+                    description: Enable automatic failover for this Cosmos DB account.
+                    type: boolean
                   backup:
                     description: A backup block as defined below.
                     items:
@@ -1368,6 +1395,11 @@ spec:
                   endpoint:
                     description: The endpoint used to connect to the CosmosDB account.
                     type: string
+                  freeTierEnabled:
+                    description: Enable the Free Tier pricing option for this Cosmos
+                      DB account. Defaults to false. Changing this forces a new resource
+                      to be created.
+                    type: boolean
                   geoLocation:
                     description: Specifies a geo_location resource, used to define
                       where data should be replicated with the failover_priority 0
@@ -1465,6 +1497,10 @@ spec:
                     description: The Server Version of a MongoDB account. Possible
                       values are 4.2, 4.0, 3.6, and 3.2.
                     type: string
+                  multipleWriteLocationsEnabled:
+                    description: Enable multiple write locations for this Cosmos DB
+                      account.
+                    type: boolean
                   networkAclBypassForAzureServices:
                     description: If Azure services can bypass ACLs. Defaults to false.
                     type: boolean

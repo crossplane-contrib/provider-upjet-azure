@@ -1305,8 +1305,32 @@ spec:
                                         type: object
                                       type: array
                                     slowRequest:
-                                      description: One or more slow_request blocks
-                                        as defined above.
+                                      description: A slow_request block as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          count:
+                                            description: The number of occurrences
+                                              of the defined status_code in the specified
+                                              interval on which to trigger this rule.
+                                            type: number
+                                          interval:
+                                            description: The time interval in the
+                                              form hh:mm:ss.
+                                            type: string
+                                          path:
+                                            description: The path to which this rule
+                                              status code applies.
+                                            type: string
+                                          timeTaken:
+                                            description: The threshold of time passed
+                                              to qualify as a Slow Request in hh:mm:ss.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    slowRequestWithPath:
+                                      description: One or more slow_request_with_path
+                                        blocks as defined above.
                                       items:
                                         properties:
                                           count:
@@ -1409,6 +1433,25 @@ spec:
                             values include: AllAllowed, FtpsOnly, Disabled. Defaults
                             to Disabled.'
                           type: string
+                        handlerMapping:
+                          description: One or more handler_mapping blocks as defined
+                            below.
+                          items:
+                            properties:
+                              arguments:
+                                description: Specify the command-line arguments to
+                                  be passed to the script processor.
+                                type: string
+                              extension:
+                                description: Specify which extension to be handled
+                                  by the specified FastCGI application.
+                                type: string
+                              scriptProcessorPath:
+                                description: Specify the absolute path to the FastCGI
+                                  application.
+                                type: string
+                            type: object
+                          type: array
                         healthCheckEvictionTimeInMin:
                           description: |-
                             The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
@@ -2925,8 +2968,32 @@ spec:
                                         type: object
                                       type: array
                                     slowRequest:
-                                      description: One or more slow_request blocks
-                                        as defined above.
+                                      description: A slow_request block as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          count:
+                                            description: The number of occurrences
+                                              of the defined status_code in the specified
+                                              interval on which to trigger this rule.
+                                            type: number
+                                          interval:
+                                            description: The time interval in the
+                                              form hh:mm:ss.
+                                            type: string
+                                          path:
+                                            description: The path to which this rule
+                                              status code applies.
+                                            type: string
+                                          timeTaken:
+                                            description: The threshold of time passed
+                                              to qualify as a Slow Request in hh:mm:ss.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    slowRequestWithPath:
+                                      description: One or more slow_request_with_path
+                                        blocks as defined above.
                                       items:
                                         properties:
                                           count:
@@ -3029,6 +3096,25 @@ spec:
                             values include: AllAllowed, FtpsOnly, Disabled. Defaults
                             to Disabled.'
                           type: string
+                        handlerMapping:
+                          description: One or more handler_mapping blocks as defined
+                            below.
+                          items:
+                            properties:
+                              arguments:
+                                description: Specify the command-line arguments to
+                                  be passed to the script processor.
+                                type: string
+                              extension:
+                                description: Specify which extension to be handled
+                                  by the specified FastCGI application.
+                                type: string
+                              scriptProcessorPath:
+                                description: Specify the absolute path to the FastCGI
+                                  application.
+                                type: string
+                            type: object
+                          type: array
                         healthCheckEvictionTimeInMin:
                           description: |-
                             The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
@@ -4775,8 +4861,32 @@ spec:
                                         type: object
                                       type: array
                                     slowRequest:
-                                      description: One or more slow_request blocks
-                                        as defined above.
+                                      description: A slow_request block as defined
+                                        above.
+                                      items:
+                                        properties:
+                                          count:
+                                            description: The number of occurrences
+                                              of the defined status_code in the specified
+                                              interval on which to trigger this rule.
+                                            type: number
+                                          interval:
+                                            description: The time interval in the
+                                              form hh:mm:ss.
+                                            type: string
+                                          path:
+                                            description: The path to which this rule
+                                              status code applies.
+                                            type: string
+                                          timeTaken:
+                                            description: The threshold of time passed
+                                              to qualify as a Slow Request in hh:mm:ss.
+                                            type: string
+                                        type: object
+                                      type: array
+                                    slowRequestWithPath:
+                                      description: One or more slow_request_with_path
+                                        blocks as defined above.
                                       items:
                                         properties:
                                           count:
@@ -4883,6 +4993,25 @@ spec:
                             values include: AllAllowed, FtpsOnly, Disabled. Defaults
                             to Disabled.'
                           type: string
+                        handlerMapping:
+                          description: One or more handler_mapping blocks as defined
+                            below.
+                          items:
+                            properties:
+                              arguments:
+                                description: Specify the command-line arguments to
+                                  be passed to the script processor.
+                                type: string
+                              extension:
+                                description: Specify which extension to be handled
+                                  by the specified FastCGI application.
+                                type: string
+                              scriptProcessorPath:
+                                description: Specify the absolute path to the FastCGI
+                                  application.
+                                type: string
+                            type: object
+                          type: array
                         healthCheckEvictionTimeInMin:
                           description: |-
                             The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.

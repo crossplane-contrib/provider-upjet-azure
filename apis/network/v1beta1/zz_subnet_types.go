@@ -76,6 +76,9 @@ type SubnetInitParameters struct {
 	// The address prefixes to use for the subnet.
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
+	// Enable default outbound access to the internet for the subnet. Defaults to true.
+	DefaultOutboundAccessEnabled *bool `json:"defaultOutboundAccessEnabled,omitempty" tf:"default_outbound_access_enabled,omitempty"`
+
 	// One or more delegation blocks as defined below.
 	Delegation []DelegationInitParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
@@ -83,7 +86,9 @@ type SubnetInitParameters struct {
 
 	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
 
-	// Enable or Disable network policies for the private endpoint on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
+	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
+
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
 	// Enable or Disable network policies for the private link service on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
@@ -103,6 +108,9 @@ type SubnetObservation struct {
 	// The address prefixes to use for the subnet.
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
+	// Enable default outbound access to the internet for the subnet. Defaults to true.
+	DefaultOutboundAccessEnabled *bool `json:"defaultOutboundAccessEnabled,omitempty" tf:"default_outbound_access_enabled,omitempty"`
+
 	// One or more delegation blocks as defined below.
 	Delegation []DelegationObservation `json:"delegation,omitempty" tf:"delegation,omitempty"`
 
@@ -113,7 +121,9 @@ type SubnetObservation struct {
 	// The subnet ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Enable or Disable network policies for the private endpoint on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
+	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
+
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
 	// Enable or Disable network policies for the private link service on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
@@ -140,6 +150,10 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	AddressPrefixes []*string `json:"addressPrefixes,omitempty" tf:"address_prefixes,omitempty"`
 
+	// Enable default outbound access to the internet for the subnet. Defaults to true.
+	// +kubebuilder:validation:Optional
+	DefaultOutboundAccessEnabled *bool `json:"defaultOutboundAccessEnabled,omitempty" tf:"default_outbound_access_enabled,omitempty"`
+
 	// One or more delegation blocks as defined below.
 	// +kubebuilder:validation:Optional
 	Delegation []DelegationParameters `json:"delegation,omitempty" tf:"delegation,omitempty"`
@@ -150,7 +164,10 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	EnforcePrivateLinkServiceNetworkPolicies *bool `json:"enforcePrivateLinkServiceNetworkPolicies,omitempty" tf:"enforce_private_link_service_network_policies,omitempty"`
 
-	// Enable or Disable network policies for the private endpoint on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	// Enable or Disable network policies for the private endpoint on the subnet. Possible values are Disabled, Enabled, NetworkSecurityGroupEnabled and RouteTableEnabled. Defaults to Disabled.
+	// +kubebuilder:validation:Optional
+	PrivateEndpointNetworkPolicies *string `json:"privateEndpointNetworkPolicies,omitempty" tf:"private_endpoint_network_policies,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
