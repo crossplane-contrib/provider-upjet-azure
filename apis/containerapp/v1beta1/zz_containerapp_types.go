@@ -1484,7 +1484,7 @@ type SecretInitParameters struct {
 
 	// The secret name.
 	// The secret name.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The value for this secret.
 	// The value for this secret.
@@ -1500,10 +1500,6 @@ type SecretObservation struct {
 	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
 	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
-
-	// The secret name.
-	// The secret name.
-	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 }
 
 type SecretParameters struct {
@@ -1521,7 +1517,7 @@ type SecretParameters struct {
 	// The secret name.
 	// The secret name.
 	// +kubebuilder:validation:Optional
-	Name *string `json:"name" tf:"name,omitempty"`
+	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The value for this secret.
 	// The value for this secret.
