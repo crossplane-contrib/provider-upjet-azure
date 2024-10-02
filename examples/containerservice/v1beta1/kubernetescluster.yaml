@@ -25,25 +25,23 @@ kind: KubernetesCluster
 metadata:
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     defaultNodePool:
-    - name: default
+    - enableHostEncryption: false
+      name: default
       nodeCount: 1
-      vmSize: Standard_D2_v2
-    dnsPrefix: exampleaks1
+      vmSize: Standard_DS2_v2
+      upgradeSettings:
+      - maxSurge: '10%'
+    dnsPrefix: dns
     identity:
     - type: SystemAssigned
-    location: West Europe
+    location: North Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-containerservice
-    tags:
-      Environment: Production
-    apiServerAccessProfile:
-      - authorizedIpRanges:
-         - 192.168.1.0/24
 
 ---
 
@@ -55,4 +53,4 @@ metadata:
   name: example-containerservice-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
-    location: West Europe
+    location: North Europe
