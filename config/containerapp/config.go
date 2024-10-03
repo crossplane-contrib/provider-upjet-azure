@@ -48,9 +48,4 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = group
 		r.Kind = "EnvironmentStorage"
 	})
-
-	p.AddResourceConfigurator("azurerm_container_app_job", func(r *config.Resource) {
-		r.ShortGroup = group
-		r.Kind = "Job"
-	})
 }

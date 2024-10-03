@@ -168,7 +168,12 @@ import (
 	budgetresourcegroup "github.com/upbound/provider-azure/internal/controller/consumption/budgetresourcegroup"
 	budgetsubscription "github.com/upbound/provider-azure/internal/controller/consumption/budgetsubscription"
 	containerapp "github.com/upbound/provider-azure/internal/controller/containerapp/containerapp"
+	customdomaincontainerapp "github.com/upbound/provider-azure/internal/controller/containerapp/customdomain"
 	environment "github.com/upbound/provider-azure/internal/controller/containerapp/environment"
+	environmentcertificate "github.com/upbound/provider-azure/internal/controller/containerapp/environmentcertificate"
+	environmentcustomdomain "github.com/upbound/provider-azure/internal/controller/containerapp/environmentcustomdomain"
+	environmentdaprcomponent "github.com/upbound/provider-azure/internal/controller/containerapp/environmentdaprcomponent"
+	environmentstorage "github.com/upbound/provider-azure/internal/controller/containerapp/environmentstorage"
 	agentpool "github.com/upbound/provider-azure/internal/controller/containerregistry/agentpool"
 	containerconnectedregistry "github.com/upbound/provider-azure/internal/controller/containerregistry/containerconnectedregistry"
 	registry "github.com/upbound/provider-azure/internal/controller/containerregistry/registry"
@@ -907,7 +912,12 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		budgetresourcegroup.Setup,
 		budgetsubscription.Setup,
 		containerapp.Setup,
+		customdomaincontainerapp.Setup,
 		environment.Setup,
+		environmentcertificate.Setup,
+		environmentcustomdomain.Setup,
+		environmentdaprcomponent.Setup,
+		environmentstorage.Setup,
 		agentpool.Setup,
 		containerconnectedregistry.Setup,
 		registry.Setup,

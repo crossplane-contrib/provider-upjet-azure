@@ -1,0 +1,163 @@
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: CustomDomain
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    certificateBindingType: SniEnabled
+    containerAppEnvironmentCertificateIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    containerAppIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerapp.azure.upbound.io/v1beta2
+kind: ContainerApp
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    containerAppEnvironmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ingress:
+    - allowInsecureConnections: false
+      externalEnabled: true
+      targetPort: 5000
+      trafficWeight:
+      - latestRevision: true
+        percentage: 100
+      transport: http
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    revisionMode: Single
+    template:
+    - container:
+      - cpu: 0.25
+        image: mcr.microsoft.com/azuredocs/containerapps-helloworld:latest
+        memory: 0.5Gi
+        name: examplecontainerapp
+
+---
+
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: EnvironmentCertificate
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    certificate_blob: ${filebase64("path/to/certificate_file.pfx")}
+    certificatePasswordSecretRef:
+      key: example-key
+      name: example-secret
+      namespace: upbound-system
+    containerAppEnvironmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: DNSTXTRecord
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    record:
+    - value: ${azurerm_container_app.example.custom_domain_verification_id}
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    ttl: 300
+    zoneNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta2
+kind: DNSZone
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInDays: 30
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/customdomain
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe

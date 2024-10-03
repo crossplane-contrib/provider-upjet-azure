@@ -10,7 +10,12 @@ import (
 	"github.com/crossplane/upjet/pkg/controller"
 
 	containerapp "github.com/upbound/provider-azure/internal/controller/containerapp/containerapp"
+	customdomain "github.com/upbound/provider-azure/internal/controller/containerapp/customdomain"
 	environment "github.com/upbound/provider-azure/internal/controller/containerapp/environment"
+	environmentcertificate "github.com/upbound/provider-azure/internal/controller/containerapp/environmentcertificate"
+	environmentcustomdomain "github.com/upbound/provider-azure/internal/controller/containerapp/environmentcustomdomain"
+	environmentdaprcomponent "github.com/upbound/provider-azure/internal/controller/containerapp/environmentdaprcomponent"
+	environmentstorage "github.com/upbound/provider-azure/internal/controller/containerapp/environmentstorage"
 )
 
 // Setup_containerapp creates all controllers with the supplied logger and adds them to
@@ -18,7 +23,12 @@ import (
 func Setup_containerapp(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		containerapp.Setup,
+		customdomain.Setup,
 		environment.Setup,
+		environmentcertificate.Setup,
+		environmentcustomdomain.Setup,
+		environmentdaprcomponent.Setup,
+		environmentstorage.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err
