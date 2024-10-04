@@ -256,8 +256,13 @@ type SQLContainerInitParameters struct {
 	// An indexing_policy block as defined below.
 	IndexingPolicy []IndexingPolicyInitParameters `json:"indexingPolicy,omitempty" tf:"indexing_policy,omitempty"`
 
-	// Define a partition key. Changing this forces a new resource to be created.
+	// Define a partition key kind. Possible values are Hash and MultiHash. Defaults to Hash. Changing this forces a new resource to be created.
+	PartitionKeyKind *string `json:"partitionKeyKind,omitempty" tf:"partition_key_kind,omitempty"`
+
 	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+
+	// A list of partition key paths. Changing this forces a new resource to be created.
+	PartitionKeyPaths []*string `json:"partitionKeyPaths,omitempty" tf:"partition_key_paths,omitempty"`
 
 	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
 	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
@@ -295,8 +300,13 @@ type SQLContainerObservation struct {
 	// An indexing_policy block as defined below.
 	IndexingPolicy []IndexingPolicyObservation `json:"indexingPolicy,omitempty" tf:"indexing_policy,omitempty"`
 
-	// Define a partition key. Changing this forces a new resource to be created.
+	// Define a partition key kind. Possible values are Hash and MultiHash. Defaults to Hash. Changing this forces a new resource to be created.
+	PartitionKeyKind *string `json:"partitionKeyKind,omitempty" tf:"partition_key_kind,omitempty"`
+
 	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+
+	// A list of partition key paths. Changing this forces a new resource to be created.
+	PartitionKeyPaths []*string `json:"partitionKeyPaths,omitempty" tf:"partition_key_paths,omitempty"`
 
 	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
 	PartitionKeyVersion *float64 `json:"partitionKeyVersion,omitempty" tf:"partition_key_version,omitempty"`
@@ -359,9 +369,16 @@ type SQLContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	IndexingPolicy []IndexingPolicyParameters `json:"indexingPolicy,omitempty" tf:"indexing_policy,omitempty"`
 
-	// Define a partition key. Changing this forces a new resource to be created.
+	// Define a partition key kind. Possible values are Hash and MultiHash. Defaults to Hash. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PartitionKeyKind *string `json:"partitionKeyKind,omitempty" tf:"partition_key_kind,omitempty"`
+
 	// +kubebuilder:validation:Optional
 	PartitionKeyPath *string `json:"partitionKeyPath,omitempty" tf:"partition_key_path,omitempty"`
+
+	// A list of partition key paths. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PartitionKeyPaths []*string `json:"partitionKeyPaths,omitempty" tf:"partition_key_paths,omitempty"`
 
 	// Define a partition key version. Changing this forces a new resource to be created. Possible values are 1and 2. This should be set to 2 in order to use large partition keys.
 	// +kubebuilder:validation:Optional
@@ -447,9 +464,8 @@ type SQLContainerStatus struct {
 type SQLContainer struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.partitionKeyPath) || (has(self.initProvider) && has(self.initProvider.partitionKeyPath))",message="spec.forProvider.partitionKeyPath is a required parameter"
-	Spec   SQLContainerSpec   `json:"spec"`
-	Status SQLContainerStatus `json:"status,omitempty"`
+	Spec              SQLContainerSpec   `json:"spec"`
+	Status            SQLContainerStatus `json:"status,omitempty"`
 }
 
 // +kubebuilder:object:root=true

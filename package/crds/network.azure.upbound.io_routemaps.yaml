@@ -82,7 +82,8 @@ spec:
                           items:
                             properties:
                               parameter:
-                                description: A parameter block as defined below.
+                                description: A parameter block as defined below. Required
+                                  if type is anything other than Drop.
                                 items:
                                   properties:
                                     asPath:
@@ -247,7 +248,8 @@ spec:
                           items:
                             properties:
                               parameter:
-                                description: A parameter block as defined below.
+                                description: A parameter block as defined below. Required
+                                  if type is anything other than Drop.
                                 items:
                                   properties:
                                     asPath:
@@ -494,7 +496,8 @@ spec:
                           items:
                             properties:
                               parameter:
-                                description: A parameter block as defined below.
+                                description: A parameter block as defined below. Required
+                                  if type is anything other than Drop.
                                 items:
                                   properties:
                                     asPath:

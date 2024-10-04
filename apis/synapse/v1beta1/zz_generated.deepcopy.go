@@ -5485,6 +5485,11 @@ func (in *WorkspaceInitParameters) DeepCopyInto(out *WorkspaceInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.SQLAdministratorLoginPasswordSecretRef != nil {
+		in, out := &in.SQLAdministratorLoginPasswordSecretRef, &out.SQLAdministratorLoginPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.SQLIdentityControlEnabled != nil {
 		in, out := &in.SQLIdentityControlEnabled, &out.SQLIdentityControlEnabled
 		*out = new(bool)

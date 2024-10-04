@@ -20,6 +20,9 @@ type IntegrationRuntimeSelfHostedInitParameters struct {
 
 	// A rbac_authorization block as defined below. Changing this forces a new resource to be created.
 	RbacAuthorization []RbacAuthorizationInitParameters `json:"rbacAuthorization,omitempty" tf:"rbac_authorization,omitempty"`
+
+	// Specifies whether enable interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
+	SelfContainedInteractiveAuthoringEnabled *bool `json:"selfContainedInteractiveAuthoringEnabled,omitempty" tf:"self_contained_interactive_authoring_enabled,omitempty"`
 }
 
 type IntegrationRuntimeSelfHostedObservation struct {
@@ -41,6 +44,9 @@ type IntegrationRuntimeSelfHostedObservation struct {
 
 	// The secondary integration runtime authentication key.
 	SecondaryAuthorizationKey *string `json:"secondaryAuthorizationKey,omitempty" tf:"secondary_authorization_key,omitempty"`
+
+	// Specifies whether enable interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
+	SelfContainedInteractiveAuthoringEnabled *bool `json:"selfContainedInteractiveAuthoringEnabled,omitempty" tf:"self_contained_interactive_authoring_enabled,omitempty"`
 }
 
 type IntegrationRuntimeSelfHostedParameters struct {
@@ -66,6 +72,10 @@ type IntegrationRuntimeSelfHostedParameters struct {
 	// A rbac_authorization block as defined below. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	RbacAuthorization []RbacAuthorizationParameters `json:"rbacAuthorization,omitempty" tf:"rbac_authorization,omitempty"`
+
+	// Specifies whether enable interactive authoring function when your self-hosted integration runtime is unable to establish a connection with Azure Relay.
+	// +kubebuilder:validation:Optional
+	SelfContainedInteractiveAuthoringEnabled *bool `json:"selfContainedInteractiveAuthoringEnabled,omitempty" tf:"self_contained_interactive_authoring_enabled,omitempty"`
 }
 
 type RbacAuthorizationInitParameters struct {

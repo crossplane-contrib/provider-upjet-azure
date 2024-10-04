@@ -191,7 +191,7 @@ type RouteMapRuleParameters struct {
 
 type RuleActionInitParameters struct {
 
-	// A parameter block as defined below.
+	// A parameter block as defined below. Required if type is anything other than Drop.
 	Parameter []ParameterInitParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
@@ -200,7 +200,7 @@ type RuleActionInitParameters struct {
 
 type RuleActionObservation struct {
 
-	// A parameter block as defined below.
+	// A parameter block as defined below. Required if type is anything other than Drop.
 	Parameter []ParameterObservation `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
@@ -209,9 +209,9 @@ type RuleActionObservation struct {
 
 type RuleActionParameters struct {
 
-	// A parameter block as defined below.
+	// A parameter block as defined below. Required if type is anything other than Drop.
 	// +kubebuilder:validation:Optional
-	Parameter []ParameterParameters `json:"parameter" tf:"parameter,omitempty"`
+	Parameter []ParameterParameters `json:"parameter,omitempty" tf:"parameter,omitempty"`
 
 	// The type of the action to be taken. Possible values are Add, Drop, Remove, Replace and Unknown.
 	// +kubebuilder:validation:Optional

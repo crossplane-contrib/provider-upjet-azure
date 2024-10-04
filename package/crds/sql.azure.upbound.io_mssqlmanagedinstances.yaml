@@ -1373,8 +1373,8 @@ spec:
                   storageAccountType:
                     description: Specifies the storage account type used to store
                       backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, LRS and ZRS. Defaults
-                      to GRS.
+                      to be created. Possible values are GRS, GZRS, LRS, and ZRS.
+                      Defaults to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -1654,8 +1654,8 @@ spec:
                   storageAccountType:
                     description: Specifies the storage account type used to store
                       backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, LRS and ZRS. Defaults
-                      to GRS.
+                      to be created. Possible values are GRS, GZRS, LRS, and ZRS.
+                      Defaults to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.
@@ -2055,8 +2055,8 @@ spec:
                   storageAccountType:
                     description: Specifies the storage account type used to store
                       backups for this database. Changing this forces a new resource
-                      to be created. Possible values are GRS, LRS and ZRS. Defaults
-                      to GRS.
+                      to be created. Possible values are GRS, GZRS, LRS, and ZRS.
+                      Defaults to GRS.
                     type: string
                   storageSizeInGb:
                     description: Maximum storage space for the SQL Managed instance.

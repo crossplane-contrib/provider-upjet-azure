@@ -251,6 +251,9 @@ type InteractiveQueryClusterInitParameters struct {
 	// A network block as defined below.
 	Network []InteractiveQueryClusterNetworkInitParameters `json:"network,omitempty" tf:"network,omitempty"`
 
+	// A private_link_configuration block as defined below.
+	PrivateLinkConfiguration []InteractiveQueryClusterPrivateLinkConfigurationInitParameters `json:"privateLinkConfiguration,omitempty" tf:"private_link_configuration,omitempty"`
+
 	// A roles block as defined below.
 	Roles []InteractiveQueryClusterRolesInitParameters `json:"roles,omitempty" tf:"roles,omitempty"`
 
@@ -535,6 +538,9 @@ type InteractiveQueryClusterObservation struct {
 	// A network block as defined below.
 	Network []InteractiveQueryClusterNetworkObservation `json:"network,omitempty" tf:"network,omitempty"`
 
+	// A private_link_configuration block as defined below.
+	PrivateLinkConfiguration []InteractiveQueryClusterPrivateLinkConfigurationObservation `json:"privateLinkConfiguration,omitempty" tf:"private_link_configuration,omitempty"`
+
 	// Specifies the name of the Resource Group in which this HDInsight Interactive Query Cluster should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -610,6 +616,10 @@ type InteractiveQueryClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Network []InteractiveQueryClusterNetworkParameters `json:"network,omitempty" tf:"network,omitempty"`
 
+	// A private_link_configuration block as defined below.
+	// +kubebuilder:validation:Optional
+	PrivateLinkConfiguration []InteractiveQueryClusterPrivateLinkConfigurationParameters `json:"privateLinkConfiguration,omitempty" tf:"private_link_configuration,omitempty"`
+
 	// Specifies the name of the Resource Group in which this HDInsight Interactive Query Cluster should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -653,7 +663,125 @@ type InteractiveQueryClusterParameters struct {
 	Tier *string `json:"tier,omitempty" tf:"tier,omitempty"`
 }
 
+type InteractiveQueryClusterPrivateLinkConfigurationIPConfigurationInitParameters struct {
+
+	// The name of the script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether this IP configuration is primary.
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The private IP address of the IP configuration.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The private IP allocation method. The only possible value now is Dynamic.
+	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type InteractiveQueryClusterPrivateLinkConfigurationIPConfigurationObservation struct {
+
+	// The name of the script action.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Indicates whether this IP configuration is primary.
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The private IP address of the IP configuration.
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The private IP allocation method. The only possible value now is Dynamic.
+	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+}
+
+type InteractiveQueryClusterPrivateLinkConfigurationIPConfigurationParameters struct {
+
+	// The name of the script action.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+
+	// Indicates whether this IP configuration is primary.
+	// +kubebuilder:validation:Optional
+	Primary *bool `json:"primary,omitempty" tf:"primary,omitempty"`
+
+	// The private IP address of the IP configuration.
+	// +kubebuilder:validation:Optional
+	PrivateIPAddress *string `json:"privateIpAddress,omitempty" tf:"private_ip_address,omitempty"`
+
+	// The private IP allocation method. The only possible value now is Dynamic.
+	// +kubebuilder:validation:Optional
+	PrivateIPAllocationMethod *string `json:"privateIpAllocationMethod,omitempty" tf:"private_ip_allocation_method,omitempty"`
+
+	// The ID of the Subnet within the Virtual Network where the Zookeeper Nodes should be provisioned within. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
+	// +kubebuilder:validation:Optional
+	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
+
+	// Reference to a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDRef *v1.Reference `json:"subnetIdRef,omitempty" tf:"-"`
+
+	// Selector for a Subnet in network to populate subnetId.
+	// +kubebuilder:validation:Optional
+	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
+}
+
+type InteractiveQueryClusterPrivateLinkConfigurationInitParameters struct {
+
+	// The ID of the private link service group.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	IPConfiguration []InteractiveQueryClusterPrivateLinkConfigurationIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The name of the private link configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type InteractiveQueryClusterPrivateLinkConfigurationObservation struct {
+
+	// The ID of the private link service group.
+	GroupID *string `json:"groupId,omitempty" tf:"group_id,omitempty"`
+
+	IPConfiguration []InteractiveQueryClusterPrivateLinkConfigurationIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// The name of the private link configuration.
+	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+}
+
+type InteractiveQueryClusterPrivateLinkConfigurationParameters struct {
+
+	// The ID of the private link service group.
+	// +kubebuilder:validation:Optional
+	GroupID *string `json:"groupId" tf:"group_id,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	IPConfiguration []InteractiveQueryClusterPrivateLinkConfigurationIPConfigurationParameters `json:"ipConfiguration" tf:"ip_configuration,omitempty"`
+
+	// The name of the private link configuration.
+	// +kubebuilder:validation:Optional
+	Name *string `json:"name" tf:"name,omitempty"`
+}
+
 type InteractiveQueryClusterRolesHeadNodeInitParameters struct {
+
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -792,6 +920,9 @@ type InteractiveQueryClusterRolesWorkerNodeInitParameters struct {
 
 	// A autoscale block as defined below.
 	Autoscale []RolesWorkerNodeAutoscaleInitParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
+
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -944,6 +1075,9 @@ type InteractiveQueryClusterRolesWorkerNodeScriptActionsParameters struct {
 }
 
 type InteractiveQueryClusterRolesZookeeperNodeInitParameters struct {
+
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set

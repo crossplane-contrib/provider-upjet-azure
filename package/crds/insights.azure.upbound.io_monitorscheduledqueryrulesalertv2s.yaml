@@ -189,6 +189,24 @@ spec:
                       PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H,
                       PT5H, PT6H, P1D.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Scheduled Query Rule.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Scheduled Query Rule.
+                            Possible values are SystemAssigned, UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: Specifies the Azure Region where the Monitor Scheduled
                       Query Rule should exist. Changing this forces a new resource
@@ -540,6 +558,24 @@ spec:
                       PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H,
                       PT5H, PT6H, P1D.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Scheduled Query Rule.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Scheduled Query Rule.
+                            Possible values are SystemAssigned, UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   location:
                     description: Specifies the Azure Region where the Monitor Scheduled
                       Query Rule should exist. Changing this forces a new resource
@@ -993,6 +1029,34 @@ spec:
                   id:
                     description: The ID of the Monitor Scheduled Query Rule.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        identityIds:
+                          description: A list of User Assigned Managed Identity IDs
+                            to be assigned to this Scheduled Query Rule.
+                          items:
+                            type: string
+                          type: array
+                          x-kubernetes-list-type: set
+                        principalId:
+                          description: The Principal ID for the Service Principal
+                            associated with the Managed Service Identity of this App
+                            Service slot.
+                          type: string
+                        tenantId:
+                          description: The Tenant ID for the Service Principal associated
+                            with the Managed Service Identity of this App Service
+                            slot.
+                          type: string
+                        type:
+                          description: Specifies the type of Managed Service Identity
+                            that should be configured on this Scheduled Query Rule.
+                            Possible values are SystemAssigned, UserAssigned.
+                          type: string
+                      type: object
+                    type: array
                   isALegacyLogAnalyticsRule:
                     description: True if this alert rule is a legacy Log Analytic
                       Rule.
@@ -1297,6 +1361,22 @@ spec:
                       PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H,
                       PT5H, PT6H, P1D.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this Scheduled Query Rule.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Scheduled Query Rule.
+                          Possible values are SystemAssigned, UserAssigned.
+                        type: string
+                    type: object
                   location:
                     description: Specifies the Azure Region where the Monitor Scheduled
                       Query Rule should exist. Changing this forces a new resource
@@ -1643,6 +1723,22 @@ spec:
                       PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H,
                       PT5H, PT6H, P1D.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this Scheduled Query Rule.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Scheduled Query Rule.
+                          Possible values are SystemAssigned, UserAssigned.
+                        type: string
+                    type: object
                   location:
                     description: Specifies the Azure Region where the Monitor Scheduled
                       Query Rule should exist. Changing this forces a new resource
@@ -2091,6 +2187,30 @@ spec:
                   id:
                     description: The ID of the Monitor Scheduled Query Rule.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this Scheduled Query Rule.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The Principal ID for the Service Principal associated
+                          with the Managed Service Identity of this App Service slot.
+                        type: string
+                      tenantId:
+                        description: The Tenant ID for the Service Principal associated
+                          with the Managed Service Identity of this App Service slot.
+                        type: string
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Scheduled Query Rule.
+                          Possible values are SystemAssigned, UserAssigned.
+                        type: string
+                    type: object
                   isALegacyLogAnalyticsRule:
                     description: True if this alert rule is a legacy Log Analytic
                       Rule.

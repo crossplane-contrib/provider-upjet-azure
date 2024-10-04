@@ -15,17 +15,27 @@ import (
 
 type AdditionalCapabilitiesInitParameters struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type AdditionalCapabilitiesObservation struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type AdditionalCapabilitiesParameters struct {
+
+	// Whether to enable the hibernation capability or not.
+	// +kubebuilder:validation:Optional
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
 
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -240,6 +250,9 @@ type LinuxVirtualMachineInitParameters struct {
 	// A additional_capabilities block as defined below.
 	AdditionalCapabilities []AdditionalCapabilitiesInitParameters `json:"additionalCapabilities,omitempty" tf:"additional_capabilities,omitempty"`
 
+	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+
 	// One or more admin_ssh_key blocks as defined below. Changing this forces a new resource to be created.
 	AdminSSHKey []AdminSSHKeyInitParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
 
@@ -263,6 +276,9 @@ type LinuxVirtualMachineInitParameters struct {
 
 	// Specifies the Hostname which should be used for this Virtual Machine. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name, then you must specify computer_name. Changing this forces a new resource to be created.
 	ComputerName *string `json:"computerName,omitempty" tf:"computer_name,omitempty"`
+
+	// The Base64-Encoded Custom Data which should be used for this Virtual Machine. Changing this forces a new resource to be created.
+	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// The ID of a Dedicated Host Group that this Linux Virtual Machine should be run within. Conflicts with dedicated_host_id.
 	DedicatedHostGroupID *string `json:"dedicatedHostGroupId,omitempty" tf:"dedicated_host_group_id,omitempty"`

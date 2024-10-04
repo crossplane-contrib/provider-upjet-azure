@@ -73,6 +73,9 @@ type TrafficSelectorPolicyParameters struct {
 
 type VirtualNetworkGatewayConnectionInitParameters struct {
 
+	// The authorization key associated with the Express Route Circuit. This field is required only if the type is an ExpressRoute connection.
+	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+
 	// Connection mode to use. Possible values are Default, InitiatorOnly and ResponderOnly. Defaults to Default. Changing this value will force a resource to be created.
 	ConnectionMode *string `json:"connectionMode,omitempty" tf:"connection_mode,omitempty"`
 
@@ -142,8 +145,14 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
 
+	// Bypass the Express Route gateway when accessing private-links. When enabled express_route_gateway_bypass must be set to true. Defaults to false.
+	PrivateLinkFastPathEnabled *bool `json:"privateLinkFastPathEnabled,omitempty" tf:"private_link_fast_path_enabled,omitempty"`
+
 	// The routing weight. Defaults to 10.
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
+
+	// The shared IPSec key. A key could be provided if a Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
+	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
@@ -323,6 +332,9 @@ type VirtualNetworkGatewayConnectionObservation struct {
 	// The ID of the peer virtual network gateway when creating a VNet-to-VNet connection (i.e. when type is Vnet2Vnet). The peer Virtual Network Gateway can be in the same or in a different subscription. Changing this forces a new resource to be created.
 	PeerVirtualNetworkGatewayID *string `json:"peerVirtualNetworkGatewayId,omitempty" tf:"peer_virtual_network_gateway_id,omitempty"`
 
+	// Bypass the Express Route gateway when accessing private-links. When enabled express_route_gateway_bypass must be set to true. Defaults to false.
+	PrivateLinkFastPathEnabled *bool `json:"privateLinkFastPathEnabled,omitempty" tf:"private_link_fast_path_enabled,omitempty"`
+
 	// The name of the resource group in which to create the connection Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -436,6 +448,10 @@ type VirtualNetworkGatewayConnectionParameters struct {
 	// Selector for a VirtualNetworkGateway in network to populate peerVirtualNetworkGatewayId.
 	// +kubebuilder:validation:Optional
 	PeerVirtualNetworkGatewayIDSelector *v1.Selector `json:"peerVirtualNetworkGatewayIdSelector,omitempty" tf:"-"`
+
+	// Bypass the Express Route gateway when accessing private-links. When enabled express_route_gateway_bypass must be set to true. Defaults to false.
+	// +kubebuilder:validation:Optional
+	PrivateLinkFastPathEnabled *bool `json:"privateLinkFastPathEnabled,omitempty" tf:"private_link_fast_path_enabled,omitempty"`
 
 	// The name of the resource group in which to create the connection Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

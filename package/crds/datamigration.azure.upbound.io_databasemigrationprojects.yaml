@@ -244,9 +244,9 @@ spec:
                         type: object
                     type: object
                   sourcePlatform:
-                    description: 'The platform type of the migration source. Currently
-                      only support: SQL(on-premises SQL Server). Changing this forces
-                      a new resource to be created.'
+                    description: The platform type of the migration source. Possible
+                      values are SQL, PostgreSQL, MySQL and MongoDb. Changing this
+                      forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -255,9 +255,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   targetPlatform:
-                    description: 'The platform type of the migration target. Currently
-                      only support: SQLDB(Azure SQL Database). Changing this forces
-                      a new resource to be created.'
+                    description: The platform type of the migration target. Possible
+                      values are SQLDB, AzureDbForPostgreSql, AzureDbForMySql and
+                      MongoDb. Changing this forces a new resource to be created.
                     type: string
                 type: object
               initProvider:
@@ -282,9 +282,9 @@ spec:
                       Changing this forces a new resource to be created.
                     type: string
                   sourcePlatform:
-                    description: 'The platform type of the migration source. Currently
-                      only support: SQL(on-premises SQL Server). Changing this forces
-                      a new resource to be created.'
+                    description: The platform type of the migration source. Possible
+                      values are SQL, PostgreSQL, MySQL and MongoDb. Changing this
+                      forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -293,9 +293,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   targetPlatform:
-                    description: 'The platform type of the migration target. Currently
-                      only support: SQLDB(Azure SQL Database). Changing this forces
-                      a new resource to be created.'
+                    description: The platform type of the migration target. Possible
+                      values are SQLDB, AzureDbForPostgreSql, AzureDbForMySql and
+                      MongoDb. Changing this forces a new resource to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -509,9 +509,9 @@ spec:
                       belongs to. Changing this forces a new resource to be created.
                     type: string
                   sourcePlatform:
-                    description: 'The platform type of the migration source. Currently
-                      only support: SQL(on-premises SQL Server). Changing this forces
-                      a new resource to be created.'
+                    description: The platform type of the migration source. Possible
+                      values are SQL, PostgreSQL, MySQL and MongoDb. Changing this
+                      forces a new resource to be created.
                     type: string
                   tags:
                     additionalProperties:
@@ -520,9 +520,9 @@ spec:
                     type: object
                     x-kubernetes-map-type: granular
                   targetPlatform:
-                    description: 'The platform type of the migration target. Currently
-                      only support: SQLDB(Azure SQL Database). Changing this forces
-                      a new resource to be created.'
+                    description: The platform type of the migration target. Possible
+                      values are SQLDB, AzureDbForPostgreSql, AzureDbForMySql and
+                      MongoDb. Changing this forces a new resource to be created.
                     type: string
                 type: object
               conditions:

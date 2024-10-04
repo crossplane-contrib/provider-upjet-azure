@@ -31,6 +31,9 @@ type BackupInstanceBlobStorageInitParameters struct {
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// The list of the container names of the source Storage Account.
+	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
+
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
@@ -55,6 +58,9 @@ type BackupInstanceBlobStorageObservation struct {
 
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The list of the container names of the source Storage Account.
+	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	StorageAccountID *string `json:"storageAccountId,omitempty" tf:"storage_account_id,omitempty"`
@@ -82,6 +88,10 @@ type BackupInstanceBlobStorageParameters struct {
 	// The location of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// The list of the container names of the source Storage Account.
+	// +kubebuilder:validation:Optional
+	StorageAccountContainerNames []*string `json:"storageAccountContainerNames,omitempty" tf:"storage_account_container_names,omitempty"`
 
 	// The ID of the source Storage Account. Changing this forces a new Backup Instance Blob Storage to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/storage/v1beta2.Account

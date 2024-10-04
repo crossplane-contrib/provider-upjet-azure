@@ -27,6 +27,9 @@ type BlobInitParameters struct {
 	// The content type of the storage blob. Cannot be defined if source_uri is defined. Defaults to application/octet-stream.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
 
+	// The encryption scope to use for this blob.
+	EncryptionScope *string `json:"encryptionScope,omitempty" tf:"encryption_scope,omitempty"`
+
 	// A map of custom blob metadata.
 	// +mapType=granular
 	Metadata map[string]*string `json:"metadata,omitempty" tf:"metadata,omitempty"`
@@ -63,6 +66,9 @@ type BlobObservation struct {
 
 	// The content type of the storage blob. Cannot be defined if source_uri is defined. Defaults to application/octet-stream.
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// The encryption scope to use for this blob.
+	EncryptionScope *string `json:"encryptionScope,omitempty" tf:"encryption_scope,omitempty"`
 
 	// The ID of the Storage Blob.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -116,6 +122,10 @@ type BlobParameters struct {
 	// The content type of the storage blob. Cannot be defined if source_uri is defined. Defaults to application/octet-stream.
 	// +kubebuilder:validation:Optional
 	ContentType *string `json:"contentType,omitempty" tf:"content_type,omitempty"`
+
+	// The encryption scope to use for this blob.
+	// +kubebuilder:validation:Optional
+	EncryptionScope *string `json:"encryptionScope,omitempty" tf:"encryption_scope,omitempty"`
 
 	// A map of custom blob metadata.
 	// +kubebuilder:validation:Optional

@@ -58,6 +58,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutomaticFailoverEnabled != nil {
+		in, out := &in.AutomaticFailoverEnabled, &out.AutomaticFailoverEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
 		*out = new(BackupInitParameters)
@@ -107,6 +112,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 	}
 	if in.EnableMultipleWriteLocations != nil {
 		in, out := &in.EnableMultipleWriteLocations, &out.EnableMultipleWriteLocations
+		*out = new(bool)
+		**out = **in
+	}
+	if in.FreeTierEnabled != nil {
+		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -160,6 +170,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 	if in.MongoServerVersion != nil {
 		in, out := &in.MongoServerVersion, &out.MongoServerVersion
 		*out = new(string)
+		**out = **in
+	}
+	if in.MultipleWriteLocationsEnabled != nil {
+		in, out := &in.MultipleWriteLocationsEnabled, &out.MultipleWriteLocationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NetworkACLBypassForAzureServices != nil {
@@ -283,6 +298,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutomaticFailoverEnabled != nil {
+		in, out := &in.AutomaticFailoverEnabled, &out.AutomaticFailoverEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
 		*out = new(BackupObservation)
@@ -340,6 +360,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FreeTierEnabled != nil {
+		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GeoLocation != nil {
 		in, out := &in.GeoLocation, &out.GeoLocation
 		*out = make([]GeoLocationObservation, len(*in))
@@ -395,6 +420,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	if in.MongoServerVersion != nil {
 		in, out := &in.MongoServerVersion, &out.MongoServerVersion
 		*out = new(string)
+		**out = **in
+	}
+	if in.MultipleWriteLocationsEnabled != nil {
+		in, out := &in.MultipleWriteLocationsEnabled, &out.MultipleWriteLocationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NetworkACLBypassForAzureServices != nil {
@@ -513,6 +543,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutomaticFailoverEnabled != nil {
+		in, out := &in.AutomaticFailoverEnabled, &out.AutomaticFailoverEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
 		*out = new(BackupParameters)
@@ -562,6 +597,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	}
 	if in.EnableMultipleWriteLocations != nil {
 		in, out := &in.EnableMultipleWriteLocations, &out.EnableMultipleWriteLocations
+		*out = new(bool)
+		**out = **in
+	}
+	if in.FreeTierEnabled != nil {
+		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -615,6 +655,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	if in.MongoServerVersion != nil {
 		in, out := &in.MongoServerVersion, &out.MongoServerVersion
 		*out = new(string)
+		**out = **in
+	}
+	if in.MultipleWriteLocationsEnabled != nil {
+		in, out := &in.MultipleWriteLocationsEnabled, &out.MultipleWriteLocationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NetworkACLBypassForAzureServices != nil {
@@ -5673,10 +5718,26 @@ func (in *SQLContainerInitParameters) DeepCopyInto(out *SQLContainerInitParamete
 		*out = new(IndexingPolicyInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.PartitionKeyKind != nil {
+		in, out := &in.PartitionKeyKind, &out.PartitionKeyKind
+		*out = new(string)
+		**out = **in
+	}
 	if in.PartitionKeyPath != nil {
 		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
 		*out = new(string)
 		**out = **in
+	}
+	if in.PartitionKeyPaths != nil {
+		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PartitionKeyVersion != nil {
 		in, out := &in.PartitionKeyVersion, &out.PartitionKeyVersion
@@ -5782,10 +5843,26 @@ func (in *SQLContainerObservation) DeepCopyInto(out *SQLContainerObservation) {
 		*out = new(IndexingPolicyObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.PartitionKeyKind != nil {
+		in, out := &in.PartitionKeyKind, &out.PartitionKeyKind
+		*out = new(string)
+		**out = **in
+	}
 	if in.PartitionKeyPath != nil {
 		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
 		*out = new(string)
 		**out = **in
+	}
+	if in.PartitionKeyPaths != nil {
+		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PartitionKeyVersion != nil {
 		in, out := &in.PartitionKeyVersion, &out.PartitionKeyVersion
@@ -5879,10 +5956,26 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 		*out = new(IndexingPolicyParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.PartitionKeyKind != nil {
+		in, out := &in.PartitionKeyKind, &out.PartitionKeyKind
+		*out = new(string)
+		**out = **in
+	}
 	if in.PartitionKeyPath != nil {
 		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
 		*out = new(string)
 		**out = **in
+	}
+	if in.PartitionKeyPaths != nil {
+		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PartitionKeyVersion != nil {
 		in, out := &in.PartitionKeyVersion, &out.PartitionKeyVersion

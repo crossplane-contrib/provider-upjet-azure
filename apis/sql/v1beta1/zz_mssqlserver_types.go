@@ -145,6 +145,9 @@ type MSSQLServerInitParameters struct {
 	// The administrator login name for the new server. Required unless azuread_authentication_only in the azuread_administrator block is true. When omitted, Azure will generate a default username which cannot be subsequently changed. Changing this forces a new resource to be created.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// The password associated with the administrator_login user. Needs to comply with Azure's Password Policy. Required unless azuread_authentication_only in the azuread_administrator block is true.
+	AdministratorLoginPasswordSecretRef *v1.SecretKeySelector `json:"administratorLoginPasswordSecretRef,omitempty" tf:"-"`
+
 	// An azuread_administrator block as defined below.
 	AzureadAdministrator []AzureadAdministratorInitParameters `json:"azureadAdministrator,omitempty" tf:"azuread_administrator,omitempty"`
 

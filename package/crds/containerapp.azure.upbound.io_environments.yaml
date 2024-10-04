@@ -343,6 +343,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  mutualTlsEnabled:
+                    description: |-
+                      Should mutual transport layer security (mTLS) be enabled? Defaults to false.
+                      Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
+                    type: boolean
                   resourceGroupName:
                     description: The name of the resource group in which the Container
                       App Environment is to be created. Changing this forces a new
@@ -448,8 +453,8 @@ spec:
                           type: string
                         workloadProfileType:
                           description: Workload profile type for the workloads to
-                            run on. Possible values include D4, D8, D16, D32, E4,
-                            E8, E16 and E32.
+                            run on. Possible values include Consumption, D4, D8, D16,
+                            D32, E4, E8, E16 and E32.
                           type: string
                       type: object
                     type: array
@@ -742,6 +747,11 @@ spec:
                             type: string
                         type: object
                     type: object
+                  mutualTlsEnabled:
+                    description: |-
+                      Should mutual transport layer security (mTLS) be enabled? Defaults to false.
+                      Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
+                    type: boolean
                   tags:
                     additionalProperties:
                       type: string
@@ -766,8 +776,8 @@ spec:
                           type: string
                         workloadProfileType:
                           description: Workload profile type for the workloads to
-                            run on. Possible values include D4, D8, D16, D32, E4,
-                            E8, E16 and E32.
+                            run on. Possible values include Consumption, D4, D8, D16,
+                            D32, E4, E8, E16 and E32.
                           type: string
                       type: object
                     type: array
@@ -954,6 +964,11 @@ spec:
             properties:
               atProvider:
                 properties:
+                  customDomainVerificationId:
+                    description: |-
+                      The ID of the Custom Domain Verification for this Container App Environment.
+                      The ID of the Custom Domain Verification for this Container App Environment.
+                    type: string
                   defaultDomain:
                     description: |-
                       The default, publicly resolvable, name of this Container App Environment.
@@ -992,6 +1007,11 @@ spec:
                       The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
                       The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
                     type: string
+                  mutualTlsEnabled:
+                    description: |-
+                      Should mutual transport layer security (mTLS) be enabled? Defaults to false.
+                      Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
+                    type: boolean
                   platformReservedCidr:
                     description: |-
                       The IP range, in CIDR notation, that is reserved for environment infrastructure IP addresses.
@@ -1036,8 +1056,8 @@ spec:
                           type: string
                         workloadProfileType:
                           description: Workload profile type for the workloads to
-                            run on. Possible values include D4, D8, D16, D32, E4,
-                            E8, E16 and E32.
+                            run on. Possible values include Consumption, D4, D8, D16,
+                            D32, E4, E8, E16 and E32.
                           type: string
                       type: object
                     type: array

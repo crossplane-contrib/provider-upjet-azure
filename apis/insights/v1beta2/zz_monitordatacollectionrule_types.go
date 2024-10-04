@@ -1206,7 +1206,7 @@ type StreamDeclarationInitParameters struct {
 	// One or more column blocks as defined above.
 	Column []ColumnInitParameters `json:"column,omitempty" tf:"column,omitempty"`
 
-	// The name of the custom stream. This name should be unique across all stream_declaration blocks.
+	// The name of the custom stream. This name should be unique across all stream_declaration blocks and must begin with a prefix of Custom-.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
@@ -1215,7 +1215,7 @@ type StreamDeclarationObservation struct {
 	// One or more column blocks as defined above.
 	Column []ColumnObservation `json:"column,omitempty" tf:"column,omitempty"`
 
-	// The name of the custom stream. This name should be unique across all stream_declaration blocks.
+	// The name of the custom stream. This name should be unique across all stream_declaration blocks and must begin with a prefix of Custom-.
 	StreamName *string `json:"streamName,omitempty" tf:"stream_name,omitempty"`
 }
 
@@ -1225,7 +1225,7 @@ type StreamDeclarationParameters struct {
 	// +kubebuilder:validation:Optional
 	Column []ColumnParameters `json:"column" tf:"column,omitempty"`
 
-	// The name of the custom stream. This name should be unique across all stream_declaration blocks.
+	// The name of the custom stream. This name should be unique across all stream_declaration blocks and must begin with a prefix of Custom-.
 	// +kubebuilder:validation:Optional
 	StreamName *string `json:"streamName" tf:"stream_name,omitempty"`
 }

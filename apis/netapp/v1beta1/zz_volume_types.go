@@ -127,6 +127,24 @@ type ExportPolicyRuleInitParameters struct {
 	// +listType=set
 	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
 
+	// Is Kerberos 5i read-only permitted to this volume?
+	Kerberos5IReadOnlyEnabled *bool `json:"kerberos5IReadOnlyEnabled,omitempty" tf:"kerberos_5i_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5i read/write permitted to this volume?
+	Kerberos5IReadWriteEnabled *bool `json:"kerberos5IReadWriteEnabled,omitempty" tf:"kerberos_5i_read_write_enabled,omitempty"`
+
+	// Is Kerberos 5p read-only permitted to this volume?
+	Kerberos5PReadOnlyEnabled *bool `json:"kerberos5PReadOnlyEnabled,omitempty" tf:"kerberos_5p_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5p read/write permitted to this volume?
+	Kerberos5PReadWriteEnabled *bool `json:"kerberos5PReadWriteEnabled,omitempty" tf:"kerberos_5p_read_write_enabled,omitempty"`
+
+	// Is Kerberos 5 read-only access permitted to this volume?
+	Kerberos5ReadOnlyEnabled *bool `json:"kerberos5ReadOnlyEnabled,omitempty" tf:"kerberos_5_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5 read/write permitted to this volume?
+	Kerberos5ReadWriteEnabled *bool `json:"kerberos5ReadWriteEnabled,omitempty" tf:"kerberos_5_read_write_enabled,omitempty"`
+
 	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
 	ProtocolsEnabled []*string `json:"protocolsEnabled,omitempty" tf:"protocols_enabled,omitempty"`
 
@@ -148,6 +166,24 @@ type ExportPolicyRuleObservation struct {
 	// A list of allowed clients IPv4 addresses.
 	// +listType=set
 	AllowedClients []*string `json:"allowedClients,omitempty" tf:"allowed_clients,omitempty"`
+
+	// Is Kerberos 5i read-only permitted to this volume?
+	Kerberos5IReadOnlyEnabled *bool `json:"kerberos5IReadOnlyEnabled,omitempty" tf:"kerberos_5i_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5i read/write permitted to this volume?
+	Kerberos5IReadWriteEnabled *bool `json:"kerberos5IReadWriteEnabled,omitempty" tf:"kerberos_5i_read_write_enabled,omitempty"`
+
+	// Is Kerberos 5p read-only permitted to this volume?
+	Kerberos5PReadOnlyEnabled *bool `json:"kerberos5PReadOnlyEnabled,omitempty" tf:"kerberos_5p_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5p read/write permitted to this volume?
+	Kerberos5PReadWriteEnabled *bool `json:"kerberos5PReadWriteEnabled,omitempty" tf:"kerberos_5p_read_write_enabled,omitempty"`
+
+	// Is Kerberos 5 read-only access permitted to this volume?
+	Kerberos5ReadOnlyEnabled *bool `json:"kerberos5ReadOnlyEnabled,omitempty" tf:"kerberos_5_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5 read/write permitted to this volume?
+	Kerberos5ReadWriteEnabled *bool `json:"kerberos5ReadWriteEnabled,omitempty" tf:"kerberos_5_read_write_enabled,omitempty"`
 
 	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
 	ProtocolsEnabled []*string `json:"protocolsEnabled,omitempty" tf:"protocols_enabled,omitempty"`
@@ -171,6 +207,30 @@ type ExportPolicyRuleParameters struct {
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AllowedClients []*string `json:"allowedClients" tf:"allowed_clients,omitempty"`
+
+	// Is Kerberos 5i read-only permitted to this volume?
+	// +kubebuilder:validation:Optional
+	Kerberos5IReadOnlyEnabled *bool `json:"kerberos5IReadOnlyEnabled,omitempty" tf:"kerberos_5i_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5i read/write permitted to this volume?
+	// +kubebuilder:validation:Optional
+	Kerberos5IReadWriteEnabled *bool `json:"kerberos5IReadWriteEnabled,omitempty" tf:"kerberos_5i_read_write_enabled,omitempty"`
+
+	// Is Kerberos 5p read-only permitted to this volume?
+	// +kubebuilder:validation:Optional
+	Kerberos5PReadOnlyEnabled *bool `json:"kerberos5PReadOnlyEnabled,omitempty" tf:"kerberos_5p_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5p read/write permitted to this volume?
+	// +kubebuilder:validation:Optional
+	Kerberos5PReadWriteEnabled *bool `json:"kerberos5PReadWriteEnabled,omitempty" tf:"kerberos_5p_read_write_enabled,omitempty"`
+
+	// Is Kerberos 5 read-only access permitted to this volume?
+	// +kubebuilder:validation:Optional
+	Kerberos5ReadOnlyEnabled *bool `json:"kerberos5ReadOnlyEnabled,omitempty" tf:"kerberos_5_read_only_enabled,omitempty"`
+
+	// Is Kerberos 5 read/write permitted to this volume?
+	// +kubebuilder:validation:Optional
+	Kerberos5ReadWriteEnabled *bool `json:"kerberos5ReadWriteEnabled,omitempty" tf:"kerberos_5_read_write_enabled,omitempty"`
 
 	// A list of allowed protocols. Valid values include CIFS, NFSv3, or NFSv4.1. Only one value is supported at this time. This replaces the previous arguments: cifs_enabled, nfsv3_enabled and nfsv4_enabled.
 	// +kubebuilder:validation:Optional
@@ -223,6 +283,10 @@ type VolumeInitParameters struct {
 	// One or more export_policy_rule block defined below.
 	ExportPolicyRule []ExportPolicyRuleInitParameters `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
 
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
+	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
+
 	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
 	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
 
@@ -238,6 +302,10 @@ type VolumeInitParameters struct {
 
 	// Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
 	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
+
+	// Enable SMB Continuous Availability.
+	// Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
+	SMBContinuousAvailabilityEnabled *bool `json:"smbContinuousAvailabilityEnabled,omitempty" tf:"smb_continuous_availability_enabled,omitempty"`
 
 	// Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
 	SMBNonBrowsableEnabled *bool `json:"smbNonBrowsableEnabled,omitempty" tf:"smb_non_browsable_enabled,omitempty"`
@@ -307,6 +375,10 @@ type VolumeObservation struct {
 	// The ID of the NetApp Volume.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
+	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
+
 	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
 	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
 
@@ -331,6 +403,10 @@ type VolumeObservation struct {
 
 	// Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
 	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
+
+	// Enable SMB Continuous Availability.
+	// Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
+	SMBContinuousAvailabilityEnabled *bool `json:"smbContinuousAvailabilityEnabled,omitempty" tf:"smb_continuous_availability_enabled,omitempty"`
 
 	// Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
 	SMBNonBrowsableEnabled *bool `json:"smbNonBrowsableEnabled,omitempty" tf:"smb_non_browsable_enabled,omitempty"`
@@ -413,6 +489,11 @@ type VolumeParameters struct {
 	// +kubebuilder:validation:Optional
 	ExportPolicyRule []ExportPolicyRuleParameters `json:"exportPolicyRule,omitempty" tf:"export_policy_rule,omitempty"`
 
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules.
+	// Enable to allow Kerberos secured volumes. Requires appropriate export rules as well as the parent `azurerm_netapp_account` having a defined AD connection.
+	// +kubebuilder:validation:Optional
+	KerberosEnabled *bool `json:"kerberosEnabled,omitempty" tf:"kerberos_enabled,omitempty"`
+
 	// The Private Endpoint ID for Key Vault, which is required when using customer-managed keys. This is required with encryption_key_source. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	KeyVaultPrivateEndpointID *string `json:"keyVaultPrivateEndpointId,omitempty" tf:"key_vault_private_endpoint_id,omitempty"`
@@ -459,6 +540,11 @@ type VolumeParameters struct {
 	// Limits enumeration of files and folders (that is, listing the contents) in SMB only to users with allowed access on the share. For instance, if a user doesn't have access to read a file or folder in a share with access-based enumeration enabled, then the file or folder doesn't show up in directory listings. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
 	// +kubebuilder:validation:Optional
 	SMBAccessBasedEnumerationEnabled *bool `json:"smbAccessBasedEnumerationEnabled,omitempty" tf:"smb_access_based_enumeration_enabled,omitempty"`
+
+	// Enable SMB Continuous Availability.
+	// Continuous availability option should be used only for SQL and FSLogix workloads. Using it for any other SMB workloads is not supported.
+	// +kubebuilder:validation:Optional
+	SMBContinuousAvailabilityEnabled *bool `json:"smbContinuousAvailabilityEnabled,omitempty" tf:"smb_continuous_availability_enabled,omitempty"`
 
 	// Limits clients from browsing for an SMB share by hiding the share from view in Windows Explorer or when listing shares in "net view." Only end users that know the absolute paths to the share are able to find the share. Defaults to false. For more information, please refer to Understand NAS share permissions in Azure NetApp Files
 	// +kubebuilder:validation:Optional

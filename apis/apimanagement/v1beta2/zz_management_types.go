@@ -30,7 +30,7 @@ type AdditionalLocationInitParameters struct {
 	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
-	// A list of availability zones. Changing this forces a new resource to be created.
+	// A list of availability zones.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -61,7 +61,7 @@ type AdditionalLocationObservation struct {
 	// A virtual_network_configuration block as defined below. Required when virtual_network_type is External or Internal.
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationObservation `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
-	// A list of availability zones. Changing this forces a new resource to be created.
+	// A list of availability zones.
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
 }
@@ -88,7 +88,7 @@ type AdditionalLocationParameters struct {
 	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
-	// A list of availability zones. Changing this forces a new resource to be created.
+	// A list of availability zones.
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Zones []*string `json:"zones,omitempty" tf:"zones,omitempty"`
@@ -345,7 +345,6 @@ type ManagementInitParameters struct {
 	// Email address from which the notification will be sent.
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
-	// A policy block as defined below.
 	Policy *PolicyInitParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// A protocols block as defined below.
@@ -440,7 +439,6 @@ type ManagementObservation struct {
 	// Email address from which the notification will be sent.
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
-	// A policy block as defined below.
 	Policy *PolicyObservation `json:"policy,omitempty" tf:"policy,omitempty"`
 
 	// The URL for the Publisher Portal associated with this API Management service.
@@ -541,7 +539,6 @@ type ManagementParameters struct {
 	// +kubebuilder:validation:Optional
 	NotificationSenderEmail *string `json:"notificationSenderEmail,omitempty" tf:"notification_sender_email,omitempty"`
 
-	// A policy block as defined below.
 	// +kubebuilder:validation:Optional
 	Policy *PolicyParameters `json:"policy,omitempty" tf:"policy,omitempty"`
 
@@ -657,30 +654,22 @@ type ManagementVirtualNetworkConfigurationParameters struct {
 }
 
 type PolicyInitParameters struct {
-
-	// The XML Content for this Policy.
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content"`
 
-	// A link to an API Management Policy XML Document, which must be publicly available.
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link"`
 }
 
 type PolicyObservation struct {
-
-	// The XML Content for this Policy.
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content,omitempty"`
 
-	// A link to an API Management Policy XML Document, which must be publicly available.
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link,omitempty"`
 }
 
 type PolicyParameters struct {
 
-	// The XML Content for this Policy.
 	// +kubebuilder:validation:Optional
 	XMLContent *string `json:"xmlContent,omitempty" tf:"xml_content"`
 
-	// A link to an API Management Policy XML Document, which must be publicly available.
 	// +kubebuilder:validation:Optional
 	XMLLink *string `json:"xmlLink,omitempty" tf:"xml_link"`
 }

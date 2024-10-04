@@ -97,7 +97,7 @@ type ComputeInstanceInitParameters struct {
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Instance to be created.
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
-	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
+	// The Azure Region where the Machine Learning Compute Instance should exist.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// Whether the compute instance will have a public ip. To set this to false a subnet_resource_id needs to be set. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
@@ -147,7 +147,7 @@ type ComputeInstanceObservation struct {
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Instance to be created.
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
-	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
+	// The Azure Region where the Machine Learning Compute Instance should exist.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
 	// The ID of the Machine Learning Workspace. Changing this forces a new Machine Learning Compute Instance to be created.
@@ -192,7 +192,7 @@ type ComputeInstanceParameters struct {
 	// +kubebuilder:validation:Optional
 	LocalAuthEnabled *bool `json:"localAuthEnabled,omitempty" tf:"local_auth_enabled,omitempty"`
 
-	// The Azure Region where the Machine Learning Compute Instance should exist. Changing this forces a new Machine Learning Compute Instance to be created.
+	// The Azure Region where the Machine Learning Compute Instance should exist.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
@@ -302,7 +302,6 @@ type ComputeInstanceStatus struct {
 type ComputeInstance struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.virtualMachineSize) || (has(self.initProvider) && has(self.initProvider.virtualMachineSize))",message="spec.forProvider.virtualMachineSize is a required parameter"
 	Spec   ComputeInstanceSpec   `json:"spec"`
 	Status ComputeInstanceStatus `json:"status,omitempty"`

@@ -89,7 +89,7 @@ apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLTrigger
 metadata:
   annotations:
-    meta.upbound.io/example-id: cosmosdb/v1beta1/sqltrigger
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlfunction
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -107,6 +107,8 @@ spec:
 apiVersion: cosmosdb.azure.upbound.io/v1beta1
 kind: SQLStoredProcedure
 metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlfunction
   labels:
     testing.upbound.io/example-name: example
   name: example
@@ -126,3 +128,17 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: rg1
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: cosmosdb/v1beta1/sqlfunction
+  labels:
+    testing.upbound.io/example-name: rg1
+  name: cosmosdb-func-rg
+spec:
+  forProvider:
+    location: West Europe

@@ -1980,6 +1980,11 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorPasswordSecretRef != nil {
+		in, out := &in.AdministratorPasswordSecretRef, &out.AdministratorPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Authentication != nil {
 		in, out := &in.Authentication, &out.Authentication
 		*out = make([]AuthenticationInitParameters, len(*in))
@@ -2074,6 +2079,11 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		in, out := &in.PrivateDNSZoneIDSelector, &out.PrivateDNSZoneIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ReplicationRole != nil {
 		in, out := &in.ReplicationRole, &out.ReplicationRole
@@ -2448,6 +2458,11 @@ func (in *FlexibleServerParameters) DeepCopyInto(out *FlexibleServerParameters) 
 		in, out := &in.PrivateDNSZoneIDSelector, &out.PrivateDNSZoneIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PublicNetworkAccessEnabled != nil {
+		in, out := &in.PublicNetworkAccessEnabled, &out.PublicNetworkAccessEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.ReplicationRole != nil {
 		in, out := &in.ReplicationRole, &out.ReplicationRole

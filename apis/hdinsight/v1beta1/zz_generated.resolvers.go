@@ -27,12 +27,35 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
@@ -136,6 +159,29 @@ func (mg *HBaseCluster) ResolveReferences( // ResolveReferences of this HBaseClu
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
@@ -239,12 +285,35 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
@@ -348,6 +417,29 @@ func (mg *HadoopCluster) ResolveReferences(ctx context.Context, c client.Reader)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
@@ -451,12 +543,35 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
@@ -561,6 +676,29 @@ func (mg *InteractiveQueryCluster) ResolveReferences(ctx context.Context, c clie
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
 			{
@@ -663,12 +801,35 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
@@ -796,6 +957,29 @@ func (mg *KafkaCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
 	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {
 			{
@@ -921,12 +1105,35 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 
 	var rsp reference.ResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.ForProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
@@ -1030,6 +1237,29 @@ func (mg *SparkCluster) ResolveReferences(ctx context.Context, c client.Reader) 
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.StorageAccount[i3].StorageContainerIDRef = rsp.ResolvedReference
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.PrivateLinkConfiguration); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+					CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID),
+					Extract:      rconfig.ExtractResourceID(),
+					Reference:    mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef,
+					Selector:     mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDSelector,
+					To:           reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID")
+			}
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+			mg.Spec.InitProvider.PrivateLinkConfiguration[i3].IPConfiguration[i4].SubnetIDRef = rsp.ResolvedReference
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Roles); i3++ {
 		for i4 := 0; i4 < len(mg.Spec.InitProvider.Roles[i3].HeadNode); i4++ {

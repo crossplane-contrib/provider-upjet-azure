@@ -100,6 +100,10 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  configurationExportStorageAccountName:
+                    description: Specifies the name of the storage account which the
+                      operation configuration information is exported to.
+                    type: string
                   corsConfiguration:
                     description: A cors_configuration block as defined below.
                     items:
@@ -140,6 +144,14 @@ spec:
                     description: The provisioned throughput for the backing database.
                       Range of 400-100000. Defaults to 1000.
                     type: number
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      type:
+                        description: The type of managed identity to assign. The only
+                          possible value is SystemAssigned.
+                        type: string
+                    type: object
                   kind:
                     description: 'The type of the service. Values at time of publication
                       are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'
@@ -280,6 +292,10 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  configurationExportStorageAccountName:
+                    description: Specifies the name of the storage account which the
+                      operation configuration information is exported to.
+                    type: string
                   corsConfiguration:
                     description: A cors_configuration block as defined below.
                     items:
@@ -320,6 +336,16 @@ spec:
                     description: The provisioned throughput for the backing database.
                       Range of 400-100000. Defaults to 1000.
                     type: number
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        type:
+                          description: The type of managed identity to assign. The
+                            only possible value is SystemAssigned.
+                          type: string
+                      type: object
+                    type: array
                   kind:
                     description: 'The type of the service. Values at time of publication
                       are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'
@@ -544,6 +570,10 @@ spec:
                           type: boolean
                       type: object
                     type: array
+                  configurationExportStorageAccountName:
+                    description: Specifies the name of the storage account which the
+                      operation configuration information is exported to.
+                    type: string
                   corsConfiguration:
                     description: A cors_configuration block as defined below.
                     items:
@@ -587,6 +617,22 @@ spec:
                   id:
                     description: The ID of the Healthcare Service.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    items:
+                      properties:
+                        principalId:
+                          description: The ID of the Healthcare Service.
+                          type: string
+                        tenantId:
+                          description: The ID of the Healthcare Service.
+                          type: string
+                        type:
+                          description: The type of managed identity to assign. The
+                            only possible value is SystemAssigned.
+                          type: string
+                      type: object
+                    type: array
                   kind:
                     description: 'The type of the service. Values at time of publication
                       are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'
@@ -752,6 +798,10 @@ spec:
                           for mobile and web implementations.
                         type: boolean
                     type: object
+                  configurationExportStorageAccountName:
+                    description: Specifies the name of the storage account which the
+                      operation configuration information is exported to.
+                    type: string
                   corsConfiguration:
                     description: A cors_configuration block as defined below.
                     properties:
@@ -790,6 +840,14 @@ spec:
                     description: The provisioned throughput for the backing database.
                       Range of 400-100000. Defaults to 1000.
                     type: number
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      type:
+                        description: The type of managed identity to assign. The only
+                          possible value is SystemAssigned.
+                        type: string
+                    type: object
                   kind:
                     description: 'The type of the service. Values at time of publication
                       are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'
@@ -928,6 +986,10 @@ spec:
                           for mobile and web implementations.
                         type: boolean
                     type: object
+                  configurationExportStorageAccountName:
+                    description: Specifies the name of the storage account which the
+                      operation configuration information is exported to.
+                    type: string
                   corsConfiguration:
                     description: A cors_configuration block as defined below.
                     properties:
@@ -966,6 +1028,14 @@ spec:
                     description: The provisioned throughput for the backing database.
                       Range of 400-100000. Defaults to 1000.
                     type: number
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      type:
+                        description: The type of managed identity to assign. The only
+                          possible value is SystemAssigned.
+                        type: string
+                    type: object
                   kind:
                     description: 'The type of the service. Values at time of publication
                       are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'
@@ -1188,6 +1258,10 @@ spec:
                           for mobile and web implementations.
                         type: boolean
                     type: object
+                  configurationExportStorageAccountName:
+                    description: Specifies the name of the storage account which the
+                      operation configuration information is exported to.
+                    type: string
                   corsConfiguration:
                     description: A cors_configuration block as defined below.
                     properties:
@@ -1229,6 +1303,20 @@ spec:
                   id:
                     description: The ID of the Healthcare Service.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      principalId:
+                        description: The ID of the Healthcare Service.
+                        type: string
+                      tenantId:
+                        description: The ID of the Healthcare Service.
+                        type: string
+                      type:
+                        description: The type of managed identity to assign. The only
+                          possible value is SystemAssigned.
+                        type: string
+                    type: object
                   kind:
                     description: 'The type of the service. Values at time of publication
                       are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.'

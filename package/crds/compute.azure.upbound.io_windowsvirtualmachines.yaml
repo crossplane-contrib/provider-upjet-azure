@@ -77,6 +77,10 @@ spec:
                     description: A additional_capabilities block as defined below.
                     items:
                       properties:
+                        hibernationEnabled:
+                          description: Whether to enable the hibernation capability
+                            or not.
+                          type: boolean
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
@@ -764,6 +768,10 @@ spec:
                     description: A additional_capabilities block as defined below.
                     items:
                       properties:
+                        hibernationEnabled:
+                          description: Whether to enable the hibernation capability
+                            or not.
+                          type: boolean
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
@@ -824,6 +832,25 @@ spec:
                       computer_name, then you must specify computer_name. Changing
                       this forces a new resource to be created.
                     type: string
+                  customDataSecretRef:
+                    description: The Base64-Encoded Custom Data which should be used
+                      for this Virtual Machine. Changing this forces a new resource
+                      to be created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   dedicatedHostGroupId:
                     description: The ID of a Dedicated Host Group that this Windows
                       Virtual Machine should be run within. Conflicts with dedicated_host_id.
@@ -1491,6 +1518,10 @@ spec:
                     description: A additional_capabilities block as defined below.
                     items:
                       properties:
+                        hibernationEnabled:
+                          description: Whether to enable the hibernation capability
+                            or not.
+                          type: boolean
                         ultraSsdEnabled:
                           description: Should the capacity to enable Data Disks of
                             the UltraSSD_LRS storage account type be supported on
@@ -2101,6 +2132,10 @@ spec:
                   additionalCapabilities:
                     description: A additional_capabilities block as defined below.
                     properties:
+                      hibernationEnabled:
+                        description: Whether to enable the hibernation capability
+                          or not.
+                        type: boolean
                       ultraSsdEnabled:
                         description: Should the capacity to enable Data Disks of the
                           UltraSSD_LRS storage account type be supported on this Virtual
@@ -2270,7 +2305,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -2293,7 +2329,7 @@ spec:
                       information about hot patching please see the product documentation.
                     type: boolean
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     properties:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
@@ -2766,6 +2802,10 @@ spec:
                   additionalCapabilities:
                     description: A additional_capabilities block as defined below.
                     properties:
+                      hibernationEnabled:
+                        description: Whether to enable the hibernation capability
+                          or not.
+                        type: boolean
                       ultraSsdEnabled:
                         description: Should the capacity to enable Data Disks of the
                           UltraSSD_LRS storage account type be supported on this Virtual
@@ -2937,7 +2977,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -2960,7 +3001,7 @@ spec:
                       information about hot patching please see the product documentation.
                     type: boolean
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     properties:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity
@@ -3534,6 +3575,10 @@ spec:
                   additionalCapabilities:
                     description: A additional_capabilities block as defined below.
                     properties:
+                      hibernationEnabled:
+                        description: Whether to enable the hibernation capability
+                          or not.
+                        type: boolean
                       ultraSsdEnabled:
                         description: Should the capacity to enable Data Disks of the
                           UltraSSD_LRS storage account type be supported on this Virtual
@@ -3646,7 +3691,8 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -3672,7 +3718,7 @@ spec:
                     description: The ID of the Windows Virtual Machine.
                     type: string
                   identity:
-                    description: An identity block as defined below.
+                    description: An identity block as documented below.
                     properties:
                       identityIds:
                         description: Specifies a list of User Assigned Managed Identity

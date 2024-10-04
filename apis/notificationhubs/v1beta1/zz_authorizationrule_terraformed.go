@@ -21,7 +21,7 @@ func (mg *AuthorizationRule) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this AuthorizationRule
 func (tr *AuthorizationRule) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"primary_connection_string": "status.atProvider.primaryConnectionString", "secondary_connection_string": "status.atProvider.secondaryConnectionString"}
 }
 
 // GetObservation of this AuthorizationRule

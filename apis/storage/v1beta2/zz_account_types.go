@@ -48,6 +48,9 @@ type AccountInitParameters struct {
 	// A customer_managed_key block as documented below.
 	CustomerManagedKey *CustomerManagedKeyInitParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
 
+	// Specifies which DNS endpoint type to use. Possible values are Standard and AzureDnsZone. Defaults to Standard. Changing this forces a new resource to be created.
+	DNSEndpointType *string `json:"dnsEndpointType,omitempty" tf:"dns_endpoint_type,omitempty"`
+
 	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
 	DefaultToOauthAuthentication *bool `json:"defaultToOauthAuthentication,omitempty" tf:"default_to_oauth_authentication,omitempty"`
 
@@ -156,6 +159,9 @@ type AccountObservation struct {
 
 	// A customer_managed_key block as documented below.
 	CustomerManagedKey *CustomerManagedKeyObservation `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
+	// Specifies which DNS endpoint type to use. Possible values are Standard and AzureDnsZone. Defaults to Standard. Changing this forces a new resource to be created.
+	DNSEndpointType *string `json:"dnsEndpointType,omitempty" tf:"dns_endpoint_type,omitempty"`
 
 	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
 	DefaultToOauthAuthentication *bool `json:"defaultToOauthAuthentication,omitempty" tf:"default_to_oauth_authentication,omitempty"`
@@ -480,6 +486,10 @@ type AccountParameters struct {
 	// A customer_managed_key block as documented below.
 	// +kubebuilder:validation:Optional
 	CustomerManagedKey *CustomerManagedKeyParameters `json:"customerManagedKey,omitempty" tf:"customer_managed_key,omitempty"`
+
+	// Specifies which DNS endpoint type to use. Possible values are Standard and AzureDnsZone. Defaults to Standard. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	DNSEndpointType *string `json:"dnsEndpointType,omitempty" tf:"dns_endpoint_type,omitempty"`
 
 	// Default to Azure Active Directory authorization in the Azure portal when accessing the Storage Account. The default value is false
 	// +kubebuilder:validation:Optional
@@ -901,8 +911,11 @@ type CustomDomainParameters struct {
 
 type CustomerManagedKeyInitParameters struct {
 
-	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key.
+	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key. Exactly one of key_vault_key_id and managed_hsm_key_id may be specified.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the managed HSM Key. Exactly one of key_vault_key_id and managed_hsm_key_id may be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// The ID of a user assigned identity.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
@@ -910,8 +923,11 @@ type CustomerManagedKeyInitParameters struct {
 
 type CustomerManagedKeyObservation struct {
 
-	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key.
+	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key. Exactly one of key_vault_key_id and managed_hsm_key_id may be specified.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the managed HSM Key. Exactly one of key_vault_key_id and managed_hsm_key_id may be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// The ID of a user assigned identity.
 	UserAssignedIdentityID *string `json:"userAssignedIdentityId,omitempty" tf:"user_assigned_identity_id,omitempty"`
@@ -919,9 +935,13 @@ type CustomerManagedKeyObservation struct {
 
 type CustomerManagedKeyParameters struct {
 
-	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key.
+	// The ID of the Key Vault Key, supplying a version-less key ID will enable auto-rotation of this key. Exactly one of key_vault_key_id and managed_hsm_key_id may be specified.
 	// +kubebuilder:validation:Optional
-	KeyVaultKeyID *string `json:"keyVaultKeyId" tf:"key_vault_key_id,omitempty"`
+	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
+
+	// The ID of the managed HSM Key. Exactly one of key_vault_key_id and managed_hsm_key_id may be specified.
+	// +kubebuilder:validation:Optional
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// The ID of a user assigned identity.
 	// +kubebuilder:validation:Optional
@@ -932,12 +952,18 @@ type DeleteRetentionPolicyInitParameters struct {
 
 	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Indicates whether permanent deletion of the soft deleted blob versions and snapshots is allowed. Defaults to false.
+	PermanentDeleteEnabled *bool `json:"permanentDeleteEnabled,omitempty" tf:"permanent_delete_enabled,omitempty"`
 }
 
 type DeleteRetentionPolicyObservation struct {
 
 	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Indicates whether permanent deletion of the soft deleted blob versions and snapshots is allowed. Defaults to false.
+	PermanentDeleteEnabled *bool `json:"permanentDeleteEnabled,omitempty" tf:"permanent_delete_enabled,omitempty"`
 }
 
 type DeleteRetentionPolicyParameters struct {
@@ -945,6 +971,10 @@ type DeleteRetentionPolicyParameters struct {
 	// Specifies the number of days that the azurerm_storage_share should be retained, between 1 and 365 days. Defaults to 7.
 	// +kubebuilder:validation:Optional
 	Days *float64 `json:"days,omitempty" tf:"days,omitempty"`
+
+	// Indicates whether permanent deletion of the soft deleted blob versions and snapshots is allowed. Defaults to false.
+	// +kubebuilder:validation:Optional
+	PermanentDeleteEnabled *bool `json:"permanentDeleteEnabled,omitempty" tf:"permanent_delete_enabled,omitempty"`
 }
 
 type HourMetricsInitParameters struct {

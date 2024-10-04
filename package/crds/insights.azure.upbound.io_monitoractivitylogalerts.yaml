@@ -417,6 +417,11 @@ spec:
                     description: Should this Activity Log Alert be enabled? Defaults
                       to true.
                     type: boolean
+                  location:
+                    description: The Azure Region where the activity log alert rule
+                      should exist. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   name:
                     description: The name of the activity log alert. Changing this
                       forces a new resource to be created.
@@ -952,6 +957,11 @@ spec:
                     description: Should this Activity Log Alert be enabled? Defaults
                       to true.
                     type: boolean
+                  location:
+                    description: The Azure Region where the activity log alert rule
+                      should exist. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   name:
                     description: The name of the activity log alert. Changing this
                       forces a new resource to be created.
@@ -1507,6 +1517,11 @@ spec:
                   id:
                     description: The ID of the activity log alert.
                     type: string
+                  location:
+                    description: The Azure Region where the activity log alert rule
+                      should exist. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   name:
                     description: The name of the activity log alert. Changing this
                       forces a new resource to be created.
@@ -1983,6 +1998,11 @@ spec:
                     description: Should this Activity Log Alert be enabled? Defaults
                       to true.
                     type: boolean
+                  location:
+                    description: The Azure Region where the activity log alert rule
+                      should exist. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   name:
                     description: The name of the activity log alert. Changing this
                       forces a new resource to be created.
@@ -2510,6 +2530,11 @@ spec:
                     description: Should this Activity Log Alert be enabled? Defaults
                       to true.
                     type: boolean
+                  location:
+                    description: The Azure Region where the activity log alert rule
+                      should exist. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   name:
                     description: The name of the activity log alert. Changing this
                       forces a new resource to be created.
@@ -3056,6 +3081,11 @@ spec:
                     type: boolean
                   id:
                     description: The ID of the activity log alert.
+                    type: string
+                  location:
+                    description: The Azure Region where the activity log alert rule
+                      should exist. Changing this forces a new resource to be created.
+                      Defaults to global.
                     type: string
                   name:
                     description: The name of the activity log alert. Changing this

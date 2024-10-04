@@ -175,6 +175,9 @@ type LinuxConfigurationAdminSSHKeyParameters struct {
 
 type LinuxConfigurationInitParameters struct {
 
+	// The Password which should be used for the local-administrator on this Virtual Machine. Changing this forces a new resource to be created.
+	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
+
 	// A admin_ssh_key block as documented below.
 	AdminSSHKey []LinuxConfigurationAdminSSHKeyInitParameters `json:"adminSshKey,omitempty" tf:"admin_ssh_key,omitempty"`
 
@@ -618,6 +621,9 @@ type OrchestratedVirtualMachineScaleSetExtensionInitParameters struct {
 	// A protected_settings_from_key_vault block as defined below.
 	ProtectedSettingsFromKeyVault []ExtensionProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
+	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+
 	// Specifies the Publisher of the Extension.
 	Publisher *string `json:"publisher,omitempty" tf:"publisher,omitempty"`
 
@@ -832,6 +838,9 @@ type OrchestratedVirtualMachineScaleSetInitParameters struct {
 
 	// A termination_notification block as defined below.
 	TerminationNotification []OrchestratedVirtualMachineScaleSetTerminationNotificationInitParameters `json:"terminationNotification,omitempty" tf:"termination_notification,omitempty"`
+
+	// The Base64-Encoded User Data which should be used for this Virtual Machine Scale Set.
+	UserDataBase64SecretRef *v1.SecretKeySelector `json:"userDataBase64SecretRef,omitempty" tf:"-"`
 
 	// Should the Virtual Machines in this Scale Set be strictly evenly distributed across Availability Zones? Defaults to false. Changing this forces a new resource to be created.
 	ZoneBalance *bool `json:"zoneBalance,omitempty" tf:"zone_balance,omitempty"`
@@ -1389,6 +1398,9 @@ type OrchestratedVirtualMachineScaleSetTerminationNotificationParameters struct 
 }
 
 type OsProfileInitParameters struct {
+
+	// The Base64-Encoded Custom Data which should be used for this Virtual Machine Scale Set.
+	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// A linux_configuration block as documented below.
 	LinuxConfiguration []LinuxConfigurationInitParameters `json:"linuxConfiguration,omitempty" tf:"linux_configuration,omitempty"`

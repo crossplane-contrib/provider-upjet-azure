@@ -157,6 +157,12 @@ spec:
                     description: The location of the source Storage Account. Changing
                       this forces a new Backup Instance Blob Storage to be created.
                     type: string
+                  storageAccountContainerNames:
+                    description: The list of the container names of the source Storage
+                      Account.
+                    items:
+                      type: string
+                    type: array
                   storageAccountId:
                     description: The ID of the source Storage Account. Changing this
                       forces a new Backup Instance Blob Storage to be created.
@@ -413,6 +419,12 @@ spec:
                     description: The location of the source Storage Account. Changing
                       this forces a new Backup Instance Blob Storage to be created.
                     type: string
+                  storageAccountContainerNames:
+                    description: The list of the container names of the source Storage
+                      Account.
+                    items:
+                      type: string
+                    type: array
                   storageAccountId:
                     description: The ID of the source Storage Account. Changing this
                       forces a new Backup Instance Blob Storage to be created.
@@ -680,6 +692,12 @@ spec:
                     description: The location of the source Storage Account. Changing
                       this forces a new Backup Instance Blob Storage to be created.
                     type: string
+                  storageAccountContainerNames:
+                    description: The list of the container names of the source Storage
+                      Account.
+                    items:
+                      type: string
+                    type: array
                   storageAccountId:
                     description: The ID of the source Storage Account. Changing this
                       forces a new Backup Instance Blob Storage to be created.

@@ -120,6 +120,31 @@ type CorsConfigurationParameters struct {
 	MaxAgeInSeconds *float64 `json:"maxAgeInSeconds,omitempty" tf:"max_age_in_seconds,omitempty"`
 }
 
+type HealthcareServiceIdentityInitParameters struct {
+
+	// The type of managed identity to assign. The only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type HealthcareServiceIdentityObservation struct {
+
+	// The ID of the Healthcare Service.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the Healthcare Service.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// The type of managed identity to assign. The only possible value is SystemAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type HealthcareServiceIdentityParameters struct {
+
+	// The type of managed identity to assign. The only possible value is SystemAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type HealthcareServiceInitParameters struct {
 
 	// A set of Azure object IDs that are allowed to access the Service.
@@ -129,6 +154,9 @@ type HealthcareServiceInitParameters struct {
 	// An authentication_configuration block as defined below.
 	AuthenticationConfiguration *AuthenticationConfigurationInitParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
+	// Specifies the name of the storage account which the operation configuration information is exported to.
+	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
+
 	// A cors_configuration block as defined below.
 	CorsConfiguration *CorsConfigurationInitParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
@@ -137,6 +165,9 @@ type HealthcareServiceInitParameters struct {
 
 	// The provisioned throughput for the backing database. Range of 400-100000. Defaults to 1000.
 	CosmosDBThroughput *float64 `json:"cosmosdbThroughput,omitempty" tf:"cosmosdb_throughput,omitempty"`
+
+	// An identity block as defined below.
+	Identity *HealthcareServiceIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The type of the service. Values at time of publication are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
@@ -161,6 +192,9 @@ type HealthcareServiceObservation struct {
 	// An authentication_configuration block as defined below.
 	AuthenticationConfiguration *AuthenticationConfigurationObservation `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
+	// Specifies the name of the storage account which the operation configuration information is exported to.
+	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
+
 	// A cors_configuration block as defined below.
 	CorsConfiguration *CorsConfigurationObservation `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
 
@@ -172,6 +206,9 @@ type HealthcareServiceObservation struct {
 
 	// The ID of the Healthcare Service.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
+
+	// An identity block as defined below.
+	Identity *HealthcareServiceIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The type of the service. Values at time of publication are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.
 	Kind *string `json:"kind,omitempty" tf:"kind,omitempty"`
@@ -201,6 +238,10 @@ type HealthcareServiceParameters struct {
 	// +kubebuilder:validation:Optional
 	AuthenticationConfiguration *AuthenticationConfigurationParameters `json:"authenticationConfiguration,omitempty" tf:"authentication_configuration,omitempty"`
 
+	// Specifies the name of the storage account which the operation configuration information is exported to.
+	// +kubebuilder:validation:Optional
+	ConfigurationExportStorageAccountName *string `json:"configurationExportStorageAccountName,omitempty" tf:"configuration_export_storage_account_name,omitempty"`
+
 	// A cors_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	CorsConfiguration *CorsConfigurationParameters `json:"corsConfiguration,omitempty" tf:"cors_configuration,omitempty"`
@@ -212,6 +253,10 @@ type HealthcareServiceParameters struct {
 	// The provisioned throughput for the backing database. Range of 400-100000. Defaults to 1000.
 	// +kubebuilder:validation:Optional
 	CosmosDBThroughput *float64 `json:"cosmosdbThroughput,omitempty" tf:"cosmosdb_throughput,omitempty"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity *HealthcareServiceIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The type of the service. Values at time of publication are: fhir, fhir-Stu3 and fhir-R4. Default value is fhir.
 	// +kubebuilder:validation:Optional

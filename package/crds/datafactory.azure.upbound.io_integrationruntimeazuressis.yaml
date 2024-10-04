@@ -131,6 +131,22 @@ spec:
                           type: string
                       type: object
                     type: array
+                  copyComputeScale:
+                    description: One copy_compute_scale block as defined below.
+                    items:
+                      properties:
+                        dataIntegrationUnit:
+                          description: Specifies the data integration unit number
+                            setting reserved for copy activity execution. Supported
+                            values are multiples of 4 in range 4-256.
+                          type: number
+                        timeToLive:
+                          description: Specifies the time to live (in minutes) setting
+                            of integration runtime which will execute copy activity.
+                            Possible values are at least 5.
+                          type: number
+                      type: object
+                    type: array
                   credentialName:
                     description: The name of a Data Factory Credential that the SSIS
                       integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
@@ -502,6 +518,26 @@ spec:
                           type: string
                       type: object
                     type: array
+                  pipelineExternalComputeScale:
+                    description: One pipeline_external_compute_scale block as defined
+                      below.
+                    items:
+                      properties:
+                        numberOfExternalNodes:
+                          description: Specifies the number of the external nodes,
+                            which should be greater than 0 and less than 11.
+                          type: number
+                        numberOfPipelineNodes:
+                          description: Specifies the number of the pipeline nodes,
+                            which should be greater than 0 and less than 11.
+                          type: number
+                        timeToLive:
+                          description: Specifies the time to live (in minutes) setting
+                            of integration runtime which will execute copy activity.
+                            Possible values are at least 5.
+                          type: number
+                      type: object
+                    type: array
                   proxy:
                     description: A proxy block as defined below.
                     items:
@@ -719,6 +755,23 @@ spec:
                         administratorLogin:
                           description: Administrator login name for the SQL Server.
                           type: string
+                        administratorPasswordSecretRef:
+                          description: Administrator login password for the SQL Server.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         dualStandbyPairName:
                           description: The dual standby Azure-SSIS Integration Runtime
                             pair with SSISDB failover.
@@ -750,6 +803,22 @@ spec:
                           description: The endpoint of an Azure SQL Server that will
                             be used to host the SSIS catalog.
                           type: string
+                      type: object
+                    type: array
+                  copyComputeScale:
+                    description: One copy_compute_scale block as defined below.
+                    items:
+                      properties:
+                        dataIntegrationUnit:
+                          description: Specifies the data integration unit number
+                            setting reserved for copy activity execution. Supported
+                            values are multiples of 4 in range 4-256.
+                          type: number
+                        timeToLive:
+                          description: Specifies the time to live (in minutes) setting
+                            of integration runtime which will execute copy activity.
+                            Possible values are at least 5.
+                          type: number
                       type: object
                     type: array
                   credentialName:
@@ -809,6 +878,23 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              passwordSecretRef:
+                                description: The password for the target device.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               targetName:
                                 description: The target computer or domain name.
                                 type: string
@@ -847,6 +933,23 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              licenseSecretRef:
+                                description: The license used for the Component.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               name:
                                 description: Name of the package store.
                                 type: string
@@ -986,6 +1089,26 @@ spec:
                         name:
                           description: Name of the package store.
                           type: string
+                      type: object
+                    type: array
+                  pipelineExternalComputeScale:
+                    description: One pipeline_external_compute_scale block as defined
+                      below.
+                    items:
+                      properties:
+                        numberOfExternalNodes:
+                          description: Specifies the number of the external nodes,
+                            which should be greater than 0 and less than 11.
+                          type: number
+                        numberOfPipelineNodes:
+                          description: Specifies the number of the pipeline nodes,
+                            which should be greater than 0 and less than 11.
+                          type: number
+                        timeToLive:
+                          description: Specifies the time to live (in minutes) setting
+                            of integration runtime which will execute copy activity.
+                            Possible values are at least 5.
+                          type: number
                       type: object
                     type: array
                   proxy:
@@ -1407,6 +1530,22 @@ spec:
                           type: string
                       type: object
                     type: array
+                  copyComputeScale:
+                    description: One copy_compute_scale block as defined below.
+                    items:
+                      properties:
+                        dataIntegrationUnit:
+                          description: Specifies the data integration unit number
+                            setting reserved for copy activity execution. Supported
+                            values are multiples of 4 in range 4-256.
+                          type: number
+                        timeToLive:
+                          description: Specifies the time to live (in minutes) setting
+                            of integration runtime which will execute copy activity.
+                            Possible values are at least 5.
+                          type: number
+                      type: object
+                    type: array
                   credentialName:
                     description: The name of a Data Factory Credential that the SSIS
                       integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
@@ -1573,6 +1712,26 @@ spec:
                         name:
                           description: Name of the package store.
                           type: string
+                      type: object
+                    type: array
+                  pipelineExternalComputeScale:
+                    description: One pipeline_external_compute_scale block as defined
+                      below.
+                    items:
+                      properties:
+                        numberOfExternalNodes:
+                          description: Specifies the number of the external nodes,
+                            which should be greater than 0 and less than 11.
+                          type: number
+                        numberOfPipelineNodes:
+                          description: Specifies the number of the pipeline nodes,
+                            which should be greater than 0 and less than 11.
+                          type: number
+                        timeToLive:
+                          description: Specifies the time to live (in minutes) setting
+                            of integration runtime which will execute copy activity.
+                            Possible values are at least 5.
+                          type: number
                       type: object
                     type: array
                   proxy:
@@ -1790,6 +1949,20 @@ spec:
                         description: The endpoint of an Azure SQL Server that will
                           be used to host the SSIS catalog.
                         type: string
+                    type: object
+                  copyComputeScale:
+                    description: One copy_compute_scale block as defined below.
+                    properties:
+                      dataIntegrationUnit:
+                        description: Specifies the data integration unit number setting
+                          reserved for copy activity execution. Supported values are
+                          multiples of 4 in range 4-256.
+                        type: number
+                      timeToLive:
+                        description: Specifies the time to live (in minutes) setting
+                          of integration runtime which will execute copy activity.
+                          Possible values are at least 5.
+                        type: number
                     type: object
                   credentialName:
                     description: The name of a Data Factory Credential that the SSIS
@@ -2150,6 +2323,24 @@ spec:
                           type: string
                       type: object
                     type: array
+                  pipelineExternalComputeScale:
+                    description: One pipeline_external_compute_scale block as defined
+                      below.
+                    properties:
+                      numberOfExternalNodes:
+                        description: Specifies the number of the external nodes, which
+                          should be greater than 0 and less than 11.
+                        type: number
+                      numberOfPipelineNodes:
+                        description: Specifies the number of the pipeline nodes, which
+                          should be greater than 0 and less than 11.
+                        type: number
+                      timeToLive:
+                        description: Specifies the time to live (in minutes) setting
+                          of integration runtime which will execute copy activity.
+                          Possible values are at least 5.
+                        type: number
+                    type: object
                   proxy:
                     description: A proxy block as defined below.
                     properties:
@@ -2408,6 +2599,20 @@ spec:
                         description: The endpoint of an Azure SQL Server that will
                           be used to host the SSIS catalog.
                         type: string
+                    type: object
+                  copyComputeScale:
+                    description: One copy_compute_scale block as defined below.
+                    properties:
+                      dataIntegrationUnit:
+                        description: Specifies the data integration unit number setting
+                          reserved for copy activity execution. Supported values are
+                          multiples of 4 in range 4-256.
+                        type: number
+                      timeToLive:
+                        description: Specifies the time to live (in minutes) setting
+                          of integration runtime which will execute copy activity.
+                          Possible values are at least 5.
+                        type: number
                     type: object
                   credentialName:
                     description: The name of a Data Factory Credential that the SSIS
@@ -2690,6 +2895,24 @@ spec:
                           type: string
                       type: object
                     type: array
+                  pipelineExternalComputeScale:
+                    description: One pipeline_external_compute_scale block as defined
+                      below.
+                    properties:
+                      numberOfExternalNodes:
+                        description: Specifies the number of the external nodes, which
+                          should be greater than 0 and less than 11.
+                        type: number
+                      numberOfPipelineNodes:
+                        description: Specifies the number of the pipeline nodes, which
+                          should be greater than 0 and less than 11.
+                        type: number
+                      timeToLive:
+                        description: Specifies the time to live (in minutes) setting
+                          of integration runtime which will execute copy activity.
+                          Possible values are at least 5.
+                        type: number
+                    type: object
                   proxy:
                     description: A proxy block as defined below.
                     properties:
@@ -3101,6 +3324,20 @@ spec:
                           be used to host the SSIS catalog.
                         type: string
                     type: object
+                  copyComputeScale:
+                    description: One copy_compute_scale block as defined below.
+                    properties:
+                      dataIntegrationUnit:
+                        description: Specifies the data integration unit number setting
+                          reserved for copy activity execution. Supported values are
+                          multiples of 4 in range 4-256.
+                        type: number
+                      timeToLive:
+                        description: Specifies the time to live (in minutes) setting
+                          of integration runtime which will execute copy activity.
+                          Possible values are at least 5.
+                        type: number
+                    type: object
                   credentialName:
                     description: The name of a Data Factory Credential that the SSIS
                       integration will use to access data sources. For example, azurerm_data_factory_credential_user_managed_identity
@@ -3259,6 +3496,24 @@ spec:
                           type: string
                       type: object
                     type: array
+                  pipelineExternalComputeScale:
+                    description: One pipeline_external_compute_scale block as defined
+                      below.
+                    properties:
+                      numberOfExternalNodes:
+                        description: Specifies the number of the external nodes, which
+                          should be greater than 0 and less than 11.
+                        type: number
+                      numberOfPipelineNodes:
+                        description: Specifies the number of the pipeline nodes, which
+                          should be greater than 0 and less than 11.
+                        type: number
+                      timeToLive:
+                        description: Specifies the time to live (in minutes) setting
+                          of integration runtime which will execute copy activity.
+                          Possible values are at least 5.
+                        type: number
+                    type: object
                   proxy:
                     description: A proxy block as defined below.
                     properties:

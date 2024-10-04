@@ -86,6 +86,28 @@ spec:
                     description: Controls if the VMs in the remote virtual network
                       can access VMs in the local virtual network. Defaults to true.
                     type: boolean
+                  localSubnetNames:
+                    description: A list of local Subnet names that are Subnet peered
+                      with remote Virtual Network.
+                    items:
+                      type: string
+                    type: array
+                  onlyIpv6PeeringEnabled:
+                    description: Specifies whether only IPv6 address space is peered
+                      for Subnet peering. Changing this forces a new resource to be
+                      created.
+                    type: boolean
+                  peerCompleteVirtualNetworksEnabled:
+                    description: Specifies whether complete Virtual Network address
+                      space is peered. Defaults to true. Changing this forces a new
+                      resource to be created.
+                    type: boolean
+                  remoteSubnetNames:
+                    description: A list of remote Subnet names from remote Virtual
+                      Network that are Subnet peered.
+                    items:
+                      type: string
+                    type: array
                   remoteVirtualNetworkId:
                     description: The full Azure resource ID of the remote virtual
                       network. Changing this forces a new resource to be created.
@@ -370,6 +392,28 @@ spec:
                     description: Controls if the VMs in the remote virtual network
                       can access VMs in the local virtual network. Defaults to true.
                     type: boolean
+                  localSubnetNames:
+                    description: A list of local Subnet names that are Subnet peered
+                      with remote Virtual Network.
+                    items:
+                      type: string
+                    type: array
+                  onlyIpv6PeeringEnabled:
+                    description: Specifies whether only IPv6 address space is peered
+                      for Subnet peering. Changing this forces a new resource to be
+                      created.
+                    type: boolean
+                  peerCompleteVirtualNetworksEnabled:
+                    description: Specifies whether complete Virtual Network address
+                      space is peered. Defaults to true. Changing this forces a new
+                      resource to be created.
+                    type: boolean
+                  remoteSubnetNames:
+                    description: A list of remote Subnet names from remote Virtual
+                      Network that are Subnet peered.
+                    items:
+                      type: string
+                    type: array
                   remoteVirtualNetworkId:
                     description: The full Azure resource ID of the remote virtual
                       network. Changing this forces a new resource to be created.
@@ -656,6 +700,28 @@ spec:
                   id:
                     description: The ID of the Virtual Network Peering.
                     type: string
+                  localSubnetNames:
+                    description: A list of local Subnet names that are Subnet peered
+                      with remote Virtual Network.
+                    items:
+                      type: string
+                    type: array
+                  onlyIpv6PeeringEnabled:
+                    description: Specifies whether only IPv6 address space is peered
+                      for Subnet peering. Changing this forces a new resource to be
+                      created.
+                    type: boolean
+                  peerCompleteVirtualNetworksEnabled:
+                    description: Specifies whether complete Virtual Network address
+                      space is peered. Defaults to true. Changing this forces a new
+                      resource to be created.
+                    type: boolean
+                  remoteSubnetNames:
+                    description: A list of remote Subnet names from remote Virtual
+                      Network that are Subnet peered.
+                    items:
+                      type: string
+                    type: array
                   remoteVirtualNetworkId:
                     description: The full Azure resource ID of the remote virtual
                       network. Changing this forces a new resource to be created.

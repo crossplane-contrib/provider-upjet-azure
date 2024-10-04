@@ -77,7 +77,7 @@ type CapacityReservationParameters struct {
 
 type SkuInitParameters struct {
 
-	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
+	// Specifies the number of instances to be reserved. It must be greater than or equal to 0 and not exceed the quota in the subscription.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// Name of the sku, such as Standard_F2. Changing this forces a new resource to be created.
@@ -86,7 +86,7 @@ type SkuInitParameters struct {
 
 type SkuObservation struct {
 
-	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
+	// Specifies the number of instances to be reserved. It must be greater than or equal to 0 and not exceed the quota in the subscription.
 	Capacity *float64 `json:"capacity,omitempty" tf:"capacity,omitempty"`
 
 	// Name of the sku, such as Standard_F2. Changing this forces a new resource to be created.
@@ -95,7 +95,7 @@ type SkuObservation struct {
 
 type SkuParameters struct {
 
-	// Specifies the number of instances to be reserved. It must be a positive integer and not exceed the quota in the subscription.
+	// Specifies the number of instances to be reserved. It must be greater than or equal to 0 and not exceed the quota in the subscription.
 	// +kubebuilder:validation:Optional
 	Capacity *float64 `json:"capacity" tf:"capacity,omitempty"`
 

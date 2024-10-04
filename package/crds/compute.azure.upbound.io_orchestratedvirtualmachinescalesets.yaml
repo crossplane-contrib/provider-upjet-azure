@@ -1269,6 +1269,24 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        protectedSettingsSecretRef:
+                          description: A JSON String which specifies Sensitive Settings
+                            (such as Passwords) for the Extension.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         publisher:
                           description: Specifies the Publisher of the Extension.
                           type: string
@@ -1613,10 +1631,47 @@ spec:
                     description: An os_profile block as defined below.
                     items:
                       properties:
+                        customDataSecretRef:
+                          description: The Base64-Encoded Custom Data which should
+                            be used for this Virtual Machine Scale Set.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         linuxConfiguration:
                           description: A linux_configuration block as documented below.
                           items:
                             properties:
+                              adminPasswordSecretRef:
+                                description: The Password which should be used for
+                                  the local-administrator on this Virtual Machine.
+                                  Changing this forces a new resource to be created.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               adminSshKey:
                                 description: A admin_ssh_key block as documented below.
                                 items:
@@ -1932,6 +1987,24 @@ spec:
                           type: string
                       type: object
                     type: array
+                  userDataBase64SecretRef:
+                    description: The Base64-Encoded User Data which should be used
+                      for this Virtual Machine Scale Set.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   zoneBalance:
                     description: Should the Virtual Machines in this Scale Set be
                       strictly evenly distributed across Availability Zones? Defaults
@@ -3955,7 +4028,7 @@ spec:
                       enabled:
                         description: Should the termination notification be enabled
                           on this Virtual Machine Scale Set? Possible values true
-                          or false
+                          or false.
                         type: boolean
                       timeout:
                         description: Length of time (in minutes, between 5 and 15)
@@ -4876,7 +4949,7 @@ spec:
                       enabled:
                         description: Should the termination notification be enabled
                           on this Virtual Machine Scale Set? Possible values true
-                          or false
+                          or false.
                         type: boolean
                       timeout:
                         description: Length of time (in minutes, between 5 and 15)
@@ -5800,7 +5873,7 @@ spec:
                       enabled:
                         description: Should the termination notification be enabled
                           on this Virtual Machine Scale Set? Possible values true
-                          or false
+                          or false.
                         type: boolean
                       timeout:
                         description: Length of time (in minutes, between 5 and 15)

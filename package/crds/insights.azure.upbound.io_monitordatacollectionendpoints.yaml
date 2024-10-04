@@ -406,6 +406,9 @@ spec:
                   id:
                     description: The ID of the Data Collection Endpoint.
                     type: string
+                  immutableId:
+                    description: The immutable ID of the Data Collection Endpoint.
+                    type: string
                   kind:
                     description: The kind of the Data Collection Endpoint. Possible
                       values are Linux and Windows.

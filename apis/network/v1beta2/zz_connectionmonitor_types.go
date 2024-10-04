@@ -143,7 +143,7 @@ type EndpointInitParameters struct {
 	// The resource ID which is used as the endpoint by the Network Connection Monitor.
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
-	// The endpoint type of the Network Connection Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+	// The endpoint type of the Network Connection Monitor. Possible values are AzureArcVM, AzureSubnet, AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
 	TargetResourceType *string `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
@@ -172,7 +172,7 @@ type EndpointObservation struct {
 	// The resource ID which is used as the endpoint by the Network Connection Monitor.
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
-	// The endpoint type of the Network Connection Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+	// The endpoint type of the Network Connection Monitor. Possible values are AzureArcVM, AzureSubnet, AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
 	TargetResourceType *string `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }
 
@@ -208,7 +208,7 @@ type EndpointParameters struct {
 	// +kubebuilder:validation:Optional
 	TargetResourceID *string `json:"targetResourceId,omitempty" tf:"target_resource_id,omitempty"`
 
-	// The endpoint type of the Network Connection Monitor. Possible values are AzureSubnet, AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
+	// The endpoint type of the Network Connection Monitor. Possible values are AzureArcVM, AzureSubnet, AzureVM, AzureVNet, ExternalAddress, MMAWorkspaceMachine and MMAWorkspaceNetwork.
 	// +kubebuilder:validation:Optional
 	TargetResourceType *string `json:"targetResourceType,omitempty" tf:"target_resource_type,omitempty"`
 }

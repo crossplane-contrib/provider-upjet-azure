@@ -15,6 +15,12 @@ import (
 
 type MonitorPrivateLinkScopeInitParameters struct {
 
+	// The default ingestion access mode for the associated private endpoints in scope. Possible values are Open and PrivateOnly. Defaults to Open.
+	IngestionAccessMode *string `json:"ingestionAccessMode,omitempty" tf:"ingestion_access_mode,omitempty"`
+
+	// The default query access mode for hte associated private endpoints in scope. Possible values are Open and PrivateOnly. Defaults to Open.
+	QueryAccessMode *string `json:"queryAccessMode,omitempty" tf:"query_access_mode,omitempty"`
+
 	// A mapping of tags which should be assigned to the Azure Monitor Private Link Scope.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -25,6 +31,12 @@ type MonitorPrivateLinkScopeObservation struct {
 	// The ID of the Azure Monitor Private Link Scope.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// The default ingestion access mode for the associated private endpoints in scope. Possible values are Open and PrivateOnly. Defaults to Open.
+	IngestionAccessMode *string `json:"ingestionAccessMode,omitempty" tf:"ingestion_access_mode,omitempty"`
+
+	// The default query access mode for hte associated private endpoints in scope. Possible values are Open and PrivateOnly. Defaults to Open.
+	QueryAccessMode *string `json:"queryAccessMode,omitempty" tf:"query_access_mode,omitempty"`
+
 	// The name of the Resource Group where the Azure Monitor Private Link Scope should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -34,6 +46,14 @@ type MonitorPrivateLinkScopeObservation struct {
 }
 
 type MonitorPrivateLinkScopeParameters struct {
+
+	// The default ingestion access mode for the associated private endpoints in scope. Possible values are Open and PrivateOnly. Defaults to Open.
+	// +kubebuilder:validation:Optional
+	IngestionAccessMode *string `json:"ingestionAccessMode,omitempty" tf:"ingestion_access_mode,omitempty"`
+
+	// The default query access mode for hte associated private endpoints in scope. Possible values are Open and PrivateOnly. Defaults to Open.
+	// +kubebuilder:validation:Optional
+	QueryAccessMode *string `json:"queryAccessMode,omitempty" tf:"query_access_mode,omitempty"`
 
 	// The name of the Resource Group where the Azure Monitor Private Link Scope should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

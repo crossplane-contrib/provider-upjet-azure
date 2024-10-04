@@ -178,7 +178,7 @@ type ContainerAppObservation struct {
 	RevisionMode *string `json:"revisionMode,omitempty" tf:"revision_mode,omitempty"`
 
 	// One or more secret block as detailed below.
-	Secret []SecretParameters `json:"secret,omitempty" tf:"secret,omitempty"`
+	Secret []SecretObservation `json:"secret,omitempty" tf:"secret,omitempty"`
 
 	// A mapping of tags to assign to the Container App.
 	// +mapType=granular
@@ -735,8 +735,8 @@ type IPSecurityRestrictionInitParameters struct {
 	// Describe the IP restriction rule that is being sent to the container-app.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// CIDR notation to match incoming IP address.
-	// CIDR notation to match incoming IP address.
+	// The incoming IP address or range of IP addresses (in CIDR notation).
+	// The incoming IP address or range of IP addresses (in CIDR notation).
 	IPAddressRange *string `json:"ipAddressRange,omitempty" tf:"ip_address_range,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
@@ -754,8 +754,8 @@ type IPSecurityRestrictionObservation struct {
 	// Describe the IP restriction rule that is being sent to the container-app.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// CIDR notation to match incoming IP address.
-	// CIDR notation to match incoming IP address.
+	// The incoming IP address or range of IP addresses (in CIDR notation).
+	// The incoming IP address or range of IP addresses (in CIDR notation).
 	IPAddressRange *string `json:"ipAddressRange,omitempty" tf:"ip_address_range,omitempty"`
 
 	// The name of the Volume to be mounted in the container.
@@ -775,8 +775,8 @@ type IPSecurityRestrictionParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// CIDR notation to match incoming IP address.
-	// CIDR notation to match incoming IP address.
+	// The incoming IP address or range of IP addresses (in CIDR notation).
+	// The incoming IP address or range of IP addresses (in CIDR notation).
 	// +kubebuilder:validation:Optional
 	IPAddressRange *string `json:"ipAddressRange" tf:"ip_address_range,omitempty"`
 
@@ -1474,29 +1474,55 @@ type RegistryParameters struct {
 
 type SecretInitParameters struct {
 
-	// The Secret name.
-	// The Secret name.
+	// The identity to use for accessing the Key Vault secret reference. This can either be the Resource ID of a User Assigned Identity, or System for the System Assigned Identity.
+	// The identity to use for accessing key vault reference.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The secret name.
+	// The secret name.
 	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The value for this secret.
 	// The value for this secret.
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type SecretObservation struct {
+
+	// The identity to use for accessing the Key Vault secret reference. This can either be the Resource ID of a User Assigned Identity, or System for the System Assigned Identity.
+	// The identity to use for accessing key vault reference.
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 }
 
 type SecretParameters struct {
 
-	// The Secret name.
-	// The Secret name.
+	// The identity to use for accessing the Key Vault secret reference. This can either be the Resource ID of a User Assigned Identity, or System for the System Assigned Identity.
+	// The identity to use for accessing key vault reference.
+	// +kubebuilder:validation:Optional
+	Identity *string `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The ID of a Key Vault secret. This can be a versioned or version-less ID.
+	// The Key Vault Secret ID. Could be either one of `id` or `versionless_id`.
+	// +kubebuilder:validation:Optional
+	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
+
+	// The secret name.
+	// The secret name.
 	// +kubebuilder:validation:Optional
 	NameSecretRef v1.SecretKeySelector `json:"nameSecretRef" tf:"-"`
 
 	// The value for this secret.
 	// The value for this secret.
 	// +kubebuilder:validation:Optional
-	ValueSecretRef v1.SecretKeySelector `json:"valueSecretRef" tf:"-"`
+	ValueSecretRef *v1.SecretKeySelector `json:"valueSecretRef,omitempty" tf:"-"`
 }
 
 type StartupProbeHeaderInitParameters struct {

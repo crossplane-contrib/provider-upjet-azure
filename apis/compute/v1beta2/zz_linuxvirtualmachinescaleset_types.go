@@ -190,7 +190,7 @@ type ExtensionParameters struct {
 type GalleryApplicationsInitParameters struct {
 	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// The ID of the Linux Virtual Machine Scale Set.
@@ -203,7 +203,7 @@ type GalleryApplicationsInitParameters struct {
 type GalleryApplicationsObservation struct {
 	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// The ID of the Linux Virtual Machine Scale Set.
@@ -218,7 +218,7 @@ type GalleryApplicationsParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationReferenceBlobURI *string `json:"configurationReferenceBlobUri,omitempty" tf:"configuration_reference_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -572,7 +572,7 @@ type LinuxVirtualMachineScaleSetGalleryApplicationInitParameters struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided. Changing this forces a new resource to be created.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value. Changing this forces a new resource to be created.
@@ -587,7 +587,7 @@ type LinuxVirtualMachineScaleSetGalleryApplicationObservation struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided. Changing this forces a new resource to be created.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value. Changing this forces a new resource to be created.
@@ -603,7 +603,7 @@ type LinuxVirtualMachineScaleSetGalleryApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647. Changing this forces a new resource to be created.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -1659,6 +1659,9 @@ type RollingUpgradePolicyInitParameters struct {
 	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
 	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent,omitempty" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
 
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
+
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches,omitempty" tf:"pause_time_between_batches,omitempty"`
 
@@ -1679,6 +1682,9 @@ type RollingUpgradePolicyObservation struct {
 
 	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
 	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent,omitempty" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
 
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches,omitempty" tf:"pause_time_between_batches,omitempty"`
@@ -1704,6 +1710,10 @@ type RollingUpgradePolicyParameters struct {
 	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
 	// +kubebuilder:validation:Optional
 	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	// +kubebuilder:validation:Optional
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
 
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	// +kubebuilder:validation:Optional

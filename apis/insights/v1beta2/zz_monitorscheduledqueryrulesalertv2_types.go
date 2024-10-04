@@ -202,6 +202,44 @@ type MonitorScheduledQueryRulesAlertV2CriteriaParameters struct {
 	TimeAggregationMethod *string `json:"timeAggregationMethod" tf:"time_aggregation_method,omitempty"`
 }
 
+type MonitorScheduledQueryRulesAlertV2IdentityInitParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MonitorScheduledQueryRulesAlertV2IdentityObservation struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// The Principal ID for the Service Principal associated with the Managed Service Identity of this App Service slot.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The Tenant ID for the Service Principal associated with the Managed Service Identity of this App Service slot.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type MonitorScheduledQueryRulesAlertV2IdentityParameters struct {
+
+	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
+	// +kubebuilder:validation:Optional
+	// +listType=set
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
 type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 
 	// An action block as defined below.
@@ -224,6 +262,9 @@ type MonitorScheduledQueryRulesAlertV2InitParameters struct {
 
 	// How often the scheduled query rule is evaluated, represented in ISO 8601 duration format. Possible values are PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D.
 	EvaluationFrequency *string `json:"evaluationFrequency,omitempty" tf:"evaluation_frequency,omitempty"`
+
+	// An identity block as defined below.
+	Identity *MonitorScheduledQueryRulesAlertV2IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Monitor Scheduled Query Rule should exist. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -296,6 +337,9 @@ type MonitorScheduledQueryRulesAlertV2Observation struct {
 	// The ID of the Monitor Scheduled Query Rule.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// An identity block as defined below.
+	Identity *MonitorScheduledQueryRulesAlertV2IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
 	// True if this alert rule is a legacy Log Analytic Rule.
 	IsALegacyLogAnalyticsRule *bool `json:"isALegacyLogAnalyticsRule,omitempty" tf:"is_a_legacy_log_analytics_rule,omitempty"`
 
@@ -366,6 +410,10 @@ type MonitorScheduledQueryRulesAlertV2Parameters struct {
 	// How often the scheduled query rule is evaluated, represented in ISO 8601 duration format. Possible values are PT1M, PT5M, PT10M, PT15M, PT30M, PT45M, PT1H, PT2H, PT3H, PT4H, PT5H, PT6H, P1D.
 	// +kubebuilder:validation:Optional
 	EvaluationFrequency *string `json:"evaluationFrequency,omitempty" tf:"evaluation_frequency,omitempty"`
+
+	// An identity block as defined below.
+	// +kubebuilder:validation:Optional
+	Identity *MonitorScheduledQueryRulesAlertV2IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Specifies the Azure Region where the Monitor Scheduled Query Rule should exist. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

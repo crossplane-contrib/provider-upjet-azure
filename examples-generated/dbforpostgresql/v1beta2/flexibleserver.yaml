@@ -20,6 +20,7 @@ spec:
     privateDnsZoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+    publicNetworkAccessEnabled: false
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

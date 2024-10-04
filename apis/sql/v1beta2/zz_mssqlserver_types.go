@@ -166,7 +166,7 @@ type MSSQLServerInitParameters struct {
 	// Whether outbound network traffic is restricted for this server. Defaults to false.
 	OutboundNetworkRestrictionEnabled *bool `json:"outboundNetworkRestrictionEnabled,omitempty" tf:"outbound_network_restriction_enabled,omitempty"`
 
-	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with identity_ids.
+	// Specifies the primary user managed identity id. Required if type within the identity block is set to either SystemAssigned, UserAssigned or UserAssigned and should be set at same time as setting identity_ids.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
@@ -232,7 +232,7 @@ type MSSQLServerObservation struct {
 	// Whether outbound network traffic is restricted for this server. Defaults to false.
 	OutboundNetworkRestrictionEnabled *bool `json:"outboundNetworkRestrictionEnabled,omitempty" tf:"outbound_network_restriction_enabled,omitempty"`
 
-	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with identity_ids.
+	// Specifies the primary user managed identity id. Required if type within the identity block is set to either SystemAssigned, UserAssigned or UserAssigned and should be set at same time as setting identity_ids.
 	PrimaryUserAssignedIdentityID *string `json:"primaryUserAssignedIdentityId,omitempty" tf:"primary_user_assigned_identity_id,omitempty"`
 
 	// Whether public network access is allowed for this server. Defaults to true.
@@ -289,7 +289,7 @@ type MSSQLServerParameters struct {
 	// +kubebuilder:validation:Optional
 	OutboundNetworkRestrictionEnabled *bool `json:"outboundNetworkRestrictionEnabled,omitempty" tf:"outbound_network_restriction_enabled,omitempty"`
 
-	// Specifies the primary user managed identity id. Required if type is UserAssigned and should be combined with identity_ids.
+	// Specifies the primary user managed identity id. Required if type within the identity block is set to either SystemAssigned, UserAssigned or UserAssigned and should be set at same time as setting identity_ids.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional

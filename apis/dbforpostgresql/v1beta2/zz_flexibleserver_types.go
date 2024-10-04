@@ -119,7 +119,7 @@ type FlexibleServerInitParameters struct {
 	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update.
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
@@ -153,7 +153,7 @@ type FlexibleServerInitParameters struct {
 	// A maintenance_window block as defined below.
 	MaintenanceWindow *MaintenanceWindowInitParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The point in time to restore from source_server_id when create_mode is GeoRestore, PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
 	// The ID of the private DNS zone to create the PostgreSQL Flexible Server.
@@ -169,13 +169,16 @@ type FlexibleServerInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
+	// Specifies whether this PostgreSQL Flexible Server is publicly accessible. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
+
 	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
 
 	// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
@@ -209,7 +212,7 @@ type FlexibleServerObservation struct {
 	// The backup retention days for the PostgreSQL Flexible Server. Possible values are between 7 and 35 days.
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update.
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
 	// A customer_managed_key block as defined below. Changing this forces a new resource to be created.
@@ -239,13 +242,13 @@ type FlexibleServerObservation struct {
 	// A maintenance_window block as defined below.
 	MaintenanceWindow *MaintenanceWindowObservation `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The point in time to restore from source_server_id when create_mode is GeoRestore, PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
 	// The ID of the private DNS zone to create the PostgreSQL Flexible Server.
 	PrivateDNSZoneID *string `json:"privateDnsZoneId,omitempty" tf:"private_dns_zone_id,omitempty"`
 
-	// Is public network access enabled?
+	// Specifies whether this PostgreSQL Flexible Server is publicly accessible. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
@@ -257,7 +260,7 @@ type FlexibleServerObservation struct {
 	// The SKU Name for the PostgreSQL Flexible Server. The name of the SKU, follows the tier + name pattern (e.g. B_Standard_B1ms, GP_Standard_D2s_v3, MO_Standard_E4s_v3).
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 
 	// The max storage allowed for the PostgreSQL Flexible Server. Possible values are 32768, 65536, 131072, 262144, 524288, 1048576, 2097152, 4193280, 4194304, 8388608, 16777216 and 33553408.
@@ -305,7 +308,7 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	BackupRetentionDays *float64 `json:"backupRetentionDays,omitempty" tf:"backup_retention_days,omitempty"`
 
-	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, PointInTimeRestore, Replica and Update.
+	// The creation mode which can be used to restore or replicate existing servers. Possible values are Default, GeoRestore, PointInTimeRestore, Replica and Update. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	CreateMode *string `json:"createMode,omitempty" tf:"create_mode,omitempty"`
 
@@ -347,7 +350,7 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	MaintenanceWindow *MaintenanceWindowParameters `json:"maintenanceWindow,omitempty" tf:"maintenance_window,omitempty"`
 
-	// The point in time to restore from source_server_id when create_mode is PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The point in time to restore from source_server_id when create_mode is GeoRestore, PointInTimeRestore. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	PointInTimeRestoreTimeInUtc *string `json:"pointInTimeRestoreTimeInUtc,omitempty" tf:"point_in_time_restore_time_in_utc,omitempty"`
 
@@ -364,6 +367,10 @@ type FlexibleServerParameters struct {
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether this PostgreSQL Flexible Server is publicly accessible. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
 	// +kubebuilder:validation:Optional
@@ -386,7 +393,7 @@ type FlexibleServerParameters struct {
 	// +kubebuilder:validation:Optional
 	SkuName *string `json:"skuName,omitempty" tf:"sku_name,omitempty"`
 
-	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
+	// The resource ID of the source PostgreSQL Flexible Server to be restored. Required when create_mode is GeoRestore, PointInTimeRestore or Replica. Changing this forces a new PostgreSQL Flexible Server to be created.
 	// +kubebuilder:validation:Optional
 	SourceServerID *string `json:"sourceServerId,omitempty" tf:"source_server_id,omitempty"`
 

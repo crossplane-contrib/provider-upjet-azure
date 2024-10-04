@@ -457,6 +457,9 @@ spec:
                       type: string
                     type: array
                     x-kubernetes-list-type: set
+                  tenantScopedId:
+                    description: The Management Group ID with the Tenant ID prefix.
+                    type: string
                 type: object
               conditions:
                 description: Conditions of the resource.

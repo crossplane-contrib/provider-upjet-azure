@@ -632,8 +632,8 @@ spec:
                     properties:
                       capacity:
                         description: Specifies the number of instances to be reserved.
-                          It must be a positive integer and not exceed the quota in
-                          the subscription.
+                          It must be greater than or equal to 0 and not exceed the
+                          quota in the subscription.
                         type: number
                       name:
                         description: Name of the sku, such as Standard_F2. Changing
@@ -669,8 +669,8 @@ spec:
                     properties:
                       capacity:
                         description: Specifies the number of instances to be reserved.
-                          It must be a positive integer and not exceed the quota in
-                          the subscription.
+                          It must be greater than or equal to 0 and not exceed the
+                          quota in the subscription.
                         type: number
                       name:
                         description: Name of the sku, such as Standard_F2. Changing
@@ -878,8 +878,8 @@ spec:
                     properties:
                       capacity:
                         description: Specifies the number of instances to be reserved.
-                          It must be a positive integer and not exceed the quota in
-                          the subscription.
+                          It must be greater than or equal to 0 and not exceed the
+                          quota in the subscription.
                         type: number
                       name:
                         description: Name of the sku, such as Standard_F2. Changing

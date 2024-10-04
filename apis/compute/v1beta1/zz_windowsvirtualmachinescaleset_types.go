@@ -356,6 +356,9 @@ type WindowsVirtualMachineScaleSetExtensionInitParameters struct {
 	// A protected_settings_from_key_vault block as defined below.
 	ProtectedSettingsFromKeyVault []WindowsVirtualMachineScaleSetExtensionProtectedSettingsFromKeyVaultInitParameters `json:"protectedSettingsFromKeyVault,omitempty" tf:"protected_settings_from_key_vault,omitempty"`
 
+	// A JSON String which specifies Sensitive Settings (such as Passwords) for the Extension.
+	ProtectedSettingsSecretRef *v1.SecretKeySelector `json:"protectedSettingsSecretRef,omitempty" tf:"-"`
+
 	// An ordered list of Extension names which this should be provisioned after.
 	ProvisionAfterExtensions []*string `json:"provisionAfterExtensions,omitempty" tf:"provision_after_extensions,omitempty"`
 
@@ -637,6 +640,9 @@ type WindowsVirtualMachineScaleSetInitParameters struct {
 
 	// The prefix which should be used for the name of the Virtual Machines in this Scale Set. If unspecified this defaults to the value for the name field. If the value of the name field is not a valid computer_name_prefix, then you must specify computer_name_prefix. Changing this forces a new resource to be created.
 	ComputerNamePrefix *string `json:"computerNamePrefix,omitempty" tf:"computer_name_prefix,omitempty"`
+
+	// The Base64-Encoded Custom Data which should be used for this Virtual Machine Scale Set.
+	CustomDataSecretRef *v1.SecretKeySelector `json:"customDataSecretRef,omitempty" tf:"-"`
 
 	// One or more data_disk blocks as defined below.
 	DataDisk []WindowsVirtualMachineScaleSetDataDiskInitParameters `json:"dataDisk,omitempty" tf:"data_disk,omitempty"`
@@ -1575,6 +1581,9 @@ type WindowsVirtualMachineScaleSetRollingUpgradePolicyInitParameters struct {
 	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
 	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent,omitempty" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
 
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
+
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches,omitempty" tf:"pause_time_between_batches,omitempty"`
 
@@ -1595,6 +1604,9 @@ type WindowsVirtualMachineScaleSetRollingUpgradePolicyObservation struct {
 
 	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
 	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent,omitempty" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
 
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	PauseTimeBetweenBatches *string `json:"pauseTimeBetweenBatches,omitempty" tf:"pause_time_between_batches,omitempty"`
@@ -1620,6 +1632,10 @@ type WindowsVirtualMachineScaleSetRollingUpgradePolicyParameters struct {
 	// The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts.
 	// +kubebuilder:validation:Optional
 	MaxUnhealthyUpgradedInstancePercent *float64 `json:"maxUnhealthyUpgradedInstancePercent" tf:"max_unhealthy_upgraded_instance_percent,omitempty"`
+
+	// Create new virtual machines to upgrade the scale set, rather than updating the existing virtual machines. Existing virtual machines will be deleted once the new virtual machines are created for each batch. Possible values are true or false.
+	// +kubebuilder:validation:Optional
+	MaximumSurgeInstancesEnabled *bool `json:"maximumSurgeInstancesEnabled,omitempty" tf:"maximum_surge_instances_enabled,omitempty"`
 
 	// The wait time between completing the update for all virtual machines in one batch and starting the next batch. The time duration should be specified in ISO 8601 format.
 	// +kubebuilder:validation:Optional

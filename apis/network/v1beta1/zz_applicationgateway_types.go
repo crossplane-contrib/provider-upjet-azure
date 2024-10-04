@@ -1300,6 +1300,12 @@ type IdentityObservation struct {
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
+	// The ID of the Application Gateway.
+	PrincipalID *string `json:"principalId,omitempty" tf:"principal_id,omitempty"`
+
+	// The ID of the Application Gateway.
+	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
+
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
@@ -1309,7 +1315,7 @@ type IdentityParameters struct {
 	// Specifies a list of User Assigned Managed Identity IDs to be assigned to this Application Gateway.
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	IdentityIds []*string `json:"identityIds" tf:"identity_ids,omitempty"`
+	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Application Gateway. Only possible value is UserAssigned.
 	// +kubebuilder:validation:Optional
@@ -1964,11 +1970,17 @@ type RewriteRuleSetParameters struct {
 
 type SSLCertificateInitParameters struct {
 
+	// The base64-encoded PFX certificate data. Required if key_vault_secret_id is not set.
+	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
+
 	// The Secret ID of (base-64 encoded unencrypted pfx) the Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`
 
 	// The Name of the SSL certificate that is unique within this Application Gateway
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
+
+	// Password for the pfx file specified in data. Required if data is set.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 }
 
 type SSLCertificateObservation struct {
@@ -2251,6 +2263,9 @@ type TrustedClientCertificateParameters struct {
 }
 
 type TrustedRootCertificateInitParameters struct {
+
+	// The contents of the Trusted Root Certificate which should be used. Required if key_vault_secret_id is not set.
+	DataSecretRef *v1.SecretKeySelector `json:"dataSecretRef,omitempty" tf:"-"`
 
 	// The Secret ID of (base-64 encoded unencrypted pfx) Secret or Certificate object stored in Azure KeyVault. You need to enable soft delete for the Key Vault to use this feature. Required if data is not set.
 	KeyVaultSecretID *string `json:"keyVaultSecretId,omitempty" tf:"key_vault_secret_id,omitempty"`

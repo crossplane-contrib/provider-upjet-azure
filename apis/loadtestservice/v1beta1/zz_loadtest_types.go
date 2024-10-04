@@ -13,7 +13,65 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type EncryptionInitParameters struct {
+
+	// An identity block as defined below. Changing this forces a new Load Test to be created.
+	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The URI specifying the Key vault and key to be used to encrypt data in this resource. The URI should include the key version. Changing this forces a new Load Test to be created.
+	KeyURL *string `json:"keyUrl,omitempty" tf:"key_url,omitempty"`
+}
+
+type EncryptionObservation struct {
+
+	// An identity block as defined below. Changing this forces a new Load Test to be created.
+	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+
+	// The URI specifying the Key vault and key to be used to encrypt data in this resource. The URI should include the key version. Changing this forces a new Load Test to be created.
+	KeyURL *string `json:"keyUrl,omitempty" tf:"key_url,omitempty"`
+}
+
+type EncryptionParameters struct {
+
+	// An identity block as defined below. Changing this forces a new Load Test to be created.
+	// +kubebuilder:validation:Optional
+	Identity *IdentityParameters `json:"identity" tf:"identity,omitempty"`
+
+	// The URI specifying the Key vault and key to be used to encrypt data in this resource. The URI should include the key version. Changing this forces a new Load Test to be created.
+	// +kubebuilder:validation:Optional
+	KeyURL *string `json:"keyUrl" tf:"key_url,omitempty"`
+}
+
 type IdentityInitParameters struct {
+
+	// The User Assigned Identity ID that should be assigned to this Load Test Encryption. Changing this forces a new Load Test to be created.
+	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+
+	// Specifies the type of Managed Identity that should be assigned to this Load Test. Possible values are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityObservation struct {
+
+	// The User Assigned Identity ID that should be assigned to this Load Test Encryption. Changing this forces a new Load Test to be created.
+	IdentityID *string `json:"identityId,omitempty" tf:"identity_id,omitempty"`
+
+	// Specifies the type of Managed Identity that should be assigned to this Load Test. Possible values are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
+	Type *string `json:"type,omitempty" tf:"type,omitempty"`
+}
+
+type IdentityParameters struct {
+
+	// The User Assigned Identity ID that should be assigned to this Load Test Encryption. Changing this forces a new Load Test to be created.
+	// +kubebuilder:validation:Optional
+	IdentityID *string `json:"identityId" tf:"identity_id,omitempty"`
+
+	// Specifies the type of Managed Identity that should be assigned to this Load Test. Possible values are SystemAssigned, SystemAssigned, UserAssigned and UserAssigned.
+	// +kubebuilder:validation:Optional
+	Type *string `json:"type" tf:"type,omitempty"`
+}
+
+type LoadTestIdentityInitParameters struct {
 
 	// A list of the User Assigned Identity IDs that should be assigned to this Load Test.
 	// +listType=set
@@ -23,7 +81,7 @@ type IdentityInitParameters struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type IdentityObservation struct {
+type LoadTestIdentityObservation struct {
 
 	// A list of the User Assigned Identity IDs that should be assigned to this Load Test.
 	// +listType=set
@@ -39,7 +97,7 @@ type IdentityObservation struct {
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
 }
 
-type IdentityParameters struct {
+type LoadTestIdentityParameters struct {
 
 	// A list of the User Assigned Identity IDs that should be assigned to this Load Test.
 	// +kubebuilder:validation:Optional
@@ -56,8 +114,11 @@ type LoadTestInitParameters struct {
 	// Description of the resource. Changing this forces a new Load Test to be created.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// An encryption block as defined below. Changing this forces a new Load Test to be created.
+	Encryption []EncryptionInitParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
 	// An identity block as defined below. Specifies the Managed Identity which should be assigned to this Load Test.
-	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []LoadTestIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Load Test should exist. Changing this forces a new Load Test to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -75,11 +136,14 @@ type LoadTestObservation struct {
 	// Description of the resource. Changing this forces a new Load Test to be created.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// An encryption block as defined below. Changing this forces a new Load Test to be created.
+	Encryption *EncryptionObservation `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
 	// The ID of the Load Test.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// An identity block as defined below. Specifies the Managed Identity which should be assigned to this Load Test.
-	Identity []IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []LoadTestIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Load Test should exist. Changing this forces a new Load Test to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
@@ -98,9 +162,13 @@ type LoadTestParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
+	// An encryption block as defined below. Changing this forces a new Load Test to be created.
+	// +kubebuilder:validation:Optional
+	Encryption *EncryptionParameters `json:"encryption,omitempty" tf:"encryption,omitempty"`
+
 	// An identity block as defined below. Specifies the Managed Identity which should be assigned to this Load Test.
 	// +kubebuilder:validation:Optional
-	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
+	Identity []LoadTestIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// The Azure Region where the Load Test should exist. Changing this forces a new Load Test to be created.
 	// +kubebuilder:validation:Optional

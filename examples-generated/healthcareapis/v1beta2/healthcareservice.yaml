@@ -13,6 +13,7 @@ spec:
     - audience: https://azurehealthcareapis.com/
       authority: https://login.microsoftonline.com/$%7Bdata.azurerm_client_config.current.tenant_id%7D
       smartProxyEnabled: "true"
+    configurationExportStorageAccountName: teststorage
     corsConfiguration:
     - allowCredentials: "true"
       allowedHeaders:
@@ -26,6 +27,8 @@ spec:
       - http://www.example2.com
       maxAgeInSeconds: "500"
     cosmosdbThroughput: "2000"
+    identity:
+    - type: SystemAssigned
     kind: fhir-R4
     location: westus2
     resourceGroupNameSelector:

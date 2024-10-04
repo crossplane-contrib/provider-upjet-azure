@@ -41,7 +41,6 @@ type LoadBalancerBackendAddressPoolAddressInitParameters struct {
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
-	// For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
@@ -74,7 +73,6 @@ type LoadBalancerBackendAddressPoolAddressObservation struct {
 	InboundNATRulePortMapping []InboundNATRulePortMappingObservation `json:"inboundNatRulePortMapping,omitempty" tf:"inbound_nat_rule_port_mapping,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
-	// For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
 	VirtualNetworkID *string `json:"virtualNetworkId,omitempty" tf:"virtual_network_id,omitempty"`
 }
 
@@ -104,7 +102,6 @@ type LoadBalancerBackendAddressPoolAddressParameters struct {
 	IPAddress *string `json:"ipAddress,omitempty" tf:"ip_address,omitempty"`
 
 	// The ID of the Virtual Network within which the Backend Address Pool should exist.
-	// For regional load balancer, user needs to specify `virtual_network_id` and `ip_address`
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional

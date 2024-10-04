@@ -86,13 +86,38 @@ type AccountParameters struct {
 
 type ActiveDirectoryInitParameters struct {
 
+	// If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
+	// If enabled, AES encryption will be enabled for SMB communication.
+	AesEncryptionEnabled *bool `json:"aesEncryptionEnabled,omitempty" tf:"aes_encryption_enabled,omitempty"`
+
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
 
 	// The name of the Active Directory domain.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The Organizational Unit (OU) within the Active Directory Domain.
+	// Name of the active directory machine.
+	// Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
+	KerberosAdName *string `json:"kerberosAdName,omitempty" tf:"kerberos_ad_name,omitempty"`
+
+	// kdc server IP addresses for the active directory machine.
+	// IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
+	KerberosKdcIP *string `json:"kerberosKdcIp,omitempty" tf:"kerberos_kdc_ip,omitempty"`
+
+	// Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
+	// Specifies whether or not the LDAP traffic needs to be secured via TLS.
+	LdapOverTLSEnabled *bool `json:"ldapOverTlsEnabled,omitempty" tf:"ldap_over_tls_enabled,omitempty"`
+
+	// Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
+	// Specifies whether or not the LDAP traffic needs to be signed.
+	LdapSigningEnabled *bool `json:"ldapSigningEnabled,omitempty" tf:"ldap_signing_enabled,omitempty"`
+
+	// If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes. Defaults to false.
+	// If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
+	LocalNFSUsersWithLdapAllowed *bool `json:"localNfsUsersWithLdapAllowed,omitempty" tf:"local_nfs_users_with_ldap_allowed,omitempty"`
+
+	// The Organizational Unit (OU) within Active Directory where machines will be created. If blank, defaults to CN=Computers.
+	// The Organizational Unit (OU) within the Windows Active Directory where machines will be created. If blank, defaults to 'CN=Computers'
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
 	// The password associated with the username.
@@ -101,11 +126,23 @@ type ActiveDirectoryInitParameters struct {
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
 
+	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have a base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes. Required if ldap_over_tls_enabled is set to true.
+	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
+	ServerRootCACertificateSecretRef *v1.SecretKeySelector `json:"serverRootCaCertificateSecretRef,omitempty" tf:"-"`
+
+	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to Default-First-Site-Name.
+	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to 'Default-First-Site-Name'
+	SiteName *string `json:"siteName,omitempty" tf:"site_name,omitempty"`
+
 	// The Username of Active Directory Domain Administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type ActiveDirectoryObservation struct {
+
+	// If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
+	// If enabled, AES encryption will be enabled for SMB communication.
+	AesEncryptionEnabled *bool `json:"aesEncryptionEnabled,omitempty" tf:"aes_encryption_enabled,omitempty"`
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
 	DNSServers []*string `json:"dnsServers,omitempty" tf:"dns_servers,omitempty"`
@@ -113,17 +150,47 @@ type ActiveDirectoryObservation struct {
 	// The name of the Active Directory domain.
 	Domain *string `json:"domain,omitempty" tf:"domain,omitempty"`
 
-	// The Organizational Unit (OU) within the Active Directory Domain.
+	// Name of the active directory machine.
+	// Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
+	KerberosAdName *string `json:"kerberosAdName,omitempty" tf:"kerberos_ad_name,omitempty"`
+
+	// kdc server IP addresses for the active directory machine.
+	// IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
+	KerberosKdcIP *string `json:"kerberosKdcIp,omitempty" tf:"kerberos_kdc_ip,omitempty"`
+
+	// Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
+	// Specifies whether or not the LDAP traffic needs to be secured via TLS.
+	LdapOverTLSEnabled *bool `json:"ldapOverTlsEnabled,omitempty" tf:"ldap_over_tls_enabled,omitempty"`
+
+	// Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
+	// Specifies whether or not the LDAP traffic needs to be signed.
+	LdapSigningEnabled *bool `json:"ldapSigningEnabled,omitempty" tf:"ldap_signing_enabled,omitempty"`
+
+	// If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes. Defaults to false.
+	// If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
+	LocalNFSUsersWithLdapAllowed *bool `json:"localNfsUsersWithLdapAllowed,omitempty" tf:"local_nfs_users_with_ldap_allowed,omitempty"`
+
+	// The Organizational Unit (OU) within Active Directory where machines will be created. If blank, defaults to CN=Computers.
+	// The Organizational Unit (OU) within the Windows Active Directory where machines will be created. If blank, defaults to 'CN=Computers'
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	SMBServerName *string `json:"smbServerName,omitempty" tf:"smb_server_name,omitempty"`
+
+	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to Default-First-Site-Name.
+	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to 'Default-First-Site-Name'
+	SiteName *string `json:"siteName,omitempty" tf:"site_name,omitempty"`
 
 	// The Username of Active Directory Domain Administrator.
 	Username *string `json:"username,omitempty" tf:"username,omitempty"`
 }
 
 type ActiveDirectoryParameters struct {
+
+	// If enabled, AES encryption will be enabled for SMB communication. Defaults to false.
+	// If enabled, AES encryption will be enabled for SMB communication.
+	// +kubebuilder:validation:Optional
+	AesEncryptionEnabled *bool `json:"aesEncryptionEnabled,omitempty" tf:"aes_encryption_enabled,omitempty"`
 
 	// A list of DNS server IP addresses for the Active Directory domain. Only allows IPv4 address.
 	// +kubebuilder:validation:Optional
@@ -133,7 +200,33 @@ type ActiveDirectoryParameters struct {
 	// +kubebuilder:validation:Optional
 	Domain *string `json:"domain" tf:"domain,omitempty"`
 
-	// The Organizational Unit (OU) within the Active Directory Domain.
+	// Name of the active directory machine.
+	// Name of the active directory machine. This optional parameter is used only while creating kerberos volume.
+	// +kubebuilder:validation:Optional
+	KerberosAdName *string `json:"kerberosAdName,omitempty" tf:"kerberos_ad_name,omitempty"`
+
+	// kdc server IP addresses for the active directory machine.
+	// IP address of the KDC server (usually same the DC). This optional parameter is used only while creating kerberos volume.
+	// +kubebuilder:validation:Optional
+	KerberosKdcIP *string `json:"kerberosKdcIp,omitempty" tf:"kerberos_kdc_ip,omitempty"`
+
+	// Specifies whether or not the LDAP traffic needs to be secured via TLS. Defaults to false.
+	// Specifies whether or not the LDAP traffic needs to be secured via TLS.
+	// +kubebuilder:validation:Optional
+	LdapOverTLSEnabled *bool `json:"ldapOverTlsEnabled,omitempty" tf:"ldap_over_tls_enabled,omitempty"`
+
+	// Specifies whether or not the LDAP traffic needs to be signed. Defaults to false.
+	// Specifies whether or not the LDAP traffic needs to be signed.
+	// +kubebuilder:validation:Optional
+	LdapSigningEnabled *bool `json:"ldapSigningEnabled,omitempty" tf:"ldap_signing_enabled,omitempty"`
+
+	// If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes. Defaults to false.
+	// If enabled, NFS client local users can also (in addition to LDAP users) access the NFS volumes.
+	// +kubebuilder:validation:Optional
+	LocalNFSUsersWithLdapAllowed *bool `json:"localNfsUsersWithLdapAllowed,omitempty" tf:"local_nfs_users_with_ldap_allowed,omitempty"`
+
+	// The Organizational Unit (OU) within Active Directory where machines will be created. If blank, defaults to CN=Computers.
+	// The Organizational Unit (OU) within the Windows Active Directory where machines will be created. If blank, defaults to 'CN=Computers'
 	// +kubebuilder:validation:Optional
 	OrganizationalUnit *string `json:"organizationalUnit,omitempty" tf:"organizational_unit,omitempty"`
 
@@ -144,6 +237,16 @@ type ActiveDirectoryParameters struct {
 	// The NetBIOS name which should be used for the NetApp SMB Server, which will be registered as a computer account in the AD and used to mount volumes.
 	// +kubebuilder:validation:Optional
 	SMBServerName *string `json:"smbServerName" tf:"smb_server_name,omitempty"`
+
+	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have a base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes. Required if ldap_over_tls_enabled is set to true.
+	// When LDAP over SSL/TLS is enabled, the LDAP client is required to have base64 encoded Active Directory Certificate Service's self-signed root CA certificate, this optional parameter is used only for dual protocol with LDAP user-mapping volumes.
+	// +kubebuilder:validation:Optional
+	ServerRootCACertificateSecretRef *v1.SecretKeySelector `json:"serverRootCaCertificateSecretRef,omitempty" tf:"-"`
+
+	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to Default-First-Site-Name.
+	// The Active Directory site the service will limit Domain Controller discovery to. If blank, defaults to 'Default-First-Site-Name'
+	// +kubebuilder:validation:Optional
+	SiteName *string `json:"siteName,omitempty" tf:"site_name,omitempty"`
 
 	// The Username of Active Directory Domain Administrator.
 	// +kubebuilder:validation:Optional

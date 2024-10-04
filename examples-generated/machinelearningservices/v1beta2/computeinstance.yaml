@@ -10,7 +10,6 @@ spec:
   forProvider:
     authorizationType: personal
     description: foo
-    location: West Europe
     machineLearningWorkspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example

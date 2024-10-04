@@ -24,6 +24,18 @@ type VirtualNetworkPeeringInitParameters struct {
 	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 
+	// A list of local Subnet names that are Subnet peered with remote Virtual Network.
+	LocalSubnetNames []*string `json:"localSubnetNames,omitempty" tf:"local_subnet_names,omitempty"`
+
+	// Specifies whether only IPv6 address space is peered for Subnet peering. Changing this forces a new resource to be created.
+	OnlyIPv6PeeringEnabled *bool `json:"onlyIpv6PeeringEnabled,omitempty" tf:"only_ipv6_peering_enabled,omitempty"`
+
+	// Specifies whether complete Virtual Network address space is peered. Defaults to true. Changing this forces a new resource to be created.
+	PeerCompleteVirtualNetworksEnabled *bool `json:"peerCompleteVirtualNetworksEnabled,omitempty" tf:"peer_complete_virtual_networks_enabled,omitempty"`
+
+	// A list of remote Subnet names from remote Virtual Network that are Subnet peered.
+	RemoteSubnetNames []*string `json:"remoteSubnetNames,omitempty" tf:"remote_subnet_names,omitempty"`
+
 	// The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
@@ -59,6 +71,18 @@ type VirtualNetworkPeeringObservation struct {
 	// The ID of the Virtual Network Peering.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
+	// A list of local Subnet names that are Subnet peered with remote Virtual Network.
+	LocalSubnetNames []*string `json:"localSubnetNames,omitempty" tf:"local_subnet_names,omitempty"`
+
+	// Specifies whether only IPv6 address space is peered for Subnet peering. Changing this forces a new resource to be created.
+	OnlyIPv6PeeringEnabled *bool `json:"onlyIpv6PeeringEnabled,omitempty" tf:"only_ipv6_peering_enabled,omitempty"`
+
+	// Specifies whether complete Virtual Network address space is peered. Defaults to true. Changing this forces a new resource to be created.
+	PeerCompleteVirtualNetworksEnabled *bool `json:"peerCompleteVirtualNetworksEnabled,omitempty" tf:"peer_complete_virtual_networks_enabled,omitempty"`
+
+	// A list of remote Subnet names from remote Virtual Network that are Subnet peered.
+	RemoteSubnetNames []*string `json:"remoteSubnetNames,omitempty" tf:"remote_subnet_names,omitempty"`
+
 	// The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created.
 	RemoteVirtualNetworkID *string `json:"remoteVirtualNetworkId,omitempty" tf:"remote_virtual_network_id,omitempty"`
 
@@ -89,6 +113,22 @@ type VirtualNetworkPeeringParameters struct {
 	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
+
+	// A list of local Subnet names that are Subnet peered with remote Virtual Network.
+	// +kubebuilder:validation:Optional
+	LocalSubnetNames []*string `json:"localSubnetNames,omitempty" tf:"local_subnet_names,omitempty"`
+
+	// Specifies whether only IPv6 address space is peered for Subnet peering. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	OnlyIPv6PeeringEnabled *bool `json:"onlyIpv6PeeringEnabled,omitempty" tf:"only_ipv6_peering_enabled,omitempty"`
+
+	// Specifies whether complete Virtual Network address space is peered. Defaults to true. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	PeerCompleteVirtualNetworksEnabled *bool `json:"peerCompleteVirtualNetworksEnabled,omitempty" tf:"peer_complete_virtual_networks_enabled,omitempty"`
+
+	// A list of remote Subnet names from remote Virtual Network that are Subnet peered.
+	// +kubebuilder:validation:Optional
+	RemoteSubnetNames []*string `json:"remoteSubnetNames,omitempty" tf:"remote_subnet_names,omitempty"`
 
 	// The full Azure resource ID of the remote virtual network. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.VirtualNetwork

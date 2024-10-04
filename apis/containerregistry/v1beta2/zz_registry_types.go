@@ -15,7 +15,7 @@ import (
 
 type EncryptionInitParameters struct {
 
-	// Boolean value that indicates whether encryption is enabled.
+	// Boolean value that indicates whether the policy is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 
 	// The client ID of the managed identity associated with the encryption key.
@@ -37,7 +37,7 @@ type EncryptionInitParameters struct {
 
 type EncryptionObservation struct {
 
-	// Boolean value that indicates whether encryption is enabled.
+	// Boolean value that indicates whether the policy is enabled.
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The client ID of the managed identity associated with the encryption key.
@@ -49,7 +49,7 @@ type EncryptionObservation struct {
 
 type EncryptionParameters struct {
 
-	// Boolean value that indicates whether encryption is enabled.
+	// Boolean value that indicates whether the policy is enabled.
 	// +kubebuilder:validation:Optional
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled"`
 

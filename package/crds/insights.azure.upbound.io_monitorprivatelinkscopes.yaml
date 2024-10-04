@@ -74,6 +74,16 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  ingestionAccessMode:
+                    description: The default ingestion access mode for the associated
+                      private endpoints in scope. Possible values are Open and PrivateOnly.
+                      Defaults to Open.
+                    type: string
+                  queryAccessMode:
+                    description: The default query access mode for hte associated
+                      private endpoints in scope. Possible values are Open and PrivateOnly.
+                      Defaults to Open.
+                    type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Azure Monitor
                       Private Link Scope should exist. Changing this forces a new
@@ -176,6 +186,16 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  ingestionAccessMode:
+                    description: The default ingestion access mode for the associated
+                      private endpoints in scope. Possible values are Open and PrivateOnly.
+                      Defaults to Open.
+                    type: string
+                  queryAccessMode:
+                    description: The default query access mode for hte associated
+                      private endpoints in scope. Possible values are Open and PrivateOnly.
+                      Defaults to Open.
+                    type: string
                   tags:
                     additionalProperties:
                       type: string
@@ -359,6 +379,16 @@ spec:
                 properties:
                   id:
                     description: The ID of the Azure Monitor Private Link Scope.
+                    type: string
+                  ingestionAccessMode:
+                    description: The default ingestion access mode for the associated
+                      private endpoints in scope. Possible values are Open and PrivateOnly.
+                      Defaults to Open.
+                    type: string
+                  queryAccessMode:
+                    description: The default query access mode for hte associated
+                      private endpoints in scope. Possible values are Open and PrivateOnly.
+                      Defaults to Open.
                     type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Azure Monitor

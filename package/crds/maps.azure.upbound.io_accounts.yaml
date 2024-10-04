@@ -73,12 +73,57 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  cors:
+                    description: '- A cors block as defined below'
+                    properties:
+                      allowedOrigins:
+                        description: A list of origins that should be allowed to make
+                          cross-origin calls.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  dataStore:
+                    description: One or more data_store blocks as defined below.
+                    items:
+                      properties:
+                        storageAccountId:
+                          description: The ID of the Storage Account that should be
+                            linked to this Azure Maps Account.
+                          type: string
+                        uniqueName:
+                          description: The name given to the linked Storage Account.
+                          type: string
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this Azure Maps Account.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Azure Maps Account. Possible
+                          values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
                   localAuthenticationEnabled:
                     description: Is local authentication enabled for this Azure Maps
                       Account? When false, all authentication to the Azure Maps data-plane
                       REST API is disabled, except Azure AD authentication. Defaults
                       to true.
                     type: boolean
+                  location:
+                    description: The Location in which the Azure Maps Account should
+                      be provisioned. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Azure
                       Maps Account should exist. Changing this forces a new resource
@@ -185,12 +230,57 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  cors:
+                    description: '- A cors block as defined below'
+                    properties:
+                      allowedOrigins:
+                        description: A list of origins that should be allowed to make
+                          cross-origin calls.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  dataStore:
+                    description: One or more data_store blocks as defined below.
+                    items:
+                      properties:
+                        storageAccountId:
+                          description: The ID of the Storage Account that should be
+                            linked to this Azure Maps Account.
+                          type: string
+                        uniqueName:
+                          description: The name given to the linked Storage Account.
+                          type: string
+                      type: object
+                    type: array
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this Azure Maps Account.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Azure Maps Account. Possible
+                          values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
                   localAuthenticationEnabled:
                     description: Is local authentication enabled for this Azure Maps
                       Account? When false, all authentication to the Azure Maps data-plane
                       REST API is disabled, except Azure AD authentication. Defaults
                       to true.
                     type: boolean
+                  location:
+                    description: The Location in which the Azure Maps Account should
+                      be provisioned. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   skuName:
                     description: The SKU of the Azure Maps Account. Possible values
                       are S0, S1 and G2. Changing this forces a new resource to be
@@ -380,15 +470,68 @@ spec:
             properties:
               atProvider:
                 properties:
+                  cors:
+                    description: '- A cors block as defined below'
+                    properties:
+                      allowedOrigins:
+                        description: A list of origins that should be allowed to make
+                          cross-origin calls.
+                        items:
+                          type: string
+                        type: array
+                    type: object
+                  dataStore:
+                    description: One or more data_store blocks as defined below.
+                    items:
+                      properties:
+                        storageAccountId:
+                          description: The ID of the Storage Account that should be
+                            linked to this Azure Maps Account.
+                          type: string
+                        uniqueName:
+                          description: The name given to the linked Storage Account.
+                          type: string
+                      type: object
+                    type: array
                   id:
                     description: The ID of the Azure Maps Account.
                     type: string
+                  identity:
+                    description: An identity block as defined below.
+                    properties:
+                      identityIds:
+                        description: A list of User Assigned Managed Identity IDs
+                          to be assigned to this Azure Maps Account.
+                        items:
+                          type: string
+                        type: array
+                        x-kubernetes-list-type: set
+                      principalId:
+                        description: The Principal ID associated with this Managed
+                          Service Identity.
+                        type: string
+                      tenantId:
+                        description: The Tenant ID associated with this Managed Service
+                          Identity.
+                        type: string
+                      type:
+                        description: Specifies the type of Managed Service Identity
+                          that should be configured on this Azure Maps Account. Possible
+                          values are SystemAssigned, UserAssigned, SystemAssigned,
+                          UserAssigned (to enable both).
+                        type: string
+                    type: object
                   localAuthenticationEnabled:
                     description: Is local authentication enabled for this Azure Maps
                       Account? When false, all authentication to the Azure Maps data-plane
                       REST API is disabled, except Azure AD authentication. Defaults
                       to true.
                     type: boolean
+                  location:
+                    description: The Location in which the Azure Maps Account should
+                      be provisioned. Changing this forces a new resource to be created.
+                      Defaults to global.
+                    type: string
                   resourceGroupName:
                     description: The name of the Resource Group in which the Azure
                       Maps Account should exist. Changing this forces a new resource

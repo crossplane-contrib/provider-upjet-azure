@@ -67,6 +67,10 @@ type EnvironmentInitParameters struct {
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
+	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
+	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
+	MutualTLSEnabled *bool `json:"mutualTlsEnabled,omitempty" tf:"mutual_tls_enabled,omitempty"`
+
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -79,6 +83,10 @@ type EnvironmentInitParameters struct {
 }
 
 type EnvironmentObservation struct {
+
+	// The ID of the Custom Domain Verification for this Container App Environment.
+	// The ID of the Custom Domain Verification for this Container App Environment.
+	CustomDomainVerificationID *string `json:"customDomainVerificationId,omitempty" tf:"custom_domain_verification_id,omitempty"`
 
 	// The default, publicly resolvable, name of this Container App Environment.
 	// The default publicly resolvable name of this Container App Environment
@@ -109,6 +117,10 @@ type EnvironmentObservation struct {
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to. Changing this forces a new resource to be created.
 	// The ID for the Log Analytics Workspace to link this Container Apps Managed Environment to.
 	LogAnalyticsWorkspaceID *string `json:"logAnalyticsWorkspaceId,omitempty" tf:"log_analytics_workspace_id,omitempty"`
+
+	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
+	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
+	MutualTLSEnabled *bool `json:"mutualTlsEnabled,omitempty" tf:"mutual_tls_enabled,omitempty"`
 
 	// The IP range, in CIDR notation, that is reserved for environment infrastructure IP addresses.
 	// The IP range, in CIDR notation, that is reserved for environment infrastructure IP addresses.
@@ -196,6 +208,11 @@ type EnvironmentParameters struct {
 	// +kubebuilder:validation:Optional
 	LogAnalyticsWorkspaceIDSelector *v1.Selector `json:"logAnalyticsWorkspaceIdSelector,omitempty" tf:"-"`
 
+	// Should mutual transport layer security (mTLS) be enabled? Defaults to false.
+	// Should mutual transport layer security (mTLS) be enabled? Defaults to `false`. **Note:** This feature is in public preview. Enabling mTLS for your applications may increase response latency and reduce maximum throughput in high-load scenarios.
+	// +kubebuilder:validation:Optional
+	MutualTLSEnabled *bool `json:"mutualTlsEnabled,omitempty" tf:"mutual_tls_enabled,omitempty"`
+
 	// The name of the resource group in which the Container App Environment is to be created. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
@@ -234,7 +251,7 @@ type WorkloadProfileInitParameters struct {
 	// The name of the workload profile.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Workload profile type for the workloads to run on. Possible values include D4, D8, D16, D32, E4, E8, E16 and E32.
+	// Workload profile type for the workloads to run on. Possible values include Consumption, D4, D8, D16, D32, E4, E8, E16 and E32.
 	WorkloadProfileType *string `json:"workloadProfileType,omitempty" tf:"workload_profile_type,omitempty"`
 }
 
@@ -249,7 +266,7 @@ type WorkloadProfileObservation struct {
 	// The name of the workload profile.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// Workload profile type for the workloads to run on. Possible values include D4, D8, D16, D32, E4, E8, E16 and E32.
+	// Workload profile type for the workloads to run on. Possible values include Consumption, D4, D8, D16, D32, E4, E8, E16 and E32.
 	WorkloadProfileType *string `json:"workloadProfileType,omitempty" tf:"workload_profile_type,omitempty"`
 }
 
@@ -257,17 +274,17 @@ type WorkloadProfileParameters struct {
 
 	// The maximum number of instances of workload profile that can be deployed in the Container App Environment.
 	// +kubebuilder:validation:Optional
-	MaximumCount *float64 `json:"maximumCount" tf:"maximum_count,omitempty"`
+	MaximumCount *float64 `json:"maximumCount,omitempty" tf:"maximum_count,omitempty"`
 
 	// The minimum number of instances of workload profile that can be deployed in the Container App Environment.
 	// +kubebuilder:validation:Optional
-	MinimumCount *float64 `json:"minimumCount" tf:"minimum_count,omitempty"`
+	MinimumCount *float64 `json:"minimumCount,omitempty" tf:"minimum_count,omitempty"`
 
 	// The name of the workload profile.
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// Workload profile type for the workloads to run on. Possible values include D4, D8, D16, D32, E4, E8, E16 and E32.
+	// Workload profile type for the workloads to run on. Possible values include Consumption, D4, D8, D16, D32, E4, E8, E16 and E32.
 	// +kubebuilder:validation:Optional
 	WorkloadProfileType *string `json:"workloadProfileType" tf:"workload_profile_type,omitempty"`
 }

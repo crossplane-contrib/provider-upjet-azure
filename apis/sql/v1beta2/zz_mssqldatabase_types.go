@@ -194,7 +194,7 @@ type MSSQLDatabaseInitParameters struct {
 	// Specifies the ID of the elastic pool containing this database.
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
 
-	// Specifies the type of enclave to be used by the database. Possible value VBS.
+	// Specifies the type of enclave to be used by the elastic pool. When enclave_type is not specified (e.g., the default) enclaves are not enabled on the database.  Possible values are Default or VBS.
 	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
 
 	// A boolean that specifies if the Geo Backup Policy is enabled. Defaults to true.
@@ -247,6 +247,9 @@ type MSSQLDatabaseInitParameters struct {
 
 	// Specifies the name of the sample schema to apply when creating this database. Possible value is AdventureWorksLT.
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
+
+	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// A short_term_retention_policy block as defined below.
 	ShortTermRetentionPolicy *ShortTermRetentionPolicyInitParameters `json:"shortTermRetentionPolicy,omitempty" tf:"short_term_retention_policy,omitempty"`
@@ -304,7 +307,7 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the ID of the elastic pool containing this database.
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
 
-	// Specifies the type of enclave to be used by the database. Possible value VBS.
+	// Specifies the type of enclave to be used by the elastic pool. When enclave_type is not specified (e.g., the default) enclaves are not enabled on the database.  Possible values are Default or VBS.
 	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
 
 	// A boolean that specifies if the Geo Backup Policy is enabled. Defaults to true.
@@ -361,6 +364,9 @@ type MSSQLDatabaseObservation struct {
 	// Specifies the name of the sample schema to apply when creating this database. Possible value is AdventureWorksLT.
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
 
+	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
+
 	// The id of the MS SQL Server on which to create the database. Changing this forces a new resource to be created.
 	ServerID *string `json:"serverId,omitempty" tf:"server_id,omitempty"`
 
@@ -415,7 +421,7 @@ type MSSQLDatabaseParameters struct {
 	// +kubebuilder:validation:Optional
 	ElasticPoolID *string `json:"elasticPoolId,omitempty" tf:"elastic_pool_id,omitempty"`
 
-	// Specifies the type of enclave to be used by the database. Possible value VBS.
+	// Specifies the type of enclave to be used by the elastic pool. When enclave_type is not specified (e.g., the default) enclaves are not enabled on the database.  Possible values are Default or VBS.
 	// +kubebuilder:validation:Optional
 	EnclaveType *string `json:"enclaveType,omitempty" tf:"enclave_type,omitempty"`
 
@@ -486,6 +492,10 @@ type MSSQLDatabaseParameters struct {
 	// Specifies the name of the sample schema to apply when creating this database. Possible value is AdventureWorksLT.
 	// +kubebuilder:validation:Optional
 	SampleName *string `json:"sampleName,omitempty" tf:"sample_name,omitempty"`
+
+	// How do you want your replica to be made? Valid values include Geo and Named. Defaults to Geo. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	SecondaryType *string `json:"secondaryType,omitempty" tf:"secondary_type,omitempty"`
 
 	// The id of the MS SQL Server on which to create the database. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/sql/v1beta2.MSSQLServer

@@ -182,8 +182,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
   labels:
-    testing.upbound.io/example-name: cluster_msi_contributor_on_snap_rg
-  name: cluster-msi-contributor-on-snap-rg
+    testing.upbound.io/example-name: test_cluster_msi_contributor_on_snap_rg
+  name: test-cluster-msi-contributor-on-snap-rg
 spec:
   forProvider:
     principalId: ${azurerm_kubernetes_cluster.example.identity[0].principal_id}
@@ -198,8 +198,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
   labels:
-    testing.upbound.io/example-name: extension_and_storage_account_permission
-  name: extension-and-storage-account-permission
+    testing.upbound.io/example-name: test_extension_and_storage_account_permission
+  name: test-extension-and-storage-account-permission
 spec:
   forProvider:
     principalId: ${azurerm_kubernetes_cluster_extension.example.aks_assigned_identity[0].principal_id}
@@ -214,8 +214,40 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
   labels:
-    testing.upbound.io/example-name: vault_msi_read_on_cluster
-  name: vault-msi-read-on-cluster
+    testing.upbound.io/example-name: test_vault_data_contributor_on_storage
+  name: test-vault-data-contributor-on-storage
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Storage Blob Data Contributor
+    scope: ${azurerm_storage_account.example.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_data_operator_on_snap_rg
+  name: test-vault-data-operator-on-snap-rg
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Data Operator for Managed Disks
+    scope: ${azurerm_resource_group.snap.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_msi_read_on_cluster
+  name: test-vault-msi-read-on-cluster
 spec:
   forProvider:
     principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
@@ -230,12 +262,28 @@ metadata:
   annotations:
     meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
   labels:
-    testing.upbound.io/example-name: vault_msi_read_on_snap_rg
-  name: vault-msi-read-on-snap-rg
+    testing.upbound.io/example-name: test_vault_msi_read_on_snap_rg
+  name: test-vault-msi-read-on-snap-rg
 spec:
   forProvider:
     principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
     roleDefinitionName: Reader
+    scope: ${azurerm_resource_group.snap.id}
+
+---
+
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: RoleAssignment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: test_vault_msi_snapshot_contributor_on_snap_rg
+  name: test-vault-msi-snapshot-contributor-on-snap-rg
+spec:
+  forProvider:
+    principalId: ${azurerm_data_protection_backup_vault.example.identity[0].principal_id}
+    roleDefinitionName: Disk Snapshot Contributor
     scope: ${azurerm_resource_group.snap.id}
 
 ---

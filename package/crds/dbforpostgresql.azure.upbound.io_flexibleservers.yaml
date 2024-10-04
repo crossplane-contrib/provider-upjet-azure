@@ -390,6 +390,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccessEnabled:
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
+                    type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
                       Server. Possible value is None.
@@ -533,6 +537,25 @@ spec:
                       Server. Required when create_mode is Default and authentication.password_auth_enabled
                       is true.
                     type: string
+                  administratorPasswordSecretRef:
+                    description: |-
+                      The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+                      Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   authentication:
                     description: An authentication block as defined below.
                     items:
@@ -821,6 +844,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccessEnabled:
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
+                    type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
                       Server. Possible value is None.
@@ -1416,8 +1443,9 @@ spec:
                     type: number
                   createMode:
                     description: The creation mode which can be used to restore or
-                      replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update.
+                      replicate existing servers. Possible values are Default, GeoRestore,
+                      PointInTimeRestore, Replica and Update. Changing this forces
+                      a new PostgreSQL Flexible Server to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
@@ -1582,8 +1610,8 @@ spec:
                     type: object
                   pointInTimeRestoreTimeInUtc:
                     description: The point in time to restore from source_server_id
-                      when create_mode is PointInTimeRestore. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      when create_mode is GeoRestore, PointInTimeRestore. Changing
+                      this forces a new PostgreSQL Flexible Server to be created.
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
@@ -1665,6 +1693,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccessEnabled:
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
+                    type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
                       Server. Possible value is None.
@@ -1757,9 +1789,9 @@ spec:
                     type: string
                   sourceServerId:
                     description: The resource ID of the source PostgreSQL Flexible
-                      Server to be restored. Required when create_mode is PointInTimeRestore
-                      or Replica. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Server to be restored. Required when create_mode is GeoRestore,
+                      PointInTimeRestore or Replica. Changing this forces a new PostgreSQL
+                      Flexible Server to be created.
                     type: string
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
@@ -1855,8 +1887,9 @@ spec:
                     type: number
                   createMode:
                     description: The creation mode which can be used to restore or
-                      replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update.
+                      replicate existing servers. Possible values are Default, GeoRestore,
+                      PointInTimeRestore, Replica and Update. Changing this forces
+                      a new PostgreSQL Flexible Server to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
@@ -2021,8 +2054,8 @@ spec:
                     type: object
                   pointInTimeRestoreTimeInUtc:
                     description: The point in time to restore from source_server_id
-                      when create_mode is PointInTimeRestore. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      when create_mode is GeoRestore, PointInTimeRestore. Changing
+                      this forces a new PostgreSQL Flexible Server to be created.
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
@@ -2104,6 +2137,10 @@ spec:
                             type: string
                         type: object
                     type: object
+                  publicNetworkAccessEnabled:
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
+                    type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
                       Server. Possible value is None.
@@ -2115,9 +2152,9 @@ spec:
                     type: string
                   sourceServerId:
                     description: The resource ID of the source PostgreSQL Flexible
-                      Server to be restored. Required when create_mode is PointInTimeRestore
-                      or Replica. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Server to be restored. Required when create_mode is GeoRestore,
+                      PointInTimeRestore or Replica. Changing this forces a new PostgreSQL
+                      Flexible Server to be created.
                     type: string
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible
@@ -2358,8 +2395,9 @@ spec:
                     type: number
                   createMode:
                     description: The creation mode which can be used to restore or
-                      replicate existing servers. Possible values are Default, PointInTimeRestore,
-                      Replica and Update.
+                      replicate existing servers. Possible values are Default, GeoRestore,
+                      PointInTimeRestore, Replica and Update. Changing this forces
+                      a new PostgreSQL Flexible Server to be created.
                     type: string
                   customerManagedKey:
                     description: A customer_managed_key block as defined below. Changing
@@ -2456,15 +2494,16 @@ spec:
                     type: object
                   pointInTimeRestoreTimeInUtc:
                     description: The point in time to restore from source_server_id
-                      when create_mode is PointInTimeRestore. Changing this forces
-                      a new PostgreSQL Flexible Server to be created.
+                      when create_mode is GeoRestore, PointInTimeRestore. Changing
+                      this forces a new PostgreSQL Flexible Server to be created.
                     type: string
                   privateDnsZoneId:
                     description: The ID of the private DNS zone to create the PostgreSQL
                       Flexible Server.
                     type: string
                   publicNetworkAccessEnabled:
-                    description: Is public network access enabled?
+                    description: Specifies whether this PostgreSQL Flexible Server
+                      is publicly accessible. Defaults to true.
                     type: boolean
                   replicationRole:
                     description: The replication role for the PostgreSQL Flexible
@@ -2482,9 +2521,9 @@ spec:
                     type: string
                   sourceServerId:
                     description: The resource ID of the source PostgreSQL Flexible
-                      Server to be restored. Required when create_mode is PointInTimeRestore
-                      or Replica. Changing this forces a new PostgreSQL Flexible Server
-                      to be created.
+                      Server to be restored. Required when create_mode is GeoRestore,
+                      PointInTimeRestore or Replica. Changing this forces a new PostgreSQL
+                      Flexible Server to be created.
                     type: string
                   storageMb:
                     description: The max storage allowed for the PostgreSQL Flexible

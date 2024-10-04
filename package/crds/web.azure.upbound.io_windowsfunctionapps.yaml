@@ -1984,6 +1984,25 @@ spec:
                                   The OAuth 2.0 client ID that was created for the app used for authentication.
                                   The ID of the Client to use to authenticate with Azure Active Directory.
                                 type: string
+                              clientSecretSecretRef:
+                                description: |-
+                                  The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                                  The Client Secret for the Client ID. Cannot be used with `client_secret_setting_name`.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               clientSecretSettingName:
                                 description: |-
                                   The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -2025,6 +2044,25 @@ spec:
                                   The App ID of the Facebook app used for login.
                                   The App ID of the Facebook app used for login.
                                 type: string
+                              appSecretSecretRef:
+                                description: |-
+                                  The App Secret of the Facebook app used for Facebook login. Cannot be specified with app_secret_setting_name.
+                                  The App Secret of the Facebook app used for Facebook Login. Cannot be specified with `app_secret_setting_name`.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               appSecretSettingName:
                                 description: |-
                                   The app setting name that contains the app_secret value used for Facebook Login.
@@ -2048,6 +2086,25 @@ spec:
                                   The OAuth 2.0 client ID that was created for the app used for authentication.
                                   The ID of the GitHub app used for login.
                                 type: string
+                              clientSecretSecretRef:
+                                description: |-
+                                  The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                                  The Client Secret of the GitHub app used for GitHub Login. Cannot be specified with `client_secret_setting_name`.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               clientSecretSettingName:
                                 description: |-
                                   The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -2071,6 +2128,25 @@ spec:
                                   The OAuth 2.0 client ID that was created for the app used for authentication.
                                   The OpenID Connect Client ID for the Google web application.
                                 type: string
+                              clientSecretSecretRef:
+                                description: |-
+                                  The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                                  The client secret associated with the Google web application.  Cannot be specified with `client_secret_setting_name`.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               clientSecretSettingName:
                                 description: |-
                                   The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -2099,6 +2175,25 @@ spec:
                                   The OAuth 2.0 client ID that was created for the app used for authentication.
                                   The OAuth 2.0 client ID that was created for the app used for authentication.
                                 type: string
+                              clientSecretSecretRef:
+                                description: |-
+                                  The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with client_secret_setting_name.
+                                  The OAuth 2.0 client secret that was created for the app used for authentication. Cannot be specified with `client_secret_setting_name`.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               clientSecretSettingName:
                                 description: |-
                                   The app setting name containing the OAuth 2.0 client secret that was created for the app used for authentication.
@@ -2137,6 +2232,25 @@ spec:
                                   The OAuth 1.0a consumer key of the Twitter application used for sign-in.
                                   The OAuth 1.0a consumer key of the Twitter application used for sign-in.
                                 type: string
+                              consumerSecretSecretRef:
+                                description: |-
+                                  The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with consumer_secret_setting_name.
+                                  The OAuth 1.0a consumer secret of the Twitter application used for sign-in. Cannot be specified with `consumer_secret_setting_name`.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               consumerSecretSettingName:
                                 description: |-
                                   The app setting name that contains the OAuth 1.0a consumer secret of the Twitter application used for sign-in.
@@ -2821,6 +2935,44 @@ spec:
                                 type: number
                             type: object
                           type: array
+                        applicationInsightsConnectionStringSecretRef:
+                          description: |-
+                            The Connection String for linking the Windows Function App to Application Insights.
+                            The Connection String for linking the Windows Function App to Application Insights.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
+                        applicationInsightsKeySecretRef:
+                          description: |-
+                            The Instrumentation Key for connecting the Windows Function App to Application Insights.
+                            The Instrumentation Key for connecting the Windows Function App to Application Insights.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         applicationStack:
                           description: An application_stack block as defined above.
                           items:
@@ -3329,6 +3481,25 @@ spec:
                           type: string
                       type: object
                     type: array
+                  storageAccountAccessKeySecretRef:
+                    description: |-
+                      The access key which will be used to access the backend storage account for the Function App. Conflicts with storage_uses_managed_identity.
+                      The access key which will be used to access the storage account for the Function App.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   storageAccountName:
                     description: |-
                       The backend storage account name which will be used by this Function App.
@@ -5460,7 +5631,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -6199,13 +6370,13 @@ spec:
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to run. Possible values include ~12, ~14, ~16 and ~18.
+                              The version of Node to run. Possible values include ~12, ~14, ~16, ~18 and ~20.
                               The version of Node to use. Possible values include `12`, `14`, `16` and `18`
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The version of PowerShell Core to run. Possible values are 7, and 7.2.
-                              The PowerShell Core version to use. Possible values are `7`, and `7.2`
+                              The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+                              The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
                             type: string
                           useCustomRuntime:
                             description: |-
@@ -6255,7 +6426,7 @@ spec:
                       healthCheckEvictionTimeInMin:
                         description: |-
                           The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
                         type: number
                       healthCheckPath:
                         description: |-
@@ -7282,7 +7453,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -7944,13 +8115,13 @@ spec:
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to run. Possible values include ~12, ~14, ~16 and ~18.
+                              The version of Node to run. Possible values include ~12, ~14, ~16, ~18 and ~20.
                               The version of Node to use. Possible values include `12`, `14`, `16` and `18`
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The version of PowerShell Core to run. Possible values are 7, and 7.2.
-                              The PowerShell Core version to use. Possible values are `7`, and `7.2`
+                              The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+                              The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
                             type: string
                           useCustomRuntime:
                             description: |-
@@ -8000,7 +8171,7 @@ spec:
                       healthCheckEvictionTimeInMin:
                         description: |-
                           The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
                         type: number
                       healthCheckPath:
                         description: |-
@@ -9083,7 +9254,7 @@ spec:
                             x-kubernetes-map-type: granular
                           tenantAuthEndpoint:
                             description: |-
-                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+                              The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
                               The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
                             type: string
                           wwwAuthenticationDisabled:
@@ -9678,13 +9849,13 @@ spec:
                             type: string
                           nodeVersion:
                             description: |-
-                              The version of Node to run. Possible values include ~12, ~14, ~16 and ~18.
+                              The version of Node to run. Possible values include ~12, ~14, ~16, ~18 and ~20.
                               The version of Node to use. Possible values include `12`, `14`, `16` and `18`
                             type: string
                           powershellCoreVersion:
                             description: |-
-                              The version of PowerShell Core to run. Possible values are 7, and 7.2.
-                              The PowerShell Core version to use. Possible values are `7`, and `7.2`
+                              The version of PowerShell Core to run. Possible values are 7, 7.2, and 7.4.
+                              The PowerShell Core version to use. Possible values are `7`, `7.2`, and `7.4`
                             type: string
                           useCustomRuntime:
                             description: |-
@@ -9739,7 +9910,7 @@ spec:
                       healthCheckEvictionTimeInMin:
                         description: |-
                           The amount of time in minutes that a node can be unhealthy before being removed from the load balancer. Possible values are between 2 and 10. Only valid in conjunction with health_check_path.
-                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Defaults to `10`. Only valid in conjunction with `health_check_path`
+                          The amount of time in minutes that a node is unhealthy before being removed from the load balancer. Possible values are between `2` and `10`. Only valid in conjunction with `health_check_path`
                         type: number
                       healthCheckPath:
                         description: |-

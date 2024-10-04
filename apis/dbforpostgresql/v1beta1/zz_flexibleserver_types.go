@@ -106,6 +106,10 @@ type FlexibleServerInitParameters struct {
 	// The Administrator login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// The Password associated with the administrator_login for the PostgreSQL Flexible Server. Required when create_mode is Default and authentication.password_auth_enabled is true.
+	// Password for the master DB user. If you set autoGeneratePassword to true, the Secret referenced here will be created or updated with generated password if it does not already contain one.
+	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+
 	// An authentication block as defined below.
 	Authentication []AuthenticationInitParameters `json:"authentication,omitempty" tf:"authentication,omitempty"`
 
@@ -164,6 +168,9 @@ type FlexibleServerInitParameters struct {
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether this PostgreSQL Flexible Server is publicly accessible. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
 	ReplicationRole *string `json:"replicationRole,omitempty" tf:"replication_role,omitempty"`
@@ -360,6 +367,10 @@ type FlexibleServerParameters struct {
 	// Selector for a PrivateDNSZone in network to populate privateDnsZoneId.
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
+
+	// Specifies whether this PostgreSQL Flexible Server is publicly accessible. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The replication role for the PostgreSQL Flexible Server. Possible value is None.
 	// +kubebuilder:validation:Optional

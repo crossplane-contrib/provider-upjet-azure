@@ -1352,7 +1352,7 @@ spec:
                     type: array
                   virtualNetworkConfiguration:
                     description: A virtual_network_configuration block as defined
-                      below. Changing this forces a new resource to be created.
+                      below.
                     properties:
                       dataManagementPublicIpId:
                         description: Data management's service public IP address resource
@@ -1598,7 +1598,7 @@ spec:
                     type: array
                   virtualNetworkConfiguration:
                     description: A virtual_network_configuration block as defined
-                      below. Changing this forces a new resource to be created.
+                      below.
                     properties:
                       dataManagementPublicIpId:
                         description: Data management's service public IP address resource
@@ -2033,7 +2033,7 @@ spec:
                     type: string
                   virtualNetworkConfiguration:
                     description: A virtual_network_configuration block as defined
-                      below. Changing this forces a new resource to be created.
+                      below.
                     properties:
                       dataManagementPublicIpId:
                         description: Data management's service public IP address resource

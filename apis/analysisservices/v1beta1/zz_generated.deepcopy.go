@@ -171,6 +171,11 @@ func (in *ServerInitParameters) DeepCopyInto(out *ServerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PowerBiServiceEnabled != nil {
+		in, out := &in.PowerBiServiceEnabled, &out.PowerBiServiceEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.QuerypoolConnectionMode != nil {
 		in, out := &in.QuerypoolConnectionMode, &out.QuerypoolConnectionMode
 		*out = new(string)
@@ -297,6 +302,11 @@ func (in *ServerObservation) DeepCopyInto(out *ServerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PowerBiServiceEnabled != nil {
+		in, out := &in.PowerBiServiceEnabled, &out.PowerBiServiceEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.QuerypoolConnectionMode != nil {
 		in, out := &in.QuerypoolConnectionMode, &out.QuerypoolConnectionMode
 		*out = new(string)
@@ -384,6 +394,11 @@ func (in *ServerParameters) DeepCopyInto(out *ServerParameters) {
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name
 		*out = new(string)
+		**out = **in
+	}
+	if in.PowerBiServiceEnabled != nil {
+		in, out := &in.PowerBiServiceEnabled, &out.PowerBiServiceEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.QuerypoolConnectionMode != nil {

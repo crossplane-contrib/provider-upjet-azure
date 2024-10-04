@@ -79,4 +79,26 @@ func Configure(p *config.Provider) { //nolint:gocyclo
 	p.AddResourceConfigurator("azurerm_storage_management_policy", func(r *config.Resource) {
 		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "storage_account_id")
 	})
+
+	p.AddResourceConfigurator("azurerm_storage_share_directory", func(r *config.Resource) {
+		r.References["share_name"] = config.Reference{
+			TerraformName: "azurerm_storage_share",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+		}
+		r.References["storage_account_name"] = config.Reference{
+			TerraformName: "azurerm_storage_account",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_storage_table_entity", func(r *config.Resource) {
+		r.References["table_name"] = config.Reference{
+			TerraformName: "azurerm_storage_table",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+		}
+		r.References["storage_account_name"] = config.Reference{
+			TerraformName: "azurerm_storage_account",
+			Extractor:     `github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)`,
+		}
+	})
 }

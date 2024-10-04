@@ -179,7 +179,7 @@ type AuthSettingsV2ActiveDirectoryV2InitParameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -231,7 +231,7 @@ type AuthSettingsV2ActiveDirectoryV2Observation struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint,omitempty" tf:"tenant_auth_endpoint,omitempty"`
 
@@ -293,7 +293,7 @@ type AuthSettingsV2ActiveDirectoryV2Parameters struct {
 	// +mapType=granular
 	LoginParameters map[string]*string `json:"loginParameters,omitempty" tf:"login_parameters,omitempty"`
 
-	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/v2.0/{tenant-guid}/
+	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. https://login.microsoftonline.com/{tenant-guid}/v2.0/
 	// The Azure Tenant Endpoint for the Authenticating Tenant. e.g. `https://login.microsoftonline.com/v2.0/{tenant-guid}/`.
 	// +kubebuilder:validation:Optional
 	TenantAuthEndpoint *string `json:"tenantAuthEndpoint" tf:"tenant_auth_endpoint,omitempty"`
@@ -3220,12 +3220,12 @@ type SiteConfigApplicationStackInitParameters struct {
 	// The version of Java to use. Possible values are `8`, `11`, and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values include 12, 14, 16 and 18
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values include 12, 14, 16, 18 and 20
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , and 7.2.
-	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
 	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
@@ -3254,12 +3254,12 @@ type SiteConfigApplicationStackObservation struct {
 	// The version of Java to use. Possible values are `8`, `11`, and `17`
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values include 12, 14, 16 and 18
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values include 12, 14, 16, 18 and 20
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , and 7.2.
-	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 
 	// The version of Python to use. Possible values are 3.12, 3.11, 3.10, 3.9, 3.8 and 3.7.
@@ -3291,13 +3291,13 @@ type SiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	JavaVersion *string `json:"javaVersion,omitempty" tf:"java_version,omitempty"`
 
-	// The version of Node to use. Possible values include 12, 14, 16 and 18
-	// The version of Node to use. Possible values include `12`, `14`, `16` and `18`
+	// The version of Node to use. Possible values include 12, 14, 16, 18 and 20
+	// The version of Node to use. Possible values include `12`, `14`, `16`, `18` and `20`
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PowerShell Core to use. Possibles values are 7 , and 7.2.
-	// The version of PowerShell Core to use. Possibles values are `7`, and `7.2`
+	// The version of PowerShell Core to use. Possibles values are 7 , 7.2, and 7.4.
+	// The version of PowerShell Core to use. Possibles values are `7`, `7.2`, and `7.4`
 	// +kubebuilder:validation:Optional
 	PowershellCoreVersion *string `json:"powershellCoreVersion,omitempty" tf:"powershell_core_version,omitempty"`
 

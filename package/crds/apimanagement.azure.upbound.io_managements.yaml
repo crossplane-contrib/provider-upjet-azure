@@ -802,6 +802,23 @@ spec:
                       below.
                     items:
                       properties:
+                        certificatePasswordSecretRef:
+                          description: The password for the certificate.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         storeName:
                           description: The name of the Certificate Store where this
                             certificate should be stored. Possible values are CertificateAuthority
@@ -829,6 +846,24 @@ spec:
                           description: Should user registration requests be delegated
                             to an external url? Defaults to false.
                           type: boolean
+                        validationKeySecretRef:
+                          description: A base64-encoded validation key to validate,
+                            that a request is coming from Azure API Management.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   gatewayDisabled:
@@ -2149,8 +2184,7 @@ spec:
                               type: object
                           type: object
                         zones:
-                          description: A list of availability zones. Changing this
-                            forces a new resource to be created.
+                          description: A list of availability zones.
                           items:
                             type: string
                           type: array
@@ -2277,14 +2311,10 @@ spec:
                       sent.
                     type: string
                   policy:
-                    description: A policy block as defined below.
                     properties:
                       xmlContent:
-                        description: The XML Content for this Policy.
                         type: string
                       xmlLink:
-                        description: A link to an API Management Policy XML Document,
-                          which must be publicly available.
                         type: string
                     type: object
                   protocols:
@@ -2730,8 +2760,7 @@ spec:
                               type: object
                           type: object
                         zones:
-                          description: A list of availability zones. Changing this
-                            forces a new resource to be created.
+                          description: A list of availability zones.
                           items:
                             type: string
                           type: array
@@ -2860,14 +2889,10 @@ spec:
                       sent.
                     type: string
                   policy:
-                    description: A policy block as defined below.
                     properties:
                       xmlContent:
-                        description: The XML Content for this Policy.
                         type: string
                       xmlLink:
-                        description: A link to an API Management Policy XML Document,
-                          which must be publicly available.
                         type: string
                     type: object
                   protocols:
@@ -3350,8 +3375,7 @@ spec:
                               type: string
                           type: object
                         zones:
-                          description: A list of availability zones. Changing this
-                            forces a new resource to be created.
+                          description: A list of availability zones.
                           items:
                             type: string
                           type: array
@@ -3672,14 +3696,10 @@ spec:
                       sent.
                     type: string
                   policy:
-                    description: A policy block as defined below.
                     properties:
                       xmlContent:
-                        description: The XML Content for this Policy.
                         type: string
                       xmlLink:
-                        description: A link to an API Management Policy XML Document,
-                          which must be publicly available.
                         type: string
                     type: object
                   portalUrl:

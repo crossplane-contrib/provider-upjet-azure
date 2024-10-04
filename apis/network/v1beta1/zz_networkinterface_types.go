@@ -144,6 +144,9 @@ type NetworkInterfaceIPConfigurationParameters struct {
 
 type NetworkInterfaceInitParameters struct {
 
+	// Should Accelerated Networking be enabled? Defaults to false.
+	AcceleratedNetworkingEnabled *bool `json:"acceleratedNetworkingEnabled,omitempty" tf:"accelerated_networking_enabled,omitempty"`
+
 	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
 	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
 
@@ -156,14 +159,15 @@ type NetworkInterfaceInitParameters struct {
 	// Specifies the Edge Zone within the Azure Region where this Network Interface should exist. Changing this forces a new Network Interface to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Should Accelerated Networking be enabled? Defaults to false.
 	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
 
-	// Should IP Forwarding be enabled? Defaults to false.
 	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
 
 	// One or more ip_configuration blocks as defined below.
 	IPConfiguration []NetworkInterfaceIPConfigurationInitParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// Should IP Forwarding be enabled? Defaults to false.
+	IPForwardingEnabled *bool `json:"ipForwardingEnabled,omitempty" tf:"ip_forwarding_enabled,omitempty"`
 
 	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
 	InternalDNSNameLabel *string `json:"internalDnsNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
@@ -177,6 +181,9 @@ type NetworkInterfaceInitParameters struct {
 }
 
 type NetworkInterfaceObservation struct {
+
+	// Should Accelerated Networking be enabled? Defaults to false.
+	AcceleratedNetworkingEnabled *bool `json:"acceleratedNetworkingEnabled,omitempty" tf:"accelerated_networking_enabled,omitempty"`
 
 	// If the Virtual Machine using this Network Interface is part of an Availability Set, then this list will have the union of all DNS servers from all Network Interfaces that are part of the Availability Set.
 	AppliedDNSServers []*string `json:"appliedDnsServers,omitempty" tf:"applied_dns_servers,omitempty"`
@@ -193,10 +200,8 @@ type NetworkInterfaceObservation struct {
 	// Specifies the Edge Zone within the Azure Region where this Network Interface should exist. Changing this forces a new Network Interface to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Should Accelerated Networking be enabled? Defaults to false.
 	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
 
-	// Should IP Forwarding be enabled? Defaults to false.
 	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
 
 	// The ID of the Network Interface.
@@ -204,6 +209,9 @@ type NetworkInterfaceObservation struct {
 
 	// One or more ip_configuration blocks as defined below.
 	IPConfiguration []NetworkInterfaceIPConfigurationObservation `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// Should IP Forwarding be enabled? Defaults to false.
+	IPForwardingEnabled *bool `json:"ipForwardingEnabled,omitempty" tf:"ip_forwarding_enabled,omitempty"`
 
 	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
 	InternalDNSNameLabel *string `json:"internalDnsNameLabel,omitempty" tf:"internal_dns_name_label,omitempty"`
@@ -236,6 +244,10 @@ type NetworkInterfaceObservation struct {
 
 type NetworkInterfaceParameters struct {
 
+	// Should Accelerated Networking be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	AcceleratedNetworkingEnabled *bool `json:"acceleratedNetworkingEnabled,omitempty" tf:"accelerated_networking_enabled,omitempty"`
+
 	// Specifies the auxiliary mode used to enable network high-performance feature on Network Virtual Appliances (NVAs). This feature offers competitive performance in Connections Per Second (CPS) optimization, along with improvements to handling large amounts of simultaneous connections. Possible values are AcceleratedConnections, Floating, MaxConnections and None.
 	// +kubebuilder:validation:Optional
 	AuxiliaryMode *string `json:"auxiliaryMode,omitempty" tf:"auxiliary_mode,omitempty"`
@@ -252,17 +264,19 @@ type NetworkInterfaceParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Should Accelerated Networking be enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableAcceleratedNetworking *bool `json:"enableAcceleratedNetworking,omitempty" tf:"enable_accelerated_networking,omitempty"`
 
-	// Should IP Forwarding be enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	EnableIPForwarding *bool `json:"enableIpForwarding,omitempty" tf:"enable_ip_forwarding,omitempty"`
 
 	// One or more ip_configuration blocks as defined below.
 	// +kubebuilder:validation:Optional
 	IPConfiguration []NetworkInterfaceIPConfigurationParameters `json:"ipConfiguration,omitempty" tf:"ip_configuration,omitempty"`
+
+	// Should IP Forwarding be enabled? Defaults to false.
+	// +kubebuilder:validation:Optional
+	IPForwardingEnabled *bool `json:"ipForwardingEnabled,omitempty" tf:"ip_forwarding_enabled,omitempty"`
 
 	// The (relative) DNS Name used for internal communications between Virtual Machines in the same Virtual Network.
 	// +kubebuilder:validation:Optional

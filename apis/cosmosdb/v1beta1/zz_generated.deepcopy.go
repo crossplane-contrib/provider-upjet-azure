@@ -60,6 +60,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutomaticFailoverEnabled != nil {
+		in, out := &in.AutomaticFailoverEnabled, &out.AutomaticFailoverEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
 		*out = make([]BackupInitParameters, len(*in))
@@ -120,6 +125,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FreeTierEnabled != nil {
+		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GeoLocation != nil {
 		in, out := &in.GeoLocation, &out.GeoLocation
 		*out = make([]GeoLocationInitParameters, len(*in))
@@ -172,6 +182,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 	if in.MongoServerVersion != nil {
 		in, out := &in.MongoServerVersion, &out.MongoServerVersion
 		*out = new(string)
+		**out = **in
+	}
+	if in.MultipleWriteLocationsEnabled != nil {
+		in, out := &in.MultipleWriteLocationsEnabled, &out.MultipleWriteLocationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NetworkACLBypassForAzureServices != nil {
@@ -299,6 +314,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutomaticFailoverEnabled != nil {
+		in, out := &in.AutomaticFailoverEnabled, &out.AutomaticFailoverEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
 		*out = make([]BackupObservation, len(*in))
@@ -364,6 +384,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.FreeTierEnabled != nil {
+		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GeoLocation != nil {
 		in, out := &in.GeoLocation, &out.GeoLocation
 		*out = make([]GeoLocationObservation, len(*in))
@@ -421,6 +446,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	if in.MongoServerVersion != nil {
 		in, out := &in.MongoServerVersion, &out.MongoServerVersion
 		*out = new(string)
+		**out = **in
+	}
+	if in.MultipleWriteLocationsEnabled != nil {
+		in, out := &in.MultipleWriteLocationsEnabled, &out.MultipleWriteLocationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NetworkACLBypassForAzureServices != nil {
@@ -543,6 +573,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.AutomaticFailoverEnabled != nil {
+		in, out := &in.AutomaticFailoverEnabled, &out.AutomaticFailoverEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Backup != nil {
 		in, out := &in.Backup, &out.Backup
 		*out = make([]BackupParameters, len(*in))
@@ -603,6 +638,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.FreeTierEnabled != nil {
+		in, out := &in.FreeTierEnabled, &out.FreeTierEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.GeoLocation != nil {
 		in, out := &in.GeoLocation, &out.GeoLocation
 		*out = make([]GeoLocationParameters, len(*in))
@@ -655,6 +695,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 	if in.MongoServerVersion != nil {
 		in, out := &in.MongoServerVersion, &out.MongoServerVersion
 		*out = new(string)
+		**out = **in
+	}
+	if in.MultipleWriteLocationsEnabled != nil {
+		in, out := &in.MultipleWriteLocationsEnabled, &out.MultipleWriteLocationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.NetworkACLBypassForAzureServices != nil {
@@ -6203,10 +6248,26 @@ func (in *SQLContainerInitParameters) DeepCopyInto(out *SQLContainerInitParamete
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PartitionKeyKind != nil {
+		in, out := &in.PartitionKeyKind, &out.PartitionKeyKind
+		*out = new(string)
+		**out = **in
+	}
 	if in.PartitionKeyPath != nil {
 		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
 		*out = new(string)
 		**out = **in
+	}
+	if in.PartitionKeyPaths != nil {
+		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PartitionKeyVersion != nil {
 		in, out := &in.PartitionKeyVersion, &out.PartitionKeyVersion
@@ -6318,10 +6379,26 @@ func (in *SQLContainerObservation) DeepCopyInto(out *SQLContainerObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PartitionKeyKind != nil {
+		in, out := &in.PartitionKeyKind, &out.PartitionKeyKind
+		*out = new(string)
+		**out = **in
+	}
 	if in.PartitionKeyPath != nil {
 		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
 		*out = new(string)
 		**out = **in
+	}
+	if in.PartitionKeyPaths != nil {
+		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PartitionKeyVersion != nil {
 		in, out := &in.PartitionKeyVersion, &out.PartitionKeyVersion
@@ -6421,10 +6498,26 @@ func (in *SQLContainerParameters) DeepCopyInto(out *SQLContainerParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PartitionKeyKind != nil {
+		in, out := &in.PartitionKeyKind, &out.PartitionKeyKind
+		*out = new(string)
+		**out = **in
+	}
 	if in.PartitionKeyPath != nil {
 		in, out := &in.PartitionKeyPath, &out.PartitionKeyPath
 		*out = new(string)
 		**out = **in
+	}
+	if in.PartitionKeyPaths != nil {
+		in, out := &in.PartitionKeyPaths, &out.PartitionKeyPaths
+		*out = make([]*string, len(*in))
+		for i := range *in {
+			if (*in)[i] != nil {
+				in, out := &(*in)[i], &(*out)[i]
+				*out = new(string)
+				**out = **in
+			}
+		}
 	}
 	if in.PartitionKeyVersion != nil {
 		in, out := &in.PartitionKeyVersion, &out.PartitionKeyVersion

@@ -2443,6 +2443,24 @@ spec:
                     description: One or more ssl_certificate blocks as defined below.
                     items:
                       properties:
+                        dataSecretRef:
+                          description: The base64-encoded PFX certificate data. Required
+                            if key_vault_secret_id is not set.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         keyVaultSecretId:
                           description: The Secret ID of (base-64 encoded unencrypted
                             pfx) the Secret or Certificate object stored in Azure
@@ -2453,6 +2471,24 @@ spec:
                           description: The Name of the SSL certificate that is unique
                             within this Application Gateway
                           type: string
+                        passwordSecretRef:
+                          description: Password for the pfx file specified in data.
+                            Required if data is set.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   sslPolicy:
@@ -2594,6 +2630,25 @@ spec:
                       below.
                     items:
                       properties:
+                        dataSecretRef:
+                          description: The contents of the Trusted Root Certificate
+                            which should be used. Required if key_vault_secret_id
+                            is not set.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         keyVaultSecretId:
                           description: The Secret ID of (base-64 encoded unencrypted
                             pfx) Secret or Certificate object stored in Azure KeyVault.
@@ -3338,6 +3393,12 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        principalId:
+                          description: The ID of the Application Gateway.
+                          type: string
+                        tenantId:
+                          description: The ID of the Application Gateway.
+                          type: string
                         type:
                           description: Specifies the type of Managed Service Identity
                             that should be configured on this Application Gateway.
@@ -7523,6 +7584,12 @@ spec:
                           type: string
                         type: array
                         x-kubernetes-list-type: set
+                      principalId:
+                        description: The ID of the Application Gateway.
+                        type: string
+                      tenantId:
+                        description: The ID of the Application Gateway.
+                        type: string
                       type:
                         description: Specifies the type of Managed Service Identity
                           that should be configured on this Application Gateway. Only

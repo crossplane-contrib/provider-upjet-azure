@@ -112,6 +112,9 @@ type SnapshotInitParameters struct {
 	// Indicates how the snapshot is to be created. Possible values are Copy or Import.
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
+	// Specifies the ID of the Disk Access which should be used for this Snapshot. This is used in conjunction with setting network_access_policy to AllowPrivate.
+	DiskAccessID *string `json:"diskAccessId,omitempty" tf:"disk_access_id,omitempty"`
+
 	// The size of the Snapshotted Disk in GB.
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
@@ -123,6 +126,12 @@ type SnapshotInitParameters struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Policy for accessing the disk via network. Possible values are AllowAll, AllowPrivate, or DenyAll. Defaults to AllowAll.
+	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
+
+	// Policy for controlling export on the disk. Possible values are true or false. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies a reference to an existing snapshot, when create_option is Copy. Changing this forces a new resource to be created.
 	SourceResourceID *string `json:"sourceResourceId,omitempty" tf:"source_resource_id,omitempty"`
@@ -153,6 +162,9 @@ type SnapshotObservation struct {
 	// Indicates how the snapshot is to be created. Possible values are Copy or Import.
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
+	// Specifies the ID of the Disk Access which should be used for this Snapshot. This is used in conjunction with setting network_access_policy to AllowPrivate.
+	DiskAccessID *string `json:"diskAccessId,omitempty" tf:"disk_access_id,omitempty"`
+
 	// The size of the Snapshotted Disk in GB.
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
 
@@ -167,6 +179,12 @@ type SnapshotObservation struct {
 
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Policy for accessing the disk via network. Possible values are AllowAll, AllowPrivate, or DenyAll. Defaults to AllowAll.
+	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
+
+	// Policy for controlling export on the disk. Possible values are true or false. Defaults to true.
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Snapshot. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -194,6 +212,10 @@ type SnapshotParameters struct {
 	// +kubebuilder:validation:Optional
 	CreateOption *string `json:"createOption,omitempty" tf:"create_option,omitempty"`
 
+	// Specifies the ID of the Disk Access which should be used for this Snapshot. This is used in conjunction with setting network_access_policy to AllowPrivate.
+	// +kubebuilder:validation:Optional
+	DiskAccessID *string `json:"diskAccessId,omitempty" tf:"disk_access_id,omitempty"`
+
 	// The size of the Snapshotted Disk in GB.
 	// +kubebuilder:validation:Optional
 	DiskSizeGb *float64 `json:"diskSizeGb,omitempty" tf:"disk_size_gb,omitempty"`
@@ -209,6 +231,14 @@ type SnapshotParameters struct {
 	// Specifies the supported Azure location where the resource exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Policy for accessing the disk via network. Possible values are AllowAll, AllowPrivate, or DenyAll. Defaults to AllowAll.
+	// +kubebuilder:validation:Optional
+	NetworkAccessPolicy *string `json:"networkAccessPolicy,omitempty" tf:"network_access_policy,omitempty"`
+
+	// Policy for controlling export on the disk. Possible values are true or false. Defaults to true.
+	// +kubebuilder:validation:Optional
+	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// The name of the resource group in which to create the Snapshot. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

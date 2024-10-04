@@ -74,10 +74,120 @@ spec:
                 type: string
               forProvider:
                 properties:
+                  backupRepeatingTimeIntervals:
+                    description: Specifies a list of repeating time interval. It should
+                      follow ISO 8601 repeating time interval. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
+                    items:
+                      type: string
+                    type: array
+                  operationalDefaultRetentionDuration:
+                    description: The duration of operational default retention rule.
+                      It should follow ISO 8601 duration format. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
+                    type: string
                   retentionDuration:
                     description: Duration of deletion after given timespan. It should
                       follow ISO 8601 duration format. Changing this forces a new
                       Backup Policy Blob Storage to be created.
+                    type: string
+                  retentionRule:
+                    description: One or more retention_rule blocks as defined below.
+                      Changing this forces a new Backup Policy Blob Storage to be
+                      created.
+                    items:
+                      properties:
+                        criteria:
+                          description: A criteria block as defined below. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          properties:
+                            absoluteCriteria:
+                              description: Possible values are AllBackup, FirstOfDay,
+                                FirstOfWeek, FirstOfMonth and FirstOfYear. These values
+                                mean the first successful backup of the day/week/month/year.
+                                Changing this forces a new Backup Policy Blob Storage
+                                to be created.
+                              type: string
+                            daysOfMonth:
+                              description: Must be between 0 and 28. 0 for last day
+                                within the month. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              items:
+                                type: number
+                              type: array
+                              x-kubernetes-list-type: set
+                            daysOfWeek:
+                              description: Possible values are Monday, Tuesday, Thursday,
+                                Friday, Saturday and Sunday. Changing this forces
+                                a new Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            monthsOfYear:
+                              description: Possible values are January, February,
+                                March, April, May, June, July, August, September,
+                                October, November and December. Changing this forces
+                                a new Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            scheduledBackupTimes:
+                              description: Specifies a list of backup times for backup
+                                in the RFC3339 format. Changing this forces a new
+                                Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            weeksOfMonth:
+                              description: Possible values are First, Second, Third,
+                                Fourth and Last. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        lifeCycle:
+                          description: A life_cycle block as defined below. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          properties:
+                            dataStoreType:
+                              description: The type of data store. The only possible
+                                value is VaultStore. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              type: string
+                            duration:
+                              description: Duration after which the backup is deleted.
+                                It should follow ISO 8601 duration format. Changing
+                                this forces a new Backup Policy Blob Storage to be
+                                created.
+                              type: string
+                          type: object
+                        name:
+                          description: The name which should be used for this retention
+                            rule. Changing this forces a new Backup Policy Blob Storage
+                            to be created.
+                          type: string
+                        priority:
+                          description: Specifies the priority of the rule. The priority
+                            number must be unique for each rule. The lower the priority
+                            number, the higher the priority of the rule. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          type: number
+                      type: object
+                    type: array
+                  timeZone:
+                    description: Specifies the Time Zone which should be used by the
+                      backup schedule. Changing this forces a new Backup Policy Blob
+                      Storage to be created.
+                    type: string
+                  vaultDefaultRetentionDuration:
+                    description: The duration of vault default retention rule. It
+                      should follow ISO 8601 duration format. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
                     type: string
                   vaultId:
                     description: The ID of the Backup Vault within which the Backup
@@ -174,10 +284,120 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  backupRepeatingTimeIntervals:
+                    description: Specifies a list of repeating time interval. It should
+                      follow ISO 8601 repeating time interval. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
+                    items:
+                      type: string
+                    type: array
+                  operationalDefaultRetentionDuration:
+                    description: The duration of operational default retention rule.
+                      It should follow ISO 8601 duration format. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
+                    type: string
                   retentionDuration:
                     description: Duration of deletion after given timespan. It should
                       follow ISO 8601 duration format. Changing this forces a new
                       Backup Policy Blob Storage to be created.
+                    type: string
+                  retentionRule:
+                    description: One or more retention_rule blocks as defined below.
+                      Changing this forces a new Backup Policy Blob Storage to be
+                      created.
+                    items:
+                      properties:
+                        criteria:
+                          description: A criteria block as defined below. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          properties:
+                            absoluteCriteria:
+                              description: Possible values are AllBackup, FirstOfDay,
+                                FirstOfWeek, FirstOfMonth and FirstOfYear. These values
+                                mean the first successful backup of the day/week/month/year.
+                                Changing this forces a new Backup Policy Blob Storage
+                                to be created.
+                              type: string
+                            daysOfMonth:
+                              description: Must be between 0 and 28. 0 for last day
+                                within the month. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              items:
+                                type: number
+                              type: array
+                              x-kubernetes-list-type: set
+                            daysOfWeek:
+                              description: Possible values are Monday, Tuesday, Thursday,
+                                Friday, Saturday and Sunday. Changing this forces
+                                a new Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            monthsOfYear:
+                              description: Possible values are January, February,
+                                March, April, May, June, July, August, September,
+                                October, November and December. Changing this forces
+                                a new Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            scheduledBackupTimes:
+                              description: Specifies a list of backup times for backup
+                                in the RFC3339 format. Changing this forces a new
+                                Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            weeksOfMonth:
+                              description: Possible values are First, Second, Third,
+                                Fourth and Last. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        lifeCycle:
+                          description: A life_cycle block as defined below. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          properties:
+                            dataStoreType:
+                              description: The type of data store. The only possible
+                                value is VaultStore. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              type: string
+                            duration:
+                              description: Duration after which the backup is deleted.
+                                It should follow ISO 8601 duration format. Changing
+                                this forces a new Backup Policy Blob Storage to be
+                                created.
+                              type: string
+                          type: object
+                        name:
+                          description: The name which should be used for this retention
+                            rule. Changing this forces a new Backup Policy Blob Storage
+                            to be created.
+                          type: string
+                        priority:
+                          description: Specifies the priority of the rule. The priority
+                            number must be unique for each rule. The lower the priority
+                            number, the higher the priority of the rule. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          type: number
+                      type: object
+                    type: array
+                  timeZone:
+                    description: Specifies the Time Zone which should be used by the
+                      backup schedule. Changing this forces a new Backup Policy Blob
+                      Storage to be created.
+                    type: string
+                  vaultDefaultRetentionDuration:
+                    description: The duration of vault default retention rule. It
+                      should follow ISO 8601 duration format. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
                     type: string
                 type: object
               managementPolicies:
@@ -347,24 +567,129 @@ spec:
             required:
             - forProvider
             type: object
-            x-kubernetes-validations:
-            - message: spec.forProvider.retentionDuration is a required parameter
-              rule: '!(''*'' in self.managementPolicies || ''Create'' in self.managementPolicies
-                || ''Update'' in self.managementPolicies) || has(self.forProvider.retentionDuration)
-                || (has(self.initProvider) && has(self.initProvider.retentionDuration))'
           status:
             description: BackupPolicyBlobStorageStatus defines the observed state
               of BackupPolicyBlobStorage.
             properties:
               atProvider:
                 properties:
+                  backupRepeatingTimeIntervals:
+                    description: Specifies a list of repeating time interval. It should
+                      follow ISO 8601 repeating time interval. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
+                    items:
+                      type: string
+                    type: array
                   id:
                     description: The ID of the Backup Policy Blob Storage.
+                    type: string
+                  operationalDefaultRetentionDuration:
+                    description: The duration of operational default retention rule.
+                      It should follow ISO 8601 duration format. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
                     type: string
                   retentionDuration:
                     description: Duration of deletion after given timespan. It should
                       follow ISO 8601 duration format. Changing this forces a new
                       Backup Policy Blob Storage to be created.
+                    type: string
+                  retentionRule:
+                    description: One or more retention_rule blocks as defined below.
+                      Changing this forces a new Backup Policy Blob Storage to be
+                      created.
+                    items:
+                      properties:
+                        criteria:
+                          description: A criteria block as defined below. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          properties:
+                            absoluteCriteria:
+                              description: Possible values are AllBackup, FirstOfDay,
+                                FirstOfWeek, FirstOfMonth and FirstOfYear. These values
+                                mean the first successful backup of the day/week/month/year.
+                                Changing this forces a new Backup Policy Blob Storage
+                                to be created.
+                              type: string
+                            daysOfMonth:
+                              description: Must be between 0 and 28. 0 for last day
+                                within the month. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              items:
+                                type: number
+                              type: array
+                              x-kubernetes-list-type: set
+                            daysOfWeek:
+                              description: Possible values are Monday, Tuesday, Thursday,
+                                Friday, Saturday and Sunday. Changing this forces
+                                a new Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            monthsOfYear:
+                              description: Possible values are January, February,
+                                March, April, May, June, July, August, September,
+                                October, November and December. Changing this forces
+                                a new Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            scheduledBackupTimes:
+                              description: Specifies a list of backup times for backup
+                                in the RFC3339 format. Changing this forces a new
+                                Backup Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                            weeksOfMonth:
+                              description: Possible values are First, Second, Third,
+                                Fourth and Last. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              items:
+                                type: string
+                              type: array
+                              x-kubernetes-list-type: set
+                          type: object
+                        lifeCycle:
+                          description: A life_cycle block as defined below. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          properties:
+                            dataStoreType:
+                              description: The type of data store. The only possible
+                                value is VaultStore. Changing this forces a new Backup
+                                Policy Blob Storage to be created.
+                              type: string
+                            duration:
+                              description: Duration after which the backup is deleted.
+                                It should follow ISO 8601 duration format. Changing
+                                this forces a new Backup Policy Blob Storage to be
+                                created.
+                              type: string
+                          type: object
+                        name:
+                          description: The name which should be used for this retention
+                            rule. Changing this forces a new Backup Policy Blob Storage
+                            to be created.
+                          type: string
+                        priority:
+                          description: Specifies the priority of the rule. The priority
+                            number must be unique for each rule. The lower the priority
+                            number, the higher the priority of the rule. Changing
+                            this forces a new Backup Policy Blob Storage to be created.
+                          type: number
+                      type: object
+                    type: array
+                  timeZone:
+                    description: Specifies the Time Zone which should be used by the
+                      backup schedule. Changing this forces a new Backup Policy Blob
+                      Storage to be created.
+                    type: string
+                  vaultDefaultRetentionDuration:
+                    description: The duration of vault default retention rule. It
+                      should follow ISO 8601 duration format. Changing this forces
+                      a new Backup Policy Blob Storage to be created.
                     type: string
                   vaultId:
                     description: The ID of the Backup Vault within which the Backup

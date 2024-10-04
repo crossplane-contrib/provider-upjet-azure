@@ -70,7 +70,7 @@ type ClusterInitParameters struct {
 	// Specifies a list of tenant IDs that are trusted by the cluster. Default setting trusts all other tenants. Use trusted_external_tenants = ["*"] to explicitly allow all other tenants, trusted_external_tenants = ["MyTenantOnly"] for only your tenant or trusted_external_tenants = ["<tenantId1>", "<tenantIdx>"] to allow specific other tenants.
 	TrustedExternalTenants []*string `json:"trustedExternalTenants,omitempty" tf:"trusted_external_tenants,omitempty"`
 
-	// A virtual_network_configuration block as defined below. Changing this forces a new resource to be created.
+	// A virtual_network_configuration block as defined below.
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationInitParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
@@ -147,7 +147,7 @@ type ClusterObservation struct {
 	// The FQDN of the Azure Kusto Cluster.
 	URI *string `json:"uri,omitempty" tf:"uri,omitempty"`
 
-	// A virtual_network_configuration block as defined below. Changing this forces a new resource to be created.
+	// A virtual_network_configuration block as defined below.
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationObservation `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kusto Cluster should be located. Changing this forces a new Kusto Cluster to be created.
@@ -243,7 +243,7 @@ type ClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	TrustedExternalTenants []*string `json:"trustedExternalTenants,omitempty" tf:"trusted_external_tenants,omitempty"`
 
-	// A virtual_network_configuration block as defined below. Changing this forces a new resource to be created.
+	// A virtual_network_configuration block as defined below.
 	// +kubebuilder:validation:Optional
 	VirtualNetworkConfiguration *VirtualNetworkConfigurationParameters `json:"virtualNetworkConfiguration,omitempty" tf:"virtual_network_configuration,omitempty"`
 

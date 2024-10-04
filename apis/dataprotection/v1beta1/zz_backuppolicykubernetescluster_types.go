@@ -220,23 +220,10 @@ type BackupPolicyKubernetesClusterRetentionRuleParameters struct {
 type DefaultRetentionRuleInitParameters struct {
 
 	// A life_cycle block as defined below. Changing this forces a new resource to be created.
-	LifeCycle []LifeCycleInitParameters `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
+	LifeCycle []DefaultRetentionRuleLifeCycleInitParameters `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
 }
 
-type DefaultRetentionRuleObservation struct {
-
-	// A life_cycle block as defined below. Changing this forces a new resource to be created.
-	LifeCycle []LifeCycleObservation `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
-}
-
-type DefaultRetentionRuleParameters struct {
-
-	// A life_cycle block as defined below. Changing this forces a new resource to be created.
-	// +kubebuilder:validation:Optional
-	LifeCycle []LifeCycleParameters `json:"lifeCycle" tf:"life_cycle,omitempty"`
-}
-
-type LifeCycleInitParameters struct {
+type DefaultRetentionRuleLifeCycleInitParameters struct {
 
 	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
@@ -245,7 +232,7 @@ type LifeCycleInitParameters struct {
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 }
 
-type LifeCycleObservation struct {
+type DefaultRetentionRuleLifeCycleObservation struct {
 
 	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
 	DataStoreType *string `json:"dataStoreType,omitempty" tf:"data_store_type,omitempty"`
@@ -254,7 +241,7 @@ type LifeCycleObservation struct {
 	Duration *string `json:"duration,omitempty" tf:"duration,omitempty"`
 }
 
-type LifeCycleParameters struct {
+type DefaultRetentionRuleLifeCycleParameters struct {
 
 	// The type of data store. The only possible value is OperationalStore. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
@@ -263,6 +250,19 @@ type LifeCycleParameters struct {
 	// The retention duration up to which the backups are to be retained in the data stores. It should follow ISO 8601 duration format. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Duration *string `json:"duration" tf:"duration,omitempty"`
+}
+
+type DefaultRetentionRuleObservation struct {
+
+	// A life_cycle block as defined below. Changing this forces a new resource to be created.
+	LifeCycle []DefaultRetentionRuleLifeCycleObservation `json:"lifeCycle,omitempty" tf:"life_cycle,omitempty"`
+}
+
+type DefaultRetentionRuleParameters struct {
+
+	// A life_cycle block as defined below. Changing this forces a new resource to be created.
+	// +kubebuilder:validation:Optional
+	LifeCycle []DefaultRetentionRuleLifeCycleParameters `json:"lifeCycle" tf:"life_cycle,omitempty"`
 }
 
 type RetentionRuleLifeCycleInitParameters struct {

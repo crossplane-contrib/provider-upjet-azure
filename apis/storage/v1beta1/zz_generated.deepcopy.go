@@ -367,6 +367,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DNSEndpointType != nil {
+		in, out := &in.DNSEndpointType, &out.DNSEndpointType
+		*out = new(string)
+		**out = **in
+	}
 	if in.DefaultToOauthAuthentication != nil {
 		in, out := &in.DefaultToOauthAuthentication, &out.DefaultToOauthAuthentication
 		*out = new(bool)
@@ -1264,6 +1269,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DNSEndpointType != nil {
+		in, out := &in.DNSEndpointType, &out.DNSEndpointType
+		*out = new(string)
+		**out = **in
+	}
 	if in.DefaultToOauthAuthentication != nil {
 		in, out := &in.DefaultToOauthAuthentication, &out.DefaultToOauthAuthentication
 		*out = new(bool)
@@ -1828,6 +1838,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.DNSEndpointType != nil {
+		in, out := &in.DNSEndpointType, &out.DNSEndpointType
+		*out = new(string)
+		**out = **in
 	}
 	if in.DefaultToOauthAuthentication != nil {
 		in, out := &in.DefaultToOauthAuthentication, &out.DefaultToOauthAuthentication
@@ -2772,6 +2787,11 @@ func (in *BlobInitParameters) DeepCopyInto(out *BlobInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EncryptionScope != nil {
+		in, out := &in.EncryptionScope, &out.EncryptionScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
 		*out = make(map[string]*string, len(*in))
@@ -3085,6 +3105,11 @@ func (in *BlobObservation) DeepCopyInto(out *BlobObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.EncryptionScope != nil {
+		in, out := &in.EncryptionScope, &out.EncryptionScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -3183,6 +3208,11 @@ func (in *BlobParameters) DeepCopyInto(out *BlobParameters) {
 	}
 	if in.ContentType != nil {
 		in, out := &in.ContentType, &out.ContentType
+		*out = new(string)
+		**out = **in
+	}
+	if in.EncryptionScope != nil {
+		in, out := &in.EncryptionScope, &out.EncryptionScope
 		*out = new(string)
 		**out = **in
 	}
@@ -3608,6 +3638,16 @@ func (in *ContainerInitParameters) DeepCopyInto(out *ContainerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultEncryptionScope != nil {
+		in, out := &in.DefaultEncryptionScope, &out.DefaultEncryptionScope
+		*out = new(string)
+		**out = **in
+	}
+	if in.EncryptionScopeOverrideEnabled != nil {
+		in, out := &in.EncryptionScopeOverrideEnabled, &out.EncryptionScopeOverrideEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Metadata != nil {
 		in, out := &in.Metadata, &out.Metadata
 		*out = make(map[string]*string, len(*in))
@@ -3676,6 +3716,16 @@ func (in *ContainerObservation) DeepCopyInto(out *ContainerObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.DefaultEncryptionScope != nil {
+		in, out := &in.DefaultEncryptionScope, &out.DefaultEncryptionScope
+		*out = new(string)
+		**out = **in
+	}
+	if in.EncryptionScopeOverrideEnabled != nil {
+		in, out := &in.EncryptionScopeOverrideEnabled, &out.EncryptionScopeOverrideEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.HasImmutabilityPolicy != nil {
 		in, out := &in.HasImmutabilityPolicy, &out.HasImmutabilityPolicy
 		*out = new(bool)
@@ -3735,6 +3785,16 @@ func (in *ContainerParameters) DeepCopyInto(out *ContainerParameters) {
 	if in.ContainerAccessType != nil {
 		in, out := &in.ContainerAccessType, &out.ContainerAccessType
 		*out = new(string)
+		**out = **in
+	}
+	if in.DefaultEncryptionScope != nil {
+		in, out := &in.DefaultEncryptionScope, &out.DefaultEncryptionScope
+		*out = new(string)
+		**out = **in
+	}
+	if in.EncryptionScopeOverrideEnabled != nil {
+		in, out := &in.EncryptionScopeOverrideEnabled, &out.EncryptionScopeOverrideEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.Metadata != nil {
@@ -4090,6 +4150,11 @@ func (in *CustomerManagedKeyInitParameters) DeepCopyInto(out *CustomerManagedKey
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserAssignedIdentityID != nil {
 		in, out := &in.UserAssignedIdentityID, &out.UserAssignedIdentityID
 		*out = new(string)
@@ -4115,6 +4180,11 @@ func (in *CustomerManagedKeyObservation) DeepCopyInto(out *CustomerManagedKeyObs
 		*out = new(string)
 		**out = **in
 	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
+		*out = new(string)
+		**out = **in
+	}
 	if in.UserAssignedIdentityID != nil {
 		in, out := &in.UserAssignedIdentityID, &out.UserAssignedIdentityID
 		*out = new(string)
@@ -4137,6 +4207,11 @@ func (in *CustomerManagedKeyParameters) DeepCopyInto(out *CustomerManagedKeyPara
 	*out = *in
 	if in.KeyVaultKeyID != nil {
 		in, out := &in.KeyVaultKeyID, &out.KeyVaultKeyID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ManagedHSMKeyID != nil {
+		in, out := &in.ManagedHSMKeyID, &out.ManagedHSMKeyID
 		*out = new(string)
 		**out = **in
 	}
@@ -4193,6 +4268,11 @@ func (in *DataLakeGen2FileSystemInitParameters) DeepCopyInto(out *DataLakeGen2Fi
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.DefaultEncryptionScope != nil {
+		in, out := &in.DefaultEncryptionScope, &out.DefaultEncryptionScope
+		*out = new(string)
+		**out = **in
 	}
 	if in.Group != nil {
 		in, out := &in.Group, &out.Group
@@ -4289,6 +4369,11 @@ func (in *DataLakeGen2FileSystemObservation) DeepCopyInto(out *DataLakeGen2FileS
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DefaultEncryptionScope != nil {
+		in, out := &in.DefaultEncryptionScope, &out.DefaultEncryptionScope
+		*out = new(string)
+		**out = **in
+	}
 	if in.Group != nil {
 		in, out := &in.Group, &out.Group
 		*out = new(string)
@@ -4346,6 +4431,11 @@ func (in *DataLakeGen2FileSystemParameters) DeepCopyInto(out *DataLakeGen2FileSy
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.DefaultEncryptionScope != nil {
+		in, out := &in.DefaultEncryptionScope, &out.DefaultEncryptionScope
+		*out = new(string)
+		**out = **in
 	}
 	if in.Group != nil {
 		in, out := &in.Group, &out.Group
@@ -4843,6 +4933,11 @@ func (in *DeleteRetentionPolicyInitParameters) DeepCopyInto(out *DeleteRetention
 		*out = new(float64)
 		**out = **in
 	}
+	if in.PermanentDeleteEnabled != nil {
+		in, out := &in.PermanentDeleteEnabled, &out.PermanentDeleteEnabled
+		*out = new(bool)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new DeleteRetentionPolicyInitParameters.
@@ -4863,6 +4958,11 @@ func (in *DeleteRetentionPolicyObservation) DeepCopyInto(out *DeleteRetentionPol
 		*out = new(float64)
 		**out = **in
 	}
+	if in.PermanentDeleteEnabled != nil {
+		in, out := &in.PermanentDeleteEnabled, &out.PermanentDeleteEnabled
+		*out = new(bool)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new DeleteRetentionPolicyObservation.
@@ -4881,6 +4981,11 @@ func (in *DeleteRetentionPolicyParameters) DeepCopyInto(out *DeleteRetentionPoli
 	if in.Days != nil {
 		in, out := &in.Days, &out.Days
 		*out = new(float64)
+		**out = **in
+	}
+	if in.PermanentDeleteEnabled != nil {
+		in, out := &in.PermanentDeleteEnabled, &out.PermanentDeleteEnabled
+		*out = new(bool)
 		**out = **in
 	}
 }
@@ -8666,6 +8771,21 @@ func (in *ShareDirectoryInitParameters) DeepCopyInto(out *ShareDirectoryInitPara
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageShareID != nil {
+		in, out := &in.StorageShareID, &out.StorageShareID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageShareIDRef != nil {
+		in, out := &in.StorageShareIDRef, &out.StorageShareIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageShareIDSelector != nil {
+		in, out := &in.StorageShareIDSelector, &out.StorageShareIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ShareDirectoryInitParameters.
@@ -8749,6 +8869,11 @@ func (in *ShareDirectoryObservation) DeepCopyInto(out *ShareDirectoryObservation
 		*out = new(string)
 		**out = **in
 	}
+	if in.StorageShareID != nil {
+		in, out := &in.StorageShareID, &out.StorageShareID
+		*out = new(string)
+		**out = **in
+	}
 }
 
 // DeepCopy is an autogenerated deepcopy function, copying the receiver, creating a new ShareDirectoryObservation.
@@ -8812,6 +8937,21 @@ func (in *ShareDirectoryParameters) DeepCopyInto(out *ShareDirectoryParameters) 
 	}
 	if in.StorageAccountNameSelector != nil {
 		in, out := &in.StorageAccountNameSelector, &out.StorageAccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageShareID != nil {
+		in, out := &in.StorageShareID, &out.StorageShareID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageShareIDRef != nil {
+		in, out := &in.StorageShareIDRef, &out.StorageShareIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageShareIDSelector != nil {
+		in, out := &in.StorageShareIDSelector, &out.StorageShareIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
@@ -9797,6 +9937,21 @@ func (in *TableEntityInitParameters) DeepCopyInto(out *TableEntityInitParameters
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.StorageTableID != nil {
+		in, out := &in.StorageTableID, &out.StorageTableID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageTableIDRef != nil {
+		in, out := &in.StorageTableIDRef, &out.StorageTableIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageTableIDSelector != nil {
+		in, out := &in.StorageTableIDSelector, &out.StorageTableIDSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
@@ -9895,6 +10050,11 @@ func (in *TableEntityObservation) DeepCopyInto(out *TableEntityObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.StorageTableID != nil {
+		in, out := &in.StorageTableID, &out.StorageTableID
+		*out = new(string)
+		**out = **in
+	}
 	if in.TableName != nil {
 		in, out := &in.TableName, &out.TableName
 		*out = new(string)
@@ -9953,6 +10113,21 @@ func (in *TableEntityParameters) DeepCopyInto(out *TableEntityParameters) {
 	}
 	if in.StorageAccountNameSelector != nil {
 		in, out := &in.StorageAccountNameSelector, &out.StorageAccountNameSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageTableID != nil {
+		in, out := &in.StorageTableID, &out.StorageTableID
+		*out = new(string)
+		**out = **in
+	}
+	if in.StorageTableIDRef != nil {
+		in, out := &in.StorageTableIDRef, &out.StorageTableIDRef
+		*out = new(v1.Reference)
+		(*in).DeepCopyInto(*out)
+	}
+	if in.StorageTableIDSelector != nil {
+		in, out := &in.StorageTableIDSelector, &out.StorageTableIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
 	}

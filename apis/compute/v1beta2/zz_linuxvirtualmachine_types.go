@@ -15,17 +15,27 @@ import (
 
 type AdditionalCapabilitiesInitParameters struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type AdditionalCapabilitiesObservation struct {
 
+	// Whether to enable the hibernation capability or not.
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
+
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	UltraSsdEnabled *bool `json:"ultraSsdEnabled,omitempty" tf:"ultra_ssd_enabled,omitempty"`
 }
 
 type AdditionalCapabilitiesParameters struct {
+
+	// Whether to enable the hibernation capability or not.
+	// +kubebuilder:validation:Optional
+	HibernationEnabled *bool `json:"hibernationEnabled,omitempty" tf:"hibernation_enabled,omitempty"`
 
 	// Should the capacity to enable Data Disks of the UltraSSD_LRS storage account type be supported on this Virtual Machine? Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -136,7 +146,7 @@ type GalleryApplicationInitParameters struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
@@ -157,7 +167,7 @@ type GalleryApplicationObservation struct {
 	// Specifies the URI to an Azure Blob that will replace the default configuration for the package if provided.
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
 	// Specifies a passthrough value for more generic context. This field can be any valid string value.
@@ -180,7 +190,7 @@ type GalleryApplicationParameters struct {
 	// +kubebuilder:validation:Optional
 	ConfigurationBlobURI *string `json:"configurationBlobUri,omitempty" tf:"configuration_blob_uri,omitempty"`
 
-	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2,147,483,647.
+	// Specifies the order in which the packages have to be installed. Possible values are between 0 and 2147483647. Defaults to 0.
 	// +kubebuilder:validation:Optional
 	Order *float64 `json:"order,omitempty" tf:"order,omitempty"`
 
@@ -297,10 +307,10 @@ type LinuxVirtualMachineInitParameters struct {
 	// One or more gallery_application blocks as defined below.
 	GalleryApplication []GalleryApplicationInitParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	Identity *LinuxVirtualMachineIdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the BYOL Type for this Virtual Machine. Possible values are RHEL_BYOS and SLES_BYOS.
+	// Specifies the License Type for this Virtual Machine. Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP, SLES_HPC.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// The Azure location where the Linux Virtual Machine should exist. Changing this forces a new resource to be created.
@@ -449,10 +459,10 @@ type LinuxVirtualMachineObservation struct {
 	// The ID of the Linux Virtual Machine.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	Identity *LinuxVirtualMachineIdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the BYOL Type for this Virtual Machine. Possible values are RHEL_BYOS and SLES_BYOS.
+	// Specifies the License Type for this Virtual Machine. Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP, SLES_HPC.
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 
 	// The Azure location where the Linux Virtual Machine should exist. Changing this forces a new resource to be created.
@@ -731,11 +741,11 @@ type LinuxVirtualMachineParameters struct {
 	// +kubebuilder:validation:Optional
 	GalleryApplication []GalleryApplicationParameters `json:"galleryApplication,omitempty" tf:"gallery_application,omitempty"`
 
-	// An identity block as defined below.
+	// An identity block as documented below.
 	// +kubebuilder:validation:Optional
 	Identity *LinuxVirtualMachineIdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the BYOL Type for this Virtual Machine. Possible values are RHEL_BYOS and SLES_BYOS.
+	// Specifies the License Type for this Virtual Machine. Possible values are RHEL_BYOS, RHEL_BASE, RHEL_EUS, RHEL_SAPAPPS, RHEL_SAPHA, RHEL_BASESAPAPPS, RHEL_BASESAPHA, SLES_BYOS, SLES_SAP, SLES_HPC.
 	// +kubebuilder:validation:Optional
 	LicenseType *string `json:"licenseType,omitempty" tf:"license_type,omitempty"`
 

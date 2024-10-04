@@ -50,6 +50,9 @@ type ManagementGroupObservation struct {
 	// A list of Subscription GUIDs which should be assigned to the Management Group.
 	// +listType=set
 	SubscriptionIds []*string `json:"subscriptionIds,omitempty" tf:"subscription_ids,omitempty"`
+
+	// The Management Group ID with the Tenant ID prefix.
+	TenantScopedID *string `json:"tenantScopedId,omitempty" tf:"tenant_scoped_id,omitempty"`
 }
 
 type ManagementGroupParameters struct {

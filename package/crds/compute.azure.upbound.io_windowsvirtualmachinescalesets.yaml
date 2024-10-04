@@ -927,6 +927,13 @@ spec:
                             If this percentage is ever exceeded, the rolling update
                             aborts.
                           type: number
+                        maximumSurgeInstancesEnabled:
+                          description: Create new virtual machines to upgrade the
+                            scale set, rather than updating the existing virtual machines.
+                            Existing virtual machines will be deleted once the new
+                            virtual machines are created for each batch. Possible
+                            values are true or false.
+                          type: boolean
                         pauseTimeBetweenBatches:
                           description: The wait time between completing the update
                             for all virtual machines in one batch and starting the
@@ -1246,6 +1253,24 @@ spec:
                       is not a valid computer_name_prefix, then you must specify computer_name_prefix.
                       Changing this forces a new resource to be created.
                     type: string
+                  customDataSecretRef:
+                    description: The Base64-Encoded Custom Data which should be used
+                      for this Virtual Machine Scale Set.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   dataDisk:
                     description: One or more data_disk blocks as defined below.
                     items:
@@ -1359,6 +1384,24 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        protectedSettingsSecretRef:
+                          description: A JSON String which specifies Sensitive Settings
+                            (such as Passwords) for the Extension.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         provisionAfterExtensions:
                           description: An ordered list of Extension names which this
                             should be provisioned after.
@@ -1853,6 +1896,13 @@ spec:
                             If this percentage is ever exceeded, the rolling update
                             aborts.
                           type: number
+                        maximumSurgeInstancesEnabled:
+                          description: Create new virtual machines to upgrade the
+                            scale set, rather than updating the existing virtual machines.
+                            Existing virtual machines will be deleted once the new
+                            virtual machines are created for each batch. Possible
+                            values are true or false.
+                          type: boolean
                         pauseTimeBetweenBatches:
                           description: The wait time between completing the update
                             for all virtual machines in one batch and starting the
@@ -2907,6 +2957,13 @@ spec:
                             If this percentage is ever exceeded, the rolling update
                             aborts.
                           type: number
+                        maximumSurgeInstancesEnabled:
+                          description: Create new virtual machines to upgrade the
+                            scale set, rather than updating the existing virtual machines.
+                            Existing virtual machines will be deleted once the new
+                            virtual machines are created for each batch. Possible
+                            values are true or false.
+                          type: boolean
                         pauseTimeBetweenBatches:
                           description: The wait time between completing the update
                             for all virtual machines in one batch and starting the
@@ -3555,8 +3612,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -3576,8 +3634,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         packageReferenceId:
                           description: The ID of the Windows Virtual Machine Scale
@@ -4071,6 +4130,13 @@ spec:
                           This check will happen after each batch is upgraded. If
                           this percentage is ever exceeded, the rolling update aborts.
                         type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
                       pauseTimeBetweenBatches:
                         description: The wait time between completing the update for
                           all virtual machines in one batch and starting the next
@@ -4601,8 +4667,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -4622,8 +4689,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         packageReferenceId:
                           description: The ID of the Windows Virtual Machine Scale
@@ -5036,6 +5104,13 @@ spec:
                           This check will happen after each batch is upgraded. If
                           this percentage is ever exceeded, the rolling update aborts.
                         type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
                       pauseTimeBetweenBatches:
                         description: The wait time between completing the update for
                           all virtual machines in one batch and starting the next
@@ -5680,8 +5755,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         tag:
                           description: Specifies a passthrough value for more generic
@@ -5701,8 +5777,9 @@ spec:
                           type: string
                         order:
                           description: Specifies the order in which the packages have
-                            to be installed. Possible values are between 0 and 2,147,483,647.
-                            Changing this forces a new resource to be created.
+                            to be installed. Possible values are between 0 and 2147483647.
+                            Defaults to 0. Changing this forces a new resource to
+                            be created.
                           type: number
                         packageReferenceId:
                           description: The ID of the Windows Virtual Machine Scale
@@ -6055,6 +6132,13 @@ spec:
                           This check will happen after each batch is upgraded. If
                           this percentage is ever exceeded, the rolling update aborts.
                         type: number
+                      maximumSurgeInstancesEnabled:
+                        description: Create new virtual machines to upgrade the scale
+                          set, rather than updating the existing virtual machines.
+                          Existing virtual machines will be deleted once the new virtual
+                          machines are created for each batch. Possible values are
+                          true or false.
+                        type: boolean
                       pauseTimeBetweenBatches:
                         description: The wait time between completing the update for
                           all virtual machines in one batch and starting the next
