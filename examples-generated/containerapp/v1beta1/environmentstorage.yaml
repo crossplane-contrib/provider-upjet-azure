@@ -1,0 +1,113 @@
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: EnvironmentStorage
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accessKeySecretRef:
+      key: attribute.primary_access_key
+      name: example-storage-account
+      namespace: upbound-system
+    accessMode: ReadOnly
+    accountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    containerAppEnvironmentIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    shareNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: containerapp.azure.upbound.io/v1beta1
+kind: Environment
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    logAnalyticsWorkspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: operationalinsights.azure.upbound.io/v1beta2
+kind: Workspace
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    retentionInDays: 30
+    sku: PerGB2018
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta2
+kind: Account
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    accountReplicationType: LRS
+    accountTier: Standard
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: storage.azure.upbound.io/v1beta1
+kind: Share
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerapp/v1beta1/environmentstorage
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    quota: 5
+    storageAccountNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

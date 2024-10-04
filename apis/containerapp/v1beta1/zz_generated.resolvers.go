@@ -12,8 +12,9 @@ import (
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
-	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
+
+	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
@@ -83,6 +84,75 @@ func (mg *ContainerApp) ResolveReferences( // ResolveReferences of this Containe
 	}
 	mg.Spec.InitProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this CustomDomain.
+func (mg *CustomDomain) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "EnvironmentCertificate", "EnvironmentCertificateList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID")
+	}
+	mg.Spec.ForProvider.ContainerAppEnvironmentCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentCertificateIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta2", "ContainerApp", "ContainerAppList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ContainerAppIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerAppIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppID")
+	}
+	mg.Spec.ForProvider.ContainerAppID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "EnvironmentCertificate", "EnvironmentCertificateList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDRef,
+			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID")
+	}
+	mg.Spec.InitProvider.ContainerAppEnvironmentCertificateID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerAppEnvironmentCertificateIDRef = rsp.ResolvedReference
 
 	return nil
 }
@@ -228,6 +298,225 @@ func (mg *Environment) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.InitProvider.LogAnalyticsWorkspaceID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.LogAnalyticsWorkspaceIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this EnvironmentCertificate.
+func (mg *EnvironmentCertificate) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
+	}
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this EnvironmentCustomDomain.
+func (mg *EnvironmentCustomDomain) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
+	}
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ContainerAppEnvironmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.ContainerAppEnvironmentIDRef,
+			Selector:     mg.Spec.InitProvider.ContainerAppEnvironmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ContainerAppEnvironmentID")
+	}
+	mg.Spec.InitProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this EnvironmentDaprComponent.
+func (mg *EnvironmentDaprComponent) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
+	}
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this EnvironmentStorage.
+func (mg *EnvironmentStorage) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AccountName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.AccountNameRef,
+			Selector:     mg.Spec.ForProvider.AccountNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AccountName")
+	}
+	mg.Spec.ForProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AccountNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("containerapp.azure.upbound.io", "v1beta1", "Environment", "EnvironmentList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ContainerAppEnvironmentID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.ContainerAppEnvironmentIDRef,
+			Selector:     mg.Spec.ForProvider.ContainerAppEnvironmentIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ContainerAppEnvironmentID")
+	}
+	mg.Spec.ForProvider.ContainerAppEnvironmentID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ContainerAppEnvironmentIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Share", "ShareList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ShareName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ShareNameRef,
+			Selector:     mg.Spec.ForProvider.ShareNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ShareName")
+	}
+	mg.Spec.ForProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ShareNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta2", "Account", "AccountList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AccountName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.AccountNameRef,
+			Selector:     mg.Spec.InitProvider.AccountNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AccountName")
+	}
+	mg.Spec.InitProvider.AccountName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AccountNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Share", "ShareList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ShareName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.InitProvider.ShareNameRef,
+			Selector:     mg.Spec.InitProvider.ShareNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.ShareName")
+	}
+	mg.Spec.InitProvider.ShareName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ShareNameRef = rsp.ResolvedReference
 
 	return nil
 }
