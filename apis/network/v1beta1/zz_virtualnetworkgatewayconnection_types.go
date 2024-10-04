@@ -73,6 +73,9 @@ type TrafficSelectorPolicyParameters struct {
 
 type VirtualNetworkGatewayConnectionInitParameters struct {
 
+	// The authorization key associated with the Express Route Circuit. This field is required only if the type is an ExpressRoute connection.
+	AuthorizationKeySecretRef *v1.SecretKeySelector `json:"authorizationKeySecretRef,omitempty" tf:"-"`
+
 	// Connection mode to use. Possible values are Default, InitiatorOnly and ResponderOnly. Defaults to Default. Changing this value will force a resource to be created.
 	ConnectionMode *string `json:"connectionMode,omitempty" tf:"connection_mode,omitempty"`
 
@@ -147,6 +150,9 @@ type VirtualNetworkGatewayConnectionInitParameters struct {
 
 	// The routing weight. Defaults to 10.
 	RoutingWeight *float64 `json:"routingWeight,omitempty" tf:"routing_weight,omitempty"`
+
+	// The shared IPSec key. A key could be provided if a Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
+	SharedKeySecretRef *v1.SecretKeySelector `json:"sharedKeySecretRef,omitempty" tf:"-"`
 
 	// A mapping of tags to assign to the resource.
 	// +mapType=granular

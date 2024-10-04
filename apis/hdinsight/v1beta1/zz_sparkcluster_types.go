@@ -749,6 +749,9 @@ type SparkClusterPrivateLinkConfigurationParameters struct {
 
 type SparkClusterRolesHeadNodeInitParameters struct {
 
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
@@ -955,6 +958,9 @@ type SparkClusterRolesWorkerNodeInitParameters struct {
 	// A autoscale block as defined below.
 	Autoscale []SparkClusterRolesWorkerNodeAutoscaleInitParameters `json:"autoscale,omitempty" tf:"autoscale,omitempty"`
 
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
@@ -1106,6 +1112,9 @@ type SparkClusterRolesWorkerNodeScriptActionsParameters struct {
 }
 
 type SparkClusterRolesZookeeperNodeInitParameters struct {
+
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set

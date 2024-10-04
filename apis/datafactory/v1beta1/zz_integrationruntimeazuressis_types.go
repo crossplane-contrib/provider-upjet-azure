@@ -18,6 +18,9 @@ type CatalogInfoInitParameters struct {
 	// Administrator login name for the SQL Server.
 	AdministratorLogin *string `json:"administratorLogin,omitempty" tf:"administrator_login,omitempty"`
 
+	// Administrator login password for the SQL Server.
+	AdministratorPasswordSecretRef *v1.SecretKeySelector `json:"administratorPasswordSecretRef,omitempty" tf:"-"`
+
 	// The dual standby Azure-SSIS Integration Runtime pair with SSISDB failover.
 	DualStandbyPairName *string `json:"dualStandbyPairName,omitempty" tf:"dual_standby_pair_name,omitempty"`
 
@@ -81,6 +84,9 @@ type CommandKeyInitParameters struct {
 	// A key_vault_secret_reference block as defined below.
 	KeyVaultPassword []KeyVaultPasswordInitParameters `json:"keyVaultPassword,omitempty" tf:"key_vault_password,omitempty"`
 
+	// The password for the target device.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// The target computer or domain name.
 	TargetName *string `json:"targetName,omitempty" tf:"target_name,omitempty"`
 
@@ -123,6 +129,9 @@ type ComponentInitParameters struct {
 
 	// A key_vault_secret_reference block as defined below.
 	KeyVaultLicense []KeyVaultLicenseInitParameters `json:"keyVaultLicense,omitempty" tf:"key_vault_license,omitempty"`
+
+	// The license used for the Component.
+	LicenseSecretRef *v1.SecretKeySelector `json:"licenseSecretRef,omitempty" tf:"-"`
 
 	// Name of the package store.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`

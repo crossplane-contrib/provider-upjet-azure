@@ -601,6 +601,9 @@ type ThreatDetectionPolicyInitParameters struct {
 	// The State of the Policy. Possible values are Enabled or Disabled. Defaults to Disabled.
 	State *string `json:"state,omitempty" tf:"state,omitempty"`
 
+	// Specifies the identifier key of the Threat Detection audit storage account. Required if state is Enabled.
+	StorageAccountAccessKeySecretRef *v1.SecretKeySelector `json:"storageAccountAccessKeySecretRef,omitempty" tf:"-"`
+
 	// Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net). This blob storage will hold all Threat Detection audit logs. Required if state is Enabled.
 	StorageEndpoint *string `json:"storageEndpoint,omitempty" tf:"storage_endpoint,omitempty"`
 }

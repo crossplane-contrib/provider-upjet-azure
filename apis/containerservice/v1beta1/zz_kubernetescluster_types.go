@@ -382,6 +382,8 @@ type AzureActiveDirectoryRoleBasedAccessControlInitParameters struct {
 	// The Server ID of an Azure Active Directory Application.
 	ServerAppID *string `json:"serverAppId,omitempty" tf:"server_app_id,omitempty"`
 
+	ServerAppSecretSecretRef *v1.SecretKeySelector `json:"serverAppSecretSecretRef,omitempty" tf:"-"`
+
 	// The Tenant ID used for Azure Active Directory Application. If this isn't specified the Tenant ID of the current Subscription is used.
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
@@ -960,6 +962,9 @@ type HTTPProxyConfigInitParameters struct {
 	// The list of domains that will not use the proxy for communication.
 	// +listType=set
 	NoProxy []*string `json:"noProxy,omitempty" tf:"no_proxy,omitempty"`
+
+	// The base64 encoded alternative CA certificate content in PEM format.
+	TrustedCASecretRef *v1.SecretKeySelector `json:"trustedCaSecretRef,omitempty" tf:"-"`
 }
 
 type HTTPProxyConfigObservation struct {
@@ -3419,6 +3424,9 @@ type WebAppRoutingParameters struct {
 }
 
 type WindowsProfileInitParameters struct {
+
+	// The Admin Password for Windows VMs. Length must be between 14 and 123 characters.
+	AdminPasswordSecretRef *v1.SecretKeySelector `json:"adminPasswordSecretRef,omitempty" tf:"-"`
 
 	// The Admin Username for Windows VMs. Changing this forces a new resource to be created.
 	AdminUsername *string `json:"adminUsername,omitempty" tf:"admin_username,omitempty"`

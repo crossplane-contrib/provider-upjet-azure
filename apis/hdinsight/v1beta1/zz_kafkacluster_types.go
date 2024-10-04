@@ -733,6 +733,9 @@ type KafkaClusterPrivateLinkConfigurationParameters struct {
 
 type KafkaClusterRolesHeadNodeInitParameters struct {
 
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
@@ -920,6 +923,9 @@ type KafkaClusterRolesWorkerNodeInitParameters struct {
 	// The number of Data Disks which should be assigned to each Worker Node, which can be between 1 and 8. Changing this forces a new resource to be created.
 	NumberOfDisksPerNode *float64 `json:"numberOfDisksPerNode,omitempty" tf:"number_of_disks_per_node,omitempty"`
 
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
+
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
 	SSHKeys []*string `json:"sshKeys,omitempty" tf:"ssh_keys,omitempty"`
@@ -1071,6 +1077,9 @@ type KafkaClusterRolesWorkerNodeScriptActionsParameters struct {
 }
 
 type KafkaClusterRolesZookeeperNodeInitParameters struct {
+
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
@@ -1397,6 +1406,9 @@ type KafkaClusterStorageAccountParameters struct {
 }
 
 type KafkaManagementNodeInitParameters struct {
+
+	// The Password associated with the local administrator for the Zookeeper Nodes. Changing this forces a new resource to be created.
+	PasswordSecretRef *v1.SecretKeySelector `json:"passwordSecretRef,omitempty" tf:"-"`
 
 	// A list of SSH Keys which should be used for the local administrator on the Zookeeper Nodes. Changing this forces a new resource to be created.
 	// +listType=set
