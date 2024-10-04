@@ -589,6 +589,26 @@ spec:
                       which cannot be subsequently changed. Changing this forces a
                       new resource to be created.
                     type: string
+                  administratorLoginPasswordSecretRef:
+                    description: The password associated with the administrator_login
+                      user. Needs to comply with Azure's Password Policy. Required
+                      unless azuread_authentication_only in the azuread_administrator
+                      block is true.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   azureadAdministrator:
                     description: An azuread_administrator block as defined below.
                     items:

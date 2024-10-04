@@ -1808,9 +1808,19 @@ func (in *ApplicationStackDockerInitParameters) DeepCopyInto(out *ApplicationSta
 		*out = new(string)
 		**out = **in
 	}
+	if in.RegistryPasswordSecretRef != nil {
+		in, out := &in.RegistryPasswordSecretRef, &out.RegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.RegistryURL != nil {
 		in, out := &in.RegistryURL, &out.RegistryURL
 		*out = new(string)
+		**out = **in
+	}
+	if in.RegistryUsernameSecretRef != nil {
+		in, out := &in.RegistryUsernameSecretRef, &out.RegistryUsernameSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 }
@@ -2264,6 +2274,11 @@ func (in *AuthSettingsGithubInitParameters) DeepCopyInto(out *AuthSettingsGithub
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -6413,9 +6428,19 @@ func (in *DockerInitParameters) DeepCopyInto(out *DockerInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.RegistryPasswordSecretRef != nil {
+		in, out := &in.RegistryPasswordSecretRef, &out.RegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.RegistryURL != nil {
 		in, out := &in.RegistryURL, &out.RegistryURL
 		*out = new(string)
+		**out = **in
+	}
+	if in.RegistryUsernameSecretRef != nil {
+		in, out := &in.RegistryUsernameSecretRef, &out.RegistryUsernameSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 }
@@ -9811,6 +9836,11 @@ func (in *GithubInitParameters) DeepCopyInto(out *GithubInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -11251,6 +11281,11 @@ func (in *LinuxFunctionAppAuthSettingsActiveDirectoryInitParameters) DeepCopyInt
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -11351,6 +11386,11 @@ func (in *LinuxFunctionAppAuthSettingsFacebookInitParameters) DeepCopyInto(out *
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -11464,6 +11504,11 @@ func (in *LinuxFunctionAppAuthSettingsGoogleInitParameters) DeepCopyInto(out *Li
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -11696,6 +11741,11 @@ func (in *LinuxFunctionAppAuthSettingsMicrosoftInitParameters) DeepCopyInto(out 
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -12047,6 +12097,11 @@ func (in *LinuxFunctionAppAuthSettingsTwitterInitParameters) DeepCopyInto(out *L
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -12474,6 +12529,11 @@ func (in *LinuxFunctionAppInitParameters) DeepCopyInto(out *LinuxFunctionAppInit
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.StorageAccountName != nil {
 		in, out := &in.StorageAccountName, &out.StorageAccountName
@@ -13426,6 +13486,16 @@ func (in *LinuxFunctionAppSiteConfigInitParameters) DeepCopyInto(out *LinuxFunct
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ApplicationInsightsConnectionStringSecretRef != nil {
+		in, out := &in.ApplicationInsightsConnectionStringSecretRef, &out.ApplicationInsightsConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.ApplicationInsightsKeySecretRef != nil {
+		in, out := &in.ApplicationInsightsKeySecretRef, &out.ApplicationInsightsKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.ApplicationStack != nil {
 		in, out := &in.ApplicationStack, &out.ApplicationStack
@@ -14474,6 +14544,11 @@ func (in *LinuxFunctionAppSlotAuthSettingsActiveDirectoryInitParameters) DeepCop
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -14574,6 +14649,11 @@ func (in *LinuxFunctionAppSlotAuthSettingsFacebookInitParameters) DeepCopyInto(o
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -14687,6 +14767,11 @@ func (in *LinuxFunctionAppSlotAuthSettingsGoogleInitParameters) DeepCopyInto(out
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -14919,6 +15004,11 @@ func (in *LinuxFunctionAppSlotAuthSettingsMicrosoftInitParameters) DeepCopyInto(
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -15270,6 +15360,11 @@ func (in *LinuxFunctionAppSlotAuthSettingsTwitterInitParameters) DeepCopyInto(ou
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -16205,6 +16300,11 @@ func (in *LinuxFunctionAppSlotInitParameters) DeepCopyInto(out *LinuxFunctionApp
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.StorageAccountName != nil {
 		in, out := &in.StorageAccountName, &out.StorageAccountName
@@ -17275,6 +17375,16 @@ func (in *LinuxFunctionAppSlotSiteConfigInitParameters) DeepCopyInto(out *LinuxF
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ApplicationInsightsConnectionStringSecretRef != nil {
+		in, out := &in.ApplicationInsightsConnectionStringSecretRef, &out.ApplicationInsightsConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.ApplicationInsightsKeySecretRef != nil {
+		in, out := &in.ApplicationInsightsKeySecretRef, &out.ApplicationInsightsKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.ApplicationStack != nil {
 		in, out := &in.ApplicationStack, &out.ApplicationStack
@@ -18529,6 +18639,11 @@ func (in *LinuxWebAppAuthSettingsActiveDirectoryInitParameters) DeepCopyInto(out
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -18629,6 +18744,11 @@ func (in *LinuxWebAppAuthSettingsFacebookInitParameters) DeepCopyInto(out *Linux
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -18744,6 +18864,11 @@ func (in *LinuxWebAppAuthSettingsGithubInitParameters) DeepCopyInto(out *LinuxWe
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -18855,6 +18980,11 @@ func (in *LinuxWebAppAuthSettingsGoogleInitParameters) DeepCopyInto(out *LinuxWe
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -19087,6 +19217,11 @@ func (in *LinuxWebAppAuthSettingsMicrosoftInitParameters) DeepCopyInto(out *Linu
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -19438,6 +19573,11 @@ func (in *LinuxWebAppAuthSettingsTwitterInitParameters) DeepCopyInto(out *LinuxW
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -22564,6 +22704,11 @@ func (in *LinuxWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(out 
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.DockerRegistryURL != nil {
 		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
 		*out = new(string)
@@ -24309,6 +24454,11 @@ func (in *LinuxWebAppSlotAuthSettingsActiveDirectoryInitParameters) DeepCopyInto
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -24409,6 +24559,11 @@ func (in *LinuxWebAppSlotAuthSettingsFacebookInitParameters) DeepCopyInto(out *L
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -24524,6 +24679,11 @@ func (in *LinuxWebAppSlotAuthSettingsGithubInitParameters) DeepCopyInto(out *Lin
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -24635,6 +24795,11 @@ func (in *LinuxWebAppSlotAuthSettingsGoogleInitParameters) DeepCopyInto(out *Lin
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -24867,6 +25032,11 @@ func (in *LinuxWebAppSlotAuthSettingsMicrosoftInitParameters) DeepCopyInto(out *
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -25218,6 +25388,11 @@ func (in *LinuxWebAppSlotAuthSettingsTwitterInitParameters) DeepCopyInto(out *Li
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -28449,6 +28624,11 @@ func (in *LinuxWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInto(
 	if in.DockerImageTag != nil {
 		in, out := &in.DockerImageTag, &out.DockerImageTag
 		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.DockerRegistryURL != nil {
@@ -37267,6 +37447,11 @@ func (in *WindowsFunctionAppAuthSettingsActiveDirectoryInitParameters) DeepCopyI
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -37367,6 +37552,11 @@ func (in *WindowsFunctionAppAuthSettingsFacebookInitParameters) DeepCopyInto(out
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -37482,6 +37672,11 @@ func (in *WindowsFunctionAppAuthSettingsGithubInitParameters) DeepCopyInto(out *
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -37593,6 +37788,11 @@ func (in *WindowsFunctionAppAuthSettingsGoogleInitParameters) DeepCopyInto(out *
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -37825,6 +38025,11 @@ func (in *WindowsFunctionAppAuthSettingsMicrosoftInitParameters) DeepCopyInto(ou
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -38176,6 +38381,11 @@ func (in *WindowsFunctionAppAuthSettingsTwitterInitParameters) DeepCopyInto(out 
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -40755,6 +40965,11 @@ func (in *WindowsFunctionAppInitParameters) DeepCopyInto(out *WindowsFunctionApp
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageAccountName != nil {
 		in, out := &in.StorageAccountName, &out.StorageAccountName
 		*out = new(string)
@@ -42084,6 +42299,16 @@ func (in *WindowsFunctionAppSiteConfigInitParameters) DeepCopyInto(out *WindowsF
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.ApplicationInsightsConnectionStringSecretRef != nil {
+		in, out := &in.ApplicationInsightsConnectionStringSecretRef, &out.ApplicationInsightsConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.ApplicationInsightsKeySecretRef != nil {
+		in, out := &in.ApplicationInsightsKeySecretRef, &out.ApplicationInsightsKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ApplicationStack != nil {
 		in, out := &in.ApplicationStack, &out.ApplicationStack
 		*out = make([]WindowsFunctionAppSiteConfigApplicationStackInitParameters, len(*in))
@@ -43101,6 +43326,11 @@ func (in *WindowsFunctionAppSlotAuthSettingsActiveDirectoryInitParameters) DeepC
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -43201,6 +43431,11 @@ func (in *WindowsFunctionAppSlotAuthSettingsFacebookInitParameters) DeepCopyInto
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -43316,6 +43551,11 @@ func (in *WindowsFunctionAppSlotAuthSettingsGithubInitParameters) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -43427,6 +43667,11 @@ func (in *WindowsFunctionAppSlotAuthSettingsGoogleInitParameters) DeepCopyInto(o
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -43659,6 +43904,11 @@ func (in *WindowsFunctionAppSlotAuthSettingsMicrosoftInitParameters) DeepCopyInt
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -44010,6 +44260,11 @@ func (in *WindowsFunctionAppSlotAuthSettingsTwitterInitParameters) DeepCopyInto(
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -46567,6 +46822,11 @@ func (in *WindowsFunctionAppSlotInitParameters) DeepCopyInto(out *WindowsFunctio
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.StorageAccountName != nil {
 		in, out := &in.StorageAccountName, &out.StorageAccountName
 		*out = new(string)
@@ -47846,6 +48106,16 @@ func (in *WindowsFunctionAppSlotSiteConfigInitParameters) DeepCopyInto(out *Wind
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.ApplicationInsightsConnectionStringSecretRef != nil {
+		in, out := &in.ApplicationInsightsConnectionStringSecretRef, &out.ApplicationInsightsConnectionStringSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
+	if in.ApplicationInsightsKeySecretRef != nil {
+		in, out := &in.ApplicationInsightsKeySecretRef, &out.ApplicationInsightsKeySecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.ApplicationStack != nil {
 		in, out := &in.ApplicationStack, &out.ApplicationStack
@@ -49302,6 +49572,11 @@ func (in *WindowsWebAppAuthSettingsActiveDirectoryInitParameters) DeepCopyInto(o
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -49402,6 +49677,11 @@ func (in *WindowsWebAppAuthSettingsFacebookInitParameters) DeepCopyInto(out *Win
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -49517,6 +49797,11 @@ func (in *WindowsWebAppAuthSettingsGithubInitParameters) DeepCopyInto(out *Windo
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -49628,6 +49913,11 @@ func (in *WindowsWebAppAuthSettingsGoogleInitParameters) DeepCopyInto(out *Windo
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -49860,6 +50150,11 @@ func (in *WindowsWebAppAuthSettingsMicrosoftInitParameters) DeepCopyInto(out *Wi
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -50211,6 +50506,11 @@ func (in *WindowsWebAppAuthSettingsTwitterInitParameters) DeepCopyInto(out *Wind
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -53693,6 +53993,11 @@ func (in *WindowsWebAppSiteConfigApplicationStackInitParameters) DeepCopyInto(ou
 		*out = new(string)
 		**out = **in
 	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.DockerRegistryURL != nil {
 		in, out := &in.DockerRegistryURL, &out.DockerRegistryURL
 		*out = new(string)
@@ -55622,6 +55927,11 @@ func (in *WindowsWebAppSlotAuthSettingsActiveDirectoryInitParameters) DeepCopyIn
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -55722,6 +56032,11 @@ func (in *WindowsWebAppSlotAuthSettingsFacebookInitParameters) DeepCopyInto(out 
 	if in.AppID != nil {
 		in, out := &in.AppID, &out.AppID
 		*out = new(string)
+		**out = **in
+	}
+	if in.AppSecretSecretRef != nil {
+		in, out := &in.AppSecretSecretRef, &out.AppSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.AppSecretSettingName != nil {
@@ -55837,6 +56152,11 @@ func (in *WindowsWebAppSlotAuthSettingsGithubInitParameters) DeepCopyInto(out *W
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.ClientSecretSettingName != nil {
 		in, out := &in.ClientSecretSettingName, &out.ClientSecretSettingName
 		*out = new(string)
@@ -55948,6 +56268,11 @@ func (in *WindowsWebAppSlotAuthSettingsGoogleInitParameters) DeepCopyInto(out *W
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -56180,6 +56505,11 @@ func (in *WindowsWebAppSlotAuthSettingsMicrosoftInitParameters) DeepCopyInto(out
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
 		*out = new(string)
+		**out = **in
+	}
+	if in.ClientSecretSecretRef != nil {
+		in, out := &in.ClientSecretSecretRef, &out.ClientSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ClientSecretSettingName != nil {
@@ -56531,6 +56861,11 @@ func (in *WindowsWebAppSlotAuthSettingsTwitterInitParameters) DeepCopyInto(out *
 	if in.ConsumerKey != nil {
 		in, out := &in.ConsumerKey, &out.ConsumerKey
 		*out = new(string)
+		**out = **in
+	}
+	if in.ConsumerSecretSecretRef != nil {
+		in, out := &in.ConsumerSecretSecretRef, &out.ConsumerSecretSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.ConsumerSecretSettingName != nil {
@@ -60120,6 +60455,11 @@ func (in *WindowsWebAppSlotSiteConfigApplicationStackInitParameters) DeepCopyInt
 	if in.DockerImageName != nil {
 		in, out := &in.DockerImageName, &out.DockerImageName
 		*out = new(string)
+		**out = **in
+	}
+	if in.DockerRegistryPasswordSecretRef != nil {
+		in, out := &in.DockerRegistryPasswordSecretRef, &out.DockerRegistryPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.DockerRegistryURL != nil {

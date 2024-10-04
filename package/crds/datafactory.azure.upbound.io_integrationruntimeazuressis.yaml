@@ -755,6 +755,23 @@ spec:
                         administratorLogin:
                           description: Administrator login name for the SQL Server.
                           type: string
+                        administratorPasswordSecretRef:
+                          description: Administrator login password for the SQL Server.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         dualStandbyPairName:
                           description: The dual standby Azure-SSIS Integration Runtime
                             pair with SSISDB failover.
@@ -861,6 +878,23 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              passwordSecretRef:
+                                description: The password for the target device.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               targetName:
                                 description: The target computer or domain name.
                                 type: string
@@ -899,6 +933,23 @@ spec:
                                       type: string
                                   type: object
                                 type: array
+                              licenseSecretRef:
+                                description: The license used for the Component.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               name:
                                 description: Name of the package store.
                                 type: string

@@ -1681,6 +1681,25 @@ spec:
                           description: A head_node block as defined above.
                           items:
                             properties:
+                              passwordSecretRef:
+                                description: The Password associated with the local
+                                  administrator for the Zookeeper Nodes. Changing
+                                  this forces a new resource to be created.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               scriptActions:
                                 description: The script action which will run on the
                                   cluster. One or more script_actions blocks as defined
@@ -1888,6 +1907,25 @@ spec:
                                       type: array
                                   type: object
                                 type: array
+                              passwordSecretRef:
+                                description: The Password associated with the local
+                                  administrator for the Zookeeper Nodes. Changing
+                                  this forces a new resource to be created.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               scriptActions:
                                 description: The script action which will run on the
                                   cluster. One or more script_actions blocks as defined
@@ -2048,6 +2086,25 @@ spec:
                           description: A zookeeper_node block as defined below.
                           items:
                             properties:
+                              passwordSecretRef:
+                                description: The Password associated with the local
+                                  administrator for the Zookeeper Nodes. Changing
+                                  this forces a new resource to be created.
+                                properties:
+                                  key:
+                                    description: The key to select.
+                                    type: string
+                                  name:
+                                    description: Name of the secret.
+                                    type: string
+                                  namespace:
+                                    description: Namespace of the secret.
+                                    type: string
+                                required:
+                                - key
+                                - name
+                                - namespace
+                                type: object
                               scriptActions:
                                 description: The script action which will run on the
                                   cluster. One or more script_actions blocks as defined

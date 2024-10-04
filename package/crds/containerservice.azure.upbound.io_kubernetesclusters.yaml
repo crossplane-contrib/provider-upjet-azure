@@ -2413,6 +2413,24 @@ spec:
                           description: The Server ID of an Azure Active Directory
                             Application.
                           type: string
+                        serverAppSecretSecretRef:
+                          description: A SecretKeySelector is a reference to a secret
+                            key in an arbitrary namespace.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         tenantId:
                           description: The Tenant ID used for Azure Active Directory
                             Application. If this isn't specified the Tenant ID of
@@ -3101,6 +3119,24 @@ spec:
                             type: string
                           type: array
                           x-kubernetes-list-type: set
+                        trustedCaSecretRef:
+                          description: The base64 encoded alternative CA certificate
+                            content in PEM format.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                       type: object
                     type: array
                   identity:
@@ -3927,6 +3963,24 @@ spec:
                     description: A windows_profile block as defined below.
                     items:
                       properties:
+                        adminPasswordSecretRef:
+                          description: The Admin Password for Windows VMs. Length
+                            must be between 14 and 123 characters.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         adminUsername:
                           description: The Admin Username for Windows VMs. Changing
                             this forces a new resource to be created.

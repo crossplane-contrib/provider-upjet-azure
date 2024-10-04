@@ -352,6 +352,11 @@ func (in *CatalogInfoInitParameters) DeepCopyInto(out *CatalogInfoInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorPasswordSecretRef != nil {
+		in, out := &in.AdministratorPasswordSecretRef, &out.AdministratorPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.DualStandbyPairName != nil {
 		in, out := &in.DualStandbyPairName, &out.DualStandbyPairName
 		*out = new(string)
@@ -479,6 +484,11 @@ func (in *CommandKeyInitParameters) DeepCopyInto(out *CommandKeyInitParameters) 
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.PasswordSecretRef != nil {
+		in, out := &in.PasswordSecretRef, &out.PasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.TargetName != nil {
 		in, out := &in.TargetName, &out.TargetName
 		*out = new(string)
@@ -579,6 +589,11 @@ func (in *ComponentInitParameters) DeepCopyInto(out *ComponentInitParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.LicenseSecretRef != nil {
+		in, out := &in.LicenseSecretRef, &out.LicenseSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
 	}
 	if in.Name != nil {
 		in, out := &in.Name, &out.Name

@@ -1980,6 +1980,11 @@ func (in *FlexibleServerInitParameters) DeepCopyInto(out *FlexibleServerInitPara
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorPasswordSecretRef != nil {
+		in, out := &in.AdministratorPasswordSecretRef, &out.AdministratorPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.Authentication != nil {
 		in, out := &in.Authentication, &out.Authentication
 		*out = make([]AuthenticationInitParameters, len(*in))

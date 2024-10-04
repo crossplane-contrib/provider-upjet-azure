@@ -324,6 +324,23 @@ spec:
                           type: string
                       type: object
                     type: array
+                  valueSecretRef:
+                    description: The value of this API Management Named Value.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                 type: object
               managementPolicies:
                 default:

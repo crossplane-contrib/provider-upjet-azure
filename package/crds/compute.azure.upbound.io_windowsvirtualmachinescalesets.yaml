@@ -1253,6 +1253,24 @@ spec:
                       is not a valid computer_name_prefix, then you must specify computer_name_prefix.
                       Changing this forces a new resource to be created.
                     type: string
+                  customDataSecretRef:
+                    description: The Base64-Encoded Custom Data which should be used
+                      for this Virtual Machine Scale Set.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   dataDisk:
                     description: One or more data_disk blocks as defined below.
                     items:
@@ -1366,6 +1384,24 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        protectedSettingsSecretRef:
+                          description: A JSON String which specifies Sensitive Settings
+                            (such as Passwords) for the Extension.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         provisionAfterExtensions:
                           description: An ordered list of Extension names which this
                             should be provisioned after.

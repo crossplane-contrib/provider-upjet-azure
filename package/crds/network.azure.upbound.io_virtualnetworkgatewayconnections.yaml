@@ -603,6 +603,25 @@ spec:
                   for example because of an external controller is managing them, like an
                   autoscaler.
                 properties:
+                  authorizationKeySecretRef:
+                    description: The authorization key associated with the Express
+                      Route Circuit. This field is required only if the type is an
+                      ExpressRoute connection.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   connectionMode:
                     description: Connection mode to use. Possible values are Default,
                       InitiatorOnly and ResponderOnly. Defaults to Default. Changing
@@ -883,6 +902,24 @@ spec:
                   routingWeight:
                     description: The routing weight. Defaults to 10.
                     type: number
+                  sharedKeySecretRef:
+                    description: The shared IPSec key. A key could be provided if
+                      a Site-to-Site, VNet-to-VNet or ExpressRoute connection is created.
+                    properties:
+                      key:
+                        description: The key to select.
+                        type: string
+                      name:
+                        description: Name of the secret.
+                        type: string
+                      namespace:
+                        description: Namespace of the secret.
+                        type: string
+                    required:
+                    - key
+                    - name
+                    - namespace
+                    type: object
                   tags:
                     additionalProperties:
                       type: string

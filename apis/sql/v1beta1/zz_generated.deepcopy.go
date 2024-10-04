@@ -5404,6 +5404,11 @@ func (in *MSSQLServerInitParameters) DeepCopyInto(out *MSSQLServerInitParameters
 		*out = new(string)
 		**out = **in
 	}
+	if in.AdministratorLoginPasswordSecretRef != nil {
+		in, out := &in.AdministratorLoginPasswordSecretRef, &out.AdministratorLoginPasswordSecretRef
+		*out = new(v1.SecretKeySelector)
+		**out = **in
+	}
 	if in.AzureadAdministrator != nil {
 		in, out := &in.AzureadAdministrator, &out.AzureadAdministrator
 		*out = make([]AzureadAdministratorInitParameters, len(*in))
@@ -7880,6 +7885,11 @@ func (in *ThreatDetectionPolicyInitParameters) DeepCopyInto(out *ThreatDetection
 	if in.State != nil {
 		in, out := &in.State, &out.State
 		*out = new(string)
+		**out = **in
+	}
+	if in.StorageAccountAccessKeySecretRef != nil {
+		in, out := &in.StorageAccountAccessKeySecretRef, &out.StorageAccountAccessKeySecretRef
+		*out = new(v1.SecretKeySelector)
 		**out = **in
 	}
 	if in.StorageEndpoint != nil {

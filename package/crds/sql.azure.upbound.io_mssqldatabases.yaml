@@ -838,6 +838,25 @@ spec:
                           description: The State of the Policy. Possible values are
                             Enabled or Disabled. Defaults to Disabled.
                           type: string
+                        storageAccountAccessKeySecretRef:
+                          description: Specifies the identifier key of the Threat
+                            Detection audit storage account. Required if state is
+                            Enabled.
+                          properties:
+                            key:
+                              description: The key to select.
+                              type: string
+                            name:
+                              description: Name of the secret.
+                              type: string
+                            namespace:
+                              description: Namespace of the secret.
+                              type: string
+                          required:
+                          - key
+                          - name
+                          - namespace
+                          type: object
                         storageEndpoint:
                           description: Specifies the blob storage endpoint (e.g. https://example.blob.core.windows.net).
                             This blob storage will hold all Threat Detection audit
