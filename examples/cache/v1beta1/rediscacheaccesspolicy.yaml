@@ -29,19 +29,16 @@ metadata:
   name: example
 spec:
   forProvider:
-    redisVersion: "6"
-    capacity: 1
+    capacity: 2
     enableNonSslPort: false
-    family: P
+    family: C
     location: West Europe
-    redisConfiguration:
-      - maxmemoryDelta: 2
-        maxmemoryPolicy: allkeys-lru
-        maxmemoryReserved: 2
+    minimumTlsVersion: "1.2"
+    redisConfiguration: {}
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: Premium
+    skuName: Standard
 
 ---
 
