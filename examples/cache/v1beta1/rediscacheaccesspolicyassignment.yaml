@@ -13,7 +13,7 @@ metadata:
 spec:
   forProvider:
     accessPolicyName: Data Contributor
-    objectId: ${data.azurerm_client_config.example.object_id}
+    objectId: ${data.azurerm_client_config.current.object_id}
     objectIdAlias: ServicePrincipal
     redisCacheIdSelector:
       matchLabels:
