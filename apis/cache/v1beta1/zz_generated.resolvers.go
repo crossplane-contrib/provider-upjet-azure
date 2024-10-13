@@ -87,6 +87,106 @@ func (mg *RedisCache) ResolveReferences( // ResolveReferences of this RedisCache
 	return nil
 }
 
+// ResolveReferences of this RedisCacheAccessPolicy.
+func (mg *RedisCacheAccessPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisCacheID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.RedisCacheIDRef,
+			Selector:     mg.Spec.ForProvider.RedisCacheIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RedisCacheID")
+	}
+	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedisCacheID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.RedisCacheIDRef,
+			Selector:     mg.Spec.InitProvider.RedisCacheIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RedisCacheID")
+	}
+	mg.Spec.InitProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RedisCacheIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this RedisCacheAccessPolicyAssignment.
+func (mg *RedisCacheAccessPolicyAssignment) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.RedisCacheID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.RedisCacheIDRef,
+			Selector:     mg.Spec.ForProvider.RedisCacheIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.RedisCacheID")
+	}
+	mg.Spec.ForProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.RedisCacheIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cache.azure.upbound.io", "v1beta2", "RedisCache", "RedisCacheList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.RedisCacheID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.RedisCacheIDRef,
+			Selector:     mg.Spec.InitProvider.RedisCacheIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.RedisCacheID")
+	}
+	mg.Spec.InitProvider.RedisCacheID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.RedisCacheIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this RedisEnterpriseCluster.
 func (mg *RedisEnterpriseCluster) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
