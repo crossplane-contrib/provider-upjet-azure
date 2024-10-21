@@ -50,7 +50,7 @@ metadata:
     meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicyassignment
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-redis-${Rand.RFC1123Subdomain}
 spec:
   forProvider:
     location: West Europe
