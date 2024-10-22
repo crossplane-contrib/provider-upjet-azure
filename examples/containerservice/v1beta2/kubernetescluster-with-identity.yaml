@@ -9,7 +9,7 @@ metadata:
     meta.upbound.io/example-id: containerservice/v1beta2/kubernetescluster
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-kc-with-uai
 spec:
   forProvider:
     apiServerAccessProfile:
@@ -19,13 +19,15 @@ spec:
       name: default
       nodeCount: 1
       vmSize: Standard_D2_v2
+      upgradeSettings:
+        maxSurge: '10%'
     dnsPrefix: exampleaks1
     identity:
       type: UserAssigned
       identityIdsSelector:
         matchLabels:
           testing.upbound.io/example-name: exmple-managedidentity
-    location: West Europe
+    location: North Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example-containerservice
@@ -39,10 +41,10 @@ kind: ResourceGroup
 metadata:
   labels:
     testing.upbound.io/example-name: example-containerservice
-  name: example-containerservice-${Rand.RFC1123Subdomain}
+  name: example-rg-kc-with-uai
 spec:
   forProvider:
-    location: West Europe
+    location: North Europe
 
 ---
 
@@ -51,10 +53,10 @@ kind: UserAssignedIdentity
 metadata:
   labels:
     testing.upbound.io/example-name: exmple-managedidentity
-  name: example-managedidentity
+  name: example-uai-kc
 spec:
   forProvider:
-    location: West Europe
+    location: North Europe
     name: exmple-managedidentity
     resourceGroupNameSelector:
       matchLabels:
