@@ -25,6 +25,7 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 
 	if mg.Spec.ForProvider.APIServerAccessProfile != nil {
@@ -109,6 +110,27 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		}
 		mg.Spec.ForProvider.DefaultNodePool.VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.ForProvider.DefaultNodePool.VnetSubnetIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.ForProvider.Identity != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Identity.IdentityIds),
+				Extract:       rconfig.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.Identity.IdentityIdsRefs,
+				Selector:      mg.Spec.ForProvider.Identity.IdentityIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Identity.IdentityIds")
+		}
+		mg.Spec.ForProvider.Identity.IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Identity.IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
 	if mg.Spec.ForProvider.IngressApplicationGateway != nil {
@@ -252,6 +274,27 @@ func (mg *KubernetesCluster) ResolveReferences( // ResolveReferences of this Kub
 		}
 		mg.Spec.InitProvider.DefaultNodePool.VnetSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
 		mg.Spec.InitProvider.DefaultNodePool.VnetSubnetIDRef = rsp.ResolvedReference
+
+	}
+	if mg.Spec.InitProvider.Identity != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("managedidentity.azure.upbound.io", "v1beta1", "UserAssignedIdentity", "UserAssignedIdentityList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Identity.IdentityIds),
+				Extract:       rconfig.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.Identity.IdentityIdsRefs,
+				Selector:      mg.Spec.InitProvider.Identity.IdentityIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Identity.IdentityIds")
+		}
+		mg.Spec.InitProvider.Identity.IdentityIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Identity.IdentityIdsRefs = mrsp.ResolvedReferences
 
 	}
 	if mg.Spec.InitProvider.IngressApplicationGateway != nil {

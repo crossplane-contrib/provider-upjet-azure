@@ -1,0 +1,63 @@
+# SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
+#
+# SPDX-License-Identifier: Apache-2.0
+
+apiVersion: containerservice.azure.upbound.io/v1beta2
+kind: KubernetesCluster
+metadata:
+  annotations:
+    meta.upbound.io/example-id: containerservice/v1beta2/kubernetescluster
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-kc-with-uai
+spec:
+  forProvider:
+    apiServerAccessProfile:
+      authorizedIpRanges:
+      - 192.168.1.0/24
+    defaultNodePool:
+      name: default
+      nodeCount: 1
+      vmSize: Standard_D2_v2
+      upgradeSettings:
+        maxSurge: '10%'
+    dnsPrefix: exampleaks1
+    identity:
+      type: UserAssigned
+      identityIdsSelector:
+        matchLabels:
+          testing.upbound.io/example-name: exmple-managedidentity
+    location: North Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-containerservice
+    tags:
+      Environment: Production
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  labels:
+    testing.upbound.io/example-name: example-containerservice
+  name: example-rg-kc-with-uai
+spec:
+  forProvider:
+    location: North Europe
+
+---
+
+apiVersion: managedidentity.azure.upbound.io/v1beta1
+kind: UserAssignedIdentity
+metadata:
+  labels:
+    testing.upbound.io/example-name: exmple-managedidentity
+  name: example-uai-kc
+spec:
+  forProvider:
+    location: North Europe
+    name: exmple-managedidentity
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-containerservice
