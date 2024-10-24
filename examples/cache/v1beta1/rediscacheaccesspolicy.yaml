@@ -7,7 +7,7 @@ kind: RedisCacheAccessPolicy
 metadata:
   annotations:
     meta.upbound.io/example-id: cache/v1beta1/rediscacheaccesspolicy
-    uptest.upbound.io/timeout: "7200"
+    uptest.upbound.io/timeout: "10800"
   labels:
     testing.upbound.io/example-name: example
   name: example
