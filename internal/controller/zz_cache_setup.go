@@ -10,6 +10,8 @@ import (
 	"github.com/crossplane/upjet/pkg/controller"
 
 	rediscache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
+	rediscacheaccesspolicy "github.com/upbound/provider-azure/internal/controller/cache/rediscacheaccesspolicy"
+	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/internal/controller/cache/rediscacheaccesspolicyassignment"
 	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/cache/redisfirewallrule"
@@ -21,6 +23,8 @@ import (
 func Setup_cache(mgr ctrl.Manager, o controller.Options) error {
 	for _, setup := range []func(ctrl.Manager, controller.Options) error{
 		rediscache.Setup,
+		rediscacheaccesspolicy.Setup,
+		rediscacheaccesspolicyassignment.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
