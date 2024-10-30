@@ -5,7 +5,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-pdnsrie
 spec:
   forProvider:
     ipConfigurations:
@@ -29,7 +29,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-pdnsrie
 spec:
   forProvider:
     location: West Europe
@@ -49,7 +49,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-rg-pdnsrie
 spec:
   forProvider:
     location: West Europe
@@ -63,7 +63,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-pdnsrie
 spec:
   forProvider:
     addressPrefixes:
@@ -90,7 +90,7 @@ metadata:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
   labels:
     testing.upbound.io/example-name: example
-  name: example
+  name: example-pdnsrie
 spec:
   forProvider:
     addressSpace:
