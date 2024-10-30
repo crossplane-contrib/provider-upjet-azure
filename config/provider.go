@@ -47,6 +47,7 @@ import (
 	"github.com/upbound/provider-azure/config/resource"
 	"github.com/upbound/provider-azure/config/resources"
 	"github.com/upbound/provider-azure/config/security"
+	"github.com/upbound/provider-azure/config/securityinsights"
 	"github.com/upbound/provider-azure/config/servicebus"
 	"github.com/upbound/provider-azure/config/sql"
 	"github.com/upbound/provider-azure/config/storage"
@@ -79,6 +80,7 @@ func init() {
 	ProviderConfiguration.AddConfig(healthcareapis.Configure)
 	ProviderConfiguration.AddConfig(logic.Configure)
 	ProviderConfiguration.AddConfig(security.Configure)
+	ProviderConfiguration.AddConfig(securityinsights.Configure)
 	ProviderConfiguration.AddConfig(base.Configure)
 	ProviderConfiguration.AddConfig(botservice.Configure)
 	ProviderConfiguration.AddConfig(datashare.Configure)
