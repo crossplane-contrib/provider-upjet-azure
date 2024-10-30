@@ -2322,7 +2322,7 @@ type LinuxWebAppSlotSiteConfigApplicationStackInitParameters struct {
 	// The version of Node to run. Possible values are 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
@@ -2364,7 +2364,7 @@ type LinuxWebAppSlotSiteConfigApplicationStackObservation struct {
 	// The version of Node to run. Possible values are 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
@@ -2422,7 +2422,7 @@ type LinuxWebAppSlotSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
@@ -2724,7 +2724,7 @@ type LinuxWebAppSlotSiteConfigInitParameters struct {
 	// Should Remote Debugging be enabled? Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -2830,7 +2830,7 @@ type LinuxWebAppSlotSiteConfigObservation struct {
 	// Should Remote Debugging be enabled? Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -2956,7 +2956,7 @@ type LinuxWebAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 

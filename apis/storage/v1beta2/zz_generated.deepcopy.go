@@ -118,6 +118,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPSTrafficOnlyEnabled != nil {
+		in, out := &in.HTTPSTrafficOnlyEnabled, &out.HTTPSTrafficOnlyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = new(IdentityInitParameters)
@@ -604,6 +609,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 	}
 	if in.EnableHTTPSTrafficOnly != nil {
 		in, out := &in.EnableHTTPSTrafficOnly, &out.EnableHTTPSTrafficOnly
+		*out = new(bool)
+		**out = **in
+	}
+	if in.HTTPSTrafficOnlyEnabled != nil {
+		in, out := &in.HTTPSTrafficOnlyEnabled, &out.HTTPSTrafficOnlyEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -1153,6 +1163,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPSTrafficOnlyEnabled != nil {
+		in, out := &in.HTTPSTrafficOnlyEnabled, &out.HTTPSTrafficOnlyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = new(IdentityParameters)
@@ -1564,6 +1579,11 @@ func (in *AzureFilesAuthenticationInitParameters) DeepCopyInto(out *AzureFilesAu
 		*out = new(ActiveDirectoryInitParameters)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DefaultShareLevelPermission != nil {
+		in, out := &in.DefaultShareLevelPermission, &out.DefaultShareLevelPermission
+		*out = new(string)
+		**out = **in
+	}
 	if in.DirectoryType != nil {
 		in, out := &in.DirectoryType, &out.DirectoryType
 		*out = new(string)
@@ -1589,6 +1609,11 @@ func (in *AzureFilesAuthenticationObservation) DeepCopyInto(out *AzureFilesAuthe
 		*out = new(ActiveDirectoryObservation)
 		(*in).DeepCopyInto(*out)
 	}
+	if in.DefaultShareLevelPermission != nil {
+		in, out := &in.DefaultShareLevelPermission, &out.DefaultShareLevelPermission
+		*out = new(string)
+		**out = **in
+	}
 	if in.DirectoryType != nil {
 		in, out := &in.DirectoryType, &out.DirectoryType
 		*out = new(string)
@@ -1613,6 +1638,11 @@ func (in *AzureFilesAuthenticationParameters) DeepCopyInto(out *AzureFilesAuthen
 		in, out := &in.ActiveDirectory, &out.ActiveDirectory
 		*out = new(ActiveDirectoryParameters)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.DefaultShareLevelPermission != nil {
+		in, out := &in.DefaultShareLevelPermission, &out.DefaultShareLevelPermission
+		*out = new(string)
+		**out = **in
 	}
 	if in.DirectoryType != nil {
 		in, out := &in.DirectoryType, &out.DirectoryType

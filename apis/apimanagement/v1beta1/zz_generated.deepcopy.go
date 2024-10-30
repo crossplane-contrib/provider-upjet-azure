@@ -11170,6 +11170,11 @@ func (in *IdentityProviderAADInitParameters) DeepCopyInto(out *IdentityProviderA
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientLibrary != nil {
+		in, out := &in.ClientLibrary, &out.ClientLibrary
+		*out = new(string)
+		**out = **in
+	}
 	out.ClientSecretSecretRef = in.ClientSecretSecretRef
 	if in.SigninTenant != nil {
 		in, out := &in.SigninTenant, &out.SigninTenant
@@ -11244,6 +11249,11 @@ func (in *IdentityProviderAADObservation) DeepCopyInto(out *IdentityProviderAADO
 		*out = new(string)
 		**out = **in
 	}
+	if in.ClientLibrary != nil {
+		in, out := &in.ClientLibrary, &out.ClientLibrary
+		*out = new(string)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -11302,6 +11312,11 @@ func (in *IdentityProviderAADParameters) DeepCopyInto(out *IdentityProviderAADPa
 	}
 	if in.ClientID != nil {
 		in, out := &in.ClientID, &out.ClientID
+		*out = new(string)
+		**out = **in
+	}
+	if in.ClientLibrary != nil {
+		in, out := &in.ClientLibrary, &out.ClientLibrary
 		*out = new(string)
 		**out = **in
 	}

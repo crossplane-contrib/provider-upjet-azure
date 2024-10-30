@@ -991,7 +991,7 @@ spec:
                   privateLinkFastPathEnabled:
                     description: Bypass the Express Route gateway when accessing private-links.
                       When enabled express_route_gateway_bypass_enabled must be set
-                      to true. Defaults to false.
+                      to true.
                     type: boolean
                   routing:
                     description: A routing block as defined below.
@@ -1142,7 +1142,7 @@ spec:
                   privateLinkFastPathEnabled:
                     description: Bypass the Express Route gateway when accessing private-links.
                       When enabled express_route_gateway_bypass_enabled must be set
-                      to true. Defaults to false.
+                      to true.
                     type: boolean
                   routing:
                     description: A routing block as defined below.
@@ -1385,7 +1385,7 @@ spec:
                   privateLinkFastPathEnabled:
                     description: Bypass the Express Route gateway when accessing private-links.
                       When enabled express_route_gateway_bypass_enabled must be set
-                      to true. Defaults to false.
+                      to true.
                     type: boolean
                   routing:
                     description: A routing block as defined below.

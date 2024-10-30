@@ -78,6 +78,8 @@ spec:
                       after which the Queue is automatically deleted, minimum of 5
                       minutes.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   deadLetteringOnMessageExpiration:
                     description: Boolean flag which controls whether the Queue has
                       dead letter support when a message expires. Defaults to false.
@@ -106,6 +108,8 @@ spec:
                       queue to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created. Defaults to false
                       for Basic and Standard.
+                    type: boolean
+                  expressEnabled:
                     type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
@@ -215,6 +219,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  partitioningEnabled:
+                    type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Queue requires
                       duplicate detection. Changing this forces a new resource to
@@ -251,6 +257,8 @@ spec:
                       after which the Queue is automatically deleted, minimum of 5
                       minutes.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   deadLetteringOnMessageExpiration:
                     description: Boolean flag which controls whether the Queue has
                       dead letter support when a message expires. Defaults to false.
@@ -280,6 +288,8 @@ spec:
                       this forces a new resource to be created. Defaults to false
                       for Basic and Standard.
                     type: boolean
+                  expressEnabled:
+                    type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
                       dead lettered messages to.
@@ -308,6 +318,8 @@ spec:
                       for the queue. For supported values see the "Queue or topic
                       size" section of Service Bus Quotas. Defaults to 1024.
                     type: number
+                  partitioningEnabled:
+                    type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Queue requires
                       duplicate detection. Changing this forces a new resource to
@@ -503,6 +515,8 @@ spec:
                       after which the Queue is automatically deleted, minimum of 5
                       minutes.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   deadLetteringOnMessageExpiration:
                     description: Boolean flag which controls whether the Queue has
                       dead letter support when a message expires. Defaults to false.
@@ -531,6 +545,8 @@ spec:
                       queue to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created. Defaults to false
                       for Basic and Standard.
+                    type: boolean
+                  expressEnabled:
                     type: boolean
                   forwardDeadLetteredMessagesTo:
                     description: The name of a Queue or Topic to automatically forward
@@ -567,6 +583,8 @@ spec:
                     description: The ID of the ServiceBus Namespace to create this
                       queue in. Changing this forces a new resource to be created.
                     type: string
+                  partitioningEnabled:
+                    type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Queue requires
                       duplicate detection. Changing this forces a new resource to

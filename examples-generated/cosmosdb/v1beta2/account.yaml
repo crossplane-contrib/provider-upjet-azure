@@ -8,6 +8,7 @@ metadata:
   name: db
 spec:
   forProvider:
+    automaticFailoverEnabled: true
     capabilities:
     - name: EnableAggregationPipeline
     - name: mongoEnableDocLevelTTL
@@ -17,7 +18,6 @@ spec:
     - consistencyLevel: BoundedStaleness
       maxIntervalInSeconds: 300
       maxStalenessPrefix: 100000
-    enableAutomaticFailover: true
     geoLocation:
     - failoverPriority: 1
       location: eastus

@@ -60,4 +60,6 @@ metadata:
   name: example
 spec:
   forProvider:
-    workspaceId: ${azurerm_log_analytics_workspace.example.id}
+    workspaceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example

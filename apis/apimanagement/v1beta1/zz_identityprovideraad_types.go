@@ -21,10 +21,13 @@ type IdentityProviderAADInitParameters struct {
 	// Client Id of the Application in the AAD Identity Provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The client library to be used in the AAD Identity Provider.
+	ClientLibrary *string `json:"clientLibrary,omitempty" tf:"client_library,omitempty"`
+
 	// Client secret of the Application in the AAD Identity Provider.
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
 
-	// The AAD Tenant to use instead of Common when logging into Active Directory
+	// The AAD Tenant to use instead of Common when logging into Active Directory.
 	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
 }
 
@@ -39,13 +42,16 @@ type IdentityProviderAADObservation struct {
 	// Client Id of the Application in the AAD Identity Provider.
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The client library to be used in the AAD Identity Provider.
+	ClientLibrary *string `json:"clientLibrary,omitempty" tf:"client_library,omitempty"`
+
 	// The ID of the API Management AAD Identity Provider.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
 	// The Name of the Resource Group where the API Management Service exists. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The AAD Tenant to use instead of Common when logging into Active Directory
+	// The AAD Tenant to use instead of Common when logging into Active Directory.
 	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
 }
 
@@ -72,6 +78,10 @@ type IdentityProviderAADParameters struct {
 	// +kubebuilder:validation:Optional
 	ClientID *string `json:"clientId,omitempty" tf:"client_id,omitempty"`
 
+	// The client library to be used in the AAD Identity Provider.
+	// +kubebuilder:validation:Optional
+	ClientLibrary *string `json:"clientLibrary,omitempty" tf:"client_library,omitempty"`
+
 	// Client secret of the Application in the AAD Identity Provider.
 	// +kubebuilder:validation:Optional
 	ClientSecretSecretRef v1.SecretKeySelector `json:"clientSecretSecretRef" tf:"-"`
@@ -89,7 +99,7 @@ type IdentityProviderAADParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The AAD Tenant to use instead of Common when logging into Active Directory
+	// The AAD Tenant to use instead of Common when logging into Active Directory.
 	// +kubebuilder:validation:Optional
 	SigninTenant *string `json:"signinTenant,omitempty" tf:"signin_tenant,omitempty"`
 }

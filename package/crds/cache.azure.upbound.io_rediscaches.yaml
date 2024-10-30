@@ -1282,6 +1282,8 @@ spec:
                     description: The minimum TLS version. Possible values are 1.0,
                       1.1 and 1.2. Defaults to 1.0.
                     type: string
+                  nonSslPortEnabled:
+                    type: boolean
                   patchSchedule:
                     description: A list of patch_schedule blocks as defined below.
                     items:
@@ -1360,6 +1362,8 @@ spec:
                         - name
                         - namespace
                         type: object
+                      authenticationEnabled:
+                        type: boolean
                       dataPersistenceAuthenticationMethod:
                         description: Preferred auth method to communicate to storage
                           account used for data persistence. Possible values are SAS
@@ -1680,6 +1684,8 @@ spec:
                     description: The minimum TLS version. Possible values are 1.0,
                       1.1 and 1.2. Defaults to 1.0.
                     type: string
+                  nonSslPortEnabled:
+                    type: boolean
                   patchSchedule:
                     description: A list of patch_schedule blocks as defined below.
                     items:
@@ -1758,6 +1764,8 @@ spec:
                         - name
                         - namespace
                         type: object
+                      authenticationEnabled:
+                        type: boolean
                       dataPersistenceAuthenticationMethod:
                         description: Preferred auth method to communicate to storage
                           account used for data persistence. Possible values are SAS
@@ -2189,6 +2197,8 @@ spec:
                     description: The minimum TLS version. Possible values are 1.0,
                       1.1 and 1.2. Defaults to 1.0.
                     type: string
+                  nonSslPortEnabled:
+                    type: boolean
                   patchSchedule:
                     description: A list of patch_schedule blocks as defined below.
                     items:
@@ -2233,6 +2243,8 @@ spec:
                       aofBackupEnabled:
                         description: Enable or disable AOF persistence for this Redis
                           Cache. Defaults to false.
+                        type: boolean
+                      authenticationEnabled:
                         type: boolean
                       dataPersistenceAuthenticationMethod:
                         description: Preferred auth method to communicate to storage

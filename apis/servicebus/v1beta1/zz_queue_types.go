@@ -18,6 +18,8 @@ type QueueInitParameters struct {
 	// The ISO 8601 timespan duration of the idle interval after which the Queue is automatically deleted, minimum of 5 minutes.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
+
 	// Boolean flag which controls whether the Queue has dead letter support when a message expires. Defaults to false.
 	DeadLetteringOnMessageExpiration *bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
 
@@ -35,6 +37,8 @@ type QueueInitParameters struct {
 
 	// Boolean flag which controls whether to enable the queue to be partitioned across multiple message brokers. Changing this forces a new resource to be created. Defaults to false for Basic and Standard.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+
+	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward dead lettered messages to.
 	ForwardDeadLetteredMessagesTo *string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
@@ -54,6 +58,8 @@ type QueueInitParameters struct {
 	// Integer value which controls the size of memory allocated for the queue. For supported values see the "Queue or topic size" section of Service Bus Quotas. Defaults to 1024.
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
 
+	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
+
 	// Boolean flag which controls whether the Queue requires duplicate detection. Changing this forces a new resource to be created. Defaults to false.
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
 
@@ -68,6 +74,8 @@ type QueueObservation struct {
 
 	// The ISO 8601 timespan duration of the idle interval after which the Queue is automatically deleted, minimum of 5 minutes.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Queue has dead letter support when a message expires. Defaults to false.
 	DeadLetteringOnMessageExpiration *bool `json:"deadLetteringOnMessageExpiration,omitempty" tf:"dead_lettering_on_message_expiration,omitempty"`
@@ -86,6 +94,8 @@ type QueueObservation struct {
 
 	// Boolean flag which controls whether to enable the queue to be partitioned across multiple message brokers. Changing this forces a new resource to be created. Defaults to false for Basic and Standard.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+
+	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward dead lettered messages to.
 	ForwardDeadLetteredMessagesTo *string `json:"forwardDeadLetteredMessagesTo,omitempty" tf:"forward_dead_lettered_messages_to,omitempty"`
@@ -111,6 +121,8 @@ type QueueObservation struct {
 	// The ID of the ServiceBus Namespace to create this queue in. Changing this forces a new resource to be created.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
 
+	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
+
 	// Boolean flag which controls whether the Queue requires duplicate detection. Changing this forces a new resource to be created. Defaults to false.
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
 
@@ -126,6 +138,9 @@ type QueueParameters struct {
 	// The ISO 8601 timespan duration of the idle interval after which the Queue is automatically deleted, minimum of 5 minutes.
 	// +kubebuilder:validation:Optional
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Queue has dead letter support when a message expires. Defaults to false.
 	// +kubebuilder:validation:Optional
@@ -150,6 +165,9 @@ type QueueParameters struct {
 	// Boolean flag which controls whether to enable the queue to be partitioned across multiple message brokers. Changing this forces a new resource to be created. Defaults to false for Basic and Standard.
 	// +kubebuilder:validation:Optional
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
 
 	// The name of a Queue or Topic to automatically forward dead lettered messages to.
 	// +kubebuilder:validation:Optional
@@ -188,6 +206,9 @@ type QueueParameters struct {
 	// Selector for a ServiceBusNamespace in servicebus to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Queue requires duplicate detection. Changing this forces a new resource to be created. Defaults to false.
 	// +kubebuilder:validation:Optional

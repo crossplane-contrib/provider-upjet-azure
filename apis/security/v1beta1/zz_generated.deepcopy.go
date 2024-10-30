@@ -3743,6 +3743,11 @@ func (in *StorageDefenderInitParameters) DeepCopyInto(out *StorageDefenderInitPa
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ScanResultsEventGridTopicID != nil {
+		in, out := &in.ScanResultsEventGridTopicID, &out.ScanResultsEventGridTopicID
+		*out = new(string)
+		**out = **in
+	}
 	if in.SensitiveDataDiscoveryEnabled != nil {
 		in, out := &in.SensitiveDataDiscoveryEnabled, &out.SensitiveDataDiscoveryEnabled
 		*out = new(bool)
@@ -3830,6 +3835,11 @@ func (in *StorageDefenderObservation) DeepCopyInto(out *StorageDefenderObservati
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ScanResultsEventGridTopicID != nil {
+		in, out := &in.ScanResultsEventGridTopicID, &out.ScanResultsEventGridTopicID
+		*out = new(string)
+		**out = **in
+	}
 	if in.SensitiveDataDiscoveryEnabled != nil {
 		in, out := &in.SensitiveDataDiscoveryEnabled, &out.SensitiveDataDiscoveryEnabled
 		*out = new(bool)
@@ -3868,6 +3878,11 @@ func (in *StorageDefenderParameters) DeepCopyInto(out *StorageDefenderParameters
 	if in.OverrideSubscriptionSettingsEnabled != nil {
 		in, out := &in.OverrideSubscriptionSettingsEnabled, &out.OverrideSubscriptionSettingsEnabled
 		*out = new(bool)
+		**out = **in
+	}
+	if in.ScanResultsEventGridTopicID != nil {
+		in, out := &in.ScanResultsEventGridTopicID, &out.ScanResultsEventGridTopicID
+		*out = new(string)
 		**out = **in
 	}
 	if in.SensitiveDataDiscoveryEnabled != nil {

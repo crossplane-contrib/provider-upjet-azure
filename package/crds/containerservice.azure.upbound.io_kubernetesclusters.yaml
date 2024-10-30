@@ -6155,8 +6155,10 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       subnetId:
-                        description: The ID of the Subnet where the API server endpoint
-                          is delegated to.
+                        description: The ID of the subnet on which to create an Application
+                          Gateway, which in turn will be integrated with the ingress
+                          controller of this Kubernetes Cluster. See this page for
+                          further details.
                         type: string
                       subnetIdRef:
                         description: Reference to a Subnet in network to populate
@@ -6235,8 +6237,6 @@ spec:
                             type: object
                         type: object
                       vnetIntegrationEnabled:
-                        description: Should API Server VNet Integration be enabled?
-                          For more details please visit Use API Server VNet Integration.
                         type: boolean
                     type: object
                   apiServerAuthorizedIpRanges:
@@ -6399,9 +6399,6 @@ spec:
                       in the Azure portal.
                     type: boolean
                   customCaTrustCertificatesBase64:
-                    description: A list of up to 10 base64 encoded CAs that will be
-                      added to the trust store on nodes with the custom_ca_trust_enabled
-                      feature enabled.
                     items:
                       type: string
                     type: array
@@ -6414,7 +6411,6 @@ spec:
                           this forces a new resource to be created.
                         type: string
                       customCaTrustEnabled:
-                        description: Specifies whether to trust a Custom CA.
                         type: boolean
                       enableAutoScaling:
                         description: Should the Kubernetes Auto Scaler be enabled
@@ -6651,12 +6647,6 @@ spec:
                           changing this property.
                         type: number
                       messageOfTheDay:
-                        description: A base64-encoded string which will be written
-                          to /etc/motd after decoding. This allows customization of
-                          the message of the day for Linux nodes. It cannot be specified
-                          for Windows nodes and must be a static string (i.e. will
-                          be printed raw and not executed as a script). Changing this
-                          forces a new resource to be created.
                         type: string
                       minCount:
                         description: The minimum number of nodes which should exist
@@ -6756,8 +6746,10 @@ spec:
                           Windows2022. If not specified, the default is Ubuntu if
                           OSType=Linux or Windows2019 if OSType=Windows. And the default
                           Windows OSSKU will be changed to Windows2022 after Windows2019
-                          is deprecated. temporary_name_for_rotation must be specified
-                          when attempting a change.
+                          is deprecated. Changing this from AzureLinux or Ubuntu to
+                          AzureLinux or Ubuntu will not replace the resource, otherwise
+                          temporary_name_for_rotation must be specified when attempting
+                          a change.
                         type: string
                       podSubnetId:
                         description: The ID of the Subnet where the pods in the default
@@ -6984,7 +6976,7 @@ spec:
                         type: object
                       workloadRuntime:
                         description: Specifies the workload runtime used by the node
-                          pool. Possible values are OCIContainer and KataMshvVmIsolation.
+                          pool. Possible value is OCIContainer.
                         type: string
                       zones:
                         description: Specifies a list of Availability Zones in which
@@ -7407,7 +7399,7 @@ spec:
                         type: string
                       duration:
                         description: The duration of the window for maintenance to
-                          run in hours.
+                          run in hours. Possible options are between 4 to 24.
                         type: number
                       frequency:
                         description: Frequency of maintenance. Possible options are
@@ -7464,7 +7456,7 @@ spec:
                         type: string
                       duration:
                         description: The duration of the window for maintenance to
-                          run in hours.
+                          run in hours. Possible options are between 4 to 24.
                         type: number
                       frequency:
                         description: Frequency of maintenance. Possible options are
@@ -7818,8 +7810,6 @@ spec:
                         type: object
                     type: object
                   publicNetworkAccessEnabled:
-                    description: Whether public network access is allowed for this
-                      Kubernetes Cluster. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: Specifies the Resource Group where the Managed Kubernetes
@@ -7914,6 +7904,34 @@ spec:
                   serviceMeshProfile:
                     description: A service_mesh_profile block as defined below.
                     properties:
+                      certificateAuthority:
+                        description: A certificate_authority block as defined below.
+                          When this property is specified, key_vault_secrets_provider
+                          is also required to be set. This configuration allows you
+                          to bring your own root certificate and keys for Istio CA
+                          in the Istio-based service mesh add-on for Azure Kubernetes
+                          Service.
+                        properties:
+                          certChainObjectName:
+                            description: The certificate chain object name in Azure
+                              Key Vault.
+                            type: string
+                          certObjectName:
+                            description: The intermediate certificate object name
+                              in Azure Key Vault.
+                            type: string
+                          keyObjectName:
+                            description: The intermediate certificate private key
+                              object name in Azure Key Vault.
+                            type: string
+                          keyVaultId:
+                            description: The resource ID of the Key Vault.
+                            type: string
+                          rootCertObjectName:
+                            description: The root certificate object name in Azure
+                              Key Vault.
+                            type: string
+                        type: object
                       externalIngressGatewayEnabled:
                         description: Is Istio External Ingress Gateway enabled?
                         type: boolean
@@ -7965,8 +7983,6 @@ spec:
                         description: Is the Disk CSI driver enabled? Defaults to true.
                         type: boolean
                       diskDriverVersion:
-                        description: Disk CSI Driver version to be used. Possible
-                          values are v1 and v2. Defaults to v1.
                         type: string
                       fileDriverEnabled:
                         description: Is the File CSI driver enabled? Defaults to true.
@@ -8175,8 +8191,10 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       subnetId:
-                        description: The ID of the Subnet where the API server endpoint
-                          is delegated to.
+                        description: The ID of the subnet on which to create an Application
+                          Gateway, which in turn will be integrated with the ingress
+                          controller of this Kubernetes Cluster. See this page for
+                          further details.
                         type: string
                       subnetIdRef:
                         description: Reference to a Subnet in network to populate
@@ -8255,8 +8273,6 @@ spec:
                             type: object
                         type: object
                       vnetIntegrationEnabled:
-                        description: Should API Server VNet Integration be enabled?
-                          For more details please visit Use API Server VNet Integration.
                         type: boolean
                     type: object
                   apiServerAuthorizedIpRanges:
@@ -8419,9 +8435,6 @@ spec:
                       in the Azure portal.
                     type: boolean
                   customCaTrustCertificatesBase64:
-                    description: A list of up to 10 base64 encoded CAs that will be
-                      added to the trust store on nodes with the custom_ca_trust_enabled
-                      feature enabled.
                     items:
                       type: string
                     type: array
@@ -8434,7 +8447,6 @@ spec:
                           this forces a new resource to be created.
                         type: string
                       customCaTrustEnabled:
-                        description: Specifies whether to trust a Custom CA.
                         type: boolean
                       enableAutoScaling:
                         description: Should the Kubernetes Auto Scaler be enabled
@@ -8671,12 +8683,6 @@ spec:
                           changing this property.
                         type: number
                       messageOfTheDay:
-                        description: A base64-encoded string which will be written
-                          to /etc/motd after decoding. This allows customization of
-                          the message of the day for Linux nodes. It cannot be specified
-                          for Windows nodes and must be a static string (i.e. will
-                          be printed raw and not executed as a script). Changing this
-                          forces a new resource to be created.
                         type: string
                       minCount:
                         description: The minimum number of nodes which should exist
@@ -8776,8 +8782,10 @@ spec:
                           Windows2022. If not specified, the default is Ubuntu if
                           OSType=Linux or Windows2019 if OSType=Windows. And the default
                           Windows OSSKU will be changed to Windows2022 after Windows2019
-                          is deprecated. temporary_name_for_rotation must be specified
-                          when attempting a change.
+                          is deprecated. Changing this from AzureLinux or Ubuntu to
+                          AzureLinux or Ubuntu will not replace the resource, otherwise
+                          temporary_name_for_rotation must be specified when attempting
+                          a change.
                         type: string
                       podSubnetId:
                         description: The ID of the Subnet where the pods in the default
@@ -9004,7 +9012,7 @@ spec:
                         type: object
                       workloadRuntime:
                         description: Specifies the workload runtime used by the node
-                          pool. Possible values are OCIContainer and KataMshvVmIsolation.
+                          pool. Possible value is OCIContainer.
                         type: string
                       zones:
                         description: Specifies a list of Availability Zones in which
@@ -9427,7 +9435,7 @@ spec:
                         type: string
                       duration:
                         description: The duration of the window for maintenance to
-                          run in hours.
+                          run in hours. Possible options are between 4 to 24.
                         type: number
                       frequency:
                         description: Frequency of maintenance. Possible options are
@@ -9484,7 +9492,7 @@ spec:
                         type: string
                       duration:
                         description: The duration of the window for maintenance to
-                          run in hours.
+                          run in hours. Possible options are between 4 to 24.
                         type: number
                       frequency:
                         description: Frequency of maintenance. Possible options are
@@ -9838,8 +9846,6 @@ spec:
                         type: object
                     type: object
                   publicNetworkAccessEnabled:
-                    description: Whether public network access is allowed for this
-                      Kubernetes Cluster. Defaults to true.
                     type: boolean
                   roleBasedAccessControlEnabled:
                     description: Whether Role Based Access Control for the Kubernetes
@@ -9853,6 +9859,34 @@ spec:
                   serviceMeshProfile:
                     description: A service_mesh_profile block as defined below.
                     properties:
+                      certificateAuthority:
+                        description: A certificate_authority block as defined below.
+                          When this property is specified, key_vault_secrets_provider
+                          is also required to be set. This configuration allows you
+                          to bring your own root certificate and keys for Istio CA
+                          in the Istio-based service mesh add-on for Azure Kubernetes
+                          Service.
+                        properties:
+                          certChainObjectName:
+                            description: The certificate chain object name in Azure
+                              Key Vault.
+                            type: string
+                          certObjectName:
+                            description: The intermediate certificate object name
+                              in Azure Key Vault.
+                            type: string
+                          keyObjectName:
+                            description: The intermediate certificate private key
+                              object name in Azure Key Vault.
+                            type: string
+                          keyVaultId:
+                            description: The resource ID of the Key Vault.
+                            type: string
+                          rootCertObjectName:
+                            description: The root certificate object name in Azure
+                              Key Vault.
+                            type: string
+                        type: object
                       externalIngressGatewayEnabled:
                         description: Is Istio External Ingress Gateway enabled?
                         type: boolean
@@ -9906,8 +9940,6 @@ spec:
                         description: Is the Disk CSI driver enabled? Defaults to true.
                         type: boolean
                       diskDriverVersion:
-                        description: Disk CSI Driver version to be used. Possible
-                          values are v1 and v2. Defaults to v1.
                         type: string
                       fileDriverEnabled:
                         description: Is the File CSI driver enabled? Defaults to true.
@@ -10227,12 +10259,12 @@ spec:
                         type: array
                         x-kubernetes-list-type: set
                       subnetId:
-                        description: The ID of the Subnet where the API server endpoint
-                          is delegated to.
+                        description: The ID of the subnet on which to create an Application
+                          Gateway, which in turn will be integrated with the ingress
+                          controller of this Kubernetes Cluster. See this page for
+                          further details.
                         type: string
                       vnetIntegrationEnabled:
-                        description: Should API Server VNet Integration be enabled?
-                          For more details please visit Use API Server VNet Integration.
                         type: boolean
                     type: object
                   apiServerAuthorizedIpRanges:
@@ -10381,9 +10413,6 @@ spec:
                       Managed Cluster.
                     type: string
                   customCaTrustCertificatesBase64:
-                    description: A list of up to 10 base64 encoded CAs that will be
-                      added to the trust store on nodes with the custom_ca_trust_enabled
-                      feature enabled.
                     items:
                       type: string
                     type: array
@@ -10396,7 +10425,6 @@ spec:
                           this forces a new resource to be created.
                         type: string
                       customCaTrustEnabled:
-                        description: Specifies whether to trust a Custom CA.
                         type: boolean
                       enableAutoScaling:
                         description: Should the Kubernetes Auto Scaler be enabled
@@ -10633,12 +10661,6 @@ spec:
                           changing this property.
                         type: number
                       messageOfTheDay:
-                        description: A base64-encoded string which will be written
-                          to /etc/motd after decoding. This allows customization of
-                          the message of the day for Linux nodes. It cannot be specified
-                          for Windows nodes and must be a static string (i.e. will
-                          be printed raw and not executed as a script). Changing this
-                          forces a new resource to be created.
                         type: string
                       minCount:
                         description: The minimum number of nodes which should exist
@@ -10738,8 +10760,10 @@ spec:
                           Windows2022. If not specified, the default is Ubuntu if
                           OSType=Linux or Windows2019 if OSType=Windows. And the default
                           Windows OSSKU will be changed to Windows2022 after Windows2019
-                          is deprecated. temporary_name_for_rotation must be specified
-                          when attempting a change.
+                          is deprecated. Changing this from AzureLinux or Ubuntu to
+                          AzureLinux or Ubuntu will not replace the resource, otherwise
+                          temporary_name_for_rotation must be specified when attempting
+                          a change.
                         type: string
                       podSubnetId:
                         description: The ID of the Subnet where the pods in the default
@@ -10814,7 +10838,7 @@ spec:
                         type: string
                       workloadRuntime:
                         description: Specifies the workload runtime used by the node
-                          pool. Possible values are OCIContainer and KataMshvVmIsolation.
+                          pool. Possible value is OCIContainer.
                         type: string
                       zones:
                         description: Specifies a list of Availability Zones in which
@@ -11124,7 +11148,7 @@ spec:
                         type: string
                       duration:
                         description: The duration of the window for maintenance to
-                          run in hours.
+                          run in hours. Possible options are between 4 to 24.
                         type: number
                       frequency:
                         description: Frequency of maintenance. Possible options are
@@ -11181,7 +11205,7 @@ spec:
                         type: string
                       duration:
                         description: The duration of the window for maintenance to
-                          run in hours.
+                          run in hours. Possible options are between 4 to 24.
                         type: number
                       frequency:
                         description: Frequency of maintenance. Possible options are
@@ -11509,8 +11533,6 @@ spec:
                       Network used by the Kubernetes Cluster.
                     type: string
                   publicNetworkAccessEnabled:
-                    description: Whether public network access is allowed for this
-                      Kubernetes Cluster. Defaults to true.
                     type: boolean
                   resourceGroupName:
                     description: Specifies the Resource Group where the Managed Kubernetes
@@ -11529,6 +11551,34 @@ spec:
                   serviceMeshProfile:
                     description: A service_mesh_profile block as defined below.
                     properties:
+                      certificateAuthority:
+                        description: A certificate_authority block as defined below.
+                          When this property is specified, key_vault_secrets_provider
+                          is also required to be set. This configuration allows you
+                          to bring your own root certificate and keys for Istio CA
+                          in the Istio-based service mesh add-on for Azure Kubernetes
+                          Service.
+                        properties:
+                          certChainObjectName:
+                            description: The certificate chain object name in Azure
+                              Key Vault.
+                            type: string
+                          certObjectName:
+                            description: The intermediate certificate object name
+                              in Azure Key Vault.
+                            type: string
+                          keyObjectName:
+                            description: The intermediate certificate private key
+                              object name in Azure Key Vault.
+                            type: string
+                          keyVaultId:
+                            description: The resource ID of the Key Vault.
+                            type: string
+                          rootCertObjectName:
+                            description: The root certificate object name in Azure
+                              Key Vault.
+                            type: string
+                        type: object
                       externalIngressGatewayEnabled:
                         description: Is Istio External Ingress Gateway enabled?
                         type: boolean
@@ -11563,8 +11613,6 @@ spec:
                         description: Is the Disk CSI driver enabled? Defaults to true.
                         type: boolean
                       diskDriverVersion:
-                        description: Disk CSI Driver version to be used. Possible
-                          values are v1 and v2. Defaults to v1.
                         type: string
                       fileDriverEnabled:
                         description: Is the File CSI driver enabled? Defaults to true.

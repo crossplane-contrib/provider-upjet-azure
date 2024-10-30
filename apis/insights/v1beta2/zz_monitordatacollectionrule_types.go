@@ -918,7 +918,7 @@ type PerformanceCounterInitParameters struct {
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 1800 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds,omitempty" tf:"sampling_frequency_in_seconds,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
@@ -933,7 +933,7 @@ type PerformanceCounterObservation struct {
 	// The name which should be used for this data source. This name should be unique across all data sources regardless of type within the Data Collection Rule.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
-	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 1800 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds,omitempty" tf:"sampling_frequency_in_seconds,omitempty"`
 
 	// Specifies a list of streams that this data source will be sent to. A stream indicates what schema will be used for this data and usually what table in Log Analytics the data will be sent to.
@@ -950,7 +950,7 @@ type PerformanceCounterParameters struct {
 	// +kubebuilder:validation:Optional
 	Name *string `json:"name" tf:"name,omitempty"`
 
-	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 300 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
+	// The number of seconds between consecutive counter measurements (samples). The value should be integer between 1 and 1800 inclusive. sampling_frequency_in_seconds must be equal to 60 seconds for counters collected with Microsoft-InsightsMetrics stream.
 	// +kubebuilder:validation:Optional
 	SamplingFrequencyInSeconds *float64 `json:"samplingFrequencyInSeconds" tf:"sampling_frequency_in_seconds,omitempty"`
 

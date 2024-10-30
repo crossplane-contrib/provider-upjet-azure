@@ -15639,6 +15639,11 @@ func (in *PolicySettingsInitParameters) DeepCopyInto(out *PolicySettingsInitPara
 		*out = new(float64)
 		**out = **in
 	}
+	if in.JsChallengeCookieExpirationInMinutes != nil {
+		in, out := &in.JsChallengeCookieExpirationInMinutes, &out.JsChallengeCookieExpirationInMinutes
+		*out = new(float64)
+		**out = **in
+	}
 	if in.LogScrubbing != nil {
 		in, out := &in.LogScrubbing, &out.LogScrubbing
 		*out = new(LogScrubbingInitParameters)
@@ -15689,6 +15694,11 @@ func (in *PolicySettingsObservation) DeepCopyInto(out *PolicySettingsObservation
 		*out = new(float64)
 		**out = **in
 	}
+	if in.JsChallengeCookieExpirationInMinutes != nil {
+		in, out := &in.JsChallengeCookieExpirationInMinutes, &out.JsChallengeCookieExpirationInMinutes
+		*out = new(float64)
+		**out = **in
+	}
 	if in.LogScrubbing != nil {
 		in, out := &in.LogScrubbing, &out.LogScrubbing
 		*out = new(LogScrubbingObservation)
@@ -15736,6 +15746,11 @@ func (in *PolicySettingsParameters) DeepCopyInto(out *PolicySettingsParameters) 
 	}
 	if in.FileUploadLimitInMb != nil {
 		in, out := &in.FileUploadLimitInMb, &out.FileUploadLimitInMb
+		*out = new(float64)
+		**out = **in
+	}
+	if in.JsChallengeCookieExpirationInMinutes != nil {
+		in, out := &in.JsChallengeCookieExpirationInMinutes, &out.JsChallengeCookieExpirationInMinutes
 		*out = new(float64)
 		**out = **in
 	}

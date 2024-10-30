@@ -19,7 +19,7 @@ type APIServerAccessProfileInitParameters struct {
 	// +listType=set
 	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
 
-	// The ID of the Subnet where the API server endpoint is delegated to.
+	// The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
@@ -32,7 +32,6 @@ type APIServerAccessProfileInitParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// Should API Server VNet Integration be enabled? For more details please visit Use API Server VNet Integration.
 	VnetIntegrationEnabled *bool `json:"vnetIntegrationEnabled,omitempty" tf:"vnet_integration_enabled,omitempty"`
 }
 
@@ -42,10 +41,9 @@ type APIServerAccessProfileObservation struct {
 	// +listType=set
 	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
 
-	// The ID of the Subnet where the API server endpoint is delegated to.
+	// The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
 	SubnetID *string `json:"subnetId,omitempty" tf:"subnet_id,omitempty"`
 
-	// Should API Server VNet Integration be enabled? For more details please visit Use API Server VNet Integration.
 	VnetIntegrationEnabled *bool `json:"vnetIntegrationEnabled,omitempty" tf:"vnet_integration_enabled,omitempty"`
 }
 
@@ -56,7 +54,7 @@ type APIServerAccessProfileParameters struct {
 	// +listType=set
 	AuthorizedIPRanges []*string `json:"authorizedIpRanges,omitempty" tf:"authorized_ip_ranges,omitempty"`
 
-	// The ID of the Subnet where the API server endpoint is delegated to.
+	// The ID of the subnet on which to create an Application Gateway, which in turn will be integrated with the ingress controller of this Kubernetes Cluster. See this page for further details.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
 	// +crossplane:generate:reference:extractor=github.com/upbound/provider-azure/apis/rconfig.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -70,7 +68,6 @@ type APIServerAccessProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	SubnetIDSelector *v1.Selector `json:"subnetIdSelector,omitempty" tf:"-"`
 
-	// Should API Server VNet Integration be enabled? For more details please visit Use API Server VNet Integration.
 	// +kubebuilder:validation:Optional
 	VnetIntegrationEnabled *bool `json:"vnetIntegrationEnabled,omitempty" tf:"vnet_integration_enabled,omitempty"`
 }
@@ -439,6 +436,65 @@ type AzureActiveDirectoryRoleBasedAccessControlParameters struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
+type CertificateAuthorityInitParameters struct {
+
+	// The certificate chain object name in Azure Key Vault.
+	CertChainObjectName *string `json:"certChainObjectName,omitempty" tf:"cert_chain_object_name,omitempty"`
+
+	// The intermediate certificate object name in Azure Key Vault.
+	CertObjectName *string `json:"certObjectName,omitempty" tf:"cert_object_name,omitempty"`
+
+	// The intermediate certificate private key object name in Azure Key Vault.
+	KeyObjectName *string `json:"keyObjectName,omitempty" tf:"key_object_name,omitempty"`
+
+	// The resource ID of the Key Vault.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// The root certificate object name in Azure Key Vault.
+	RootCertObjectName *string `json:"rootCertObjectName,omitempty" tf:"root_cert_object_name,omitempty"`
+}
+
+type CertificateAuthorityObservation struct {
+
+	// The certificate chain object name in Azure Key Vault.
+	CertChainObjectName *string `json:"certChainObjectName,omitempty" tf:"cert_chain_object_name,omitempty"`
+
+	// The intermediate certificate object name in Azure Key Vault.
+	CertObjectName *string `json:"certObjectName,omitempty" tf:"cert_object_name,omitempty"`
+
+	// The intermediate certificate private key object name in Azure Key Vault.
+	KeyObjectName *string `json:"keyObjectName,omitempty" tf:"key_object_name,omitempty"`
+
+	// The resource ID of the Key Vault.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// The root certificate object name in Azure Key Vault.
+	RootCertObjectName *string `json:"rootCertObjectName,omitempty" tf:"root_cert_object_name,omitempty"`
+}
+
+type CertificateAuthorityParameters struct {
+
+	// The certificate chain object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	CertChainObjectName *string `json:"certChainObjectName" tf:"cert_chain_object_name,omitempty"`
+
+	// The intermediate certificate object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	CertObjectName *string `json:"certObjectName" tf:"cert_object_name,omitempty"`
+
+	// The intermediate certificate private key object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	KeyObjectName *string `json:"keyObjectName" tf:"key_object_name,omitempty"`
+
+	// The resource ID of the Key Vault.
+	// +kubebuilder:validation:Optional
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
+
+	// The root certificate object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	RootCertObjectName *string `json:"rootCertObjectName" tf:"root_cert_object_name,omitempty"`
+}
+
 type ConfidentialComputingInitParameters struct {
 
 	// Should the SGX quote helper be enabled?
@@ -481,7 +537,6 @@ type DefaultNodePoolInitParameters struct {
 	// Specifies the ID of the Capacity Reservation Group within which this AKS Cluster should be created. Changing this forces a new resource to be created.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
-	// Specifies whether to trust a Custom CA.
 	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
 
 	// Should the Kubernetes Auto Scaler be enabled for this Node Pool?
@@ -517,7 +572,6 @@ type DefaultNodePoolInitParameters struct {
 	// The maximum number of pods that can run on each agent. temporary_name_for_rotation must be specified when changing this property.
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 
-	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
 	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
 
 	// The minimum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000.
@@ -553,7 +607,7 @@ type DefaultNodePoolInitParameters struct {
 	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. temporary_name_for_rotation must be specified when attempting a change.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. temporary_name_for_rotation must be specified when attempting a change.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise temporary_name_for_rotation must be specified when attempting a change.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The ID of the Subnet where the pods in the default Node Pool should exist.
@@ -610,7 +664,7 @@ type DefaultNodePoolInitParameters struct {
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
-	// Specifies the workload runtime used by the node pool. Possible values are OCIContainer and KataMshvVmIsolation.
+	// Specifies the workload runtime used by the node pool. Possible value is OCIContainer.
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster should be located. temporary_name_for_rotation must be specified when changing this property.
@@ -623,7 +677,6 @@ type DefaultNodePoolObservation struct {
 	// Specifies the ID of the Capacity Reservation Group within which this AKS Cluster should be created. Changing this forces a new resource to be created.
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
-	// Specifies whether to trust a Custom CA.
 	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
 
 	// Should the Kubernetes Auto Scaler be enabled for this Node Pool?
@@ -659,7 +712,6 @@ type DefaultNodePoolObservation struct {
 	// The maximum number of pods that can run on each agent. temporary_name_for_rotation must be specified when changing this property.
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 
-	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
 	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
 
 	// The minimum number of nodes which should exist in this Node Pool. If specified this must be between 1 and 1000.
@@ -695,7 +747,7 @@ type DefaultNodePoolObservation struct {
 	// The type of disk which should be used for the Operating System. Possible values are Ephemeral and Managed. Defaults to Managed. temporary_name_for_rotation must be specified when attempting a change.
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. temporary_name_for_rotation must be specified when attempting a change.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise temporary_name_for_rotation must be specified when attempting a change.
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
 	// The ID of the Subnet where the pods in the default Node Pool should exist.
@@ -732,7 +784,7 @@ type DefaultNodePoolObservation struct {
 	// The ID of a Subnet where the Kubernetes Node Pool should exist.
 	VnetSubnetID *string `json:"vnetSubnetId,omitempty" tf:"vnet_subnet_id,omitempty"`
 
-	// Specifies the workload runtime used by the node pool. Possible values are OCIContainer and KataMshvVmIsolation.
+	// Specifies the workload runtime used by the node pool. Possible value is OCIContainer.
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
 	// Specifies a list of Availability Zones in which this Kubernetes Cluster should be located. temporary_name_for_rotation must be specified when changing this property.
@@ -746,7 +798,6 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	CapacityReservationGroupID *string `json:"capacityReservationGroupId,omitempty" tf:"capacity_reservation_group_id,omitempty"`
 
-	// Specifies whether to trust a Custom CA.
 	// +kubebuilder:validation:Optional
 	CustomCATrustEnabled *bool `json:"customCaTrustEnabled,omitempty" tf:"custom_ca_trust_enabled,omitempty"`
 
@@ -794,7 +845,6 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	MaxPods *float64 `json:"maxPods,omitempty" tf:"max_pods,omitempty"`
 
-	// A base64-encoded string which will be written to /etc/motd after decoding. This allows customization of the message of the day for Linux nodes. It cannot be specified for Windows nodes and must be a static string (i.e. will be printed raw and not executed as a script). Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	MessageOfTheDay *string `json:"messageOfTheDay,omitempty" tf:"message_of_the_day,omitempty"`
 
@@ -842,7 +892,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	OsDiskType *string `json:"osDiskType,omitempty" tf:"os_disk_type,omitempty"`
 
-	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. temporary_name_for_rotation must be specified when attempting a change.
+	// Specifies the OS SKU used by the agent pool. Possible values are AzureLinux, Ubuntu, Windows2019 and Windows2022. If not specified, the default is Ubuntu if OSType=Linux or Windows2019 if OSType=Windows. And the default Windows OSSKU will be changed to Windows2022 after Windows2019 is deprecated. Changing this from AzureLinux or Ubuntu to AzureLinux or Ubuntu will not replace the resource, otherwise temporary_name_for_rotation must be specified when attempting a change.
 	// +kubebuilder:validation:Optional
 	OsSku *string `json:"osSku,omitempty" tf:"os_sku,omitempty"`
 
@@ -911,7 +961,7 @@ type DefaultNodePoolParameters struct {
 	// +kubebuilder:validation:Optional
 	VnetSubnetIDSelector *v1.Selector `json:"vnetSubnetIdSelector,omitempty" tf:"-"`
 
-	// Specifies the workload runtime used by the node pool. Possible values are OCIContainer and KataMshvVmIsolation.
+	// Specifies the workload runtime used by the node pool. Possible value is OCIContainer.
 	// +kubebuilder:validation:Optional
 	WorkloadRuntime *string `json:"workloadRuntime,omitempty" tf:"workload_runtime,omitempty"`
 
@@ -1422,7 +1472,6 @@ type KubernetesClusterInitParameters struct {
 	// Should cost analysis be enabled for this Kubernetes Cluster? Defaults to false. The sku_tier must be set to Standard or Premium to enable this feature. Enabling this will add Kubernetes Namespace and Deployment details to the Cost Analysis views in the Azure portal.
 	CostAnalysisEnabled *bool `json:"costAnalysisEnabled,omitempty" tf:"cost_analysis_enabled,omitempty"`
 
-	// A list of up to 10 base64 encoded CAs that will be added to the trust store on nodes with the custom_ca_trust_enabled feature enabled.
 	CustomCATrustCertificatesBase64 []*string `json:"customCaTrustCertificatesBase64,omitempty" tf:"custom_ca_trust_certificates_base64,omitempty"`
 
 	// DNS prefix specified when creating the managed cluster. Possible values must begin and end with a letter or number, contain only letters, numbers, and hyphens and be between 1 and 54 characters in length. Changing this forces a new resource to be created.
@@ -1533,7 +1582,6 @@ type KubernetesClusterInitParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
-	// Whether public network access is allowed for this Kubernetes Cluster. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Whether Role Based Access Control for the Kubernetes Cluster should be enabled. Defaults to true. Changing this forces a new resource to be created.
@@ -1607,7 +1655,6 @@ type KubernetesClusterObservation struct {
 	// The current version running on the Azure Kubernetes Managed Cluster.
 	CurrentKubernetesVersion *string `json:"currentKubernetesVersion,omitempty" tf:"current_kubernetes_version,omitempty"`
 
-	// A list of up to 10 base64 encoded CAs that will be added to the trust store on nodes with the custom_ca_trust_enabled feature enabled.
 	CustomCATrustCertificatesBase64 []*string `json:"customCaTrustCertificatesBase64,omitempty" tf:"custom_ca_trust_certificates_base64,omitempty"`
 
 	// DNS prefix specified when creating the managed cluster. Possible values must begin and end with a letter or number, contain only letters, numbers, and hyphens and be between 1 and 54 characters in length. Changing this forces a new resource to be created.
@@ -1729,7 +1776,6 @@ type KubernetesClusterObservation struct {
 	// The FQDN for the Kubernetes Cluster when private link has been enabled, which is only resolvable inside the Virtual Network used by the Kubernetes Cluster.
 	PrivateFqdn *string `json:"privateFqdn,omitempty" tf:"private_fqdn,omitempty"`
 
-	// Whether public network access is allowed for this Kubernetes Cluster. Defaults to true.
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
 	// Specifies the Resource Group where the Managed Kubernetes Cluster should exist. Changing this forces a new resource to be created.
@@ -1812,7 +1858,6 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	CostAnalysisEnabled *bool `json:"costAnalysisEnabled,omitempty" tf:"cost_analysis_enabled,omitempty"`
 
-	// A list of up to 10 base64 encoded CAs that will be added to the trust store on nodes with the custom_ca_trust_enabled feature enabled.
 	// +kubebuilder:validation:Optional
 	CustomCATrustCertificatesBase64 []*string `json:"customCaTrustCertificatesBase64,omitempty" tf:"custom_ca_trust_certificates_base64,omitempty"`
 
@@ -1957,7 +2002,6 @@ type KubernetesClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateDNSZoneIDSelector *v1.Selector `json:"privateDnsZoneIdSelector,omitempty" tf:"-"`
 
-	// Whether public network access is allowed for this Kubernetes Cluster. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PublicNetworkAccessEnabled *bool `json:"publicNetworkAccessEnabled,omitempty" tf:"public_network_access_enabled,omitempty"`
 
@@ -2189,7 +2233,7 @@ type MaintenanceWindowAutoUpgradeInitParameters struct {
 	// The day of the week for the maintenance run. Required in combination with weekly frequency. Possible values are Friday, Monday, Saturday, Sunday, Thursday, Tuesday and Wednesday.
 	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The duration of the window for maintenance to run in hours.
+	// The duration of the window for maintenance to run in hours. Possible options are between 4 to 24.
 	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Frequency of maintenance. Possible options are Weekly, AbsoluteMonthly and RelativeMonthly.
@@ -2252,7 +2296,7 @@ type MaintenanceWindowAutoUpgradeObservation struct {
 	// The day of the week for the maintenance run. Required in combination with weekly frequency. Possible values are Friday, Monday, Saturday, Sunday, Thursday, Tuesday and Wednesday.
 	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The duration of the window for maintenance to run in hours.
+	// The duration of the window for maintenance to run in hours. Possible options are between 4 to 24.
 	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Frequency of maintenance. Possible options are Weekly, AbsoluteMonthly and RelativeMonthly.
@@ -2288,7 +2332,7 @@ type MaintenanceWindowAutoUpgradeParameters struct {
 	// +kubebuilder:validation:Optional
 	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The duration of the window for maintenance to run in hours.
+	// The duration of the window for maintenance to run in hours. Possible options are between 4 to 24.
 	// +kubebuilder:validation:Optional
 	Duration *float64 `json:"duration" tf:"duration,omitempty"`
 
@@ -2339,7 +2383,7 @@ type MaintenanceWindowNodeOsInitParameters struct {
 	// The day of the week for the maintenance run. Required in combination with weekly frequency. Possible values are Friday, Monday, Saturday, Sunday, Thursday, Tuesday and Wednesday.
 	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The duration of the window for maintenance to run in hours.
+	// The duration of the window for maintenance to run in hours. Possible options are between 4 to 24.
 	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Frequency of maintenance. Possible options are Daily, Weekly, AbsoluteMonthly and RelativeMonthly.
@@ -2401,7 +2445,7 @@ type MaintenanceWindowNodeOsObservation struct {
 	// The day of the week for the maintenance run. Required in combination with weekly frequency. Possible values are Friday, Monday, Saturday, Sunday, Thursday, Tuesday and Wednesday.
 	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The duration of the window for maintenance to run in hours.
+	// The duration of the window for maintenance to run in hours. Possible options are between 4 to 24.
 	Duration *float64 `json:"duration,omitempty" tf:"duration,omitempty"`
 
 	// Frequency of maintenance. Possible options are Daily, Weekly, AbsoluteMonthly and RelativeMonthly.
@@ -2436,7 +2480,7 @@ type MaintenanceWindowNodeOsParameters struct {
 	// +kubebuilder:validation:Optional
 	DayOfWeek *string `json:"dayOfWeek,omitempty" tf:"day_of_week,omitempty"`
 
-	// The duration of the window for maintenance to run in hours.
+	// The duration of the window for maintenance to run in hours. Possible options are between 4 to 24.
 	// +kubebuilder:validation:Optional
 	Duration *float64 `json:"duration" tf:"duration,omitempty"`
 
@@ -2932,6 +2976,9 @@ type SecretIdentityParameters struct {
 
 type ServiceMeshProfileInitParameters struct {
 
+	// A certificate_authority block as defined below. When this property is specified, key_vault_secrets_provider is also required to be set. This configuration allows you to bring your own root certificate and keys for Istio CA in the Istio-based service mesh add-on for Azure Kubernetes Service.
+	CertificateAuthority *CertificateAuthorityInitParameters `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
+
 	// Is Istio External Ingress Gateway enabled?
 	ExternalIngressGatewayEnabled *bool `json:"externalIngressGatewayEnabled,omitempty" tf:"external_ingress_gateway_enabled,omitempty"`
 
@@ -2944,6 +2991,9 @@ type ServiceMeshProfileInitParameters struct {
 
 type ServiceMeshProfileObservation struct {
 
+	// A certificate_authority block as defined below. When this property is specified, key_vault_secrets_provider is also required to be set. This configuration allows you to bring your own root certificate and keys for Istio CA in the Istio-based service mesh add-on for Azure Kubernetes Service.
+	CertificateAuthority *CertificateAuthorityObservation `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
+
 	// Is Istio External Ingress Gateway enabled?
 	ExternalIngressGatewayEnabled *bool `json:"externalIngressGatewayEnabled,omitempty" tf:"external_ingress_gateway_enabled,omitempty"`
 
@@ -2955,6 +3005,10 @@ type ServiceMeshProfileObservation struct {
 }
 
 type ServiceMeshProfileParameters struct {
+
+	// A certificate_authority block as defined below. When this property is specified, key_vault_secrets_provider is also required to be set. This configuration allows you to bring your own root certificate and keys for Istio CA in the Istio-based service mesh add-on for Azure Kubernetes Service.
+	// +kubebuilder:validation:Optional
+	CertificateAuthority *CertificateAuthorityParameters `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
 
 	// Is Istio External Ingress Gateway enabled?
 	// +kubebuilder:validation:Optional
@@ -3003,7 +3057,6 @@ type StorageProfileInitParameters struct {
 	// Is the Disk CSI driver enabled? Defaults to true.
 	DiskDriverEnabled *bool `json:"diskDriverEnabled,omitempty" tf:"disk_driver_enabled,omitempty"`
 
-	// Disk CSI Driver version to be used. Possible values are v1 and v2. Defaults to v1.
 	DiskDriverVersion *string `json:"diskDriverVersion,omitempty" tf:"disk_driver_version,omitempty"`
 
 	// Is the File CSI driver enabled? Defaults to true.
@@ -3021,7 +3074,6 @@ type StorageProfileObservation struct {
 	// Is the Disk CSI driver enabled? Defaults to true.
 	DiskDriverEnabled *bool `json:"diskDriverEnabled,omitempty" tf:"disk_driver_enabled,omitempty"`
 
-	// Disk CSI Driver version to be used. Possible values are v1 and v2. Defaults to v1.
 	DiskDriverVersion *string `json:"diskDriverVersion,omitempty" tf:"disk_driver_version,omitempty"`
 
 	// Is the File CSI driver enabled? Defaults to true.
@@ -3041,7 +3093,6 @@ type StorageProfileParameters struct {
 	// +kubebuilder:validation:Optional
 	DiskDriverEnabled *bool `json:"diskDriverEnabled,omitempty" tf:"disk_driver_enabled,omitempty"`
 
-	// Disk CSI Driver version to be used. Possible values are v1 and v2. Defaults to v1.
 	// +kubebuilder:validation:Optional
 	DiskDriverVersion *string `json:"diskDriverVersion,omitempty" tf:"disk_driver_version,omitempty"`
 

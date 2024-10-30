@@ -15,7 +15,7 @@ import (
 
 type AccountNetworkRulesInitParameters struct {
 
-	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. Defaults to ["AzureServices"].
 	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
@@ -49,7 +49,7 @@ type AccountNetworkRulesInitParameters struct {
 
 type AccountNetworkRulesObservation struct {
 
-	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. Defaults to ["AzureServices"].
 	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`
 
@@ -76,7 +76,7 @@ type AccountNetworkRulesObservation struct {
 
 type AccountNetworkRulesParameters struct {
 
-	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None.
+	// Specifies whether traffic is bypassed for Logging/Metrics/AzureServices. Valid options are any combination of Logging, Metrics, AzureServices, or None. Defaults to ["AzureServices"].
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	Bypass []*string `json:"bypass,omitempty" tf:"bypass,omitempty"`

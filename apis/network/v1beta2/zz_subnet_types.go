@@ -91,7 +91,7 @@ type SubnetInitParameters struct {
 
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
-	// Enable or Disable network policies for the private link service on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	// Enable or Disable network policies for the private link service on the subnet. Defaults to true.
 	PrivateLinkServiceNetworkPoliciesEnabled *bool `json:"privateLinkServiceNetworkPoliciesEnabled,omitempty" tf:"private_link_service_network_policies_enabled,omitempty"`
 
 	// The list of IDs of Service Endpoint Policies to associate with the subnet.
@@ -126,7 +126,7 @@ type SubnetObservation struct {
 
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
-	// Enable or Disable network policies for the private link service on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	// Enable or Disable network policies for the private link service on the subnet. Defaults to true.
 	PrivateLinkServiceNetworkPoliciesEnabled *bool `json:"privateLinkServiceNetworkPoliciesEnabled,omitempty" tf:"private_link_service_network_policies_enabled,omitempty"`
 
 	// The name of the resource group in which to create the subnet. This must be the resource group that the virtual network resides in. Changing this forces a new resource to be created.
@@ -171,7 +171,7 @@ type SubnetParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateEndpointNetworkPoliciesEnabled *bool `json:"privateEndpointNetworkPoliciesEnabled,omitempty" tf:"private_endpoint_network_policies_enabled,omitempty"`
 
-	// Enable or Disable network policies for the private link service on the subnet. Setting this to true will Enable the policy and setting this to false will Disable the policy. Defaults to true.
+	// Enable or Disable network policies for the private link service on the subnet. Defaults to true.
 	// +kubebuilder:validation:Optional
 	PrivateLinkServiceNetworkPoliciesEnabled *bool `json:"privateLinkServiceNetworkPoliciesEnabled,omitempty" tf:"private_link_service_network_policies_enabled,omitempty"`
 

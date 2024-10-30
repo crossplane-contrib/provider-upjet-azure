@@ -50,6 +50,8 @@ type SubscriptionInitParameters struct {
 	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
+
 	// A client_scoped_subscription block as defined below.
 	ClientScopedSubscription *ClientScopedSubscriptionInitParameters `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
 
@@ -91,6 +93,8 @@ type SubscriptionObservation struct {
 
 	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
 	// A client_scoped_subscription block as defined below.
 	ClientScopedSubscription *ClientScopedSubscriptionObservation `json:"clientScopedSubscription,omitempty" tf:"client_scoped_subscription,omitempty"`
@@ -140,6 +144,9 @@ type SubscriptionParameters struct {
 	// The idle interval after which the topic is automatically deleted as an ISO 8601 duration. The minimum duration is 5 minutes or PT5M.
 	// +kubebuilder:validation:Optional
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
 
 	// A client_scoped_subscription block as defined below.
 	// +kubebuilder:validation:Optional

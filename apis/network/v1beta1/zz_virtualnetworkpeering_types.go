@@ -21,7 +21,7 @@ type VirtualNetworkPeeringInitParameters struct {
 	// Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. Defaults to false.
 	AllowGatewayTransit *bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
 
-	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
+	// Controls if the traffic from the local virtual network can reach the remote virtual network. Defaults to true.
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 
 	// A list of local Subnet names that are Subnet peered with remote Virtual Network.
@@ -65,7 +65,7 @@ type VirtualNetworkPeeringObservation struct {
 	// Controls gatewayLinks can be used in the remote virtual network’s link to the local virtual network. Defaults to false.
 	AllowGatewayTransit *bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
 
-	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
+	// Controls if the traffic from the local virtual network can reach the remote virtual network. Defaults to true.
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 
 	// The ID of the Virtual Network Peering.
@@ -110,7 +110,7 @@ type VirtualNetworkPeeringParameters struct {
 	// +kubebuilder:validation:Optional
 	AllowGatewayTransit *bool `json:"allowGatewayTransit,omitempty" tf:"allow_gateway_transit,omitempty"`
 
-	// Controls if the VMs in the remote virtual network can access VMs in the local virtual network. Defaults to true.
+	// Controls if the traffic from the local virtual network can reach the remote virtual network. Defaults to true.
 	// +kubebuilder:validation:Optional
 	AllowVirtualNetworkAccess *bool `json:"allowVirtualNetworkAccess,omitempty" tf:"allow_virtual_network_access,omitempty"`
 

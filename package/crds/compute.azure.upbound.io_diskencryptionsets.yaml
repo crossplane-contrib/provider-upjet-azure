@@ -815,7 +815,8 @@ spec:
                     type: object
                   keyVaultKeyId:
                     description: Specifies the URL to a Key Vault Key (either from
-                      a Key Vault Key, or the Key URL for the Key Vault Secret).
+                      a Key Vault Key, or the Key URL for the Key Vault Secret). Exactly
+                      one of managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   keyVaultKeyIdRef:
                     description: Reference to a Key in keyvault to populate keyVaultKeyId.
@@ -894,6 +895,10 @@ spec:
                   location:
                     description: Specifies the Azure Region where the Disk Encryption
                       Set exists. Changing this forces a new resource to be created.
+                    type: string
+                  managedHsmKeyId:
+                    description: Key ID of a key in a managed HSM.  Exactly one of
+                      managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   resourceGroupName:
                     description: Specifies the name of the Resource Group where the
@@ -1031,7 +1036,8 @@ spec:
                     type: object
                   keyVaultKeyId:
                     description: Specifies the URL to a Key Vault Key (either from
-                      a Key Vault Key, or the Key URL for the Key Vault Secret).
+                      a Key Vault Key, or the Key URL for the Key Vault Secret). Exactly
+                      one of managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   keyVaultKeyIdRef:
                     description: Reference to a Key in keyvault to populate keyVaultKeyId.
@@ -1110,6 +1116,10 @@ spec:
                   location:
                     description: Specifies the Azure Region where the Disk Encryption
                       Set exists. Changing this forces a new resource to be created.
+                    type: string
+                  managedHsmKeyId:
+                    description: Key ID of a key in a managed HSM.  Exactly one of
+                      managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   tags:
                     additionalProperties:
@@ -1344,7 +1354,8 @@ spec:
                     type: object
                   keyVaultKeyId:
                     description: Specifies the URL to a Key Vault Key (either from
-                      a Key Vault Key, or the Key URL for the Key Vault Secret).
+                      a Key Vault Key, or the Key URL for the Key Vault Secret). Exactly
+                      one of managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   keyVaultKeyUrl:
                     description: The URL for the Key Vault Key or Key Vault Secret
@@ -1353,6 +1364,10 @@ spec:
                   location:
                     description: Specifies the Azure Region where the Disk Encryption
                       Set exists. Changing this forces a new resource to be created.
+                    type: string
+                  managedHsmKeyId:
+                    description: Key ID of a key in a managed HSM.  Exactly one of
+                      managed_hsm_key_id, key_vault_key_id must be specified.
                     type: string
                   resourceGroupName:
                     description: Specifies the name of the Resource Group where the

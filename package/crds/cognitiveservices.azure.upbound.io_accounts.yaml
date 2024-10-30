@@ -1177,7 +1177,10 @@ spec:
                     type: object
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. Changing
+                      This property is required when network_acls is specified. This
+                      property is also required when using the OpenAI service with
+                      libraries which assume the Azure OpenAI endpoint is a subdomain
+                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
                       this forces a new resource to be created.
                     type: string
                   customerManagedKey:
@@ -1524,7 +1527,10 @@ spec:
                     type: object
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. Changing
+                      This property is required when network_acls is specified. This
+                      property is also required when using the OpenAI service with
+                      libraries which assume the Azure OpenAI endpoint is a subdomain
+                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
                       this forces a new resource to be created.
                     type: string
                   customerManagedKey:
@@ -1944,7 +1950,10 @@ spec:
                     type: string
                   customSubdomainName:
                     description: The subdomain name used for token-based authentication.
-                      This property is required when network_acls is specified. Changing
+                      This property is required when network_acls is specified. This
+                      property is also required when using the OpenAI service with
+                      libraries which assume the Azure OpenAI endpoint is a subdomain
+                      on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing
                       this forces a new resource to be created.
                     type: string
                   customerManagedKey:

@@ -14,6 +14,7 @@ import (
 )
 
 type RouteTableInitParameters struct {
+	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
 
 	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
 	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
@@ -30,6 +31,7 @@ type RouteTableInitParameters struct {
 }
 
 type RouteTableObservation struct {
+	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
 
 	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
 	DisableBGPRoutePropagation *bool `json:"disableBgpRoutePropagation,omitempty" tf:"disable_bgp_route_propagation,omitempty"`
@@ -56,6 +58,9 @@ type RouteTableObservation struct {
 }
 
 type RouteTableParameters struct {
+
+	// +kubebuilder:validation:Optional
+	BGPRoutePropagationEnabled *bool `json:"bgpRoutePropagationEnabled,omitempty" tf:"bgp_route_propagation_enabled,omitempty"`
 
 	// Boolean flag which controls propagation of routes learned by BGP on that route table. True means disable.
 	// +kubebuilder:validation:Optional

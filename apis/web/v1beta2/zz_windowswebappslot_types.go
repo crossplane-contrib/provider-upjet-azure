@@ -3217,7 +3217,7 @@ type WindowsWebAppSlotSiteConfigInitParameters struct {
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -3327,7 +3327,7 @@ type WindowsWebAppSlotSiteConfigObservation struct {
 	// Should Remote Debugging be enabled. Defaults to false.
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 
 	// One or more scm_ip_restriction blocks as defined above.
@@ -3462,7 +3462,7 @@ type WindowsWebAppSlotSiteConfigParameters struct {
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingEnabled *bool `json:"remoteDebuggingEnabled,omitempty" tf:"remote_debugging_enabled,omitempty"`
 
-	// The Remote Debugging Version. Possible values include VS2017 and VS2019
+	// The Remote Debugging Version. Possible values include VS2017, VS2019 and VS2022
 	// +kubebuilder:validation:Optional
 	RemoteDebuggingVersion *string `json:"remoteDebuggingVersion,omitempty" tf:"remote_debugging_version,omitempty"`
 

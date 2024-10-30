@@ -687,6 +687,8 @@ spec:
                       deleted as an ISO 8601 duration. The minimum duration is 5 minutes
                       or PT5M.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   clientScopedSubscription:
                     description: A client_scoped_subscription block as defined below.
                     properties:
@@ -847,6 +849,8 @@ spec:
                       deleted as an ISO 8601 duration. The minimum duration is 5 minutes
                       or PT5M.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   clientScopedSubscription:
                     description: A client_scoped_subscription block as defined below.
                     properties:
@@ -1093,6 +1097,8 @@ spec:
                       deleted as an ISO 8601 duration. The minimum duration is 5 minutes
                       or PT5M.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   clientScopedSubscription:
                     description: A client_scoped_subscription block as defined below.
                     properties:
