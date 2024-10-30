@@ -1,0 +1,101 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSResolverInboundEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    ipConfigurations:
+    - privateIpAllocationMethod: Dynamic
+      subnetIdSelector:
+        matchLabels:
+          testing.upbound.io/example-name: example
+    location: West Europe
+    privateDnsResolverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    tags:
+      key: value
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSResolver
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    location: West Europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.0/28
+    delegation:
+    - name: Microsoft.Network.dnsResolvers
+      serviceDelegation:
+      - actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        name: Microsoft.Network/dnsResolvers
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolverinboundendpoint
+  labels:
+    testing.upbound.io/example-name: example
+  name: example
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: West Europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
