@@ -509,6 +509,7 @@ import (
 	privatednsmxrecord "github.com/upbound/provider-azure/internal/controller/network/privatednsmxrecord"
 	privatednsptrrecord "github.com/upbound/provider-azure/internal/controller/network/privatednsptrrecord"
 	privatednsresolver "github.com/upbound/provider-azure/internal/controller/network/privatednsresolver"
+	privatednsresolverinboundendpoint "github.com/upbound/provider-azure/internal/controller/network/privatednsresolverinboundendpoint"
 	privatednssrvrecord "github.com/upbound/provider-azure/internal/controller/network/privatednssrvrecord"
 	privatednstxtrecord "github.com/upbound/provider-azure/internal/controller/network/privatednstxtrecord"
 	privatednszone "github.com/upbound/provider-azure/internal/controller/network/privatednszone"
@@ -1253,6 +1254,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		privatednsmxrecord.Setup,
 		privatednsptrrecord.Setup,
 		privatednsresolver.Setup,
+		privatednsresolverinboundendpoint.Setup,
 		privatednssrvrecord.Setup,
 		privatednstxtrecord.Setup,
 		privatednszone.Setup,
