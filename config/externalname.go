@@ -274,14 +274,16 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
 	"azurerm_cosmosdb_sql_role_assignment": config.IdentifierFromProvider,
 	// We switched to IdentifierFromProvider configuration because of the problem in this issue: https://github.com/crossplane/upjet/issues/32
-	"azurerm_cosmosdb_sql_role_definition":  config.IdentifierFromProvider,
-	"azurerm_cosmosdb_mongo_database":       config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .external_name }}"),
-	"azurerm_cosmosdb_mongo_collection":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .parameters.database_name }}/collections/{{ .external_name }}"),
-	"azurerm_cosmosdb_cassandra_keyspace":   config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/cassandraKeyspaces/{{ .external_name }}"),
-	"azurerm_cosmosdb_cassandra_table":      config.TemplatedStringAsIdentifier("name", "{{ .parameters.cassandra_keyspace_id }}/tables/{{ .external_name }}"),
-	"azurerm_cosmosdb_gremlin_database":     config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/gremlinDatabases/{{ .external_name }}"),
-	"azurerm_cosmosdb_gremlin_graph":        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/gremlinDatabases/{{ .parameters.database_name }}/graphs/{{ .external_name }}"),
-	"azurerm_cosmosdb_sql_stored_procedure": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .parameters.container_name }}/storedProcedures/{{ .external_name }}"),
+	"azurerm_cosmosdb_sql_role_definition":   config.IdentifierFromProvider,
+	"azurerm_cosmosdb_mongo_database":        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .external_name }}"),
+	"azurerm_cosmosdb_mongo_collection":      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/mongodbDatabases/{{ .parameters.database_name }}/collections/{{ .external_name }}"),
+	"azurerm_cosmosdb_mongo_user_definition": mongoDatabaseBasedId("username", "mongodbUserDefinitions"),
+	"azurerm_cosmosdb_mongo_role_definition": mongoDatabaseBasedId("role_name", "mongodbRoleDefinitions"),
+	"azurerm_cosmosdb_cassandra_keyspace":    config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/cassandraKeyspaces/{{ .external_name }}"),
+	"azurerm_cosmosdb_cassandra_table":       config.TemplatedStringAsIdentifier("name", "{{ .parameters.cassandra_keyspace_id }}/tables/{{ .external_name }}"),
+	"azurerm_cosmosdb_gremlin_database":      config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/gremlinDatabases/{{ .external_name }}"),
+	"azurerm_cosmosdb_gremlin_graph":         config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/gremlinDatabases/{{ .parameters.database_name }}/graphs/{{ .external_name }}"),
+	"azurerm_cosmosdb_sql_stored_procedure":  config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/sqlDatabases/{{ .parameters.database_name }}/containers/{{ .parameters.container_name }}/storedProcedures/{{ .external_name }}"),
 	// Contains only container_id as parameter which includes other information like resource group name etc.
 	"azurerm_cosmosdb_sql_function": config.TemplatedStringAsIdentifier("name", "{{ .parameters.container_id }}/userDefinedFunctions/{{ .external_name }}"),
 	"azurerm_cosmosdb_table":        config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.DocumentDB/databaseAccounts/{{ .parameters.account_name }}/tables/{{ .external_name }}"),
@@ -2066,6 +2068,44 @@ func managementGroupSubscriptionAssociation() config.ExternalName {
 		return fmt.Sprintf("/managementGroup/%s/subscription/%s", managementGroupName, subscriptionId), nil
 	}
 	return e
+}
+
+// custom function for mongo database related resources
+// Database ID Input
+// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DocumentDB/databaseAccounts/account1/mongodbDatabases/database
+// Expected output
+// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DocumentDB/databaseAccounts/account1/mongodbRoleDefinitions/database.rolename
+// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.DocumentDB/databaseAccounts/account1/mongodbUserDefinitions/database.username
+func mongoDatabaseBasedId(nameField string, objectType string) config.ExternalName {
+	return config.ExternalName{
+		SetIdentifierArgumentFn: func(base map[string]any, name string) {
+			base[nameField] = name
+		},
+		OmittedFields: []string{
+			nameField,
+			nameField + "_prefix",
+		},
+		GetExternalNameFn: func(tfstate map[string]interface{}) (string, error) {
+			id, ok := tfstate["id"]
+			if !ok {
+				return "", errors.New("id in tfstate cannot be empty")
+			}
+			w := strings.Split(id.(string), "/")
+			databaseAndName := w[len(w)-1]
+			return strings.Split(databaseAndName, ".")[1], nil
+		},
+		GetIDFn: func(_ context.Context, externalName string, parameters map[string]interface{}, _ map[string]interface{}) (string, error) {
+			mongoDatabaseID, ok := parameters["cosmos_mongo_database_id"]
+			if !ok {
+				return "", errors.New("cannot get cosmos_mongo_database_id")
+			}
+			w := strings.Split(mongoDatabaseID.(string), "/")
+			accountId := w[:9]
+			databaseName := w[len(w)-1]
+
+			return strings.Join(append(accountId, objectType, databaseName+"."+externalName), "/"), nil
+		},
+	}
 }
 
 // ResourceConfigurator applies all external name configs

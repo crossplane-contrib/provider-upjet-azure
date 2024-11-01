@@ -10,6 +10,12 @@ package v1beta1
 func (tr *CassandraDatacenter) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *MongoRoleDefinition) Hub() {}
+
+// Hub marks this type as a conversion hub.
+func (tr *MongoUserDefinition) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *SQLDedicatedGateway) Hub() {}
 
 // Hub marks this type as a conversion hub.

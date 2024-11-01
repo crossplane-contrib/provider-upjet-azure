@@ -593,6 +593,106 @@ func (mg *MongoDatabase) ResolveReferences(ctx context.Context, c client.Reader)
 	return nil
 }
 
+// ResolveReferences of this MongoRoleDefinition.
+func (mg *MongoRoleDefinition) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "MongoDatabase", "MongoDatabaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosMongoDatabaseID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.CosmosMongoDatabaseIDRef,
+			Selector:     mg.Spec.ForProvider.CosmosMongoDatabaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosMongoDatabaseID")
+	}
+	mg.Spec.ForProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "MongoDatabase", "MongoDatabaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosMongoDatabaseID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.CosmosMongoDatabaseIDRef,
+			Selector:     mg.Spec.InitProvider.CosmosMongoDatabaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CosmosMongoDatabaseID")
+	}
+	mg.Spec.InitProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
+// ResolveReferences of this MongoUserDefinition.
+func (mg *MongoUserDefinition) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "MongoDatabase", "MongoDatabaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.CosmosMongoDatabaseID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.ForProvider.CosmosMongoDatabaseIDRef,
+			Selector:     mg.Spec.ForProvider.CosmosMongoDatabaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.CosmosMongoDatabaseID")
+	}
+	mg.Spec.ForProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("cosmosdb.azure.upbound.io", "v1beta2", "MongoDatabase", "MongoDatabaseList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.CosmosMongoDatabaseID),
+			Extract:      resource.ExtractResourceID(),
+			Reference:    mg.Spec.InitProvider.CosmosMongoDatabaseIDRef,
+			Selector:     mg.Spec.InitProvider.CosmosMongoDatabaseIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.CosmosMongoDatabaseID")
+	}
+	mg.Spec.InitProvider.CosmosMongoDatabaseID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.CosmosMongoDatabaseIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this SQLContainer.
 func (mg *SQLContainer) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
