@@ -2647,6 +2647,11 @@ func (in *SubscriptionInitParameters) DeepCopyInto(out *SubscriptionInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ClientScopedSubscription != nil {
 		in, out := &in.ClientScopedSubscription, &out.ClientScopedSubscription
 		*out = make([]ClientScopedSubscriptionInitParameters, len(*in))
@@ -2761,6 +2766,11 @@ func (in *SubscriptionObservation) DeepCopyInto(out *SubscriptionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ClientScopedSubscription != nil {
 		in, out := &in.ClientScopedSubscription, &out.ClientScopedSubscription
 		*out = make([]ClientScopedSubscriptionObservation, len(*in))
@@ -2851,6 +2861,11 @@ func (in *SubscriptionParameters) DeepCopyInto(out *SubscriptionParameters) {
 	if in.AutoDeleteOnIdle != nil {
 		in, out := &in.AutoDeleteOnIdle, &out.AutoDeleteOnIdle
 		*out = new(string)
+		**out = **in
+	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ClientScopedSubscription != nil {

@@ -151,6 +151,11 @@ spec:
                       Health Extension.
                     items:
                       properties:
+                        action:
+                          description: The repair action that will be used for repairing
+                            unhealthy virtual machines in the scale set. Possible
+                            values include Replace, Restart, Reimage.
+                          type: string
                         enabled:
                           description: Should the automatic instance repair be enabled
                             on this Virtual Machine Scale Set?
@@ -1201,6 +1206,11 @@ spec:
                       Health Extension.
                     items:
                       properties:
+                        action:
+                          description: The repair action that will be used for repairing
+                            unhealthy virtual machines in the scale set. Possible
+                            values include Replace, Restart, Reimage.
+                          type: string
                         enabled:
                           description: Should the automatic instance repair be enabled
                             on this Virtual Machine Scale Set?
@@ -2358,6 +2368,11 @@ spec:
                       Health Extension.
                     items:
                       properties:
+                        action:
+                          description: The repair action that will be used for repairing
+                            unhealthy virtual machines in the scale set. Possible
+                            values include Replace, Restart, Reimage.
+                          type: string
                         enabled:
                           description: Should the automatic instance repair be enabled
                             on this Virtual Machine Scale Set?

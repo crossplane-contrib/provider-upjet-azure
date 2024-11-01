@@ -387,6 +387,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPSTrafficOnlyEnabled != nil {
+		in, out := &in.HTTPSTrafficOnlyEnabled, &out.HTTPSTrafficOnlyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]IdentityInitParameters, len(*in))
@@ -1289,6 +1294,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPSTrafficOnlyEnabled != nil {
+		in, out := &in.HTTPSTrafficOnlyEnabled, &out.HTTPSTrafficOnlyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -1859,6 +1869,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.HTTPSTrafficOnlyEnabled != nil {
+		in, out := &in.HTTPSTrafficOnlyEnabled, &out.HTTPSTrafficOnlyEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Identity != nil {
 		in, out := &in.Identity, &out.Identity
 		*out = make([]IdentityParameters, len(*in))
@@ -2411,6 +2426,11 @@ func (in *AzureFilesAuthenticationInitParameters) DeepCopyInto(out *AzureFilesAu
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DefaultShareLevelPermission != nil {
+		in, out := &in.DefaultShareLevelPermission, &out.DefaultShareLevelPermission
+		*out = new(string)
+		**out = **in
+	}
 	if in.DirectoryType != nil {
 		in, out := &in.DirectoryType, &out.DirectoryType
 		*out = new(string)
@@ -2438,6 +2458,11 @@ func (in *AzureFilesAuthenticationObservation) DeepCopyInto(out *AzureFilesAuthe
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.DefaultShareLevelPermission != nil {
+		in, out := &in.DefaultShareLevelPermission, &out.DefaultShareLevelPermission
+		*out = new(string)
+		**out = **in
+	}
 	if in.DirectoryType != nil {
 		in, out := &in.DirectoryType, &out.DirectoryType
 		*out = new(string)
@@ -2464,6 +2489,11 @@ func (in *AzureFilesAuthenticationParameters) DeepCopyInto(out *AzureFilesAuthen
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.DefaultShareLevelPermission != nil {
+		in, out := &in.DefaultShareLevelPermission, &out.DefaultShareLevelPermission
+		*out = new(string)
+		**out = **in
 	}
 	if in.DirectoryType != nil {
 		in, out := &in.DirectoryType, &out.DirectoryType

@@ -244,6 +244,29 @@ spec:
                     description: A subnet block as defined below.
                     items:
                       properties:
+                        sharedPublicIpAddress:
+                          description: A shared_public_ip_address block as defined
+                            below.
+                          items:
+                            properties:
+                              allowedPorts:
+                                description: A list of allowed_ports blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    backendPort:
+                                      description: The port on the Virtual Machine
+                                        that the traffic will be sent to.
+                                      type: number
+                                    transportProtocol:
+                                      description: The transport protocol that the
+                                        traffic will use. Possible values are TCP
+                                        and UDP.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         useInVirtualMachineCreation:
                           description: Can this subnet be used for creating Virtual
                             Machines? Possible values are Allow, Default and Deny.
@@ -447,6 +470,29 @@ spec:
                     description: A subnet block as defined below.
                     items:
                       properties:
+                        sharedPublicIpAddress:
+                          description: A shared_public_ip_address block as defined
+                            below.
+                          items:
+                            properties:
+                              allowedPorts:
+                                description: A list of allowed_ports blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    backendPort:
+                                      description: The port on the Virtual Machine
+                                        that the traffic will be sent to.
+                                      type: number
+                                    transportProtocol:
+                                      description: The transport protocol that the
+                                        traffic will use. Possible values are TCP
+                                        and UDP.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         useInVirtualMachineCreation:
                           description: Can this subnet be used for creating Virtual
                             Machines? Possible values are Allow, Default and Deny.
@@ -670,6 +716,29 @@ spec:
                         name:
                           description: The name of the Subnet for this Virtual Network.
                           type: string
+                        sharedPublicIpAddress:
+                          description: A shared_public_ip_address block as defined
+                            below.
+                          items:
+                            properties:
+                              allowedPorts:
+                                description: A list of allowed_ports blocks as defined
+                                  below.
+                                items:
+                                  properties:
+                                    backendPort:
+                                      description: The port on the Virtual Machine
+                                        that the traffic will be sent to.
+                                      type: number
+                                    transportProtocol:
+                                      description: The transport protocol that the
+                                        traffic will use. Possible values are TCP
+                                        and UDP.
+                                      type: string
+                                  type: object
+                                type: array
+                            type: object
+                          type: array
                         useInVirtualMachineCreation:
                           description: Can this subnet be used for creating Virtual
                             Machines? Possible values are Allow, Default and Deny.

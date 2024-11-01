@@ -72,6 +72,11 @@ func (in *AccountInitParameters) DeepCopyInto(out *AccountInitParameters) {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
 	}
+	if in.BurstCapacityEnabled != nil {
+		in, out := &in.BurstCapacityEnabled, &out.BurstCapacityEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.Capabilities != nil {
 		in, out := &in.Capabilities, &out.Capabilities
 		*out = make([]CapabilitiesInitParameters, len(*in))
@@ -325,6 +330,11 @@ func (in *AccountObservation) DeepCopyInto(out *AccountObservation) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.BurstCapacityEnabled != nil {
+		in, out := &in.BurstCapacityEnabled, &out.BurstCapacityEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Capabilities != nil {
 		in, out := &in.Capabilities, &out.Capabilities
@@ -584,6 +594,11 @@ func (in *AccountParameters) DeepCopyInto(out *AccountParameters) {
 		for i := range *in {
 			(*in)[i].DeepCopyInto(&(*out)[i])
 		}
+	}
+	if in.BurstCapacityEnabled != nil {
+		in, out := &in.BurstCapacityEnabled, &out.BurstCapacityEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.Capabilities != nil {
 		in, out := &in.Capabilities, &out.Capabilities

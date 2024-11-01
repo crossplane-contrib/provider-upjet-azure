@@ -2003,6 +2003,36 @@ spec:
                     description: A service_mesh_profile block as defined below.
                     items:
                       properties:
+                        certificateAuthority:
+                          description: A certificate_authority block as defined below.
+                            When this property is specified, key_vault_secrets_provider
+                            is also required to be set. This configuration allows
+                            you to bring your own root certificate and keys for Istio
+                            CA in the Istio-based service mesh add-on for Azure Kubernetes
+                            Service.
+                          items:
+                            properties:
+                              certChainObjectName:
+                                description: The certificate chain object name in
+                                  Azure Key Vault.
+                                type: string
+                              certObjectName:
+                                description: The intermediate certificate object name
+                                  in Azure Key Vault.
+                                type: string
+                              keyObjectName:
+                                description: The intermediate certificate private
+                                  key object name in Azure Key Vault.
+                                type: string
+                              keyVaultId:
+                                description: The resource ID of the Key Vault.
+                                type: string
+                              rootCertObjectName:
+                                description: The root certificate object name in Azure
+                                  Key Vault.
+                                type: string
+                            type: object
+                          type: array
                         externalIngressGatewayEnabled:
                           description: Is Istio External Ingress Gateway enabled?
                           type: boolean
@@ -4035,6 +4065,36 @@ spec:
                     description: A service_mesh_profile block as defined below.
                     items:
                       properties:
+                        certificateAuthority:
+                          description: A certificate_authority block as defined below.
+                            When this property is specified, key_vault_secrets_provider
+                            is also required to be set. This configuration allows
+                            you to bring your own root certificate and keys for Istio
+                            CA in the Istio-based service mesh add-on for Azure Kubernetes
+                            Service.
+                          items:
+                            properties:
+                              certChainObjectName:
+                                description: The certificate chain object name in
+                                  Azure Key Vault.
+                                type: string
+                              certObjectName:
+                                description: The intermediate certificate object name
+                                  in Azure Key Vault.
+                                type: string
+                              keyObjectName:
+                                description: The intermediate certificate private
+                                  key object name in Azure Key Vault.
+                                type: string
+                              keyVaultId:
+                                description: The resource ID of the Key Vault.
+                                type: string
+                              rootCertObjectName:
+                                description: The root certificate object name in Azure
+                                  Key Vault.
+                                type: string
+                            type: object
+                          type: array
                         externalIngressGatewayEnabled:
                           description: Is Istio External Ingress Gateway enabled?
                           type: boolean
@@ -5783,6 +5843,36 @@ spec:
                     description: A service_mesh_profile block as defined below.
                     items:
                       properties:
+                        certificateAuthority:
+                          description: A certificate_authority block as defined below.
+                            When this property is specified, key_vault_secrets_provider
+                            is also required to be set. This configuration allows
+                            you to bring your own root certificate and keys for Istio
+                            CA in the Istio-based service mesh add-on for Azure Kubernetes
+                            Service.
+                          items:
+                            properties:
+                              certChainObjectName:
+                                description: The certificate chain object name in
+                                  Azure Key Vault.
+                                type: string
+                              certObjectName:
+                                description: The intermediate certificate object name
+                                  in Azure Key Vault.
+                                type: string
+                              keyObjectName:
+                                description: The intermediate certificate private
+                                  key object name in Azure Key Vault.
+                                type: string
+                              keyVaultId:
+                                description: The resource ID of the Key Vault.
+                                type: string
+                              rootCertObjectName:
+                                description: The root certificate object name in Azure
+                                  Key Vault.
+                                type: string
+                            type: object
+                          type: array
                         externalIngressGatewayEnabled:
                           description: Is Istio External Ingress Gateway enabled?
                           type: boolean
