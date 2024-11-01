@@ -118,6 +118,8 @@ import (
 	botconnection "github.com/upbound/provider-azure/internal/controller/botservice/botconnection"
 	botwebapp "github.com/upbound/provider-azure/internal/controller/botservice/botwebapp"
 	rediscachecache "github.com/upbound/provider-azure/internal/controller/cache/rediscache"
+	rediscacheaccesspolicy "github.com/upbound/provider-azure/internal/controller/cache/rediscacheaccesspolicy"
+	rediscacheaccesspolicyassignment "github.com/upbound/provider-azure/internal/controller/cache/rediscacheaccesspolicyassignment"
 	redisenterprisecluster "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisecluster"
 	redisenterprisedatabase "github.com/upbound/provider-azure/internal/controller/cache/redisenterprisedatabase"
 	redisfirewallrule "github.com/upbound/provider-azure/internal/controller/cache/redisfirewallrule"
@@ -863,6 +865,8 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		botconnection.Setup,
 		botwebapp.Setup,
 		rediscachecache.Setup,
+		rediscacheaccesspolicy.Setup,
+		rediscacheaccesspolicyassignment.Setup,
 		redisenterprisecluster.Setup,
 		redisenterprisedatabase.Setup,
 		redisfirewallrule.Setup,
