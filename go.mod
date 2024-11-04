@@ -166,5 +166,3 @@ require (
 )
 
 replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20241030101333-b4c9cbe27360
-
-// replace github.com/hashicorp/terraform-plugin-sdk/v2 => github.com/hashicorp/terraform-plugin-sdk/v2 v2.29.0
