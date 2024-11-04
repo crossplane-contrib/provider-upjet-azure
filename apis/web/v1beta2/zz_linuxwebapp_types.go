@@ -2349,7 +2349,7 @@ type LinuxWebAppSiteConfigApplicationStackInitParameters struct {
 	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
@@ -2391,7 +2391,7 @@ type LinuxWebAppSiteConfigApplicationStackObservation struct {
 	// The version of Node to run. Possible values include 12-lts, 14-lts, 16-lts, 18-lts and 20-lts. This property conflicts with java_version.
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 
 	// The version of Python to run. Possible values include 3.7, 3.8, 3.9, 3.10, 3.11 and 3.12.
@@ -2449,7 +2449,7 @@ type LinuxWebAppSiteConfigApplicationStackParameters struct {
 	// +kubebuilder:validation:Optional
 	NodeVersion *string `json:"nodeVersion,omitempty" tf:"node_version,omitempty"`
 
-	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1 and 8.2.
+	// The version of PHP to run. Possible values are 7.4, 8.0, 8.1, 8.2 and 8.3.
 	// +kubebuilder:validation:Optional
 	PHPVersion *string `json:"phpVersion,omitempty" tf:"php_version,omitempty"`
 

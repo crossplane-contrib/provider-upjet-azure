@@ -13,7 +13,58 @@ import (
 	v1 "github.com/crossplane/crossplane-runtime/apis/common/v1"
 )
 
+type AllowedPortsInitParameters struct {
+
+	// The port on the Virtual Machine that the traffic will be sent to.
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+
+	// The transport protocol that the traffic will use. Possible values are TCP and UDP.
+	TransportProtocol *string `json:"transportProtocol,omitempty" tf:"transport_protocol,omitempty"`
+}
+
+type AllowedPortsObservation struct {
+
+	// The port on the Virtual Machine that the traffic will be sent to.
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+
+	// The transport protocol that the traffic will use. Possible values are TCP and UDP.
+	TransportProtocol *string `json:"transportProtocol,omitempty" tf:"transport_protocol,omitempty"`
+}
+
+type AllowedPortsParameters struct {
+
+	// The port on the Virtual Machine that the traffic will be sent to.
+	// +kubebuilder:validation:Optional
+	BackendPort *float64 `json:"backendPort,omitempty" tf:"backend_port,omitempty"`
+
+	// The transport protocol that the traffic will use. Possible values are TCP and UDP.
+	// +kubebuilder:validation:Optional
+	TransportProtocol *string `json:"transportProtocol,omitempty" tf:"transport_protocol,omitempty"`
+}
+
+type SharedPublicIPAddressInitParameters struct {
+
+	// A list of allowed_ports blocks as defined below.
+	AllowedPorts []AllowedPortsInitParameters `json:"allowedPorts,omitempty" tf:"allowed_ports,omitempty"`
+}
+
+type SharedPublicIPAddressObservation struct {
+
+	// A list of allowed_ports blocks as defined below.
+	AllowedPorts []AllowedPortsObservation `json:"allowedPorts,omitempty" tf:"allowed_ports,omitempty"`
+}
+
+type SharedPublicIPAddressParameters struct {
+
+	// A list of allowed_ports blocks as defined below.
+	// +kubebuilder:validation:Optional
+	AllowedPorts []AllowedPortsParameters `json:"allowedPorts,omitempty" tf:"allowed_ports,omitempty"`
+}
+
 type SubnetInitParameters struct {
+
+	// A shared_public_ip_address block as defined below.
+	SharedPublicIPAddress *SharedPublicIPAddressInitParameters `json:"sharedPublicIpAddress,omitempty" tf:"shared_public_ip_address,omitempty"`
 
 	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny. Defaults to Allow.
 	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
@@ -27,6 +78,9 @@ type SubnetObservation struct {
 	// The name of the Subnet for this Virtual Network.
 	Name *string `json:"name,omitempty" tf:"name,omitempty"`
 
+	// A shared_public_ip_address block as defined below.
+	SharedPublicIPAddress *SharedPublicIPAddressObservation `json:"sharedPublicIpAddress,omitempty" tf:"shared_public_ip_address,omitempty"`
+
 	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny. Defaults to Allow.
 	UseInVirtualMachineCreation *string `json:"useInVirtualMachineCreation,omitempty" tf:"use_in_virtual_machine_creation,omitempty"`
 
@@ -35,6 +89,10 @@ type SubnetObservation struct {
 }
 
 type SubnetParameters struct {
+
+	// A shared_public_ip_address block as defined below.
+	// +kubebuilder:validation:Optional
+	SharedPublicIPAddress *SharedPublicIPAddressParameters `json:"sharedPublicIpAddress,omitempty" tf:"shared_public_ip_address,omitempty"`
 
 	// Can this subnet be used for creating Virtual Machines? Possible values are Allow, Default and Deny. Defaults to Allow.
 	// +kubebuilder:validation:Optional

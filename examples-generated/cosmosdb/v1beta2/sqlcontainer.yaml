@@ -21,7 +21,8 @@ spec:
       - path: /*
       - path: /included/?
       indexingMode: consistent
-    partitionKeyPath: /definition/id
+    partitionKeyPaths:
+    - /definition/id
     partitionKeyVersion: 1
     resourceGroupNameSelector:
       matchLabels:

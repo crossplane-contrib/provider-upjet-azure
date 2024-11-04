@@ -30,6 +30,9 @@ type AccountInitParameters struct {
 	// A backup block as defined below.
 	Backup []BackupInitParameters `json:"backup,omitempty" tf:"backup,omitempty"`
 
+	// Enable burst capacity for this Cosmos DB account. Defaults to false.
+	BurstCapacityEnabled *bool `json:"burstCapacityEnabled,omitempty" tf:"burst_capacity_enabled,omitempty"`
+
 	// The capabilities which should be enabled for this Cosmos DB account. Value is a capabilities block as defined below.
 	Capabilities []CapabilitiesInitParameters `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
 
@@ -135,6 +138,9 @@ type AccountObservation struct {
 
 	// A backup block as defined below.
 	Backup []BackupObservation `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// Enable burst capacity for this Cosmos DB account. Defaults to false.
+	BurstCapacityEnabled *bool `json:"burstCapacityEnabled,omitempty" tf:"burst_capacity_enabled,omitempty"`
 
 	// The capabilities which should be enabled for this Cosmos DB account. Value is a capabilities block as defined below.
 	Capabilities []CapabilitiesObservation `json:"capabilities,omitempty" tf:"capabilities,omitempty"`
@@ -261,6 +267,10 @@ type AccountParameters struct {
 	// A backup block as defined below.
 	// +kubebuilder:validation:Optional
 	Backup []BackupParameters `json:"backup,omitempty" tf:"backup,omitempty"`
+
+	// Enable burst capacity for this Cosmos DB account. Defaults to false.
+	// +kubebuilder:validation:Optional
+	BurstCapacityEnabled *bool `json:"burstCapacityEnabled,omitempty" tf:"burst_capacity_enabled,omitempty"`
 
 	// The capabilities which should be enabled for this Cosmos DB account. Value is a capabilities block as defined below.
 	// +kubebuilder:validation:Optional

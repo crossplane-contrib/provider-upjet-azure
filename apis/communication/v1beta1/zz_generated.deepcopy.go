@@ -121,28 +121,8 @@ func (in *ServiceObservation) DeepCopyInto(out *ServiceObservation) {
 		*out = new(string)
 		**out = **in
 	}
-	if in.PrimaryConnectionString != nil {
-		in, out := &in.PrimaryConnectionString, &out.PrimaryConnectionString
-		*out = new(string)
-		**out = **in
-	}
-	if in.PrimaryKey != nil {
-		in, out := &in.PrimaryKey, &out.PrimaryKey
-		*out = new(string)
-		**out = **in
-	}
 	if in.ResourceGroupName != nil {
 		in, out := &in.ResourceGroupName, &out.ResourceGroupName
-		*out = new(string)
-		**out = **in
-	}
-	if in.SecondaryConnectionString != nil {
-		in, out := &in.SecondaryConnectionString, &out.SecondaryConnectionString
-		*out = new(string)
-		**out = **in
-	}
-	if in.SecondaryKey != nil {
-		in, out := &in.SecondaryKey, &out.SecondaryKey
 		*out = new(string)
 		**out = **in
 	}

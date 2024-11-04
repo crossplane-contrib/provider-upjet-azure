@@ -27,7 +27,7 @@ type DiskEncryptionSetInitParameters struct {
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
+	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret). Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta2.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
@@ -42,6 +42,9 @@ type DiskEncryptionSetInitParameters struct {
 
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key ID of a key in a managed HSM.  Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// A mapping of tags to assign to the Disk Encryption Set.
 	// +mapType=granular
@@ -65,7 +68,7 @@ type DiskEncryptionSetObservation struct {
 	// An identity block as defined below.
 	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
+	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret). Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
 	KeyVaultKeyID *string `json:"keyVaultKeyId,omitempty" tf:"key_vault_key_id,omitempty"`
 
 	// The URL for the Key Vault Key or Key Vault Secret that is currently being used by the service.
@@ -73,6 +76,9 @@ type DiskEncryptionSetObservation struct {
 
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key ID of a key in a managed HSM.  Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -100,7 +106,7 @@ type DiskEncryptionSetParameters struct {
 	// +kubebuilder:validation:Optional
 	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
-	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret).
+	// Specifies the URL to a Key Vault Key (either from a Key Vault Key, or the Key URL for the Key Vault Secret). Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/keyvault/v1beta2.Key
 	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
@@ -117,6 +123,10 @@ type DiskEncryptionSetParameters struct {
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key ID of a key in a managed HSM.  Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
+	// +kubebuilder:validation:Optional
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

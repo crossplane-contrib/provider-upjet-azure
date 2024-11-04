@@ -24,7 +24,7 @@ type LogAnalyticsSavedSearchInitParameters struct {
 	// The function alias if the query serves as a function. Changing this forces a new resource to be created.
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
-	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
+	// The function parameters if the query serves as a function. Changing this forces a new resource to be created. For more examples and proper syntax please refer to this document.
 	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
 
 	// The query expression for the saved search. Changing this forces a new resource to be created.
@@ -46,7 +46,7 @@ type LogAnalyticsSavedSearchObservation struct {
 	// The function alias if the query serves as a function. Changing this forces a new resource to be created.
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
-	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
+	// The function parameters if the query serves as a function. Changing this forces a new resource to be created. For more examples and proper syntax please refer to this document.
 	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
 
 	// The Log Analytics Saved Search ID.
@@ -77,7 +77,7 @@ type LogAnalyticsSavedSearchParameters struct {
 	// +kubebuilder:validation:Optional
 	FunctionAlias *string `json:"functionAlias,omitempty" tf:"function_alias,omitempty"`
 
-	// The function parameters if the query serves as a function. Changing this forces a new resource to be created.
+	// The function parameters if the query serves as a function. Changing this forces a new resource to be created. For more examples and proper syntax please refer to this document.
 	// +kubebuilder:validation:Optional
 	FunctionParameters []*string `json:"functionParameters,omitempty" tf:"function_parameters,omitempty"`
 

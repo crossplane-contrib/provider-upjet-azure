@@ -121,7 +121,7 @@ spec:
                       to use a 3 tuple hash to map traffic to available servers. Also
                       known as Session Persistence, where in the Azure portal the
                       options are called None, Client IP and Client IP and Protocol
-                      respectively.'
+                      respectively. Defaults to Default.'
                     type: string
                   loadbalancerId:
                     description: The ID of the Load Balancer in which to create the
@@ -273,7 +273,7 @@ spec:
                       to use a 3 tuple hash to map traffic to available servers. Also
                       known as Session Persistence, where in the Azure portal the
                       options are called None, Client IP and Client IP and Protocol
-                      respectively.'
+                      respectively. Defaults to Default.'
                     type: string
                   probeId:
                     description: A reference to a Probe used by this Load Balancing
@@ -528,7 +528,7 @@ spec:
                       to use a 3 tuple hash to map traffic to available servers. Also
                       known as Session Persistence, where in the Azure portal the
                       options are called None, Client IP and Client IP and Protocol
-                      respectively.'
+                      respectively. Defaults to Default.'
                     type: string
                   loadbalancerId:
                     description: The ID of the Load Balancer in which to create the

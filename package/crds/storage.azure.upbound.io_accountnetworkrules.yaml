@@ -76,7 +76,7 @@ spec:
                   bypass:
                     description: Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
                       Valid options are any combination of Logging, Metrics, AzureServices,
-                      or None.
+                      or None. Defaults to ["AzureServices"].
                     items:
                       type: string
                     type: array
@@ -211,7 +211,7 @@ spec:
                   bypass:
                     description: Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
                       Valid options are any combination of Logging, Metrics, AzureServices,
-                      or None.
+                      or None. Defaults to ["AzureServices"].
                     items:
                       type: string
                     type: array
@@ -510,7 +510,7 @@ spec:
                   bypass:
                     description: Specifies whether traffic is bypassed for Logging/Metrics/AzureServices.
                       Valid options are any combination of Logging, Metrics, AzureServices,
-                      or None.
+                      or None. Defaults to ["AzureServices"].
                     items:
                       type: string
                     type: array

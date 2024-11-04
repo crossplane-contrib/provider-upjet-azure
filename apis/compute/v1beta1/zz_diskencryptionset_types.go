@@ -43,6 +43,9 @@ type DiskEncryptionSetInitParameters struct {
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
 
+	// Key ID of a key in a managed HSM.  Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
+
 	// A mapping of tags to assign to the Disk Encryption Set.
 	// +mapType=granular
 	Tags map[string]*string `json:"tags,omitempty" tf:"tags,omitempty"`
@@ -73,6 +76,9 @@ type DiskEncryptionSetObservation struct {
 
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key ID of a key in a managed HSM.  Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -117,6 +123,10 @@ type DiskEncryptionSetParameters struct {
 	// Specifies the Azure Region where the Disk Encryption Set exists. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	Location *string `json:"location,omitempty" tf:"location,omitempty"`
+
+	// Key ID of a key in a managed HSM.  Exactly one of managed_hsm_key_id, key_vault_key_id must be specified.
+	// +kubebuilder:validation:Optional
+	ManagedHSMKeyID *string `json:"managedHsmKeyId,omitempty" tf:"managed_hsm_key_id,omitempty"`
 
 	// Specifies the name of the Resource Group where the Disk Encryption Set should exist. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup

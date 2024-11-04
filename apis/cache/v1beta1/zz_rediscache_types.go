@@ -110,6 +110,8 @@ type RedisCacheInitParameters struct {
 	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	NonSSLPortEnabled *bool `json:"nonSslPortEnabled,omitempty" tf:"non_ssl_port_enabled,omitempty"`
+
 	// A list of patch_schedule blocks as defined below.
 	PatchSchedule []PatchScheduleInitParameters `json:"patchSchedule,omitempty" tf:"patch_schedule,omitempty"`
 
@@ -189,6 +191,8 @@ type RedisCacheObservation struct {
 	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
 
+	NonSSLPortEnabled *bool `json:"nonSslPortEnabled,omitempty" tf:"non_ssl_port_enabled,omitempty"`
+
 	// A list of patch_schedule blocks as defined below.
 	PatchSchedule []PatchScheduleObservation `json:"patchSchedule,omitempty" tf:"patch_schedule,omitempty"`
 
@@ -266,6 +270,9 @@ type RedisCacheParameters struct {
 	// The minimum TLS version. Possible values are 1.0, 1.1 and 1.2. Defaults to 1.0.
 	// +kubebuilder:validation:Optional
 	MinimumTLSVersion *string `json:"minimumTlsVersion,omitempty" tf:"minimum_tls_version,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	NonSSLPortEnabled *bool `json:"nonSslPortEnabled,omitempty" tf:"non_ssl_port_enabled,omitempty"`
 
 	// A list of patch_schedule blocks as defined below.
 	// +kubebuilder:validation:Optional
@@ -354,6 +361,14 @@ type RedisConfigurationInitParameters struct {
 	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
 
+	// First Storage Account connection string for AOF persistence.
+	AofStorageConnectionString0SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString0SecretRef,omitempty" tf:"-"`
+
+	// Second Storage Account connection string for AOF persistence.
+	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
+
+	AuthenticationEnabled *bool `json:"authenticationEnabled,omitempty" tf:"authentication_enabled,omitempty"`
+
 	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
 	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
 
@@ -384,6 +399,9 @@ type RedisConfigurationInitParameters struct {
 	// The maximum number of snapshots to create as a backup. Only supported for Premium SKUs.
 	RdbBackupMaxSnapshotCount *float64 `json:"rdbBackupMaxSnapshotCount,omitempty" tf:"rdb_backup_max_snapshot_count,omitempty"`
 
+	// The Connection String to the Storage Account. Only supported for Premium SKUs. In the format: DefaultEndpointsProtocol=https;BlobEndpoint=${azurerm_storage_account.example.primary_blob_endpoint};AccountName=${azurerm_storage_account.example.name};AccountKey=${azurerm_storage_account.example.primary_access_key}.
+	RdbStorageConnectionStringSecretRef *v1.SecretKeySelector `json:"rdbStorageConnectionStringSecretRef,omitempty" tf:"-"`
+
 	// The ID of the Subscription containing the Storage Account.
 	StorageAccountSubscriptionID *string `json:"storageAccountSubscriptionId,omitempty" tf:"storage_account_subscription_id,omitempty"`
 }
@@ -395,6 +413,8 @@ type RedisConfigurationObservation struct {
 
 	// Enable or disable AOF persistence for this Redis Cache. Defaults to false.
 	AofBackupEnabled *bool `json:"aofBackupEnabled,omitempty" tf:"aof_backup_enabled,omitempty"`
+
+	AuthenticationEnabled *bool `json:"authenticationEnabled,omitempty" tf:"authentication_enabled,omitempty"`
 
 	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
 	DataPersistenceAuthenticationMethod *string `json:"dataPersistenceAuthenticationMethod,omitempty" tf:"data_persistence_authentication_method,omitempty"`
@@ -450,6 +470,9 @@ type RedisConfigurationParameters struct {
 	// Second Storage Account connection string for AOF persistence.
 	// +kubebuilder:validation:Optional
 	AofStorageConnectionString1SecretRef *v1.SecretKeySelector `json:"aofStorageConnectionString1SecretRef,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	AuthenticationEnabled *bool `json:"authenticationEnabled,omitempty" tf:"authentication_enabled,omitempty"`
 
 	// Preferred auth method to communicate to storage account used for data persistence. Possible values are SAS and ManagedIdentity. Defaults to SAS.
 	// +kubebuilder:validation:Optional

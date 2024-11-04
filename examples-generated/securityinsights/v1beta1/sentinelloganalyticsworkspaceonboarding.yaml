@@ -9,10 +9,7 @@ metadata:
 spec:
   forProvider:
     customerManagedKeyEnabled: false
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    workspaceNameSelector:
+    workspaceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
 

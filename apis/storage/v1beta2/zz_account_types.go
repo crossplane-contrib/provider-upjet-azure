@@ -57,8 +57,10 @@ type AccountInitParameters struct {
 	// Specifies the Edge Zone within the Azure Region where this Storage Account should exist. Changing this forces a new Storage Account to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
+
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
+	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
 
 	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -72,7 +74,7 @@ type AccountInitParameters struct {
 	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information). Changing this forces a new resource to be created.
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
-	// Is Large File Share Enabled?
+	// Are Large File Shares Enabled? Defaults to false.
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
 	// Is Local User Enabled? Defaults to true.
@@ -169,8 +171,10 @@ type AccountObservation struct {
 	// Specifies the Edge Zone within the Azure Region where this Storage Account should exist. Changing this forces a new Storage Account to be created.
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
+
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
+	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
 
 	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -187,7 +191,7 @@ type AccountObservation struct {
 	// Is Hierarchical Namespace enabled? This can be used with Azure Data Lake Storage Gen 2 (see here for more information). Changing this forces a new resource to be created.
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
-	// Is Large File Share Enabled?
+	// Are Large File Shares Enabled? Defaults to false.
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
 	// Is Local User Enabled? Defaults to true.
@@ -499,9 +503,12 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EdgeZone *string `json:"edgeZone,omitempty" tf:"edge_zone,omitempty"`
 
-	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	// +kubebuilder:validation:Optional
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
+
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
+	// +kubebuilder:validation:Optional
+	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
 
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
@@ -519,7 +526,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	IsHnsEnabled *bool `json:"isHnsEnabled,omitempty" tf:"is_hns_enabled,omitempty"`
 
-	// Is Large File Share Enabled?
+	// Are Large File Shares Enabled? Defaults to false.
 	// +kubebuilder:validation:Optional
 	LargeFileShareEnabled *bool `json:"largeFileShareEnabled,omitempty" tf:"large_file_share_enabled,omitempty"`
 
@@ -676,6 +683,9 @@ type AzureFilesAuthenticationInitParameters struct {
 	// A active_directory block as defined below. Required when directory_type is AD.
 	ActiveDirectory *ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
+
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	DirectoryType *string `json:"directoryType,omitempty" tf:"directory_type,omitempty"`
 }
@@ -684,6 +694,9 @@ type AzureFilesAuthenticationObservation struct {
 
 	// A active_directory block as defined below. Required when directory_type is AD.
 	ActiveDirectory *ActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
 
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	DirectoryType *string `json:"directoryType,omitempty" tf:"directory_type,omitempty"`
@@ -694,6 +707,10 @@ type AzureFilesAuthenticationParameters struct {
 	// A active_directory block as defined below. Required when directory_type is AD.
 	// +kubebuilder:validation:Optional
 	ActiveDirectory *ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	// +kubebuilder:validation:Optional
+	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
 
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	// +kubebuilder:validation:Optional

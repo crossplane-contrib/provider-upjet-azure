@@ -21,7 +21,7 @@ type AccountInitParameters struct {
 	// If kind is TextAnalytics this specifies the key of the Search service.
 	CustomQuestionAnsweringSearchServiceKeySecretRef *v1.SecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
 
-	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. Changing this forces a new resource to be created.
+	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. This property is also required when using the OpenAI service with libraries which assume the Azure OpenAI endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing this forces a new resource to be created.
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 
 	// A customer_managed_key block as documented below.
@@ -85,7 +85,7 @@ type AccountObservation struct {
 	// If kind is TextAnalytics this specifies the ID of the Search service.
 	CustomQuestionAnsweringSearchServiceID *string `json:"customQuestionAnsweringSearchServiceId,omitempty" tf:"custom_question_answering_search_service_id,omitempty"`
 
-	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. Changing this forces a new resource to be created.
+	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. This property is also required when using the OpenAI service with libraries which assume the Azure OpenAI endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing this forces a new resource to be created.
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 
 	// A customer_managed_key block as documented below.
@@ -163,7 +163,7 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomQuestionAnsweringSearchServiceKeySecretRef *v1.SecretKeySelector `json:"customQuestionAnsweringSearchServiceKeySecretRef,omitempty" tf:"-"`
 
-	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. Changing this forces a new resource to be created.
+	// The subdomain name used for token-based authentication. This property is required when network_acls is specified. This property is also required when using the OpenAI service with libraries which assume the Azure OpenAI endpoint is a subdomain on https://openai.azure.com/, eg. https://<custom_subdomain_name>.openai.azure.com/.  Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	CustomSubdomainName *string `json:"customSubdomainName,omitempty" tf:"custom_subdomain_name,omitempty"`
 

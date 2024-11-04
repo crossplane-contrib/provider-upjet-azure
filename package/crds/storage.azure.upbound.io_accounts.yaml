@@ -140,6 +140,12 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        defaultShareLevelPermission:
+                          description: Specifies the default share level permissions
+                            applied to all users. Possible values are StorageFileDataSmbShareReader,
+                            StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
+                            or None.
+                          type: string
                         directoryType:
                           description: Specifies the directory service used. Possible
                             values are AADDS, AD and AADKERB.
@@ -305,6 +311,10 @@ spec:
                       Storage Account to be created.
                     type: string
                   enableHttpsTrafficOnly:
+                    description: Boolean flag which forces HTTPS if enabled, see here
+                      for more information. Defaults to true.
+                    type: boolean
+                  httpsTrafficOnlyEnabled:
                     description: Boolean flag which forces HTTPS if enabled, see here
                       for more information. Defaults to true.
                     type: boolean
@@ -871,6 +881,12 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        defaultShareLevelPermission:
+                          description: Specifies the default share level permissions
+                            applied to all users. Possible values are StorageFileDataSmbShareReader,
+                            StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
+                            or None.
+                          type: string
                         directoryType:
                           description: Specifies the directory service used. Possible
                             values are AADDS, AD and AADKERB.
@@ -1036,6 +1052,10 @@ spec:
                       Storage Account to be created.
                     type: string
                   enableHttpsTrafficOnly:
+                    description: Boolean flag which forces HTTPS if enabled, see here
+                      for more information. Defaults to true.
+                    type: boolean
+                  httpsTrafficOnlyEnabled:
                     description: Boolean flag which forces HTTPS if enabled, see here
                       for more information. Defaults to true.
                     type: boolean
@@ -1693,6 +1713,12 @@ spec:
                                 type: string
                             type: object
                           type: array
+                        defaultShareLevelPermission:
+                          description: Specifies the default share level permissions
+                            applied to all users. Possible values are StorageFileDataSmbShareReader,
+                            StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
+                            or None.
+                          type: string
                         directoryType:
                           description: Specifies the directory service used. Possible
                             values are AADDS, AD and AADKERB.
@@ -1858,6 +1884,10 @@ spec:
                       Storage Account to be created.
                     type: string
                   enableHttpsTrafficOnly:
+                    description: Boolean flag which forces HTTPS if enabled, see here
+                      for more information. Defaults to true.
+                    type: boolean
+                  httpsTrafficOnlyEnabled:
                     description: Boolean flag which forces HTTPS if enabled, see here
                       for more information. Defaults to true.
                     type: boolean
@@ -2719,6 +2749,12 @@ spec:
                               is set to AD.
                             type: string
                         type: object
+                      defaultShareLevelPermission:
+                        description: Specifies the default share level permissions
+                          applied to all users. Possible values are StorageFileDataSmbShareReader,
+                          StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
+                          or None.
+                        type: string
                       directoryType:
                         description: Specifies the directory service used. Possible
                           values are AADDS, AD and AADKERB.
@@ -2868,6 +2904,8 @@ spec:
                       Storage Account to be created.
                     type: string
                   enableHttpsTrafficOnly:
+                    type: boolean
+                  httpsTrafficOnlyEnabled:
                     description: Boolean flag which forces HTTPS if enabled, see here
                       for more information. Defaults to true.
                     type: boolean
@@ -2924,7 +2962,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: boolean
                   largeFileShareEnabled:
-                    description: Is Large File Share Enabled?
+                    description: Are Large File Shares Enabled? Defaults to false.
                     type: boolean
                   localUserEnabled:
                     description: Is Local User Enabled? Defaults to true.
@@ -3405,6 +3443,12 @@ spec:
                               is set to AD.
                             type: string
                         type: object
+                      defaultShareLevelPermission:
+                        description: Specifies the default share level permissions
+                          applied to all users. Possible values are StorageFileDataSmbShareReader,
+                          StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
+                          or None.
+                        type: string
                       directoryType:
                         description: Specifies the directory service used. Possible
                           values are AADDS, AD and AADKERB.
@@ -3554,6 +3598,8 @@ spec:
                       Storage Account to be created.
                     type: string
                   enableHttpsTrafficOnly:
+                    type: boolean
+                  httpsTrafficOnlyEnabled:
                     description: Boolean flag which forces HTTPS if enabled, see here
                       for more information. Defaults to true.
                     type: boolean
@@ -3610,7 +3656,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: boolean
                   largeFileShareEnabled:
-                    description: Is Large File Share Enabled?
+                    description: Are Large File Shares Enabled? Defaults to false.
                     type: boolean
                   localUserEnabled:
                     description: Is Local User Enabled? Defaults to true.
@@ -4182,6 +4228,12 @@ spec:
                               is set to AD.
                             type: string
                         type: object
+                      defaultShareLevelPermission:
+                        description: Specifies the default share level permissions
+                          applied to all users. Possible values are StorageFileDataSmbShareReader,
+                          StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor,
+                          or None.
+                        type: string
                       directoryType:
                         description: Specifies the directory service used. Possible
                           values are AADDS, AD and AADKERB.
@@ -4331,6 +4383,8 @@ spec:
                       Storage Account to be created.
                     type: string
                   enableHttpsTrafficOnly:
+                    type: boolean
+                  httpsTrafficOnlyEnabled:
                     description: Boolean flag which forces HTTPS if enabled, see here
                       for more information. Defaults to true.
                     type: boolean
@@ -4398,7 +4452,7 @@ spec:
                       Changing this forces a new resource to be created.
                     type: boolean
                   largeFileShareEnabled:
-                    description: Is Large File Share Enabled?
+                    description: Are Large File Shares Enabled? Defaults to false.
                     type: boolean
                   localUserEnabled:
                     description: Is Local User Enabled? Defaults to true.

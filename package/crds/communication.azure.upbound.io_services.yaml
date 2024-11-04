@@ -382,24 +382,10 @@ spec:
                   id:
                     description: The ID of the Communication Service.
                     type: string
-                  primaryConnectionString:
-                    description: The primary connection string of the Communication
-                      Service.
-                    type: string
-                  primaryKey:
-                    description: The primary key of the Communication Service.
-                    type: string
                   resourceGroupName:
                     description: The name of the Resource Group where the Communication
                       Service should exist. Changing this forces a new Communication
                       Service to be created.
-                    type: string
-                  secondaryConnectionString:
-                    description: The secondary connection string of the Communication
-                      Service.
-                    type: string
-                  secondaryKey:
-                    description: The secondary key of the Communication Service.
                     type: string
                   tags:
                     additionalProperties:

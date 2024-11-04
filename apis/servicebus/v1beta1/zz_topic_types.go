@@ -18,6 +18,8 @@ type TopicInitParameters struct {
 	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
+
 	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
 
@@ -33,11 +35,15 @@ type TopicInitParameters struct {
 	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
+	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
+
 	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
 	MaxMessageSizeInKilobytes *float64 `json:"maxMessageSizeInKilobytes,omitempty" tf:"max_message_size_in_kilobytes,omitempty"`
 
 	// Integer value which controls the size of memory allocated for the topic. For supported values see the "Queue/topic size" section of this document.
 	MaxSizeInMegabytes *float64 `json:"maxSizeInMegabytes,omitempty" tf:"max_size_in_megabytes,omitempty"`
+
+	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
@@ -54,6 +60,8 @@ type TopicObservation struct {
 	// The ISO 8601 timespan duration of the idle interval after which the Topic is automatically deleted, minimum of 5 minutes.
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
+
 	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
 
@@ -69,6 +77,8 @@ type TopicObservation struct {
 	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
 
+	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
+
 	// The ServiceBus Topic ID.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
@@ -80,6 +90,8 @@ type TopicObservation struct {
 
 	// The ID of the ServiceBus Namespace to create this topic in. Changing this forces a new resource to be created.
 	NamespaceID *string `json:"namespaceId,omitempty" tf:"namespace_id,omitempty"`
+
+	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
 	RequiresDuplicateDetection *bool `json:"requiresDuplicateDetection,omitempty" tf:"requires_duplicate_detection,omitempty"`
@@ -97,6 +109,9 @@ type TopicParameters struct {
 	// +kubebuilder:validation:Optional
 	AutoDeleteOnIdle *string `json:"autoDeleteOnIdle,omitempty" tf:"auto_delete_on_idle,omitempty"`
 
+	// +kubebuilder:validation:Optional
+	BatchedOperationsEnabled *bool `json:"batchedOperationsEnabled,omitempty" tf:"batched_operations_enabled,omitempty"`
+
 	// The ISO 8601 timespan duration of TTL of messages sent to this topic if no TTL value is set on the message itself.
 	// +kubebuilder:validation:Optional
 	DefaultMessageTTL *string `json:"defaultMessageTtl,omitempty" tf:"default_message_ttl,omitempty"`
@@ -116,6 +131,9 @@ type TopicParameters struct {
 	// Boolean flag which controls whether to enable the topic to be partitioned across multiple message brokers. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	EnablePartitioning *bool `json:"enablePartitioning,omitempty" tf:"enable_partitioning,omitempty"`
+
+	// +kubebuilder:validation:Optional
+	ExpressEnabled *bool `json:"expressEnabled,omitempty" tf:"express_enabled,omitempty"`
 
 	// Integer value which controls the maximum size of a message allowed on the topic for Premium SKU. For supported values see the "Large messages support" section of this document.
 	// +kubebuilder:validation:Optional
@@ -138,6 +156,9 @@ type TopicParameters struct {
 	// Selector for a ServiceBusNamespace in servicebus to populate namespaceId.
 	// +kubebuilder:validation:Optional
 	NamespaceIDSelector *v1.Selector `json:"namespaceIdSelector,omitempty" tf:"-"`
+
+	// +kubebuilder:validation:Optional
+	PartitioningEnabled *bool `json:"partitioningEnabled,omitempty" tf:"partitioning_enabled,omitempty"`
 
 	// Boolean flag which controls whether the Topic requires duplicate detection. Defaults to false. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional

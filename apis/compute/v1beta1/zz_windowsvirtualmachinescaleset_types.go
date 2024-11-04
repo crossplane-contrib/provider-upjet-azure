@@ -155,6 +155,9 @@ type WindowsVirtualMachineScaleSetAdditionalUnattendContentParameters struct {
 
 type WindowsVirtualMachineScaleSetAutomaticInstanceRepairInitParameters struct {
 
+	// The repair action that will be used for repairing unhealthy virtual machines in the scale set. Possible values include Replace, Restart, Reimage.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
 	// Should the automatic instance repair be enabled on this Virtual Machine Scale Set?
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -164,6 +167,9 @@ type WindowsVirtualMachineScaleSetAutomaticInstanceRepairInitParameters struct {
 
 type WindowsVirtualMachineScaleSetAutomaticInstanceRepairObservation struct {
 
+	// The repair action that will be used for repairing unhealthy virtual machines in the scale set. Possible values include Replace, Restart, Reimage.
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
+
 	// Should the automatic instance repair be enabled on this Virtual Machine Scale Set?
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
@@ -172,6 +178,10 @@ type WindowsVirtualMachineScaleSetAutomaticInstanceRepairObservation struct {
 }
 
 type WindowsVirtualMachineScaleSetAutomaticInstanceRepairParameters struct {
+
+	// The repair action that will be used for repairing unhealthy virtual machines in the scale set. Possible values include Replace, Restart, Reimage.
+	// +kubebuilder:validation:Optional
+	Action *string `json:"action,omitempty" tf:"action,omitempty"`
 
 	// Should the automatic instance repair be enabled on this Virtual Machine Scale Set?
 	// +kubebuilder:validation:Optional

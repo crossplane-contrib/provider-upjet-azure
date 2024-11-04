@@ -78,6 +78,8 @@ spec:
                       after which the Topic is automatically deleted, minimum of 5
                       minutes.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   defaultMessageTtl:
                     description: The ISO 8601 timespan duration of TTL of messages
                       sent to this topic if no TTL value is set on the message itself.
@@ -99,6 +101,8 @@ spec:
                     description: Boolean flag which controls whether to enable the
                       topic to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created.
+                    type: boolean
+                  expressEnabled:
                     type: boolean
                   maxMessageSizeInKilobytes:
                     description: Integer value which controls the maximum size of
@@ -190,6 +194,8 @@ spec:
                             type: string
                         type: object
                     type: object
+                  partitioningEnabled:
+                    type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Topic requires
                       duplicate detection. Defaults to false. Changing this forces
@@ -222,6 +228,8 @@ spec:
                       after which the Topic is automatically deleted, minimum of 5
                       minutes.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   defaultMessageTtl:
                     description: The ISO 8601 timespan duration of TTL of messages
                       sent to this topic if no TTL value is set on the message itself.
@@ -244,6 +252,8 @@ spec:
                       topic to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created.
                     type: boolean
+                  expressEnabled:
+                    type: boolean
                   maxMessageSizeInKilobytes:
                     description: Integer value which controls the maximum size of
                       a message allowed on the topic for Premium SKU. For supported
@@ -254,6 +264,8 @@ spec:
                       for the topic. For supported values see the "Queue/topic size"
                       section of this document.
                     type: number
+                  partitioningEnabled:
+                    type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Topic requires
                       duplicate detection. Defaults to false. Changing this forces
@@ -445,6 +457,8 @@ spec:
                       after which the Topic is automatically deleted, minimum of 5
                       minutes.
                     type: string
+                  batchedOperationsEnabled:
+                    type: boolean
                   defaultMessageTtl:
                     description: The ISO 8601 timespan duration of TTL of messages
                       sent to this topic if no TTL value is set on the message itself.
@@ -467,6 +481,8 @@ spec:
                       topic to be partitioned across multiple message brokers. Changing
                       this forces a new resource to be created.
                     type: boolean
+                  expressEnabled:
+                    type: boolean
                   id:
                     description: The ServiceBus Topic ID.
                     type: string
@@ -484,6 +500,8 @@ spec:
                     description: The ID of the ServiceBus Namespace to create this
                       topic in. Changing this forces a new resource to be created.
                     type: string
+                  partitioningEnabled:
+                    type: boolean
                   requiresDuplicateDetection:
                     description: Boolean flag which controls whether the Topic requires
                       duplicate detection. Defaults to false. Changing this forces

@@ -60,6 +60,9 @@ type AccountInitParameters struct {
 	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
+	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
+
 	// An identity block as defined below.
 	Identity []IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
@@ -171,6 +174,9 @@ type AccountObservation struct {
 
 	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
+
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
+	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
 
 	// The ID of the Storage Account.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
@@ -503,6 +509,10 @@ type AccountParameters struct {
 	// +kubebuilder:validation:Optional
 	EnableHTTPSTrafficOnly *bool `json:"enableHttpsTrafficOnly,omitempty" tf:"enable_https_traffic_only,omitempty"`
 
+	// Boolean flag which forces HTTPS if enabled, see here for more information. Defaults to true.
+	// +kubebuilder:validation:Optional
+	HTTPSTrafficOnlyEnabled *bool `json:"httpsTrafficOnlyEnabled,omitempty" tf:"https_traffic_only_enabled,omitempty"`
+
 	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity []IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
@@ -676,6 +686,9 @@ type AzureFilesAuthenticationInitParameters struct {
 	// A active_directory block as defined below. Required when directory_type is AD.
 	ActiveDirectory []ActiveDirectoryInitParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
 
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
+
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	DirectoryType *string `json:"directoryType,omitempty" tf:"directory_type,omitempty"`
 }
@@ -684,6 +697,9 @@ type AzureFilesAuthenticationObservation struct {
 
 	// A active_directory block as defined below. Required when directory_type is AD.
 	ActiveDirectory []ActiveDirectoryObservation `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
 
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	DirectoryType *string `json:"directoryType,omitempty" tf:"directory_type,omitempty"`
@@ -694,6 +710,10 @@ type AzureFilesAuthenticationParameters struct {
 	// A active_directory block as defined below. Required when directory_type is AD.
 	// +kubebuilder:validation:Optional
 	ActiveDirectory []ActiveDirectoryParameters `json:"activeDirectory,omitempty" tf:"active_directory,omitempty"`
+
+	// Specifies the default share level permissions applied to all users. Possible values are StorageFileDataSmbShareReader, StorageFileDataSmbShareContributor, StorageFileDataSmbShareElevatedContributor, or None.
+	// +kubebuilder:validation:Optional
+	DefaultShareLevelPermission *string `json:"defaultShareLevelPermission,omitempty" tf:"default_share_level_permission,omitempty"`
 
 	// Specifies the directory service used. Possible values are AADDS, AD and AADKERB.
 	// +kubebuilder:validation:Optional

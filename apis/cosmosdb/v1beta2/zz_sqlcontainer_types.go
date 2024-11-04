@@ -244,7 +244,7 @@ type SQLContainerInitParameters struct {
 	// The default time to live of Analytical Storage for this SQL container. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
-	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
+	// An autoscale_settings block as defined below.
 	AutoscaleSettings *SQLContainerAutoscaleSettingsInitParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
@@ -282,7 +282,7 @@ type SQLContainerObservation struct {
 	// The default time to live of Analytical Storage for this SQL container. If present and the value is set to -1, it is equal to infinity, and items don’t expire by default. If present and the value is set to some number n – items will expire n seconds after their last modified time.
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
-	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
+	// An autoscale_settings block as defined below.
 	AutoscaleSettings *SQLContainerAutoscaleSettingsObservation `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 
 	// A conflict_resolution_policy blocks as defined below. Changing this forces a new resource to be created.
@@ -340,7 +340,7 @@ type SQLContainerParameters struct {
 	// +kubebuilder:validation:Optional
 	AnalyticalStorageTTL *float64 `json:"analyticalStorageTtl,omitempty" tf:"analytical_storage_ttl,omitempty"`
 
-	// An autoscale_settings block as defined below. Requires partition_key_path to be set.
+	// An autoscale_settings block as defined below.
 	// +kubebuilder:validation:Optional
 	AutoscaleSettings *SQLContainerAutoscaleSettingsParameters `json:"autoscaleSettings,omitempty" tf:"autoscale_settings,omitempty"`
 

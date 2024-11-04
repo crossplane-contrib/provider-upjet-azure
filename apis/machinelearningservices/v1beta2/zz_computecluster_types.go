@@ -18,7 +18,7 @@ type ComputeClusterInitParameters struct {
 	// The description of the Machine Learning compute. Changing this forces a new Machine Learning Compute Cluster to be created.
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An identity block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// An identity block as defined below.
 	Identity *IdentityInitParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
@@ -87,7 +87,7 @@ type ComputeClusterObservation struct {
 	// The ID of the Machine Learning Compute Cluster.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// An identity block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// An identity block as defined below.
 	Identity *IdentityObservation `json:"identity,omitempty" tf:"identity,omitempty"`
 
 	// Whether local authentication methods is enabled. Defaults to true. Changing this forces a new Machine Learning Compute Cluster to be created.
@@ -134,7 +134,7 @@ type ComputeClusterParameters struct {
 	// +kubebuilder:validation:Optional
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
-	// An identity block as defined below. Changing this forces a new Machine Learning Compute Cluster to be created.
+	// An identity block as defined below.
 	// +kubebuilder:validation:Optional
 	Identity *IdentityParameters `json:"identity,omitempty" tf:"identity,omitempty"`
 

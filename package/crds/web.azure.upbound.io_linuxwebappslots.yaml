@@ -6473,7 +6473,7 @@ spec:
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
-                              are 7.4, 8.0, 8.1 and 8.2.
+                              are 7.4, 8.0, 8.1, 8.2 and 8.3.
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
@@ -6827,7 +6827,7 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: The Remote Debugging Version. Possible values
-                          include VS2017 and VS2019
+                          include VS2017, VS2019 and VS2022
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -8239,7 +8239,7 @@ spec:
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
-                              are 7.4, 8.0, 8.1 and 8.2.
+                              are 7.4, 8.0, 8.1, 8.2 and 8.3.
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
@@ -8593,7 +8593,7 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: The Remote Debugging Version. Possible values
-                          include VS2017 and VS2019
+                          include VS2017, VS2019 and VS2022
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -9993,7 +9993,7 @@ spec:
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
-                              are 7.4, 8.0, 8.1 and 8.2.
+                              are 7.4, 8.0, 8.1, 8.2 and 8.3.
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
@@ -10277,7 +10277,7 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: The Remote Debugging Version. Possible values
-                          include VS2017 and VS2019
+                          include VS2017, VS2019 and VS2022
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined

@@ -6655,7 +6655,7 @@ spec:
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
-                              are 7.4, 8.0, 8.1 and 8.2.
+                              are 7.4, 8.0, 8.1, 8.2 and 8.3.
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
@@ -8428,7 +8428,7 @@ spec:
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
-                              are 7.4, 8.0, 8.1 and 8.2.
+                              are 7.4, 8.0, 8.1, 8.2 and 8.3.
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values
@@ -10188,7 +10188,7 @@ spec:
                             type: string
                           phpVersion:
                             description: The version of PHP to run. Possible values
-                              are 7.4, 8.0, 8.1 and 8.2.
+                              are 7.4, 8.0, 8.1, 8.2 and 8.3.
                             type: string
                           pythonVersion:
                             description: The version of Python to run. Possible values

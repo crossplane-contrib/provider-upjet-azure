@@ -330,6 +330,12 @@ spec:
                           description: The File Upload Limit in MB. Accepted values
                             are in the range 1 to 4000. Defaults to 100.
                           type: number
+                        jsChallengeCookieExpirationInMinutes:
+                          description: Specifies the JavaScript challenge cookie validity
+                            lifetime in minutes. The user is challenged after the
+                            lifetime expires. Accepted values are in the range 5 to
+                            1440. Defaults to 30.
+                          type: number
                         logScrubbing:
                           description: One log_scrubbing block as defined below.
                           items:
@@ -742,6 +748,12 @@ spec:
                         fileUploadLimitInMb:
                           description: The File Upload Limit in MB. Accepted values
                             are in the range 1 to 4000. Defaults to 100.
+                          type: number
+                        jsChallengeCookieExpirationInMinutes:
+                          description: Specifies the JavaScript challenge cookie validity
+                            lifetime in minutes. The user is challenged after the
+                            lifetime expires. Accepted values are in the range 5 to
+                            1440. Defaults to 30.
                           type: number
                         logScrubbing:
                           description: One log_scrubbing block as defined below.
@@ -1257,6 +1269,12 @@ spec:
                         fileUploadLimitInMb:
                           description: The File Upload Limit in MB. Accepted values
                             are in the range 1 to 4000. Defaults to 100.
+                          type: number
+                        jsChallengeCookieExpirationInMinutes:
+                          description: Specifies the JavaScript challenge cookie validity
+                            lifetime in minutes. The user is challenged after the
+                            lifetime expires. Accepted values are in the range 5 to
+                            1440. Defaults to 30.
                           type: number
                         logScrubbing:
                           description: One log_scrubbing block as defined below.
@@ -1627,8 +1645,9 @@ spec:
                                         action:
                                           description: Describes the override action
                                             to be applied when rule matches. Possible
-                                            values are Allow, AnomalyScoring, Block
-                                            and Log.
+                                            values are Allow, AnomalyScoring, Block,
+                                            JSChallenge and Log. JSChallenge is only
+                                            valid for rulesets of type Microsoft_BotManagerRuleSet.
                                           type: string
                                         enabled:
                                           description: Whether this rule is enabled.
@@ -1683,6 +1702,12 @@ spec:
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
                           are in the range 1 to 4000. Defaults to 100.
+                        type: number
+                      jsChallengeCookieExpirationInMinutes:
+                        description: Specifies the JavaScript challenge cookie validity
+                          lifetime in minutes. The user is challenged after the lifetime
+                          expires. Accepted values are in the range 5 to 1440. Defaults
+                          to 30.
                         type: number
                       logScrubbing:
                         description: One log_scrubbing block as defined below.
@@ -2022,8 +2047,9 @@ spec:
                                         action:
                                           description: Describes the override action
                                             to be applied when rule matches. Possible
-                                            values are Allow, AnomalyScoring, Block
-                                            and Log.
+                                            values are Allow, AnomalyScoring, Block,
+                                            JSChallenge and Log. JSChallenge is only
+                                            valid for rulesets of type Microsoft_BotManagerRuleSet.
                                           type: string
                                         enabled:
                                           description: Whether this rule is enabled.
@@ -2078,6 +2104,12 @@ spec:
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
                           are in the range 1 to 4000. Defaults to 100.
+                        type: number
+                      jsChallengeCookieExpirationInMinutes:
+                        description: Specifies the JavaScript challenge cookie validity
+                          lifetime in minutes. The user is challenged after the lifetime
+                          expires. Accepted values are in the range 5 to 1440. Defaults
+                          to 30.
                         type: number
                       logScrubbing:
                         description: One log_scrubbing block as defined below.
@@ -2514,8 +2546,9 @@ spec:
                                         action:
                                           description: Describes the override action
                                             to be applied when rule matches. Possible
-                                            values are Allow, AnomalyScoring, Block
-                                            and Log.
+                                            values are Allow, AnomalyScoring, Block,
+                                            JSChallenge and Log. JSChallenge is only
+                                            valid for rulesets of type Microsoft_BotManagerRuleSet.
                                           type: string
                                         enabled:
                                           description: Whether this rule is enabled.
@@ -2575,6 +2608,12 @@ spec:
                       fileUploadLimitInMb:
                         description: The File Upload Limit in MB. Accepted values
                           are in the range 1 to 4000. Defaults to 100.
+                        type: number
+                      jsChallengeCookieExpirationInMinutes:
+                        description: Specifies the JavaScript challenge cookie validity
+                          lifetime in minutes. The user is challenged after the lifetime
+                          expires. Accepted values are in the range 5 to 1440. Defaults
+                          to 30.
                         type: number
                       logScrubbing:
                         description: One log_scrubbing block as defined below.

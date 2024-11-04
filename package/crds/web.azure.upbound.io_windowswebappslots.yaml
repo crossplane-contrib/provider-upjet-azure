@@ -7041,7 +7041,7 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: The Remote Debugging Version. Possible values
-                          include VS2017 and VS2019
+                          include VS2017, VS2019 and VS2022
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -8808,7 +8808,7 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: The Remote Debugging Version. Possible values
-                          include VS2017 and VS2019
+                          include VS2017, VS2019 and VS2022
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined
@@ -10560,7 +10560,7 @@ spec:
                         type: boolean
                       remoteDebuggingVersion:
                         description: The Remote Debugging Version. Possible values
-                          include VS2017 and VS2019
+                          include VS2017, VS2019 and VS2022
                         type: string
                       scmIpRestriction:
                         description: One or more scm_ip_restriction blocks as defined

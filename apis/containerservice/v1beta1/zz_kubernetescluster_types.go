@@ -440,6 +440,65 @@ type AzureActiveDirectoryRoleBasedAccessControlParameters struct {
 	TenantID *string `json:"tenantId,omitempty" tf:"tenant_id,omitempty"`
 }
 
+type CertificateAuthorityInitParameters struct {
+
+	// The certificate chain object name in Azure Key Vault.
+	CertChainObjectName *string `json:"certChainObjectName,omitempty" tf:"cert_chain_object_name,omitempty"`
+
+	// The intermediate certificate object name in Azure Key Vault.
+	CertObjectName *string `json:"certObjectName,omitempty" tf:"cert_object_name,omitempty"`
+
+	// The intermediate certificate private key object name in Azure Key Vault.
+	KeyObjectName *string `json:"keyObjectName,omitempty" tf:"key_object_name,omitempty"`
+
+	// The resource ID of the Key Vault.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// The root certificate object name in Azure Key Vault.
+	RootCertObjectName *string `json:"rootCertObjectName,omitempty" tf:"root_cert_object_name,omitempty"`
+}
+
+type CertificateAuthorityObservation struct {
+
+	// The certificate chain object name in Azure Key Vault.
+	CertChainObjectName *string `json:"certChainObjectName,omitempty" tf:"cert_chain_object_name,omitempty"`
+
+	// The intermediate certificate object name in Azure Key Vault.
+	CertObjectName *string `json:"certObjectName,omitempty" tf:"cert_object_name,omitempty"`
+
+	// The intermediate certificate private key object name in Azure Key Vault.
+	KeyObjectName *string `json:"keyObjectName,omitempty" tf:"key_object_name,omitempty"`
+
+	// The resource ID of the Key Vault.
+	KeyVaultID *string `json:"keyVaultId,omitempty" tf:"key_vault_id,omitempty"`
+
+	// The root certificate object name in Azure Key Vault.
+	RootCertObjectName *string `json:"rootCertObjectName,omitempty" tf:"root_cert_object_name,omitempty"`
+}
+
+type CertificateAuthorityParameters struct {
+
+	// The certificate chain object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	CertChainObjectName *string `json:"certChainObjectName" tf:"cert_chain_object_name,omitempty"`
+
+	// The intermediate certificate object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	CertObjectName *string `json:"certObjectName" tf:"cert_object_name,omitempty"`
+
+	// The intermediate certificate private key object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	KeyObjectName *string `json:"keyObjectName" tf:"key_object_name,omitempty"`
+
+	// The resource ID of the Key Vault.
+	// +kubebuilder:validation:Optional
+	KeyVaultID *string `json:"keyVaultId" tf:"key_vault_id,omitempty"`
+
+	// The root certificate object name in Azure Key Vault.
+	// +kubebuilder:validation:Optional
+	RootCertObjectName *string `json:"rootCertObjectName" tf:"root_cert_object_name,omitempty"`
+}
+
 type ConfidentialComputingInitParameters struct {
 
 	// Should the SGX quote helper be enabled?
@@ -2936,6 +2995,9 @@ type SecretIdentityParameters struct {
 
 type ServiceMeshProfileInitParameters struct {
 
+	// A certificate_authority block as defined below. When this property is specified, key_vault_secrets_provider is also required to be set. This configuration allows you to bring your own root certificate and keys for Istio CA in the Istio-based service mesh add-on for Azure Kubernetes Service.
+	CertificateAuthority []CertificateAuthorityInitParameters `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
+
 	// Is Istio External Ingress Gateway enabled?
 	ExternalIngressGatewayEnabled *bool `json:"externalIngressGatewayEnabled,omitempty" tf:"external_ingress_gateway_enabled,omitempty"`
 
@@ -2948,6 +3010,9 @@ type ServiceMeshProfileInitParameters struct {
 
 type ServiceMeshProfileObservation struct {
 
+	// A certificate_authority block as defined below. When this property is specified, key_vault_secrets_provider is also required to be set. This configuration allows you to bring your own root certificate and keys for Istio CA in the Istio-based service mesh add-on for Azure Kubernetes Service.
+	CertificateAuthority []CertificateAuthorityObservation `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
+
 	// Is Istio External Ingress Gateway enabled?
 	ExternalIngressGatewayEnabled *bool `json:"externalIngressGatewayEnabled,omitempty" tf:"external_ingress_gateway_enabled,omitempty"`
 
@@ -2959,6 +3024,10 @@ type ServiceMeshProfileObservation struct {
 }
 
 type ServiceMeshProfileParameters struct {
+
+	// A certificate_authority block as defined below. When this property is specified, key_vault_secrets_provider is also required to be set. This configuration allows you to bring your own root certificate and keys for Istio CA in the Istio-based service mesh add-on for Azure Kubernetes Service.
+	// +kubebuilder:validation:Optional
+	CertificateAuthority []CertificateAuthorityParameters `json:"certificateAuthority,omitempty" tf:"certificate_authority,omitempty"`
 
 	// Is Istio External Ingress Gateway enabled?
 	// +kubebuilder:validation:Optional

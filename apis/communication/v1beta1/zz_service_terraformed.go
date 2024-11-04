@@ -21,7 +21,7 @@ func (mg *Service) GetTerraformResourceType() string {
 
 // GetConnectionDetailsMapping for this Service
 func (tr *Service) GetConnectionDetailsMapping() map[string]string {
-	return nil
+	return map[string]string{"primary_connection_string": "status.atProvider.primaryConnectionString", "primary_key": "status.atProvider.primaryKey", "secondary_connection_string": "status.atProvider.secondaryConnectionString", "secondary_key": "status.atProvider.secondaryKey"}
 }
 
 // GetObservation of this Service

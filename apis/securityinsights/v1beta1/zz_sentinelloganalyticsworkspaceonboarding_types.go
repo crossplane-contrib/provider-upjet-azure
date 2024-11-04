@@ -18,7 +18,6 @@ type SentinelLogAnalyticsWorkspaceOnboardingInitParameters struct {
 	// Specifies if the Workspace is using Customer managed key. Defaults to false. Changing this forces a new resource to be created.
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
-	// Specifies the name of the Resource Group where the Security Insights Sentinel Onboarding States should exist. Changing this forces the Log Analytics Workspace off the board and onboard again.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
@@ -30,11 +29,21 @@ type SentinelLogAnalyticsWorkspaceOnboardingInitParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The ID of the Security Insights Sentinel Onboarding States.
+	// Specifies the Workspace Id. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
-	// Specifies the Workspace Name. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)
 	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 
 	// Reference to a Workspace in operationalinsights to populate workspaceName.
@@ -54,13 +63,11 @@ type SentinelLogAnalyticsWorkspaceOnboardingObservation struct {
 	// The ID of the Security Insights Sentinel Onboarding States.
 	ID *string `json:"id,omitempty" tf:"id,omitempty"`
 
-	// Specifies the name of the Resource Group where the Security Insights Sentinel Onboarding States should exist. Changing this forces the Log Analytics Workspace off the board and onboard again.
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
 
-	// The ID of the Security Insights Sentinel Onboarding States.
+	// Specifies the Workspace Id. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
-	// Specifies the Workspace Name. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
 	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 }
 
@@ -70,7 +77,6 @@ type SentinelLogAnalyticsWorkspaceOnboardingParameters struct {
 	// +kubebuilder:validation:Optional
 	CustomerManagedKeyEnabled *bool `json:"customerManagedKeyEnabled,omitempty" tf:"customer_managed_key_enabled,omitempty"`
 
-	// Specifies the name of the Resource Group where the Security Insights Sentinel Onboarding States should exist. Changing this forces the Log Analytics Workspace off the board and onboard again.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
 	ResourceGroupName *string `json:"resourceGroupName,omitempty" tf:"resource_group_name,omitempty"`
@@ -83,12 +89,22 @@ type SentinelLogAnalyticsWorkspaceOnboardingParameters struct {
 	// +kubebuilder:validation:Optional
 	ResourceGroupNameSelector *v1.Selector `json:"resourceGroupNameSelector,omitempty" tf:"-"`
 
-	// The ID of the Security Insights Sentinel Onboarding States.
+	// Specifies the Workspace Id. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	WorkspaceID *string `json:"workspaceId,omitempty" tf:"workspace_id,omitempty"`
 
-	// Specifies the Workspace Name. Changing this forces the Log Analytics Workspace off the board and onboard again. Changing this forces a new resource to be created.
+	// Reference to a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDRef *v1.Reference `json:"workspaceIdRef,omitempty" tf:"-"`
+
+	// Selector for a Workspace in operationalinsights to populate workspaceId.
+	// +kubebuilder:validation:Optional
+	WorkspaceIDSelector *v1.Selector `json:"workspaceIdSelector,omitempty" tf:"-"`
+
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("name",true)
 	// +kubebuilder:validation:Optional
 	WorkspaceName *string `json:"workspaceName,omitempty" tf:"workspace_name,omitempty"`
 

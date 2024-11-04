@@ -24,6 +24,9 @@ type StorageDefenderInitParameters struct {
 	// Whether the settings defined for this storage account should override the settings defined for the subscription. Defaults to false.
 	OverrideSubscriptionSettingsEnabled *bool `json:"overrideSubscriptionSettingsEnabled,omitempty" tf:"override_subscription_settings_enabled,omitempty"`
 
+	// The Event Grid Topic where every scan result will be sent to. When you set an Event Grid custom topic, you must set override_subscription_settings_enabled to true to override the subscription-level settings.
+	ScanResultsEventGridTopicID *string `json:"scanResultsEventGridTopicId,omitempty" tf:"scan_results_event_grid_topic_id,omitempty"`
+
 	// Whether Sensitive Data Discovery should be enabled. Defaults to false.
 	SensitiveDataDiscoveryEnabled *bool `json:"sensitiveDataDiscoveryEnabled,omitempty" tf:"sensitive_data_discovery_enabled,omitempty"`
 
@@ -55,6 +58,9 @@ type StorageDefenderObservation struct {
 	// Whether the settings defined for this storage account should override the settings defined for the subscription. Defaults to false.
 	OverrideSubscriptionSettingsEnabled *bool `json:"overrideSubscriptionSettingsEnabled,omitempty" tf:"override_subscription_settings_enabled,omitempty"`
 
+	// The Event Grid Topic where every scan result will be sent to. When you set an Event Grid custom topic, you must set override_subscription_settings_enabled to true to override the subscription-level settings.
+	ScanResultsEventGridTopicID *string `json:"scanResultsEventGridTopicId,omitempty" tf:"scan_results_event_grid_topic_id,omitempty"`
+
 	// Whether Sensitive Data Discovery should be enabled. Defaults to false.
 	SensitiveDataDiscoveryEnabled *bool `json:"sensitiveDataDiscoveryEnabled,omitempty" tf:"sensitive_data_discovery_enabled,omitempty"`
 
@@ -75,6 +81,10 @@ type StorageDefenderParameters struct {
 	// Whether the settings defined for this storage account should override the settings defined for the subscription. Defaults to false.
 	// +kubebuilder:validation:Optional
 	OverrideSubscriptionSettingsEnabled *bool `json:"overrideSubscriptionSettingsEnabled,omitempty" tf:"override_subscription_settings_enabled,omitempty"`
+
+	// The Event Grid Topic where every scan result will be sent to. When you set an Event Grid custom topic, you must set override_subscription_settings_enabled to true to override the subscription-level settings.
+	// +kubebuilder:validation:Optional
+	ScanResultsEventGridTopicID *string `json:"scanResultsEventGridTopicId,omitempty" tf:"scan_results_event_grid_topic_id,omitempty"`
 
 	// Whether Sensitive Data Discovery should be enabled. Defaults to false.
 	// +kubebuilder:validation:Optional

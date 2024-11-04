@@ -448,6 +448,9 @@ type PolicySettingsInitParameters struct {
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
 	FileUploadLimitInMb *float64 `json:"fileUploadLimitInMb,omitempty" tf:"file_upload_limit_in_mb,omitempty"`
 
+	// Specifies the JavaScript challenge cookie validity lifetime in minutes. The user is challenged after the lifetime expires. Accepted values are in the range 5 to 1440. Defaults to 30.
+	JsChallengeCookieExpirationInMinutes *float64 `json:"jsChallengeCookieExpirationInMinutes,omitempty" tf:"js_challenge_cookie_expiration_in_minutes,omitempty"`
+
 	// One log_scrubbing block as defined below.
 	LogScrubbing []LogScrubbingInitParameters `json:"logScrubbing,omitempty" tf:"log_scrubbing,omitempty"`
 
@@ -471,6 +474,9 @@ type PolicySettingsObservation struct {
 
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
 	FileUploadLimitInMb *float64 `json:"fileUploadLimitInMb,omitempty" tf:"file_upload_limit_in_mb,omitempty"`
+
+	// Specifies the JavaScript challenge cookie validity lifetime in minutes. The user is challenged after the lifetime expires. Accepted values are in the range 5 to 1440. Defaults to 30.
+	JsChallengeCookieExpirationInMinutes *float64 `json:"jsChallengeCookieExpirationInMinutes,omitempty" tf:"js_challenge_cookie_expiration_in_minutes,omitempty"`
 
 	// One log_scrubbing block as defined below.
 	LogScrubbing []LogScrubbingObservation `json:"logScrubbing,omitempty" tf:"log_scrubbing,omitempty"`
@@ -497,6 +503,10 @@ type PolicySettingsParameters struct {
 	// The File Upload Limit in MB. Accepted values are in the range 1 to 4000. Defaults to 100.
 	// +kubebuilder:validation:Optional
 	FileUploadLimitInMb *float64 `json:"fileUploadLimitInMb,omitempty" tf:"file_upload_limit_in_mb,omitempty"`
+
+	// Specifies the JavaScript challenge cookie validity lifetime in minutes. The user is challenged after the lifetime expires. Accepted values are in the range 5 to 1440. Defaults to 30.
+	// +kubebuilder:validation:Optional
+	JsChallengeCookieExpirationInMinutes *float64 `json:"jsChallengeCookieExpirationInMinutes,omitempty" tf:"js_challenge_cookie_expiration_in_minutes,omitempty"`
 
 	// One log_scrubbing block as defined below.
 	// +kubebuilder:validation:Optional

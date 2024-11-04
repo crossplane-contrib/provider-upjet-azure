@@ -1798,6 +1798,11 @@ func (in *QueueInitParameters) DeepCopyInto(out *QueueInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeadLetteringOnMessageExpiration != nil {
 		in, out := &in.DeadLetteringOnMessageExpiration, &out.DeadLetteringOnMessageExpiration
 		*out = new(bool)
@@ -1825,6 +1830,11 @@ func (in *QueueInitParameters) DeepCopyInto(out *QueueInitParameters) {
 	}
 	if in.EnablePartitioning != nil {
 		in, out := &in.EnablePartitioning, &out.EnablePartitioning
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ExpressEnabled != nil {
+		in, out := &in.ExpressEnabled, &out.ExpressEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -1856,6 +1866,11 @@ func (in *QueueInitParameters) DeepCopyInto(out *QueueInitParameters) {
 	if in.MaxSizeInMegabytes != nil {
 		in, out := &in.MaxSizeInMegabytes, &out.MaxSizeInMegabytes
 		*out = new(float64)
+		**out = **in
+	}
+	if in.PartitioningEnabled != nil {
+		in, out := &in.PartitioningEnabled, &out.PartitioningEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequiresDuplicateDetection != nil {
@@ -1925,6 +1940,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeadLetteringOnMessageExpiration != nil {
 		in, out := &in.DeadLetteringOnMessageExpiration, &out.DeadLetteringOnMessageExpiration
 		*out = new(bool)
@@ -1952,6 +1972,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 	}
 	if in.EnablePartitioning != nil {
 		in, out := &in.EnablePartitioning, &out.EnablePartitioning
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ExpressEnabled != nil {
+		in, out := &in.ExpressEnabled, &out.ExpressEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -1995,6 +2020,11 @@ func (in *QueueObservation) DeepCopyInto(out *QueueObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.PartitioningEnabled != nil {
+		in, out := &in.PartitioningEnabled, &out.PartitioningEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.RequiresDuplicateDetection != nil {
 		in, out := &in.RequiresDuplicateDetection, &out.RequiresDuplicateDetection
 		*out = new(bool)
@@ -2030,6 +2060,11 @@ func (in *QueueParameters) DeepCopyInto(out *QueueParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DeadLetteringOnMessageExpiration != nil {
 		in, out := &in.DeadLetteringOnMessageExpiration, &out.DeadLetteringOnMessageExpiration
 		*out = new(bool)
@@ -2057,6 +2092,11 @@ func (in *QueueParameters) DeepCopyInto(out *QueueParameters) {
 	}
 	if in.EnablePartitioning != nil {
 		in, out := &in.EnablePartitioning, &out.EnablePartitioning
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ExpressEnabled != nil {
+		in, out := &in.ExpressEnabled, &out.ExpressEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -2104,6 +2144,11 @@ func (in *QueueParameters) DeepCopyInto(out *QueueParameters) {
 		in, out := &in.NamespaceIDSelector, &out.NamespaceIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PartitioningEnabled != nil {
+		in, out := &in.PartitioningEnabled, &out.PartitioningEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.RequiresDuplicateDetection != nil {
 		in, out := &in.RequiresDuplicateDetection, &out.RequiresDuplicateDetection
@@ -2602,6 +2647,11 @@ func (in *SubscriptionInitParameters) DeepCopyInto(out *SubscriptionInitParamete
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ClientScopedSubscription != nil {
 		in, out := &in.ClientScopedSubscription, &out.ClientScopedSubscription
 		*out = make([]ClientScopedSubscriptionInitParameters, len(*in))
@@ -2716,6 +2766,11 @@ func (in *SubscriptionObservation) DeepCopyInto(out *SubscriptionObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ClientScopedSubscription != nil {
 		in, out := &in.ClientScopedSubscription, &out.ClientScopedSubscription
 		*out = make([]ClientScopedSubscriptionObservation, len(*in))
@@ -2806,6 +2861,11 @@ func (in *SubscriptionParameters) DeepCopyInto(out *SubscriptionParameters) {
 	if in.AutoDeleteOnIdle != nil {
 		in, out := &in.AutoDeleteOnIdle, &out.AutoDeleteOnIdle
 		*out = new(string)
+		**out = **in
+	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.ClientScopedSubscription != nil {
@@ -3411,6 +3471,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DefaultMessageTTL != nil {
 		in, out := &in.DefaultMessageTTL, &out.DefaultMessageTTL
 		*out = new(string)
@@ -3436,6 +3501,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ExpressEnabled != nil {
+		in, out := &in.ExpressEnabled, &out.ExpressEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.MaxMessageSizeInKilobytes != nil {
 		in, out := &in.MaxMessageSizeInKilobytes, &out.MaxMessageSizeInKilobytes
 		*out = new(float64)
@@ -3444,6 +3514,11 @@ func (in *TopicInitParameters) DeepCopyInto(out *TopicInitParameters) {
 	if in.MaxSizeInMegabytes != nil {
 		in, out := &in.MaxSizeInMegabytes, &out.MaxSizeInMegabytes
 		*out = new(float64)
+		**out = **in
+	}
+	if in.PartitioningEnabled != nil {
+		in, out := &in.PartitioningEnabled, &out.PartitioningEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequiresDuplicateDetection != nil {
@@ -3513,6 +3588,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DefaultMessageTTL != nil {
 		in, out := &in.DefaultMessageTTL, &out.DefaultMessageTTL
 		*out = new(string)
@@ -3538,6 +3618,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 		*out = new(bool)
 		**out = **in
 	}
+	if in.ExpressEnabled != nil {
+		in, out := &in.ExpressEnabled, &out.ExpressEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.ID != nil {
 		in, out := &in.ID, &out.ID
 		*out = new(string)
@@ -3556,6 +3641,11 @@ func (in *TopicObservation) DeepCopyInto(out *TopicObservation) {
 	if in.NamespaceID != nil {
 		in, out := &in.NamespaceID, &out.NamespaceID
 		*out = new(string)
+		**out = **in
+	}
+	if in.PartitioningEnabled != nil {
+		in, out := &in.PartitioningEnabled, &out.PartitioningEnabled
+		*out = new(bool)
 		**out = **in
 	}
 	if in.RequiresDuplicateDetection != nil {
@@ -3593,6 +3683,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 		*out = new(string)
 		**out = **in
 	}
+	if in.BatchedOperationsEnabled != nil {
+		in, out := &in.BatchedOperationsEnabled, &out.BatchedOperationsEnabled
+		*out = new(bool)
+		**out = **in
+	}
 	if in.DefaultMessageTTL != nil {
 		in, out := &in.DefaultMessageTTL, &out.DefaultMessageTTL
 		*out = new(string)
@@ -3615,6 +3710,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 	}
 	if in.EnablePartitioning != nil {
 		in, out := &in.EnablePartitioning, &out.EnablePartitioning
+		*out = new(bool)
+		**out = **in
+	}
+	if in.ExpressEnabled != nil {
+		in, out := &in.ExpressEnabled, &out.ExpressEnabled
 		*out = new(bool)
 		**out = **in
 	}
@@ -3642,6 +3742,11 @@ func (in *TopicParameters) DeepCopyInto(out *TopicParameters) {
 		in, out := &in.NamespaceIDSelector, &out.NamespaceIDSelector
 		*out = new(v1.Selector)
 		(*in).DeepCopyInto(*out)
+	}
+	if in.PartitioningEnabled != nil {
+		in, out := &in.PartitioningEnabled, &out.PartitioningEnabled
+		*out = new(bool)
+		**out = **in
 	}
 	if in.RequiresDuplicateDetection != nil {
 		in, out := &in.RequiresDuplicateDetection, &out.RequiresDuplicateDetection

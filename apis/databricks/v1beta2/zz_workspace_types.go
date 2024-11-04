@@ -18,7 +18,7 @@ type CustomParametersInitParameters struct {
 	// The ID of a Azure Machine Learning workspace to link with Databricks workspace. Changing this forces a new resource to be created.
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
-	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets. Defaults to nat-gateway. Changing this forces a new resource to be created.
+	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
 	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
@@ -39,7 +39,7 @@ type CustomParametersInitParameters struct {
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
-	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
+	// Name of the Public IP for No Public IP workspace with managed virtual network. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
 	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -60,7 +60,7 @@ type CustomParametersInitParameters struct {
 	// Default Databricks File Storage account name. Defaults to a randomized name(e.g. dbstoragel6mfeghoe5kxu). Changing this forces a new resource to be created.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS. Changing this forces a new resource to be created.
+	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS.
 	StorageAccountSkuName *string `json:"storageAccountSkuName,omitempty" tf:"storage_account_sku_name,omitempty"`
 
 	// The ID of a Virtual Network where this Databricks Cluster should be created. Changing this forces a new resource to be created.
@@ -75,7 +75,7 @@ type CustomParametersObservation struct {
 	// The ID of a Azure Machine Learning workspace to link with Databricks workspace. Changing this forces a new resource to be created.
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
-	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets. Defaults to nat-gateway. Changing this forces a new resource to be created.
+	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
 	// Are public IP Addresses not allowed? Possible values are true or false. Defaults to false.
@@ -87,7 +87,7 @@ type CustomParametersObservation struct {
 	// The resource ID of the azurerm_subnet_network_security_group_association resource which is referred to by the private_subnet_name field. This is the same as the ID of the subnet referred to by the private_subnet_name field. Required if virtual_network_id is set.
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
-	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
+	// Name of the Public IP for No Public IP workspace with managed virtual network. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
 	// The name of the Public Subnet within the Virtual Network. Required if virtual_network_id is set. Changing this forces a new resource to be created.
@@ -99,7 +99,7 @@ type CustomParametersObservation struct {
 	// Default Databricks File Storage account name. Defaults to a randomized name(e.g. dbstoragel6mfeghoe5kxu). Changing this forces a new resource to be created.
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS. Changing this forces a new resource to be created.
+	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS.
 	StorageAccountSkuName *string `json:"storageAccountSkuName,omitempty" tf:"storage_account_sku_name,omitempty"`
 
 	// The ID of a Virtual Network where this Databricks Cluster should be created. Changing this forces a new resource to be created.
@@ -115,7 +115,7 @@ type CustomParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	MachineLearningWorkspaceID *string `json:"machineLearningWorkspaceId,omitempty" tf:"machine_learning_workspace_id,omitempty"`
 
-	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets. Defaults to nat-gateway. Changing this forces a new resource to be created.
+	// Name of the NAT gateway for Secure Cluster Connectivity (No Public IP) workspace subnets (only for workspace with managed virtual network). Defaults to nat-gateway. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	NATGatewayName *string `json:"natGatewayName,omitempty" tf:"nat_gateway_name,omitempty"`
 
@@ -140,7 +140,7 @@ type CustomParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	PrivateSubnetNetworkSecurityGroupAssociationID *string `json:"privateSubnetNetworkSecurityGroupAssociationId,omitempty" tf:"private_subnet_network_security_group_association_id,omitempty"`
 
-	// Name of the Public IP for No Public IP workspace with managed vNet. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
+	// Name of the Public IP for No Public IP workspace with managed virtual network. Defaults to nat-gw-public-ip. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	PublicIPName *string `json:"publicIpName,omitempty" tf:"public_ip_name,omitempty"`
 
@@ -165,7 +165,7 @@ type CustomParametersParameters struct {
 	// +kubebuilder:validation:Optional
 	StorageAccountName *string `json:"storageAccountName,omitempty" tf:"storage_account_name,omitempty"`
 
-	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS. Changing this forces a new resource to be created.
+	// Storage account SKU name. Possible values include Standard_LRS, Standard_GRS, Standard_RAGRS, Standard_GZRS, Standard_RAGZRS, Standard_ZRS, Premium_LRS or Premium_ZRS. Defaults to Standard_GRS.
 	// +kubebuilder:validation:Optional
 	StorageAccountSkuName *string `json:"storageAccountSkuName,omitempty" tf:"storage_account_sku_name,omitempty"`
 
@@ -231,7 +231,7 @@ type WorkspaceInitParameters struct {
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
-	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace. Changing this forces a new resource to be created.
+	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace with managed virtual network. Changing this forces a new resource to be created.
 	LoadBalancerBackendAddressPoolID *string `json:"loadBalancerBackendAddressPoolId,omitempty" tf:"load_balancer_backend_address_pool_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
@@ -301,7 +301,7 @@ type WorkspaceObservation struct {
 	// Is the Databricks File System root file system enabled with a secondary layer of encryption with platform managed keys? Possible values are true or false. Defaults to false. This field is only valid if the Databricks Workspace sku is set to premium. Changing this forces a new resource to be created.
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
-	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace. Changing this forces a new resource to be created.
+	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace with managed virtual network. Changing this forces a new resource to be created.
 	LoadBalancerBackendAddressPoolID *string `json:"loadBalancerBackendAddressPoolId,omitempty" tf:"load_balancer_backend_address_pool_id,omitempty"`
 
 	// Specifies the supported Azure location where the resource has to be created. Changing this forces a new resource to be created.
@@ -379,7 +379,7 @@ type WorkspaceParameters struct {
 	// +kubebuilder:validation:Optional
 	InfrastructureEncryptionEnabled *bool `json:"infrastructureEncryptionEnabled,omitempty" tf:"infrastructure_encryption_enabled,omitempty"`
 
-	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace. Changing this forces a new resource to be created.
+	// Resource ID of the Outbound Load balancer Backend Address Pool for Secure Cluster Connectivity (No Public IP) workspace with managed virtual network. Changing this forces a new resource to be created.
 	// +kubebuilder:validation:Optional
 	LoadBalancerBackendAddressPoolID *string `json:"loadBalancerBackendAddressPoolId,omitempty" tf:"load_balancer_backend_address_pool_id,omitempty"`
 

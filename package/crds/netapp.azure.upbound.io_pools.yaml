@@ -253,7 +253,7 @@ spec:
                     type: string
                   sizeInTb:
                     description: Provisioned size of the pool in TB. Value must be
-                      between 2 and 500.
+                      between 2 and 2048.
                     type: number
                   tags:
                     additionalProperties:
@@ -295,7 +295,7 @@ spec:
                     type: string
                   sizeInTb:
                     description: Provisioned size of the pool in TB. Value must be
-                      between 2 and 500.
+                      between 2 and 2048.
                     type: number
                   tags:
                     additionalProperties:
@@ -522,7 +522,7 @@ spec:
                     type: string
                   sizeInTb:
                     description: Provisioned size of the pool in TB. Value must be
-                      between 2 and 500.
+                      between 2 and 2048.
                     type: number
                   tags:
                     additionalProperties:
