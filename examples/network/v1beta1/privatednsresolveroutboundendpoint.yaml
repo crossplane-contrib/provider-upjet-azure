@@ -1,0 +1,99 @@
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSResolverOutboundEndpoint
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolveroutboundendpoint
+  labels:
+    testing.upbound.io/example-name: example-pdroe
+  name: example-pdroe
+spec:
+  forProvider:
+    location: West Europe
+    privateDnsResolverIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pdroe
+    subnetIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pdroe
+    tags:
+      key: value
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSResolver
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolveroutboundendpoint
+  labels:
+    testing.upbound.io/example-name: example-pdroe
+  name: example-pdroe
+spec:
+  forProvider:
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pdroe
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pdroe
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolveroutboundendpoint
+  labels:
+    testing.upbound.io/example-name: example-pdroe
+  name: example-pdroe
+spec:
+  forProvider:
+    location: west europe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: Subnet
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolveroutboundendpoint
+  labels:
+    testing.upbound.io/example-name: example-pdroe
+  name: example-pdroe
+spec:
+  forProvider:
+    addressPrefixes:
+    - 10.0.0.64/28
+    delegation:
+    - name: Microsoft.Network.dnsResolvers
+      serviceDelegation:
+      - actions:
+        - Microsoft.Network/virtualNetworks/subnets/join/action
+        name: Microsoft.Network/dnsResolvers
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pdroe
+    virtualNetworkNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pdroe
+
+---
+
+apiVersion: network.azure.upbound.io/v1beta1
+kind: VirtualNetwork
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolveroutboundendpoint
+  labels:
+    testing.upbound.io/example-name: example-pdroe
+  name: example-pdroe
+spec:
+  forProvider:
+    addressSpace:
+    - 10.0.0.0/16
+    location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example-pdroe
