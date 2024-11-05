@@ -51,7 +51,7 @@ export GOPRIVATE = github.com/upbound/*
 GO_REQUIRED_VERSION ?= 1.21
 # GOLANGCILINT_VERSION is inherited from build submodule by default.
 # Uncomment below if you need to override the version.
-GOLANGCILINT_VERSION ?= 1.55.2
+# GOLANGCILINT_VERSION ?= 1.55.2
 
 RUN_BUILDTAGGER ?= true
 # if RUN_BUILDTAGGER is set to "true", we will use build constraints
