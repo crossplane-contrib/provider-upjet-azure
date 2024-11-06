@@ -142,7 +142,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	// {resource}/providers/Microsoft.Authorization/policyAssignments/assignment1
 	"azurerm_resource_policy_assignment": config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-000000000000/resourceGroups/resGroup1/providers/Microsoft.Authorization/policyExemptions/exemption1
-	"azurerm_resource_policy_exemption": config.IdentifierFromProvider,
+	"azurerm_resource_policy_exemption":                      config.IdentifierFromProvider,
+	"azurerm_kubernetes_cluster_trusted_access_role_binding": config.TemplatedStringAsIdentifier("name", "{{ .parameters.cluster_id }}/trustedAccessRoleBindings/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Authorization/roleDefinitions/{roleDefinitionId}|{scope}
 	"azurerm_role_definition": config.IdentifierFromProvider,
 	// /subscriptions/00000000-0000-0000-000000000000/providers/Microsoft.Authorization/policyAssignments/assignment1
