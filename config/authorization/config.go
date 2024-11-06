@@ -7,6 +7,7 @@ package authorization
 import (
 	"github.com/crossplane/upjet/pkg/config"
 
+	"github.com/upbound/provider-azure/apis/rconfig"
 	"github.com/upbound/provider-azure/config/common"
 )
 
@@ -19,5 +20,14 @@ func Configure(p *config.Provider) {
 	})
 	p.AddResourceConfigurator("azurerm_resource_group_policy_assignment", func(r *config.Resource) {
 		r.ExternalName.IdentifierFields = common.RemoveIndex(r.ExternalName.IdentifierFields, "resource_group_id")
+	})
+
+	p.AddResourceConfigurator("azurerm_kubernetes_cluster_trusted_access_role_binding", func(r *config.Resource) {
+		r.Kind = "TrustedAccessRoleBinding"
+		r.ShortGroup = "authorization"
+		r.References["kubernetes_cluster_id"] = config.Reference{
+			TerraformName: "azurerm_kubernetes_cluster",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
 	})
 }

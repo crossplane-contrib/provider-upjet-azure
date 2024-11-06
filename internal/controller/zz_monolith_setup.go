@@ -89,6 +89,7 @@ import (
 	roledefinition "github.com/upbound/provider-azure/internal/controller/authorization/roledefinition"
 	subscriptionpolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyassignment"
 	subscriptionpolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyexemption"
+	trustedaccessrolebinding "github.com/upbound/provider-azure/internal/controller/authorization/trustedaccessrolebinding"
 	account "github.com/upbound/provider-azure/internal/controller/automation/account"
 	connection "github.com/upbound/provider-azure/internal/controller/automation/connection"
 	connectionclassiccertificate "github.com/upbound/provider-azure/internal/controller/automation/connectionclassiccertificate"
@@ -833,6 +834,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		roledefinition.Setup,
 		subscriptionpolicyassignment.Setup,
 		subscriptionpolicyexemption.Setup,
+		trustedaccessrolebinding.Setup,
 		account.Setup,
 		connection.Setup,
 		connectionclassiccertificate.Setup,
