@@ -12,7 +12,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     roles:
-    - example-value
+      - "Reader"
     sourceResourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -52,8 +52,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: example-value
-    softDeleteRetentionDays:
-    - 1
+    softDeleteRetentionDays: 1
     tenantId: ${data.azurerm_client_config.example.tenant_id}
 
 ---
@@ -78,7 +77,7 @@ spec:
 
 ---
 
-apiVersion: containerservice.azure.upbound.io/v1beta2
+apiVersion: containerservice.azure.upbound.io/v1beta1
 kind: KubernetesCluster
 metadata:
   annotations:
@@ -89,15 +88,15 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-      name: example-value
-      nodeCount: example-value
+    - name: default
+      nodeCount: 1
+      vmSize: Standard_D2_v2
       upgradeSettings:
-        maxSurge: example-value
-      vmSize: example-value
-    dnsPrefix: acctestaksexample
+      - maxSurge: '10%'
+    dnsPrefix: exampleaks1
     identity:
-      type: example-value
-    location: West Europe
+    - type: SystemAssigned
+    location: North Europe
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
