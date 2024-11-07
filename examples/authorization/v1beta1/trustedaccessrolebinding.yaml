@@ -4,18 +4,18 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-tarb
 spec:
   forProvider:
     kubernetesClusterIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
     roles:
       - "Reader"
     sourceResourceIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
 
 ---
 
@@ -25,15 +25,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-ai-tarb
 spec:
   forProvider:
     applicationType: web
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
 
 ---
 
@@ -43,15 +43,15 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-ai-v
 spec:
   forProvider:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
-    skuName: standard
+        testing.upbound.io/example-name: example-tarb
+    skuName: Standard
     softDeleteRetentionDays: 1
     tenantId: ${data.azurerm_client_config.example.tenant_id}
 
@@ -63,8 +63,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-tarb-ap
 spec:
   forProvider:
     keyPermissions:
@@ -72,7 +72,7 @@ spec:
       - list
     keyVaultIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
     objectId: ${data.azurerm_client_config.example.object_id}
     tenantId: ${data.azurerm_client_config.example.tenant_id}
 
@@ -84,8 +84,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-tarb-kc
 spec:
   forProvider:
     defaultNodePool:
@@ -100,7 +100,7 @@ spec:
     location: North Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
 
 ---
 
@@ -110,25 +110,25 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-tarb-wp
 spec:
   forProvider:
     applicationInsightsIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
     identity:
       type: SystemAssigned  
     keyVaultIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
     storageAccountIdSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
 
 ---
 
@@ -138,8 +138,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-tarb-rg
 spec:
   forProvider:
     location: West Europe
@@ -152,8 +152,8 @@ metadata:
   annotations:
     meta.upbound.io/example-id: authorization/v1beta1/trustedaccessrolebinding
   labels:
-    testing.upbound.io/example-name: example
-  name: example
+    testing.upbound.io/example-name: example-tarb
+  name: example-tarb-ac
 spec:
   forProvider:
     accountReplicationType: LRS
@@ -161,4 +161,4 @@ spec:
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
-        testing.upbound.io/example-name: example
+        testing.upbound.io/example-name: example-tarb
