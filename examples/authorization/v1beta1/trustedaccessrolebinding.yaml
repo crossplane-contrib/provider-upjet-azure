@@ -11,7 +11,8 @@ spec:
     kubernetesClusterIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    roles: example-value
+    roles:
+    - example-value
     sourceResourceIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -51,7 +52,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     skuName: example-value
-    softDeleteRetentionDays: example-value
+    softDeleteRetentionDays:
+    - 1
     tenantId: ${data.azurerm_client_config.example.tenant_id}
 
 ---
@@ -66,7 +68,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    keyPermissions: example-value
+    keyPermissions:
+    - example-value
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -86,14 +89,14 @@ metadata:
 spec:
   forProvider:
     defaultNodePool:
-    - name: example-value
+      name: example-value
       nodeCount: example-value
       upgradeSettings:
-      - maxSurge: example-value
+        maxSurge: example-value
       vmSize: example-value
     dnsPrefix: acctestaksexample
     identity:
-    - type: example-value
+      type: example-value
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
