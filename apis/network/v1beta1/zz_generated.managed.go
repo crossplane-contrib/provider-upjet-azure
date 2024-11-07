@@ -3847,6 +3847,66 @@ func (mg *PrivateDNSResolverInboundEndpoint) SetWriteConnectionSecretToReference
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSResolverOutboundEndpoint.
+func (mg *PrivateDNSResolverOutboundEndpoint) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PrivateDNSSRVRecord.
 func (mg *PrivateDNSSRVRecord) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

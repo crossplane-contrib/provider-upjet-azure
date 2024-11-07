@@ -73,6 +73,7 @@ import (
 	privatednsptrrecord "github.com/upbound/provider-azure/internal/controller/network/privatednsptrrecord"
 	privatednsresolver "github.com/upbound/provider-azure/internal/controller/network/privatednsresolver"
 	privatednsresolverinboundendpoint "github.com/upbound/provider-azure/internal/controller/network/privatednsresolverinboundendpoint"
+	privatednsresolveroutboundendpoint "github.com/upbound/provider-azure/internal/controller/network/privatednsresolveroutboundendpoint"
 	privatednssrvrecord "github.com/upbound/provider-azure/internal/controller/network/privatednssrvrecord"
 	privatednstxtrecord "github.com/upbound/provider-azure/internal/controller/network/privatednstxtrecord"
 	privatednszone "github.com/upbound/provider-azure/internal/controller/network/privatednszone"
@@ -189,6 +190,7 @@ func Setup_network(mgr ctrl.Manager, o controller.Options) error {
 		privatednsptrrecord.Setup,
 		privatednsresolver.Setup,
 		privatednsresolverinboundendpoint.Setup,
+		privatednsresolveroutboundendpoint.Setup,
 		privatednssrvrecord.Setup,
 		privatednstxtrecord.Setup,
 		privatednszone.Setup,
