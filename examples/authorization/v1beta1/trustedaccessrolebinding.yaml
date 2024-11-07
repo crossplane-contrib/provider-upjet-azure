@@ -156,8 +156,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    accountReplicationType: example-value
-    accountTier: example-value
+    accountReplicationType: LRS
+    accountTier: Standard
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
