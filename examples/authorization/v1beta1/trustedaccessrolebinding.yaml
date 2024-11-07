@@ -29,7 +29,7 @@ metadata:
   name: example
 spec:
   forProvider:
-    applicationType: example-value
+    applicationType: web
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:
@@ -51,7 +51,7 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    skuName: example-value
+    skuName: standard
     softDeleteRetentionDays: 1
     tenantId: ${data.azurerm_client_config.example.tenant_id}
 
@@ -68,7 +68,8 @@ metadata:
 spec:
   forProvider:
     keyPermissions:
-    - example-value
+      - get  # Example permission, adjust as needed
+      - list
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
@@ -117,7 +118,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     identity:
-    - type: example-value
+      type: SystemAssigned  
     keyVaultIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
