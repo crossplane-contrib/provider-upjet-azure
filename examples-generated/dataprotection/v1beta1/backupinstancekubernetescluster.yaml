@@ -148,6 +148,27 @@ spec:
 
 ---
 
+apiVersion: authorization.azure.upbound.io/v1beta1
+kind: TrustedAccessRoleBinding
+metadata:
+  annotations:
+    meta.upbound.io/example-id: dataprotection/v1beta1/backupinstancekubernetescluster
+  labels:
+    testing.upbound.io/example-name: aks_cluster_trusted_access
+  name: aks-cluster-trusted-access
+spec:
+  forProvider:
+    kubernetesClusterIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    roles:
+    - Microsoft.DataProtection/backupVaults/backup-operator
+    sourceResourceIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+
+---
+
 apiVersion: azure.upbound.io/v1beta1
 kind: ResourceGroup
 metadata:

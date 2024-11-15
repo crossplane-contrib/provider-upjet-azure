@@ -20,6 +20,7 @@ import (
 	roledefinition "github.com/upbound/provider-azure/internal/controller/authorization/roledefinition"
 	subscriptionpolicyassignment "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyassignment"
 	subscriptionpolicyexemption "github.com/upbound/provider-azure/internal/controller/authorization/subscriptionpolicyexemption"
+	trustedaccessrolebinding "github.com/upbound/provider-azure/internal/controller/authorization/trustedaccessrolebinding"
 )
 
 // Setup_authorization creates all controllers with the supplied logger and adds them to
@@ -37,6 +38,7 @@ func Setup_authorization(mgr ctrl.Manager, o controller.Options) error {
 		roledefinition.Setup,
 		subscriptionpolicyassignment.Setup,
 		subscriptionpolicyexemption.Setup,
+		trustedaccessrolebinding.Setup,
 	} {
 		if err := setup(mgr, o); err != nil {
 			return err

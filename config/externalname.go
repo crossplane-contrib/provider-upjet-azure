@@ -131,8 +131,9 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_api_management_custom_domain": config.TemplatedStringAsIdentifier("", "{{ .parameters.api_management_id }}/customDomains/{{ .external_name }}"),
 
 	// authorization
-	"azurerm_resource_group_policy_assignment": config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
-	"azurerm_role_assignment":                  config.IdentifierFromProvider,
+	"azurerm_resource_group_policy_assignment":               config.TemplatedStringAsIdentifier("name", "{{ .parameters.resource_group_id }}/providers/Microsoft.Authorization/policyAssignments/{{ .external_name }}"),
+	"azurerm_role_assignment":                                config.IdentifierFromProvider,
+	"azurerm_kubernetes_cluster_trusted_access_role_binding": config.TemplatedStringAsIdentifier("name", "{{ .parameters.kubernetes_cluster_id }}/trustedAccessRoleBindings/{{ .external_name }}"),
 	// Pim Eligible Role Assignments can be imported using the resource id
 	"azurerm_pim_eligible_role_assignment": config.IdentifierFromProvider,
 	// Pim Active Role Assignments can be imported using the resource id
