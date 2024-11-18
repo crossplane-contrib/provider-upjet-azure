@@ -114,7 +114,17 @@ type DefaultConnectionParameters struct {
 type LabServicePlanInitParameters struct {
 
 	// The allowed regions for the lab creator to use when creating labs using this Lab Service Plan. The allowed region's count must be between 1 and 28.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	AllowedRegions []*string `json:"allowedRegions,omitempty" tf:"allowed_regions,omitempty"`
+
+	// References to ResourceGroup in azure to populate allowedRegions.
+	// +kubebuilder:validation:Optional
+	AllowedRegionsRefs []v1.Reference `json:"allowedRegionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate allowedRegions.
+	// +kubebuilder:validation:Optional
+	AllowedRegionsSelector *v1.Selector `json:"allowedRegionsSelector,omitempty" tf:"-"`
 
 	// A default_auto_shutdown block as defined below.
 	DefaultAutoShutdown []DefaultAutoShutdownInitParameters `json:"defaultAutoShutdown,omitempty" tf:"default_auto_shutdown,omitempty"`
@@ -186,8 +196,18 @@ type LabServicePlanObservation struct {
 type LabServicePlanParameters struct {
 
 	// The allowed regions for the lab creator to use when creating labs using this Lab Service Plan. The allowed region's count must be between 1 and 28.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("location",false)
 	// +kubebuilder:validation:Optional
 	AllowedRegions []*string `json:"allowedRegions,omitempty" tf:"allowed_regions,omitempty"`
+
+	// References to ResourceGroup in azure to populate allowedRegions.
+	// +kubebuilder:validation:Optional
+	AllowedRegionsRefs []v1.Reference `json:"allowedRegionsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate allowedRegions.
+	// +kubebuilder:validation:Optional
+	AllowedRegionsSelector *v1.Selector `json:"allowedRegionsSelector,omitempty" tf:"-"`
 
 	// A default_auto_shutdown block as defined below.
 	// +kubebuilder:validation:Optional
@@ -327,7 +347,6 @@ type LabServicePlanStatus struct {
 type LabServicePlan struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.allowedRegions) || (has(self.initProvider) && has(self.initProvider.allowedRegions))",message="spec.forProvider.allowedRegions is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.location) || (has(self.initProvider) && has(self.initProvider.location))",message="spec.forProvider.location is a required parameter"
 	Spec   LabServicePlanSpec   `json:"spec"`
 	Status LabServicePlanStatus `json:"status,omitempty"`
