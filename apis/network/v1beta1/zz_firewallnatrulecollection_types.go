@@ -92,7 +92,17 @@ type FirewallNATRuleCollectionRuleInitParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of destination IP addresses and/or IP ranges.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ip_address",true)
 	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+
+	// References to PublicIP in network to populate destinationAddresses.
+	// +kubebuilder:validation:Optional
+	DestinationAddressesRefs []v1.Reference `json:"destinationAddressesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of PublicIP in network to populate destinationAddresses.
+	// +kubebuilder:validation:Optional
+	DestinationAddressesSelector *v1.Selector `json:"destinationAddressesSelector,omitempty" tf:"-"`
 
 	// A list of destination ports.
 	DestinationPorts []*string `json:"destinationPorts,omitempty" tf:"destination_ports,omitempty"`
@@ -153,8 +163,18 @@ type FirewallNATRuleCollectionRuleParameters struct {
 	Description *string `json:"description,omitempty" tf:"description,omitempty"`
 
 	// A list of destination IP addresses and/or IP ranges.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta1.PublicIP
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractParamPath("ip_address",true)
 	// +kubebuilder:validation:Optional
-	DestinationAddresses []*string `json:"destinationAddresses" tf:"destination_addresses,omitempty"`
+	DestinationAddresses []*string `json:"destinationAddresses,omitempty" tf:"destination_addresses,omitempty"`
+
+	// References to PublicIP in network to populate destinationAddresses.
+	// +kubebuilder:validation:Optional
+	DestinationAddressesRefs []v1.Reference `json:"destinationAddressesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of PublicIP in network to populate destinationAddresses.
+	// +kubebuilder:validation:Optional
+	DestinationAddressesSelector *v1.Selector `json:"destinationAddressesSelector,omitempty" tf:"-"`
 
 	// A list of destination ports.
 	// +kubebuilder:validation:Optional

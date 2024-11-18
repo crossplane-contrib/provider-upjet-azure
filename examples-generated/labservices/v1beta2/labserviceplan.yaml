@@ -8,8 +8,8 @@ metadata:
   name: example
 spec:
   forProvider:
-    allowedRegions:
-    - ${azurerm_resource_group.example.location}
+    allowedRegionsRefs:
+    - name: example
     location: West Europe
     resourceGroupNameSelector:
       matchLabels:

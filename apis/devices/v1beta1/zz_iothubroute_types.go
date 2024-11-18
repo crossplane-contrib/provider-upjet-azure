@@ -22,7 +22,16 @@ type IOTHubRouteInitParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubEndpointStorageContainer
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The source that the routing rule is to be applied to. Possible values include: DeviceConnectionStateEvents, DeviceJobLifecycleEvents, DeviceLifecycleEvents, DeviceMessages, DigitalTwinChangeEvents, Invalid, TwinChangeEvents.
 	Source *string `json:"source,omitempty" tf:"source,omitempty"`
@@ -63,8 +72,17 @@ type IOTHubRouteParameters struct {
 	Enabled *bool `json:"enabled,omitempty" tf:"enabled,omitempty"`
 
 	// The list of endpoints to which messages that satisfy the condition are routed. Currently only one endpoint is allowed.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubEndpointStorageContainer
 	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The name of the IoTHub to which this Route belongs. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
@@ -134,7 +152,6 @@ type IOTHubRoute struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.enabled) || (has(self.initProvider) && has(self.initProvider.enabled))",message="spec.forProvider.enabled is a required parameter"
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointNames) || (has(self.initProvider) && has(self.initProvider.endpointNames))",message="spec.forProvider.endpointNames is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.source) || (has(self.initProvider) && has(self.initProvider.source))",message="spec.forProvider.source is a required parameter"
 	Spec   IOTHubRouteSpec   `json:"spec"`
 	Status IOTHubRouteStatus `json:"status,omitempty"`

@@ -9,8 +9,8 @@ metadata:
 spec:
   forProvider:
     action:
-    - actionGroups:
-      - ${azurerm_monitor_action_group.example.id}
+    - actionGroupsRefs:
+      - name: example
       customProperties:
         key: value
         key2: value2
@@ -37,8 +37,8 @@ spec:
     enabled: true
     evaluationFrequency: PT10M
     identity:
-    - identityIds:
-      - ${azurerm_user_assigned_identity.example.id}
+    - identityIdsRefs:
+      - name: example
       type: UserAssigned
     location: West Europe
     queryTimeRangeOverride: PT1H

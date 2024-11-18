@@ -12,8 +12,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     scope:
-    - resourceIds:
-      - ${azurerm_resource_group.example.id}
+    - resourceIdsRefs:
+      - name: example
       type: ResourceGroup
     suppression:
     - recurrenceType: Weekly

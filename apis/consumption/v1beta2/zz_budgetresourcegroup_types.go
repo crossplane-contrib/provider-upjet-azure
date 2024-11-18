@@ -134,7 +134,17 @@ type BudgetResourceGroupNotificationInitParameters struct {
 	ContactEmails []*string `json:"contactEmails,omitempty" tf:"contact_emails,omitempty"`
 
 	// Specifies a list of Action Group IDs to send the budget notification to when the threshold is exceeded.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ContactGroups []*string `json:"contactGroups,omitempty" tf:"contact_groups,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate contactGroups.
+	// +kubebuilder:validation:Optional
+	ContactGroupsRefs []v1.Reference `json:"contactGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate contactGroups.
+	// +kubebuilder:validation:Optional
+	ContactGroupsSelector *v1.Selector `json:"contactGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies a list of contact roles to send the budget notification to when the threshold is exceeded.
 	ContactRoles []*string `json:"contactRoles,omitempty" tf:"contact_roles,omitempty"`
@@ -183,8 +193,18 @@ type BudgetResourceGroupNotificationParameters struct {
 	ContactEmails []*string `json:"contactEmails,omitempty" tf:"contact_emails,omitempty"`
 
 	// Specifies a list of Action Group IDs to send the budget notification to when the threshold is exceeded.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ContactGroups []*string `json:"contactGroups,omitempty" tf:"contact_groups,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate contactGroups.
+	// +kubebuilder:validation:Optional
+	ContactGroupsRefs []v1.Reference `json:"contactGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate contactGroups.
+	// +kubebuilder:validation:Optional
+	ContactGroupsSelector *v1.Selector `json:"contactGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies a list of contact roles to send the budget notification to when the threshold is exceeded.
 	// +kubebuilder:validation:Optional
@@ -320,7 +340,17 @@ type FilterDimensionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type FilterDimensionObservation struct {
@@ -346,8 +376,18 @@ type FilterDimensionParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type FilterNotDimensionInitParameters struct {

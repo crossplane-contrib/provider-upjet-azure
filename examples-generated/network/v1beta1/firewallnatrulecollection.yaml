@@ -17,8 +17,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     rule:
-    - destinationAddresses:
-      - ${azurerm_public_ip.example.ip_address}
+    - destinationAddressesRefs:
+      - name: example
       destinationPorts:
       - "53"
       name: testrule

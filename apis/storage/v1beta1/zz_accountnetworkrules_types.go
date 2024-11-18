@@ -43,8 +43,18 @@ type AccountNetworkRulesInitParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A list of virtual network subnet ids to secure the storage account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+
+	// References to Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsRefs []v1.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsSelector *v1.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type AccountNetworkRulesObservation struct {
@@ -109,9 +119,19 @@ type AccountNetworkRulesParameters struct {
 	StorageAccountIDSelector *v1.Selector `json:"storageAccountIdSelector,omitempty" tf:"-"`
 
 	// A list of virtual network subnet ids to secure the storage account.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+
+	// References to Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsRefs []v1.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsSelector *v1.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type AccountNetworkRulesPrivateLinkAccessInitParameters struct {

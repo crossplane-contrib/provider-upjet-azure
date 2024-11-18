@@ -11941,6 +11941,18 @@ func (in *StreamingLocatorInitParameters) DeepCopyInto(out *StreamingLocatorInit
 			}
 		}
 	}
+	if in.FilterNamesRefs != nil {
+		in, out := &in.FilterNamesRefs, &out.FilterNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.FilterNamesSelector != nil {
+		in, out := &in.FilterNamesSelector, &out.FilterNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.StartTime != nil {
 		in, out := &in.StartTime, &out.StartTime
 		*out = new(string)
@@ -12133,6 +12145,18 @@ func (in *StreamingLocatorParameters) DeepCopyInto(out *StreamingLocatorParamete
 				**out = **in
 			}
 		}
+	}
+	if in.FilterNamesRefs != nil {
+		in, out := &in.FilterNamesRefs, &out.FilterNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.FilterNamesSelector != nil {
+		in, out := &in.FilterNamesSelector, &out.FilterNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.MediaServicesAccountName != nil {
 		in, out := &in.MediaServicesAccountName, &out.MediaServicesAccountName

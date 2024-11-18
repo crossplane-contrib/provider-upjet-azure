@@ -1611,6 +1611,7 @@ func (mg *FirewallNATRuleCollection) ResolveReferences(ctx context.Context, c cl
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Firewall", "FirewallList")
@@ -1650,6 +1651,49 @@ func (mg *FirewallNATRuleCollection) ResolveReferences(ctx context.Context, c cl
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Rule); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Rule[i3].DestinationAddresses),
+				Extract:       resource.ExtractParamPath("ip_address", true),
+				References:    mg.Spec.ForProvider.Rule[i3].DestinationAddressesRefs,
+				Selector:      mg.Spec.ForProvider.Rule[i3].DestinationAddressesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Rule[i3].DestinationAddresses")
+		}
+		mg.Spec.ForProvider.Rule[i3].DestinationAddresses = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Rule[i3].DestinationAddressesRefs = mrsp.ResolvedReferences
+
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Rule); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PublicIP", "PublicIPList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Rule[i3].DestinationAddresses),
+				Extract:       resource.ExtractParamPath("ip_address", true),
+				References:    mg.Spec.InitProvider.Rule[i3].DestinationAddressesRefs,
+				Selector:      mg.Spec.InitProvider.Rule[i3].DestinationAddressesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Rule[i3].DestinationAddresses")
+		}
+		mg.Spec.InitProvider.Rule[i3].DestinationAddresses = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Rule[i3].DestinationAddressesRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }
@@ -5421,13 +5465,35 @@ func (mg *SubnetServiceEndpointStoragePolicy) ResolveReferences(ctx context.Cont
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Definition); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Definition[i3].ServiceResources),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.Definition[i3].ServiceResourcesRefs,
+				Selector:      mg.Spec.ForProvider.Definition[i3].ServiceResourcesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Definition[i3].ServiceResources")
+		}
+		mg.Spec.ForProvider.Definition[i3].ServiceResources = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Definition[i3].ServiceResourcesRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
@@ -5441,6 +5507,28 @@ func (mg *SubnetServiceEndpointStoragePolicy) ResolveReferences(ctx context.Cont
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Definition); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Definition[i3].ServiceResources),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.Definition[i3].ServiceResourcesRefs,
+				Selector:      mg.Spec.InitProvider.Definition[i3].ServiceResourcesSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Definition[i3].ServiceResources")
+		}
+		mg.Spec.InitProvider.Definition[i3].ServiceResources = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Definition[i3].ServiceResourcesRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }

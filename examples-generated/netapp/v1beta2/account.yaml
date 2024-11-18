@@ -20,8 +20,8 @@ spec:
       smbServerName: SMBSERVER
       username: aduser
     identity:
-    - identityIds:
-      - ${azurerm_user_assigned_identity.example.id}
+    - identityIdsRefs:
+      - name: example
       type: UserAssigned
     location: West Europe
     resourceGroupNameSelector:

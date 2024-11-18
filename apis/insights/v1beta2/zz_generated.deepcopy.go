@@ -7455,6 +7455,18 @@ func (in *MonitorDataCollectionRuleIdentityInitParameters) DeepCopyInto(out *Mon
 			}
 		}
 	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -7526,6 +7538,18 @@ func (in *MonitorDataCollectionRuleIdentityParameters) DeepCopyInto(out *Monitor
 				**out = **in
 			}
 		}
+	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -9171,6 +9195,18 @@ func (in *MonitorScheduledQueryRulesAlertInitParameters) DeepCopyInto(out *Monit
 			}
 		}
 	}
+	if in.AuthorizedResourceIdsRefs != nil {
+		in, out := &in.AuthorizedResourceIdsRefs, &out.AuthorizedResourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AuthorizedResourceIdsSelector != nil {
+		in, out := &in.AuthorizedResourceIdsSelector, &out.AuthorizedResourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoMitigationEnabled != nil {
 		in, out := &in.AutoMitigationEnabled, &out.AutoMitigationEnabled
 		*out = new(bool)
@@ -9462,6 +9498,18 @@ func (in *MonitorScheduledQueryRulesAlertParameters) DeepCopyInto(out *MonitorSc
 			}
 		}
 	}
+	if in.AuthorizedResourceIdsRefs != nil {
+		in, out := &in.AuthorizedResourceIdsRefs, &out.AuthorizedResourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AuthorizedResourceIdsSelector != nil {
+		in, out := &in.AuthorizedResourceIdsSelector, &out.AuthorizedResourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.AutoMitigationEnabled != nil {
 		in, out := &in.AutoMitigationEnabled, &out.AutoMitigationEnabled
 		*out = new(bool)
@@ -9656,6 +9704,18 @@ func (in *MonitorScheduledQueryRulesAlertV2ActionInitParameters) DeepCopyInto(ou
 			}
 		}
 	}
+	if in.ActionGroupsRefs != nil {
+		in, out := &in.ActionGroupsRefs, &out.ActionGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ActionGroupsSelector != nil {
+		in, out := &in.ActionGroupsSelector, &out.ActionGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.CustomProperties != nil {
 		in, out := &in.CustomProperties, &out.CustomProperties
 		*out = make(map[string]*string, len(*in))
@@ -9739,6 +9799,18 @@ func (in *MonitorScheduledQueryRulesAlertV2ActionParameters) DeepCopyInto(out *M
 				**out = **in
 			}
 		}
+	}
+	if in.ActionGroupsRefs != nil {
+		in, out := &in.ActionGroupsRefs, &out.ActionGroupsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ActionGroupsSelector != nil {
+		in, out := &in.ActionGroupsSelector, &out.ActionGroupsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.CustomProperties != nil {
 		in, out := &in.CustomProperties, &out.CustomProperties
@@ -9953,6 +10025,18 @@ func (in *MonitorScheduledQueryRulesAlertV2IdentityInitParameters) DeepCopyInto(
 			}
 		}
 	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -10024,6 +10108,18 @@ func (in *MonitorScheduledQueryRulesAlertV2IdentityParameters) DeepCopyInto(out 
 				**out = **in
 			}
 		}
+	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type

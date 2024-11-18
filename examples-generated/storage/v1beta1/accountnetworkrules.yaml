@@ -16,8 +16,8 @@ spec:
     storageAccountIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
-    virtualNetworkSubnetIds:
-    - ${azurerm_subnet.example.id}
+    virtualNetworkSubnetIdsRefs:
+    - name: example
 
 ---
 

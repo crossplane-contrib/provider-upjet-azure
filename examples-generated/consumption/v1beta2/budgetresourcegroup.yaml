@@ -12,8 +12,8 @@ spec:
     filter:
     - dimension:
       - name: ResourceId
-        values:
-        - ${azurerm_monitor_action_group.example.id}
+        valuesRefs:
+        - name: example
       tag:
       - name: foo
         values:
@@ -24,8 +24,8 @@ spec:
     - contactEmails:
       - foo@example.com
       - bar@example.com
-      contactGroups:
-      - ${azurerm_monitor_action_group.example.id}
+      contactGroupsRefs:
+      - name: example
       contactRoles:
       - Owner
       enabled: true

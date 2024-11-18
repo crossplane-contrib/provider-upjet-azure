@@ -84,7 +84,17 @@ type FailingPeriodsParameters struct {
 type MonitorScheduledQueryRulesAlertV2ActionInitParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate actionGroups.
+	// +kubebuilder:validation:Optional
+	ActionGroupsRefs []v1.Reference `json:"actionGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate actionGroups.
+	// +kubebuilder:validation:Optional
+	ActionGroupsSelector *v1.Selector `json:"actionGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies the properties of an alert payload.
 	// +mapType=granular
@@ -104,8 +114,18 @@ type MonitorScheduledQueryRulesAlertV2ActionObservation struct {
 type MonitorScheduledQueryRulesAlertV2ActionParameters struct {
 
 	// List of Action Group resource IDs to invoke when the alert fires.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta2.MonitorActionGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	ActionGroups []*string `json:"actionGroups,omitempty" tf:"action_groups,omitempty"`
+
+	// References to MonitorActionGroup in insights to populate actionGroups.
+	// +kubebuilder:validation:Optional
+	ActionGroupsRefs []v1.Reference `json:"actionGroupsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of MonitorActionGroup in insights to populate actionGroups.
+	// +kubebuilder:validation:Optional
+	ActionGroupsSelector *v1.Selector `json:"actionGroupsSelector,omitempty" tf:"-"`
 
 	// Specifies the properties of an alert payload.
 	// +kubebuilder:validation:Optional
@@ -205,8 +225,18 @@ type MonitorScheduledQueryRulesAlertV2CriteriaParameters struct {
 type MonitorScheduledQueryRulesAlertV2IdentityInitParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -231,9 +261,19 @@ type MonitorScheduledQueryRulesAlertV2IdentityObservation struct {
 type MonitorScheduledQueryRulesAlertV2IdentityParameters struct {
 
 	// A list of User Assigned Managed Identity IDs to be assigned to this Scheduled Query Rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/managedidentity/v1beta1.UserAssignedIdentity
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	IdentityIds []*string `json:"identityIds,omitempty" tf:"identity_ids,omitempty"`
+
+	// References to UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsRefs []v1.Reference `json:"identityIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of UserAssignedIdentity in managedidentity to populate identityIds.
+	// +kubebuilder:validation:Optional
+	IdentityIdsSelector *v1.Selector `json:"identityIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of Managed Service Identity that should be configured on this Scheduled Query Rule. Possible values are SystemAssigned, UserAssigned.
 	// +kubebuilder:validation:Optional

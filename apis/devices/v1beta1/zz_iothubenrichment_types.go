@@ -16,7 +16,16 @@ import (
 type IOTHubEnrichmentInitParameters struct {
 
 	// The list of endpoints which will be enriched.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubEndpointStorageContainer
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
@@ -73,8 +82,17 @@ type IOTHubEnrichmentObservation struct {
 type IOTHubEnrichmentParameters struct {
 
 	// The list of endpoints which will be enriched.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta1.IOTHubEndpointStorageContainer
 	// +kubebuilder:validation:Optional
 	EndpointNames []*string `json:"endpointNames,omitempty" tf:"endpoint_names,omitempty"`
+
+	// References to IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesRefs []v1.Reference `json:"endpointNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of IOTHubEndpointStorageContainer in devices to populate endpointNames.
+	// +kubebuilder:validation:Optional
+	EndpointNamesSelector *v1.Selector `json:"endpointNamesSelector,omitempty" tf:"-"`
 
 	// The IoTHub name of the enrichment. Changing this forces a new resource to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/devices/v1beta2.IOTHub
@@ -147,7 +165,6 @@ type IOTHubEnrichmentStatus struct {
 type IOTHubEnrichment struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
-	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.endpointNames) || (has(self.initProvider) && has(self.initProvider.endpointNames))",message="spec.forProvider.endpointNames is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.key) || (has(self.initProvider) && has(self.initProvider.key))",message="spec.forProvider.key is a required parameter"
 	// +kubebuilder:validation:XValidation:rule="!('*' in self.managementPolicies || 'Create' in self.managementPolicies || 'Update' in self.managementPolicies) || has(self.forProvider.value) || (has(self.initProvider) && has(self.initProvider.value))",message="spec.forProvider.value is a required parameter"
 	Spec   IOTHubEnrichmentSpec   `json:"spec"`

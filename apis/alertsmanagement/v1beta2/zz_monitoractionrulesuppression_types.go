@@ -410,8 +410,18 @@ type MonitorActionRuleSuppressionParameters struct {
 type MonitorActionRuleSuppressionScopeInitParameters struct {
 
 	// A list of resource IDs of the given scope type which will be the target of action rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
+
+	// References to ResourceGroup in azure to populate resourceIds.
+	// +kubebuilder:validation:Optional
+	ResourceIdsRefs []v1.Reference `json:"resourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate resourceIds.
+	// +kubebuilder:validation:Optional
+	ResourceIdsSelector *v1.Selector `json:"resourceIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of target scope. Possible values are ResourceGroup and Resource.
 	Type *string `json:"type,omitempty" tf:"type,omitempty"`
@@ -430,9 +440,19 @@ type MonitorActionRuleSuppressionScopeObservation struct {
 type MonitorActionRuleSuppressionScopeParameters struct {
 
 	// A list of resource IDs of the given scope type which will be the target of action rule.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	ResourceIds []*string `json:"resourceIds" tf:"resource_ids,omitempty"`
+	ResourceIds []*string `json:"resourceIds,omitempty" tf:"resource_ids,omitempty"`
+
+	// References to ResourceGroup in azure to populate resourceIds.
+	// +kubebuilder:validation:Optional
+	ResourceIdsRefs []v1.Reference `json:"resourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate resourceIds.
+	// +kubebuilder:validation:Optional
+	ResourceIdsSelector *v1.Selector `json:"resourceIdsSelector,omitempty" tf:"-"`
 
 	// Specifies the type of target scope. Possible values are ResourceGroup and Resource.
 	// +kubebuilder:validation:Optional

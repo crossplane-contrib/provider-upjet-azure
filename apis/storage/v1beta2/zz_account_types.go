@@ -1245,8 +1245,18 @@ type NetworkRulesInitParameters struct {
 	PrivateLinkAccess []PrivateLinkAccessInitParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+
+	// References to Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsRefs []v1.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsSelector *v1.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type NetworkRulesObservation struct {
@@ -1291,9 +1301,19 @@ type NetworkRulesParameters struct {
 	PrivateLinkAccess []PrivateLinkAccessParameters `json:"privateLinkAccess,omitempty" tf:"private_link_access,omitempty"`
 
 	// A list of resource ids for subnets.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/network/v1beta2.Subnet
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	VirtualNetworkSubnetIds []*string `json:"virtualNetworkSubnetIds,omitempty" tf:"virtual_network_subnet_ids,omitempty"`
+
+	// References to Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsRefs []v1.Reference `json:"virtualNetworkSubnetIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Subnet in network to populate virtualNetworkSubnetIds.
+	// +kubebuilder:validation:Optional
+	VirtualNetworkSubnetIdsSelector *v1.Selector `json:"virtualNetworkSubnetIdsSelector,omitempty" tf:"-"`
 }
 
 type PrivateLinkAccessInitParameters struct {
