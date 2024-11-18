@@ -250,6 +250,18 @@ func (in *IdentityInitParameters) DeepCopyInto(out *IdentityInitParameters) {
 			}
 		}
 	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -311,6 +323,18 @@ func (in *IdentityParameters) DeepCopyInto(out *IdentityParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -5307,6 +5331,18 @@ func (in *MSSQLServerIdentityInitParameters) DeepCopyInto(out *MSSQLServerIdenti
 			}
 		}
 	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -5378,6 +5414,18 @@ func (in *MSSQLServerIdentityParameters) DeepCopyInto(out *MSSQLServerIdentityPa
 				**out = **in
 			}
 		}
+	}
+	if in.IdentityIdsRefs != nil {
+		in, out := &in.IdentityIdsRefs, &out.IdentityIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.IdentityIdsSelector != nil {
+		in, out := &in.IdentityIdsSelector, &out.IdentityIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type

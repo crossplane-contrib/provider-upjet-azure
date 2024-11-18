@@ -25,13 +25,37 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Filter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Filter[i3].Dimension); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs,
+					Selector:      mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values")
+			}
+			mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
@@ -45,12 +69,35 @@ func (mg *BudgetManagementGroup) ResolveReferences( // ResolveReferences of this
 	}
 	mg.Spec.ForProvider.ManagementGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ManagementGroupIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Filter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Filter[i3].Dimension); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs,
+					Selector:      mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values")
+			}
+			mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("management.azure.upbound.io", "v1beta1", "ManagementGroup", "ManagementGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ManagementGroupID),
 			Extract:      resource.ExtractResourceID(),
@@ -75,13 +122,58 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Filter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Filter[i3].Dimension); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs,
+					Selector:      mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values")
+			}
+			mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Notification); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Notification[i3].ContactGroups),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs,
+				Selector:      mg.Spec.ForProvider.Notification[i3].ContactGroupsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.Notification[i3].ContactGroups")
+		}
+		mg.Spec.ForProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
@@ -95,12 +187,56 @@ func (mg *BudgetResourceGroup) ResolveReferences(ctx context.Context, c client.R
 	}
 	mg.Spec.ForProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupIDRef = rsp.ResolvedReference
+
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Filter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Filter[i3].Dimension); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values),
+					Extract:       resource.ExtractResourceID(),
+					References:    mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs,
+					Selector:      mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values")
+			}
+			mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
+
+		}
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Notification); i3++ {
+		{
+			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta2", "MonitorActionGroup", "MonitorActionGroupList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Notification[i3].ContactGroups),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs,
+				Selector:      mg.Spec.InitProvider.Notification[i3].ContactGroupsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.Notification[i3].ContactGroups")
+		}
+		mg.Spec.InitProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
 			Extract:      resource.ExtractResourceID(),
@@ -127,6 +263,29 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 	var mrsp reference.MultiResolutionResponse
 	var err error
 
+	for i3 := 0; i3 < len(mg.Spec.ForProvider.Filter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.ForProvider.Filter[i3].Dimension); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs,
+					Selector:      mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values")
+			}
+			mg.Spec.ForProvider.Filter[i3].Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.ForProvider.Filter[i3].Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
+
+		}
+	}
 	for i3 := 0; i3 < len(mg.Spec.ForProvider.Notification); i3++ {
 		{
 			m, l, err = apisresolver.GetManagedResource("insights.azure.upbound.io", "v1beta1", "MonitorActionGroup", "MonitorActionGroupList")
@@ -147,6 +306,29 @@ func (mg *BudgetSubscription) ResolveReferences(ctx context.Context, c client.Re
 		mg.Spec.ForProvider.Notification[i3].ContactGroups = reference.ToPtrValues(mrsp.ResolvedValues)
 		mg.Spec.ForProvider.Notification[i3].ContactGroupsRefs = mrsp.ResolvedReferences
 
+	}
+	for i3 := 0; i3 < len(mg.Spec.InitProvider.Filter); i3++ {
+		for i4 := 0; i4 < len(mg.Spec.InitProvider.Filter[i3].Dimension); i4++ {
+			{
+				m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+				if err != nil {
+					return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+				}
+				mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+					CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values),
+					Extract:       reference.ExternalName(),
+					References:    mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs,
+					Selector:      mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesSelector,
+					To:            reference.To{List: l, Managed: m},
+				})
+			}
+			if err != nil {
+				return errors.Wrap(err, "mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values")
+			}
+			mg.Spec.InitProvider.Filter[i3].Dimension[i4].Values = reference.ToPtrValues(mrsp.ResolvedValues)
+			mg.Spec.InitProvider.Filter[i3].Dimension[i4].ValuesRefs = mrsp.ResolvedReferences
+
+		}
 	}
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.Notification); i3++ {
 		{
