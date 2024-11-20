@@ -99,7 +99,16 @@ type StreamingLocatorInitParameters struct {
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// A list of names of asset or account filters which apply to this Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta2.ServicesAccountFilter
 	FilterNames []*string `json:"filterNames,omitempty" tf:"filter_names,omitempty"`
+
+	// References to ServicesAccountFilter in media to populate filterNames.
+	// +kubebuilder:validation:Optional
+	FilterNamesRefs []v1.Reference `json:"filterNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ServicesAccountFilter in media to populate filterNames.
+	// +kubebuilder:validation:Optional
+	FilterNamesSelector *v1.Selector `json:"filterNamesSelector,omitempty" tf:"-"`
 
 	// The start time of the Streaming Locator. Changing this forces a new Streaming Locator to be created.
 	StartTime *string `json:"startTime,omitempty" tf:"start_time,omitempty"`
@@ -182,8 +191,17 @@ type StreamingLocatorParameters struct {
 	EndTime *string `json:"endTime,omitempty" tf:"end_time,omitempty"`
 
 	// A list of names of asset or account filters which apply to this Streaming Locator. Changing this forces a new Streaming Locator to be created.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta2.ServicesAccountFilter
 	// +kubebuilder:validation:Optional
 	FilterNames []*string `json:"filterNames,omitempty" tf:"filter_names,omitempty"`
+
+	// References to ServicesAccountFilter in media to populate filterNames.
+	// +kubebuilder:validation:Optional
+	FilterNamesRefs []v1.Reference `json:"filterNamesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ServicesAccountFilter in media to populate filterNames.
+	// +kubebuilder:validation:Optional
+	FilterNamesSelector *v1.Selector `json:"filterNamesSelector,omitempty" tf:"-"`
 
 	// The Media Services account name. Changing this forces a new Streaming Locator to be created.
 	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/media/v1beta2.ServicesAccount

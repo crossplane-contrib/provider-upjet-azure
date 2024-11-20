@@ -605,6 +605,7 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
 	{
 		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta1", "Asset", "AssetList")
@@ -625,6 +626,25 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.AssetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AssetNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta2", "ServicesAccountFilter", "ServicesAccountFilterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.FilterNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.FilterNamesRefs,
+			Selector:      mg.Spec.ForProvider.FilterNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.FilterNames")
+	}
+	mg.Spec.ForProvider.FilterNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.FilterNamesRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta2", "ServicesAccount", "ServicesAccountList")
 		if err != nil {
@@ -682,6 +702,25 @@ func (mg *StreamingLocator) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.InitProvider.AssetName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AssetNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("media.azure.upbound.io", "v1beta2", "ServicesAccountFilter", "ServicesAccountFilterList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.FilterNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.FilterNamesRefs,
+			Selector:      mg.Spec.InitProvider.FilterNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.FilterNames")
+	}
+	mg.Spec.InitProvider.FilterNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.FilterNamesRefs = mrsp.ResolvedReferences
 
 	return nil
 }

@@ -3126,6 +3126,18 @@ func (in *IOTHubEnrichmentInitParameters) DeepCopyInto(out *IOTHubEnrichmentInit
 			}
 		}
 	}
+	if in.EndpointNamesRefs != nil {
+		in, out := &in.EndpointNamesRefs, &out.EndpointNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.EndpointNamesSelector != nil {
+		in, out := &in.EndpointNamesSelector, &out.EndpointNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.IOTHubName != nil {
 		in, out := &in.IOTHubName, &out.IOTHubName
 		*out = new(string)
@@ -3274,6 +3286,18 @@ func (in *IOTHubEnrichmentParameters) DeepCopyInto(out *IOTHubEnrichmentParamete
 				**out = **in
 			}
 		}
+	}
+	if in.EndpointNamesRefs != nil {
+		in, out := &in.EndpointNamesRefs, &out.EndpointNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.EndpointNamesSelector != nil {
+		in, out := &in.EndpointNamesSelector, &out.EndpointNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubName != nil {
 		in, out := &in.IOTHubName, &out.IOTHubName
@@ -4114,6 +4138,18 @@ func (in *IOTHubRouteInitParameters) DeepCopyInto(out *IOTHubRouteInitParameters
 			}
 		}
 	}
+	if in.EndpointNamesRefs != nil {
+		in, out := &in.EndpointNamesRefs, &out.EndpointNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.EndpointNamesSelector != nil {
+		in, out := &in.EndpointNamesSelector, &out.EndpointNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Source != nil {
 		in, out := &in.Source, &out.Source
 		*out = new(string)
@@ -4242,6 +4278,18 @@ func (in *IOTHubRouteParameters) DeepCopyInto(out *IOTHubRouteParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.EndpointNamesRefs != nil {
+		in, out := &in.EndpointNamesRefs, &out.EndpointNamesRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.EndpointNamesSelector != nil {
+		in, out := &in.EndpointNamesSelector, &out.EndpointNamesSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.IOTHubName != nil {
 		in, out := &in.IOTHubName, &out.IOTHubName

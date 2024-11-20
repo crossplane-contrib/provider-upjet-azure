@@ -9,6 +9,7 @@ package v1beta1
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
@@ -98,7 +99,27 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AllowedRegions),
+			Extract:       resource.ExtractParamPath("location", false),
+			References:    mg.Spec.ForProvider.AllowedRegionsRefs,
+			Selector:      mg.Spec.ForProvider.AllowedRegionsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.AllowedRegions")
+	}
+	mg.Spec.ForProvider.AllowedRegions = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.AllowedRegionsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {
@@ -137,6 +158,25 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AllowedRegions),
+			Extract:       resource.ExtractParamPath("location", false),
+			References:    mg.Spec.InitProvider.AllowedRegionsRefs,
+			Selector:      mg.Spec.InitProvider.AllowedRegionsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.AllowedRegions")
+	}
+	mg.Spec.InitProvider.AllowedRegions = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.AllowedRegionsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "Subnet", "SubnetList")
 		if err != nil {

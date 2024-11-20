@@ -12,8 +12,8 @@ spec:
     filter:
     - dimension:
       - name: ResourceGroupName
-        values:
-        - ${azurerm_resource_group.example.name}
+        valuesRefs:
+        - name: example
       tag:
       - name: foo
         values:

@@ -25,8 +25,18 @@ type DefinitionInitParameters struct {
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 
 	// Specifies a list of resources or aliases that this Subnet Service Endpoint Storage Policy Definition applies to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
+
+	// References to ResourceGroup in azure to populate serviceResources.
+	// +kubebuilder:validation:Optional
+	ServiceResourcesRefs []v1.Reference `json:"serviceResourcesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate serviceResources.
+	// +kubebuilder:validation:Optional
+	ServiceResourcesSelector *v1.Selector `json:"serviceResourcesSelector,omitempty" tf:"-"`
 }
 
 type DefinitionObservation struct {
@@ -60,9 +70,19 @@ type DefinitionParameters struct {
 	Service *string `json:"service,omitempty" tf:"service,omitempty"`
 
 	// Specifies a list of resources or aliases that this Subnet Service Endpoint Storage Policy Definition applies to.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
-	ServiceResources []*string `json:"serviceResources" tf:"service_resources,omitempty"`
+	ServiceResources []*string `json:"serviceResources,omitempty" tf:"service_resources,omitempty"`
+
+	// References to ResourceGroup in azure to populate serviceResources.
+	// +kubebuilder:validation:Optional
+	ServiceResourcesRefs []v1.Reference `json:"serviceResourcesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate serviceResources.
+	// +kubebuilder:validation:Optional
+	ServiceResourcesSelector *v1.Selector `json:"serviceResourcesSelector,omitempty" tf:"-"`
 }
 
 type SubnetServiceEndpointStoragePolicyInitParameters struct {

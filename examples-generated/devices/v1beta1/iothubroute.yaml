@@ -10,8 +10,8 @@ spec:
   forProvider:
     condition: "true"
     enabled: true
-    endpointNames:
-    - ${azurerm_iothub_endpoint_storage_container.example.name}
+    endpointNamesRefs:
+    - name: example
     iothubNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example

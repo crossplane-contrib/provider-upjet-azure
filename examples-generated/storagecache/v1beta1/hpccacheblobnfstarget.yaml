@@ -184,8 +184,8 @@ spec:
     location: west europe
     networkRules:
     - defaultAction: Deny
-      virtualNetworkSubnetIds:
-      - ${azurerm_subnet.example.id}
+      virtualNetworkSubnetIdsRefs:
+      - name: example
     nfsv3Enabled: true
     resourceGroupNameSelector:
       matchLabels:

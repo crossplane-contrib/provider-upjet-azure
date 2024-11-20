@@ -25,8 +25,18 @@ type ConnectionMonitorInitParameters struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	OutputWorkspaceResourceIds []*string `json:"outputWorkspaceResourceIds,omitempty" tf:"output_workspace_resource_ids,omitempty"`
+
+	// References to Workspace in operationalinsights to populate outputWorkspaceResourceIds.
+	// +kubebuilder:validation:Optional
+	OutputWorkspaceResourceIdsRefs []v1.Reference `json:"outputWorkspaceResourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Workspace in operationalinsights to populate outputWorkspaceResourceIds.
+	// +kubebuilder:validation:Optional
+	OutputWorkspaceResourceIdsSelector *v1.Selector `json:"outputWorkspaceResourceIdsSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Connection Monitor.
 	// +mapType=granular
@@ -100,9 +110,19 @@ type ConnectionMonitorParameters struct {
 	Notes *string `json:"notes,omitempty" tf:"notes,omitempty"`
 
 	// A list of IDs of the Log Analytics Workspace which will accept the output from the Network Connection Monitor.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/operationalinsights/v1beta2.Workspace
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	OutputWorkspaceResourceIds []*string `json:"outputWorkspaceResourceIds,omitempty" tf:"output_workspace_resource_ids,omitempty"`
+
+	// References to Workspace in operationalinsights to populate outputWorkspaceResourceIds.
+	// +kubebuilder:validation:Optional
+	OutputWorkspaceResourceIdsRefs []v1.Reference `json:"outputWorkspaceResourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of Workspace in operationalinsights to populate outputWorkspaceResourceIds.
+	// +kubebuilder:validation:Optional
+	OutputWorkspaceResourceIdsSelector *v1.Selector `json:"outputWorkspaceResourceIdsSelector,omitempty" tf:"-"`
 
 	// A mapping of tags which should be assigned to the Network Connection Monitor.
 	// +kubebuilder:validation:Optional

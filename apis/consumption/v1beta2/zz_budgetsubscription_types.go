@@ -22,7 +22,16 @@ type BudgetSubscriptionFilterDimensionInitParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+
+	// References to ResourceGroup in azure to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type BudgetSubscriptionFilterDimensionObservation struct {
@@ -48,8 +57,17 @@ type BudgetSubscriptionFilterDimensionParameters struct {
 	Operator *string `json:"operator,omitempty" tf:"operator,omitempty"`
 
 	// Specifies a list of values for the tag.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/azure/v1beta1.ResourceGroup
 	// +kubebuilder:validation:Optional
-	Values []*string `json:"values" tf:"values,omitempty"`
+	Values []*string `json:"values,omitempty" tf:"values,omitempty"`
+
+	// References to ResourceGroup in azure to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesRefs []v1.Reference `json:"valuesRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ResourceGroup in azure to populate values.
+	// +kubebuilder:validation:Optional
+	ValuesSelector *v1.Selector `json:"valuesSelector,omitempty" tf:"-"`
 }
 
 type BudgetSubscriptionFilterInitParameters struct {

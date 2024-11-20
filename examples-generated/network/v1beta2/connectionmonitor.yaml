@@ -23,8 +23,8 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     notes: examplenote
-    outputWorkspaceResourceIds:
-    - ${azurerm_log_analytics_workspace.example.id}
+    outputWorkspaceResourceIdsRefs:
+    - name: example
     testConfiguration:
     - name: tcpName
       protocol: Tcp

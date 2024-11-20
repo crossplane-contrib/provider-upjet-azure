@@ -25,13 +25,35 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+
+	if mg.Spec.ForProvider.NetworkRules != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIdsRefs,
+				Selector:      mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds")
+		}
+		mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.ForProvider.NetworkRules.VirtualNetworkSubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
 		if err != nil {
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
-
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
 			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
 			Extract:      reference.ExternalName(),
@@ -45,6 +67,28 @@ func (mg *Account) ResolveReferences(ctx context.Context, c client.Reader) error
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+
+	if mg.Spec.InitProvider.NetworkRules != nil {
+		{
+			m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
+			if err != nil {
+				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+			}
+			mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+				CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds),
+				Extract:       resource.ExtractResourceID(),
+				References:    mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIdsRefs,
+				Selector:      mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIdsSelector,
+				To:            reference.To{List: l, Managed: m},
+			})
+		}
+		if err != nil {
+			return errors.Wrap(err, "mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds")
+		}
+		mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIds = reference.ToPtrValues(mrsp.ResolvedValues)
+		mg.Spec.InitProvider.NetworkRules.VirtualNetworkSubnetIdsRefs = mrsp.ResolvedReferences
+
+	}
 
 	return nil
 }

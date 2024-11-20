@@ -2581,6 +2581,18 @@ func (in *MonitorActionRuleSuppressionScopeInitParameters) DeepCopyInto(out *Mon
 			}
 		}
 	}
+	if in.ResourceIdsRefs != nil {
+		in, out := &in.ResourceIdsRefs, &out.ResourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ResourceIdsSelector != nil {
+		in, out := &in.ResourceIdsSelector, &out.ResourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -2642,6 +2654,18 @@ func (in *MonitorActionRuleSuppressionScopeParameters) DeepCopyInto(out *Monitor
 				**out = **in
 			}
 		}
+	}
+	if in.ResourceIdsRefs != nil {
+		in, out := &in.ResourceIdsRefs, &out.ResourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ResourceIdsSelector != nil {
+		in, out := &in.ResourceIdsSelector, &out.ResourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
@@ -6609,6 +6633,18 @@ func (in *ScopeInitParameters) DeepCopyInto(out *ScopeInitParameters) {
 			}
 		}
 	}
+	if in.ResourceIdsRefs != nil {
+		in, out := &in.ResourceIdsRefs, &out.ResourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ResourceIdsSelector != nil {
+		in, out := &in.ResourceIdsSelector, &out.ResourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type
 		*out = new(string)
@@ -6670,6 +6706,18 @@ func (in *ScopeParameters) DeepCopyInto(out *ScopeParameters) {
 				**out = **in
 			}
 		}
+	}
+	if in.ResourceIdsRefs != nil {
+		in, out := &in.ResourceIdsRefs, &out.ResourceIdsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.ResourceIdsSelector != nil {
+		in, out := &in.ResourceIdsSelector, &out.ResourceIdsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.Type != nil {
 		in, out := &in.Type, &out.Type

@@ -81,8 +81,18 @@ type MonitorScheduledQueryRulesAlertInitParameters struct {
 	Action *MonitorScheduledQueryRulesAlertActionInitParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// List of Resource IDs referred into query.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
+
+	// References to ApplicationInsights in insights to populate authorizedResourceIds.
+	// +kubebuilder:validation:Optional
+	AuthorizedResourceIdsRefs []v1.Reference `json:"authorizedResourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ApplicationInsights in insights to populate authorizedResourceIds.
+	// +kubebuilder:validation:Optional
+	AuthorizedResourceIdsSelector *v1.Selector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
 	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.
@@ -218,9 +228,19 @@ type MonitorScheduledQueryRulesAlertParameters struct {
 	Action *MonitorScheduledQueryRulesAlertActionParameters `json:"action,omitempty" tf:"action,omitempty"`
 
 	// List of Resource IDs referred into query.
+	// +crossplane:generate:reference:type=github.com/upbound/provider-azure/apis/insights/v1beta1.ApplicationInsights
+	// +crossplane:generate:reference:extractor=github.com/crossplane/upjet/pkg/resource.ExtractResourceID()
 	// +kubebuilder:validation:Optional
 	// +listType=set
 	AuthorizedResourceIds []*string `json:"authorizedResourceIds,omitempty" tf:"authorized_resource_ids,omitempty"`
+
+	// References to ApplicationInsights in insights to populate authorizedResourceIds.
+	// +kubebuilder:validation:Optional
+	AuthorizedResourceIdsRefs []v1.Reference `json:"authorizedResourceIdsRefs,omitempty" tf:"-"`
+
+	// Selector for a list of ApplicationInsights in insights to populate authorizedResourceIds.
+	// +kubebuilder:validation:Optional
+	AuthorizedResourceIdsSelector *v1.Selector `json:"authorizedResourceIdsSelector,omitempty" tf:"-"`
 
 	// Should the alerts in this Metric Alert be auto resolved? Defaults to false.
 	// -> NOTE auto_mitigation_enabled and throttling are mutually exclusive and cannot both be set.

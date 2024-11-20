@@ -988,6 +988,18 @@ func (in *LabServicePlanInitParameters) DeepCopyInto(out *LabServicePlanInitPara
 			}
 		}
 	}
+	if in.AllowedRegionsRefs != nil {
+		in, out := &in.AllowedRegionsRefs, &out.AllowedRegionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AllowedRegionsSelector != nil {
+		in, out := &in.AllowedRegionsSelector, &out.AllowedRegionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
+	}
 	if in.DefaultAutoShutdown != nil {
 		in, out := &in.DefaultAutoShutdown, &out.DefaultAutoShutdown
 		*out = new(DefaultAutoShutdownInitParameters)
@@ -1183,6 +1195,18 @@ func (in *LabServicePlanParameters) DeepCopyInto(out *LabServicePlanParameters) 
 				**out = **in
 			}
 		}
+	}
+	if in.AllowedRegionsRefs != nil {
+		in, out := &in.AllowedRegionsRefs, &out.AllowedRegionsRefs
+		*out = make([]v1.Reference, len(*in))
+		for i := range *in {
+			(*in)[i].DeepCopyInto(&(*out)[i])
+		}
+	}
+	if in.AllowedRegionsSelector != nil {
+		in, out := &in.AllowedRegionsSelector, &out.AllowedRegionsSelector
+		*out = new(v1.Selector)
+		(*in).DeepCopyInto(*out)
 	}
 	if in.DefaultAutoShutdown != nil {
 		in, out := &in.DefaultAutoShutdown, &out.DefaultAutoShutdown

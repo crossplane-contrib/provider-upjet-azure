@@ -620,7 +620,27 @@ func (mg *IOTHubEnrichment) ResolveReferences(ctx context.Context, c client.Read
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHubEndpointStorageContainer", "IOTHubEndpointStorageContainerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.EndpointNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.EndpointNamesRefs,
+			Selector:      mg.Spec.ForProvider.EndpointNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EndpointNames")
+	}
+	mg.Spec.ForProvider.EndpointNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.EndpointNamesRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
@@ -659,6 +679,25 @@ func (mg *IOTHubEnrichment) ResolveReferences(ctx context.Context, c client.Read
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHubEndpointStorageContainer", "IOTHubEndpointStorageContainerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.EndpointNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.EndpointNamesRefs,
+			Selector:      mg.Spec.InitProvider.EndpointNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EndpointNames")
+	}
+	mg.Spec.InitProvider.EndpointNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.EndpointNamesRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
@@ -797,7 +836,27 @@ func (mg *IOTHubRoute) ResolveReferences(ctx context.Context, c client.Reader) e
 	r := reference.NewAPIResolver(c, mg)
 
 	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
 	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHubEndpointStorageContainer", "IOTHubEndpointStorageContainerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.EndpointNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.ForProvider.EndpointNamesRefs,
+			Selector:      mg.Spec.ForProvider.EndpointNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.EndpointNames")
+	}
+	mg.Spec.ForProvider.EndpointNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.EndpointNamesRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
 		if err != nil {
@@ -836,6 +895,25 @@ func (mg *IOTHubRoute) ResolveReferences(ctx context.Context, c client.Reader) e
 	}
 	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta1", "IOTHubEndpointStorageContainer", "IOTHubEndpointStorageContainerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.EndpointNames),
+			Extract:       reference.ExternalName(),
+			References:    mg.Spec.InitProvider.EndpointNamesRefs,
+			Selector:      mg.Spec.InitProvider.EndpointNamesSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.EndpointNames")
+	}
+	mg.Spec.InitProvider.EndpointNames = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.EndpointNamesRefs = mrsp.ResolvedReferences
 
 	return nil
 }
