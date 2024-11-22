@@ -16,6 +16,9 @@ func (tr *Blob) Hub() {}
 func (tr *Container) Hub() {}
 
 // Hub marks this type as a conversion hub.
+func (tr *ContainerImmutabilityPolicy) Hub() {}
+
+// Hub marks this type as a conversion hub.
 func (tr *DataLakeGen2FileSystem) Hub() {}
 
 // Hub marks this type as a conversion hub.
