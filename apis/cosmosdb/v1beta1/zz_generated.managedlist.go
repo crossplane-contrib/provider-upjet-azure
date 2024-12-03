@@ -88,6 +88,24 @@ func (l *MongoDatabaseList) GetItems() []resource.Managed {
 	return items
 }
 
+// GetItems of this MongoRoleDefinitionList.
+func (l *MongoRoleDefinitionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
+// GetItems of this MongoUserDefinitionList.
+func (l *MongoUserDefinitionList) GetItems() []resource.Managed {
+	items := make([]resource.Managed, len(l.Items))
+	for i := range l.Items {
+		items[i] = &l.Items[i]
+	}
+	return items
+}
+
 // GetItems of this SQLContainerList.
 func (l *SQLContainerList) GetItems() []resource.Managed {
 	items := make([]resource.Managed, len(l.Items))
