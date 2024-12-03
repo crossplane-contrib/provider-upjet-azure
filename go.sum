@@ -153,8 +153,8 @@ github.com/hashicorp/go-azure-helpers v0.70.1 h1:7hlnRrZobMZxpOzdlNEsayzAayj/KRG
 github.com/hashicorp/go-azure-helpers v0.70.1/go.mod h1:BmbF4JDYXK5sEmFeU5hcn8Br21uElcqLfdQxjatwQKw=
 github.com/hashicorp/go-azure-sdk/resource-manager v0.20240731.1212841 h1:H7BkxZl0qitdWq7sEGzNqkn5/11YTamwq2XTI8/7Jq0=
 github.com/hashicorp/go-azure-sdk/resource-manager v0.20240731.1212841/go.mod h1:/4Ly9Gppp/Nu9AaWDfod6atYQ4n2OqN0ERpE2xZQz8A=
-github.com/hashicorp/go-azure-sdk/sdk v0.20240731.1212841 h1:RzWuy96j/7q3Vi2aZoiIrokm8yotUNX1UGD3pbWi5Ck=
-github.com/hashicorp/go-azure-sdk/sdk v0.20240731.1212841/go.mod h1:dMKF6bXrgGmy1d3pLzkmBpG2JIHgSAV2/OMSCEgyMwE=
+github.com/hashicorp/go-azure-sdk/sdk v0.20241025.1143247 h1:NoYFgxtEsxHhE6TyJ6DRXqHLcxZ0cmrpGxNPio0lT84=
+github.com/hashicorp/go-azure-sdk/sdk v0.20241025.1143247/go.mod h1:dMKF6bXrgGmy1d3pLzkmBpG2JIHgSAV2/OMSCEgyMwE=
 github.com/hashicorp/go-checkpoint v0.5.0 h1:MFYpPZCnQqQTE18jFwSII6eUQrD/oxMFp3mlgcqk5mU=
 github.com/hashicorp/go-checkpoint v0.5.0/go.mod h1:7nfLNL10NsxqO4iWuW6tWW0HjZuDrwkBuEQsVcpCOgg=
 github.com/hashicorp/go-cleanhttp v0.5.0/go.mod h1:JpRdi6/HCYpAwUzNwuwqhbovhLtngrth3wmdIIUrZ80=
@@ -330,8 +330,8 @@ github.com/tombuildsstuff/giovanni v0.27.0 h1:3CDNjauK78FIhvvCp0SAHlvNcPTcofR6zQ
 github.com/tombuildsstuff/giovanni v0.27.0/go.mod h1:SviBdlwdVn2HyArdRABBqMUODBJ2adQHi+RFEVaO05I=
 github.com/tombuildsstuff/kermit v0.20240122.1123108 h1:icQaxsv/ANv/KC4Sr0V1trrWA/XIL+3QAVBDpiSTgj8=
 github.com/tombuildsstuff/kermit v0.20240122.1123108/go.mod h1:T3YBVFhRV4qA7SbnRaNE6eapIMpKDA9rG/V7Ocsjlno=
-github.com/upbound/terraform-provider-azurerm v0.0.0-20241030101333-b4c9cbe27360 h1:Ecx/ZgN3Wcbgq/CBrznmkrX0D7ryEl5aV2FiS2jAeD0=
-github.com/upbound/terraform-provider-azurerm v0.0.0-20241030101333-b4c9cbe27360/go.mod h1:/t447X+oN2EJxglMFjIFHaBWHbMjUzYIBa/Ro/0NgPo=
+github.com/upbound/terraform-provider-azurerm v0.0.0-20241203092116-b74bc0a2e2d8 h1:3b85peJKHf/QIEllUgK64z/oG8fuDhnmE7G5pl5i1mg=
+github.com/upbound/terraform-provider-azurerm v0.0.0-20241203092116-b74bc0a2e2d8/go.mod h1:6p9OsjLZCi9+P2vq6wkk7cJC0AtYHMyQ3zvLSN7tjWI=
 github.com/vmihailenco/msgpack v3.3.3+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
 github.com/vmihailenco/msgpack v4.0.4+incompatible h1:dSLoQfGFAo3F6OoNhwUmLwVgaUXK79GlxNBwueZn0xI=
 github.com/vmihailenco/msgpack v4.0.4+incompatible/go.mod h1:fy3FlTQTDXWkZ7Bh6AcGMlsjHatGryHQYUTf1ShIgkk=
