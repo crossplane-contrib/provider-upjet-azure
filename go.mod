@@ -76,7 +76,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-azure-helpers v0.70.1 // indirect
 	github.com/hashicorp/go-azure-sdk/resource-manager v0.20240731.1212841 // indirect
-	github.com/hashicorp/go-azure-sdk/sdk v0.20240731.1212841 // indirect
+	github.com/hashicorp/go-azure-sdk/sdk v0.20241025.1143247 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
 	github.com/hashicorp/go-cty v1.4.1-0.20200414143053-d3edf31b6320 // indirect
@@ -165,4 +165,4 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.4.0 // indirect
 )
 
-replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20241030101333-b4c9cbe27360
+replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20241203092116-b74bc0a2e2d8
