@@ -673,6 +673,7 @@ import (
 	blob "github.com/upbound/provider-azure/internal/controller/storage/blob"
 	blobinventorypolicy "github.com/upbound/provider-azure/internal/controller/storage/blobinventorypolicy"
 	container "github.com/upbound/provider-azure/internal/controller/storage/container"
+	containerimmutabilitypolicy "github.com/upbound/provider-azure/internal/controller/storage/containerimmutabilitypolicy"
 	datalakegen2filesystem "github.com/upbound/provider-azure/internal/controller/storage/datalakegen2filesystem"
 	datalakegen2path "github.com/upbound/provider-azure/internal/controller/storage/datalakegen2path"
 	encryptionscope "github.com/upbound/provider-azure/internal/controller/storage/encryptionscope"
@@ -1424,6 +1425,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		blob.Setup,
 		blobinventorypolicy.Setup,
 		container.Setup,
+		containerimmutabilitypolicy.Setup,
 		datalakegen2filesystem.Setup,
 		datalakegen2path.Setup,
 		encryptionscope.Setup,

@@ -834,13 +834,14 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_storage_account":           config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Storage/storageAccounts/{{ .external_name }}"),
 	// This resource does not have its own identifier, but rather uses the name of storage account.
 	// Following _Case 6_ from the **Adding a New Resource** guide
-	"azurerm_storage_account_network_rules":     config.IdentifierFromProvider,
-	"azurerm_storage_blob":                      config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .external_name }}"),
-	"azurerm_storage_blob_inventory_policy":     config.IdentifierFromProvider,
-	"azurerm_storage_container":                 config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
-	"azurerm_storage_data_lake_gen2_filesystem": storageDataLakeGen2Filesystem(),
-	"azurerm_storage_encryption_scope":          config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/encryptionScopes/{{ .external_name }}"),
-	"azurerm_storage_management_policy":         config.TemplatedStringAsIdentifier("", "{{ .parameters.storage_account_id }}/managementPolicies/default"),
+	"azurerm_storage_account_network_rules":         config.IdentifierFromProvider,
+	"azurerm_storage_blob":                          config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .parameters.storage_container_name }}/{{ .external_name }}"),
+	"azurerm_storage_blob_inventory_policy":         config.IdentifierFromProvider,
+	"azurerm_storage_container":                     config.TemplatedStringAsIdentifier("name", "https://{{ .parameters.storage_account_name }}.blob.core.windows.net/{{ .external_name }}"),
+	"azurerm_storage_data_lake_gen2_filesystem":     storageDataLakeGen2Filesystem(),
+	"azurerm_storage_encryption_scope":              config.TemplatedStringAsIdentifier("name", "{{ .parameters.storage_account_id }}/encryptionScopes/{{ .external_name }}"),
+	"azurerm_storage_management_policy":             config.TemplatedStringAsIdentifier("", "{{ .parameters.storage_account_id }}/managementPolicies/default"),
+	"azurerm_storage_container_immutability_policy": config.TemplatedStringAsIdentifier("", "{{ .parameters.storage_container_resource_manager_id }}/immutabilityPolicies/default"),
 	// The id of this resource is a concatenation of 2 resource names, but in the terraform documentation
 	// this reasource does not have a name so instead it concatenates destination and target storage account IDs
 	"azurerm_storage_object_replication": config.IdentifierFromProvider,
