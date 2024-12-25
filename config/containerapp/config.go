@@ -17,6 +17,9 @@ func Configure(p *config.Provider) {
 		r.ShortGroup = group
 		r.TerraformResource.Schema["secret"].Elem.(*schema.Resource).
 			Schema["name"].Sensitive = true
+		r.LateInitializer = config.LateInitializer{
+			IgnoredFields: []string{"secret"},
+		}
 	})
 
 	p.AddResourceConfigurator("azurerm_container_app_environment", func(r *config.Resource) {
