@@ -431,6 +431,37 @@ func (mg *Container) ResolveReferences(ctx context.Context, c client.Reader) err
 	return nil
 }
 
+// ResolveReferences of this ContainerImmutabilityPolicy.
+func (mg *ContainerImmutabilityPolicy) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("storage.azure.upbound.io", "v1beta1", "Container", "ContainerList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.StorageContainerResourceManagerID),
+			Extract:      resource.ExtractParamPath("resource_manager_id", true),
+			Reference:    mg.Spec.ForProvider.StorageContainerResourceManagerIDRef,
+			Selector:     mg.Spec.ForProvider.StorageContainerResourceManagerIDSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.StorageContainerResourceManagerID")
+	}
+	mg.Spec.ForProvider.StorageContainerResourceManagerID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.StorageContainerResourceManagerIDRef = rsp.ResolvedReference
+
+	return nil
+}
+
 // ResolveReferences of this DataLakeGen2FileSystem.
 func (mg *DataLakeGen2FileSystem) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
