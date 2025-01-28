@@ -6127,6 +6127,66 @@ func (mg *VirtualHubRouteTableRoute) SetWriteConnectionSecretToReference(r *xpv1
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this VirtualHubRoutingIntent.
+func (mg *VirtualHubRoutingIntent) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this VirtualHubSecurityPartnerProvider.
 func (mg *VirtualHubSecurityPartnerProvider) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)

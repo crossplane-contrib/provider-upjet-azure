@@ -548,6 +548,7 @@ import (
 	virtualhubip "github.com/upbound/provider-azure/internal/controller/network/virtualhubip"
 	virtualhubroutetable "github.com/upbound/provider-azure/internal/controller/network/virtualhubroutetable"
 	virtualhubroutetableroute "github.com/upbound/provider-azure/internal/controller/network/virtualhubroutetableroute"
+	virtualhubroutingintent "github.com/upbound/provider-azure/internal/controller/network/virtualhubroutingintent"
 	virtualhubsecuritypartnerprovider "github.com/upbound/provider-azure/internal/controller/network/virtualhubsecuritypartnerprovider"
 	virtualnetworknetwork "github.com/upbound/provider-azure/internal/controller/network/virtualnetwork"
 	virtualnetworkgateway "github.com/upbound/provider-azure/internal/controller/network/virtualnetworkgateway"
@@ -1300,6 +1301,7 @@ func Setup_monolith(mgr ctrl.Manager, o controller.Options) error {
 		virtualhubip.Setup,
 		virtualhubroutetable.Setup,
 		virtualhubroutetableroute.Setup,
+		virtualhubroutingintent.Setup,
 		virtualhubsecuritypartnerprovider.Setup,
 		virtualnetworknetwork.Setup,
 		virtualnetworkgateway.Setup,

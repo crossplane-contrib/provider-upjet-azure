@@ -1764,6 +1764,8 @@ var TerraformPluginSDKExternalNameConfigs = map[string]config.ExternalName{
 	"azurerm_virtual_hub_route_table_route": config.TemplatedStringAsIdentifier("name", "{{ .parameters.route_table_id }}/routes/{{ .external_name }}"),
 	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/securityPartnerProviders/securityPartnerProvider1
 	"azurerm_virtual_hub_security_partner_provider": config.TemplatedStringAsIdentifier("name", "/subscriptions/{{ .setup.configuration.subscription_id }}/resourceGroups/{{ .parameters.resource_group_name }}/providers/Microsoft.Network/securityPartnerProviders/{{ .external_name }}"),
+	// /subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.Network/virtualHubs/virtualHub1/routingIntent/routingIntent1
+	"azurerm_virtual_hub_routing_intent": config.TemplatedStringAsIdentifier("name", "{{ .parameters.virtual_hub_id }}/routingIntent/{{ .external_name }}"),
 
 	// stream_analytics
 	//
