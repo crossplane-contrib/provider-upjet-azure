@@ -3787,6 +3787,126 @@ func (mg *PrivateDNSResolver) SetWriteConnectionSecretToReference(r *xpv1.Secret
 	mg.Spec.WriteConnectionSecretToReference = r
 }
 
+// GetCondition of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
+// GetCondition of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
+	return mg.Status.GetCondition(ct)
+}
+
+// GetDeletionPolicy of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) GetDeletionPolicy() xpv1.DeletionPolicy {
+	return mg.Spec.DeletionPolicy
+}
+
+// GetManagementPolicies of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) GetManagementPolicies() xpv1.ManagementPolicies {
+	return mg.Spec.ManagementPolicies
+}
+
+// GetProviderConfigReference of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) GetProviderConfigReference() *xpv1.Reference {
+	return mg.Spec.ProviderConfigReference
+}
+
+// GetPublishConnectionDetailsTo of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) GetPublishConnectionDetailsTo() *xpv1.PublishConnectionDetailsTo {
+	return mg.Spec.PublishConnectionDetailsTo
+}
+
+// GetWriteConnectionSecretToReference of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) GetWriteConnectionSecretToReference() *xpv1.SecretReference {
+	return mg.Spec.WriteConnectionSecretToReference
+}
+
+// SetConditions of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) SetConditions(c ...xpv1.Condition) {
+	mg.Status.SetConditions(c...)
+}
+
+// SetDeletionPolicy of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) SetDeletionPolicy(r xpv1.DeletionPolicy) {
+	mg.Spec.DeletionPolicy = r
+}
+
+// SetManagementPolicies of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) SetManagementPolicies(r xpv1.ManagementPolicies) {
+	mg.Spec.ManagementPolicies = r
+}
+
+// SetProviderConfigReference of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) SetProviderConfigReference(r *xpv1.Reference) {
+	mg.Spec.ProviderConfigReference = r
+}
+
+// SetPublishConnectionDetailsTo of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) SetPublishConnectionDetailsTo(r *xpv1.PublishConnectionDetailsTo) {
+	mg.Spec.PublishConnectionDetailsTo = r
+}
+
+// SetWriteConnectionSecretToReference of this PrivateDNSResolverForwardingRule.
+func (mg *PrivateDNSResolverForwardingRule) SetWriteConnectionSecretToReference(r *xpv1.SecretReference) {
+	mg.Spec.WriteConnectionSecretToReference = r
+}
+
 // GetCondition of this PrivateDNSResolverInboundEndpoint.
 func (mg *PrivateDNSResolverInboundEndpoint) GetCondition(ct xpv1.ConditionType) xpv1.Condition {
 	return mg.Status.GetCondition(ct)
