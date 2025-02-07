@@ -4045,6 +4045,76 @@ func (mg *PrivateDNSResolver) ResolveReferences(ctx context.Context, c client.Re
 	return nil
 }
 
+// ResolveReferences of this PrivateDNSResolverDNSForwardingRuleset.
+func (mg *PrivateDNSResolverDNSForwardingRuleset) ResolveReferences(ctx context.Context, c client.Reader) error {
+	var m xpresource.Managed
+	var l xpresource.ManagedList
+	r := reference.NewAPIResolver(c, mg)
+
+	var rsp reference.ResolutionResponse
+	var mrsp reference.MultiResolutionResponse
+	var err error
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSResolverOutboundEndpoint", "PrivateDNSResolverOutboundEndpointList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIdsRefs,
+			Selector:      mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIds")
+	}
+	mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.PrivateDNSResolverOutboundEndpointIdsRefs = mrsp.ResolvedReferences
+	{
+		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
+			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			Extract:      reference.ExternalName(),
+			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
+			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
+			To:           reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
+	}
+	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
+	{
+		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta1", "PrivateDNSResolverOutboundEndpoint", "PrivateDNSResolverOutboundEndpointList")
+		if err != nil {
+			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
+		}
+
+		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
+			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.PrivateDNSResolverOutboundEndpointIds),
+			Extract:       resource.ExtractResourceID(),
+			References:    mg.Spec.InitProvider.PrivateDNSResolverOutboundEndpointIdsRefs,
+			Selector:      mg.Spec.InitProvider.PrivateDNSResolverOutboundEndpointIdsSelector,
+			To:            reference.To{List: l, Managed: m},
+		})
+	}
+	if err != nil {
+		return errors.Wrap(err, "mg.Spec.InitProvider.PrivateDNSResolverOutboundEndpointIds")
+	}
+	mg.Spec.InitProvider.PrivateDNSResolverOutboundEndpointIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.PrivateDNSResolverOutboundEndpointIdsRefs = mrsp.ResolvedReferences
+
+	return nil
+}
+
 // ResolveReferences of this PrivateDNSResolverInboundEndpoint.
 func (mg *PrivateDNSResolverInboundEndpoint) ResolveReferences(ctx context.Context, c client.Reader) error {
 	var m xpresource.Managed
