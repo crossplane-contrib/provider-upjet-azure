@@ -4,7 +4,7 @@
 
 module github.com/upbound/provider-azure
 
-go 1.22.11
+go 1.22.12
 
 require (
 	dario.cat/mergo v1.0.0
