@@ -1,7 +1,3 @@
-// SPDX-FileCopyrightText: 2024 The Crossplane Authors <https://crossplane.io>
-//
-// SPDX-License-Identifier: CC0-1.0
-
 package network
 
 import (
@@ -607,6 +603,18 @@ func Configure(p *config.Provider) {
 				delete(diff.Attributes, "network_manager_id")
 			}
 			return diff, nil
+		}
+	})
+
+	p.AddResourceConfigurator("azurerm_private_dns_resolver_virtual_network_link", func(r *config.Resource) {
+		r.Kind = "PrivateDNSResolverVirtualNetworkLink"
+		r.References["virtual_network_id"] = config.Reference{
+			TerraformName: "azurerm_virtual_network",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
+		}
+		r.References["dns_resolver_id"] = config.Reference{
+			TerraformName: "azurerm_private_dns_resolver",
+			Extractor:     rconfig.ExtractResourceIDFuncPath,
 		}
 	})
 }
