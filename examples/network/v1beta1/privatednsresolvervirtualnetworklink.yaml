@@ -88,7 +88,7 @@ spec:
 
 ---
 
-apiVersion: network.azure.upbound.io/v1beta2
+apiVersion: network.azure.upbound.io/v1beta1
 kind: Subnet
 metadata:
   annotations:
