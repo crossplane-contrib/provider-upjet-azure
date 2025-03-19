@@ -7,6 +7,7 @@ kind: PrivateDNSResolverForwardingRule
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverforwardingrule
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example-pdrfr
@@ -26,30 +27,11 @@ spec:
 ---
 
 apiVersion: network.azure.upbound.io/v1beta1
-kind: PrivateDNSResolver
-metadata:
-  annotations:
-    meta.upbound.io/example-id: network/v1beta1/privatednsresolverforwardingrule
-  labels:
-    testing.upbound.io/example-name: example
-  name: example-pdrfr
-spec:
-  forProvider:
-    location: west europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    virtualNetworkIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
 kind: PrivateDNSResolverDNSForwardingRuleset
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverforwardingrule
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example-pdrfr
@@ -86,8 +68,8 @@ spec:
 
 ---
 
-apiVersion: azure.upbound.io/v1beta1
-kind: ResourceGroup
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSResolver
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverforwardingrule
@@ -97,6 +79,12 @@ metadata:
 spec:
   forProvider:
     location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -143,3 +131,17 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolverforwardingrule
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-pdrfr
+spec:
+  forProvider:
+    location: west europe
