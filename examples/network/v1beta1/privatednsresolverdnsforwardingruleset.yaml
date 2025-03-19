@@ -7,6 +7,7 @@ kind: PrivateDNSResolverDNSForwardingRuleset
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverdnsforwardingruleset
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example-pdrdfr
@@ -20,26 +21,6 @@ spec:
         testing.upbound.io/example-name: example
     tags:
       key: value
-
----
-
-apiVersion: network.azure.upbound.io/v1beta1
-kind: PrivateDNSResolver
-metadata:
-  annotations:
-    meta.upbound.io/example-id: network/v1beta1/privatednsresolverdnsforwardingruleset
-  labels:
-    testing.upbound.io/example-name: example
-  name: example-pdrdfr
-spec:
-  forProvider:
-    location: west europe
-    resourceGroupNameSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
-    virtualNetworkIdSelector:
-      matchLabels:
-        testing.upbound.io/example-name: example
 
 ---
 
@@ -65,8 +46,8 @@ spec:
 
 ---
 
-apiVersion: azure.upbound.io/v1beta1
-kind: ResourceGroup
+apiVersion: network.azure.upbound.io/v1beta1
+kind: PrivateDNSResolver
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolverdnsforwardingruleset
@@ -76,6 +57,12 @@ metadata:
 spec:
   forProvider:
     location: west europe
+    resourceGroupNameSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
+    virtualNetworkIdSelector:
+      matchLabels:
+        testing.upbound.io/example-name: example
 
 ---
 
@@ -122,3 +109,17 @@ spec:
     resourceGroupNameSelector:
       matchLabels:
         testing.upbound.io/example-name: example
+
+---
+
+apiVersion: azure.upbound.io/v1beta1
+kind: ResourceGroup
+metadata:
+  annotations:
+    meta.upbound.io/example-id: network/v1beta1/privatednsresolverdnsforwardingruleset
+  labels:
+    testing.upbound.io/example-name: example
+  name: example-pdrdfr
+spec:
+  forProvider:
+    location: west europe
