@@ -51,6 +51,7 @@ kind: PrivateDNSResolverOutboundEndpoint
 metadata:
   annotations:
     meta.upbound.io/example-id: network/v1beta1/privatednsresolvervirtualnetworklink
+    uptest.upbound.io/timeout: "3600"
   labels:
     testing.upbound.io/example-name: example
   name: example-pdrvnl
