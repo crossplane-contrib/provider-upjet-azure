@@ -75,7 +75,7 @@ require (
 	github.com/google/uuid v1.6.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-azure-helpers v0.70.1 // indirect
-	github.com/hashicorp/go-azure-sdk/resource-manager v0.20240731.1212841 // indirect
+	github.com/hashicorp/go-azure-sdk/resource-manager v0.20240819.1075239 // indirect
 	github.com/hashicorp/go-azure-sdk/sdk v0.20241025.1143247 // indirect
 	github.com/hashicorp/go-checkpoint v0.5.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
@@ -166,4 +166,4 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.4.0 // indirect
 )
 
-replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20241203092116-b74bc0a2e2d8
+replace github.com/hashicorp/terraform-provider-azurerm => github.com/upbound/terraform-provider-azurerm v0.0.0-20250417173331-4074132d9d03
