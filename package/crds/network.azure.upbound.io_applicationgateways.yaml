@@ -4547,6 +4547,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - name
+                    x-kubernetes-list-type: map
                   frontendPort:
                     description: One or more frontend_port blocks as defined below.
                     items:
@@ -4649,6 +4652,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - name
+                    x-kubernetes-list-type: map
                   global:
                     description: A global block as defined below.
                     properties:
@@ -5972,6 +5978,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - name
+                    x-kubernetes-list-type: map
                   frontendPort:
                     description: One or more frontend_port blocks as defined below.
                     items:
@@ -6074,6 +6083,9 @@ spec:
                           type: object
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - name
+                    x-kubernetes-list-type: map
                   global:
                     description: A global block as defined below.
                     properties:
@@ -7285,6 +7297,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - name
+                    x-kubernetes-list-type: map
                   frontendPort:
                     description: One or more frontend_port blocks as defined below.
                     items:
@@ -7317,6 +7332,9 @@ spec:
                           type: string
                       type: object
                     type: array
+                    x-kubernetes-list-map-keys:
+                    - name
+                    x-kubernetes-list-type: map
                   global:
                     description: A global block as defined below.
                     properties:
