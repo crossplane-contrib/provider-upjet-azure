@@ -22,6 +22,7 @@ spec:
       matchLabels:
         testing.upbound.io/example-name: example
     location: West Europe
+    publicNetworkAccessEnabled: false
     privateDnsZoneIdSelector:
       matchLabels:
         testing.upbound.io/example-name: example
