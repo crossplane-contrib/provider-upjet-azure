@@ -9,12 +9,14 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	rconfig "github.com/upbound/provider-azure/apis/rconfig"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -34,7 +36,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.Network.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.Network.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.ForProvider.Network.SubnetIDRef,
 				Selector:     mg.Spec.ForProvider.Network.SubnetIDSelector,
@@ -44,7 +46,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.Network.SubnetID")
 		}
-		mg.Spec.ForProvider.Network.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.Network.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.Network.SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -54,7 +56,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -64,7 +66,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 
 	if mg.Spec.InitProvider.Network != nil {
@@ -74,7 +76,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.Network.SubnetID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.Network.SubnetID, ""),
 				Extract:      rconfig.ExtractResourceID(),
 				Reference:    mg.Spec.InitProvider.Network.SubnetIDRef,
 				Selector:     mg.Spec.InitProvider.Network.SubnetIDSelector,
@@ -84,7 +86,7 @@ func (mg *LabServiceLab) ResolveReferences( // ResolveReferences of this LabServ
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.Network.SubnetID")
 		}
-		mg.Spec.InitProvider.Network.SubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.Network.SubnetID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.Network.SubnetIDRef = rsp.ResolvedReference
 
 	}
@@ -108,7 +110,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.AllowedRegions),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.AllowedRegions),
 			Extract:       resource.ExtractParamPath("location", false),
 			References:    mg.Spec.ForProvider.AllowedRegionsRefs,
 			Selector:      mg.Spec.ForProvider.AllowedRegionsSelector,
@@ -118,7 +120,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AllowedRegions")
 	}
-	mg.Spec.ForProvider.AllowedRegions = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.AllowedRegions = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.AllowedRegionsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -127,7 +129,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.DefaultNetworkSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.DefaultNetworkSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.DefaultNetworkSubnetIDRef,
 			Selector:     mg.Spec.ForProvider.DefaultNetworkSubnetIDSelector,
@@ -137,7 +139,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.DefaultNetworkSubnetID")
 	}
-	mg.Spec.ForProvider.DefaultNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.DefaultNetworkSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.DefaultNetworkSubnetIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -146,7 +148,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -156,7 +158,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -165,7 +167,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.AllowedRegions),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.AllowedRegions),
 			Extract:       resource.ExtractParamPath("location", false),
 			References:    mg.Spec.InitProvider.AllowedRegionsRefs,
 			Selector:      mg.Spec.InitProvider.AllowedRegionsSelector,
@@ -175,7 +177,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AllowedRegions")
 	}
-	mg.Spec.InitProvider.AllowedRegions = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.AllowedRegions = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.AllowedRegionsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("network.azure.upbound.io", "v1beta2", "Subnet", "SubnetList")
@@ -184,7 +186,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.DefaultNetworkSubnetID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.DefaultNetworkSubnetID, ""),
 			Extract:      rconfig.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.DefaultNetworkSubnetIDRef,
 			Selector:     mg.Spec.InitProvider.DefaultNetworkSubnetIDSelector,
@@ -194,7 +196,7 @@ func (mg *LabServicePlan) ResolveReferences(ctx context.Context, c client.Reader
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.DefaultNetworkSubnetID")
 	}
-	mg.Spec.InitProvider.DefaultNetworkSubnetID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.DefaultNetworkSubnetID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.DefaultNetworkSubnetIDRef = rsp.ResolvedReference
 
 	return nil

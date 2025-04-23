@@ -9,11 +9,13 @@ package v1beta2
 import (
 	"context"
 	reference "github.com/crossplane/crossplane-runtime/pkg/reference"
+	helper "github.com/crossplane/crossplane-tools/pkg/helpers"
 	resource "github.com/crossplane/upjet/pkg/resource"
 	errors "github.com/pkg/errors"
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -32,7 +34,7 @@ func (mg *IOTSecurityDeviceGroup) ResolveReferences( // ResolveReferences of thi
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.IOTHubID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.IOTHubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.IOTHubIDRef,
 			Selector:     mg.Spec.ForProvider.IOTHubIDSelector,
@@ -42,7 +44,7 @@ func (mg *IOTSecurityDeviceGroup) ResolveReferences( // ResolveReferences of thi
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubID")
 	}
-	mg.Spec.ForProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.IOTHubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.IOTHubIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
@@ -51,7 +53,7 @@ func (mg *IOTSecurityDeviceGroup) ResolveReferences( // ResolveReferences of thi
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.IOTHubID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.IOTHubID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.IOTHubIDRef,
 			Selector:     mg.Spec.InitProvider.IOTHubIDSelector,
@@ -61,7 +63,7 @@ func (mg *IOTSecurityDeviceGroup) ResolveReferences( // ResolveReferences of thi
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubID")
 	}
-	mg.Spec.InitProvider.IOTHubID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.IOTHubID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.IOTHubIDRef = rsp.ResolvedReference
 
 	return nil
@@ -83,7 +85,7 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.ForProvider.IOTHubIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.ForProvider.IOTHubIds),
 			Extract:       resource.ExtractParamPath("id", true),
 			References:    mg.Spec.ForProvider.IOTHubIdsRefs,
 			Selector:      mg.Spec.ForProvider.IOTHubIdsSelector,
@@ -93,7 +95,7 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.IOTHubIds")
 	}
-	mg.Spec.ForProvider.IOTHubIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.ForProvider.IOTHubIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.ForProvider.IOTHubIdsRefs = mrsp.ResolvedReferences
 	{
 		m, l, err = apisresolver.GetManagedResource("azure.upbound.io", "v1beta1", "ResourceGroup", "ResourceGroupList")
@@ -102,7 +104,7 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupName),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupName, ""),
 			Extract:      reference.ExternalName(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupNameRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupNameSelector,
@@ -112,7 +114,7 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupName")
 	}
-	mg.Spec.ForProvider.ResourceGroupName = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupName = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupNameRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("devices.azure.upbound.io", "v1beta2", "IOTHub", "IOTHubList")
@@ -121,7 +123,7 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 		}
 
 		mrsp, err = r.ResolveMultiple(ctx, reference.MultiResolutionRequest{
-			CurrentValues: reference.FromPtrValues(mg.Spec.InitProvider.IOTHubIds),
+			CurrentValues: helper.FromPtrValues(mg.Spec.InitProvider.IOTHubIds),
 			Extract:       resource.ExtractParamPath("id", true),
 			References:    mg.Spec.InitProvider.IOTHubIdsRefs,
 			Selector:      mg.Spec.InitProvider.IOTHubIdsSelector,
@@ -131,7 +133,7 @@ func (mg *IOTSecuritySolution) ResolveReferences(ctx context.Context, c client.R
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.IOTHubIds")
 	}
-	mg.Spec.InitProvider.IOTHubIds = reference.ToPtrValues(mrsp.ResolvedValues)
+	mg.Spec.InitProvider.IOTHubIds = helper.ToPtrValues(mrsp.ResolvedValues)
 	mg.Spec.InitProvider.IOTHubIdsRefs = mrsp.ResolvedReferences
 
 	return nil
@@ -152,7 +154,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.AssessmentPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.AssessmentPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.AssessmentPolicyIDRef,
 			Selector:     mg.Spec.ForProvider.AssessmentPolicyIDSelector,
@@ -162,7 +164,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.AssessmentPolicyID")
 	}
-	mg.Spec.ForProvider.AssessmentPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.AssessmentPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.AssessmentPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachineScaleSet", "LinuxVirtualMachineScaleSetList")
@@ -171,7 +173,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.TargetResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.TargetResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.ForProvider.TargetResourceIDSelector,
@@ -181,7 +183,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.TargetResourceID")
 	}
-	mg.Spec.ForProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.TargetResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.TargetResourceIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("security.azure.upbound.io", "v1beta1", "SecurityCenterAssessmentPolicy", "SecurityCenterAssessmentPolicyList")
@@ -190,7 +192,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.AssessmentPolicyID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.AssessmentPolicyID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.AssessmentPolicyIDRef,
 			Selector:     mg.Spec.InitProvider.AssessmentPolicyIDSelector,
@@ -200,7 +202,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.AssessmentPolicyID")
 	}
-	mg.Spec.InitProvider.AssessmentPolicyID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.AssessmentPolicyID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.AssessmentPolicyIDRef = rsp.ResolvedReference
 	{
 		m, l, err = apisresolver.GetManagedResource("compute.azure.upbound.io", "v1beta2", "LinuxVirtualMachineScaleSet", "LinuxVirtualMachineScaleSetList")
@@ -209,7 +211,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 		}
 
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.TargetResourceID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.TargetResourceID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.TargetResourceIDRef,
 			Selector:     mg.Spec.InitProvider.TargetResourceIDSelector,
@@ -219,7 +221,7 @@ func (mg *SecurityCenterAssessment) ResolveReferences(ctx context.Context, c cli
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.TargetResourceID")
 	}
-	mg.Spec.InitProvider.TargetResourceID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.TargetResourceID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.TargetResourceIDRef = rsp.ResolvedReference
 
 	return nil

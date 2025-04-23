@@ -14,6 +14,7 @@ import (
 
 	xpresource "github.com/crossplane/crossplane-runtime/pkg/resource"
 	apisresolver "github.com/upbound/provider-azure/internal/apis"
+	ptr "k8s.io/utils/ptr"
 	client "sigs.k8s.io/controller-runtime/pkg/client"
 )
 
@@ -33,7 +34,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID, ""),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
@@ -43,7 +44,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID")
 		}
-		mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -53,7 +54,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ResourceGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.ResourceGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.ForProvider.ResourceGroupIDSelector,
@@ -63,7 +64,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.ResourceGroupID")
 	}
-	mg.Spec.ForProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.ResourceGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExportDataStorageLocation); i3++ {
@@ -73,7 +74,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID, ""),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
@@ -83,7 +84,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID")
 		}
-		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -93,7 +94,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ResourceGroupID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.ResourceGroupID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.ResourceGroupIDRef,
 			Selector:     mg.Spec.InitProvider.ResourceGroupIDSelector,
@@ -103,7 +104,7 @@ func (mg *ResourceGroupCostManagementExport) ResolveReferences( // ResolveRefere
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.ResourceGroupID")
 	}
-	mg.Spec.InitProvider.ResourceGroupID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.ResourceGroupID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.ResourceGroupIDRef = rsp.ResolvedReference
 
 	return nil
@@ -125,7 +126,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID, ""),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
 				Reference:    mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
@@ -135,7 +136,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID")
 		}
-		mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.ForProvider.ExportDataStorageLocation[i3].ContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -145,7 +146,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.ForProvider.SubscriptionID),
+			CurrentValue: ptr.Deref(mg.Spec.ForProvider.SubscriptionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.ForProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.ForProvider.SubscriptionIDSelector,
@@ -155,7 +156,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.ForProvider.SubscriptionID")
 	}
-	mg.Spec.ForProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.ForProvider.SubscriptionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.ForProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	for i3 := 0; i3 < len(mg.Spec.InitProvider.ExportDataStorageLocation); i3++ {
@@ -165,7 +166,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 				return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 			}
 			rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-				CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID),
+				CurrentValue: ptr.Deref(mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID, ""),
 				Extract:      resource.ExtractParamPath("resource_manager_id", true),
 				Reference:    mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef,
 				Selector:     mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDSelector,
@@ -175,7 +176,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 		if err != nil {
 			return errors.Wrap(err, "mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID")
 		}
-		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID = reference.ToPtrValue(rsp.ResolvedValue)
+		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerID = ptr.To(rsp.ResolvedValue)
 		mg.Spec.InitProvider.ExportDataStorageLocation[i3].ContainerIDRef = rsp.ResolvedReference
 
 	}
@@ -185,7 +186,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 			return errors.Wrap(err, "failed to get the reference target managed resource and its list for reference resolution")
 		}
 		rsp, err = r.Resolve(ctx, reference.ResolutionRequest{
-			CurrentValue: reference.FromPtrValue(mg.Spec.InitProvider.SubscriptionID),
+			CurrentValue: ptr.Deref(mg.Spec.InitProvider.SubscriptionID, ""),
 			Extract:      resource.ExtractResourceID(),
 			Reference:    mg.Spec.InitProvider.SubscriptionIDRef,
 			Selector:     mg.Spec.InitProvider.SubscriptionIDSelector,
@@ -195,7 +196,7 @@ func (mg *SubscriptionCostManagementExport) ResolveReferences(ctx context.Contex
 	if err != nil {
 		return errors.Wrap(err, "mg.Spec.InitProvider.SubscriptionID")
 	}
-	mg.Spec.InitProvider.SubscriptionID = reference.ToPtrValue(rsp.ResolvedValue)
+	mg.Spec.InitProvider.SubscriptionID = ptr.To(rsp.ResolvedValue)
 	mg.Spec.InitProvider.SubscriptionIDRef = rsp.ResolvedReference
 
 	return nil
